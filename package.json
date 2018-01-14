@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/patric-eberle/vue-template/issues"
   },
-  "homepage": "https://github.com/patric-eberle/vue-template#readme"
+  "homepage": "https://github.com/patric-eberle/vue-template#readme",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "vue": "^2.5.13",
+    "vue-bem-cn": "^1.0.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  }
 }
