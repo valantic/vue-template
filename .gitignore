@@ -1,0 +1,10 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen

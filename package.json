@@ -1,0 +1,23 @@
+{
+  "name": "vue-template",
+  "version": "1.0.0-alpha.1",
+  "description": "A customized Vue.js project template",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patric-eberle/vue-template.git"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "verstärker"
+  ],
+  "author": "Patric Eberle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patric-eberle/vue-template/issues"
+  },
+  "homepage": "https://github.com/patric-eberle/vue-template#readme"
+}
