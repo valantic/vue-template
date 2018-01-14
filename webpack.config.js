@@ -100,7 +100,7 @@ const devConfig = Object.assign({
     new webpack.HotModuleReplacementPlugin(), // Hot Module Replacement
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
-        messages: [`Your application is running on http://${host}:${port}.`], // TODO: hardcore domain and port so we can those to this message, too.
+        messages: [`Your application is running on http://${host}:${port}.`],
       },
     }),
   ]
