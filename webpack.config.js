@@ -10,7 +10,7 @@ const webpack = require('webpack');
 
 /**
  * TODO: add Stylelint
- * TODO: add postcss
+ * TODO: add styleguid output
  */
 
 module.exports = function (env, options) {
