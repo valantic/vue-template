@@ -7,6 +7,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
+/**
+ * TODO: add Stylelint
+ * TODO: add postcss
+ */
+
 module.exports = function (env, options) {
   const isProduction = env && env.production;
   const host = 'localhost';
@@ -74,11 +79,6 @@ module.exports = function (env, options) {
 
     return isProduction ? undefined : alias;
   }
-
-  /**
-   * TODO: add ESLint
-   * TODO: add postcss
-   */
 
   const baseConfig = {
     entry: {
