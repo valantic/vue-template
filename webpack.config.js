@@ -8,11 +8,12 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = function (env) {
-  const isProduction = env.production;
+  const isProduction = env && env.production;
   const host = 'localhost';
   const port = 8080;
   const hotReload = true;
   const assetsSubFolder = 'static/';
+  const hashAlias = isProduction ? 'chunkhash' : 'hash';
 
   function vueLoaderScss() {
     const use = [
@@ -57,8 +58,8 @@ module.exports = function (env) {
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: assetsSubFolder + 'js/[name].[chunkhash].js',
-      chunkFilename: assetsSubFolder +'js/[id].[chunkhash].js'
+      filename: assetsSubFolder + 'js/[name].[' + hashAlias + '].js',
+      chunkFilename: assetsSubFolder +'js/[id].[' + hashAlias + '].js'
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
@@ -146,7 +147,7 @@ module.exports = function (env) {
     }
   };
 
-  const devConfig = Object.assign({
+  const devConfig = {
     devServer: {
       host,
       port,
@@ -168,9 +169,9 @@ module.exports = function (env) {
         },
       }),
     ]
-  }, baseConfig);
+  };
 
-  const prodConfig = Object.assign({
+  const prodConfig = {
     // Customizes build log
     stats: {
       all: false,
@@ -228,10 +229,13 @@ module.exports = function (env) {
         template: 'index.html'
       }),
     ]
-  }, baseConfig);
+  };
 
-// Print type of build (first value is log color)
+  // Print type of build (first value is log color)
   console.info('\x1b[36m%s\x1b[0m', '## Building for ' + (isProduction ? 'Production' : 'Development') + ' ##');
 
-  return isProduction ? prodConfig : devConfig;
+  return Object.assign(
+    isProduction ? prodConfig : devConfig,
+    baseConfig
+  );
 };
