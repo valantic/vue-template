@@ -7,13 +7,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
-module.exports = function (env) {
+module.exports = function (env, options) {
   const isProduction = env && env.production;
   const host = 'localhost';
   const port = 8080;
   const hotReload = true;
   const assetsSubFolder = 'static/';
   const hashAlias = isProduction ? 'chunkhash' : 'hash';
+  const isProfileBuild = options.profile && options.json;
 
   function vueLoaderScss() {
     const use = [
@@ -42,13 +43,36 @@ module.exports = function (env) {
     }
 
     return isProduction
-      ? ExtractTextPlugin.extract({ use })
+      ? ExtractTextPlugin.extract({use})
       : use;
+  }
+
+  function webpackStats() {
+    const stats = {
+      all: false,
+      // List created files
+      assets: true,
+      // Show errors
+      errors: true,
+      // Show build time
+      timings: true,
+      // Show warnings
+      warnings: true
+    };
+
+    return !isProfileBuild ? stats : undefined;
+  }
+
+  function webpackResolveAlias() {
+    const alias = {
+      'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+    };
+
+    return isProduction ? undefined : alias;
   }
 
   /**
    * TODO: add ESLint
-   * TODO: build js to /dist/js folder
    * TODO: add postcss
    */
 
@@ -59,13 +83,11 @@ module.exports = function (env) {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: assetsSubFolder + 'js/[name].[' + hashAlias + '].js',
-      chunkFilename: assetsSubFolder +'js/[id].[' + hashAlias + '].js'
+      chunkFilename: assetsSubFolder + 'js/[id].[' + hashAlias + '].js'
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
-      alias: {
-        'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
-      }
+      alias: webpackResolveAlias()
     },
     module: {
       rules: [
@@ -173,17 +195,7 @@ module.exports = function (env) {
 
   const prodConfig = {
     // Customizes build log
-    stats: {
-      all: false,
-      // List created files
-      assets: true,
-      // Show errors
-      errors: true,
-      // Show build time
-      timings: true,
-      // Show warnings
-      warnings: true
-    },
+    stats: webpackStats(),
     // Warn about performance issues
     performance: {
       hints: 'warning',
@@ -231,8 +243,10 @@ module.exports = function (env) {
     ]
   };
 
-  // Print type of build (first value is log color)
-  console.info('\x1b[36m%s\x1b[0m', '## Building for ' + (isProduction ? 'Production' : 'Development') + ' ##');
+  if (!isProfileBuild) {
+    // Print type of build (first value is log color)
+    console.info('\x1b[36m%s\x1b[0m', '## Building for ' + (isProduction ? 'Production' : 'Development') + ' ##');
+  }
 
   return Object.assign(
     isProduction ? prodConfig : devConfig,
