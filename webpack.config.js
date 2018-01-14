@@ -5,6 +5,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
 
 /**
@@ -214,6 +215,8 @@ module.exports = function (env, options) {
       new UglifyJsPlugin({
         parallel: true
       }),
+      // Compress extracted CSS.
+      new OptimizeCSSPlugin(),
       // extract css into its own file
       new ExtractTextPlugin({
         filename: assetsSubFolder + 'css/[name].[contenthash].css',
