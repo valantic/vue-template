@@ -15,6 +15,10 @@ module.exports = function (env, options) {
   const assetsSubFolder = 'static/';
   const hashAlias = isProduction ? 'chunkhash' : 'hash';
   const isProfileBuild = options.profile && options.json;
+  const include = [
+    path.resolve(__dirname, 'app'),
+    path.resolve(__dirname, 'test'),
+  ];
 
   function vueLoaderScss() {
     const use = [
@@ -92,11 +96,18 @@ module.exports = function (env, options) {
     module: {
       rules: [
         {
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          enforce: 'pre',
+          include,
+          options: {
+            failOnError: isProduction
+          }
+        },
+        {
           test: /\.vue$/,
           loader: 'vue-loader',
-          include: [
-            path.resolve(__dirname, 'app'),
-          ],
+          include,
           options: {
             // extractCSS can not be used because of scss
             // cssSourceMap can not be used because of scss
@@ -113,10 +124,7 @@ module.exports = function (env, options) {
         {
           test: /\.js$/,
           use: 'babel-loader',
-          include: [
-            path.resolve(__dirname, 'app'),
-            path.resolve(__dirname, 'test'),
-          ],
+          include,
         },
         {
           test: /\.(gif|png|jpe?g|svg)$/i,

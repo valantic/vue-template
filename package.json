@@ -5,8 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack --env.production",
-    "build:profile": "npm run clean && webpack --env.production --profile --json > webpack-stats.json",
+    "build": "npm run clean && webpack --env.production; exit 0;",
+    "build:profile": "npm run clean && webpack --env.production --profile --json > webpack-stats.json; exit 0;",
+    "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
+    "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "dev": "webpack-dev-server"
   },
   "repository": {
@@ -33,9 +35,16 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.8",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^4.0.1",
+    "eslint-plugin-import": "^2.8.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
     "friendly-errors-webpack-plugin": "^1.6.1",

@@ -22,20 +22,20 @@
        */
       inline: {
         type: Boolean,
-        default: false
+        default: false,
       },
       /**
        * Custom width value
        */
       width: {
-        type: String
+        type: String,
       },
       /**
        * Custom height value
        */
       height: {
-        type: String
-      }
+        type: String,
+      },
     },
     computed: {
       src() {
@@ -47,7 +47,7 @@
 
           return null;
         }
-      }
+      },
     },
     methods: {
       setAttributes(svg) {
@@ -66,7 +66,7 @@
 
         svg.setAttribute('role', 'img');
         svg.setAttribute('aria-label', this.icon);
-      }
+      },
     },
     mounted() {
       if (!this.inline || !this.src) {
@@ -76,16 +76,14 @@
       if (!cache[this.icon]) {
         cache[this.icon] = this.$axios
           .get(this.src)
-          .then(response => {
-            return response.data;
-          });
+          .then(response => response.data);
       }
 
-      cache[this.icon].then(svg => {
+      cache[this.icon].then((svg) => {
         this.$el.innerHTML = svg;
 
         this.setAttributes(this.$el.children[0]);
-      })
+      });
     },
   };
 </script>
