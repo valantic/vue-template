@@ -90,3 +90,8 @@
   };
 </script>
 
+<style lang="scss">
+  .c-icon {
+    display: inline-block;
+  }
+</style>

@@ -3,15 +3,51 @@
 const path = require('path'); // Cross platform path resolver
 const htmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
+
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 const isProduction = process.env.NODE_ENV === 'production';
 const host = 'localhost';
 const port = 8080;
+const hotReload = true;
+
+function vueLoaderScss() {
+  const use = [
+    {
+      loader: 'css-loader',
+      options: {
+        sourceMap: !isProduction
+      }
+    },
+    {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: !isProduction
+      }
+    },
+    {
+      loader: 'sass-resources-loader',
+      options: {
+        resources: path.resolve(__dirname, 'app/setup/_scss.scss')
+      }
+    }
+  ];
+
+  if (!isProduction) {
+    use.unshift('vue-style-loader')
+  }
+
+  return isProduction
+    ? ExtractTextPlugin.extract({ use })
+    : use;
+}
 
 /**
  * TODO: add ESLint
  * TODO: build js to /dist/js folder
+ * TODO: add postcss
  */
 
 const baseConfig = {
@@ -33,15 +69,25 @@ const baseConfig = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // options: { TODO: add scss loader
-        //   loaders: {
-        //
-        //   }
-        // }
+        include: [
+          path.resolve(__dirname, 'app'),
+        ],
+        options: {
+          // extractCSS can not be used because of scss
+          // cssSourceMap can not be used because of scss
+          hotReload,
+          // If you have problems debugging vue-files in devtools,
+          // set this to false - it *may* help
+          // https://vue-loader.vuejs.org/en/options.html#cachebusting
+          cacheBusting: false,
+          loaders: {
+            scss: vueLoaderScss()
+          }
+        }
       },
       {
-        use: 'babel-loader',
         test: /\.js$/,
+        use: 'babel-loader',
         include: [
           path.resolve(__dirname, 'app'),
           path.resolve(__dirname, 'test'),
@@ -53,7 +99,7 @@ const baseConfig = {
           {
             loader: 'file-loader',
             options: {
-              name: '/assets/img/[name].[hash:7].[ext]',
+              name: '/static/img/[name].[hash:7].[ext]',
             }
           },
           {
@@ -86,7 +132,7 @@ const devConfig = Object.assign({
   devServer: {
     host,
     port,
-    hot: true,
+    hot: hotReload,
     compress: true,
     overlay: true,
     quiet: true, // Handled by FriendlyErrorsPlugin
@@ -108,6 +154,15 @@ const devConfig = Object.assign({
 
 const prodConfig = Object.assign({
   plugins: [
+    // extract css into its own file
+    new ExtractTextPlugin({
+      filename: 'static/css/[name].[contenthash].css',
+      // Setting the following option to `false` will not extract CSS from codesplit chunks.
+      // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
+      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
+      // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
+      allChunks: true,
+    }),
     new htmlWebpackPlugin({ // Script tag injection
       inject: true,
       template: 'index.html'
