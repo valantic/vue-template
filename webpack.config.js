@@ -6,6 +6,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const webpack = require('webpack');
 
 /**
@@ -191,6 +192,12 @@ module.exports = function (env, options) {
       new htmlWebpackPlugin({ // Script tag injection
         inject: true,
         template: 'index.html'
+      }),
+      new StyleLintPlugin({
+        files: [
+          '**/*.vue',
+          '**/*.s?(a|c)ss'
+        ]
       }),
       new webpack.NamedModulesPlugin(), // Hot Module Replacement
       new webpack.HotModuleReplacementPlugin(), // Hot Module Replacement

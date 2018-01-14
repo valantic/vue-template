@@ -89,10 +89,6 @@
 </script>
 
 <style lang="scss">
-  .foo {
-    display: flex;
-  }
-
   .c-icon {
     display: inline-block;
   }
