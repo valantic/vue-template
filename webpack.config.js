@@ -4,6 +4,7 @@ const path = require('path'); // Cross platform path resolver
 const htmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
@@ -12,6 +13,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const host = 'localhost';
 const port = 8080;
 const hotReload = true;
+const assetsSubFolder = 'static/';
 
 function vueLoaderScss() {
   const use = [
@@ -56,7 +58,8 @@ const baseConfig = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: assetsSubFolder + 'js/[name].js',
+    chunkFilename: assetsSubFolder +'js/[id].[chunkhash].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -99,7 +102,7 @@ const baseConfig = {
           {
             loader: 'file-loader',
             options: {
-              name: '/static/img/[name].[hash:7].[ext]',
+              name: assetsSubFolder + '/img/[name].[hash:7].[ext]',
             }
           },
           {
@@ -111,7 +114,23 @@ const baseConfig = {
             }
           },
         ],
-      }
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: assetsSubFolder + 'media/[name].[hash:7].[ext]'
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: assetsSubFolder + 'fonts/[name].[hash:7].[ext]'
+        }
+      },
     ]
   },
   node: {
@@ -154,9 +173,12 @@ const devConfig = Object.assign({
 
 const prodConfig = Object.assign({
   plugins: [
+    new UglifyJsPlugin({
+      parallel: true
+    }),
     // extract css into its own file
     new ExtractTextPlugin({
-      filename: 'static/css/[name].[contenthash].css',
+      filename: assetsSubFolder + 'css/[name].[contenthash].css',
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
       // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
