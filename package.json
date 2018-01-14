@@ -3,7 +3,8 @@
   "version": "1.0.0-alpha.1",
   "description": "A customized Vue.js project template",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,11 @@
     "vue-bem-cn": "^1.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0"
   }
 }
