@@ -196,7 +196,7 @@ module.exports = function (env, options) {
       new StyleLintPlugin({
         files: [
           '**/*.vue',
-          '**/*.s?(a|c)ss'
+          '**/*.scss'
         ]
       }),
       new webpack.NamedModulesPlugin(), // Hot Module Replacement

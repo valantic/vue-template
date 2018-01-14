@@ -9,6 +9,9 @@
     "build:profile": "npm run clean && webpack --env.production --profile --json > webpack-stats.json; exit 0;",
     "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
+    "stylelint": "stylelint '**/*.?(vue|scss)'; exit 0",
+    "stylelint:fix": "echo \"Using stylelint --fix a good idea when using *.vue files...\"",
+    "lint": "npm run eslint && npm run stylelint",
     "dev": "webpack-dev-server"
   },
   "repository": {
