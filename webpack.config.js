@@ -7,6 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const WebpackMonitor = require('webpack-monitor');
 const webpack = require('webpack');
 
 /**
@@ -257,6 +258,11 @@ module.exports = function (env, options) {
       new htmlWebpackPlugin({
         inject: true,
         template: 'index.html'
+      }),
+      new WebpackMonitor({
+        capture: true, // -> default 'true'
+        target: '../monitor/stats.json', // default -> '../monitor/stats.json'
+        launch: env.monitor
       }),
     ]
   };

@@ -5,8 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack --env.production; exit 0;",
-    "build:profile": "npm run clean && webpack --env.production --profile --json > webpack-stats.json; exit 0;",
+    "build": "npm run clean && webpack --env.production",
+    "build:monitor": "npm run build -- --env.monitor",
+    "build:profile": "npm run build -- --profile --json > webpack-stats.json",
     "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint '**/*.?(vue|scss)'; exit 0",
@@ -69,7 +70,8 @@
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.0"
+    "webpack-dev-server": "^2.11.0",
+    "webpack-monitor": "^1.0.14"
   },
   "browserslist": [
     "> 1%",
