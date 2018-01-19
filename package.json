@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "build": "npm run clean && webpack --env.production",
     "build:monitor": "npm run build -- --env.monitor",
-    "build:profile": "npm run build -- --profile --json > webpack-stats.json",
+    "build:profile": "rimraf dist && webpack --env.production --profile --json > stats/profile.json",
     "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint '**/*.?(vue|scss)'; exit 0",

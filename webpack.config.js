@@ -262,7 +262,7 @@ module.exports = function (env, options) {
       }),
       new WebpackMonitor({
         capture: true,
-        target: '../monitor/stats.json', // default -> '../monitor/stats.json'
+        target: '../stats/monitor.json', // default -> '../monitor/stats.json'
         launch: env.monitor
       }),
       // copy custom static assets
