@@ -17,13 +17,13 @@ const webpack = require('webpack');
  */
 
 module.exports = function (env, options) {
-  const isProduction = env && env.production;
+  const isProduction = (env && env.production) || false;
   const host = 'localhost';
   const port = 8080;
   const hotReload = true;
   const assetsSubDirectory = 'static/';
   const hashAlias = isProduction ? 'chunkhash' : 'hash';
-  const isProfileBuild = options.profile && options.json;
+  const isProfileBuild = (options && options.profile && options.json) || false;
   const include = [
     path.resolve(__dirname, 'app'),
     path.resolve(__dirname, 'test'),
@@ -106,7 +106,7 @@ module.exports = function (env, options) {
           include,
           options: {
             failOnError: isProduction,
-            emitWarning: true, // Keeps overlay from showing up during development, which could be annoying
+            emitWarning: !isProduction, // Keeps overlay from showing up during development, which could be annoying
           }
         },
         {

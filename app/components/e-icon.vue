@@ -1,5 +1,7 @@
 <template>
-  <img :class="b({ icon })" v-if="!inline" :src="src" :alt="icon" :width="width" :height="height">
+  <span :class="b()"><!-- needed for inline usage -->
+    <img :class="b('icon')" v-if="!inline" :src="src" :alt="icon" :width="width" :height="height">
+  </span>
 </template>
 
 <script>
@@ -41,7 +43,7 @@
           return require.context('../assets/icons/', false, /\.svg/)(`./${this.icon}.svg`) || null;
         } catch (e) {
           // eslint-disable-next-line no-console
-          console.error(`c-icon was unable to find icon "${this.icon}"`);
+          console.error(`e-icon was unable to find icon "${this.icon}"`);
 
           return null;
         }
@@ -87,7 +89,7 @@
 </script>
 
 <style lang="scss">
-  .c-icon {
+  .e-icon {
     display: inline-block;
   }
 </style>
