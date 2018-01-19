@@ -22,7 +22,6 @@ module.exports = function (env, options) {
   const port = 8080;
   const hotReload = true;
   const assetsSubDirectory = 'static/';
-  const hashAlias = isProduction ? 'chunkhash' : 'hash';
   const isProfileBuild = (options && options.profile && options.json) || false;
   const globalVariables = {
     WP_STYLEGUIDE: JSON.stringify(hasStyleguide),
@@ -219,8 +218,8 @@ module.exports = function (env, options) {
   const prodConfig = {
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: `${assetsSubDirectory}js/[name].[${hashAlias}].js`,
-      chunkFilename: assetsSubDirectory + 'js/[id].[' + hashAlias + '].js',
+      filename: `${assetsSubDirectory}js/[name].[hash].js`,
+      chunkFilename: assetsSubDirectory + 'js/[id].[hash].js',
       publicPath: '/',
     },
     // Customizes build log
