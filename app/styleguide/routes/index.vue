@@ -21,7 +21,7 @@
 </script>
 
 <style lang="scss">
-  .styleguide-index {
+  .index {
     &__warning {
       border: 1px solid red;
       background: coral;

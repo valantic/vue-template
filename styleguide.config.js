@@ -1,4 +1,10 @@
 module.exports = {
+  webpackConfig(env) {
+    return require('./webpack.config')({
+      production: env === 'production',
+      styleguide: true
+    })
+  },
   defaultExample: 'app/setup/styleguide.fallback.md',
   components: 'app/components/**/*.vue',
   styleguideDir: 'dist/styleguidist',

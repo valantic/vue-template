@@ -12,12 +12,11 @@ const WebpackMonitor = require('webpack-monitor');
 const webpack = require('webpack');
 
 /**
- * TODO: add Stylelint
- * TODO: add styleguid output
+ * TODO: add version injection
  */
 
 module.exports = function (env, options) {
-  const isProduction = (env && env.production) || false;
+  const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
   const host = 'localhost';
   const port = 8080;
@@ -26,8 +25,11 @@ module.exports = function (env, options) {
   const hashAlias = isProduction ? 'chunkhash' : 'hash';
   const isProfileBuild = (options && options.profile && options.json) || false;
   const globalVariables = {
-    'WP_STYLEGUIDE': JSON.stringify(hasStyleguide),
-    'WP_PRODUCTION': JSON.stringify(isProduction),
+    WP_STYLEGUIDE: JSON.stringify(hasStyleguide),
+    WP_PRODUCTION: JSON.stringify(isProduction),
+    'process.env': {
+      NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development') // Needed by vendor scripts
+    },
   };
   const include = [
     path.resolve(__dirname, 'app'),
@@ -57,7 +59,7 @@ module.exports = function (env, options) {
     ];
 
     if (!isProduction) {
-      use.unshift('vue-style-loader')
+      use.unshift('vue-style-loader');
     }
 
     return isProduction
@@ -81,21 +83,15 @@ module.exports = function (env, options) {
     return !isProfileBuild ? stats : undefined;
   }
 
-  function webpackResolveAlias() {
-    const alias = {
-      vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
-    };
-
-    return isProduction ? undefined : alias;
-  }
-
   const baseConfig = {
     entry: {
-      app: path.resolve(__dirname, 'app/main.js')
+      app: path.resolve(__dirname, 'app/main.js'),
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
-      alias: webpackResolveAlias(),
+      alias: {
+        vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+      },
     },
     module: {
       rules: [
@@ -231,13 +227,13 @@ module.exports = function (env, options) {
     stats: webpackStats(),
     // Warn about performance issues
     performance: {
-      hints: 'warning',
+      hints: hasStyleguide ? false : 'warning',
       maxEntrypointSize: 500000, // 500kb
-      maxAssetSize: 150000 // 150kb
+      maxAssetSize: 150000, // 150kb
     },
     plugins: [
       new UglifyJsPlugin({
-        parallel: true
+        parallel: true,
       }),
       // Compress extracted CSS.
       new OptimizeCSSPlugin(),
@@ -276,7 +272,7 @@ module.exports = function (env, options) {
         template: 'index.html'
       }),
       new WebpackMonitor({
-        capture: true,
+        capture: !hasStyleguide,
         target: '../stats/monitor.json',
         launch: env && env.monitor
       }),
@@ -295,13 +291,14 @@ module.exports = function (env, options) {
     ],
   };
 
-  if (!isProfileBuild) {
+  if (!isProfileBuild && env && env.message) {
+    const target = hasStyleguide
+        ? 'Styleguide'
+        : 'Production';
+
     // Print type of build (first value is log color)
-    console.info('\x1b[36m%s\x1b[0m', '## Building for ' + (isProduction ? 'Production' : 'Development') + ' ##');
+    console.info('\x1b[36m%s\x1b[0m', '## Building for ' + target + ' ##');
   }
 
-  return Object.assign(
-    isProduction ? prodConfig : devConfig,
-    baseConfig
-  );
+  return Object.assign(baseConfig, isProduction ? prodConfig : devConfig);
 };
