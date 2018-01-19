@@ -3,7 +3,6 @@
   "version": "1.0.0-alpha.1",
   "description": "A customized Vue.js project template",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
     "build": "npm run clean && webpack --env.production",
     "build:monitor": "npm run build -- --env.monitor",
@@ -12,8 +11,9 @@
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint '**/*.?(vue|scss)'; exit 0",
     "stylelint:fix": "echo \"Using stylelint --fix is not a good idea when using *.vue files...\"",
-    "test:unit": "jest --config package.json; exit 0;",
     "lint": "npm run eslint && npm run stylelint",
+    "test:unit": "jest --config package.json; exit 0;",
+    "test": "npm run lint && npm run test:unit",
     "dev": "webpack-dev-server --env.foo"
   },
   "repository": {
