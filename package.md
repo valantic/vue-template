@@ -23,3 +23,7 @@ The official router for Vue.js.
 Centralized State Management for Vue.js.
 
 ## Dev-Dependencies
+
+### copy-webpack-plugin
+
+Webpack plugin to copy static files

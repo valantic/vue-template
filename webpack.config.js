@@ -7,6 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WebpackMonitor = require('webpack-monitor');
 const webpack = require('webpack');
 
@@ -20,7 +21,7 @@ module.exports = function (env, options) {
   const host = 'localhost';
   const port = 8080;
   const hotReload = true;
-  const assetsSubFolder = 'static/';
+  const assetsSubDirectory = 'static/';
   const hashAlias = isProduction ? 'chunkhash' : 'hash';
   const isProfileBuild = options.profile && options.json;
   const include = [
@@ -89,8 +90,8 @@ module.exports = function (env, options) {
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: assetsSubFolder + 'js/[name].[' + hashAlias + '].js',
-      chunkFilename: assetsSubFolder + 'js/[id].[' + hashAlias + '].js'
+      filename: assetsSubDirectory + 'js/[name].[' + hashAlias + '].js',
+      chunkFilename: assetsSubDirectory + 'js/[id].[' + hashAlias + '].js'
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
@@ -135,7 +136,7 @@ module.exports = function (env, options) {
             {
               loader: 'file-loader',
               options: {
-                name: assetsSubFolder + '/img/[name].[hash:7].[ext]',
+                name: assetsSubDirectory + '/img/[name].[hash:7].[ext]',
               }
             },
             {
@@ -153,7 +154,7 @@ module.exports = function (env, options) {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubFolder + 'media/[name].[hash:7].[ext]'
+            name: assetsSubDirectory + 'media/[name].[hash:7].[ext]'
           }
         },
         {
@@ -161,7 +162,7 @@ module.exports = function (env, options) {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubFolder + 'fonts/[name].[hash:7].[ext]'
+            name: assetsSubDirectory + 'fonts/[name].[hash:7].[ext]'
           }
         },
       ]
@@ -227,7 +228,7 @@ module.exports = function (env, options) {
       new OptimizeCSSPlugin(),
       // extract css into its own file
       new ExtractTextPlugin({
-        filename: assetsSubFolder + 'css/[name].[contenthash].css',
+        filename: assetsSubDirectory + 'css/[name].[contenthash].css',
         // Setting the following option to `false` will not extract CSS from codesplit chunks.
         // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
         // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
@@ -260,10 +261,21 @@ module.exports = function (env, options) {
         template: 'index.html'
       }),
       new WebpackMonitor({
-        capture: true, // -> default 'true'
+        capture: true,
         target: '../monitor/stats.json', // default -> '../monitor/stats.json'
         launch: env.monitor
       }),
+      // copy custom static assets
+      new CopyWebpackPlugin([
+        {
+          from: path.resolve(__dirname, 'static'),
+          to: assetsSubDirectory,
+          ignore: ['.*']
+        },
+        {
+          from: path.resolve(__dirname, 'static/.htaccess'),
+        },
+      ])
     ]
   };
 
