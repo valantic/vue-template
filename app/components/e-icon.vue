@@ -1,14 +1,12 @@
 <template>
-  <span :class="b()">
-    <img :class="b('icon')" v-if="!inline" :src="src" :alt="icon" :width="width" :height="height">
-  </span>
+  <img :class="b({ icon })" v-if="!inline" :src="src" :alt="icon" :width="width" :height="height">
 </template>
 
 <script>
   const cache = {};
 
   export default {
-    name: 'c-icon',
+    name: 'e-icon',
     props: {
       /**
        * Name of the svg icon

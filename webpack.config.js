@@ -105,7 +105,8 @@ module.exports = function (env, options) {
           enforce: 'pre',
           include,
           options: {
-            failOnError: isProduction
+            failOnError: isProduction,
+            emitWarning: true, // Keeps overlay from showing up during development, which could be annoying
           }
         },
         {
@@ -262,8 +263,8 @@ module.exports = function (env, options) {
       }),
       new WebpackMonitor({
         capture: true,
-        target: '../stats/monitor.json', // default -> '../monitor/stats.json'
-        launch: env.monitor
+        target: '../stats/monitor.json',
+        launch: env && env.monitor
       }),
       // copy custom static assets
       new CopyWebpackPlugin([
