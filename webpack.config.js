@@ -18,12 +18,17 @@ const webpack = require('webpack');
 
 module.exports = function (env, options) {
   const isProduction = (env && env.production) || false;
+  const hasStyleguide = (env && env.styleguide) || false;
   const host = 'localhost';
   const port = 8080;
   const hotReload = true;
   const assetsSubDirectory = 'static/';
   const hashAlias = isProduction ? 'chunkhash' : 'hash';
   const isProfileBuild = (options && options.profile && options.json) || false;
+  const globalVariables = {
+    'WP_STYLEGUIDE': JSON.stringify(hasStyleguide),
+    'WP_PRODUCTION': JSON.stringify(isProduction),
+  };
   const include = [
     path.resolve(__dirname, 'app'),
     path.resolve(__dirname, 'test'),
@@ -34,21 +39,21 @@ module.exports = function (env, options) {
       {
         loader: 'css-loader',
         options: {
-          sourceMap: !isProduction
-        }
+          sourceMap: !isProduction,
+        },
       },
       {
         loader: 'sass-loader',
         options: {
-          sourceMap: !isProduction
-        }
+          sourceMap: !isProduction,
+        },
       },
       {
         loader: 'sass-resources-loader',
         options: {
-          resources: path.resolve(__dirname, 'app/setup/_scss.scss')
-        }
-      }
+          resources: path.resolve(__dirname, 'app/setup/_scss.scss'),
+        },
+      },
     ];
 
     if (!isProduction) {
@@ -56,7 +61,7 @@ module.exports = function (env, options) {
     }
 
     return isProduction
-      ? ExtractTextPlugin.extract({use})
+      ? ExtractTextPlugin.extract({ use })
       : use;
   }
 
@@ -70,7 +75,7 @@ module.exports = function (env, options) {
       // Show build time
       timings: true,
       // Show warnings
-      warnings: true
+      warnings: true,
     };
 
     return !isProfileBuild ? stats : undefined;
@@ -78,7 +83,7 @@ module.exports = function (env, options) {
 
   function webpackResolveAlias() {
     const alias = {
-      'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+      vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
     };
 
     return isProduction ? undefined : alias;
@@ -88,14 +93,9 @@ module.exports = function (env, options) {
     entry: {
       app: path.resolve(__dirname, 'app/main.js')
     },
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: assetsSubDirectory + 'js/[name].[' + hashAlias + '].js',
-      chunkFilename: assetsSubDirectory + 'js/[id].[' + hashAlias + '].js'
-    },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
-      alias: webpackResolveAlias()
+      alias: webpackResolveAlias(),
     },
     module: {
       rules: [
@@ -106,8 +106,8 @@ module.exports = function (env, options) {
           include,
           options: {
             failOnError: isProduction,
-            emitWarning: !isProduction, // Keeps overlay from showing up during development, which could be annoying
-          }
+            emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
+          },
         },
         {
           test: /\.vue$/,
@@ -138,7 +138,7 @@ module.exports = function (env, options) {
               loader: 'file-loader',
               options: {
                 name: assetsSubDirectory + '/img/[name].[hash:7].[ext]',
-              }
+              },
             },
             {
               loader: 'image-webpack-loader', // @see https://github.com/tcoopman/image-webpack-loader
@@ -178,29 +178,36 @@ module.exports = function (env, options) {
       fs: 'empty',
       net: 'empty',
       tls: 'empty',
-      child_process: 'empty'
-    }
+      child_process: 'empty',
+    },
   };
 
   const devConfig = {
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].js',
+      publicPath: '/',
+    },
     devServer: {
+      historyApiFallback: true, // Enables routing support
       host,
       port,
       hot: hotReload,
       compress: true,
       overlay: true,
       quiet: true, // Handled by FriendlyErrorsPlugin
+      inline: true,
     },
     plugins: [
       new htmlWebpackPlugin({ // Script tag injection
         inject: true,
-        template: 'index.html'
+        template: 'index.html',
       }),
       new StyleLintPlugin({
         files: [
           '**/*.vue',
-          '**/*.scss'
-        ]
+          '**/*.scss',
+        ],
       }),
       new webpack.NamedModulesPlugin(), // Hot Module Replacement
       new webpack.HotModuleReplacementPlugin(), // Hot Module Replacement
@@ -209,10 +216,17 @@ module.exports = function (env, options) {
           messages: [`Your application is running on http://${host}:${port}.`],
         },
       }),
-    ]
+      new webpack.DefinePlugin(globalVariables),
+    ],
   };
 
   const prodConfig = {
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: `${assetsSubDirectory}js/[name].[${hashAlias}].js`,
+      chunkFilename: assetsSubDirectory + 'js/[id].[' + hashAlias + '].js',
+      publicPath: '/',
+    },
     // Customizes build log
     stats: webpackStats(),
     // Warn about performance issues
@@ -276,8 +290,9 @@ module.exports = function (env, options) {
         {
           from: path.resolve(__dirname, 'static/.htaccess'),
         },
-      ])
-    ]
+      ]),
+      new webpack.DefinePlugin(globalVariables),
+    ],
   };
 
   if (!isProfileBuild) {

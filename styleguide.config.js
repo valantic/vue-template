@@ -6,18 +6,18 @@ module.exports = {
   sections: [
     {
       name: 'Elements',
-      components: 'app/components/**/e-*.vue'
+      components: 'app/components/**/e-*.vue',
     },
     {
       name: 'Components',
-      components: 'app/components/**/c-!(styleguide*).vue'
+      components: 'app/components/**/c-*.vue',
     },
     {
       name: 'Styleguide',
-      components: 'app/components/c-styleguide*.vue'
-    }
+      components: 'app/styleguide/components/*.vue',
+    },
   ],
   mixins: [
-    './app/setup/styleguide.plugins'
-  ]
+    './app/setup/styleguide.mixins',
+  ],
 };

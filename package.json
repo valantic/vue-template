@@ -7,6 +7,7 @@
     "build": "npm run clean && webpack --env.production",
     "build:monitor": "npm run build -- --env.monitor",
     "build:profile": "rimraf dist && webpack --env.production --profile --json > stats/profile.json",
+    "build:styleguide": "npm run build -- --env.styleguide && vue-styleguidist build",
     "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint '**/*.?(vue|scss)'; exit 0",
@@ -14,7 +15,7 @@
     "lint": "npm run eslint && npm run stylelint",
     "test:unit": "jest --config package.json; exit 0;",
     "test": "npm run lint && npm run test:unit",
-    "dev": "webpack-dev-server --env.foo",
+    "dev": "webpack-dev-server",
     "dev:styleguide": "vue-styleguidist server"
   },
   "repository": {
@@ -81,6 +82,7 @@
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-friendly-formatter": "^3.0.0",
+    "eslint-import-resolver-webpack": "^0.8.4",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^4.0.1",
     "eslint-plugin-import": "^2.8.0",
