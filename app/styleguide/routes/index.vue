@@ -33,6 +33,7 @@
       display: inline-block;
       border: 1px solid grey;
       background: rgba(0, 0, 0, 0.5);
+      color: white;
     }
   }
 </style>
