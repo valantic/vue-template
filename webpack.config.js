@@ -7,8 +7,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackMonitor = require('webpack-monitor');
+const WebpackAutoInject = require('webpack-auto-inject-version');
 const webpack = require('webpack');
 
 /**
@@ -34,6 +35,15 @@ module.exports = function (env, options) {
     path.resolve(__dirname, 'app'),
     path.resolve(__dirname, 'test'),
   ];
+
+  if (!isProfileBuild && env && env.message) {
+    const target = hasStyleguide
+      ? 'Styleguide'
+      : 'Production';
+
+    // Print type of build (first value is log color)
+    console.info('\x1b[36m%s\x1b[0m', '## Building for ' + target + ' ##');
+  }
 
   function vueLoaderScss() {
     const use = [
@@ -292,17 +302,21 @@ module.exports = function (env, options) {
         },
       ]),
       new webpack.DefinePlugin(globalVariables),
+      new WebpackAutoInject({
+        components: {
+          AutoIncreaseVersion: false,
+          InjectAsComment: true,
+          InjectByTag: true
+        },
+        componentsOptions: {
+          InjectAsComment: {
+            tag: 'Build version: {version} - {date}',
+            dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
+          }
+        }
+      }),
     ],
   };
-
-  if (!isProfileBuild && env && env.message) {
-    const target = hasStyleguide
-      ? 'Styleguide'
-      : 'Production';
-
-    // Print type of build (first value is log color)
-    console.info('\x1b[36m%s\x1b[0m', '## Building for ' + target + ' ##');
-  }
 
   return Object.assign(baseConfig, isProduction ? prodConfig : devConfig);
 };

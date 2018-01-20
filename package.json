@@ -7,7 +7,7 @@
     "build": "npm run clean && webpack --env.production --env.message",
     "build:monitor": "npm run build -- --env.monitor",
     "build:profile": "rimraf dist && webpack --env.production --profile --json > stats/profile.json",
-    "build:styleguide": "npm run build -- --env.styleguide",
+    "build:styleguide": "npm run build -- --env.styleguide && vue-styleguidist build",
     "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint '**/*.?(vue|scss)'; exit 0",
@@ -111,6 +111,7 @@
     "vue-styleguidist": "^1.4.5",
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
+    "webpack-auto-inject-version": "^1.0.0",
     "webpack-dev-server": "^2.11.0",
     "webpack-monitor": "^1.0.14"
   },
