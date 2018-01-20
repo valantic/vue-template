@@ -14,7 +14,6 @@
     name: 'index',
     computed: {
       isProduction() {
-        console.info('foo');
         return process.env.NODE_ENV === 'production';
       },
     },
