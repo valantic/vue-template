@@ -62,7 +62,7 @@ module.exports = function (env, options) {
     }
 
     return isProduction
-      ? ExtractTextPlugin.extract({ use })
+      ? ExtractTextPlugin.extract({use})
       : use;
   }
 
@@ -183,6 +183,8 @@ module.exports = function (env, options) {
       filename: '[name].js',
       publicPath: '/',
     },
+    // @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx
+    devtool: 'eval-source-map',
     devServer: {
       historyApiFallback: true, // Enables routing support
       host,
@@ -222,6 +224,8 @@ module.exports = function (env, options) {
       chunkFilename: assetsSubDirectory + 'js/[id].[hash].js',
       publicPath: '/',
     },
+    // @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx
+    devtool: hasStyleguide ? 'source-map' : false,
     // Customizes build log
     stats: webpackStats(),
     // Warn about performance issues
@@ -233,6 +237,7 @@ module.exports = function (env, options) {
     plugins: [
       new UglifyJsPlugin({
         parallel: true,
+        sourceMap: true,
       }),
       // Compress extracted CSS.
       new OptimizeCSSPlugin(),
@@ -292,8 +297,8 @@ module.exports = function (env, options) {
 
   if (!isProfileBuild && env && env.message) {
     const target = hasStyleguide
-        ? 'Styleguide'
-        : 'Production';
+      ? 'Styleguide'
+      : 'Production';
 
     // Print type of build (first value is log color)
     console.info('\x1b[36m%s\x1b[0m', '## Building for ' + target + ' ##');

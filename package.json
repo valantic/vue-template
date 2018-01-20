@@ -7,7 +7,7 @@
     "build": "npm run clean && webpack --env.production --env.message",
     "build:monitor": "npm run build -- --env.monitor",
     "build:profile": "rimraf dist && webpack --env.production --profile --json > stats/profile.json",
-    "build:styleguide": "npm run build -- --env.styleguide && vue-styleguidist build",
+    "build:styleguide": "npm run build -- --env.styleguide",
     "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint '**/*.?(vue|scss)'; exit 0",
