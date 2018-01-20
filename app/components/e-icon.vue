@@ -43,7 +43,7 @@
           return require.context('../assets/icons/', false, /\.svg/)(`./${this.icon}.svg`) || null;
         } catch (e) {
           // eslint-disable-next-line no-console
-          console.error(`e-icon was unable to find icon "${this.icon}"`);
+          console.warn(`e-icon was unable to find icon "${this.icon}"`);
 
           return null;
         }
