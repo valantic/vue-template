@@ -303,6 +303,7 @@ module.exports = function (env, options) {
       ]),
       new webpack.DefinePlugin(globalVariables),
       new WebpackAutoInject({
+        SILENT: true,
         components: {
           AutoIncreaseVersion: false,
           InjectAsComment: true,
