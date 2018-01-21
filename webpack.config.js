@@ -5,7 +5,6 @@ const htmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackMonitor = require('webpack-monitor');
@@ -51,6 +50,7 @@ module.exports = function (env, options) {
         loader: 'css-loader',
         options: {
           sourceMap: !isProduction,
+          minimize: isProduction
         },
       },
       {
@@ -249,8 +249,6 @@ module.exports = function (env, options) {
         parallel: true,
         sourceMap: true,
       }),
-      // Compress extracted CSS.
-      new OptimizeCSSPlugin(),
       // extract css into its own file
       new ExtractTextPlugin({
         filename: assetsSubDirectory + 'css/[name].[contenthash].css',

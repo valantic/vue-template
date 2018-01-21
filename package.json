@@ -49,9 +49,6 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
     },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-vue"
-    ],
     "setupFiles": [
       "<rootDir>/tests/unit/setup"
     ],
@@ -92,9 +89,7 @@
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.4.2",
     "jest": "^22.1.3",
-    "jest-serializer-vue": "^0.3.0",
     "node-sass": "^4.7.2",
-    "optimize-css-assets-webpack-plugin": "^3.2.0",
     "postcss-loader": "^2.0.10",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
