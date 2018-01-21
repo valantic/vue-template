@@ -47,7 +47,7 @@ module.exports = function (env, options) {
   function vueLoaderScss() {
     const use = [
       {
-        loader: 'css-loader',
+        loader: 'css-loader', // Note: will also call postcss
         options: {
           sourceMap: !isProduction,
           minimize: isProduction
