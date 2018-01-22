@@ -27,6 +27,7 @@ Centralized State Management for Vue.js.
 * [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing.
 * [node-sass](https://github.com/sass/node-sass) - Node-sass is a library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass.
 * [rimraf](https://github.com/isaacs/rimraf) - A `rm -rf` util for nodejs.
+* [sass-loader](https://github.com/webpack-contrib/sass-loader) - Sass loader for webpack. Compiles Sass to CSS. 
 
 ### copy-webpack-plugin
 

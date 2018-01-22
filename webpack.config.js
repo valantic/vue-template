@@ -12,7 +12,7 @@ const WebpackAutoInject = require('webpack-auto-inject-version');
 const webpack = require('webpack');
 
 /**
- * TODO: add version injection
+ * TODO: add CSS maps
  */
 
 module.exports = function (env, options) {
@@ -49,20 +49,18 @@ module.exports = function (env, options) {
       {
         loader: 'css-loader', // Note: will also call postcss
         options: {
-          sourceMap: !isProduction,
+          sourceMap: !isProduction || hasStyleguide,
           minimize: isProduction
         },
       },
       {
         loader: 'sass-loader',
         options: {
-          sourceMap: !isProduction,
-        },
-      },
-      {
-        loader: 'sass-resources-loader',
-        options: {
-          resources: path.resolve(__dirname, 'app/setup/_scss.scss'),
+          data: '@import "scss";', // Load SCSS setup
+          sourceMap: !isProduction || hasStyleguide,
+          includePaths: [
+            path.resolve(__dirname, 'app/setup')
+          ]
         },
       },
     ];
