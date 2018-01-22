@@ -1,4 +1,4 @@
 module.exports = {
-  processors: ['stylelint-processor-html'],
+  processors: ['postcss-html'],
   extends: 'stylelint-config-standard'
 };

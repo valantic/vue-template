@@ -26,8 +26,11 @@ Centralized State Management for Vue.js.
 * [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image loader module for webpack.
 * [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing.
 * [node-sass](https://github.com/sass/node-sass) - Node-sass is a library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass.
+* [postcss-html](https://github.com/gucong3000/postcss-html) - PostCSS Syntax for parsing HTML / Markdown / Vue component
 * [rimraf](https://github.com/isaacs/rimraf) - A `rm -rf` util for nodejs.
 * [sass-loader](https://github.com/webpack-contrib/sass-loader) - Sass loader for webpack. Compiles Sass to CSS. 
+* [stylelint](https://github.com/stylelint/stylelint) - A mighty, modern CSS linter and fixer that helps you avoid errors and enforce consistent conventions in your stylesheets.
+* [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) - The standard shareable config for stylelint .
 
 ### copy-webpack-plugin
 
