@@ -86,10 +86,6 @@ module.exports = function (env, options) {
     return !isProfileBuild ? stats : undefined;
   }
 
-  /**
-   * TODO: add image optimization
-   */
-
   const baseConfig = {
     entry: {
       app: path.resolve(__dirname, 'app/main.js'),
