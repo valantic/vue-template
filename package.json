@@ -17,8 +17,8 @@
     "test": "npm run lint && npm run test:unit",
     "dev": "webpack-dev-server",
     "dev:styleguide": "vue-styleguidist server",
-    "postinstall": "echo \"\\x1b[36m Please update package.md after installing new packages and check build output for malicious code! \\x1b[0m\"",
-    "postuninstall": "echo \"\\x1b[36m Please update package.md after uninstalling packages! \\x1b[0m\""
+    "postinstall": "echo \"\\x1b[44m Please update package.md after installing new packages and check build output for malicious code! \\x1b[0m\"",
+    "postuninstall": "echo \"\\x1b[44m Please update package.md after uninstalling packages! \\x1b[0m\""
   },
   "repository": {
     "type": "git",
