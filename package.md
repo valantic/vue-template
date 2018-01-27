@@ -22,6 +22,11 @@ Centralized State Management for Vue.js.
 * [css-loader](https://github.com/webpack-contrib/css-loader) - The webpack css-loader interprets @import and url() like import/require() and will resolve them.
 * [eslint](https://github.com/eslint/eslint) - A fully pluggable tool for identifying and reporting on patterns in JavaScript.
 * [eslint-config-airbnb-base](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) - This package provides Airbnb's base JS .eslintrc (without React plugins) as an extensible shared config.
+* [eslint-import-resolver-webpack](https://www.npmjs.com/package/eslint-import-resolver-webpack) - Webpack-literate module resolution plugin for eslint-plugin-import.
+* [eslint-loader](https://github.com/webpack-contrib/eslint-loader) - eslint loader for webpack.
+* [eslint-plugin-html](https://github.com/BenoitZugmeyer/eslint-plugin-html) - An ESLint plugin to extract and lint scripts from HTML files.
+* [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) - ESLint plugin with rules that help validate proper imports.
+* [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) - Extract text from bundle into a file.
 * [file-loader](https://github.com/webpack-contrib/file-loader) - Instructs webpack to emit the required object as file and to return its public URL.
 * [friendly-errors-webpack-plugin](https://github.com/geowarin/friendly-errors-webpack-plugin) - Friendly-errors-webpack-plugin recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them to provide a better Developer Experience.
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.

@@ -14,7 +14,7 @@ module.exports = {
   extends: 'airbnb-base',
   // required to lint *.vue files
   plugins: [
-    'html'
+    'html' // eslint-plugin-html
   ],
   // Uses eslint-import-resolver-webpack
   settings: {
