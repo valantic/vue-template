@@ -11,10 +11,6 @@ const WebpackMonitor = require('webpack-monitor');
 const WebpackAutoInject = require('webpack-auto-inject-version');
 const webpack = require('webpack');
 
-/**
- * TODO: add CSS maps
- */
-
 module.exports = function (env, options) {
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
@@ -90,6 +86,10 @@ module.exports = function (env, options) {
     return !isProfileBuild ? stats : undefined;
   }
 
+  /**
+   * TODO: add image optimization
+   */
+
   const baseConfig = {
     entry: {
       app: path.resolve(__dirname, 'app/main.js'),
@@ -140,7 +140,9 @@ module.exports = function (env, options) {
             {
               loader: 'file-loader',
               options: {
-                name: assetsSubDirectory + '/img/[name].[hash:7].[ext]',
+                context: 'app/assets/',
+                name: '[path]/[name].[ext]?[hash]',
+                outputPath: `${assetsSubDirectory}img/`,
               },
             },
             {
@@ -158,7 +160,7 @@ module.exports = function (env, options) {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubDirectory + 'media/[name].[hash:7].[ext]'
+            name: assetsSubDirectory + 'media/[name].[ext]?[hash]'
           }
         },
         {
@@ -166,7 +168,7 @@ module.exports = function (env, options) {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubDirectory + 'fonts/[name].[hash:7].[ext]'
+            name: assetsSubDirectory + 'fonts/[name].[ext]?[hash:]'
           }
         },
       ]
@@ -228,9 +230,9 @@ module.exports = function (env, options) {
   const prodConfig = {
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: `${assetsSubDirectory}js/[name].[hash].js`,
-      chunkFilename: assetsSubDirectory + 'js/[id].[hash].js',
-      publicPath: '/',
+      filename: `${assetsSubDirectory}js/[name].js?[hash]`,
+      chunkFilename: `${assetsSubDirectory}js/[id].js?[hash]`,
+      publicPath: '/', // Public path to 'dist' scope in production
     },
     // @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx
     devtool: hasStyleguide ? 'source-map' : false,
@@ -249,7 +251,7 @@ module.exports = function (env, options) {
       }),
       // extract css into its own file
       new ExtractTextPlugin({
-        filename: assetsSubDirectory + 'css/[name].[contenthash].css',
+        filename: assetsSubDirectory + 'css/[name].css?[contenthash]',
         // Setting the following option to `false` will not extract CSS from codesplit chunks.
         // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
         // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
