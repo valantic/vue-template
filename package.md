@@ -31,6 +31,13 @@ Centralized State Management for Vue.js.
 * [sass-loader](https://github.com/webpack-contrib/sass-loader) - Sass loader for webpack. Compiles Sass to CSS. 
 * [stylelint](https://github.com/stylelint/stylelint) - A mighty, modern CSS linter and fixer that helps you avoid errors and enforce consistent conventions in your stylesheets.
 * [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) - The standard shareable config for stylelint .
+* [stylelint-webpack-plugin](https://github.com/JaKXz/stylelint-webpack-plugin) -  A webpack plugin to lint your CSS/Sass code using stylelint.
+* [uglifyjs-webpack-plugin](https://github.com/webpack-contrib/uglifyjs-webpack-plugin) - This plugin uses UglifyJS v3 (`uglify-es`) to minify your JavaScript.
+* [url-loader](https://github.com/webpack-contrib/url-loader) - Loads files as `base64` encoded URL.
+* [vue-jest](https://github.com/vuejs/vue-jest) - Jest Vue transformer.
+* [vue-loader](https://github.com/vuejs/vue-loader) - Vue.js component loader for Webpack.
+* [vue-style-loader](https://github.com/vuejs/vue-style-loader) - Similar to style-loader, you can chain it after css-loader to dynamically inject CSS into the document as style tags.
+* [vue-styleguidist]() - Created from react styleguidist for Vue Components with a living style guide.
 
 ### copy-webpack-plugin
 

@@ -104,7 +104,6 @@
     "vue-loader": "^13.7.0",
     "vue-style-loader": "^3.0.3",
     "vue-styleguidist": "^1.4.5",
-    "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
     "webpack-auto-inject-version": "^1.0.0",
     "webpack-dev-server": "^2.11.0",

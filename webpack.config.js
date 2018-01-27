@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path'); // Cross platform path resolver
-const htmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -202,7 +202,7 @@ module.exports = function (env, options) {
       inline: true,
     },
     plugins: [
-      new htmlWebpackPlugin({ // Script tag injection
+      new HtmlWebpackPlugin({ // Script tag injection
         inject: true,
         template: 'index.html',
       }),
@@ -242,8 +242,9 @@ module.exports = function (env, options) {
     },
     plugins: [
       new UglifyJsPlugin({
+        test: /\.js($|\?)/i, // MUST be defined because of file has as query
         parallel: true,
-        sourceMap: true,
+        sourceMap: !isProduction,
       }),
       // extract css into its own file
       new ExtractTextPlugin({
@@ -275,7 +276,7 @@ module.exports = function (env, options) {
         minChunks: Infinity
       }),
       // Script tag injection
-      new htmlWebpackPlugin({
+      new HtmlWebpackPlugin({
         inject: true,
         template: 'index.html'
       }),
