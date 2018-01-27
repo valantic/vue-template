@@ -20,6 +20,8 @@ Centralized State Management for Vue.js.
 * [babel-preset-env](https://www.npmjs.com/package/babel-preset-env) - A Babel preset that compiles ES2015+ down to ES5 by automatically determining the Babel plugins and polyfills you need based on your targeted browser or runtime environments.
 * [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin) - webpack plugin to copie individual files or entire directories to the build directory.
 * [css-loader](https://github.com/webpack-contrib/css-loader) - The webpack css-loader interprets @import and url() like import/require() and will resolve them.
+* [eslint](https://github.com/eslint/eslint) - A fully pluggable tool for identifying and reporting on patterns in JavaScript.
+* [eslint-config-airbnb-base](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) - This package provides Airbnb's base JS .eslintrc (without React plugins) as an extensible shared config.
 * [file-loader](https://github.com/webpack-contrib/file-loader) - Instructs webpack to emit the required object as file and to return its public URL.
 * [friendly-errors-webpack-plugin](https://github.com/geowarin/friendly-errors-webpack-plugin) - Friendly-errors-webpack-plugin recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them to provide a better Developer Experience.
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
@@ -38,6 +40,10 @@ Centralized State Management for Vue.js.
 * [vue-loader](https://github.com/vuejs/vue-loader) - Vue.js component loader for Webpack.
 * [vue-style-loader](https://github.com/vuejs/vue-style-loader) - Similar to style-loader, you can chain it after css-loader to dynamically inject CSS into the document as style tags.
 * [vue-styleguidist]() - Created from react styleguidist for Vue Components with a living style guide.
+* [webpack](https://github.com/webpack/webpack) - webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
+* [webpack-auto-inject-version](https://github.com/radswiat/webpack-auto-inject-version) - Webpack plugin to auto inject version into html or file.
+* [webpack-dev-server](https://github.com/webpack/webpack-dev-server) - Serves a webpack app. Updates the browser on changes.
+* [webpack-monitor](https://github.com/webpackmonitor/webpackmonitor) - Webpack Monitor is a configurable Webpack plugin that captures relevant statistics on your production builds.
 
 ### copy-webpack-plugin
 
