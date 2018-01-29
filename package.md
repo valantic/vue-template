@@ -43,7 +43,6 @@ Centralized State Management for Vue.js.
 * [url-loader](https://github.com/webpack-contrib/url-loader) - Loads files as `base64` encoded URL.
 * [vue-jest](https://github.com/vuejs/vue-jest) - Jest Vue transformer.
 * [vue-loader](https://github.com/vuejs/vue-loader) - Vue.js component loader for Webpack.
-* [vue-style-loader](https://github.com/vuejs/vue-style-loader) - Similar to style-loader, you can chain it after css-loader to dynamically inject CSS into the document as style tags.
 * [vue-styleguidist]() - Created from react styleguidist for Vue Components with a living style guide.
 * [webpack](https://github.com/webpack/webpack) - webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
 * [webpack-auto-inject-version](https://github.com/radswiat/webpack-auto-inject-version) - Webpack plugin to auto inject version into html or file.
