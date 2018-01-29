@@ -14,6 +14,7 @@ const webpack = require('webpack');
 module.exports = function (env, options) {
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
+  const isCritical = (env && env.critical) || false;
   const host = 'localhost';
   const port = 8080;
   const hotReload = true;
@@ -40,7 +41,7 @@ module.exports = function (env, options) {
     console.info('\x1b[36m%s\x1b[0m', '## Building for ' + target + ' ##');
   }
 
-  function vueLoaderScss() {
+  function scssLoader() {
     const use = [
       {
         loader: 'css-loader', // Note: will also call postcss
@@ -121,9 +122,13 @@ module.exports = function (env, options) {
             // https://vue-loader.vuejs.org/en/options.html#cachebusting
             cacheBusting: false,
             loaders: {
-              scss: vueLoaderScss()
+              scss: scssLoader()
             }
           }
+        },
+        {
+          test: /\.scss$/,
+          use: scssLoader(),
         },
         {
           test: /\.js$/,
@@ -316,5 +321,34 @@ module.exports = function (env, options) {
     ],
   };
 
-  return Object.assign(baseConfig, isProduction ? prodConfig : devConfig);
+  const criticalConfig = {
+    entry: {
+      critical: path.resolve(__dirname, 'app/setup/critical.scss.js'),
+    },
+    resolve: {
+      extensions: ['.js', '.vue'],
+    },
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: `${assetsSubDirectory}css/[name].css`,
+      publicPath: '/', // Public path to 'dist' scope in production
+    },
+    performance: {
+      hints: 'warning',
+      maxEntrypointSize: 500000, // 500kb
+      maxAssetSize: 150000, // 150kb
+    },
+    plugins: [
+      new ExtractTextPlugin({
+        filename: assetsSubDirectory + 'css/[name].css',
+        allChunks: true,
+      }),
+    ]
+  };
+
+  if (isProduction) {
+    return Object.assign(baseConfig, isCritical ? criticalConfig : prodConfig);
+  }
+
+  return Object.assign(baseConfig, devConfig);
 };
