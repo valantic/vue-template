@@ -33,7 +33,5 @@
 </script>
 
 <style lang="scss">
-  .c-component { // TODO: update selector according to filename
-
-  }
+  .c-component {} // TODO: update selector according to filename
 </style>

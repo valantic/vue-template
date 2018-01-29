@@ -213,6 +213,7 @@ module.exports = function (env, options) {
         template: 'index.html',
       }),
       new StyleLintPlugin({
+        context: 'app',
         files: [
           '**/*.vue',
           '**/*.scss',
