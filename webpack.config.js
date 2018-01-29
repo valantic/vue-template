@@ -15,6 +15,7 @@ module.exports = function (env, options) {
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
   const isCritical = (env && env.critical) || false;
+  const hasMessage = (env && env.message) || false;
   const host = 'localhost';
   const port = 8080;
   const hotReload = true;
@@ -32,10 +33,10 @@ module.exports = function (env, options) {
     path.resolve(__dirname, 'test'),
   ];
 
-  if (!isProfileBuild && env && env.message) {
+  if (!isProfileBuild && hasMessage) {
     const target = hasStyleguide
       ? 'Styleguide'
-      : 'Production';
+      : (isCritical ? 'Critical CSS' : 'Production');
 
     // Print type of build (first value is log color)
     console.info('\x1b[36m%s\x1b[0m', '## Building for ' + target + ' ##');
@@ -333,10 +334,10 @@ module.exports = function (env, options) {
       filename: `${assetsSubDirectory}css/[name].css`,
       publicPath: '/', // Public path to 'dist' scope in production
     },
+    stats: webpackStats(),
     performance: {
       hints: 'warning',
-      maxEntrypointSize: 500000, // 500kb
-      maxAssetSize: 150000, // 150kb
+      maxEntrypointSize: 10000, // 10k
     },
     plugins: [
       new ExtractTextPlugin({
@@ -346,8 +347,12 @@ module.exports = function (env, options) {
     ]
   };
 
+  if (isCritical) {
+    return Object.assign(baseConfig, criticalConfig);
+  }
+
   if (isProduction) {
-    return Object.assign(baseConfig, isCritical ? criticalConfig : prodConfig);
+    return Object.assign(baseConfig, prodConfig);
   }
 
   return Object.assign(baseConfig, devConfig);
