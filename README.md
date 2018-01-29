@@ -14,6 +14,14 @@ $ npm install
 
 #### Known issues
 
+##### Stale
+
+If you get a warning about `Using stale package data`, try to clear your npm cache before installing the packages:
+
+```
+$ npm cache clean --force
+```
+
 ##### Error when installing mozjpeg 1
 
 If you should get the following error when installing mozjpeg on MacOS
