@@ -226,8 +226,8 @@ module.exports = function (env, options) {
   const prodConfig = {
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: `${assetsSubDirectory}js/[name].js?[hash]`,
-      chunkFilename: `${assetsSubDirectory}js/[id].js?[hash]`,
+      filename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
+      chunkFilename: `${assetsSubDirectory}js/[id].js?[chunkhash]`,
       publicPath: '/', // Public path to 'dist' scope in production
     },
     // @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx
@@ -297,6 +297,8 @@ module.exports = function (env, options) {
         },
       ]),
       new webpack.DefinePlugin(globalVariables),
+
+      // NOTE: this is currently not working because of incompatibility with query hash
       new WebpackAutoInject({
         SILENT: true,
         components: {
