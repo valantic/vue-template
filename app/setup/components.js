@@ -1,9 +1,11 @@
-import cIcon from '../components/e-icon';
+import eIcon from '../components/e-icon';
+import eButton from '../components/e-button';
 
 export default {
   install(Vue) {
     const components = [
-      cIcon,
+      eIcon,
+      eButton,
     ];
 
     components.forEach((component) => {

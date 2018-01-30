@@ -2,6 +2,7 @@
   <div :class="b()">
     <h1>Example</h1>
     <e-icon icon="styleguide-heart" width="100"></e-icon>
+    <e-button type="submit"></e-button>
   </div>
 </template>
 
