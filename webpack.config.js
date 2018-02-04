@@ -88,6 +88,120 @@ module.exports = function (env, options) {
     return !isProfileBuild ? stats : undefined;
   }
 
+  function plugins() {
+    const pluginCollection = [
+      new webpack.DefinePlugin(globalVariables),
+    ];
+
+    if (!isProduction) {
+      pluginCollection.push(new HtmlWebpackPlugin({ // Script tag injection
+        inject: true,
+        template: 'index.html',
+      }));
+
+      pluginCollection.push(new StyleLintPlugin({
+        context: 'app',
+        files: [
+          '**/*.vue',
+          '**/*.scss',
+        ],
+      }));
+
+      pluginCollection.push(new webpack.NamedModulesPlugin()); // Hot Module Replacement
+      pluginCollection.push(new webpack.HotModuleReplacementPlugin()); // Hot Module Replacement
+      pluginCollection.push(new webpack.DefinePlugin(globalVariables)); // Hot Module Replacement
+
+      if (!hasStyleguide) {
+        pluginCollection.push(new FriendlyErrorsPlugin({
+          compilationSuccessInfo: {
+            messages: [`Your application is running on http://${host}:${port}.`],
+          },
+        }),)
+      }
+    } else {
+      pluginCollection.push(new UglifyJsPlugin({
+        test: /\.js($|\?)/i, // MUST be defined because of file has as query
+        parallel: true,
+        sourceMap: hasStyleguide,
+      }));
+
+      // extract css into its own file
+      pluginCollection.push(new ExtractTextPlugin({
+        filename: assetsSubDirectory + 'css/[name].css?[contenthash]',
+        // Setting the following option to `false` will not extract CSS from codesplit chunks.
+        // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
+        // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
+        // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
+        allChunks: true,
+      }));
+
+      // split vendor js into its own file
+      pluginCollection.push(new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks(module) {
+          // any required modules inside node_modules are extracted to vendor
+          return (
+            module.resource &&
+            /\.js$/.test(module.resource) &&
+            module.resource.indexOf(
+              path.join(__dirname, 'node_modules')
+            ) === 0
+          );
+        }
+      }));
+
+      // extract webpack runtime and module manifest to its own file in order to
+      // prevent vendor hash from being updated whenever app bundle is updated
+      pluginCollection.push(new webpack.optimize.CommonsChunkPlugin({
+        name: 'manifest',
+        minChunks: Infinity
+      }));
+
+      // Script tag injection
+      pluginCollection.push(new HtmlWebpackPlugin({
+        inject: true,
+        template: 'index.html'
+      }));
+
+      // Script tag injection
+      pluginCollection.push(new WebpackMonitor({
+        capture: !hasStyleguide,
+        target: '../stats/monitor.json',
+        launch: env && env.monitor
+      }));
+
+      // copy custom static assets
+      pluginCollection.push(new CopyWebpackPlugin([
+        {
+          from: path.resolve(__dirname, 'static'),
+          to: assetsSubDirectory,
+          ignore: ['.*']
+        },
+        {
+          from: path.resolve(__dirname, 'static/.htaccess'),
+        },
+      ]));
+
+      // NOTE: this is currently not working because of incompatibility with query hash
+      pluginCollection.push(new WebpackAutoInject({
+        SILENT: true,
+        components: {
+          AutoIncreaseVersion: false,
+          InjectAsComment: true,
+          InjectByTag: true
+        },
+        componentsOptions: {
+          InjectAsComment: {
+            tag: 'Build version: {version} - {date}',
+            dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
+          }
+        }
+      }));
+    }
+
+    return pluginCollection;
+  }
+
   const baseConfig = {
     entry: {
       app: path.resolve(__dirname, 'app/main.js'),
@@ -207,27 +321,7 @@ module.exports = function (env, options) {
       quiet: true, // Handled by FriendlyErrorsPlugin
       inline: true,
     },
-    plugins: [
-      new HtmlWebpackPlugin({ // Script tag injection
-        inject: true,
-        template: 'index.html',
-      }),
-      new StyleLintPlugin({
-        context: 'app',
-        files: [
-          '**/*.vue',
-          '**/*.scss',
-        ],
-      }),
-      new webpack.NamedModulesPlugin(), // Hot Module Replacement
-      new webpack.HotModuleReplacementPlugin(), // Hot Module Replacement
-      new FriendlyErrorsPlugin({
-        compilationSuccessInfo: {
-          messages: [`Your application is running on http://${host}:${port}.`],
-        },
-      }),
-      new webpack.DefinePlugin(globalVariables),
-    ],
+    plugins: plugins(),
   };
 
   const prodConfig = {
@@ -247,80 +341,7 @@ module.exports = function (env, options) {
       maxEntrypointSize: 500000, // 500kb
       maxAssetSize: 150000, // 150kb
     },
-    plugins: [
-      new UglifyJsPlugin({
-        test: /\.js($|\?)/i, // MUST be defined because of file has as query
-        parallel: true,
-        sourceMap: !isProduction,
-      }),
-      // extract css into its own file
-      new ExtractTextPlugin({
-        filename: assetsSubDirectory + 'css/[name].css?[contenthash]',
-        // Setting the following option to `false` will not extract CSS from codesplit chunks.
-        // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-        // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
-        // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
-        allChunks: true,
-      }),
-      // split vendor js into its own file
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks(module) {
-          // any required modules inside node_modules are extracted to vendor
-          return (
-            module.resource &&
-            /\.js$/.test(module.resource) &&
-            module.resource.indexOf(
-              path.join(__dirname, 'node_modules')
-            ) === 0
-          );
-        }
-      }),
-      // extract webpack runtime and module manifest to its own file in order to
-      // prevent vendor hash from being updated whenever app bundle is updated
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        minChunks: Infinity
-      }),
-      // Script tag injection
-      new HtmlWebpackPlugin({
-        inject: true,
-        template: 'index.html'
-      }),
-      new WebpackMonitor({
-        capture: !hasStyleguide,
-        target: '../stats/monitor.json',
-        launch: env && env.monitor
-      }),
-      // copy custom static assets
-      new CopyWebpackPlugin([
-        {
-          from: path.resolve(__dirname, 'static'),
-          to: assetsSubDirectory,
-          ignore: ['.*']
-        },
-        {
-          from: path.resolve(__dirname, 'static/.htaccess'),
-        },
-      ]),
-      new webpack.DefinePlugin(globalVariables),
-
-      // NOTE: this is currently not working because of incompatibility with query hash
-      new WebpackAutoInject({
-        SILENT: true,
-        components: {
-          AutoIncreaseVersion: false,
-          InjectAsComment: true,
-          InjectByTag: true
-        },
-        componentsOptions: {
-          InjectAsComment: {
-            tag: 'Build version: {version} - {date}',
-            dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
-          }
-        }
-      }),
-    ],
+    plugins: plugins(),
   };
 
   const criticalConfig = {

@@ -4,7 +4,7 @@
   "description": "A customized Vue.js project template",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack --env.production --env.message && npm run build:critical",
+    "build": "npm run clean && npm run build:critical && webpack --env.production --env.message",
     "build:monitor": "npm run build -- --env.monitor",
     "build:profile": "rimraf dist && webpack --env.production --profile --json > stats/profile.json",
     "build:styleguide": "npm run build -- --env.styleguide && vue-styleguidist build",
@@ -26,8 +26,8 @@
     "url": "git+https://github.com/patric-eberle/vue-template.git"
   },
   "engines": {
-    "node": "^6.12.0",
-    "npm": "^5.6.0"
+    "node": ">=6.12.0",
+    "npm": ">=5.6.0"
   },
   "keywords": [
     "vue",
