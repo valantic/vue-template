@@ -2,6 +2,12 @@
 
 TBD: Add info about npm version
 
+## Configuration files
+
+### .editorconfig
+
+The `.editorconfig` file in the project root defines project defaults for your IDE like indent and type of line-breaks. Please make sure that your IDE is configured to read this file. Help and plugins can be found [here](http://editorconfig.org/#download).
+
 ## Node.js
 
 ### Installing npm packages
