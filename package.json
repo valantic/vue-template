@@ -69,7 +69,6 @@
   },
   "dependencies": {
     "axios": "~0.17.1",
-    "postcss-pipeline-webpack-plugin": "~3.0.1",
     "vue": "~2.5.13",
     "vue-bem-cn": "~1.0.0",
     "vue-router": "~3.0.1",
@@ -98,6 +97,7 @@
     "node-sass": "~4.7.2",
     "postcss-critical-split": "~2.5.1",
     "postcss-html": "~0.12.0",
+    "postcss-pipeline-webpack-plugin": "~3.0.1",
     "rimraf": "~2.6.2",
     "sass-loader": "~6.0.6",
     "stylelint": "~8.4.0",
