@@ -40,7 +40,5 @@ module.exports = {
     }],
   },
   globals: {
-    'WP_STYLEGUIDE': false,
-    'WP_PRODUCTION': false
   }
 };

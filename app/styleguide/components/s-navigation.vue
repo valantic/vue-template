@@ -49,7 +49,7 @@
     },
     computed: {
       styleguidistUrl() {
-        return WP_PRODUCTION
+        return process.env.NODE_ENV === 'production'
           ? '/styleguidist'
           : '//localhost:6060';
       },

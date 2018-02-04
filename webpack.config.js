@@ -22,10 +22,9 @@ module.exports = function (env, options) {
   const assetsSubDirectory = 'static/';
   const isProfileBuild = (options && options.profile && options.json) || false;
   const globalVariables = {
-    WP_STYLEGUIDE: JSON.stringify(hasStyleguide),
-    WP_PRODUCTION: JSON.stringify(isProduction),
     'process.env': {
-      NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development') // Needed by vendor scripts
+      NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
+      HAS_STYLEGUIDE: JSON.stringify(hasStyleguide)
     },
   };
   const include = [

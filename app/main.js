@@ -10,7 +10,7 @@ Vue.config.productionTip = false;
 Vue.use(components);
 Vue.use(plugins);
 
-if (!WP_PRODUCTION || WP_STYLEGUIDE) {
+if (process.env.NODE_ENV !== 'production' || process.env.HAS_STYLEGUIDE) {
   // eslint-disable-next-line global-require
   vueOptions = Object.assign(vueOptions, require('./setup/options.dev').default); // Note: will overwrite duplicates
 
