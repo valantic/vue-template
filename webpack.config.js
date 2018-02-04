@@ -10,11 +10,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackMonitor = require('webpack-monitor');
 const WebpackAutoInject = require('webpack-auto-inject-version');
 const webpack = require('webpack');
+const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
+const postCssCriticalSplit = require('postcss-critical-split');
+const cssNano = require('cssnano');
 
 module.exports = function (env, options) {
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
-  const isCritical = (env && env.critical) || false;
   const hasMessage = (env && env.message) || false;
   const host = 'localhost';
   const port = 8080;
@@ -35,7 +37,7 @@ module.exports = function (env, options) {
   if (!isProfileBuild && hasMessage) {
     const target = hasStyleguide
       ? 'Styleguide'
-      : (isCritical ? 'Critical CSS' : 'Production');
+      : 'Production';
 
     // Print type of build (first value is log color)
     console.info('\x1b[36m%s\x1b[0m', '## Building for ' + target + ' ##');
@@ -47,7 +49,7 @@ module.exports = function (env, options) {
         loader: 'css-loader', // Note: will also call postcss
         options: {
           sourceMap: !isProduction || hasStyleguide,
-          minimize: isProduction
+          minimize: false // TODO: isProduction
         },
       },
       {
@@ -126,7 +128,7 @@ module.exports = function (env, options) {
 
       // extract css into its own file
       pluginCollection.push(new ExtractTextPlugin({
-        filename: assetsSubDirectory + 'css/[name].css?[contenthash]',
+        filename: assetsSubDirectory + 'css/[name].css', // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
         // Setting the following option to `false` will not extract CSS from codesplit chunks.
         // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
         // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
@@ -169,6 +171,22 @@ module.exports = function (env, options) {
         launch: env && env.monitor
       }));
 
+      // Create critical CSS
+      pluginCollection.push(new PostCssPipelineWebpackPlugin({
+        suffix: 'critical',
+        pipeline: [
+          postCssCriticalSplit()
+        ]
+      }));
+
+      // Create minificated CSS
+      pluginCollection.push(new PostCssPipelineWebpackPlugin({
+        suffix: 'min',
+        pipeline: [
+          cssNano()
+        ]
+      }));
+
       // copy custom static assets
       pluginCollection.push(new CopyWebpackPlugin([
         {
@@ -181,8 +199,8 @@ module.exports = function (env, options) {
         },
       ]));
 
-      // NOTE: this is currently not working because of incompatibility with query hash
-      pluginCollection.push(new WebpackAutoInject({
+      // Note: version auto inject is currently not working with query hash (https://github.com/radswiat/webpack-auto-inject-version/issues/25)
+     pluginCollection.push(new WebpackAutoInject({
         SILENT: true,
         components: {
           AutoIncreaseVersion: false,
@@ -283,7 +301,7 @@ module.exports = function (env, options) {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubDirectory + 'fonts/[name].[ext]?[hash:]'
+            name: assetsSubDirectory + 'fonts/[name].[ext]?[hash]'
           }
         },
       ]
@@ -342,35 +360,6 @@ module.exports = function (env, options) {
     },
     plugins: plugins(),
   };
-
-  const criticalConfig = {
-    entry: {
-      critical: path.resolve(__dirname, 'app/setup/critical.scss.js'),
-    },
-    resolve: {
-      extensions: ['.js', '.vue'],
-    },
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: `${assetsSubDirectory}css/[name].css`,
-      publicPath: '/', // Public path to 'dist' scope in production
-    },
-    stats: webpackStats(),
-    performance: {
-      hints: 'warning',
-      maxEntrypointSize: 10000, // 10k
-    },
-    plugins: [
-      new ExtractTextPlugin({
-        filename: assetsSubDirectory + 'css/[name].css',
-        allChunks: true,
-      }),
-    ]
-  };
-
-  if (isCritical) {
-    return Object.assign(baseConfig, criticalConfig);
-  }
 
   if (isProduction) {
     return Object.assign(baseConfig, prodConfig);

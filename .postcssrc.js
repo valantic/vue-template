@@ -2,7 +2,7 @@
 
 module.exports = {
   plugins: [
-    require('autoprefixer')
+    require('autoprefixer'),
     // Browser config is fetched from package.json:browserslist
   ]
 };

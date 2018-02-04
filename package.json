@@ -4,11 +4,10 @@
   "description": "A customized Vue.js project template",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:critical && webpack --env.production --env.message",
+    "build": "npm run clean && webpack --env.production --env.message",
     "build:monitor": "npm run build -- --env.monitor",
     "build:profile": "rimraf dist && webpack --env.production --profile --json > stats/profile.json",
     "build:styleguide": "npm run build -- --env.styleguide && vue-styleguidist build",
-    "build:critical": "webpack --env.production --env.critical --env.message",
     "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint '**/*.?(vue|scss)'; exit 0",
@@ -70,6 +69,7 @@
   },
   "dependencies": {
     "axios": "~0.17.1",
+    "postcss-pipeline-webpack-plugin": "~3.0.1",
     "vue": "~2.5.13",
     "vue-bem-cn": "~1.0.0",
     "vue-router": "~3.0.1",
@@ -96,6 +96,7 @@
     "image-webpack-loader": "~4.0.0",
     "jest": "~22.1.4",
     "node-sass": "~4.7.2",
+    "postcss-critical-split": "~2.5.1",
     "postcss-html": "~0.12.0",
     "rimraf": "~2.6.2",
     "sass-loader": "~6.0.6",
