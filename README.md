@@ -8,6 +8,10 @@ TBD: Add info about npm version
 
 The `.editorconfig` file in the project root defines project defaults for your IDE like indent and type of line-breaks. Please make sure that your IDE is configured to read this file. Help and plugins can be found [here](http://editorconfig.org/#download).
 
+### .npmrc
+
+By default `npm` will install new packages with the version info prefix `^`, which means, that minor version updates can be installed automatically. Past projects have shown, that this behaviour can lead to problems, since minor updates are often not backwards compatible. Therefore we replace the prefix with `~` which by default only allows patch updates and therefore gives us less headache. The [config file](https://docs.npmjs.com/files/npmrc) is used automatically.
+
 ## Node.js
 
 ### Installing npm packages
