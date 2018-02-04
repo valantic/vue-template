@@ -2,16 +2,25 @@
 
 ## Dependencies
 
+### Project
+
+None
+
+### Template
+
 * [axios](https://github.com/axios/axios) - Promise based HTTP client for browser and node.js.
 * [vue](https://github.com/vuejs/vue) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
 * [vue-bem-cn](http://codepen.io/c01nd01r/pen/Qdeovv)- Simple BEM class name generator for Vue.JS.
 * [vue-router](https://github.com/vuejs/vue-router) - The official router for Vue.js.
-
-### [vuex](https://github.com/vuejs/vuex)
-
-Centralized State Management for Vue.js.
+* [vuex](https://github.com/vuejs/vuex) - Centralized State Management for Vue.js.
 
 ## Dev-Dependencies
+
+### Project
+
+None
+
+### Template
 
 * [babel-core](https://github.com/babel/babel/tree/master/packages/babel-core) - Babel compiler core.
 * [babel-eslint](https://github.com/babel/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
@@ -50,7 +59,3 @@ Centralized State Management for Vue.js.
 * [webpack-auto-inject-version](https://github.com/radswiat/webpack-auto-inject-version) - Webpack plugin to auto inject version into html or file.
 * [webpack-dev-server](https://github.com/webpack/webpack-dev-server) - Serves a webpack app. Updates the browser on changes.
 * [webpack-monitor](https://github.com/webpackmonitor/webpackmonitor) - Webpack Monitor is a configurable Webpack plugin that captures relevant statistics on your production builds.
-
-### copy-webpack-plugin
-
-Webpack plugin to copy static files
