@@ -155,7 +155,25 @@ TBD
 
 ### Optimization
 
-TBD
+We have several possibilities/tools to optimize the size and speed of our application. This section will give you a few hints how to tweak it.
+
+#### Functional components
+
+Vue allows us to also create `functional components`, which are basically just stateless functions and meant for a single render. Therefore the rendering itself is much faster while no components instance is cluttering the browser cache.
+
+You can read more about this practice [here](https://vuejs.org/v2/guide/render-function.html#Functional-Components).
+
+#### Async components
+
+Vue is able to load components asynchronously. While this should be used sparingly, since a huge amount of files will also slow down the whole application, it can be used to load big parts which are only used in a very specific an lesser reached part of the application on demand (e.g. the checkout in a shop or an extensive configurator for a certain task).
+
+In webpack this separate parts of the application are called `chunks`. Read more about this practice [here](https://vuejs.org/v2/guide/components.html#Async-Components).
+
+#### Critical CSS
+
+Delivering critical CSS to the browser trough the HTML head can drastically decrease the time until first render. As long as the HTML file itself is gziped still below 14kb. Therefore we decided to ad a manual possibility to define critical CSS styles, which will be extracted in a separate `*.critical.css` file during the build.
+
+You can read more about critical CSS [here](https://css-tricks.com/annotating-critical-css/) and the tool we're using [here](https://github.com/mrnocreativity/postcss-critical-split)
 
 ### Other tools
 
@@ -271,15 +289,15 @@ $ brew upgrade nasm
 ## ToDo
 
 * [x] Add info about npm version
-* [ ] Functional components
+* [x] Functional components
 * [x] Node scripts
 * [x] Inspector
 * [x] Must read
 * [x] Installation (npm, inspector)
 * [ ] Best practice
-* [ ] Minification/Code splitting
+* [x] Minification/Code splitting
 * [ ] Vue exceptions
-* [ ] Blueprints
+* [x] Blueprints
 * [ ] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
 * [ ] Data injection/handling
 
