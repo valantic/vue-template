@@ -8,7 +8,7 @@ There are several scripts that will support you during the development and deplo
 
 #### `npm run build`
 
-Creates a build of the current code and moves it to the `/dist` folder. This will also perform **code splitting**, **critical CSS splitting** and **minification/uglyfication**. `npm run test` **MUST** be executed before building!
+Creates the production build of the current code and moves it to the `/dist` folder. This will also perform **code splitting**, **critical CSS splitting** and **minification/uglyfication**. `npm run test` **MUST** be executed before building!
 
 #### `npm run dev`
 

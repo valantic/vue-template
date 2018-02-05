@@ -42,9 +42,33 @@ You **SHOULD** also know the following tools:
 
 You **MUST** install the following tools globally, before you can use this template:
 
-* [Node.js & NPM](https://nodejs.org/en/) (See package.json for the required versions. Use a version manager in case you work on different projects (e.g. [n](https://www.npmjs.com/package/n) or [nvm](https://github.com/creationix/nvm/blob/master/README.md)))
-* [Vue-Devtools](https://github.com/vuejs/vue-devtools) for your browser
+* [Node.js & NPM](https://nodejs.org/en/) (See package.json for the required versions. Use a version manager in case you work on different projects (e.g. [n](https://www.npmjs.com/package/n) or [nvm](https://github.com/creationix/nvm/blob/master/README.md))).
+* [Vue-Devtools](https://github.com/vuejs/vue-devtools) for your browser.
+* [Homebrew](http://brew.sh/) is most likely also needed for 3rd party tools.
 * A modern IDE
+
+### Prepare your IDE
+
+Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](http://editorconfig.org/#download) linting/settings.
+
+### Cloning
+
+Note: to execute the following tasks, you may need to register an SSH key for your machine on the repository side. Ask your project manager about where you need to define it. On how you create/copy the SSH key you can read more [here](https://help.github.com/articles/connecting-to-github-with-ssh/). 
+
+Make a local git clone of this project/template by using the following command:
+
+```
+$ git clone <repository-url> <[target-folder]>
+
+# If you wan't a clean copy (no history) use the following command
+$ git clone --depth 1 -b master <repository-url>
+```
+
+If you create a new project, based on this template, please make sure to change the path to the origin repository to your project repository, after cloning. **If you cloned an existing project, this step is not needed.**
+
+```
+$ git remote set-url origin <project-repository-url>
+```
 
 ### Installing
 
@@ -66,20 +90,38 @@ $ npm install
 
 ## This project
 
-> TODO: replace this part with project specific information.
+> TODO: replace this section with project specific information.
 
-TBD:
+### Browser support
 
-* [x] Add info about npm version
-* [] Functional components
-* [x] Node scripts
-* [x] Inspector
-* [x] Must read
-* [x] Installation (npm, inspector)
-* [] Best practice
-* [] Minification/Code splitting
-* [] Vue exceptions
-* [] Blueprints
+| Operating systems/Devices | Browser | Viewport |
+| --- | --- | --- |
+| Windows | ?? | ?? |
+| Mac OS X | ?? | ?? |
+| Phone 1 (iOS x.xx) | ?? | ?? |
+| Tablet 1 (iOS (x.xx) | ?? | ?? |
+
+### Running the project
+
+A complete list of available NPM scripts can be found in [package.md](package.md).
+
+Please make sure to always run Node/NPM tasks trough an NPM script. Installing NPM packages globally in calling them directly is bad practice and can cause inconsistency because of version differences (e.g. install `webpack` as a project dependency and then create an NPM script, which runs this project related `webpack` instead of a global one).
+
+To start developing you only need to execute the `dev` script from your console:
+
+```
+$ npm run dev
+```
+
+The app should now run on [http://localhost:8080](http://localhost:8080)
+
+#### Styleguidist
+
+If you prefer to develop inside the component styleguide run the following script instead or in a new tab:
+
+```
+$ npm run dev:styleguide
+```
 
 ## BEM
 
@@ -87,7 +129,7 @@ We heavily use the [BEM](http://getbem.com/) methodology to define our style cla
 
 ### Namespace
 
-Please note, that this template/project uses namespaced BEM to distinguish components and styles. The namespace is placed before the custom block name (but is also part of the block).
+Please note, that this template/project uses namespaced BEM to distinguish components and styles. The namespace is placed before the custom block name (but is also part of the block). This also is a workaround for the custom HTML element restriction which tells us they must have at least one dash in the name.
 
 #### `c-`
 
@@ -114,6 +156,16 @@ TBD
 ### Optimization
 
 TBD
+
+### Other tools
+
+### Living styleguide
+
+Please note, that the living styleguide has its on section in `/app/styleguide` where you can finde `components`, `routes` and anything else, which is only related to the living styleguide. This makes it more easy to identify and split out unneeded code during the build. 
+
+#### SCSS
+
+* Vendor prefixes are automatically applied according to the `browserslist` in `package.json`. You don't need to write them yourself.
 
 ## Node.js and NPM
 
@@ -215,6 +267,21 @@ $ brew install nasm
 
 $ brew upgrade nasm
 ```
+
+## ToDo
+
+* [x] Add info about npm version
+* [ ] Functional components
+* [x] Node scripts
+* [x] Inspector
+* [x] Must read
+* [x] Installation (npm, inspector)
+* [ ] Best practice
+* [ ] Minification/Code splitting
+* [ ] Vue exceptions
+* [ ] Blueprints
+* [ ] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
+* [ ] Data injection/handling
 
 ## License
 
