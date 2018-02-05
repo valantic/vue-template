@@ -1,6 +1,12 @@
 <template>
   <span :class="b()"><!-- needed for inline usage -->
-    <img :class="b('icon')" v-if="!inline" :src="src" :alt="icon" :width="width" :height="height">
+    <img :class="b('icon')"
+         v-if="!inline"
+         :src="src"
+         :alt="icon"
+         :width="width"
+         :height="height"
+    >
   </span>
 </template>
 
@@ -29,12 +35,14 @@
        */
       width: {
         type: String,
+        default: null,
       },
       /**
        * Custom height value
        */
       height: {
         type: String,
+        default: null,
       },
     },
     computed: {
@@ -48,6 +56,23 @@
           return null;
         }
       },
+    },
+    mounted() {
+      if (!this.inline || !this.src) {
+        return;
+      }
+
+      if (!cache[this.icon]) {
+        cache[this.icon] = this.$axios
+          .get(this.src)
+          .then(response => response.data);
+      }
+
+      cache[this.icon].then((svg) => {
+        this.$el.innerHTML = svg;
+
+        this.setAttributes(this.$el.children[0]);
+      });
     },
     methods: {
       setAttributes(svg) {
@@ -67,23 +92,6 @@
         svg.setAttribute('role', 'img');
         svg.setAttribute('aria-label', this.icon);
       },
-    },
-    mounted() {
-      if (!this.inline || !this.src) {
-        return;
-      }
-
-      if (!cache[this.icon]) {
-        cache[this.icon] = this.$axios
-          .get(this.src)
-          .then(response => response.data);
-      }
-
-      cache[this.icon].then((svg) => {
-        this.$el.innerHTML = svg;
-
-        this.setAttributes(this.$el.children[0]);
-      });
     },
   };
 </script>

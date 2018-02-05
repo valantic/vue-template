@@ -17,7 +17,6 @@
 
     // computed: {},
     // watch: {},
-    // methods: {},
 
     // beforeCreate() {},
     // created() {},
@@ -29,6 +28,8 @@
     // deactivated() {},
     // beforeDestroy() {},
     // destroyed() {},
+
+    // methods: {},
   };
 </script>
 

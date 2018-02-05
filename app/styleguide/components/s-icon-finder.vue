@@ -1,12 +1,18 @@
 <template>
   <div :class="b()">
     <div :class="b('filter')">
-      <input :class="b('filter-input')" v-model="filter" placeholder="Search …">
+      <input :class="b('filter-input')"
+             v-model="filter"
+             placeholder="Search …"
+      >
     </div>
     <div :class="b('grid')">
-      <div :class="b('grid-item')" v-for="icon in filteredIcons">
+      <div :class="b('grid-item')"
+           :key="icon"
+           v-for="icon in filteredIcons"
+      >
         <div :class="b('icon-wrapper')">
-          <e-icon :icon="icon" :key="icon" width="50"></e-icon>
+          <e-icon :icon="icon" :key="icon" width="50" />
         </div>
         <div :class="b('icon-label')">{{ icon }}</div>
       </div>

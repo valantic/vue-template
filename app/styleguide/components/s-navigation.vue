@@ -3,28 +3,34 @@
     <div :class="b('navigation-wrapper', {position: navPosition})">
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', {logo: true})">
-          <a :class="b('navigation-link')" href="http://www.derverstaerker.ch" target="_blank">
+          <a :class="b('navigation-link')"
+             href="http://www.derverstaerker.ch"
+             target="_blank"
+          >
             <img src="../assets/logo.png" alt="Verstärker">
           </a>
         </li>
         <router-link
-            v-for="route in routes"
-            v-if="route.meta"
-            tag="li"
-            :key="route.name"
-            :to="{name: route.name}"
-            :class="b('navigation-item')"
-            :active-class="`${$options.name}-item--active-path`"
-            :exact-active-class="`${$options.name}-item--active`"
-            exact>
-          <a :class="b('navigation-link')">{{route.meta.title}}</a>
+          v-for="route in routes"
+          v-if="route.meta"
+          tag="li"
+          :key="route.name"
+          :to="{name: route.name}"
+          :class="b('navigation-item')"
+          :active-class="`${$options.name}-item--active-path`"
+          :exact-active-class="`${$options.name}-item--active`"
+          exact>
+          <a :class="b('navigation-link')">{{ route.meta.title }}</a>
         </router-link>
         <li :class="b('navigation-item', {components: true})">
-          <a :class="b('navigation-link')" :href="styleguidistUrl" target="_blank">Components</a>
+          <a :class="b('navigation-link')"
+             :href="styleguidistUrl"
+             target="_blank"
+          >Components</a>
         </li>
       </ul>
     </div>
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 
@@ -37,6 +43,7 @@
        */
       routes: {
         type: Array,
+        default: () => [],
       },
       /**
        * Position of navigation (top, right, bottom, left, top-right, top-left, ...)
@@ -44,7 +51,16 @@
       navPosition: {
         type: String,
         default: 'top',
-        validator: value => ['top', 'right', 'bottom', 'left', 'top-left', 'top-right', 'bottom-right', 'bottom-left'].indexOf(value) >= 0,
+        validator: value => [
+          'top',
+          'right',
+          'bottom',
+          'left',
+          'top-left',
+          'top-right',
+          'bottom-right',
+          'bottom-left',
+        ].indexOf(value) >= 0,
       },
     },
     computed: {

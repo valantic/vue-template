@@ -300,6 +300,7 @@ $ brew upgrade nasm
 * [x] Blueprints
 * [ ] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
 * [ ] Data injection/handling
+* [ ] BEM helper
 
 ## License
 
