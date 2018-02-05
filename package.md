@@ -1,5 +1,42 @@
 # NPM packages
 
+## Scripts
+
+There are several scripts that will support you during the development and deploy process. In the end you'll probably only need two or three of them, since they often call each other.
+
+### Common
+
+#### `npm run build`
+
+Creates a build of the current code and moves it to the `/dist` folder. This will also perform **code splitting**, **critical CSS splitting** and **minification/uglyfication**. `npm run test` **MUST** be executed before building!
+
+#### `npm run dev`
+
+Starts the development-environment with styleguide example pages. Please note, that for performance reasons no minification, uglyfication and CSS extraction is performed.
+
+#### `npm run dev:styleguide`
+
+Starts [Vue-Styleguidist](https://github.com/vue-styleguidist/vue-styleguidist) in a separate webpack and localhost instance.
+
+#### `npm run test`
+
+This will test the current state of CSS and JS code. Tests **MUST** be executed before creating a build.
+
+#### All scripts
+
+* `npm run clean` - Cross platform removal of `/dist` folder.
+* `npm run build` - See above.
+* `npm run build:monitor` will run a normal build but also open a statistics page after the build, where you can review the package size development for all created builds. Please note, that the data can become invalid if the webpack configuration is changed.
+* `npm run build:profile` creates a `profile.json` in the `stats` folder which you can use to find the source of unexpected build size increases. There are []several tools](https://survivejs.com/webpack/optimizing/build-analysis/) you can use to examine the data.
+* `npm run build:styleguide` will create a build which looks exactly like your development environment. You can use this to deploy the living styleguide to a remote server. Please note, that you can only view the export inside a server instance where the provided `.htaccess` must be installed or merged.
+* `npm run eslint` performs the ESLint tests.
+* `npm run eslint:fix` performs the ESLint tests and automatic issue fixing where possible. **Only use this if you know what you're doing!** Always check and rerun the application before committing!
+* `npm run stylelint` performs the Stylelint tests.
+* `npm run lint` performs ESLint and Stylelint tests.
+* `npm run test` - See above.
+* `npm run dev` - See above.
+* `npm run dev:styleguide` - See above.
+
 ## Dependencies
 
 ### Project
