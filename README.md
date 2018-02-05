@@ -23,6 +23,7 @@ Before you start working on this project, you **MUST** read the following docume
 
 You **MUST** also be familiar with the following tools:
 
+* [BEM](http://getbem.com/)
 * [ES2015](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
 * [Git](https://git-scm.com/)
@@ -78,8 +79,33 @@ TBD:
 * [] Best practice
 * [] Minification/Code splitting
 * [] Vue exceptions
+* [] Blueprints
+
+## BEM
+
+We heavily use the [BEM](http://getbem.com/) methodology to define our style classes and component names. It's mandatory that you understand the concept behind it before starting to develop or fixing existing code.
+
+### Namespace
+
+Please note, that this template/project uses namespaced BEM to distinguish components and styles. The namespace is placed before the custom block name (but is also part of the block).
+
+#### `c-`
+
+Marks an ordinary **component** which can contain other components and/or elements and can be part of an other component.
+
+#### `e-`
+
+Marks an **element** "component" which itself doesn't contain an other component/element (except for scoped ones) but can be part of an other component.
+
+#### `l-`
+
+Marks a **layout** "component" and therefore the most outer wrapper of the application. It can not be contained within an other component but can contain components and/or elements.
 
 ## Vue
+
+### Blueprints
+
+In the `/blueprints` folder you'll find templates for several tasks like a new component, test or styleguide entry. Please always base new files on this blueprints and not on an empty or copied existing file.
 
 ### Best practice
 
@@ -194,4 +220,4 @@ $ brew upgrade nasm
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2013-present, Patric Eberle
+Copyright (c) 2017-present, Patric Eberle
