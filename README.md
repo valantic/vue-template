@@ -23,12 +23,14 @@ Before you start working on this project, you **MUST** read the following docume
 
 You **MUST** also be familiar with the following tools:
 
-* [SCSS](https://sass-lang.com/)
 * [ES2015](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
-* [Stylelint](https://stylelint.io/)
+* [Git](https://git-scm.com/)
+* [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/)
 * [Jest](https://facebook.github.io/jest/)
 * [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
+* [SCSS](https://sass-lang.com/)
+* [Stylelint](https://stylelint.io/)
 * Your IDE
 
 You **SHOULD** also know the following tools:
@@ -61,7 +63,7 @@ Finally it's time to install the project dependencies and start developing!
 $ npm install
 ```
 
-### This project
+## This project
 
 > TODO: replace this part with project specific information.
 
@@ -77,29 +79,55 @@ TBD:
 [] Minification/Code splitting
 [] Vue exceptions
 
+## Vue
+
+### Best practice
+
+TBD
+
+### Optimization
+
+TBD
+
 ## Configuration files
+
+### .babelrc
+
+The configuration file for the Babel compiler. Please note, that the browser version configuration is taken from the `browserslist` section in `package.json`.
 
 ### .editorconfig
 
 The `.editorconfig` file in the project root defines project defaults for your IDE like indent and type of line-breaks. Please make sure that your IDE is configured to read this file. Help and plugins can be found [here](http://editorconfig.org/#download).
 
+### .eslintignore
+
+Defines the folders/files which should not be linted by ESLint.
+
+### eslintrc.js
+
+ESLint setup for the current project.
+
+### .gitignore
+
+Tells git which folders/files should not be part of the repository.
+
 ### .npmrc
 
-By default `npm` will install new packages with the version info prefix `^`, which means, that minor version updates can be installed automatically. Past projects have shown, that this behaviour can lead to problems, since minor updates are often not backwards compatible. Therefore we replace the prefix with `~` which by default only allows patch updates and therefore gives us less headache. The [config file](https://docs.npmjs.com/files/npmrc) is used automatically.
+NPM configuration. By default `npm` will install new packages with the version info prefix `^`, which means, that minor version updates can be installed automatically. Past projects have shown, that this behaviour can lead to problems, since minor updates are often not backwards compatible. Therefore we replace the prefix with `~` which by default only allows patch updates and therefore gives us less headache. The [config file](https://docs.npmjs.com/files/npmrc) is used automatically.
 
-## Node.js
+### .postcssrc.js
 
-### Installing npm packages
+PostCSS configuration. PostCSS is used for **browser prefixing**, **minification** and **critical CSS** splitting of the style definitions.
 
-To install all Node.js dependencies, needed by this project, run the following command.
+### .stylelintrc.js
 
-```
-$ npm install
-```
+Stylelint setup for the current project.
 
-#### Known issues
+## Known issues
 
-##### Stale
+### Node.js & NPM
+
+#### Stale
 
 If you get a warning about `Using stale package data`, try to clear your npm cache before installing the packages:
 
@@ -107,7 +135,7 @@ If you get a warning about `Using stale package data`, try to clear your npm cac
 $ npm cache clean --force
 ```
 
-##### Error when installing mozjpeg 1
+#### Error when installing mozjpeg 1
 
 If you should get the following error when installing mozjpeg on MacOS
 
@@ -121,7 +149,7 @@ Try to fix it by installing the following brew packages:
 $ brew install automake autoconf libtool
 ```
 
-##### Error when installing mozjpeg 2
+#### Error when installing mozjpeg 2
 
 If you get the following errors when installing mozjpeg on MacOS
 
@@ -140,7 +168,7 @@ $ brew install pkg-config
 $ brew upgrade pkg-config
 ```
 
-##### Error when installing mozjpeg 3
+#### Error when installing mozjpeg 3
 
 If you get the following errors when installing mozjpeg on MacOS
 
