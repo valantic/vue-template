@@ -1,6 +1,14 @@
 # vue-template
 
-TBD: Add info about npm version
+TBD:
+* Add info about npm version
+* Functional components
+* Node scripts
+* Inspector
+* Must read
+* Installation (npm, inspector)
+* Best practice
+* Minification/Code splitting
 
 ## Configuration files
 
