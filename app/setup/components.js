@@ -8,8 +8,14 @@ export default {
       eButton,
     ];
 
-    components.forEach((component) => {
-      Vue.component(component.name, component);
-    });
+    // This improves component usage in PhpStorm, while keeping optimized import in production
+    if (process.env.NODE_ENV === 'production') {
+      components.forEach((component) => {
+        Vue.component(component.name, component);
+      });
+    } else {
+      Vue.component(eButton.name, eButton);
+      Vue.component(eIcon.name, eIcon);
+    }
   },
 };
