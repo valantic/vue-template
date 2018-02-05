@@ -47,7 +47,7 @@ You **MUST** install the following tools globally, before you can use this templ
 
 ### Installing
 
-Before executing the following command, please **make sure your Node and NPM version meet the requirements** in package.json's `endignes` section.
+Before executing the following command, please **make sure your Node and NPM version meet the requirements** in package.json's `endignes` section. Changing the Node or NPM version later on can cause issues which force you to re-install the project.
 
 ```
 # Print node version
@@ -69,15 +69,15 @@ $ npm install
 
 TBD:
 
-[x] Add info about npm version
-[] Functional components
-[x] Node scripts
-[x] Inspector
-[x] Must read
-[x] Installation (npm, inspector)
-[] Best practice
-[] Minification/Code splitting
-[] Vue exceptions
+* [x] Add info about npm version
+* [] Functional components
+* [x] Node scripts
+* [x] Inspector
+* [x] Must read
+* [x] Installation (npm, inspector)
+* [] Best practice
+* [] Minification/Code splitting
+* [] Vue exceptions
 
 ## Vue
 
@@ -88,6 +88,10 @@ TBD
 ### Optimization
 
 TBD
+
+## Node.js and NPM
+
+Please see the separate [package.md](package.md).
 
 ## Configuration files
 
@@ -113,7 +117,7 @@ Tells git which folders/files should not be part of the repository.
 
 ### .npmrc
 
-NPM configuration. By default `npm` will install new packages with the version info prefix `^`, which means, that minor version updates can be installed automatically. Past projects have shown, that this behaviour can lead to problems, since minor updates are often not backwards compatible. Therefore we replace the prefix with `~` which by default only allows patch updates and therefore gives us less headache. The [config file](https://docs.npmjs.com/files/npmrc) is used automatically.
+[NPM configuration](https://docs.npmjs.com/files/npmrc). By default `npm` will install new packages with the version info prefix `^`, which means, that minor version updates can be installed automatically. Past projects have shown, that this behaviour can lead to problems, since minor updates are often not backwards compatible. Therefore we replace the prefix with `~` which by default only allows patch updates and therefore gives us less headache during development.
 
 ### .postcssrc.js
 
@@ -135,7 +139,7 @@ If you get a warning about `Using stale package data`, try to clear your npm cac
 $ npm cache clean --force
 ```
 
-#### Error when installing mozjpeg 1
+#### Error when installing mozjpeg #1
 
 If you should get the following error when installing mozjpeg on MacOS
 
@@ -149,7 +153,7 @@ Try to fix it by installing the following brew packages:
 $ brew install automake autoconf libtool
 ```
 
-#### Error when installing mozjpeg 2
+#### Error when installing mozjpeg #2
 
 If you get the following errors when installing mozjpeg on MacOS
 
@@ -168,7 +172,7 @@ $ brew install pkg-config
 $ brew upgrade pkg-config
 ```
 
-#### Error when installing mozjpeg 3
+#### Error when installing mozjpeg #3
 
 If you get the following errors when installing mozjpeg on MacOS
 
@@ -185,3 +189,9 @@ $ brew install nasm
 
 $ brew upgrade nasm
 ```
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2013-present, Patric Eberle
