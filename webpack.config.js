@@ -13,6 +13,7 @@ const webpack = require('webpack');
 const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
 const postCssCriticalSplit = require('postcss-critical-split');
 const cssNano = require('cssnano');
+const openInEditor = require('launch-editor-middleware');
 
 module.exports = function (env, options) {
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
@@ -337,6 +338,9 @@ module.exports = function (env, options) {
       overlay: true,
       quiet: true, // Handled by FriendlyErrorsPlugin
       inline: true,
+      before (app) {
+        app.use('/__open-in-editor', openInEditor());
+      },
     },
     plugins: plugins(),
   };
