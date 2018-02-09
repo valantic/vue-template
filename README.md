@@ -301,6 +301,9 @@ $ brew upgrade nasm
 * [ ] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
 * [ ] Data injection/handling
 * [ ] BEM helper
+* [ ] Folder structure
+* [ ] Naming (only singular)
+* [ ] Vuex & modules
 
 ## License
 
