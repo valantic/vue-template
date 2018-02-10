@@ -71,6 +71,7 @@
     "axios": "~0.17.1",
     "vue": "~2.5.13",
     "vue-bem-cn": "~1.0.0",
+    "vue-i18n": "~7.4.2",
     "vue-router": "~3.0.1",
     "vuex": "~3.0.1"
   },
@@ -79,6 +80,7 @@
     "babel-eslint": "~8.2.1",
     "babel-jest": "~22.1.0",
     "babel-loader": "~7.1.2",
+    "babel-plugin-dynamic-import-node": "~1.2.0",
     "babel-preset-env": "~1.6.1",
     "copy-webpack-plugin": "~4.3.1",
     "css-loader": "~0.28.9",

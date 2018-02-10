@@ -4,6 +4,7 @@
       "modules": false
     }]
   ],
+  "plugins": ["dynamic-import-node"],
   "env": {
     "test": {
       "presets": ["env"]

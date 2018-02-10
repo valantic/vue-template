@@ -1,10 +1,12 @@
-import vueBemCn from 'vue-bem-cn';
-import vueAxios from '../plugins/axios';
+import VueBemCn from 'vue-bem-cn';
+import VueAxios from './plugins/axios';
+import VueI18n from './plugins/vue-i18n';
 
 export default {
-  install(Vue) {
-    Vue.use(vueAxios);
-    Vue.use(vueBemCn, {
+  install(Vue /* , options */) {
+    Vue.use(VueI18n);
+    Vue.use(VueAxios);
+    Vue.use(VueBemCn, {
       hyphenate: true,
     });
   },

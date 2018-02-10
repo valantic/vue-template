@@ -1,8 +1,8 @@
 <template>
   <div :class="b()">
-    <div :class="b('navigation-wrapper', {position: navPosition})">
+    <div :class="b('navigation-wrapper', { position: navPosition })">
       <ul :class="b('navigation')">
-        <li :class="b('navigation-item', {logo: true})">
+        <li :class="b('navigation-item', { logo: true })">
           <a :class="b('navigation-link')"
              href="http://www.derverstaerker.ch"
              target="_blank"
@@ -10,19 +10,22 @@
             <img src="../assets/logo.png" alt="Verstärker">
           </a>
         </li>
+        <li :class="b('navigation-item', { language: true })">
+          <s-language/>
+        </li>
         <router-link
           v-for="route in routes"
           v-if="route.meta"
           tag="li"
           :key="route.name"
-          :to="{name: route.name}"
+          :to="{ name: route.name }"
           :class="b('navigation-item')"
           :active-class="`${$options.name}-item--active-path`"
           :exact-active-class="`${$options.name}-item--active`"
           exact>
           <a :class="b('navigation-link')">{{ route.meta.title }}</a>
         </router-link>
-        <li :class="b('navigation-item', {components: true})">
+        <li :class="b('navigation-item', { components: true })">
           <a :class="b('navigation-link')"
              :href="styleguidistUrl"
              target="_blank"
@@ -35,8 +38,13 @@
 </template>
 
 <script>
+  import SLanguage from './s-language';
+
   export default {
     name: 's-navigation',
+    components: {
+      SLanguage,
+    },
     props: {
       /**
        * An array of styleguide routes
@@ -159,6 +167,11 @@
       }
 
       &--logo {
+        border-bottom: 1px solid #333;
+      }
+
+      &--language {
+        padding: 10px 20px;
         border-bottom: 1px solid #333;
       }
     }
