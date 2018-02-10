@@ -6,7 +6,7 @@ This is a custom Vue template which is based on the idea of using BEM, CriticalC
 
 ### About this readme
 
-If you're new on this project, please take your time and read carefully through this documentation and, if needed, trough the linked documentations.
+If you're new on this project, please take your time and read carefully through this documentation and, if needed, through the linked documentations.
 
 Please note, that there is also a `package.md` file which contains additional information about the used NPM packages and available NPM scripts. 
 
@@ -51,7 +51,9 @@ You **MUST** install the following tools globally, before you can use this templ
 
 Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](http://editorconfig.org/#download) linting/settings.
 
-### Cloning
+## Installation
+
+### Cloning the repository
 
 Note: to execute the following tasks, you may need to register an SSH key for your machine on the repository side. Ask your project manager about where you need to define it. On how you create/copy the SSH key you can read more [here](https://help.github.com/articles/connecting-to-github-with-ssh/). 
 
@@ -70,7 +72,7 @@ If you create a new project, based on this template, please make sure to change 
 $ git remote set-url origin <project-repository-url>
 ```
 
-### Installing
+### Installing npm packages
 
 Before executing the following command, please **make sure your Node and NPM version meet the requirements** in package.json's `endignes` section. Changing the Node or NPM version later on can cause issues which force you to re-install the project.
 
@@ -301,6 +303,10 @@ $ brew upgrade nasm
 * [ ] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
 * [ ] Data injection/handling
 * [ ] BEM helper
+* [ ] Folder structure
+* [ ] Naming (only singular)
+* [ ] Vuex & modules
+* [ ] Axios request mocking
 * [ ] Styleguide components
 
 ## License
