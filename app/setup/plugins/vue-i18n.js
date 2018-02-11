@@ -19,6 +19,13 @@ export default {
 
     options.i18n = VueI18nInstance;
 
+    /**
+     * Load messages for given locale if not already loaded
+     *
+     * @param   {string}    locale    A locale identifier
+     *
+     * @returns {Promise}
+     */
     function loadMessages(locale) {
       if (!Object.keys(VueI18nInstance.messages).includes(locale)) {
         return import(`../../languages/${locale}`).then((localeMessages) => {
@@ -31,13 +38,24 @@ export default {
       return Promise.resolve(locale);
     }
 
-    // eslint-disable-next-line no-param-reassign
-    Vue.supportedLanguages = function supportedLanguages() {
+    /**
+     * Returns an array of supported locale identifiers
+     *
+     * @returns {Array}
+     */
+    Vue.supportedLanguages = function supportedLanguages() { // eslint-disable-line no-param-reassign
       return availableLanguages;
     };
 
-    // eslint-disable-next-line no-param-reassign
-    Vue.setLocale = function setLocale(locale) {
+    /**
+     * Sets the application locale to the given value
+     * Loads locale messages if needed
+     *
+     * @param   {string}    locale    A locale identifier
+     *
+     * @returns {Promise}
+     */
+    Vue.setLocale = function setLocale(locale) { // eslint-disable-line no-param-reassign
       if (VueI18nInstance.locale !== locale) {
         return loadMessages(locale).then((newLocale) => {
           VueI18nInstance.locale = newLocale;
