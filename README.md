@@ -125,6 +125,26 @@ If you prefer to develop inside the component styleguide run the following scrip
 $ npm run dev:styleguide
 ```
 
+## Folder structure
+
+```
+|- app                  Main folder of the application
+.  |- assets            Assets for the application
+.  |- components        Components for the application
+.  |- setup             Configuration and setup of the application
+.  |- store             Vuex store and modules
+.  |- styleguide        Assets, components, mock data and routes for the stylguide 
+.  |- translations      Translations for the application
+|- blueprints           File blueprints
+|- (dist)               Build folder
+|- (node_modules)       Node modules used by this project
+|- static               Static files which will be copied to `dist` during build
+|- stats                webpack profile and monitor files
+|- tests                Jest tests
+.  |- unit              Unit tests
+.  .  |- specs          Test definitions
+```
+
 ## BEM
 
 We heavily use the [BEM](http://getbem.com/) methodology to define our style classes and component names. It's mandatory that you understand the concept behind it before starting to develop or fixing existing code.
