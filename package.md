@@ -48,6 +48,7 @@ None
 * [axios](https://github.com/axios/axios) - Promise based HTTP client for browser and node.js.
 * [vue](https://github.com/vuejs/vue) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
 * [vue-bem-cn](http://codepen.io/c01nd01r/pen/Qdeovv)- Simple BEM class name generator for Vue.JS.
+* [vue-i18n](https://github.com/kazupon/vue-i18n) - Internationalization plugin for Vue.js
 * [vue-router](https://github.com/vuejs/vue-router) - The official router for Vue.js.
 * [vuex](https://github.com/vuejs/vuex) - Centralized State Management for Vue.js.
 
@@ -59,11 +60,14 @@ None
 
 ### Template
 
+* [axios-mock-adapter](https://github.com/ctimmerm/axios-mock-adapter) - Axios adapter that allows to easily mock requests.
 * [babel-core](https://github.com/babel/babel/tree/master/packages/babel-core) - Babel compiler core.
 * [babel-eslint](https://github.com/babel/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
 * [babel-jest](https://www.npmjs.com/package/babel-jest) - Babel compiler plugin for Jest testing.
 * [babel-loader](https://github.com/babel/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
 * [babel-preset-env](https://www.npmjs.com/package/babel-preset-env) - A Babel preset that compiles ES2015+ down to ES5 by automatically determining the Babel plugins and polyfills you need based on your targeted browser or runtime environments.
+* [babel-plugin-dynamic-import-node](https://github.com/airbnb/babel-plugin-dynamic-import-node) - Babel plugin to transpile import() to a deferred require(), for node.
+* [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/) - Transform rest properties for object destructuring assignment and spread properties for object literals
 * [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin) - webpack plugin to copie individual files or entire directories to the build directory.
 * [css-loader](https://github.com/webpack-contrib/css-loader) - The webpack css-loader interprets @import and url() like import/require() and will resolve them.
 * [eslint](https://github.com/eslint/eslint) - A fully pluggable tool for identifying and reporting on patterns in JavaScript.
