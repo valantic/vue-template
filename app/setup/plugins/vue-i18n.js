@@ -1,6 +1,6 @@
 import VueI18n from 'vue-i18n';
 import messages from '../../languages/en'; // Default language
-import options from '../options';
+import vueOptions from '../options';
 
 const defaultLanguage = 'en'; // TODO: set based on environment
 const availableLanguages = [defaultLanguage, 'de'];
@@ -17,7 +17,7 @@ export default {
       },
     });
 
-    options.i18n = VueI18nInstance;
+    vueOptions.i18n = VueI18nInstance;
 
     /**
      * Load messages for given locale if not already loaded

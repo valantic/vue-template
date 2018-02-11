@@ -330,6 +330,7 @@ module.exports = function (env, options) {
     // Other methods may be faster. @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx
     devtool: 'eval-source-map',
     devServer: {
+      clientLogLevel: 'error', // Removes ESLint warnings from console
       historyApiFallback: true, // Enables routing support
       host,
       port,
