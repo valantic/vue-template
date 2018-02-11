@@ -1,3 +1,5 @@
+
+
 module.exports = {
   webpackConfig(env) {
     return require('./webpack.config')({
@@ -8,7 +10,7 @@ module.exports = {
   defaultExample: 'app/setup/styleguide.fallback.md',
   components: 'app/components/**/*.vue',
   styleguideDir: 'dist/styleguidist',
-  showUsage: true,
+  showUsage: false,
   sections: [
     {
       name: 'Elements',
@@ -24,6 +26,6 @@ module.exports = {
     },
   ],
   mixins: [
-    './app/setup/styleguide.mixins',
+    'app/setup/styleguidist.js'
   ],
 };

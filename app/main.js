@@ -12,7 +12,7 @@ Vue.use(plugins);
 
 if (process.env.NODE_ENV !== 'production' || process.env.HAS_STYLEGUIDE) {
   // eslint-disable-next-line global-require
-  vueOptions = Object.assign(vueOptions, require('./setup/options.dev').default); // Note: will overwrite duplicates
+  vueOptions = Object.assign(vueOptions, require('./setup/styleguide.options').default); // Note: will overwrite duplicates
 
   // eslint-disable-next-line global-require
   // require('./setup/mock').default(plugins.vueAxios.axios, developmentOptions);

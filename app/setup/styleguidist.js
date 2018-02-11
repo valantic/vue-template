@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import plugins from './plugins';
 import components from './components';
+// eslint-disable-next-line no-unused-vars
+import styleguideOptions from './styleguide.options';
 
-Vue.use(plugins);
 Vue.use(components);
-
-// require('./mock').default(plugins.vueAxios.axios);
+Vue.use(plugins);

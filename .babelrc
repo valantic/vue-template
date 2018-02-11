@@ -4,7 +4,10 @@
       "modules": false
     }]
   ],
-  "plugins": ["dynamic-import-node"],
+  "plugins": [
+    "dynamic-import-node",
+    "transform-object-rest-spread"
+  ],
   "env": {
     "test": {
       "presets": ["env"]
