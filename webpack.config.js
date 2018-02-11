@@ -340,7 +340,7 @@ module.exports = function (env, options) {
       quiet: true, // Handled by FriendlyErrorsPlugin
       inline: true,
       before (app) {
-        app.use('/__open-in-editor', openInEditor());
+        app.use('/__open-in-editor', openInEditor()); // Adds 'open in editor' support for Vue Inspector
       },
     },
     plugins: plugins(),
