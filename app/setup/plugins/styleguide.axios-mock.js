@@ -48,7 +48,7 @@ export default {
     // See https://github.com/ctimmerm/axios-mock-adapter
     mock
       .onGet('/suggestions').reply(200, cSuggestions)
-      .onAny(/\/static/).passThrough()
+      .onAny(/\/?static/).passThrough()
       .onAny().reply(wildcard);
   },
 };
