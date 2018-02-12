@@ -100,7 +100,7 @@ module.exports = function (env, options) {
       }));
     ];
 
-    if (!isProduction) {
+    if (!isProduction) { // Todo: switch for better readability
       pluginCollection.push(new StyleLintPlugin({
         context: 'app',
         files: [
@@ -117,7 +117,7 @@ module.exports = function (env, options) {
           compilationSuccessInfo: {
             messages: [`Your application is running on http://${host}:${port}.`],
           },
-        }),)
+        }));
       }
     } else {
       pluginCollection.push(new UglifyJsPlugin({
@@ -185,7 +185,7 @@ module.exports = function (env, options) {
       pluginCollection.push(new CopyWebpackPlugin([
         {
           from: path.resolve(__dirname, 'static'),
-          to: assetsSubDirectory,
+          to: assetsSubDirectory, // TODO: is this correct? If yes, is .htaccess correct?
           ignore: ['.*']
         },
         {
@@ -232,7 +232,7 @@ module.exports = function (env, options) {
           enforce: 'pre',
           include,
           options: {
-            failOnError: isProduction,
+            failOnError: isProduction, // TODO: prevent output on error
             emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
           },
         },
@@ -247,7 +247,7 @@ module.exports = function (env, options) {
             // If you have problems debugging vue-files in devtools,
             // set this to false - it *may* help
             // https://vue-loader.vuejs.org/en/options.html#cachebusting
-            cacheBusting: false,
+            cacheBusting: false, // TODO: shouldn't this be true?
             loaders: {
               scss: scssLoader()
             }
