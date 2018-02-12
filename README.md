@@ -320,10 +320,10 @@ $ brew upgrade nasm
 * [x] Minification/Code splitting
 * [ ] Vue exceptions
 * [x] Blueprints
-* [ ] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
+* [x] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
 * [ ] Data injection/handling
 * [ ] BEM helper
-* [ ] Folder structure
+* [x] Folder structure
 * [ ] Naming (only singular)
 * [ ] Vuex & modules
 * [ ] Axios request mocking
