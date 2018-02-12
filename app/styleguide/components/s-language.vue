@@ -1,6 +1,6 @@
 <template>
   <select :class="b()" :value="language" @change="onChange">
-    <option v-for="language in languages"
+    <option v-for="language in i18nLocales"
             :value="language"
             :key="language"
             v-t="`s-language.${language}`">
@@ -9,10 +9,12 @@
 </template>
 
 <script>
-  import Vue from 'vue';
+  import i18nMixin from '@/mixins/i18n';
 
   export default {
     name: 's-language',
+
+    mixins: [i18nMixin],
 
     // props: {},
 
@@ -23,13 +25,10 @@
       language() {
         return this.$i18n.locale;
       },
-      languages() {
-        return Vue.supportedLanguages();
-      },
     },
     methods: {
       onChange(event) {
-        Vue.setLocale(event.target.value);
+        this.i18nSetLocale(event.target.value);
       },
     },
     // watch: {},

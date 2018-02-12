@@ -228,6 +228,7 @@ module.exports = function (env, options) {
       extensions: ['.js', '.vue', '.json'],
       alias: {
         vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+        '@': path.join(__dirname, 'app'),
       },
     },
     module: {

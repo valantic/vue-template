@@ -1,4 +1,5 @@
 // https://eslint.org/docs/user-guide/configuring
+const wepackConfig = require('./webpack.config')();
 
 // TODO: review
 
@@ -24,13 +25,8 @@ module.exports = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: { // Using the webpack.config.js instead caused console noise and liniting issues
-          resolve: {
-            extensions: [
-              '.js',
-              '.vue'
-            ]
-          }
+        config: { // Linking the webpack.config.js instead caused console noise and linting issues
+          resolve: wepackConfig.resolve
         }
       }
     }

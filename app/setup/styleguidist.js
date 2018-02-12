@@ -1,8 +1,9 @@
 import Vue from 'vue';
-import plugins from './plugins';
+import options from './options';
 import components from './components';
 // eslint-disable-next-line no-unused-vars
 import styleguideOptions from './styleguide.options';
 
 Vue.use(components);
-Vue.use(plugins);
+
+export default options;

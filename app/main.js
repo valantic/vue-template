@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import plugins from './setup/plugins';
 import options from './setup/options';
 import components from './setup/components';
 
@@ -8,7 +7,6 @@ let vueOptions = options;
 Vue.config.productionTip = false;
 
 Vue.use(components);
-Vue.use(plugins);
 
 if (process.env.NODE_ENV !== 'production' || process.env.HAS_STYLEGUIDE) {
   // eslint-disable-next-line global-require
