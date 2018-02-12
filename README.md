@@ -328,6 +328,7 @@ $ brew upgrade nasm
 * [ ] Vuex & modules
 * [ ] Axios request mocking
 * [ ] Styleguide components
+* [ ] webpack alias
 
 ## License
 
