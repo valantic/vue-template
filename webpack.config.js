@@ -93,14 +93,14 @@ module.exports = function (env, options) {
   function plugins() {
     const pluginCollection = [
       new webpack.DefinePlugin(globalVariables),
+      // Script tag injection
+      pluginCollection.push(new HtmlWebpackPlugin({
+        inject: true,
+        template: 'index.html'
+      }));
     ];
 
     if (!isProduction) {
-      pluginCollection.push(new HtmlWebpackPlugin({ // Script tag injection
-        inject: true,
-        template: 'index.html',
-      }));
-
       pluginCollection.push(new StyleLintPlugin({
         context: 'app',
         files: [
@@ -111,7 +111,6 @@ module.exports = function (env, options) {
 
       pluginCollection.push(new webpack.NamedModulesPlugin()); // Hot Module Replacement
       pluginCollection.push(new webpack.HotModuleReplacementPlugin()); // Hot Module Replacement
-      pluginCollection.push(new webpack.DefinePlugin(globalVariables)); // Hot Module Replacement
 
       if (!hasStyleguide) {
         pluginCollection.push(new FriendlyErrorsPlugin({
@@ -159,13 +158,7 @@ module.exports = function (env, options) {
         minChunks: Infinity
       }));
 
-      // Script tag injection
-      pluginCollection.push(new HtmlWebpackPlugin({
-        inject: true,
-        template: 'index.html'
-      }));
-
-      // Script tag injection
+      // Create webpack monitor snapshot
       pluginCollection.push(new WebpackMonitor({
         capture: !hasStyleguide,
         target: '../stats/monitor.json',
