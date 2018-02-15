@@ -24,12 +24,13 @@
     // mounted() {},
     // beforeUpdate() {},
     // updated() {},
-    // activated() {}.
+    // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
     // destroyed() {},
 
     // methods: {},
+    // render() {},
   };
 </script>
 

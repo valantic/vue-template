@@ -39,7 +39,7 @@
     // mounted() {},
     // beforeUpdate() {},
     // updated() {},
-    // activated() {}.
+    // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
     // destroyed() {},

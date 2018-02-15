@@ -5,6 +5,8 @@
       <small>[AIV]{version}[/AIV]</small>
     </h1>
     <hr>
+    <e-button>Foo</e-button>
+    <e-button href="#foo">Foo</e-button>
     <p>Welcome to the styleguide.</p>
     <div :class="b('warning')" v-if="isProduction">
       Please note: this build is not meant for production. Please use <code :class="b('code')">npm run build</code> to create a production build.

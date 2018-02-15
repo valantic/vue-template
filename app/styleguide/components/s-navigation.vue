@@ -59,16 +59,18 @@
       navPosition: {
         type: String,
         default: 'top',
-        validator: value => [
-          'top',
-          'right',
-          'bottom',
-          'left',
-          'top-left',
-          'top-right',
-          'bottom-right',
-          'bottom-left',
-        ].indexOf(value) >= 0,
+        validator(value) {
+          return [
+            'top',
+            'right',
+            'bottom',
+            'left',
+            'top-left',
+            'top-right',
+            'bottom-right',
+            'bottom-left',
+          ].includes(value);
+        },
       },
     },
     computed: {

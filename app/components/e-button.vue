@@ -1,8 +1,4 @@
-<template>
-  <button type="button" :class="b()">
-    <span :class="b()"></span>
-  </button>
-</template>
+<!-- This component has no <template> because of dynamic root element -->
 
 <script>
   export default {
@@ -10,14 +6,43 @@
     // components: {},
     // mixins: [],
 
-    // props: {},
+    props: {
+      href: {
+        type: String,
+        default: null,
+      },
+      width: {
+        type: String,
+        default: null,
+        validator(value) {
+          return [
+            'full',
+          ].includes(value);
+        },
+      },
+      inverted: {
+        type: Boolean,
+        default: false,
+      },
+      type: {
+        type: String,
+        default: 'button',
+        validator(value) {
+          return [
+            'submit',
+            'reset',
+            'button',
+          ].includes(value);
+        },
+      },
+    },
+
     // data() {
     //   return {};
     // },
 
     // computed: {},
     // watch: {},
-    // methods: {},
 
     // beforeCreate() {},
     // created() {},
@@ -25,13 +50,47 @@
     // mounted() {},
     // beforeUpdate() {},
     // updated() {},
-    // activated() {}.
+    // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
     // destroyed() {},
+
+    // methods: {},
+
+    /**
+     * Creates a button or button like link based on defined/missing href link
+     *
+     * @param   {function}    createElement   Vue helper
+     *
+     * @returns {*}
+     */
+    render(createElement) {
+      const isLink = !!this.href;
+      const element = isLink ? 'a' : 'button';
+      const attributes = {
+        class: this.b(),
+        attrs: {},
+      };
+
+      if (isLink) {
+        attributes.attrs.href = this.href;
+      } else {
+        attributes.type = this.type;
+      }
+
+      return createElement(
+        element,
+        attributes,
+        this.$slots.default,
+      );
+    },
   };
 </script>
 
 <style lang="scss">
-  // .e-button {}
+  .e-button {
+    background: $color-grey--white;
+    border: 1px solid black;
+    padding: $spacing--10;
+  }
 </style>
