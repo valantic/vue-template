@@ -1,6 +1,6 @@
 # vue-template
 
-This is a custom Vue template which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly a not a SPA but a set of components used inside a CMS system.
+This is a custom Vue template which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS system.
 
 ## Introduction
 
@@ -169,9 +169,13 @@ Marks a **layout** "component" and therefore the most outer wrapper of the appli
 
 This are components, which are only used in the styleguide. Make sure to keep them all inside `/app/styleguide/components`.
 
-#### Using BEM with Vue
+### Using BEM with Vue
 
 We added the [vue-bem-cn](https://github.com/c01nd01r/vue-bem-cn) plugin for Vue to improve the handling of BEM classes and especially modifiers in Vue components. Just use `:class="b(<customConfiguration>)"` on any template element to add blocks, elements and modifiers. Make sure your component has a `name` property, since it is mandatory for this plugin.
+
+## SCSS
+
+Vendor prefixes are automatically applied according to the `browserslist` in `package.json`. You don't need to write them yourself.
 
 ## Vue
 
@@ -205,15 +209,13 @@ Delivering critical CSS to the browser trough the HTML head can drastically decr
 
 You can read more about critical CSS [here](https://css-tricks.com/annotating-critical-css/) and the tool we're using [here](https://github.com/mrnocreativity/postcss-critical-split)
 
-### Other tools
+## Living styleguide
 
-### Living styleguide
+The living styleguide is defined in two parts: one is documenting all available Vue components of the project, in the second one you can create example pages to test and share the design with the client or developer.
 
-Please note, that the living styleguide has its on section in `/app/styleguide` where you can finde `components`, `routes` and anything else, which is only related to the living styleguide. This makes it more easy to identify and split out unneeded code during the build. 
+### File system
 
-#### SCSS
-
-* Vendor prefixes are automatically applied according to the `browserslist` in `package.json`. You don't need to write them yourself.
+Please note, that the living styleguide has its on section in `/app/styleguide` where you can find `components`, `routes` and anything else, which is only related to the living styleguide. This makes it more easy to identify and split out unneeded code during the build.
 
 ## Webpack
 
