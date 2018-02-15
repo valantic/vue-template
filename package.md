@@ -72,7 +72,7 @@ None
 * [css-loader](https://github.com/webpack-contrib/css-loader) - The webpack css-loader interprets @import and url() like import/require() and will resolve them.
 * [eslint](https://github.com/eslint/eslint) - A fully pluggable tool for identifying and reporting on patterns in JavaScript.
 * [eslint-config-airbnb-base](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) - This package provides Airbnb's base JS .eslintrc (without React plugins) as an extensible shared config.
-* [eslint-import-resolver-webpack](https://www.npmjs.com/package/eslint-import-resolver-webpack) - Webpack-literate module resolution plugin for eslint-plugin-import.
+* [syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/) - This plugin only allows Babel to parse import syntax. **Don't use babel-plugin-dynamic-import-node since it breaks code splitting!**
 * [eslint-loader](https://github.com/webpack-contrib/eslint-loader) - eslint loader for webpack.
 * [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) - Official ESLint plugin for Vue.js.
 * [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) - ESLint plugin with rules that help validate proper imports.

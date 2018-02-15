@@ -21,7 +21,7 @@ export default {
       const { $i18n } = window.vm;
 
       if (!Object.keys($i18n.messages).includes(locale)) {
-        return import(`../translations/${locale}`).then((localeMessages) => {
+        return import(/* webpackChunkName: 'lang-[request]' */ `../translations/${locale}`).then((localeMessages) => {
           $i18n.setLocaleMessage(locale, localeMessages);
 
           return locale;

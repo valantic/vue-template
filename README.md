@@ -247,6 +247,12 @@ Stylelint setup for the current project.
 
 ## Known issues
 
+### Webpack
+
+#### Webpack does not perform code splitting
+
+Make sure you don't use `babel-plugin-dynamic-import-node` since it parses the import/require statements and therefor removes the possibility to split your code! Use [babel-plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/) instead.
+
 ### Node.js & NPM
 
 #### Stale
@@ -329,6 +335,7 @@ $ brew upgrade nasm
 * [ ] Axios request mocking
 * [ ] Styleguide components
 * [ ] webpack alias
+* [ ] webpackChunkName
 
 ## License
 

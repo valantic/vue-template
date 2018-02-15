@@ -5,7 +5,7 @@
     }]
   ],
   "plugins": [
-    "dynamic-import-node",
+    "syntax-dynamic-import",
     "transform-object-rest-spread"
   ],
   "env": {

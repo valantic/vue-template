@@ -21,7 +21,7 @@ module.exports = function (env, options) {
   const hasMessage = (env && env.message) || false;
   const host = 'localhost';
   const port = 8080;
-  const hotReload = true;
+  const hotReload = !isProduction;
   const assetsSubDirectory = 'static/';
   const isProfileBuild = (options && options.profile && options.json) || false;
   const globalVariables = {
@@ -93,14 +93,14 @@ module.exports = function (env, options) {
   function plugins() {
     const pluginCollection = [
       new webpack.DefinePlugin(globalVariables),
+      new HtmlWebpackPlugin({ // Script tag injection
+        inject: true,
+        template: 'index.html',
+        chunksSortMode: 'dependency',
+      })
     ];
 
     if (!isProduction) {
-      pluginCollection.push(new HtmlWebpackPlugin({ // Script tag injection
-        inject: true,
-        template: 'index.html',
-      }));
-
       pluginCollection.push(new StyleLintPlugin({
         context: 'app',
         files: [
@@ -111,14 +111,13 @@ module.exports = function (env, options) {
 
       pluginCollection.push(new webpack.NamedModulesPlugin()); // Hot Module Replacement
       pluginCollection.push(new webpack.HotModuleReplacementPlugin()); // Hot Module Replacement
-      pluginCollection.push(new webpack.DefinePlugin(globalVariables)); // Hot Module Replacement
 
       if (!hasStyleguide) {
         pluginCollection.push(new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
             messages: [`Your application is running on http://${host}:${port}.`],
           },
-        }),)
+        }));
       }
     } else {
       pluginCollection.push(new UglifyJsPlugin({
@@ -129,7 +128,7 @@ module.exports = function (env, options) {
 
       // extract css into its own file
       pluginCollection.push(new ExtractTextPlugin({
-        filename: assetsSubDirectory + 'css/[name].css', // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
+        filename: assetsSubDirectory + 'css/[name].css?[chunkhash]', // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
         // Setting the following option to `false` will not extract CSS from codesplit chunks.
         // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
         // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
@@ -160,17 +159,14 @@ module.exports = function (env, options) {
       }));
 
       // Script tag injection
-      pluginCollection.push(new HtmlWebpackPlugin({
-        inject: true,
-        template: 'index.html'
-      }));
-
-      // Script tag injection
       pluginCollection.push(new WebpackMonitor({
         capture: !hasStyleguide,
         target: '../stats/monitor.json',
         launch: env && env.monitor
       }));
+
+      // keep module.id stable when vender modules does not change
+      pluginCollection.push(new webpack.HashedModuleIdsPlugin());
 
       // Create critical CSS
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
@@ -182,7 +178,7 @@ module.exports = function (env, options) {
 
       // Create minificated CSS
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
-        suffix: 'min',
+        suffix: '', // Defining an empty string makes it possible not create an additional file
         pipeline: [
           cssNano()
         ]
@@ -200,8 +196,11 @@ module.exports = function (env, options) {
         },
       ]));
 
+      // enable scope hoisting
+      pluginCollection.push(new webpack.optimize.ModuleConcatenationPlugin());
+
       // Note: version auto inject is currently not working with query hash (https://github.com/radswiat/webpack-auto-inject-version/issues/25)
-     pluginCollection.push(new WebpackAutoInject({
+      pluginCollection.push(new WebpackAutoInject({
         SILENT: true,
         components: {
           AutoIncreaseVersion: false,
@@ -340,7 +339,7 @@ module.exports = function (env, options) {
       overlay: true,
       quiet: true, // Handled by FriendlyErrorsPlugin
       inline: true,
-      before (app) {
+      before(app) {
         app.use('/__open-in-editor', openInEditor()); // Adds 'open in editor' support for Vue Inspector
       },
     },
@@ -351,7 +350,7 @@ module.exports = function (env, options) {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
-      chunkFilename: `${assetsSubDirectory}js/[id].js?[chunkhash]`,
+      chunkFilename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
       publicPath: '/', // Public path to 'dist' scope in production
     },
     // @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx
