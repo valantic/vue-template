@@ -165,6 +165,14 @@ Marks an **element** "component" which itself doesn't contain an other component
 
 Marks a **layout** "component" and therefore the most outer wrapper of the application. It can not be contained within an other component but can contain components and/or elements.
 
+#### `s-`
+
+This are components, which are only used in the styleguide. Make sure to keep them all inside `/app/styleguide/components`.
+
+#### Using BEM with Vue
+
+We added the [vue-bem-cn](https://github.com/c01nd01r/vue-bem-cn) plugin for Vue to improve the handling of BEM classes and especially modifiers in Vue components. Just use `:class="b(<customConfiguration>)"` on any template element to add blocks, elements and modifiers. Make sure your component has a `name` property, since it is mandatory for this plugin.
+
 ## Vue
 
 ### Blueprints
@@ -189,7 +197,7 @@ You can read more about this practice [here](https://vuejs.org/v2/guide/render-f
 
 Vue is able to load components asynchronously. While this should be used sparingly, since a huge amount of files will also slow down the whole application, it can be used to load big parts which are only used in a very specific an lesser reached part of the application on demand (e.g. the checkout in a shop or an extensive configurator for a certain task).
 
-In webpack this separate parts of the application are called `chunks`. Read more about this practice [here](https://vuejs.org/v2/guide/components.html#Async-Components).
+In webpack this separate parts of the application are called `chunks`. You can find more about how to use this with Vue components [here](https://vuejs.org/v2/guide/components.html#Async-Components). Be also aware, that you can define a specific chunk name by adding a `webpackChunkName` comment. This webpack feature is described [here](https://webpack.js.org/api/module-methods/#import-).
 
 #### Critical CSS
 
@@ -206,6 +214,12 @@ Please note, that the living styleguide has its on section in `/app/styleguide` 
 #### SCSS
 
 * Vendor prefixes are automatically applied according to the `browserslist` in `package.json`. You don't need to write them yourself.
+
+## Webpack
+
+### Path alias
+
+Webpack supports to use an [alias](https://webpack.js.org/loaders/css-loader/#alias) for paths. Thanks to this feature, you don't need to define relative paths when importing one JavaScript file into an other. The `@` alias stands for the application root (`/app`). So for example you can just write `import options from '@/setup/options'` in any file to import the `options.js` file from the `setup` folder without caring about relative path resolving.
 
 ## Node.js and NPM
 
@@ -328,14 +342,15 @@ $ brew upgrade nasm
 * [x] Blueprints
 * [x] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
 * [ ] Data injection/handling
-* [ ] BEM helper
+* [x] BEM helper
+* [ ] BEM guidelines
 * [x] Folder structure
 * [ ] Naming (only singular)
 * [ ] Vuex & modules
 * [ ] Axios request mocking
-* [ ] Styleguide components
-* [ ] webpack alias
-* [ ] webpackChunkName
+* [x] Styleguide components
+* [x] webpack alias
+* [x] webpackChunkName
 
 ## License
 
