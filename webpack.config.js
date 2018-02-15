@@ -100,26 +100,7 @@ module.exports = function (env, options) {
       })
     ];
 
-    if (!isProduction) { // Todo: switch for better readability
-      pluginCollection.push(new StyleLintPlugin({
-        context: 'app',
-        files: [
-          '**/*.vue',
-          '**/*.scss',
-        ],
-      }));
-
-      pluginCollection.push(new webpack.NamedModulesPlugin()); // Hot Module Replacement
-      pluginCollection.push(new webpack.HotModuleReplacementPlugin()); // Hot Module Replacement
-
-      if (!hasStyleguide) {
-        pluginCollection.push(new FriendlyErrorsPlugin({
-          compilationSuccessInfo: {
-            messages: [`Your application is running on http://${host}:${port}.`],
-          },
-        }));
-      }
-    } else {
+    if (isProduction) {
       pluginCollection.push(new UglifyJsPlugin({
         test: /\.js($|\?)/i, // MUST be defined because of file has as query
         parallel: true,
@@ -214,6 +195,25 @@ module.exports = function (env, options) {
           }
         }
       }));
+    } else {
+      pluginCollection.push(new StyleLintPlugin({
+        context: 'app',
+        files: [
+          '**/*.vue',
+          '**/*.scss',
+        ],
+      }));
+
+      pluginCollection.push(new webpack.NamedModulesPlugin()); // Hot Module Replacement
+      pluginCollection.push(new webpack.HotModuleReplacementPlugin()); // Hot Module Replacement
+
+      if (!hasStyleguide) {
+        pluginCollection.push(new FriendlyErrorsPlugin({
+          compilationSuccessInfo: {
+            messages: [`Your application is running on http://${host}:${port}.`],
+          },
+        }));
+      }
     }
 
     return pluginCollection;
