@@ -7,10 +7,6 @@
     // mixins: [],
 
     props: {
-      href: {
-        type: String,
-        default: null,
-      },
       width: {
         type: String,
         default: null,
@@ -23,17 +19,6 @@
       inverted: {
         type: Boolean,
         default: false,
-      },
-      type: {
-        type: String,
-        default: 'button',
-        validator(value) {
-          return [
-            'submit',
-            'reset',
-            'button',
-          ].includes(value);
-        },
       },
     },
 
@@ -65,18 +50,13 @@
      * @returns {*}
      */
     render(createElement) {
-      const isLink = !!this.href;
-      const element = isLink ? 'a' : 'button';
+      const element = this.$attrs.href ? 'a' : 'button';
       const attributes = {
         class: this.b(),
-        attrs: {},
+        attrs: {
+          ...this.$attrs,
+        },
       };
-
-      if (isLink) {
-        attributes.attrs.href = this.href;
-      } else {
-        attributes.type = this.type;
-      }
 
       return createElement(
         element,
@@ -89,6 +69,7 @@
 
 <style lang="scss">
   .e-button {
+    display: inline-block;
     background: $color-gray--white;
     border: 1px solid black;
     padding: $spacing--10;
