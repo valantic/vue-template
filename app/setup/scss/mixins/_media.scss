@@ -44,9 +44,9 @@
         $query: $query + " and (max-width: #{$downValue - 1px})";
       }
     }
-  }
 
-  @media #{$query} {
-    @content
+    @media #{$query} {
+      @content
+    }
   }
 }
