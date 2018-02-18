@@ -7,6 +7,11 @@
     // mixins: [],
 
     props: {
+      /**
+       * Defines the width of the button
+       *
+       * Valid values: `full`
+       */
       width: {
         type: String,
         default: null,
@@ -16,8 +21,11 @@
           ].includes(value);
         },
       },
+      /**
+       * Inverts the button style
+       */
       inverted: {
-        type: Boolean,
+        type: [Boolean, String],
         default: false,
       },
     },
@@ -52,7 +60,10 @@
     render(createElement) {
       const element = this.$attrs.href ? 'a' : 'button';
       const attributes = {
-        class: this.b(),
+        class: this.b({
+          width: this.$props.width,
+          inverted: this.$props.inverted === 'true' || this.$props.inverted,
+        }),
         attrs: {
           ...this.$attrs,
         },
@@ -73,5 +84,14 @@
     background: $color-gray--white;
     border: 1px solid black;
     padding: $spacing--10;
+
+    &--width-full {
+      display: block;
+      width: 100%;
+    }
+
+    &--inverted {
+      background: $color-gray--black;
+    }
   }
 </style>

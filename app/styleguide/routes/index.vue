@@ -7,6 +7,9 @@
     <hr>
     <e-button>Foo</e-button>
     <e-button href="#foo">Foo</e-button>
+    <e-button width="full" href="#foo">Foo</e-button>
+    <e-button width="full">Foo</e-button>
+    <e-button inverted="true">Foo</e-button>
     <p>Welcome to the styleguide.</p>
     <div :class="b('warning')" v-if="isProduction">
       Please note: this build is not meant for production. Please use <code :class="b('code')">npm run build</code> to create a production build.
