@@ -1,6 +1,8 @@
 import Vue from 'vue';
+import './setup/_scss.scss';
 import options from './setup/options';
 import components from './setup/components';
+
 
 let vueOptions = options;
 

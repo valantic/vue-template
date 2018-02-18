@@ -1,0 +1,73 @@
+///
+/// Creates a media query
+///
+/// @param   {string|number}   [$min]          Either a breakpoint identifier (xxs, xs, ...) or an absolute value
+/// @param   {string|number}   [$max]          Either a breakpoint identifier (xxs, xs, ...) or an absolute value
+/// @param   {string}          [$media=all]    The targeted media
+///
+@mixin media($min: null, $max: null, $media: all, $breakpoints: $grid-breakpoints) {
+  $query: #{$media};
+
+  @if $query != "all" {
+    $query: "only " + $query;
+  }
+
+  @if $min {
+    @if type-of($min) == number {
+      $query: $query + " and (min-width: #{$min})";
+    } @else if map-has-key($breakpoints, $min) {
+      @if map-get($breakpoints, $min) != 0 {
+        $query: $query + " and (min-width: #{map-get($breakpoints, $min)})";
+      }
+    } @else {
+      @warn "media(): Invalid value for $min";
+    }
+  }
+
+  @if $max {
+    @if type-of($max) == number {
+      $query: $query + " and (max-width: #{$max})";
+    } @else if map-has-key($breakpoints, $max) {
+      $query: $query + " and (max-width: #{map-get($breakpoints, $max) - 1px})";
+    } @else {
+      @warn "media(): Invalid value for $max";
+    }
+  }
+
+  @media #{$query} {
+    @content
+  }
+}
+
+///
+/// Creates a set of spacings for the given class
+///
+/// @param   {string}    $class                              The base class to which the spacing value (e.g. "-10") will be attached
+/// @param   {string}    $property                           The CSS property to which the spacing value should be assigned
+/// @param   {list}      [$spacings=$spacings]               The CSS property to which the spacing value should be assigned
+/// @param   {list}      [$breakpoints=$grid-breakpoints]    The CSS property to which the spacing value should be assigned
+///
+@mixin spacings($class, $property, $spacings: $spacings, $breakpoints: $grid-breakpoints) {
+  @each $spacing in $spacings {
+    .#{$class}-#{$spacing} {
+      #{$property}: #{$spacing};
+    }
+  }
+
+  // Loop media queries
+  @for $breakpointIndex from 1 through length($breakpoints) {
+    $breakpoint: nth(map-keys($breakpoints), $breakpointIndex);
+
+    @include media($breakpoint) { // Wrapping spacing loop in media() reduces output size
+      @for $spacingIndex from 1 through length($spacings) {
+        $spacing: nth($spacings, $spacingIndex);
+
+        @if $breakpointIndex != 1 and $spacingIndex != 1 { // Don't create a breakpoint related spacing if 0 $spacing and 0 $breakpoint
+          .#{$class}-#{$breakpoint}-#{$spacing} {
+            #{$property}: #{$spacing};
+          }
+        }
+      }
+    }
+  }
+}

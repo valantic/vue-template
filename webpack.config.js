@@ -56,10 +56,19 @@ module.exports = function (env, options) {
       {
         loader: 'sass-loader',
         options: {
-          data: '@import "scss";', // Load SCSS setup
+          data: '@import "colors";', // Load SCSS setup
           sourceMap: !isProduction || hasStyleguide,
           includePaths: [
-            path.resolve(__dirname, 'app/setup')
+            path.resolve(__dirname, 'app/setup/scss')
+          ]
+        },
+      },
+      {
+        loader: 'sass-resources-loader',
+        options: {
+          resources: [
+            './app/setup/scss/_variables.scss',
+            './app/setup/scss/_mixins.scss',
           ]
         },
       },
@@ -157,7 +166,7 @@ module.exports = function (env, options) {
         ]
       }));
 
-      // Create minificated CSS
+      // Create minimized CSS
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
         suffix: '', // Defining an empty string makes it possible not create an additional file
         pipeline: [
@@ -196,13 +205,13 @@ module.exports = function (env, options) {
         }
       }));
     } else {
-      pluginCollection.push(new StyleLintPlugin({
-        context: 'app',
-        files: [
-          '**/*.vue',
-          '**/*.scss',
-        ],
-      }));
+      // pluginCollection.push(new StyleLintPlugin({ // TODO: add scss linting an re-enable
+      //   context: 'app',
+      //   files: [
+      //     '**/*.vue',
+      //     '**/*.scss',
+      //   ],
+      // }));
 
       pluginCollection.push(new webpack.NamedModulesPlugin()); // Hot Module Replacement
       pluginCollection.push(new webpack.HotModuleReplacementPlugin()); // Hot Module Replacement

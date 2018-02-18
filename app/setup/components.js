@@ -4,8 +4,8 @@ import eButton from '../components/e-button';
 export default {
   install(Vue) {
     const components = [
-      eIcon,
       eButton,
+      eIcon,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
