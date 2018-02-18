@@ -1,36 +1,45 @@
 ///
 /// Creates a media query
 ///
-/// @param   {string|number}   [$min]          Either a breakpoint identifier (xxs, xs, ...) or an absolute value
-/// @param   {string|number}   [$max]          Either a breakpoint identifier (xxs, xs, ...) or an absolute value
+/// @param   {string|number}   [$up]           Either a breakpoint identifier (xxs, xs, ...) or an absolute value
+/// @param   {string|number}   [$down]         Either a breakpoint identifier (xxs, xs, ...) or an absolute value
 /// @param   {string}          [$media=all]    The targeted media
 ///
-@mixin media($min: null, $max: null, $media: all, $breakpoints: $grid-breakpoints) {
+@mixin media($up: null, $down: null, $media: all, $breakpoints: $grid-breakpoints) {
+  $indexOfUpBreakpoint: index(map-keys($breakpoints), $up);
+  $indexOfDownBreakpoint: index(map-keys($breakpoints), $down);
   $query: #{$media};
 
   @if $query != "all" {
     $query: "only " + $query;
   }
 
-  @if $min {
-    @if type-of($min) == number {
-      $query: $query + " and (min-width: #{$min})";
-    } @else if map-has-key($breakpoints, $min) {
-      @if map-get($breakpoints, $min) != 0 {
-        $query: $query + " and (min-width: #{map-get($breakpoints, $min)})";
+  @if $up {
+    @if type-of($up) == number {
+      $query: $query + " and (min-width: #{$up})";
+    } @else if map-has-key($breakpoints, $up) {
+      @if map-get($breakpoints, $up) != 0 {
+        $query: $query + " and (min-width: #{map-get($breakpoints, $up)})";
       }
     } @else {
-      @warn "media(): Invalid value for $min";
+      @warn "media(): Invalid value for $down";
     }
   }
 
-  @if $max {
-    @if type-of($max) == number {
-      $query: $query + " and (max-width: #{$max})";
-    } @else if map-has-key($breakpoints, $max) {
-      $query: $query + " and (max-width: #{map-get($breakpoints, $max) - 1px})";
+  @if $down {
+    @if type-of($down) == number {
+      $query: $query + " and (max-width: #{$down})";
+    } @else if $indexOfDownBreakpoint < length($breakpoints) {
+      @if $indexOfUpBreakpoint <= $indexOfDownBreakpoint {
+        $valueOfBreakpointAboveDownBreakpoint: map-get($breakpoints, nth(map-keys($breakpoints), $indexOfDownBreakpoint + 1));
+
+        $query: $query + " and (max-width: #{$valueOfBreakpointAboveDownBreakpoint - 1px})";
+      } @else {
+        @warn "media(): $up is bigger than $down";
+      }
+
     } @else {
-      @warn "media(): Invalid value for $max";
+      @warn "media(): Invalid value for $down (to big or unexisting)";
     }
   }
 
