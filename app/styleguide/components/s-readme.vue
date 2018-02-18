@@ -40,6 +40,15 @@
 
 <!-- eslint-disable -->
 <style lang="scss">
+  /*
+  This document has been created with Marked.app <http://marked2app.com>, Copyright 2013 Brett Terpstra
+  Content is property of the document author
+  Please leave this notice in place, along with any additional credits below.
+  ---------------------------------------------------------------
+  Title: GitHub
+  Author: Brett Terpstra
+  Description: Github README style. Includes theme for Pygmentized code blocks.
+  */
   .s-readme {
     color: black;
     font: 15px helvetica, arial, freesans, clean, sans-serif;
