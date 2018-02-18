@@ -310,6 +310,10 @@ module.exports = function (env, options) {
             name: assetsSubDirectory + 'fonts/[name].[ext]?[hash]'
           }
         },
+        {
+          test: /\.md$/,
+          loader: 'vue-markdown-loader'
+        }
       ]
     },
     node: {
