@@ -56,11 +56,7 @@ module.exports = function (env, options) {
       {
         loader: 'sass-loader',
         options: {
-          data: '@import "colors";', // Load SCSS setup
           sourceMap: !isProduction || hasStyleguide,
-          includePaths: [
-            path.resolve(__dirname, 'app/setup/scss')
-          ]
         },
       },
       {
