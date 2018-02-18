@@ -97,6 +97,7 @@
       border-bottom: $s-navigation--border;
       min-width: 40px;
       background: white;
+      z-index: 1;
 
       > * {
         display: none;
