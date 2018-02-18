@@ -1,0 +1,3 @@
+@mixin z-index($key) {
+  z-index: map-get($z-index, $key);
+}

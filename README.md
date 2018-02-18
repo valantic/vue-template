@@ -353,6 +353,8 @@ $ brew upgrade nasm
 * [x] Styleguide components
 * [x] webpack alias
 * [x] webpackChunkName
+* [ ] Bootstrap grid
+* [ ] Bootstrap reset
 
 ## License
 

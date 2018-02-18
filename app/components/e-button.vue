@@ -89,7 +89,7 @@
 
 <style lang="scss">
   .e-button {
-    background: $color-grey--white;
+    background: $color-gray--white;
     border: 1px solid black;
     padding: $spacing--10;
   }
