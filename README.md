@@ -355,6 +355,7 @@ $ brew upgrade nasm
 * [x] webpackChunkName
 * [ ] Bootstrap grid
 * [ ] Bootstrap reset
+* [ ] Bootstrap mixins/extends: clearfix, style-less list
 
 ## License
 
