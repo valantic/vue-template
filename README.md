@@ -358,6 +358,7 @@ $ brew upgrade nasm
 * [ ] Bootstrap mixins/extends: clearfix, style-less list
 * [ ] Custom element style reset (e.g. iframe)
 * [ ] Fallback image for e-picture
+* [ ] Input components should expect name, title and autocomplete value
 
 ## License
 
