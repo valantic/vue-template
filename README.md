@@ -357,6 +357,7 @@ $ brew upgrade nasm
 * [ ] Bootstrap reset
 * [ ] Bootstrap mixins/extends: clearfix, style-less list
 * [ ] Custom element style reset (e.g. iframe)
+* [ ] Fallback image for e-picture
 
 ## License
 
