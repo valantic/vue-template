@@ -359,6 +359,7 @@ $ brew upgrade nasm
 * [ ] Custom element style reset (e.g. iframe)
 * [ ] Fallback image for e-picture
 * [ ] Input components should expect name, title and autocomplete value
+* [ ] Ajax error handling
 
 ## License
 
