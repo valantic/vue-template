@@ -360,6 +360,7 @@ $ brew upgrade nasm
 * [ ] Fallback image for e-picture
 * [ ] Input components should expect name, title and autocomplete value
 * [ ] Ajax error handling
+* [ ] e-picture should support relation property and fallback image
 
 ## License
 
