@@ -26,7 +26,7 @@
   },
   "engines": {
     "node": ">=6.12.0 <9.0.0",
-    "npm": ">=5.6.0"
+    "npm": ">=5.7.1"
   },
   "keywords": [
     "vue",
@@ -89,6 +89,7 @@
     "css-loader": "~0.28.10",
     "eslint": "~4.18.2",
     "eslint-config-airbnb-base": "~12.1.0",
+    "eslint-config-valantic": "git+https://github.com/valantic/eslint-config-valantic.git#4.0.0",
     "eslint-import-resolver-webpack": "~0.8.4",
     "eslint-loader": "~2.0.0",
     "eslint-plugin-import": "~2.9.0",
@@ -109,6 +110,7 @@
     "sass-resources-loader": "~1.3.3",
     "stylelint": "~9.1.1",
     "stylelint-config-standard": "~18.2.0",
+    "stylelint-config-valantic": "git+https://github.com/valantic/stylelint-config-valantic.git#3.0.0",
     "stylelint-webpack-plugin": "~0.10.3",
     "typescript": "~2.7.2",
     "uglifyjs-webpack-plugin": "~1.2.3",

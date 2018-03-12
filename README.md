@@ -279,6 +279,12 @@ If you get a warning about `Using stale package data`, try to clear your npm cac
 $ npm cache clean --force
 ```
 
+#### Installing packages with `git+` or `ssh+` removes other packages
+
+This seems to be a bug in older npm version. Please make sure to at least use npm 5.7.1.
+
+see https://github.com/npm/npm/issues/17379
+
 #### Error when installing mozjpeg #1
 
 If you should get the following error when installing mozjpeg on MacOS

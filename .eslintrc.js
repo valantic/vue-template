@@ -13,7 +13,7 @@ module.exports = {
     browser: true,
   },
   extends: [
-    'airbnb-base',
+    'valantic',
     'plugin:vue/recommended',
   ],
   // required to lint *.vue files
