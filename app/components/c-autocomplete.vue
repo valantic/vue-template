@@ -1,10 +1,10 @@
 <template>
   <div :class="b()">
-    <input type="text" :class="b('input')" @input="updateSuggestions">
+    <input :class="b('input')" type="text" @input="updateSuggestions">
     <div :class="b('dropdown-wrapper')">
       <ul :class="b('suggestions')">
-        <li :class="b('suggestions-item')"
-            v-for="suggestion in suggestions"
+        <li v-for="suggestion in suggestions"
+            :class="b('suggestions-item')"
             :key="suggestion.text">{{ suggestion.text }}</li>
       </ul>
     </div>

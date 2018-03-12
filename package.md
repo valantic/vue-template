@@ -92,6 +92,7 @@ None
 * [stylelint](https://github.com/stylelint/stylelint) - A mighty, modern CSS linter and fixer that helps you avoid errors and enforce consistent conventions in your stylesheets.
 * [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) - The standard shareable config for stylelint .
 * [stylelint-webpack-plugin](https://github.com/JaKXz/stylelint-webpack-plugin) -  A webpack plugin to lint your CSS/Sass code using stylelint.
+* [typescript](https://github.com/Microsoft/TypeScript) -  TypeScript is a superset of JavaScript that compiles to clean JavaScript output. - Needed by `vue-styleguidist`
 * [uglifyjs-webpack-plugin](https://github.com/webpack-contrib/uglifyjs-webpack-plugin) - This plugin uses UglifyJS v3 (`uglify-es`) to minify your JavaScript.
 * [url-loader](https://github.com/webpack-contrib/url-loader) - Loads files as `base64` encoded URL.
 * [vue-jest](https://github.com/vuejs/vue-jest) - Jest Vue transformer.

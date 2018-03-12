@@ -7,12 +7,12 @@
       >
     </div>
     <div :class="b('grid')">
-      <div :class="b('grid-item')"
+      <div v-for="icon in filteredIcons"
+           :class="b('grid-item')"
            :key="icon"
-           v-for="icon in filteredIcons"
       >
         <div :class="b('icon-wrapper')">
-          <e-icon :icon="icon" :key="icon" width="50" />
+          <e-icon :icon="icon" :key="icon" width="50"/>
         </div>
         <div :class="b('icon-label')">{{ icon }}</div>
       </div>
@@ -73,7 +73,7 @@
 
     &__grid-item {
       overflow: hidden;
-      border: 1px solid #000;
+      border: 1px solid #000000;
       margin: 5px;
       flex: 0 1 10%;
 
