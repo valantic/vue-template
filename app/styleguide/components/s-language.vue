@@ -1,9 +1,9 @@
 <template>
   <select :class="b()" :value="language" @change="onChange">
-    <option v-for="language in i18nLocales"
+    <option v-t="`s-language.${language}`"
+            v-for="language in i18nLocales"
             :value="language"
-            :key="language"
-            v-t="`s-language.${language}`">
+            :key="language">
     </option>
   </select>
 </template>

@@ -6,7 +6,7 @@
     </h1>
     <hr>
     <p>Welcome to the styleguide.</p>
-    <div :class="b('warning')" v-if="isProduction">
+    <div v-if="isProduction" :class="b('warning')">
       Please note: this build is not meant for production. Please use <code :class="b('code')">npm run build</code> to
       create a production build.
     </div>

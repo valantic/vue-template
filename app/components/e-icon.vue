@@ -1,7 +1,7 @@
 <template>
   <span :class="b()"><!-- needed for inline usage -->
-    <img :class="b('icon')"
-         v-if="!inline"
+    <img v-if="!inline"
+         :class="b('icon')"
          :src="src"
          :alt="icon"
          :width="width"
