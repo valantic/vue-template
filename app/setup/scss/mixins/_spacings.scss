@@ -22,6 +22,7 @@
         $spacing: nth($spacings, $spacingIndex);
 
         @if $breakpointIndex != 1 and $spacingIndex != 1 { // Don't create a breakpoint related spacing if 0 $spacing and 0 $breakpoint
+          // stylelint-disable-next-line max-nesting-depth
           .#{$class}-#{$breakpoint}-#{$spacing} {
             #{$property}: #{$spacing};
           }

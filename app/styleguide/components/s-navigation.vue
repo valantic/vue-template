@@ -53,6 +53,7 @@
         type: Array,
         default: () => [],
       },
+
       /**
        * Position of navigation (top, right, bottom, left, top-right, top-left, ...)
        */
@@ -84,7 +85,7 @@
 </script>
 
 <style lang="scss">
-  $s-navigation--border: 10px solid red;
+  $s-navigation--border: 10px solid $color-status--failed;
 
   .s-navigation {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -96,7 +97,7 @@
       opacity: 0.2;
       border-bottom: $s-navigation--border;
       min-width: 40px;
-      background: white;
+      background: $color-gray--white;
       z-index: 1;
 
       > * {
@@ -166,16 +167,16 @@
 
     &__navigation-item {
       &--components {
-        border-top: 1px solid #333;
+        border-top: 1px solid $color-gray--500;
       }
 
       &--logo {
-        border-bottom: 1px solid #333;
+        border-bottom: 1px solid $color-gray--500;
       }
 
       &--language {
         padding: 10px 20px;
-        border-bottom: 1px solid #333;
+        border-bottom: 1px solid $color-gray--500;
       }
     }
 

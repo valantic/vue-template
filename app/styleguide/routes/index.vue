@@ -34,17 +34,17 @@
 <style lang="scss">
   .index {
     &__warning {
-      border: 1px solid red;
-      background: coral;
+      border: 1px solid $color-status--failed;
+      background: rgba($color-status--failed, 0.5);
       text-align: center;
       padding: 10px;
     }
 
     &__code {
       display: inline-block;
-      border: 1px solid grey;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
+      border: 1px solid $color-gray--500;
+      background: rgba($color-gray--black, 0.5);
+      color: $color-gray--white;
     }
   }
 </style>

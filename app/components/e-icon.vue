@@ -23,6 +23,7 @@
         type: String,
         required: true,
       },
+
       /**
        * Flag to determine if icon should be used inline or as img tag
        */
@@ -30,6 +31,7 @@
         type: Boolean,
         default: false,
       },
+
       /**
        * Custom width value
        */
@@ -37,6 +39,7 @@
         type: String,
         default: null,
       },
+
       /**
        * Custom height value
        */

@@ -12,9 +12,9 @@
   $isUpNumber: type-of($up) == number;
   $isDownNumber: type-of($down) == number;
   $upKey: if(
-      $down and not($isDownNumber) and $indexOfDownBreakpoint and $indexOfDownBreakpoint < length($breakpoints),
-      nth(map-keys($breakpoints), $indexOfDownBreakpoint + 1),
-      null
+    $down and not($isDownNumber) and $indexOfDownBreakpoint and $indexOfDownBreakpoint < length($breakpoints),
+    nth(map-keys($breakpoints), $indexOfDownBreakpoint + 1),
+    null
   );
   $upValue: if($isUpNumber, $up, false) or map-get($breakpoints, $up);
   $downValue: if($isDownNumber, $down, false) or ($upKey and map-get($breakpoints, $upKey));
@@ -33,7 +33,7 @@
   } @else {
     @if $up {
       @if $upValue != 0 {
-          $query: $query + " and (min-width: #{$upValue})";
+        $query: $query + " and (min-width: #{$upValue})";
       }
     }
 
@@ -46,7 +46,7 @@
     }
 
     @media #{$query} {
-      @content
+      @content;
     }
   }
 }

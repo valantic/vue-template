@@ -33,6 +33,41 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    'comma-dangle': 0,
+    'require-jsdoc': [2, {
+      require: {
+        FunctionDeclaration: true,
+        MethodDefinition: true,
+        ClassDeclaration: true,
+        ArrowFunctionExpression: true,
+        FunctionExpression: false
+      }
+    }],
+    'id-length': [1, {
+      min: 3,
+      properties: 'always',
+      exceptions: [
+        '$',
+        'a',
+        'b',
+        'e',
+        'i',
+        'in', // ember-cp-validations
+        'j',
+        'x',
+        'y',
+        '_', // _Lowdash
+        'fs', // ember
+        'gt', // ember-cp-validations
+        'id',
+        'DS', // ember-data
+        'vm', // Vue
+        'el', // Vue
+      ]
+    }],
+
+
+
     // don't require .vue extension when importing
     'import/extensions': [0, 'always', {
       js: 'never',

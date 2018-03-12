@@ -40,6 +40,8 @@
 
 <!-- eslint-disable -->
 <style lang="scss">
+  /* stylelint-disable */
+
   /*
   This document has been created with Marked.app <http://marked2app.com>, Copyright 2013 Brett Terpstra
   Content is property of the document author

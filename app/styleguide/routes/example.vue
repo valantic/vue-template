@@ -12,8 +12,4 @@
   };
 </script>
 
-<style lang="scss">
-  .foo {
-    color: red;
-  }
-</style>
+<style lang="scss"></style>

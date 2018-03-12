@@ -30,6 +30,7 @@ export default {
 
       return Promise.resolve(locale);
     },
+
     /**
      * Sets the application locale to the given value
      * Loads locale messages if needed

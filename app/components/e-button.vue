@@ -21,6 +21,7 @@
           ].includes(value);
         },
       },
+
       /**
        * Inverts the button style
        */
@@ -82,7 +83,7 @@
   .e-button {
     display: inline-block;
     background: $color-gray--white;
-    border: 1px solid black;
+    border: 1px solid $color-gray--black;
     padding: $spacing--10;
 
     &--width-full {
