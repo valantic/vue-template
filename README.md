@@ -361,6 +361,7 @@ $ brew upgrade nasm
 * [ ] Input components should expect name, title and autocomplete value
 * [ ] Ajax error handling
 * [ ] e-picture should support relation property and fallback image
+* [ ] npm update: only update one package at a time, test, then update next.
 
 ## License
 
