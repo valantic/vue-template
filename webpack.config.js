@@ -15,7 +15,7 @@ const postCssCriticalSplit = require('postcss-critical-split');
 const cssNano = require('cssnano');
 const openInEditor = require('launch-editor-middleware');
 
-module.exports = function (env, options) {
+module.exports = function(env, options) {
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
   const hasMessage = (env && env.message) || false;
@@ -75,7 +75,7 @@ module.exports = function (env, options) {
     }
 
     return isProduction
-      ? ExtractTextPlugin.extract({use})
+      ? ExtractTextPlugin.extract({ use })
       : use;
   }
 
@@ -226,7 +226,10 @@ module.exports = function (env, options) {
 
   const baseConfig = {
     entry: {
-      app: path.resolve(__dirname, 'app/main.js'),
+      app: [
+        'babel-polyfill',
+        path.resolve(__dirname, 'app/main.js')
+      ],
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],

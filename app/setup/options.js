@@ -1,3 +1,7 @@
+// Polyfills
+import 'intersection-observer';
+import 'picturefill';
+
 import Vue from 'vue';
 import VueBemCn from 'vue-bem-cn';
 import VueI18n from 'vue-i18n';

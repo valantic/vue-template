@@ -63,9 +63,13 @@ module.exports = {
         'DS', // ember-data
         'vm', // Vue
         'el', // Vue
+        'xs', // Bootstrap
+        'sm', // Bootstrap
+        'md', // Bootstrap
+        'lg', // Bootstrap
+        'xl', // Bootstrap
       ]
     }],
-
 
 
     // don't require .vue extension when importing

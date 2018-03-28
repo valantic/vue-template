@@ -17,6 +17,7 @@
     "test": "npm run lint && npm run test:unit",
     "dev": "webpack-dev-server",
     "dev:styleguide": "vue-styleguidist server",
+    "dev:s": "npm run dev:styleguide",
     "postinstall": "echo \"\\x1b[44m Please update package.md after installing new packages and check build output for malicious code! \\x1b[0m\"",
     "postuninstall": "echo \"\\x1b[44m Please update package.md after uninstalling packages! \\x1b[0m\""
   },
@@ -69,7 +70,11 @@
   },
   "dependencies": {
     "axios": "~0.18.0",
+    "babel-polyfill": "~6.26.0",
     "bootstrap": "~4.0.0",
+    "intersection-observer": "~0.5.0",
+    "picturefill": "~3.0.2",
+    "v-lazy-image": "~1.2.1",
     "vue": "~2.5.15",
     "vue-bem-cn": "~1.0.0",
     "vue-i18n": "~7.5.0",
@@ -93,7 +98,7 @@
     "eslint-import-resolver-webpack": "~0.8.4",
     "eslint-loader": "~2.0.0",
     "eslint-plugin-import": "~2.9.0",
-    "eslint-plugin-vue": "~4.3.0",
+    "eslint-plugin-vue": "~4.4.0",
     "extract-text-webpack-plugin": "~3.0.2",
     "file-loader": "~1.1.11",
     "friendly-errors-webpack-plugin": "~1.6.1",
