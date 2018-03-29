@@ -1,11 +1,13 @@
-import eIcon from '../components/e-icon';
-import eButton from '../components/e-button';
+import eIcon from '@/components/e-icon';
+import eButton from '@/components/e-button';
+import ePicture from '@/components/e-picture';
 
 export default {
   install(Vue) {
     const components = [
       eButton,
       eIcon,
+      ePicture,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -16,6 +18,7 @@ export default {
     } else {
       Vue.component(eButton.name, eButton);
       Vue.component(eIcon.name, eIcon);
+      Vue.component(ePicture.name, ePicture);
     }
   },
 };
