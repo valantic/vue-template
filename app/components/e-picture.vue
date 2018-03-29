@@ -160,6 +160,7 @@
     // beforeCreate() {},
     created() {
       if (this.parsedSources && this.parsedSrcset) {
+        // eslint-disable-next-line no-console
         console.warn('You can not use sources and srcset at the same time for e-picture! Source is used.');
       }
     },
