@@ -26,13 +26,12 @@
       },
 
       /**
-       * TODO: Could be realized with CSS variables (would only close out IE) else I guess we have to use JS (=> window.CSS.supports())
-       * attr() is not working outside of "content"
+       * Allows to add a ratio keeper pseudo element, which will preserve the vertical space of the final image.
        *
-       * https://css-tricks.com/aspect-ratio-boxes/
+       * e.g. `1` is a ratio of 1:1 (600px x 600px), `0.75` is a ratio of 0.75:1 (600px x 800px)
        */
       ratio: {
-        type: String,
+        type: [Number, String],
         default: null
       },
 
@@ -175,22 +174,26 @@
 
     // methods: {},
     render(createElement) {
-      const { lazyload } = this;
+      const { lazyload, ratio, parsedSizes } = this;
       const pictureChilds = [];
       const imgAttributes = {
         ...this.$attrs,
         alt: this.alt,
         [lazyload ? 'data-src' : 'src']: this.fallback
       };
+      const style = {};
       let element = 'img';
 
+      // Create picture element
       if (this.parsedSources) {
         element = 'picture';
 
+        // sources
         this.parsedSources.forEach((source) => {
           pictureChilds.push(createElement(
             'source',
             {
+              class: this.b('source'),
               attrs: {
                 media: source.media,
                 [lazyload ? 'data-srcset' : 'srcset']: source.srcset,
@@ -199,33 +202,43 @@
           ));
         });
 
+        // img
         pictureChilds.push(createElement(
           'img',
           {
-            class: {
-              lazyload,
-              'e-picture__image': true
-            },
+            class: this.b('image', lazyload ? 'lazyload' : null),
             attrs: imgAttributes,
           }
         ));
       } else if (this.parsedSizes && this.parsedSrcset) {
-        imgAttributes.sizes = this.parsedSizes;
+        imgAttributes.sizes = parsedSizes;
         imgAttributes[lazyload ? 'data-srcset' : 'srcset'] = this.parsedSrcset;
         imgAttributes[lazyload ? 'data-src' : 'src'] = this.fallback;
       }
 
-      return createElement(
-        element,
+      if (ratio > 0 && parsedSizes) {
+        style['--aspect-ratio'] = ratio;
+      }
+
+      return createElement( // Wrapper
+        'span',
         {
           class: this.b({
-            lazyload,
             inline: this.isInline,
-            image: !this.parsedSources
-          }, !this.parsedSources ? 'lazyload' : null),
-          attrs: imgAttributes
+            image: !this.parsedSources,
+            ratio: ratio > 0,
+            lazyload
+          }),
+          style,
         },
-        pictureChilds
+        [createElement( // img / picture
+          element,
+          {
+            class: this.b(element === 'img' ? 'image' : 'picture', lazyload ? 'lazyload' : null),
+            attrs: imgAttributes,
+          },
+          pictureChilds // picture sources
+        )]
       );
     },
   };
@@ -238,6 +251,7 @@
     height: auto;
 
     img {
+      display: block;
       max-width: 100%;
       height: auto;
     }
@@ -248,6 +262,21 @@
 
     &__image {
       max-width: 100%;
+    }
+
+    &--ratio {
+      &::before {
+        display: block;
+        content: '';
+        float: left;
+        padding-top: calc(100% / (var(--aspect-ratio)));
+      }
+
+      &::after {
+        display: table;
+        content: '';
+        clear: both;
+      }
     }
   }
 </style>

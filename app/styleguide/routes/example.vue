@@ -67,6 +67,12 @@
                :fallback="fallback"
                alt="an image"
                inline="true" />
+    <e-picture :srcset="srcset"
+               :sizes="sizes"
+               :fallback="fallback"
+               :ratio="800/600"
+               alt="an image"
+               inline="true" />
     <e-picture :fallback="fallback"
                alt="an image"
                inline="true"/>

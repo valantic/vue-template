@@ -71,7 +71,7 @@
     <e-picture
       :sources="sources"
       :fallback="fallback"
-      inline="true"
+      :inline="true"
       alt="Show as inline element"/>
   </div>
 </template>
@@ -82,6 +82,73 @@
       fallback: 'http://via.placeholder.com/180x150/0000ff',
       sources: {
         0: ['http://via.placeholder.com/200 1x', 'http://via.placeholder.com/400 2x'],
+      },
+    })
+  };
+</script>
+```
+
+#### Preserve ratio
+```
+<template>
+  <div>
+    <e-picture
+      :sizes="sizes"
+      :srcset="srcset"
+      :fallback="fallback"
+      :ratio="800/800"
+      alt="Show as inline element"/>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      fallback: 'http://via.placeholder.com/180x150/0000ff',
+      srcset: {
+        200: 'http://via.placeholder.com/100x50',
+        400: 'http://via.placeholder.com/200x100',
+        800: 'http://via.placeholder.com/300x150',
+        1400: 'http://via.placeholder.com/600x300',
+      },
+      sizes: {
+        1024: 600,
+        xs: 100,
+        md: 300,
+      },
+    })
+  };
+</script>
+```
+
+#### Preserve ratio inline
+```
+<template>
+  <div>
+    <e-picture
+      :sizes="sizes"
+      :srcset="srcset"
+      :fallback="fallback"
+      :ratio="800/800"
+      :inline="true"
+      alt="Show as inline element"/>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      fallback: 'http://via.placeholder.com/180x150/0000ff',
+      srcset: {
+        200: 'http://via.placeholder.com/100x50',
+        400: 'http://via.placeholder.com/200x100',
+        800: 'http://via.placeholder.com/300x150',
+        1400: 'http://via.placeholder.com/600x300',
+      },
+      sizes: {
+        1024: 600,
+        xs: 100,
+        md: 300,
       },
     })
   };
