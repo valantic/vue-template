@@ -113,14 +113,12 @@
 
             return key;
           })
+          .filter(breakpoint => breakpoint > 0)
           .sort((a, b) => (a < b ? 1 : -1)); // eslint-disable-line no-extra-parens
         const fallback = ',100vw';
 
         return sizesBreakpoints
-          .map(breakpoint => breakpoint // eslint-disable-line no-confusing-arrow
-            // Converts sizes to query string and width pixel values to vw
-            ? `(min-width: ${breakpoint}px) ${(mappedSizesBreakpoints[breakpoint] / breakpoint) * 100}vw`
-            : '')
+          .map(breakpoint => `(min-width: ${breakpoint}px) ${(mappedSizesBreakpoints[breakpoint] / breakpoint) * 100}vw`)
           .filter(breakpoint => !!breakpoint)
           .join(',') + fallback;
       },

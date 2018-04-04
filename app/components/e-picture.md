@@ -88,7 +88,7 @@
 </script>
 ```
 
-#### Preserve ratio
+#### Preserve ratio (tinted background for visualisation)
 ```
 <template>
   <div>
@@ -97,6 +97,7 @@
       :srcset="srcset"
       :fallback="fallback"
       :ratio="800/800"
+      style="background: aliceblue;"
       alt="Show as inline element"/>
   </div>
 </template>
@@ -121,7 +122,7 @@
 </script>
 ```
 
-#### Preserve ratio inline
+#### Preserve ratio inline (tinted background for visualisation)
 ```
 <template>
   <div>
@@ -131,6 +132,7 @@
       :fallback="fallback"
       :ratio="800/800"
       :inline="true"
+      style="background: aliceblue;"
       alt="Show as inline element"/>
   </div>
 </template>
