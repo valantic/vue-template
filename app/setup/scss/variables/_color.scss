@@ -1,15 +1,27 @@
-// Colors
-$_color-value--black: #000000;
-$_color-value--white: #ffffff;
+// keep in sync with app/setup/js/_color.js
 
-// Color variables
-$color--alpha-1: #9fc204;
-$color--alpha-2: #54666f;
+$color-primary--1: #ffed00;
+$color-primary--2: #000000;
+$color-primary--3: #ffffff;
 
-$color-status--success: #8dc63f;
-$color-status--failed: #c60651;
-$color-status--warning: #ffa500;
+$color-secondary--1: #2c68a0;
+$color-secondary--2: #75b4e0;
+$color-secondary--3: #2fa61c;
+$color-secondary--4: #b50f0f;
+$color-secondary--5: #b50f0f;
 
-$color-gray--white: $_color-value--white;
-$color-gray--500: #7d7d7d;
-$color-gray--black: $_color-value--black;
+$color-grayscale--1: $color-primary--2;
+$color-grayscale--2: #646464;
+$color-grayscale--3: #afafaf;
+$color-grayscale--4: #f3f3f3;
+$color-grayscale--5: #fcfcfc;
+$color-grayscale--6: $color-primary--3;
+
+$color-gradient--1-0: $color-primary--2;
+$color-gradient--1-1: $color-primary--3;
+$color-gradient--2-0: $color-secondary--1;
+$color-gradient--2-1: $color-secondary--2;
+
+$color-status--success: $color-secondary--3;
+$color-status--warning: $color-secondary--5;
+$color-status--danger:$color-secondary--4;

@@ -46,6 +46,9 @@ module.exports = {
   mixins: [
     'app/setup/styleguidist.js'
   ],
+  ignore: [
+    '**/components/s-color-list-item.vue'
+  ],
   theme,
   styles
 };

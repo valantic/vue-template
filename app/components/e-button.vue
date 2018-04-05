@@ -82,8 +82,8 @@
 <style lang="scss">
   .e-button {
     display: inline-block;
-    background: $color-gray--white;
-    border: 1px solid $color-gray--black;
+    background: $color-grayscale--6;
+    border: 1px solid $color-grayscale--1;
     padding: $spacing--10;
 
     &--width-full {
@@ -92,7 +92,7 @@
     }
 
     &--inverted {
-      background: $color-gray--black;
+      background: $color-grayscale--1;
     }
   }
 </style>
