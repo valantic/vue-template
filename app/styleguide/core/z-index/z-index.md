@@ -3,11 +3,14 @@
 * front
 * back
 
-Use the media-mixin for media queries. See app/setup/scss/mixins/_z-index.scss
+Use the z-index mixin to define z-index. See app/setup/scss/mixins/_z-index.scss
+
 ```scss
 @mixin z-index($key)
 ```
-Don't hardcode z-index values, use z-index mixin
+
+Example
+
 ```scss
 .foo {
   @include z-index(modal)
