@@ -1,5 +1,4 @@
 import index from '../styleguide/routes/index';
-import example from '../styleguide/routes/example';
 import lazyload from '../styleguide/routes/lazyload';
 
 const root = '/styleguide';
@@ -14,14 +13,6 @@ export default [
     component: index,
     meta: {
       title: 'Welcome',
-    },
-  },
-  {
-    path: `${root}/example`,
-    name: 'styleguideExample',
-    component: example,
-    meta: {
-      title: 'Example',
     },
   },
   {
