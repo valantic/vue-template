@@ -12,12 +12,12 @@
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'http://via.placeholder.com/180x150/0000ff',
+      fallback: 'http://via.placeholder.com/180x150',
       sources: {
-        0: ['http://via.placeholder.com/180x150 1x', 'http://via.placeholder.com/360x300 2x'],
-        sm: ['http://via.placeholder.com/350x150 1x', 'http://via.placeholder.com/700 2x'],
-        800: ['http://via.placeholder.com/800x150 1x', 'http://via.placeholder.com/1600x300 2x'],
-        1440: ['http://via.placeholder.com/1440x150 1x', 'http://via.placeholder.com/2880x300 2x'],
+        0: ['http://via.placeholder.com/180x150/000000 1x', 'http://via.placeholder.com/360x300/000000 2x'],
+        sm: ['http://via.placeholder.com/350x150/666666 1x', 'http://via.placeholder.com/700/666666 2x'],
+        800: ['http://via.placeholder.com/800x150/aaaaaa 1x', 'http://via.placeholder.com/1600x300/aaaaaa 2x'],
+        1440: ['http://via.placeholder.com/1440x150/dddddd 1x', 'http://via.placeholder.com/2880x300/dddddd 2x'],
       },
     })
   };

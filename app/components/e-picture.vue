@@ -123,30 +123,32 @@
           .join(',') + fallback;
       },
 
+      /**
+       * Converts sources to definition to <source> attribute data
+       *
+       * @returns {Object[]|null}
+       */
       parsedSources() {
         if (!this.sources) {
           return null;
         }
 
-        const mappedSourcesBreakpoints = [];
-
-        Object
+        return Object
           .keys(this.sources)
-          .forEach((breakpoint) => {
+          .map((breakpoint) => {
             const breakpointWidth = typeof BREAKPOINTS[breakpoint] === 'number' ? BREAKPOINTS[breakpoint] : breakpoint;
 
             if (Number.isNaN(breakpointWidth)) {
               throw new Error('Invalid breakpoint value for e-picture source.');
             }
 
-            mappedSourcesBreakpoints.push({
-              sort: breakpointWidth,
+            return {
+              sort: parseInt(breakpointWidth, 10),
               media: `(min-width: ${breakpointWidth}px)`,
               srcset: this.sources[breakpoint].join(',')
-            });
-          });
-
-        return mappedSourcesBreakpoints.sort((a, b) => (a.sort < b.sort ? 1 : -1)); // eslint-disable-line no-extra-parens
+            };
+          })
+          .sort((a, b) => (a.sort < b.sort ? 1 : -1));
       },
       isInline() {
         return this.inline === 'true' || this.inline === true;
@@ -214,7 +216,7 @@
         imgAttributes[lazyload ? 'data-src' : 'src'] = this.fallback;
       }
 
-      if (ratio > 0 && parsedSizes) {
+      if (ratio > 0 && parsedSizes) { // <picture> would need dynamic ratios
         style['--aspect-ratio'] = ratio;
       }
 
