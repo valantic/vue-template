@@ -1,4 +1,4 @@
-### Allowed breakpoints
+### Available breakpoints
 See app/setup/scss/variables/_bootstrap.scss
 
 | Name | Breakpoint |
@@ -9,13 +9,16 @@ See app/setup/scss/variables/_bootstrap.scss
 | md   | 1024px     |
 | lg   | 1200px     |
 | xl   | 1440px     |
+
 ### Media queries
 Use the media-mixin for media queries. See app/setup/scss/mixins/_media.scss
+
 ```scss
 @mixin media($up: null, $down: null, $media: all, $breakpoints: $grid-breakpoints)
 ```
 
 Use media-mixin within styles, not the other way around
+
 ```scss
 .foo {
   @include media(xxs, $media: screen) {
@@ -25,3 +28,4 @@ Use media-mixin within styles, not the other way around
     display:inline;
   }
 }
+```
