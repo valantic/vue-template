@@ -1,0 +1,12 @@
+////
+// Calculate rem font-size for given pixel value based on base font-size
+//
+// @param  {Number}       [$size-value = $font-size--default]     The target font-size as pixel length
+//
+// @returns {font-size}   font-size property with rem value
+////
+@mixin font-size($size-value: $font-size--default) {
+  $size-value: strip-unit($size-value);
+
+  font-size: ($size-value / strip-unit($font-size--default)) + rem;
+}

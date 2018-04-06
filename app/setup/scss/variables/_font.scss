@@ -1,8 +1,24 @@
 // Font families
-$font-family--alpha: 'Helvetica';
+$font-family--primary: 'Helvetica', 'Trebuchet MS' Arial, sans-serif;
 
 // Font weight
-$font-weight--normal: 400;
+$font-weight--regular: 400;
+$font-weight--semi-bold: 600;
+$font-weight--bold: 700;
 
 // Font size
+$font-size--10: 10px;
+$font-size--12: 12px;
 $font-size--14: 14px;
+$font-size--16: 16px;
+$font-size--18: 18px;
+
+// Defaults
+$font-size--default: $font-size--14;
+
+$font-size--p: $font-size--default;
+$font-size--h1: $font-size--18;
+$font-size--h2: $font-size--16;
+$font-size--h3: $font-size--default;
+
+$line-height--default: 18px;
