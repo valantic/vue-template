@@ -1,3 +1,5 @@
+//@import "../functions/strip-unit";
+
 ////
 // Calculate rem font-size for given pixel value based on base font-size
 //
@@ -6,7 +8,7 @@
 // @returns {font-size}   font-size property with rem value
 ////
 @mixin font-size($size-value: $font-size--default) {
-  $size-value: strip-unit($size-value);
+  $browser-default: 16px;
 
-  font-size: ($size-value / strip-unit($font-size--default)) + rem;
+  font-size: ( strip-unit($size-value) / strip-unit($browser-default) ) + rem;
 }

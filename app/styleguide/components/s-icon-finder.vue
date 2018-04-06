@@ -107,8 +107,9 @@
     }
 
     &__icon-label {
+      @include font(10);
+
       text-align: center;
-      font-size: 10px;
     }
   }
 </style>
