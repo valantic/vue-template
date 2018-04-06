@@ -11,3 +11,9 @@ gen
 /node_modules/
 /dist/
 /tests/unit/coverage/
+
+# Visual Studio Code
+.vscode
+
+# npm
+npm-debug.log

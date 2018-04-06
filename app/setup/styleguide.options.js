@@ -26,5 +26,5 @@ export default {
   template: '<s-navigation :routes="styleguideRoutes" nav-position="right"/>',
   components: {
     sNavigation,
-  },
+  }
 };
