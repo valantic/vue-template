@@ -22,10 +22,10 @@ Use media-mixin within styles, not the other way around
 ```scss
 .foo {
   @include media(xxs, $media: screen) {
-    display:block;
+    display: block;
   }
   @include media(sm, md, screen) {
-    display:inline;
+    display: inline;
   }
 }
 ```
