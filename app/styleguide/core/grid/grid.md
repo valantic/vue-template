@@ -24,6 +24,7 @@ Use media-mixin within styles, not the other way around
   @include media(xxs, $media: screen) {
     display: block;
   }
+  
   @include media(sm, md, screen) {
     display: inline;
   }
