@@ -1,5 +1,5 @@
-### Available colors
+### Available color palettes
 This component displays the color palettes specified in app/setup/js/_color.js
 ```
-<s-color-list/>
+<s-palette-list/>
 ```

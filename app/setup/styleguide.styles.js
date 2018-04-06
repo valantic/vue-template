@@ -5,8 +5,8 @@ module.exports = {
     color: {
       link: '#5856d6',
       linkHover: 'rgb(70, 69, 171)',
-      sidebarBackground: '#7957d5',
-      errorBackground: '#e22d44'
+      sidebarBackground: '#2c68a0',
+      errorBackground: '#b50f0f'
     }
   },
   styles: {

@@ -42,9 +42,9 @@
 
     &__code {
       display: inline-block;
-      border: 1px solid $color-grayscale--3;
-      background: rgba($color-grayscale--1, 0.5);
-      color: $color-grayscale--6;
+      border: 1px solid $color-grayscale--400;
+      background: rgba($color-primary--2, 0.5);
+      color: $color-primary--3;
     }
   }
 </style>
