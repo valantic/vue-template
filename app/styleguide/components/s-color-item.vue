@@ -3,8 +3,8 @@
     <div :class="b('color-wrapper')">
       <div :class="b('color')" :style="backgroundColor"></div>
     </div>
-    <div :class="b('name')" v-html="name"></div>
-    <div :class="b('value')">{{ value }}</div>
+    <div :class="b('name')" v-html="display_name"></div>
+    <div :class="b('value')">{{ display_value }}</div>
   </div>
 </template>
 
@@ -15,8 +15,22 @@
     // mixins: [],
 
     props: {
-      color: {
-        type: Object,
+
+      /**
+       * Human readable name of the color
+       */
+      name: {
+        type: String,
+        default: null,
+        required: true
+      },
+
+      /**
+       * Array of color values provided in hex format (#ff0000).
+       * If 2 values are given it will be treated as gradient.
+       */
+      value: {
+        type: Array,
         default: null,
         required: true
       }
@@ -26,20 +40,18 @@
     // },
 
     computed: {
-      name() {
-        return this.color.name.split(' - ').join('<br>');
+      display_name() {
+        return this.name.split(' - ').join('<br>');
       },
-      value() {
-        return this.color.value.join(' - ');
+      display_value() {
+        return this.value.join(' - ');
       },
       backgroundColor() {
-        let [color1, color2] = this.color.value;
+        const [color1, color2] = this.value;
 
-        if (!color2) {
-          color2 = color1;
-        }
-
-        return `background: linear-gradient(to right, ${color1} , ${color2};`;
+        return {
+          background: `linear-gradient(to right, ${color1} , ${color2 || color1})`
+        };
       }
     }
     // watch: {},
@@ -66,8 +78,8 @@
 
     &__grid-item {
       overflow: hidden;
-      border: 1px solid #000000;
-      margin: 5px;
+      border: 1px solid $color-primary--2;
+      margin: $spacing--5;
       flex: 0 1 18%;
 
       &::before {
@@ -87,7 +99,7 @@
     }
 
     &__color {
-      width: 240px;
+      min-width: 240px;
       height: 180px;
     }
 

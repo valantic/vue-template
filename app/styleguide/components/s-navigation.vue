@@ -96,7 +96,7 @@
       position: fixed;
       opacity: 0.2;
       border-bottom: $s-navigation--border;
-      min-width: 40px;
+      min-width: $spacing--40;
       background: $color-primary--3;
       z-index: 1;
 

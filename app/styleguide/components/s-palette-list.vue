@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <div :class="b('')">
     <s-palette-item
       v-for="palette in palettes"
       :palette="palette"
@@ -10,7 +10,7 @@
 
 <script>
 
-  import _colors from '../../setup/js/_color';
+  import _colors from '../../setup/js/color';
   import sPaletteItem from './s-palette-item';
 
   export default {
@@ -21,13 +21,7 @@
     },
     // mixins: [],
 
-    props: {
-      palette: {
-        type: String,
-        default: null,
-        required: true
-      }
-    },
+    // props: {},
     // data() {
     //   return {};
     // },

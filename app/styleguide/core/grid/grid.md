@@ -17,7 +17,7 @@ Use the media-mixin for media queries. See app/setup/scss/mixins/_media.scss
 @mixin media($up: null, $down: null, $media: all, $breakpoints: $grid-breakpoints)
 ```
 
-Use media-mixin within styles, not the other way around
+Use media-mixin within selectors, not the other way around
 
 ```scss
 .foo {
