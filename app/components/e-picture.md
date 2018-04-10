@@ -25,6 +25,9 @@
 ```
 
 #### Img element with srcset and sizes
+
+*Note: lower resolutions are not loaded, if a higher resolution has already been requested by the browser. Reload page to test smaller screens. When scaling up, the higher resolution should be requested.*
+
 ```
 <template>
   <e-picture
