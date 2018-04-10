@@ -9,6 +9,7 @@
  
 ### Checklist
 - [ ] Tested all links in project relevant browsers
+- [ ] Tested all links in different screen sizes
 - [ ] Did run automated tests and linters
 - [ ] Did assign ticket
 - [ ] Double checked target branch
@@ -17,4 +18,5 @@
 - [ ] Did run automated tests and linters
 - [ ] Did review code
 - [ ] Tested all links in project relevant browsers
+- [ ] Tested all links in different screen sizes
 - [ ] Re-assign ticket to developer
