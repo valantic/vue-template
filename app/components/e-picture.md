@@ -99,7 +99,7 @@
       :sizes="sizes"
       :srcset="srcset"
       :fallback="fallback"
-      :ratio="800/800"
+      :ratio="800/500"
       style="background: aliceblue;"
       alt="Show as inline element"/>
   </div>
