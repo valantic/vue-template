@@ -1,5 +1,5 @@
 <template>
-  <div :class="b('')">
+  <div :class="b()">
     <s-palette-item
       v-for="palette in palettes"
       :palette="palette"
@@ -10,7 +10,7 @@
 
 <script>
 
-  import _colors from '../../setup/js/color';
+  import paletteColors from '../../setup/js/color';
   import sPaletteItem from './s-palette-item';
 
   export default {
@@ -28,10 +28,10 @@
 
     computed: {
       colors() {
-        return _colors;
+        return paletteColors;
       },
       palettes() {
-        return Object.keys(_colors);
+        return Object.keys(paletteColors);
       }
     },
     // watch: {},

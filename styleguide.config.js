@@ -47,7 +47,8 @@ module.exports = {
     'app/setup/styleguidist.js'
   ],
   ignore: [
-    '**/components/s-palette-item.vue'
+    '**/components/s-palette-item.vue',
+    '**/components/s-color-item.vue'
   ],
   theme,
   styles

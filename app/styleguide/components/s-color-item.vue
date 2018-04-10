@@ -1,10 +1,8 @@
 <template>
-  <div :class="b('grid-item')">
-    <div :class="b('color-wrapper')">
-      <div :class="b('color')" :style="backgroundColor"></div>
-    </div>
-    <div :class="b('name')" v-html="display_name"></div>
-    <div :class="b('value')">{{ display_value }}</div>
+  <div :class="b()">
+    <div :class="b('color')" :style="backgroundColor"></div>
+    <div :class="b('name')" v-html="displayName"></div>
+    <div :class="b('value')">{{ displayValue }}</div>
   </div>
 </template>
 
@@ -40,10 +38,10 @@
     // },
 
     computed: {
-      display_name() {
+      displayName() {
         return this.name.split(' - ').join('<br>');
       },
-      display_value() {
+      displayValue() {
         return this.value.join(' - ');
       },
       backgroundColor() {
@@ -74,32 +72,11 @@
 
 <style lang="scss">
   .s-color-item {
-    display: inline-block;
-
-    &__grid-item {
-      overflow: hidden;
-      border: 1px solid $color-primary--2;
-      margin: $spacing--5;
-      flex: 0 1 18%;
-
-      &::before {
-        display: block;
-        content: "";
-        float: left;
-        width: 0;
-        padding-top: 100%;
-      }
-    }
-
-    &__color-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 100%;
-    }
+    border: 1px solid $color-primary--2;
+    margin: $spacing--5;
+    flex: 0 1 200px;
 
     &__color {
-      min-width: 240px;
       height: 180px;
     }
 
