@@ -1,5 +1,6 @@
 import index from '../styleguide/routes/index';
 import example from '../styleguide/routes/example';
+import layout from '../styleguide/routes/layout';
 
 const root = '/styleguide';
 
@@ -21,6 +22,14 @@ export default [
     component: example,
     meta: {
       title: 'Example',
+    },
+  },
+  {
+    path: `${root}/layout`,
+    name: 'styleguideLayout',
+    component: layout,
+    meta: {
+      title: 'Layout',
     },
   },
   {
