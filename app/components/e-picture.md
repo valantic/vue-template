@@ -48,9 +48,10 @@
         1400: 'http://via.placeholder.com/1400x700',
       },
       sizes: {
-        1024: 1400,
+        1440: 1400,
         xs: 200,
-        md: 400,
+        sm: 400,
+        md: 800,
       },
     })
   };
@@ -91,7 +92,7 @@
 </script>
 ```
 
-#### Preserve ratio (tinted background for visualisation)
+#### Preserve aspect ratio (tinted background for visualisation)
 ```
 <template>
   <div>
@@ -110,22 +111,22 @@
     data: () => ({
       fallback: 'http://via.placeholder.com/180x150/0000ff',
       srcset: {
-        200: 'http://via.placeholder.com/100x50',
-        400: 'http://via.placeholder.com/200x100',
-        800: 'http://via.placeholder.com/300x150',
-        1400: 'http://via.placeholder.com/600x300',
+        100: 'http://via.placeholder.com/100x50',
+        400: 'http://via.placeholder.com/400x200',
+        500: 'http://via.placeholder.com/500x250',
+        600: 'http://via.placeholder.com/600x300',
       },
       sizes: {
-        1024: 600,
-        xs: 100,
-        md: 300,
+        1200: 600,
+        sm: 360,
+        md: 500,
       },
     })
   };
 </script>
 ```
 
-#### Preserve ratio inline (tinted background for visualisation)
+#### Preserve aspect ratio inline (tinted background for visualisation)
 ```
 <template>
   <div>
@@ -145,16 +146,16 @@
     data: () => ({
       fallback: 'http://via.placeholder.com/180x150/0000ff',
       srcset: {
-        200: 'http://via.placeholder.com/100x50',
-        400: 'http://via.placeholder.com/200x100',
-        800: 'http://via.placeholder.com/300x150',
-        1400: 'http://via.placeholder.com/600x300',
-      },
-      sizes: {
-        1024: 600,
-        xs: 100,
-        md: 300,
-      },
+          100: 'http://via.placeholder.com/100x50',
+          400: 'http://via.placeholder.com/400x200',
+          500: 'http://via.placeholder.com/500x250',
+          600: 'http://via.placeholder.com/600x300',
+        },
+        sizes: {
+          1200: 600,
+          sm: 360,
+          md: 500,
+        },
     })
   };
 </script>

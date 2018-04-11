@@ -118,7 +118,11 @@
         const fallback = ',100vw';
 
         return sizesBreakpoints
-          .map(breakpoint => `(min-width: ${breakpoint}px) ${(mappedSizesBreakpoints[breakpoint] / breakpoint) * 100}vw`)
+          .map((breakpoint) => {
+            const viewWidth = Math.ceil((mappedSizesBreakpoints[breakpoint] / breakpoint) * 100);
+
+            return `(min-width: ${breakpoint}px) ${viewWidth}vw`;
+          })
           .filter(breakpoint => !!breakpoint)
           .join(',') + fallback;
       },
