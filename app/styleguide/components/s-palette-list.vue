@@ -10,7 +10,7 @@
 
 <script>
 
-  import _colors from '../../setup/js/_color';
+  import paletteColors from '../../setup/js/color';
   import sPaletteItem from './s-palette-item';
 
   export default {
@@ -21,23 +21,17 @@
     },
     // mixins: [],
 
-    props: {
-      palette: {
-        type: String,
-        default: null,
-        required: true
-      }
-    },
+    // props: {},
     // data() {
     //   return {};
     // },
 
     computed: {
       colors() {
-        return _colors;
+        return paletteColors;
       },
       palettes() {
-        return Object.keys(_colors);
+        return Object.keys(paletteColors);
       }
     },
     // watch: {},
@@ -61,6 +55,6 @@
 
 <style lang="scss">
   .s-palette-list {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: $font-family--primary;
   }
 </style>

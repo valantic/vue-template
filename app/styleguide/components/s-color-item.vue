@@ -1,10 +1,8 @@
 <template>
-  <div :class="b('grid-item')">
-    <div :class="b('color-wrapper')">
-      <div :class="b('color')" :style="backgroundColor"></div>
-    </div>
-    <div :class="b('name')" v-html="name"></div>
-    <div :class="b('value')">{{ value }}</div>
+  <div :class="b()">
+    <div :class="b('color')" :style="backgroundColor"></div>
+    <div :class="b('name')" v-html="displayName"></div>
+    <div :class="b('value')">{{ displayValue }}</div>
   </div>
 </template>
 
@@ -15,8 +13,22 @@
     // mixins: [],
 
     props: {
-      color: {
-        type: Object,
+
+      /**
+       * Human readable name of the color
+       */
+      name: {
+        type: String,
+        default: null,
+        required: true
+      },
+
+      /**
+       * Array of color values provided in hex format (#ff0000).
+       * If 2 values are given it will be treated as gradient.
+       */
+      value: {
+        type: Array,
         default: null,
         required: true
       }
@@ -26,20 +38,18 @@
     // },
 
     computed: {
-      name() {
-        return this.color.name.split(' - ').join('<br>');
+      displayName() {
+        return this.name.split(' - ').join('<br>');
       },
-      value() {
-        return this.color.value.join(' - ');
+      displayValue() {
+        return this.value.join(' - ');
       },
       backgroundColor() {
-        let [color1, color2] = this.color.value;
+        const [color1, color2] = this.value;
 
-        if (!color2) {
-          color2 = color1;
-        }
-
-        return `background: linear-gradient(to right, ${color1} , ${color2};`;
+        return {
+          background: `linear-gradient(to right, ${color1} , ${color2 || color1})`
+        };
       }
     }
     // watch: {},
@@ -62,32 +72,11 @@
 
 <style lang="scss">
   .s-color-item {
-    display: inline-block;
-
-    &__grid-item {
-      overflow: hidden;
-      border: 1px solid #000000;
-      margin: 5px;
-      flex: 0 1 18%;
-
-      &::before {
-        display: block;
-        content: "";
-        float: left;
-        width: 0;
-        padding-top: 100%;
-      }
-    }
-
-    &__color-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 100%;
-    }
+    border: 1px solid $color-primary--2;
+    margin: $spacing--5;
+    flex: 0 1 200px;
 
     &__color {
-      width: 240px;
       height: 180px;
     }
 

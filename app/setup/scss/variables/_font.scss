@@ -1,5 +1,5 @@
 // Font families
-$font-family--primary: 'Source Sans Pro', 'Trebuchet MS' Arial, sans-serif;
+$font-family--primary: 'Source Sans Pro', 'Trebuchet MS', Arial, sans-serif;
 
 // Font weight
 $font-weight--regular: 400;
@@ -14,11 +14,7 @@ $font-size--16: 16px;
 $font-size--18: 18px;
 
 // Defaults
-$font-size--default: $font-size--14;
-
-$font-size--p: $font-size--default;
+$font-size--p: $font-size--14;
 $font-size--h1: $font-size--18;
 $font-size--h2: $font-size--16;
-$font-size--h3: $font-size--default;
-
-$line-height--default: 18px;
+$font-size--h3: $font-size--14;

@@ -37,7 +37,7 @@
       border: 1px solid $color-status--danger;
       background: rgba($color-status--danger, 0.5);
       text-align: center;
-      padding: 10px;
+      padding: $spacing--10;
     }
 
     &__code {

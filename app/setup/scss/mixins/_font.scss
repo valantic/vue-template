@@ -7,7 +7,7 @@
 //
 // returns  {font-size|line-height|font-weight}   Returns font-size and optional line-height and font-weight
 ////
-@mixin font($font-size: $font-size--default, $line-height: null, $font-weight: null) {
+@mixin font($font-size: $_config--font-size, $line-height: null, $font-weight: null) {
   @include font-size($font-size);
 
   @if $line-height != null {

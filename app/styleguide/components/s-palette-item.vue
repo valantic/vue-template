@@ -2,7 +2,11 @@
   <div :class="b()">
     <h4 :class="b('headline')">{{ headline }}</h4>
     <div :class="b('grid')">
-      <s-color-item v-for="(color, index) in colors" :color="color" :key="index"/>
+      <s-color-item
+        v-for="(color, index) in colors"
+        :name="color.name"
+        :value="color.value"
+        :key="index"/>
     </div>
   </div>
 </template>
@@ -19,11 +23,19 @@
     // mixins: [],
 
     props: {
+
+      /**
+       * Palette name to be rendered. See keys in app/setup/js/color.js
+       */
       palette: {
         type: String,
         default: null,
         required: true
       },
+
+      /**
+       * Array of color objects to be rendered. See app/setup/js/color.js
+       */
       colors: {
         type: Array,
         default: null,
@@ -59,13 +71,10 @@
 
 <style lang="scss">
   .s-palette-item {
-    display: inline-block;
-    width: 100%;
-
     &__grid {
       display: flex;
       flex-wrap: wrap;
-      margin: 0 -5px;
+      margin: $spacing--0 -$spacing--5;
     }
 
     &__headline {

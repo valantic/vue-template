@@ -59,7 +59,7 @@
 
 <style lang="scss">
   .s-icon-finder {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: $font-family--primary;
 
     &__filter-input {
       display: block;
