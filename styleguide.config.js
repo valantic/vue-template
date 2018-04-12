@@ -44,7 +44,7 @@ module.exports = {
     },
     {
       name: 'Styleguide',
-      components: 'app/styleguide/components/*.vue',
+      components: 'app/styleguide/components/!(s-readme).vue',
     },
   ],
   mixins: [
