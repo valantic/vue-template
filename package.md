@@ -41,7 +41,9 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 ### Project
 
-None
+* [intersection-observer](https://github.com/w3c/IntersectionObserver/tree/master/polyfill) - A polyfill for intersectionObserver. Required by `v-lazy-image` plugin.
+* [lazysizes](https://github.com/aFarkas/lazysizes) - Lazy loader for images and iframes. Required by `e-picture`.
+* [picturefill](https://github.com/scottjehl/picturefill) - A polyfill for picture and srcset. Required by `e-picture`.
 
 ### Template
 

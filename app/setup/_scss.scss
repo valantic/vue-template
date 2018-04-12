@@ -1,7 +1,9 @@
 /* critical:start */
 
 // Variables, mixins and functions
+// NOTE: globals must also be imported in webpack.config.js via 'sass-resources-loader'
 @import "scss/variables";
+@import "scss/functions";
 @import "scss/mixins";
 
 // Vendor styles
@@ -10,6 +12,7 @@
 
 // Global styles
 @import "scss/spacings";
+@import "scss/color";
 
 /* critical:end */
 

@@ -3,7 +3,7 @@
 * front
 * back
 
-Use the z-index mixin to define z-index. See app/setup/scss/mixins/_z-index.scss
+Use the @mixin z-index to define z-index. See app/setup/scss/mixins/_z-index.scss
 
 ```scss
 @mixin z-index($key)
