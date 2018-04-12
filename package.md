@@ -34,7 +34,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * `npm run stylelint` performs the Stylelint tests.
 * `npm run lint` performs ESLint and Stylelint tests.
 * `npm run license` logs a summary of the used npm package licenses.
-* `npm run license:stats` creates a JSON file inside `/stats` with a detailed list of used npm package licenses.
+* `npm run license:stats` creates a CSV file inside `/stats` with a detailed list of used npm package licenses.
 * `npm run test` - See above.
 * `npm run test:unit` runs unit tests.
 * `npm run dev` - See above.
