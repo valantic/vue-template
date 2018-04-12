@@ -55,6 +55,6 @@
 
 <style lang="scss">
   .s-palette-list {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: $font-family--primary;
   }
 </style>

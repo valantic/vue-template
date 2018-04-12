@@ -88,7 +88,7 @@
   $s-navigation--border: 10px solid $color-status--danger;
 
   .s-navigation {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: $font-family--primary;
     max-width: 1200px;
     margin: auto;
 

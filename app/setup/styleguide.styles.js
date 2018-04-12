@@ -7,6 +7,9 @@ module.exports = {
       linkHover: 'rgb(70, 69, 171)',
       sidebarBackground: '#2c68a0',
       errorBackground: '#b50f0f'
+    },
+    fontFamily: {
+      base: '"Source Sans Pro", "Trebuchet MS", Arial, sans-serif'
     }
   },
   styles: {

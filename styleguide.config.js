@@ -17,6 +17,10 @@ module.exports = {
       content: 'app/styleguide/core/core.md',
       sections: [
         {
+          name: 'Typography',
+          content: 'app/styleguide/core/typography/typography.md',
+        },
+        {
           name: 'Grid',
           content: 'app/styleguide/core/grid/grid.md',
         },
