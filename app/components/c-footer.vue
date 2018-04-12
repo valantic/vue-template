@@ -44,7 +44,6 @@
 
 <style lang="scss">
   .c-footer {
-    flex-shrink: 0;
     background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
     color: $color-primary--3;
 

@@ -1,21 +1,7 @@
 <template>
   <div :class="b()">
     <c-header/>
-    <!-- TODO - move to c-content -->
-    <div class="c-content">
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-    </div>
+    <c-content/>
     <c-footer/>
   </div>
 </template>
@@ -24,6 +10,7 @@
 
   import sNavigation from '@/styleguide/components/s-navigation';
   import cHeader from '@/components/c-header';
+  import cContent from '@/components/c-content';
   import cFooter from '@/components/c-footer';
 
   export default {
@@ -31,6 +18,7 @@
     components: {
       sNavigation,
       cHeader,
+      cContent,
       cFooter
     },
     // mixins: [],
@@ -61,20 +49,14 @@
 
 <style lang="scss">
 
-  html,
-  body,
+  body {
+    display: block;
+  }
+
   .layout {
     height: 100%;
-  }
-
-  .layout {
     display: flex;
     flex-direction: column;
-  }
-
-  /* TODO - move to c-content component */
-  .c-content {
-    flex: 1 0 auto;
   }
 
 </style>

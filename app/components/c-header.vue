@@ -41,6 +41,8 @@
 
 <style lang="scss">
   .c-header {
+    position: sticky;
+    top: 0;
     background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
     border-bottom: 2px solid $color-primary--1;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
