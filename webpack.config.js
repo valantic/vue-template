@@ -64,6 +64,7 @@ module.exports = function(env, options) {
         options: {
           resources: [
             './app/setup/scss/_variables.scss',
+            './app/setup/scss/_functions.scss',
             './app/setup/scss/_mixins.scss',
           ]
         },

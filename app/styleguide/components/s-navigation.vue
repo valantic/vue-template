@@ -85,10 +85,10 @@
 </script>
 
 <style lang="scss">
-  $s-navigation--border: 10px solid $color-status--failed;
+  $s-navigation--border: 10px solid $color-status--danger;
 
   .s-navigation {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: $font-family--primary;
     max-width: 1200px;
     margin: auto;
 
@@ -96,8 +96,8 @@
       position: fixed;
       opacity: 0.2;
       border-bottom: $s-navigation--border;
-      min-width: 40px;
-      background: $color-gray--white;
+      min-width: $spacing--40;
+      background: $color-primary--3;
       z-index: 1;
 
       > * {
@@ -167,16 +167,16 @@
 
     &__navigation-item {
       &--components {
-        border-top: 1px solid $color-gray--500;
+        border-top: 1px solid $color-grayscale--400;
       }
 
       &--logo {
-        border-bottom: 1px solid $color-gray--500;
+        border-bottom: 1px solid $color-grayscale--400;
       }
 
       &--language {
         padding: 10px 20px;
-        border-bottom: 1px solid $color-gray--500;
+        border-bottom: 1px solid $color-grayscale--400;
       }
     }
 

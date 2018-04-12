@@ -99,7 +99,8 @@
         }
       }
       &.footnote {
-        font-size: 1.4ex;
+        @include font(14);
+
         height: 0;
         line-height: 1;
         vertical-align: super;
@@ -107,68 +108,81 @@
       }
     }
     h1 {
+      @include font(38);
+
       font-weight: 700;
       line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
       padding: 0;
-      font-size: 2.5em;
       border-bottom: 1px solid #ddd;
+
       + p {
         margin-top: 0;
       }
     }
     h2 {
+      @include font(30);
+
       font-weight: 700;
       line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
       padding: 0;
-      font-size: 2em;
       border-bottom: 1px solid #eee;
+
       + p {
         margin-top: 0;
       }
     }
     h3 {
+      @include font(22);
+
       font-weight: 700;
       line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
       padding: 0;
-      font-size: 1.5em;
+
       + p {
         margin-top: 0;
       }
     }
     h4 {
+      @include font(18);
+
       font-weight: 700;
       line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
       padding: 0;
-      font-size: 1.2em;
+
       + p {
         margin-top: 0;
       }
     }
     h5 {
+      @include font(16);
+
       font-weight: 700;
       line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
       padding: 0;
-      font-size: 1em;
+
       + p {
         margin-top: 0;
       }
     }
+
     h6 {
+      @include font(14);
+
       font-weight: 700;
       line-height: 1.7;
       cursor: text;
@@ -176,7 +190,7 @@
       margin: 1em 0 15px;
       padding: 0;
       color: #777;
-      font-size: 1em;
+
       + p {
         margin-top: 0;
       }
@@ -196,11 +210,13 @@
       }
     }
     table {
+      @include font(14);
+
       margin: 15px 0;
       border-collapse: collapse;
       border-spacing: 0;
       font: inherit;
-      font-size: 100%;
+
       th {
         font-weight: bold;
         border: 1px solid #ccc;
@@ -219,9 +235,10 @@
       }
     }
     pre {
+      @include font(14);
+
       background-color: #f8f8f8;
       border: 1px solid #ccc;
-      font-size: 14px;
       line-height: 19px;
       overflow: auto;
       padding: 6px 10px;
@@ -302,7 +319,8 @@
     dl {
       padding: 0;
       dt {
-        font-size: 14px;
+        @include font(14);
+
         font-weight: bold;
         font-style: italic;
         padding: 0;
@@ -347,7 +365,10 @@
       font-size: 12px;
       color: #333;
     }
+
     tt {
+      @include font(12);
+
       margin: 0 2px;
       padding: 0 5px;
       white-space: nowrap;
@@ -356,14 +377,15 @@
 
       border-radius: 3px;
       font-family: Consolas, Liberation Mono, Courier, monospace;
-      font-size: 12px;
       color: #333;
     }
+
     .highlight {
       pre {
+        @include font(13);
+
         background-color: #f8f8f8;
         border: 1px solid #ccc;
-        font-size: 13px;
         line-height: 19px;
         overflow: auto;
         padding: 6px 10px;
@@ -572,14 +594,16 @@
       }
     }
     sup {
-      font-size: 1.4ex;
+      @include font(14);
+
       height: 0;
       line-height: 1;
       vertical-align: super;
       position: relative;
     }
     sub {
-      font-size: 1.4ex;
+      @include font(14);
+
       height: 0;
       line-height: 1;
       position: relative;

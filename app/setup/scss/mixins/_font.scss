@@ -1,0 +1,20 @@
+////
+// Calculate font-size, line-height and font-weight by given px values
+//
+// @param  {Number}    [$font-size = $font-size--default]         Pixel value of desired font size
+// @param  {Number}    [$line-height = null]                      Pixel value of desired line height
+// @param  {Number}    [$font-weight = null]                      Desired font-weight
+//
+// returns  {font-size|line-height|font-weight}   Returns font-size and optional line-height and font-weight
+////
+@mixin font($font-size: $_config--font-size, $line-height: null, $font-weight: null) {
+  @include font-size($font-size);
+
+  @if $line-height != null {
+    @include line-height($line-height, $font-size);
+  }
+
+  @if $font-weight != null {
+    font-weight: $font-weight;
+  }
+}
