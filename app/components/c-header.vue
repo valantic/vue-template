@@ -1,10 +1,10 @@
 <template>
   <div :class="b()">
-    <div :class="b('wrapper')">
+    <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
+      <div :class="b('icons')">Icons</div>
       <div :class="b('menu')">Menu</div>
       <div :class="b('search')">Search</div>
-      <div :class="b('icons')">Icons</div>
     </div>
   </div>
 </template>
@@ -12,6 +12,7 @@
 <script>
   export default {
     name: 'c-header',
+    functional: true,
     // components: {},
     // mixins: [],
 
@@ -45,13 +46,8 @@
     border-bottom: 2px solid $color-primary--1;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
 
-    &__wrapper {
-      @include media(xxs, xs) {
-        flex-direction: row;
-        height: auto;
-      }
-
-      min-height: 60px;
+    &__inner {
+      min-height: $spacing--60; /* TODO - remove after content is added */
       max-width: map-get($grid-breakpoints, xl);
       margin: 0 auto;
       display: flex;
@@ -61,51 +57,43 @@
     }
 
     &__logo {
-      @include media(xxs, xs) {
-        order: 1;
-        flex: 0 1 50%;
-      }
-
-      line-height: 60px;
-      flex: 0 1 auto;
+      flex: 0 1 percentage(5 / 12);
       align-self: flex-start;
+
+      @include media(sm) {
+        flex: 0 1 percentage(3 / 12);
+        order: 1;
+      }
     }
 
     &__menu {
+      flex: 0 1 percentage(3 / 12);
+      align-self: flex-start;
+
       @include media(sm) {
         display: none;
+        order: 2;
       }
-
-      @include media(xxs, xs) {
-        order: 3;
-        flex: 0 1 20%;
-      }
-
-      line-height: 60px;
-      flex: 0 1 auto;
-      align-self: flex-start;
     }
 
     &__search {
-      @include media(xxs, xs) {
-        order: 4;
-        flex: 0 1 80%;
-      }
-
-      line-height: 60px;
-      flex: 0 1 584px;
+      flex: 0 1 percentage(9 / 12);
       align-self: flex-start;
+
+      @include media(sm) {
+        flex: 0 1 percentage(6 / 12);
+        order: 3;
+      }
     }
 
     &__icons {
-      @include media(xxs, xs) {
-        order: 2;
-        flex: 0 1 50%;
-      }
-
-      line-height: 60px;
-      flex: 0 1 auto;
+      flex: 0 1 percentage(7 / 12);
       align-self: flex-start;
+
+      @include media(sm) {
+        flex: 0 1 percentage(3 / 12);
+        order: 4;
+      }
     }
   }
 </style>

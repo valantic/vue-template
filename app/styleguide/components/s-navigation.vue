@@ -85,10 +85,9 @@
 </script>
 
 <style lang="scss">
-  $s-navigation--border: 10px solid $color-status--danger;
+  $s-navigation--border: $spacing--10 solid $color-status--danger;
 
   .s-navigation {
-
     &__navigation-wrapper {
       font-family: $font-family--primary;
       margin: auto;
@@ -174,13 +173,13 @@
       }
 
       &--language {
-        padding: 10px 20px;
+        padding: $spacing--10 $spacing--20;
         border-bottom: 1px solid $color-grayscale--400;
       }
     }
 
     &__navigation-link {
-      padding: 10px 20px;
+      padding: $spacing--10 $spacing--20;
       text-decoration: none;
       display: block;
 

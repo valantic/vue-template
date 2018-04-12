@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
   import sNavigation from '@/styleguide/components/s-navigation';
   import cHeader from '@/components/c-header';
 
@@ -40,7 +39,3 @@
     // render() {},
   };
 </script>
-
-<style lang="scss">
-  .c-component {} // TODO: update selector according to filename
-</style>
