@@ -96,12 +96,23 @@ $ npm install
 
 ### Browser support
 
-| Operating systems/Devices | Browser | Viewport |
-| --- | --- | --- |
-| Windows | ?? | ?? |
-| Mac OS X | ?? | ?? |
-| Phone 1 (iOS x.xx) | ?? | ?? |
-| Tablet 1 (iOS (x.xx) | ?? | ?? |
+| Operating systems/Devices | Browser | Priority | Breakpoints |
+| --- | --- | --- | --- |
+| Windows 7 | IE11 | **high** | all |
+| Windows 8 | IE11 | **high** | all |
+| Windows 10 | IE11 | **high** | all |
+| Windows 10 | Edge (newest) | **high** | all |
+| Windows 10 | Chrome (newest) | _medium_ | all |
+| Windows 10 | Firefox (newest) | _medium_ | all |
+| Mac OS X 10.13 | Safari (newest) | _medium_ | all |
+| Mac OS X 10.13 | Chrome (newest) | low | all |
+| Mac OS X 10.13 | Firefox (newest) | low | all |
+| Phone 8 (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
+| Phone 8 Plus (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
+| Phone X (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
+| Galaxy S8 (Android 7) | Chrome Mobile (newest) | low | xxs, xs, sm (md) |
+| iPad Pro (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
+| iPad 5th (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
 
 ### Running the project
 
@@ -262,6 +273,10 @@ PostCSS configuration. PostCSS is used for **browser prefixing**, **minification
 Stylelint setup for the current project.
 
 ## Known issues
+
+### Styleguidist
+
+The styleguidist part of this application currently is not running on IE11 unfortunately (@see https://github.com/vue-styleguidist/vue-styleguidist/issues/83).
 
 ### Webpack
 

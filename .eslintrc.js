@@ -33,7 +33,6 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
-    'comma-dangle': 0,
     'require-jsdoc': [2, {
       require: {
         FunctionDeclaration: true,
@@ -63,9 +62,13 @@ module.exports = {
         'DS', // ember-data
         'vm', // Vue
         'el', // Vue
+        'xs', // Bootstrap
+        'sm', // Bootstrap
+        'md', // Bootstrap
+        'lg', // Bootstrap
+        'xl', // Bootstrap
       ]
     }],
-
 
 
     // don't require .vue extension when importing
