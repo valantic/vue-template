@@ -1,6 +1,6 @@
 import index from '../styleguide/routes/index';
-import lazyload from '../styleguide/routes/lazyload';
 import layout from '../styleguide/routes/layout';
+import lazyload from '../styleguide/routes/lazyload';
 
 const root = '/styleguide';
 
