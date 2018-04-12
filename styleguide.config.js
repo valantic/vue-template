@@ -17,6 +17,10 @@ module.exports = {
       content: 'app/styleguide/core/core.md',
       sections: [
         {
+          name: 'Typography',
+          content: 'app/styleguide/core/typography/typography.md',
+        },
+        {
           name: 'Grid',
           content: 'app/styleguide/core/grid/grid.md',
         },
@@ -45,6 +49,10 @@ module.exports = {
   ],
   mixins: [
     'app/setup/styleguidist.js'
+  ],
+  ignore: [
+    '**/components/s-palette-item.vue',
+    '**/components/s-color-item.vue'
   ],
   theme,
   styles
