@@ -53,7 +53,7 @@
     &__item {
       width: 180px;
       height: 150px;
-      border: 1px dotted grey;
+      border: 1px dotted $color-grayscale--400;
       float: left;
     }
   }

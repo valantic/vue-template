@@ -114,7 +114,7 @@
             return key;
           })
           .filter(breakpoint => breakpoint > 0)
-          .sort((a, b) => (a < b ? 1 : -1)); // eslint-disable-line no-extra-parens
+          .sort((a, b) => (a < b ? 1 : -1));
         const fallback = ',100vw';
 
         return sizesBreakpoints

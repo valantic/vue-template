@@ -33,7 +33,6 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
-    'comma-dangle': 0,
     'require-jsdoc': [2, {
       require: {
         FunctionDeclaration: true,
