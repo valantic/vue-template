@@ -91,7 +91,6 @@
 
     &__navigation-wrapper {
       font-family: $font-family--primary;
-      max-width: 1200px;
       margin: auto;
       position: fixed;
       opacity: 0.2;

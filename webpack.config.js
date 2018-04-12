@@ -227,7 +227,10 @@ module.exports = function (env, options) {
 
   const baseConfig = {
     entry: {
-      app: path.resolve(__dirname, 'app/main.js'),
+      app: [
+        'babel-polyfill',
+        path.resolve(__dirname, 'app/main.js')
+      ]
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
