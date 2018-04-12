@@ -74,7 +74,7 @@
     &__grid {
       display: flex;
       flex-wrap: wrap;
-      margin: $spacing--0 -$spacing--5;
+      margin: $spacing--0 (-$spacing--5);
     }
 
     &__headline {
