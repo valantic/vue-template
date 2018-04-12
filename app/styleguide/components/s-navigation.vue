@@ -88,6 +88,7 @@
   $s-navigation--border: 10px solid $color-status--danger;
 
   .s-navigation {
+    height: 100%;
 
     &__navigation-wrapper {
       font-family: $font-family--primary;

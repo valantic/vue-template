@@ -1,6 +1,22 @@
 <template>
   <div :class="b()">
     <c-header/>
+    <!-- TODO - move to c-content -->
+    <div class="c-content">
+      foo<br>
+      bar<br>
+      foo<br>
+      bar<br>
+      foo<br>
+      bar<br>
+      foo<br>
+      bar<br>
+      foo<br>
+      bar<br>
+      foo<br>
+      bar<br>
+    </div>
+    <c-footer/>
   </div>
 </template>
 
@@ -8,12 +24,14 @@
 
   import sNavigation from '@/styleguide/components/s-navigation';
   import cHeader from '@/components/c-header';
+  import cFooter from '@/components/c-footer';
 
   export default {
     name: 'layout',
     components: {
+      sNavigation,
       cHeader,
-      sNavigation
+      cFooter
     },
     // mixins: [],
 
@@ -42,5 +60,21 @@
 </script>
 
 <style lang="scss">
-  .c-component {} // TODO: update selector according to filename
+
+  html,
+  body,
+  .layout {
+    height: 100%;
+  }
+
+  .layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TODO - move to c-content component */
+  .c-content {
+    flex: 1 0 auto;
+  }
+
 </style>
