@@ -102,10 +102,11 @@ $ npm install
 | Windows 8 | IE11 | **high** | all |
 | Windows 10 | IE11 | **high** | all |
 | Windows 10 | Edge (newest) | **high** | all |
-| Windows 10 | Firefox (newest) | _medium_ | all |
 | Windows 10 | Chrome (newest) | _medium_ | all |
-| Mac OS X 10.13 | Safari | _medium_ | all |
-| Mac OS X 10.13 | Firefox and Chrome not required according to client | low | none |
+| Windows 10 | Firefox (newest) | _medium_ | all |
+| Mac OS X 10.13 | Safari (newest) | _medium_ | all |
+| Mac OS X 10.13 | Chrome (newest) | low | all |
+| Mac OS X 10.13 | Firefox (newest) | low | all |
 | Phone 8 (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
 | Phone 8 Plus (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
 | Phone X (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
