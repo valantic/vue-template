@@ -1,7 +1,7 @@
 module.exports = {
-  processors: ['postcss-html'],
-  extends: 'stylelint-config-valantic',
+  extends: '../../../.stylelintrc.js',
   rules: {
+    'selector-class-pattern': null,
     'indentation': [
       2,
       {
