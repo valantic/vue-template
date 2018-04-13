@@ -177,6 +177,16 @@
       }
     }
 
+    &__navigation-link {
+      padding: $spacing--10 $spacing--20;
+      text-decoration: none;
+      display: block;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
     &__navigation-item--logo {
       border-bottom: 1px solid $color-grayscale--400;
 
@@ -186,16 +196,6 @@
 
       .s-navigation__navigation-link {
         padding: $spacing--10 $spacing--5;
-      }
-    }
-
-    &__navigation-link {
-      padding: $spacing--10 $spacing--20;
-      text-decoration: none;
-      display: block;
-
-      &:hover {
-        text-decoration: underline;
       }
     }
   }
