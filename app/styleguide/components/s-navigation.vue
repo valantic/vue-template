@@ -85,14 +85,12 @@
 </script>
 
 <style lang="scss">
-  $s-navigation--border: 10px solid $color-status--danger;
+  $s-navigation--border: $spacing--10 solid $color-status--danger;
 
   .s-navigation {
-    font-family: $font-family--primary;
-    max-width: 1200px;
-    margin: auto;
-
     &__navigation-wrapper {
+      font-family: $font-family--primary;
+      margin: auto;
       position: fixed;
       opacity: 0.2;
       border-bottom: $s-navigation--border;
@@ -172,7 +170,7 @@
       }
 
       &--language {
-        padding: 10px 20px;
+        padding: $spacing--10 $spacing--20;
         border-bottom: 1px solid $color-grayscale--400;
       }
     }

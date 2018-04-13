@@ -49,6 +49,7 @@
 </script>
 
 <style lang="scss">
+  /* stylelint-disable selector-class-pattern */
   .lazyload {
     &__item {
       width: 180px;
