@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
   import sNavigation from '@/styleguide/components/s-navigation';
   import cHeader from '@/components/c-header';
   import cContent from '@/components/c-content';

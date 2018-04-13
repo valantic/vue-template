@@ -32,6 +32,7 @@
 </script>
 
 <style lang="scss">
+  /* stylelint-disable selector-class-pattern */
   .index {
     &__warning {
       border: 1px solid $color-status--danger;
