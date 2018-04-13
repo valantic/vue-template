@@ -12,7 +12,6 @@
 <script>
   export default {
     name: 'c-header',
-    functional: true,
     // components: {},
     // mixins: [],
 
