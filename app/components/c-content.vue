@@ -1,54 +1,9 @@
-<template>
-  <div :class="b()">
-    <div :class="b('wrapper')">
-      foo1<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
+<template functional>
+  <div class="c-content">
+    <div class="c-content__inner">
+      foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>
+      foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>
+      foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>
     </div>
   </div>
 </template>
@@ -86,8 +41,9 @@
 <style lang="scss">
   .c-content {
     flex: 1 0 auto;
+    margin-top: $spacing--60;
 
-    &__wrapper {
+    &__inner {
       max-width: map-get($grid-breakpoints, xl);
       margin: 0 auto;
     }
