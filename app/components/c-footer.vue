@@ -1,6 +1,7 @@
 <template>
   <div :class="b()">
-    <div :class="b('wrapper')">
+    <div :class="b('left')"></div>
+    <div :class="b('inner')">
       <div :class="b('navigation')">Navigation</div>
       <div :class="b('navigation-separator')"></div>
       <div :class="b('languages')">Languages</div>
@@ -9,6 +10,7 @@
       <div :class="b('social')">Folgen Sie uns auf: (F) (L) (X)</div>
       <div :class="b('social-separator')"></div>
     </div>
+    <div :class="b('right')"></div>
   </div>
 </template>
 
@@ -44,15 +46,28 @@
 
 <style lang="scss">
   .c-footer {
+    display: flex;
+    justify-content: center;
     flex-shrink: 0;
-    background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
-    color: $color-primary--3;
 
-    &__wrapper {
+    &__left {
+      flex: 1 1 auto;
+      background-color: $color-secondary--1;
+    }
+
+    &__right {
+      flex: 1 1 auto;
+      background-color: $color-secondary--2;
+    }
+
+    &__inner {
+      background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
+      color: $color-primary--3;
       margin: $spacing--0 auto;
       padding: $spacing--0 $spacing--10;
       min-height: 150px;
       max-width: map-get($grid-breakpoints, xl);
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;

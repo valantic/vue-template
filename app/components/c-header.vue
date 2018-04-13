@@ -43,10 +43,16 @@
 
 <style lang="scss">
   .c-header {
-    border-bottom: 2px solid $color-primary--1;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
+
+    &__left,
+    &__right,
+    &__inner {
+      border-bottom: 2px solid $color-primary--1;
+      box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
+      min-height: $spacing--60;
+    }
 
     &__left {
       flex: 1 1 auto;
@@ -60,7 +66,6 @@
 
     &__inner {
       background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
-      min-height: $spacing--60; /* TODO - remove after content is added */
       max-width: map-get($grid-breakpoints, xl);
       width: 100%;
       display: flex;

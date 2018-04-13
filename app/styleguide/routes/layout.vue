@@ -3,18 +3,6 @@
     <c-header/>
     <!-- TODO - move to c-content -->
     <div class="c-content">
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
-      foo<br>
-      bar<br>
     </div>
     <c-footer/>
   </div>
