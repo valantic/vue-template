@@ -49,19 +49,19 @@
     color: $color-primary--3;
 
     &__wrapper {
-      @include media(xxs, xxs) {
-        flex-direction: column;
-      }
-
       margin: $spacing--0 auto;
       padding: $spacing--0 $spacing--10;
       min-height: 150px;
       max-width: map-get($grid-breakpoints, xl);
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
+
+      @include media(xs) {
+        flex-direction: row;
+      }
     }
 
     &__navigation,

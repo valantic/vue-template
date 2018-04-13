@@ -21,7 +21,6 @@
 </template>
 
 <script>
-
   import sNavigation from '@/styleguide/components/s-navigation';
   import cHeader from '@/components/c-header';
   import cFooter from '@/components/c-footer';
@@ -60,7 +59,6 @@
 </script>
 
 <style lang="scss">
-
   html,
   body,
   .layout {
@@ -72,9 +70,7 @@
     flex-direction: column;
   }
 
-  /* TODO - move to c-content component */
   .c-content {
     flex: 1 0 auto;
   }
-
 </style>
