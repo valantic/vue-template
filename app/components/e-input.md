@@ -2,9 +2,26 @@
 
 #### `default`
 ```
-<e-input name="demo" placeholder="enter text..."/>
-```
+<template>
+  <div>
+  
+    <e-input v-model.trim="demo" name="demo" placeholder="enter text..."/> 
+    
+    <!-- demo only -->
+    <p v-if="demo">{{demo}}</p>
+  
+  </div>stte
+</template>
 
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
+```
 
 #### `:disabled`
 ```
@@ -42,7 +59,6 @@
 ```
 <e-input state="info" name="demo" placeholder="..."/>
 ```
-
 
 
 

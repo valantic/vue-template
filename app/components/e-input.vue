@@ -2,11 +2,19 @@
 
 <template>
 
-  <div :class="b({ state })">
-    <input :class="b('field')"
+  <div :class="b(modifiers)">
+    <input :value="value"
+           :class="b('field')"
            :disabled="$attrs.disabled"
            :placeholder="$attrs.placeholder"
-           :value="$attrs.value">
+           @blur=""
+           @focus=""
+           @input="input($event.target.value)"
+           @mouseenter="hasHover = true"
+           @mouseleave="hasHover = false"
+           @mousedown=""
+           @mouseup=""
+    >
   </div>
 
 </template>
@@ -20,15 +28,13 @@
     props: {
 
       /**
-       * User input
+       * User input passed by v-model
        */
-      input: {
+      value: {
         default: null,
         required: false,
         type: String
       },
-
-      // value
 
       /**
        * Adds the state to the input field
@@ -44,17 +50,29 @@
             'success',
           ].includes(value);
         }
+      },
+
+      //
+      hover: {
+        type: Boolean,
+        default: false,
       }
     },
 
-    // computed: {
-    //   return {}
-    // },
+    data() {
+      return {
+        hasHover: this.$props.hover
+      };
+    },
 
-    // data() {
-    //   return {};
-    // },
-
+    computed: {
+      modifiers() {
+        return {
+          state: this.state,
+          hover: this.hasHover
+        };
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -68,7 +86,17 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      /**
+       * Emits input to parent component
+       *
+       * @param   {String}    value   Field input
+       */
+      input(value) {
+        this.$emit('input', value);
+      }
+
+    }
     // render() {},
   };
 </script>
@@ -76,29 +104,6 @@
 <style lang="scss">
   .e-input {
     position: relative;
-
-    &::before,
-    &::after {
-      content: "";
-      display: block;
-      height: 55%;
-      left: 0;
-      position: absolute;
-      z-index: 1;
-      top: 20%;
-      width: 100%;
-      @include media(sm) {
-        width: 151px;
-      }
-    }
-
-    &::before {
-      border-left: 1px solid $color-primary--3;
-    }
-
-    &::after {
-      border-right: 1px solid $color-primary--3;
-    }
 
     &__field {
       border: 1px solid $color-grayscale--300;
@@ -125,7 +130,8 @@
         color: $color-grayscale--600;
       }
 
-      &:hover {
+      &:hover,
+      &--hover {
         // full border...
       }
 
