@@ -1,11 +1,13 @@
 <template>
   <div :class="b()">
+    <div :class="b('left')"></div>
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">Icons</div>
       <div :class="b('menu')">Menu</div>
       <div :class="b('search')">Search</div>
     </div>
+    <div :class="b('right')"></div>
   </div>
 </template>
 
@@ -41,14 +43,26 @@
 
 <style lang="scss">
   .c-header {
-    background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
     border-bottom: 2px solid $color-primary--1;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+
+    &__left {
+      flex: 1 1 auto;
+      background-color: $color-secondary--1;
+    }
+
+    &__right {
+      flex: 1 1 auto;
+      background-color: $color-secondary--2;
+    }
 
     &__inner {
+      background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
       min-height: $spacing--60; /* TODO - remove after content is added */
       max-width: map-get($grid-breakpoints, xl);
-      margin: 0 auto;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
