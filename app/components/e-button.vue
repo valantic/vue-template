@@ -18,6 +18,7 @@
         validator(value) {
           return [
             'full',
+            'auto',
           ].includes(value);
         },
       },
@@ -58,6 +59,11 @@
        * IF `true` the button shows a progress animation
        */
       progress: {
+        type: Boolean,
+        default: false,
+      },
+
+      primary: {
         type: Boolean,
         default: false,
       },
@@ -124,6 +130,9 @@
       onBlur() {
         this.hasFocus = false;
       },
+      onClick() {
+        this.$el.blur();
+      },
     },
 
     /**
@@ -144,6 +153,7 @@
         focus,
         active,
         disabled,
+        primary,
       } = this.$props;
       const options = {
         class: this.b({
@@ -156,6 +166,7 @@
           focus: focus || this.hasFocus,
           active: active || this.isActive,
           disabled,
+          primary,
         }),
         attrs: {
           ...this.$attrs,
@@ -168,6 +179,7 @@
           mouseup: this.onMouseUp,
           focus: this.onFocus,
           blur: this.onBlur,
+          click: this.onClick
         },
       };
       const isButton = !this.$attrs.href;
@@ -187,31 +199,85 @@
 </script>
 
 <style lang="scss">
-  .e-button {
-    display: inline-block;
-    background: $color-primary--3;
-    border: 1px solid $color-primary--2;
-    padding: $spacing--10;
+  $_e-button__radius: 3px;
 
-    &:hover:not([disabled]),
-    &--hover:not([disabled]) {
-      border: 5px solid red;
+  .e-button {
+    @include font(14, 18, $font-weight--semi-bold);
+
+    position: relative;
+    display: inline-block;
+    background: transparent;
+    padding: 6px $spacing--10;
+    border: 0;
+    color: $color-grayscale--400;
+    border-radius: $_e-button__radius;
+    outline: none;
+    min-width: 165px;
+
+    &::before, // TODO: create mixin
+    &::after {
+      position: absolute;
+      display: block;
+      content: "";
+      top: 0;
+      right: 0;
+      left: 0;
+      border: 1px solid $color-grayscale--500;
+      border-radius: $_e-button__radius;
+      height: 20%;
+    }
+
+    &::before {
+      border-bottom: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &::after {
+      top: auto;
+      bottom: 0;
+      border-top: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
 
     &:focus,
     &--focus {
-      border: 5px solid blue;
+      color: $color-primary--3;
+      background-color: $color-grayscale--500;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
 
-    &:active,
-    &--active {
-      border: 5px solid green;
+    &:hover:not([disabled]),
+    &--hover:not([disabled]) {
+      color: $color-primary--3;
+      background-color: $color-grayscale--500;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+
+    &:active:not([disabled]),
+    &--active:not([disabled]) {
+      color: $color-primary--3;
+      background-color: $color-grayscale--400;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
 
     &[disabled],
     &--disabled {
-      border-color: $color-grayscale--400;
-      color: $color-grayscale--400;
+      border-color: $color-grayscale--600;
+      color: $color-grayscale--500;
     }
 
     &--width-full {
@@ -219,9 +285,18 @@
       width: 100%;
     }
 
+    &--width-auto {
+      min-width: 0;
+    }
+
     &--inverted {
       background: $color-primary--2;
       color: $color-primary--3;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
 
     &--progress {
@@ -231,6 +306,38 @@
         content: "...";
         display: block;
       }
+    }
+
+    &--spacing-0 {
+      padding: 0;
+    }
+  }
+
+  .e-button--primary:not([disabled]) {
+    color: $color-secondary--2;
+
+    &::before,
+    &::after {
+      border-width: 2px;
+      border-color: $color-primary--1;
+    }
+
+    &.e-button:focus,
+    &.e-button--focus {
+      color: $color-primary--3;
+      background-color: $color-primary--1;
+    }
+
+    &.e-button:hover:not([disabled]),
+    &.e-button--hover:not([disabled]) {
+      color: $color-primary--3;
+      background-color: $color-primary--1;
+    }
+
+    &.e-button:active:not([disabled]),
+    &.e-button--active:not([disabled]) {
+      color: $color-primary--3;
+      background-color: $color-secondary--2;
     }
   }
 </style>
