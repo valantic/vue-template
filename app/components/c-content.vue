@@ -1,4 +1,5 @@
-<template functional>
+<!-- TODO - This component is supposed to be functional -->
+<template>
   <div class="c-content">
     <div class="c-content__inner">
       foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>

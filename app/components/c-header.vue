@@ -1,4 +1,5 @@
-<template functional>
+<!-- TODO - This component is supposed to be functional -->
+<template>
   <div class="c-header">
     <div class="c-header__left"></div>
     <div class="c-header__inner">
