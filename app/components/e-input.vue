@@ -106,7 +106,7 @@
     position: relative;
 
     &__field {
-      border: 1px solid $color-grayscale--300;
+      border: 1px solid $color-grayscale--500;
       border-radius: 2px;
       color: $color-grayscale--400;
       font-family: $font-family--primary;
