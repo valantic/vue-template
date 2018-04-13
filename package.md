@@ -33,7 +33,10 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * `npm run eslint:fix` performs the ESLint tests and automatic issue fixing where possible. **Only use this if you know what you're doing!** Always check and rerun the application before committing!
 * `npm run stylelint` performs the Stylelint tests.
 * `npm run lint` performs ESLint and Stylelint tests.
+* `npm run license` logs a summary of the used npm package licenses.
+* `npm run license:stats` creates a CSV file inside `/stats` with a detailed list of used npm package licenses.
 * `npm run test` - See above.
+* `npm run test:unit` runs unit tests.
 * `npm run dev` - See above.
 * `npm run dev:styleguide` - See above.
 
@@ -84,6 +87,7 @@ None
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
 * [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image loader module for webpack.
 * [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing.
+* [license-checker](https://github.com/davglass/license-checker) - Allows us to check the whole project for use licenses (see scripts).
 * [launch-editor-middleware](https://github.com/yyx990803/launch-editor) - Allows to open Vue components in editor from Vue inspector.
 * [node-sass](https://github.com/sass/node-sass) - Node-sass is a library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass.
 * [postcss-critical-split](https://github.com/mrnocreativity/postcss-critical-split) - A PostCSS plugin that takes existing CSS files and splits out the annotated critical styles into a separate file.

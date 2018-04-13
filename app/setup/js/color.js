@@ -15,8 +15,8 @@ module.exports = {
   grayscale: [
     { name: '$color-grayscale--200', value: ['#646464'] },
     { name: '$color-grayscale--400', value: ['#afafaf'] },
+    { name: '$color-grayscale--500', value: ['#d8d8d8'] },
     { name: '$color-grayscale--600', value: ['#f3f3f3'] },
-    { name: '$color-grayscale--800', value: ['#fcfcfc'] },
   ],
   gradient: [
     { name: '$color-gradient--1-0 - $color-gradient--1-1', value: ['#000000', '#ffffff'] },

@@ -4,10 +4,10 @@
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', { logo: true })">
           <a :class="b('navigation-link')"
-             href="http://www.derverstaerker.ch"
+             href="http://www.valantic.com"
              target="_blank"
           >
-            <img src="../assets/logo.png" alt="Verstärker">
+            <img src="../assets/valantic.svg" alt="valantic">
           </a>
         </li>
         <li :class="b('navigation-item', { language: true })">
@@ -163,15 +163,12 @@
       padding: 0;
       list-style: none;
       margin: 0;
+      min-width: 200px;
     }
 
     &__navigation-item {
       &--components {
         border-top: 1px solid $color-grayscale--400;
-      }
-
-      &--logo {
-        border-bottom: 1px solid $color-grayscale--400;
       }
 
       &--language {
@@ -180,8 +177,20 @@
       }
     }
 
+    &__navigation-item--logo {
+      border-bottom: 1px solid $color-grayscale--400;
+
+      img {
+        max-width: 150px;
+      }
+
+      .s-navigation__navigation-link {
+        padding: $spacing--10 $spacing--5;
+      }
+    }
+
     &__navigation-link {
-      padding: 10px 20px;
+      padding: $spacing--10 $spacing--20;
       text-decoration: none;
       display: block;
 
