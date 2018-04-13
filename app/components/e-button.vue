@@ -26,7 +26,7 @@
        * Inverts the button style
        */
       inverted: {
-        type: [Boolean, String],
+        type: Boolean,
         default: false,
       },
 
@@ -50,7 +50,7 @@
        * If `true` the button gets the negative style
        */
       negative: {
-        type: [Boolean, String],
+        type: Boolean,
         default: false,
       },
 
@@ -58,14 +58,38 @@
        * IF `true` the button shows a progress animation
        */
       progress: {
-        type: [Boolean, String],
+        type: Boolean,
         default: false,
-      }
+      },
+
+      hover: {
+        type: Boolean,
+        default: false,
+      },
+
+      focus: {
+        type: Boolean,
+        default: false,
+      },
+
+      active: {
+        type: Boolean,
+        default: false,
+      },
+
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
     },
 
-    // data() {
-    //   return {};
-    // },
+    data() {
+      return {
+        hasHover: this.$props.hover,
+        isActive: this.$props.active,
+        hasFocus: this.$props.focus,
+      };
+    },
 
     // computed: {},
     // watch: {},
@@ -81,7 +105,26 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      onMouseEnter() {
+        this.hasHover = true;
+      },
+      onMouseLeave() {
+        this.hasHover = false;
+      },
+      onMouseDown() {
+        this.isActive = true;
+      },
+      onMouseUp() {
+        this.isActive = false;
+      },
+      onFocus() {
+        this.hasFocus = true;
+      },
+      onBlur() {
+        this.hasFocus = false;
+      },
+    },
 
     /**
      * Creates a button or button like link based on defined/missing href link
@@ -91,20 +134,44 @@
      * @returns {*}
      */
     render(createElement) {
-      const isButton = !this.$attrs.href;
-      const element = isButton ? 'button' : 'a';
+      const {
+        width,
+        inverted,
+        spacing,
+        negative,
+        progress,
+        hover,
+        focus,
+        active,
+        disabled,
+      } = this.$props;
       const options = {
         class: this.b({
-          width: this.$props.width,
-          inverted: this.$props.inverted === 'true' || this.$props.inverted,
-          spacing: this.$props.spacing,
-          negative: this.$props.negative === 'true' || this.$props.negative,
-          progress: this.$props.progress === 'true' || this.$props.progress,
+          width,
+          inverted,
+          spacing,
+          negative,
+          progress,
+          hover: hover || this.hasHover,
+          focus: focus || this.hasFocus,
+          active: active || this.isActive,
+          disabled,
         }),
         attrs: {
           ...this.$attrs,
+          disabled,
+        },
+        on: {
+          mouseenter: this.onMouseEnter,
+          mouseleave: this.onMouseLeave,
+          mousedown: this.onMouseDown,
+          mouseup: this.onMouseUp,
+          focus: this.onFocus,
+          blur: this.onBlur,
         },
       };
+      const isButton = !this.$attrs.href;
+      const element = isButton ? 'button' : 'a';
 
       if (!isButton && !options.attrs.role) {
         options.attrs.role = 'button';
@@ -125,6 +192,27 @@
     background: $color-primary--3;
     border: 1px solid $color-primary--2;
     padding: $spacing--10;
+
+    &:hover:not([disabled]),
+    &--hover:not([disabled]) {
+      border: 5px solid red;
+    }
+
+    &:focus,
+    &--focus {
+      border: 5px solid blue;
+    }
+
+    &:active,
+    &--active {
+      border: 5px solid green;
+    }
+
+    &[disabled],
+    &--disabled {
+      border-color: $color-grayscale--400;
+      color: $color-grayscale--400;
+    }
 
     &--width-full {
       display: block;

@@ -39,3 +39,25 @@
 ```
 <e-button progress>Progress</e-button>
 ```
+
+#### Native states
+
+##### :hover
+```
+<e-button hover>Progress</e-button>
+```
+
+##### :active
+```
+<e-button active>Progress</e-button>
+```
+
+##### :focus
+```
+<e-button focus>Progress</e-button>
+```
+
+##### disabled
+```
+<e-button disabled>Progress</e-button>
+```
