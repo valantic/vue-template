@@ -89,7 +89,7 @@
     &__languages-separator,
     &__social-separator {
       margin: $spacing--0;
-      border:none;
+      border: none;
       width: 100%;
       height: 1px;
       background-color: $color-primary--3;
