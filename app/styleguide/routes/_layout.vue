@@ -1,16 +1,17 @@
-<!-- TODO - This component is supposed to be functional -->
 <template>
   <div :class="b()">
-    <div :class="b('inner')">
-      foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>
-    </div>
+    <l-default/>
   </div>
 </template>
 
 <script>
+  import lDefault from '@/styleguide/components/l-default';
+
   export default {
-    name: 'c-content',
-    // components: {},
+    name: 'layout',
+    components: {
+      lDefault
+    },
     // mixins: [],
 
     // props: {},
@@ -38,12 +39,9 @@
 </script>
 
 <style lang="scss">
-  .c-content {
-    flex: 1 0 auto;
 
-    &__inner {
-      max-width: map-get($grid-breakpoints, xl);
-      margin: 0 auto;
-    }
+  .layout {
+    height: 100%;
   }
+
 </style>

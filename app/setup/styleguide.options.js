@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import styleguideRoutes from './styleguide.routes';
-import sNavigation from '../styleguide/components/s-navigation';
+import frame from '../styleguide/routes/frame';
 import AxiosMockAdapter from './plugins/styleguide.axios-mock';
 
 /**
@@ -23,8 +23,8 @@ export default {
     styleguideRoutes,
   },
   router,
-  template: '<s-navigation :routes="styleguideRoutes" nav-position="right"/>',
+  template: '<frame/>',
   components: {
-    sNavigation,
+    frame,
   }
 };

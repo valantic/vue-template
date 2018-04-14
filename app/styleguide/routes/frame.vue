@@ -1,24 +1,18 @@
 <template>
   <div :class="b()">
-    <c-header/>
-    <c-content/>
-    <c-footer/>
+    <router-view/>
+    <s-navigation :routes="routes" nav-position="right"/>
   </div>
 </template>
 
 <script>
   import sNavigation from '@/styleguide/components/s-navigation';
-  import cHeader from '@/components/c-header';
-  import cContent from '@/components/c-content';
-  import cFooter from '@/components/c-footer';
+  import styleguideRoutes from '@/setup/styleguide.routes';
 
   export default {
-    name: 'layout',
+    name: 'frame',
     components: {
-      sNavigation,
-      cHeader,
-      cContent,
-      cFooter
+      sNavigation
     },
     // mixins: [],
 
@@ -27,7 +21,11 @@
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      routes() {
+        return styleguideRoutes;
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -48,14 +46,8 @@
 
 <style lang="scss">
 
-  body {
-    display: block;
-  }
-
-  .layout {
+  .frame {
     height: 100%;
-    display: flex;
-    flex-direction: column;
   }
 
 </style>

@@ -33,7 +33,6 @@
         </li>
       </ul>
     </div>
-    <router-view />
   </div>
 </template>
 
@@ -88,8 +87,6 @@
   $s-navigation--border: $spacing--10 solid $color-status--danger;
 
   .s-navigation {
-    height: 100%;
-
     &__navigation-wrapper {
       font-family: $font-family--primary;
       margin: auto;

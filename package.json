@@ -20,7 +20,6 @@
     "dev": "webpack-dev-server",
     "dev:s": "npm run dev:styleguide",
     "dev:styleguide": "vue-styleguidist server",
-    "dev:s": "npm run dev:styleguide",
     "postinstall": "echo \"\\x1b[44m Please update package.md after installing new packages and check build output for malicious code! \\x1b[0m\"",
     "postuninstall": "echo \"\\x1b[44m Please update package.md after uninstalling packages! \\x1b[0m\""
   },

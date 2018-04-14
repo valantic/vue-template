@@ -1,14 +1,12 @@
 <!-- TODO - This component is supposed to be functional -->
 <template>
-  <div class="c-header">
-    <div class="c-header__left"></div>
-    <div class="c-header__inner">
-      <div class="c-header__logo">Logo</div>
-      <div class="c-header__icons">Icons</div>
-      <div class="c-header__menu">Menu</div>
-      <div class="c-header__search">Search</div>
+  <div :class="b()">
+    <div :class="b('inner')">
+      <div :class="b('logo')">Logo</div>
+      <div :class="b('icons')">Icons</div>
+      <div :class="b('menu')">Menu</div>
+      <div :class="b('search')">Search</div>
     </div>
-    <div class="c-header__right"></div>
   </div>
 </template>
 
@@ -47,24 +45,21 @@
     position: fixed;
     width: 100%;
     display: flex;
-    justify-content: center;
+    border-bottom: 2px solid $color-primary--1;
+    box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
 
-    &__left,
-    &__right,
-    &__inner {
-      border-bottom: 2px solid $color-primary--1;
-      box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
-      min-height: $spacing--60;
-    }
-
-    &__left {
+    &::before {
+      content: '';
       flex: 1 1 auto;
       background-color: $color-secondary--1;
+      display: block; /* IE 11 */
     }
 
-    &__right {
+    &::after {
+      content: '';
       flex: 1 1 auto;
       background-color: $color-secondary--2;
+      display: block; /* IE 11 */
     }
 
     &__inner {
@@ -74,13 +69,11 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
       flex-wrap: wrap;
     }
 
     &__logo {
       flex: 0 1 percentage(5 / 12);
-      align-self: flex-start;
 
       @include media(sm) {
         flex: 0 1 percentage(3 / 12);
@@ -90,7 +83,6 @@
 
     &__menu {
       flex: 0 1 percentage(3 / 12);
-      align-self: flex-start;
 
       @include media(sm) {
         display: none;
@@ -100,7 +92,6 @@
 
     &__search {
       flex: 0 1 percentage(9 / 12);
-      align-self: flex-start;
 
       @include media(sm) {
         flex: 0 1 percentage(6 / 12);
@@ -110,7 +101,6 @@
 
     &__icons {
       flex: 0 1 percentage(7 / 12);
-      align-self: flex-start;
 
       @include media(sm) {
         flex: 0 1 percentage(3 / 12);
