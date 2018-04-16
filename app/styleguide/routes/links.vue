@@ -23,14 +23,13 @@
   .links {
     padding: 50px;
     text-align: center;
-  }
 
-  h1 {
-    padding-bottom: 50px;
-  }
+    h1 {
+      padding-bottom: 50px;
+    }
 
-  h2 {
-    font-size: 1em;
+    h2 {
+      font-size: 1em;
+    }
   }
-
 </style>
