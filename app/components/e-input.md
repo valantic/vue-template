@@ -5,12 +5,14 @@
 <template>
   <div>
   
-    <e-input v-model.trim="demo" name="demo" placeholder="enter text..."/> 
+    <e-input v-model="demo" name="demo" placeholder="enter text..."/> 
     
     <!-- demo only -->
-    <p v-if="demo">{{demo}}</p>
+    <div v-if="demo"><br/>
+      <p>{{demo}}</p>
+    </div>
   
-  </div>stte
+  </div>
 </template>
 
 <script>
@@ -31,18 +33,18 @@
 
 #### `:hover`
 ```
-<e-input name="demo" placeholder="..."/>
+<e-input hover name="demo" placeholder="..."/>
 ```
 
 
 #### `:active`
 ```
-<e-input name="demo" placeholder="..."/>
+<e-input active name="demo" placeholder="..."/>
 ```
 
 #### `:focus`
 ```
-<e-input name="demo" placeholder="..."/>
+<e-input focus name="demo" placeholder="..."/>
 ```
 
 #### state: `error`
