@@ -3,10 +3,10 @@
     <h1>Link examples</h1>
 
     <!-- default -->
-    <a href="#0" class="link">default</a><br/><br/>
+    <a href="#0" class="link">default</a><br><br>
 
     <!-- default -->
-    <a href="#0" class="link link--hover">hover</a><br/><br/>
+    <a href="#0" class="link link--hover">hover</a><br><br>
 
   </div>
 </template>
@@ -29,7 +29,7 @@
     padding-bottom: 50px;
   }
 
-  h2{
+  h2 {
     font-size: 1em;
   }
 
