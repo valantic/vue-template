@@ -5,7 +5,7 @@
     <!-- default -->
     <a href="#0" class="link">default</a><br><br>
 
-    <!-- default -->
+    <!-- hover -->
     <a href="#0" class="link link--hover">hover</a><br><br>
 
   </div>
