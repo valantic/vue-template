@@ -1,5 +1,6 @@
 import index from '../styleguide/routes/index';
 import lazyload from '../styleguide/routes/lazyload';
+import forms from '../styleguide/routes/forms';
 
 const root = '/styleguide';
 
@@ -21,6 +22,14 @@ export default [
     component: lazyload,
     meta: {
       title: 'Lazyload',
+    },
+  },
+  {
+    path: `${root}/forms`,
+    name: 'styleguideForms',
+    component: forms,
+    meta: {
+      title: 'Forms',
     },
   },
   {

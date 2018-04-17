@@ -144,6 +144,7 @@
     @include half-border($color-grayscale--500);
 
     border: 1px solid transparent;
+    margin-bottom: $spacing--10;
     position: relative;
 
     // input
