@@ -1,3 +1,4 @@
+<!-- TODO - This component is supposed to be functional -->
 <template>
   <div :class="b()">
     <c-header/>
@@ -70,5 +71,10 @@
       max-width: map-get($grid-breakpoints, xl);
       margin: 0 auto;
     }
+  }
+
+  .s-layout {
+    max-width: initial;
+    margin: initial;
   }
 </style>

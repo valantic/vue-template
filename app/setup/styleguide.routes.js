@@ -1,5 +1,5 @@
 import index from '../styleguide/routes/index';
-import lDefault from '../styleguide/components/l-default';
+import lDefault from '../components/l-default';
 import lazyload from '../styleguide/routes/lazyload';
 
 const root = '/styleguide';

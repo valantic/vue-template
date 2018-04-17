@@ -4,7 +4,7 @@
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">Icons</div>
-      <div :class="b('menu')">Menu</div>
+      <div :class="b('assortment')">Sortiment</div>
       <div :class="b('search')">Search</div>
     </div>
   </div>
@@ -81,7 +81,7 @@
       }
     }
 
-    &__menu {
+    &__assortment {
       flex: 0 1 percentage(3 / 12);
 
       @include media(sm) {

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import styleguideRoutes from './styleguide.routes';
-import frame from '../styleguide/routes/frame';
+import sLayout from '../styleguide/components/s-layout';
 import AxiosMockAdapter from './plugins/styleguide.axios-mock';
 
 /**
@@ -23,8 +23,8 @@ export default {
     styleguideRoutes,
   },
   router,
-  template: '<frame/>',
+  template: '<s-layout/>',
   components: {
-    frame,
+    sLayout,
   }
 };

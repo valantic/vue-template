@@ -34,6 +34,9 @@
 <style lang="scss">
   /* stylelint-disable selector-class-pattern */
   .index {
+    max-width: map-get($grid-breakpoints, xl);
+    margin: 0 auto;
+
     &__warning {
       border: 1px solid $color-status--danger;
       background: rgba($color-status--danger, 0.5);

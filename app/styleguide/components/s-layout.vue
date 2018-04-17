@@ -10,7 +10,7 @@
   import styleguideRoutes from '@/setup/styleguide.routes';
 
   export default {
-    name: 'frame',
+    name: 's-layout',
     components: {
       sNavigation
     },
@@ -45,9 +45,7 @@
 </script>
 
 <style lang="scss">
-
-  .frame {
+  .s-layout {
     height: 100%;
   }
-
 </style>
