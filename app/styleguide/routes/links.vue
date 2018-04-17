@@ -21,11 +21,11 @@
 
   // demo only
   .links {
-    padding: 50px;
+    padding: $spacing--50;
     text-align: center;
 
     h1 {
-      padding-bottom: 50px;
+      padding-bottom: $spacing--50;
     }
 
     h2 {
