@@ -6,6 +6,7 @@
     <input :value="value"
            :class="b('field')"
            :disabled="disabled"
+           :name="$attrs.name"
            :placeholder="$attrs.placeholder"
            @blur="hasFocus = false"
            @focus="hasFocus = true"
