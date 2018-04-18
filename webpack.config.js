@@ -63,7 +63,9 @@ module.exports = function(env, options) {
         loader: 'sass-resources-loader',
         options: {
           resources: [
-            './app/setup/_scss.scss'
+            './app/setup/scss/_variables.scss',
+            './app/setup/scss/_functions.scss',
+            './app/setup/scss/_mixins.scss',
           ]
         },
       },
