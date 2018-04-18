@@ -1,7 +1,9 @@
 import Vue from 'vue';
-import './setup/_scss.scss';
 import options from './setup/options';
 import components from './setup/components';
+
+// NOTE: this is not working for styleguidist. There you need to add style imports to the required configuration
+import './setup/_scss.scss';
 
 let vueOptions = options;
 
