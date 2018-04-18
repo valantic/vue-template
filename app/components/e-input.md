@@ -1,5 +1,3 @@
-### e-input
-
 #### `default`
 ```
 <template>
@@ -8,7 +6,7 @@
     <e-input v-model="demo" name="demo" placeholder="enter text..."/> 
     
     <!-- demo only -->
-    <div v-if="demo"><br/>
+    <div v-if="demo" class="spacing--top-15">
       <p>{{demo}}</p>
     </div>
   
@@ -37,11 +35,6 @@
 ```
 
 
-#### `:active`
-```
-<e-input active name="demo" placeholder="..."/>
-```
-
 #### `:focus`
 ```
 <e-input focus name="demo" placeholder="..."/>
@@ -61,7 +54,3 @@
 ```
 <e-input state="info" name="demo" placeholder="..."/>
 ```
-
-
-
-<!-- <e-input value="foo" @input="actionName" state="active" name="demo" type="text" placeholder="..."></e-input> -->
