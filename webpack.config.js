@@ -228,7 +228,7 @@ module.exports = function(env, options) {
       app: [
         'babel-polyfill',
         path.resolve(__dirname, 'app/main.js')
-      ],
+      ]
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
