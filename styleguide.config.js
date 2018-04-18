@@ -52,7 +52,11 @@ module.exports = {
   ],
   ignore: [
     '**/components/s-palette-item.vue',
-    '**/components/s-color-item.vue'
+    '**/components/s-color-item.vue',
+    '**/components/l-default.vue',
+    '**/components/c-header.vue',
+    '**/components/c-footer.vue',
+    '**/components/s-layout.vue'
   ],
   theme,
   styles
