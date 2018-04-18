@@ -1,4 +1,5 @@
 import index from '../styleguide/routes/index';
+import lDefault from '../components/l-default';
 import lazyload from '../styleguide/routes/lazyload';
 import forms from '../styleguide/routes/forms';
 
@@ -14,15 +15,23 @@ export default [
     component: index,
     meta: {
       title: 'Welcome',
-    },
+    }
   },
   {
     path: `${root}/lazyload`,
     name: 'styleguideLazyload',
     component: lazyload,
     meta: {
-      title: 'Lazyload',
-    },
+      title: 'Lazyload'
+    }
+  },
+  {
+    path: `${root}/layout`,
+    name: 'styleguideLayout',
+    component: lDefault,
+    meta: {
+      title: 'Layout',
+    }
   },
   {
     path: `${root}/forms`,
@@ -35,5 +44,5 @@ export default [
   {
     path: '*',
     redirect: root,
-  },
+  }
 ];
