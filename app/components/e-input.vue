@@ -2,15 +2,15 @@
 
   <div :class="b(modifiers)">
     <input
-      :value="value"
       :class="b('field')"
       :disabled="disabled"
       :name="name"
       :placeholder="$attrs.placeholder"
+      :value="value"
       type="text"
       @blur="hasFocus = false"
       @focus="hasFocus = true"
-      @input="input($event.target.value)"
+      @input="onInput"
       @mouseenter="hasHover = true"
       @mouseleave="hasHover = false"
     >
@@ -113,10 +113,10 @@
        */
       modifiers() {
         return {
-          active: this.isActive,
-          disabled: this.isDisabled,
-          focus: this.hasFocus,
-          hover: this.hasHover,
+          active: this.$props.active || this.isActive,
+          disabled: this.$props.disabled || this.isDisabled,
+          focus: this.$props.focus || this.hasFocus,
+          hover: this.$props.hover || this.hasHover,
           state: this.state,
         };
       }
@@ -138,11 +138,11 @@
       /**
        * Emits input to parent component
        *
-       * @param   {String}  value   Field input
+       * @param   {String}  event   Field input
        */
-      input(value) {
-        this.$emit('input', value);
-      }
+      onInput(event) {
+        this.$emit('input', event.target.value);
+      },
 
     }
     // render() {},
@@ -156,7 +156,7 @@
     // input
     &__field {
       border: 1px solid transparent;
-      border-radius: $border-radius-default;
+      border-radius: $border-radius--default;
       color: $color-grayscale--400;
       font-family: $font-family--primary;
       font-size: $font-size--14;
@@ -217,6 +217,9 @@
       @include half-border($color-secondary--4);
       // TODO add info message and icon
     }
+    &--state-error &__field:hover {
+      border: 1px solid $color-secondary--4;
+    }
 
     &--state-error > &__field:focus {
       border: 1px solid $color-secondary--4;
@@ -244,7 +247,7 @@
     &--disabled &__field,
     &--disabled &__field:hover {
       background: $color-grayscale--1000;
-      border: 1px solid $color-grayscale--600;
+      border: none;
       color: $color-grayscale--600;
 
       &::placeholder {

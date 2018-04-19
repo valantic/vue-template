@@ -14,7 +14,7 @@
       @include z-index(front);
 
       border: 1px solid $border-color;
-      border-radius: $border-radius-default;
+      border-radius: $border-radius--default;
       content: "";
       display: block;
       position: absolute;

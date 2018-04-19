@@ -1,11 +1,13 @@
 #### `default`
+
+Always use **v-model** to bind value to form elements!
+
 ```
 <template>
   <div>
   
     <e-input v-model="demo" name="demo" placeholder="enter text..."/> 
     
-    <!-- demo only -->
     <div v-if="demo" class="spacing--top-15">
       <p>{{demo}}</p>
     </div>
@@ -31,26 +33,121 @@
 
 #### `:hover`
 ```
-<e-input hover name="demo" placeholder="..."/>
+<template>
+  <div>
+  
+    <e-input v-model="demo" hover name="demo" placeholder="enter text..."/> 
+    
+    <div v-if="demo" class="spacing--top-15">
+      <p>{{demo}}</p>
+    </div>
+  
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 
 #### `:focus`
 ```
-<e-input focus name="demo" placeholder="..."/>
+<template>
+  <div>
+  
+    <e-input v-model="demo" focus name="demo" placeholder="enter text..."/> 
+    
+    <div v-if="demo" class="spacing--top-15">
+      <p>{{demo}}</p>
+    </div>
+  
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 #### state: `error`
 ```
-<e-input state="error" name="demo" placeholder="..."/>
+<template>
+  <div>
+  
+    <e-input v-model="demo" state="error" hover name="demo" placeholder="enter text..."/> 
+    
+    <div v-if="demo" class="spacing--top-15">
+      <p>{{demo}}</p>
+    </div>
+  
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 #### state: `success`
 ```
-<e-input state="success" name="demo" placeholder="..."/>
+<template>
+  <div>
+  
+    <e-input v-model="demo" state="success" hover name="demo" placeholder="enter text..."/> 
+    
+    <div v-if="demo" class="spacing--top-15">
+      <p>{{demo}}</p>
+    </div>
+  
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 #### state: `info`
 ```
-<e-input state="info" name="demo" placeholder="..."/>
+<template>
+  <div>
+  
+    <e-input v-model="demo" state="info" hover name="demo" placeholder="enter text..."/> 
+    
+    <div v-if="demo" class="spacing--top-15">
+      <p>{{demo}}</p>
+    </div>
+  
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
