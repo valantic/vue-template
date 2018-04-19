@@ -50,6 +50,9 @@
 
 <style lang="scss">
   .lazyload {
+    max-width: map-get($grid-breakpoints, xl);
+    margin: 0 auto;
+
     &__item {
       width: 180px;
       height: 150px;
