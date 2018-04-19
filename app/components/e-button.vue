@@ -1,6 +1,8 @@
 <!-- This component has no <template> because of dynamic root element -->
 
 <script>
+  import eProgress from './e-progress';
+
   export default {
     name: 'e-button',
     // components: {},
@@ -184,6 +186,28 @@
       };
       const isButton = !this.$attrs.href;
       const element = isButton ? 'button' : 'a';
+      let content = this.$slots.default;
+
+      if (progress) {
+        content = [
+          createElement( // Sub component wrapper
+            'div',
+            {
+              class: this.b('progress')
+            },
+            [
+              createElement( // e-progress
+                eProgress,
+                {
+                  props: {
+                    spacing: '0',
+                  }
+                }
+              )
+            ]
+          )
+        ];
+      }
 
       if (!isButton && !options.attrs.role) {
         options.attrs.role = 'button';
@@ -192,7 +216,7 @@
       return createElement(
         element,
         options,
-        this.$slots.default, // TODO: How to handle progress state?
+        content,
       );
     },
   };
@@ -299,17 +323,12 @@
       }
     }
 
-    &--progress {
-      text-indent: -200vw;
-
-      &::after {
-        content: "...";
-        display: block;
-      }
-    }
-
     &--spacing-0 {
       padding: 0;
+    }
+
+    &__progress {
+      display: inline-block;
     }
   }
 

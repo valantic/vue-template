@@ -1,34 +1,32 @@
-### e-button
+### Styles
 
-#### Styles
-
-##### Default
+#### Default
 
 ```
 <e-button>Default</e-button>
 ```
 
-##### Primary
+#### Primary
 
 ```
 <e-button primary>Primary</e-button>
 ```
 
-#### Width
+### Width
 
-##### full
+#### full
 
 ```
 <e-button width="full">Full width</e-button>
 ```
 
-##### auto
+#### auto
 
 ```
 <e-button width="auto">Auto width</e-button>
 ```
 
-#### ~~Inverted~~
+### ~~Negative~~
 
 Not defined yet.
 
@@ -36,71 +34,71 @@ Not defined yet.
 <e-button inverted>Inverted</e-button>
 ```
 
-#### Spacing
+### Spacing
 
-##### 0
+#### 0
 
 ```
 <e-button spacing="0" width="auto">Spacing 0</e-button>
 ```
 
-##### 500 (default)
+#### 500 (default)
 
 ```
 <e-button spacing="500" width="auto">Spacing 500 (default)</e-button>
 ```
 
-#### Progress
+### Progress
 
 ```
-<e-button progress>Progress</e-button>
+<e-button progress></e-button>
 ```
 
-#### Native states
+### Native states
 
-##### :hover
+#### :hover
 ```
 <e-button hover>Progress</e-button>
 ```
 
-##### :active
+#### :active
 ```
 <e-button active>Progress</e-button>
 ```
 
-##### :focus
+#### :focus
 ```
 <e-button focus>Progress</e-button>
 ```
 
-##### disabled
+#### disabled
 ```
 <e-button disabled>Progress</e-button>
 ```
 
-##### primary:hover
+#### primary:hover
 ```
 <e-button hover primary>Progress</e-button>
 ```
 
-##### primary:active
+#### primary:active
 ```
 <e-button active primary>Progress</e-button>
 ```
 
-##### primary:focus
+#### primary:focus
 ```
 <e-button focus primary>Progress</e-button>
 ```
 
-##### primary\[disabled\]
+#### primary\[disabled\]
 ```
 <e-button disabled primary>Progress</e-button>
 ```
 
-#### Cases
+### Cases
 
-##### Multiline
+#### Multiline
 
 ```
 <e-button>A button<br>with wrapping<br>text</e-button>
