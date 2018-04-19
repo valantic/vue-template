@@ -34,7 +34,7 @@
        */
       value: {
         default: null,
-        type: String
+        type: String,
       },
 
       /**
@@ -188,6 +188,15 @@
       right: 0;
     }
 
+    // placeholder
+    &__field::-webkit-input-placeholder, // WebKit, Blink, Edge
+    &__field:-moz-placeholder, // Mozilla Firefox 4 to 18
+    &__field:-ms-input-placeholder, // Internet Explorer 10-11
+    &__field::placeholder { // Most modern browsers support this now
+      color: $color-grayscale--400;
+      opacity: 1;
+    }
+
     // active
     &__field:active,
     &--active > &__field {
@@ -209,6 +218,24 @@
       border: 1px solid $color-grayscale--500;
     }
 
+    // disabled
+    &__field:disabled,
+    &--disabled &__field,
+    &--disabled &__field:hover {
+      background: $color-grayscale--1000;
+      border: none;
+      color: $color-grayscale--600;
+
+      &::placeholder {
+        color: $color-grayscale--600;
+      }
+    }
+
+    &--disabled::before,
+    &--disabled::after {
+      border-color: $color-grayscale--600;
+    }
+
     /**
     * states
     **/
@@ -217,6 +244,7 @@
       @include half-border($color-secondary--4);
       // TODO add info message and icon
     }
+
     &--state-error &__field:hover {
       border: 1px solid $color-secondary--4;
     }
@@ -233,32 +261,5 @@
       // TODO add info message and icon
     }
 
-    // placeholder
-    &__field::-webkit-input-placeholder, // WebKit, Blink, Edge
-    &__field:-moz-placeholder, // Mozilla Firefox 4 to 18
-    &__field:-ms-input-placeholder, // Internet Explorer 10-11
-    &__field::placeholder { // Most modern browsers support this now
-      color: $color-grayscale--400;
-      opacity: 1;
-    }
-
-    // disabled
-    &__field:disabled,
-    &--disabled &__field,
-    &--disabled &__field:hover {
-      background: $color-grayscale--1000;
-      border: none;
-      color: $color-grayscale--600;
-
-      &::placeholder {
-        color: $color-grayscale--600;
-      }
-
-    }
-
-    &--disabled::before,
-    &--disabled::after {
-      border-color: $color-grayscale--600;
-    }
   }
 </style>
