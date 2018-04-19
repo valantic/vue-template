@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({ negative, spacing })">
+  <div :class="b({ negative, spacing })" :data-message="loadingMessage">
     <div :class="b('inner')">
       <div :class="b('bubble')"></div>
       <div :class="b('bubble')"></div>
@@ -29,13 +29,21 @@
             500
           ].includes(parseInt(value, 10));
         }
+      },
+      message: {
+        type: String,
+        default: null
       }
     },
     // data() {
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      loadingMessage() {
+        return this.message || this.$t('e-progress.loading');
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -56,11 +64,22 @@
 
 <style lang="scss">
   $_e-progress__animation-duration: 2000ms;
-  $_e-progress__bubble--width: 1rem;
   $_e-progress--padding: $spacing--5;
 
   .e-progress {
+    font-size: 1rem;
     padding: $_e-progress--padding;
+    display: flex;
+    align-items: center;
+
+    &::after {
+      content: attr(data-message);
+      display: block;
+      white-space: nowrap;
+      float: right;
+      width: 0;
+      overflow: hidden;
+    }
 
     &--spacing-0 {
       padding: 0;
@@ -68,13 +87,14 @@
 
     &__inner {
       position: relative;
-      width: calc(#{$_e-progress__bubble--width} * 4);
-      height: $_e-progress__bubble--width;
+      width: calc(1em * 4);
+      height: 1em;
+      float: left;
     }
 
     &__bubble {
-      height: $_e-progress__bubble--width;
-      width: $_e-progress__bubble--width;
+      height: 1em;
+      width: 1em;
       background-color: $color-secondary--1;
       left: 100%;
       position: absolute;
