@@ -14,13 +14,8 @@
 </template>
 
 <script>
-  import EInput from '@/components/e-input';
-
   export default {
     name: 'forms',
-    components: {
-      EInput
-    },
     data() {
       return {
         name: {
