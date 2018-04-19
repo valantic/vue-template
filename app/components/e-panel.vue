@@ -1,22 +1,20 @@
 <template>
-  <div :class="b({ contour: contour, color: color })">
-    <!-- TODO replace with e-headline -->
-    <!-- eslint-disable max-len -->
-    <div v-if="hasHeadline" :class="b('headline', { 'spacing-top': headlineSpacingTop, 'spacing-right': headlineSpacingRight, 'spacing-bottom': headlineSpacingBottom, 'spacing-left': headlineSpacingLeft })">
-      <span :class="b('headline-underline')">{{ headline }}</span>
+  <div :class="b({ border: border, color: color })">
+    <!-- TODO replace with e-heading -->
+    <div v-if="hasHeading" :class="b('heading', headingModifiers)">
+      <span :class="b('heading-underline')">{{ heading }}</span>
     </div>
-    <!-- eslint-disable max-len -->
-    <div :class="b('content', { 'spacing-top': contentSpacingTop, 'spacing-right': contentSpacingRight, 'spacing-bottom': contentSpacingBottom, 'spacing-left': contentSpacingLeft })">
-      foo<br>bar<br>
-      foo<br>bar<br>
+    <div :class="b('content', contentModifiers)">
+      <slot></slot>
     </div>
     <div
       v-if="triangleButton"
-      :class="b('triangle-button', { size: triangleButtonSize, contour: contour, color: color })"
-      @click="$emit('triangle-pressed')"
-      @mouseover="mouseOver"
-      @mouseout="mouseOut">
-      <span :class="b('plus', { size: triangleButtonSize, 'plus-color': triangleButtonPlusColor })"></span>
+      ref="button"
+      :class="b('triangle-button', triangleButtonModifiers)"
+      @click="onTriangleButtonClick"
+      @mouseover="onPlusToggle"
+      @mouseout="onPlusToggle">
+      <span ref="plus" :class="b('plus', plusModifiers)"></span>
     </div>
   </div>
 </template>
@@ -30,142 +28,58 @@
     props: {
 
       /**
-       * Defines the top spacing of the content
+       * Defines the spacing of the heading
        *
-       * Valid values: `000`, `100`, `200`, `300`, `400`
+       * Valid values: `0`, `500`
        */
-      contentSpacingTop: {
-        type: String,
-        default: '100',
+      headingSpacing: {
+        type: Number,
+        default: 500,
         validator(value) {
-          return ['000', '100', '200', '300', '400'].includes(value);
+          return [0, 500].includes(value);
         },
       },
 
       /**
-       * Defines the right spacing of the content
+       * Defines the spacing of the content
        *
-       * Valid values: `000`, `100`, `200`, `300`, `400`
+       * Valid values: `0`, `500`
        */
-      contentSpacingRight: {
-        type: String,
-        default: '100',
+      contentSpacing: {
+        type: Number,
+        default: 500,
         validator(value) {
-          return ['000', '100', '200', '300', '400'].includes(value);
+          return [0, 500].includes(value);
         },
       },
 
       /**
-       * Defines the bottom spacing of the content
-       *
-       * Valid values: `000`, `100`, `200`, `300`, `400`
-       */
-      contentSpacingBottom: {
-        type: String,
-        default: '100',
-        validator(value) {
-          return ['000', '100', '200', '300', '400'].includes(value);
-        },
-      },
-
-      /**
-       * Defines the left spacing of the content
-       *
-       * Valid values: `000`, `100`, `200`, `300`, `400`
-       */
-      contentSpacingLeft: {
-        type: String,
-        default: '100',
-        validator(value) {
-          return ['000', '100', '200', '300', '400'].includes(value);
-        },
-      },
-
-      /**
-       * Defines the top spacing of the headline
-       *
-       * Valid values: `000`, `100`, `200`, `300`, `400`
-       */
-      headlineSpacingTop: {
-        type: String,
-        default: '100',
-        validator(value) {
-          return ['000', '100', '200', '300', '400'].includes(value);
-        },
-      },
-
-      /**
-       * Defines the right spacing of the headline
-       *
-       * Valid values: `000`, `100`, `200`, `300`, `400`
-       */
-      headlineSpacingRight: {
-        type: String,
-        default: '100',
-        validator(value) {
-          return ['000', '100', '200', '300', '400'].includes(value);
-        },
-      },
-
-      /**
-       * Defines the bottom spacing of the headline
-       *
-       * Valid values: `000`, `100`, `200`, `300`, `400`
-       */
-      headlineSpacingBottom: {
-        type: String,
-        default: '100',
-        validator(value) {
-          return ['000', '100', '200', '300', '400'].includes(value);
-        },
-      },
-
-      /**
-       * Defines the left spacing of the headline
-       *
-       * Valid values: `000`, `100`, `200`, `300`, `400`
-       */
-      headlineSpacingLeft: {
-        type: String,
-        default: '100',
-        validator(value) {
-          return ['000', '100', '200', '300', '400'].includes(value);
-        },
-      },
-
-      /**
-       * Defines the headline of the panel
+       * Defines the heading of the panel
        *
        */
-      headline: {
+      heading: {
         type: String,
         default: null,
       },
 
       /**
-       * Defines the contour of the panel
+       * Defines the border of the panel
        *
-       * Valid values: `thin`, `thick`
+       * Valid values: `0`, `1`, `2`
        */
-      contour: {
-        type: String,
-        default: 'thin',
-        validator(value) {
-          return [
-            'thin',
-            'thick'
-          ].includes(value);
-        },
+      border: {
+        type: Number,
+        default: 0,
       },
 
       /**
-       * Defines the contour color of the panel
+       * Defines the border color of the panel
        *
-       * Valid values: `yellow`, `blue`
+       * Valid values: `yellow`, `blue`, `gray`
        */
       color: {
         type: String,
-        default: 'yellow',
+        default: 'blue',
         validator(value) {
           return [
             'yellow',
@@ -179,6 +93,14 @@
        * Defines if the triangle shaped button shall be displayed or not
        */
       triangleButton: {
+        type: Boolean,
+        default: false
+      },
+
+      /**
+       * Defines if the triangle shaped button is initially open or not
+       */
+      triangleButtonOpen: {
         type: Boolean,
         default: false
       },
@@ -221,9 +143,33 @@
     // },
 
     computed: {
-      hasHeadline() {
-        return this.headline !== null && this.headline !== '';
-      }
+      hasHeading() {
+        return this.heading;
+      },
+      headingModifiers() {
+        return {
+          spacing: this.headingSpacing.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+        };
+      },
+      contentModifiers() {
+        return {
+          spacing: this.contentSpacing.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+        };
+      },
+      triangleButtonModifiers() {
+        return {
+          size: this.triangleButtonSize,
+          border: this.border,
+          color: this.color,
+        };
+      },
+      plusModifiers() {
+        return {
+          size: this.triangleButtonSize,
+          color: this.triangleButtonPlusColor,
+          open: this.triangleButtonOpen,
+        };
+      },
     },
     // watch: {},
 
@@ -239,20 +185,13 @@
     // destroyed() {},
 
     methods: {
-      mouseOver(event) {
-        const plus = event.target.classList.contains('e-panel__plus') ? event.target : event.target.firstChild;
-        const button = plus.parentNode;
-
-        plus.classList.add('e-panel__plus--hover');
-        button.classList.add('e-panel__triangle-button--hover');
+      onPlusToggle() {
+        this.$refs.plus.classList.toggle('e-panel__plus--hover');
+        this.$refs.button.classList.toggle('e-panel__triangle-button--hover');
       },
-      mouseOut(event) {
-        const plus = event.target.classList.contains('e-panel__plus') ? event.target : event.target.firstChild;
-        const button = plus.parentNode;
-
-        plus.classList.remove('e-panel__plus--hover');
-        button.classList.remove('e-panel__triangle-button--hover');
-      },
+      onTriangleButtonClick() {
+        this.$emit('triangle-pressed');
+      }
     },
     // render() {},
   };
@@ -264,11 +203,11 @@
     overflow: hidden;
     background-color: $color-grayscale--1000;
 
-    &--contour-thin {
+    &--border-1 {
       border-bottom: 1px solid;
     }
 
-    &--contour-thick {
+    &--border-2 {
       border-bottom: 2px solid;
     }
 
@@ -284,12 +223,8 @@
       border-color: $color-grayscale--600;
     }
 
-    &__headline {
-      padding: $spacing--10;
-    }
-
-    &__headline-underline {
-      /* TODO - should we define line-height variables? */
+    /* TODO - remove when e-heading is implemented */
+    &__heading-underline {
       @include font($font-size: $font-size--18, $line-height: 23px);
 
       display: inline-block;
@@ -298,108 +233,14 @@
       padding-bottom: $spacing--5;
     }
 
-    &__content {
+    &__heading--spacing-0,
+    &__content--spacing-0 {
+      padding: $spacing--0;
+    }
+
+    &__heading--spacing-500,
+    &__content--spacing-500 {
       padding: $spacing--10;
-    }
-
-    &__headline--spacing-top-000,
-    &__content--spacing-top-000 {
-      padding-top: $spacing--0;
-    }
-
-    &__headline--spacing-top-100,
-    &__content--spacing-top-100 {
-      padding-top: $spacing--10;
-    }
-
-    &__headline--spacing-top-200,
-    &__content--spacing-top-200 {
-      padding-top: $spacing--15;
-    }
-
-    &__headline--spacing-top-300,
-    &__content--spacing-top-300 {
-      padding-top: $spacing--20;
-    }
-
-    &__headline--spacing-top-400,
-    &__content--spacing-top-400 {
-      padding-top: $spacing--30;
-    }
-
-    &__headline--spacing-right-000,
-    &__content--spacing-right-000 {
-      padding-right: $spacing--0;
-    }
-
-    &__headline--spacing-right-100,
-    &__content--spacing-right-100 {
-      padding-right: $spacing--10;
-    }
-
-    &__headline--spacing-right-200,
-    &__content--spacing-right-200 {
-      padding-right: $spacing--15;
-    }
-
-    &__headline--spacing-right-300,
-    &__content--spacing-right-300 {
-      padding-right: $spacing--20;
-    }
-
-    &__headline--spacing-right-400,
-    &__content--spacing-right-400 {
-      padding-right: $spacing--30;
-    }
-
-    &__headline--spacing-bottom-000,
-    &__content--spacing-bottom-000 {
-      padding-bottom: $spacing--0;
-    }
-
-    &__headline--spacing-bottom-100,
-    &__content--spacing-bottom-100 {
-      padding-bottom: $spacing--10;
-    }
-
-    &__headline--spacing-bottom-200,
-    &__content--spacing-bottom-200 {
-      padding-bottom: $spacing--15;
-    }
-
-    &__headline--spacing-bottom-300,
-    &__content--spacing-bottom-300 {
-      padding-bottom: $spacing--20;
-    }
-
-    &__headline--spacing-bottom-400,
-    &__content--spacing-bottom-400 {
-      padding-bottom: $spacing--30;
-    }
-
-    &__headline--spacing-left-000,
-    &__content--spacing-left-000 {
-      padding-left: $spacing--0;
-    }
-
-    &__headline--spacing-left-100,
-    &__content--spacing-left-100 {
-      padding-left: $spacing--10;
-    }
-
-    &__headline--spacing-left-200,
-    &__content--spacing-left-200 {
-      padding-left: $spacing--15;
-    }
-
-    &__headline--spacing-left-300,
-    &__content--spacing-left-300 {
-      padding-left: $spacing--20;
-    }
-
-    &__headline--spacing-left-400,
-    &__content--spacing-left-400 {
-      padding-left: $spacing--30;
     }
 
     &__triangle-button {
@@ -420,11 +261,11 @@
       height: 33px;
     }
 
-    &__triangle-button--contour-thin {
+    &__triangle-button--border-1 {
       bottom: -1px;
     }
 
-    &__triangle-button--contour-thick {
+    &__triangle-button--border-2 {
       bottom: -2px;
     }
 
@@ -440,13 +281,13 @@
       content: "";
       display: block;
       position: absolute;
-      box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 2px -2px rgba($color-grayscale--0, 0.3);
       transform: rotate(-41deg);
       background-color: $color-grayscale--1000;
     }
 
     &__triangle-button--hover::after {
-      box-shadow: inset 0 2px 2px -2px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 2px 2px -2px rgba($color-grayscale--0, 0.3);
       transform: rotate(139deg);
     }
 
@@ -484,8 +325,15 @@
       height: 18px;
     }
 
-    &__plus--hover {
+    &__plus--hover,
+    &__plus--open {
       transform: rotate(135deg);
+    }
+
+    &__plus--open {
+      &.e-panel__plus--hover {
+        transform: rotate(270deg);
+      }
     }
 
     &__plus::before {
@@ -493,6 +341,7 @@
       position: absolute;
       display: block;
       background-color: $color-grayscale--1000;
+      transition: 0.25s ease-out;
     }
 
     &__plus::after {
@@ -500,6 +349,7 @@
       position: absolute;
       display: block;
       background-color: $color-grayscale--1000;
+      transition: 0.25s ease-out;
     }
 
     &__plus--size-small::before {
@@ -530,14 +380,22 @@
       height: 13px;
     }
 
-    &__plus--plus-color-white::before,
-    &__plus--plus-color-white::after {
+    &__plus--color-white::before,
+    &__plus--color-white::after {
       background-color: $color-grayscale--1000;
     }
 
-    &__plus--plus-color-blue::before,
-    &__plus--plus-color-blue::after {
+    &__plus--color-blue::before,
+    &__plus--color-blue::after {
       background-color: $color-secondary--2;
+    }
+
+    &__plus--hover::before {
+      background-color: $color-grayscale--1000;
+    }
+
+    &__plus--hover::after {
+      background-color: $color-grayscale--1000;
     }
   }
 </style>

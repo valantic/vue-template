@@ -1,14 +1,41 @@
 ### Panel
 
-#### Panel (small)
+#### Panel
 ```
-<e-panel color="blue" triangleButton=true contentSpacingTop="000" contentSpacingRight="100" contentSpacingBottom="200" contentSpacingLeft="300"/>
+<e-panel
+  border=2
+  color="gray"
+  heading-spacing=0
+  content-spacing=0
+>
+  foo<br>bar<br>
+  foo<br>bar<br>
+</e-panel>
 ```
-#### Panel (big)
+#### Panel (small button)
 ```
-<e-panel contour="thick" triangleButton=true triangleButtonSize="big" triangleButtonPlusColor="blue" headline="A headline" headlineSpacingTop="000" headlineSpacingTop="100" headlineSpacingTop="200" headlineSpacingTop="300"/>
+<e-panel
+  border=1
+  triangle-button
+  triangle-button-size="small"
+  triangle-button-color="blue"
+  triangle-button-open
+>
+  foo<br>bar<br>
+  foo<br>bar<br>
+</e-panel>
 ```
-#### Panel (with gray line)
+#### Panel (big button)
 ```
-<e-panel contour="thick" triangleButton=true triangleButtonSize="big" plusColor="blue" headline="A headline" headlineSpacingTop="000" headlineSpacingTop="100" headlineSpacingTop="200" headlineSpacingTop="300"/>
+<e-panel
+  border=2
+  color="yellow"
+  triangle-button
+  triangle-button-size="big"
+  triangle-button-plus-color="blue"
+  heading="A heading"
+>
+  foo<br>bar<br>
+  foo<br>bar<br>
+</e-panel>
 ```
