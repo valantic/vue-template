@@ -269,7 +269,7 @@ module.exports = function(env, options) {
           }
         },
         {
-          test: /\.(scss|foo)$/,
+          test: /\.scss$/,
           use: scssLoader(),
         },
         {
