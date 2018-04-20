@@ -12,7 +12,7 @@
        */
       color: {
         type: String,
-        default: null,
+        default: 'blue',
         validator(value) {
           return [
             'blue',
@@ -103,7 +103,7 @@
   .e-heading {
     font-family: "Source Sans Pro", sans-serif;
     font-weight: normal;
-    color: #3a77ad;
+    color: $color-secondary--1;
     letter-spacing: 2.03px;
     line-height: 23px;
 
