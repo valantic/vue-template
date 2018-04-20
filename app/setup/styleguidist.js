@@ -1,8 +1,27 @@
 import Vue from 'vue';
-import options from './options';
+import VueBemCn from 'vue-bem-cn';
+import VueAxios from '@/setup/plugins/axios';
+// NOTE: VueI18n is not supported by vue-styleguidist
+
+// Polyfills and self executing
+import 'intersection-observer';
+import 'picturefill';
+import 'lazysizes';
+import './lib/ls.attrchange'; // lazy sizes attribute change observer
+
 import components from './components';
 import './styleguide.options';
 
 Vue.use(components);
+Vue.use(VueAxios);
+Vue.use(VueBemCn, {
+  hyphenate: true,
+});
 
-export default options;
+export default {
+  methods: {
+    $t(value) { // Mocks vue-i18n since it is currently not supported by styleguidist
+      return value;
+    }
+  }
+};
