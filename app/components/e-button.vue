@@ -64,26 +64,41 @@
         default: false,
       },
 
+      /**
+       * A flag to toggle between primary and secondary styling
+       */
       primary: {
         type: Boolean,
         default: false,
       },
 
+      /**
+       * Forces the hover state
+       */
       hover: {
         type: Boolean,
         default: false,
       },
 
+      /**
+       * Forces the focus state
+       */
       focus: {
         type: Boolean,
         default: false,
       },
 
+      /**
+       * Forces the active state
+       */
       active: {
         type: Boolean,
         default: false,
       },
 
+      /**
+       * Disables the button
+       */
       disabled: {
         type: Boolean,
         default: false,
@@ -134,6 +149,13 @@
       onClick(event) {
         this.$el.blur();
 
+        /**
+         * Click event
+         *
+         * @event click
+         *
+         * @type {object}
+         */
         this.$emit('click', event);
       },
     },

@@ -8,6 +8,7 @@
 - *link*
  
 ### Checklist
+- [ ] Updated code documentation
 - [ ] Tested all links in project relevant browsers
 - [ ] Tested all links in different screen sizes
 - [ ] Did run automated tests and linters

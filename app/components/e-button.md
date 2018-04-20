@@ -1,3 +1,5 @@
+Renders a `<button>` or `<a>` element with button style.
+
 ### Styles
 
 #### Default
