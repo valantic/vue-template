@@ -101,8 +101,31 @@ Not defined yet.
 ```
 
 #### primary\[disabled\]
+
 ```vue
 <e-button disabled primary @click="onClick">[disabled]</e-button>
+```
+
+### Link
+
+Creates a button like link.
+
+#### Default
+
+```vue
+<e-button href="https://www.google.com" target="_blank">Link</e-button>
+```
+
+#### Primary
+
+```vue
+<e-button primary href="https://www.google.com" target="_blank">Link</e-button>
+```
+
+#### Width
+
+```vue
+<e-button width="full" href="https://www.google.com" target="_blank">Link</e-button>
 ```
 
 ### Cases

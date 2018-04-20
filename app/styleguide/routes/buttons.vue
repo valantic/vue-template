@@ -107,6 +107,28 @@
         <e-button disabled primary @click="onClick">[disabled]</e-button>
       </div>
 
+      <h2>Link</h2>
+
+      Creates a button like link.
+
+      <h3>Default</h3>
+
+      <div :class="b('example')">
+        <e-button href="https://www.google.com" target="_blank">Link</e-button>
+      </div>
+
+      <h3>Primary</h3>
+
+      <div :class="b('example')">
+        <e-button primary href="https://www.google.com" target="_blank">Link</e-button>
+      </div>
+
+      <h3>Width</h3>
+
+      <div :class="b('example')">
+        <e-button width="full" href="https://www.google.com" target="_blank">Link</e-button>
+      </div>
+
       <h2>Cases</h2>
 
       <h3>Multiline</h3>

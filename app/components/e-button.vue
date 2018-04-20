@@ -239,6 +239,8 @@
     border-radius: $_e-button__radius;
     outline: none;
     min-width: 165px;
+    border-bottom: none; // Overwrite link styles
+    text-align: center;
 
     &::before, // TODO: create mixin
     &::after {
@@ -283,6 +285,7 @@
     &--hover {
       color: $color-primary--3;
       background-color: $color-grayscale--500;
+      border-bottom: 0; // Overwrite link styles
 
       &:not([disabled])::before,
       &:not([disabled])::after {
@@ -352,7 +355,6 @@
       position: relative;
       display: inline-block;
       vertical-align: bottom;
-      color: $color-grayscale--400;
     }
 
     .e-progress {
