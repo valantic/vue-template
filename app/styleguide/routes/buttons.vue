@@ -143,10 +143,11 @@
 
 <script>
   import LDefault from '@/components/l-default';
+
   export default {
     name: 'buttons',
     components: { LDefault },
- // TODO: update name according to filename
+
     // components: {},
     // mixins: [],
 
@@ -171,6 +172,7 @@
 
     methods: {
       onClick() {
+        // eslint-disable-next-line no-console
         console.info('click');
       }
     },

@@ -20,6 +20,7 @@ Vue.use(VueBemCn, {
 
 export default {
   methods: {
+    // eslint-disable-next-line id-length
     $t(value) { // Mocks vue-i18n since it is currently not supported by styleguidist
       return value;
     },

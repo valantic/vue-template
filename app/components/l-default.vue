@@ -4,7 +4,7 @@
     <c-header/>
     <div :class="b('content')">
       <div :class="b('inner')">
-        <slot />
+        <slot></slot>
       </div>
     </div>
     <c-footer/>
