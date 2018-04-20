@@ -2,112 +2,113 @@
 
 #### Default
 
-```
-<e-button>Default</e-button>
+```vue
+<e-button @click="onClick">Default</e-button>
+
 ```
 
 #### Primary
 
-```
-<e-button primary>Primary</e-button>
+```vue
+<e-button primary @click="onClick">Primary</e-button>
 ```
 
 ### Width
 
 #### full
 
-```
-<e-button width="full">Full width</e-button>
+```vue
+<e-button width="full" @click="onClick">Full width</e-button>
 ```
 
 #### auto
 
-```
-<e-button width="auto">Auto width</e-button>
+```vue
+<e-button width="auto" @click="onClick">Auto width</e-button>
 ```
 
 ### ~~Negative~~
 
 Not defined yet.
 
-```
-<e-button inverted>Inverted</e-button>
+```vue
+<e-button inverted @click="onClick">Inverted</e-button>
 ```
 
 ### Spacing
 
+#### default
+
+```vue
+<e-button width="auto" @click="onClick">Spacing (default)</e-button>
+```
+
 #### 0
 
-```
-<e-button spacing="0" width="auto">Spacing 0</e-button>
-```
-
-#### 500 (default)
-
-```
-<e-button spacing="500" width="auto">Spacing 500 (default)</e-button>
+```vue
+<e-button spacing="0" width="auto" @click="onClick">Spacing 0</e-button>
 ```
 
 ### Progress
 
 #### Default
 
-```
-<e-button progress></e-button>
+```vue
+<e-button progress @click="onClick">Progress</e-button>
 ```
 
 #### Primary
 
-```
-<e-button progress primary></e-button>
+```vue
+<e-button progress primary @click="onClick">Progress</e-button>
 ```
 
 ### Native states
 
 #### :hover
-```
-<e-button hover>Progress</e-button>
+```vue
+<e-button hover @click="onClick">:hover</e-button>
 ```
 
 #### :active
-```
-<e-button active>Progress</e-button>
+```vue
+<e-button active @click="onClick">:active</e-button>
 ```
 
 #### :focus
-```
-<e-button focus>Progress</e-button>
+```vue
+<e-button focus @click="onClick">:focus</e-button>
 ```
 
-#### disabled
-```
-<e-button disabled>Progress</e-button>
+#### \[disabled\]
+```vue
+<e-button disabled @click="onClick">[disabled]</e-button>
 ```
 
 #### primary:hover
-```
-<e-button hover primary>Progress</e-button>
+```vue
+<e-button hover primary @click="onClick">:hover</e-button>
 ```
 
 #### primary:active
-```
-<e-button active primary>Progress</e-button>
+```vue
+<e-button active primary @click="onClick">:active</e-button>
 ```
 
 #### primary:focus
-```
-<e-button focus primary>Progress</e-button>
+```vue
+<e-button focus primary @click="onClick">:focus</e-button>
 ```
 
 #### primary\[disabled\]
-```
-<e-button disabled primary>Progress</e-button>
+```vue
+<e-button disabled primary @click="onClick">[disabled]</e-button>
 ```
 
 ### Cases
 
 #### Multiline
 
-```
-<e-button>A button<br>with wrapping<br>text</e-button>
+```vue
+<e-button @click="onClick">A button<br>with wrapping<br>text</e-button>
 ```

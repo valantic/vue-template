@@ -40,11 +40,10 @@
        */
       spacing: {
         type: [String, Number],
-        default: '500',
+        default: 0,
         validator(value) {
           return [
             0,
-            500
           ].includes(parseInt(value, 10));
         }
       },
@@ -132,12 +131,10 @@
       onBlur() {
         this.hasFocus = false;
       },
-      onClick() {
+      onClick(event) {
         this.$el.blur();
 
-        console.info('click');
-
-        this.$emit('click');
+        this.$emit('click', event);
       },
     },
 
@@ -194,22 +191,14 @@
 
       if (progress) {
         content = [
-          createElement( // Sub component wrapper
-            'div',
+          createElement( // e-progress
+            eProgress,
             {
-              class: this.b('progress')
-            },
-            [
-              createElement( // e-progress
-                eProgress,
-                {
-                  props: {
-                    spacing: '0',
-                    negative: true
-                  }
-                }
-              )
-            ]
+              props: {
+                spacing: '0',
+                negative: true
+              }
+            }
           )
         ];
       }
@@ -221,7 +210,15 @@
       return createElement(
         element,
         options,
-        content,
+        [
+          createElement( // Wrapper is needed to prevent content shifting in IE11
+            'span',
+            {
+              class: this.b('inner')
+            },
+            content,
+          )
+        ],
       );
     },
   };
@@ -274,6 +271,7 @@
     &--focus {
       color: $color-primary--3;
       background-color: $color-grayscale--500;
+      outline: none;
 
       &::before,
       &::after {
@@ -296,6 +294,7 @@
     &--active:not([disabled]) {
       color: $color-primary--3;
       background-color: $color-grayscale--400;
+      position: relative;
 
       &::before,
       &::after {
@@ -349,8 +348,16 @@
       }
     }
 
-    &__progress {
+    &__inner {
+      position: relative;
       display: inline-block;
+      vertical-align: bottom;
+      color: $color-grayscale--400;
+    }
+
+    .e-progress {
+      margin-top: -2px; // Creates unified height for text/progress button
+      margin-bottom: -1px;
     }
   }
 

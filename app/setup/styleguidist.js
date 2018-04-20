@@ -22,6 +22,10 @@ export default {
   methods: {
     $t(value) { // Mocks vue-i18n since it is currently not supported by styleguidist
       return value;
+    },
+    onClick(event) {
+      // eslint-disable-next-line no-console
+      console.log('You clicked:', event.target);
     }
   }
 };
