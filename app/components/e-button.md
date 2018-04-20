@@ -50,8 +50,16 @@ Not defined yet.
 
 ### Progress
 
+#### Default
+
 ```
 <e-button progress></e-button>
+```
+
+#### Primary
+
+```
+<e-button progress primary></e-button>
 ```
 
 ### Native states

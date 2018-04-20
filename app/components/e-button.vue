@@ -134,6 +134,10 @@
       },
       onClick() {
         this.$el.blur();
+
+        console.info('click');
+
+        this.$emit('click');
       },
     },
 
@@ -172,7 +176,7 @@
         }),
         attrs: {
           ...this.$attrs,
-          disabled,
+          disabled: progress || disabled,
         },
         on: {
           mouseenter: this.onMouseEnter,
@@ -201,6 +205,7 @@
                 {
                   props: {
                     spacing: '0',
+                    negative: true
                   }
                 }
               )
@@ -276,13 +281,13 @@
       }
     }
 
-    &:hover:not([disabled]),
-    &--hover:not([disabled]) {
+    &:hover,
+    &--hover {
       color: $color-primary--3;
       background-color: $color-grayscale--500;
 
-      &::before,
-      &::after {
+      &:not([disabled])::before,
+      &:not([disabled])::after {
         display: none;
       }
     }
@@ -299,7 +304,10 @@
     }
 
     &[disabled],
-    &--disabled {
+    &--disabled,
+    &[disabled]:hover,
+    &--disabled:hover {
+      background-color: transparent;
       border-color: $color-grayscale--600;
       color: $color-grayscale--500;
     }
@@ -327,36 +335,66 @@
       padding: 0;
     }
 
+    &--progress,
+    &--progress[disabled],
+    &--progress[disabled]:hover,
+    &--progress[disabled]:focus,
+    &--progress:hover,
+    &--progress:focus {
+      background-color: $color-grayscale--400; // TODO: double check with Christoph what the correct value should be
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+
     &__progress {
       display: inline-block;
     }
   }
 
-  .e-button--primary:not([disabled]) {
-    color: $color-secondary--2;
+  .e-button--primary {
+    &:not([disabled]) {
+      color: $color-secondary--2;
 
-    &::before,
-    &::after {
-      border-width: 2px;
-      border-color: $color-primary--1;
+      &::before,
+      &::after {
+        border-width: 2px;
+        border-color: $color-primary--1;
+      }
+
+      &.e-button:focus,
+      &.e-button--focus {
+        color: $color-primary--3;
+        background-color: $color-primary--1;
+      }
+
+      &.e-button:hover:not([disabled]),
+      &.e-button--hover:not([disabled]) {
+        color: $color-primary--3;
+        background-color: $color-primary--1;
+      }
+
+      &.e-button:active:not([disabled]),
+      &.e-button--active:not([disabled]) {
+        color: $color-primary--3;
+        background-color: $color-secondary--2;
+      }
     }
 
-    &.e-button:focus,
-    &.e-button--focus {
-      color: $color-primary--3;
-      background-color: $color-primary--1;
-    }
-
-    &.e-button:hover:not([disabled]),
-    &.e-button--hover:not([disabled]) {
-      color: $color-primary--3;
-      background-color: $color-primary--1;
-    }
-
-    &.e-button:active:not([disabled]),
-    &.e-button--active:not([disabled]) {
-      color: $color-primary--3;
+    &.e-button--progress,
+    &.e-button--progress[disabled],
+    &.e-button--progress[disabled]:hover,
+    &.e-button--progress[disabled]:focus,
+    &.e-button--progress:hover,
+    &.e-button--progress:focus {
       background-color: $color-secondary--2;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
   }
 </style>
