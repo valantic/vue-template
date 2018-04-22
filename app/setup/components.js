@@ -1,6 +1,7 @@
 import eIcon from '@/components/e-icon';
 import eButton from '@/components/e-button';
 import ePicture from '@/components/e-picture';
+import ePanel from '@/components/e-panel';
 
 export default {
   install(Vue) {
@@ -19,6 +20,7 @@ export default {
       Vue.component(eButton.name, eButton);
       Vue.component(eIcon.name, eIcon);
       Vue.component(ePicture.name, ePicture);
+      Vue.component(ePanel.name, ePanel);
     }
   },
 };

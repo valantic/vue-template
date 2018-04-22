@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({ border: border, color: color })">
+  <div :class="b(panelModifiers)">
     <!-- TODO replace with e-heading -->
     <div v-if="hasHeading" :class="b('heading', headingModifiers)">
       <span :class="b('heading-underline')">{{ heading }}</span>
@@ -33,10 +33,10 @@
        * Valid values: `0`, `500`
        */
       headingSpacing: {
-        type: Number,
+        type: [String, Number],
         default: 500,
         validator(value) {
-          return [0, 500].includes(value);
+          return [0, 500].includes(parseInt(value, 10));
         },
       },
 
@@ -46,10 +46,10 @@
        * Valid values: `0`, `500`
        */
       contentSpacing: {
-        type: Number,
+        type: [String, Number],
         default: 500,
         validator(value) {
-          return [0, 500].includes(value);
+          return [0, 500].includes(parseInt(value, 10));
         },
       },
 
@@ -68,8 +68,11 @@
        * Valid values: `0`, `1`, `2`
        */
       border: {
-        type: Number,
+        type: [String, Number],
         default: 0,
+        validator(value) {
+          return [0, 1, 2].includes(parseInt(value, 10));
+        },
       },
 
       /**
@@ -146,6 +149,12 @@
       hasHeading() {
         return this.heading;
       },
+      panelModifiers() {
+        return {
+          border: this.border.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+          color: this.color,
+        };
+      },
       headingModifiers() {
         return {
           spacing: this.headingSpacing.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
@@ -159,7 +168,7 @@
       triangleButtonModifiers() {
         return {
           size: this.triangleButtonSize,
-          border: this.border,
+          border: this.border.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
           color: this.color,
         };
       },
@@ -200,7 +209,6 @@
 <style lang="scss">
   .e-panel {
     position: relative;
-    overflow: hidden;
     background-color: $color-grayscale--1000;
 
     &--border-1 {
@@ -251,14 +259,53 @@
       cursor: pointer;
     }
 
+    &__triangle-button::before {
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+
     &__triangle-button--size-small {
       width: 22px;
       height: 22px;
     }
 
+    &__triangle-button--size-small::before {
+      border-top: 22px solid transparent;
+      border-bottom: 0 solid transparent;
+    }
+
     &__triangle-button--size-big {
       width: 33px;
       height: 33px;
+    }
+
+    &__triangle-button--size-big::before {
+      border-top: 33px solid transparent;
+      border-bottom: 0 solid transparent;
+    }
+
+    &__triangle-button--color-blue {
+      &.e-panel__triangle-button--size-small::before {
+        border-right: 22px solid $color-secondary--1;
+      }
+
+      &.e-panel__triangle-button--size-big::before {
+        border-right: 33px solid $color-secondary--1;
+      }
+    }
+
+    &__triangle-button--color-yellow {
+      &.e-panel__triangle-button--size-small::before {
+        border-right: 22px solid $color-primary--1;
+      }
+
+      &.e-panel__triangle-button--size-big::before {
+        border-right: 33px solid $color-primary--1;
+      }
     }
 
     &__triangle-button--border-1 {
@@ -267,42 +314,6 @@
 
     &__triangle-button--border-2 {
       bottom: -2px;
-    }
-
-    &__triangle-button--color-yellow {
-      background-color: $color-primary--1;
-    }
-
-    &__triangle-button--color-blue {
-      background-color: $color-secondary--1;
-    }
-
-    &__triangle-button::after {
-      content: "";
-      display: block;
-      position: absolute;
-      box-shadow: 0 2px 2px -2px rgba($color-grayscale--0, 0.3);
-      transform: rotate(-41deg);
-      background-color: $color-grayscale--1000;
-    }
-
-    &__triangle-button--hover::after {
-      box-shadow: inset 0 2px 2px -2px rgba($color-grayscale--0, 0.3);
-      transform: rotate(139deg);
-    }
-
-    &__triangle-button--size-small::after {
-      width: 36px;
-      height: 20px;
-      bottom: 7px;
-      right: 1px;
-    }
-
-    &__triangle-button--size-big::after {
-      width: 50px;
-      height: 25px;
-      bottom: 12px;
-      right: 0;
     }
 
     &__plus {
@@ -321,8 +332,8 @@
     }
 
     &__plus--size-big {
-      width: 19px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
     }
 
     &__plus--hover,
@@ -398,4 +409,5 @@
       background-color: $color-grayscale--1000;
     }
   }
+
 </style>

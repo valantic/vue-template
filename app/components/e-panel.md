@@ -3,10 +3,10 @@
 #### Panel
 ```
 <e-panel
-  border=2
+  border="2"
   color="gray"
-  heading-spacing=0
-  content-spacing=0
+  heading-spacing="0"
+  content-spacing="0"
 >
   foo<br>bar<br>
   foo<br>bar<br>
@@ -15,7 +15,7 @@
 #### Panel (small button)
 ```
 <e-panel
-  border=1
+  border="1"
   triangle-button
   triangle-button-size="small"
   triangle-button-color="blue"
@@ -28,7 +28,7 @@
 #### Panel (big button)
 ```
 <e-panel
-  border=2
+  border="2"
   color="yellow"
   triangle-button
   triangle-button-size="big"

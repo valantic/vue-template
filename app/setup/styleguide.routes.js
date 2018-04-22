@@ -1,6 +1,7 @@
 import index from '../styleguide/routes/index';
 import lDefault from '../components/l-default';
 import lazyload from '../styleguide/routes/lazyload';
+import panels from '../styleguide/routes/panels';
 
 const root = '/styleguide';
 
@@ -30,6 +31,14 @@ export default [
     component: lDefault,
     meta: {
       title: 'Layout',
+    }
+  },
+  {
+    path: `${root}/panels`,
+    name: 'styleguidePanels',
+    component: panels,
+    meta: {
+      title: 'Panels',
     }
   },
   {
