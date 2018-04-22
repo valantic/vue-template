@@ -71,7 +71,7 @@
     // methods: {},
 
     /**
-     * Creates a button or button like link based on defined/missing href link
+     * Creates a heading element
      *
      * @param   {function}    createElement   Vue helper
      *
