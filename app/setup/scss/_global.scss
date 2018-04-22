@@ -7,3 +7,22 @@ html,
 body {
   height: 100%;
 }
+
+// global link definitions
+a,
+.e-link {
+  border-bottom: 1px solid $color-grayscale--600;
+  color: $color-grayscale--400;
+  font-family: $font-family--primary;
+  padding: 0 $spacing--10;
+  text-decoration: none;
+
+  &:focus,
+  &--focus,
+  &:hover,
+  &--hover {
+    color: $color-secondary--1;
+    border-bottom: 1px solid $color-primary--1;
+    text-decoration: none;
+  }
+}
