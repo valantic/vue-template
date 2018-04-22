@@ -64,4 +64,13 @@ Available font-weight variables
 
 **p** <html><span style="font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></html>
 
-
+### Links
+```
+<a href="#0">no class</a>
+```
+```
+<a href="#0" class="e-link">with class e-link</a>
+```
+```
+<a href="#0" class="e-link e-link--hover">with hover state</a>
+```

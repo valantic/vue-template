@@ -1,4 +1,5 @@
 const { theme, styles } = require('./app/setup/styleguide.styles');
+const path = require('path');
 
 module.exports = {
   webpackConfig(env) {
@@ -7,6 +8,11 @@ module.exports = {
       styleguide: true
     })
   },
+  require: [
+    // NOTE: for the application this is imported in main.js. Unfortunatley the styleguidist does not support this, so we need
+    // to import the global styles here as well.
+    path.join(__dirname, 'app/setup/_scss.scss'),
+  ],
   defaultExample: 'app/setup/styleguide.fallback.md',
   components: 'app/components/**/*.vue',
   styleguideDir: 'dist/styleguidist',
@@ -52,7 +58,11 @@ module.exports = {
   ],
   ignore: [
     '**/components/s-palette-item.vue',
-    '**/components/s-color-item.vue'
+    '**/components/s-color-item.vue',
+    '**/components/l-default.vue',
+    '**/components/c-header.vue',
+    '**/components/c-footer.vue',
+    '**/components/s-layout.vue'
   ],
   theme,
   styles
