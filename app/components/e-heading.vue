@@ -17,17 +17,27 @@
           return [
             'blue',
             'green',
-            'darkgrey',
+            'gray',
           ].includes(value);
         },
       },
 
       /**
-       * Defines the level of the heading (h1-h6)
+       * Defines the tagname of the heading (h1-h6)
        */
-      level: {
+      tagName: {
         type: String,
         required: true,
+        validator(value) {
+          return [
+            'h1',
+            'h2',
+            'h3',
+            'h4',
+            'h5',
+            'h6',
+          ].includes(value);
+        },
       },
 
       /**
@@ -35,7 +45,7 @@
        */
       underline: {
         type: Boolean,
-        default: null,
+        default: true,
       },
 
       /**
@@ -43,7 +53,7 @@
        */
       weight: {
         type: String,
-        default: null,
+        default: 'normal',
         validator(value) {
           return [
             'normal',
@@ -78,15 +88,16 @@
      * @returns {*}
      */
     render(createElement) {
-      const element = this.$props.level;
+      const element = this.$props.tagName;
       const attributes = {
         class: this.b({
           color: this.$props.color,
-          underline: this.$props.underline === 'true',
+          underline: this.$props.underline,
           weight: this.$props.weight,
+          tagname: this.$props.tagName,
         }),
         attrs: {
-
+          ...this.$attrs,
         },
       };
 
@@ -101,64 +112,69 @@
 
 <style lang="scss">
   .e-heading {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: $font-family--primary;
     font-weight: normal;
     color: $color-secondary--1;
     letter-spacing: 2.03px;
     line-height: 23px;
+    text-decoration: none;
 
-    &.e-heading--weight-normal {
-      font-weight: normal;
+    &--tagname-h1 {
+      font-size: $font-size--18;
     }
 
-    &.e-heading--weight-semibold {
-      font-weight: 600;
+    &--tagname-h2 {
+      font-size: $font-size--16;
     }
 
-    &.e-heading--weight-bold {
-      font-weight: bold;
+    &--tagname-h3 {
+      font-size: $font-size--14;
     }
 
-    &.e-heading--underline {
-      text-decoration: underline;
+    &--tagname-h4 {
+      font-size: $font-size--14;
+      font-weight: $font-weight--bold;
     }
 
-    &.e-heading--color-blue {
+    &--tagname-h5 {
+      font-size: $font-size--14;
+      font-weight: $font-weight--semi-bold;
+    }
+
+    &--tagname-h6 {
+      font-size: $font-size--14;
+    }
+
+    &--weight-normal {
+      font-weight: $font-weight--regular;
+    }
+
+    &--weight-semibold {
+      font-weight: $font-weight--semi-bold;
+    }
+
+    &--weight-bold {
+      font-weight: $font-weight--bold;
+    }
+
+    &--underline {
+      display: inline-block;
+      border-bottom: 1px solid $color-primary--1;
+      padding-left: $spacing--30;
+      padding-right: $spacing--30;
+      line-height: 54px;
+    }
+
+    &--color-blue {
       color: $color-secondary--1;
     }
 
-    &.e-heading--color-darkgrey {
+    &--color-gray {
       color: $color-grayscale--200;
     }
 
-    &.e-heading--color-green {
+    &--color-green {
       color: $color-secondary--3;
     }
-  }
-
-  h1.e-heading {
-    font-size: 18px;
-  }
-
-  h2.e-heading {
-    font-size: 16px;
-  }
-
-  h3.e-heading {
-    font-size: 14px;
-  }
-
-  h4.e-heading {
-    font-size: 14px;
-    font-weight: bold;
-  }
-
-  h5.e-heading {
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  h6.e-heading {
-    font-size: 14px;
   }
 </style>
