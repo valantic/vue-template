@@ -160,8 +160,8 @@
     &--underline {
       display: inline-block;
       border-bottom: 1px solid $color-primary--1;
-      padding-left: $spacing--30;
-      padding-right: $spacing--30;
+      padding-left: $spacing--20;
+      padding-right: $spacing--20;
       line-height: 54px;
     }
 
