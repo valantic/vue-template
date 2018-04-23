@@ -1,5 +1,6 @@
 import index from '../styleguide/routes/index';
 import lDefault from '../components/l-default';
+import productDetail from '../styleguide/routes/product-detail';
 import lazyload from '../styleguide/routes/lazyload';
 
 const root = '/styleguide';
@@ -30,6 +31,14 @@ export default [
     component: lDefault,
     meta: {
       title: 'Layout',
+    }
+  },
+  {
+    path: `${root}/product-detail`,
+    name: 'styleguideProductDetail',
+    component: productDetail,
+    meta: {
+      title: 'Product Detail',
     }
   },
   {
