@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: 'e-progress', // TODO: update name according to filename
+    name: 'e-progress',
     // components: {},
     // mixins: [],
 
