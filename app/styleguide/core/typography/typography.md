@@ -2,17 +2,17 @@
 
 Font. See app/setup/scss/mixins/_font.scss
 ```scss
-@mixin font($font-size: $font-size--default, $line-height: null, $font-weight: null)
+@mixin font($font-size: $font-size--default, $line-height: null, $font-weight: null);
 ```
 
 Font-size. See app/setup/scss/mixins/_font-size.scss
 ```scss
-@mixin font-size($size-value: $font-size--default)
+@mixin font-size($size-value: $font-size--default);
 ```
 
 Line-height. See app/setup/scss/mixins/_line-height.scss
 ```scss
-@mixin line-height($line-height: $line-height--default, $font-size: $font-size--default)
+@mixin line-height($line-height: $line-height--default, $font-size: $font-size--default);
 ```
 
 Please make sure that you use the defined SCSS mixins for font, font-size and line-height.  This way we can make sure that all of the font units are relative (rem/em). Use mixins within styles, not the other way around
@@ -131,13 +131,20 @@ Please make sure that you use the defined SCSS mixins for font, font-size and li
 ```
 
 ##### Styles
+
+###### $font-weight--regular
+
 ```
 <span style="font-weight: 400;">Regular</span>
 ```
 
+###### $font-weight--semi-bold
+
 ```
 <span style="font-weight: 600;">Semi-Bold</span>
 ```
+
+###### $font-weight--bold
 
 ```
 <span style="font-weight: 700;">Bold</span>
