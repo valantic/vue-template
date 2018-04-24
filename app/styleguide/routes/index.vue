@@ -36,6 +36,7 @@
   .index {
     max-width: map-get($grid-breakpoints, xl);
     margin: 0 auto;
+    padding: $spacing--30;
 
     &__warning {
       border: 1px solid $color-status--danger;

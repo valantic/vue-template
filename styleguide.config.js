@@ -19,6 +19,16 @@ module.exports = {
   showUsage: false,
   sections: [
     {
+      name: 'Welcome',
+      content: '',
+      sections: [
+        {
+          name: 'Informations',
+          content: 'app/styleguide/components/s-welcome.md',
+        }
+      ]
+    },
+    {
       name: 'Core',
       content: 'app/styleguide/core/core.md',
       sections: [
