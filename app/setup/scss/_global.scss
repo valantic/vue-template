@@ -1,11 +1,14 @@
 html {
   font-size: 1rem;
-  font-family: $font-family--primary;
 }
 
 html,
 body {
   height: 100%;
+}
+
+body {
+  font-family: $font-family--primary;
 }
 
 // global link definitions
