@@ -85,7 +85,7 @@ Always use **v-model** to bind value to form elements!
 <template>
   <div>
   
-    <e-input v-model="demo" state="error" hover name="demo" placeholder="enter text..."/> 
+    <e-input v-model="demo" state="error" name="demo" placeholder="enter text..."/> 
     
     <div v-if="demo" class="spacing--top-15">
       <p>{{demo}}</p>
