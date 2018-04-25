@@ -11,10 +11,10 @@ const state = {
 // getters
 const getters = {
   /**
-   * Gets all products
+   * Gets a product
    *
-   * @param   {state}   current state
-   * @returns  {Array} Products
+   * @param   {state}   Current state
+   * @returns  {Array} Product
    */
   // TODO handle state error e.g. (eslint no-shadow: ["error", { "allow": ["state"] }])
   getProduct: state => state.items
