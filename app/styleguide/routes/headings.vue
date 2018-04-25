@@ -59,7 +59,53 @@
         <e-heading
           tag-name="h6"
           weight="normal"
-          color="gray"
+          underline>
+          <a href="#">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          </a>
+        </e-heading>
+      </div>
+
+      <h1>Headings with links</h1>
+      <div :class="b('examplebox')">
+        <e-heading
+          tag-name="h1"
+          underline>
+          <a href="#">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          </a>
+        </e-heading>
+        <e-heading
+          tag-name="h2"
+          underline>
+          <a href="#">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          </a>
+        </e-heading>
+        <e-heading
+          tag-name="h3"
+          underline>
+          <a href="#">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          </a>
+        </e-heading>
+        <e-heading
+          tag-name="h4"
+          underline>
+          <a href="#">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          </a>
+        </e-heading>
+        <e-heading
+          tag-name="h5"
+          underline>
+          <a href="#">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          </a>
+        </e-heading>
+        <e-heading
+          tag-name="h6"
+          weight="normal"
           underline>
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
