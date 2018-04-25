@@ -7,7 +7,7 @@
     <form>
       first name: <e-input v-model="name.firstName" name="firstname" placeholder="..." />
       last name: <e-input v-model="name.lastName" name="lastname" placeholder="..." />
-      <p v-if="name.firstName && name.lastName">Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
+      <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <pre>{{ name }}</pre>
     </form>
   </div>

@@ -2,6 +2,7 @@
 
   <div :class="b(modifiers)">
     <input
+      :autocomplete="autocomplete"
       :class="b('field')"
       :disabled="disabled"
       :name="name"
@@ -59,6 +60,14 @@
             'success',
           ].includes(value);
         }
+      },
+
+      /**
+       * Adds active state
+       */
+      autocomplete: {
+        type: String,
+        default: 'off',
       },
 
       /**
@@ -199,13 +208,13 @@
 
     // active
     &__field:active,
-    &--active > &__field {
+    &--active &__field {
       border: 1px solid $color-grayscale--500;
     }
 
     // focus
     &__field:focus,
-    &--focus > &__field {
+    &--focus &__field {
       border: 1px solid $color-grayscale--500;
       box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
       color: $color-secondary--1;
@@ -214,7 +223,7 @@
 
     // hover
     &__field:hover,
-    &--hover > &__field {
+    &--hover &__field {
       border: 1px solid $color-grayscale--500;
     }
 
@@ -249,7 +258,7 @@
       border: 1px solid $color-secondary--4;
     }
 
-    &--state-error > &__field:focus {
+    &--state-error &__field:focus {
       border: 1px solid $color-secondary--4;
     }
 
