@@ -95,7 +95,13 @@
     render(createElement) {
       const element = this.$props.tagName;
       const attributes = {
-        class: this.b({
+        class: this.b(),
+        attrs: {
+          ...this.$attrs,
+        },
+      };
+      const childAttributes = {
+        class: this.b('inline', {
           color: this.$props.color,
           underline: this.$props.underline,
           weight: this.$props.weight,
@@ -109,7 +115,9 @@
       return createElement(
         element,
         attributes,
-        this.$slots.default,
+        [
+          createElement('span', childAttributes, this.$slots.default)
+        ],
       );
     },
   };
@@ -122,69 +130,73 @@
     color: $color-secondary--1;
     line-height: 1.25;
     text-decoration: none;
+    display: block;
 
-    & a {
+    &__inline {
+      display: inline-block;
+    }
+
+    &__inline a {
       color: $color-secondary--1;
       border: none;
       padding: $spacing--0;
     }
 
-    &--h1 {
+    &__inline--h1 {
       font-size: $font-size--18;
     }
 
-    &--h2 {
+    &__inline--h2 {
       font-size: $font-size--16;
     }
 
-    &--h3 {
+    &__inline--h3 {
       font-size: $font-size--14;
     }
 
-    &--h4 {
+    &__inline--h4 {
       font-size: $font-size--14;
       font-weight: $font-weight--bold;
     }
 
-    &--h5 {
+    &__inline--h5 {
       font-size: $font-size--14;
       font-weight: $font-weight--semi-bold;
     }
 
-    &--h6 {
+    &__inline--h6 {
       font-size: $font-size--14;
     }
 
-    &--weight-normal {
+    &__inline--weight-normal {
       font-weight: $font-weight--regular;
     }
 
-    &--weight-semibold {
+    &__inline--weight-semibold {
       font-weight: $font-weight--semi-bold;
     }
 
-    &--weight-bold {
+    &__inline--weight-bold {
       font-weight: $font-weight--bold;
     }
 
-    &--underline {
-      display: block;
+    &__inline--underline {
       border-bottom: 1px solid $color-primary--1;
       padding: $spacing--15 $spacing--20;
     }
 
-    &--color-blue {
+    &__inline--color-blue {
       color: $color-secondary--1;
 
-      & a {
+      a {
         color: $color-secondary--1;
       }
     }
 
-    &--color-gray {
+    &__inline--color-gray {
       color: $color-grayscale--200;
 
-      & a {
+      a {
         color: $color-grayscale--200;
       }
     }
