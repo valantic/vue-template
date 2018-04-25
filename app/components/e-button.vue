@@ -57,7 +57,7 @@
       },
 
       /**
-       * IF `true` the button shows a progress animation
+       * If `true` the button shows a progress animation
        */
       progress: {
         type: Boolean,
