@@ -2,5 +2,8 @@
   "s-language": {
     "en": "English",
     "de": "German"
+  },
+  "e-progress": {
+    "loading": "Loading …"
   }
 }
