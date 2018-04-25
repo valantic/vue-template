@@ -9,6 +9,8 @@
     props: {
       /**
        * Defines the color of the heading (h1-h6)
+       * 
+       * Valid values: `blue, gray`
        */
       color: {
         type: String,
@@ -16,7 +18,6 @@
         validator(value) {
           return [
             'blue',
-            'green',
             'gray',
           ].includes(value);
         },
@@ -24,6 +25,8 @@
 
       /**
        * Defines the tagname of the heading (h1-h6)
+       * 
+       * Valid values: `h1, h2, h3, h4, h5, h6`
        */
       tagName: {
         type: String,
@@ -45,11 +48,13 @@
        */
       underline: {
         type: Boolean,
-        default: true,
+        default: false,
       },
 
       /**
        * Defines the font weight
+       * 
+       * Valid values: `normal, semibold, bold`
        */
       weight: {
         type: String,
@@ -94,7 +99,7 @@
           color: this.$props.color,
           underline: this.$props.underline,
           weight: this.$props.weight,
-          tagname: this.$props.tagName,
+          [this.$props.tagName]: true
         }),
         attrs: {
           ...this.$attrs,
@@ -113,35 +118,40 @@
 <style lang="scss">
   .e-heading {
     font-family: $font-family--primary;
-    font-weight: normal;
+    font-weight: $font-weight--regular;
     color: $color-secondary--1;
-    letter-spacing: 2.03px;
-    line-height: 23px;
+    line-height: 1.25;
     text-decoration: none;
 
-    &--tagname-h1 {
+    & a {
+      color: $color-secondary--1;
+      border: none;
+      padding: $spacing--0;
+    }
+
+    &--h1 {
       font-size: $font-size--18;
     }
 
-    &--tagname-h2 {
+    &--h2 {
       font-size: $font-size--16;
     }
 
-    &--tagname-h3 {
+    &--h3 {
       font-size: $font-size--14;
     }
 
-    &--tagname-h4 {
+    &--h4 {
       font-size: $font-size--14;
       font-weight: $font-weight--bold;
     }
 
-    &--tagname-h5 {
+    &--h5 {
       font-size: $font-size--14;
       font-weight: $font-weight--semi-bold;
     }
 
-    &--tagname-h6 {
+    &--h6 {
       font-size: $font-size--14;
     }
 
@@ -158,24 +168,25 @@
     }
 
     &--underline {
-      display: inline-block;
+      display: block;
       border-bottom: 1px solid $color-primary--1;
-      padding-left: $spacing--20;
-      padding-right: $spacing--20;
-      padding-top: $spacing--15;
-      padding-bottom: $spacing--15;
+      padding: $spacing--15 $spacing--20;
     }
 
     &--color-blue {
       color: $color-secondary--1;
+
+      & a {
+        color: $color-secondary--1;
+      }
     }
 
     &--color-gray {
       color: $color-grayscale--200;
-    }
 
-    &--color-green {
-      color: $color-secondary--3;
+      & a {
+        color: $color-grayscale--200;
+      }
     }
   }
 </style>

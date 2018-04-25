@@ -1,47 +1,41 @@
 <template>
   <div :class="b()">
-    <div class="__example">
+    <div :class="b('__example')">
       <h2>Headings</h2>
 
       <h3>Headings</h3>
       <div>
         <e-heading
-          :underline="false"
           tag-name="h1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          :underline="false"
           tag-name="h2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          :underline="false"
           tag-name="h3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          :underline="false"
           tag-name="h4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          :underline="false"
           tag-name="h5">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          :underline="false"
           tag-name="h6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
@@ -50,38 +44,48 @@
       <h3>Headings with underline</h3>
       <div>
         <e-heading
-          tag-name="h1">
+          tag-name="h1"
+          underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          tag-name="h2">
+          tag-name="h2"
+          underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          tag-name="h3">
+          tag-name="h3"
+          underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          tag-name="h4">
+          tag-name="h4"
+          underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          tag-name="h5">
+          tag-name="h5"
+          underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
       <div>
         <e-heading
-          tag-name="h6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          tag-name="h6"
+          weight="normal"
+          color="gray"
+          underline>
+          <a href="#">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          </a>
         </e-heading>
       </div>
     </div>
