@@ -262,6 +262,7 @@
     outline: none;
     min-width: 165px;
     text-align: center;
+    cursor: pointer;
 
     &::before, // TODO: create mixin
     &::after {
@@ -333,6 +334,7 @@
       background-color: transparent;
       border-color: $color-grayscale--600;
       color: $color-grayscale--500;
+      cursor: default;
     }
 
     &--width-full {
