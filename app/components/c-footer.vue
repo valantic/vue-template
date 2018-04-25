@@ -8,7 +8,7 @@
       <hr :class="b('navigation-separator')">
       <div :class="b('social')">Folgen Sie uns auf: (F) (L) (X)</div>
       <hr :class="b('social-separator')">
-      <div class="__sonepar">A Sonepar Company</div>
+      <div :class="b('sonepar')">A Sonepar Company</div>
     </div>
   </div>
 </template>
@@ -133,17 +133,16 @@
         display: none;
       }
     }
-  }
 
-  /* stylelint-disable selector-class-pattern */
-  .__sonepar {
-    @include font($font-size: $font-size--18, $font-weight: $font-weight--bold);
+    &__sonepar {
+      @include font($font-size: $font-size--18, $font-weight: $font-weight--bold);
 
-    padding: $spacing--20 $spacing--0 $spacing--30 $spacing--10;
+      padding: $spacing--20 $spacing--0 $spacing--30 $spacing--10;
 
-    @include media(xs) {
-      order: 4;
-      padding-left: $spacing--20;
+      @include media(xs) {
+        order: 4;
+        padding-left: $spacing--20;
+      }
     }
   }
 </style>
