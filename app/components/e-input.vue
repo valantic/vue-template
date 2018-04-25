@@ -64,6 +64,8 @@
 
       /**
        * Adds active state
+       * Please refer to:
+       * [HTML5 input autocomplete](https://developer.mozilla.org/de/docs/Web/HTML/Element/Input#attr-autocomplete)
        */
       autocomplete: {
         type: String,
