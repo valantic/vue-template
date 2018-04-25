@@ -63,7 +63,7 @@
       },
 
       /**
-       * Adds active state
+       * Adds autocomplete
        * Please refer to:
        * [HTML5 input autocomplete](https://developer.mozilla.org/de/docs/Web/HTML/Element/Input#attr-autocomplete)
        */
