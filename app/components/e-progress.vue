@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({ negative, spacing })" :data-message="loadingMessage">
+  <div :class="b({ negative, spacing })" :data-message="message">
     <div :class="b('inner')">
       <div :class="b('bubble')"></div>
       <div :class="b('bubble')"></div>
@@ -9,17 +9,25 @@
 </template>
 
 <script>
+  import { i18n } from '@/setup/options';
+
   export default {
     name: 'e-progress',
     // components: {},
     // mixins: [],
 
     props: {
+      /**
+       * Inverts the loading style
+       */
       negative: {
         type: Boolean,
         default: false
       },
 
+      /**
+       * Sets the inner spacing for the animation
+       */
       spacing: {
         type: [String, Number],
         default: 500,
@@ -30,20 +38,20 @@
           ].includes(parseInt(value, 10));
         }
       },
+
+      /**
+       * Defines a fallback message. "e-progress.loading" is used by default
+       */
       message: {
         type: String,
-        default: null
+        default: () => i18n.t('e-progress.loading')
       }
     },
     // data() {
     //   return {};
     // },
 
-    computed: {
-      loadingMessage() {
-        return this.message || this.$t('e-progress.loading');
-      }
-    },
+    // computed: {},
     // watch: {},
 
     // beforeCreate() {},
