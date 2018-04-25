@@ -1,83 +1,61 @@
 <template>
   <div :class="b()">
-    <div :class="b('__example')">
-      <h2>Headings</h2>
-
-      <h3>Headings</h3>
-      <div>
+    <div :class="b('examplecontainer')">
+      <h1>Headings</h1>
+      <div :class="b('examplebox')">
         <e-heading
           tag-name="h1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h5">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
 
-      <h3>Headings with underline</h3>
-      <div>
+      <h1>Headings with underline</h1>
+      <div :class="b('examplebox')">
         <e-heading
           tag-name="h1"
           underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h2"
           underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h3"
           underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h4"
           underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h5"
           underline>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
-      </div>
-      <div>
         <e-heading
           tag-name="h6"
           weight="normal"
@@ -132,8 +110,11 @@
 
 <style lang="scss">
   .headings {
-    &__example {
-      margin-bottom: $spacing--30;
+    &__examplecontainer {
+      margin: $spacing--30;
+    }
+    &__examplebox {
+      margin: $spacing--30 $spacing--0;
     }
   }
 </style>
