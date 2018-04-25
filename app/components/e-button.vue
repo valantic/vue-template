@@ -261,7 +261,6 @@
     border-radius: $_e-button__radius;
     outline: none;
     min-width: 165px;
-    border-bottom: none; // Overwrite link styles
     text-align: center;
 
     &::before, // TODO: create mixin
