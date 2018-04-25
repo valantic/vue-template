@@ -108,13 +108,13 @@
     }
 
     &__toggle {
-      display: none;
+      display: block;
       border-top: thin solid $color-grayscale--600;
       margin-top: $spacing--10;
       padding: $spacing--10 $spacing--0;
-
-      @include media(xxs, xs) {
-        display: block;
+      
+      @include media(xs) {
+        display: none;
       }
     }
 
@@ -131,16 +131,22 @@
     }
     
     &__grid {
-      @include media(xxs, xs) {
-        max-height: $spacing--20;
-        transition: max-height $toggle-animation-duration;
-        overflow: hidden;
+      max-height: $spacing--20;
+      transition: max-height $toggle-animation-duration;
+      overflow: hidden;
+      
+      @include media(xs) {
+        transition: none;
+        max-height: inherit;
+        overflow: visible;
       }
     }
 
     &__grid--toggled {
-      @include media(xxs, xs) {
-        max-height: 500px;
+      max-height: 800px;
+
+      @include media(xs) {
+        max-height: inherit;
       }
     }
   }
