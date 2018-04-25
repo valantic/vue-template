@@ -107,9 +107,7 @@
           weight: this.$props.weight,
           [this.$props.tagName]: true
         }),
-        attrs: {
-          ...this.$attrs,
-        },
+        attrs: {},
       };
 
       return createElement(
