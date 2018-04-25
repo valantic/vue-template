@@ -1,7 +1,7 @@
 import eIcon from '@/components/e-icon';
 import eButton from '@/components/e-button';
 import ePicture from '@/components/e-picture';
-import ePanel from '@/components/e-panel';
+import ePanel from '@/components/c-panel';
 
 export default {
   install(Vue) {

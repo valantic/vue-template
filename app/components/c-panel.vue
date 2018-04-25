@@ -9,11 +9,11 @@
     </div>
     <div
       v-if="triangleButton"
-      ref="button"
       :class="b('triangle-button', triangleButtonModifiers)"
       @click="onTriangleButtonClick"
       @mouseover="onPlusToggle"
       @mouseout="onPlusToggle">
+      <div ref="shadow" :class="b('shadow', shadowModifiers)"></div>
       <span ref="plus" :class="b('plus', plusModifiers)"></span>
     </div>
   </div>
@@ -21,7 +21,7 @@
 
 <script>
   export default {
-    name: 'e-panel',
+    name: 'c-panel',
     // components: {},
     // mixins: [],
 
@@ -168,7 +168,10 @@
       triangleButtonModifiers() {
         return {
           size: this.triangleButtonSize,
-          border: this.border.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+        };
+      },
+      shadowModifiers() {
+        return {
           color: this.color,
         };
       },
@@ -195,19 +198,28 @@
 
     methods: {
       onPlusToggle() {
-        this.$refs.plus.classList.toggle('e-panel__plus--hover');
-        this.$refs.button.classList.toggle('e-panel__triangle-button--hover');
+        // onPlusToggle() gets triggered on touch devices as well, which is not what we want.
+        if (!this.hasTouch()) {
+          this.$refs.plus.classList.toggle('c-panel__plus--hover');
+          this.$refs.shadow.classList.toggle('c-panel__shadow--hover');
+        }
       },
       onTriangleButtonClick() {
         this.$emit('triangle-pressed');
-      }
+      },
+      hasTouch() {
+        return 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+      },
     },
     // render() {},
   };
 </script>
 
 <style lang="scss">
-  .e-panel {
+
+  .c-panel {
+    $shadow-blur-radius: 5px;
+
     position: relative;
     background-color: $color-grayscale--1000;
 
@@ -257,63 +269,57 @@
       right: 0;
       border: none;
       cursor: pointer;
-    }
-
-    &__triangle-button::before {
-      content: '';
-      width: 0;
-      height: 0;
-      position: absolute;
-      right: 0;
-      bottom: 0;
+      overflow: hidden;
     }
 
     &__triangle-button--size-small {
-      width: 22px;
-      height: 22px;
-    }
-
-    &__triangle-button--size-small::before {
-      border-top: 22px solid transparent;
-      border-bottom: 0 solid transparent;
+      width: 29px;
+      height: 29px;
     }
 
     &__triangle-button--size-big {
-      width: 33px;
-      height: 33px;
+      width: 40px;
+      height: 40px;
     }
 
-    &__triangle-button--size-big::before {
-      border-top: 33px solid transparent;
-      border-bottom: 0 solid transparent;
+    &__shadow {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 7px;
+      right: -70px;
+      transform: rotate(138deg);
+      box-shadow: inset 0 0 $shadow-blur-radius $color-grayscale--200;
+      animation: shadowFadeOut 0.25s;
     }
 
-    &__triangle-button--color-blue {
-      &.e-panel__triangle-button--size-small::before {
-        border-right: 22px solid $color-secondary--1;
-      }
-
-      &.e-panel__triangle-button--size-big::before {
-        border-right: 33px solid $color-secondary--1;
-      }
+    &__shadow--color-yellow {
+      background-color: $color-primary--1;
     }
 
-    &__triangle-button--color-yellow {
-      &.e-panel__triangle-button--size-small::before {
-        border-right: 22px solid $color-primary--1;
-      }
-
-      &.e-panel__triangle-button--size-big::before {
-        border-right: 33px solid $color-primary--1;
-      }
+    &__shadow--color-blue {
+      background-color: $color-secondary--1;
     }
 
-    &__triangle-button--border-1 {
-      bottom: -1px;
+    &__shadow--color-gray {
+      background-color: $color-grayscale--600;
     }
 
-    &__triangle-button--border-2 {
-      bottom: -2px;
+    &__shadow--hover {
+      animation: shadowFade 0.25s;
+      box-shadow: 0 0 $shadow-blur-radius $color-grayscale--200;
+    }
+
+    @keyframes shadowFade {
+      0% { box-shadow: inset 0 0 $shadow-blur-radius $color-grayscale--200; }
+      50% { box-shadow: none; }
+      100% { box-shadow: 0 0 $shadow-blur-radius $color-grayscale--200; }
+    }
+
+    @keyframes shadowFadeOut {
+      0% { box-shadow: 0 0 $shadow-blur-radius $color-grayscale--200; }
+      50% { box-shadow: none; }
+      100% { box-shadow: inset 0 0 $shadow-blur-radius $color-grayscale--200; }
     }
 
     &__plus {
@@ -342,7 +348,7 @@
     }
 
     &__plus--open {
-      &.e-panel__plus--hover {
+      &.c-panel__plus--hover {
         transform: rotate(270deg);
       }
     }

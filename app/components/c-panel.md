@@ -2,7 +2,7 @@
 
 #### Panel
 ```
-<e-panel
+<c-panel
   border="2"
   color="gray"
   heading-spacing="0"
@@ -10,11 +10,11 @@
 >
   foo<br>bar<br>
   foo<br>bar<br>
-</e-panel>
+</c-panel>
 ```
 #### Panel (small button)
 ```
-<e-panel
+<c-panel
   border="1"
   triangle-button
   triangle-button-size="small"
@@ -23,11 +23,11 @@
 >
   foo<br>bar<br>
   foo<br>bar<br>
-</e-panel>
+</c-panel>
 ```
 #### Panel (big button)
 ```
-<e-panel
+<c-panel
   border="2"
   color="yellow"
   triangle-button
@@ -37,5 +37,5 @@
 >
   foo<br>bar<br>
   foo<br>bar<br>
-</e-panel>
+</c-panel>
 ```

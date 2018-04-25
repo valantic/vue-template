@@ -4,17 +4,17 @@
 
       <h2>Default</h2>
       <div :class="b('example')">
-        <e-panel>
+        <c-panel>
           foo bar foo bar<br>
           foo bar foo bar<br>
           foo bar foo bar<br>
           foo bar foo bar<br>
-        </e-panel>
+        </c-panel>
       </div>
 
       <h2>Gray border, no spacing</h2>
       <div :class="b('example')">
-        <e-panel
+        <c-panel
           border="2"
           color="gray"
           heading-spacing="0"
@@ -24,12 +24,12 @@
           foo bar foo bar<br>
           foo bar foo bar<br>
           foo bar foo bar<br>
-        </e-panel>
+        </c-panel>
       </div>
 
       <h2>Small button in open state with spacings</h2>
       <div :class="b('example')">
-        <e-panel
+        <c-panel
           border="1"
           triangle-button
           triangle-button-size="small"
@@ -40,12 +40,12 @@
           foo bar foo bar<br>
           foo bar foo bar<br>
           foo bar foo bar<br>
-        </e-panel>
+        </c-panel>
       </div>
 
       <h2>Yellow button with heading and spacings</h2>
       <div :class="b('example')">
-        <e-panel
+        <c-panel
           border="2"
           color="yellow"
           triangle-button
@@ -58,7 +58,7 @@
           foo bar foo bar<br>
           foo bar foo bar<br>
           <div style="background-color: #00ffff; height: 20px;"></div>
-        </e-panel>
+        </c-panel>
       </div>
 
     </l-default>
