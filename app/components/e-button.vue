@@ -133,6 +133,7 @@
       },
       onMouseLeave() {
         this.hasHover = false;
+        this.isActive = false;
       },
       onMouseDown() {
         this.isActive = true;
@@ -296,6 +297,7 @@
       color: $color-primary--3;
       background-color: $color-grayscale--500;
       outline: none;
+      border: 0; // Overwrite link style
 
       &::before,
       &::after {
