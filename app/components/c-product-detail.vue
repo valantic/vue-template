@@ -3,7 +3,7 @@
 
     <div :class="b('inner')">
 
-      <section :class="b('product')"> product</section>
+      <section :class="b('product')"> <pre>{{ product }}</pre></section>
 
       <div :class="b('content')">
 
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     name: 'c-product-detail',
 
@@ -36,7 +38,12 @@
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      ...mapGetters({
+        product: 'product/getProduct'
+      })
+
+    }
     // watch: {},
 
     // beforeCreate() {},

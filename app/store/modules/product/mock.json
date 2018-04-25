@@ -1,14 +1,7 @@
 [
   {
     "sku": "12345",
+    "name": "Test product",
     "quantity": 1
-  },
-  {
-    "sku": "23456",
-    "quantity": 2
-  },
-  {
-    "sku": "34567",
-    "quantity": 10
   }
 ]

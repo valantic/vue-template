@@ -17,7 +17,7 @@ const getters = {
    * @returns  {Array} Products
    */
   // TODO handle state error e.g. (eslint no-shadow: ["error", { "allow": ["state"] }])
-  getProducts: state => state.items
+  getProduct: state => state.items
 };
 
 // mutations
