@@ -28,7 +28,7 @@
 
 ```
 <div>
-  <e-heading tag-name="h1" underline>Lorem ipsum</e-heading>
+  <e-heading tag-name="h1" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
   <e-heading tag-name="h2" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
   <e-heading tag-name="h3" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
   <e-heading tag-name="h4" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
