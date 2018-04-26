@@ -1,11 +1,8 @@
-html {
-  font-size: 1rem;
-  font-family: $font-family--primary;
-}
-
 html,
 body {
   height: 100%;
+  font-size: 1rem;
+  font-family: $font-family--primary;
 }
 
 // global link definitions
@@ -25,4 +22,39 @@ a,
     border-bottom: 1px solid $color-primary--1;
     text-decoration: none;
   }
+}
+
+h1 {
+  font-size: $font-size--18;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: $font-size--16;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: $font-size--14;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: $font-size--14;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: $font-size--14;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: $font-size--14;
+  font-weight: 400;
+}
+
+p {
+  font-size: $font-size--14;
+  font-weight: 400;
 }
