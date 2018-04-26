@@ -9,7 +9,7 @@
     props: {
       /**
        * Defines the color of the heading (h1-h6)
-       * 
+       *
        * Valid values: `blue, gray`
        */
       color: {
@@ -25,7 +25,7 @@
 
       /**
        * Defines the tagname of the heading (h1-h6)
-       * 
+       *
        * Valid values: `h1, h2, h3, h4, h5, h6`
        */
       tagName: {
@@ -53,12 +53,13 @@
 
       /**
        * Defines the fontweight
-       * 
+       *
        * Valid values: `normal, semibold, bold`
        */
       fontWeight: {
         type: String,
         required: false,
+        default: null,
         validator(value) {
           return [
             'normal',
@@ -153,11 +154,13 @@
 
     &--h4 {
       @include font($font-size--14);
+
       font-weight: $font-weight--bold;
     }
 
     &--h5 {
       @include font($font-size--14);
+      
       font-weight: $font-weight--semi-bold;
     }
 
