@@ -5,10 +5,14 @@
       <h2>Default</h2>
       <div :class="b('example')">
         <c-panel>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+          tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+          no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+          dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+          dolor sit amet.
         </c-panel>
       </div>
 
@@ -20,10 +24,14 @@
           heading-spacing="0"
           content-spacing="0"
         >
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+          tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+          no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+          dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+          dolor sit amet.
         </c-panel>
       </div>
 
@@ -32,14 +40,17 @@
         <c-panel
           border="1"
           triangle-button
-          triangle-button-size="small"
           triangle-button-color="blue"
           triangle-button-open
         >
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+          tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+          no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+          dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+          dolor sit amet.
         </c-panel>
       </div>
 
@@ -49,15 +60,18 @@
           border="2"
           color="yellow"
           triangle-button
-          triangle-button-size="big"
+          triangle-button-size="500"
           triangle-button-plus-color="blue"
           heading="A heading"
         >
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          foo bar foo bar<br>
-          <div style="background-color: #00ffff; height: 20px;"></div>
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+          tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+          no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+          dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+          dolor sit amet.
         </c-panel>
       </div>
 
@@ -101,6 +115,8 @@
 
 <style lang="scss">
   .panels {
+    height: 100%;
+
     &__example {
       margin-bottom: $spacing--30;
     }

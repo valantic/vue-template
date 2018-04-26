@@ -1,7 +1,7 @@
 <template>
   <div :class="b(panelModifiers)">
     <!-- TODO replace with e-heading -->
-    <div v-if="hasHeading" :class="b('heading', headingModifiers)">
+    <div v-if="heading" :class="b('heading', headingModifiers)">
       <span :class="b('heading-underline')">{{ heading }}</span>
     </div>
     <div :class="b('content', contentModifiers)">
@@ -26,7 +26,6 @@
     // mixins: [],
 
     props: {
-
       /**
        * Defines the spacing of the heading
        *
@@ -111,16 +110,13 @@
       /**
        * Defines the size of the triangle button
        *
-       * Valid values: `small`, `big`
+       * Valid values: `0`, `500`
        */
       triangleButtonSize: {
-        type: String,
-        default: 'small',
+        type: [Number, String],
+        default: 0,
         validator(value) {
-          return [
-            'small',
-            'big'
-          ].includes(value);
+          return [0, 500].includes(parseInt(value, 10));
         },
       },
 
@@ -141,14 +137,13 @@
       },
 
     },
-    // data() {
-    //   return {};
-    // },
+    data() {
+      return {
+        hasTouch: null,
+      };
+    },
 
     computed: {
-      hasHeading() {
-        return this.heading;
-      },
       panelModifiers() {
         return {
           border: this.border.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
@@ -167,7 +162,7 @@
       },
       triangleButtonModifiers() {
         return {
-          size: this.triangleButtonSize,
+          size: this.triangleButtonSize.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
         };
       },
       shadowModifiers() {
@@ -177,7 +172,7 @@
       },
       plusModifiers() {
         return {
-          size: this.triangleButtonSize,
+          size: this.triangleButtonSize.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
           color: this.triangleButtonPlusColor,
           open: this.triangleButtonOpen,
         };
@@ -188,7 +183,10 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() { },
+    mounted() {
+      this.hasTouch = 'ontouchstart' in document.documentElement ||
+        navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -199,16 +197,19 @@
     methods: {
       onPlusToggle() {
         // onPlusToggle() gets triggered on touch devices as well, which is not what we want.
-        if (!this.hasTouch()) {
+        if (!this.hasTouch) {
           this.$refs.plus.classList.toggle('c-panel__plus--hover');
           this.$refs.shadow.classList.toggle('c-panel__shadow--hover');
         }
       },
-      onTriangleButtonClick() {
-        this.$emit('triangle-pressed');
-      },
-      hasTouch() {
-        return 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+      onTriangleButtonClick(event) {
+        /**
+         * Click event.
+         *
+         * @event click
+         * @type {object}
+         */
+        this.$emit('click', event);
       },
     },
     // render() {},
@@ -217,9 +218,9 @@
 
 <style lang="scss">
 
-  .c-panel {
-    $shadow-blur-radius: 5px;
+  $_shadow-blur-radius: 5px;
 
+  .c-panel {
     position: relative;
     background-color: $color-grayscale--1000;
 
@@ -243,7 +244,7 @@
       border-color: $color-grayscale--600;
     }
 
-    /* TODO - remove when e-heading is implemented */
+    // TODO - remove when e-heading is implemented
     &__heading-underline {
       @include font($font-size: $font-size--18, $line-height: 23px);
 
@@ -272,25 +273,26 @@
       overflow: hidden;
     }
 
-    &__triangle-button--size-small {
+    &__triangle-button--size-0 {
       width: 29px;
       height: 29px;
     }
 
-    &__triangle-button--size-big {
-      width: 40px;
-      height: 40px;
+    &__triangle-button--size-500 {
+      width: $spacing--40;
+      height: $spacing--40;
     }
 
     &__shadow {
       position: absolute;
-      width: 100px;
-      height: 100px;
+      width: $spacing--100;
+      height: $spacing--100;
       top: 7px;
       right: -70px;
-      transform: rotate(138deg);
-      box-shadow: inset 0 0 $shadow-blur-radius $color-grayscale--200;
-      animation: shadowFadeOut 0.25s;
+      transform: rotate(135deg);
+      box-shadow: inset 0 0 $_shadow-blur-radius $color-grayscale--200;
+      box-shadow: inset 0 0 $_shadow-blur-radius $color-grayscale--200, 0 0 0 $color-grayscale--200;
+      transition: box-shadow 0.25s;
     }
 
     &__shadow--color-yellow {
@@ -306,20 +308,7 @@
     }
 
     &__shadow--hover {
-      animation: shadowFade 0.25s;
-      box-shadow: 0 0 $shadow-blur-radius $color-grayscale--200;
-    }
-
-    @keyframes shadowFade {
-      0% { box-shadow: inset 0 0 $shadow-blur-radius $color-grayscale--200; }
-      50% { box-shadow: none; }
-      100% { box-shadow: 0 0 $shadow-blur-radius $color-grayscale--200; }
-    }
-
-    @keyframes shadowFadeOut {
-      0% { box-shadow: 0 0 $shadow-blur-radius $color-grayscale--200; }
-      50% { box-shadow: none; }
-      100% { box-shadow: inset 0 0 $shadow-blur-radius $color-grayscale--200; }
+      box-shadow: inset 0 0 0 $color-grayscale--200, 0 0 $_shadow-blur-radius $color-grayscale--200;
     }
 
     &__plus {
@@ -332,14 +321,14 @@
       transition: 0.25s ease-out;
     }
 
-    &__plus--size-small {
+    &__plus--size-0 {
       width: 13px;
       height: 13px;
     }
 
-    &__plus--size-big {
-      width: 20px;
-      height: 20px;
+    &__plus--size-500 {
+      width: $spacing--20;
+      height: $spacing--20;
     }
 
     &__plus--hover,
@@ -369,28 +358,28 @@
       transition: 0.25s ease-out;
     }
 
-    &__plus--size-small::before {
+    &__plus--size-0::before {
       right: 2px;
       bottom: 6px;
       width: 9px;
       height: 1px;
     }
 
-    &__plus--size-small::after {
+    &__plus--size-0::after {
       right: 6px;
       bottom: 2px;
       width: 1px;
       height: 9px;
     }
 
-    &__plus--size-big::before {
+    &__plus--size-500::before {
       right: 3px;
       bottom: 9px;
       width: 13px;
       height: 1px;
     }
 
-    &__plus--size-big::after {
+    &__plus--size-500::after {
       right: 9px;
       bottom: 3px;
       width: 1px;

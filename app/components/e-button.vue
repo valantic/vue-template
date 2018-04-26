@@ -43,7 +43,7 @@
         default: 0,
         validator(value) {
           return [
-            0,
+            0, 500
           ].includes(parseInt(value, 10));
         }
       },
