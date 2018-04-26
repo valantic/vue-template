@@ -9,8 +9,8 @@
       :value="value"
       v-bind="$attrs"
       type="text"
-      @blur="hasFocus = false"
-      @focus="hasFocus = true"
+      @blur="onFocusOut"
+      @focus="onFocusIn"
       @input="onInput"
       @mouseenter="hasHover = true"
       @mouseleave="hasHover = false"
@@ -154,7 +154,16 @@
       onInput(event) {
         this.$emit('input', event.target.value);
       },
-
+      onFocusIn() {
+        this.hasFocus = true;
+        this.$emit('focus', true);
+        this.$parent.$emit('focus', true);
+      },
+      onFocusOut() {
+        this.hasFocus = false;
+        this.$emit('focus', false);
+        this.$parent.$emit('focus', false);
+      }
     }
     // render() {},
   };

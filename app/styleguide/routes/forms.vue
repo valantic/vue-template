@@ -3,10 +3,14 @@
     <h1>Form example</h1>
 
     <h2>e-input</h2>
-    <p>excluding label</p>
+    <p>including e-label</p>
     <form>
-      first name: <e-input v-model="name.firstName" name="firstname" placeholder="..." />
-      last name: <e-input v-model="name.lastName" name="lastname" placeholder="..." />
+      <e-label name="First name:" position="top">
+        <e-input v-model="name.firstName" name="firstname" placeholder="..." />
+      </e-label>
+      <e-label name="Last name:" position="bottom">
+        <e-input v-model="name.lastName" name="lastname" placeholder="..." />
+      </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <pre>{{ name }}</pre>
     </form>
@@ -31,7 +35,7 @@
   .forms {
     padding: $spacing--50;
 
-    .e-input {
+    .e-label {
       margin-bottom: $spacing--10;
     }
   }
