@@ -1,6 +1,7 @@
 import eIcon from '@/components/e-icon';
 import eButton from '@/components/e-button';
 import ePicture from '@/components/e-picture';
+import eInput from '@/components/e-input';
 import eProgress from '@/components/e-progress';
 
 export default {
@@ -9,6 +10,7 @@ export default {
       eButton,
       eIcon,
       ePicture,
+      eInput,
       eProgress,
     ];
 
@@ -22,6 +24,7 @@ export default {
       Vue.component(eIcon.name, eIcon);
       Vue.component(ePicture.name, ePicture);
       Vue.component(eProgress.name, eProgress);
+      Vue.component(eInput.name, eInput);
     }
   },
 };

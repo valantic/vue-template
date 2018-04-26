@@ -1,35 +1,22 @@
 // store/modules/product/index.js
-import productData from './mock';
 
-const namespaced = true;
-
-// initial state
-const state = {
-  items: productData // demo
-};
-
-// getters
-const getters = {
-  /**
-   * Gets a product
-   *
-   * @param   {state}   Current state
-   * @returns  {Array} Product
-   */
-  // TODO handle state error e.g. (eslint no-shadow: ["error", { "allow": ["state"] }])
-  getProduct: state => state.items
-};
-
-// mutations
-const mutations = {};
-
-// actions
-const actions = {};
+import product from './mock';
 
 export default {
-  namespaced,
-  state,
-  getters,
-  mutations,
-  actions,
+  namespaced: true,
+  state: {
+    items: product // demo
+  },
+  getters: {
+    /**
+     * Gets a product
+     *
+     * @param   {Object}  state - Current state
+     *
+     * @returns  {Array}  product - Product data
+     */
+    getProduct: state => state.items
+  },
+  mutations: {},
+  actions: {},
 };
