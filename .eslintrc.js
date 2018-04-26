@@ -60,8 +60,9 @@ module.exports = {
         'gt', // ember-cp-validations
         'id',
         'DS', // ember-data
-        'vm', // Vue
         'el', // Vue
+        'on', // Vue
+        'vm', // Vue
         'xs', // Bootstrap
         'sm', // Bootstrap
         'md', // Bootstrap
@@ -69,7 +70,6 @@ module.exports = {
         'xl', // Bootstrap
       ]
     }],
-
 
     // don't require .vue extension when importing
     'import/extensions': [0, 'always', {

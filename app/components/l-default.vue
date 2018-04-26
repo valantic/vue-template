@@ -4,7 +4,7 @@
     <c-header/>
     <div :class="b('content')">
       <div :class="b('inner')">
-        foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>bar<br>foo<br>
+        <slot></slot>
       </div>
     </div>
     <c-footer/>
@@ -65,6 +65,7 @@
 
     &__content {
       flex: 1 0 auto;
+      min-height: 1px; // Fixes a content shifting issue with IE11 if a child element has hover
     }
 
     &__inner {
