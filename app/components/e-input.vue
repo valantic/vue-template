@@ -271,6 +271,5 @@
     &--state-success {
       // TODO add info message and icon
     }
-
   }
 </style>
