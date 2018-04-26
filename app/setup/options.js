@@ -18,7 +18,7 @@ Vue.use(VueBemCn, {
   hyphenate: true,
 });
 
-const i18n = new VueI18n({
+export const i18n = new VueI18n({
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
   messages: {
