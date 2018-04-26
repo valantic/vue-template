@@ -15,9 +15,9 @@ module.exports = {
   styles: {
     StyleGuide: {
       root: {
-        'text-rendering': 'optimizeLegibility',
-        '-moz-osx-font-smoothing': 'grayscale',
-        '-webkit-font-smoothing': 'antialiased'
+        // 'text-rendering': 'optimizeLegibility',
+        // '-moz-osx-font-smoothing': 'grayscale',
+        // '-webkit-font-smoothing': 'antialiased',
       },
       sidebar: {},
       content: {},

@@ -65,6 +65,7 @@
 
     &__content {
       flex: 1 0 auto;
+      min-height: 1px; // Fixes a content shifting issue with IE11 if a child element has hover
     }
 
     &__inner {
