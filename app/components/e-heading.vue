@@ -52,13 +52,13 @@
       },
 
       /**
-       * Defines the font weight
+       * Defines the fontweight
        * 
        * Valid values: `normal, semibold, bold`
        */
-      weight: {
+      fontWeight: {
         type: String,
-        default: 'normal',
+        required: false,
         validator(value) {
           return [
             'normal',
@@ -95,19 +95,18 @@
     render(createElement) {
       const element = this.$props.tagName;
       const attributes = {
-        class: this.b(),
+        class: this.b({
+          color: this.$props.color,
+          underline: this.$props.underline,
+          fontweight: this.$props.fontWeight,
+          [this.$props.tagName]: true
+        }),
         attrs: {
           ...this.$attrs,
         },
       };
       const childAttributes = {
-        class: this.b('inline', {
-          color: this.$props.color,
-          underline: this.$props.underline,
-          weight: this.$props.weight,
-          [this.$props.tagName]: true
-        }),
-        attrs: {},
+        class: this.b('inner'),
       };
 
       return createElement(
@@ -130,60 +129,60 @@
     text-decoration: none;
     display: block;
 
-    &__inline {
+    &__inner {
       display: inline-block;
     }
 
-    &__inline a {
+    &__inner a {
       color: $color-secondary--1;
       border: none;
       padding: $spacing--0;
     }
 
-    &__inline--h1 {
-      font-size: $font-size--18;
+    &--h1 {
+      @include font($font-size--18);
     }
 
-    &__inline--h2 {
-      font-size: $font-size--16;
+    &--h2 {
+      @include font($font-size--16);
     }
 
-    &__inline--h3 {
-      font-size: $font-size--14;
+    &--h3 {
+      @include font($font-size--14);
     }
 
-    &__inline--h4 {
-      font-size: $font-size--14;
+    &--h4 {
+      @include font($font-size--14);
       font-weight: $font-weight--bold;
     }
 
-    &__inline--h5 {
-      font-size: $font-size--14;
+    &--h5 {
+      @include font($font-size--14);
       font-weight: $font-weight--semi-bold;
     }
 
-    &__inline--h6 {
-      font-size: $font-size--14;
+    &--h6 {
+      @include font($font-size--14);
     }
 
-    &__inline--weight-normal {
+    &--fontweight-normal {
       font-weight: $font-weight--regular;
     }
 
-    &__inline--weight-semibold {
+    &--fontweight-semibold {
       font-weight: $font-weight--semi-bold;
     }
 
-    &__inline--weight-bold {
+    &--fontweight-bold {
       font-weight: $font-weight--bold;
     }
 
-    &__inline--underline {
+    &--underline {
       border-bottom: 1px solid $color-primary--1;
       padding: $spacing--15 $spacing--20;
     }
 
-    &__inline--color-blue {
+    &--color-blue {
       color: $color-secondary--1;
 
       a {
@@ -191,7 +190,7 @@
       }
     }
 
-    &__inline--color-gray {
+    &__inner--color-gray {
       color: $color-grayscale--200;
 
       a {

@@ -58,7 +58,7 @@
         </e-heading>
         <e-heading
           tag-name="h6"
-          weight="normal"
+          font-weight="normal"
           underline>
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -105,7 +105,7 @@
         </e-heading>
         <e-heading
           tag-name="h6"
-          weight="normal"
+          font-weight="bold"
           underline>
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

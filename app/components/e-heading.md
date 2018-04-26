@@ -41,11 +41,11 @@
 
 ```
 <div>
-  <e-heading tag-name="h1" weight="bold">This heading has font-weight bold</e-heading>
-  <e-heading tag-name="h2" weight="semibold">This heading has font-weight semibold</e-heading>
-  <e-heading tag-name="h3" weight="bold">This heading has font-weight bold</e-heading>
-  <e-heading tag-name="h4" weight="normal">This heading has font-weight normal</e-heading>
-  <e-heading tag-name="h5" weight="normal">This heading has font-weight normal</e-heading>
-  <e-heading tag-name="h6" weight="bold"><a href="#">This heading has font-weight bold</a></e-heading>
+  <e-heading tag-name="h1" font-weight="bold">This heading has font-weight bold</e-heading>
+  <e-heading tag-name="h2" font-weight="semibold">This heading has font-weight semibold</e-heading>
+  <e-heading tag-name="h3" font-weight="bold">This heading has font-weight bold</e-heading>
+  <e-heading tag-name="h4" font-weight="normal">This heading has font-weight normal</e-heading>
+  <e-heading tag-name="h5" font-weight="normal">This heading has font-weight normal</e-heading>
+  <e-heading tag-name="h6" font-weight="bold"><a href="#">This heading has font-weight bold</a></e-heading>
 </div>
 ```

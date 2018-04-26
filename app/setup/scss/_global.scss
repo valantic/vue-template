@@ -31,36 +31,32 @@ a,
 }
 
 h1 {
-  font-size: $font-size--18;
-  font-weight: 400;
+  @include font($font-size--18);
 }
 
 h2 {
-  font-size: $font-size--16;
-  font-weight: 400;
+  @include font($font-size--16);
 }
 
 h3 {
-  font-size: $font-size--14;
-  font-weight: 400;
+  @include font($font-size--14);
 }
 
 h4 {
-  font-size: $font-size--14;
-  font-weight: 700;
+  @include font($font-size--14);
+  font-weight: $font-weight--bold;
 }
 
 h5 {
-  font-size: $font-size--14;
-  font-weight: 600;
+  @include font($font-size--14);
+  font-weight: $font-weight--semi-bold;
 }
 
 h6 {
-  font-size: $font-size--14;
-  font-weight: 400;
+  @include font($font-size--14);
 }
 
 p {
-  font-size: $font-size--14;
+  font-size: font($font-size--14);
   font-weight: 400;
 }
