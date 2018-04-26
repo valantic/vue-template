@@ -189,24 +189,30 @@ We added the [vue-bem-cn](https://github.com/c01nd01r/vue-bem-cn) plugin for Vue
 Vendor prefixes are automatically applied according to the `browserslist` in `package.json`. You don't need to write them yourself.
 
 ## Vue.js
+[Vue.js](https://vuejs.org/) (commonly referred to as Vue; pronounced /vjuː/, like view) is an open-source JavaScript framework for building user interfaces and single page applications.
+[Wikipedia](https://en.wikipedia.org/wiki/Vue.js)
 
-### Vuex
-Vuex is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
-https://vuex.vuejs.org/en/
+## Vuex
+[Vuex](https://vuex.vuejs.org/en/) is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
 
 Vuex allows us to divide our store into modules and make it more scalable. In this case each module (index.js) contains its own state, mutations, actions and getters. For this project the following setup will be used:
 
-##### Modularity 
+#### Modularity 
 ```
 store
   |- index.js
   |- cart
   | |- index.js
-  |- product
+  |- navigation
+  | |- index.js
+  |- session
   | |- index.js
 ````
 
-The main 'index.js' file contains all modules, which are imported. Note: the module name must be written in singular.
+The main ```app/store/index.js``` file contains all modules, which are imported.
+
+**Note: the module name must be written in singular.**
+
 
 ```
 import Vue from 'vue';
@@ -214,13 +220,8 @@ import Vuex from 'vuex';
  
 // modules
 import cart from './modules/cart';
-import category from './modules/category';
-import navigation from './modules/navigation';
-import order from './modules/order';
-import product from './modules/product';
-import profile from './modules/profile';
+import navigation from './modules/navigation';;
 import session from './modules/session';
-import wishlist from './modules/wishlist';
  
 Vue.use(Vuex);
  
@@ -231,44 +232,23 @@ export default new Vuex.Store({
    * */
   modules: {
     cart,
-    category,
     navigation,
-    order,
-    product,
-    profile,
     session,
-    wishlist,
   },
 });
 ```
 
-##### Namespacing
+#### Namespacing
 By default, actions, mutations and getters inside modules are still registered under the global namespace. To make sure all modules are more self-contained and reusable, we make use of the 'namespace' option, which automatically adds a prefix for the specific module.
 ```
-// store/modules/product/index.js
- 
-const namespaced = true;
- 
-// initial state
-const state = {
-  // items: []
-};
- 
-// getters
-const getters = {}; // e.g. -> getters['product/getProduct']
- 
-// mutations
-const mutations = {};
- 
-// actions
-const actions = {};
- 
+// store/modules/cart/index.js
+
 export default {
-  namespaced,
-  state,
-  getters,
-  mutations,
-  actions,
+  namespaced: true,
+  state: {},
+  getters: {}, // e.g. -> getters['cart/getProduct']
+  mutations: {},
+  actions: {},
 };
 ```
 As the application grows it's possible to even split the module again e.g. into a structure like this:
@@ -281,7 +261,12 @@ store
   | |- getters.js
   | |- mutations.js
   | |- actions.js
-  |- product
+  |- navigation
+  | |- index.js
+  | |- getters.js
+  | |- mutations.js
+  | |- actions.js
+  |- session
   | |- index.js
   | |- getters.js
   | |- mutations.js
@@ -468,7 +453,7 @@ $ brew upgrade nasm
 * [ ] BEM guidelines
 * [x] Folder structure
 * [ ] Naming (only singular)
-* [ ] Vuex & modules
+* [x] Vuex & modules
 * [ ] Axios request mocking
 * [x] Styleguide components
 * [x] webpack alias
