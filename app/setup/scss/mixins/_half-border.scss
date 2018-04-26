@@ -6,37 +6,36 @@
 ////
 
 @mixin half-border($border-color: $color-grayscale--500) {
-  @if $border-color != null {
-    position: relative;
+  position: relative;
 
-    &::before,
-    &::after {
-      @include z-index(front);
+  &::before,
+  &::after {
+    @include z-index(front);
 
-      border: 1px solid $border-color;
-      border-radius: $border-radius--default;
-      content: "";
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      height: 20%;
-    }
-
-    &::before {
-      border-bottom: 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    &::after {
-      top: auto;
-      bottom: 0;
-      border-top: 0;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
+    border: 1px solid $border-color;
+    border-radius: $border-radius--default;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 20%;
   }
+
+  &::before {
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &::after {
+    top: auto;
+    bottom: 0;
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
 }
 
