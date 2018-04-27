@@ -36,15 +36,22 @@ module.exports = {
     },
     Heading: {
       heading1: {
-        color: '#2c68a0',
-        width: '100%',
-        textAlign: 'center'
+        'color': '#2c68a0',
+        'width': '100%',
+        'textAlign': 'left',
+        '& a': {
+          '&:hover': {
+            textDecoration: 'none',
+            color: '#2c68a0 !important',
+            cursor: 'pointer !important'
+          }
+        }
       },
       heading2: {
         'backgroundColor': '#2c68a0',
         'color': '#fff',
         'width': 'calc(100% + 32px)',
-        'padding': '0px 15px',
+        'padding': '0px 30px',
         'marginLeft': '-33px',
         'zIndex': '1',
         '& a': {

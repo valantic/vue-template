@@ -12,6 +12,7 @@ module.exports = {
     // NOTE: for the application this is imported in main.js. Unfortunatley the styleguidist does not support this, so we need
     // to import the global styles here as well.
     path.join(__dirname, 'app/setup/_scss.scss'),
+    path.join(__dirname, 'app/styleguide/core/css/styleguide-custom.scss'),
   ],
   defaultExample: 'app/setup/styleguide.fallback.md',
   components: 'app/components/**/*.vue',
@@ -30,7 +31,7 @@ module.exports = {
     },
     {
       name: 'Core',
-      content: 'app/styleguide/core/core.md',
+      content: '',
       sections: [
         {
           name: 'Typography',
