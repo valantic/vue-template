@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     /**
-     * @property {Object}   product   Stores product data
+     * @type {Object}   Stores product data
      */
     product: productData
   },
