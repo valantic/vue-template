@@ -10,6 +10,7 @@
 <script>
   import formStates from '@/mixins/formStates';
 
+  // TODO: Mixin properties not visible in styleguide => check after update styleguidist
   export default {
     name: 'e-label',
     // components: {},
@@ -70,9 +71,10 @@
        * @returns  {Object}   BEM classes
        */
       modifiers() {
-        return Object.assign(this.defaultModifiers, {
+        return {
+          ...this.defaultModifiers,
           position: this.position
-        });
+        };
       }
     },
     // watch: {},
@@ -94,7 +96,6 @@
     // methods: {}
     // render() {},
   };
-  // TODO: Mixin properties not visible in styleguide
 </script>
 
 <style lang="scss">
