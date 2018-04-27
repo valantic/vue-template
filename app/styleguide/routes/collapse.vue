@@ -2,7 +2,7 @@
   <div :class="b()">
     <h1>Accordion example</h1>
 
-    <p>For the accordion we use the following plugin:
+    <p>For the accordion the following plugin is used:
       <a href="https://roszpun.github.io/vue-collapse/#/"
          target="_blank">vue2-collapse
       </a>
