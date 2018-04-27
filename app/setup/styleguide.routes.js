@@ -1,5 +1,6 @@
 import index from '../styleguide/routes/index';
 import lDefault from '../components/l-default';
+import productDetail from '../styleguide/routes/product-detail';
 import lazyload from '../styleguide/routes/lazyload';
 import buttons from '../styleguide/routes/buttons';
 import forms from '../styleguide/routes/forms';
@@ -57,6 +58,14 @@ export default [
     component: collapse,
     meta: {
       title: 'Collapse',
+    }
+  },
+  {
+    path: `${root}/product-detail`,
+    name: 'styleguideProductDetail',
+    component: productDetail,
+    meta: {
+      title: 'Product Detail',
     }
   },
   {
