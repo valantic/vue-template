@@ -8,7 +8,7 @@
       <e-label name="First name:" position="top">
         <e-input v-model="name.firstName" name="firstname" placeholder="..." />
       </e-label>
-      <e-label name="Last name:" position="bottom">
+      <e-label name="Last name:" position="left">
         <e-input v-model="name.lastName" name="lastname" placeholder="..." />
       </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>

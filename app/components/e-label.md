@@ -107,3 +107,25 @@
   };
 </script>
 ```
+
+### state:error
+```
+<template>
+  <div>
+  
+  <e-label name="Label" position="top" state="error">
+     <e-input v-model="demo" name="demo" placeholder="enter text..." state="error"/> 
+  </e-label>
+  
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
+```
