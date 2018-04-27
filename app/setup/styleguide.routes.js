@@ -1,6 +1,8 @@
 import index from '../styleguide/routes/index';
 import lDefault from '../components/l-default';
 import lazyload from '../styleguide/routes/lazyload';
+import buttons from '../styleguide/routes/buttons';
+import forms from '../styleguide/routes/forms';
 
 const root = '/styleguide';
 
@@ -30,6 +32,22 @@ export default [
     component: lDefault,
     meta: {
       title: 'Layout',
+    }
+  },
+  {
+    path: `${root}/forms`,
+    name: 'styleguideForms',
+    component: forms,
+    meta: {
+      title: 'Forms',
+    },
+  },
+  {
+    path: `${root}/buttons`,
+    name: 'styleguideButtons',
+    component: buttons,
+    meta: {
+      title: 'Buttons',
     }
   },
   {

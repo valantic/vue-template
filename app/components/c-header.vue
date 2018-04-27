@@ -42,6 +42,8 @@
 
 <style lang="scss">
   .c-header {
+    @include z-index(header);
+
     position: fixed;
     width: 100%;
     display: flex;
