@@ -65,5 +65,6 @@
 
 <style lang="scss">
   .c-collapse {
+    // ...
   }
 </style>

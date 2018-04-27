@@ -1,6 +1,6 @@
 <template>
   <div :class="b()">
-    <h1>Accordion example</h1>
+    <h1>Accordion example (c-collapse)</h1>
 
     <p>For the accordion the following plugin is used:
       <a href="https://roszpun.github.io/vue-collapse/#/"
@@ -10,7 +10,7 @@
 
     <v-collapse-group>
       <c-collapse
-        v-for="(item, index) in items"
+        v-for="(item, index) in collapsible"
         :key="index"
         :title="item.title"
         :active="true">
@@ -31,22 +31,9 @@
     },
     data() {
       return {
-        items: [
-          {
-            title: 'This is just a title',
-            content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et  ',
-          },
-          {
-            title: 'Click me to toggle content',
-            content: '<div>This is hiddend content</div>',
-          },
-          {
-            title: 'Click me to toggle content',
-            content: 'This is hiddend content',
-          },
-        ]
+        collapsible: this.$store.getters['product/getCollapsible']
       };
-    }
+    },
   };
 </script>
 
