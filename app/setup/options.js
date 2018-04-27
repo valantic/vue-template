@@ -1,8 +1,9 @@
 import Vue from 'vue';
-import VueBemCn from 'vue-bem-cn';
+import store from '@/store/index';
 import VueI18n from 'vue-i18n';
 import VueAxios from '@/setup/plugins/axios';
-import store from '@/store/index';
+import VueCollapse from 'vue2-collapse';
+import VueBemCn from 'vue-bem-cn';
 
 // Polyfills and self executing
 import 'intersection-observer';
@@ -14,6 +15,7 @@ import { I18N_FALLBACK, I18N_FALLBACK_MESSAGES } from './i18n';
 
 Vue.use(VueI18n);
 Vue.use(VueAxios);
+Vue.use(VueCollapse);
 Vue.use(VueBemCn, {
   hyphenate: true,
 });
