@@ -139,7 +139,8 @@
     },
     data() {
       return {
-        hasTouch: null,
+        hasTouch: 'ontouchstart' in document.documentElement ||
+          navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
       };
     },
 
@@ -183,10 +184,7 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted() {
-      this.hasTouch = 'ontouchstart' in document.documentElement ||
-        navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    },
+    // mounted() { },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
