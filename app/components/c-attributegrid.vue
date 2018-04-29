@@ -12,7 +12,7 @@
       </div>
     </div>
     <div :class="b('toggle', { toggled: toggled })" @click="toggle()">
-      <img :class="b('arrow')" src="../assets/icons/arrow.png">
+      <img :class="b('arrow')" src="../assets/icons/arrowDown.svg">
     </div>
   </div>
 </template>
