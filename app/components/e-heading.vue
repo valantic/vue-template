@@ -99,7 +99,7 @@
         class: this.b({
           color: this.$props.color,
           underline: this.$props.underline,
-          fontweight: this.$props.fontWeight,
+          fontWeight: this.$props.fontWeight,
           [this.$props.tagName]: true
         }),
         attrs: {
@@ -140,6 +140,11 @@
       padding: $spacing--0;
     }
 
+    &--underline &__inner {
+      border-bottom: 1px solid $color-primary--1;
+      padding: $spacing--15 $spacing--20;
+    }
+
     &--h1 {
       @include font($font-size--18);
     }
@@ -160,7 +165,7 @@
 
     &--h5 {
       @include font($font-size--14);
-      
+
       font-weight: $font-weight--semi-bold;
     }
 
@@ -168,21 +173,16 @@
       @include font($font-size--14);
     }
 
-    &--fontweight-normal {
+    &--font-weight-normal {
       font-weight: $font-weight--regular;
     }
 
-    &--fontweight-semibold {
+    &--font-weight-semibold {
       font-weight: $font-weight--semi-bold;
     }
 
-    &--fontweight-bold {
+    &--font-weight-bold {
       font-weight: $font-weight--bold;
-    }
-
-    &--underline {
-      border-bottom: 1px solid $color-primary--1;
-      padding: $spacing--15 $spacing--20;
     }
 
     &--color-blue {
@@ -193,7 +193,7 @@
       }
     }
 
-    &__inner--color-gray {
+    &--color-gray {
       color: $color-grayscale--200;
 
       a {
