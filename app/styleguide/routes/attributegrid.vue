@@ -1,9 +1,9 @@
 <template>
   <div :class="b('spacing')">
     <h1>Attributegrid</h1>
-    <c-attributegrid :attributes="[{'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue', url: 'http://www.google.com'}]"></c-attributegrid>
+    <c-attributegrid :attributes="[{'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue', url: 'http://www.google.com'}]" />
     <h1 :class="b('secondheadline')">Attributegrid with headline</h1>
-    <c-attributegrid :attributes="[{'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue', url: 'http://www.google.com'}]" headline></c-attributegrid>
+    <c-attributegrid :attributes="[{'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue', url: 'http://www.google.com'}]" headline />
   </div>
 </template>
 
@@ -19,10 +19,11 @@
 <style lang="scss">
   .attributegrid {
     &__spacing {
-      padding: $spacing--40
+      padding: $spacing--40;
     }
+
     &__secondheadline {
-      margin-top: $spacing--20
+      margin-top: $spacing--20;
     }
   }
 </style>
