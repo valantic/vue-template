@@ -45,7 +45,7 @@
 </script>
 
 <style lang="scss">
-  .s-layout {
-    height: 100%;
+  .s-layout > :first-child {
+    height: 100vh;
   }
 </style>
