@@ -39,21 +39,45 @@ export default {
     focus: {
       type: Boolean,
       default: false
+    },
+
+    /**
+     * Adds hover state
+     */
+    hover: {
+      type: Boolean,
+      default: false,
     }
   },
+
+  /**
+   * Default data for the mixin props (will be merged with the components data function)
+   *
+   * @returns {{isActive: *, isDisabled: *, hasFocus: *, isHover: (hover|{type, default}|*)}}
+   */
+  data() {
+    return {
+      isActive: this.active,
+      isDisabled: this.disabled,
+      hasFocus: this.focus,
+      isHover: this.hover
+    };
+  },
+
   computed: {
 
     /**
      * Defines the default Modifier classes, have to be merged with custom classes or include directly in component
      *
-     * @returns {{state: *, active: *, disabled: *, focus: *}}
+     * @returns {{state: *, active: *, disabled: *, focus: *, hover: *}}
      */
-    defaultModifiers() {
+    stateModifiers() {
       return {
         state: this.state,
-        active: this.active,
-        disabled: this.disabled,
-        focus: this.hasFocus
+        active: this.isActive,
+        disabled: this.isDisabled,
+        focus: this.hasFocus,
+        hover: this.isHover
       };
     }
   }

@@ -60,7 +60,7 @@
 
     data() {
       return {
-        hasFocus: this.$props.focus
+        fooposition: this.position
       };
     },
 
@@ -72,7 +72,7 @@
        */
       modifiers() {
         return {
-          ...this.defaultModifiers,
+          ...this.stateModifiers,
           position: this.position
         };
       }
