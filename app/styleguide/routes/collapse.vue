@@ -8,15 +8,15 @@
       </a>
     </p>
 
-    <v-collapse-group>
-      <c-collapse
-        v-for="(item, index) in collapsible"
-        :key="index"
-        :title="item.title"
-        :active="true">
-        {{ item.content }}
-      </c-collapse>
-    </v-collapse-group>
+    <!-- TODO use 'item.id' instead of index if possible => :key="item.id" -->
+    <c-collapse
+      v-for="(item, index) in collapsible"
+      :active="item.active"
+      :key="item.index"
+      :ref="`el-${index}`"
+      :title="item.title">
+      {{ item.content }}
+    </c-collapse>
 
   </div>
 </template>
@@ -29,6 +29,7 @@
     components: {
       CCollapse
     },
+    replace: true,
     data() {
       return {
         collapsible: this.$store.getters['product/getCollapsible']
