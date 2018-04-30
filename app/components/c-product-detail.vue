@@ -10,6 +10,7 @@
         <div :class="b('gallery')">
           gallery
           <pre>{{ product }}</pre>
+          <pre>{{ productInformation }}</pre>
         </div>
 
         <div :class="b('specs')">specs</div>
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
     name: 'c-product-detail',
@@ -61,13 +62,22 @@
          *
          * @returns  {Object}  product - Single product from the store
          */
-        product: 'product/getProduct'
+        product: 'product/getProduct',
+
+        /**
+         * Gets a product
+         *
+         * @returns  {Object}  product - Single product from the store
+         */
+        productInformation: 'product/getProductInformation',
       })
-    }
+    },
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      this.getProductInformation();
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -77,7 +87,11 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      ...mapActions({
+        getProductInformation: 'product/getProductInformation'
+      })
+    },
     // render() {},
   };
 </script>
