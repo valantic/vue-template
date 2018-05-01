@@ -241,16 +241,6 @@
       border-color: $color-grayscale--600;
     }
 
-    // TODO - remove when e-heading is implemented
-    &__heading-underline {
-      @include font($font-size: $font-size--18, $line-height: 23px);
-
-      display: inline-block;
-      color: $color-secondary--1;
-      border-bottom: 1px solid $color-primary--1;
-      padding-bottom: $spacing--5;
-    }
-
     &__heading--spacing-0,
     &__content--spacing-0 {
       padding: $spacing--0;
