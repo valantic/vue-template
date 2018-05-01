@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/formStates';
+  import formStates from '@/mixins/form-states';
 
   export default {
 
@@ -101,17 +101,19 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
-        this.$emit('input', event.target.value);
+        this.$emit('input', { value: event.target.value });
       },
       onFocusIn() {
         this.hasFocus = true;
-        this.$emit('focus', true);
-        this.$parent.$emit('focus', true);
+
+        this.$emit('focus', { hasFocus: true });
+        this.$parent.$emit('focus', { hasFocus: true });
       },
       onFocusOut() {
         this.hasFocus = false;
-        this.$emit('focus', false);
-        this.$parent.$emit('focus', false);
+
+        this.$emit('focus', { hasFocus: false });
+        this.$parent.$emit('focus', { hasFocus: false });
       }
     }
     // render() {},

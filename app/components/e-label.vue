@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/formStates';
+  import formStates from '@/mixins/form-states';
 
   // TODO: Mixin properties not visible in styleguide => check after update styleguidist
   export default {
@@ -58,12 +58,6 @@
       }
     },
 
-    data() {
-      return {
-        fooposition: this.position
-      };
-    },
-
     computed: {
       /**
        * Defines state modifier classes
@@ -73,7 +67,7 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          position: this.position
+          position: this.$props.position
         };
       }
     },
@@ -82,8 +76,8 @@
     // beforeCreate() {},
     // created() {},
     beforeMount() {
-      this.$on('focus', (state) => {
-        this.hasFocus = state;
+      this.$on('focus', ({ hasFocus }) => {
+        this.hasFocus = hasFocus;
       });
     },
     // mounted() {},
@@ -100,7 +94,7 @@
 
 <style lang="scss">
   .e-label {
-    width: 100%;
+    display: block;
     margin: 0;
 
     &__inner {

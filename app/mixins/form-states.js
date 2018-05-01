@@ -1,3 +1,8 @@
+/**
+ * Mixin can be used to add default form states to a form-element.
+ * For modifiers class names combine the component modifier() computed function with the stateModifier()
+ * computed function
+ */
 export default {
   props: {
     /**
@@ -18,7 +23,7 @@ export default {
     },
 
     /**
-     * set's active state
+     * Forces active state
      */
     active: {
       type: Boolean,
@@ -26,7 +31,7 @@ export default {
     },
 
     /**
-     * set's disabled state
+     * Forces disabled state
      */
     disabled: {
       type: Boolean,
@@ -34,7 +39,7 @@ export default {
     },
 
     /**
-     * set's focus state
+     * Forces focus state
      */
     focus: {
       type: Boolean,

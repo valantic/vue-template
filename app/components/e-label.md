@@ -129,3 +129,25 @@
   };
 </script>
 ```
+
+### Without slot content
+```
+<template>
+  <div>
+  
+    <e-label name="Label" position="top" forId="abcde1234"></e-label>
+    <hr/>
+    <e-input v-model="demo" name="demo" placeholder="enter text..." id="abcde1234"/> 
+  
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
+```
