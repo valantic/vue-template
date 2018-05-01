@@ -9,14 +9,16 @@
     </p>
 
     <!-- TODO use 'item.id' instead of index if possible => :key="item.id" -->
-    <c-collapse
-      v-for="(item, index) in collapsible"
-      :active="item.active"
-      :key="item.index"
-      :ref="`el-${index}`"
-      :title="item.title">
-      {{ item.content }}
-    </c-collapse>
+    <v-collapse-group >
+      <c-collapse
+        v-for="(item, index) in collapsible"
+        :active="item.active"
+        :key="item.index"
+        :ref="`el-${index}`"
+        :title="item.title">
+        {{ item.content }}
+      </c-collapse>
+    </v-collapse-group>
 
   </div>
 </template>

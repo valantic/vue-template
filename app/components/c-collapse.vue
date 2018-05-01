@@ -3,6 +3,7 @@
   <v-collapse-wrapper :active="active" :class="b({expanded: isExpanded})">
 
     <div v-collapse-toggle :class="b('toggle')" @click="setState">
+      <e-icon :class="b('icon')" :inline="true" icon="i-plus"/>
       {{ title }}
     </div>
 
@@ -91,21 +92,12 @@
       font-size: $font-size--16;
       height: 40px;
       line-height: 40px;
-      padding: 0 $spacing--20;
+      overflow-y: hidden;
+      padding: 0 $spacing--10 0 $spacing--30;
       position: relative;
-
-      &::before {
-        content: "+";
-        color: $color-grayscale--400;
-        font-size: $font-size--18;
-        left: 0;
-        position: absolute;
-        transition: transform 0.15s ease-in-out;
-
-        .c-collapse--expanded & {
-          transform: rotate(45deg);
-        }
-      }
+      text-overflow: ellipsis;
+      transition: color 0.1s;
+      white-space: nowrap;
 
       &::after {
         border-bottom: 1px solid $color-primary--1;
@@ -115,6 +107,10 @@
         position: absolute;
         transition: width 0.3s ease;
         width: 0;
+      }
+
+      &:hover {
+        color: $color-secondary--1;
       }
 
       .c-collapse--expanded & {
@@ -127,14 +123,34 @@
       }
     }
 
+    &__icon {
+      left: $spacing--10;
+      position: absolute;
+      transition: transform 0.15s ease;
+
+      svg {
+        height: 12.5px;
+        width: 12.5px;
+      }
+
+      path {
+        fill: $color-grayscale--400;
+      }
+
+      .c-collapse--expanded & {
+        transform: rotate(45deg);
+      }
+    }
+
     &__content {
+      background: $color-grayscale--700;
       color: $color-grayscale--200;
       font-size: $font-size--14;
       line-height: $font-size--14 + 4;
     }
 
     &__inner {
-      padding: $spacing--10 $spacing--20;
+      padding: $spacing--10 $spacing--10 $spacing--10 $spacing--30;
     }
   }
 </style>
