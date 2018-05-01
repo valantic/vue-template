@@ -48,7 +48,7 @@ export default {
      * @param {string} item.quantity - Quantity of the product to be added
      */
     updateCartItem(state, item) {
-      let existingItem = findInCart(state.cart, item.sku, item.groupKey);
+      const existingItem = findInCart(state.cart, item.sku, item.groupKey);
 
       console.dir(state.cart.items[0].quantity);
 
@@ -86,14 +86,14 @@ export default {
        *
        * @param {Object} response - The response object from backend
        */
-      let success = function(response) {
-        let responseItem = findInCart(response, item.sku, item.groupKey);
+      const success = function(response) {
+        const responseItem = findInCart(response, item.sku, item.groupKey);
 
         if (responseItem) {
           commit('updateCartItem', responseItem);
         }
       };
-      let existingItem = findInCart(state.cart, item.sku, item.groupKey);
+      const existingItem = findInCart(state.cart, item.sku, item.groupKey);
 
       if (existingItem) {
         return api.patch(`/cart/1/${item.sku}/${item.groupKey}`, item)

@@ -3,9 +3,9 @@
     <e-input
       ref="quantity"
       :class="b('quantity')"
-      @input="onInput"
-      name="quantity"
       v-model="quantity"
+      name="quantity"
+      @input="onInput"
     />
     <e-button
       :class="b('button')"
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions } from 'vuex';
 
   export default {
     name: 'c-add-to-cart',
@@ -43,7 +43,7 @@
     },
     data() {
       return {
-        quantity: "1",
+        quantity: '1',
       };
     },
 
@@ -63,7 +63,7 @@
 
     methods: {
       ...mapActions({
-        'addToCart': 'cart/addToCart',
+        addToCart: 'cart/addToCart',
       }),
       onClick() {
         this.addToCart({
@@ -74,9 +74,11 @@
       },
       onInput(value) {
         /* very basic validation so we don't get any problems :) */
-        this.quantity = value.replace(/[^0-9]/g,'');
-        if (this.quantity === "" || this.quantity === "0")
-          this.quantity = "1"
+        this.quantity = value.replace(/[^0-9]/g, '');
+
+        if (this.quantity === '' || this.quantity === '0') {
+          this.quantity = '1';
+        }
       },
     },
     // render() {},
@@ -90,10 +92,9 @@
       width: 100px;
       margin-right: $spacing--10;
     }
-  }
 
-  .e-button {
-    padding-top: 2px;
-    padding-bottom: 6px;
+    &__button {
+      padding: 2px 10px 6px 10px;
+    }
   }
 </style>
