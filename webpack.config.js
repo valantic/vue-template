@@ -19,7 +19,7 @@ module.exports = function(env, options) {
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
   const hasMessage = (env && env.message) || false;
-  const host = 'localhost';
+  const host = '0.0.0.0';
   const port = 8080;
   const hotReload = !isProduction;
   const assetsSubDirectory = 'static/';

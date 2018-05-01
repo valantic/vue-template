@@ -1,6 +1,7 @@
 import eIcon from '@/components/e-icon';
 import eButton from '@/components/e-button';
 import ePicture from '@/components/e-picture';
+import eHeading from '@/components/e-heading';
 import ePanel from '@/components/c-panel';
 import eInput from '@/components/e-input';
 import eProgress from '@/components/e-progress';
@@ -11,6 +12,7 @@ export default {
       eButton,
       eIcon,
       ePicture,
+      eHeading,
       eInput,
       eProgress,
       ePanel,

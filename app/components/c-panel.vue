@@ -1,9 +1,6 @@
 <template>
   <div :class="b(panelModifiers)">
-    <!-- TODO replace with e-heading -->
-    <div v-if="heading" :class="b('heading', headingModifiers)">
-      <span :class="b('heading-underline')">{{ heading }}</span>
-    </div>
+    <e-heading v-if="heading" :class="b('heading', headingModifiers)" tag-name="h2" underline>{{ heading }}</e-heading>
     <div :class="b('content', contentModifiers)">
       <slot></slot>
     </div>
@@ -20,9 +17,13 @@
 </template>
 
 <script>
+  import eHeading from '@/components/e-heading';
+
   export default {
     name: 'c-panel',
-    // components: {},
+    components: {
+      eHeading
+    },
     // mixins: [],
 
     props: {
@@ -33,7 +34,7 @@
        */
       headingSpacing: {
         type: [String, Number],
-        default: 500,
+        default: 0,
         validator(value) {
           return [0, 500].includes(parseInt(value, 10));
         },
