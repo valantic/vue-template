@@ -3,7 +3,7 @@
     <h1>Attributegrid</h1>
     <c-attribute-grid :attributes="[{'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue', url: 'http://www.google.com'}]" />
     <h1 :class="b('secondheadline')">Attributegrid with headline which is shrinking on mobile</h1>
-    <c-attribute-grid :attributes="[{'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue', url: 'http://www.google.com'}]" headline shrinkOnMobile />
+    <c-attribute-grid :attributes="[{'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue'}, {'name': 'Test', 'content': 'Testvalue', url: 'http://www.google.com'}]" headline shrink-on-mobile />
   </div>
 </template>
 
