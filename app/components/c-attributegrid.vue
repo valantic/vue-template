@@ -1,7 +1,7 @@
 <template>
-  <div :class="b({ headline: headline, shrinkOnMobile: shrinkOnMobile })">
-    <div :class="b('table', { open: isOpen })">
-      <div v-for="(attribute, index) in attributes" :key="index" :class="b('row')">
+  <div :class="b({ headline: headline, shrinkOnMobile: shrinkOnMobile, dontShrinkOnMobile: !shrinkOnMobile })">
+    <div :class="b('table', { open: isOpen })" :style="{ 'max-height': tableMaxHeight + 'px' }">
+      <div v-for="(attribute, index) in attributes" :key="index" :class="b('row')" :ref="'row_' + index">
         <div :class="b('col')">
           <span :class="b('name')">{{ attribute.name }}</span>
         </div>
@@ -51,7 +51,8 @@
 
     data() {
       return {
-        isOpen: false
+        isOpen: false,
+        tableMaxHeight: 0
       };
     },
 
@@ -61,7 +62,9 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() {},
+    mounted() {
+      this.tableMaxHeight = this.getClosedHeight();
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -70,8 +73,41 @@
     // destroyed() {},
 
     methods: {
+      /**
+       * Toggles the open state of the attribute grid.
+       */
       toggle() {
         this.isOpen = !this.isOpen;
+
+        if (this.isOpen) {
+          this.tableMaxHeight = this.getExpanedHeight();
+        } else {
+          this.tableMaxHeight = this.$refs['row_0'][0].clientHeight;
+        }
+      },
+
+      /**
+       * Returns the height of the attribute grid for the closed state.
+       * @returns {Number}
+       */
+      getClosedHeight() {
+        let firstColumn = this.$refs['row_0'];
+        if (firstColumn) {
+          return firstColumn[0].clientHeight;
+        }
+        return 0;
+      },
+
+      /**
+       * Returns the height of the attribute grid for the expaned state.
+       * @returns {Number}
+       */
+      getExpanedHeight() {
+        let height = 0;
+        for (let i = 0; i < this.attributes.length; i++) {
+          height += this.$refs['row_' + i][0].clientHeight;
+        }
+        return height;
       }
     },
 
@@ -118,6 +154,10 @@
       display: none;
     }
 
+    &--dont-shrink-on-mobile &__table {
+      max-height: inherit !important;
+    }
+
     &--shrink-on-mobile &__toggle {
       display: block;
       border-top: thin solid $color-grayscale--600;
@@ -148,7 +188,6 @@
     }
     
     &--shrink-on-mobile &__table {
-      max-height: $spacing--20;
       transition: max-height $toggle-animation-duration;
       overflow: hidden;
       
@@ -160,8 +199,7 @@
     }
 
     &__table--open {
-      max-height: 800px !important;
-
+      
       @include media(xs) {
         max-height: inherit !important;
       }
