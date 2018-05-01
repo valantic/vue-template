@@ -10,8 +10,8 @@ export default {
     },
   ],
   totals: {
-    subtotal: 0,
-    grandTotal: 0,
-    netTotal: 0,
-  }
+    subtotal: 30,
+    grandTotal: 30,
+    netTotal: 30,
+  },
 };

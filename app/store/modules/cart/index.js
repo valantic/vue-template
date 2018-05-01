@@ -1,6 +1,17 @@
-// store/modules/cart/index.js
-
 import cartData from './mock/cart';
+import api from './../../utils/api';
+
+/**
+ * Finds the first occurence of item in given cart object
+ *
+ * @param {Object} cart - Cart object
+ * @param {String} sku - Sku of the cart item
+ * @param {String} groupKey - groupKey of the cart item
+ * @returns {Object} - Cart item, if found
+ */
+function findInCart(cart, sku, groupKey) {
+  return cart.items.find(i => i.sku === sku && i.groupKey === groupKey);
+}
 
 export default {
   namespaced: true,
@@ -8,10 +19,25 @@ export default {
     /**
      * @type {Object}   Stores cart items
      */
-    cart: cartData,
+    cart: cartData, // TODO - remove mock data once we have the api
+
+    /**
+     * @type {Object} API error
+     */
+    apiError: null,
   },
   getters: { },
   mutations: {
+    /**
+     * Initial cart data provided by spryker
+     *
+     * @param {Object} state - State
+     * @param {Object} data - Cart data
+     */
+    data(state, data) {
+      state.cart = data;
+    },
+
     /**
      * Update product item in cart
      *
@@ -22,18 +48,26 @@ export default {
      * @param {string} item.quantity - Quantity of the product to be added
      */
     updateCartItem(state, item) {
-      let cartItem = state.cart.items.find(i => i.sku === item.sku && i.groupKey === item.groupKey);
+      let existingItem = findInCart(state.cart, item.sku, item.groupKey);
 
-      if (cartItem) {
-        cartItem.quantity = item.quantity;
+      console.dir(state.cart.items[0].quantity);
+
+      if (existingItem) {
+        existingItem.quantity = item.quantity;
       } else {
-        state.cart.items.push({
-          sku: item.sku,
-          groupKey: item.groupKey,
-          quantity: item.quantity,
-        });
+        state.cart.items.push(item);
       }
-      console.log(state.cart.items);
+
+      console.dir(state.cart);
+    },
+
+    /**
+     * Handles an API failure
+     * @param {Object} state Current state
+     * @param {Object} error API Error that ocured
+     */
+    apiFailure(state, error) {
+      state.apiError = error;
     }
   },
   actions: {
@@ -46,32 +80,31 @@ export default {
      * @param {string} item.quantity - Quantity of the product to be added
      * @returns {Promise} Promise object
      */
-    addToCartAsync({ state, commit }, item) {
-      const cartItem = state.cart.items.find(i => i.sku === item.sku && i.groupKey === item.groupKey);
+    addToCart({ state, commit }, item) {
+      /**
+       * Triggers commit
+       *
+       * @param {Object} response - The response object from backend
+       */
+      let success = function(response) {
+        let responseItem = findInCart(response, item.sku, item.groupKey);
 
-      if (cartItem) {
-        // PATCH
-        // TODO - add ajax call + error handling
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            const response = item; // set response to real response
+        if (responseItem) {
+          commit('updateCartItem', responseItem);
+        }
+      };
+      let existingItem = findInCart(state.cart, item.sku, item.groupKey);
 
-            commit('updateCartItem', response);
-            resolve(response); //
-          }, 200);
-        });
+      if (existingItem) {
+        return api.patch(`/cart/1/${item.sku}/${item.groupKey}`, item)
+          .then(success)
+          .catch(error => commit('apiFailure', error));
       }
 
-      // POST
-      // TODO - add ajax call + error handling
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          const response = item; // set response to real response
-
-          commit('updateCartItem', response);
-          resolve(response); //
-        }, 200);
-      });
+      // create
+      return api.post('/cart/1', item)
+        .then(success)
+        .catch(error => commit('apiFailure', error));
     },
   },
 };

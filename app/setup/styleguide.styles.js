@@ -6,7 +6,9 @@ module.exports = {
       link: '#5856d6',
       linkHover: 'rgb(70, 69, 171)',
       sidebarBackground: '#2c68a0',
-      errorBackground: '#b50f0f'
+      sidebarBorder: '0',
+      errorBackground: '#b50f0f',
+      cursor: 'pointer'
     },
     fontFamily: {
       base: '"Source Sans Pro", "Trebuchet MS", Arial, sans-serif'
@@ -32,6 +34,35 @@ module.exports = {
         fontSize: 20
       }
     },
+    Heading: {
+      heading1: {
+        'color': '#2c68a0',
+        'width': '100%',
+        'textAlign': 'left',
+        '& a': {
+          '&:hover': {
+            textDecoration: 'none',
+            color: '#2c68a0 !important',
+            cursor: 'pointer !important'
+          }
+        }
+      },
+      heading2: {
+        'backgroundColor': '#2c68a0',
+        'color': '#fff',
+        'width': 'calc(100% + 32px)',
+        'padding': '0px 30px',
+        'marginLeft': '-33px',
+        'zIndex': '1',
+        '& a': {
+          '&:hover': {
+            textDecoration: 'none',
+            color: '#fff !important',
+            cursor: 'pointer !important'
+          }
+        }
+      }
+    },
     ComponentsList: {
       list: {
         '& ul': {
@@ -44,7 +75,8 @@ module.exports = {
           'fontWeight': 500,
           '&:hover': {
             textDecoration: 'underline',
-            color: '#fff !important'
+            color: '#fff !important',
+            cursor: 'pointer !important'
           }
         }
       },

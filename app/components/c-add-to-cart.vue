@@ -7,13 +7,12 @@
       name="quantity"
       v-model="quantity"
     />
-    <!-- TODO: add cart icon -->
     <e-button
       :class="b('button')"
       primary
       width="auto"
       @click="onClick"
-    >Add to cart</e-button>
+    ><e-icon icon="i-cart--blue"/></e-button>
   </div>
 </template>
 
@@ -54,9 +53,7 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted() {
-      this.getCartItemsAsync(); // TODO - must be moved somewhere else
-    },
+    // mounted() { },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -66,15 +63,13 @@
 
     methods: {
       ...mapActions({
-        'addToCartAsync': 'cart/addToCartAsync',
-        'getCartItemsAsync': 'cart/getCartItemsAsync',
+        'addToCart': 'cart/addToCart',
       }),
       onClick() {
-        this.addToCartAsync({
+        this.addToCart({
           sku: this.sku,
+          groupKey: this.groupKey,
           quantity: this.quantity,
-        }).then((item) => {
-          console.log(item);
         });
       },
       onInput(value) {
@@ -95,5 +90,10 @@
       width: 100px;
       margin-right: $spacing--10;
     }
+  }
+
+  .e-button {
+    padding-top: 2px;
+    padding-bottom: 6px;
   }
 </style>

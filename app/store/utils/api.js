@@ -26,4 +26,17 @@ export default {
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
+
+  /**
+   * Runs a patch request with a given url and payload.
+   * @param {*} url url to patch to
+   * @param {*} payload patch payload which will be attached to the request
+   * @returns {Promise} promise with response data or error
+   */
+  patch(url, payload) {
+    return axios
+      .patch(url, payload)
+      .then(response => Promise.resolve(response.data))
+      .catch(error => Promise.reject(error));
+  },
 };
