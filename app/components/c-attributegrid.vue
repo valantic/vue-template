@@ -1,25 +1,25 @@
 <template>
-  <div :class="b({ headline: headline })">
-    <div :class="b('grid', { toggled: toggled })">
+  <div :class="b({ headline: headline, shrinkOnMobile: shrinkOnMobile })">
+    <div :class="b('table', { open: isOpen })">
       <div v-for="(attribute, index) in attributes" :key="index" :class="b('row')">
         <div :class="b('col')">
           <span :class="b('name')">{{ attribute.name }}</span>
         </div>
         <div :class="b('col')">
-          <a v-if="attribute.url" :class="b('link')" :href="attribute.url">{{ attribute.content }}</a>
+          <a v-if="attribute.url" :class="b('link')" :href="attribute.url" :title="attribute.content">{{ attribute.content }}</a>
           <span v-else :class="b('content')">{{ attribute.content }}</span>
         </div>
       </div>
     </div>
-    <div :class="b('toggle', { toggled: toggled })" @click="toggle()">
-      <img :class="b('arrow')" src="../assets/icons/arrowDown.svg">
+    <div :class="b('toggle', { open: isOpen })" @click="toggle()" role="button">
+      <img :class="b('arrow')" src="../assets/icons/i-arrow-down.svg">
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'c-attributegrid',
+    name: 'c-attribute-grid',
     // components: {},
     // mixins: [],
 
@@ -39,11 +39,19 @@
         type: Boolean,
         default: false,
       },
+
+      /**
+       * Defines weather the grid should shrink on mobile or not.
+       */
+      shrinkOnMobile: {
+        type: Boolean,
+        default: false,
+      },
     },
 
     data() {
       return {
-        toggled: false
+        isOpen: false
       };
     },
 
@@ -63,7 +71,7 @@
 
     methods: {
       toggle() {
-        this.toggled = !this.toggled;
+        this.isOpen = !this.isOpen;
       }
     },
 
@@ -72,7 +80,7 @@
 </script>
 
 <style lang="scss">
-  .c-attributegrid {
+  .c-attribute-grid {
     $toggle-animation-duration: 0.7s;
 
     &__row {
@@ -80,10 +88,9 @@
     }
 
     &__col {
+      @include font($font-size--14, 23, $font-weight--regular);
       font-family: $font-family--primary;
-      font-weight: $font-weight--regular;
       color: $color-grayscale--200;
-      font-size: $font-size--14;
       flex-basis: 0;
       flex-grow: 1;
       text-align: left;
@@ -108,6 +115,10 @@
     }
 
     &__toggle {
+      display: none;
+    }
+
+    &--shrink-on-mobile &__toggle {
       display: block;
       border-top: thin solid $color-grayscale--600;
       margin-top: $spacing--10;
@@ -126,11 +137,17 @@
       transition: transform $toggle-animation-duration;
     }
 
-    &__toggle--toggled &__arrow {
-      transform: rotate(180deg);
+    &__toggle--open &__arrow {
+      transform: rotate(180deg) !important;
+    }
+
+    &__table {
+      transition: none;
+      max-height: inherit;
+      overflow: visible;
     }
     
-    &__grid {
+    &--shrink-on-mobile &__table {
       max-height: $spacing--20;
       transition: max-height $toggle-animation-duration;
       overflow: hidden;
@@ -142,11 +159,11 @@
       }
     }
 
-    &__grid--toggled {
-      max-height: 800px;
+    &__table--open {
+      max-height: 800px !important;
 
       @include media(xs) {
-        max-height: inherit;
+        max-height: inherit !important;
       }
     }
   }
