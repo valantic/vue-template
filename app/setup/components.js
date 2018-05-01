@@ -27,6 +27,7 @@ export default {
       Vue.component(eButton.name, eButton);
       Vue.component(eIcon.name, eIcon);
       Vue.component(ePicture.name, ePicture);
+      Vue.component(eHeading.name, eHeading);
       Vue.component(ePanel.name, ePanel);
       Vue.component(eProgress.name, eProgress);
       Vue.component(eInput.name, eInput);

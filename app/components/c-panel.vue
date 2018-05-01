@@ -1,6 +1,8 @@
 <template>
   <div :class="b(panelModifiers)">
-    <e-heading v-if="heading" :class="b('heading', headingModifiers)" tag-name="h2" underline>{{ heading }}</e-heading>
+    <div :class="b('heading', headingModifiers)">
+      <e-heading v-if="heading" tag-name="h2" underline>{{ heading }}</e-heading>
+    </div>
     <div :class="b('content', contentModifiers)">
       <slot></slot>
     </div>
@@ -17,13 +19,9 @@
 </template>
 
 <script>
-  import eHeading from '@/components/e-heading';
-
   export default {
     name: 'c-panel',
-    components: {
-      eHeading
-    },
+    // components: {},
     // mixins: [],
 
     props: {
@@ -140,8 +138,8 @@
     },
     data() {
       return {
-        hasTouch: 'ontouchstart' in document.documentElement ||
-          navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
+        hasTouch: 'ontouchstart' in document.documentElement
+          || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
       };
     },
 
