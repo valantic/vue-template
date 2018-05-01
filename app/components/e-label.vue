@@ -44,7 +44,7 @@
       /**
        * Labels «form» attribute for place the label outside a form
        */
-      formId: {
+      formId: { // TODO: check if not handled by auto-bind
         type: String,
         default: null
       },
@@ -52,7 +52,7 @@
       /**
        * Labels «for» attribute for referencing a form-element outside the slot
        */
-      forId: {
+      forId: { // TODO: check if not handled by auto-bind
         type: String,
         default: null
       }
