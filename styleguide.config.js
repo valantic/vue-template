@@ -18,6 +18,7 @@ module.exports = {
   components: 'app/components/**/*.vue',
   styleguideDir: 'dist/styleguidist',
   showUsage: false,
+  vuex: './app/store/index',
   sections: [
     {
       name: 'Welcome',

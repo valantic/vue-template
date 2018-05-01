@@ -59,9 +59,10 @@
 <style lang="scss">
 
   .l-default {
-    height: 100%;
+    background: $color-grayscale--600;
     display: flex;
     flex-direction: column;
+    height: 100%;
 
     &__content {
       flex: 1 0 auto;
@@ -69,8 +70,10 @@
     }
 
     &__inner {
+      background: $color-grayscale--1000;
+      box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
+      margin: $spacing--20 auto;
       max-width: map-get($grid-breakpoints, xl);
-      margin: 0 auto;
     }
   }
 
