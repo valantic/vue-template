@@ -7,10 +7,11 @@
       :disabled="disabled"
       :name="name"
       :value="value"
+      :title="title"
       v-bind="$attrs"
       type="text"
-      @blur="hasFocus = false"
-      @focus="hasFocus = true"
+      @blur="onFocusOut"
+      @focus="onFocusIn"
       @input="onInput"
       @mouseenter="hasHover = true"
       @mouseleave="hasHover = false"
@@ -20,13 +21,15 @@
 </template>
 
 <script>
+  import formStates from '@/mixins/form-states';
+
   export default {
 
     name: 'e-input',
+    mixins: [formStates],
     inheritAttrs: false,
 
     // components: {},
-    // mixins: [],
 
     props: {
 
@@ -47,19 +50,11 @@
       },
 
       /**
-       * Adds the state to the input field
-       * Valid states are: 'error', 'info', 'success'
+       *  Adds title attribute
        */
-      state: {
+      title: {
         default: null,
-        type: String,
-        validator(value) {
-          return [
-            'error',
-            'info',
-            'success',
-          ].includes(value);
-        }
+        type: String
       },
 
       /**
@@ -70,49 +65,7 @@
       autocomplete: {
         type: String,
         default: 'off',
-      },
-
-      /**
-       * Adds active state
-       */
-      active: {
-        type: Boolean,
-        default: false,
-      },
-
-      /**
-       * Adds disabled state
-       */
-      disabled: {
-        type: Boolean,
-        default: false,
-      },
-
-      /**
-       * Adds focus state
-       */
-      focus: {
-        type: Boolean,
-        default: false,
-      },
-
-      /**
-       * Adds hover state
-       */
-      hover: {
-        type: Boolean,
-        default: false,
-      },
-
-    },
-
-    data() {
-      return {
-        isActive: this.$props.active,
-        isDisabled: this.$props.disabled,
-        hasFocus: this.$props.focus,
-        hasHover: this.$props.hover,
-      };
+      }
     },
 
     computed: {
@@ -124,11 +77,7 @@
        */
       modifiers() {
         return {
-          active: this.$props.active || this.isActive,
-          disabled: this.$props.disabled || this.isDisabled,
-          focus: this.$props.focus || this.hasFocus,
-          hover: this.$props.hover || this.hasHover,
-          state: this.state,
+          ...this.stateModifiers
         };
       }
     },
@@ -152,9 +101,20 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
-        this.$emit('input', event.target.value);
+        this.$emit('input', { value: event.target.value });
       },
+      onFocusIn() {
+        this.hasFocus = true;
 
+        this.$emit('focus', { hasFocus: true });
+        this.$parent.$emit('focus', { hasFocus: true });
+      },
+      onFocusOut() {
+        this.hasFocus = false;
+
+        this.$emit('focus', { hasFocus: false });
+        this.$parent.$emit('focus', { hasFocus: false });
+      }
     }
     // render() {},
   };
