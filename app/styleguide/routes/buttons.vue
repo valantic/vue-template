@@ -34,7 +34,7 @@
       Not defined yet.
 
       <div :class="b('example')">
-        <e-button inverted @click="onClick">Inverted</e-button>
+        <e-button negative @click="onClick">Negative</e-button>
       </div>
 
       <h2>Spacing</h2>
