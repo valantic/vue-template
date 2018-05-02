@@ -10,8 +10,8 @@
       :title="title"
       v-bind="$attrs"
       type="text"
-      @blur="onFocusOut"
-      @focus="onFocusIn"
+      @blur="onBlur"
+      @focus="onFocus"
       @input="onInput"
       @mouseenter="hasHover = true"
       @mouseleave="hasHover = false"
@@ -103,17 +103,27 @@
       onInput(event) {
         this.$emit('input', { value: event.target.value });
       },
-      onFocusIn() {
+
+      /**
+       * Emits focus to parent and wrapper component
+       * Update "hasFocus" state
+       */
+      onFocus() {
         this.hasFocus = true;
 
-        this.$emit('focus', { hasFocus: true });
-        this.$parent.$emit('focus', { hasFocus: true });
+        this.$emit('focus');
+        this.$parent.$emit('focus');
       },
-      onFocusOut() {
+
+      /**
+       * Emits blur to parent and wrapper component
+       * Update "hasFocus" state
+       */
+      onBlur() {
         this.hasFocus = false;
 
-        this.$emit('focus', { hasFocus: false });
-        this.$parent.$emit('focus', { hasFocus: false });
+        this.$emit('blur');
+        this.$parent.$emit('blur');
       }
     }
     // render() {},

@@ -135,7 +135,7 @@
 <template>
   <div>
   
-    <e-label name="Label" position="top" forId="abcde1234"></e-label>
+    <e-label name="Label" position="top" for="abcde1234" form="formabc"></e-label>
     <hr/>
     <e-input v-model="demo" name="demo" placeholder="enter text..." id="abcde1234"/> 
   

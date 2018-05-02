@@ -1,7 +1,7 @@
 <template>
-  <label :class="b(modifiers)" :form="formId" :for="forId">
+  <label :class="b(modifiers)">
     <span :class="b('name')">{{ name }}</span>
-    <span v-if="!forId" :class="b('inner')">
+    <span v-if="this.$slots.default" :class="b('inner')">
       <slot></slot>
     </span>
   </label>
@@ -39,22 +39,6 @@
             'left',
           ].includes(value);
         }
-      },
-
-      /**
-       * Labels «form» attribute for place the label outside a form
-       */
-      formId: { // TODO: check if not handled by auto-bind
-        type: String,
-        default: null
-      },
-
-      /**
-       * Labels «for» attribute for referencing a form-element outside the slot
-       */
-      forId: { // TODO: check if not handled by auto-bind
-        type: String,
-        default: null
       }
     },
 
@@ -76,8 +60,18 @@
     // beforeCreate() {},
     // created() {},
     beforeMount() {
-      this.$on('focus', ({ hasFocus }) => {
-        this.hasFocus = hasFocus;
+      /**
+       * Setup event handler for "focus" event, which will be sent from the input in the slot
+       */
+      this.$on('focus', () => {
+        this.hasFocus = true;
+      });
+
+      /**
+       * Setup event handler for "blur" event, which will be sent from the input in the slot
+       */
+      this.$on('blur', () => {
+        this.hasFocus = false;
       });
     },
     // mounted() {},
