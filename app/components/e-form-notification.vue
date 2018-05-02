@@ -50,10 +50,13 @@
 
 <style lang="scss">
   .e-form-notification {
+    @include font($font-size--14, $font-size--18);
+
     display: block;
     padding: $spacing--10 35px $spacing--10 $spacing--5;
     background-size: 20px 30px;
     background-position-x: calc(100% - 5px);
+    background-position-y: calc(#{$font-size--18} / 2 - 5px);
     background-repeat: no-repeat;
     border-bottom-left-radius: $border-radius--default;
     border-bottom-right-radius: $border-radius--default;
