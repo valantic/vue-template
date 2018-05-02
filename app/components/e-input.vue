@@ -154,7 +154,7 @@
       -webkit-text-fill-color: initial;
     }
 
-    // remove x on in put field wihtin IE
+    // remove x on in put field within IE
     &__field::-ms-clear {
       display: none;
       height: 0;

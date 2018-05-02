@@ -472,4 +472,4 @@ $ brew upgrade nasm
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017-present, Patric Eberle
+Copyright (c) 2017-present, valantic CEC Schweiz AG

@@ -3,7 +3,7 @@
 //
 // @param {Length}    $number   Length to remove unit from
 //
-// @return {Number}   Unitless number
+// @return {Number}   Unit less number
 ////
 @function strip-unit($number) {
   @if type-of($number) == 'number' and not unitless($number) {
