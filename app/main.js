@@ -1,9 +1,10 @@
-import Vue from 'vue';
-import options from './setup/options';
-import components from './setup/components';
-
+// It's mandatory that common styles are imported before the application. Else they will come lasts in the CSS build
 // NOTE: this is not working for styleguidist. There you need to add style imports to the required configuration
 import './setup/_scss.scss';
+
+import Vue from 'vue'; // eslint-disable-line import/first
+import options from './setup/options';
+import components from './setup/components';
 
 let vueOptions = options;
 
