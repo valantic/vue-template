@@ -90,6 +90,7 @@
   .e-label {
     display: block;
     margin: 0;
+    color: $color-grayscale--400;
 
     &__inner {
       width: 100%;
@@ -144,10 +145,6 @@
       }
     }
 
-    &--state-default {
-      color: $color-grayscale--400;
-    }
-
     &--active,
     &--focus {
       color: $color-secondary--1;
@@ -159,6 +156,10 @@
 
     &--state-error {
       color: $color-status--danger;
+    }
+
+    &--state-info {
+      color: $color-status--info;
     }
   }
 </style>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <g id="icons/i-preisAnfrage--blue" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-17" fill="#75B4E0" transform="translate(11.131728, 11.131728) rotate(45.000000) translate(-11.131728, -11.131728) " x="10.631728" y="0.131727984" width="1" height="22" rx="0.5"></rect>
+        <path d="M6,9 C4.34314575,9 3,7.65685425 3,6 C3,4.34314575 4.34314575,3 6,3 C7.65685425,3 9,4.34314575 9,6 C9,7.65685425 7.65685425,9 6,9 Z M6,8 C7.1045695,8 8,7.1045695 8,6 C8,4.8954305 7.1045695,4 6,4 C4.8954305,4 4,4.8954305 4,6 C4,7.1045695 4.8954305,8 6,8 Z" id="Combined-Shape" fill="#75B4E0"></path>
+        <path d="M16,19 C14.3431458,19 13,17.6568542 13,16 C13,14.3431458 14.3431458,13 16,13 C17.6568542,13 19,14.3431458 19,16 C19,17.6568542 17.6568542,19 16,19 Z M16,18 C17.1045695,18 18,17.1045695 18,16 C18,14.8954305 17.1045695,14 16,14 C14.8954305,14 14,14.8954305 14,16 C14,17.1045695 14.8954305,18 16,18 Z" id="Combined-Shape" fill="#75B4E0"></path>
+    </g>
+</svg>

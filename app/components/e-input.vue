@@ -16,20 +16,25 @@
       @mouseenter="hasHover = true"
       @mouseleave="hasHover = false"
     >
+    <span v-if="!hasDefaultState && !notification" :class="b('icon-splitter')"></span>
+    <div v-if="notification" :class="b('notification')">
+      <e-form-notification :state="state">{{ notification }}</e-form-notification>
+    </div>
   </div>
 
 </template>
 
 <script>
   import formStates from '@/mixins/form-states';
+  import EFormNotification from '@/components/e-form-notification';
 
   export default {
-
     name: 'e-input',
+    components: {
+      EFormNotification
+    },
     mixins: [formStates],
     inheritAttrs: false,
-
-    // components: {},
 
     props: {
 
@@ -65,6 +70,14 @@
       autocomplete: {
         type: String,
         default: 'off',
+      },
+
+      /**
+       * Shows the notification content in a state container bellow the input field
+       */
+      notification: {
+        type: String,
+        default: null
       }
     },
 
@@ -77,8 +90,12 @@
        */
       modifiers() {
         return {
-          ...this.stateModifiers
+          ...this.stateModifiers,
+          notification: Boolean(this.$props.notification)
         };
+      },
+      hasDefaultState() {
+        return this.state === 'default';
       }
     },
     // watch: {},
@@ -101,7 +118,7 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
-        this.$emit('input', { value: event.target.value });
+        this.$emit('input', event.target.value);
       },
 
       /**
@@ -178,6 +195,19 @@
       opacity: 1;
     }
 
+    &__icon-splitter {
+      position: absolute;
+      right: 30px;
+      height: 26px;
+      top: 2px;
+      border-left: 1px solid;
+    }
+
+    &__notification {
+      position: absolute;
+      width: 100%;
+    }
+
     // active
     &__field:active,
     &--active &__field {
@@ -203,7 +233,7 @@
     &__field:disabled,
     &--disabled &__field,
     &--disabled &__field:hover {
-      background: $color-grayscale--1000;
+      background-color: $color-grayscale--1000;
       border: none;
       color: $color-grayscale--600;
 
@@ -220,26 +250,63 @@
     /**
     * states
     **/
-
     &--state-error {
-      @include half-border($color-secondary--4);
-      // TODO add info message and icon
+      @include half-border($color-status--danger);
+
+      .e-input__field {
+        background: url('../assets/icons/i-error.svg') no-repeat;
+        background-size: 20px 30px;
+        background-position-x: calc(100% - 5px);
+        padding-right: 35px;
+      }
+
+      .e-input__icon-splitter {
+        border-color: $color-status--danger;
+      }
     }
 
     &--state-error &__field:hover {
-      border: 1px solid $color-secondary--4;
+      border: 1px solid $color-status--danger;
     }
 
     &--state-error &__field:focus {
-      border: 1px solid $color-secondary--4;
+      border: 1px solid $color-status--danger;
     }
 
     &--state-info {
-      // TODO add info message and icon
+      .e-input__field {
+        background: url('../assets/icons/i-info.svg') no-repeat;
+        background-size: 20px 30px;
+        background-position-x: calc(100% - 5px);
+        padding-right: 35px;
+      }
+
+      .e-input__icon-splitter {
+        border-color: $color-grayscale--500;
+      }
     }
 
     &--state-success {
-      // TODO add info message and icon
+      .e-input__field {
+        background: url('../assets/icons/i-check.svg') no-repeat;
+        background-size: 20px 30px;
+        background-position-x: calc(100% - 5px);
+        padding-right: 35px;
+      }
+
+      .e-input__icon-splitter {
+        display: none;
+      }
+    }
+
+    /*
+     * Notification is visible
+     */
+    &--notification {
+      .e-input__field {
+        padding: $spacing--5 $spacing--10;
+        background: none;
+      }
     }
   }
 </style>
