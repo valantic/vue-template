@@ -42,6 +42,7 @@
         validator(value) {
           return [
             0,
+            500
           ].includes(parseInt(value, 10));
         }
       },
