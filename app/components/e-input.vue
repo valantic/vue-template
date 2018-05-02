@@ -198,12 +198,14 @@
     &__icon-splitter {
       position: absolute;
       right: 30px;
-      height: 26px;
+      height: calc(100% - 4px);
       top: 2px;
       border-left: 1px solid;
     }
 
     &__notification {
+      @include z-index(form-notification);
+
       position: absolute;
       width: 100%;
     }
@@ -254,10 +256,7 @@
       @include half-border($color-status--danger);
 
       .e-input__field {
-        background: url('../assets/icons/i-error.svg') no-repeat;
-        background-size: 20px 30px;
-        background-position-x: calc(100% - 5px);
-        padding-right: 35px;
+        @include form-state-icon('error');
       }
 
       .e-input__icon-splitter {
@@ -275,10 +274,7 @@
 
     &--state-info {
       .e-input__field {
-        background: url('../assets/icons/i-info.svg') no-repeat;
-        background-size: 20px 30px;
-        background-position-x: calc(100% - 5px);
-        padding-right: 35px;
+        @include form-state-icon('info');
       }
 
       .e-input__icon-splitter {
@@ -288,10 +284,7 @@
 
     &--state-success {
       .e-input__field {
-        background: url('../assets/icons/i-check.svg') no-repeat;
-        background-size: 20px 30px;
-        background-position-x: calc(100% - 5px);
-        padding-right: 35px;
+        @include form-state-icon('success');
       }
 
       .e-input__icon-splitter {
