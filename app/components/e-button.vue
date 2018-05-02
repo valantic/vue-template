@@ -3,6 +3,12 @@
 <script>
   import eProgress from './e-progress';
 
+  /**
+   * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
+   *
+   * @link [You can also define inherited attributes for `<button>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/button#Attribute)
+   * @link [You can also define inherited attributes for `<a>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/a#Attribute)
+   */
   export default {
     name: 'e-button',
     // components: {},
@@ -23,14 +29,6 @@
             'auto',
           ].includes(value);
         },
-      },
-
-      /**
-       * Inverts the button style
-       */
-      inverted: {
-        type: Boolean,
-        default: false,
       },
 
       /**
@@ -171,7 +169,6 @@
     render(createElement) {
       const {
         width,
-        inverted,
         spacing,
         negative,
         progress,
@@ -184,7 +181,6 @@
       const options = {
         class: this.b({
           width,
-          inverted,
           spacing,
           negative,
           progress,
@@ -348,7 +344,7 @@
       min-width: 0;
     }
 
-    &--inverted {
+    &--negative {
       background: $color-primary--2;
       color: $color-primary--3;
 
