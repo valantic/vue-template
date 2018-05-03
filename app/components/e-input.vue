@@ -101,7 +101,7 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
-        this.$emit('input', { value: event.target.value });
+        this.$emit('input', event.target.value);
       },
 
       /**
