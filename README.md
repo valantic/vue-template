@@ -465,11 +465,11 @@ $ brew upgrade nasm
 * [ ] Fallback image for e-picture
 * [ ] Input components should expect name, title and autocomplete value
 * [ ] Ajax error handling
-* [ ] e-picture should support relation property and fallback image
+* [x] e-picture should support relation property and fallback image
 * [ ] npm update: only update one package at a time, test, then update next.
 
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017-present, Patric Eberle
+Copyright (c) 2017-present, valantic CEC Schweiz AG
