@@ -8,15 +8,15 @@
     </div>
     <div :class="b('grid')">
       <div v-for="icon in filteredIcons"
-           :class="b('grid-item')"
+           :class="b('grid-item', { negative: icon.negative })"
            :key="icon"
            role="button"
            @click="copyToClipboard(icon)"
       >
         <div :class="b('icon-wrapper')">
-          <e-icon :icon="icon" :key="icon" width="50"/>
+          <e-icon :icon="icon.name" :key="icon.name" width="50"/>
         </div>
-        <div :class="b('icon-label')">{{ icon }}</div>
+        <div :class="b('icon-label')">{{ icon.name }}</div>
       </div>
     </div>
     <div v-if="notification" :class="b('notification')">{{ notification }}</div>
@@ -43,12 +43,19 @@
     // components: {},
     computed: {
       filteredIcons() {
-        return this.icons.filter(icon => icon.indexOf(this.filter) > -1);
+        const list = this.icons.filter(icon => icon.indexOf(this.filter) > -1);
+
+        return list.map((icon) => { // eslint-disable-line arrow-body-style
+          return {
+            name: icon,
+            negative: Boolean(icon.match(/negative/))
+          };
+        });
       },
     },
     methods: {
       copyToClipboard(icon) {
-        const value = `<e-icon icon="${icon}"/>`;
+        const value = `<e-icon icon="${icon.name}"/>`;
         const input = this.$el.querySelector('.s-icon-finder__clipboard');
         const _that = this;
 
@@ -117,6 +124,10 @@
         width: 100%;
         height: 100%;
       }
+    }
+
+    &__grid-item--negative {
+      background-color: $color-grayscale--500;
     }
 
     &__icon-wrapper {
