@@ -13,8 +13,8 @@
       @blur="onBlur"
       @focus="onFocus"
       @input="onInput"
-      @mouseenter="hasHover = true"
-      @mouseleave="hasHover = false"
+      @mouseenter="isHover = true"
+      @mouseleave="isHover = false"
     >
   </div>
 
