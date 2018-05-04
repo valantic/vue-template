@@ -14,12 +14,19 @@
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <pre>{{ name }}</pre>
     </form>
+    <h2>c-add-to-cart</h2>
+    <c-add-to-cart sku="SKU03"/>
   </div>
 </template>
 
 <script>
+  import cAddToCart from '@/components/c-add-to-cart';
+
   export default {
     name: 'forms',
+    components: {
+      cAddToCart,
+    },
     data() {
       return {
         name: {
