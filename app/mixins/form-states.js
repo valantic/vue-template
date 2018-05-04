@@ -52,7 +52,15 @@ export default {
     hover: {
       type: Boolean,
       default: false,
-    }
+    },
+
+    /**
+     * Adds checked state
+     */
+    checked: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   /**
@@ -65,7 +73,8 @@ export default {
       isActive: this.active,
       isDisabled: this.disabled,
       hasFocus: this.focus,
-      isHover: this.hover
+      isHover: this.hover,
+      isChecked: this.checked,
     };
   },
 
@@ -82,7 +91,8 @@ export default {
         active: this.isActive,
         disabled: this.isDisabled,
         focus: this.hasFocus,
-        hover: this.isHover
+        hover: this.isHover,
+        checked: this.isChecked,
       };
     }
   }
