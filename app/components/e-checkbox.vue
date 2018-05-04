@@ -1,17 +1,21 @@
 <template>
   <div :class="b(modifiers)">
 
-    <input
-      :checked="checked"
-      :class="b('field')"
-      :disabled="disabled"
-      v-bind="$attrs"
-      type="checkbox"
-      @change="onChange"
-      @blur="onBlur"
-      @focus="onFocus"
-      @mouseenter="hasHover = true"
-      @mouseleave="hasHover = false">
+    <label :class="b('label')">
+      <input
+        :class="b('field')"
+        :disabled="disabled"
+        :value="value"
+        v-bind="$attrs"
+        v-model="internalValue"
+        type="checkbox"
+        @change="onChange"
+        @blur="onBlur"
+        @focus="onFocus"
+        @mouseenter="isHover = true"
+        @mouseleave="isHover = false">
+      <slot></slot>
+    </label>
   </div>
 
 </template>
@@ -30,16 +34,39 @@
        * Avoid a conflict with default value attribute.
        */
       prop: 'checked',
-      event: 'change'
+      event: 'change',
     },
 
-    // props: {},
+    props: {
+      checked: {
+        type: [Boolean, Array],
+        default: false,
+      },
+      value: {
+        type: String,
+        required: true,
+      },
+    },
 
     // data() {
     //   return {};
     // },
 
     computed: {
+      /**
+       * Sets value of component model to parent model
+       *
+       * @returns  {Boolean}   Status of the checkbox
+       */
+      internalValue: {
+        get() {
+          return this.checked;
+        },
+        set(value) {
+          this.$emit('change', value);
+        }
+      },
+
       /**
        * Defines state modifier classes
        *
@@ -73,7 +100,6 @@
        */
       onChange(event) {
         this.isChecked = event.target.checked;
-        this.$emit('change', event.target.checked);
         this.$parent.$emit('change');
       },
 

@@ -1,17 +1,18 @@
-#### `default`
+#### `single checkbox`
 
 Always use **v-model** to bind value to form elements!
 ```
 <template>
 <div>
-  
-  <e-checkbox v-model="checked" value="Checkbox Demo" />
 
+  <e-checkbox v-model="checked" :value="value">
+    {{ value }}
+  </e-checkbox>
+  
   <div class="spacing--top-15">
-    <pre>{{ checked }}</pre>
+    <pre>checked: {{ checked }}</pre>
   </div>
 
-  
 </div>
 </template>
 
@@ -19,16 +20,52 @@ Always use **v-model** to bind value to form elements!
   export default {
     name: 'example',
     data: () => ({
-      checked: false
+      // The list of IDs of checked items
+      checked: false,
+      value: 'Single Checkbox'
     })
   };
 </script>
 ```
 
 
-#### `:disabled`
+#### `multiple checkboxes`
+Use Array instead of Boolean for multiple checkboxes, which share the same v-model. 
+
 ```
-<e-input disabled name="demo" value="Lorem ipsum..."/>
+<template>
+<div>
+
+  <div v-for="item in items">
+    <e-checkbox :key="item.id" v-model="checked" :value="item.value">
+      {{ item.value }}
+    </e-checkbox>
+  </div>
+  
+  <div class="spacing--top-15">
+    <pre>checked: {{ checked }}</pre>
+    <pre>items: {{ items }}</pre>
+  </div>
+
+</div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      // The list of items we need to do operation on
+      items: [
+        {id: 1,value: 'Checkbox 1'},
+        {id: 2,value: 'Checkbox 2'},
+        {id: 3,value: 'Checkbox 3'}
+      ],
+      
+      // The list of IDs of checked items
+      checked: []
+    })
+  };
+</script>
 ```
 
 
