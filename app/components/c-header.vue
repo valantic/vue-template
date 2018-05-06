@@ -3,7 +3,11 @@
   <div :class="b()">
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
-      <div :class="b('icons')">Icons</div>
+      <div :class="b('icons')">
+        <div :class="b('cart')">
+          <c-cart active/>
+        </div>
+      </div>
       <div :class="b('assortment')">Sortiment</div>
       <div :class="b('search')">Search</div>
     </div>
@@ -11,9 +15,13 @@
 </template>
 
 <script>
+  import cCart from '@/components/c-cart';
+
   export default {
     name: 'c-header',
-    // components: {},
+    components: {
+      cCart,
+    },
     // mixins: [],
 
     // props: {},
@@ -103,10 +111,19 @@
 
     &__icons {
       flex: 0 1 percentage(7 / 12);
+      text-align: right;
 
       @include media(sm) {
         flex: 0 1 percentage(3 / 12);
         order: 4;
+      }
+    }
+
+    &__cart {
+      display: inline-block;
+
+      @include media(sm) {
+        margin-right: 70px;
       }
     }
   }
