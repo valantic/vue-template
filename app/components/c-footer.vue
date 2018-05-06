@@ -8,7 +8,7 @@
       <hr :class="b('navigation-separator')">
       <div :class="b('social')">Folgen Sie uns auf: (F) (L) (X)</div>
       <hr :class="b('social-separator')">
-      <div :class="b('sonepar')">A Sonepar Company</div>
+      <div :class="b('sonepar')"><a href="http://www.sonepar.com/" target="_blank">A Sonepar Company</a></div>
     </div>
   </div>
 </template>
@@ -142,6 +142,19 @@
       @include media(xs) {
         order: 4;
         padding-left: $spacing--20;
+      }
+
+      a {
+        border: none;
+        color: $color-grayscale--1000;
+        padding: 0;
+
+        &:focus,
+        &--focus,
+        &:hover,
+        &--hover {
+          border-bottom: 1px solid $color-primary--1;
+        }
       }
     }
   }
