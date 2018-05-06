@@ -148,13 +148,6 @@
         border: none;
         color: $color-grayscale--1000;
         padding: 0;
-
-        &:focus,
-        &--focus,
-        &:hover,
-        &--hover {
-          border-bottom: 1px solid $color-primary--1;
-        }
       }
     }
   }
