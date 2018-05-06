@@ -1,6 +1,6 @@
 <template>
-  <div :class="b({ headline: headline, shrinkOnMobile: shrinkOnMobile, dontShrinkOnMobile: !shrinkOnMobile })">
-    <div :class="b('table', { open: isOpen })" :style="{ 'max-height': tableMaxHeight + 'px' }">
+  <div :class="b(modifiers)">
+    <div :class="b('table', { open: isOpen })" :style="{ 'max-height': tableMaxHeight }">
       <div
         v-for="(attribute, index) in attributes"
         :key="index"
@@ -59,19 +59,52 @@
 
     data() {
       return {
-        isOpen: false,
-        tableMaxHeight: 0
+        isOpen: true,
       };
     },
 
-    // computed: {},
+    computed: {
+      /**
+       * Defines state modifier classes
+       *
+       * @returns  {Object}   BEM classes
+       */
+      modifiers() {
+        return {
+          headline: this.headline,
+          shrinkOnMobile: this.shrinkOnMobile,
+          dontShrinkOnMobile: !this.shrinkOnMobile
+        };
+      },
+
+      /**
+       * return the attribute grid's table max-height
+       *
+       * @returns  {String}   max-height style value
+       */
+      tableMaxHeight() {
+        if (!this.shrinkOnMobile) {
+          return 'inherit';
+        }
+        let maxHeight = 0;
+
+        if (this.isOpen) {
+          maxHeight = this.getExpanedHeight();
+        } else {
+          maxHeight = this.getClosedHeight();
+        }
+
+        return `${maxHeight}px`;
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
+
     mounted() {
-      this.tableMaxHeight = this.getClosedHeight();
+      this.isOpen = false;
     },
     // beforeUpdate() {},
     // updated() {},
@@ -86,12 +119,6 @@
        */
       toggle() {
         this.isOpen = !this.isOpen;
-
-        if (this.isOpen) {
-          this.tableMaxHeight = this.getExpanedHeight();
-        } else {
-          this.tableMaxHeight = this.$refs.row_0[0].clientHeight;
-        }
       },
 
       /**
@@ -116,7 +143,11 @@
         let height = 0;
 
         for (let i = 0; i < this.attributes.length; i += 1) {
-          height += this.$refs[`row_${i}`][0].clientHeight;
+          const ref = this.$refs[`row_${i}`];
+          
+          if (ref) {
+            height += ref[0].clientHeight;
+          }
         }
 
         return height;
@@ -187,17 +218,13 @@
     }
 
     &__toggle--open &__arrow {
-      transform: rotate(180deg) !important;
+      transform: rotate(180deg);
     }
 
     &__table {
       transition: none;
       max-height: inherit;
       overflow: visible;
-    }
-    
-    &--dont-shrink-on-mobile &__table {
-      max-height: inherit !important;
     }
 
     &--shrink-on-mobile &__table {
@@ -206,14 +233,14 @@
       
       @include media(xs) {
         transition: none;
-        max-height: inherit;
+        max-height: inherit !important;
         overflow: visible;
       }
     }
 
     &__table--open {
       @include media(xs) {
-        max-height: inherit !important;
+        max-height: inherit;
       }
     }
   }
