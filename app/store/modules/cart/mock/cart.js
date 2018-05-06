@@ -3,7 +3,6 @@ export default {
     {
       id: '123',
       sku: 'SKU03',
-      groupKey: '',
       quantity: 3,
       unitGrossPrice: 10,
       sumGrossPrice: 30,

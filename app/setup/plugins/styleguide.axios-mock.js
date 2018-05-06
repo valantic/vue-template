@@ -56,7 +56,7 @@ export default {
 
       .onGet('/cart/1').reply(200, cCartGet)
       .onPost('/cart/1').reply(200, cCartPost)
-      .onPatch('/cart/1/SKU03/').reply(200, cCartPatch)
+      .onPatch('/cart/1/SKU03').reply(200, cCartPatch)
 
       .onAny(/\/?static/).passThrough()
       .onAny().reply(wildcard);

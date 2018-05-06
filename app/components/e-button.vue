@@ -331,6 +331,8 @@
 
     &[disabled],
     &--disabled,
+    &[disabled]::before,
+    &--disabled::after,
     &[disabled]:hover,
     &--disabled:hover {
       background-color: transparent;
@@ -379,7 +381,7 @@
     &__inner {
       position: relative;
       display: inline-block;
-      vertical-align: bottom;
+      vertical-align: baseline;
     }
 
     .e-progress {

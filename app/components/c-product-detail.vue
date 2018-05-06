@@ -18,7 +18,7 @@
       </div>
 
       <aside :class="b('sidebar', {area: 'top' })">
-        <div :class="b('add-to-cart')">availability / price / qty / add to cart</div>
+        <div :class="b('add-to-cart')">availability / price / qty / <c-add-to-cart :step="3" label sku="product.sku"/></div>
       </aside>
 
     </section>
@@ -44,9 +44,13 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  import cAddToCart from '@/components/c-add-to-cart';
 
   export default {
     name: 'c-product-detail',
+    components: {
+      cAddToCart
+    },
 
     // mixins: [],
 

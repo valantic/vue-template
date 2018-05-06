@@ -1,25 +1,25 @@
 export default {
-  items: [
-    {
-      id: '123',
-      sku: 'SKU03',
-      groupKey: '',
-      quantity: 3,
-      unitGrossPrice: 10,
-      sumGrossPrice: 30,
+  data: {
+    items: [
+      {
+        id: '123',
+        sku: 'SKU03',
+        quantity: 3,
+        unitGrossPrice: 1000,
+        sumGrossPrice: 3000,
+      },
+      {
+        id: '456',
+        sku: 'SKU06',
+        quantity: 6,
+        unitGrossPrice: 1000,
+        sumGrossPrice: 6000,
+      },
+    ],
+    totals: {
+      subtotal: 9000,
+      grandTotal: 9000,
+      netTotal: 9000,
     },
-    {
-      id: '456',
-      sku: 'SKU06',
-      groupKey: '',
-      quantity: 6,
-      unitGrossPrice: 10,
-      sumGrossPrice: 60,
-    },
-  ],
-  totals: {
-    subtotal: 90,
-    grandTotal: 90,
-    netTotal: 90,
   },
 };
