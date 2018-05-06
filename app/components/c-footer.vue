@@ -6,7 +6,9 @@
       <hr :class="b('languages-separator')">
       <div :class="b('navigation')">Navigation</div>
       <hr :class="b('navigation-separator')">
-      <div :class="b('social')">Folgen Sie uns auf: (F) (L) (X)</div>
+      <div :class="b('social')">
+        <c-social-media/>
+      </div>
       <hr :class="b('social-separator')">
       <div :class="b('sonepar')">A Sonepar Company</div>
     </div>
@@ -14,9 +16,13 @@
 </template>
 
 <script>
+  import cSocialMedia from '@/components/c-social-media';
+
   export default {
     name: 'c-footer',
-    // components: {},
+    components: {
+      cSocialMedia,
+    },
     // mixins: [],
 
     // props: {},
@@ -82,7 +88,7 @@
     &__sonepar,
     &__social,
     &__social-separator {
-      flex: 0 1 percentage (12 / 12);
+      flex: 0 1 percentage(12 / 12);
     }
 
     &__navigation-separator,
@@ -140,6 +146,7 @@
       padding: $spacing--20 $spacing--0 $spacing--30 $spacing--10;
 
       @include media(xs) {
+        flex: 0 1 percentage(6 / 12);
         order: 4;
         padding-left: $spacing--20;
       }
