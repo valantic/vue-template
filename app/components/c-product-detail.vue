@@ -26,7 +26,11 @@
     <section :class="b('bottom')">
 
       <div :class="b('main', { area: 'bottom' })">
-        <div :class="b('details')"> details</div>
+        <div v-if="product.description" :class="b('details')">
+          <!-- TODO - translate -->
+          <e-heading underline tagName="h2" color="gray">Produktbeschreibung</e-heading>
+          <div :class="b('description')" v-html="product.description"></div>
+        </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
       </div>
@@ -175,6 +179,12 @@
       @include media(sm) {
         border-bottom: 4px solid $color-grayscale--600;
       }
+    }
+
+    &__description {
+      @include font($font-size--14, $line-height: 18px);
+
+      padding: $spacing--20;
     }
 
     &__accessories {
