@@ -20,7 +20,6 @@ Always use **v-model** to bind value to form elements!
   export default {
     name: 'example',
     data: () => ({
-      // The list of IDs of checked items
       name: 'xyz',
       checked: false,
       value: 'single Checkbox'
@@ -69,26 +68,74 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 </script>
 ```
 
-
-#### `:hover`
+#### `checked`
 ```
 <template>
-  <div>
+<div>
+
+  <e-checkbox checked v-model="checked" :name="name" :value="value">
+    {{ value }}
+  </e-checkbox>
   
-    <e-input v-model="demo" hover name="demo" placeholder="enter text..."/> 
-    
-    <div v-if="demo" class="spacing--top-15">
-      <p>{{demo}}</p>
-    </div>
-  
-  </div>
+</div>
 </template>
 
 <script>
   export default {
     name: 'example',
     data: () => ({
-      demo: ''
+      name: 'checked',
+      checked: true,
+      value: 'checked'
+    })
+  };
+</script>
+```
+
+#### `disabled`
+```
+<template>
+<div>
+
+  <e-checkbox disabled v-model="checked" :name="name" :value="value">
+    {{ value }}
+  </e-checkbox>
+  
+</div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      name: 'disabled',
+      checked: false,
+      value: 'disabled'
+    })
+  };
+</script>
+```
+
+
+#### `:hover`
+```
+<template>
+<div>
+
+  <e-checkbox hover v-model="checked" :name="name" :value="value">
+    {{ value }}
+  </e-checkbox>
+
+</div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      name: 'hover',
+      checked: false,
+      value: 'hover'
     })
   };
 </script>
@@ -98,70 +145,22 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 #### `:focus`
 ```
 <template>
-  <div>
-  
-    <e-input v-model="demo" focus name="demo" placeholder="enter text..."/> 
-    
-    <div v-if="demo" class="spacing--top-15">
-      <p>{{demo}}</p>
-    </div>
-  
-  </div>
+<div>
+
+  <e-checkbox focus v-model="checked" :name="name" :value="value">
+    {{ value }}
+  </e-checkbox>
+
+</div>
 </template>
 
 <script>
   export default {
     name: 'example',
     data: () => ({
-      demo: ''
-    })
-  };
-</script>
-```
-
-#### state: `error`
-```
-<template>
-  <div>
-  
-    <e-input v-model="demo" state="error" name="demo" placeholder="enter text..."/> 
-    
-    <div v-if="demo" class="spacing--top-15">
-      <p>{{demo}}</p>
-    </div>
-  
-  </div>
-</template>
-
-<script>
-  export default {
-    name: 'example',
-    data: () => ({
-      demo: ''
-    })
-  };
-</script>
-```
-
-#### state: `success`
-```
-<template>
-  <div>
-  
-    <e-input v-model="demo" state="success" hover name="demo" placeholder="enter text..."/> 
-    
-    <div v-if="demo" class="spacing--top-15">
-      <p>{{demo}}</p>
-    </div>
-  
-  </div>
-</template>
-
-<script>
-  export default {
-    name: 'example',
-    data: () => ({
-      demo: ''
+      name: 'focus',
+      checked: false,
+      value: 'focus'
     })
   };
 </script>
@@ -170,22 +169,22 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 #### state: `info`
 ```
 <template>
-  <div>
-  
-    <e-input v-model="demo" state="info" hover name="demo" placeholder="enter text..."/> 
-    
-    <div v-if="demo" class="spacing--top-15">
-      <p>{{demo}}</p>
-    </div>
-  
-  </div>
+<div>
+
+  <e-checkbox state="info" v-model="checked" :name="name" :value="value">
+    {{ value }}
+  </e-checkbox>
+
+</div>
 </template>
 
 <script>
   export default {
     name: 'example',
     data: () => ({
-      demo: ''
+      name: 'info',
+      checked: true,
+      value: 'info'
     })
   };
 </script>

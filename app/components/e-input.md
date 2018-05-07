@@ -61,7 +61,7 @@ Always use **v-model** to bind value to form elements!
 <template>
   <div>
   
-    <e-input v-model="demo" focus name="demo" placeholder="enter text..."/> 
+    <e-input focus v-model="demo" name="demo" placeholder="enter text..."/> 
     
     <div v-if="demo" class="spacing--top-15">
       <p>{{demo}}</p>
