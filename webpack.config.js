@@ -16,20 +16,25 @@ const cssNano = require('cssnano');
 const openInEditor = require('launch-editor-middleware');
 
 module.exports = function(env, options) {
+  // Flags
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
   const hasMessage = (env && env.message) || false;
-  const host = '0.0.0.0';
-  const port = 8080;
   const hotReload = !isProduction;
-  const assetsSubDirectory = 'static/';
   const isProfileBuild = (options && options.profile && options.json) || false;
+
+  // Configuration
+  const buildPath = path.resolve(__dirname, 'dist');
+  const devPort = 8080;
+  const assetsSubDirectory = 'static/';
   const globalVariables = {
     'process.env': {
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
       HAS_STYLEGUIDE: JSON.stringify(hasStyleguide)
     },
   };
+
+  const host = '0.0.0.0';
   const include = [
     path.resolve(__dirname, 'app'),
     path.resolve(__dirname, 'test'),
@@ -216,7 +221,7 @@ module.exports = function(env, options) {
       if (!hasStyleguide) {
         pluginCollection.push(new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
-            messages: [`Your application is running on http://${host}:${port}.`],
+            messages: [`Your application is running on http://${host}:${devPort}.`],
           },
         }));
       }
@@ -336,7 +341,7 @@ module.exports = function(env, options) {
 
   const devConfig = {
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: buildPath,
       filename: '[name].js',
       publicPath: '/',
     },
@@ -346,7 +351,7 @@ module.exports = function(env, options) {
       clientLogLevel: 'error', // Removes ESLint warnings from console
       historyApiFallback: true, // Enables routing support
       host,
-      port,
+      port: devPort,
       hot: hotReload,
       compress: true,
       overlay: true,
@@ -361,7 +366,7 @@ module.exports = function(env, options) {
 
   const prodConfig = {
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: buildPath,
       filename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
       chunkFilename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
       publicPath: '/', // Public path to 'dist' scope in production
