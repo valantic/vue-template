@@ -16,6 +16,13 @@ const cssNano = require('cssnano');
 const openInEditor = require('launch-editor-middleware');
 
 module.exports = function(env, options) {
+  // Flags
+  const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
+  const hasStyleguide = (env && env.styleguide) || false;
+  const hasMessage = (env && env.message) || false;
+  const hotReload = !isProduction;
+  const isProfileBuild = (options && options.profile && options.json) || false;
+
   // Configuration
   const buildPath = path.resolve(__dirname, 'dist');
   const devPort = 8080;
@@ -28,11 +35,6 @@ module.exports = function(env, options) {
   };
 
   const host = '0.0.0.0';
-  const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
-  const hasStyleguide = (env && env.styleguide) || false;
-  const hasMessage = (env && env.message) || false;
-  const hotReload = !isProduction;
-  const isProfileBuild = (options && options.profile && options.json) || false;
   const include = [
     path.resolve(__dirname, 'app'),
     path.resolve(__dirname, 'test'),
