@@ -25,6 +25,7 @@ module.exports = function(env, options) {
 
   // Configuration
   const buildPath = path.resolve(__dirname, 'dist');
+  const filePrefix = '';
   const devPort = 8080;
   const assetsSubDirectory = 'static/';
   const globalVariables = {
@@ -35,6 +36,7 @@ module.exports = function(env, options) {
   };
 
   const host = '0.0.0.0';
+  const prefix = filePrefix ? `${filePrefix}_` : '';
   const include = [
     path.resolve(__dirname, 'app'),
     path.resolve(__dirname, 'test'),
@@ -120,7 +122,7 @@ module.exports = function(env, options) {
 
       // extract css into its own file
       pluginCollection.push(new ExtractTextPlugin({
-        filename: assetsSubDirectory + 'css/[name].css?[chunkhash]', // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
+        filename: assetsSubDirectory + `css/${prefix}[name].css?[chunkhash]`, // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
         // Setting the following option to `false` will not extract CSS from codesplit chunks.
         // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
         // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
@@ -367,8 +369,8 @@ module.exports = function(env, options) {
   const prodConfig = {
     output: {
       path: buildPath,
-      filename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
-      chunkFilename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
+      filename: `${assetsSubDirectory}js/${prefix}[name].js?[chunkhash]`,
+      chunkFilename: `${assetsSubDirectory}js/${prefix}[name].js?[chunkhash]`,
       publicPath: '/', // Public path to 'dist' scope in production
     },
     // @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx
