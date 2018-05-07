@@ -136,6 +136,26 @@ If you prefer to develop inside the component styleguide run the following scrip
 $ npm run dev:styleguide
 ```
 
+### Integrate vue-template into an other repository
+
+If you need to integrate this repository into an other project (e.g. a backend repository) we recommend to use `git subtree`. This will create a copy of a certain branch and allow updates later on while not changing the other projects git setup. For more information see [Atlassian Blog](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree) and [Git subtree](https://git-scm.com/book/de/v1/Git-Tools-Subtree-Merging).
+
+WARNING: Please don't commit anything from inside the parent repository into the vue-template repository!
+
+#### Pull this repository into an other one
+
+Note: the `target-folder` shall not exist and we be crated during pull. `--squash` will flatten the change history.
+
+```
+git subtree add --prefix <target-folder> <source> <branch> --squash
+```
+
+#### Update the files inside the parent repository
+
+```
+git subtree pull --prefix <target-folder> <source> <branch> --squash -m "Merges vue-template @ version x.x.x into project"
+```
+
 ## Folder structure
 
 ```
@@ -472,4 +492,4 @@ $ brew upgrade nasm
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017-present, Patric Eberle
+Copyright (c) 2017-present, valantic CEC Schweiz AG

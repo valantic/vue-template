@@ -16,20 +16,27 @@ const cssNano = require('cssnano');
 const openInEditor = require('launch-editor-middleware');
 
 module.exports = function(env, options) {
+  // Flags
   const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = (env && env.styleguide) || false;
   const hasMessage = (env && env.message) || false;
-  const host = '0.0.0.0';
-  const port = 8080;
   const hotReload = !isProduction;
-  const assetsSubDirectory = 'static/';
   const isProfileBuild = (options && options.profile && options.json) || false;
+
+  // Configuration
+  const buildPath = path.resolve(__dirname, 'dist');
+  const filePrefix = '';
+  const devPort = 8080;
+  const assetsSubDirectory = 'static/';
   const globalVariables = {
     'process.env': {
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
       HAS_STYLEGUIDE: JSON.stringify(hasStyleguide)
     },
   };
+
+  const host = '0.0.0.0';
+  const prefix = filePrefix ? `${filePrefix}_` : '';
   const include = [
     path.resolve(__dirname, 'app'),
     path.resolve(__dirname, 'test'),
@@ -115,7 +122,7 @@ module.exports = function(env, options) {
 
       // extract css into its own file
       pluginCollection.push(new ExtractTextPlugin({
-        filename: assetsSubDirectory + 'css/[name].css?[chunkhash]', // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
+        filename: assetsSubDirectory + `css/${prefix}[name].css?[chunkhash]`, // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
         // Setting the following option to `false` will not extract CSS from codesplit chunks.
         // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
         // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
@@ -216,7 +223,7 @@ module.exports = function(env, options) {
       if (!hasStyleguide) {
         pluginCollection.push(new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
-            messages: [`Your application is running on http://${host}:${port}.`],
+            messages: [`Your application is running on http://${host}:${devPort}.`],
           },
         }));
       }
@@ -335,7 +342,7 @@ module.exports = function(env, options) {
 
   const devConfig = {
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: buildPath,
       filename: '[name].js',
       publicPath: '/',
     },
@@ -345,7 +352,7 @@ module.exports = function(env, options) {
       clientLogLevel: 'error', // Removes ESLint warnings from console
       historyApiFallback: true, // Enables routing support
       host,
-      port,
+      port: devPort,
       hot: hotReload,
       compress: true,
       overlay: true,
@@ -360,9 +367,9 @@ module.exports = function(env, options) {
 
   const prodConfig = {
     output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
-      chunkFilename: `${assetsSubDirectory}js/[name].js?[chunkhash]`,
+      path: buildPath,
+      filename: `${assetsSubDirectory}js/${prefix}[name].js?[chunkhash]`,
+      chunkFilename: `${assetsSubDirectory}js/${prefix}[name].js?[chunkhash]`,
       publicPath: '/', // Public path to 'dist' scope in production
     },
     // @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx

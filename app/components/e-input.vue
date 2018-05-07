@@ -101,7 +101,7 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
-        this.$emit('input', { value: event.target.value });
+        this.$emit('input', event.target.value);
       },
 
       /**
@@ -154,7 +154,7 @@
       -webkit-text-fill-color: initial;
     }
 
-    // remove x on in put field wihtin IE
+    // remove x on in put field within IE
     &__field::-ms-clear {
       display: none;
       height: 0;
