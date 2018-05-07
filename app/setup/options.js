@@ -2,7 +2,6 @@ import Vue from 'vue';
 import store from '@/store/index';
 import VueI18n from 'vue-i18n';
 import VueAxios from '@/setup/plugins/axios';
-import VueCollapse from 'vue2-collapse';
 import VueBemCn from 'vue-bem-cn';
 
 // Polyfills and self executing
@@ -15,7 +14,6 @@ import { I18N_FALLBACK, I18N_FALLBACK_MESSAGES } from './i18n';
 
 Vue.use(VueI18n);
 Vue.use(VueAxios);
-Vue.use(VueCollapse);
 Vue.use(VueBemCn, {
   hyphenate: true,
 });

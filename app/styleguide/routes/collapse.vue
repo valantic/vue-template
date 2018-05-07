@@ -2,14 +2,9 @@
   <div :class="b()">
     <h1>Accordion example (c-collapse)</h1>
 
-    <p>For the accordion the following plugin is used:
-      <a href="https://roszpun.github.io/vue-collapse/#/"
-         target="_blank">vue2-collapse
-      </a>
-    </p>
-
     <!-- TODO use 'item.id' instead of index if possible => :key="item.id" -->
-    <v-collapse-group :onlyOneActive="true">
+    <c-collapse-group>
+
       <c-collapse
         v-for="(item, index) in collapsible"
         :active="item.active"
@@ -17,17 +12,20 @@
         :title="item.title">
         {{ item.content }}
       </c-collapse>
-    </v-collapse-group>
+
+    </c-collapse-group>
 
   </div>
 </template>
 
 <script>
+  import CCollapseGroup from '@/components/c-collapse-group';
   import CCollapse from '@/components/c-collapse';
 
   export default {
     name: 'collapse',
     components: {
+      CCollapseGroup,
       CCollapse
     },
     replace: true,

@@ -1,19 +1,19 @@
 <template>
 
-  <v-collapse-wrapper :active="active" :class="b({expanded: isExpanded})">
+  <div :class="b({expanded: isExpanded})">
 
-    <div v-collapse-toggle :class="b('toggle')" @click="setState">
+    <div :class="b('toggle')" @click="setState">
       <e-icon :class="b('icon')" :inline="true" icon="i-plus"/>
       {{ title }}
     </div>
 
-    <div v-collapse-content :class="b('content')">
+    <div :class="b('content')">
       <div :class="b('inner')">
         <slot></slot>
       </div>
     </div>
 
-  </v-collapse-wrapper>
+  </div>
 
 </template>
 
@@ -44,7 +44,7 @@
 
     data() {
       return {
-        isExpanded: false
+        isExpanded: this.$props.active
       };
     },
 
@@ -53,9 +53,7 @@
 
     // beforeCreate() {},
     // created() {},
-    beforeMount() {
-      if (this.$props.active) this.isExpanded = true;
-    },
+    // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
     // updated() {},
@@ -147,6 +145,14 @@
       color: $color-grayscale--200;
       font-size: $font-size--14;
       line-height: $font-size--14 + 4;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+
+      .c-collapse--expanded & {
+        max-height: 800px;
+        transition: max-height 0.5s ease-in-out; // no delay
+      }
     }
 
     &__inner {
