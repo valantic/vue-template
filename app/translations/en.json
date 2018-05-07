@@ -5,5 +5,8 @@
   },
   "e-progress": {
     "loading": "Loading …"
+  },
+  "c-product-detail": {
+    "product-description": "Product description"
   }
 }

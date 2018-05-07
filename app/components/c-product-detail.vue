@@ -8,8 +8,8 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
-          gallery
-          <pre>{{ product }}</pre>
+          gallery<br>
+          {{ product }}
         </div>
 
         <div :class="b('specs')">specs</div>
@@ -27,8 +27,7 @@
 
       <div :class="b('main', { area: 'bottom' })">
         <div v-if="product.description" :class="b('details')">
-          <!-- TODO - translate -->
-          <e-heading underline tagName="h2" color="gray">Produktbeschreibung</e-heading>
+          <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.product-description') }}</e-heading>
           <div :class="b('description')" v-html="product.description"></div>
         </div>
         <div :class="b('related')"> related</div>
@@ -181,10 +180,24 @@
       }
     }
 
+    &__details {
+      .e-heading--underline .e-heading__inner {
+        padding-left: $spacing--20;
+
+        @include media(sm) {
+          padding-left: $spacing--30;
+        }
+      }
+    }
+
     &__description {
       @include font($font-size--14, $line-height: 18px);
 
-      padding: $spacing--20;
+      padding: $spacing--10 $spacing--20 $spacing--10 $spacing--20;
+
+      @include media(sm) {
+        padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
+      }
     }
 
     &__accessories {
