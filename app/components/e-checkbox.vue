@@ -46,14 +46,6 @@
 
     props: {
       /**
-       * Adds checked attribute
-       */
-      checked: {
-        type: [Boolean, Array],
-        default: false,
-      },
-
-      /**
        * Adds name attribute
        * Note: is also used as id and for label (won't work without them)
        */
