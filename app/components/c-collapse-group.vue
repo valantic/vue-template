@@ -36,5 +36,6 @@
 
 <style lang="scss">
   .c-collapse-group {
+    // ...
   }
 </style>
