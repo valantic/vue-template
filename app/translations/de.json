@@ -5,5 +5,9 @@
   },
   "e-progress": {
     "loading": "Lade …"
+  },
+  "c-footer": {
+    "sonepar": "A Sonepar Company",
+    "sonepar-link": "http://www.sonepar.ch"
   }
 }
