@@ -129,8 +129,9 @@
 
     &__social {
       @include media(xs) {
-        flex: 0 1 percentage(6 / 12);
+        flex: 0 1 percentage(7 / 12);
         order: 5;
+        padding-right: $spacing--20;
       }
     }
 
@@ -146,7 +147,7 @@
       padding: $spacing--20 $spacing--0 $spacing--30 $spacing--10;
 
       @include media(xs) {
-        flex: 0 1 percentage(6 / 12);
+        flex: 0 1 percentage(5 / 12);
         order: 4;
         padding-left: $spacing--20;
       }

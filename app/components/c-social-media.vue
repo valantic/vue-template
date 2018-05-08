@@ -3,9 +3,9 @@
     <!-- TODO - translate -->
     <span :class="b('follow-us')">Folgen Sie uns auf:</span>
     <span :class="b('icons')">
-      <a :class="b('facebook')" href="#" target="_blank">[f]</a>
-      <a :class="b('linkedin')" href="#" target="_blank">[in]</a>
-      <a :class="b('xing')" href="#" target="_blank">[X]</a>
+      <a :class="b('facebook')" href="https://www.facebook.com/winterhalterfenner/" target="_blank"><e-icon inline icon="i-facebook"/></a>
+      <a :class="b('linkedin')" href="https://www.linkedin.com/m/login/" target="_blank"><e-icon inline icon="i-in"/></a>
+      <a :class="b('xing')" href="https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e" target="_blank"><e-icon inline icon="i-xing"/></a>
     </span>
   </div>
 </template>
@@ -44,20 +44,45 @@
   .c-social-media {
     @include font($font-size: $font-size--18);
 
-    padding: 20px 0 30px 10px;
+    padding: 20px 0 20px 10px;
     display: flex;
     justify-content: space-between;
 
     &__follow-us {
-      flex: 0 1 percentage(8/12);
+      flex: 0 1 percentage(6/12);
     }
 
     &__icons {
       text-align: right;
-      flex: 0 1 percentage(4/12);
+      flex: 0 1 percentage(6/12);
     }
 
-    a {
+    &__facebook,
+    &__linkedin,
+    &__xing {
+      display: inline-block;
+      width: $spacing--30;
+      height: $spacing--30;
+      margin-right: $spacing--5;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &__facebook,
+    &__facebook:hover,
+    &__facebook:active,
+    &__facebook:focus,
+    &__linkedin,
+    &__linkedin:hover,
+    &__linkedin:active,
+    &__linkedin:focus,
+    &__xing,
+    &__xing:hover,
+    &__xing:active,
+    &__xing:focus {
       border: none;
       color: $color-grayscale--1000;
       padding: 0;
