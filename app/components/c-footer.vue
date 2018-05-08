@@ -8,7 +8,7 @@
       <hr :class="b('navigation-separator')">
       <div :class="b('social')">Folgen Sie uns auf: (F) (L) (X)</div>
       <hr :class="b('social-separator')">
-      <div :class="b('sonepar')"><a href="http://www.sonepar.com/" target="_blank">A Sonepar Company</a></div>
+      <div :class="b('sonepar')"><a href="http://www.sonepar.ch/" target="_blank">A Sonepar Company</a></div>
     </div>
   </div>
 </template>
