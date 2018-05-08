@@ -7,9 +7,9 @@
       >
     </div>
     <div :class="b('grid')">
-      <div v-for="icon in filteredIcons"
+      <div v-for="(icon, index) in filteredIcons"
            :class="b('grid-item', { negative: icon.negative })"
-           :key="icon"
+           :key="index"
            role="button"
            @click="copyToClipboard(icon)"
       >
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div v-if="notification" :class="b('notification')">{{ notification }}</div>
-    <input :class="b('clipboard')" type="text">
+    <input ref="input" :class="b('clipboard')" type="text">
   </div>
 </template>
 
@@ -56,14 +56,13 @@
     methods: {
       copyToClipboard(icon) {
         const value = `<e-icon icon="${icon.name}"/>`;
-        const input = this.$el.querySelector('.s-icon-finder__clipboard');
-        const _that = this;
+        const hiddenInput = this.$refs.input;
 
-        input.value = value;
-        input.select();
+        hiddenInput.value = value;
+        hiddenInput.select();
         document.execCommand('Copy');
         this.setNotification(`copied! - ${value}`);
-        setTimeout(() => { _that.setNotification(''); }, 2000);
+        setTimeout(() => { this.setNotification(''); }, 2000);
       },
       setNotification(message) {
         this.notification = message;
@@ -104,6 +103,7 @@
       margin: 5px;
       flex: 0 1 10%;
       cursor: pointer;
+      min-width: 100px;
 
       &::before {
         display: block;

@@ -16,9 +16,9 @@
       @mouseenter="hasHover = true"
       @mouseleave="hasHover = false"
     >
-    <span v-if="!hasDefaultState && !notification" :class="b('icon-splitter')"></span>
-    <div v-if="notification" :class="b('notification')">
-      <e-form-notification :state="state">{{ notification }}</e-form-notification>
+    <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
+    <div v-if="notification && hasFocus" :class="b('notification')">
+      <c-form-notification :state="state" v-html="notification"/>
     </div>
   </div>
 
@@ -26,12 +26,12 @@
 
 <script>
   import formStates from '@/mixins/form-states';
-  import EFormNotification from '@/components/e-form-notification';
+  import CFormNotification from '@/components/c-form-notification';
 
   export default {
     name: 'e-input',
     components: {
-      EFormNotification
+      CFormNotification
     },
     mixins: [formStates],
     inheritAttrs: false,
@@ -73,7 +73,7 @@
       },
 
       /**
-       * Shows the notification content in a state container bellow the input field
+       * Defines the notification content in a state container bellow the input field
        */
       notification: {
         type: String,
@@ -91,7 +91,7 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          notification: Boolean(this.$props.notification)
+          notification: Boolean(this.$props.notification && this.hasFocus)
         };
       },
       hasDefaultState() {
@@ -148,6 +148,8 @@
 </script>
 
 <style lang="scss">
+  $e-input-height: 30px;
+
   .e-input {
     @include half-border($color-grayscale--500);
 
@@ -158,7 +160,7 @@
       color: $color-grayscale--400;
       font-family: $font-family--primary;
       font-size: $font-size--14;
-      height: 30px;
+      height: $e-input-height;
       position: relative;
       transition: box-shadow 0.15s ease-in-out;
       width: 100%;
@@ -179,6 +181,7 @@
     }
 
     // Hide autofill Safari icon
+    // noinspection CssInvalidPseudoSelector
     &__field::-webkit-contacts-auto-fill-button {
       visibility: hidden;
       pointer-events: none;
@@ -208,6 +211,7 @@
 
       position: absolute;
       width: 100%;
+      top: calc(#{$e-input-height} - 1px);
     }
 
     // active
@@ -252,6 +256,7 @@
     /**
     * states
     **/
+    /* stylelint-disable no-descending-specificity */
     &--state-error {
       @include half-border($color-status--danger);
 

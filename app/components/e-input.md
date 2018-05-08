@@ -85,7 +85,7 @@ Always use **v-model** to bind value to form elements!
 <template>
   <div>
   
-    <e-input v-model="demo" state="error" name="demo" placeholder="enter text..."/> 
+    <e-input v-model="demo" state="error" name="demo" placeholder="enter text..." notification="hello World!"/> 
     
     <div v-if="demo" class="spacing--top-15">
       <p>{{demo}}</p>
@@ -109,7 +109,7 @@ Always use **v-model** to bind value to form elements!
 <template>
   <div>
   
-    <e-input v-model="demo" state="success" name="demo" placeholder="enter text..."/> 
+    <e-input v-model="demo" state="success" name="demo" placeholder="enter text..." notification="hello World!"/> 
     
     <div v-if="demo" class="spacing--top-15">
       <p>{{demo}}</p>
@@ -133,7 +133,7 @@ Always use **v-model** to bind value to form elements!
 <template>
   <div>
   
-    <e-input v-model="demo" state="info" name="demo" placeholder="enter text..."/> 
+    <e-input v-model="demo" state="info" name="demo" placeholder="enter text..." notification="hello World!"/> 
     
     <div v-if="demo" class="spacing--top-15">
       <p>{{demo}}</p>
@@ -148,38 +148,6 @@ Always use **v-model** to bind value to form elements!
     data: () => ({
       demo: ''
     })
-  };
-</script>
-```
-
-#### notification
-```
-<template>
-  <div>
-    <button @click="changeState('info')">Info</button>
-    <button @click="changeState('error')">Error</button>
-    <button @click="changeState('success')">Success</button>
-    <hr/>
-      <e-input v-model="demo" :state="state" name="demo" placeholder="enter text..." notification="this is a custom notification message..."/> 
-      
-      <div v-if="demo" class="spacing--top-15">
-        <p>{{demo}}</p>
-      </div>
-  </div>
-</template>
-
-<script>
-  export default {
-    name: 'example',
-    data: () => ({
-      demo: '',
-      state: 'info'
-    }),
-    methods: {
-        changeState: function (state) {
-          this.state = state;
-        }
-      }
   };
 </script>
 ```
