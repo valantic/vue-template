@@ -304,6 +304,9 @@ Delivering critical CSS to the browser trough the HTML head can drastically decr
 
 You can read more about critical CSS [here](https://css-tricks.com/annotating-critical-css/) and the tool we're using [here](https://github.com/mrnocreativity/postcss-critical-split)
 
+#### SVG usage
+Check svg files delivered from designers and remove unnecessary attributes like "title" (because title attribute will displayed on hover-state)
+
 ## Living styleguide
 
 The living styleguide is defined in two parts: one is documenting all available Vue components of the project, in the second one you can create example pages to test and share the design with the client or developer.

@@ -28,6 +28,9 @@
   import formStates from '@/mixins/form-states';
   import CFormNotification from '@/components/c-form-notification';
 
+  /**
+   * Input form component
+   */
   export default {
     name: 'e-input',
     components: {
@@ -118,6 +121,12 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
+        /**
+         * input event fires on input
+         *
+         * @event input
+         * @type {String}
+         */
         this.$emit('input', event.target.value);
       },
 
@@ -128,6 +137,11 @@
       onFocus() {
         this.hasFocus = true;
 
+        /**
+         * focus event fires on focus
+         *
+         * @event focus
+         */
         this.$emit('focus');
         this.$parent.$emit('focus');
       },
@@ -139,6 +153,11 @@
       onBlur() {
         this.hasFocus = false;
 
+        /**
+         * blur event fires on blur
+         *
+         * @event blur
+         */
         this.$emit('blur');
         this.$parent.$emit('blur');
       }
