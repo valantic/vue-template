@@ -6,7 +6,11 @@
   "e-progress": {
     "loading": "Lade …"
   },
+  "c-footer": {
+    "sonepar": "A Sonepar Company",
+    "soneparLink": "http://www.sonepar.ch"
+  },
   "c-product-detail": {
-    "product-description": "Produktbeschreibung"
+    "productDescriptionTitle": "Produktbeschreibung"
   }
 }

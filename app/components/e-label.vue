@@ -2,6 +2,7 @@
   <label :class="b(modifiers)">
     <span :class="b('name')">{{ name }}</span>
     <span v-if="this.$slots.default" :class="b('inner')">
+      <!-- @slot Label content -->
       <slot></slot>
     </span>
   </label>
@@ -11,6 +12,9 @@
   import formStates from '@/mixins/form-states';
 
   // TODO: Mixin properties not visible in styleguide => check after update styleguidist
+  /**
+   * Label component for form elements, can be used with a slot or a for attribute
+   */
   export default {
     name: 'e-label',
     // components: {},
@@ -90,6 +94,7 @@
   .e-label {
     display: block;
     margin: 0;
+    color: $color-grayscale--400;
 
     &__inner {
       width: 100%;
@@ -144,13 +149,13 @@
       }
     }
 
-    &--state-default {
-      color: $color-grayscale--400;
-    }
-
     &--active,
     &--focus {
       color: $color-secondary--1;
+
+      &.e-label--state-info {
+        color: $color-status--info;
+      }
     }
 
     &--disabled {

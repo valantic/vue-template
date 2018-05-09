@@ -26,9 +26,11 @@
     <section :class="b('bottom')">
 
       <div :class="b('main', { area: 'bottom' })">
-        <div v-if="product.description" :class="b('details')">
-          <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.product-description') }}</e-heading>
-          <div :class="b('description')" v-html="product.description"></div>
+        <div :class="b('details')">
+          <div v-if="product.description" :class="b('description')">
+            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
+            <div :class="b('description-text')" v-html="product.description"></div>
+          </div>
         </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
@@ -190,10 +192,11 @@
       }
     }
 
-    &__description {
+    &__description-text {
       @include font($font-size--14, $line-height: 18px);
 
-      padding: $spacing--10 $spacing--20 $spacing--10 $spacing--20;
+      color: $color-grayscale--200;
+      padding: $spacing--10 $spacing--20;
 
       @include media(sm) {
         padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
