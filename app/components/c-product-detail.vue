@@ -12,7 +12,7 @@
         </div>
 
         <div :class="b('specs')">
-          <c-attribute-grid :attributes="product.attributes" headline shrink-on-mobile />
+          <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
         </div>
 
       </div>

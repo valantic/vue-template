@@ -2,5 +2,5 @@ export default {
   sku: '12345',
   name: 'Test product',
   quantity: 1,
-  attributes: [{ key: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', value: 'Testvalue', emphasis: true }, { key: 'Test', value: 'Testvalue' }, { key: 'Test', content: 'Testvalue' }, { key: 'Test', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.' }, { key: 'Test', value: 'Testvalue', url: 'http://www.google.com'}]
+  attributes: [{ key: 'E-No', value: '941 151 361', emphasis: true }, { key: 'EAN-Nr', value: '8718696573990' }, { key: 'Lieferanten Ar-Nr', value: '57399000' }, { key: 'Hersteller', value: 'Philips', url: 'https://www.philips.ch' }, { key: 'Marke', value: 'Philips', url: 'https://www.philips.ch' }, { key: 'Programm', value: 'LED Leuchtmittel', url: 'https://www.philips.ch' }, { key: 'Typ', value: 'LED Consumer', url: 'https://www.philips.ch' }, { key: 'Artikelklasse', value: 'LED-Lampe/Multi-LED', url: 'https://www.philips.ch' }, { key: 'Artikelgruppee', value: 'Leuchtmittel', url: 'https://www.philips.ch' }, { key: 'Lieferantenlink', value: 'link Webseite Lieferant', url: 'https://www.philips.ch' }]
 };

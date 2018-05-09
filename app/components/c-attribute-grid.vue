@@ -29,15 +29,7 @@
       },
 
       /**
-       * Defines weather the first row is a headline or not.
-       */
-      headline: {
-        type: Boolean,
-        default: false,
-      },
-
-      /**
-       * Defines weather the grid should shrink on mobile or not.
+       * Defines whether the grid should shrink on mobile or not.
        */
       shrinkOnMobile: {
         type: Boolean,
@@ -56,13 +48,11 @@
     computed: {
       modifiers() {
         return {
-          headline: this.headline,
           shrinkOnMobile: this.shrinkOnMobile,
           dontShrinkOnMobile: !this.shrinkOnMobile
         };
       },
       maxHeight() {
-
         if (!this.shrinkOnMobile) {
           return 'inherit';
         }
@@ -71,9 +61,7 @@
           return this.openHeight;
         }
 
-        if (!this.isOpen) {
-          return this.closedHeight;
-        }
+        return this.closedHeight;
       },
     },
     // watch: {},
@@ -90,9 +78,6 @@
       window.addEventListener('resize', this.recalculateClosedHeight);
 
       this.isOpen = false;
-
-      console.log(this.openHeight);
-      console.log(this.closedHeight);
     },
     // beforeUpdate() {},
     // updated() {},
@@ -115,8 +100,9 @@
       recalculateOpenHeight() {
         let openHeight = this.$el.querySelector('dl').clientHeight;
 
-        if (openHeight > 0)
+        if (openHeight > 0) {
           openHeight = `${openHeight}px`;
+        }
 
         this.openHeight = openHeight;
       },
@@ -125,12 +111,13 @@
        * Recalculates the height of the definition list when closed.
        */
       recalculateClosedHeight() {
-        let dtHeight = this.$el.querySelector('dt').clientHeight;
-        let ddHeight = this.$el.querySelector('dd').clientHeight;
+        const dtHeight = this.$el.querySelector('dt').clientHeight;
+        const ddHeight = this.$el.querySelector('dd').clientHeight;
         let closedHeight = dtHeight >= ddHeight ? dtHeight : ddHeight;
 
-        if (closedHeight > 0)
+        if (closedHeight > 0) {
           closedHeight = `${closedHeight}px`;
+        }
 
         this.closedHeight = closedHeight;
       },
@@ -144,20 +131,16 @@
   .c-attribute-grid {
     $toggle-animation-duration: 0.7s;
 
-    &--headline &__row:first-child &__col {
-      font-weight: $font-weight--bold;
-    }
-
     &__toggle {
       display: none;
-      margin: 0 auto;
+      margin: $spacing--0 $spacing--10;
       text-align: center;
       border-top: thin solid $color-grayscale--600;
     }
 
     &--shrink-on-mobile &__toggle {
       display: block;
-      padding: $spacing--5 $spacing--0;
+      padding: $spacing--5 $spacing--0 $spacing--0 $spacing--0;
 
       @include media(xs) {
         display: none;
@@ -166,6 +149,7 @@
 
     &__arrow {
       transition: transform $toggle-animation-duration;
+      height: 22px;
 
       path {
         fill: $color-grayscale--500;
