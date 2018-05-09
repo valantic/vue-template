@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueBemCn from 'vue-bem-cn';
 import VueAxios from '@/setup/plugins/axios';
+import { Component as Vuedal } from 'vuedals';
+
 // NOTE: VueI18n is not supported by vue-styleguidist
 
 // Polyfills and self executing
@@ -19,6 +21,9 @@ Vue.use(VueBemCn, {
 });
 
 export default {
+  components: {
+    Vuedal
+  },
   methods: {
     // eslint-disable-next-line id-length
     onClick(event) {
