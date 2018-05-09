@@ -101,7 +101,7 @@
       opacity: 0.2;
       min-width: $spacing--40;
       background: $color-primary--3;
-      z-index: 1;
+      z-index: 10000;
       height: 100%;
 
       &::before {
