@@ -57,26 +57,18 @@
 
     computed: {
       ...mapGetters({
-        /**
-         * Gets a product
-         *
-         * @returns  {Object}  product - Single product from the store
-         */
-        product: 'product/getProduct',
-
-        /**
-         * Gets a product
-         *
-         * @returns  {Object}  product - Single product from the store
-         */
-        productInformation: 'product/getProductInformation',
+        product: 'product/product',
+        productInformation: 'product/productInformation',
       })
     },
     // watch: {},
 
     // beforeCreate() {},
     created() {
-      this.getProductInformation();
+      this.productInformation([{
+        sku: this.product.sku,
+        quantity: this.product.quantity,
+      }]);
     },
     // beforeMount() {},
     // mounted() {},
@@ -89,7 +81,7 @@
 
     methods: {
       ...mapActions({
-        getProductInformation: 'product/getProductInformation'
+        productInformation: 'product/productInformation'
       })
     },
     // render() {},

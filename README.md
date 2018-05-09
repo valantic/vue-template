@@ -136,6 +136,26 @@ If you prefer to develop inside the component styleguide run the following scrip
 $ npm run dev:styleguide
 ```
 
+### Integrate vue-template into an other repository
+
+If you need to integrate this repository into an other project (e.g. a backend repository) we recommend to use `git subtree`. This will create a copy of a certain branch and allow updates later on while not changing the other projects git setup. For more information see [Atlassian Blog](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree) and [Git subtree](https://git-scm.com/book/de/v1/Git-Tools-Subtree-Merging).
+
+WARNING: Please don't commit anything from inside the parent repository into the vue-template repository!
+
+#### Pull this repository into an other one
+
+Note: the `target-folder` shall not exist and we be crated during pull. `--squash` will flatten the change history.
+
+```
+git subtree add --prefix <target-folder> <source> <branch> --squash
+```
+
+#### Update the files inside the parent repository
+
+```
+git subtree pull --prefix <target-folder> <source> <branch> --squash -m "Merges vue-template @ version x.x.x into project"
+```
+
 ## Folder structure
 
 ```
@@ -304,6 +324,9 @@ Delivering critical CSS to the browser trough the HTML head can drastically decr
 
 You can read more about critical CSS [here](https://css-tricks.com/annotating-critical-css/) and the tool we're using [here](https://github.com/mrnocreativity/postcss-critical-split)
 
+#### SVG usage
+Check svg files delivered from designers and remove unnecessary attributes like "title" (because title attribute will displayed on hover-state)
+
 ## Living styleguide
 
 The living styleguide is defined in two parts: one is documenting all available Vue components of the project, in the second one you can create example pages to test and share the design with the client or developer.
@@ -465,11 +488,11 @@ $ brew upgrade nasm
 * [ ] Fallback image for e-picture
 * [ ] Input components should expect name, title and autocomplete value
 * [ ] Ajax error handling
-* [ ] e-picture should support relation property and fallback image
+* [x] e-picture should support relation property and fallback image
 * [ ] npm update: only update one package at a time, test, then update next.
 
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017-present, Patric Eberle
+Copyright (c) 2017-present, valantic CEC Schweiz AG

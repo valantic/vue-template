@@ -29,6 +29,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * `npm run build:monitor` will run a normal build but also open a statistics page after the build, where you can review the package size development for all created builds. Please note, that the data can become invalid if the webpack configuration is changed.
 * `npm run build:profile` creates a `profile.json` in the `stats` folder which you can use to find the source of unexpected build size increases. There are []several tools](https://survivejs.com/webpack/optimizing/build-analysis/) you can use to examine the data.
 * `npm run build:styleguide` will create a build which looks exactly like your development environment. You can use this to deploy the living styleguide to a remote server. Please note, that you can only view the export inside a server instance where the provided `.htaccess` must be installed or merged.
+* `npm run build:watch` creates a build and then watches the source code for changes. This can be used when developing inside a vendor environment.
 * `npm run eslint` performs the ESLint tests.
 * `npm run eslint:fix` performs the ESLint tests and automatic issue fixing where possible. **Only use this if you know what you're doing!** Always check and rerun the application before committing!
 * `npm run stylelint` performs the Stylelint tests.

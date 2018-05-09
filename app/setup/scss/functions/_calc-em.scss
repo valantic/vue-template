@@ -4,7 +4,7 @@
 // @param   {List}    $values       To be converted pixel values
 // @param   {Number}  [$context]    Font-size for em calculation
 //
-// @retuns  {List}    Converted pixel values
+// @returns {List}    Converted pixel values
 ////
 @function calc-em($values, $context: $font-size--default) {
   $result: ();

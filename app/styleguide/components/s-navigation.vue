@@ -1,6 +1,6 @@
 <template>
   <div :class="b()">
-    <div :class="b('navigation-wrapper', { position: navPosition })">
+    <div :class="b('navigation-wrapper', { position: navPosition, open: isOpen })" @click="onClick">
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', { logo: true })">
           <a :class="b('navigation-link')"
@@ -10,7 +10,7 @@
             <img src="../assets/valantic.svg" alt="valantic">
           </a>
         </li>
-        <li :class="b('navigation-item', { language: true })">
+        <li :class="b('navigation-item', { language: true })" @click.stop>
           <s-language/>
         </li>
         <router-link
@@ -54,17 +54,13 @@
       },
 
       /**
-       * Position of navigation (top, right, bottom, left, top-right, top-left, ...)
+       * Position of navigation (top-right, top-left, bottom-left, bottom-right)
        */
       navPosition: {
         type: String,
-        default: 'top',
+        default: 'top-right',
         validator(value) {
           return [
-            'top',
-            'right',
-            'bottom',
-            'left',
             'top-left',
             'top-right',
             'bottom-right',
@@ -73,6 +69,11 @@
         },
       },
     },
+    data() {
+      return {
+        isOpen: false,
+      };
+    },
     computed: {
       styleguidistUrl() {
         return process.env.NODE_ENV === 'production'
@@ -80,11 +81,17 @@
           : '//localhost:6060';
       },
     },
+    methods: {
+      onClick() {
+        this.isOpen = !this.isOpen;
+      }
+    }
   };
 </script>
 
 <style lang="scss">
   $s-navigation--border: $spacing--10 solid $color-status--danger;
+  $s-navigation--trigger-size: 40px;
 
   .s-navigation {
     &__navigation-wrapper {
@@ -92,16 +99,29 @@
       margin: auto;
       position: fixed;
       opacity: 0.2;
-      border-bottom: $s-navigation--border;
       min-width: $spacing--40;
       background: $color-primary--3;
-      z-index: 1;
+      z-index: 10000;
+      height: 100%;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: $s-navigation--trigger-size;
+        height: $s-navigation--trigger-size;
+        background-color: $color-status--danger;
+        background-image: url('../assets/menu-button.svg');
+        background-repeat: no-repeat;
+        background-size: $s-navigation--trigger-size - 15px;
+        background-position: center;
+        cursor: pointer;
+      }
 
       > * {
         display: none;
       }
 
-      &:hover {
+      &--open {
         opacity: 1;
 
         > * {
@@ -109,50 +129,52 @@
         }
       }
 
-      &--position-top-left,
-      &--position-top {
-        top: 0;
-        left: 0;
-      }
-
       &--position-top-right,
-      &--position-right {
-        top: 0;
-        right: 0;
-      }
-
-      &--position-bottom-right,
-      &--position-bottom {
-        bottom: 0;
-        right: 0;
-      }
-
-      &--position-bottom-left,
-      &--position-left {
-        bottom: 0;
-        left: 0;
-      }
-
-      &--position-top {
-        right: 0;
-      }
-
-      &--position-right {
-        border-left: $s-navigation--border;
-        border-bottom: 0;
-        min-width: 0;
-        bottom: 0;
-      }
-
-      &--position-bottom {
-        left: 0;
-      }
-
-      &--position-left {
-        border-right: $s-navigation--border;
+      &--position-bottom-right {
         border-bottom: 0;
         min-width: 0;
         top: 0;
+        right: 0;
+        bottom: 0;
+
+        &::before {
+          top: 0;
+          left: -$s-navigation--trigger-size;
+        }
+
+        &.s-navigation__navigation-wrapper--open {
+          border-left: $s-navigation--border;
+        }
+      }
+
+      &--position-bottom-right {
+        &::before {
+          top: auto;
+          bottom: 0;
+        }
+      }
+
+      &--position-top-left,
+      &--position-bottom-left {
+        border-bottom: 0;
+        min-width: 0;
+        top: 0;
+
+        &::before {
+          top: 0;
+          left: 100%;
+        }
+
+        &.s-navigation__navigation-wrapper--open {
+          border-right: $s-navigation--border;
+        }
+      }
+
+      &--position-bottom-left {
+        &::before {
+          top: auto;
+          bottom: 0;
+        }
       }
     }
 

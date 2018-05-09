@@ -29,7 +29,7 @@ export default {
      *
      * @returns  {Object}  product   Product data
      */
-    getProduct: state => state.product,
+    product: state => state.product,
 
     /**
      * Get the product information
@@ -38,11 +38,12 @@ export default {
      *
      * @returns  {Object}  product   Product information data
      */
-    getProductInformation: state => state.productInformation,
+    productInformation: state => state.productInformation,
   },
   mutations: {
     /**
      * Sets the productinformation for the current state
+     *
      * @param {Object} state Current state
      * @param {Object} productInformation Product information data
      */
@@ -52,24 +53,22 @@ export default {
 
     /**
      * Handles an API failure
+     *
      * @param {Object} state Current state
-     * @param {Object} error API Error that ocured
+     * @param {Object} error API Error that occurred
      */
     apiFailure(state, error) {
       state.apiError = error;
     }
   },
   actions: {
-    getProductInformation({ commit, state }) {
-      const payload = [{
-        sku: state.product.sku,
-        quantity: state.product.quantity
-      }];
-
+    productInformation({ commit }, payload) {
       return api.post('/product/multi-get', payload)
         .then((response) => {
-          if (response && response instanceof Array && response.length > 0) {
-            commit('setProductInformation', response[0]);
+          if (response && Array.isArray(response.data) && response.data.length) {
+            commit('setProductInformation', response.data[0]);
+          } else {
+            throw new Error('apiFailure');
           }
         })
         .catch(error => commit('apiFailure', error));

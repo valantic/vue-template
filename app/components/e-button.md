@@ -1,5 +1,3 @@
-Renders a `<button>` or `<a>` element with button style.
-
 ### Styles
 
 #### Default
@@ -34,7 +32,7 @@ Renders a `<button>` or `<a>` element with button style.
 Not defined yet.
 
 ```vue
-<e-button inverted @click="onClick">Inverted</e-button>
+<e-button negative @click="onClick">Negative</e-button>
 ```
 
 ### Spacing
