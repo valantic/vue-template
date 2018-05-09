@@ -1,34 +1,22 @@
 <template>
   <div :class="b(modifiers)">
-    <div :class="b('table', { open: isOpen })" :style="{ 'max-height': tableMaxHeight }">
-      <div
-        v-for="(attribute, index) in attributes"
-        :key="index"
-        :class="b('row')"
-        :ref="'row_' + index">
-        <div :class="b('col')">
-          <span :class="b('name')">{{ attribute.name }}</span>
-        </div>
-        <div :class="b('col')">
-          <a
-            v-if="attribute.url"
-            :class="b('link')"
-            :href="attribute.url"
-            :title="attribute.content">{{ attribute.content }}</a>
-          <span v-else :class="b('content')">{{ attribute.content }}</span>
-        </div>
-      </div>
+    <div ref="table" :class="b('table', { open: isOpen })" :style="{ 'max-height': maxHeight }">
+      <c-attribute-grid-items :items="attributes"/>
     </div>
     <div :class="b('toggle', { open: isOpen })" role="button" @click="toggle()">
-      <img :class="b('arrow')" src="../assets/icons/i-arrow-down.svg">
+      <e-icon :class="b('arrow')" inline icon="i-arrow-down"/>
     </div>
   </div>
 </template>
 
 <script>
+  import cAttributeGridItems from '@/components/c-attribute-grid-items';
+
   export default {
     name: 'c-attribute-grid',
-    // components: {},
+    components: {
+      cAttributeGridItems,
+    },
     // mixins: [],
 
     props: {
@@ -60,15 +48,12 @@
     data() {
       return {
         isOpen: true,
+        openHeight: 0,
+        closedHeight: 0,
       };
     },
 
     computed: {
-      /**
-       * Defines state modifier classes
-       *
-       * @returns  {Object}   BEM classes
-       */
       modifiers() {
         return {
           headline: this.headline,
@@ -76,25 +61,19 @@
           dontShrinkOnMobile: !this.shrinkOnMobile
         };
       },
+      maxHeight() {
 
-      /**
-       * return the attribute grid's table max-height
-       *
-       * @returns  {String}   max-height style value
-       */
-      tableMaxHeight() {
         if (!this.shrinkOnMobile) {
           return 'inherit';
         }
-        let maxHeight = 0;
 
         if (this.isOpen) {
-          maxHeight = this.getExpanedHeight();
-        } else {
-          maxHeight = this.getClosedHeight();
+          return this.openHeight;
         }
 
-        return `${maxHeight}px`;
+        if (!this.isOpen) {
+          return this.closedHeight;
+        }
       },
     },
     // watch: {},
@@ -104,7 +83,16 @@
     // beforeMount() {},
 
     mounted() {
+      this.recalculateOpenHeight();
+      window.addEventListener('resize', this.recalculateOpenHeight);
+
+      this.recalculateClosedHeight();
+      window.addEventListener('resize', this.recalculateClosedHeight);
+
       this.isOpen = false;
+
+      console.log(this.openHeight);
+      console.log(this.closedHeight);
     },
     // beforeUpdate() {},
     // updated() {},
@@ -122,36 +110,30 @@
       },
 
       /**
-       * Returns the height of the attribute grid for the closed state.
-       * @returns {Number}
+       * Recalculates the height of the definition list when open.
        */
-      getClosedHeight() {
-        const firstColumn = this.$refs.row_0;
+      recalculateOpenHeight() {
+        let openHeight = this.$el.querySelector('dl').clientHeight;
 
-        if (firstColumn) {
-          return firstColumn[0].clientHeight;
-        }
+        if (openHeight > 0)
+          openHeight = `${openHeight}px`;
 
-        return 0;
+        this.openHeight = openHeight;
       },
 
       /**
-       * Returns the height of the attribute grid for the expaned state.
-       * @returns {Number}
+       * Recalculates the height of the definition list when closed.
        */
-      getExpanedHeight() {
-        let height = 0;
+      recalculateClosedHeight() {
+        let dtHeight = this.$el.querySelector('dt').clientHeight;
+        let ddHeight = this.$el.querySelector('dd').clientHeight;
+        let closedHeight = dtHeight >= ddHeight ? dtHeight : ddHeight;
 
-        for (let i = 0; i < this.attributes.length; i += 1) {
-          const ref = this.$refs[`row_${i}`];
-          
-          if (ref) {
-            height += ref[0].clientHeight;
-          }
-        }
+        if (closedHeight > 0)
+          closedHeight = `${closedHeight}px`;
 
-        return height;
-      }
+        this.closedHeight = closedHeight;
+      },
     },
 
     // render(createElement) {},
@@ -162,59 +144,32 @@
   .c-attribute-grid {
     $toggle-animation-duration: 0.7s;
 
-    &__row {
-      display: flex;
-    }
-
-    &__col {
-      @include font($font-size--14, 23, $font-weight--regular);
-      
-      font-family: $font-family--primary;
-      color: $color-grayscale--200;
-      flex-basis: 0;
-      flex-grow: 1;
-      text-align: left;
-    }
-
-    &__name {
-      color: $color-grayscale--200;
-    }
-
-    &__content {
-      color: $color-grayscale--400;
-    }
-
-    &__link {
-      color: $color-grayscale--400;
-      padding: $spacing--0;
-      border-color: $color-grayscale--400;
-    }
-
     &--headline &__row:first-child &__col {
       font-weight: $font-weight--bold;
     }
 
     &__toggle {
       display: none;
+      margin: 0 auto;
+      text-align: center;
+      border-top: thin solid $color-grayscale--600;
     }
 
     &--shrink-on-mobile &__toggle {
       display: block;
-      border-top: thin solid $color-grayscale--600;
-      margin-top: $spacing--10;
-      padding: $spacing--10 $spacing--0;
-      
+      padding: $spacing--5 $spacing--0;
+
       @include media(xs) {
         display: none;
       }
     }
 
     &__arrow {
-      display: block;
-      height: $spacing--15;
-      width: auto;
-      margin: auto;
       transition: transform $toggle-animation-duration;
+
+      path {
+        fill: $color-grayscale--500;
+      }
     }
 
     &__toggle--open &__arrow {
@@ -230,9 +185,10 @@
     &--shrink-on-mobile &__table {
       transition: max-height $toggle-animation-duration;
       overflow: hidden;
-      
+
       @include media(xs) {
         transition: none;
+        // stylelint-disable-next-line declaration-no-important
         max-height: inherit !important;
         overflow: visible;
       }

@@ -9,10 +9,11 @@
 
         <div :class="b('gallery')">
           gallery
-          <pre>{{ product }}</pre>
         </div>
 
-        <div :class="b('specs')">specs</div>
+        <div :class="b('specs')">
+          <c-attribute-grid :attributes="product.attributes" headline shrink-on-mobile />
+        </div>
 
       </div>
 
@@ -43,10 +44,14 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import cAttributeGrid from '@/components/c-attribute-grid';
 
   export default {
     name: 'c-product-detail',
 
+    components: {
+      cAttributeGrid,
+    },
     // mixins: [],
 
     // props: {},

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="39px" height="25px" viewBox="0 0 39 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/i-arrow-down--blue</title>
+    <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(-1.000000, 0.000000)" fill="#D6D6D6">
-            <rect id="Rectangle" transform="translate(29.000000, 13.000000) rotate(40.000000) translate(-29.000000, -13.000000) " x="27" y="-2" width="4" height="30" rx="2"></rect>
-            <path d="M12.2457395,-2.22789164 L12.2457395,-2.22789164 C13.3491228,-2.22789164 14.2435917,-1.33342275 14.2435917,-0.230039459 C14.2435917,-0.229323905 14.2435913,-0.228608351 14.2435905,-0.227892797 L14.2155332,25.8844015 C14.2143241,27.0097315 13.3229284,27.9323843 12.1983081,27.9723615 L12.1983081,27.9723615 C11.1264954,28.0104615 10.2267333,27.1724718 10.1886333,26.1006591 C10.1877687,26.0763373 10.1873615,26.0520013 10.1874117,26.0276642 L10.2416109,-0.227895904 C10.2438924,-1.33313026 11.1405028,-2.22789164 12.2457395,-2.22789164 Z" id="Rectangle" transform="translate(12.215500, 12.872860) rotate(-40.000000) translate(-12.215500, -12.872860) "></path>
-        </g>
+    <g id="icons/i-arrow-down--blue" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M15.8994949,12.8994949 L15.8994949,1.89949494 C15.8994949,1.34721019 16.3472102,0.899494937 16.8994949,0.899494937 C17.4517797,0.899494937 17.8994949,1.34721019 17.8994949,1.89949494 L17.8994949,13.8994949 C17.8994949,14.4517797 17.4517797,14.8994949 16.8994949,14.8994949 L4.89949494,14.8994949 C4.34721019,14.8994949 3.89949494,14.4517797 3.89949494,13.8994949 C3.89949494,13.3472102 4.34721019,12.8994949 4.89949494,12.8994949 L15.8994949,12.8994949 Z" id="Combined-Shape" fill="#75B4E0" transform="translate(10.899495, 7.899495) rotate(45.000000) translate(-10.899495, -7.899495) "></path>
     </g>
 </svg>
