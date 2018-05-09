@@ -87,16 +87,9 @@
     // destroyed() {},
 
     methods: {
-      /**
-       * Toggles the open state of the attribute grid.
-       */
       toggle() {
         this.isOpen = !this.isOpen;
       },
-
-      /**
-       * Recalculates the height of the definition list when open.
-       */
       recalculateOpenHeight() {
         let openHeight = this.$el.querySelector('dl').clientHeight;
 
@@ -106,10 +99,6 @@
 
         this.openHeight = openHeight;
       },
-
-      /**
-       * Recalculates the height of the definition list when closed.
-       */
       recalculateClosedHeight() {
         const dtHeight = this.$el.querySelector('dt').clientHeight;
         const ddHeight = this.$el.querySelector('dd').clientHeight;
