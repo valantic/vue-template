@@ -55,12 +55,37 @@
       headerComponent: {
         type: String,
         default: 'c-modal-header-default'
+      },
+
+      /**
+       * Defines size for modal («small» or «large»)
+       */
+      size: {
+        type: String,
+        default: 'small',
+        validator(value) {
+          return [
+            'small',
+            'large',
+          ].includes(value);
+        }
       }
     },
     // data() {
     //   return {};
     // },
 
+    computed: {
+      classNames() {
+        const classes = [];
+
+        classes.push('c-modal__content');
+        classes.push(this.$props.noPadding ? 'c-modal__content--no-spacing' : '');
+        classes.push(`c-modal__content--${this.$props.size}`);
+
+        return classes.filter(Boolean).join(' ');
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -77,10 +102,9 @@
     methods: {
       showModal() {
         const contentSlot = this.$slots.content;
-        const className = this.$props.noPadding ? 'c-modal__content c-modal__content--no-spacing' : 'c-modal__content';
 
         VuedalsBus.$emit('new', {
-          name: className,
+          name: this.classNames,
           component: {
             name: this.title.replace(/\s/g, ''),
 
@@ -111,19 +135,19 @@
     }
 
     &__content {
-      margin: 0;
-      width: 768px;
-      max-width: 100%;
+      width: 100%;
       min-height: 100vh;
       padding: $spacing--20;
       background-color: $color-grayscale--1000;
       opacity: 1;
+      margin: 0;
 
       @include media(sm) {
         min-height: auto;
-        margin: $spacing--100 0;
+        margin: $spacing--100 auto;
         padding: $spacing--20 $spacing--50;
         box-shadow: 0 0 15px 0 $color-grayscale--500;
+        min-width: 500px;
       }
 
       header {
@@ -143,6 +167,20 @@
 
     &__content--no-spacing {
       padding: 0;
+    }
+
+    &__content--small {
+      @include media(sm) {
+        width: 50%;
+        max-width: calc(#{map-get($grid-breakpoints, xl)} * 0.5);
+      }
+    }
+
+    &__content--large {
+      @include media(sm) {
+        width: 80%;
+        max-width: calc(#{map-get($grid-breakpoints, xl)} * 0.8);
+      }
     }
   }
 

@@ -1,5 +1,7 @@
 ### c-modal-header-default
 
 ```vue
-<c-modal-header-default title="Example title"/>
+<div style="padding: 0 50px">
+  <c-modal-header-default title="Example title"/>
+</div>
 ```
