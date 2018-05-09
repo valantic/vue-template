@@ -1,7 +1,6 @@
 <template>
 
   <div :class="b({expanded: isExpanded})">
-
     <div :class="b('toggle')" @click="setState">
       <e-icon :class="b('icon')" :inline="true" icon="i-plus"/>
       {{ title }}
@@ -9,6 +8,7 @@
 
     <div :class="b('content')">
       <div :class="b('inner')">
+        <!-- @slot Used for item content -->
         <slot></slot>
       </div>
     </div>
@@ -18,6 +18,11 @@
 </template>
 
 <script>
+  import EventBus from '@/setup/event-bus';
+
+  /**
+   * Displays collapsible content panels (dependency: c-collapse-group)
+   */
   export default {
     name: 'c-collapse',
     // components: {},
@@ -25,7 +30,7 @@
 
     props: {
       /**
-       * Sets item to active
+       * Sets state of the item
        */
       active: {
         type: Boolean,
@@ -34,7 +39,7 @@
       },
 
       /**
-       * Title of the toggle
+       * Title of the toggle item
        */
       title: {
         type: String,
@@ -54,7 +59,22 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() {},
+    mounted() {
+      /**
+       * Listens if c-collapse-group (parent) has received event and emitted back
+       *
+       * @returns   {object}  child   Previous toggled element
+       */
+
+      EventBus.$on('c-collapse-group.toggle', (payload) => {
+        const toggledElement = payload.toggledCollapse;
+
+        // close all items except toggled
+        if (payload.component.$el.contains(this.$el) && this !== toggledElement) {
+          this.isExpanded = false;
+        }
+      });
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -64,11 +84,18 @@
 
     methods: {
       /**
-       * Sets and emits the current state
+       * Sets state and emits event to EventBus
        */
       setState() {
         this.isExpanded = !this.isExpanded; // toggle state
-        this.$emit('toggle-state', this.isExpanded); // listens to @toggle-state
+
+        /**
+         * Emits toggled event to EventBus
+         *
+         * @event c-collapse.toggled
+         * @type {object}
+         */
+        EventBus.$emit('c-collapse.toggled', { component: this });
       }
     },
     // render() {},

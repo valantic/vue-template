@@ -3,7 +3,7 @@
     <h1>Accordion example (c-collapse)</h1>
 
     <!-- TODO use 'item.id' instead of index if possible => :key="item.id" -->
-    <c-collapse-group>
+    <c-collapse-group :one-active="true"> <!-- TODO: one active -->
 
       <c-collapse
         v-for="(item, index) in collapsible"
@@ -28,9 +28,9 @@
       CCollapseGroup,
       CCollapse
     },
-    replace: true,
     data() {
       return {
+        // TODO rename getter
         collapsible: this.$store.getters['product/getCollapsible']
       };
     },
