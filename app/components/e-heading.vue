@@ -52,7 +52,7 @@
       },
 
       /**
-       * Defines the fontweight
+       * Defines the font-weight
        *
        * Valid values: `normal, semibold, bold`
        */
