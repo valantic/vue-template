@@ -75,7 +75,7 @@ module.exports = {
     '**/components/c-header.vue',
     '**/components/c-footer.vue',
     '**/components/s-layout.vue',
-    '**/components/c-attribute-grid-items',
+    '**/components/c-attribute-grid-items.vue',
   ],
   theme,
   styles
