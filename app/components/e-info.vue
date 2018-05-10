@@ -2,7 +2,7 @@
   <div :class="b({ type })" @mouseover="onMouseOver" @mouseout="onMouseOut">
     <div :class="b('label', { type })">
       {{ $t(`e-info.${type}`) }}
-      <div ref="detail" :class="b('detail')">
+      <div ref="detail" :class="b('detail', { hover })">
         | {{ detail }}
       </div>
     </div>
@@ -17,7 +17,7 @@
 
     props: {
       /**
-       * Defines the type of the label
+       * Defines the type of info
        *
        * Valid values: `new`, `promo`
        */
@@ -30,13 +30,20 @@
       },
 
       /**
-       * Defines the detail of the label which shows up no hover
+       * Defines the detail info which shows up on hover
        *
-       * Valid values: `new`, `promo`
        */
       detail: {
         type: [String],
         default: '',
+      },
+
+      /**
+       * Forces the hover state
+       */
+      hover: {
+        type: Boolean,
+        default: false,
       },
     },
     // data() {
@@ -59,10 +66,14 @@
 
     methods: {
       onMouseOver() {
-        this.$refs.detail.classList.add('e-info__detail--hover');
+        if (!this.$props.hover) {
+          this.$refs.detail.classList.add('e-info__detail--hover');
+        }
       },
       onMouseOut() {
-        this.$refs.detail.classList.remove('e-info__detail--hover');
+        if (!this.$props.hover) {
+          this.$refs.detail.classList.remove('e-info__detail--hover');
+        }
       },
     },
     // render() {},
@@ -71,9 +82,8 @@
 
 <style lang="scss">
   .e-info {
-
     &__label {
-    @include font($font-size: $font-size--14, $line-height: 14, $font-weight: $font-weight--semi-bold);
+      @include font($font-size: $font-size--14, $line-height: 14, $font-weight: $font-weight--semi-bold);
 
       padding: 2px $spacing--5 2px $spacing--5;
       text-transform: uppercase;

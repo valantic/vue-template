@@ -8,7 +8,7 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
-          <e-info type="promo" detail="(Infos Datum)"/>
+          <e-info type="promo" detail="(Infos Datum)" hover/>
           <e-info type="new" detail="(Infos Datum)"/>
           gallery
           <pre>{{ product }}</pre>
@@ -20,7 +20,13 @@
       </div>
 
       <aside :class="b('sidebar', {area: 'top' })">
-        <div :class="b('add-to-cart')">availability / price / qty / add to cart</div>
+        <div :class="b('add-to-cart')">
+          availability /
+          <div :class="b('prices')">
+            <c-prices :grossPrice="123456" :netPrice="123456"/>
+          </div>
+           / qty / add to cart
+        </div>
       </aside>
 
     </section>
@@ -46,10 +52,13 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  import cPrices from '@/components/c-prices';
 
   export default {
     name: 'c-product-detail',
-
+    components: {
+      cPrices,
+    },
     // mixins: [],
 
     // props: {},
@@ -60,17 +69,19 @@
     computed: {
       ...mapGetters({
         product: 'product/product',
-        productInformation: 'product/productInformation',
+        /*productInformation: 'product/productInformation',*/
       })
     },
     // watch: {},
 
     // beforeCreate() {},
     created() {
+      /*
       this.productInformation([{
         sku: this.product.sku,
         quantity: this.product.quantity,
       }]);
+      */
     },
     // beforeMount() {},
     // mounted() {},

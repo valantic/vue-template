@@ -13,5 +13,9 @@
   "e-info": {
     "new": "Neu",
     "promo": "Aktion"
+  },
+  "c-prices": {
+    "grossLabel": "Bruttopreis",
+    "netLabel": "Nettopreis"
   }
 }
