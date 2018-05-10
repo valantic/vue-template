@@ -6,6 +6,7 @@ import ePanel from '@/components/c-panel';
 import eInput from '@/components/e-input';
 import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
+import eInfo from '@/components/e-info';
 
 export default {
   install(Vue) {
@@ -18,6 +19,7 @@ export default {
       eLabel,
       eProgress,
       ePanel,
+      eInfo,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -34,6 +36,7 @@ export default {
       Vue.component(eProgress.name, eProgress);
       Vue.component(eInput.name, eInput);
       Vue.component(eLabel.name, eLabel);
+      Vue.component(eInfo.name, eInfo);
     }
   },
 };

@@ -9,5 +9,9 @@
   "c-footer": {
     "sonepar": "A Sonepar Company",
     "soneparLink": "http://www.sonepar.ch"
+  },
+  "e-info": {
+    "new": "New",
+    "promo": "Promotion"
   }
 }

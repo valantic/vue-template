@@ -8,6 +8,8 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
+          <e-info type="promo" detail="(Infos Datum)"/>
+          <e-info type="new" detail="(Infos Datum)"/>
           gallery
           <pre>{{ product }}</pre>
           <pre>{{ productInformation }}</pre>
