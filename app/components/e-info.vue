@@ -1,5 +1,10 @@
 <template>
-  <div v-if="visible" :class="b({ design })" @mouseover="onMouseOver" @mouseout="onMouseOut">
+  <div
+    v-if="visible"
+    :class="b({ design })"
+    @mouseover="onMouseOver"
+    @mouseout="onMouseOut"
+  >
     <div :class="b('label', { design })">
       {{ label }}
       <div v-if="detail" ref="detail" :class="b('detail', { hover })">
@@ -50,14 +55,16 @@
       },
       design() {
         if (this.visible) {
-          return this.$props.priceType == 2 ? 'new' : 'promo';
+          return this.$props.priceType === 2 ? 'new' : 'promo';
         }
+
         return '';
       },
       label() {
         if (this.visible) {
           return this.$t(`e-info.priceType${this.$props.priceType}`);
         }
+
         return '';
       },
       detail() {
