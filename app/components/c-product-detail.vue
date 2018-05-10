@@ -8,7 +8,12 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
-          <e-info :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate" hover/>
+          <e-info
+            v-if="erp.priceType"
+            :price-type="erp.priceType"
+            :price-type-end-date="erp.priceTypeEndDate"
+            hover
+          />
           gallery
           <pre>{{ product }}</pre>
           <pre>{{ erp }}</pre>

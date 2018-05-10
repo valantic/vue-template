@@ -1,10 +1,5 @@
 <template>
-  <div
-    v-if="visible"
-    :class="b({ design })"
-    @mouseover="onMouseOver"
-    @mouseout="onMouseOut"
-  >
+  <div :class="b({ design })" @mouseover="onMouseOver" @mouseout="onMouseOut">
     <div :class="b('label', { design })">
       {{ label }}
       <div v-if="detail" ref="detail" :class="b('detail', { hover })">
@@ -25,7 +20,7 @@
        * The priceType from ERP
        */
       priceType: {
-        type: Number,
+        type: [Number],
         required: true,
       },
 
@@ -50,22 +45,11 @@
     // },
 
     computed: {
-      visible() {
-        return this.$props.priceType;
-      },
       design() {
-        if (this.visible) {
-          return this.$props.priceType === 2 ? 'new' : 'promo';
-        }
-
-        return '';
+        return this.$props.priceType === 2 ? 'new' : 'promo';
       },
       label() {
-        if (this.visible) {
-          return this.$t(`e-info.priceType${this.$props.priceType}`);
-        }
-
-        return '';
+        return this.$t(`e-info.priceType${this.$props.priceType}`);
       },
       detail() {
         return this.$props.priceTypeEndDate;
