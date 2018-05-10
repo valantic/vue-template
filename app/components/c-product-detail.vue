@@ -12,7 +12,12 @@
         </div>
 
         <div :class="b('specs')">
-          <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
+          <div :class="b('technical-data')">
+            <c-attribute-grid :attributes="product.technicalData"/>
+          </div>
+          <div :class="b('attributes')">
+            <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
+          </div>
         </div>
 
       </div>
@@ -146,6 +151,14 @@
 
       @include media(sm) {
         flex-basis: percentage(6 / 12);
+      }
+    }
+
+    &__technical-data {
+      margin-bottom: $spacing--15;
+
+      @include media(sm) {
+        margin-bottom: $spacing--10;
       }
     }
 
