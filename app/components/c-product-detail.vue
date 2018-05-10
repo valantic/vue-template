@@ -13,9 +13,11 @@
 
         <div :class="b('specs')">
           <div :class="b('technical-data')">
-            <c-attribute-grid :attributes="product.technicalData"/>
+            <!-- TODO - use final property name -->
+            <c-attribute-grid :attributes="product.technicalAttributes"/>
           </div>
           <div :class="b('attributes')">
+            <!-- TODO - use final property name -->
             <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
           </div>
         </div>
@@ -32,7 +34,10 @@
     <section :class="b('bottom')">
 
       <div :class="b('main', { area: 'bottom' })">
-        <div :class="b('details')"> details</div>
+        <div :class="b('details')">
+            <!-- TODO - use final property name -->
+            <c-attribute-grid :attributes="product.technicalData"/>
+        </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
       </div>
