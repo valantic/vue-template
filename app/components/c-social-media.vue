@@ -1,10 +1,15 @@
 <template>
   <div :class="b()">
-    <!-- TODO - translate -->
-    <div :class="b('follow-us')">Folgen Sie uns auf:</div>
-    <a :class="b('facebook')" href="https://www.facebook.com/winterhalterfenner/" target="_blank"><e-icon :class="b('icon')" inline icon="i-facebook"/></a>
-    <a :class="b('linkedin')" href="https://www.linkedin.com/m/login/" target="_blank"><e-icon :class="b('icon')" inline icon="i-in"/></a>
-    <a :class="b('xing')" href="https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e" target="_blank"><e-icon :class="b('icon')" inline icon="i-xing"/></a>
+    <div :class="b('follow-us')">{{ $t('c-social-media.followUs') }}</div>
+    <a :class="b('facebook')" :href="$t('c-social-media.facebookUrl')" target="_blank">
+      <e-icon :class="b('icon')" inline icon="i-facebook"/>
+    </a>
+    <a :class="b('linkedin')" :href="$t('c-social-media.linkedinUrl')" target="_blank">
+      <e-icon :class="b('icon')" inline icon="i-in"/>
+    </a>
+    <a :class="b('xing')" :href="$t('c-social-media.xingUrl')" target="_blank">
+      <e-icon :class="b('icon')" inline icon="i-xing"/>
+    </a>
   </div>
 </template>
 
@@ -43,10 +48,19 @@
     @include font($font-size: $font-size--18);
 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 
     &__follow-us {
-      margin-right: auto;
+      @include media(sm) {
+        margin-right: $spacing--30;
+      }
+    }
+
+    &__follow-us,
+    &__facebook,
+    &__linkedin,
+    &__xing {
+      flex: 0 1 auto;
     }
 
     &__facebook,
@@ -80,7 +94,7 @@
     &__xing:focus {
       border: none;
       color: $color-grayscale--1000;
-      padding: 0;
+      padding: $spacing--0;
     }
   }
 </style>

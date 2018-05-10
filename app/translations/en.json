@@ -9,5 +9,11 @@
   "c-footer": {
     "sonepar": "A Sonepar Company",
     "soneparLink": "http://www.sonepar.ch"
+  },
+  "c-social-media": {
+    "followUs": "Follow us:",
+    "facebookUrl": "https://www.facebook.com/winterhalterfenner/",
+    "linkedinUrl": "https://www.linkedin.com/m/login/",
+    "xingUrl": "https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e"
   }
 }
