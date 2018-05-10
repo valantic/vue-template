@@ -1,13 +1,13 @@
 <template>
   <div :class="b()">
     <div :class="b('follow-us')">{{ $t('c-social-media.followUs') }}</div>
-    <a :class="b('facebook')" :href="$t('c-social-media.facebookUrl')" target="_blank">
+    <a :class="b('link')" :href="$t('c-social-media.facebookUrl')" target="_blank">
       <e-icon :class="b('icon')" inline icon="i-facebook"/>
     </a>
-    <a :class="b('linkedin')" :href="$t('c-social-media.linkedinUrl')" target="_blank">
+    <a :class="b('link')" :href="$t('c-social-media.linkedinUrl')" target="_blank">
       <e-icon :class="b('icon')" inline icon="i-in"/>
     </a>
-    <a :class="b('xing')" :href="$t('c-social-media.xingUrl')" target="_blank">
+    <a :class="b('link')" :href="$t('c-social-media.xingUrl')" target="_blank">
       <e-icon :class="b('icon')" inline icon="i-xing"/>
     </a>
   </div>
@@ -57,15 +57,11 @@
     }
 
     &__follow-us,
-    &__facebook,
-    &__linkedin,
-    &__xing {
+    &__link {
       flex: 0 1 auto;
     }
 
-    &__facebook,
-    &__linkedin,
-    &__xing {
+    &__link {
       display: block;
       margin-left: $spacing--10;
     }
@@ -80,18 +76,10 @@
       }
     }
 
-    &__facebook,
-    &__facebook:hover,
-    &__facebook:active,
-    &__facebook:focus,
-    &__linkedin,
-    &__linkedin:hover,
-    &__linkedin:active,
-    &__linkedin:focus,
-    &__xing,
-    &__xing:hover,
-    &__xing:active,
-    &__xing:focus {
+    &__link,
+    &__link:hover,
+    &__link:active,
+    &__link:focus {
       border: none;
       color: $color-grayscale--1000;
       padding: $spacing--0;
