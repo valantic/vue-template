@@ -10,7 +10,7 @@
         <c-social-media/>
       </div>
       <hr :class="b('social-separator')">
-      <div :class="b('sonepar')">A Sonepar Company</div>
+      <div :class="b('sonepar')"><a :class="b('sonepar-link')" v-bind:href="$t('c-footer.soneparLink')" target="_blank">{{ $t('c-footer.sonepar') }}</a></div>
     </div>
   </div>
 </template>
@@ -151,6 +151,15 @@
         order: 4;
         padding-left: $spacing--20;
       }
+    }
+
+    &__sonepar-link,
+    &__sonepar-link:hover,
+    &__sonepar-link:active,
+    &__sonepar-link:focus {
+      border: none;
+      color: $color-grayscale--1000;
+      padding: 0;
     }
   }
 </style>
