@@ -8,11 +8,10 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
-          <e-info type="promo" detail="(Infos Datum)" hover/>
-          <e-info type="new" detail="(Infos Datum)"/>
+          <e-info :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate" hover/>
           gallery
           <pre>{{ product }}</pre>
-          <pre>{{ productInformation }}</pre>
+          <pre>{{ erp }}</pre>
         </div>
 
         <div :class="b('specs')">specs</div>
@@ -23,7 +22,7 @@
         <div :class="b('add-to-cart')">
           availability /
           <div :class="b('prices')">
-            <c-prices :gross-price="productInformation.priceGross" :net-price="productInformation.price"/>
+            <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
           </div>
           / qty / add to cart
         </div>
@@ -61,7 +60,15 @@
     },
     // mixins: [],
 
-    // props: {},
+    props: {
+      /**
+       * The sku of the product
+       */
+      sku: {
+        type: String,
+        required: true,
+      },
+    },
     // data() {
     //   return {};
     // },
@@ -69,20 +76,17 @@
     computed: {
       ...mapGetters({
         product: 'product/product',
-        productInformation: 'product/productInformation',
+        erp: 'product/erp',
       })
     },
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    mounted() {
-      this.fetchProductInformation([{
-        sku: this.product.sku,
-        quantity: this.product.quantity,
-      }]);
+    created() {
+      this.fetchErp(this.$props.sku, 1); // TODO - what's the quantity initially?
     },
+    // beforeMount() {},
+    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -92,7 +96,7 @@
 
     methods: {
       ...mapActions({
-        fetchProductInformation: 'product/fetchProductInformation',
+        fetchErp: 'product/fetchErp',
       })
     },
     // render() {},

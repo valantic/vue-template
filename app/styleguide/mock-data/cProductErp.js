@@ -5,5 +5,5 @@ export default [{
   priceGross: 234567,
   price: 345678,
   priceType: 1,
-  priceTypeEndDate: ''
+  priceTypeEndDate: '30.1.2018'
 }];

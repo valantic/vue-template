@@ -2,13 +2,11 @@
   <div :class="b()">
     <dl :class="b('price-definition')">
       <dt :class="b('price-label')">{{ $t('c-prices.grossLabel') }}</dt>
-      <!-- TODO - remove hardcoded locale -->
-      <dd :class="b('price-value')">{{ $n(grossPrice / 100, 'currency', 'de-DE') }}</dd>
+      <dd :class="b('price-value')">{{ displayPriceGross }}</dd>
     </dl>
     <dl :class="b('price-definition')">
       <dt :class="b('price-label')">{{ $t('c-prices.netLabel') }}</dt>
-      <!-- TODO - remove hardcoded locale -->
-      <dd :class="b('price-value')">{{ $n(netPrice / 100, 'currency', 'de-DE') }}</dd>
+      <dd :class="b('price-value')">{{ displayNetPrice }}</dd>
     </dl>
   </div>
 </template>
@@ -21,17 +19,18 @@
 
     props: {
       /**
-       * The gross price to display
+       * The gross price as delivered by ERP
        */
-      grossPrice: {
+      priceGross: {
         type: Number,
         required: true,
       },
 
       /**
-       * The net price to display
+       * The price as delivered by ERP.
+       * price = priceGross * (100 - discount) * quantity
        */
-      netPrice: {
+      price: {
         type: Number,
         required: true,
       },
@@ -40,7 +39,15 @@
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      displayPriceGross() {
+        return this.$n(this.$props.priceGross / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+      },
+      displayNetPrice() {
+        // TODO - properly calculate net price
+        return this.$n(this.$props.price / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},

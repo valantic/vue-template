@@ -11,8 +11,11 @@
     "soneparLink": "http://www.sonepar.ch"
   },
   "e-info": {
-    "new": "New",
-    "promo": "Promotion"
+    "priceType1": "Promotion",
+    "priceType2": "New",
+    "priceType3": "Discount",
+    "priceType4": "While stock last",
+    "priceType5": "Currency discount"
   },
   "c-prices": {
     "grossLabel": "Gross price",

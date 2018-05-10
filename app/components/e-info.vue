@@ -1,8 +1,8 @@
 <template>
-  <div :class="b({ type })" @mouseover="onMouseOver" @mouseout="onMouseOut">
-    <div :class="b('label', { type })">
-      {{ $t(`e-info.${type}`) }}
-      <div ref="detail" :class="b('detail', { hover })">
+  <div v-if="visible" :class="b({ design })" @mouseover="onMouseOver" @mouseout="onMouseOut">
+    <div :class="b('label', { design })">
+      {{ label }}
+      <div v-if="detail" ref="detail" :class="b('detail', { hover })">
         | {{ detail }}
       </div>
     </div>
@@ -17,25 +17,19 @@
 
     props: {
       /**
-       * Defines the type of info
-       *
-       * Valid values: `new`, `promo`
+       * The priceType from ERP
        */
-      type: {
-        type: [String],
+      priceType: {
+        type: Number,
         required: true,
-        validator(value) {
-          return ['new', 'promo'].includes(value);
-        },
       },
 
       /**
-       * Defines the detail info which shows up on hover
-       *
+       * The priceTypeEndDate from ERP
        */
-      detail: {
-        type: [String],
-        default: '',
+      priceTypeEndDate: {
+        type: String,
+        default: null,
       },
 
       /**
@@ -47,10 +41,29 @@
       },
     },
     // data() {
-    //   return {};
+    //  return {};
     // },
 
-    // computed: {},
+    computed: {
+      visible() {
+        return this.$props.priceType;
+      },
+      design() {
+        if (this.visible) {
+          return this.$props.priceType == 2 ? 'new' : 'promo';
+        }
+        return '';
+      },
+      label() {
+        if (this.visible) {
+          return this.$t(`e-info.priceType${this.$props.priceType}`);
+        }
+        return '';
+      },
+      detail() {
+        return this.$props.priceTypeEndDate;
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -90,21 +103,21 @@
       letter-spacing: 0.05em;
       display: inline-block;
 
-      &--type-new {
+      &--design-new {
         background-color: $color-primary--1;
         color: $color-secondary--1;
         vertical-align: bottom;
         padding-right: $spacing--10;
       }
 
-      &--type-promo {
+      &--design-promo {
         background-color: $color-secondary--2;
         color: $color-grayscale--1000;
         vertical-align: bottom;
       }
     }
 
-    &--type-new::after {
+    &--design-new::after {
       content: '';
       display: inline-block;
       width: 0;

@@ -4,7 +4,7 @@ import { axios } from './axios';
 
 // Import mocks
 import cSuggestions from '../../styleguide/mock-data/cSuggestions';
-import cProductInformation from '../../styleguide/mock-data/cProductInformation';
+import cProductErp from '../../styleguide/mock-data/cProductErp';
 
 /**
  * By default returns a 500 'no route defined' error.
@@ -49,7 +49,7 @@ export default {
     // See https://github.com/ctimmerm/axios-mock-adapter
     mock
       .onGet('/suggestions').reply(200, cSuggestions)
-      .onPost('/product/multi-get').reply(200, cProductInformation)
+      .onPost('/product/multi-get').reply(200, cProductErp)
       .onAny(/\/?static/).passThrough()
       .onAny().reply(wildcard);
   },

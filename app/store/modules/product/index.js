@@ -14,9 +14,11 @@ export default {
     /**
      * @type {Object}   Stores product information data
      */
-    productInformation: {
+    erp: {
       priceGross: 0,
       price: 0,
+      priceType: 0,
+      priceTypeEndDate: '',
     },
 
     /**
@@ -41,17 +43,17 @@ export default {
      *
      * @returns  {Object}  product   Product information data
      */
-    productInformation: state => state.productInformation,
+    erp: state => state.erp,
   },
   mutations: {
     /**
-     * Sets the productInformation
+     * Sets erp state
      *
      * @param {Object} state   Current state
-     * @param {Object} productInformation   Product information data from ERP
+     * @param {Object} erp   Product information data from ERP
      */
-    setProductInformation(state, productInformation) {
-      state.productInformation = productInformation;
+    setErp(state, erp) {
+      state.erp = erp;
     },
 
     /**
@@ -66,17 +68,18 @@ export default {
   },
   actions: {
     /**
-     * Fetches productInformation from ERP
+     * Fetches data from erp
      *
-     * @param {Object} payload   Product information
+     * @param {String} quantity   Product quantity
+     * @param {String} sku   Product sku
      *
      * @returns  {Promise}  promise   Promise
      */
-    fetchProductInformation({ commit }, payload) {
-      return api.post('/product/multi-get', payload)
+    fetchErp({ commit }, sku, quantity) {
+      return api.post('/product/multi-get', { sku, quantity })
         .then((response) => {
           if (response && Array.isArray(response.data) && response.data.length) {
-            commit('setProductInformation', response.data[0]);
+            commit('setErp', response.data[0]);
           } else {
             throw new Error('apiFailure');
           }

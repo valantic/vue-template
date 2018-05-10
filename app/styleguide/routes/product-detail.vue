@@ -1,10 +1,7 @@
 <template>
   <div :class="b()">
     <l-default>
-
-      <!-- product detail goes here-->
-      <c-product-detail/>
-
+      <c-product-detail sku="12345"/>
     </l-default>
   </div>
 </template>
