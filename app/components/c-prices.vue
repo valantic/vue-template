@@ -2,11 +2,13 @@
   <div :class="b()">
     <dl :class="b('price-definition')">
       <dt :class="b('price-label')">{{ $t('c-prices.grossLabel') }}</dt>
-      <dd :class="b('price-value')">{{ $n(grossPrice / 100, 'currency', 'de-DE') }}</dd> <!-- TODO - remove hardcoded locale -->
+      <!-- TODO - remove hardcoded locale -->
+      <dd :class="b('price-value')">{{ $n(grossPrice / 100, 'currency', 'de-DE') }}</dd>
     </dl>
     <dl :class="b('price-definition')">
       <dt :class="b('price-label')">{{ $t('c-prices.netLabel') }}</dt>
-      <dd :class="b('price-value')">{{ $n(netPrice / 100, 'currency', 'de-DE') }}</dd> <!-- TODO - remove hardcoded locale -->
+      <!-- TODO - remove hardcoded locale -->
+      <dd :class="b('price-value')">{{ $n(netPrice / 100, 'currency', 'de-DE') }}</dd>
     </dl>
   </div>
 </template>

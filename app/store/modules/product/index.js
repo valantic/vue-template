@@ -14,7 +14,10 @@ export default {
     /**
      * @type {Object}   Stores product information data
      */
-    productInformation: {},
+    productInformation: {
+      priceGross: 0,
+      price: 0,
+    },
 
     /**
      * @type {Object} API error
@@ -32,7 +35,7 @@ export default {
     product: state => state.product,
 
     /**
-     * Get the product information
+     * The additional product information from ERP
      *
      * @param   {Object}  state   Current state
      *
@@ -42,10 +45,10 @@ export default {
   },
   mutations: {
     /**
-     * Sets the productinformation for the current state
+     * Sets the productInformation
      *
-     * @param {Object} state Current state
-     * @param {Object} productInformation Product information data
+     * @param {Object} state   Current state
+     * @param {Object} productInformation   Product information data from ERP
      */
     setProductInformation(state, productInformation) {
       state.productInformation = productInformation;
@@ -62,7 +65,14 @@ export default {
     }
   },
   actions: {
-    productInformation({ commit }, payload) {
+    /**
+     * Fetches productInformation from ERP
+     *
+     * @param {Object} payload   Product information
+     *
+     * @returns  {Promise}  promise   Promise
+     */
+    fetchProductInformation({ commit }, payload) {
       return api.post('/product/multi-get', payload)
         .then((response) => {
           if (response && Array.isArray(response.data) && response.data.length) {

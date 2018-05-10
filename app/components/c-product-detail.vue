@@ -23,9 +23,9 @@
         <div :class="b('add-to-cart')">
           availability /
           <div :class="b('prices')">
-            <c-prices :grossPrice="123456" :netPrice="123456"/>
+            <c-prices :gross-price="productInformation.priceGross" :net-price="productInformation.price"/>
           </div>
-           / qty / add to cart
+          / qty / add to cart
         </div>
       </aside>
 
@@ -69,22 +69,20 @@
     computed: {
       ...mapGetters({
         product: 'product/product',
-        /*productInformation: 'product/productInformation',*/
+        productInformation: 'product/productInformation',
       })
     },
     // watch: {},
 
     // beforeCreate() {},
-    created() {
-      /*
-      this.productInformation([{
+    // created() {},
+    // beforeMount() {},
+    mounted() {
+      this.fetchProductInformation([{
         sku: this.product.sku,
         quantity: this.product.quantity,
       }]);
-      */
     },
-    // beforeMount() {},
-    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -94,7 +92,7 @@
 
     methods: {
       ...mapActions({
-        productInformation: 'product/productInformation'
+        fetchProductInformation: 'product/fetchProductInformation',
       })
     },
     // render() {},
