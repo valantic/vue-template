@@ -7,10 +7,16 @@
       <div :class="b('navigation')">Navigation</div>
       <hr :class="b('navigation-separator')">
       <div :class="b('social')">
-        <c-social-media/>
+        <div :class="b('social-inner')">
+          <c-social-media/>
+        </div>
       </div>
       <hr :class="b('social-separator')">
-      <div :class="b('sonepar')"><a :class="b('sonepar-link')" v-bind:href="$t('c-footer.soneparLink')" target="_blank">{{ $t('c-footer.sonepar') }}</a></div>
+      <div :class="b('sonepar')">
+        <div :class="b('sonepar-inner')">
+          <a :class="b('sonepar-link')" :href="$t('c-footer.soneparLink')" target="_blank">{{ $t('c-footer.sonepar') }}</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -131,6 +137,17 @@
       @include media(xs) {
         flex: 0 1 percentage(7 / 12);
         order: 5;
+      }
+    }
+
+    &__social-inner {
+      padding: $spacing--20 $spacing--10 $spacing--30 $spacing--10;
+
+      @include media(xs) {
+        padding-left: $spacing--0;
+      }
+
+      @include media(sm) {
         padding-right: $spacing--20;
       }
     }
@@ -142,13 +159,18 @@
     }
 
     &__sonepar {
+      @include media(xs) {
+        flex: 0 1 percentage(5 / 12);
+        order: 4;
+      }
+    }
+
+    &__sonepar-inner {
       @include font($font-size: $font-size--18, $font-weight: $font-weight--bold);
 
       padding: $spacing--20 $spacing--0 $spacing--30 $spacing--10;
 
-      @include media(xs) {
-        flex: 0 1 percentage(5 / 12);
-        order: 4;
+      @include media(sm) {
         padding-left: $spacing--20;
       }
     }

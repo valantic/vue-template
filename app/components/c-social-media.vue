@@ -1,12 +1,10 @@
 <template>
   <div :class="b()">
     <!-- TODO - translate -->
-    <span :class="b('follow-us')">Folgen Sie uns auf:</span>
-    <span :class="b('icons')">
-      <a :class="b('facebook')" href="https://www.facebook.com/winterhalterfenner/" target="_blank"><e-icon inline icon="i-facebook"/></a>
-      <a :class="b('linkedin')" href="https://www.linkedin.com/m/login/" target="_blank"><e-icon inline icon="i-in"/></a>
-      <a :class="b('xing')" href="https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e" target="_blank"><e-icon inline icon="i-xing"/></a>
-    </span>
+    <div :class="b('follow-us')">Folgen Sie uns auf:</div>
+    <a :class="b('facebook')" href="https://www.facebook.com/winterhalterfenner/" target="_blank"><e-icon :class="b('icon')" inline icon="i-facebook"/></a>
+    <a :class="b('linkedin')" href="https://www.linkedin.com/m/login/" target="_blank"><e-icon :class="b('icon')" inline icon="i-in"/></a>
+    <a :class="b('xing')" href="https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e" target="_blank"><e-icon :class="b('icon')" inline icon="i-xing"/></a>
   </div>
 </template>
 
@@ -44,26 +42,23 @@
   .c-social-media {
     @include font($font-size: $font-size--18);
 
-    padding: 20px 0 20px 10px;
     display: flex;
     justify-content: space-between;
 
     &__follow-us {
-      flex: 0 1 percentage(6/12);
-    }
-
-    &__icons {
-      text-align: right;
-      flex: 0 1 percentage(6/12);
+      margin-right: auto;
     }
 
     &__facebook,
     &__linkedin,
     &__xing {
-      display: inline-block;
+      display: block;
+      margin-left: $spacing--10;
+    }
+
+    &__icon {
       width: $spacing--30;
       height: $spacing--30;
-      margin-right: $spacing--5;
 
       svg {
         width: 100%;
