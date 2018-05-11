@@ -3,8 +3,7 @@
 ```vue
 <template>
   <div>
-
-    <e-textarea name="demo" placeholder="insert text..." v-model="demo" sometest="true"/>
+    <e-textarea name="demo" placeholder="insert text..." v-model="demo" title="demotitle"/>
     
     <div v-if="demo" class="spacing--top-15" style="white-space: pre;">
       <p>{{demo}}</p>
@@ -25,45 +24,138 @@
 #### `:disabled`
 
 ```vue
+<e-textarea name="demo" disabled placeholder="insert text..."/>
 ```
 
 #### `:hover`
 
 ```vue
-<e-textarea name="demo" hover placeholder="insert text..."/>
+<template>
+  <div>
+    <e-textarea name="demo" hover placeholder="insert text..." v-model="demo"/>
+  
+    <div v-if="demo" class="spacing--top-15" style="white-space: pre;">
+      <p>{{demo}}</p>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 #### `:active`
 
 ```vue
-<e-textarea name="demo" active placeholder="insert text..."/>
+<template>
+  <div>
+    <e-textarea name="demo" active placeholder="insert text..." v-model="demo"/>
+  
+    <div v-if="demo" class="spacing--top-15" style="white-space: pre;">
+      <p>{{demo}}</p>
+    </div>
+  </div>
+</template>
+    
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 #### `:focus`
 
 
 ```vue
-<e-textarea name="demo" focus placeholder="insert text..."/>
+<template>
+  <div>
+    <e-textarea name="demo" focus placeholder="insert text..." v-model="demo"/>
+    
+    <div v-if="demo" class="spacing--top-15" style="white-space: pre;">
+      <p>{{demo}}</p>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 #### `:error`
 
 ```vue
-<e-textarea name="demo" placeholder="insert text..." state="error"/>
+<template>
+  <div>
+    <e-textarea name="demo" placeholder="insert text..." v-model="demo" state="error" notification="Choose a username at least 6 characters long!"/>
+  
+    <div v-if="demo" class="spacing--top-15" style="white-space: pre;">
+      <p>{{demo}}</p>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 #### `:success`
 
 ```vue
-<e-textarea name="demo"/>
+<template>
+  <div>
+    <e-textarea name="demo" placeholder="insert text..." v-model="demo" state="success" notification="Choose a username at least 6 characters long!"/>
+    
+    <div v-if="demo" class="spacing--top-15" style="white-space: pre;">
+      <p>{{demo}}</p>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
 ```
 
 #### `:info`
 ```vue
-<e-textarea name="demo"/>
-```
-
+<template>
+  <div>
+    <e-textarea name="demo" placeholder="insert text..." v-model="demo" state="info" notification="Choose a username at least 6 characters long!"/>
+    
+    <div v-if="demo" class="spacing--top-15" style="white-space: pre;">
+      <p>{{demo}}</p>
+    </div>
+  </div>
+</template>
 <script>
-  export default {};
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
 </script>
 ```

@@ -259,7 +259,7 @@
     &--disabled &__field,
     &--disabled &__field:hover {
       background-color: $color-grayscale--1000;
-      border: none;
+      border-color: transparent;
       color: $color-grayscale--600;
 
       &::placeholder {
