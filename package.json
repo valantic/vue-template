@@ -1,6 +1,6 @@
 {
   "name": "vue-template",
-  "version": "1.0.0-rc.1",
+  "version": "1.1.0",
   "description": "A customized Vue.js project template",
   "scripts": {
     "clean": "rimraf dist",
@@ -8,6 +8,7 @@
     "build:monitor": "npm run build -- --env.monitor",
     "build:profile": "rimraf dist && webpack --env.production --profile --json > stats/profile.json",
     "build:styleguide": "npm run build -- --env.styleguide && vue-styleguidist build",
+    "build:watch": "npm run build -- --env.watch",
     "eslint": "eslint --ext .js,.vue app test/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint 'app/**/*.?(vue|scss)'; exit 0",
