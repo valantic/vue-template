@@ -23,7 +23,7 @@
 
     props: {
       /**
-       * Adds value attribute.
+       * Adds value attribute. This is the returned string for the v-model after selecting an element.
        */
       value: {
         required: true,
