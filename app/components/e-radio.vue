@@ -8,6 +8,7 @@
            type="radio"
            @input="onInput"
     >
+    <label :class="b('fake-button')" :for="id"></label>
     <label :class="b('label')" :for="id">{{ displayName }}</label>
   </div>
 </template>
@@ -101,25 +102,29 @@
 <style lang="scss">
   .e-radio {
     &__field {
-      background-color: $color-grayscale--1000;
-      border: 1px solid $color-grayscale--400;
-      border-radius: 10px;
-      cursor: pointer;
-      display: inline-block;
-      height: 16px;
-      position: relative;
-      width: 16px;
-      -webkit-appearance: none;
-      outline: none;
-      top: 3px;
+      opacity: 0;
+      position: absolute;
     }
 
-    &__field::after {
+    &__fake-button::after {
       position: relative;
       content: '';
     }
 
-    &__field:checked::after {
+    &__fake-button {
+      -webkit-appearance: none;
+      background-color: $color-grayscale--1000;
+      border: 1px solid $color-grayscale--400;
+      border-radius: 10px;
+      display: inline-block;
+      position: relative;
+      width: 16px;
+      height: 16px;
+      top: 10px;
+      cursor: pointer;
+    }
+
+    &__field:checked ~ &__fake-button::after {
       background-color: $color-secondary--2;
       position: relative;
       border-radius: 25px;
@@ -131,7 +136,7 @@
       top: 2px;
     }
 
-    &__field:checked + &__label {
+    &__field:checked ~ &__label {
       color: $color-secondary--2;
     }
 
@@ -142,29 +147,29 @@
     }
 
     // focus
-    &__field:focus,
-    &--focus &__field {
+    &__field:focus ~ &__fake-button,
+    &--focus &__fake-button {
       border: 1px solid $color-primary--1;
     }
 
-    &__field:focus + &__label,
+    &__field:focus ~ &__label,
     &--focus &__label {
       color: $color-secondary--2;
     }
 
     // hover
-    &__field:hover,
-    &--hover &__field {
+    &__field:hover ~ &__fake-button,
+    &--hover &__fake-button {
       border: 1px solid $color-primary--1;
     }
 
-    //disabled
-    &__field:disabled,
-    &--disabled &__field {
+    // disabled
+    &__field:disabled ~ &__fake-button,
+    &--disabled &__fake-button {
       border-color: $color-grayscale--500;
       cursor: default;
     }
-    &__field:disabled + &__label {
+    &__field:disabled ~ &__label {
       cursor: default;
       color: $color-grayscale--500;
     }
@@ -175,7 +180,7 @@
     &--state-info {
       pointer-events: none;
 
-      .e-radio__field {
+      .e-radio__fake-button {
         background-color: $color-grayscale--1000;
         border: 1px solid $color-grayscale--400;
 
@@ -189,7 +194,7 @@
           background-color: $color-grayscale--400;
         }
 
-        &:checked + .e-radio__label {
+        &:checked ~ .e-radio__label {
           color: $color-grayscale--400;
         }
       }

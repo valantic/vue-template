@@ -15,7 +15,7 @@
   export default {
     name: 'example',
     data: () => ({
-      demo: ''
+      demo: 'radio-1'
     })
   };
 </script>
@@ -87,7 +87,7 @@
   export default {
     name: 'example',
     data: () => ({
-      demo: ''
+      demo: 'radio-1'
     })
   };
 </script>
