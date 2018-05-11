@@ -8,7 +8,7 @@
       <hr :class="b('navigation-separator')">
       <div :class="b('social')">Folgen Sie uns auf: (F) (L) (X)</div>
       <hr :class="b('social-separator')">
-      <div :class="b('sonepar')"><a :class="b('sonepar-link')" v-bind:href="$t('c-footer.soneparLink')" target="_blank">{{ $t('c-footer.sonepar') }}</a></div>
+      <div :class="b('sonepar')"><a :class="b('sonepar-link')" :href="$t('c-footer.soneparLink')" target="_blank">{{ $t('c-footer.sonepar') }}</a></div>
     </div>
   </div>
 </template>
