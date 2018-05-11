@@ -5,5 +5,23 @@
   },
   "e-progress": {
     "loading": "Lade …"
+  },
+  "c-footer": {
+    "sonepar": "A Sonepar Company",
+    "soneparLink": "http://www.sonepar.ch"
+  },
+  "e-info": {
+    "priceType1": "Aktion",
+    "priceType2": "Neu",
+    "priceType3": "Sonderpreis",
+    "priceType4": "Aktion solange Vorrat",
+    "priceType5": "Währungsrabatt"
+  },
+  "c-prices": {
+    "grossLabel": "Bruttopreis",
+    "netLabel": "Nettopreis"
+  },
+  "c-add-to-cart": {
+    "addToCart": "in den Warenkorb"
   }
 }

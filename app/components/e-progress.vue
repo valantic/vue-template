@@ -77,7 +77,7 @@
   @keyframes e-progress-rotation-animation {
     0% {
       left: 100%;
-      transform: translateX(-50%) scale(0) rotate(0.02deg); // NOTE: the rotation smoothes animation in FF
+      transform: translateX(-50%) scale(0) rotate(0.02deg); // NOTE: the rotation smooths animation in FF
     }
 
     50% {
@@ -124,7 +124,7 @@
       position: absolute;
       margin: 0 auto;
       border-radius: 50%;
-      transform: translateX(-50%) scale(0) rotate(0.02deg); // NOTE: the rotation smoothes animation in FF
+      transform: translateX(-50%) scale(0) rotate(0.02deg); // NOTE: the rotation smooths animation in FF
       animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;
 
       &:nth-child(1) {

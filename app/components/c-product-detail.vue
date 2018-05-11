@@ -8,9 +8,15 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
+          <e-info
+            v-if="erp.priceType"
+            :price-type="erp.priceType"
+            :price-type-end-date="erp.priceTypeEndDate"
+            hover
+          />
           gallery
           <pre>{{ product }}</pre>
-          <pre>{{ productInformation }}</pre>
+          <pre>{{ erp }}</pre>
         </div>
 
         <div :class="b('specs')">specs</div>
@@ -18,7 +24,14 @@
       </div>
 
       <aside :class="b('sidebar', {area: 'top' })">
-        <div :class="b('add-to-cart')">availability / price / qty / <c-add-to-cart :step="3" label sku="product.sku"/></div>
+        <div :class="b('add-to-cart')">
+          availability /
+          <div :class="b('prices')">
+            <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          </div>
+          / qty /
+          <c-add-to-cart label sku="sku"/>
+        </div>
       </aside>
 
     </section>
@@ -45,42 +58,40 @@
 <script>
   import { mapGetters, mapActions } from 'vuex';
   import cAddToCart from '@/components/c-add-to-cart';
+  import cPrices from '@/components/c-prices';
 
   export default {
     name: 'c-product-detail',
     components: {
-      cAddToCart
+      cAddToCart,
+      cPrices,
     },
-
     // mixins: [],
 
-    // props: {},
+    props: {
+      /**
+       * The sku of the product
+       */
+      sku: {
+        type: String,
+        required: true,
+      },
+    },
     // data() {
     //   return {};
     // },
 
     computed: {
       ...mapGetters({
-        /**
-         * Gets a product
-         *
-         * @returns  {Object}  product - Single product from the store
-         */
-        product: 'product/getProduct',
-
-        /**
-         * Gets a product
-         *
-         * @returns  {Object}  product - Single product from the store
-         */
-        productInformation: 'product/getProductInformation',
+        product: 'product/product',
+        erp: 'product/erp',
       })
     },
     // watch: {},
 
     // beforeCreate() {},
     created() {
-      this.getProductInformation();
+      this.fetchErp(this.$props.sku, 1); // TODO - what's the quantity initially?
     },
     // beforeMount() {},
     // mounted() {},
@@ -93,7 +104,7 @@
 
     methods: {
       ...mapActions({
-        getProductInformation: 'product/getProductInformation'
+        fetchErp: 'product/fetchErp',
       })
     },
     // render() {},

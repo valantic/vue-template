@@ -18,11 +18,8 @@
         spacing="0"
         @click="onClick"
       >
-        <!-- TODO - enable + style svg icon -->
-        <!-- <span ref="icon" :class="b('icon', iconModifiers)"><e-icon icon="i-cart--blue" inline/></span> -->
-        <!-- TODO - translate -->
-        <span ref="label" :class="b('label', labelModifiers)">in den Warenkorb</span>
-        <!-- TODO - height of progress not correct -->
+        <span ref="icon" :class="b('icon', iconModifiers)"><e-icon icon="i-cart" inline/></span>
+        <span ref="label" :class="b('label', labelModifiers)">{{ $t('c-add-to-cart.addToCart') }}</span>
         <span ref="progress" :class="b('progress', progressModifiers)"><e-progress/></span>
       </e-button>
     </div>
@@ -109,6 +106,7 @@
           focus: this.$props.focus,
           active: this.$props.active,
           disabled: this.$props.disabled,
+          isLoading: this.isLoading,
         };
       },
       labelModifiers() {
@@ -172,6 +170,16 @@
 
     &__button {
       display: inline-block;
+    }
+
+    &__icon {
+      path {
+        fill: $color-secondary--2;
+      }
+    }
+
+    &__icon--is-loading {
+      display: none;
     }
 
     &__label {

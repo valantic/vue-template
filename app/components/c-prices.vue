@@ -1,0 +1,94 @@
+<template>
+  <div :class="b()">
+    <dl :class="b('price-definition')">
+      <dt :class="b('price-label')">{{ $t('c-prices.grossLabel') }}</dt>
+      <dd :class="b('price-value')">{{ displayPriceGross }}</dd>
+    </dl>
+    <dl :class="b('price-definition')">
+      <dt :class="b('price-label')">{{ $t('c-prices.netLabel') }}</dt>
+      <dd :class="b('price-value')">{{ displayNetPrice }}</dd>
+    </dl>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'c-prices',
+    // components: {},
+    // mixins: [],
+
+    props: {
+      /**
+       * The gross price as delivered by ERP
+       */
+      priceGross: {
+        type: Number,
+        required: true,
+      },
+
+      /**
+       * The price as delivered by ERP.
+       * price = priceGross * (100 - discount) * quantity
+       */
+      price: {
+        type: Number,
+        required: true,
+      },
+    },
+    // data() {
+    //   return {};
+    // },
+
+    computed: {
+      displayPriceGross() {
+        return this.$n(this.$props.priceGross / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+      },
+      displayNetPrice() {
+        // TODO - properly calculate net price
+        return this.$n(this.$props.price / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+      }
+    },
+    // watch: {},
+
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeDestroy() {},
+    // destroyed() {},
+
+    // methods: {},
+    // render() {},
+  };
+</script>
+
+<style lang="scss">
+  .c-prices {
+    padding: $spacing--10;
+
+    &__price-definition {
+      display: flex;
+      margin-bottom: $spacing--0;
+    }
+
+    &__price-label {
+      @include font($font-size: $font-size--16, $font-weight: $font-weight--regular);
+
+      flex: 0 1 50%;
+      color: $color-grayscale--400;
+    }
+
+    &__price-value {
+      @include font($font-size: $font-size--16, $font-weight: $font-weight--bold);
+
+      flex: 0 1 50%;
+      text-align: right;
+      color: $color-secondary--1;
+      margin-bottom: $spacing--0;
+    }
+  }
+</style>

@@ -4,7 +4,7 @@ import { axios } from './axios';
 
 // Import mocks
 import cSuggestions from '../../styleguide/mock-data/cSuggestions';
-import cProductInformation from '../../styleguide/mock-data/cProductInformation';
+import cProductErp from '../../styleguide/mock-data/cProductErp';
 import cCartGet from '../../styleguide/mock-data/cCartGet';
 import cCartPost from '../../styleguide/mock-data/cCartPost';
 import cCartPatch from '../../styleguide/mock-data/cCartPatch';
@@ -52,7 +52,7 @@ export default {
     // See https://github.com/ctimmerm/axios-mock-adapter
     mock
       .onGet('/suggestions').reply(200, cSuggestions)
-      .onPost('/product/multi-get').reply(200, cProductInformation)
+      .onPost('/product/multi-get').reply(200, cProductErp)
 
       .onGet('/cart/1').reply(200, cCartGet)
       .onPost('/cart/1').reply(200, cCartPost)
