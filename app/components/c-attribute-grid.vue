@@ -49,7 +49,6 @@
       modifiers() {
         return {
           shrinkOnMobile: this.shrinkOnMobile,
-          dontShrinkOnMobile: !this.shrinkOnMobile
         };
       },
       maxHeight() {
@@ -97,7 +96,7 @@
           openHeight = `${openHeight}px`;
         }
 
-        this.openHeight = openHeight;
+        this.openHeight = openHeight.toString();
       },
       recalculateClosedHeight() {
         const dtHeight = this.$el.querySelector('dt').clientHeight;
@@ -108,7 +107,7 @@
           closedHeight = `${closedHeight}px`;
         }
 
-        this.closedHeight = closedHeight;
+        this.closedHeight = closedHeight.toString();
       },
     },
 
@@ -129,7 +128,7 @@
 
     &--shrink-on-mobile &__toggle {
       display: block;
-      padding: $spacing--5 $spacing--0 $spacing--0 $spacing--0;
+      padding-top: $spacing--5;
 
       @include media(xs) {
         display: none;
