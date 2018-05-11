@@ -61,7 +61,7 @@
          *
          * @returns  {Object}  product - Single product from the store
          */
-        product: 'product/getProduct'
+        product: 'product/product'
       })
     }
     // watch: {},

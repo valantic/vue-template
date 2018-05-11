@@ -21,7 +21,8 @@
   import EventBus from '@/setup/event-bus';
 
   /**
-   * Displays collapsible content panels (dependency: c-collapse-group)
+   * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
+   * and if only one item should be open at the same time (:one-active=true).
    */
   export default {
     name: 'c-collapse',
@@ -68,9 +69,10 @@
 
       EventBus.$on('c-collapse-group.toggle', (payload) => {
         const toggledElement = payload.toggledCollapse;
+        const toggleGroup = payload.component;
 
-        // close all items except toggled
-        if (payload.component.$el.contains(this.$el) && this !== toggledElement) {
+        // close all items except toggled if 'one-active=true'
+        if (payload.component.$el.contains(this.$el) && this !== toggledElement && toggleGroup.$props.oneActive) {
           this.isExpanded = false;
         }
       });

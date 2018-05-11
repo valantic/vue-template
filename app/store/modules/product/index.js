@@ -24,7 +24,7 @@ export default {
      *
      * @returns  {Array}  product   Product data
      */
-    getProduct: state => state.product,
+    product: state => state.product,
 
     /**
      * Gets collapsible items to create an accordion
@@ -33,7 +33,7 @@ export default {
      *
      * @returns  {Array}  items   Collapsible items (accordion)
      */
-    getCollapsible: state => state.collapsible
+    collapsible: state => state.collapsible
   },
   mutations: {},
   actions: {},

@@ -8,6 +8,9 @@
 <script>
   import EventBus from '@/setup/event-bus';
 
+  /**
+   * Wrapper for multiple (collapsible) itmes.
+   */
   export default {
     name: 'c-collapse-group',
     // components: {},
@@ -15,11 +18,11 @@
 
     props: {
       /**
-       * If only one item is active
+       * Defines if items can be open simultaneously
        */
       oneActive: {
-        default: false,
         type: Boolean,
+        default: true,
       }
     },
     // data() {
@@ -42,10 +45,10 @@
         const collapseComponent = payload.component; // child
 
         /**
-         * Emits update to EventBus
+         * Receives update from child and emits update to EventBus
          *
          * @event   c-collapse-group.toggle
-         * @type {object}   collapseElement   Toggled child element
+         * @type {object}   collapseGroup   Toggled child element
          */
         if (this.$el.contains(collapseComponent.$el)) {
           EventBus.$emit('c-collapse-group.toggle', { component: this, toggledCollapse: collapseComponent });
@@ -56,7 +59,7 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {}, // TODO $off
+    // beforeDestroy() {},
     // destroyed() {},
 
     // methods: {},

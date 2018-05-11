@@ -2,13 +2,12 @@
   <div :class="b()">
     <h1>Accordion example (c-collapse)</h1>
 
-    <!-- TODO use 'item.id' instead of index if possible => :key="item.id" -->
-    <c-collapse-group :one-active="true"> <!-- TODO: one active -->
+    <c-collapse-group>
 
       <c-collapse
-        v-for="(item, index) in collapsible"
+        v-for="item in collapsible"
         :active="item.active"
-        :key="index"
+        :key="item.id"
         :title="item.title">
         {{ item.content }}
       </c-collapse>
@@ -30,8 +29,7 @@
     },
     data() {
       return {
-        // TODO rename getter
-        collapsible: this.$store.getters['product/getCollapsible']
+        collapsible: this.$store.getters['product/collapsible']
       };
     },
   };

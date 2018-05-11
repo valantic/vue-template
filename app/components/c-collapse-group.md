@@ -1,13 +1,11 @@
 ```
 <template>
-
-  <!-- TODO use 'item.id' instead of index if possible => :key="item.id" -->
   
   <c-collapse-group>
   
       <c-collapse
-        v-for="(item, index) in collapsible"
-        :key="index"
+        v-for="item in collapsible"
+        :key="item.id"
         :title="item.title">
         {{ item.content }}
       </c-collapse>
@@ -21,7 +19,7 @@
     name: 'collapse',
     data() {
       return {
-        collapsible: this.$store.getters['product/getCollapsible']
+        collapsible: this.$store.getters['product/collapsible']
       };
     },
   };

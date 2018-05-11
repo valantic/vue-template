@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     active: true,
     title: 'This is just a title',
     content: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
@@ -10,6 +11,7 @@ export default [
               sanctus est Lorem ipsum dolor sit amet.`
   },
   {
+    id: 2,
     active: false,
     title: 'Click me to toggle content',
     content: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
@@ -20,6 +22,7 @@ export default [
               sanctus est Lorem ipsum dolor sit amet. `
   },
   {
+    id: 3,
     active: false,
     title: 'Click me to toggle content',
     content: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et 
