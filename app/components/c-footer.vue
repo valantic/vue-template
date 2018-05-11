@@ -141,14 +141,10 @@
     }
 
     &__social-inner {
-      padding: $spacing--20 $spacing--10 $spacing--30 $spacing--10;
-
-      @include media(xs) {
-        padding-left: $spacing--0;
-      }
+      padding: $spacing--20 $spacing--10 $spacing--30 $spacing--0;
 
       @include media(sm) {
-        padding-right: $spacing--20;
+        padding-right: $spacing--30;
       }
     }
 

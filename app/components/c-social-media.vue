@@ -1,13 +1,13 @@
 <template>
   <div :class="b()">
-    <div :class="b('follow-us')">{{ $t('c-social-media.followUs') }}</div>
-    <a :class="b('link')" :href="$t('c-social-media.facebookUrl')" target="_blank">
+    <span :class="b('title')">{{ $t('c-social-media.followUs') }}</span>
+    <a :class="b('link')" :href="$t('c-social-media.facebookUrl')" target="_blank" title="">
       <e-icon :class="b('icon')" inline icon="i-facebook"/>
     </a>
-    <a :class="b('link')" :href="$t('c-social-media.linkedinUrl')" target="_blank">
+    <a :class="b('link')" :href="$t('c-social-media.linkedinUrl')" target="_blank" title="">
       <e-icon :class="b('icon')" inline icon="i-in"/>
     </a>
-    <a :class="b('link')" :href="$t('c-social-media.xingUrl')" target="_blank">
+    <a :class="b('link')" :href="$t('c-social-media.xingUrl')" target="_blank" title="">
       <e-icon :class="b('icon')" inline icon="i-xing"/>
     </a>
   </div>
@@ -50,13 +50,15 @@
     display: flex;
     justify-content: flex-end;
 
-    &__follow-us {
-      @include media(sm) {
-        margin-right: $spacing--30;
+    &__title {
+      margin-right: auto;
+
+      @include media(xs) {
+        margin-right: $spacing--10;
       }
     }
 
-    &__follow-us,
+    &__title,
     &__link {
       flex: 0 1 auto;
     }
@@ -64,6 +66,10 @@
     &__link {
       display: block;
       margin-left: $spacing--10;
+
+      @include media(sm) {
+        margin-left: $spacing--20;
+      }
     }
 
     &__icon {
