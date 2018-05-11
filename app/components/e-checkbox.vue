@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <div :class="b(stateModifiers)">
 
     <input
       :aria-checked="checked ? 'true' : 'false'"
@@ -7,7 +7,7 @@
       :disabled="disabled"
       :value="value"
       :name="name"
-      :id="name"
+      :id="uid"
       v-bind="$attrs"
       v-model="internalValue"
       role="checkbox"
@@ -16,10 +16,11 @@
       @change="onChange"
       @focus="onFocus">
 
-    <label :for="name"
+    <label :for="uid"
            :class="b('label')"
            @mouseenter="isHover = true"
            @mouseleave="isHover = false">
+      <!-- @slot Used for label text -->
       <slot></slot>
     </label>
 
@@ -45,6 +46,14 @@
     },
 
     props: {
+      /**
+       * Adds checked attribute to prevent type error
+       */
+      checked: {
+        type: [Boolean, Array],
+        required: true,
+      },
+
       /**
        * Adds name attribute
        * Note: is also used as id and for label (won't work without them)
@@ -78,19 +87,23 @@
           return this.checked;
         },
         set(value) {
+          /**
+           * Emits checkbox value e.g. true/false or value
+           *
+           * @event change
+           * @type {Boolean|Array}
+           */
           this.$emit('change', value);
         }
       },
 
       /**
-       * Defines state modifier classes
+       * Creates a unique id for the label
        *
-       * @returns  {Object}   BEM classes
+       * @returns  {String}   Unique id (uid)
        */
-      modifiers() {
-        return {
-          ...this.stateModifiers
-        };
+      uid() {
+        return this.name + Math.random();
       }
     },
     // watch: {},
@@ -115,6 +128,13 @@
        */
       onChange(event) {
         this.isChecked = event.target.checked;
+
+        /**
+         * Change event
+         *
+         * @event change
+         * @type {String}
+         */
         this.$parent.$emit('change');
       },
 
@@ -125,6 +145,12 @@
       onFocus() {
         this.hasFocus = true;
 
+        /**
+         * Focus event
+         *
+         * @event focus
+         * @type {String}
+         */
         this.$emit('focus');
         this.$parent.$emit('focus');
       },
@@ -136,6 +162,12 @@
       onBlur() {
         this.hasFocus = false;
 
+        /**
+         * Blur event
+         *
+         * @event blur
+         * @type {String}
+         */
         this.$emit('blur');
         this.$parent.$emit('blur');
       }
@@ -147,36 +179,26 @@
 <style lang="scss">
   .e-checkbox {
     &__field {
-      // label styling
-      &:not(:checked),
-      &:checked {
-        position: absolute;
-        left: -9999px;
-        cursor: pointer;
-        -webkit-appearance: none;
-      }
+      position: absolute;
+      left: -9999px;
+      -webkit-appearance: none;
+    }
 
-      &:not(:checked) + label,
-      &:checked + label {
-        position: relative;
-        padding-left: $spacing--25;
-        font-size: $font-size--14;
-        line-height: $font-size--18;
-      }
+    // general label
+    &__label {
+      @include font-size($font-size--14);
 
-      &:not(:checked) + label {
-        color: $color-grayscale--400;
-      }
+      color: $color-grayscale--400;
+      cursor: pointer;
+      position: relative;
+      padding-left: $spacing--25;
+      line-height: 18px;
 
-      &:checked + label {
-        color: $color-secondary--1;
-      }
-
-      // checkbox
-      &:not(:checked) + label::before,
-      &:checked + label::before {
+      // custom field
+      &::before {
         background: $color-grayscale--1000;
         border-radius: 3px;
+        border: 1px solid $color-grayscale--500;
         content: "";
         cursor: default;
         position: absolute;
@@ -187,17 +209,8 @@
         transition: border 0.3s ease;
       }
 
-      &:not(:checked) + label::before {
-        border: 1px solid $color-grayscale--500;
-      }
-
-      &:checked + label::before {
-        border: 1px solid $color-secondary--2;
-      }
-
-      // checkbox marker
-      &:not(:checked) + label::after,
-      &:checked + label::after {
+      // custom field marker
+      &::after {
         background: transparent url('../assets/icons/i-check.svg') no-repeat center;
         background-size: 20px;
         border-top: none;
@@ -209,72 +222,64 @@
         left: 0;
         height: 17px;
         width: 17px;
-        transition: all 0.1s;
-      }
-
-      // checkbox marker changes
-      &:not(:checked) + label::after {
         opacity: 0;
         transform: scale(0);
+        transition: all 0.1s;
+      }
+    }
+
+    // checked label
+    &--checked &__label,
+    &__field:checked + &__label {
+      color: $color-secondary--1;
+
+      // custom field checked
+      &::before {
+        border: 1px solid $color-secondary--2;
       }
 
-      &:checked + label::after {
+      // custom field marker checked
+      &::after {
         opacity: 1;
         transform: scale(1);
       }
     }
 
-    // focus
-    &__field:focus,
-    &--focus &__field {
-      &:checked + label::before,
-      &:not(:checked) + label::before {
-        border: 1px solid $color-secondary--2;
-      }
-    }
+    // disabled label
+    &--disabled &__label,
+    &__field:disabled + &__label {
+      color: $color-grayscale--500;
 
-    // hover
-    &__field:hover,
-    &--hover &__field {
-      &:checked + label::before,
-      &:not(:checked) + label::before {
-        border: 1px solid $color-secondary--2;
-      }
-    }
-
-    // state: info
-    &--state-info &__field {
-      // checked mark aspect
-      &:not(:checked) + label::after,
-      &:checked + label::after {
-        background: transparent url('../assets/icons/i-check--info.svg') no-repeat center;
-      }
-
-      &:checked + label::before,
-      &:not(:checked) + label::before,
-      &:checked:hover + label::before,
-      &:not(:checked):hover + label::before {
-        border: 1px solid $color-grayscale--500;
-      }
-
-      &:checked + label {
-        color: $color-grayscale--400;
-      }
-    }
-
-    // disabled
-    &__field:disabled,
-    &--disabled &__field {
-      &:disabled:not(:checked) + label::before,
-      &:disabled:checked + label::before,
-      &:disabled:hover:not(:checked) + label::before,
-      &:disabled:hover:checked + label::before {
+      // custom field disabled
+      &::before,
+      &:hover::before {
         border: 1px solid $color-grayscale--600;
       }
 
-      &:disabled:checked + label::after,
-      &:disabled + label {
+      // custom field marker disabled
+      &::after {
+        background: transparent url('../assets/icons/i-check--info.svg') no-repeat center;
         color: $color-grayscale--500;
+      }
+    }
+
+    // focus label
+    &--focus &__label,
+    &__field:focus + &__label {
+
+      // custom field focus
+      &::before {
+        border: 1px solid $color-secondary--2;
+      }
+    }
+
+    // hover label
+    &--hover &__label,
+    &__field:hover + &__label {
+
+      // custom field hover
+      &::before {
+        border: 1px solid $color-secondary--2;
       }
     }
   }

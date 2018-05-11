@@ -174,11 +174,12 @@
 
     // input
     &__field {
+      @include font-size($font-size--14);
+
       border: 1px solid transparent;
       border-radius: $border-radius--default;
       color: $color-grayscale--400;
       font-family: $font-family--primary;
-      font-size: $font-size--14;
       height: $e-input-height;
       position: relative;
       transition: box-shadow 0.15s ease-in-out;

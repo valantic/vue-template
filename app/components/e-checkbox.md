@@ -56,9 +56,9 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
     data: () => ({
       // The list of items we need to do operation on
       items: [
-        {id: 1, name:'foo', value: 'Checkbox 1'},
-        {id: 2, name:'bar', value: 'Checkbox 2'},
-        {id: 3, name:'baz', value: 'Checkbox 3'}
+        {id: 1, name:'multiple', value: 'Checkbox 1'},
+        {id: 2, name:'multiple', value: 'Checkbox 2'},
+        {id: 3, name:'multiple', value: 'Checkbox 3'}
       ],
       
       // The list of IDs of checked items
@@ -109,7 +109,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
     name: 'example',
     data: () => ({
       name: 'disabled',
-      checked: false,
+      checked: true,
       value: 'disabled'
     })
   };
@@ -166,26 +166,3 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 </script>
 ```
 
-#### state: `info`
-```
-<template>
-<div>
-
-  <e-checkbox state="info" v-model="checked" :name="name" :value="value">
-    {{ value }}
-  </e-checkbox>
-
-</div>
-</template>
-
-<script>
-  export default {
-    name: 'example',
-    data: () => ({
-      name: 'info',
-      checked: true,
-      value: 'info'
-    })
-  };
-</script>
-```
