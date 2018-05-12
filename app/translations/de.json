@@ -10,6 +10,9 @@
     "sonepar": "A Sonepar Company",
     "soneparLink": "http://www.sonepar.ch"
   },
+  "c-product-detail": {
+    "productDescriptionTitle": "Produktbeschreibung"
+  },
   "e-info-label": {
     "priceType1": "Aktion",
     "priceType2": "Neu",

@@ -70,13 +70,12 @@ export default {
     /**
      * Fetches data from erp
      *
-     * @param {String} quantity   Product quantity
      * @param {String} sku   Product sku
      *
      * @returns  {Promise}  promise   Promise
      */
-    fetchErp({ commit }, sku, quantity) {
-      return api.post('/product/multi-get', { sku, quantity })
+    fetchErp({ commit }, sku) {
+      return api.post('/product/multi-get', { sku, quantity: 1 }) /* always assume quantity === 1 */
         .then((response) => {
           if (response && Array.isArray(response.data) && response.data.length) {
             commit('setErp', response.data[0]);
