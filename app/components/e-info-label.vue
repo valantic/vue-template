@@ -42,8 +42,8 @@
       return {
         hasInfo: !!this.$props.priceTypeEndDate,
         hasHover: this.$props.hover && !!this.$props.priceTypeEndDate
-          || 'ontouchstart' in document.documentElement
-          || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
+          || (this.$props.priceTypeEndDate && ('ontouchstart' in document.documentElement
+            || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0)),
       };
     },
 
@@ -91,11 +91,12 @@
     &__inner {
       @include font($font-size: $font-size--14, $line-height: 14px, $font-weight: $font-weight--semi-bold);
 
+      display: inline-block;
+      vertical-align: top;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       overflow: hidden;
       white-space: nowrap;
-      display: inline-block;
       cursor: pointer;
 
       &--design-new {
@@ -149,8 +150,8 @@
       transition: 0.25s ease-out;
     }
 
-    &--has-hover &__info--has-info,
-    &:hover &__info--has-info {
+    &__inner--has-hover &__info--has-info,
+    &__inner:hover &__info--has-info {
       opacity: 1;
       padding-right: 8px;
       max-width: 100px;
