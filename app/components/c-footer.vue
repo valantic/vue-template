@@ -167,7 +167,7 @@
       padding: $spacing--20 $spacing--0 $spacing--30 $spacing--10;
 
       @include media(sm) {
-        padding-left: $spacing--20;
+        padding-left: $spacing--30;
       }
     }
 
