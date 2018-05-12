@@ -47,6 +47,16 @@ export default {
   },
   mutations: {
     /**
+     * Initial product data provided by spryker
+     *
+     * @param {Object} state   State
+     * @param {Object} data   Product data
+     */
+    data(state, data) {
+      state.product = data;
+    },
+
+    /**
      * Sets erp state
      *
      * @param {Object} state   Current state
