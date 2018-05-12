@@ -13,11 +13,9 @@
       </div>
       <hr :class="b('social-separator')">
       <div :class="b('sonepar')">
-        <a
-          :class="b('sonepar-link')"
-          :href="$t('c-footer.soneparLink')"
-          target="_blank"
-        >{{ $t('c-footer.sonepar') }}</a>
+        <div :class="b('sonepar-inner')">
+          <a :class="b('sonepar-link')" :href="$t('c-footer.soneparLink')" target="_blank">{{ $t('c-footer.sonepar') }}</a>
+        </div>
       </div>
     </div>
   </div>
