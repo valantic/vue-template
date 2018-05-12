@@ -12,12 +12,15 @@
 </template>
 
 <script>
+
   /**
+   *
    * This component does not fetch any data from ERP, it just displays
    * the prices provided to it as attributes and formats them according to the
    * currently used language.
    * This means that the parent component is responsible for fetching the data from ERP.
    * If there should be no prices shown, just hide the whole component by using v-if.
+   *
    */
   export default {
     name: 'c-prices',
@@ -50,7 +53,6 @@
         return this.$n(this.$props.priceGross / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
       },
       displayNetPrice() {
-        // TODO - properly calculate net price
         return this.$n(this.$props.price / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
       }
     },

@@ -8,12 +8,15 @@
 </template>
 
 <script>
+
   /**
+   *
    * This component does not fetch any data from ERP, it just displays
    * the information provided to it as attributes.
    * This means that the parent component is responsible for fetching the data.
    * It's also the parent components responsibility to check if priceType is available or not.
    * On touch devices hover is automatically forced.
+   *
    */
   export default {
     name: 'e-info-label',
