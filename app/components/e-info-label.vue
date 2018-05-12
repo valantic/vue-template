@@ -8,6 +8,13 @@
 </template>
 
 <script>
+  /**
+   * This component does not fetch any data from ERP, it just displays
+   * the information provided to it as attributes.
+   * This means that the parent component is responsible for fetching the data.
+   * It's also the parent components responsibility to check if priceType is available or not.
+   * On touch devices hover is automatically forced.
+   */
   export default {
     name: 'e-info-label',
     // components: {},
@@ -16,10 +23,15 @@
     props: {
       /**
        * The priceType from ERP
+       *
+       * Valid values: `1, 2, 3, 4, 5`
        */
       priceType: {
         type: [Number],
         required: true,
+        validator(value) {
+          return [1, 2, 3, 4, 5].includes(value);
+        },
       },
 
       /**
@@ -41,9 +53,9 @@
     data() {
       return {
         hasInfo: !!this.$props.priceTypeEndDate,
-        hasHover: this.$props.hover && !!this.$props.priceTypeEndDate
+        hasHover: (this.$props.hover && !!this.$props.priceTypeEndDate)
           || (this.$props.priceTypeEndDate && ('ontouchstart' in document.documentElement
-            || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0)),
+          || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0)),
       };
     },
 
