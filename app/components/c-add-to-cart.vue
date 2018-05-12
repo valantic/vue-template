@@ -11,9 +11,9 @@
     </div>
     <div :class="b('button')">
       <e-button
+        :progress="progress"
         primary
         width="full"
-        :progress="this.progress"
         @click="onClick"
       >
         <e-icon :class="b('icon')" icon="i-cart" inline/><span v-if="hasLabel"> {{ $t('c-add-to-cart.addToCart') }}</span>
@@ -94,8 +94,7 @@
           }, (error) => {
             this.progress = false;
             this.debug = error; // TODO - remove
-          }
-        );
+        });
       },
     },
     // render() {},
