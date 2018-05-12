@@ -16,11 +16,15 @@
         ref="button"
         v-bind="$props"
         primary
+        width="full"
+        :progress="this.progress"
         @click="onClick"
       >
-        <e-icon icon="i-cart" inline/> {{ $t('c-add-to-cart.addToCart') }}
+        <e-icon :class="b('icon')" icon="i-cart" inline/> {{ $t('c-add-to-cart.addToCart') }}
       </e-button>
     </div>
+    <!-- TODO - remove -->
+    <div ref="debug">{{ debug }}</div>
   </div>
 </template>
 
@@ -62,7 +66,8 @@
       return {
         quantity: this.$props.step,
         hasLabel: !!this.$props.label,
-        isLoading: false,
+        progress: false,
+        debug: '', // TODO - remove
       };
     },
 
@@ -72,9 +77,7 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted() {
-      this.$refs.button.hasProgress = true;
-    },
+    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -87,8 +90,16 @@
         addToCart: 'cart/addToCart',
       }),
       onClick() {
+        this.progress = true;
         this.addToCart(this.sku, this.quantity)
-          .then(() => {}, () => {});
+          .then((response) => {
+            this.progress = false;
+            this.debug = response; // TODO - remove
+          }, (error) => {
+            this.progress = false;
+            this.debug = error; // TODO - remove
+            }
+          );
       },
     },
     // render() {},
@@ -98,14 +109,26 @@
 <style lang="scss">
   .c-add-to-cart {
     display: flex;
+    flex-direction: column;
+    padding: $spacing--15 $spacing--10 $spacing--30 $spacing--10;
+
+    @include media(xs) {
+      padding: $spacing--0 $spacing--20 $spacing--30 $spacing--20;
+    }
 
     &__quantity {
       flex: 0 1 auto;
-      margin-right: $spacing--20;
+      width: 100%;
+      margin-bottom: $spacing--10;
     }
 
     &__button {
       flex: 0 1 auto;
+    }
+
+    &__icon {
+      vertical-align: text-top;
+      height: 21px; /* TODO - this is probably not how to do it */
     }
   }
 </style>

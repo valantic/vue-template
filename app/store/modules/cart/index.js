@@ -35,16 +35,6 @@ export default {
     updateTotals(state, totals) {
       state.cart.totals = totals;
     },
-
-    /**
-     * Handles an API failure
-     *
-     * @param {Object} state Current state
-     * @param {Object} error API Error that ocured
-     */
-    apiFailure(state, error) {
-      state.apiError = error;
-    }
   },
   actions: {
     /**
@@ -56,15 +46,15 @@ export default {
      * @returns {Promise} Promise object
      */
     addToCart({ commit }, sku, quantity) {
-      return api.post('/cart/1', { sku, quantity }) // TODO - replace id
+      return api.post('/cart/1', { sku, quantity }) // TODO - replace id of cart
         .then((response) => {
           if (response && response.data && response.data.totals && Object.keys(response.data.totals).length) {
             commit('updateTotals', response.data.totals);
-          } else {
-            throw new Error('apiFailure');
+
+            return response;
           }
-        })
-        .catch(error => commit('apiFailure', error));
+          throw new Error('apiFailure');
+      });
     },
   },
 };
