@@ -107,7 +107,7 @@
         },
       };
       const childAttributes = {
-        class: this.b('inner'),
+        class: this.b('inner', { color: this.$props.color }),
       };
 
       return createElement(
@@ -143,6 +143,10 @@
     &--underline &__inner {
       border-bottom: 1px solid $color-primary--1;
       padding: $spacing--15 $spacing--20;
+    }
+
+    &--underline &__inner--color-gray {
+      border-bottom: 1px solid $color-grayscale--600;
     }
 
     &--h1 {
@@ -194,10 +198,10 @@
     }
 
     &--color-gray {
-      color: $color-grayscale--200;
+      color: $color-grayscale--400;
 
       a {
-        color: $color-grayscale--200;
+        color: $color-grayscale--400;
       }
     }
   }
