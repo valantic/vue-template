@@ -2,9 +2,7 @@
   <div :class="b()">
     <div :class="b('quantity')">
       <e-input
-        ref="quantity"
         v-model.number="quantity"
-        v-bind="$props"
         :min="step"
         :step="step"
         type="number"
@@ -13,14 +11,12 @@
     </div>
     <div :class="b('button')">
       <e-button
-        ref="button"
-        v-bind="$props"
         primary
         width="full"
         :progress="this.progress"
         @click="onClick"
       >
-        <e-icon :class="b('icon')" icon="i-cart" inline/> {{ $t('c-add-to-cart.addToCart') }}
+        <e-icon :class="b('icon')" icon="i-cart" inline/><span v-if="hasLabel"> {{ $t('c-add-to-cart.addToCart') }}</span>
       </e-button>
     </div>
     <!-- TODO - remove -->
@@ -35,7 +31,6 @@
     name: 'c-add-to-cart',
     // components: {},
     // mixins: [],
-    inheritAttrs: false,
 
     props: {
       /**
@@ -47,7 +42,7 @@
       },
 
       /**
-       * Quantity steps, also defines initial value
+       * Increment steps. Also defines initial value
        */
       step: {
         type: Number,
@@ -91,6 +86,7 @@
       }),
       onClick() {
         this.progress = true;
+
         this.addToCart(this.sku, this.quantity)
           .then((response) => {
             this.progress = false;
@@ -98,8 +94,8 @@
           }, (error) => {
             this.progress = false;
             this.debug = error; // TODO - remove
-            }
-          );
+          }
+        );
       },
     },
     // render() {},

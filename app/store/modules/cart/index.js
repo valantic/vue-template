@@ -29,8 +29,8 @@ export default {
     /**
      * Update totals for cart
      *
-     * @param {Object} state   State
-     * @param {Object} totals   Totals object
+     * @param {Object} state   State object
+     * @param {Object} totals   TotalsDataObject
      */
     updateTotals(state, totals) {
       state.cart.totals = totals;
@@ -40,7 +40,7 @@ export default {
     /**
      * Asynchronously add product to cart
      *
-     * @param {string} quantity   Quantity of the product to be added
+     * @param {string} quantity   Amount of product units to be added
      * @param {string} sku   Sku of the product to be added
      *
      * @returns {Promise} Promise object
