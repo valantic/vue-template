@@ -88,7 +88,7 @@
     components: {
       lDefault,
       cPanel,
-     },
+    },
 
     // components: {},
     // mixins: [],

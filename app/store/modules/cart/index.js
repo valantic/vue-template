@@ -27,13 +27,13 @@ export default {
     },
 
     /**
-     * Update product item in cart
+     * Update totals for cart
      *
      * @param {Object} state   State
-     * @param {Object} item   Cart item object
+     * @param {Object} totals   Totals object
      */
-    updateCartItem(state, item) {
-      state.cart.items.push(item);
+    updateTotals(state, totals) {
+      state.cart.totals = totals;
     },
 
     /**
@@ -50,20 +50,18 @@ export default {
     /**
      * Asynchronously add product to cart
      *
-     * @param {Object} item   Cart item object
-     * @param {string} item.sku   Sku of the product to be added
-     * @param {string} item.quantity   Quantity of the product to be added
+     * @param {string} quantity   Quantity of the product to be added
+     * @param {string} sku   Sku of the product to be added
      *
      * @returns {Promise} Promise object
      */
-    addToCart({ commit }, item) {
-      return api.post('/cart/1', item) // TODO - replace id
+    addToCart({ commit }, sku, quantity) {
+      return api.post('/cart/1', { sku, quantity }) // TODO - replace id
         .then((response) => {
-          const responseItem = response.data.items.find(i => i.sku === item.sku);
-
-          // TODO - api should reply with the complete cart item
-          if (responseItem) {
-            commit('updateCartItem', responseItem);
+          if (response && response.data && response.data.totals && Object.keys(response.data.totals).length) {
+            commit('updateTotals', response.data.totals);
+          } else {
+            throw new Error('apiFailure');
           }
         })
         .catch(error => commit('apiFailure', error));

@@ -8,15 +8,9 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
-          <e-info
-            v-if="erp.priceType"
-            :price-type="erp.priceType"
-            :price-type-end-date="erp.priceTypeEndDate"
-            hover
-          />
-          gallery
-          <pre>{{ product }}</pre>
-          <pre>{{ erp }}</pre>
+          <e-info-label v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
+          gallery<br>
+          {{ product }}
         </div>
 
         <div :class="b('specs')">specs</div>
@@ -30,7 +24,7 @@
             <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
           </div>
           / qty /
-          <c-add-to-cart label sku="sku"/>
+          <c-add-to-cart :sku="this.$props.sku" label progress/>
         </div>
       </aside>
 
@@ -40,7 +34,12 @@
     <section :class="b('bottom')">
 
       <div :class="b('main', { area: 'bottom' })">
-        <div :class="b('details')"> details</div>
+        <div :class="b('details')">
+          <div v-if="product.description" :class="b('description')">
+            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
+            <div :class="b('description-text')" v-html="product.description"></div>
+          </div>
+        </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
       </div>
@@ -91,7 +90,7 @@
 
     // beforeCreate() {},
     created() {
-      this.fetchErp(this.$props.sku, 1); // TODO - what's the quantity initially?
+      this.fetchErp(this.$props.sku);
     },
     // beforeMount() {},
     // mounted() {},
@@ -203,6 +202,27 @@
 
       @include media(sm) {
         border-bottom: 4px solid $color-grayscale--600;
+      }
+    }
+
+    &__details {
+      .e-heading--underline .e-heading__inner {
+        padding-left: $spacing--20;
+
+        @include media(sm) {
+          padding-left: $spacing--30;
+        }
+      }
+    }
+
+    &__description-text {
+      @include font($font-size--14, $line-height: 18px);
+
+      color: $color-grayscale--200;
+      padding: $spacing--10 $spacing--20;
+
+      @include media(sm) {
+        padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
       }
     }
 
