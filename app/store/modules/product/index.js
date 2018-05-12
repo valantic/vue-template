@@ -55,16 +55,6 @@ export default {
     setErp(state, erp) {
       state.erp = erp;
     },
-
-    /**
-     * Handles an API failure
-     *
-     * @param {Object} state Current state
-     * @param {Object} error API Error that occurred
-     */
-    apiFailure(state, error) {
-      state.apiError = error;
-    }
   },
   actions: {
     /**
@@ -79,11 +69,12 @@ export default {
         .then((response) => {
           if (response && Array.isArray(response.data) && response.data.length) {
             commit('setErp', response.data[0]);
-          } else {
-            throw new Error('apiFailure');
+
+            return response;
           }
-        })
-        .catch(error => commit('apiFailure', error));
+
+          throw new Error('apiFailure');
+      });
     },
   },
 };
