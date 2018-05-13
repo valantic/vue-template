@@ -6,9 +6,8 @@
 
       <!-- left area -->
       <div :class="b('main', {area: 'top' })">
-
+        <e-info-label v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
         <div :class="b('gallery')">
-          <e-info-label v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
           gallery<br>
           {{ product }}
         </div>
