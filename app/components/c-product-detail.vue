@@ -6,7 +6,7 @@
 
       <!-- left area -->
       <div :class="b('main', {area: 'top' })">
-        <e-info-label v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
+        <e-info-label :class="b('info')" v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
         <div :class="b('gallery')">
           gallery<br>
           {{ product }}
@@ -124,6 +124,8 @@
     }
 
     &__main--area-top {
+      position: relative;
+
       @include media(sm) {
         display: flex;
       }
@@ -134,6 +136,16 @@
 
       @include media(sm) {
         padding-bottom: $spacing--60;
+      }
+    }
+
+    &__info {
+      position: absolute;
+      top: $spacing--15;
+      left: $spacing--0;
+
+      @include media(sm) {
+        top: $spacing--30;
       }
     }
 
