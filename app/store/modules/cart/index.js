@@ -8,18 +8,13 @@ export default {
      * @type {Object}   Stores cart items
      */
     cart: cartData, // TODO - remove mock data once we have the api
-
-    /**
-     * @type {Object} API error
-     */
-    apiError: null,
   },
   getters: { },
   mutations: {
     /**
      * Initial cart data provided by spryker
      *
-     * @param {Object} state   State
+     * @param {Object} state   Current state
      * @param {Object} data   Cart data
      */
     data(state, data) {
@@ -29,8 +24,8 @@ export default {
     /**
      * Update totals for cart
      *
-     * @param {Object} state   State object
-     * @param {Object} totals   TotalsDataObject
+     * @param {Object} state   Current state
+     * @param {Object} totals   Totals data
      */
     updateTotals(state, totals) {
       state.cart.totals = totals;
