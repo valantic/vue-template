@@ -64,15 +64,7 @@
     },
     // mixins: [],
 
-    props: {
-      /**
-       * The sku of the product
-       */
-      sku: {
-        type: String,
-        required: true,
-      },
-    },
+    // props: {},
     // data() {
     //   return {};
     // },
@@ -87,7 +79,7 @@
 
     // beforeCreate() {},
     created() {
-      this.fetchErp(this.$props.sku);
+      this.fetchErp();
     },
     // beforeMount() {},
     // mounted() {},
