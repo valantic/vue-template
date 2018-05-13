@@ -12,6 +12,6 @@ export default {
     subtotal: 39700000,
     grandTotal: 39700000,
     netTotal: 39700000,
-    numItemsTotal: 99,
+    numItemsTotal: 1,
   }
 };
