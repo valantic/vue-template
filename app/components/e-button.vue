@@ -4,7 +4,8 @@
   import eProgress from './e-progress';
 
   /**
-   * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style. The component uses a `<slot>` to render the content.
+   * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
+   * The component uses a `<slot>` to render the content.
    *
    * @link [You can also define inherited attributes for `<button>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/button#Attribute)
    * @link [You can also define inherited attributes for `<a>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/a#Attribute)
@@ -289,12 +290,16 @@
       border-top-right-radius: 0;
     }
 
-    &:focus,
-    &--focus {
+    &--focus,
+    &:focus {
       color: $color-primary--3;
       background-color: $color-grayscale--500;
       outline: none;
       border: 0; // Overwrite link style
+
+      path {
+        fill: $color-primary--3;
+      }
 
       &::before,
       &::after {
@@ -302,11 +307,15 @@
       }
     }
 
-    &:hover,
-    &--hover {
+    &--hover,
+    &:hover {
       color: $color-primary--3;
       background-color: $color-grayscale--500;
       border-bottom: 0; // Overwrite link styles
+
+      path {
+        fill: $color-primary--3;
+      }
 
       &:not([disabled])::before,
       &:not([disabled])::after {
@@ -328,6 +337,8 @@
 
     &[disabled],
     &--disabled,
+    &[disabled]::before,
+    &--disabled::after,
     &[disabled]:hover,
     &--disabled:hover {
       background-color: transparent;
@@ -376,7 +387,7 @@
     &__inner {
       position: relative;
       display: inline-block;
-      vertical-align: bottom;
+      vertical-align: baseline;
     }
 
     .e-progress {

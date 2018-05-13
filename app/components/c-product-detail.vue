@@ -8,8 +8,9 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
-          gallery
-          <pre>{{ product }}</pre>
+          <e-info-label v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
+          gallery<br>
+          {{ product }}
         </div>
 
         <div :class="b('specs')">specs</div>
@@ -17,7 +18,14 @@
       </div>
 
       <aside :class="b('sidebar', {area: 'top' })">
-        <div :class="b('add-to-cart')">availability / price / qty / add to cart</div>
+        <div :class="b('add-to-cart')">
+          availability /
+          <div :class="b('prices')">
+            <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          </div>
+          / qty /
+          <c-add-to-cart :sku="this.$props.sku" label/>
+        </div>
       </aside>
 
     </section>
@@ -26,7 +34,12 @@
     <section :class="b('bottom')">
 
       <div :class="b('main', { area: 'bottom' })">
-        <div :class="b('details')"> details</div>
+        <div :class="b('details')">
+          <div v-if="product.description" :class="b('description')">
+            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
+            <div :class="b('description-text')" v-html="product.description"></div>
+          </div>
+        </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
       </div>
@@ -42,32 +55,43 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
+  import cAddToCart from '@/components/c-add-to-cart';
+  import cPrices from '@/components/c-prices';
 
   export default {
     name: 'c-product-detail',
-
+    components: {
+      cAddToCart,
+      cPrices,
+    },
     // mixins: [],
 
-    // props: {},
+    props: {
+      /**
+       * The sku of the product
+       */
+      sku: {
+        type: String,
+        required: true,
+      },
+    },
     // data() {
     //   return {};
     // },
 
     computed: {
       ...mapGetters({
-        /**
-         * Gets a product
-         *
-         * @returns  {Object}  product - Single product from the store
-         */
-        product: 'product/getProduct'
+        product: 'product/product',
+        erp: 'product/erp',
       })
-    }
+    },
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      this.fetchErp(this.$props.sku);
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -77,7 +101,11 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      ...mapActions({
+        fetchErp: 'product/fetchErp',
+      })
+    },
     // render() {},
   };
 </script>
@@ -174,6 +202,27 @@
 
       @include media(sm) {
         border-bottom: 4px solid $color-grayscale--600;
+      }
+    }
+
+    &__details {
+      .e-heading--underline .e-heading__inner {
+        padding-left: $spacing--20;
+
+        @include media(sm) {
+          padding-left: $spacing--30;
+        }
+      }
+    }
+
+    &__description-text {
+      @include font($font-size--14, $line-height: 18px);
+
+      color: $color-grayscale--200;
+      padding: $spacing--10 $spacing--20;
+
+      @include media(sm) {
+        padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
       }
     }
 

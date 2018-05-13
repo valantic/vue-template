@@ -10,7 +10,7 @@ import 'picturefill';
 import 'lazysizes';
 import './lib/ls.attrchange'; // lazy sizes attribute change observer
 
-import { I18N_FALLBACK, I18N_FALLBACK_MESSAGES } from './i18n';
+import { I18N_FALLBACK, I18N_FALLBACK_MESSAGES, numberFormats } from './i18n';
 
 Vue.use(VueI18n);
 Vue.use(VueAxios);
@@ -24,6 +24,7 @@ export const i18n = new VueI18n({
   messages: {
     [I18N_FALLBACK]: I18N_FALLBACK_MESSAGES,
   },
+  numberFormats,
 });
 
 export default {

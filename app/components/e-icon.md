@@ -1,21 +1,21 @@
 ### Default (img tag)
 
 ```
-<e-icon icon="styleguide-heart"/>
+<e-icon icon="i-account"/>
 ```
 
 ### Inline
 
 ```
-<e-icon icon="styleguide-heart" :inline="true"/>
+<e-icon icon="i-account" :inline="true"/>
 ```
 
 ### Custom width
 
 ```
 <div>
-    <e-icon icon="styleguide-heart" width="30"/> As img
+    <e-icon icon="i-account" width="50"/> 50px (as img)
     <br>
-    <e-icon icon="styleguide-heart" width="30" :inline="true"/> Inline
+    <e-icon icon="i-account" width="50" :inline="true"/> 50px (inline)
 </div>
 ```
