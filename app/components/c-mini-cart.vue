@@ -1,21 +1,16 @@
 <template>
-  <div :class="b({ active: isActive })"
-    @click="onClick"
-    @mouseover="onMouseOver"
-    @mouseout="onMouseOut"
-  >
-    <div :class="b('count')">99</div>
-    <!-- TODO - icon size not correct -->
-    <div :class="b('icon')">
-      <e-icon inline icon="i-cart--blue"/>
-    </div>
-    <div :class="b('total')">100'000 CHF</div>
+  <div :class="b({ active })" @click="onClick">
+    <div :class="b('count')">{{ cart.totals.numItemsTotal }}</div>
+    <div :class="b('icon')"><e-icon inline icon="i-cart"/></div>
+    <div :class="b('total')">{{ displayPrice }}</div>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
-    name: 'c-cart',
+    name: 'c-mini-cart',
     // components: {},
     // mixins: [],
 
@@ -28,13 +23,18 @@
         default: false,
       },
     },
-    data() {
-      return {
-        isActive: this.$props.active,
-      };
-    },
+    // data() {
+    //   return {};
+    // },
 
-    // computed: {},
+    computed: {
+      ...mapGetters({
+        cart: 'cart/cart',
+      }),
+      displayPrice() {
+        return this.$n(this.cart.totals.netTotal / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -58,38 +58,37 @@
          */
         this.$emit('click', event);
       },
-      onMouseOver(event) {
-        /**
-         * Mouseover event.
-         *
-         * @event mouseover
-         * @type {object}
-         */
-        this.$emit('mouseover', event);
-      },
-      onMouseOut(event) {
-        /**
-         * Mouseout event.
-         *
-         * @event mouseout
-         * @type {object}
-         */
-        this.$emit('mouseout', event);
-      },
     },
     // render() {},
   };
 </script>
 
 <style lang="scss">
-  .c-cart {
+  .c-mini-cart {
     position: relative;
     padding: 10px;
     cursor: pointer;
 
-    &--active,
-    &:active,
-    &:hover {
+    @include media(sm) {
+      padding: 0;
+    }
+
+    &__icon {
+      width: 22px;
+      height: 24px;
+
+      @include media(sm) {
+        margin: 15px auto 0 auto;
+      }
+
+      path {
+        fill: $color-grayscale--1000;
+      }
+    }
+
+    &--active &__icon,
+    &:active &__icon,
+    &:hover &__icon {
       path {
         fill: $color-primary--1;
       }
@@ -99,9 +98,9 @@
       @include font($font-size--10, 10px, $font-weight--regular);
 
       position: absolute;
-      left: 50%;
+      right: 50%;
       top: -5px;
-      margin-left: -25px;
+      margin-right: 10px;
       display: none;
       color: $color-secondary--2;
       padding: 1px 2px;
@@ -112,19 +111,6 @@
 
       @include media(sm) {
         display: inline-block;
-      }
-    }
-
-    &__icon {
-      width: 22px;
-      height: 24px;
-
-      path {
-        fill: $color-grayscale--1000;
-      }
-
-      @include media(sm) {
-        margin: 15px auto 0 auto;
       }
     }
 
@@ -139,10 +125,6 @@
       @include media(sm) {
         display: block;
       }
-    }
-
-    @include media(sm) {
-      padding: 0;
     }
   }
 </style>

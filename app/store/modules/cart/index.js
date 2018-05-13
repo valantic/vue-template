@@ -14,7 +14,16 @@ export default {
      */
     apiError: null,
   },
-  getters: { },
+  getters: {
+    /**
+     * Gets the cart
+     *
+     * @param   {Object}  state   Current state
+     *
+     * @returns  {Object}  cart   Cart data
+     */
+    cart: state => state.cart,
+  },
   mutations: {
     /**
      * Initial cart data provided by spryker

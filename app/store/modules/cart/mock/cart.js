@@ -9,8 +9,9 @@ export default {
     },
   ],
   totals: {
-    subtotal: 30,
-    grandTotal: 30,
-    netTotal: 30,
+    subtotal: 39700000,
+    grandTotal: 39700000,
+    netTotal: 39700000,
+    numItemsTotal: 99,
   }
 };

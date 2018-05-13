@@ -5,7 +5,7 @@
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">
         <div :class="b('cart')">
-          <c-cart active/>
+          <c-mini-cart/>
         </div>
       </div>
       <div :class="b('assortment')">Sortiment</div>
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-  import cCart from '@/components/c-cart';
+  import cMiniCart from '@/components/c-mini-cart';
 
   export default {
     name: 'c-header',
     components: {
-      cCart,
+      cMiniCart,
     },
     // mixins: [],
 
@@ -122,7 +122,11 @@
     &__cart {
       display: inline-block;
 
-      @include media(sm) {
+      @include media(xs) {
+        margin-right: 40px;
+      }
+
+      @include media(md) {
         margin-right: 70px;
       }
     }
