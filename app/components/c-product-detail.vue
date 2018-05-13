@@ -24,7 +24,7 @@
             <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
           </div>
           / qty /
-          <c-add-to-cart :sku="this.$props.sku" label/>
+          <c-add-to-cart :sku="this.product.sku" label/>
         </div>
       </aside>
 
