@@ -77,8 +77,8 @@ export default {
     fetchErp({ commit }, sku) {
       return api.post('/product/multi-get', { sku, quantity: 1 }) /* always assume quantity === 1 */
         .then((response) => {
-          if (response && Array.isArray(response.data) && response.data.length) {
-            commit('setErp', response.data[0]);
+          if (response && Array.isArray(response.data) && response.data.products) {
+            commit('setErp', response.data);
 
             return response;
           }
