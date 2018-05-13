@@ -297,10 +297,6 @@
       outline: none;
       border: 0; // Overwrite link style
 
-      path {
-        fill: $color-primary--3;
-      }
-
       &::before,
       &::after {
         display: none;
@@ -313,14 +309,17 @@
       background-color: $color-grayscale--500;
       border-bottom: 0; // Overwrite link styles
 
-      path {
-        fill: $color-primary--3;
-      }
-
       &:not([disabled])::before,
       &:not([disabled])::after {
         display: none;
       }
+    }
+
+    &--focus path,
+    &--hover path,
+    &:focus path,
+    &:hover path {
+      fill: $color-primary--3;
     }
 
     &:active:not([disabled]),
