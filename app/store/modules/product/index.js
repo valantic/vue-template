@@ -1,5 +1,3 @@
-// store/modules/product/index.js
-
 import productData from './mock/product';
 import api from './../../utils/api';
 
@@ -12,7 +10,7 @@ export default {
     product: productData,
 
     /**
-     * @type {Object}   Stores product information data
+     * @type {Object}   Stores ERP data for product
      */
     erp: {
       priceGross: 0,
@@ -20,11 +18,6 @@ export default {
       priceType: 0,
       priceTypeEndDate: '',
     },
-
-    /**
-     * @type {Object} API error
-     */
-    apiError: null,
   },
   getters: {
     /**
@@ -37,11 +30,11 @@ export default {
     product: state => state.product,
 
     /**
-     * The additional product information from ERP
+     * The ERP - or "Live" data for the product
      *
      * @param   {Object}  state   Current state
      *
-     * @returns  {Object}  product   Product information data
+     * @returns  {Object}  erp   ERP data for product
      */
     erp: state => state.erp,
   },
@@ -57,10 +50,10 @@ export default {
     },
 
     /**
-     * Sets erp state
+     * Sets ERP data
      *
      * @param {Object} state   Current state
-     * @param {Object} erp   Product information data from ERP
+     * @param {Object} erp   ERP data for product
      */
     setErp(state, erp) {
       state.erp = erp;
@@ -68,17 +61,15 @@ export default {
   },
   actions: {
     /**
-     * Fetches data from erp
-     *
-     * @param {String} sku   Product sku
+     * Fetches data from ERP
      *
      * @returns  {Promise}  promise   Promise
      */
-    fetchErp({ commit }, sku) {
-      return api.post('/product/multi-get', { sku, quantity: 1 }) /* always assume quantity === 1 */
+    fetchErp({ state, commit }) {
+      return api.post('/product/multi-get', { sku: state.product.sku, quantity: 1 })
         .then((response) => {
-          if (response && Array.isArray(response.data) && response.data.length) {
-            commit('setErp', response.data[0]);
+          if (response && response.data && response.data.products) {
+            commit('setErp', response.data.products[0]);
 
             return response;
           }
