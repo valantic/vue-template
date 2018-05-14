@@ -25,9 +25,7 @@
       <aside :class="b('sidebar', {area: 'top' })">
         <div :class="b('add-to-cart')">
           availability /
-          <div :class="b('prices')">
-            <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
-          </div>
+          <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
           / qty / add to cart
         </div>
       </aside>
@@ -156,6 +154,12 @@
     }
 
     &__sidebar {
+      padding: $spacing--0 $spacing--10;
+
+      @include media(md) {
+        padding: $spacing--0 $spacing--30;
+      }
+
       @include media(sm) {
         flex-basis: percentage(3 / 12);
       }
@@ -200,10 +204,6 @@
       @include media(sm) {
         border: none;
       }
-    }
-
-    &__prices {
-      padding: $spacing--10;
     }
 
     &__details,
