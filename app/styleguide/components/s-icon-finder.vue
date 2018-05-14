@@ -7,16 +7,20 @@
       >
     </div>
     <div :class="b('grid')">
-      <div v-for="icon in filteredIcons"
-           :class="b('grid-item')"
-           :key="icon"
+      <div v-for="(icon, index) in filteredIcons"
+           :class="b('grid-item', { negative: icon.negative })"
+           :key="index"
+           role="button"
+           @click="copyToClipboard(icon)"
       >
         <div :class="b('icon-wrapper')">
-          <e-icon :icon="icon" :key="icon" width="50"/>
+          <e-icon :icon="icon.name" :key="icon.name" width="50"/>
         </div>
-        <div :class="b('icon-label')">{{ icon }}</div>
+        <div :class="b('icon-label')">{{ icon.name }}</div>
       </div>
     </div>
+    <div v-if="notification" :class="b('notification')">{{ notification }}</div>
+    <input ref="input" :class="b('clipboard')" type="text">
   </div>
 </template>
 
@@ -32,16 +36,38 @@
       return {
         icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
         filter: '',
+        notification: ''
       };
     },
 
     // components: {},
     computed: {
       filteredIcons() {
-        return this.icons.filter(icon => icon.indexOf(this.filter) > -1);
+        const list = this.icons.filter(icon => icon.indexOf(this.filter) > -1);
+
+        return list.map((icon) => { // eslint-disable-line arrow-body-style
+          return {
+            name: icon,
+            negative: Boolean(icon.match(/negative/))
+          };
+        });
       },
     },
-    // methods: {},
+    methods: {
+      copyToClipboard(icon) {
+        const value = `<e-icon icon="${icon.name}"/>`;
+        const hiddenInput = this.$refs.input;
+
+        hiddenInput.value = value;
+        hiddenInput.select();
+        document.execCommand('Copy');
+        this.setNotification(`copied! - ${value}`);
+        setTimeout(() => { this.setNotification(''); }, 2000);
+      },
+      setNotification(message) {
+        this.notification = message;
+      }
+    }
     // watch: {},
 
     // beforeCreate() {},
@@ -76,6 +102,8 @@
       border: 1px solid #000000;
       margin: 5px;
       flex: 0 1 10%;
+      cursor: pointer;
+      min-width: 100px;
 
       &::before {
         display: block;
@@ -98,6 +126,10 @@
       }
     }
 
+    &__grid-item--negative {
+      background-color: $color-grayscale--500;
+    }
+
     &__icon-wrapper {
       display: flex;
       justify-content: center;
@@ -110,6 +142,22 @@
       @include font(10);
 
       text-align: center;
+    }
+
+    &__clipboard {
+      position: absolute;
+      left: -99999px;
+    }
+
+    &__notification {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: $color-status--success;
+      width: 100%;
+      text-align: center;
+      z-index: 999;
+      padding: $spacing--10;
     }
   }
 </style>
