@@ -35,7 +35,7 @@
 
     props: {
       /**
-       * Id of radio element. Needed to set the label for the element.
+       * Adds id of radio element. Needed to set the label for the element.
        */
       id: {
         required: true,
@@ -43,7 +43,7 @@
       },
 
       /**
-       * Value attribute.
+       * Adds value attribute.
        */
       value: {
         required: true,
@@ -51,7 +51,7 @@
       },
 
       /**
-       * Display name of the radio element. Value can't be used because of the v-model logic.
+       * Adds displayed value of the radio element.
        */
       displayName: {
         required: true,
@@ -85,7 +85,10 @@
         },
         set(value) {
           /**
-           * Emits radio value.
+           * Fired on select of radio button.
+           *
+           * @event change
+           * @type {String}
            */
           this.$emit('change', value);
         }
@@ -118,12 +121,12 @@
        */
       onChange(event) {
         /**
-         * Change event
+         * Emits change event.
          *
          * @event change
          * @type {String}
          */
-        this.$emit('change', event.target.value);
+        this.$parent.$emit('change', event.target.value);
       },
     },
     // render() {},
@@ -155,6 +158,13 @@
       cursor: pointer;
     }
 
+    &__label {
+      padding-left: $spacing--10;
+      cursor: pointer;
+      color: $color-grayscale--400;
+      margin-left: -4px; // Remove the white-space between inline-elements.
+    }
+
     &__field:checked ~ &__fake-button::after {
       background-color: $color-secondary--2;
       position: relative;
@@ -167,42 +177,43 @@
       top: 2px;
     }
 
+    &__field:checked ~ &__fake-button {
+      border: 1px solid $color-primary--1;
+    }
+
     &__field:checked ~ &__label {
       color: $color-secondary--2;
     }
 
-    &__label {
-      padding-left: $spacing--10;
-      cursor: pointer;
-      color: $color-grayscale--400;
-    }
-
-    // focus
-    &__field:focus ~ &__fake-button,
-    &--focus &__fake-button {
-      border: 1px solid $color-primary--1;
-    }
-
-    &__field:focus ~ &__label,
-    &--focus &__label {
-      color: $color-secondary--2;
-    }
-
-    // hover
-    &__field:hover ~ &__fake-button,
-    &--hover &__fake-button {
-      border: 1px solid $color-primary--1;
-    }
+    /* stylelint-disable no-descending-specificity */
 
     // disabled
-    &__field:disabled ~ &__fake-button,
-    &--disabled &__fake-button {
+    &--disabled &__fake-button,
+    &__field:disabled ~ &__fake-button {
       border-color: $color-grayscale--500;
       cursor: default;
     }
+
     &__field:disabled ~ &__label {
       cursor: default;
       color: $color-grayscale--500;
+    }
+
+    // hover
+    &--hover &__fake-button,
+    &__field:hover ~ &__fake-button {
+      border: 1px solid $color-primary--1;
+    }
+
+    // focus
+    &--focus &__fake-button,
+    &__field:focus ~ &__fake-button {
+      border: 1px solid $color-primary--1;
+    }
+
+    &--focus &__label,
+    &__field:focus ~ &__label {
+      color: $color-secondary--2;
     }
 
     /*

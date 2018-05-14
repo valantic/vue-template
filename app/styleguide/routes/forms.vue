@@ -52,6 +52,10 @@
       <pre>{{ name }}</pre>
       <p>You are {{ gender }}.</p>
       <p v-if="favoriteColor">Your favorite color is {{ favoriteColor }}.</p>
+
+      <h2>e-checkbox</h2>
+      <e-checkbox v-model="checkbox.checked" :name="checkbox.name" :value="checkbox.value" />
+
     </form>
   </div>
 </template>
@@ -112,6 +116,11 @@
             displayName: 'Green',
           },
         ],
+        checkbox: {
+          checked: false,
+          name: 'checkbox',
+          value: 'Hello world...'
+        }
       };
     }
   };

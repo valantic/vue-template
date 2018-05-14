@@ -4,6 +4,7 @@ import ePicture from '@/components/e-picture';
 import eHeading from '@/components/e-heading';
 import ePanel from '@/components/c-panel';
 import eInput from '@/components/e-input';
+import eCheckbox from '@/components/e-checkbox';
 import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
 import eRadio from '@/components/e-radio';
@@ -16,6 +17,7 @@ export default {
       ePicture,
       eHeading,
       eInput,
+      eCheckbox,
       eLabel,
       eProgress,
       ePanel,
@@ -35,6 +37,7 @@ export default {
       Vue.component(ePanel.name, ePanel);
       Vue.component(eProgress.name, eProgress);
       Vue.component(eInput.name, eInput);
+      Vue.component(eCheckbox.name, eCheckbox);
       Vue.component(eLabel.name, eLabel);
       Vue.component(eRadio.name, eRadio);
     }
