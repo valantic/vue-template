@@ -4,10 +4,9 @@
       <e-heading v-if="title" tag-name="h1" underline>{{ title }}</e-heading>
     </div>
     <div v-if="!noCloseIcon" :class="b('close')" @click="close">
-      <!-- TODO: Replace dummy icon with close icon-->
       <e-icon
         :inline="true"
-        icon="styleguide-heart"
+        icon="i-close"
         width="25"
         height="25"
       />
@@ -102,6 +101,10 @@
 
     &__close {
       cursor: pointer;
+
+      path {
+        fill: $color-primary--1;
+      }
     }
   }
 </style>
