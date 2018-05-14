@@ -38,7 +38,7 @@
       <e-label name="Gender:" position="top"/>
       <c-radio v-model="gender"
                :data-set="genders"
-               vertical
+               horizontal
                name="gender"
       />
 

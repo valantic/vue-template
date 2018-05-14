@@ -6,15 +6,15 @@
 ```vue
 <template>
   <div>
-    <e-label name="Vertical radio component" />
-    <c-radio name="gender-vertical"
+    <e-label name="Horizontal radio component" />
+    <c-radio name="gender-horizontal"
              v-model="selectedValue"
              :dataSet="dataSet"
-             vertical
+             horizontal
     />
     <br>
-    <e-label name="Horizontal radio component"/>
-    <c-radio name="gender-horizontal" 
+    <e-label name="Vertical radio component"/>
+    <c-radio name="gender-vertical" 
              v-model="selectedValue" 
              :dataSet="dataSet" 
     />

@@ -47,9 +47,9 @@
       },
 
       /**
-       * Defines if the elements should be aligned vertical.
+       * Defines if the elements should be aligned horizontal.
        */
-      vertical: {
+      horizontal: {
         default: false,
         type: Boolean,
       }
@@ -73,7 +73,7 @@
       },
       containerModifiers() {
         return {
-          vertical: this.vertical,
+          horizontal: this.horizontal,
         };
       },
     },
@@ -101,12 +101,12 @@
 
 <style lang="scss">
   .c-radio {
-    &__container--vertical {
+    &__container--horizontal {
       display: inline-block;
       padding-right: $spacing--40;
     }
 
-    &__container--vertical:last-child {
+    &__container--horizontal:last-child {
       padding-right: $spacing--0;
     }
   }
