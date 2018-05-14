@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="113px" height="113px" viewBox="0 0 113 113" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
-    <g id="sozialMedia/i-facebook" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M94.3625278,68.0165539 L82.3013824,68.0165539 L82.3013824,112.203 L64.0277228,112.203 L64.0277228,68.0165539 L55.3367096,68.0165539 L55.3367096,52.4876785 L64.0277228,52.4876785 L64.0277228,42.4387321 C64.0277228,35.2526511 67.4412318,24 82.4640452,24 L96,24.0566308 L96,39.1300503 L86.1787816,39.1300503 C84.5678174,39.1300503 82.3025873,39.9349299 82.3025873,43.3628978 L82.3025873,52.5021374 L95.9590331,52.5021374 L94.3625278,68.0165539 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
-        <rect id="Rectangle-2" stroke="#FFFFFF" x="0.5" y="0.5" width="112" height="112" rx="3"></rect>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>sozialMedia/i-facebook-30x30</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="sozialMedia/i-facebook-30x30" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M24.6793032,17.7888532 L21.524866,17.7888532 L21.524866,29.3452488 L16.7456258,29.3452488 L16.7456258,17.7888532 L14.4726033,17.7888532 L14.4726033,13.727476 L16.7456258,13.727476 L16.7456258,11.0993035 C16.7456258,9.21987662 17.6383851,6.27689074 21.5674084,6.27689074 L25.1075629,6.29170178 L25.1075629,10.2339604 L22.5389498,10.2339604 C22.1176229,10.2339604 21.5251811,10.4444663 21.5251811,11.3410072 L21.5251811,13.7312575 L25.0968486,13.7312575 L24.6793032,17.7888532 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+        <rect id="Rectangle-2" stroke="#FFFFFF" x="0.5" y="0.5" width="29" height="29" rx="3"></rect>
     </g>
 </svg>
