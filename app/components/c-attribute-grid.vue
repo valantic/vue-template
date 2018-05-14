@@ -92,22 +92,14 @@
       recalculateOpenHeight() {
         let openHeight = this.$el.querySelector('dl').clientHeight;
 
-        if (openHeight > 0) {
-          openHeight = `${openHeight}px`;
-        }
-
-        this.openHeight = openHeight.toString();
+        this.openHeight = `${openHeight}px`;
       },
       recalculateClosedHeight() {
         const dtHeight = this.$el.querySelector('dt').clientHeight;
         const ddHeight = this.$el.querySelector('dd').clientHeight;
         let closedHeight = dtHeight >= ddHeight ? dtHeight : ddHeight;
 
-        if (closedHeight > 0) {
-          closedHeight = `${closedHeight}px`;
-        }
-
-        this.closedHeight = closedHeight.toString();
+        this.closedHeight = `${closedHeight}px`;
       },
     },
 
