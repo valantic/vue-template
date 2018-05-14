@@ -31,6 +31,10 @@
 <script>
   import formStates from '@/mixins/form-states';
 
+  /**
+   * Checkbox component for form elements.
+   * Can be used as single element with a Boolean value or multiple checkboxes with an Array.
+   */
   export default {
     name: 'e-checkbox',
     mixins: [formStates],
@@ -200,7 +204,6 @@
         border-radius: 3px;
         border: 1px solid $color-grayscale--500;
         content: "";
-        cursor: default;
         position: absolute;
         left: 0;
         top: 0;
@@ -228,22 +231,7 @@
       }
     }
 
-    // checked label
-    &--checked &__label,
-    &__field:checked + &__label {
-      color: $color-secondary--1;
-
-      // custom field checked
-      &::before {
-        border: 1px solid $color-secondary--2;
-      }
-
-      // custom field marker checked
-      &::after {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+    /* stylelint-disable no-descending-specificity */
 
     // disabled label
     &--disabled &__label,
@@ -258,8 +246,25 @@
 
       // custom field marker disabled
       &::after {
-        background: transparent url('../assets/icons/i-check--info.svg') no-repeat center;
+        background: transparent url('../assets/icons/i-check--disabled.svg') no-repeat center;
         color: $color-grayscale--500;
+      }
+    }
+
+    // checked label
+    &--checked &__label,
+    &__field:checked + &__label {
+      color: $color-secondary--1;
+
+      // custom field checked
+      &::before {
+        border: 1px solid $color-secondary--2;
+      }
+
+      // custom field marker checked
+      &::after {
+        opacity: 1;
+        transform: scale(1);
       }
     }
 
