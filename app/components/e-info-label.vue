@@ -146,14 +146,6 @@
       margin-right: 8px;
     }
 
-    &--design-new &__separator {
-      background-color: $color-secondary--1;
-    }
-
-    &--design-promo &__separator {
-      background-color: $color-grayscale--1000;
-    }
-
     &__info {
       @include font($font-size: $font-size--14, $line-height: 14px, $font-weight: $font-weight--regular);
 

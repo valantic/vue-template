@@ -3,6 +3,7 @@ import eButton from '@/components/e-button';
 import ePicture from '@/components/e-picture';
 import eHeading from '@/components/e-heading';
 import eInput from '@/components/e-input';
+import eCheckbox from '@/components/e-checkbox';
 import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
 import eInfoLabel from '@/components/e-info-label';
@@ -15,6 +16,7 @@ export default {
       ePicture,
       eHeading,
       eInput,
+      eCheckbox,
       eLabel,
       eProgress,
       eInfoLabel,
@@ -32,6 +34,7 @@ export default {
       Vue.component(eHeading.name, eHeading);
       Vue.component(eProgress.name, eProgress);
       Vue.component(eInput.name, eInput);
+      Vue.component(eCheckbox.name, eCheckbox);
       Vue.component(eLabel.name, eLabel);
       Vue.component(eInfoLabel.name, eInfoLabel);
     }

@@ -6,7 +6,13 @@
 
       <!-- left area -->
       <div :class="b('main', {area: 'top' })">
-        <e-info-label :class="b('info')" v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
+        <div :class="b('info')">
+          <e-info-label
+            v-if="erp.priceType"
+            :price-type="erp.priceType"
+            :price-type-end-date="erp.priceTypeEndDate"
+          />
+        </div>
         <div :class="b('gallery')">
           gallery<br>
           {{ product }}
@@ -153,6 +159,12 @@
     }
 
     &__sidebar {
+      padding: $spacing--0 $spacing--10;
+
+      @include media(md) {
+        padding: $spacing--0 $spacing--30;
+      }
+
       @include media(sm) {
         flex-basis: percentage(3 / 12);
       }
