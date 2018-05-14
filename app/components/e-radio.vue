@@ -3,6 +3,8 @@
     <input :class="b('field')"
            v-bind="$attrs"
            :disabled="disabled"
+           :checked="value === label"
+           :value="label"
            :name="name"
            :id="id"
            type="radio"
@@ -24,7 +26,15 @@
 
     props: {
       /**
-       * Adds value attribute. This is the returned string for the v-model after selecting an element.
+       * Id of radio element. Needed to set the label for the element.
+       */
+      id: {
+        required: true,
+        type: String,
+      },
+
+      /**
+       * Value used by v-model.
        */
       value: {
         required: true,
@@ -32,9 +42,9 @@
       },
 
       /**
-       * Id of radio element. Needed to set the label for the element.
+       * Label will be returned as selected value.
        */
-      id: {
+      label: {
         required: true,
         type: String,
       },
@@ -86,6 +96,7 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
+
         /**
          * input event fires on input
          *
