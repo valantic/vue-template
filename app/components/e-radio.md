@@ -1,13 +1,13 @@
 ### e-radio
 
-+Always use **v-model** to bind value to form elements!
+Always use **v-model** to bind value to form elements!
 
 ```vue
 <template>
   <div>
     <e-radio id="radio-1" 
              name="example-radio-1" 
-             label="radio-1" 
+             value="radio-1"
              v-model="demo"
              displayName="Select Radio Button"
     />

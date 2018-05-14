@@ -3,12 +3,12 @@
     <input :class="b('field')"
            v-bind="$attrs"
            :disabled="disabled"
-           :checked="value === label"
-           :value="label"
+           :value="value"
+           v-model="internalValue"
            :name="name"
            :id="id"
            type="radio"
-           @input="onInput"
+           @change="onChange"
     >
     <label :class="b('fake-button')" :for="id"></label>
     <label :class="b('label')" :for="id">{{ displayName }}</label>
@@ -24,6 +24,15 @@
     mixins: [formStates],
     inheritAttrs: false,
 
+    model: {
+      /**
+       * Changes v-model behavior and use 'selected' instead of 'value' as prop.
+       * Avoids conflict with default value attribute.
+       */
+      prop: 'selected',
+      event: 'change',
+    },
+
     props: {
       /**
        * Id of radio element. Needed to set the label for the element.
@@ -34,17 +43,9 @@
       },
 
       /**
-       * Value used by v-model.
+       * Value attribute.
        */
       value: {
-        required: true,
-        type: String,
-      },
-
-      /**
-       * Label will be returned as selected value.
-       */
-      label: {
         required: true,
         type: String,
       },
@@ -64,12 +65,32 @@
         required: true,
         type: String,
       },
+
+      /**
+       * Adds selected attribute to be used by v-model.
+       */
+      selected: {
+        default: '',
+        type: String,
+      }
     },
     // data() {
     //   return {};
     // },
 
     computed: {
+      internalValue: {
+        get() {
+          return this.selected;
+        },
+        set(value) {
+          /**
+           * Emits radio value.
+           */
+          this.$emit('change', value);
+        }
+      },
+
       modifiers() {
         return {
           ...this.stateModifiers,
@@ -95,15 +116,14 @@
        *
        * @param   {String}  event   Field input
        */
-      onInput(event) {
-
+      onChange(event) {
         /**
-         * input event fires on input
+         * Change event
          *
-         * @event input
+         * @event change
          * @type {String}
          */
-        this.$emit('input', event.target.value);
+        this.$emit('change', event.target.value);
       },
     },
     // render() {},
