@@ -24,12 +24,9 @@
 
       <aside :class="b('sidebar', {area: 'top' })">
         <div :class="b('add-to-cart')">
-          availability /
-          <div :class="b('prices')">
-            <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
-          </div>
-          / qty /
-          <c-add-to-cart :sku="this.product.sku" label/>
+          availability
+          <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          <c-add-to-cart :sku="product.sku" label/>
         </div>
       </aside>
 
@@ -159,10 +156,10 @@
     }
 
     &__sidebar {
-      padding: $spacing--0 $spacing--10;
+      padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
 
       @include media(md) {
-        padding: $spacing--0 $spacing--30;
+        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
       }
 
       @include media(sm) {
