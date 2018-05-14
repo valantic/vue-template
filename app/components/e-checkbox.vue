@@ -233,6 +233,23 @@
 
     /* stylelint-disable no-descending-specificity */
 
+    // checked label
+    &--checked &__label,
+    &__field:checked + &__label {
+      color: $color-secondary--1;
+
+      // custom field checked
+      &::before {
+        border: 1px solid $color-secondary--2;
+      }
+
+      // custom field marker checked
+      &::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     // disabled label
     &--disabled &__label,
     &__field:disabled + &__label {
@@ -248,23 +265,6 @@
       &::after {
         background: transparent url('../assets/icons/i-check--disabled.svg') no-repeat center;
         color: $color-grayscale--500;
-      }
-    }
-
-    // checked label
-    &--checked &__label,
-    &__field:checked + &__label {
-      color: $color-secondary--1;
-
-      // custom field checked
-      &::before {
-        border: 1px solid $color-secondary--2;
-      }
-
-      // custom field marker checked
-      &::after {
-        opacity: 1;
-        transform: scale(1);
       }
     }
 
