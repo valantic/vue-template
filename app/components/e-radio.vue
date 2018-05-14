@@ -199,11 +199,6 @@
       border: 1px solid $color-primary--1;
     }
 
-    &--focus &__label,
-    &__field:focus ~ &__label {
-      color: $color-secondary--2;
-    }
-
     // disabled
     &--disabled &__fake-button,
     &__field:disabled ~ &__fake-button {
