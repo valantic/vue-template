@@ -22,7 +22,7 @@ Always use **v-model** to bind value to form elements!
   export default {
     name: 'example',
     data: () => ({
-      demo: 'radio-1'
+      demo: ''
     })
   };
 </script>
@@ -33,7 +33,7 @@ Always use **v-model** to bind value to form elements!
     <e-radio disabled 
              id="radio-1-disabled" 
              name="example-radio-disabled" 
-             label="radio-1" 
+             value="radio-1" 
              displayName="Select Radio Button"
     />
 ```
@@ -45,7 +45,7 @@ Always use **v-model** to bind value to form elements!
     <e-radio hover 
              id="radio-1-hover" 
              name="example-radio-hover" 
-             label="radio-1" 
+             value="radio-1" 
              v-model="demo" 
              displayName="Select Radio Button"
     />
@@ -74,7 +74,7 @@ Always use **v-model** to bind value to form elements!
              id="radio-1-focus" 
              v-model="demo" 
              name="example-radio-focus" 
-             label="radio-1" 
+             value="radio-1" 
              displayName="Select Radio Button"
     />
   
@@ -103,7 +103,7 @@ Always use **v-model** to bind value to form elements!
              id="radio-1-info" 
              v-model="demo" 
              name="example-radio-info" 
-             label="radio-1" 
+             value="radio-1" 
              displayName="Select Radio Button"
     />
   
