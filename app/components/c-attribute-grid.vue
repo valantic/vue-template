@@ -90,14 +90,14 @@
         this.isOpen = !this.isOpen;
       },
       recalculateOpenHeight() {
-        let openHeight = this.$el.querySelector('dl').clientHeight;
+        const openHeight = this.$el.querySelector('dl').clientHeight;
 
         this.openHeight = `${openHeight}px`;
       },
       recalculateClosedHeight() {
         const dtHeight = this.$el.querySelector('dt').clientHeight;
         const ddHeight = this.$el.querySelector('dd').clientHeight;
-        let closedHeight = dtHeight >= ddHeight ? dtHeight : ddHeight;
+        const closedHeight = dtHeight >= ddHeight ? dtHeight : ddHeight;
 
         this.closedHeight = `${closedHeight}px`;
       },
