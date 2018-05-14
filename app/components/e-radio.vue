@@ -135,6 +135,8 @@
 
 <style lang="scss">
   .e-radio {
+    position: relative;
+
     &__field {
       opacity: 0;
       position: absolute;
@@ -151,23 +153,22 @@
       border: 1px solid $color-grayscale--400;
       border-radius: 10px;
       display: inline-block;
-      position: relative;
+      position: absolute;
       width: 16px;
       height: 16px;
-      top: 10px;
+      top: 4px;
+      left: 0;
       cursor: pointer;
     }
 
     &__label {
-      padding-left: $spacing--10;
+      padding-left: $spacing--25;
       cursor: pointer;
       color: $color-grayscale--400;
-      margin-left: -4px; // Remove the white-space between inline-elements.
     }
 
     &__field:checked ~ &__fake-button::after {
       background-color: $color-secondary--2;
-      position: relative;
       border-radius: 25px;
       content: '';
       display: block;
