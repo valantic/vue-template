@@ -15,10 +15,16 @@
         </div>
         <div :class="b('gallery')">
           gallery<br>
-          {{ product }}
         </div>
 
-        <div :class="b('specs')">specs</div>
+        <div :class="b('specs')">
+          <div :class="b('technical-data')">
+            <c-attribute-grid :attributes="product.technicalData"/>
+          </div>
+          <div :class="b('attributes')">
+            <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
+          </div>
+        </div>
 
       </div>
 
@@ -60,12 +66,14 @@
   import { mapGetters, mapActions } from 'vuex';
   import cAddToCart from '@/components/c-add-to-cart';
   import cPrices from '@/components/c-prices';
+  import cAttributeGrid from '@/components/c-attribute-grid';
 
   export default {
     name: 'c-product-detail',
     components: {
       cAddToCart,
       cPrices,
+      cAttributeGrid,
     },
     // mixins: [],
 
@@ -181,6 +189,14 @@
 
       @include media(sm) {
         flex-basis: percentage(6 / 12);
+      }
+    }
+
+    &__technical-data {
+      margin-bottom: $spacing--15;
+
+      @include media(sm) {
+        margin-bottom: $spacing--10;
       }
     }
 
