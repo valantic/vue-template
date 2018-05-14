@@ -79,10 +79,6 @@
       }
     }
 
-    &__link:first-of-type {
-      margin-left: $spacing--0;
-    }
-
     &__icon {
       width: 30px;
       height: 30px;
@@ -104,6 +100,10 @@
       border: none;
       color: $color-grayscale--1000;
       padding: $spacing--0;
+    }
+
+    &__link:first-of-type {
+      margin-left: $spacing--0;
     }
   }
 </style>
