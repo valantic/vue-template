@@ -13,23 +13,31 @@
       @blur="onBlur"
       @focus="onFocus"
       @input="onInput"
-      @mouseenter="hasHover = true"
-      @mouseleave="hasHover = false"
+      @mouseenter="isHover = true"
+      @mouseleave="isHover = false"
     >
+    <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
+    <div v-if="notification && hasFocus" :class="b('notification')">
+      <c-form-notification :state="state" v-html="notification"/>
+    </div>
   </div>
 
 </template>
 
 <script>
   import formStates from '@/mixins/form-states';
+  import CFormNotification from '@/components/c-form-notification';
 
+  /**
+   * Input form component
+   */
   export default {
-
     name: 'e-input',
+    components: {
+      CFormNotification
+    },
     mixins: [formStates],
     inheritAttrs: false,
-
-    // components: {},
 
     props: {
 
@@ -65,6 +73,14 @@
       autocomplete: {
         type: String,
         default: 'off',
+      },
+
+      /**
+       * Defines the notification content in a state container bellow the input field
+       */
+      notification: {
+        type: String,
+        default: null
       }
     },
 
@@ -77,8 +93,12 @@
        */
       modifiers() {
         return {
-          ...this.stateModifiers
+          ...this.stateModifiers,
+          notification: Boolean(this.$props.notification && this.hasFocus)
         };
+      },
+      hasDefaultState() {
+        return this.state === 'default';
       }
     },
     // watch: {},
@@ -101,6 +121,12 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
+        /**
+         * input event fires on input
+         *
+         * @event input
+         * @type {String}
+         */
         this.$emit('input', event.target.value);
       },
 
@@ -111,6 +137,11 @@
       onFocus() {
         this.hasFocus = true;
 
+        /**
+         * focus event fires on focus
+         *
+         * @event focus
+         */
         this.$emit('focus');
         this.$parent.$emit('focus');
       },
@@ -122,6 +153,11 @@
       onBlur() {
         this.hasFocus = false;
 
+        /**
+         * blur event fires on blur
+         *
+         * @event blur
+         */
         this.$emit('blur');
         this.$parent.$emit('blur');
       }
@@ -131,17 +167,20 @@
 </script>
 
 <style lang="scss">
+  $e-input-height: 30px;
+
   .e-input {
     @include half-border($color-grayscale--500);
 
     // input
     &__field {
+      @include font-size($font-size--14);
+
       border: 1px solid transparent;
       border-radius: $border-radius--default;
       color: $color-grayscale--400;
       font-family: $font-family--primary;
-      font-size: $font-size--14;
-      height: 30px;
+      height: $e-input-height;
       position: relative;
       transition: box-shadow 0.15s ease-in-out;
       width: 100%;
@@ -162,6 +201,7 @@
     }
 
     // Hide autofill Safari icon
+    // noinspection CssInvalidPseudoSelector
     &__field::-webkit-contacts-auto-fill-button {
       visibility: hidden;
       pointer-events: none;
@@ -176,6 +216,22 @@
     &__field::placeholder { // Most modern browsers support this now
       color: $color-grayscale--400;
       opacity: 1;
+    }
+
+    &__icon-splitter {
+      position: absolute;
+      right: 30px;
+      height: calc(100% - 4px);
+      top: 2px;
+      border-left: 1px solid;
+    }
+
+    &__notification {
+      @include z-index(form-notification);
+
+      position: absolute;
+      width: 100%;
+      top: calc(#{$e-input-height} - 1px);
     }
 
     // active
@@ -203,7 +259,7 @@
     &__field:disabled,
     &--disabled &__field,
     &--disabled &__field:hover {
-      background: $color-grayscale--1000;
+      background-color: $color-grayscale--1000;
       border: none;
       color: $color-grayscale--600;
 
@@ -220,26 +276,55 @@
     /**
     * states
     **/
-
+    /* stylelint-disable no-descending-specificity */
     &--state-error {
-      @include half-border($color-secondary--4);
-      // TODO add info message and icon
+      @include half-border($color-status--danger);
+
+      .e-input__field {
+        @include form-state-icon('error');
+      }
+
+      .e-input__icon-splitter {
+        border-color: $color-status--danger;
+      }
     }
 
     &--state-error &__field:hover {
-      border: 1px solid $color-secondary--4;
+      border: 1px solid $color-status--danger;
     }
 
     &--state-error &__field:focus {
-      border: 1px solid $color-secondary--4;
+      border: 1px solid $color-status--danger;
     }
 
     &--state-info {
-      // TODO add info message and icon
+      .e-input__field {
+        @include form-state-icon('info');
+      }
+
+      .e-input__icon-splitter {
+        border-color: $color-grayscale--500;
+      }
     }
 
     &--state-success {
-      // TODO add info message and icon
+      .e-input__field {
+        @include form-state-icon('success');
+      }
+
+      .e-input__icon-splitter {
+        display: none;
+      }
+    }
+
+    /*
+     * Notification is visible
+     */
+    &--notification {
+      .e-input__field {
+        padding: $spacing--5 $spacing--10;
+        background: none;
+      }
     }
   }
 </style>

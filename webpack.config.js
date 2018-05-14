@@ -15,13 +15,14 @@ const postCssCriticalSplit = require('postcss-critical-split');
 const cssNano = require('cssnano');
 const openInEditor = require('launch-editor-middleware');
 
-module.exports = function(env, options) {
+module.exports = function(env = {}, options = {}) {
   // Flags
-  const isProduction = ((env && env.production) || process.env.NODE_ENV === 'production') || false;
-  const hasStyleguide = (env && env.styleguide) || false;
-  const hasMessage = (env && env.message) || false;
+  const isProduction = (env.production || process.env.NODE_ENV === 'production') || false;
+  const hasStyleguide = env.styleguide || false;
+  const hasMessage = env.message || false;
   const hotReload = !isProduction;
-  const isProfileBuild = (options && options.profile && options.json) || false;
+  const isProfileBuild = (options.profile && options.json) || false;
+  const hasWatcher = env.watch || false;
 
   // Configuration
   const buildPath = path.resolve(__dirname, 'dist');
@@ -367,6 +368,7 @@ module.exports = function(env, options) {
   };
 
   const prodConfig = {
+    watch: hasWatcher,
     output: {
       path: buildPath,
       filename: `${assetsSubDirectory}js/${prefix}[name].js?[chunkhash]`,
