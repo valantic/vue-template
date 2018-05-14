@@ -1,14 +1,15 @@
 <template>
   <div :class="b()">
     <span :class="b('title')">{{ $t('c-social-media.followUs') }}</span>
-    <a :class="b('link')" :href="$t('c-social-media.facebookUrl')" target="_blank" title="">
-      <e-icon :class="b('icon')" inline icon="i-facebook--negative"/>
-    </a>
-    <a :class="b('link')" :href="$t('c-social-media.linkedinUrl')" target="_blank" title="">
-      <e-icon :class="b('icon')" inline icon="i-in--negative"/>
-    </a>
-    <a :class="b('link')" :href="$t('c-social-media.xingUrl')" target="_blank" title="">
-      <e-icon :class="b('icon')" inline icon="i-xing--negative"/>
+    <a
+      v-for="site in sites"
+      :class="b('link')"
+      :href="$t(`c-social-media.${site}Url`)"
+      :title="$t(`c-social-media.${site}Title`)"
+      :key="site"
+      target="_blank"
+    >
+      <e-icon :class="b('icon')" :icon="`i-${site}--negative`" inline/>
     </a>
   </div>
 </template>
@@ -20,9 +21,11 @@
     // mixins: [],
 
     // props: {},
-    // data() {
-    //   return {};
-    // },
+    data() {
+      return {
+        sites: ['facebook', 'in', 'xing'],
+      };
+    },
 
     // computed: {},
     // watch: {},
