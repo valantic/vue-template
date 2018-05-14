@@ -11,6 +11,12 @@ Always use **v-model** to bind value to form elements!
              v-model="demo"
              displayName="Select Radio Button"
     />
+    <e-radio id="radio-2" 
+             name="example-radio-1" 
+             value="radio-2"
+             v-model="demo"
+             displayName="Select Radio Button"
+    />
   
     <div class="spacing--top-15">
       <p>{{ demo }}</p>
@@ -22,7 +28,7 @@ Always use **v-model** to bind value to form elements!
   export default {
     name: 'example',
     data: () => ({
-      demo: ''
+      demo: 'radio-1'
     })
   };
 </script>
