@@ -106,10 +106,13 @@ Always use **v-model** to bind value to form elements!
              value="radio-1" 
              displayName="Select Radio Button"
     />
-  
-    <div class="spacing--top-15">
-      <p>{{ demo }}</p>
-    </div>
+    <e-radio state="info" 
+             id="radio-2-info" 
+             v-model="demo" 
+             name="example-radio-info" 
+             value="radio-2" 
+             displayName="Select Radio Button"
+    />  
   </div>
 </template>
 

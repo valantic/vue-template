@@ -187,18 +187,6 @@
 
     /* stylelint-disable no-descending-specificity */
 
-    // disabled
-    &--disabled &__fake-button,
-    &__field:disabled ~ &__fake-button {
-      border-color: $color-grayscale--500;
-      cursor: default;
-    }
-
-    &__field:disabled ~ &__label {
-      cursor: default;
-      color: $color-grayscale--500;
-    }
-
     // hover
     &--hover &__fake-button,
     &__field:hover ~ &__fake-button {
@@ -214,6 +202,18 @@
     &--focus &__label,
     &__field:focus ~ &__label {
       color: $color-secondary--2;
+    }
+
+    // disabled
+    &--disabled &__fake-button,
+    &__field:disabled ~ &__fake-button {
+      border-color: $color-grayscale--500;
+      cursor: default;
+    }
+
+    &__field:disabled ~ &__label {
+      cursor: default;
+      color: $color-grayscale--500;
     }
 
     /*
