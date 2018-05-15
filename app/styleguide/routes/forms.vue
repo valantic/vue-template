@@ -6,7 +6,7 @@
     <p>including e-label</p>
     <form>
       <e-label name="First name:" position="top">
-        <e-input v-model="name.firstName" name="firstname" placeholder="..." />
+        <e-input v-model="name.firstName" name="firstname" placeholder="..."/>
       </e-label>
       <e-label name="Last name:" position="left">
         <e-input v-model="name.lastName" name="lastname" placeholder="..."/>
@@ -24,7 +24,11 @@
                  name="notes"
                  placeholder="your notes"
                  state="info"
-                 notification="this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>"
+                 notification="this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message<br/>"
         />
       </e-label>
       <e-label name="Notes2:" position="top" state="success">
@@ -34,8 +38,24 @@
                  state="success"
         />
       </e-label>
+
+      <e-label name="Gender:" position="top"/>
+      <c-radio v-model="gender"
+               :data-set="genders"
+               horizontal
+               name="gender"
+      />
+
+      <e-label name="Favorite Color:" position="top"/>
+      <c-radio v-model="favoriteColor"
+               :data-set="colors"
+               name="color"
+      />
+
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <pre>{{ name }}</pre>
+      <p>You are {{ gender }}.</p>
+      <p v-if="favoriteColor">Your favorite color is {{ favoriteColor }}.</p>
 
       <h2>e-checkbox</h2>
       <e-checkbox
@@ -49,8 +69,13 @@
 </template>
 
 <script>
+  import CRadio from '@/components/c-radio';
+
   export default {
     name: 'forms',
+    components: {
+      CRadio
+    },
     data() {
       return {
         name: {
@@ -58,6 +83,47 @@
           lastName: '',
           street: ''
         },
+        gender: 'female',
+        genders: [
+          {
+            id: 'gender-male',
+            value: 'male',
+            displayName: 'Male',
+          },
+          {
+            id: 'gender-female',
+            value: 'female',
+            displayName: 'Female',
+          },
+        ],
+        favoriteColor: '',
+        colors: [
+          {
+            id: 'blue',
+            value: 'blue',
+            displayName: 'Blue',
+          },
+          {
+            id: 'red',
+            value: 'red',
+            displayName: 'Red',
+          },
+          {
+            id: 'orange',
+            value: 'orange',
+            displayName: 'Orange',
+          },
+          {
+            id: 'yellow',
+            value: 'yellow',
+            displayName: 'Yellow',
+          },
+          {
+            id: 'green',
+            value: 'green',
+            displayName: 'Green',
+          },
+        ],
         checkbox: {
           checked: false,
           name: 'checkbox',
