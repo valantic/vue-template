@@ -12,7 +12,14 @@
           {{ product }}
         </div>
 
-        <div :class="b('specs')">specs</div>
+        <div :class="b('specs')">
+          <div :class="b('technical-data')">
+            <c-attribute-grid :attributes="product.technicalData"/>
+          </div>
+          <div :class="b('attributes')">
+            <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
+          </div>
+        </div>
 
       </div>
 
@@ -48,10 +55,14 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import cAttributeGrid from '@/components/c-attribute-grid';
 
   export default {
     name: 'c-product-detail',
 
+    components: {
+      cAttributeGrid,
+    },
     // mixins: [],
 
     // props: {},
@@ -146,6 +157,14 @@
 
       @include media(sm) {
         flex-basis: percentage(6 / 12);
+      }
+    }
+
+    &__technical-data {
+      margin-bottom: $spacing--15;
+
+      @include media(sm) {
+        margin-bottom: $spacing--10;
       }
     }
 
