@@ -1,0 +1,30 @@
+$themes: (
+  theme-01: (
+    modifier: 'theme-01',
+    color-primary--1: #ffed00,
+    color-primary--2: green
+  ),
+  theme-02: (
+    modifier: 'theme-02',
+    color-primary--1: red,
+    color-primary--2: blue
+  )
+);
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}
+
+@mixin theme($properties) {
+  @each $theme in map-keys($themes) {
+    &--#{$theme} {
+      @each $property in map-keys($properties) {
+        #{$property}: map-deep-get($themes, #{$theme}, map_get($properties, #{$property}));
+      }
+    }
+  }
+}

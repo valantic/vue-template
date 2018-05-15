@@ -1,20 +1,22 @@
 <!-- TODO - This component is supposed to be functional -->
 <template>
-  <div :class="b()">
+  <div :class="b(activeTheme)">
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">Icons</div>
       <div :class="b('assortment')">Sortiment</div>
-      <div :class="b('search')">Search</div>
+      <div :class="b('search', activeTheme)">Search</div>
     </div>
   </div>
 </template>
 
 <script>
+  import themes from '@/mixins/themes';
+
   export default {
     name: 'c-header',
     // components: {},
-    // mixins: [],
+    mixins: [themes],
 
     // props: {},
     // data() {
@@ -43,6 +45,10 @@
 <style lang="scss">
   .c-header {
     @include z-index(header);
+    @include theme((
+      border-color: color-primary--1,
+      color: color-primary--2
+    ));
 
     position: fixed;
     width: 100%;
@@ -93,6 +99,10 @@
     }
 
     &__search {
+      @include theme((
+          color: color-primary--2
+      ));
+
       flex: 0 1 percentage(9 / 12);
 
       @include media(sm) {
