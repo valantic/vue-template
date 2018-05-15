@@ -1,12 +1,7 @@
 {
-  "en-US": {
+  "de-CH": {
     "currency": {
-      "style": "currency", "currency": "CHF", "decimal": ","
-    }
-  },
-  "de-DE": {
-    "currency": {
-      "style": "currency", "currency": "CHF", "decimal": "."
+      "style": "currency", "currency": "CHF", "decimal": "'"
     }
   }
 }
