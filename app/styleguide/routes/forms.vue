@@ -6,7 +6,7 @@
     <p>including e-label</p>
     <form>
       <e-label name="First name:" position="top">
-        <e-input v-model="name.firstName" name="firstname" placeholder="..." />
+        <e-input v-model="name.firstName" name="firstname" placeholder="..."/>
       </e-label>
       <e-label name="Last name:" position="left">
         <e-input v-model="name.lastName" name="lastname" placeholder="..."/>
@@ -34,11 +34,18 @@
                  state="success"
         />
       </e-label>
+      <e-label name="Country:" position="top">
+        <e-select v-model="name.country"
+                  :options-list="countries"
+                  name="country-select"
+                  select-text="Please choose country..."
+        />
+      </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <pre>{{ name }}</pre>
 
       <h2>e-checkbox</h2>
-      <e-checkbox v-model="checkbox.checked" :name="checkbox.name" :value="checkbox.value" />
+      <e-checkbox v-model="checkbox.checked" :name="checkbox.name" :value="checkbox.value"/>
 
     </form>
   </div>
@@ -52,13 +59,26 @@
         name: {
           firstName: '',
           lastName: '',
-          street: ''
+          street: '',
+          country: '',
         },
         checkbox: {
           checked: false,
           name: 'checkbox',
           value: 'Hello world...'
-        }
+        },
+        countries: [
+          {
+            value: 'at',
+            label: 'Austria',
+          }, {
+            value: 'li',
+            label: 'Liechtenstein',
+          }, {
+            value: 'ch',
+            label: 'Switzerland',
+          },
+        ]
       };
     }
   };
