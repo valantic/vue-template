@@ -50,10 +50,10 @@
 
     computed: {
       displayPriceGross() {
-        return this.$n(this.$props.priceGross / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+        return this.$n(this.$props.priceGross / 100, 'currency', 'de-CH'); // TODO - remove hardcoded locale
       },
       displayNetPrice() {
-        return this.$n(this.$props.price / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+        return this.$n(this.$props.price / 100, 'currency', 'de-CH'); // TODO - remove hardcoded locale
       }
     },
     // watch: {},
