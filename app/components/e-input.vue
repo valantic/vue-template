@@ -94,7 +94,7 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          notification: Boolean(this.$props.notification && this.hasFocus)
+          notification: this.$props.notification && this.hasFocus
         };
       },
       hasDefaultState() {
