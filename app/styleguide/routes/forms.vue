@@ -6,7 +6,7 @@
     <p>including e-label</p>
     <form>
       <e-label name="First name:" position="top">
-        <e-input v-model="name.firstName" name="firstname" placeholder="..." />
+        <e-input v-model="name.firstName" name="firstname" placeholder="..."/>
       </e-label>
       <e-label name="Last name:" position="left">
         <e-input v-model="name.lastName" name="lastname" placeholder="..."/>
@@ -24,7 +24,11 @@
                  name="notes"
                  placeholder="your notes"
                  state="info"
-                 notification="this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>"
+                 notification="this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message<br/>"
         />
       </e-label>
       <e-label name="Notes2:" position="top" state="success">
@@ -34,7 +38,16 @@
                  state="success"
         />
       </e-label>
+      <e-label name="Gender:" position="top"/>
+      <e-radio v-for="item in genders"
+               v-model="gender"
+               :value="item.value"
+               :display-name="item.displayName"
+               :key="item.id"
+               name="gender"
+      />
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
+      <p>You are {{ gender }}.</p>
       <pre>{{ name }}</pre>
 
       <h2>e-checkbox</h2>
@@ -58,6 +71,19 @@
           lastName: '',
           street: ''
         },
+        gender: 'female',
+        genders: [
+          {
+            id: 'gender-male',
+            value: 'male',
+            displayName: 'Male',
+          },
+          {
+            id: 'gender-female',
+            value: 'female',
+            displayName: 'Female',
+          },
+        ],
         checkbox: {
           checked: false,
           name: 'checkbox',

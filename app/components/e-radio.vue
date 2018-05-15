@@ -1,23 +1,29 @@
 <template>
   <div :class="b(modifiers)">
-    <input :class="b('field')"
-           v-bind="$attrs"
-           :disabled="disabled"
-           :value="value"
-           v-model="internalValue"
-           :name="name"
-           :id="id"
-           type="radio"
-           @change="onChange"
-    >
-    <label :class="b('fake-button')" :for="id"></label>
-    <label :class="b('label')" :for="id">{{ displayName }}</label>
+    <label :class="b('label')"
+           @mouseenter="isHover = true"
+           @mouseleave="isHover = false">
+      <input :class="b('field')"
+             v-bind="$attrs"
+             :disabled="disabled"
+             :value="value"
+             v-model="internalValue"
+             :name="name"
+             type="radio"
+             @change="onChange"
+      >
+      <label :class="b('fake-button')"></label>
+      <span :class="b('label-name')">{{ displayName }}</span>
+    </label>
   </div>
 </template>
 
 <script>
   import formStates from '@/mixins/form-states';
 
+  /**
+   * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
+   */
   export default {
     name: 'e-radio',
     // components: {},
@@ -34,14 +40,6 @@
     },
 
     props: {
-      /**
-       * Adds id of radio element. Needed to set the label for the element.
-       */
-      id: {
-        required: true,
-        type: String,
-      },
-
       /**
        * Adds value attribute.
        */
@@ -97,6 +95,7 @@
       modifiers() {
         return {
           ...this.stateModifiers,
+          selected: this.internalValue === this.value,
         };
       }
     },
@@ -140,6 +139,7 @@
     &__field {
       opacity: 0;
       position: absolute;
+      left: -9999px;
     }
 
     &__fake-button::after {
@@ -161,10 +161,14 @@
       cursor: pointer;
     }
 
-    &__label {
+    &__label-name {
       padding-left: $spacing--25;
       cursor: pointer;
       color: $color-grayscale--400;
+    }
+
+    &__label {
+      cursor: pointer;
     }
 
     &__field:checked ~ &__fake-button::after {
@@ -182,7 +186,7 @@
       border: 1px solid $color-primary--1;
     }
 
-    &__field:checked ~ &__label {
+    &__field:checked ~ &__label-name {
       color: $color-secondary--2;
     }
 
@@ -207,9 +211,13 @@
       cursor: default;
     }
 
-    &__field:disabled ~ &__label {
+    &__field:disabled ~ &__label-name {
       cursor: default;
       color: $color-grayscale--500;
+    }
+
+    &--disabled &__label {
+      cursor: default;
     }
 
     /*
@@ -218,7 +226,8 @@
     &--state-info {
       pointer-events: none;
 
-      .e-radio__fake-button {
+      .e-radio__fake-button,
+      .e-radio__field:checked ~ .e-radio__fake-button {
         background-color: $color-grayscale--1000;
         border: 1px solid $color-grayscale--400;
 
@@ -227,14 +236,14 @@
           background-color: $color-grayscale--1000;
           border-color: $color-grayscale--400;
         }
+      }
 
-        &:checked::after {
-          background-color: $color-grayscale--400;
-        }
+      .e-radio__field:checked ~ .e-radio__fake-button::after {
+        background-color: $color-grayscale--400;
+      }
 
-        &:checked ~ .e-radio__label {
-          color: $color-grayscale--400;
-        }
+      .e-radio__field:checked ~ .e-radio__label-name {
+        color: $color-grayscale--400;
       }
     }
   }

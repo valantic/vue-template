@@ -5,21 +5,16 @@ Always use **v-model** to bind value to form elements!
 ```vue
 <template>
   <div>
-    <e-radio id="radio-1" 
-             name="example-radio-1" 
-             value="radio-1"
-             v-model="demo"
-             displayName="Select Radio Button"
-    />
-    <e-radio id="radio-2" 
-             name="example-radio-1" 
-             value="radio-2"
-             v-model="demo"
-             displayName="Select Radio Button"
-    />
+    <e-radio v-for="item in items"
+             :key="item.id"
+             :name="name" 
+             :value="item.value"
+             v-model="selected"
+             :display-name="item.displayName"
+        />
   
     <div class="spacing--top-15">
-      <p>{{ demo }}</p>
+      <p>{{ selected }}</p>
     </div>
   </div>
 </template>
@@ -28,7 +23,13 @@ Always use **v-model** to bind value to form elements!
   export default {
     name: 'example',
     data: () => ({
-      demo: 'radio-1'
+      selected: 'radio-2',
+      name: 'radio',
+      items: [
+        {id: 1, value: 'radio-1', displayName: 'Radio 1'},
+        {id: 2, value: 'radio-2', displayName: 'Radio 2'},
+        {id: 3, value: 'radio-3', displayName: 'Radio 3'}
+      ],
     })
   };
 </script>
@@ -37,7 +38,6 @@ Always use **v-model** to bind value to form elements!
 #### `:disabled`
 ```vue
     <e-radio disabled 
-             id="radio-1-disabled" 
              name="example-radio-disabled" 
              value="radio-1" 
              displayName="Select Radio Button"
@@ -49,7 +49,6 @@ Always use **v-model** to bind value to form elements!
 <template>
   <div>
     <e-radio hover 
-             id="radio-1-hover" 
              name="example-radio-hover" 
              value="radio-1" 
              v-model="demo" 
@@ -77,7 +76,6 @@ Always use **v-model** to bind value to form elements!
 <template>
   <div>
     <e-radio focus 
-             id="radio-1-focus" 
              v-model="demo" 
              name="example-radio-focus" 
              value="radio-1" 
@@ -106,14 +104,12 @@ Always use **v-model** to bind value to form elements!
 <template>
   <div>
     <e-radio state="info" 
-             id="radio-1-info" 
              v-model="demo" 
              name="example-radio-info" 
              value="radio-1" 
              displayName="Select Radio Button"
     />
     <e-radio state="info" 
-             id="radio-2-info" 
              v-model="demo" 
              name="example-radio-info" 
              value="radio-2" 
