@@ -3,6 +3,7 @@
     <textarea :class="b('field')"
               :name="name"
               :disabled="disabled"
+              :rows="rows"
               v-bind="$attrs"
               @focus="onFocus"
               @blur="onBlur"
@@ -19,6 +20,10 @@
   import formStates from '@/mixins/form-states';
   import CFormNotification from '@/components/c-form-notification';
 
+  /**
+   * Renders a styled `<textarea>` element which supports the default form state-types.
+   * The height can be set by the `rows` property.
+   */
   export default {
     name: 'e-textarea',
     components: {
@@ -49,8 +54,16 @@
        */
       notification: {
         type: String,
-        default: null
-      }
+        default: null,
+      },
+
+      /**
+       * Defines the height of the textarea field.
+       */
+      rows: {
+        type: Number,
+        default: 3,
+      },
     },
     // data() {
     //   return {};
@@ -129,8 +142,6 @@
 </script>
 
 <style lang="scss">
-  $e-textarea-height: 77px;
-
   .e-textarea {
     @include half-border($color-grayscale--500);
 
@@ -148,7 +159,6 @@
       border: 1px solid transparent;
       display: block;
       position: relative;
-      height: $e-textarea-height;
 
       // disable iPhone styling
       -webkit-appearance: none;
@@ -178,7 +188,7 @@
 
       position: absolute;
       width: 100%;
-      top: calc(#{$e-textarea-height} - 1px);
+      margin-top: -1px;
     }
 
     // active

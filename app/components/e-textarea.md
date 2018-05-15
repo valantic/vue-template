@@ -3,7 +3,7 @@
 ```vue
 <template>
   <div>
-    <e-textarea name="demo" placeholder="insert text..." v-model="demo" title="demotitle"/>
+    <e-textarea name="demo" placeholder="insert text..." v-model="demo" title="demotitle" :rows="5"/>
     
     <div v-if="demo" class="spacing--top-15" style="white-space: pre;">
       <p>{{demo}}</p>
