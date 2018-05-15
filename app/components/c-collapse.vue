@@ -1,13 +1,13 @@
 <template>
 
-  <div :class="b({expanded: isExpanded})">
-    <div :class="b('toggle')" @click="setState">
+  <div :class="b(modifiers)">
+    <div :class="b('toggle')" @click="toggleState">
       <e-icon :class="b('icon')" :inline="true" icon="i-plus"/>
       {{ title }}
     </div>
 
-    <div :class="b('content')">
-      <div :class="b('inner')">
+    <div :class="b('content')" :style="isExpanded && { 'max-height': maxHeight }">
+      <div ref="content" :class="b('inner')">
         <!-- @slot Used for item content -->
         <slot></slot>
       </div>
@@ -35,8 +35,25 @@
        */
       active: {
         type: Boolean,
-        required: false,
         default: false,
+      },
+
+      /**
+       * Defines if the item has a grey background
+       */
+      background: {
+        type: Boolean,
+        default: true,
+      },
+
+      /**
+       * Defines if inner content has padding left/right
+       *
+       *
+       */
+      padding: {
+        type: Boolean,
+        default: true,
       },
 
       /**
@@ -50,11 +67,25 @@
 
     data() {
       return {
-        isExpanded: this.$props.active
+        isExpanded: this.$props.active,
+        maxHeight: '',
       };
     },
 
-    // computed: {},
+    computed: {
+      /**
+       * Sets modifier classes depending on props
+       *
+       * @returns   {object}  modifiers   Modifier BEM classes
+       */
+      modifiers() {
+        return {
+          background: this.$props.background,
+          expanded: this.isExpanded,
+          padding: this.$props.padding,
+        };
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -63,8 +94,6 @@
     mounted() {
       /**
        * Listens if c-collapse-group (parent) has received event and emitted back
-       *
-       * @returns   {object}  child   Previous toggled element
        */
 
       EventBus.$on('c-collapse-group.toggle', (payload) => {
@@ -72,7 +101,7 @@
         const toggleGroup = payload.component;
 
         // close all items except toggled if 'one-active=true'
-        if (payload.component.$el.contains(this.$el) && this !== toggledElement && toggleGroup.$props.oneActive) {
+        if (toggleGroup.$el.contains(this.$el) && this !== toggledElement && toggleGroup.$props.oneActive) {
           this.isExpanded = false;
         }
       });
@@ -86,9 +115,9 @@
 
     methods: {
       /**
-       * Sets state and emits event to EventBus
+       * Togles state and emits event to EventBus
        */
-      setState() {
+      toggleState() {
         this.isExpanded = !this.isExpanded; // toggle state
 
         /**
@@ -98,6 +127,29 @@
          * @type {object}
          */
         EventBus.$emit('c-collapse.toggled', { component: this });
+
+        /**
+         * Calculate set content height of clicked item
+         */
+        if (this.maxHeight) {
+          // make sure container receives previous height (important for smooth animation)
+          this.$refs.content.parentElement.style.maxHeight = this.maxHeight;
+        }
+        this.setContentHeight();
+      },
+
+      /**
+       * Calculates max-height of inner content
+       */
+      setContentHeight() {
+        const contentHeight = this.$refs.content.clientHeight;
+
+        this.maxHeight = `${contentHeight}px`;
+
+        // remove style attribute after animation
+        setTimeout(() => {
+          this.$refs.content.parentElement.removeAttribute('style');
+        }, 500);
       }
     },
     // render() {},
@@ -114,11 +166,11 @@
     }
 
     &__toggle {
+      @include font($font-size--16, 40px);
+
       color: $color-grayscale--400;
       cursor: pointer;
-      font-size: $font-size--16;
       height: 40px;
-      line-height: 40px;
       overflow-y: hidden;
       padding: 0 $spacing--10 0 $spacing--30;
       position: relative;
@@ -156,8 +208,8 @@
       transition: transform 0.15s ease;
 
       svg {
-        height: 12.5px;
-        width: 12.5px;
+        height: 12px;
+        width: 12px;
       }
 
       path {
@@ -170,22 +222,28 @@
     }
 
     &__content {
-      background: $color-grayscale--700;
+      @include font($font-size--14, 18px);
+
       color: $color-grayscale--200;
-      font-size: $font-size--14;
-      line-height: $font-size--14 + 4;
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+      transition: max-height 0.3s ease-in-out;
+
+      .c-collapse--background & {
+        background: $color-grayscale--700;
+      }
 
       .c-collapse--expanded & {
-        max-height: 800px;
-        transition: max-height 0.5s ease-in-out; // no delay
+        max-height: none;
       }
     }
 
     &__inner {
-      padding: $spacing--10 $spacing--10 $spacing--10 $spacing--30;
+      padding: $spacing--10 0 $spacing--10 0;
+
+      .c-collapse--padding & {
+        padding: $spacing--10 $spacing--10 $spacing--10 $spacing--30;
+      }
     }
   }
 </style>

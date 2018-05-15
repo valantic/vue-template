@@ -9,7 +9,7 @@
   import EventBus from '@/setup/event-bus';
 
   /**
-   * Wrapper for multiple (collapsible) itmes.
+   * Wrapper for multiple (c-collapse) itmes.
    */
   export default {
     name: 'c-collapse-group',
@@ -38,8 +38,6 @@
     mounted() {
       /**
        * Emits toggled event
-       *
-       * @returns   {object}  payload   Child component
        */
       EventBus.$on('c-collapse.toggled', (payload) => {
         const collapseComponent = payload.component; // child
@@ -48,7 +46,9 @@
          * Receives update from child and emits update to EventBus
          *
          * @event   c-collapse-group.toggle
-         * @type {object}   collapseGroup   Toggled child element
+         * @type  {object}  payload
+         * @type  {object}  payload.component         Current c-collapse-group instance
+         * @type  {object}  payload.toggleCollapse   Component instance of original event
          */
         if (this.$el.contains(collapseComponent.$el)) {
           EventBus.$emit('c-collapse-group.toggle', { component: this, toggledCollapse: collapseComponent });
@@ -67,8 +67,3 @@
   };
 </script>
 
-<style lang="scss">
-  .c-collapse-group {
-    // ...
-  }
-</style>
