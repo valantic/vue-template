@@ -6,24 +6,33 @@
 
       <!-- left area -->
       <div :class="b('main', {area: 'top' })">
-        <e-info-label :class="b('info')" v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
+        <div :class="b('info')">
+          <e-info-label
+            v-if="erp.priceType"
+            :price-type="erp.priceType"
+            :price-type-end-date="erp.priceTypeEndDate"
+          />
+        </div>
         <div :class="b('gallery')">
           gallery<br>
-          {{ product }}
         </div>
 
-        <div :class="b('specs')">specs</div>
+        <div :class="b('specs')">
+          <div :class="b('technical-data')">
+            <c-attribute-grid :attributes="product.technicalData"/>
+          </div>
+          <div :class="b('attributes')">
+            <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
+          </div>
+        </div>
 
       </div>
 
       <aside :class="b('sidebar', {area: 'top' })">
         <div :class="b('add-to-cart')">
-          availability /
-          <div :class="b('prices')">
-            <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
-          </div>
-          / qty /
-          <c-add-to-cart :sku="this.product.sku" label/>
+          availability
+          <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          <c-add-to-cart :sku="product.sku" label/>
         </div>
       </aside>
 
@@ -57,12 +66,14 @@
   import { mapGetters, mapActions } from 'vuex';
   import cAddToCart from '@/components/c-add-to-cart';
   import cPrices from '@/components/c-prices';
+  import cAttributeGrid from '@/components/c-attribute-grid';
 
   export default {
     name: 'c-product-detail',
     components: {
       cAddToCart,
       cPrices,
+      cAttributeGrid,
     },
     // mixins: [],
 
@@ -153,6 +164,12 @@
     }
 
     &__sidebar {
+      padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
+
+      @include media(md) {
+        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
+      }
+
       @include media(sm) {
         flex-basis: percentage(3 / 12);
       }
@@ -172,6 +189,14 @@
 
       @include media(sm) {
         flex-basis: percentage(6 / 12);
+      }
+    }
+
+    &__technical-data {
+      margin-bottom: $spacing--15;
+
+      @include media(sm) {
+        margin-bottom: $spacing--10;
       }
     }
 

@@ -27,6 +27,9 @@
 <script>
   import { mapActions } from 'vuex';
 
+  /**
+   * Renders add to cart component
+   */
   export default {
     name: 'c-add-to-cart',
     // components: {},
@@ -81,9 +84,9 @@
     // destroyed() {},
 
     methods: {
-      ...mapActions({
-        addToCart: 'cart/addToCart',
-      }),
+      ...mapActions('cart', [
+        'addToCart'
+      ]),
       onClick() {
         this.progress = true;
 
@@ -105,16 +108,11 @@
   .c-add-to-cart {
     display: flex;
     flex-direction: column;
-    padding: $spacing--15 $spacing--10 $spacing--30 $spacing--10;
-
-    @include media(xs) {
-      padding: $spacing--0 $spacing--20 $spacing--30 $spacing--20;
-    }
 
     &__quantity {
       flex: 0 1 auto;
       width: 100%;
-      margin-bottom: $spacing--10;
+      margin-bottom: $spacing--15;
     }
 
     &__button {

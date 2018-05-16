@@ -1,10 +1,10 @@
 <template>
   <div :class="b()">
-    <dl :class="b('price-definition')">
+    <dl v-if="displayPriceGross" :class="b('price-definition')">
       <dt :class="b('price-label')">{{ $t('c-prices.grossLabel') }}</dt>
       <dd :class="b('price-value')">{{ displayPriceGross }}</dd>
     </dl>
-    <dl :class="b('price-definition')">
+    <dl v-if="displayNetPrice" :class="b('price-definition')">
       <dt :class="b('price-label')">{{ $t('c-prices.netLabel') }}</dt>
       <dd :class="b('price-value')">{{ displayNetPrice }}</dd>
     </dl>
@@ -50,10 +50,10 @@
 
     computed: {
       displayPriceGross() {
-        return this.$n(this.$props.priceGross / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+        return this.$n(this.$props.priceGross / 100, 'currency', 'de-CH'); // TODO - remove hardcoded locale
       },
       displayNetPrice() {
-        return this.$n(this.$props.price / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+        return this.$n(this.$props.price / 100, 'currency', 'de-CH'); // TODO - remove hardcoded locale
       }
     },
     // watch: {},
@@ -76,8 +76,6 @@
 
 <style lang="scss">
   .c-prices {
-    padding: $spacing--10;
-
     &__price-definition {
       display: flex;
       margin-bottom: $spacing--0;

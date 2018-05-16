@@ -12,8 +12,8 @@
       @blur="onBlur"
       @focus="onFocus"
       @input="onInput"
-      @mouseenter="hasHover = true"
-      @mouseleave="hasHover = false"
+      @mouseenter="isHover = true"
+      @mouseleave="isHover = false"
     >
     <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
     <div v-if="notification && hasFocus" :class="b('notification')">
@@ -93,7 +93,7 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          notification: Boolean(this.$props.notification && this.hasFocus)
+          notification: this.$props.notification && this.hasFocus
         };
       },
       hasDefaultState() {
@@ -173,11 +173,12 @@
 
     // input
     &__field {
+      @include font-size($font-size--14);
+
       border: 1px solid transparent;
       border-radius: $border-radius--default;
       color: $color-grayscale--400;
       font-family: $font-family--primary;
-      font-size: $font-size--14;
       height: $e-input-height;
       position: relative;
       transition: box-shadow 0.15s ease-in-out;

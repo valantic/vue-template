@@ -1,8 +1,8 @@
 <template>
   <div :class="b({ design })">
-    <div :class="b('inner', { design, hasHover })">
+    <div :class="b('inner', { design, hasInfo, hasHover })">
       <span :class="b('label')">{{ label }}</span>
-      <span :class="b('info', { hasInfo })"><span :class="b('separator')"></span>{{ info }}</span>
+      <span :class="b('info')"><span :class="b('separator')"></span>{{ info }}</span>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@
    * the information provided to it as attributes.
    * This means that the parent component is responsible for fetching the data.
    * It's also the parent components responsibility to check if priceType is available or not.
-   * On touch devices hover is automatically forced.
+   * On touch devices the infos show when touching the label.
    *
    */
   export default {
@@ -44,21 +44,11 @@
         type: String,
         default: null,
       },
-
-      /**
-       * Forces the hover state
-       */
-      hover: {
-        type: Boolean,
-        default: false,
-      },
     },
     data() {
       return {
         hasInfo: !!this.$props.priceTypeEndDate,
-        hasHover: (this.$props.hover && !!this.$props.priceTypeEndDate)
-          || (this.$props.priceTypeEndDate && ('ontouchstart' in document.documentElement
-          || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0)),
+        hasHover: true,
       };
     },
 
@@ -93,6 +83,8 @@
 
 <style lang="scss">
   .e-info-label {
+    @include font($font-size: $font-size--14, $line-height: 14px, $font-weight: $font-weight--semi-bold);
+
     &--design-new::after {
       content: '';
       display: inline-block;
@@ -103,47 +95,31 @@
       border-left: 8px solid $color-primary--1;
     }
 
-    &__inner {
-      @include font($font-size: $font-size--14, $line-height: 14px, $font-weight: $font-weight--semi-bold);
+    &__separator {
+      display: inline-block;
+      height: 10px;
+      width: 1px;
+      margin-right: 8px;
+    }
 
+    &__inner {
       display: inline-block;
       vertical-align: top;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       overflow: hidden;
       white-space: nowrap;
-      cursor: pointer;
+      cursor: default;
 
       &--design-new {
         background-color: $color-primary--1;
         color: $color-secondary--1;
-
-        &__separator {
-          background-color: $color-secondary--1;
-        }
       }
 
       &--design-promo {
         background-color: $color-secondary--2;
         color: $color-grayscale--1000;
-
-        &__separator {
-          background-color: $color-grayscale--1000;
-        }
       }
-    }
-
-    &__label {
-      display: inline-block;
-      vertical-align: middle;
-      padding: 2px 3px 2px 8px;
-    }
-
-    &__separator {
-      display: inline-block;
-      height: 10px;
-      width: 1px;
-      margin-right: 8px;
     }
 
     &--design-new &__separator {
@@ -152,6 +128,12 @@
 
     &--design-promo &__separator {
       background-color: $color-grayscale--1000;
+    }
+
+    &__label {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 2px 3px 2px 8px;
     }
 
     &__info {
@@ -165,8 +147,8 @@
       transition: 0.25s ease-out;
     }
 
-    &__inner--has-hover &__info--has-info,
-    &__inner:hover &__info--has-info {
+    &__inner--has-info:hover &__info,
+    &__inner--has-info &__inner--has-hover &__info {
       opacity: 1;
       padding-right: 8px;
       max-width: 100px;
