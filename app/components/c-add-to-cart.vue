@@ -90,8 +90,8 @@
       onClick() {
         let quantity = this.quantity.toString().match(/[0-9]/g);
 
-        this.quantity = quantity && quantity.length ? parseInt(quantity[0], 10) : 1; // IE 11
-        
+        this.quantity = quantity && quantity.length ? parseInt(quantity[0], 10) : 1; // IE 11 / Safari
+
         this.progress = true;
 
         this.addToCart(this.sku, this.quantity)
