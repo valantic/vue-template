@@ -158,7 +158,9 @@
         clearTimeout(this.openTimeout);
 
         this.closeTimeout = setTimeout(() => {
-          this.maxHeight = 0;
+          this.$nextTick(() => {
+            this.maxHeight = '0px'; // Unit is needed because of transition
+          });
         });
       },
 
