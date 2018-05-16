@@ -16,7 +16,8 @@
         width="full"
         @click="onClick"
       >
-        <e-icon :class="b('icon')" icon="i-cart" inline/><span :class="b('label')" v-if="hasLabel"> {{ $t('c-add-to-cart.addToCart') }}</span>
+        <e-icon :class="b('icon')" icon="i-cart" inline/>
+        <span v-if="hasLabel" :class="b('label')"> {{ $t('c-add-to-cart.addToCart') }}</span>
       </e-button>
     </div>
   </div>
@@ -89,7 +90,7 @@
         this.progress = true;
 
         this.addToCart(this.sku, this.quantity)
-          .finally(() => this.progress = false);
+          .finally(() => { this.progress = false; });
       },
     },
     // render() {},
@@ -100,12 +101,6 @@
   .c-add-to-cart {
     display: flex;
     flex-direction: column;
-
-    &:hover &__label,
-    &:focus &__label,
-    &:active &__label {
-      color: $color-grayscale--1000;
-    }
 
     &__quantity {
       flex: 0 1 auto;
@@ -118,7 +113,7 @@
     }
 
     &__icon {
-      display: flex !important;
+      display: flex;
       align-items: center;
       justify-content: center;
     }
@@ -126,6 +121,12 @@
     &__label {
       margin-left: $spacing--10;
       color: $color-secondary--1;
+    }
+
+    &__button:hover &__label,
+    &__button:focus &__label,
+    &__button:active &__label {
+      color: $color-grayscale--1000;
     }
   }
 
