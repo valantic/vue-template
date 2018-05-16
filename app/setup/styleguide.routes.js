@@ -6,6 +6,7 @@ import headings from '../styleguide/routes/headings';
 import panels from '../styleguide/routes/panels';
 import buttons from '../styleguide/routes/buttons';
 import forms from '../styleguide/routes/forms';
+import collapse from '../styleguide/routes/collapse';
 
 const root = '/styleguide';
 
@@ -67,6 +68,14 @@ export default [
     component: buttons,
     meta: {
       title: 'Buttons',
+    }
+  },
+  {
+    path: `${root}/collapse`,
+    name: 'styleguideCollapse',
+    component: collapse,
+    meta: {
+      title: 'Collapse',
     }
   },
   {
