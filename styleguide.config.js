@@ -8,11 +8,13 @@ module.exports = {
       styleguide: true
     })
   },
+  renderRootJsx: path.join(__dirname, 'app/setup/styleguidist.root.js'),
   require: [
     // NOTE: for the application this is imported in main.js. Unfortunatley the styleguidist does not support this, so we need
     // to import the global styles here as well.
     path.join(__dirname, 'app/setup/_scss.scss'),
-    path.join(__dirname, 'app/setup/styleguide.styles-custom.scss'),
+    path.join(__dirname, 'app/setup/styleguidist.style.scss'),
+    path.join(__dirname, 'app/setup/styleguidist.required.js'),
   ],
   defaultExample: 'app/setup/styleguide.fallback.md',
   components: 'app/components/**/*.vue',
@@ -66,7 +68,7 @@ module.exports = {
     },
   ],
   mixins: [
-    'app/setup/styleguidist.js'
+    'app/setup/styleguidist.mixins.js'
   ],
   ignore: [
     '**/components/s-palette-item.vue',
