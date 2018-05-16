@@ -1,11 +1,11 @@
 <!-- TODO - This component is supposed to be functional -->
 <template>
   <div :class="b(activeTheme)">
-    <div :class="b('inner')">
+    <div :class="b('inner', activeTheme)">
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">Icons</div>
       <div :class="b('assortment')">Sortiment</div>
-      <div :class="b('search', activeTheme)">Search</div>
+      <div :class="b('search')">Search</div>
     </div>
   </div>
 </template>
@@ -46,8 +46,7 @@
   .c-header {
     @include z-index(header);
     @include theme((
-      border-color: color-primary--1,
-      color: color-primary--2
+      border-color: color-primary--1
     ));
 
     position: fixed;
@@ -71,7 +70,13 @@
     }
 
     &__inner {
-      background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
+      @include theme((
+        background-gradient: (
+          from: color-gradient--2-0,
+          to: color-gradient--2-1
+        )
+      ));
+
       color: $color-primary--3;
       max-width: map-get($grid-breakpoints, xl);
       width: 100%;
@@ -99,10 +104,6 @@
     }
 
     &__search {
-      @include theme((
-          color: color-primary--2
-      ));
-
       flex: 0 1 percentage(9 / 12);
 
       @include media(sm) {

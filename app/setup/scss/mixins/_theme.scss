@@ -1,16 +1,56 @@
+////
+// Is a nested list with all the themes and the specific color codes
+////
 $themes: (
-  theme-01: (
+  theme-01: ( // Winterhalter - Fenner
     modifier: 'theme-01',
-    color-primary--1: #ffed00,
-    color-primary--2: green
+    color-primary--1: $color-primary--1,
+    color-secondary--1: $color-secondary--1,
+    color-secondary--2: $color-secondary--2,
+    color-gradient--2-0: $color-gradient--2-0,
+    color-gradient--2-1: $color-gradient--2-1
   ),
-  theme-02: (
+  theme-02: ( // Electro - LAN SA
     modifier: 'theme-02',
-    color-primary--1: red,
-    color-primary--2: blue
+    color-primary--1: $color-primary--1,
+    color-secondary--1: $color-secondary--1,
+    color-secondary--2: $color-secondary--2,
+    color-gradient--2-0: $color-gradient--2-0,
+    color-gradient--2-1: $color-gradient--2-1
+  ),
+  theme-03: ( // Fabri
+    modifier: 'theme-03',
+    color-primary--1: #dc2f34,
+    color-secondary--1: $color-secondary--1,
+    color-secondary--2: $color-secondary--2,
+    color-gradient--2-0: $color-gradient--2-0,
+    color-gradient--2-1: $color-gradient--2-1
+  ),
+  theme-04: ( // Dysbox
+    modifier: 'theme-04',
+    color-primary--1: red, // TODO: define final primary--1 color
+    color-secondary--1: $color-secondary--1,
+    color-secondary--2: $color-secondary--2,
+    color-gradient--2-0: $color-gradient--2-0,
+    color-gradient--2-1: $color-gradient--2-1
+  ),
+  theme-05: ( // Electroplast SA
+    modifier: 'theme-05',
+    color-primary--1: #00a4e0,
+    color-secondary--1: #2e3089,
+    color-secondary--2: #7275d8,
+    color-gradient--2-0: #2e3089,
+    color-gradient--2-1: #7275d8
   )
 );
 
+////
+// Gets the value of a nested maps
+//
+// @param   {map}     $map    The outer sass map
+// @param   {String}  $keys   Nested keys
+// @return  {String}  value
+////
 @function map-deep-get($map, $keys...) {
   @each $key in $keys {
     $map: map-get($map, $key);
@@ -19,11 +59,26 @@ $themes: (
   @return $map;
 }
 
+////
+// Mixin set's a theme class modifier with all the given properties
+//
+// @param   {map}     $properties    A map of properties
+////
 @mixin theme($properties) {
   @each $theme in map-keys($themes) {
     &--#{$theme} {
+      /* #{$theme} */
+
+      /* critical */
       @each $property in map-keys($properties) {
-        #{$property}: map-deep-get($themes, #{$theme}, map_get($properties, #{$property}));
+        @if $property == 'background-gradient' {
+          $color-from: map-deep-get($themes, #{$theme}, map-deep-get($properties, #{$property}, 'from'));
+          $color-to: map-deep-get($themes, #{$theme}, map-deep-get($properties, #{$property}, 'to'));
+
+          background: linear-gradient(to right, $color-from, $color-to);
+        } @else {
+          #{$property}: map-deep-get($themes, #{$theme}, map_get($properties, #{$property}));
+        }
       }
     }
   }

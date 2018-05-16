@@ -167,7 +167,20 @@ module.exports = function(env = {}, options = {}) {
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
         suffix: 'critical',
         pipeline: [
-          postCssCriticalSplit()
+          postCssCriticalSplit({
+            'output': 'critical',
+          })
+        ]
+      }));
+
+      // TEST
+      pluginCollection.push(new PostCssPipelineWebpackPlugin({
+        suffix: 'theme-01',
+        pipeline: [
+          postCssCriticalSplit({
+            'blockTag':'theme-01',
+            'output': 'critical',
+          })
         ]
       }));
 
@@ -175,7 +188,10 @@ module.exports = function(env = {}, options = {}) {
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
         suffix: '', // Defining an empty string makes it possible not create an additional file
         pipeline: [
-          cssNano()
+          postCssCriticalSplit({
+            'output': 'rest'
+          })
+          // cssNano() TODO: enable css minifier
         ]
       }));
 

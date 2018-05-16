@@ -6,7 +6,7 @@ export default {
     /**
      * @type {String}   theme id
      */
-    theme: '02' // TODO: set this value dynamic
+    theme: '01' // TODO: set this value dynamic (initial)
   },
   getters: {
     /**
@@ -18,6 +18,16 @@ export default {
      */
     getTheme: state => state.theme
   },
-  mutations: {},
+  mutations: {
+    /**
+     * Sets the global theme id
+     *
+     * @param {Object}  state   session/state
+     * @param {String}  id      theme id
+     */
+    setTheme(state, id) {
+      state.theme = id;
+    }
+  },
   actions: {},
 };

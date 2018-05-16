@@ -1,7 +1,7 @@
 <!-- TODO - This component is supposed to be functional -->
 <template>
   <div :class="b()">
-    <div :class="b('inner')">
+    <div :class="b('inner', activeTheme)">
       <div :class="b('languages')">Languages</div>
       <hr :class="b('languages-separator')">
       <div :class="b('navigation')">Navigation</div>
@@ -23,13 +23,14 @@
 
 <script>
   import cSocialMedia from '@/components/c-social-media';
+  import themes from '@/mixins/themes';
 
   export default {
     name: 'c-footer',
     components: {
       cSocialMedia,
     },
-    // mixins: [],
+    mixins: [themes],
 
     // props: {},
     // data() {
@@ -62,7 +63,13 @@
     flex-shrink: 0;
 
     &__inner {
-      background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
+      @include theme((
+        background-gradient: (
+          from: color-gradient--2-0,
+          to: color-gradient--2-1
+        )
+      ));
+
       color: $color-primary--3;
       margin: $spacing--0 auto;
       padding: $spacing--0 $spacing--5;
