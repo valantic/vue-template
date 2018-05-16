@@ -38,6 +38,14 @@
             <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
             <div :class="b('description-text')" v-html="product.description"></div>
           </div>
+          <div v-if="product.media_attributes" :class="b('documents')">
+            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDocumentsTitle') }}</e-heading>
+            <c-linklist :items="product.media_attributes"/>
+          </div>
+          <div v-if="product.product_videos" :class="b('videos')">
+            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productVideosTitle') }}</e-heading>
+            <c-linklist :items="product.product_videos"/>
+          </div>
         </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
@@ -56,11 +64,13 @@
 <script>
   import { mapGetters } from 'vuex';
   import cAttributeGrid from '@/components/c-attribute-grid';
+  import CLinklist from "@/components/c-linklist";
 
   export default {
     name: 'c-product-detail',
 
     components: {
+      CLinklist,
       cAttributeGrid,
     },
     // mixins: [],
@@ -219,6 +229,26 @@
 
       @include media(sm) {
         padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
+      }
+    }
+
+    &__documents {
+      .e-heading--underline {
+        width: percentage(1);
+
+        .e-heading__inner {
+          width: percentage(1);
+        }
+      }
+    }
+
+    &__videos {
+      .e-heading--underline {
+        width: percentage(1);
+
+        .e-heading__inner {
+          width: percentage(1);
+        }
       }
     }
 

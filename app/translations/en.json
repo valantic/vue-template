@@ -20,6 +20,8 @@
     "xingTitle": "Xing"
   },
   "c-product-detail": {
-    "productDescriptionTitle": "Product description"
+    "productDescriptionTitle": "Product description",
+    "productDocumentsTitle": "Documents",
+    "productVideosTitle": "Videos"
   }
 }
