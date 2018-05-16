@@ -72,7 +72,7 @@ export default {
      */
     updateTotals(state, totals) {
       state.cart.totals = totals;
-      state.miniCart.cartQuantity = state.miniCart.cartQuantity + 1;
+      state.miniCart.cartQuantity += 1;
       state.miniCart.netTotal = state.cart.totals.subtotal;
     },
   },

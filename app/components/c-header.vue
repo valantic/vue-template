@@ -67,7 +67,6 @@
     display: flex;
     border-bottom: 2px solid $color-primary--1;
     box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
-    min-height: 60px;
 
     &::before {
       content: '';
@@ -87,6 +86,7 @@
       background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
       color: $color-primary--3;
       max-width: map-get($grid-breakpoints, xl);
+      min-height: 60px;
       width: 100%;
       display: flex;
       justify-content: space-between;
