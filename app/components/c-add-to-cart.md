@@ -1,11 +1,14 @@
-Renders add to cart component.
-
-#### default
+### Default
 ```vue
 <c-add-to-cart sku="12345"/>
 ```
 
-#### default with label
+### Default with label
 ```vue
 <c-add-to-cart sku="12345" label/>
+```
+
+### Default with step
+```vue
+<c-add-to-cart sku="12345" step="3"/>
 ```

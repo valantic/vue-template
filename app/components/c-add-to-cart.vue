@@ -27,6 +27,9 @@
 <script>
   import { mapActions } from 'vuex';
 
+  /**
+   * Renders add to cart component
+   */
   export default {
     name: 'c-add-to-cart',
     // components: {},
@@ -81,9 +84,9 @@
     // destroyed() {},
 
     methods: {
-      ...mapActions({
-        addToCart: 'cart/addToCart',
-      }),
+      ...mapActions('cart', [
+        'addToCart'
+      ]),
       onClick() {
         this.progress = true;
 
