@@ -262,7 +262,6 @@ module.exports = function(env = {}, options = {}) {
         {
           test: /\.vue$/,
           loader: 'vue-loader',
-          include,
           options: {
             // extractCSS can not be used because of scss
             // cssSourceMap can not be used because of scss
