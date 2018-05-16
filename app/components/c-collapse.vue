@@ -201,6 +201,7 @@
       text-overflow: ellipsis;
       transition: color 0.1s;
       white-space: nowrap;
+      border-bottom: 0;
 
       &::after {
         border-bottom: 1px solid $color-primary--1;
@@ -214,6 +215,7 @@
 
       &:hover {
         color: $color-secondary--1;
+        border-bottom: 0;
       }
 
       .c-collapse--expanded & {
