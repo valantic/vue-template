@@ -6,7 +6,7 @@
       {{ title }}
     </div>
 
-    <div ref="content" :class="b('content')" :style="isExpanded && { 'max-height': maxHeight }">
+    <div ref="content" :class="b('content')" :style="{ maxHeight }">
       <div ref="inner" :class="b('inner')">
         <!-- @slot Used for item content -->
         <slot></slot>
@@ -69,6 +69,8 @@
       return {
         isExpanded: this.$props.active,
         maxHeight: '',
+        openTimeout: null,
+        closeTimeout: null,
       };
     },
 
@@ -92,14 +94,6 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      /**
-       * Listens if c-collapse-group (parent) has received event and emitted back
-       * @event   c-collapse-group.toggle
-       * @type      {object}  payload
-       * @property  {object}  payload.component   Group element component
-       * @property  {object}  payload.toggledCollapse   Component instance of original event
-       */
-
       EventBus.$on('c-collapse-group.toggle', (payload) => {
         const toggledElement = payload.toggledCollapse;
         const toggleGroup = payload.component;
@@ -107,6 +101,8 @@
         // close all items except toggled if 'one-active=true'
         if (toggleGroup.$el.contains(this.$el) && this !== toggledElement) {
           this.isExpanded = false;
+
+          this.close();
         }
       });
     },
@@ -124,6 +120,12 @@
       toggleState() {
         this.isExpanded = !this.isExpanded; // toggle state
 
+        if (this.isExpanded) {
+          this.open();
+        } else {
+          this.close();
+        }
+
         /**
          * Emits toggled event to EventBus
          *
@@ -132,29 +134,39 @@
          * @property  {object}   component  Current component
          */
         EventBus.$emit('c-collapse.toggled', { component: this });
-
-        /**
-         * Calculate set content height of clicked item
-         */
-        if (this.maxHeight) {
-          // make sure container receives previous height (important for smooth animation)
-          this.$refs.content.style.maxHeight = this.maxHeight;
-        }
-        this.setContentHeight();
       },
 
       /**
-       * Calculates max-height of inner content
+       * Opens the collapsible
        */
-      setContentHeight() {
-        const contentHeight = this.$refs.inner.clientHeight;
+      open() {
+        this.setMaxHeight();
 
-        this.maxHeight = `${contentHeight}px`;
+        clearTimeout(this.closeTimeout);
 
-        // remove style attribute after animation
-        setTimeout(() => {
-          this.$refs.content.removeAttribute('style');
+        this.openTimeout = setTimeout(() => {
+          this.maxHeight = 'none';
         }, 500);
+      },
+
+      /**
+       * Closes the collapsible
+       */
+      close() {
+        this.setMaxHeight();
+
+        clearTimeout(this.openTimeout);
+
+        this.closeTimeout = setTimeout(() => {
+          this.maxHeight = 0;
+        });
+      },
+
+      /**
+       * Sets the collapsible height according to its current content
+       */
+      setMaxHeight() {
+        this.maxHeight = `${this.$refs.inner.clientHeight}px`;
       }
     },
     // render() {},
