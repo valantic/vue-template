@@ -16,11 +16,9 @@
         width="full"
         @click="onClick"
       >
-        <e-icon :class="b('icon')" icon="i-cart" inline/><span v-if="hasLabel"> {{ $t('c-add-to-cart.addToCart') }}</span>
+        <e-icon :class="b('icon')" icon="i-cart" inline/><span :class="b('label')" v-if="hasLabel"> {{ $t('c-add-to-cart.addToCart') }}</span>
       </e-button>
     </div>
-    <!-- TODO - remove -->
-    <div ref="debug">{{ debug }}</div>
   </div>
 </template>
 
@@ -91,13 +89,7 @@
         this.progress = true;
 
         this.addToCart(this.sku, this.quantity)
-          .then((response) => {
-            this.progress = false;
-            this.debug = response; // TODO - remove
-          }, (error) => {
-            this.progress = false;
-            this.debug = error; // TODO - remove
-        });
+          .finally(() => this.progress = false);
       },
     },
     // render() {},
@@ -108,6 +100,12 @@
   .c-add-to-cart {
     display: flex;
     flex-direction: column;
+
+    &:hover &__label,
+    &:focus &__label,
+    &:active &__label {
+      color: $color-grayscale--1000;
+    }
 
     &__quantity {
       flex: 0 1 auto;
@@ -120,8 +118,21 @@
     }
 
     &__icon {
-      vertical-align: text-top;
-      height: 21px; /* TODO - this is probably not how to do it */
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
     }
+
+    &__label {
+      margin-left: $spacing--10;
+      color: $color-secondary--1;
+    }
+  }
+
+  .e-button__inner {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
   }
 </style>
