@@ -1,10 +1,10 @@
 <template>
 
   <div :class="b(modifiers)">
-    <div :class="b('toggle')" @click="toggleState">
+    <a :class="b('toggle')" href="#" @click="toggleState">
       <e-icon :class="b('icon')" :inline="true" icon="i-plus"/>
       {{ title }}
-    </div>
+    </a>
 
     <div ref="content" :class="b('content')" :style="{ maxHeight }">
       <div ref="inner" :class="b('inner')">
@@ -99,7 +99,7 @@
         const toggleGroup = payload.component;
 
         // close all items except toggled if 'one-active=true'
-        if (toggleGroup.$el.contains(this.$el) && this !== toggledElement) {
+        if (this.isExpanded && toggleGroup.$el.contains(this.$el) && this !== toggledElement) {
           this.isExpanded = false;
 
           this.close();
@@ -116,8 +116,14 @@
     methods: {
       /**
        * Toggles state and emits event to EventBus
+       *
+       * @param   {object}    event   Original event
        */
-      toggleState() {
+      toggleState(event) {
+        event.preventDefault();
+
+        event.target.blur();
+
         this.isExpanded = !this.isExpanded; // toggle state
 
         if (this.isExpanded) {
@@ -158,10 +164,8 @@
         clearTimeout(this.openTimeout);
 
         this.closeTimeout = setTimeout(() => {
-          this.$nextTick(() => {
-            this.maxHeight = '0px'; // Unit is needed because of transition
-          });
-        });
+          this.maxHeight = 0;
+        }, 20); // Timeout is needed because of transition
       },
 
       /**
@@ -187,6 +191,7 @@
     &__toggle {
       @include font($font-size--16, 40px);
 
+      display: block;
       color: $color-grayscale--400;
       cursor: pointer;
       height: 40px;
