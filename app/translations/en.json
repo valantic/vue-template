@@ -35,5 +35,8 @@
   },
   "c-add-to-cart": {
     "addToCart": "add to cart"
+  },
+  "urls": {
+    "cart": "/cart"
   }
 }

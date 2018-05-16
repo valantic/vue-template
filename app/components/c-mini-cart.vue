@@ -1,8 +1,8 @@
 <template>
   <div :class="b({ active })" @click="onClick">
-    <div :class="b('count')">{{ cart.totals.numItemsTotal }}</div>
+    <div v-if="miniCartHasItems" :class="b('count')">{{ miniCart.cartQuantity }}</div>
     <div :class="b('icon')"><e-icon inline icon="i-cart"/></div>
-    <div :class="b('total')">{{ displayPrice }}</div>
+    <div v-if="miniCartHasPrice" :class="b('total')">{{ displayPrice }}</div>
   </div>
 </template>
 
@@ -28,11 +28,13 @@
     // },
 
     computed: {
-      ...mapGetters({
-        cart: 'cart/cart',
-      }),
+      ...mapGetters('cart', [
+        'miniCart',
+        'miniCartHasItems',
+        'miniCartHasPrice',
+      ]),
       displayPrice() {
-        return this.$n(this.cart.totals.netTotal / 100, 'currency', 'de-DE'); // TODO - remove hardcoded locale
+        return this.$n(this.miniCart.netTotal / 100, 'currency', 'de-CH'); // TODO - remove hardcoded locale
       },
     },
     // watch: {},
@@ -119,7 +121,7 @@
 
       display: none;
       margin-top: 0;
-      padding: 3px 0 7px 0;
+      padding: 3px 0 6px 0;
       text-align: center;
 
       @include media(sm) {

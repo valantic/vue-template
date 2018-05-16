@@ -35,5 +35,8 @@
   },
   "c-add-to-cart": {
     "addToCart": "in den Warenkorb"
+  },
+  "urls": {
+    "cart": "/cart"
   }
 }

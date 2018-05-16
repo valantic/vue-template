@@ -4,8 +4,8 @@
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">
-        <div :class="b('cart')">
-          <c-mini-cart/>
+        <div v-if="userLoggedIn" :class="b('cart')">
+          <c-mini-cart @click="onMiniCartClick"/>
         </div>
       </div>
       <div :class="b('assortment')">Sortiment</div>
@@ -16,6 +16,7 @@
 
 <script>
   import cMiniCart from '@/components/c-mini-cart';
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'c-header',
@@ -29,7 +30,12 @@
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      ...mapGetters('session', [
+        'user',
+        'userLoggedIn',
+      ]),
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -43,7 +49,11 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      onMiniCartClick() {
+        window.location.replace(this.$t('urls.cart'));
+      }
+    },
     // render() {},
   };
 </script>
@@ -57,6 +67,7 @@
     display: flex;
     border-bottom: 2px solid $color-primary--1;
     box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
+    min-height: 60px;
 
     &::before {
       content: '';
