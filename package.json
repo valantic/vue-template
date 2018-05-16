@@ -127,7 +127,7 @@
     "vue-jest": "~2.1.1",
     "vue-loader": "~14.2.1",
     "vue-markdown-loader": "~2.4.0",
-    "vue-styleguidist": "~1.4.7",
+    "vue-styleguidist": "~1.7.7",
     "webpack": "~3.10.0",
     "webpack-auto-inject-version": "~1.0.0",
     "webpack-dev-server": "~2.11.2",
