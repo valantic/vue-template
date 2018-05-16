@@ -7,6 +7,7 @@
         :step="step"
         type="number"
         name="quantity"
+        pattern="\d*"
       />
     </div>
     <div :class="b('button')">
@@ -87,6 +88,10 @@
         'addToCart'
       ]),
       onClick() {
+        let quantity = this.quantity.toString().match(/[0-9]/g);
+
+        this.quantity = quantity && quantity.length ? parseInt(quantity[0], 10) : 1; // IE 11
+        
         this.progress = true;
 
         this.addToCart(this.sku, this.quantity)
@@ -106,6 +111,10 @@
       flex: 0 1 auto;
       width: 100%;
       margin-bottom: $spacing--15;
+
+      input {
+        text-align: right;
+      }
     }
 
     &__button {
