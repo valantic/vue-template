@@ -3,7 +3,9 @@
   <div :class="b()">
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
-      <div :class="b('icons')">Icons</div>
+      <div :class="b('header-links')">
+        <c-header-links />
+      </div>
       <div :class="b('assortment')">Sortiment</div>
       <div :class="b('search')">Search</div>
     </div>
@@ -11,9 +13,13 @@
 </template>
 
 <script>
+  import cHeaderLinks from '@/components/c-header-links';
+
   export default {
     name: 'c-header',
-    // components: {},
+    components: {
+      cHeaderLinks,
+    },
     // mixins: [],
 
     // props: {},
@@ -101,7 +107,7 @@
       }
     }
 
-    &__icons {
+    &__header-links {
       flex: 0 1 percentage(7 / 12);
 
       @include media(sm) {

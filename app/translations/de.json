@@ -23,5 +23,12 @@
     "productDescriptionTitle": "Produktbeschreibung",
     "productDocumentsTitle": "Dokumente",
     "productVideosTitle": "Videos"
+  },
+  "c-header-links": {
+    "linkAccount": "/account",
+    "linkWishlist": "/wishlist",
+    "linkLogin": "/login",
+    "labelWishlist": "Merkliste",
+    "labelLogin": "Anmelden"
   }
 }

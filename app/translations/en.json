@@ -23,5 +23,12 @@
     "productDescriptionTitle": "Product description",
     "productDocumentsTitle": "Documents",
     "productVideosTitle": "Videos"
+  },
+  "c-header-links": {
+    "linkLogin": "/login",
+    "linkWishlist": "/wishlist",
+    "linkRegister": "/register",
+    "labelWishlist": "Wishlist",
+    "labelLogin": "Login"
   }
 }
