@@ -46,11 +46,11 @@
          * Receives update from child and emits update to EventBus
          *
          * @event   c-collapse-group.toggle
-         * @type  {object}  payload
-         * @type  {object}  payload.component         Current c-collapse-group instance
-         * @type  {object}  payload.toggleCollapse   Component instance of original event
+         * @type      {object}  payload
+         * @property  {object}  payload.component         Current c-collapse-group instance
+         * @property  {object}  payload.toggleCollapse    Component instance of original event
          */
-        if (this.$el.contains(collapseComponent.$el)) {
+        if (this.$el.contains(collapseComponent.$el) && this.oneActive) {
           EventBus.$emit('c-collapse-group.toggle', { component: this, toggledCollapse: collapseComponent });
         }
       });

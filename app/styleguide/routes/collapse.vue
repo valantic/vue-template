@@ -2,7 +2,7 @@
   <div :class="b()">
     <h1>Accordion example (c-collapse)</h1>
 
-    <c-collapse-group>
+    <c-collapse-group :one-active="true">
 
       <c-collapse
         v-for="item in collapsible"

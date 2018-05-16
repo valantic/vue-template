@@ -6,8 +6,8 @@
       {{ title }}
     </div>
 
-    <div :class="b('content')" :style="isExpanded && { 'max-height': maxHeight }">
-      <div ref="content" :class="b('inner')">
+    <div ref="content" :class="b('content')" :style="isExpanded && { 'max-height': maxHeight }">
+      <div ref="inner" :class="b('inner')">
         <!-- @slot Used for item content -->
         <slot></slot>
       </div>
@@ -94,6 +94,10 @@
     mounted() {
       /**
        * Listens if c-collapse-group (parent) has received event and emitted back
+       * @event   c-collapse-group.toggle
+       * @type      {object}  payload
+       * @property  {object}  payload.component   Group element component
+       * @property  {object}  payload.toggledCollapse   Component instance of original event
        */
 
       EventBus.$on('c-collapse-group.toggle', (payload) => {
@@ -101,7 +105,7 @@
         const toggleGroup = payload.component;
 
         // close all items except toggled if 'one-active=true'
-        if (toggleGroup.$el.contains(this.$el) && this !== toggledElement && toggleGroup.$props.oneActive) {
+        if (toggleGroup.$el.contains(this.$el) && this !== toggledElement) {
           this.isExpanded = false;
         }
       });
@@ -115,7 +119,7 @@
 
     methods: {
       /**
-       * Togles state and emits event to EventBus
+       * Toggles state and emits event to EventBus
        */
       toggleState() {
         this.isExpanded = !this.isExpanded; // toggle state
@@ -123,8 +127,9 @@
         /**
          * Emits toggled event to EventBus
          *
-         * @event c-collapse.toggled
-         * @type {object}
+         * @event     c-collapse.toggled
+         * @type      {object}
+         * @property  {object}   component  Current component
          */
         EventBus.$emit('c-collapse.toggled', { component: this });
 
@@ -133,7 +138,7 @@
          */
         if (this.maxHeight) {
           // make sure container receives previous height (important for smooth animation)
-          this.$refs.content.parentElement.style.maxHeight = this.maxHeight;
+          this.$refs.content.style.maxHeight = this.maxHeight;
         }
         this.setContentHeight();
       },
@@ -142,13 +147,13 @@
        * Calculates max-height of inner content
        */
       setContentHeight() {
-        const contentHeight = this.$refs.content.clientHeight;
+        const contentHeight = this.$refs.inner.clientHeight;
 
         this.maxHeight = `${contentHeight}px`;
 
         // remove style attribute after animation
         setTimeout(() => {
-          this.$refs.content.parentElement.removeAttribute('style');
+          this.$refs.content.removeAttribute('style');
         }, 500);
       }
     },
@@ -227,7 +232,7 @@
       color: $color-grayscale--200;
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease-in-out;
+      transition: max-height 0.2s ease-in-out;
 
       .c-collapse--background & {
         background: $color-grayscale--700;
