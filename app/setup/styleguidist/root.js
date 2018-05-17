@@ -3,7 +3,7 @@ import { i18n } from '@/setup/i18n';
 /**
  * Root component setup for styleguidist
  *
- * @param   {object}    previewComponent
+ * @param   {object}    previewComponent    The to be displayed component
  *
  * @returns {object}
  */

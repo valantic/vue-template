@@ -32,7 +32,7 @@ export const i18nLoadMessages = function(locale) {
         i18n.setLocaleMessage(locale, localeMessages);
 
         return locale;
-      });
+      }); // eslint-disable-line vue/script-indent
   }
 
   return Promise.resolve(locale);
