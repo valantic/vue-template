@@ -10,9 +10,8 @@ module.exports = {
   },
   renderRootJsx: path.join(__dirname, 'app/setup/styleguidist.root.js'),
   require: [
-    // NOTE: for the application this is imported in main.js. Unfortunatley the styleguidist does not support this, so we need
-    // to import the global styles here as well.
-    path.join(__dirname, 'app/setup/_scss.scss'),
+    'babel-polyfill', // In vue application imported by webpack. Was not supported by vue-styleguidist
+    path.join(__dirname, 'app/setup/_scss.scss'), // In vue application imported by main.js. Was not supported by vue-stylgudist
     path.join(__dirname, 'app/setup/styleguidist.style.scss'),
     path.join(__dirname, 'app/setup/styleguidist.required.js'),
   ],
