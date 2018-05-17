@@ -1,9 +1,14 @@
 <template>
   <dl :class="b()">
     <template v-for="(item, index) in items">
-      <dt :key="`dt-${index}`" :class="b('col-dt', { emphasis: item.emphasis })">{{ item.key }}</dt>
+      <dt :key="`dt-${index}`" :class="b('col-dt', { emphasis: item.emphasis })">{{ item.key_localized }}</dt>
       <dd :key="`dd-${index}`" :class="b('col-dd', { emphasis: item.emphasis })">
-        <a v-if="item.url" :class="b('link')" :href="item.url">{{ item.value }}</a>
+        <a
+          v-if="item.url"
+          :class="b('link')"
+          :href="item.url"
+          title=""
+        >{{ item.value }}</a>
         <span v-else :class="b('value')">{{ item.value }}</span>
       </dd>
     </template>
@@ -65,27 +70,17 @@
 
     &__col-dt,
     &__col-dd {
-      @include font($font-size--14, 18, $font-weight--regular);
+      @include font($font-size--14, 18px, $font-weight--regular);
 
       font-family: $font-family--primary;
       color: $color-grayscale--200;
       text-align: left;
-      padding: 0 $spacing--10;
+      margin-bottom: $spacing--10;
     }
 
     &__col-dt--emphasis,
     &__col-dd--emphasis {
-      @include font($font-size--14, 18, $font-weight--bold);
-
-      color: $color-grayscale--200;
-    }
-
-    &__col-dd--emphasis {
-      color: $color-grayscale--400;
-    }
-
-    &__key {
-      color: $color-grayscale--200;
+      @include font($font-size--14, 18px, $font-weight--bold);
     }
 
     &__value {

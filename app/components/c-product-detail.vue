@@ -13,11 +13,9 @@
 
         <div :class="b('specs')">
           <div :class="b('technical-data')">
-            <!-- TODO - use final property name -->
-            <c-attribute-grid :attributes="product.technicalAttributes"/>
+            <c-attribute-grid :attributes="product.main_attributes"/>
           </div>
           <div :class="b('attributes')">
-            <!-- TODO - use final property name -->
             <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
           </div>
         </div>
@@ -35,8 +33,17 @@
 
       <div :class="b('main', { area: 'bottom' })">
         <div :class="b('details')">
-            <!-- TODO - use final property name -->
-            <c-attribute-grid :attributes="product.technicalData"/>
+          <div v-if="product.description" :class="b('description')">
+            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
+            <div :class="b('description-text')" v-html="product.description"></div>
+          </div>
+        </div>
+        <div :class="b('details')">
+          <c-collapse-group>
+            <c-collapse v-if="product.tech_attributes" :title="$t('c-product-detail.technicalDataTitle')">
+              <c-attribute-grid :attributes="product.tech_attributes"/>
+            </c-collapse>
+          </c-collapse-group>
         </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
@@ -55,12 +62,16 @@
 <script>
   import { mapGetters } from 'vuex';
   import cAttributeGrid from '@/components/c-attribute-grid';
+  import cCollapseGroup from '@/components/c-collapse-group';
+  import cCollapse from '@/components/c-collapse';
 
   export default {
     name: 'c-product-detail',
 
     components: {
       cAttributeGrid,
+      cCollapseGroup,
+      cCollapse,
     },
     // mixins: [],
 
@@ -76,7 +87,8 @@
          *
          * @returns  {Object}  product - Single product from the store
          */
-        product: 'product/getProduct'
+        product: 'product/product',
+        collapsible: 'product/collapsible',
       })
     }
     // watch: {},
@@ -197,6 +209,27 @@
 
       @include media(sm) {
         border-bottom: 4px solid $color-grayscale--600;
+      }
+    }
+
+    &__details {
+      .e-heading--underline .e-heading__inner {
+        padding-left: $spacing--20;
+
+        @include media(sm) {
+          padding-left: $spacing--30;
+        }
+      }
+    }
+
+    &__description-text {
+      @include font($font-size--14, $line-height: 18px);
+
+      color: $color-grayscale--200;
+      padding: $spacing--10 $spacing--20;
+
+      @include media(sm) {
+        padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
       }
     }
 

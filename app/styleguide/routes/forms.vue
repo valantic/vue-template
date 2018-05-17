@@ -36,6 +36,14 @@
       </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <pre>{{ name }}</pre>
+
+      <h2>e-checkbox</h2>
+      <e-checkbox
+        v-model="checkbox.checked"
+        :name="checkbox.name"
+        :value="checkbox.value"
+        :display-name="checkbox.value"/>
+
     </form>
   </div>
 </template>
@@ -49,6 +57,11 @@
           firstName: '',
           lastName: '',
           street: ''
+        },
+        checkbox: {
+          checked: false,
+          name: 'checkbox',
+          value: 'Hello world...'
         }
       };
     }

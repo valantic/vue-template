@@ -49,7 +49,6 @@
       modifiers() {
         return {
           shrinkOnMobile: this.shrinkOnMobile,
-          dontShrinkOnMobile: !this.shrinkOnMobile
         };
       },
       maxHeight() {
@@ -91,24 +90,16 @@
         this.isOpen = !this.isOpen;
       },
       recalculateOpenHeight() {
-        let openHeight = this.$el.querySelector('dl').clientHeight;
+        const openHeight = this.$el.querySelector('dl').clientHeight;
 
-        if (openHeight > 0) {
-          openHeight = `${openHeight}px`;
-        }
-
-        this.openHeight = openHeight;
+        this.openHeight = `${openHeight}px`;
       },
       recalculateClosedHeight() {
         const dtHeight = this.$el.querySelector('dt').clientHeight;
         const ddHeight = this.$el.querySelector('dd').clientHeight;
-        let closedHeight = dtHeight >= ddHeight ? dtHeight : ddHeight;
+        const closedHeight = dtHeight >= ddHeight ? dtHeight : ddHeight;
 
-        if (closedHeight > 0) {
-          closedHeight = `${closedHeight}px`;
-        }
-
-        this.closedHeight = closedHeight;
+        this.closedHeight = `${closedHeight}px`;
       },
     },
 
@@ -129,7 +120,7 @@
 
     &--shrink-on-mobile &__toggle {
       display: block;
-      padding: $spacing--5 $spacing--0 $spacing--0 $spacing--0;
+      padding-top: $spacing--5;
 
       @include media(xs) {
         display: none;

@@ -6,17 +6,29 @@
       <hr :class="b('languages-separator')">
       <div :class="b('navigation')">Navigation</div>
       <hr :class="b('navigation-separator')">
-      <div :class="b('social')">Folgen Sie uns auf: (F) (L) (X)</div>
+      <div :class="b('social')">
+        <div :class="b('social-inner')">
+          <c-social-media/>
+        </div>
+      </div>
       <hr :class="b('social-separator')">
-      <div :class="b('sonepar')">A Sonepar Company</div>
+      <div :class="b('sonepar')">
+        <div :class="b('sonepar-inner')">
+          <a :class="b('sonepar-link')" :href="$t('c-footer.soneparLink')" target="_blank">{{ $t('c-footer.sonepar') }}</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import cSocialMedia from '@/components/c-social-media';
+
   export default {
     name: 'c-footer',
-    // components: {},
+    components: {
+      cSocialMedia,
+    },
     // mixins: [],
 
     // props: {},
@@ -82,7 +94,7 @@
     &__sonepar,
     &__social,
     &__social-separator {
-      flex: 0 1 percentage (12 / 12);
+      flex: 0 1 percentage(12 / 12);
     }
 
     &__navigation-separator,
@@ -123,8 +135,16 @@
 
     &__social {
       @include media(xs) {
-        flex: 0 1 percentage(6 / 12);
+        flex: 0 1 percentage(7 / 12);
         order: 5;
+      }
+    }
+
+    &__social-inner {
+      padding: $spacing--20 $spacing--10 $spacing--30 $spacing--0;
+
+      @include media(sm) {
+        padding-right: $spacing--30;
       }
     }
 
@@ -135,14 +155,29 @@
     }
 
     &__sonepar {
+      @include media(xs) {
+        flex: 0 1 percentage(5 / 12);
+        order: 4;
+      }
+    }
+
+    &__sonepar-inner {
       @include font($font-size: $font-size--18, $font-weight: $font-weight--bold);
 
       padding: $spacing--20 $spacing--0 $spacing--30 $spacing--10;
 
-      @include media(xs) {
-        order: 4;
-        padding-left: $spacing--20;
+      @include media(sm) {
+        padding-left: $spacing--30;
       }
+    }
+
+    &__sonepar-link,
+    &__sonepar-link:hover,
+    &__sonepar-link:active,
+    &__sonepar-link:focus {
+      border: none;
+      color: $color-grayscale--1000;
+      padding: 0;
     }
   }
 </style>
