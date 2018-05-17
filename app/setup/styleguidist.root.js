@@ -1,13 +1,4 @@
-import VueI18n from 'vue-i18n';
-import { I18N_FALLBACK, I18N_FALLBACK_MESSAGES } from './i18n';
-
-const i18n = new VueI18n({
-  locale: I18N_FALLBACK,
-  fallbackLocale: I18N_FALLBACK,
-  messages: {
-    [I18N_FALLBACK]: I18N_FALLBACK_MESSAGES,
-  },
-});
+import { i18n } from './i18n';
 
 export default previewComponent => ({
   i18n,
@@ -18,10 +9,7 @@ export default previewComponent => ({
   },
   render(createElement) {
     // v-app to support vuetify plugin
-    return createElement(
-      's-app',
-      [createElement(previewComponent)]
-    );
+    return createElement(previewComponent);
   }
 });
 
