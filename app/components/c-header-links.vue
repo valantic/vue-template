@@ -1,47 +1,36 @@
 <template>
   <div :class="b()">
-    <div v-if="userLoggedIn" :class="b('item', { active: accountActive })">
-      <a :class="b('link')" :href="$t('c-header-links.linkAccount')">
+    <div v-for="item in items" v-if="item.loggedIn" :class="b('item', { active: item.isActive })">
+      <a :class="b('link')" :href="$t(item.link)">
         <e-icon
           :class="b('icon')"
+          :icon="item.icon"
           inline
-          icon="i-account"
           width="25px"
           height="25px"
+          @click="onClick"
         />
-        <span :class="b('label')">{{ username }}</span>
+        <span v-if="item.label" :class="b('label')">{{ $t(item.label) }}</span>
+        <span v-else :class="b('label')">{{ username }}</span>
       </a>
     </div>
-    <div v-if="userLoggedIn" :class="b('item', { active: wishlistActive })">
-      <a :class="b('link')" :href="$t('c-header-links.linkWishlist')">
-        <e-icon
-          :class="b('icon')"
-          inline
-          icon="i-wishlist"
-          width="25px"
-          height="25px"
-        />
-        <span :class="b('label')">{{ $t('c-header-links.labelWishlist') }}</span>
-      </a>
-    </div>
-    <div v-if="!userLoggedIn" :class="b('item', { active: loginActive })">
-      <a :class="b('link')" :href="$t('c-header-links.linkLogin')">
-        <e-icon
-          :class="b('icon')"
-          inline
-          icon="i-account"
-          width="25px"
-          height="25px"
-        />
-        <span :class="b('label')">{{ $t('c-header-links.labelLogin') }}</span>
-      </a>
-    </div>
+    <filter id="dropshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"></feGaussianBlur>
+      <feOffset in="blur" result="offsetBlur" dx="0" dy="0"></feOffset>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
   </div>
 </template>
 
 <script>
   import eIcon from '@/components/e-icon';
 
+  /**
+   * Renders three links which contain an icon and a text element each. Should be displayed in the header.
+   */
   export default {
     name: 'c-header-links',
     components: {
@@ -50,33 +39,58 @@
     // mixins: [],
 
     props: {
-      isAccountActive: {
+      /**
+       * Defines if the account-link should be active.
+       */
+      account: {
         type: Boolean,
         default: false,
       },
-      isWishlistActive: {
+
+      /**
+       * Defines if the wishlist-link should be active.
+       */
+      wishlist: {
         type: Boolean,
         default: false,
       },
-      isLoginActive: {
+
+      /**
+       * Defines if the login-link should be active.
+       */
+      login: {
         type: Boolean,
         default: false,
       }
     },
-    // data() {},
+    data() {
+      return {
+        items: [
+          {
+            name: 'account', loggedIn: true, icon: 'i-account', link: 'urls.linkAccount', label: '', isActive: this.account
+          },
+          {
+            name: 'wishlist', loggedIn: true, icon: 'i-wishlist', link: 'urls.linkWishlist', label: 'c-header-links.labelWishlist', isActive: this.wishlist
+          },
+          {
+            name: 'login', loggedIn: false, icon: 'i-account', link: 'urls.linkLogin', label: 'c-header-links.labelLogin', isActive: this.login
+          }
+        ],
+      };
+    },
 
     computed: {
       userLoggedIn() {
         return true; // TODO: receive user state through the Vuex Store
       },
       accountActive() {
-        return this.isAccountActive; // TODO: get user state of Vuex Store, to determine if user is on account page
+        return this.account; // TODO: get user state of Vuex Store, to determine if user is on account page
       },
       wishlistActive() {
-        return this.isWishlistActive; // TODO: get user state of Vuex Store, to determine if wishlist is active
+        return this.wishlist; // TODO: get user state of Vuex Store, to determine if wishlist is active
       },
       loginActive() {
-        return this.isLoginActive; // TODO: get user state of Vuex Store, to determine if login is active
+        return this.login; // TODO: get user state of Vuex Store, to determine if login is active
       },
       username() {
         return 'Max Muster'; // TODO: get user name of Vuex Store
@@ -95,7 +109,17 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      onClick(event) {
+        /**
+         * Click event
+         *
+         * @event click
+         * @type {object}
+         */
+        this.$emit('click', event);
+      },
+    },
     // render() {},
   };
 </script>
@@ -136,11 +160,16 @@
 
       &:hover {
         border-bottom: none;
+
+        .e-icon svg {
+          -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+          filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+        }
       }
     }
 
     &__label {
-      @include font($font-size--10, 13, $font-weight--semi-bold);
+      @include font($font-size--10, 13px, $font-weight--semi-bold);
 
       display: none;
       color: $color-grayscale--1000;

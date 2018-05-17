@@ -24,10 +24,12 @@
     "productDocumentsTitle": "Dokumente",
     "productVideosTitle": "Videos"
   },
-  "c-header-links": {
+  "urls": {
     "linkAccount": "/account",
     "linkWishlist": "/wishlist",
-    "linkLogin": "/login",
+    "linkLogin": "/login"
+  },
+  "c-header-links": {
     "labelWishlist": "Merkliste",
     "labelLogin": "Anmelden"
   }

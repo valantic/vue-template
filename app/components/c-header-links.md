@@ -1,6 +1,7 @@
 ### Styles
 
-#### Header Links
-```
-<c-header-links />
+#### Header-Links
+
+```vue
+<c-header-links account="true" wishlist="true" />
 ```
