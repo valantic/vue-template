@@ -8,12 +8,12 @@ module.exports = {
       styleguide: true
     })
   },
-  renderRootJsx: path.join(__dirname, 'app/setup/styleguidist.root.js'),
+  renderRootJsx: path.join(__dirname, 'app/setup/styleguidist/root.js'),
   require: [
     'babel-polyfill', // In vue application imported by webpack. Was not supported by vue-styleguidist
     path.join(__dirname, 'app/setup/_scss.scss'), // In vue application imported by main.js. Was not supported by vue-stylgudist
-    path.join(__dirname, 'app/setup/styleguidist.style.scss'),
-    path.join(__dirname, 'app/setup/styleguidist.required.js'),
+    path.join(__dirname, 'app/setup/styleguidist/style.scss'),
+    path.join(__dirname, 'app/setup/styleguidist/required.js'),
   ],
   defaultExample: 'app/setup/styleguide.fallback.md',
   components: 'app/components/**/*.vue',
@@ -67,7 +67,7 @@ module.exports = {
     },
   ],
   mixins: [
-    'app/setup/styleguidist.mixins.js'
+    'app/setup/styleguidist/mixins.js'
   ],
   ignore: [
     '**/components/s-palette-item.vue',
