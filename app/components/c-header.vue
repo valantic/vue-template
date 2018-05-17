@@ -1,7 +1,7 @@
 <!-- TODO - This component is supposed to be functional -->
 <template>
-  <div :class="b(activeTheme)">
-    <div :class="b('inner', activeTheme)">
+  <div :class="b()">
+    <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">Icons</div>
       <div :class="b('assortment')">Sortiment</div>
@@ -11,12 +11,10 @@
 </template>
 
 <script>
-  import themes from '@/mixins/themes';
-
   export default {
     name: 'c-header',
     // components: {},
-    mixins: [themes],
+    // mixins: [],
 
     // props: {},
     // data() {
@@ -45,38 +43,29 @@
 <style lang="scss">
   .c-header {
     @include z-index(header);
-    @include theme((
-      border-color: color-primary--1
-    ));
 
     position: fixed;
     width: 100%;
     display: flex;
-    border-bottom: 2px solid $color-primary--1;
+    border-bottom: 2px solid var(--theme-color-primary-1);
     box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
 
     &::before {
       content: '';
       flex: 1 1 auto;
-      background-color: $color-secondary--1;
+      background-color: var(--theme-color-secondary-1);
       display: block; /* IE 11 */
     }
 
     &::after {
       content: '';
       flex: 1 1 auto;
-      background-color: $color-secondary--2;
+      background-color: var(--theme-color-secondary-2);
       display: block; /* IE 11 */
     }
 
     &__inner {
-      @include theme((
-        background-gradient: (
-          from: color-gradient--2-0,
-          to: color-gradient--2-1
-        )
-      ));
-
+      background: linear-gradient(to right, var(--theme-color-gradient-2-0), var(--theme-color-gradient-2-1));
       color: $color-primary--3;
       max-width: map-get($grid-breakpoints, xl);
       width: 100%;

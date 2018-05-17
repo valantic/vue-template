@@ -16,7 +16,9 @@ export default {
      *
      * @returns {String}  theme   Current theme id
      */
-    getTheme: state => state.theme
+    getTheme(state) {
+      return state.theme;
+    }
   },
   mutations: {
     /**

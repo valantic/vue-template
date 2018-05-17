@@ -55,7 +55,36 @@
         globalTheme: 'session/getTheme'
       }),
     },
-    // watch: {},
+
+    watch: {
+      /**
+       * Watches for changes of the «globalTheme» and sets or changes the stylesheet with the
+       * custom theme css-variables
+       */
+      globalTheme: {
+        immediate: true,
+        handler() {
+          const cssId = 'themeStylesheet';
+          const theme = this.globalTheme;
+
+          if (!document.getElementById(cssId)) {
+            const head = document.getElementsByTagName('head')[0];
+            const link = document.createElement('link');
+
+            link.id = cssId;
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = `/static/css/theme-${theme}.css`;
+            link.media = 'all';
+            head.appendChild(link);
+          } else {
+            const link = document.getElementById(cssId);
+
+            link.href = `/static/css/theme-${theme}.css`;
+          }
+        }
+      }
+    },
 
     // beforeCreate() {},
     // created() {},
@@ -71,13 +100,8 @@
     methods: {
       onChange(event) {
         this.$store.commit('session/setTheme', event.target.value);
-      },
+      }
     },
     // render() {},
   };
 </script>
-
-<style lang="scss">
-  .s-theme-selector {
-  }
-</style>

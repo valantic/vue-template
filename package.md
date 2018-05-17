@@ -109,3 +109,4 @@ None
 * [webpack-auto-inject-version](https://github.com/radswiat/webpack-auto-inject-version) - Webpack plugin to auto inject version into html or file.
 * [webpack-dev-server](https://github.com/webpack/webpack-dev-server) - Serves a webpack app. Updates the browser on changes.
 * [webpack-monitor](https://github.com/webpackmonitor/webpackmonitor) - Webpack Monitor is a configurable Webpack plugin that captures relevant statistics on your production builds.
+* [css-vars-ponyfill](https://github.com/jhildenbiddle/css-vars-ponyfill) - :horse: IE Polyfill for CSS Variables (used for themes)

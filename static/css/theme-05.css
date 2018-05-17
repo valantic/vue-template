@@ -1,0 +1,11 @@
+/**
+ * Theme id:    05
+ * Theme name:  Electroplast SA
+ */
+:root {
+  --theme-color-primary-1: #00a4e0;
+  --theme-color-secondary-1: #2e3089;
+  --theme-color-secondary-2: #7275d8;
+  --theme-color-gradient-2-0: #2e3089;
+  --theme-color-gradient-2-1: #7275d8;
+}

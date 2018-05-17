@@ -3,6 +3,7 @@ import VueBemCn from 'vue-bem-cn';
 import VueI18n from 'vue-i18n';
 import VueAxios from '@/setup/plugins/axios';
 import store from '@/store/index';
+import cssVars from 'css-vars-ponyfill';
 
 // Polyfills and self executing
 import 'intersection-observer';
@@ -12,6 +13,12 @@ import './lib/ls.attrchange'; // lazy sizes attribute change observer
 
 import { I18N_FALLBACK, I18N_FALLBACK_MESSAGES } from './i18n';
 
+/**
+ * Polyfill for css vars on IE11 https://github.com/jhildenbiddle/css-vars-ponyfill
+ */
+cssVars({
+  // ...
+});
 Vue.use(VueI18n);
 Vue.use(VueAxios);
 Vue.use(VueBemCn, {

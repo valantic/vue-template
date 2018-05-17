@@ -169,29 +169,19 @@ module.exports = function(env = {}, options = {}) {
         pipeline: [
           postCssCriticalSplit({
             'output': 'critical',
-          })
+          }),
+          cssNano()
         ]
       }));
 
-      // TEST
-      pluginCollection.push(new PostCssPipelineWebpackPlugin({
-        suffix: 'theme-01',
-        pipeline: [
-          postCssCriticalSplit({
-            'blockTag':'theme-01',
-            'output': 'critical',
-          })
-        ]
-      }));
-
-      // Create minimized CSS
+      // Create minimized CSS (Full css => incl. critical css)
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
         suffix: '', // Defining an empty string makes it possible not create an additional file
         pipeline: [
           postCssCriticalSplit({
-            'output': 'rest'
-          })
-          // cssNano() TODO: enable css minifier
+            'output': 'input',
+          }),
+          cssNano()
         ]
       }));
 
@@ -293,7 +283,7 @@ module.exports = function(env = {}, options = {}) {
           }
         },
         {
-          test: /\.scss$/,
+          test: /\.(scss|css)$/,
           use: scssLoader(),
         },
         {
