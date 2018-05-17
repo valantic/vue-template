@@ -1,4 +1,4 @@
-// store/modules/order/index.js
+// store/modules/catalog/index.js
 
 export default {
   namespaced: true,

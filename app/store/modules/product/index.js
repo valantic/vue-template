@@ -1,14 +1,20 @@
 // store/modules/product/index.js
 
 import productData from './mock/product';
+import collapsibleData from './mock/collapsible';
 
 export default {
   namespaced: true,
   state: {
     /**
-     * @type {Object}   Stores product data
+     * @property {Object}   Stores product data
      */
-    product: productData
+    product: productData,
+
+    /**
+     * @property {Array}   Stores collapsible items
+     */
+    collapsible: collapsibleData,
   },
   getters: {
     /**
@@ -18,7 +24,16 @@ export default {
      *
      * @returns  {Array}  product   Product data
      */
-    getProduct: state => state.product
+    product: state => state.product,
+
+    /**
+     * Gets collapsible items to create an accordion
+     *
+     * @param   {Object}  state   Current state
+     *
+     * @returns  {Array}  items   Collapsible items (accordion)
+     */
+    collapsible: state => state.collapsible
   },
   mutations: {},
   actions: {},
