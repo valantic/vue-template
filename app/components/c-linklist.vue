@@ -1,14 +1,7 @@
 <template>
   <ul :class="b('list')">
-    <li
-      v-for="item in items"
-      :class="b('item')"
-    >
-      <a
-        :class="b('link')"
-        :href="item.value"
-        :title="item.key"
-      >
+    <li v-for="item in items" :class="b('item')" :key="item.key">
+      <a :class="b('link')" :href="item.value" :title="item.key">
         {{ item.key }}
       </a>
     </li>

@@ -38,14 +38,23 @@
             <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
             <div :class="b('description-text')" v-html="product.description"></div>
           </div>
-          <div v-if="product.media_attributes" :class="b('documents')">
-            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDocumentsTitle') }}</e-heading>
-            <c-linklist :items="product.media_attributes"/>
-          </div>
-          <div v-if="product.product_videos" :class="b('videos')">
-            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productVideosTitle') }}</e-heading>
-            <c-linklist :items="product.product_videos"/>
-          </div>
+          <c-collapse-group>
+            <c-collapse v-if="product.media_attributes"
+                        :class="b('documents')"
+                        :background="false"
+                        :title="$t('c-product-detail.productDocumentsTitle')"
+                        :active="true"
+            >
+              <c-linklist :items="product.media_attributes"/>
+            </c-collapse>
+            <c-collapse v-if="product.product_videos"
+                        :class="b('videos')"
+                        :background="false"
+                        :title="$t('c-product-detail.productVideosTitle')"
+            >
+              <c-linklist :items="product.product_videos"/>
+            </c-collapse>
+          </c-collapse-group>
         </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
@@ -64,14 +73,18 @@
 <script>
   import { mapGetters } from 'vuex';
   import cAttributeGrid from '@/components/c-attribute-grid';
-  import CLinklist from "@/components/c-linklist";
+  import cLinklist from '@/components/c-linklist';
+  import cCollapseGroup from '@/components/c-collapse-group';
+  import cCollapse from '@/components/c-collapse';
 
   export default {
     name: 'c-product-detail',
 
     components: {
-      CLinklist,
+      cLinklist,
       cAttributeGrid,
+      cCollapseGroup,
+      cCollapse,
     },
     // mixins: [],
 
@@ -225,7 +238,7 @@
       @include font($font-size--14, $line-height: 18px);
 
       color: $color-grayscale--200;
-      padding: $spacing--10 $spacing--20;
+      padding: $spacing--10 $spacing--20 $spacing--30 $spacing--20;
 
       @include media(sm) {
         padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
