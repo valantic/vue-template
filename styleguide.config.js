@@ -28,7 +28,7 @@ module.exports = {
       sections: [
         {
           name: 'Informations',
-          content: 'app/styleguide/components/s-welcome.md',
+          content: 'app/styleguide/core/index.md',
         }
       ]
     },
@@ -81,5 +81,5 @@ module.exports = {
     '**/components/c-attribute-grid-items.vue',
   ],
   theme,
-  styles
+  styles,
 };
