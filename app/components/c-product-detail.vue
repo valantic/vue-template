@@ -8,13 +8,12 @@
       <div :class="b('main', {area: 'top' })">
 
         <div :class="b('gallery')">
-          gallery<br>
-          {{ product }}
+          gallery
         </div>
 
         <div :class="b('specs')">
           <div :class="b('technical-data')">
-            <c-attribute-grid :attributes="product.technicalData"/>
+            <c-attribute-grid :attributes="product.main_attributes"/>
           </div>
           <div :class="b('attributes')">
             <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
@@ -53,6 +52,13 @@
                         :title="$t('c-product-detail.productVideosTitle')"
             >
               <c-linklist :items="product.product_videos"/>
+            </c-collapse>
+          </c-collapse-group>
+        </div>
+        <div :class="b('details')">
+          <c-collapse-group>
+            <c-collapse v-if="product.tech_attributes" :title="$t('c-product-detail.technicalDataTitle')">
+              <c-attribute-grid :attributes="product.tech_attributes"/>
             </c-collapse>
           </c-collapse-group>
         </div>
@@ -100,7 +106,8 @@
          *
          * @returns  {Object}  product - Single product from the store
          */
-        product: 'product/product'
+        product: 'product/product',
+        collapsible: 'product/collapsible',
       })
     }
     // watch: {},
