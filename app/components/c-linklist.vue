@@ -1,6 +1,6 @@
 <template>
   <ul :class="b('')">
-    <li v-for="value in items" :class="b('item')">
+    <li v-for="(value, index) in items" :class="b('item')" :key="index">
       <a :class="b('link')"
          :href="value"
          target="_blank"
