@@ -37,28 +37,24 @@
             <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
             <div :class="b('description-text')" v-html="product.description"></div>
           </div>
+        </div>
+        <div :class="b('details')">
           <c-collapse-group>
-            <c-collapse v-if="product.media_attributes"
+            <c-collapse v-if="product.tech_attributes"
+                        :title="$t('c-product-detail.technicalDataTitle')"
+            >
+              <c-attribute-grid :attributes="product.tech_attributes"/>
+            </c-collapse>
+            <c-collapse v-if="hasMedia"
                         :class="b('documents')"
                         :background="false"
                         :title="$t('c-product-detail.productDocumentsTitle')"
                         :active="true"
             >
-              <c-linklist :items="product.media_attributes"/>
-            </c-collapse>
-            <c-collapse v-if="product.product_videos"
-                        :class="b('videos')"
-                        :background="false"
-                        :title="$t('c-product-detail.productVideosTitle')"
-            >
-              <c-linklist :items="product.product_videos"/>
-            </c-collapse>
-          </c-collapse-group>
-        </div>
-        <div :class="b('details')">
-          <c-collapse-group>
-            <c-collapse v-if="product.tech_attributes" :title="$t('c-product-detail.technicalDataTitle')">
-              <c-attribute-grid :attributes="product.tech_attributes"/>
+              <e-heading v-if="hasPdfDocuments" tag-name="h3">{{ $t('c-product-detail.productPdfsTitle') }}</e-heading>
+              <c-linklist v-if="hasPdfDocuments" :items="product.media_attributes.productDataSheet"/>
+              <e-heading v-if="hasVideos" tag-name="h3">{{ $t('c-product-detail.productVideosTitle') }}</e-heading>
+              <c-linklist v-if="hasVideos" :items="product.media_attributes.video"/>
             </c-collapse>
           </c-collapse-group>
         </div>
@@ -73,7 +69,6 @@
     </section>
 
   </div>
-
 </template>
 
 <script>
@@ -108,7 +103,28 @@
          */
         product: 'product/product',
         collapsible: 'product/collapsible',
-      })
+      }),
+      hasPdfDocuments() {
+        if (Object.keys(this.product.media_attributes).length === 0) return false;
+
+        if (this.product.media_attributes.productDataSheet == null) return false;
+
+        if (Object.keys(this.product.media_attributes.productDataSheet).length === 0) return false;
+
+        return true;
+      },
+      hasVideos() {
+        if (Object.keys(this.product.media_attributes).length === 0) return false;
+
+        if (this.product.media_attributes.video == null) return false;
+
+        if (Object.keys(this.product.media_attributes.video).length === 0) return false;
+
+        return true;
+      },
+      hasMedia() {
+        return this.hasPdfDocuments || this.hasVideos;
+      }
     }
     // watch: {},
 
@@ -246,23 +262,9 @@
 
       color: $color-grayscale--200;
       padding: $spacing--10 $spacing--20 $spacing--30 $spacing--20;
-
-      @include media(sm) {
-        padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
-      }
     }
 
     &__documents {
-      .e-heading--underline {
-        width: percentage(1);
-
-        .e-heading__inner {
-          width: percentage(1);
-        }
-      }
-    }
-
-    &__videos {
       .e-heading--underline {
         width: percentage(1);
 

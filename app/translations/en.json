@@ -22,6 +22,7 @@
   "c-product-detail": {
     "productDescriptionTitle": "Product description",
     "productDocumentsTitle": "Documents",
+    "productPdfsTitle": "PDFs",
     "productVideosTitle": "Videos",
     "technicalDataTitle": "Technical data"
   }

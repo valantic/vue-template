@@ -1,8 +1,11 @@
 <template>
-  <ul :class="b('list')">
-    <li v-for="item in items" :class="b('item')" :key="item.key">
-      <a :class="b('link')" :href="item.value" :title="item.key">
-        {{ item.key }}
+  <ul :class="b('')">
+    <li v-for="value in items" :class="b('item')">
+      <a :class="b('link')"
+         :href="value"
+         target="_blank"
+      >
+        {{ value }}
       </a>
     </li>
   </ul>
@@ -14,12 +17,12 @@
     // components: {},
     // mixins: [],
 
-    /**
-     * Defines the items, displayed in the list.
-     */
     props: {
+      /**
+       * Defines the items, displayed in the list.
+       */
       items: {
-        type: Array,
+        type: Object,
         required: true
       }
     },
@@ -47,12 +50,12 @@
 </script>
 
 <style lang="scss">
-  .c-linklist__list {
+  .c-linklist {
     list-style-type: none;
     padding-left: $spacing--0;
-  }
 
-  .c-linklist__link {
-    padding-left: $spacing--0;
+    &__link {
+      padding-left: $spacing--0;
+    }
   }
 </style>
