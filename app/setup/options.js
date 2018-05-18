@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import VueBemCn from 'vue-bem-cn';
+import store from '@/store/index';
 import VueI18n from 'vue-i18n';
 import VueAxios from '@/setup/plugins/axios';
-import store from '@/store/index';
+import VueBemCn from 'vue-bem-cn';
 import cssVars from 'css-vars-ponyfill';
 
 // Polyfills and self executing
