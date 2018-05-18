@@ -1,0 +1,23 @@
+/**
+ * Theme id:    05
+ * Theme name:  Electroplast SA
+ */
+
+$theme-05: (
+    color-primary--1: #00a4e0,
+    color-secondary--1: #2e3089,
+    color-secondary--2: #7275d8,
+    color-gradient-2-0: #2e3089,
+    color-gradient-2-1: #7275d8,
+);
+
+:root {
+  --theme-color-primary-1: #{map_get($theme-05, 'color-primary--1')};
+  --theme-color-primary-1--rgb: #{calc-rgb(map_get($theme-05, 'color-primary--1'))};
+  --theme-color-secondary-1: #{map_get($theme-05, 'color-secondary--1')};
+  --theme-color-secondary-1--rgb: #{calc-rgb(map_get($theme-05, 'color-secondary--1'))};
+  --theme-color-secondary-2: #{map_get($theme-05, 'color-secondary--2')};
+  --theme-color-secondary-2--rgb: #{calc-rgb(map_get($theme-05, 'color-secondary--2'))};
+  --theme-color-gradient-2-0: #{map_get($theme-05, 'color-gradient-2-0')};
+  --theme-color-gradient-2-1: #{map_get($theme-05, 'color-gradient-2-1')};
+}

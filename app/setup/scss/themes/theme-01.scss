@@ -1,0 +1,22 @@
+/**
+ * Theme id:    01
+ * Theme name:  Winterhalter Fenner
+ */
+$theme-01: (
+  color-primary--1: #ffed00,
+  color-secondary--1: #2c68a0,
+  color-secondary--2: #75b4e0,
+  color-gradient-2-0: #2c68a0,
+  color-gradient-2-1: #75b4e0,
+);
+
+:root {
+  --theme-color-primary-1: #{map_get($theme-01, 'color-primary--1')};
+  --theme-color-primary-1--rgb: #{calc-rgb(map_get($theme-01, 'color-primary--1'))};
+  --theme-color-secondary-1: #{map_get($theme-01, 'color-secondary--1')};
+  --theme-color-secondary-1--rgb: #{calc-rgb(map_get($theme-01, 'color-secondary--1'))};
+  --theme-color-secondary-2: #{map_get($theme-01, 'color-secondary--2')};
+  --theme-color-secondary-2--rgb: #{calc-rgb(map_get($theme-01, 'color-secondary--2'))};
+  --theme-color-gradient-2-0: #{map_get($theme-01, 'color-gradient-2-0')};
+  --theme-color-gradient-2-1: #{map_get($theme-01, 'color-gradient-2-1')};
+}
