@@ -25,8 +25,8 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
   import CFormNotification from '@/components/c-form-notification';
+  import formStates from '../mixins/form-states';
 
   /**
    * Input form component
