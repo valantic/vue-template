@@ -83,7 +83,7 @@
 
 <style lang="scss">
   .e-info-label {
-    @include font($font-size: $font-size--14, $line-height: 14px, $font-weight: $font-weight--semi-bold);
+    @include font($font-size--14, 14px, $font-weight--semi-bold);
 
     &--design-new::after {
       content: '';
