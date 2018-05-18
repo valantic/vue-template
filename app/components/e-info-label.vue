@@ -1,8 +1,13 @@
 <template>
   <div :class="b({ design })">
-    <div :class="b('inner', { design, hasInfo, hasHover })">
+    <div
+      :class="b('inner', { design, hasInfo })"
+      @click="onClick"
+      @mouseover="onMouseOver"
+      @mouseout="onMouseOut"
+    >
       <span :class="b('label')">{{ label }}</span>
-      <span :class="b('info')"><span :class="b('separator')"></span>{{ info }}</span>
+      <span ref="info" :class="b('info')"><span :class="b('separator')"></span>{{ info }}</span>
     </div>
   </div>
 </template>
@@ -48,7 +53,8 @@
     data() {
       return {
         hasInfo: !!this.$props.priceTypeEndDate,
-        hasHover: true,
+        hasTouch: 'ontouchstart' in document.documentElement
+          || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
       };
     },
 
@@ -76,7 +82,23 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      onClick() {
+        if (this.hasTouch) {
+          this.$refs.info.classList.toggle('e-info-label__info--active');
+        }
+      },
+      onMouseOver() {
+        if (!this.hasTouch) {
+          this.$refs.info.classList.add('e-info-label__info--active');
+        }
+      },
+      onMouseOut() {
+        if (!this.hasTouch) {
+          this.$refs.info.classList.remove('e-info-label__info--active');
+        }
+      }
+    },
     // render() {},
   };
 </script>
@@ -147,8 +169,7 @@
       transition: 0.25s ease-out;
     }
 
-    &__inner--has-info:hover &__info,
-    &__inner--has-info &__inner--has-hover &__info {
+    &__inner--has-info &__info--active {
       opacity: 1;
       padding-right: 8px;
       max-width: 100px;
