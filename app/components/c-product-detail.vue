@@ -30,9 +30,9 @@
 
       <aside :class="b('sidebar', {area: 'top' })">
         <div :class="b('add-to-cart')">
-          availability /
+          availability
           <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
-          / qty / add to cart
+          <c-add-to-cart :sku="product.sku" label/>
         </div>
       </aside>
 
@@ -64,12 +64,14 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  import cAddToCart from '@/components/c-add-to-cart';
   import cPrices from '@/components/c-prices';
   import cAttributeGrid from '@/components/c-attribute-grid';
 
   export default {
     name: 'c-product-detail',
     components: {
+      cAddToCart,
       cPrices,
       cAttributeGrid,
     },
@@ -162,10 +164,10 @@
     }
 
     &__sidebar {
-      padding: $spacing--0 $spacing--10;
+      padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
 
       @include media(md) {
-        padding: $spacing--0 $spacing--30;
+        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
       }
 
       @include media(sm) {

@@ -2,7 +2,6 @@ import eIcon from '@/components/e-icon';
 import eButton from '@/components/e-button';
 import ePicture from '@/components/e-picture';
 import eHeading from '@/components/e-heading';
-import ePanel from '@/components/c-panel';
 import eInput from '@/components/e-input';
 import eCheckbox from '@/components/e-checkbox';
 import eLabel from '@/components/e-label';
@@ -20,7 +19,6 @@ export default {
       eCheckbox,
       eLabel,
       eProgress,
-      ePanel,
       eInfoLabel,
     ];
 
@@ -34,7 +32,6 @@ export default {
       Vue.component(eIcon.name, eIcon);
       Vue.component(ePicture.name, ePicture);
       Vue.component(eHeading.name, eHeading);
-      Vue.component(ePanel.name, ePanel);
       Vue.component(eProgress.name, eProgress);
       Vue.component(eInput.name, eInput);
       Vue.component(eCheckbox.name, eCheckbox);

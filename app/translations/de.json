@@ -32,5 +32,8 @@
   "c-prices": {
     "grossLabel": "Bruttopreis",
     "netLabel": "Nettopreis"
+  },
+  "c-add-to-cart": {
+    "addToCart": "in den Warenkorb"
   }
 }
