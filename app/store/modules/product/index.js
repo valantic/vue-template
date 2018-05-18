@@ -1,13 +1,19 @@
 import productData from './mock/product';
 import api from './../../utils/api';
+import collapsibleData from './mock/collapsible';
 
 export default {
   namespaced: true,
   state: {
     /**
-     * @type {Object}   Stores product data
+     * @property {Object}   Stores product data
      */
     product: productData,
+
+    /**
+     * @property {Array}   Stores collapsible items
+     */
+    collapsible: collapsibleData,
 
     /**
      * @type {Object}   Stores ERP data for product
@@ -37,6 +43,15 @@ export default {
      * @returns  {Object}  erp   ERP data for product
      */
     erp: state => state.erp,
+
+    /**
+     * Gets collapsible items to create an accordion
+     *
+     * @param   {Object}  state   Current state
+     *
+     * @returns  {Array}  items   Collapsible items (accordion)
+     */
+    collapsible: state => state.collapsible
   },
   mutations: {
     /**

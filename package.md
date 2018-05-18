@@ -86,7 +86,7 @@ None
 * [file-loader](https://github.com/webpack-contrib/file-loader) - Instructs webpack to emit the required object as file and to return its public URL.
 * [friendly-errors-webpack-plugin](https://github.com/geowarin/friendly-errors-webpack-plugin) - Friendly-errors-webpack-plugin recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them to provide a better Developer Experience.
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
-* [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image loader module for webpack.
+* [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image optimizer module for webpack.
 * [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing.
 * [license-checker](https://github.com/davglass/license-checker) - Allows us to check the whole project for use licenses (see scripts).
 * [launch-editor-middleware](https://github.com/yyx990803/launch-editor) - Allows to open Vue components in editor from Vue inspector.
