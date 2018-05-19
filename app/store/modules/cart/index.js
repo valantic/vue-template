@@ -7,7 +7,7 @@ export default {
     /**
      * @type {Object}   Stores cart items
      */
-    cart: cartData, // TODO - remove mock data once we have the api
+    cart: cartData,
   },
   getters: { },
   mutations: {

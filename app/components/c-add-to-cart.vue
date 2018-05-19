@@ -65,7 +65,6 @@
         quantity: this.$props.step,
         hasLabel: !!this.$props.label,
         progress: false,
-        debug: '', // TODO - remove
       };
     },
 
@@ -88,7 +87,7 @@
         'addToCart'
       ]),
       onClick() {
-        let quantity = this.quantity.toString().match(/[0-9]/g);
+        const quantity = this.quantity.toString().match(/[0-9]/g);
 
         this.quantity = quantity && quantity.length ? parseInt(quantity[0], 10) : 1; // IE 11 / Safari
 
@@ -140,6 +139,7 @@
   }
 
   .e-button__inner {
+    /* stylelint-disable-next-line declaration-no-important */
     display: flex !important;
     align-items: center;
     justify-content: center;

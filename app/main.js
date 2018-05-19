@@ -6,6 +6,8 @@ import Vue from 'vue'; // eslint-disable-line import/first
 import options from './setup/options';
 import components from './setup/components';
 
+import './setup/plugins';
+
 let vueOptions = options;
 
 Vue.config.productionTip = false;

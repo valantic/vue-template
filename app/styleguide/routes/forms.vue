@@ -24,7 +24,8 @@
                  name="notes"
                  placeholder="your notes"
                  state="info"
-                 notification="this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>"
+                 notification="this is the info message<br/>this is the info message<br/>
+                  this is the info message<br/>this is the info message<br/>this is the info message<br/>"
         />
       </e-label>
       <e-label name="Notes2:" position="top" state="success">
