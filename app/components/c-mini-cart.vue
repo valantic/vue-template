@@ -1,20 +1,42 @@
 <template>
-  <div :class="b({ active })" @click="onClick">
+  <a :class="b({ active, state })" :href="$t('urls.cart')">
     <div v-if="miniCartHasItems" :class="b('count')">{{ miniCart.cartQuantity }}</div>
     <div :class="b('icon')"><e-icon inline icon="i-cart"/></div>
     <div v-if="miniCartHasPrice" :class="b('total')">{{ displayPrice }}</div>
-  </div>
+  </a>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
 
+  /**
+   *
+   * This component renders the mini cart.
+   * It takes the amount of items and total price from state.miniCart from vuex cart store.
+   *
+   */
   export default {
     name: 'c-mini-cart',
     // components: {},
     // mixins: [],
 
     props: {
+      /**
+       * Sets the display state of the minicart
+       *
+       * Valid values: `full, reduced`
+       */
+      state: {
+        type: String,
+        default: 'full',
+        validator(value) {
+          return [
+            'full',
+            'reduced'
+          ].includes(value);
+        }
+      },
+
       /**
        * Forces the active state
        */
@@ -50,41 +72,40 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    methods: {
-      onClick(event) {
-        /**
-         * Click event.
-         *
-         * @event click
-         * @type {object}
-         */
-        this.$emit('click', event);
-      },
-    },
+    // methods: {},
     // render() {},
   };
 </script>
 
 <style lang="scss">
   .c-mini-cart {
-    position: relative;
-    padding: 10px;
-    cursor: pointer;
+    @include font($font-size--10, 10px);
 
-    @include media(sm) {
-      padding: 0;
+    display: inline-block;
+    position: relative;
+    color: $color-grayscale--1000;
+    border-bottom: none;
+    padding: $spacing--0;
+
+    &:hover,
+    &:active {
+      border-bottom: none;
+      color: $color-grayscale--1000;
     }
 
     &__icon {
       width: 22px;
       height: 24px;
-
-      @include media(sm) {
-        margin: 15px auto 0 auto;
-      }
+      margin: $spacing--15 auto $spacing--0;
 
       path {
         fill: $color-grayscale--1000;
+      }
+    }
+
+    &--state-reduced &__icon {
+      @include media(sm) {
+        margin: $spacing--10 auto $spacing--0 auto;
       }
     }
 
@@ -97,36 +118,41 @@
     }
 
     &__count {
-      @include font($font-size--10, 10px, $font-weight--regular);
-
       position: absolute;
       right: 50%;
-      top: -5px;
-      margin-right: 10px;
-      display: none;
+      top: $spacing--10;
+      margin-right: $spacing--10;
+      display: inline-block;
       color: $color-secondary--2;
       padding: 1px 2px;
       background-color: $color-grayscale--1000;
       border-radius: 2px;
-      min-width: 13px;
+      min-width: 1em;
       text-align: center;
+    }
 
+    &--state-reduced &__count {
       @include media(sm) {
-        display: inline-block;
+        top: 6px;
       }
     }
 
     &__total {
-      @include font($font-size--10, 10px, $font-weight--regular);
-
-      display: none;
       margin-top: 0;
       padding: 3px 0 6px 0;
       text-align: center;
+    }
+
+    &--state-full &__total {
+      display: none;
 
       @include media(sm) {
         display: block;
       }
+    }
+
+    &--state-reduced &__total {
+      display: none;
     }
   }
 </style>

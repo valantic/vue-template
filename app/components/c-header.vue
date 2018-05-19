@@ -5,7 +5,7 @@
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">
         <div v-if="userLoggedIn" :class="b('cart')">
-          <c-mini-cart @click="onMiniCartClick"/>
+          <c-mini-cart :state="state"/>
         </div>
       </div>
       <div :class="b('assortment')">Sortiment</div>
@@ -25,7 +25,23 @@
     },
     // mixins: [],
 
-    // props: {},
+    props: {
+      /**
+       * Sets the display state of the header
+       *
+       * Valid values: `full, reduced`
+       */
+      state: {
+        type: String,
+        default: 'full',
+        validator(value) {
+          return [
+            'full',
+            'reduced'
+          ].includes(value);
+        }
+      },
+    },
     // data() {
     //   return {};
     // },
@@ -49,11 +65,7 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    methods: {
-      onMiniCartClick() {
-        window.location.replace(this.$t('urls.cart'));
-      }
-    },
+    // methods: {},
     // render() {},
   };
 </script>
@@ -86,7 +98,6 @@
       background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
       color: $color-primary--3;
       max-width: map-get($grid-breakpoints, xl);
-      min-height: 60px;
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -123,22 +134,16 @@
     &__icons {
       flex: 0 1 percentage(7 / 12);
       text-align: right;
+      padding-right: $spacing--10;
 
       @include media(sm) {
         flex: 0 1 percentage(3 / 12);
         order: 4;
-      }
-    }
-
-    &__cart {
-      display: inline-block;
-
-      @include media(xs) {
-        margin-right: 40px;
+        padding-right: $spacing--15;
       }
 
-      @include media(md) {
-        margin-right: 70px;
+      @include media(xl) {
+        padding-right: $spacing--0;
       }
     }
   }

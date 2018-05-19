@@ -6,7 +6,7 @@ export default {
     /**
      * @type {Object}   Stores user data
      */
-    user: userData, // TODO - remove mock data once the backend is available
+    user: userData,
   },
   getters: {
     /**
@@ -25,7 +25,7 @@ export default {
      *
      * @returns  {Object}  userLoggedIn   True if user is logged in, false otherwise
      */
-    userLoggedIn: state => state.user && state.user.name,
+    userLoggedIn: state => state.user && !!state.user.name,
   },
   mutations: {
     /**

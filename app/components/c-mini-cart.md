@@ -1,11 +1,29 @@
 ### Default
 
 ```vue
-<c-mini-cart/>
+<template>
+  <div style="background: aliceblue;">
+    <c-mini-cart/>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+  };
+</script>
 ```
 
 ### Active
 
 ```vue
-<c-mini-cart active/>
+<template>
+  <div style="background: aliceblue;">
+    <c-mini-cart active/>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+  };
+</script>
 ```

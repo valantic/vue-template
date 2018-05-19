@@ -8,12 +8,12 @@ export default {
     /**
      * @type {Object}   Stores cart object
      */
-    cart: cartData, // TODO - remove mock data once the backend is available
+    cart: cartData,
 
     /**
      * @type {Object}   Stores mini cart object
      */
-    miniCart: miniCartData, // TODO - remove mock data once the backend is available
+    miniCart: miniCartData,
   },
   getters: {
     /**
@@ -30,7 +30,7 @@ export default {
      *
      * @param   {Object}  state   Current state
      *
-     * @returns  {Boolean}  miniCartHasItems True if items are in the minicart, false otherwise
+     * @returns  {Boolean}  miniCartHasItems   True if items are in the minicart, false otherwise
      */
     miniCartHasItems: state => state.miniCart.cartQuantity > 0,
 
