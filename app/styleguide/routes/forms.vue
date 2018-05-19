@@ -69,6 +69,7 @@
     },
     data() {
       return {
+        demo: '',
         name: {
           firstName: '',
           lastName: '',
