@@ -123,10 +123,9 @@
 
 <style lang="scss">
   .e-heading {
-    font-family: $font-family--primary;
-    font-weight: $font-weight--regular;
+    @include font($font-size--18, 22px, $font-weight--regular);
+
     color: $color-secondary--1;
-    line-height: 1.25;
     text-decoration: none;
     display: block;
 
