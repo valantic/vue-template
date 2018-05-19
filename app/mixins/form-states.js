@@ -2,6 +2,8 @@
  * Mixin can be used to add default form states to a form-element.
  * For modifiers class names combine the component modifier() computed function with the stateModifier()
  * computed function
+ *
+ * @mixin
  */
 export default {
   props: {

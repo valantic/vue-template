@@ -7,6 +7,7 @@
         :step="step"
         type="number"
         name="quantity"
+        pattern="\d*"
       />
     </div>
     <div :class="b('button')">
@@ -16,11 +17,10 @@
         width="full"
         @click="onClick"
       >
-        <e-icon :class="b('icon')" icon="i-cart" inline/><span v-if="hasLabel"> {{ $t('c-add-to-cart.addToCart') }}</span>
+        <e-icon :class="b('icon')" icon="i-cart" inline/>
+        <span v-if="hasLabel" :class="b('label')"> {{ $t('c-add-to-cart.addToCart') }}</span>
       </e-button>
     </div>
-    <!-- TODO - remove -->
-    <div ref="debug">{{ debug }}</div>
   </div>
 </template>
 
@@ -65,7 +65,6 @@
         quantity: this.$props.step,
         hasLabel: !!this.$props.label,
         progress: false,
-        debug: '', // TODO - remove
       };
     },
 
@@ -88,16 +87,14 @@
         'addToCart'
       ]),
       onClick() {
+        const quantity = this.quantity.toString().match(/[0-9]/g);
+
+        this.quantity = quantity && quantity.length ? parseInt(quantity[0], 10) : 1; // IE 11 / Safari
+
         this.progress = true;
 
         this.addToCart(this.sku, this.quantity)
-          .then((response) => {
-            this.progress = false;
-            this.debug = response; // TODO - remove
-          }, (error) => {
-            this.progress = false;
-            this.debug = error; // TODO - remove
-        });
+          .finally(() => { this.progress = false; });
       },
     },
     // render() {},
@@ -113,6 +110,10 @@
       flex: 0 1 auto;
       width: 100%;
       margin-bottom: $spacing--15;
+
+      input {
+        text-align: right;
+      }
     }
 
     &__button {
@@ -120,8 +121,28 @@
     }
 
     &__icon {
-      vertical-align: text-top;
-      height: 21px; /* TODO - this is probably not how to do it */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
+    &__label {
+      margin-left: $spacing--10;
+      color: $color-secondary--1;
+    }
+
+    &__button:hover &__label,
+    &__button:focus &__label,
+    &__button:active &__label {
+      color: $color-grayscale--1000;
+    }
+  }
+
+  .e-button__inner {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
   }
 </style>

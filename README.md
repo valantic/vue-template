@@ -266,7 +266,7 @@ By default, actions, mutations and getters inside modules are still registered u
 export default {
   namespaced: true,
   state: {},
-  getters: {}, // e.g. -> getters['cart/getProduct']
+  getters: {}, // e.g. -> getters['cart/product']
   mutations: {},
   actions: {},
 };
