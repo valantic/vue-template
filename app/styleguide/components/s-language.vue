@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import i18nMixin from '@/mixins/i18n';
+  import i18nMixin from '../../mixins/i18n';
 
   export default {
     name: 's-language',
