@@ -25,7 +25,7 @@ export default {
       eInfoLabel,
       ePanel,
       cModal,
-      cModalHeaderDefault
+      cModalHeaderDefault,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production

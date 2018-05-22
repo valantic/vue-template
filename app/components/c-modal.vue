@@ -1,8 +1,7 @@
 <template>
   <div :class="b()">
     <div :class="b('trigger')">
-      <!-- @slot This slot will trigger the "showModal()" function -->
-      <slot name="handler"></slot>
+      <!-- @slot The default slot will render the modal content -->
     </div>
   </div>
 </template>
@@ -94,6 +93,8 @@
         handler() {
           if (this.open) {
             this.showModal();
+          } else {
+            this.closeModal();
           }
         }
       }
@@ -112,7 +113,8 @@
 
     methods: {
       showModal() {
-        const contentSlot = this.$slots.content;
+        const contentSlot = this.$slots.default;
+        const _that = this;
 
         VuedalsBus.$emit('new', {
           name: this.classNames,
@@ -131,8 +133,22 @@
             }
           } : null,
           dismissable: false,
-          escapable: true
+          escapable: true,
+          onClose() {
+            /**
+             * Close Event
+             *
+             * @event close
+             */
+            _that.$emit('close');
+          },
+          onDismiss() {
+            _that.$emit('close');
+          }
         });
+      },
+      closeModal() {
+        VuedalsBus.$emit('close');
       }
     }
     // render() {},
