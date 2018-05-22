@@ -381,10 +381,6 @@ Stylelint setup for the current project.
 
 ## Known issues
 
-### Styleguidist
-
-The styleguidist part of this application currently is not running on IE11 unfortunately (@see https://github.com/vue-styleguidist/vue-styleguidist/issues/83).
-
 ### Webpack
 
 #### Webpack does not perform code splitting
