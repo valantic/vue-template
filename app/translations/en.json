@@ -20,6 +20,24 @@
     "xingTitle": "Xing"
   },
   "c-product-detail": {
-    "productDescriptionTitle": "Product description"
+    "productDescriptionTitle": "Product description",
+    "productDocumentsTitle": "Documents",
+    "productPdfsTitle": "PDFs",
+    "productVideosTitle": "Videos",
+    "technicalDataTitle": "Technical data"
+  },
+  "e-info-label": {
+    "priceType1": "Promotion",
+    "priceType2": "New",
+    "priceType3": "Discount",
+    "priceType4": "While stock last",
+    "priceType5": "Currency discount"
+  },
+  "c-prices": {
+    "grossLabel": "Gross price",
+    "netLabel": "Net price"
+  },
+  "c-add-to-cart": {
+    "addToCart": "add to cart"
   }
 }

@@ -6,15 +6,20 @@
 
       <!-- left area -->
       <div :class="b('main', {area: 'top' })">
-
+        <div :class="b('info')">
+          <e-info-label
+            v-if="erp.priceType"
+            :price-type="erp.priceType"
+            :price-type-end-date="erp.priceTypeEndDate"
+          />
+        </div>
         <div :class="b('gallery')">
           gallery<br>
-          {{ product }}
         </div>
 
         <div :class="b('specs')">
           <div :class="b('technical-data')">
-            <c-attribute-grid :attributes="product.technicalData"/>
+            <c-attribute-grid :attributes="product.main_attributes"/>
           </div>
           <div :class="b('attributes')">
             <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
@@ -24,7 +29,11 @@
       </div>
 
       <aside :class="b('sidebar', {area: 'top' })">
-        <div :class="b('add-to-cart')">availability / price / qty / add to cart</div>
+        <div :class="b('add-to-cart')">
+          availability
+          <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          <c-add-to-cart :sku="product.sku" label/>
+        </div>
       </aside>
 
     </section>
@@ -39,6 +48,21 @@
             <div :class="b('description-text')" v-html="product.description"></div>
           </div>
         </div>
+        <div :class="b('details')">
+          <c-collapse-group>
+            <c-collapse v-if="product.tech_attributes"
+                        :title="$t('c-product-detail.technicalDataTitle')"
+            >
+              <c-attribute-grid :attributes="product.tech_attributes"/>
+            </c-collapse>
+            <c-collapse v-if="hasMedia" :background="true" :title="$t('c-product-detail.productDocumentsTitle')">
+              <e-heading v-if="hasPdfDocuments" tag-name="h3" color="gray">{{ $t('c-product-detail.productPdfsTitle') }}</e-heading>
+              <c-linklist v-if="hasPdfDocuments" :items="product.media_attributes.productDataSheet"/>
+              <e-heading v-if="hasVideos" tag-name="h3" color="gray">{{ $t('c-product-detail.productVideosTitle') }}</e-heading>
+              <c-linklist v-if="hasVideos" :items="product.media_attributes.video"/>
+            </c-collapse>
+          </c-collapse-group>
+        </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
       </div>
@@ -50,18 +74,26 @@
     </section>
 
   </div>
-
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
+  import cAddToCart from '@/components/c-add-to-cart';
+  import cPrices from '@/components/c-prices';
   import cAttributeGrid from '@/components/c-attribute-grid';
+  import cLinklist from '@/components/c-linklist';
+  import cCollapseGroup from '@/components/c-collapse-group';
+  import cCollapse from '@/components/c-collapse';
 
   export default {
     name: 'c-product-detail',
-
     components: {
+      cLinklist,
+      cAddToCart,
+      cPrices,
       cAttributeGrid,
+      cCollapseGroup,
+      cCollapse,
     },
     // mixins: [],
 
@@ -77,13 +109,50 @@
          *
          * @returns  {Object}  product - Single product from the store
          */
-        product: 'product/product'
-      })
-    }
+        product: 'product/product',
+        erp: 'product/erp',
+        collapsible: 'product/collapsible',
+      }),
+
+      /**
+       * Checks if this product has PDF documents (attribute of the "media-attributes"-Object)
+       *
+       * @returns {boolean}
+       */
+      hasPdfDocuments() {
+        if (Object.keys(this.product.media_attributes).length === 0) return false;
+
+        if (this.product.media_attributes.productDataSheet == null) return false;
+
+        if (Object.keys(this.product.media_attributes.productDataSheet).length === 0) return false;
+
+        return true;
+      },
+
+      /**
+       * Checks if this product has Videos (attribute of the "media-attributes"-Object)
+       *
+       * @returns {boolean}
+       */
+      hasVideos() {
+        if (Object.keys(this.product.media_attributes).length === 0) return false;
+
+        if (this.product.media_attributes.video == null) return false;
+
+        if (Object.keys(this.product.media_attributes.video).length === 0) return false;
+
+        return true;
+      },
+      hasMedia() {
+        return this.hasPdfDocuments || this.hasVideos;
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      this.fetchErp();
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -93,7 +162,11 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      ...mapActions({
+        fetchErp: 'product/fetchErp',
+      })
+    },
     // render() {},
   };
 </script>
@@ -124,6 +197,8 @@
     }
 
     &__main--area-top {
+      position: relative;
+
       @include media(sm) {
         display: flex;
       }
@@ -137,7 +212,23 @@
       }
     }
 
+    &__info {
+      position: absolute;
+      top: $spacing--15;
+      left: $spacing--0;
+
+      @include media(sm) {
+        top: $spacing--30;
+      }
+    }
+
     &__sidebar {
+      padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
+
+      @include media(md) {
+        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
+      }
+
       @include media(sm) {
         flex-basis: percentage(3 / 12);
       }
@@ -212,14 +303,10 @@
     }
 
     &__description-text {
-      @include font($font-size--14, $line-height: 18px);
+      @include font($font-size--14, 18px);
 
       color: $color-grayscale--200;
-      padding: $spacing--10 $spacing--20;
-
-      @include media(sm) {
-        padding: $spacing--10 $spacing--30 $spacing--40 $spacing--30;
-      }
+      padding: $spacing--10 $spacing--20 $spacing--30 $spacing--20;
     }
 
     &__accessories {

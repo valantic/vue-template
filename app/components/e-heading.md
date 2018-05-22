@@ -16,11 +16,11 @@
 ```
 <div>
   <e-heading tag-name="h1" color="gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h2" color="green">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
+  <e-heading tag-name="h2" color="blue">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
   <e-heading tag-name="h3" color="gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h4" color="green">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h5" color="blue">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h6" color="green"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</a></e-heading>
+  <e-heading tag-name="h4" color="blue">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
+  <e-heading tag-name="h5" color="gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
+  <e-heading tag-name="h6" color="blue"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</a></e-heading>
 </div>
 ```
 

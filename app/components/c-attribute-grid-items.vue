@@ -1,7 +1,7 @@
 <template>
   <dl :class="b()">
     <template v-for="(item, index) in items">
-      <dt :key="`dt-${index}`" :class="b('col-dt', { emphasis: item.emphasis })">{{ item.key }}</dt>
+      <dt :key="`dt-${index}`" :class="b('col-dt', { emphasis: item.emphasis })">{{ item.key_localized }}</dt>
       <dd :key="`dd-${index}`" :class="b('col-dd', { emphasis: item.emphasis })">
         <a
           v-if="item.url"
@@ -75,7 +75,6 @@
       font-family: $font-family--primary;
       color: $color-grayscale--200;
       text-align: left;
-      padding: 0 $spacing--10;
       margin-bottom: $spacing--10;
     }
 
