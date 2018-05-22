@@ -1,6 +1,6 @@
 <template>
   <div :class="b()">
-    <div :class="b('trigger')" @click="showModal()">
+    <div :class="b('trigger')">
       <!-- @slot This slot will trigger the "showModal()" function -->
       <slot name="handler"></slot>
     </div>
@@ -69,11 +69,13 @@
             'large',
           ].includes(value);
         }
+      },
+
+      open: {
+        type: Boolean,
+        default: false
       }
     },
-    // data() {
-    //   return {};
-    // },
 
     computed: {
       classNames() {
@@ -86,7 +88,16 @@
         return classes.filter(Boolean).join(' ');
       }
     },
-    // watch: {},
+    watch: {
+      open: {
+        immediate: true,
+        handler() {
+          if (this.open) {
+            this.showModal();
+          }
+        }
+      }
+    },
 
     // beforeCreate() {},
     // created() {},
