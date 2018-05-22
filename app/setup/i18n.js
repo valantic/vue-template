@@ -1,6 +1,7 @@
 import VueI18n from 'vue-i18n';
 import Vue from 'vue'; // Default language
 import fallbackMessages from '../translations/en';
+import numberFormats from '../translations/numbers';
 
 const pageLang = document && document.documentElement && document.documentElement.lang;
 
@@ -16,6 +17,7 @@ export const i18n = new VueI18n({
   messages: {
     [I18N_FALLBACK]: I18N_FALLBACK_MESSAGES,
   },
+  numberFormats,
 });
 
 /**
