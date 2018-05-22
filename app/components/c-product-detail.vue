@@ -82,7 +82,7 @@
   import cAddToCart from '@/components/c-add-to-cart';
   import cPrices from '@/components/c-prices';
   import cAttributeGrid from '@/components/c-attribute-grid';
-  import CLinklist from "@/components/c-linklist";
+  import CLinklist from '@/components/c-linklist';
   import cCollapseGroup from '@/components/c-collapse-group';
   import cCollapse from '@/components/c-collapse';
 

@@ -1,27 +1,23 @@
 <template>
   <div :class="b()">
-    <div v-for="item in items" v-if="item.loggedIn" :class="b('item', { active: item.isActive })">
+    <div v-for="item in items"
+         v-if="item.loggedIn"
+         :class="b('item', { active: item.isActive })"
+         :key="item.link"
+    >
       <a :class="b('link')" :href="$t(item.link)">
         <e-icon
           :class="b('icon')"
           :icon="item.icon"
           inline
-          width="25px"
-          height="25px"
+          width="30px"
+          height="30px"
           @click="onClick"
         />
         <span v-if="item.label" :class="b('label')">{{ $t(item.label) }}</span>
         <span v-else :class="b('label')">{{ username }}</span>
       </a>
     </div>
-    <filter id="dropshadow">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"></feGaussianBlur>
-      <feOffset in="blur" result="offsetBlur" dx="0" dy="0"></feOffset>
-      <feMerge>
-        <feMergeNode></feMergeNode>
-        <feMergeNode in="SourceGraphic"></feMergeNode>
-      </feMerge>
-    </filter>
   </div>
 </template>
 
@@ -161,10 +157,17 @@
       &:hover {
         border-bottom: none;
 
-        .e-icon svg {
-          -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
-          filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+        .e-icon svg path {
+          filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+          filter: url(#dropshadow);
+          // -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+          // filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
         }
+
+        // .e-icon svg {
+        //   -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+        //   filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+        // }
       }
     }
 

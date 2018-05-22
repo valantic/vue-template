@@ -3,6 +3,7 @@
     <li
       v-for="item in items"
       :class="b('item')"
+      :key="item.key"
     >
       <a
         :class="b('link')"
