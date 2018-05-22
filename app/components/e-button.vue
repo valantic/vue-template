@@ -290,8 +290,8 @@
       border-top-right-radius: 0;
     }
 
-    &:focus,
-    &--focus {
+    &--focus,
+    &:focus {
       color: $color-primary--3;
       background-color: $color-grayscale--500;
       outline: none;
@@ -303,8 +303,8 @@
       }
     }
 
-    &:hover,
-    &--hover {
+    &--hover,
+    &:hover {
       color: $color-primary--3;
       background-color: $color-grayscale--500;
       border-bottom: 0; // Overwrite link styles
@@ -313,6 +313,13 @@
       &:not([disabled])::after {
         display: none;
       }
+    }
+
+    &--focus path,
+    &--hover path,
+    &:focus path,
+    &:hover path {
+      fill: $color-primary--3;
     }
 
     &:active:not([disabled]),
@@ -329,6 +336,8 @@
 
     &[disabled],
     &--disabled,
+    &[disabled]::before,
+    &--disabled::after,
     &[disabled]:hover,
     &--disabled:hover {
       background-color: transparent;
@@ -377,7 +386,7 @@
     &__inner {
       position: relative;
       display: inline-block;
-      vertical-align: bottom;
+      vertical-align: baseline;
     }
 
     .e-progress {

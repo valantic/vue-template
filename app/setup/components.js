@@ -7,6 +7,7 @@ import eInput from '@/components/e-input';
 import eCheckbox from '@/components/e-checkbox';
 import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
+import eInfoLabel from '@/components/e-info-label';
 import cModal from '@/components/c-modal';
 import cModalHeaderDefault from '@/components/c-modal-header-default';
 
@@ -21,6 +22,7 @@ export default {
       eCheckbox,
       eLabel,
       eProgress,
+      eInfoLabel,
       ePanel,
       cModal,
       cModalHeaderDefault
@@ -41,6 +43,7 @@ export default {
       Vue.component(eInput.name, eInput);
       Vue.component(eCheckbox.name, eCheckbox);
       Vue.component(eLabel.name, eLabel);
+      Vue.component(eInfoLabel.name, eInfoLabel);
       Vue.component(cModal.name, cModal);
       Vue.component(cModalHeaderDefault.name, cModalHeaderDefault);
     }
