@@ -6,8 +6,6 @@ import eInput from '@/components/e-input';
 import eCheckbox from '@/components/e-checkbox';
 import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
-import '@/components/c-header'; // import for styling import
-import '@/components/c-footer'; // import for styling import
 import eInfoLabel from '@/components/e-info-label';
 
 export default {

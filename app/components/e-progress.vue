@@ -121,7 +121,7 @@
     &__bubble {
       height: 1em;
       width: 1em;
-      background-color: $color-secondary--1;
+      background-color: var(--theme-color-secondary-1);
       left: 100%;
       position: absolute;
       margin: 0 auto;

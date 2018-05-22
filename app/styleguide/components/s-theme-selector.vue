@@ -41,7 +41,7 @@
             name: 'Electroplast SA',
             id: '05'
           }
-        ]
+        ],
       };
     },
 
@@ -53,7 +53,7 @@
          * @returns  {String}  theme id
          */
         globalTheme: 'session/getTheme'
-      }),
+      })
     },
 
     watch: {
@@ -68,15 +68,7 @@
           const theme = this.globalTheme;
 
           if (!document.getElementById(cssId)) {
-            const head = document.getElementsByTagName('head')[0];
-            const link = document.createElement('link');
-
-            link.id = cssId;
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = `/static/css/theme-${theme}.css`;
-            link.media = 'all';
-            head.appendChild(link);
+            this.createStyleElement(theme, cssId);
           } else {
             const link = document.getElementById(cssId);
 
@@ -86,7 +78,6 @@
       }
     },
 
-    // beforeCreate() {},
     // created() {},
     // beforeMount() {},
     // mounted() {},
@@ -100,6 +91,18 @@
     methods: {
       onChange(event) {
         this.$store.commit('session/setTheme', event.target.value);
+      },
+      createStyleElement(themeId, cssId) {
+        const head = document.getElementsByTagName('head')[0];
+        const link = document.createElement('link');
+
+        link.id = cssId;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = `/static/css/theme-${themeId}.css`;
+        link.media = 'all';
+
+        head.appendChild(link);
       }
     },
     // render() {},

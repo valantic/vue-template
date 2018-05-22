@@ -150,7 +150,7 @@
 
     &--active,
     &--focus {
-      color: $color-secondary--1;
+      color: var(--theme-color-secondary-1);
 
       &.e-label--state-info {
         color: $color-status--info;

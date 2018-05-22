@@ -4,6 +4,8 @@ import { mapGetters } from 'vuex';
  * Mixin can be included in components which needs a custom theme style class.
  * Per default it uses the global defined theme in the store/modules/session. It can be overwritten
  * with the prop "customTheme"
+ *
+ * @mixin
  */
 export default {
   props: {
@@ -27,14 +29,12 @@ export default {
     }),
 
     /**
-     * Get's a Object with the active theme (gloabel theme if nothing specific defined)
+     * Get's a Object with the active theme (global theme if nothing specific is defined)
      *
      * @returns {{theme: {String}}}   active theme for BEM class name
      */
-    activeTheme() {
-      return {
-        theme: this.$props.customTheme ? this.$props.customTheme : this.globalTheme
-      };
+    theme() {
+      return this.$props.customTheme ? this.$props.customTheme : this.globalTheme;
     },
   }
 };

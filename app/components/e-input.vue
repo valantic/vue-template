@@ -244,7 +244,7 @@
     &--focus &__field {
       border: 1px solid $color-grayscale--500;
       box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
-      color: $color-secondary--1;
+      color: var(--theme-color-secondary-1);
       outline: none;
     }
 

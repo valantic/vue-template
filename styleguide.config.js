@@ -28,7 +28,6 @@ module.exports = {
         {
           name: 'Informations',
           content: 'app/styleguide/core/index.md',
-          components: 'app/styleguide/components/s-theme-selector.vue',
         }
       ]
     },

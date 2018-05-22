@@ -87,7 +87,13 @@ module.exports = function(env = {}, options = {}) {
       },
     ];
 
-    return ExtractTextPlugin.extract({ use });
+    if (hasStyleguide) {
+      use.unshift('vue-style-loader');
+    }
+
+    return hasStyleguide
+        ? use
+        : ExtractTextPlugin.extract({ use });
   }
 
   function webpackStats() {
@@ -118,7 +124,7 @@ module.exports = function(env = {}, options = {}) {
       // extract css into its own file
       new ExtractTextPlugin({
         filename: assetsSubDirectory + `css/${prefix}[name].css?[chunkhash]`, // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
-        allChunks: false,
+        allChunks: true,
       })
     ];
 
@@ -283,7 +289,7 @@ module.exports = function(env = {}, options = {}) {
           }
         },
         {
-          test: /\.(scss|css)$/,
+          test: /\.(scss)$/,
           use: scssLoader(),
         },
         {

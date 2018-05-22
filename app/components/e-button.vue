@@ -397,30 +397,30 @@
 
   .e-button--primary {
     &:not([disabled]) {
-      color: $color-secondary--2;
+      color: var(--theme-color-secondary-2);
 
       &::before,
       &::after {
         border-width: 2px;
-        border-color: $color-primary--1;
+        border-color: var(--theme-color-primary-1);
       }
 
       &.e-button:focus,
       &.e-button--focus {
         color: $color-primary--3;
-        background-color: $color-primary--1;
+        background-color: var(--theme-color-primary-1);
       }
 
       &.e-button:hover:not([disabled]),
       &.e-button--hover:not([disabled]) {
         color: $color-primary--3;
-        background-color: $color-primary--1;
+        background-color: var(--theme-color-primary-1);
       }
 
       &.e-button:active:not([disabled]),
       &.e-button--active:not([disabled]) {
         color: $color-primary--3;
-        background-color: $color-secondary--2;
+        background-color: var(--theme-color-secondary-2);
       }
     }
 
@@ -430,7 +430,7 @@
     &.e-button--progress[disabled]:focus,
     &.e-button--progress:hover,
     &.e-button--progress:focus {
-      background-color: $color-secondary--2;
+      background-color: var(--theme-color-secondary-2);
 
       &::before,
       &::after {

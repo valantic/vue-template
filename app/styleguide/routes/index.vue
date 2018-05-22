@@ -1,7 +1,6 @@
 <!-- eslint-disable max-len -->
 <template>
   <div :class="b()">
-    <c-header/>
     <h1>Styleguide
       <small>[AIV]{version}[/AIV]</small>
     </h1>
@@ -20,11 +19,10 @@
 
 <script>
   import SReadme from '@/styleguide/components/s-readme';
-  import cHeader from '@/components/c-header';
 
   export default {
     name: 'index',
-    components: { SReadme, cHeader },
+    components: { SReadme },
     computed: {
       isProduction() {
         return process.env.NODE_ENV === 'production';
