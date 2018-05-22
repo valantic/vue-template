@@ -37,11 +37,11 @@
       </e-label>
       <e-label name="Comment" position="top">
         <e-textarea v-model="name.comment"
+                    :rows="5"
                     name="comment"
                     placeholder="Insert comment"
                     state="info"
                     notification="You can add a specific comment here.<br>Please do so."
-                    :rows="5"
         />
       </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
