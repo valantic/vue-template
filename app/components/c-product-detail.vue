@@ -6,9 +6,15 @@
 
       <!-- left area -->
       <div :class="b('main', {area: 'top' })">
-
+        <div :class="b('info')">
+          <e-info-label
+            v-if="erp.priceType"
+            :price-type="erp.priceType"
+            :price-type-end-date="erp.priceTypeEndDate"
+          />
+        </div>
         <div :class="b('gallery')">
-          gallery
+          gallery<br>
         </div>
 
         <div :class="b('specs')">
@@ -23,7 +29,11 @@
       </div>
 
       <aside :class="b('sidebar', {area: 'top' })">
-        <div :class="b('add-to-cart')">availability / price / qty / add to cart</div>
+        <div :class="b('add-to-cart')">
+          availability
+          <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          <c-add-to-cart :sku="product.sku" label/>
+        </div>
       </aside>
 
     </section>
@@ -72,7 +82,9 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
+  import cAddToCart from '@/components/c-add-to-cart';
+  import cPrices from '@/components/c-prices';
   import cAttributeGrid from '@/components/c-attribute-grid';
   import cLinklist from '@/components/c-linklist';
   import cCollapseGroup from '@/components/c-collapse-group';
@@ -80,9 +92,10 @@
 
   export default {
     name: 'c-product-detail',
-
     components: {
       cLinklist,
+      cAddToCart,
+      cPrices,
       cAttributeGrid,
       cCollapseGroup,
       cCollapse,
@@ -102,6 +115,7 @@
          * @returns  {Object}  product - Single product from the store
          */
         product: 'product/product',
+        erp: 'product/erp',
         collapsible: 'product/collapsible',
       }),
       hasPdfDocuments() {
@@ -125,11 +139,13 @@
       hasMedia() {
         return this.hasPdfDocuments || this.hasVideos;
       }
-    }
+    },
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      this.fetchErp();
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -139,7 +155,11 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      ...mapActions({
+        fetchErp: 'product/fetchErp',
+      })
+    },
     // render() {},
   };
 </script>
@@ -170,6 +190,8 @@
     }
 
     &__main--area-top {
+      position: relative;
+
       @include media(sm) {
         display: flex;
       }
@@ -183,7 +205,23 @@
       }
     }
 
+    &__info {
+      position: absolute;
+      top: $spacing--15;
+      left: $spacing--0;
+
+      @include media(sm) {
+        top: $spacing--30;
+      }
+    }
+
     &__sidebar {
+      padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
+
+      @include media(md) {
+        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
+      }
+
       @include media(sm) {
         flex-basis: percentage(3 / 12);
       }

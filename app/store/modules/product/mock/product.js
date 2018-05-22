@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export default {
   sku: '12345',
   name: 'Test product',

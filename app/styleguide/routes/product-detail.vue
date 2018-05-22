@@ -1,10 +1,7 @@
 <template>
   <div :class="b()">
     <l-default>
-
-      <!-- product detail goes here-->
       <c-product-detail/>
-
     </l-default>
   </div>
 </template>

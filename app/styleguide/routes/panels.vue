@@ -80,11 +80,15 @@
 </template>
 
 <script>
-  import LDefault from '@/components/l-default';
+  import lDefault from '@/components/l-default';
+  import cPanel from '@/components/c-panel';
 
   export default {
     name: 'panels',
-    components: { LDefault },
+    components: {
+      lDefault,
+      cPanel,
+    },
 
     // components: {},
     // mixins: [],
