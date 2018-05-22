@@ -32,5 +32,20 @@
   "c-header-links": {
     "labelWishlist": "Merkliste",
     "labelLogin": "Anmelden"
+    "technicalDataTitle": "Technische Daten"
+  },
+  "e-info-label": {
+    "priceType1": "Aktion",
+    "priceType2": "Neu",
+    "priceType3": "Sonderpreis",
+    "priceType4": "Aktion solange Vorrat",
+    "priceType5": "Währungsrabatt"
+  },
+  "c-prices": {
+    "grossLabel": "Bruttopreis",
+    "netLabel": "Nettopreis"
+  },
+  "c-add-to-cart": {
+    "addToCart": "in den Warenkorb"
   }
 }
