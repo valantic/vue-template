@@ -10,7 +10,31 @@
     "sonepar": "A Sonepar Company",
     "soneparLink": "http://www.sonepar.ch"
   },
+  "c-social-media": {
+    "followUs": "Folgen Sie uns auf:",
+    "facebookUrl": "https://www.facebook.com/winterhalterfenner/",
+    "facebookTitle": "Facebook",
+    "inUrl": "https://www.linkedin.com/m/login/",
+    "inTitle": "LinkedIn",
+    "xingUrl": "https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e",
+    "xingTitle": "Xing"
+  },
   "c-product-detail": {
-    "productDescriptionTitle": "Produktbeschreibung"
+    "productDescriptionTitle": "Produktbeschreibung",
+    "technicalDataTitle": "Technische Daten"
+  },
+  "e-info-label": {
+    "priceType1": "Aktion",
+    "priceType2": "Neu",
+    "priceType3": "Sonderpreis",
+    "priceType4": "Aktion solange Vorrat",
+    "priceType5": "Währungsrabatt"
+  },
+  "c-prices": {
+    "grossLabel": "Bruttopreis",
+    "netLabel": "Nettopreis"
+  },
+  "c-add-to-cart": {
+    "addToCart": "in den Warenkorb"
   }
 }

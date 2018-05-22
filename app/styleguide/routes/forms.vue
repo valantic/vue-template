@@ -24,7 +24,8 @@
                  name="notes"
                  placeholder="your notes"
                  state="info"
-                 notification="this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>"
+                 notification="this is the info message<br/>this is the info message<br/>
+                  this is the info message<br/>this is the info message<br/>this is the info message<br/>"
         />
       </e-label>
       <e-label name="Notes2:" position="top" state="success">
@@ -47,15 +48,24 @@
       <pre>{{ name }}</pre>
 
       <h2>e-checkbox</h2>
-      <e-checkbox v-model="checkbox.checked" :name="checkbox.name" :value="checkbox.value" />
+      <e-checkbox
+        v-model="checkbox.checked"
+        :name="checkbox.name"
+        :value="checkbox.value"
+        :display-name="checkbox.value"/>
 
     </form>
   </div>
 </template>
 
 <script>
+  import cAddToCart from '@/components/c-add-to-cart';
+
   export default {
     name: 'forms',
+    components: {
+      cAddToCart,
+    },
     data() {
       return {
         name: {

@@ -9,9 +9,8 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
 
-  // TODO: Mixin properties not visible in styleguide => check after update styleguidist
   /**
    * Label component for form elements, can be used with a slot or a for attribute
    */

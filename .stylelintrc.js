@@ -5,7 +5,7 @@ module.exports = {
     'indentation': [
       2,
       {
-        ignore: ["inside-parens"] // Stylelint seems to fail on maps
+        ignore: ['inside-parens'] // Stylelint seems to fail on maps
       }
     ]
   }

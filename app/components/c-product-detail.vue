@@ -6,18 +6,34 @@
 
       <!-- left area -->
       <div :class="b('main', {area: 'top' })">
-
+        <div :class="b('info')">
+          <e-info-label
+            v-if="erp.priceType"
+            :price-type="erp.priceType"
+            :price-type-end-date="erp.priceTypeEndDate"
+          />
+        </div>
         <div :class="b('gallery')">
           gallery<br>
-          {{ product }}
         </div>
 
-        <div :class="b('specs')">specs</div>
+        <div :class="b('specs')">
+          <div :class="b('technical-data')">
+            <c-attribute-grid :attributes="product.main_attributes"/>
+          </div>
+          <div :class="b('attributes')">
+            <c-attribute-grid :attributes="product.attributes" shrink-on-mobile />
+          </div>
+        </div>
 
       </div>
 
       <aside :class="b('sidebar', {area: 'top' })">
-        <div :class="b('add-to-cart')">availability / price / qty / add to cart</div>
+        <div :class="b('add-to-cart')">
+          availability
+          <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          <c-add-to-cart :sku="product.sku" label/>
+        </div>
       </aside>
 
     </section>
@@ -31,6 +47,13 @@
             <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
             <div :class="b('description-text')" v-html="product.description"></div>
           </div>
+        </div>
+        <div :class="b('details')">
+          <c-collapse-group>
+            <c-collapse v-if="product.tech_attributes" :title="$t('c-product-detail.technicalDataTitle')">
+              <c-attribute-grid :attributes="product.tech_attributes"/>
+            </c-collapse>
+          </c-collapse-group>
         </div>
         <div :class="b('related')"> related</div>
         <div :class="b('accessories')"> accessories</div>
@@ -47,11 +70,22 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
+  import cAddToCart from '@/components/c-add-to-cart';
+  import cPrices from '@/components/c-prices';
+  import cAttributeGrid from '@/components/c-attribute-grid';
+  import cCollapseGroup from '@/components/c-collapse-group';
+  import cCollapse from '@/components/c-collapse';
 
   export default {
     name: 'c-product-detail',
-
+    components: {
+      cAddToCart,
+      cPrices,
+      cAttributeGrid,
+      cCollapseGroup,
+      cCollapse,
+    },
     // mixins: [],
 
     // props: {},
@@ -66,13 +100,17 @@
          *
          * @returns  {Object}  product - Single product from the store
          */
-        product: 'product/getProduct'
+        product: 'product/product',
+        erp: 'product/erp',
+        collapsible: 'product/collapsible',
       })
-    }
+    },
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      this.fetchErp();
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -82,7 +120,11 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      ...mapActions({
+        fetchErp: 'product/fetchErp',
+      })
+    },
     // render() {},
   };
 </script>
@@ -113,6 +155,8 @@
     }
 
     &__main--area-top {
+      position: relative;
+
       @include media(sm) {
         display: flex;
       }
@@ -126,7 +170,23 @@
       }
     }
 
+    &__info {
+      position: absolute;
+      top: $spacing--15;
+      left: $spacing--0;
+
+      @include media(sm) {
+        top: $spacing--30;
+      }
+    }
+
     &__sidebar {
+      padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
+
+      @include media(md) {
+        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
+      }
+
       @include media(sm) {
         flex-basis: percentage(3 / 12);
       }
@@ -146,6 +206,14 @@
 
       @include media(sm) {
         flex-basis: percentage(6 / 12);
+      }
+    }
+
+    &__technical-data {
+      margin-bottom: $spacing--15;
+
+      @include media(sm) {
+        margin-bottom: $spacing--10;
       }
     }
 
