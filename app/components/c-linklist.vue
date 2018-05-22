@@ -4,6 +4,7 @@
       <a :class="b('link')"
          :href="value"
          target="_blank"
+         title="pdf-download"
       >
         {{ value }}
       </a>
@@ -56,6 +57,9 @@
 
     &__link {
       padding-left: $spacing--0;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      -ms-word-break: break-all;
     }
   }
 </style>

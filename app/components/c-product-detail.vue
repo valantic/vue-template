@@ -55,15 +55,10 @@
             >
               <c-attribute-grid :attributes="product.tech_attributes"/>
             </c-collapse>
-            <c-collapse v-if="hasMedia"
-                        :class="b('documents')"
-                        :background="false"
-                        :title="$t('c-product-detail.productDocumentsTitle')"
-                        :active="true"
-            >
-              <e-heading v-if="hasPdfDocuments" tag-name="h3">{{ $t('c-product-detail.productPdfsTitle') }}</e-heading>
+            <c-collapse v-if="hasMedia" :background="true" :title="$t('c-product-detail.productDocumentsTitle')">
+              <e-heading v-if="hasPdfDocuments" tag-name="h3" color="gray">{{ $t('c-product-detail.productPdfsTitle') }}</e-heading>
               <c-linklist v-if="hasPdfDocuments" :items="product.media_attributes.productDataSheet"/>
-              <e-heading v-if="hasVideos" tag-name="h3">{{ $t('c-product-detail.productVideosTitle') }}</e-heading>
+              <e-heading v-if="hasVideos" tag-name="h3" color="gray">{{ $t('c-product-detail.productVideosTitle') }}</e-heading>
               <c-linklist v-if="hasVideos" :items="product.media_attributes.video"/>
             </c-collapse>
           </c-collapse-group>
@@ -118,6 +113,12 @@
         erp: 'product/erp',
         collapsible: 'product/collapsible',
       }),
+
+      /**
+       * Checks if this product has PDF documents (attribute of the "media-attributes"-Object)
+       *
+       * @returns {boolean}
+       */
       hasPdfDocuments() {
         if (Object.keys(this.product.media_attributes).length === 0) return false;
 
@@ -127,6 +128,12 @@
 
         return true;
       },
+
+      /**
+       * Checks if this product has Videos (attribute of the "media-attributes"-Object)
+       *
+       * @returns {boolean}
+       */
       hasVideos() {
         if (Object.keys(this.product.media_attributes).length === 0) return false;
 
@@ -296,20 +303,10 @@
     }
 
     &__description-text {
-      @include font($font-size--14, $line-height: 18px);
+      @include font($font-size--14, 18px);
 
       color: $color-grayscale--200;
       padding: $spacing--10 $spacing--20 $spacing--30 $spacing--20;
-    }
-
-    &__documents {
-      .e-heading--underline {
-        width: percentage(1);
-
-        .e-heading__inner {
-          width: percentage(1);
-        }
-      }
     }
 
     &__accessories {
