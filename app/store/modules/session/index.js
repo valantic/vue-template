@@ -23,7 +23,7 @@ export default {
      *
      * @param   {Object}  state   Current state
      *
-     * @returns  {Object}  userLoggedIn   True if user is logged in, false otherwise
+     * @returns  {Boolean}  userLoggedIn   True if user is logged in, false otherwise
      */
     userLoggedIn: state => state.user && !!state.user.name,
   },

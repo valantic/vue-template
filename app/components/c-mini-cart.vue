@@ -87,12 +87,6 @@
     border-bottom: none;
     padding: $spacing--0;
 
-    &:hover,
-    &:active {
-      border-bottom: none;
-      color: $color-grayscale--1000;
-    }
-
     &__icon {
       width: 22px;
       height: 24px;
@@ -107,6 +101,17 @@
       @include media(sm) {
         margin: $spacing--10 auto $spacing--0 auto;
       }
+    }
+
+    &:hover,
+    &:active {
+      border-bottom: none;
+      color: $color-grayscale--1000;
+    }
+
+    &:hover path {
+      filter: "progid:DXImageTransform.Microsoft.Dropshadow()";
+      filter: url(#dropshadow);
     }
 
     &--active &__icon,
