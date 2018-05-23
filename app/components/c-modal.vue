@@ -1,12 +1,6 @@
-<template>
-  <div :class="b()">
-    <!-- @slot The default slot will render the modal content -->
-  </div>
-</template>
-
 <script>
   import { Bus as VuedalsBus } from 'vuedals';
-  import cModalHeaderDefault from '@/components/c-modal-header-default';
+  import cModalHeader01 from '@/components/c-modal-header-01';
 
   /**
    * The «c-modal» component uses the vuedals plugin (https://github.com/javisperez/vuedals).
@@ -18,7 +12,7 @@
   export default {
     name: 'c-modal',
     components: {
-      cModalHeaderDefault
+      cModalHeader01
     },
     // mixins: [],
 
@@ -28,7 +22,7 @@
        */
       title: {
         type: String,
-        default: ''
+        default: null
       },
 
       /**
@@ -40,11 +34,17 @@
       },
 
       /**
-       * Set's the inner spacing to 0
+       * Set's the inner spacing of the modal [0, 500]
        */
-      noPadding: {
-        type: Boolean,
-        default: false
+      innerSpacing: {
+        type: String,
+        default: '500',
+        validator(value) {
+          return [
+            '0',
+            '500'
+          ].includes(value);
+        }
       },
 
       /**
@@ -52,19 +52,24 @@
        */
       headerComponent: {
         type: String,
-        default: 'c-modal-header-default'
+        default: 'c-modal-header-01',
+        validator(value) {
+          return [
+            'c-modal-header-01'
+          ].includes(value);
+        }
       },
 
       /**
-       * Defines size for modal («small» or «large»)
+       * Defines size for modal [300, 600]
        */
       size: {
         type: String,
-        default: 'small',
+        default: '300',
         validator(value) {
           return [
-            'small',
-            'large',
+            '300',
+            '600',
           ].includes(value);
         }
       },
@@ -88,17 +93,24 @@
     },
 
     computed: {
-      classNames() {
-        const classes = [];
+      /**
+       * Checks if the header can be rendered
+       *
+       * @returns {Boolean}   state if header should be visible
+       */
+      showHeader() {
+        const componentName = this.$props.headerComponent;
+        const hasCloseIcon = !this.$props.noCloseIcon;
+        const hasTitle = this.$props.title;
 
-        classes.push('c-modal__content');
-        classes.push(this.$props.noPadding ? 'c-modal__content--no-spacing' : '');
-        classes.push(`c-modal__content--${this.$props.size}`);
-
-        return classes.filter(Boolean).join(' ');
+        return componentName && (hasCloseIcon || hasTitle);
       }
     },
+
     watch: {
+      /**
+       * Watches the open state and close/ opens the modal if the property changes from outside
+       */
       open: {
         immediate: true,
         handler() {
@@ -128,19 +140,21 @@
         const _that = this;
 
         VuedalsBus.$emit('new', {
-          name: this.classNames,
+          name: this.b({
+            size: this.$props.size
+          }),
           component: {
-            name: this.title.replace(/\s/g, ''),
+            name: this.title ? this.title.replace(/\s/g, '') : '',
 
             render(createElement) {
-              return createElement('div', [contentSlot]);
+              return createElement('div', { class: _that.b('content', { innerSpacing: _that.$props.innerSpacing }) }, [contentSlot]);
             }
           },
-          header: this.headerComponent && (!this.noCloseIcon || this.title) ? {
+          header: this.showHeader ? {
             component: this.headerComponent,
             props: {
               title: this.$props.title,
-              noCloseIcon: this.$props.noCloseIcon
+              noCloseIcon: this.$props.noCloseIcon,
             }
           } : null,
           dismissable: false,
@@ -168,59 +182,65 @@
       closeModal() {
         VuedalsBus.$emit('close');
       }
+    },
+
+    /**
+     * Empty render function because this don't have to render something initial
+     *
+     * @returns {null}
+     */
+    render() {
+      return null;
     }
-    // render() {},
   };
 </script>
 
 <style lang="scss">
   .c-modal {
-    &__content {
-      width: 100%;
-      min-height: 100vh;
-      padding: $spacing--20;
-      background-color: $color-grayscale--1000;
-      opacity: 1;
+    width: 100%;
+    min-height: 100vh;
+    background-color: $color-grayscale--1000;
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+
+    @include media(sm) {
+      min-height: auto;
+      margin: $spacing--100 auto;
+      box-shadow: 0 0 15px 0 $color-grayscale--500;
+    }
+
+    header {
+      border-bottom: 0;
+      min-height: 0;
       margin: 0;
-
-      @include media(sm) {
-        min-height: auto;
-        margin: $spacing--100 auto;
-        padding: $spacing--20 $spacing--50;
-        box-shadow: 0 0 15px 0 $color-grayscale--500;
-        min-width: 500px;
-      }
-
-      header {
-        border-bottom: 0;
-        min-height: 0;
-      }
-
-      &::after {
-        @include media(sm) {
-          content: '';
-          height: 100px;
-          position: absolute;
-          width: 1px;
-        }
-      }
     }
 
-    &__content--no-spacing {
-      padding: 0;
-    }
-
-    &__content--small {
+    &--size-300 {
       @include media(sm) {
         width: 50%;
-        max-width: calc(#{map-get($grid-breakpoints, xl)} * 0.5);
+        max-width: #{map-get($grid-breakpoints, xl) * 0.5};
       }
     }
 
-    &__content--large {
+    &--size-600 {
       @include media(sm) {
         width: 80%;
-        max-width: calc(#{map-get($grid-breakpoints, xl)} * 0.8);
+        max-width: #{map-get($grid-breakpoints, xl) * 0.8};
+      }
+    }
+
+    &__content {
+      &--inner-spacing-0 {
+        padding: 0;
+      }
+
+      &--inner-spacing-500 {
+        padding: $spacing--20;
+
+        @include media(sm) {
+          padding: $spacing--20 $spacing--50;
+        }
       }
     }
   }

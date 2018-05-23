@@ -9,7 +9,7 @@ import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
 import eInfoLabel from '@/components/e-info-label';
 import cModal from '@/components/c-modal';
-import cModalHeaderDefault from '@/components/c-modal-header-default';
+import cModalHeader01 from '@/components/c-modal-header-01';
 
 export default {
   install(Vue) {
@@ -25,7 +25,7 @@ export default {
       eInfoLabel,
       ePanel,
       cModal,
-      cModalHeaderDefault,
+      cModalHeader01,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -45,7 +45,7 @@ export default {
       Vue.component(eLabel.name, eLabel);
       Vue.component(eInfoLabel.name, eInfoLabel);
       Vue.component(cModal.name, cModal);
-      Vue.component(cModalHeaderDefault.name, cModalHeaderDefault);
+      Vue.component(cModalHeader01.name, cModalHeader01);
     }
   },
 };

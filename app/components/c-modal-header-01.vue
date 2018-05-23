@@ -1,9 +1,9 @@
 <template>
-  <div v-if="title || !noCloseIcon" :class="b()">
+  <div :class="b()">
     <div :class="b('title')">
       <e-heading v-if="title" tag-name="h1" underline>{{ title }}</e-heading>
     </div>
-    <div v-if="!noCloseIcon" :class="b('close')" @click="close">
+    <div v-if="closable" :class="b('close')" @click="close">
       <e-icon
         :inline="true"
         icon="i-close"
@@ -21,7 +21,7 @@
    * Component is used to render the default header in the modal
    */
   export default {
-    name: 'c-modal-header-default',
+    name: 'c-modal-header-01',
     // components: {},
     // mixins: [],
 
@@ -35,11 +35,11 @@
       },
 
       /**
-       * Header without close icon in the right-top corner
+       * Header option with closable icon
        */
-      noCloseIcon: {
+      closable: {
         type: Boolean,
-        default: false
+        default: true
       }
     },
     // data() {
@@ -64,6 +64,7 @@
       close() {
         /**
          * Global close event for the modal
+         *
          * @event close
          */
         VuedalsBus.$emit('close');
@@ -74,24 +75,19 @@
 </script>
 
 <style lang="scss">
-  .c-modal-header-default {
+  .c-modal-header-01 {
     display: flex;
     justify-content: space-between;
-    margin-left: -$spacing--20;
-    width: calc(100% + (2 * #{$spacing--20}));
-    padding: 0 $spacing--20;
-
-    @include media(sm) {
-      margin-left: -$spacing--50;
-      width: calc(100% + (2 * #{$spacing--50}));
-    }
+    width: 100%;
+    padding: 0;
+    margin-top: $spacing--20;
 
     &__title {
       flex: 1 0;
-      margin-left: -$spacing--20;
 
       .e-heading--underline .e-heading__inner {
         padding-top: 0;
+        margin-bottom: 0;
 
         @include media(sm) {
           padding-left: $spacing--50;
@@ -101,6 +97,7 @@
 
     &__close {
       cursor: pointer;
+      margin-right: $spacing--20;
 
       path {
         fill: $color-primary--1;
