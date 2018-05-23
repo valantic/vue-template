@@ -7,18 +7,22 @@
         <c-header-links />
       </div>
       <div :class="b('assortment')">Sortiment</div>
-      <div :class="b('search')">Search</div>
+      <div :class="b('search')">
+        <c-search />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   import cHeaderLinks from '@/components/c-header-links';
+  import cSearch from '@/components/c-search';
 
   export default {
     name: 'c-header',
     components: {
       cHeaderLinks,
+      cSearch,
     },
     // mixins: [],
 

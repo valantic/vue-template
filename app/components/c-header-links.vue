@@ -160,14 +160,7 @@
         .e-icon svg path {
           filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
           filter: url(#dropshadow);
-          // -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-          // filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
         }
-
-        // .e-icon svg {
-        //   -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
-        //   filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
-        // }
       }
     }
 
