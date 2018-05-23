@@ -10,8 +10,8 @@
           :class="b('icon')"
           :icon="item.icon"
           inline
-          width="30px"
-          height="30px"
+          width="25px"
+          height="25px"
           @click="onClick"
         />
         <span v-if="item.label" :class="b('label')">{{ $t(item.label) }}</span>
