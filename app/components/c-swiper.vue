@@ -29,7 +29,7 @@
 
 <script>
 
-  import { swiper, swiperSlide } from 'vue-awesome-swiper';
+  import {swiper, swiperSlide} from 'vue-awesome-swiper';
 
   // require styles
   import 'swiper/dist/css/swiper.css';
@@ -68,6 +68,9 @@
     data() {
       return {
         optionsDefault: {
+          keyboard: {
+            enabled: true,
+          },
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
@@ -75,6 +78,9 @@
           pagination: {
             el: '.swiper-pagination',
             type: 'bullets',
+            clickable: true,
+            dynamicBullets: true,
+            dynamicMainBullets: 6,
           },
         },
       };
@@ -129,5 +135,60 @@
 <style lang="scss">
   .c-swiper {
 
+    // dots navigation
+    .swiper-container-horizontal > .swiper-pagination-bullets-dynamic {
+      left: 90px;
+      overflow: hidden;
+      padding-top: $spacing--30;
+      position: relative;
+
+      @include media(xs) {
+        left: 110px;
+        padding-top: 0;
+      }
+    }
+
+    // single dot
+    .swiper-pagination-bullet {
+      background: $color-grayscale--600;
+      border-radius: 2.5px;
+      height: 5px;
+      width: 20px;
+      margin: 0 3px;
+      opacity: 1;
+      transform: scale(1);
+
+      &:first-child {
+        // margin-left: 0;
+      }
+
+      &-active {
+        background-color: $color-primary--1;
+        box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
+      }
+
+      &-active-prev,
+      &-active-prev-prev,
+      &-active-next-next {
+        visibility: hidden;
+      }
+    }
+
+    // arrow navigation
+    &__button-prev,
+    &__button-next {
+      display: none;
+
+      @include media(md) {
+        display: block;
+      }
+    }
+
+    // images
+    .e-picture__image {
+      @include media(xs) {
+        padding: $spacing--30;
+      }
+    }
   }
 </style>

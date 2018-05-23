@@ -26,8 +26,11 @@
 
 <style lang="scss">
   .swiper {
-    max-width: 1200px;
-    padding: $spacing--50;
+    max-width: 600px;
+
+    @include media(xs) {
+      padding: $spacing--50;
+    }
   }
 </style>
 
