@@ -316,6 +316,16 @@
       }
     }
 
+    &--state-search {
+      .e-input__field {
+        @include form-state-icon('search');
+      }
+
+      .e-input__icon-splitter {
+        display: none;
+      }
+    }
+
     /*
      * Notification is visible
      */

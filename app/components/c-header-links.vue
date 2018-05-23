@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
     <div v-for="item in items"
-         v-if="item.loggedIn"
+         v-if="item.loggedIn == userLoggedIn"
          :class="b('item', { active: item.isActive })"
          :key="item.link"
     >
@@ -79,15 +79,6 @@
       userLoggedIn() {
         return true; // TODO: receive user state through the Vuex Store
       },
-      accountActive() {
-        return this.account; // TODO: get user state of Vuex Store, to determine if user is on account page
-      },
-      wishlistActive() {
-        return this.wishlist; // TODO: get user state of Vuex Store, to determine if wishlist is active
-      },
-      loginActive() {
-        return this.login; // TODO: get user state of Vuex Store, to determine if login is active
-      },
       username() {
         return 'Max Muster'; // TODO: get user name of Vuex Store
       }
@@ -158,7 +149,6 @@
         border-bottom: none;
 
         .e-icon svg path {
-          filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
           filter: url(#dropshadow);
         }
       }

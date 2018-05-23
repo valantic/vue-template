@@ -34,6 +34,9 @@
     "labelLogin": "Anmelden",
     "technicalDataTitle": "Technische Daten"
   },
+  "c-search": {
+    "placeholder": "Suche"
+  },
   "e-info-label": {
     "priceType1": "Aktion",
     "priceType2": "Neu",

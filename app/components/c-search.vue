@@ -1,6 +1,13 @@
 <template>
   <div :class="b()">
-    <e-input v-model="demo" name="demo" :placeholder="enter text" title="search"/>
+    <e-input v-model="searchstring"
+             :placeholder="$t('c-search.placeholder')"
+             :value="value"
+             :autocomplete="autocomplete"
+             state="search"
+             name="searchfield"
+             title="search"
+    />
   </div>
 </template>
 
@@ -11,9 +18,11 @@
     // mixins: [],
 
     // props: {},
-    // data() {
-    //   return {};
-    // },
+    data() {
+      return {
+        searchstring: '',
+      };
+    },
 
     // computed: {},
     // watch: {},
@@ -47,6 +56,14 @@
       .e-input {
         width: percentage(1);
       }
+    }
+
+    .e-input::before {
+      border: none;
+    }
+
+    .e-input::after {
+      border: none;
     }
   }
 </style>
