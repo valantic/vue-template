@@ -3,6 +3,7 @@
     <option v-for="theme in themes"
             :value="theme.id"
             :key="theme.id"
+            :selected="theme.selected"
     >
       {{ theme.name }}
     </option>
@@ -20,7 +21,7 @@
     // props: {},
     data() {
       return {
-        themes: [
+        defaultThemes: [
           {
             name: 'Winterhalter - Fenner',
             id: '01'
@@ -53,7 +54,31 @@
          * @returns  {String}  theme id
          */
         globalTheme: 'session/getTheme'
-      })
+      }),
+
+      /**
+       * Loops the themes and mark the selected by the global theme
+       *
+       * @returns {Array} list of themes
+       */
+      themes() {
+        const list = this.defaultThemes;
+        const activeId = this.globalTheme;
+
+        return list.map((theme) => {
+          let selected = false;
+
+          if (theme.id === activeId) {
+            selected = true;
+          }
+
+          return {
+            name: theme.name,
+            id: theme.id,
+            selected
+          };
+        });
+      }
     },
 
     watch: {

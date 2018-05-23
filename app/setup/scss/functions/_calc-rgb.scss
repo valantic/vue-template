@@ -10,5 +10,5 @@
   $green: green($hex);
   $blue: blue($hex);
 
-  @return #{$red, $green, $blue};
+  @return $red, $green, $blue;
 }

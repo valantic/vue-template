@@ -31,7 +31,7 @@ export default {
     /**
      * Get's a Object with the active theme (global theme if nothing specific is defined)
      *
-     * @returns {{theme: {String}}}   active theme for BEM class name
+     * @returns {String}   active theme id for BEM class name
      */
     theme() {
       return this.$props.customTheme ? this.$props.customTheme : this.globalTheme;
