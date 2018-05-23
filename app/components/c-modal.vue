@@ -1,8 +1,6 @@
 <template>
   <div :class="b()">
-    <div :class="b('trigger')">
-      <!-- @slot The default slot will render the modal content -->
-    </div>
+    <!-- @slot The default slot will render the modal content -->
   </div>
 </template>
 
@@ -13,8 +11,9 @@
   /**
    * The «c-modal» component uses the vuedals plugin (https://github.com/javisperez/vuedals).
    * It needs the component <vuedal/> integrated somewhere on the page once.
-   * There is a second slot <slot name="content"></slot> where you can put the modal content.
-   * The slot isn't visible in the template because it's directly used in the JS via «this.$slots.content».
+   * There is a slot for inject the modal content. You can define a custom header component for the
+   * modal header. The component emits an event if it's closed. But can also beeing closed by set the "open" attribute
+   * to false.
    */
   export default {
     name: 'c-modal',
@@ -70,9 +69,21 @@
         }
       },
 
+      /**
+       * State of the modal (can be toggled)
+       */
       open: {
         type: Boolean,
         default: false
+      },
+
+      /**
+       * Prevents modal from closing by Esc and outside-click
+       * (close action have to get prevent separate in the header component)
+       */
+      closable: {
+        type: Boolean,
+        default: true
       }
     },
 
@@ -143,7 +154,14 @@
             _that.$emit('close');
           },
           onDismiss() {
-            _that.$emit('close');
+            if (_that.$props.closable) {
+              _that.$emit('close');
+
+              return true;
+            }
+
+            // prevents closing modal
+            return false;
           }
         });
       },
@@ -157,10 +175,6 @@
 
 <style lang="scss">
   .c-modal {
-    &__trigger {
-      display: inline-block;
-    }
-
     &__content {
       width: 100%;
       min-height: 100vh;

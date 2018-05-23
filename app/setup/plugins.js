@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueAxios from '@/setup/plugins/axios';
 import VueBemCn from 'vue-bem-cn';
-import {default as Vuedals} from 'vuedals';
+import Vuedals from 'vuedals';
 
 // Polyfills and self executing
 import 'intersection-observer';
