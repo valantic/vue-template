@@ -21,7 +21,21 @@
   },
   "c-product-detail": {
     "productDescriptionTitle": "Product description",
+    "productDocumentsTitle": "Documents",
+    "productVideosTitle": "Videos"
+  },
+  "urls": {
+    "linkAccount": "/account",
+    "linkWishlist": "/wishlist",
+    "linkLogin": "/login"
+  },
+  "c-header-links": {
+    "labelWishlist": "Wishlist",
+    "labelLogin": "Login",
     "technicalDataTitle": "Technical data"
+  },
+  "c-search": {
+    "placeholder": "Search"
   },
   "e-info-label": {
     "priceType1": "Promotion",

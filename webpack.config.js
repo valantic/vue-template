@@ -299,7 +299,42 @@ module.exports = function(env = {}, options = {}) {
               loader: 'image-webpack-loader', // @see https://github.com/tcoopman/image-webpack-loader
               options: {
                 svgo: {
-                  removeEmptyContainers: true,
+                  plugins: [
+                    //{ cleanupAttrs: false, },
+                    //{ removeDoctype: false, },
+                    //{ removeXMLProcInst: false, },
+                    //{ removeComments: false, },
+                    //{ removeMetadata: false, },
+                    //{ removeTitle: false, },
+                    //{ removeDesc: false, },
+                    { removeUselessDefs: false, },
+                    //{ removeEditorsNSData: false, },
+                    //{ removeEmptyAttrs: false, },
+                    //{ removeHiddenElems: false, },
+                    //{ removeEmptyText: false, },
+                    //{ removeEmptyContainers: false, },
+                    //{ removeViewBox: false, },
+                    //{ cleanUpEnableBackground: true, },
+                    //{ convertStyleToAttrs: true, },
+                    //{ convertColors: true, },
+                    //{ convertPathData: true, },
+                    //{ convertTransform: true, },
+                    //{ removeUnknownsAndDefaults: true, },
+                    //{ removeNonInheritableGroupAttrs: true, },
+                    //{ removeUselessStrokeAndFill: true, },
+                    //{ removeUnusedNS: true, },
+                    { cleanupIDs: false, },
+                    //{ cleanupNumericValues: false, },
+                    //{ moveElemsAttrsToGroup: true, },
+                    //{ moveGroupAttrsToElems: true, },
+                    //{ collapseGroups: false, },
+                    //{ removeRasterImages: false, },
+                    //{ mergePaths: true, },
+                    //{ convertShapeToPath: true, },
+                    //{ sortAttrs: true, },
+                    //{ transformsWithOnePath: false, },
+                    //{ removeDimensions: true, }
+                  ]
                 },
               }
             },

@@ -10,4 +10,8 @@ export default {
     3L+N+PE TN-C/TN-S, Sicherungselement, 1 kg',
   main_attributes: [{ key_localized: 'Merkmal techn. Daten (1)', value: 'Merkmal techn. Daten (1)' }, { key_localized: 'Merkmal techn. Daten (1)', value: 'Merkmal techn. Daten (1)' }, { key_localized: 'Merkmal techn. Daten (1)', value: 'Merkmal techn. Daten (1)' }],
   tech_attributes: [{ key_localized: 'Nennspannung', value: '220...240 V' }, { key_localized: 'Lampenleistung', value: '4 W' }, { key_localized: 'Lichtstrom', value: '470 lm' }, { key_localized: 'Farbwiedergabeindex', value: '80-89' }, { key_localized: 'Lampenform', value: 'Birnenform' }, { key_localized: 'Ausführung Glas/Abdeckung', value: 'klar' }, { key_localized: 'Sockel', value: 'E27' }, { key_localized: 'Farbe', value: 'weiss' }, { key_localized: 'Lichtfarbe Kategorie', value: 'warm' }, { key_localized: 'Lichtfarbe', value: '827' }, { key_localized: 'Farbtemperatur', value: '2700 K' }, { key_localized: 'Durchmesser', value: '60 mm' }, { key_localized: 'Länge', value: '104 mm' }, { key_localized: 'Energieeffizienzklasse', value: 'A++' }, { key_localized: 'Mittlere Nennlebensdauer', value: '15000 h' }],
+  media_attributes: {
+    productDataSheet: { productDataSheet_0: 'https://shop.w-f.ch/sonepar/asset_external/lieferanten/bsw/datenblätter/964870199.pdf', productDataSheet_1: 'https://shop.w-f.ch/sonepar/asset_external/lieferanten/bsw/datenblätter/964870199.pdf' },
+    video: { video_0: 'https://www.youtube.com/watch?v=A69ca_b_f3c', video_1: 'https:/www.youtube.com/watch?v=A69ca_b_f3c' }
+  }
 };

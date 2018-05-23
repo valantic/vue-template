@@ -21,7 +21,21 @@
   },
   "c-product-detail": {
     "productDescriptionTitle": "Produktbeschreibung",
+    "productDocumentsTitle": "Dokumente",
+    "productVideosTitle": "Videos"
+  },
+  "urls": {
+    "linkAccount": "/account",
+    "linkWishlist": "/wishlist",
+    "linkLogin": "/login"
+  },
+  "c-header-links": {
+    "labelWishlist": "Merkliste",
+    "labelLogin": "Anmelden",
     "technicalDataTitle": "Technische Daten"
+  },
+  "c-search": {
+    "placeholder": "Suche"
   },
   "e-info-label": {
     "priceType1": "Aktion",
