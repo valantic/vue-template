@@ -3,20 +3,25 @@
 // Theme name:  Fabri
 ////
 $theme-03: (
-  color-primary--1: #dc2f34,
-  color-secondary--1: #2c68a0,
-  color-secondary--2: #75b4e0,
+  color-primary-1: #dc2f34,
+  color-primary-2: #000000,
+  color-primary-3: #ffffff,
+  color-secondary-1: #2c68a0,
+  color-secondary-2: #75b4e0,
+  color-secondary-3: #2fa61c,
+  color-secondary-4: #b50f0f,
+  color-secondary-5: #e2951f,
   color-gradient-2-0: #2c68a0,
   color-gradient-2-1: #75b4e0,
+  color-status-success: #2fa61c,
+  color-status-warning: #e2951f,
+  color-status-danger: #b50f0f,
+  color-status-info: #75b4e0
 );
 
 :root {
-  --theme-color-primary-1: #{map_get($theme-03, 'color-primary--1')};
-  --theme-color-primary-1--rgb: #{calc-rgb(map_get($theme-03, 'color-primary--1'))};
-  --theme-color-secondary-1: #{map_get($theme-03, 'color-secondary--1')};
-  --theme-color-secondary-1--rgb: #{calc-rgb(map_get($theme-03, 'color-secondary--1'))};
-  --theme-color-secondary-2: #{map_get($theme-03, 'color-secondary--2')};
-  --theme-color-secondary-2--rgb: #{calc-rgb(map_get($theme-03, 'color-secondary--2'))};
-  --theme-color-gradient-2-0: #{map_get($theme-03, 'color-gradient-2-0')};
-  --theme-color-gradient-2-1: #{map_get($theme-03, 'color-gradient-2-1')};
+  @each $name, $color in $theme-03 {
+    --theme-#{$name}: #{$color};
+    --theme-#{$name}--rgb: #{calc-rgb($color)};
+  }
 }

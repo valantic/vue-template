@@ -66,7 +66,7 @@
 
     &__inner {
       background: linear-gradient(to right, var(--theme-color-gradient-2-0), var(--theme-color-gradient-2-1));
-      color: $color-primary--3;
+      color: var(--theme-color-primary-3);
       max-width: map-get($grid-breakpoints, xl);
       width: 100%;
       display: flex;

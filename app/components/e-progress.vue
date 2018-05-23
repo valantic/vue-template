@@ -145,7 +145,7 @@
 
   .e-progress--negative {
     .e-progress__bubble {
-      background-color: $color-primary--3;
+      background-color: var(--theme-color-primary-3);
     }
   }
 </style>
