@@ -22,10 +22,11 @@ if (process.env.NODE_ENV !== 'production' || process.env.HAS_STYLEGUIDE) {
 
 window.vm = new Vue(vueOptions);
 
-// Set's current theme id to the vuex store read by url param for e.g. ?theme=01
-const themeId = urlFunctions.methods.getUrlParameter('theme');
+if (process.env.NODE_ENV !== 'production' || process.env.HAS_STYLEGUIDE) {
+  // Set's current theme id to the vuex store read by url param for e.g. ?theme=01
+  const themeId = urlFunctions.methods.getUrlParameter('theme');
 
-if (themeId) {
-  window.vm.$store.commit('session/setTheme', themeId);
+  if (themeId) {
+    window.vm.$store.commit('session/setTheme', themeId);
+  }
 }
-
