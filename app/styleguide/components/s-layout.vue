@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
     <router-view/>
-    <s-navigation :routes="routes" nav-position="top-right"/>
+    <s-navigation :routes="routes" nav-position="bottom-right"/>
   </div>
 </template>
 
