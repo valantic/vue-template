@@ -118,7 +118,7 @@
     &:active &__icon,
     &:hover &__icon {
       path {
-        fill: $color-primary--1;
+        fill: var(--theme-color-primary-1);
       }
     }
 
@@ -128,7 +128,7 @@
       top: $spacing--10;
       margin-right: $spacing--10;
       display: inline-block;
-      color: $color-secondary--2;
+      color: var(--theme-color-secondary-1);
       padding: 1px 2px;
       background-color: $color-grayscale--1000;
       border-radius: 2px;
