@@ -292,7 +292,7 @@
 
     &--focus,
     &:focus {
-      color: $color-primary--3;
+      color: var(--theme-color-primary-3);
       background-color: $color-grayscale--500;
       outline: none;
       border: 0; // Overwrite link style
@@ -305,7 +305,7 @@
 
     &--hover,
     &:hover {
-      color: $color-primary--3;
+      color: var(--theme-color-primary-3);
       background-color: $color-grayscale--500;
       border-bottom: 0; // Overwrite link styles
 
@@ -319,12 +319,12 @@
     &--hover path,
     &:focus path,
     &:hover path {
-      fill: $color-primary--3;
+      fill: var(--theme-color-primary-3);
     }
 
     &:active:not([disabled]),
     &--active:not([disabled]) {
-      color: $color-primary--3;
+      color: var(--theme-color-primary-3);
       background-color: $color-grayscale--400;
       position: relative;
 
@@ -356,8 +356,8 @@
     }
 
     &--negative {
-      background: $color-primary--2;
-      color: $color-primary--3;
+      background: var(--theme-color-primary-2);
+      color: var(--theme-color-primary-3);
 
       &::before,
       &::after {
@@ -397,30 +397,30 @@
 
   .e-button--primary {
     &:not([disabled]) {
-      color: $color-secondary--2;
+      color: var(--theme-color-secondary-2);
 
       &::before,
       &::after {
         border-width: 2px;
-        border-color: $color-primary--1;
+        border-color: var(--theme-color-primary-1);
       }
 
       &.e-button:focus,
       &.e-button--focus {
-        color: $color-primary--3;
-        background-color: $color-primary--1;
+        color: var(--theme-color-primary-3);
+        background-color: var(--theme-color-primary-1);
       }
 
       &.e-button:hover:not([disabled]),
       &.e-button--hover:not([disabled]) {
-        color: $color-primary--3;
-        background-color: $color-primary--1;
+        color: var(--theme-color-primary-3);
+        background-color: var(--theme-color-primary-1);
       }
 
       &.e-button:active:not([disabled]),
       &.e-button--active:not([disabled]) {
-        color: $color-primary--3;
-        background-color: $color-secondary--2;
+        color: var(--theme-color-primary-3);
+        background-color: var(--theme-color-secondary-2);
       }
     }
 
@@ -430,7 +430,7 @@
     &.e-button--progress[disabled]:focus,
     &.e-button--progress:hover,
     &.e-button--progress:focus {
-      background-color: $color-secondary--2;
+      background-color: var(--theme-color-secondary-2);
 
       &::before,
       &::after {

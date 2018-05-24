@@ -24,6 +24,14 @@ module.exports = function(env = {}, options = {}) {
   const isProfileBuild = (options.profile && options.json) || false;
   const hasWatcher = env.watch || false;
 
+  const themes = {
+    'theme-01': path.resolve(__dirname, 'app/setup/scss/themes/theme-01.scss'),
+    'theme-02': path.resolve(__dirname, 'app/setup/scss/themes/theme-02.scss'),
+    'theme-03': path.resolve(__dirname, 'app/setup/scss/themes/theme-03.scss'),
+    'theme-04': path.resolve(__dirname, 'app/setup/scss/themes/theme-04.scss'),
+    'theme-05': path.resolve(__dirname, 'app/setup/scss/themes/theme-05.scss'),
+  };
+
   // Configuration
   const buildPath = path.resolve(__dirname, 'dist');
   const filePrefix = '';
@@ -79,13 +87,13 @@ module.exports = function(env = {}, options = {}) {
       },
     ];
 
-    if (!isProduction) {
+    if (hasStyleguide) {
       use.unshift('vue-style-loader');
     }
 
-    return isProduction
-      ? ExtractTextPlugin.extract({ use })
-      : use;
+    return hasStyleguide
+        ? use
+        : ExtractTextPlugin.extract({ use });
   }
 
   function webpackStats() {
@@ -111,6 +119,12 @@ module.exports = function(env = {}, options = {}) {
         inject: true,
         template: 'index.html',
         chunksSortMode: 'dependency',
+        excludeChunks: Object.keys(themes),
+      }),
+      // extract css into its own file
+      new ExtractTextPlugin({
+        filename: assetsSubDirectory + `css/${prefix}[name].css?[chunkhash]`, // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
+        allChunks: true,
       })
     ];
 
@@ -119,16 +133,6 @@ module.exports = function(env = {}, options = {}) {
         test: /\.js($|\?)/i, // MUST be defined because of file has as query
         parallel: true,
         sourceMap: hasStyleguide,
-      }));
-
-      // extract css into its own file
-      pluginCollection.push(new ExtractTextPlugin({
-        filename: assetsSubDirectory + `css/${prefix}[name].css?[chunkhash]`, // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
-        // Setting the following option to `false` will not extract CSS from codesplit chunks.
-        // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-        // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
-        // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
-        allChunks: true,
       }));
 
       // split vendor js into its own file
@@ -165,16 +169,24 @@ module.exports = function(env = {}, options = {}) {
 
       // Create critical CSS
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
+        // provide an optional function to filter out unwanted CSS
+        predicate: name => name.indexOf('app.css') > -1,
         suffix: 'critical',
         pipeline: [
-          postCssCriticalSplit()
+          postCssCriticalSplit({
+            output: 'critical',
+          }),
+          cssNano()
         ]
       }));
 
-      // Create minimized CSS
+      // Create minimized CSS (Full css => incl. critical css)
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
         suffix: '', // Defining an empty string makes it possible not create an additional file
         pipeline: [
+          postCssCriticalSplit({
+            'output': 'input',
+          }),
           cssNano()
         ]
       }));
@@ -235,6 +247,7 @@ module.exports = function(env = {}, options = {}) {
 
   const baseConfig = {
     entry: {
+      ...themes,
       app: [
         'babel-polyfill',
         path.resolve(__dirname, 'app/main.js')
@@ -276,7 +289,7 @@ module.exports = function(env = {}, options = {}) {
           }
         },
         {
-          test: /\.scss$/,
+          test: /\.(scss)$/,
           use: scssLoader(),
         },
         {
