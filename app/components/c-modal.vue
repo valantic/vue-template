@@ -26,14 +26,6 @@
       },
 
       /**
-       * Hides the close icon in the header
-       */
-      noCloseIcon: {
-        type: Boolean,
-        default: false
-      },
-
-      /**
        * Set's the inner spacing of the modal [0, 500]
        */
       innerSpacing: {
@@ -126,7 +118,19 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-
+    mounted() {
+      // Global esc key event listener
+      VuedalsBus.$on('opened', (modal) => {
+        if (modal.options.escapable) {
+          document.addEventListener('keydown', function dismissModal(event) {
+            if (event.keyCode === 27) {
+              VuedalsBus.$emit('close');
+              document.removeEventListener('keydown', dismissModal, true);
+            }
+          }, true);
+        }
+      });
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -138,27 +142,32 @@
       showModal() {
         const contentSlot = this.$slots.default;
         const _that = this;
+        const scrollPosition = window.pageYOffset;
 
         VuedalsBus.$emit('new', {
-          name: this.b({
+          name: _that.b({
             size: this.$props.size
           }),
           component: {
             name: this.title ? this.title.replace(/\s/g, '') : '',
 
             render(createElement) {
-              return createElement('div', { class: _that.b('content', { innerSpacing: _that.$props.innerSpacing }) }, [contentSlot]);
+              return createElement(
+                'div',
+                { class: _that.b('content', { innerSpacing: _that.$props.innerSpacing }) },
+                [contentSlot]
+              );
             }
           },
           header: this.showHeader ? {
             component: this.headerComponent,
             props: {
               title: this.$props.title,
-              noCloseIcon: this.$props.noCloseIcon,
+              closable: this.$props.closable,
             }
           } : null,
           dismissable: false,
-          escapable: true,
+          escapable: this.$props.closable,
           onClose() {
             /**
              * Close Event
@@ -166,6 +175,7 @@
              * @event close
              */
             _that.$emit('close');
+            window.setTimeout(() => { window.scrollTo(0, scrollPosition); }, 0);
           },
           onDismiss() {
             if (_that.$props.closable) {
@@ -176,7 +186,7 @@
 
             // prevents closing modal
             return false;
-          }
+          },
         });
       },
       closeModal() {
@@ -214,6 +224,16 @@
       border-bottom: 0;
       min-height: 0;
       margin: 0;
+    }
+
+    // Is needed for a bottom spacing of the modal if the content is higher than the screen-height (IE, Safari)
+    &::after {
+      @include media(sm) {
+        content: '';
+        height: 100px;
+        position: absolute;
+        width: 1px;
+      }
     }
 
     &--size-300 {
