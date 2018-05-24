@@ -327,6 +327,22 @@ You can read more about critical CSS [here](https://css-tricks.com/annotating-cr
 #### SVG usage
 Check svg files delivered from designers and remove unnecessary attributes like "title" (because title attribute will displayed on hover-state)
 
+#### Themes
+Theme styles are delivered seperatly in a *.css file. In this files are the global css-vars defined which can be used in every vue component.
+* For the available css-vars check the theme files: `app/setup/scss/themes/theme-**.scss`
+* Vue mixin for including theme class-names into component `app/mixins/themes.js`
+* The current theme is always available in the store `app/store/modules/session/index.js`
+* [Infos css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) (For the IE polyfill we use [this](https://github.com/jhildenbiddle/css-vars-ponyfill))
+
+Usage example:
+```css
+  .class {
+    color: var(--theme-color-primary-1);
+    background: linear-gradient(to right, var(--theme-color-gradient-2-0), var(--theme-color-gradient-2-1));
+    background-color: rgba(var(--theme-color-primary-1--rgb), 0.5);
+  }
+```
+
 ## Living styleguide
 
 The living styleguide is defined in two parts: one is documenting all available Vue components of the project, in the second one you can create example pages to test and share the design with the client or developer.

@@ -249,6 +249,10 @@
 </script>
 
 <style lang="scss">
+  :root {
+    --aspect-ratio: 1000; // Makes sure the variable is defined and creates a very small spacer
+  }
+
   .e-picture { // Can be <picture> or <img>!
     display: block;
     max-width: 100%;

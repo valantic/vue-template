@@ -204,7 +204,7 @@
       border-bottom: 0;
 
       &::after {
-        border-bottom: 1px solid $color-primary--1;
+        border-bottom: 1px solid var(--theme-color-primary-1);
         bottom: 0;
         left: 0;
         content: "";
@@ -214,12 +214,12 @@
       }
 
       &:hover {
-        color: $color-secondary--1;
+        color: var(--theme-color-secondary-1);
         border-bottom: 0;
       }
 
       .c-collapse--expanded & {
-        color: $color-secondary--1;
+        color: var(--theme-color-secondary-1);
         transition: color 0.3s;
 
         &::after {

@@ -4,6 +4,11 @@ export default {
   namespaced: true,
   state: {
     /**
+     * @type {String}   theme id
+     */
+    theme: '01', // TODO: set this value dynamic (initial)
+
+    /**
      * @type {Object}   Stores user data
      */
     user: userData,
@@ -26,6 +31,17 @@ export default {
      * @returns  {Boolean}  userLoggedIn   True if user is logged in, false otherwise
      */
     userLoggedIn: state => state.user && !!state.user.name,
+
+    /**
+     * Gets the current theme id
+     *
+     * @param {Object}    state   Current state
+     *
+     * @returns {String}  theme   Current theme id
+     */
+    getTheme(state) {
+      return state.theme;
+    },
   },
   mutations: {
     /**
@@ -36,6 +52,16 @@ export default {
      */
     data(state, data) {
       state.user = data;
+    },
+
+    /**
+     * Sets the global theme id
+     *
+     * @param {Object}  state   session/state
+     * @param {String}  id      theme id
+     */
+    setTheme(state, id) {
+      state.theme = id;
     },
   },
   actions: {},
