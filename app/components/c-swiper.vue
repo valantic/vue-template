@@ -8,11 +8,13 @@
       <!-- slides -->
       <swiper-slide v-for="img in images"
                     :class="b('slide')"
-                    :key="img.name">
+                    :key="img.id">
 
-        <e-picture :alt="img.alt"
-                   :fallback="img.fallback"
-                   :sources="img.sources"/>
+        <e-picture
+          :sizes="img.sizes"
+          :srcset="img.srcset"
+          :fallback="img.fallback"
+          :alt="img.altText"/>
 
       </swiper-slide>
 
@@ -20,7 +22,6 @@
       <div slot="pagination" :class="b('pagination swiper-pagination')"></div>
       <div slot="button-prev" :class="b('button-prev swiper-button-prev')"></div>
       <div slot="button-next" :class="b('button-next swiper-button-next')"></div>
-
     </swiper>
 
     <!-- counter -->
@@ -35,7 +36,7 @@
 
 <script>
 
-  import {swiper, swiperSlide} from 'vue-awesome-swiper';
+  import { swiper, swiperSlide } from 'vue-awesome-swiper';
 
   // require styles
   import 'swiper/dist/css/swiper.css';
@@ -77,9 +78,14 @@
           keyboard: {
             enabled: true,
           },
+          lazy: {
+            elementClass: 'lazyload',
+            loadPrevNext: true,
+          },
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
+            hideOnClick: true,
           },
           pagination: {
             el: '.swiper-pagination',
@@ -119,13 +125,7 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted() {
-      /**
-       * initialize current swiper
-       */
-      // this.swiper.slideTo(1, 1000, false);
-      // console.log(this.swiper)
-    },
+    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -143,75 +143,80 @@
     position: relative;
 
     // dots navigation
-    .swiper-container-horizontal > .swiper-pagination-bullets-dynamic {
+    .swiper-container-horizontal > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
       bottom: 16px;
-      left: 90px;
+      left: 75px;
       overflow: hidden;
       padding-top: $spacing--30;
       position: relative;
+      text-align: left;
 
       @include media(xs) {
-        left: 110px;
         padding-top: 0;
       }
-    }
 
-    // single dot
-    .swiper-pagination-bullet {
-      background: $color-grayscale--600;
-      border-radius: 2.5px;
-      height: 5px;
-      width: 20px;
-      margin: 0 3px;
-      opacity: 1;
-      transform: scale(1);
+      // single dot
+      .swiper-pagination-bullet {
+        background: $color-grayscale--600;
+        border-radius: 2.5px;
+        height: 5px;
+        width: 20px;
+        margin: 0 3px;
+        opacity: 1;
+        transform: scale(1);
 
-      &:first-child {
-        // margin-left: 0;
-      }
+        &-active {
+          background-color: var(--theme-color-primary-1);
+          box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
+        }
 
-      &-active {
-        background-color: $color-primary--1;
-        box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
-      }
-
-      &-active-prev,
-      &-active-prev-prev,
-      &-active-next-next {
-        visibility: hidden;
+        &-active-prev,
+        &-active-prev-prev,
+        &-active-next-next {
+          visibility: hidden;
+        }
       }
     }
 
     // arrow navigation
-    &__button-prev,
-    &__button-next {
+    .swiper-button-prev,
+    .swiper-button-next {
+      background-size: 25px 30px;
       display: none;
+      height: 30px;
+      width: 25px;
+      margin-top: -15px;
 
-      @include media(sm) {
+      @include media(xs) {
         display: block;
       }
     }
 
-    // counter
+    .swiper-button-prev {
+      background-image: url('../assets/icons/i-arrow-full--left.svg');
+      left: 0;
+    }
+
+    .swiper-button-next {
+      background-image: url('../assets/icons/i-arrow-full--right.svg');
+      right: 0;
+    }
+
     &__counter {
       @include font(14px, 18px);
 
       color: $color-grayscale--400;
       bottom: $spacing--10;
-      padding: 0 $spacing--10;
       position: absolute;
       text-align: right;
       width: 100%;
-
-      @include media(xs) {
-        padding: 0 $spacing--30;
-      }
     }
 
-    // images
-    .e-picture__image {
+    .e-picture {
+      padding: $spacing--30;
+
       @include media(xs) {
-        padding: $spacing--30;
+        padding: $spacing--50;
       }
     }
   }

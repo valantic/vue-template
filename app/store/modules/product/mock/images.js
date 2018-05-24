@@ -1,92 +1,152 @@
 export default [
   {
     id: 1,
-    alt: 'My first picture',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Just an image',
+    fallback: 'http://localhost:8080/static/mock/dummy_square_500--v1.jpg',
+    srcset: {
+      500: 'http://localhost:8080/static/mock/dummy_square_500--v1.jpg',
+      800: 'http://localhost:8080/static/mock/dummy_square_800--v1.jpg',
+      1200: 'http://localhost:8080/static/mock/dummy_square_1200--v1.jpg',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 2,
-    alt: 'Just another picture',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Another image',
+    fallback: 'http://localhost:8080/static/mock/dummy_square_500--v2.jpg',
+    srcset: {
+      500: 'http://localhost:8080/static/mock/dummy_square_500--v2.jpg',
+      800: 'http://localhost:8080/static/mock/dummy_square_800--v2.jpg',
+      1200: 'http://localhost:8080/static/mock/dummy_square_1200--v2.jpg',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 3,
-    alt: 'Picture vs Image',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Just an image',
+    fallback: 'http://via.placeholder.com/300x300?text=fallback',
+    srcset: {
+      500: 'http://via.placeholder.com/500x500',
+      800: 'http://via.placeholder.com/800x800',
+      1200: 'http://via.placeholder.com/1200x1200',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 4,
-    alt: 'Picture vs Image',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Another image',
+    fallback: 'http://via.placeholder.com/300x300?text=fallback',
+    srcset: {
+      500: 'http://via.placeholder.com/500x500/bbb/eee',
+      800: 'http://via.placeholder.com/800x800/bbb/eee',
+      1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 5,
-    alt: 'Picture vs Image',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Just an image',
+    fallback: 'http://via.placeholder.com/300x300?text=fallback',
+    srcset: {
+      500: 'http://via.placeholder.com/500x500',
+      800: 'http://via.placeholder.com/800x800',
+      1200: 'http://via.placeholder.com/1200x1200',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 6,
-    alt: 'Picture vs Image',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Another image',
+    fallback: 'http://via.placeholder.com/300x300?text=fallback',
+    srcset: {
+      500: 'http://via.placeholder.com/500x500/bbb/eee',
+      800: 'http://via.placeholder.com/800x800/bbb/eee',
+      1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 7,
-    alt: 'Picture vs Image',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Just an image',
+    fallback: 'http://via.placeholder.com/300x300?text=fallback',
+    srcset: {
+      500: 'http://via.placeholder.com/500x500',
+      800: 'http://via.placeholder.com/800x800',
+      1200: 'http://via.placeholder.com/1200x1200',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 8,
-    alt: 'Picture vs Image',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Another image',
+    fallback: 'http://via.placeholder.com/300x300?text=fallback',
+    srcset: {
+      500: 'http://via.placeholder.com/500x500/bbb/eee',
+      800: 'http://via.placeholder.com/800x800/bbb/eee',
+      1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 9,
-    alt: 'Picture vs Image',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Just an image',
+    fallback: 'http://via.placeholder.com/300x300?text=fallback',
+    srcset: {
+      500: 'http://via.placeholder.com/500x500',
+      800: 'http://via.placeholder.com/800x800',
+      1200: 'http://via.placeholder.com/1200x1200',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
   {
     id: 10,
-    alt: 'Picture vs Image',
-    fallback: 'http://via.placeholder.com/150x150',
-    sources: {
-      0: ['http://via.placeholder.com/800/000000 1x', 'http://via.placeholder.com/1600/000000 2x'],
-      sm: ['http://via.placeholder.com/1200/aaaaaa 1x', 'http://via.placeholder.com/2400/aaaaaa 2x'],
+    altText: 'Another image',
+    fallback: 'http://via.placeholder.com/300x300?text=fallback',
+    srcset: {
+      500: 'http://via.placeholder.com/500x500/bbb/eee',
+      800: 'http://via.placeholder.com/800x800/bbb/eee',
+      1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
+    },
+    sizes: {
+      xs: 500,
+      sm: 800,
+      md: 1200,
     },
   },
 ];

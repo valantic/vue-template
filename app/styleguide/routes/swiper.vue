@@ -1,7 +1,6 @@
 <template>
   <div :class="b()">
     <h1>Slider example (c-swiper)</h1>
-
     <c-swiper :images="images" :options="options"/>
 
   </div>
@@ -26,10 +25,11 @@
 
 <style lang="scss">
   .swiper {
-    max-width: 600px;
+    padding: $spacing--30 $spacing--10;
 
     @include media(xs) {
-      padding: $spacing--50;
+      max-width: 1000px;
+      padding: $spacing--30;
     }
   }
 </style>

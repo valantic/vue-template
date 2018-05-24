@@ -14,7 +14,7 @@
           />
         </div>
         <div :class="b('gallery')">
-          gallery<br>
+          <c-swiper :images="images" :options="options"/>
         </div>
 
         <div :class="b('specs')">
@@ -76,6 +76,7 @@
   import cAttributeGrid from '@/components/c-attribute-grid';
   import cCollapseGroup from '@/components/c-collapse-group';
   import cCollapse from '@/components/c-collapse';
+  import cSwiper from '@/components/c-swiper';
 
   export default {
     name: 'c-product-detail',
@@ -85,6 +86,7 @@
       cAttributeGrid,
       cCollapseGroup,
       cCollapse,
+      cSwiper,
     },
     // mixins: [],
 
@@ -96,13 +98,12 @@
     computed: {
       ...mapGetters({
         /**
-         * Gets a product
-         *
-         * @returns  {Object}  product - Single product from the store
+         * Product detail getters
          */
-        product: 'product/product',
-        erp: 'product/erp',
         collapsible: 'product/collapsible',
+        erp: 'product/erp',
+        images: 'product/images',
+        product: 'product/product',
       })
     },
     // watch: {},
@@ -159,6 +160,7 @@
 
       @include media(sm) {
         display: flex;
+        max-width: 75%;
       }
     }
 
@@ -219,9 +221,12 @@
 
     &__gallery {
       border-bottom: 2px solid $color-grayscale--600;
+      padding: 0 $spacing--10;
 
       @include media(sm) {
         border: none;
+        max-width: 50%;
+        padding: 0 $spacing--60 0 $spacing--30;
       }
     }
 
