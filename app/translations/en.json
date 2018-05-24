@@ -36,5 +36,8 @@
   },
   "c-add-to-cart": {
     "addToCart": "add to cart"
+  },
+  "c-swiper": {
+    "images": "0 pictures | 1 picture | {count} pictures"
   }
 }

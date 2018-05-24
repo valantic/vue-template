@@ -23,6 +23,12 @@
 
     </swiper>
 
+    <!-- counter -->
+    <div :class="b('counter')">
+      <div :class="b('img-counter')">{{ $tc('c-swiper.images', images.length, {count: images.length}) }}</div>
+      <div :class="b('video-counter')"></div>
+    </div>
+
   </div>
 
 </template>
@@ -134,9 +140,11 @@
 
 <style lang="scss">
   .c-swiper {
+    position: relative;
 
     // dots navigation
     .swiper-container-horizontal > .swiper-pagination-bullets-dynamic {
+      bottom: 16px;
       left: 90px;
       overflow: hidden;
       padding-top: $spacing--30;
@@ -179,8 +187,24 @@
     &__button-next {
       display: none;
 
-      @include media(md) {
+      @include media(sm) {
         display: block;
+      }
+    }
+
+    // counter
+    &__counter {
+      @include font(14px, 18px);
+
+      color: $color-grayscale--400;
+      bottom: $spacing--10;
+      padding: 0 $spacing--10;
+      position: absolute;
+      text-align: right;
+      width: 100%;
+
+      @include media(xs) {
+        padding: 0 $spacing--30;
       }
     }
 
