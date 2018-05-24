@@ -610,10 +610,7 @@
       vertical-align: sub;
       top: -1px;
     }
-    *:not('#mkdbuttons') {
-      margin: 0;
-      padding: 0;
-    }
+
     .poetry pre {
       font-family: Georgia, Garamond, serif !important;
       font-style: italic;
