@@ -7,7 +7,7 @@ import options from './setup/options';
 import components from './setup/components';
 
 import './setup/plugins';
-import urlHelper from './helpers/get-url-parameter';
+import getUrlParameter from './helpers/get-url-parameter';
 
 let vueOptions = options;
 
@@ -24,7 +24,7 @@ window.vm = new Vue(vueOptions);
 
 if (process.env.NODE_ENV !== 'production' || process.env.HAS_STYLEGUIDE) {
   // Set's current theme id to the vuex store read by url param for e.g. ?theme=01
-  const themeId = urlHelper.getUrlParameter('theme');
+  const themeId = getUrlParameter('theme');
 
   if (themeId) {
     window.vm.$store.commit('session/setTheme', themeId);
