@@ -71,12 +71,12 @@ export default [
   },
   {
     id: 8,
-    altText: 'Another image',
+    altText: 'Just an image',
     fallback: 'http://via.placeholder.com/300x300?text=fallback',
     srcset: {
-      500: 'http://via.placeholder.com/500x500/bbb/eee',
-      800: 'http://via.placeholder.com/800x800/bbb/eee',
-      1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
+      500: 'http://via.placeholder.com/500x500',
+      800: 'http://via.placeholder.com/800x800',
+      1200: 'http://via.placeholder.com/1200x1200',
     },
   },
   {
@@ -91,12 +91,13 @@ export default [
   },
   {
     id: 10,
-    altText: 'Another image',
+    altText: 'Just an image',
     fallback: 'http://via.placeholder.com/300x300?text=fallback',
     srcset: {
-      500: 'http://via.placeholder.com/500x500/bbb/eee',
-      800: 'http://via.placeholder.com/800x800/bbb/eee',
-      1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
+      500: 'http://via.placeholder.com/500x500',
+      800: 'http://via.placeholder.com/800x800',
+      1200: 'http://via.placeholder.com/1200x1200',
     },
   },
+
 ];

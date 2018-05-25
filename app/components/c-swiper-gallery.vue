@@ -1,5 +1,7 @@
 <template>
-  <div :class="b()">
+  <div :class="b(modifiers)"
+       @mouseenter="isHover = true"
+       @mouseleave="isHover = false">
 
     <div ref="container" :class="b('container swiper-container')">
 
@@ -85,7 +87,6 @@
     },
     data() {
       return {
-        swiper: null,
         optionsDefault: {
           watchOverflow: true,
           keyboard: {
@@ -101,10 +102,13 @@
             el: '.swiper-pagination',
             type: 'bullets',
             clickable: true,
-            dynamicBullets: true,
-            dynamicMainBullets: 6,
+            dynamicBullets: this.images.length > 7 || false,
+            dynamicMainBullets: 5,
           },
         },
+        // this.images.length > this.dynamicBullets
+        swiper: null,
+        isHover: false,
         modalOpen: false,
         sizes: BREAKPOINTS, // todo add as prop
       };
@@ -112,9 +116,21 @@
 
     computed: {
       /**
+       * Defines state modifier classes
+       *
+       * @returns  {Object}   BEM classes
+       */
+      modifiers() {
+        return {
+          hover: this.isHover,
+          modalOpen: this.modalOpen,
+        };
+      },
+
+      /**
        * Merges default with custom component options
        *
-       * @returns  {object}  optionsMerged    Combination of default and custom options.
+       * @returns  {Object}  optionsMerged    Combination of default and custom options.
        */
       optionsMerged() {
         return {
@@ -130,7 +146,7 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      this.swiper = new Swiper('.swiper-container', this.optionsMerged); // init swiper
+      this.swiper = new Swiper(this.$refs.container, this.optionsMerged); // init swiper
     },
     // beforeUpdate() {},
     // updated() {},
@@ -156,16 +172,21 @@
     position: relative;
 
     // dots navigation
-    .swiper-container-horizontal > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
-      bottom: 16px;
-      left: 75px;
-      overflow: hidden;
-      padding-top: $spacing--30;
-      position: relative;
-      text-align: left;
+    .swiper-container-horizontal {
+      & > .swiper-pagination-bullets {
+        padding-top: $spacing--30;
+        position: relative;
+        text-align: left;
 
-      @include media(xs) {
-        padding-top: 0;
+        @include media(xs) {
+          padding-top: 0;
+        }
+
+        &.swiper-pagination-bullets-dynamic {
+          bottom: 15px;
+          left: 70px;
+          overflow: hidden;
+        }
       }
 
       // single dot
@@ -184,8 +205,7 @@
         }
 
         &-active-prev,
-        &-active-prev-prev,
-        &-active-next-next {
+        &-active-prev-prev {
           visibility: hidden;
         }
       }
@@ -214,18 +234,6 @@
       right: 0;
     }
 
-    &:hover {
-      .swiper-button-prev:not(.swiper-button-disabled),
-      .swiper-button-next:not(.swiper-button-disabled) {
-        @include media(xs) {
-          opacity: 1;
-          transition: all 0.2s linear;
-          transition-delay: 0.2s;
-          visibility: visible;
-        }
-      }
-    }
-
     &__counter {
       @include font(14px, 18px);
 
@@ -242,11 +250,24 @@
       border: none;
       display: inline-block;
       margin: $spacing--30;
-      padding:0;
+      padding: 0;
       text-decoration: none;
 
       @include media(xs) {
         margin: $spacing--50;
+      }
+    }
+
+    &--hover,
+    &:hover {
+      .swiper-button-prev:not(.swiper-button-disabled),
+      .swiper-button-next:not(.swiper-button-disabled) {
+        @include media(xs) {
+          opacity: 1;
+          transition: all 0.2s linear;
+          transition-delay: 0.2s;
+          visibility: visible;
+        }
       }
     }
   }
