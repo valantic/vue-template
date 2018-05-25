@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
-    <div :class="b('breadcrumbs--wrapper')">
-      <span :class="b('breadcrumbs')">Sortiment / Licht</span>
+    <div :class="b('breadcrumbs')">
+      Sortiment / Licht
     </div>
     <e-heading tag-name="h1" font-weight="bold">{{ productlist.length }} Artikel</e-heading>
     <ul :class="b('list')">
@@ -53,19 +53,17 @@
 </script>
 
 <style lang="scss">
+
   .c-productlist-wrapper {
     background-color: $color-grayscale--600;
     box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
 
-    &__breadcrumbs--wrapper {
-      background-color: $color-grayscale--1000;
-      margin-bottom: $spacing--5;
-      padding: $spacing--0 $spacing--10;
-    }
-
     &__breadcrumbs {
       @include font(12, 24);
 
+      background-color: $color-grayscale--1000;
+      margin-bottom: $spacing--5;
+      padding: $spacing--0 $spacing--10;
       color: $color-grayscale--400;
     }
 
@@ -90,4 +88,5 @@
       margin-bottom: $spacing--5;
     }
   }
+  
 </style>
