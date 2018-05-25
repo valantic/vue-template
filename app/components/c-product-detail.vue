@@ -14,7 +14,7 @@
           />
         </div>
         <div :class="b('gallery')">
-          <c-swiper :images="images" :options="options"/>
+          <c-swiper :images="images"/>
         </div>
 
         <div :class="b('specs')">
@@ -30,7 +30,6 @@
 
       <aside :class="b('sidebar', {area: 'top' })">
         <div :class="b('add-to-cart')">
-          availability
           <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
           <c-add-to-cart :sku="product.sku" label/>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
     <h1>Slider example (c-swiper)</h1>
-    <c-swiper :images="images" :options="options"/>
+    <c-swiper :images="images" :options="test"/>
 
   </div>
 </template>
@@ -17,7 +17,6 @@
     data() {
       return {
         images: this.$store.getters['product/images'],
-        options: {},
       };
     },
   };

@@ -18,9 +18,13 @@
 
       </swiper-slide>
 
-      <!-- controls -->
+      <!-- @slot Bullets pagination -->
       <div slot="pagination" :class="b('pagination swiper-pagination')"></div>
+
+      <!-- @slot Previous button element -->
       <div slot="button-prev" :class="b('button-prev swiper-button-prev')"></div>
+
+      <!-- @slot Next button element -->
       <div slot="button-next" :class="b('button-next swiper-button-next')"></div>
     </swiper>
 
@@ -31,7 +35,6 @@
     </div>
 
   </div>
-
 </template>
 
 <script>
@@ -56,7 +59,7 @@
 
     props: {
       /**
-       * Gallery images passed to swiper
+       * Gallery images passed to swiper.
        */
       images: {
         type: Array,
@@ -64,7 +67,7 @@
       },
 
       /**
-       * Swiper options passed by component
+       * Swiper options passed by component (merged with default).
        */
       options: {
         type: Object,
@@ -75,6 +78,7 @@
     data() {
       return {
         optionsDefault: {
+          watchOverflow: true,
           keyboard: {
             enabled: true,
           },
@@ -182,14 +186,13 @@
     .swiper-button-prev,
     .swiper-button-next {
       background-size: 25px 30px;
-      display: none;
       height: 30px;
       width: 25px;
       margin-top: -15px;
-
-      @include media(xs) {
-        display: block;
-      }
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s linear;
+      transition-delay: 0.1s;
     }
 
     .swiper-button-prev {
@@ -200,6 +203,18 @@
     .swiper-button-next {
       background-image: url('../assets/icons/i-arrow-full--right.svg');
       right: 0;
+    }
+
+    &:hover {
+      .swiper-button-prev:not(.swiper-button-disabled),
+      .swiper-button-next:not(.swiper-button-disabled) {
+        @include media(xs) {
+          opacity: 1;
+          transition: all 0.2s linear;
+          transition-delay: 0.2s;
+          visibility: visible;
+        }
+      }
     }
 
     &__counter {
