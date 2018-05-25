@@ -114,7 +114,7 @@
       height: 0;
       border-top: 10px solid transparent;
       border-bottom: 8px solid transparent;
-      border-left: 8px solid $color-primary--1;
+      border-left: 8px solid var(--theme-color-primary-1);
     }
 
     &__separator {
@@ -134,18 +134,18 @@
       cursor: default;
 
       &--design-new {
-        background-color: $color-primary--1;
-        color: $color-secondary--1;
+        background-color: var(--theme-color-primary-1);
+        color: var(--theme-color-secondary-1);
       }
 
       &--design-promo {
-        background-color: $color-secondary--2;
+        background-color: var(--theme-color-secondary-2);
         color: $color-grayscale--1000;
       }
     }
 
     &--design-new &__separator {
-      background-color: $color-secondary--1;
+      background-color: var(--theme-color-secondary-1);
     }
 
     &--design-promo &__separator {
