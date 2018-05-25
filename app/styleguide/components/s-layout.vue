@@ -2,17 +2,20 @@
   <div :class="b()">
     <router-view/>
     <s-navigation :routes="routes" nav-position="top-right"/>
+    <vuedal/>
   </div>
 </template>
 
 <script>
   import sNavigation from '@/styleguide/components/s-navigation';
   import styleguideRoutes from '@/setup/styleguide.routes';
+  import { Component as Vuedal } from 'vuedals';
 
   export default {
     name: 's-layout',
     components: {
-      sNavigation
+      sNavigation,
+      Vuedal
     },
     // mixins: [],
 

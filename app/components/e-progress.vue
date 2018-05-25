@@ -121,7 +121,7 @@
     &__bubble {
       height: 1em;
       width: 1em;
-      background-color: var(--theme-color-secondary-1);
+      background-color: $color-secondary--1;
       left: 100%;
       position: absolute;
       margin: 0 auto;
@@ -145,7 +145,7 @@
 
   .e-progress--negative {
     .e-progress__bubble {
-      background-color: var(--theme-color-primary-3);
+      background-color: $color-primary--3;
     }
   }
 </style>

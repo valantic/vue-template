@@ -82,6 +82,7 @@
     "vue-bem-cn": "~1.0.0",
     "vue-i18n": "~7.5.0",
     "vue-router": "~3.0.1",
+    "vuedals": "~1.7.0",
     "vuex": "~3.0.1"
   },
   "devDependencies": {
