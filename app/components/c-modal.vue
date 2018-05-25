@@ -123,7 +123,7 @@
       VuedalsBus.$on('opened', (modal) => {
         if (modal.options.escapable) {
           document.addEventListener('keydown', function dismissModal(event) {
-            if (event.keyCode === 27) {
+            if (event.key === 'Escape') {
               VuedalsBus.$emit('close');
               document.removeEventListener('keydown', dismissModal, true);
             }
@@ -206,7 +206,8 @@
 </script>
 
 <style lang="scss">
-  .c-modal {
+  .vuedal.c-modal,
+  .vuedal .c-modal {
     width: 100%;
     min-height: 100vh;
     background-color: $color-grayscale--1000;
@@ -267,7 +268,7 @@
 
   /* stylelint-disable */
   // Background
-  .vuedals {
+  .vuedals.vuedals {
     background-color: rgba($color-grayscale--600, 0.9);
     transition: unset;
   }
