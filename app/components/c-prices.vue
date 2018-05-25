@@ -93,7 +93,7 @@
 
       flex: 0 1 50%;
       text-align: right;
-      color: var(--theme-color-secondary-1);
+      color: $color-secondary--1;
       margin-bottom: $spacing--0;
     }
   }

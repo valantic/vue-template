@@ -100,7 +100,7 @@
       margin-right: $spacing--20;
 
       path {
-        fill: var(--theme-color-primary-1);
+        fill: $color-primary--1;
       }
     }
   }

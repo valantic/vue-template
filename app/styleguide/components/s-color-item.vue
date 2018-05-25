@@ -72,7 +72,7 @@
 
 <style lang="scss">
   .s-color-item {
-    border: 1px solid var(--theme-color-primary-2);
+    border: 1px solid $color-primary--2;
     margin: $spacing--5;
     flex: 0 1 200px;
 
