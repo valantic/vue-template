@@ -39,8 +39,8 @@
     padding: $spacing--30;
 
     &__warning {
-      border: 1px solid $color-status--danger;
-      background: rgba($color-status--danger, 0.5);
+      border: 1px solid var(--theme-color-status-danger);
+      background: rgba(var(--theme-color-status-danger--rgb), 0.5);
       text-align: center;
       padding: $spacing--10;
     }
@@ -48,8 +48,8 @@
     &__code {
       display: inline-block;
       border: 1px solid $color-grayscale--400;
-      background: rgba($color-primary--2, 0.5);
-      color: $color-primary--3;
+      background: rgba(var(--theme-color-primary-2--rgb), 0.5);
+      color: var(--theme-color-primary-3);
     }
   }
 </style>

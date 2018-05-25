@@ -76,6 +76,7 @@ None
 * [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/) - Transform rest properties for object destructuring assignment and spread properties for object literals
 * [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin) - webpack plugin to copie individual files or entire directories to the build directory.
 * [css-loader](https://github.com/webpack-contrib/css-loader) - The webpack css-loader interprets @import and url() like import/require() and will resolve them.
+* [css-vars-ponyfill](https://github.com/jhildenbiddle/css-vars-ponyfill) - :horse: IE Polyfill for CSS Variables (used for themes)
 * [eslint](https://github.com/eslint/eslint) - A fully pluggable tool for identifying and reporting on patterns in JavaScript.
 * [eslint-config-airbnb-base](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) - This package provides Airbnb's base JS .eslintrc (without React plugins) as an extensible shared config.
 * [syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/) - This plugin only allows Babel to parse import syntax. **Don't use babel-plugin-dynamic-import-node since it breaks code splitting!**
@@ -86,7 +87,7 @@ None
 * [file-loader](https://github.com/webpack-contrib/file-loader) - Instructs webpack to emit the required object as file and to return its public URL.
 * [friendly-errors-webpack-plugin](https://github.com/geowarin/friendly-errors-webpack-plugin) - Friendly-errors-webpack-plugin recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them to provide a better Developer Experience.
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
-* [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image loader module for webpack.
+* [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image optimizer module for webpack.
 * [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing.
 * [license-checker](https://github.com/davglass/license-checker) - Allows us to check the whole project for use licenses (see scripts).
 * [launch-editor-middleware](https://github.com/yyx990803/launch-editor) - Allows to open Vue components in editor from Vue inspector.

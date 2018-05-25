@@ -6,9 +6,8 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
 
-  // TODO: Mixin properties not visible in styleguide => check after update styleguidist
   /**
    * Component is used to display a notification (status message) directly in the form field.
    * It needs a content and a state
@@ -70,17 +69,17 @@
 
     &--state-error {
       background-image: url('../assets/icons/i-error--negative.svg');
-      background-color: $color-status--danger;
+      background-color: var(--theme-color-status-danger);
     }
 
     &--state-info {
       background-image: url('../assets/icons/i-info--negative.svg');
-      background-color: $color-status--info;
+      background-color: var(--theme-color-status-info);
     }
 
     &--state-success {
       background-image: url('../assets/icons/i-check--negative.svg');
-      background-color: $color-status--success;
+      background-color: var(--theme-color-status-success);
     }
   }
 </style>

@@ -9,8 +9,6 @@
 </template>
 
 <script>
-  import { i18n } from '@/setup/options';
-
   export default {
     name: 'e-progress',
     // components: {},
@@ -44,14 +42,18 @@
        */
       message: {
         type: String,
-        default: () => i18n.t('e-progress.loading')
+        default: null // Translation can not be set here because it will not be computed
       }
     },
     // data() {
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      loadingMessage() {
+        return this.message || this.$i18n.t('e-progress.loading');
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -119,7 +121,7 @@
     &__bubble {
       height: 1em;
       width: 1em;
-      background-color: $color-secondary--1;
+      background-color: var(--theme-color-secondary-1);
       left: 100%;
       position: absolute;
       margin: 0 auto;
@@ -143,7 +145,7 @@
 
   .e-progress--negative {
     .e-progress__bubble {
-      background-color: $color-primary--3;
+      background-color: var(--theme-color-primary-3);
     }
   }
 </style>

@@ -62,8 +62,13 @@
 </template>
 
 <script>
+  import cAddToCart from '@/components/c-add-to-cart';
+
   export default {
     name: 'forms',
+    components: {
+      cAddToCart,
+    },
     data() {
       return {
         name: {

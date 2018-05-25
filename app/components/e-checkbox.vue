@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
 
   /**
    * Checkbox component for form elements.
@@ -230,11 +230,11 @@
     // checked label
     &--checked &__label,
     &__field:checked + &__label {
-      color: $color-secondary--1;
+      color: var(--theme-color-secondary-1);
 
       // custom field checked
       &::before {
-        border: 1px solid $color-secondary--2;
+        border: 1px solid var(--theme-color-secondary-2);
       }
 
       // custom field marker checked
@@ -268,7 +268,7 @@
 
       // custom field focus
       &::before {
-        border: 1px solid $color-secondary--2;
+        border: 1px solid var(--theme-color-secondary-2);
       }
     }
 
@@ -278,7 +278,7 @@
 
       // custom field hover
       &::before {
-        border: 1px solid $color-secondary--2;
+        border: 1px solid var(--theme-color-secondary-2);
       }
     }
   }
