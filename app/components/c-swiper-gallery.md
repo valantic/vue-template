@@ -3,7 +3,7 @@
 ```
 <template>
   <div class="demo">
-    <c-swiper :images="images"/>
+    <c-swiper-gallery :images="images"/>
   </div>
 
 </template>
@@ -25,14 +25,14 @@
 ```
 <template>
   <div class="demo">
-    <c-swiper :images="images" :options="customOptions"/>
+    <c-swiper-gallery :images="images" :options="customOptions"/>
   </div>
 
 </template>
 
 <script>
   export default {
-    name: 'swiper',
+    name: 'swiper2',
     data() {
       return {
         customOptions: {
@@ -40,7 +40,7 @@
           cubeEffect: {
               slideShadows: false,
           },
-          speed: 1000
+          speed: 500
         },
         images: this.$store.getters['product/images']
       };

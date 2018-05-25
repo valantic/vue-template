@@ -103,7 +103,7 @@ None
 * [typescript](https://github.com/Microsoft/TypeScript) -  TypeScript is a superset of JavaScript that compiles to clean JavaScript output. - Needed by `vue-styleguidist`
 * [uglifyjs-webpack-plugin](https://github.com/webpack-contrib/uglifyjs-webpack-plugin) - This plugin uses UglifyJS v3 (`uglify-es`) to minify your JavaScript.
 * [url-loader](https://github.com/webpack-contrib/url-loader) - Loads files as `base64` encoded URL.
-* [vue-awesome-swiper](https://github.com/nolimits4web/Swiper) - Swiper wrapper component for vue.js based on [Swiper 4](http://idangero.us/swiper/). 
+* [swiper](https://github.com/nolimits4web/swiper) - Mobile touch slider (swiper) with hardware accelerated transitions. 
 * [vue-jest](https://github.com/vuejs/vue-jest) - Jest Vue transformer.
 * [vue-loader](https://github.com/vuejs/vue-loader) - Vue.js component loader for Webpack.
 * [vue-styleguidist]() - Created from react styleguidist for Vue Components with a living style guide.

@@ -1,42 +1,42 @@
 <template>
   <div :class="b()">
 
-    <swiper ref="container"
-            :class="b('container')"
-            :options="optionsMerged">
+    <div ref="container" :class="b('container swiper-container')">
 
-      <!-- slides -->
-      <swiper-slide v-for="img in images"
-                    :class="b('slide')"
-                    :key="img.id">
+      <div :class="b('wrapper swiper-wrapper')">
+        <!-- Slides -->
+        <div v-for="img in images"
+             :class="b('slide swiper-slide')"
+             :key="img.id">
 
-        <a :class="b('trigger')"
-           :title="$tc('c-swiper.zoom')"
-           href="#0"
-           @click.prevent="modalOpen = true">
+          <a :class="b('trigger')"
+             :title="$tc('c-swiper.zoom')"
+             href="#0"
+             @click.prevent="modalOpen = true">
 
-          <e-picture
-            :sizes="sizes"
-            :srcset="img.srcset"
-            :fallback="img.fallback"
-            :alt="img.altText"/>
+            <e-picture
+              :sizes="sizes"
+              :srcset="img.srcset"
+              :fallback="img.fallback"
+              :alt="img.altText"
+              @click.prevent="modalOpen = true"/>
 
-        </a>
+          </a>
 
-      </swiper-slide>
+        </div>
+      </div>
 
-      <!-- @slot Bullets pagination -->
-      <div slot="pagination" :class="b('pagination swiper-pagination')"></div>
+      <!-- navigation -->
+      <div :class="b('pagination swiper-pagination')"></div>
 
-      <!-- @slot Previous button element -->
-      <div slot="button-prev" :class="b('button-prev swiper-button-prev')"></div>
+      <!-- buttons-->
+      <div :class="b('button-prev swiper-button-prev')"></div>
+      <div :class="b('button-next swiper-button-next')"></div>
 
-      <!-- @slot Next button element -->
-      <div slot="button-next" :class="b('button-next swiper-button-next')"></div>
-
-      <!-- modal box -->
+      <!-- modal -->
       <c-modal :open="modalOpen" @close="modalClose">hello world...</c-modal>
-    </swiper>
+
+    </div>
 
     <!-- counter -->
     <div :class="b('counter')">
@@ -49,7 +49,7 @@
 
 <script>
 
-  import { swiper, swiperSlide } from 'vue-awesome-swiper';
+  import Swiper from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
 
   // require styles
@@ -57,15 +57,11 @@
 
   /**
    * Touch enabled slider component based on
-   * [vue-awesome-slider](https://github.com/surmon-china/vue-awesome-swiper) and
-   * [swiper](http://idangero.us/swiper/api/).
+   * [swiper](http://idangero.us/swiper/).
    */
   export default {
-    name: 'c-swiper',
-    components: {
-      swiper,
-      swiperSlide
-    },
+    name: 'c-swiper-gallery',
+    // components: {},
     // mixins: [],
 
     props: {
@@ -82,12 +78,14 @@
        */
       options: {
         type: Object,
-        default: () => {},
+        default: () => {
+        },
       },
 
     },
     data() {
       return {
+        swiper: null,
         optionsDefault: {
           watchOverflow: true,
           keyboard: {
@@ -108,7 +106,7 @@
           },
         },
         modalOpen: false,
-        sizes: BREAKPOINTS,
+        sizes: BREAKPOINTS, // todo add as prop
       };
     },
 
@@ -125,21 +123,15 @@
         };
       },
 
-      /**
-       * Gets current swiper reference
-       *
-       * @returns  {object}  swiper   Swiper component instance
-       */
-      swiper() {
-        return this.$refs.container.swiper;
-      }
     },
     // watch: {},
 
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() {},
+    mounted() {
+      this.swiper = new Swiper('.swiper-container', this.optionsMerged); // init swiper
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -160,7 +152,7 @@
 </script>
 
 <style lang="scss">
-  .c-swiper {
+  .c-swiper-gallery {
     position: relative;
 
     // dots navigation
@@ -249,14 +241,12 @@
     &__trigger:visited {
       border: none;
       display: inline-block;
+      margin: $spacing--30;
+      padding:0;
       text-decoration: none;
-    }
-
-    .e-picture {
-      padding: $spacing--30;
 
       @include media(xs) {
-        padding: $spacing--50;
+        margin: $spacing--50;
       }
     }
   }

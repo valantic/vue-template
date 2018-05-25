@@ -1,18 +1,18 @@
 <template>
   <div :class="b()">
     <h1>Slider example (c-swiper)</h1>
-    <c-swiper :images="images"/>
+    <c-swiper-gallery :images="images"/>
 
   </div>
 </template>
 
 <script>
-  import CSwiper from '@/components/c-swiper';
+  import CSwiperGallery from '@/components/c-swiper-gallery';
 
   export default {
     name: 'swiper',
     components: {
-      CSwiper,
+      CSwiperGallery,
     },
     data() {
       return {

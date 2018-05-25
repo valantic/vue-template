@@ -14,7 +14,7 @@
           />
         </div>
         <div :class="b('gallery')">
-          <c-swiper :images="images"/>
+          <c-swiper-gallery :images="images"/>
         </div>
 
         <div :class="b('specs')">
@@ -83,7 +83,7 @@
   import cLinklist from '@/components/c-linklist';
   import cCollapseGroup from '@/components/c-collapse-group';
   import cCollapse from '@/components/c-collapse';
-  import cSwiper from '@/components/c-swiper';
+  import cSwiperGallery from '@/components/c-swiper-gallery';
 
   export default {
     name: 'c-product-detail',
@@ -94,7 +94,7 @@
       cAttributeGrid,
       cCollapseGroup,
       cCollapse,
-      cSwiper,
+      cSwiperGallery,
     },
     // mixins: [],
 
