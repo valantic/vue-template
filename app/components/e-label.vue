@@ -150,11 +150,7 @@
 
     &--active,
     &--focus {
-      color: $color-secondary--1;
-
-      &.e-label--state-info {
-        color: $color-status--info;
-      }
+      color: var(--theme-color-secondary-1);
     }
 
     &--disabled {
@@ -162,7 +158,7 @@
     }
 
     &--state-error {
-      color: $color-status--danger;
+      color: var(--theme-color-status-danger);
     }
   }
 </style>

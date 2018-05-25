@@ -35,6 +35,15 @@
                  state="success"
         />
       </e-label>
+      <e-label name="Comment" position="top">
+        <e-textarea v-model="name.comment"
+                    :rows="5"
+                    name="comment"
+                    placeholder="Insert comment"
+                    state="info"
+                    notification="You can add a specific comment here.<br>Please do so."
+        />
+      </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <pre>{{ name }}</pre>
 
@@ -73,7 +82,8 @@
         name: {
           firstName: '',
           lastName: '',
-          street: ''
+          street: '',
+          comment: ''
         },
         checkbox: {
           checked: false,

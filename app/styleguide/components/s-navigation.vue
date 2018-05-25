@@ -13,6 +13,9 @@
         <li :class="b('navigation-item', { language: true })" @click.stop>
           <s-language/>
         </li>
+        <li :class="b('navigation-item', { theme: true })" @click.stop>
+          <s-theme-selector/>
+        </li>
         <router-link
           v-for="route in routes"
           v-if="route.meta"
@@ -38,11 +41,13 @@
 
 <script>
   import SLanguage from './s-language';
+  import SThemeSelector from './s-theme-selector';
 
   export default {
     name: 's-navigation',
     components: {
       SLanguage,
+      SThemeSelector
     },
     props: {
       /**
@@ -90,7 +95,7 @@
 </script>
 
 <style lang="scss">
-  $s-navigation--border: $spacing--10 solid $color-status--danger;
+  $s-navigation--border: $spacing--10 solid var(--theme-color-status-danger);
   $s-navigation--trigger-size: 40px;
 
   .s-navigation {
@@ -100,7 +105,7 @@
       position: fixed;
       opacity: 0.2;
       min-width: $spacing--40;
-      background: $color-primary--3;
+      background: var(--theme-color-primary-3);
       z-index: 10000;
       height: 100%;
 
@@ -109,7 +114,7 @@
         position: absolute;
         width: $s-navigation--trigger-size;
         height: $s-navigation--trigger-size;
-        background-color: $color-status--danger;
+        background-color: var(--theme-color-status-danger);
         background-image: url('../assets/menu-button.svg');
         background-repeat: no-repeat;
         background-size: $s-navigation--trigger-size - 15px;
@@ -190,7 +195,8 @@
         border-top: 1px solid $color-grayscale--400;
       }
 
-      &--language {
+      &--language,
+      &--theme {
         padding: $spacing--10 $spacing--20;
         border-bottom: 1px solid $color-grayscale--400;
       }

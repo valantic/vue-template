@@ -69,17 +69,17 @@
 
     &--state-error {
       background-image: url('../assets/icons/i-error--negative.svg');
-      background-color: $color-status--danger;
+      background-color: var(--theme-color-status-danger);
     }
 
     &--state-info {
       background-image: url('../assets/icons/i-info--negative.svg');
-      background-color: $color-status--info;
+      background-color: var(--theme-color-status-info);
     }
 
     &--state-success {
       background-image: url('../assets/icons/i-check--negative.svg');
-      background-color: $color-status--success;
+      background-color: var(--theme-color-status-success);
     }
   }
 </style>

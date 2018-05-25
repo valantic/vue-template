@@ -47,26 +47,26 @@
     position: fixed;
     width: 100%;
     display: flex;
-    border-bottom: 2px solid $color-primary--1;
+    border-bottom: 2px solid var(--theme-color-primary-1);
     box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
 
     &::before {
       content: '';
       flex: 1 1 auto;
-      background-color: $color-secondary--1;
+      background-color: var(--theme-color-secondary-1);
       display: block; /* IE 11 */
     }
 
     &::after {
       content: '';
       flex: 1 1 auto;
-      background-color: $color-secondary--2;
+      background-color: var(--theme-color-secondary-2);
       display: block; /* IE 11 */
     }
 
     &__inner {
-      background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
-      color: $color-primary--3;
+      background: linear-gradient(to right, var(--theme-color-gradient-2-0), var(--theme-color-gradient-2-1));
+      color: var(--theme-color-primary-3);
       max-width: map-get($grid-breakpoints, xl);
       width: 100%;
       display: flex;
