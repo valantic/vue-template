@@ -62,8 +62,8 @@
     flex-shrink: 0;
 
     &__inner {
-      background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
-      color: $color-primary--3;
+      background: linear-gradient(to right, var(--theme-color-gradient-2-0), var(--theme-color-gradient-2-1));
+      color: var(--theme-color-primary-3);
       margin: $spacing--0 auto;
       padding: $spacing--0 $spacing--5;
       max-width: map-get($grid-breakpoints, xl);
@@ -76,14 +76,14 @@
     &::before {
       content: '';
       flex: 1 1 auto;
-      background-color: $color-secondary--1;
+      background-color: var(--theme-color-secondary-1);
       display: block; /* IE 11 */
     }
 
     &::after {
       content: '';
       flex: 1 1 auto;
-      background-color: $color-secondary--2;
+      background-color: var(--theme-color-secondary-2);
       display: block; /* IE 11 */
     }
 
@@ -104,7 +104,7 @@
       border: none;
       width: 100%;
       height: 1px;
-      background-color: $color-primary--3;
+      background-color: var(--theme-color-primary-3);
     }
 
     &__languages {

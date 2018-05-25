@@ -244,7 +244,7 @@
     &--focus &__field {
       border: 1px solid $color-grayscale--500;
       box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
-      color: $color-secondary--1;
+      color: var(--theme-color-secondary-1);
       outline: none;
     }
 
@@ -277,23 +277,23 @@
     **/
     /* stylelint-disable no-descending-specificity */
     &--state-error {
-      @include half-border($color-status--danger);
+      @include half-border(var(--theme-color-status-danger));
 
       .e-input__field {
         @include form-state-icon('error');
       }
 
       .e-input__icon-splitter {
-        border-color: $color-status--danger;
+        border-color: var(--theme-color-status-danger);
       }
     }
 
     &--state-error &__field:hover {
-      border: 1px solid $color-status--danger;
+      border: 1px solid var(--theme-color-status-danger);
     }
 
     &--state-error &__field:focus {
-      border: 1px solid $color-status--danger;
+      border: 1px solid var(--theme-color-status-danger);
     }
 
     &--state-info {
