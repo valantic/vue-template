@@ -1,6 +1,6 @@
 <template>
   <div :class="b()">
-    <h1>Slider example (c-swiper)</h1>
+    <h1>Swiper example (c-swiper-gallery)</h1>
     <c-swiper-gallery :images="images"/>
 
   </div>
