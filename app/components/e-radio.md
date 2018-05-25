@@ -37,11 +37,32 @@ Always use **v-model** to bind value to form elements!
 
 #### `:disabled`
 ```vue
+<template>
+  <div>
     <e-radio disabled 
-             name="example-radio-disabled" 
-             value="radio-1" 
-             displayName="Select Radio Button"
+           v-for="item in items"
+           :key="item.id"
+           :name="name" 
+           :value="item.value" 
+           :display-name="item.displayName"
+           v-model="selected"
     />
+  </div>
+</template>
+    
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      selected: 'radio-1',
+      name: 'radio',
+      items: [
+        {id: 1, value: 'radio-1', displayName: 'Radio 1'},
+        {id: 2, value: 'radio-2', displayName: 'Radio 2'},
+      ],
+    })
+  };
+</script>
 ```
 
 #### `:hover`
@@ -103,13 +124,15 @@ Always use **v-model** to bind value to form elements!
 ```vue
 <template>
   <div>
-    <e-radio state="info" 
+    <e-radio disabled
+             state="info" 
              v-model="demo" 
              name="example-radio-info" 
              value="radio-1" 
              displayName="Select Radio Button"
     />
-    <e-radio state="info" 
+    <e-radio disabled
+             state="info" 
              v-model="demo" 
              name="example-radio-info" 
              value="radio-2" 
