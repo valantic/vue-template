@@ -1,7 +1,10 @@
 <template>
   <div :class="b()">
     <h1>Slider example (c-swiper-modal)</h1>
-    <c-swiper-modal :images="product.images"/>
+    <e-button @click="modalState = true">Open swiper</e-button>
+    <c-modal :open="modalState" @close="close">
+      <c-swiper-modal :images="product.images"/>
+    </c-modal>
   </div>
 </template>
 
@@ -14,10 +17,20 @@
     components: {
       CSwiperModal,
     },
+    data() {
+      return {
+        modalState: false
+      };
+    },
     computed: {
       ...mapGetters({
         product: 'product/product',
       })
+    },
+    methods: {
+      close() {
+        this.modalState = false;
+      }
     },
   };
 </script>
