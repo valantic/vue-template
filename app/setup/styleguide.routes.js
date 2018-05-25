@@ -8,6 +8,7 @@ import panels from '../styleguide/routes/panels';
 import buttons from '../styleguide/routes/buttons';
 import forms from '../styleguide/routes/forms';
 import collapse from '../styleguide/routes/collapse';
+import modals from '../styleguide/routes/modals';
 
 const root = '/styleguide';
 
@@ -85,6 +86,14 @@ export default [
     component: productDetail,
     meta: {
       title: 'Product Detail',
+    }
+  },
+  {
+    path: `${root}/modals`,
+    name: 'styleguideModals',
+    component: modals,
+    meta: {
+      title: 'Modals',
     }
   },
   {

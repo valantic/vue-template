@@ -151,10 +151,6 @@
     &--active,
     &--focus {
       color: var(--theme-color-secondary-1);
-
-      &.e-label--state-info {
-        color: var(--theme-color-status-info);
-      }
     }
 
     &--disabled {
