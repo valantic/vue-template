@@ -55,7 +55,7 @@
     &__legend {
       @include font($font-size--18, 22px, $font-weight--regular);
 
-      color: $color-secondary--1;
+      color: var(--theme-color-secondary-1);
       margin-bottom: $spacing--25;
 
       @include media(xs) {
@@ -65,7 +65,7 @@
 
     &__inner {
       display: inline-block;
-      border-bottom: 1px solid $color-primary--1;
+      border-bottom: 1px solid var(--theme-color-primary-1);
       padding: $spacing--0 $spacing--10 $spacing--5;
 
       @include media(xs) {
