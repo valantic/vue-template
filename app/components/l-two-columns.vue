@@ -1,15 +1,17 @@
 <template>
   <div :class="b()">
-    <c-header/>
-    <div :class="b('content')">
-      <div :class="b('left')">
-        <slot name="left"></slot>
+    <div :class="b('wrapper')">
+      <c-header/>
+      <div :class="b('content')">
+        <div :class="b('left')">
+          <slot name="left"></slot>
+        </div>
+        <div :class="b('main')">
+          <slot name="main"></slot>
+        </div>
       </div>
-      <div :class="b('main')">
-        <slot name="main"></slot>
-      </div>
+      <c-footer/>
     </div>
-    <c-footer/>
   </div>
 </template>
 
@@ -64,8 +66,8 @@
 
   .l-two-columns {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    // flex-direction: column;
+    // min-height: 100vh;
 
     @include media(xxs) {
       &__left {
@@ -87,6 +89,13 @@
       &__main {
         flex-basis: percentage(3/4);
       }
+    }
+
+    &__wrapper {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     &__content {

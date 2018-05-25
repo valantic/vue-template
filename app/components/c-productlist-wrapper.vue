@@ -54,6 +54,7 @@
 
 <style lang="scss">
   .c-productlist-wrapper {
+    background-color: $color-grayscale--600;
     box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
 
     &__breadcrumbs--wrapper {

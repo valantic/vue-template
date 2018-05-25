@@ -1,6 +1,6 @@
 ### Styles
 
-#### Productlist Wrapper
+#### Productlist Wrapper (Mock data)
 ```
 <c-productlist-wrapper />
 ```
