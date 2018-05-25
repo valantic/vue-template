@@ -172,7 +172,7 @@
     }
 
     &__field:checked ~ &__fake-button::after {
-      background-color: $color-secondary--2;
+      background-color: var(--theme-color-secondary-2);
       border-radius: 25px;
       content: '';
       display: block;
@@ -183,11 +183,11 @@
     }
 
     &__field:checked ~ &__fake-button {
-      border: 1px solid $color-primary--1;
+      border: 1px solid var(--theme-color-primary-1);
     }
 
     &__field:checked ~ &__label-name {
-      color: $color-secondary--2;
+      color: var(--theme-color-secondary-2);
     }
 
     /* stylelint-disable no-descending-specificity */
@@ -195,13 +195,13 @@
     // hover
     &--hover &__fake-button,
     &__field:hover ~ &__fake-button {
-      border: 1px solid $color-primary--1;
+      border: 1px solid var(--theme-color-primary-1);
     }
 
     // focus
     &--focus &__fake-button,
     &__field:focus ~ &__fake-button {
-      border: 1px solid $color-primary--1;
+      border: 1px solid var(--theme-color-primary-1);
     }
 
     // disabled
