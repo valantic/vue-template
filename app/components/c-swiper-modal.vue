@@ -79,6 +79,12 @@
             hideOnClick: true,
           },
         },
+        optionsThumbnails: {
+          spaceBetween: 10,
+          slidesPerView: 'auto',
+          touchRatio: 0.2,
+          slideToClickedSlide: true,
+        }
       };
     },
 
@@ -87,15 +93,6 @@
         return {
           ...this.optionsDefault,
           ...this.options,
-        };
-      },
-      optionsThumbnails() {
-        return {
-          spaceBetween: 10,
-          centeredSlides: true,
-          slidesPerView: 'auto',
-          touchRatio: 0.2,
-          slideToClickedSlide: true,
         };
       },
 
