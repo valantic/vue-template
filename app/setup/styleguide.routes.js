@@ -1,5 +1,6 @@
 import index from '../styleguide/routes/index';
 import lDefault from '../components/l-default';
+import lTwoColumns from '../styleguide/routes/two-columns';
 import productDetail from '../styleguide/routes/product-detail';
 import lazyload from '../styleguide/routes/lazyload';
 import headings from '../styleguide/routes/headings';
@@ -84,6 +85,14 @@ export default [
     component: productDetail,
     meta: {
       title: 'Product Detail',
+    }
+  },
+  {
+    path: `${root}/two-columns`,
+    name: 'styleguideTwoColumns',
+    component: lTwoColumns,
+    meta: {
+      title: 'Two Columns Layout',
     }
   },
   {
