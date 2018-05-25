@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
     <l-two-columns>
-      <div :class="b('testmenu')" slot="left">
+      <div slot="left" :class="b('testmenu')" >
         ...
       </div>
       <c-productlist-wrapper slot="main"/>
