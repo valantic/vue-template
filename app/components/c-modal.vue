@@ -206,6 +206,8 @@
 </script>
 
 <style lang="scss">
+  /* stylelint-disable */
+  // Double selector is needed to be sure that this style voerwrites the vuedals plugin default styling
   .vuedal.c-modal,
   .vuedal .c-modal {
     width: 100%;
@@ -266,7 +268,6 @@
     }
   }
 
-  /* stylelint-disable */
   // Background
   .vuedals.vuedals {
     background-color: rgba($color-grayscale--600, 0.9);
