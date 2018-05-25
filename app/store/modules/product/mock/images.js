@@ -8,11 +8,6 @@ export default [
       800: 'http://localhost:8080/static/mock/dummy_square_800--v1.jpg',
       1200: 'http://localhost:8080/static/mock/dummy_square_1200--v1.jpg',
     },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
-    },
   },
   {
     id: 2,
@@ -22,11 +17,6 @@ export default [
       500: 'http://localhost:8080/static/mock/dummy_square_500--v2.jpg',
       800: 'http://localhost:8080/static/mock/dummy_square_800--v2.jpg',
       1200: 'http://localhost:8080/static/mock/dummy_square_1200--v2.jpg',
-    },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
     },
   },
   {
@@ -38,11 +28,6 @@ export default [
       800: 'http://via.placeholder.com/800x800',
       1200: 'http://via.placeholder.com/1200x1200',
     },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
-    },
   },
   {
     id: 4,
@@ -52,11 +37,6 @@ export default [
       500: 'http://via.placeholder.com/500x500/bbb/eee',
       800: 'http://via.placeholder.com/800x800/bbb/eee',
       1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
-    },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
     },
   },
   {
@@ -68,11 +48,6 @@ export default [
       800: 'http://via.placeholder.com/800x800',
       1200: 'http://via.placeholder.com/1200x1200',
     },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
-    },
   },
   {
     id: 6,
@@ -82,11 +57,6 @@ export default [
       500: 'http://via.placeholder.com/500x500/bbb/eee',
       800: 'http://via.placeholder.com/800x800/bbb/eee',
       1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
-    },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
     },
   },
   {
@@ -98,11 +68,6 @@ export default [
       800: 'http://via.placeholder.com/800x800',
       1200: 'http://via.placeholder.com/1200x1200',
     },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
-    },
   },
   {
     id: 8,
@@ -112,11 +77,6 @@ export default [
       500: 'http://via.placeholder.com/500x500/bbb/eee',
       800: 'http://via.placeholder.com/800x800/bbb/eee',
       1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
-    },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
     },
   },
   {
@@ -128,11 +88,6 @@ export default [
       800: 'http://via.placeholder.com/800x800',
       1200: 'http://via.placeholder.com/1200x1200',
     },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
-    },
   },
   {
     id: 10,
@@ -142,11 +97,6 @@ export default [
       500: 'http://via.placeholder.com/500x500/bbb/eee',
       800: 'http://via.placeholder.com/800x800/bbb/eee',
       1200: 'http://via.placeholder.com/1200x1200/bbb/eee',
-    },
-    sizes: {
-      xs: 500,
-      sm: 800,
-      md: 1200,
     },
   },
 ];

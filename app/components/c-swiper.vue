@@ -10,11 +10,18 @@
                     :class="b('slide')"
                     :key="img.id">
 
-        <e-picture
-          :sizes="img.sizes"
-          :srcset="img.srcset"
-          :fallback="img.fallback"
-          :alt="img.altText"/>
+        <a :class="b('trigger')"
+           :title="$tc('c-swiper.zoom')"
+           href="#0"
+           @click.prevent="modalOpen = true">
+
+          <e-picture
+            :sizes="sizes"
+            :srcset="img.srcset"
+            :fallback="img.fallback"
+            :alt="img.altText"/>
+
+        </a>
 
       </swiper-slide>
 
@@ -26,6 +33,9 @@
 
       <!-- @slot Next button element -->
       <div slot="button-next" :class="b('button-next swiper-button-next')"></div>
+
+      <!-- modal box -->
+      <c-modal :open="modalOpen" @close="modalClose">hello world...</c-modal>
     </swiper>
 
     <!-- counter -->
@@ -40,6 +50,7 @@
 <script>
 
   import { swiper, swiperSlide } from 'vue-awesome-swiper';
+  import { BREAKPOINTS } from '@/setup/globals';
 
   // require styles
   import 'swiper/dist/css/swiper.css';
@@ -71,9 +82,9 @@
        */
       options: {
         type: Object,
-        default: () => {
-        },
+        default: () => {},
       },
+
     },
     data() {
       return {
@@ -82,10 +93,7 @@
           keyboard: {
             enabled: true,
           },
-          lazy: {
-            elementClass: 'lazyload',
-            loadPrevNext: true,
-          },
+          lazy: false,
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
@@ -99,6 +107,8 @@
             dynamicMainBullets: 6,
           },
         },
+        modalOpen: false,
+        sizes: BREAKPOINTS,
       };
     },
 
@@ -137,7 +147,14 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      /**
+       * Close modal box
+       */
+      modalClose() {
+        this.modalOpen = false;
+      },
+    },
     // render() {},
   };
 </script>
@@ -225,6 +242,14 @@
       position: absolute;
       text-align: right;
       width: 100%;
+    }
+
+    &__trigger,
+    &__trigger:hover,
+    &__trigger:visited {
+      border: none;
+      display: inline-block;
+      text-decoration: none;
     }
 
     .e-picture {

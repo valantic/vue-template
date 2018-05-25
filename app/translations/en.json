@@ -44,6 +44,7 @@
     "downloadTitle": "Download file"
   },
   "c-swiper": {
-    "images": "0 pictures | 1 picture | {count} pictures"
+    "images": "0 pictures | 1 picture | {count} pictures",
+    "zoom": "zoom image"
   }
 }
