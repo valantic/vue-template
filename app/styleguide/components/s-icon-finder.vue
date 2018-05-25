@@ -153,7 +153,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      background-color: $color-status--success;
+      background-color: var(--theme-color-status-success);
       width: 100%;
       text-align: center;
       z-index: 999;
