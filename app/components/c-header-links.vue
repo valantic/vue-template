@@ -128,7 +128,7 @@
     &__item {
       &--active {
         .e-icon path {
-          fill: var(--theme-color-primary-1);
+          fill: $color-primary--1;
         }
       }
     }
