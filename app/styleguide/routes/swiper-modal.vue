@@ -1,8 +1,7 @@
 <template>
   <div :class="b()">
     <h1>Slider example (c-swiper-modal)</h1>
-    <c-swiper-modal :images="product.images[0].thumbs"/>
-
+    <c-swiper-modal :images="product.images"/>
   </div>
 </template>
 

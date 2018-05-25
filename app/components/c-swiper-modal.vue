@@ -3,14 +3,12 @@
     <swiper ref="container"
             :class="b('container')"
             :options="optionsMerged">
-      <swiper-slide v-for="picture in pictures"
-                    :class="b('slide')"
-                    :key="picuture.id">
+      <swiper-slide v-for="picture in pictures" :class="b('slide')" :key="picture.id">
         <e-picture
-          :sizes="picuture.sizes"
-          :srcset="picuture.srcset"
-          :fallback="picuture.fallback"
-          :alt="picuture.altText"/>
+          :sizes="picture.sizes"
+          :srcset="picture.srcset"
+          :fallback="picture.fallback"
+          :alt="picture.alt"/>
       </swiper-slide>
       <div slot="pagination" :class="b('pagination swiper-pagination')"></div>
       <div slot="button-prev" :class="b('button-prev swiper-button-prev')"></div>
@@ -97,23 +95,23 @@
       },
 
       pictures() {
-        return [
-          {
-            fallback: 'http://via.placeholder.com/180x150/0000ff',
-            srcset: {
-              200: 'http://via.placeholder.com/200x100',
-              400: 'http://via.placeholder.com/400x200',
-              800: 'http://via.placeholder.com/800x400',
-              1400: 'http://via.placeholder.com/1400x700',
-            },
-            sizes: {
-              1440: 1400,
-              xs: 200,
-              sm: 400,
-              md: 800,
-            },
-          },
-        ]
+        return this.images.map((image) => {
+          const sizeKeys = ['xs', 'sm', 'md'];
+          let sizes = {};
+          let srcset = {};
+
+          image.thumbs.map((thumb, i) => {
+            Object.assign(srcset, { [thumb.width]: thumb.absolute_path })
+            Object.assign(sizes, { [sizeKeys[i]]: thumb.width });
+          });
+
+          return {
+            fallback: image.external_url_small,
+            srcset,
+            sizes,
+            alt: '',
+          };
+        });
       }
     },
     // watch: {},
@@ -121,7 +119,9 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() {},
+    mounted() {
+      console.log(this.pictures);
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
