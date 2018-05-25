@@ -24,7 +24,8 @@
                  name="notes"
                  placeholder="your notes"
                  state="info"
-                 notification="this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>this is the info message<br/>"
+                 notification="this is the info message<br/>this is the info message<br/>
+                  this is the info message<br/>this is the info message<br/>this is the info message<br/>"
         />
       </e-label>
       <e-label name="Notes2:" position="top" state="success">
@@ -32,6 +33,15 @@
                  name="notes2"
                  placeholder="your notes"
                  state="success"
+        />
+      </e-label>
+      <e-label name="Comment" position="top">
+        <e-textarea v-model="name.comment"
+                    :rows="5"
+                    name="comment"
+                    placeholder="Insert comment"
+                    state="info"
+                    notification="You can add a specific comment here.<br>Please do so."
         />
       </e-label>
       <e-label name="Country:" position="top">
@@ -56,8 +66,13 @@
 </template>
 
 <script>
+  import cAddToCart from '@/components/c-add-to-cart';
+
   export default {
     name: 'forms',
+    components: {
+      cAddToCart,
+    },
     data() {
       return {
         name: {
@@ -65,6 +80,7 @@
           lastName: '',
           street: '',
           country: '',
+          comment: ''
         },
         checkbox: {
           checked: false,

@@ -3,6 +3,8 @@ body {
   height: 100%;
   font-size: 1rem;
   font-family: $font-family--primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 // global link definitions

@@ -7,6 +7,10 @@ import eInput from '@/components/e-input';
 import eCheckbox from '@/components/e-checkbox';
 import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
+import eTextarea from '@/components/e-textarea';
+import eInfoLabel from '@/components/e-info-label';
+import cModal from '@/components/c-modal';
+import cModalHeader01 from '@/components/c-modal-header-01';
 import eSelect from '@/components/e-select';
 
 export default {
@@ -20,7 +24,11 @@ export default {
       eCheckbox,
       eLabel,
       eProgress,
+      eTextarea,
+      eInfoLabel,
       ePanel,
+      cModal,
+      cModalHeader01,
       eSelect,
     ];
 
@@ -39,6 +47,10 @@ export default {
       Vue.component(eInput.name, eInput);
       Vue.component(eCheckbox.name, eCheckbox);
       Vue.component(eLabel.name, eLabel);
+      Vue.component(eTextarea.name, eTextarea);
+      Vue.component(eInfoLabel.name, eInfoLabel);
+      Vue.component(cModal.name, cModal);
+      Vue.component(cModalHeader01.name, cModalHeader01);
       Vue.component(eSelect.name, eSelect);
     }
   },

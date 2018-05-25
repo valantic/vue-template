@@ -9,7 +9,6 @@
       :value="value"
       :title="title"
       v-bind="$attrs"
-      type="text"
       @blur="onBlur"
       @focus="onFocus"
       @input="onInput"
@@ -25,8 +24,8 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
   import CFormNotification from '@/components/c-form-notification';
+  import formStates from '../mixins/form-states';
 
   /**
    * Input form component
@@ -46,7 +45,7 @@
        */
       value: {
         default: null,
-        type: String,
+        type: [String, Number],
       },
 
       /**
@@ -260,7 +259,7 @@
     &--disabled &__field,
     &--disabled &__field:hover {
       background-color: $color-grayscale--1000;
-      border: none;
+      border-color: transparent;
       color: $color-grayscale--600;
 
       &::placeholder {

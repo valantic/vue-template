@@ -13,6 +13,9 @@
         <li :class="b('navigation-item', { language: true })" @click.stop>
           <s-language/>
         </li>
+        <li :class="b('navigation-item', { theme: true })" @click.stop>
+          <s-theme-selector/>
+        </li>
         <router-link
           v-for="route in routes"
           v-if="route.meta"
@@ -38,11 +41,13 @@
 
 <script>
   import SLanguage from './s-language';
+  import SThemeSelector from './s-theme-selector';
 
   export default {
     name: 's-navigation',
     components: {
       SLanguage,
+      SThemeSelector
     },
     props: {
       /**
@@ -190,7 +195,8 @@
         border-top: 1px solid $color-grayscale--400;
       }
 
-      &--language {
+      &--language,
+      &--theme {
         padding: $spacing--10 $spacing--20;
         border-bottom: 1px solid $color-grayscale--400;
       }
