@@ -39,5 +39,8 @@
   },
   "c-add-to-cart": {
     "addToCart": "add to cart"
+  },
+  "c-linklist": {
+    "downloadTitle": "Download file"
   }
 }

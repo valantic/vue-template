@@ -55,7 +55,7 @@
             >
               <c-attribute-grid :attributes="product.tech_attributes"/>
             </c-collapse>
-            <c-collapse v-if="hasMedia" :background="true" :title="$t('c-product-detail.productDocumentsTitle')">
+            <c-collapse v-if="hasMedia" :title="$t('c-product-detail.productDocumentsTitle')">
               <e-heading v-if="hasPdfDocuments" tag-name="h3" color="gray">{{ $t('c-product-detail.productPdfsTitle') }}</e-heading>
               <c-linklist v-if="hasPdfDocuments" :items="product.media_attributes.productDataSheet"/>
               <e-heading v-if="hasVideos" tag-name="h3" color="gray">{{ $t('c-product-detail.productVideosTitle') }}</e-heading>

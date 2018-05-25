@@ -3,8 +3,8 @@
     <li v-for="(value, index) in items" :class="b('item')" :key="index">
       <a :class="b('link')"
          :href="value"
+         :title="$t(`c-linklist.downloadTitle`)"
          target="_blank"
-         title="pdf-download"
       >
         {{ value }}
       </a>
