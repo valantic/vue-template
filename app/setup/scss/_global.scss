@@ -21,8 +21,8 @@ a,
   &--focus,
   &:hover,
   &--hover {
-    color: $color-secondary--1;
-    border-bottom: 1px solid $color-primary--1;
+    color: var(--theme-color-secondary-1);
+    border-bottom: 1px solid var(--theme-color-primary-1);
     text-decoration: none;
   }
 }

@@ -1,37 +1,31 @@
 <template>
-
   <div :class="b(modifiers)">
-    <input
-      :autocomplete="autocomplete"
-      :class="b('field')"
-      :disabled="disabled"
-      :name="name"
-      :value="value"
-      :title="title"
-      v-bind="$attrs"
-      @blur="onBlur"
-      @focus="onFocus"
-      @input="onInput"
-      @mouseenter="isHover = true"
-      @mouseleave="isHover = false"
-    >
+    <textarea :class="b('field')"
+              :name="name"
+              :disabled="disabled"
+              :rows="rows"
+              v-bind="$attrs"
+              @focus="onFocus"
+              @blur="onBlur"
+              @input="onInput">
+    </textarea>
     <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
     <div v-if="notification && hasFocus" :class="b('notification')">
       <c-form-notification :state="state" v-html="notification"/>
     </div>
   </div>
-
 </template>
 
 <script>
+  import formStates from '@/mixins/form-states';
   import CFormNotification from '@/components/c-form-notification';
-  import formStates from '../mixins/form-states';
 
   /**
-   * Input form component
+   * Renders a styled `<textarea>` element which supports the default form state-types.
+   * The height can be set by the `rows` property.
    */
   export default {
-    name: 'e-input',
+    name: 'e-textarea',
     components: {
       CFormNotification
     },
@@ -39,13 +33,12 @@
     inheritAttrs: false,
 
     props: {
-
       /**
        * Value passed by v-model
        */
       value: {
         default: null,
-        type: [String, Number],
+        type: String,
       },
 
       /**
@@ -57,31 +50,24 @@
       },
 
       /**
-       *  Adds title attribute
-       */
-      title: {
-        default: null,
-        type: String
-      },
-
-      /**
-       * Adds autocomplete
-       * Please refer to:
-       * [HTML5 input autocomplete](https://developer.mozilla.org/de/docs/Web/HTML/Element/Input#attr-autocomplete)
-       */
-      autocomplete: {
-        type: String,
-        default: 'off',
-      },
-
-      /**
-       * Defines the notification content in a state container bellow the input field
+       * Adds a notification block in a state container below the textarea
        */
       notification: {
         type: String,
-        default: null
-      }
+        default: null,
+      },
+
+      /**
+       * Defines the height of the textarea field.
+       */
+      rows: {
+        type: Number,
+        default: 3,
+      },
     },
+    // data() {
+    //   return {};
+    // },
 
     computed: {
 
@@ -93,9 +79,15 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          notification: this.$props.notification && this.hasFocus
+          notification: Boolean(this.$props.notification && this.hasFocus)
         };
       },
+
+      /**
+       * Checks if the component is in default state.
+       *
+       * @returns {Boolean}
+       */
       hasDefaultState() {
         return this.state === 'default';
       }
@@ -120,43 +112,27 @@
        * @param   {String}  event   Field input
        */
       onInput(event) {
-        /**
-         * input event fires on input
-         *
-         * @event input
-         * @type {String}
-         */
         this.$emit('input', event.target.value);
       },
 
       /**
-       * Emits focus to parent and wrapper component
-       * Update "hasFocus" state
+       * Emits focus to parent and wrapper component. This is needed for e.g. setting the focus on the label as well.
+       * Updates "hasFocus" state
        */
       onFocus() {
         this.hasFocus = true;
 
-        /**
-         * focus event fires on focus
-         *
-         * @event focus
-         */
         this.$emit('focus');
         this.$parent.$emit('focus');
       },
 
       /**
-       * Emits blur to parent and wrapper component
-       * Update "hasFocus" state
+       * Emits blur to parent and wrapper component. This is needed for e.g. removing the focus on the label as well.
+       * Updates "hasFocus" state
        */
       onBlur() {
         this.hasFocus = false;
 
-        /**
-         * blur event fires on blur
-         *
-         * @event blur
-         */
         this.$emit('blur');
         this.$parent.$emit('blur');
       }
@@ -166,24 +142,23 @@
 </script>
 
 <style lang="scss">
-  $e-input-height: 30px;
-
-  .e-input {
+  .e-textarea {
     @include half-border($color-grayscale--500);
 
-    // input
-    &__field {
-      @include font-size($font-size--14);
+    &::before,
+    &::after {
+      pointer-events: none;
+    }
 
-      border: 1px solid transparent;
-      border-radius: $border-radius--default;
-      color: $color-grayscale--400;
-      font-family: $font-family--primary;
-      height: $e-input-height;
-      position: relative;
-      transition: box-shadow 0.15s ease-in-out;
-      width: 100%;
+    &__field {
       padding: $spacing--5 $spacing--10;
+      color: $color-grayscale--400;
+      resize: none;
+      width: 100%;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      display: block;
+      position: relative;
 
       // disable iPhone styling
       -webkit-appearance: none;
@@ -192,31 +167,13 @@
       -webkit-text-fill-color: initial;
     }
 
-    // remove x on in put field within IE
-    &__field::-ms-clear {
-      display: none;
-      height: 0;
-      width: 0;
-    }
-
-    // Hide autofill Safari icon
-    // noinspection CssInvalidPseudoSelector
-    &__field::-webkit-contacts-auto-fill-button {
-      visibility: hidden;
-      pointer-events: none;
-      position: absolute;
-      right: 0;
-    }
-
     // placeholder
-    &__field::-webkit-input-placeholder, // WebKit, Blink, Edge
-    &__field:-moz-placeholder, // Mozilla Firefox 4 to 18
-    &__field:-ms-input-placeholder, // Internet Explorer 10-11
-    &__field::placeholder { // Most modern browsers support this now
+    &__field::placeholder {
       color: $color-grayscale--400;
       opacity: 1;
     }
 
+    // separator for state icons
     &__icon-splitter {
       position: absolute;
       right: 30px;
@@ -225,12 +182,13 @@
       border-left: 1px solid;
     }
 
+    // notification below field
     &__notification {
       @include z-index(form-notification);
 
       position: absolute;
       width: 100%;
-      top: calc(#{$e-input-height} - 1px);
+      margin-top: -1px;
     }
 
     // active
@@ -242,10 +200,10 @@
     // focus
     &__field:focus,
     &--focus &__field {
-      border: 1px solid $color-grayscale--500;
-      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
-      color: var(--theme-color-secondary-1);
       outline: none;
+      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
+      border: 1px solid $color-grayscale--500;
+      color: var(--theme-color-secondary-1);
     }
 
     // hover
@@ -273,64 +231,54 @@
     }
 
     /**
-    * states
-    **/
+     * states
+     */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       @include half-border(var(--theme-color-status-danger));
 
-      .e-input__field {
+      .e-textarea__field {
         @include form-state-icon('error');
       }
 
-      .e-input__icon-splitter {
+      .e-textarea__icon-splitter {
         border-color: var(--theme-color-status-danger);
       }
     }
 
     &--state-error &__field:hover {
-      border: 1px solid var(--theme-color-status-danger);
+      border-color: var(--theme-color-status-danger);
     }
 
     &--state-error &__field:focus {
-      border: 1px solid var(--theme-color-status-danger);
+      border-color: var(--theme-color-status-danger);
     }
 
     &--state-info {
-      .e-input__field {
+      .e-textarea__field {
         @include form-state-icon('info');
       }
 
-      .e-input__icon-splitter {
+      .e-textarea__icon-splitter {
         border-color: $color-grayscale--500;
       }
     }
 
     &--state-success {
-      .e-input__field {
+      .e-textarea__field {
         @include form-state-icon('success');
       }
 
-      .e-input__icon-splitter {
-        display: none;
-      }
-    }
-
-    &--state-search {
-      .e-input__field {
-        @include form-state-icon('search');
-      }
-
-      .e-input__icon-splitter {
+      .e-textarea__icon-splitter {
         display: none;
       }
     }
 
     /*
-     * Notification is visible
+     * Remove icon in background if notification is visible
      */
     &--notification {
-      .e-input__field {
+      .e-textarea__field {
         padding: $spacing--5 $spacing--10;
         background: none;
       }

@@ -1,16 +1,12 @@
 <template>
-  <ul :class="b('list')">
-    <li
-      v-for="item in items"
-      :class="b('item')"
-      :key="item.key"
-    >
-      <a
-        :class="b('link')"
-        :href="item.value"
-        :title="item.key"
+  <ul :class="b('')">
+    <li v-for="(value, index) in items" :class="b('item')" :key="index">
+      <a :class="b('link')"
+         :href="value"
+         :title="$t(`c-linklist.downloadTitle`)"
+         :target="target"
       >
-        {{ item.key }}
+        {{ value }}
       </a>
     </li>
   </ul>
@@ -22,13 +18,27 @@
     // components: {},
     // mixins: [],
 
-    /**
-     * Defines the items, displayed in the list.
-     */
     props: {
+      /**
+       * Defines the items, displayed in the list.
+       */
       items: {
-        type: Array,
+        type: Object,
         required: true
+      },
+
+      /**
+       * Defines the target of the link
+       */
+      target: {
+        type: String,
+        default: '_self',
+        validator(value) {
+          return [
+            '_self',
+            '_blank',
+          ].includes(value);
+        },
       }
     },
     // data() {
@@ -55,12 +65,15 @@
 </script>
 
 <style lang="scss">
-  .c-linklist__list {
+  .c-linklist {
     list-style-type: none;
     padding-left: $spacing--0;
-  }
 
-  .c-linklist__link {
-    padding-left: $spacing--0;
+    &__link {
+      padding-left: $spacing--0;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      -ms-word-break: break-all;
+    }
   }
 </style>

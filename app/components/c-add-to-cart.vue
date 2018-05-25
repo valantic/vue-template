@@ -128,7 +128,7 @@
 
     &__label {
       margin-left: $spacing--10;
-      color: $color-secondary--1;
+      color: var(--theme-color-secondary-1);
     }
 
     &__button:hover &__label,

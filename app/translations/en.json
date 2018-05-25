@@ -32,6 +32,8 @@
   "c-header-links": {
     "labelWishlist": "Wishlist",
     "labelLogin": "Login",
+    "productPdfsTitle": "PDFs",
+    "productVideosTitle": "Videos",
     "technicalDataTitle": "Technical data"
   },
   "c-search": {
@@ -50,5 +52,8 @@
   },
   "c-add-to-cart": {
     "addToCart": "add to cart"
+  },
+  "c-linklist": {
+    "downloadTitle": "Download file"
   }
 }
