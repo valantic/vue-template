@@ -21,6 +21,9 @@
   },
   "c-product-detail": {
     "productDescriptionTitle": "Product description",
+    "productDocumentsTitle": "Documents",
+    "productPdfsTitle": "PDFs",
+    "productVideosTitle": "Videos",
     "technicalDataTitle": "Technical data"
   },
   "e-info-label": {
@@ -36,5 +39,8 @@
   },
   "c-add-to-cart": {
     "addToCart": "add to cart"
+  },
+  "c-linklist": {
+    "downloadTitle": "Download file"
   }
 }
