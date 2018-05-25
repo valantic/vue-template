@@ -5,7 +5,7 @@
         v-model.number="quantity"
         :min="step"
         :step="step"
-        type="number"
+        inputmode="numeric"
         name="quantity"
         pattern="\d*"
       />
