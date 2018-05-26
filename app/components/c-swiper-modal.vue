@@ -215,11 +215,10 @@
     .gallery-top {
       width: 100%;
       border-bottom: 2px solid var(--theme-color-primary-1);
-      padding-bottom: $spacing--15;
     }
 
     .gallery-top .swiper-slide {
-      padding: $spacing--30;
+      padding: $spacing--10 $spacing--30 $spacing--60 $spacing--30;
     }
 
     .gallery-top .swiper-slide .e-picture,
