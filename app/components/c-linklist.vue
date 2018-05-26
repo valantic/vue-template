@@ -4,7 +4,7 @@
       <a :class="b('link')"
          :href="value"
          :title="$t(`c-linklist.downloadTitle`)"
-         target="_blank"
+         :target="target"
       >
         {{ value }}
       </a>
@@ -25,6 +25,20 @@
       items: {
         type: Object,
         required: true
+      },
+
+      /**
+       * Defines the target of the link
+       */
+      target: {
+        type: String,
+        default: '_self',
+        validator(value) {
+          return [
+            '_self',
+            '_blank',
+          ].includes(value);
+        },
       }
     },
     // data() {
