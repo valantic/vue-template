@@ -139,10 +139,13 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      new Swiper(this.$refs.gallery, Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsMerged));
-      new Swiper(this.$refs.thumbnails, Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsThumbnails));
-      this.$refs.gallery.swiper.controller.control = this.$refs.thumbnails.swiper;
-      this.$refs.thumbnails.swiper.controller.control = this.$refs.gallery.swiper;
+      const galleryOptions = Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsMerged);
+      const gallery = new Swiper(this.$refs.gallery, galleryOptions);
+      const thumbnailOptions = Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsThumbnails);
+      const thumbnails = new Swiper(this.$refs.thumbnails, thumbnailOptions);
+
+      gallery.controller.control = thumbnails;
+      thumbnails.controller.control = gallery;
 
       this.setThumbnailSlidesPerView();
       window.addEventListener('resize', this.setThumbnailSlidesPerView);

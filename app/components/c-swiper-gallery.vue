@@ -42,7 +42,7 @@
         inner-spacing="0"
         @close="modalClose"
       >
-        <c-swiper-modal :images="productImages" :initialSlide="this.swiper.activeIndex"/>
+        <c-swiper-modal :images="productImages" :initial-slide="swiper.activeIndex"/>
       </c-modal>
     </div>
 
@@ -217,6 +217,7 @@
         margin: 0 3px;
         opacity: 1;
         transform: scale(1);
+        outline: none;
 
         &-active {
           background-color: var(--theme-color-primary-1);

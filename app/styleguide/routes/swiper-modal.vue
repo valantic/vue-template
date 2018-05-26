@@ -8,7 +8,7 @@
       inner-spacing="0"
       @close="close"
     >
-      <c-swiper-modal :images="product.images" :initialSlide="10"/>
+      <c-swiper-modal :images="product.images"/>
     </c-modal>
   </div>
 </template>
