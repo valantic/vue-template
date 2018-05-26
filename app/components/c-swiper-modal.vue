@@ -214,7 +214,7 @@
 
     .gallery-top {
       width: 100%;
-      border-bottom: 2px solid var(--theme-color-primary-1);
+      border-bottom: 2px solid $color-primary--1;
     }
 
     .gallery-top .swiper-slide {
@@ -271,7 +271,7 @@
       z-index: 1000;
       border-left: 11px solid transparent;
       border-right: 11px solid transparent;
-      border-bottom: 15px solid var(--theme-color-primary-1);
+      border-bottom: 15px solid $color-primary--1;
     }
 
     &:hover {

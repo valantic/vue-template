@@ -227,7 +227,7 @@
         outline: none;
 
         &-active {
-          background-color: var(--theme-color-primary-1);
+          background-color: $color-primary--1;
           box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
         }
 
