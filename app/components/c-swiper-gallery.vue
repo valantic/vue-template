@@ -7,9 +7,9 @@
 
       <div :class="b('wrapper swiper-wrapper')">
         <!-- Slides -->
-        <div v-for="img in images"
+        <div v-for="picture in pictures"
              :class="b('slide swiper-slide')"
-             :key="img.id">
+             :key="picture.id">
 
           <a :class="b('trigger')"
              :title="$tc('c-swiper.zoom')"
@@ -18,9 +18,9 @@
 
             <e-picture
               :sizes="sizes"
-              :srcset="img.srcset"
-              :fallback="img.fallback"
-              :alt="img.altText"
+              :srcset="picture.srcset"
+              :fallback="picture.fallback"
+              :alt="picture.alt"
               @click.prevent="modalOpen = true"/>
 
           </a>
@@ -42,7 +42,7 @@
         inner-spacing="0"
         @close="modalClose"
       >
-        <c-swiper-modal :images="productImages" :initial-slide="swiper.activeIndex"/>
+        <c-swiper-modal :images="images" :initial-slide="swiper.activeIndex"/>
       </c-modal>
     </div>
 
@@ -80,14 +80,6 @@
        * Gallery images passed to swiper.
        */
       images: {
-        type: Array,
-        required: true,
-      },
-
-      /**
-       * Gallery images from product.
-       */
-      productImages: {
         type: Array,
         required: true,
       },
@@ -158,6 +150,21 @@
         };
       },
 
+      pictures() {
+        return this.images.map((image) => {
+          const srcset = {};
+
+          image.thumbs.map((thumb) => {
+            Object.assign(srcset, { [thumb.width]: thumb.absolute_path });
+          });
+
+          return {
+            fallback: image.external_url_small,
+            srcset,
+            alt: '',
+          };
+        });
+      },
     },
     // watch: {},
 

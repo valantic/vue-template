@@ -92,7 +92,6 @@
           slidesPerView: 3,
           slideToClickedSlide: true,
           roundLengths: true,
-          spaceBetween: 15,
         },
         swiperGallery: null,
         swiperThumbnails: null,
@@ -154,7 +153,10 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
+    beforeDestroy() {
+      clearTimeout(this.resizeTimerId);
+      window.removeEventListener('resize', this.setThumbnailSlidesPerView);
+    },
     // destroyed() {},
 
     methods: {
@@ -216,6 +218,10 @@
       padding-bottom: $spacing--15;
     }
 
+    .gallery-top .swiper-slide {
+      padding: $spacing--30;
+    }
+
     .gallery-top .swiper-slide .e-picture,
     .gallery-top .swiper-slide .e-picture img {
       max-height: 570px;
@@ -236,15 +242,16 @@
     }
 
     .gallery-thumbs .swiper-slide .e-picture {
-      margin-top: $spacing--15;
+      margin-top: $spacing--30;
+      margin-bottom: $spacing--15;
     }
 
     .gallery-thumbs .swiper-slide .e-picture,
     .gallery-thumbs .swiper-slide .e-picture img {
-      max-height: 105px;
+      max-height: 75px;
 
       @include media(sm) {
-        max-height: 125px;
+        max-height: 85px;
       }
     }
 
