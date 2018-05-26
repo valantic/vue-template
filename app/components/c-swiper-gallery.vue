@@ -36,8 +36,14 @@
       <div :class="b('button-next swiper-button-next')"></div>
 
       <!-- modal -->
-      <c-modal :open="modalOpen" @close="modalClose">hello world...</c-modal>
-
+      <c-modal
+        :open="modalOpen"
+        size="600"
+        inner-spacing="0"
+        @close="modalClose"
+      >
+        <c-swiper-modal :images="productImages"/>
+      </c-modal>
     </div>
 
     <!-- counter -->
@@ -53,6 +59,7 @@
 
   import Swiper from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
+  import cSwiperModal from '@/components/c-swiper-modal';
 
   // require styles
   import 'swiper/dist/css/swiper.css';
@@ -63,7 +70,9 @@
    */
   export default {
     name: 'c-swiper-gallery',
-    // components: {},
+    components: {
+      cSwiperModal,
+    },
     // mixins: [],
 
     props: {
@@ -71,6 +80,14 @@
        * Gallery images passed to swiper.
        */
       images: {
+        type: Array,
+        required: true,
+      },
+
+      /**
+       * Gallery images from product.
+       */
+      productImages: {
         type: Array,
         required: true,
       },

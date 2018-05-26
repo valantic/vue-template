@@ -14,7 +14,7 @@
           />
         </div>
         <div :class="b('gallery')">
-          <c-swiper-gallery :images="images"/>
+          <c-swiper-gallery :images="images" :product-images="product.images"/>
         </div>
 
         <div :class="b('specs')">

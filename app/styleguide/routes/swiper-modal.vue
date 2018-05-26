@@ -2,7 +2,12 @@
   <div :class="b()">
     <h1>Slider example (c-swiper-modal)</h1>
     <e-button @click="modalState = true">Open swiper</e-button>
-    <c-modal :open="modalState" @close="close">
+    <c-modal
+      :open="modalState"
+      size="600"
+      inner-spacing="0"
+      @close="close"
+    >
       <c-swiper-modal :images="product.images"/>
     </c-modal>
   </div>
@@ -26,6 +31,9 @@
       ...mapGetters({
         product: 'product/product',
       })
+    },
+    mounted() {
+      this.modalState = true;
     },
     methods: {
       close() {
