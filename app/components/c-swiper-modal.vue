@@ -224,7 +224,11 @@
 
     .gallery-top .swiper-slide .e-picture,
     .gallery-top .swiper-slide .e-picture img {
-      max-height: 570px;
+      max-height: 350px;
+
+      @include media(sm) {
+        max-height: 450px;
+      }
     }
 
     .gallery-top .swiper-slide .e-picture img {
