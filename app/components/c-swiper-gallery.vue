@@ -42,7 +42,7 @@
         inner-spacing="0"
         @close="modalClose"
       >
-        <c-swiper-modal :images="productImages"/>
+        <c-swiper-modal :images="productImages" :initialSlide="this.swiper.activeIndex"/>
       </c-modal>
     </div>
 
@@ -124,7 +124,9 @@
           },
         },
         // this.images.length > this.dynamicBullets
-        swiper: null,
+        swiper: {
+          activeIndex: 0,
+        },
         isHover: false,
         modalOpen: false,
         sizes: BREAKPOINTS, // todo add as prop
@@ -239,6 +241,7 @@
       visibility: hidden;
       transition: all 0.2s linear;
       transition-delay: 0.1s;
+      outline: none;
     }
 
     .swiper-button-prev {

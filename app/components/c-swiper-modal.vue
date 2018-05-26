@@ -15,8 +15,12 @@
     </div>
     <div ref="thumbnails" :class="b('container swiper-container gallery-thumbs')">
       <div :class="b('wrapper swiper-wrapper')">
-        <div v-for="thumbnail in thumbnails" :class="b('slide swiper-slide')" :key="thumbnail.id">
-          <e-picture :fallback="thumbnail" alt=""/>
+        <div v-for="picture in pictures" :class="b('slide swiper-slide')" :key="picture.id">
+          <e-picture
+            :sizes="sizes"
+            :srcset="picture.srcset"
+            :fallback="picture.fallback"
+            :alt="picture.alt"/>
         </div>
       </div>
     </div>
@@ -49,6 +53,14 @@
       },
 
       /**
+       * Sets the initial slide index
+       */
+      initialSlide: {
+        type: Number,
+        default: 0,
+      },
+
+      /**
        * Swiper options passed by component
        */
       options: {
@@ -60,6 +72,7 @@
     data() {
       return {
         optionsDefault: {
+          slidesPerGroup: 1,
           watchOverflow: true,
           keyboard: {
             enabled: true,
@@ -72,6 +85,7 @@
           },
         },
         optionsThumbnails: {
+          slidesPerGroup: 1,
           watchOverflow: true,
           lazy: false,
           centeredSlides: true,
@@ -118,10 +132,6 @@
           };
         });
       },
-
-      thumbnails() {
-        return this.images.map(image => image.thumbs[0].absolute_path);
-      }
     },
     // watch: {},
 
@@ -129,8 +139,8 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      this.swiperGallery = new Swiper(this.$refs.gallery, this.optionsMerged);
-      this.swiperThumbnails = new Swiper(this.$refs.thumbnails, this.optionsThumbnails);
+      new Swiper(this.$refs.gallery, Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsMerged));
+      new Swiper(this.$refs.thumbnails, Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsThumbnails));
       this.$refs.gallery.swiper.controller.control = this.$refs.thumbnails.swiper;
       this.$refs.thumbnails.swiper.controller.control = this.$refs.gallery.swiper;
 
@@ -184,6 +194,7 @@
       visibility: hidden;
       transition: all 0.2s linear;
       transition-delay: 0.1s;
+      outline: none;
     }
 
     .swiper-button-prev {

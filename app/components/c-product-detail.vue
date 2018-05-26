@@ -214,6 +214,8 @@
     }
 
     &__info {
+      @include z-index(info);
+
       position: absolute;
       top: $spacing--15;
       left: $spacing--0;
