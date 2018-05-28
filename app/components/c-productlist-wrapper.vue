@@ -3,7 +3,7 @@
     <div :class="b('breadcrumbs')">
       Sortiment / Licht
     </div>
-    <e-heading tag-name="h1" font-weight="bold">{{ productlist.length }} Artikel</e-heading>
+    <div :class="b('title')">{{ productlist.length }} {{ $tc('c-productlist-wrapper.prductlistArticles', productlist.length) }}</div>
     <ul :class="b('list')">
       <li v-for="(value, index) in productlist" :class="b('product')" :key="index">
       </li>
@@ -55,38 +55,46 @@
 <style lang="scss">
 
   .c-productlist-wrapper {
-    background-color: $color-grayscale--600;
-    box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
-
     &__breadcrumbs {
-      @include font(12, 24);
+      @include font(12, 20);
 
       background-color: $color-grayscale--1000;
       margin-bottom: $spacing--5;
-      padding: $spacing--0 $spacing--10;
+      padding: $spacing--0 $spacing--5;
       color: $color-grayscale--400;
+      box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
     }
 
-    &__list {
-      list-style-type: none;
-      padding: $spacing--0;
-    }
+    &__title {
+      @include font($font-size: $font-size--18, $line-height: 36px, $font-weight: $font-weight--bold);
 
-    &__product {
-      width: percentage(1);
-      height: $spacing--100;
-      background-color: $color-grayscale--1000;
-      border-bottom: 2px solid $color-grayscale--600;
-    }
-
-    .e-heading {
       display: flex;
       align-items: center;
       height: $spacing--60;
       padding: $spacing--0 $spacing--10;
       background-color: $color-grayscale--1000;
       margin-bottom: $spacing--5;
+      box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
+      color: var(--theme-color-secondary-1);
+    }
+
+    &__list {
+      list-style-type: none;
+      margin-bottom: $spacing--0;
+      padding: $spacing--0;
+    }
+
+    &__product {
+      width: 100%;
+      min-height: $spacing--100;
+      background-color: $color-grayscale--1000;
+      margin-bottom: $spacing--2;
+      box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
+
+      &:last-child {
+        margin-bottom: $spacing--0;
+      }
     }
   }
-  
+
 </style>

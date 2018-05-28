@@ -1,8 +1,8 @@
 <template>
   <div :class="b()">
-    <div :class="b('wrapper')">
-      <c-header/>
-      <div :class="b('content')">
+    <c-header/>
+    <div :class="b('content')">
+      <div :class="b('inner')">
         <div :class="b('left')">
           <slot name="left"></slot>
         </div>
@@ -10,8 +10,8 @@
           <slot name="main"></slot>
         </div>
       </div>
-      <c-footer/>
     </div>
+    <c-footer/>
   </div>
 </template>
 
@@ -66,17 +66,18 @@
 
   .l-two-columns {
     display: flex;
-    // flex-direction: column;
-    // min-height: 100vh;
+    flex-direction: column;
+    height: 100%;
+    background: $color-grayscale--600;
 
     @include media(xxs) {
       &__left {
         display: none;
-        flex-basis: percentage(0);
+        flex-basis: 0;
       }
 
       &__main {
-        flex-basis: percentage(1);
+        flex-basis: 100%;
       }
     }
 
@@ -91,25 +92,21 @@
       }
     }
 
-    &__wrapper {
+    &__content {
       flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
-    &__content {
+    &__inner {
       flex: 1 0 auto;
       display: flex;
+      max-width: map-get($grid-breakpoints, xl);
+      margin: $spacing--20 auto;
+      padding: $spacing--10;
       background: $color-grayscale--600;
     }
 
     &__left {
-      padding: $spacing--10 $spacing--0 $spacing--10 $spacing--10;
-    }
-
-    &__main {
-      padding: $spacing--10 $spacing--10 $spacing--10 $spacing--5;
+      margin-right: $spacing--5;
     }
   }
 
