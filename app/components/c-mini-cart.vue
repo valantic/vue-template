@@ -1,8 +1,8 @@
 <template>
   <a :class="b({ active, state })" :href="$t('urls.cart')">
-    <div v-if="miniCartHasItems" :class="b('count')">{{ miniCart.cartQuantity }}</div>
+    <div v-if="quantity" :class="b('count')">{{ quantity }}</div>
     <div :class="b('icon')"><e-icon inline icon="i-cart"/></div>
-    <div v-if="miniCartHasPrice" :class="b('total')">{{ displayPrice }}</div>
+    <div v-if="subtotal" :class="b('total')">{{ displayPrice }}</div>
   </a>
 </template>
 
@@ -51,12 +51,11 @@
 
     computed: {
       ...mapGetters('cart', [
-        'miniCart',
-        'miniCartHasItems',
-        'miniCartHasPrice',
+        'quantity',
+        'subtotal',
       ]),
       displayPrice() {
-        return this.$n(this.miniCart.netTotal / 100, 'currency', 'de-CH'); // TODO - remove hardcoded locale
+        return this.$n(this.subtotal / 100, 'currency', 'de-CH'); // TODO - remove hardcoded locale
       },
     },
     // watch: {},
@@ -124,9 +123,9 @@
 
     &__count {
       position: absolute;
-      right: 50%;
+      left: $spacing--0;
+      transform: translateX(-100%);
       top: $spacing--10;
-      margin-right: $spacing--10;
       display: inline-block;
       color: var(--theme-color-secondary-1);
       padding: 1px 2px;
@@ -134,6 +133,11 @@
       border-radius: 2px;
       min-width: 1em;
       text-align: center;
+
+      @include media(sm) {
+        left: 20%;
+        transform: translateX(-50%);
+      }
     }
 
     &--state-reduced &__count {

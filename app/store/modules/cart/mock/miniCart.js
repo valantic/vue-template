@@ -1,4 +1,4 @@
 export default {
-  netTotal: 100000,
-  cartQuantity: 99,
+  netTotal: 0,
+  cartQuantity: 0,
 };
