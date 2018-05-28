@@ -1,10 +1,39 @@
 <!-- TODO - This component is supposed to be functional -->
 <template>
-  <div :class="b()">
+  <!-- div :class="b()">
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
       <div :class="b('header-links')">
         <c-header-links />
+        <div :class="b('icons')">
+          <div v-if="userLoggedIn" :class="b('cart')">
+            <div :class="b('cart-inner')">
+              <c-mini-cart :state="state"/>
+            </div>
+          </div>
+        </div>
+        <div :class="b('assortment')">Sortiment</div>
+        <div :class="b('search')">
+          <c-search />
+        </div>
+      </div>
+    </div>
+  </div -->
+
+  <div :class="b()">
+    <div :class="b('inner')">
+      <div :class="b('logo')">Logo</div>
+      <!-- div :class="b('header-links')">
+        <c-header-links />
+      </div -->
+      <div :class="b('icons')">
+
+        <c-header-links />
+        <div v-if="userLoggedIn" :class="b('cart')">
+          <div :class="b('cart-inner')">
+            <c-mini-cart :state="state"/>
+          </div>
+        </div>
       </div>
       <div :class="b('assortment')">Sortiment</div>
       <div :class="b('search')">
@@ -17,21 +46,45 @@
 <script>
   import cHeaderLinks from '@/components/c-header-links';
   import cSearch from '@/components/c-search';
+  import cMiniCart from '@/components/c-mini-cart';
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'c-header',
     components: {
       cHeaderLinks,
       cSearch,
+      cMiniCart,
     },
     // mixins: [],
 
-    // props: {},
+    props: {
+      /**
+       * Sets the display state of the header
+       *
+       * Valid values: `full, reduced`
+       */
+      state: {
+        type: String,
+        default: 'full',
+        validator(value) {
+          return [
+            'full',
+            'reduced'
+          ].includes(value);
+        }
+      },
+    },
     // data() {
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      ...mapGetters('session', [
+        'user',
+        'userLoggedIn',
+      ]),
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -111,12 +164,26 @@
       }
     }
 
-    &__header-links {
+    &__icons {
       flex: 0 1 percentage(7 / 12);
+      display: flex;
+      justify-content: flex-end;
 
       @include media(sm) {
         flex: 0 1 percentage(3 / 12);
         order: 4;
+      }
+    }
+
+    &__cart-inner {
+      padding-right: $spacing--10;
+
+      @include media(sm) {
+        padding-right: $spacing--15;
+      }
+
+      @include media(xl) {
+        padding-right: $spacing--0;
       }
     }
   }

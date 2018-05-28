@@ -19,6 +19,9 @@
     "xingUrl": "https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e",
     "xingTitle": "Xing"
   },
+  "c-productlist-wrapper": {
+    "prductlistArticles": "0 Articles | 1 Article | {count} Articles"
+  },
   "c-product-detail": {
     "productDescriptionTitle": "Product description",
     "productDocumentsTitle": "Documents",
@@ -59,5 +62,8 @@
   "c-swiper": {
     "images": "0 pictures | 1 picture | {count} pictures",
     "zoom": "zoom image"
+  },
+  "urls": {
+    "cart": "/cart"
   }
 }

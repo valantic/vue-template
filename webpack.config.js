@@ -92,8 +92,8 @@ module.exports = function(env = {}, options = {}) {
     }
 
     return hasStyleguide
-        ? use
-        : ExtractTextPlugin.extract({ use });
+      ? use
+      : ExtractTextPlugin.extract({ use });
   }
 
   function webpackStats() {
