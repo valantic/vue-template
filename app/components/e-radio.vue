@@ -134,7 +134,10 @@
 
 <style lang="scss">
   .e-radio {
+    @include font($font-size--14, 18px);
+
     position: relative;
+    padding-top: 3px;
 
     &__field {
       opacity: 0;
