@@ -49,5 +49,8 @@
   "c-swiper": {
     "images": "0 Bilder | 1 Bild | {count} Bilder",
     "zoom": "Bild vergrössern"
+  },
+  "urls": {
+    "cart": "/cart"
   }
 }

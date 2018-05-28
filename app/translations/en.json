@@ -49,5 +49,8 @@
   "c-swiper": {
     "images": "0 pictures | 1 picture | {count} pictures",
     "zoom": "zoom image"
+  },
+  "urls": {
+    "cart": "/cart"
   }
 }
