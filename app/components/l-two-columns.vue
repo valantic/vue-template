@@ -100,7 +100,7 @@
       flex: 1 0 auto;
       display: flex;
       max-width: map-get($grid-breakpoints, xl);
-      margin: $spacing--20 auto;
+      margin: $spacing--0 auto $spacing--20 auto;
       padding: $spacing--10;
       background: $color-grayscale--600;
     }
