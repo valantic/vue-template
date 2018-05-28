@@ -15,12 +15,10 @@
     </div>
     <div ref="thumbnails" :class="b('container swiper-container gallery-thumbs')">
       <div :class="b('wrapper swiper-wrapper')">
-        <div v-for="picture in pictures" :class="b('slide swiper-slide')" :key="picture.id">
+        <div v-for="thumbnail in thumbnails" :class="b('slide swiper-slide')" :key="thumbnail.id">
           <e-picture
-            :sizes="sizes"
-            :srcset="picture.srcset"
-            :fallback="picture.fallback"
-            :alt="picture.alt"/>
+            :fallback="thumbnail.fallback"
+            :alt="thumbnail.alt"/>
         </div>
       </div>
     </div>
@@ -127,6 +125,15 @@
           return {
             fallback: image.external_url_small,
             srcset,
+            alt: '',
+          };
+        });
+      },
+
+      thumbnails() {
+        return this.images.map((image) => {
+          return {
+            fallback: image.thumbs[0].absolute_path,
             alt: '',
           };
         });
@@ -260,6 +267,7 @@
 
     .gallery-thumbs .swiper-slide .e-picture img {
       margin: 0 auto;
+      -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
     }
 
     .gallery-thumbs .swiper-slide-active::before {
