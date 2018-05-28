@@ -45,5 +45,9 @@
   },
   "c-linklist": {
     "downloadTitle": "Datei herunterladen"
+  },
+  "c-swiper": {
+    "images": "0 Bilder | 1 Bild | {count} Bilder",
+    "zoom": "Bild vergrössern"
   }
 }
