@@ -24,8 +24,11 @@
                  name="notes"
                  placeholder="your notes"
                  state="info"
-                 notification="this is the info message<br/>this is the info message<br/>
-                  this is the info message<br/>this is the info message<br/>this is the info message<br/>"
+                 notification="this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message
+                 <br/>this is the info message<br/>"
         />
       </e-label>
       <e-label name="Notes2:" position="top" state="success">
@@ -35,6 +38,14 @@
                  state="success"
         />
       </e-label>
+      <e-label name="Gender:" position="top"/>
+      <e-radio v-for="item in genders"
+               v-model="gender"
+               :value="item.value"
+               :display-name="item.displayName"
+               :key="item.id"
+               name="gender"
+      />
       <e-label name="Comment" position="top">
         <e-textarea v-model="name.comment"
                     :rows="5"
@@ -52,6 +63,7 @@
         />
       </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
+      <p>You are {{ gender }}.</p>
       <pre>{{ name }}</pre>
 
       <h2>e-checkbox</h2>
@@ -82,6 +94,19 @@
           country: '',
           comment: ''
         },
+        gender: 'female',
+        genders: [
+          {
+            id: 'gender-male',
+            value: 'male',
+            displayName: 'Male',
+          },
+          {
+            id: 'gender-female',
+            value: 'female',
+            displayName: 'Female',
+          },
+        ],
         checkbox: {
           checked: false,
           name: 'checkbox',

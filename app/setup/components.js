@@ -9,6 +9,7 @@ import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
 import eTextarea from '@/components/e-textarea';
 import eInfoLabel from '@/components/e-info-label';
+import eRadio from '@/components/e-radio';
 import cModal from '@/components/c-modal';
 import cModalHeader01 from '@/components/c-modal-header-01';
 import eSelect from '@/components/e-select';
@@ -26,6 +27,7 @@ export default {
       eProgress,
       eTextarea,
       eInfoLabel,
+      eRadio,
       ePanel,
       cModal,
       cModalHeader01,
@@ -49,6 +51,7 @@ export default {
       Vue.component(eLabel.name, eLabel);
       Vue.component(eTextarea.name, eTextarea);
       Vue.component(eInfoLabel.name, eInfoLabel);
+      Vue.component(eRadio.name, eRadio);
       Vue.component(cModal.name, cModal);
       Vue.component(cModalHeader01.name, cModalHeader01);
       Vue.component(eSelect.name, eSelect);
