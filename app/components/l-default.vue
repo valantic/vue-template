@@ -64,7 +64,6 @@
         this.lastKnownScrollPosition = window.scrollY ? window.scrollY : window.pageYOffset;
 
         if (!this.ticking) {
-          console.log(this.lastKnownScrollPosition);
           window.requestAnimationFrame(() => {
             this.headerState = this.lastKnownScrollPosition > 0 ? 'reduced' : 'full';
             this.ticking = false;
