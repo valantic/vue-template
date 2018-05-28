@@ -116,6 +116,7 @@
 
       background: url('../assets/icons/i-arrow--down--info.svg') no-repeat right 5px center;
       border: 1px solid transparent;
+      border-radius: 3px;
       width: 100%;
       -webkit-appearance: none;
       -moz-appearance: none;
