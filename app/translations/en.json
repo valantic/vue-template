@@ -20,7 +20,7 @@
     "xingTitle": "Xing"
   },
   "c-productlist-wrapper": {
-    "prductlistArticles": "Articles | Article | Articles"
+    "prductlistArticles": "0 Articles | 1 Article | {count} Articles"
   },
   "c-product-detail": {
     "productDescriptionTitle": "Product description",

@@ -3,7 +3,9 @@
     <div :class="b('breadcrumbs')">
       Sortiment / Licht
     </div>
-    <div :class="b('title')">{{ productlist.length }} {{ $tc('c-productlist-wrapper.prductlistArticles', productlist.length) }}</div>
+    <div :class="b('title')">
+      {{ $tc('c-productlist-wrapper.prductlistArticles', productlist.length, {count: productlist.length}) }}
+    </div>
     <ul :class="b('list')">
       <li v-for="(value, index) in productlist" :class="b('product')" :key="index">
       </li>
@@ -56,26 +58,26 @@
 
   .c-productlist-wrapper {
     &__breadcrumbs {
-      @include font(12, 20);
+      @include font($font-size--12, 20px);
 
       background-color: $color-grayscale--1000;
-      margin-bottom: $spacing--5;
+      margin-bottom: $spacing--2;
       padding: $spacing--0 $spacing--5;
       color: $color-grayscale--400;
       box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
     }
 
     &__title {
-      @include font($font-size: $font-size--18, $line-height: 36px, $font-weight: $font-weight--bold);
+      @include font($font-size--18, 36px, $font-weight--bold);
 
       display: flex;
       align-items: center;
       height: $spacing--60;
       padding: $spacing--0 $spacing--10;
       background-color: $color-grayscale--1000;
-      margin-bottom: $spacing--5;
+      margin-bottom: $spacing--2;
       box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
-      color: var(--theme-color-secondary-1);
+      color: $color-secondary--1;
     }
 
     &__list {
@@ -86,7 +88,7 @@
 
     &__product {
       width: 100%;
-      min-height: $spacing--100;
+      min-height: 100px;
       background-color: $color-grayscale--1000;
       margin-bottom: $spacing--2;
       box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
