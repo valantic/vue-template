@@ -80,6 +80,17 @@
       notification: {
         type: String,
         default: null
+      },
+
+      border: {
+        default: '500', // vue-bem-cn currently does not support number values
+        type: [Number, String],
+        validator(value) {
+          return [
+            0,
+            500
+          ].includes(parseInt(value, 10));
+        }
       }
     },
 
@@ -93,7 +104,9 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          notification: this.$props.notification && this.hasFocus
+          notification: this.$props.notification && this.hasFocus,
+          type: this.$attrs.type || 'text',
+          border: this.$props.border
         };
       },
       hasDefaultState() {
@@ -169,7 +182,9 @@
   $e-input-height: 30px;
 
   .e-input {
-    @include half-border($color-grayscale--500);
+    &:not(&--border-0) {
+      @include half-border($color-grayscale--500);
+    }
 
     // input
     &__field {
@@ -316,7 +331,7 @@
       }
     }
 
-    &--state-search {
+    &--type-search {
       .e-input__field {
         @include form-state-icon('search');
       }

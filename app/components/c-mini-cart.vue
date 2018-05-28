@@ -150,10 +150,15 @@
     }
 
     &__total {
-      visibility: hidden;
-      margin-top: 0;
-      padding: 3px 0 6px 0;
-      text-align: center;
+      display: none;
+
+      @include media(sm) {
+        display: block;
+        visibility: hidden;
+        margin-top: 0;
+        padding: 3px 0 6px 0;
+        text-align: center;
+      }
     }
 
     &--state-reduced &__total {

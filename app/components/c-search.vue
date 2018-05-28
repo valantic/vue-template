@@ -1,13 +1,15 @@
 <template>
   <div :class="b()">
-    <e-input v-model="searchstring"
-             :placeholder="$t('c-search.placeholder')"
-             :value="value"
-             :autocomplete="autocomplete"
-             state="search"
-             name="searchfield"
-             title="search"
-    />
+    <div :class="b('search')">
+      <e-input v-model="searchstring"
+               :placeholder="$t('c-search.placeholder')"
+               :title="$t('c-search.title')"
+               autocomplete="off"
+               type="search"
+               name="searchfield"
+               border="0"
+      />
+    </div>
   </div>
 </template>
 
@@ -52,18 +54,10 @@
       padding: $spacing--0;
       display: flex;
       align-items: center;
-
-      .e-input {
-        width: 100%;
-      }
     }
 
-    .e-input::before {
-      border: none;
-    }
-
-    .e-input::after {
-      border: none;
+    &__search {
+      flex: 1 1 auto;
     }
   }
 </style>

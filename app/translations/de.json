@@ -36,7 +36,8 @@
     "profile": "Profil"
   },
   "c-search": {
-    "placeholder": "Suche"
+    "placeholder": "Nach Produkten und Kategorien suchen",
+    "title": "Suchen"
   },
   "e-info-label": {
     "priceType1": "Aktion",
