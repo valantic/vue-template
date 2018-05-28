@@ -11,19 +11,18 @@
              :class="b('slide swiper-slide')"
              :key="picture.id">
 
-          <a :class="b('trigger')"
-             :title="$tc('c-swiper.zoom')"
-             href="#0"
-             @click.prevent="modalOpen = true">
+          <button :class="b('trigger')"
+                  :title="$t('c-swiper.zoom')"
+                  type="button"
+                  @click.prevent="modalOpen = true">
 
             <e-picture
               :sizes="sizes"
               :srcset="picture.srcset"
               :fallback="picture.fallback"
-              :alt="picture.alt"
-              @click.prevent="modalOpen = true"/>
+              :alt="picture.alt"/>
 
-          </a>
+          </button>
 
         </div>
       </div>
@@ -49,7 +48,7 @@
     <!-- counter -->
     <div :class="b('counter')">
       <div :class="b('img-counter')">{{ $tc('c-swiper.images', images.length, {count: images.length}) }}</div>
-      <div :class="b('video-counter')"></div>
+      <div :class="b('video-counter')"></div><!-- TODO: Add logic for videos -->
     </div>
 
   </div>
@@ -196,6 +195,16 @@
 <style lang="scss">
   .c-swiper-gallery {
     position: relative;
+    height: 100%;
+
+    &__container {
+      height: 100%;
+    }
+
+    &__slide {
+      display: flex;
+      align-items: center;
+    }
 
     // dots navigation
     .swiper-container-horizontal {
@@ -266,10 +275,22 @@
       @include font(14px, 18px);
 
       color: $color-grayscale--400;
-      bottom: $spacing--10;
+      bottom: $spacing--20;
       position: absolute;
       text-align: right;
       width: 100%;
+
+      @include media(xs) {
+        bottom: 6px;
+      }
+
+      @include media(sm) {
+        bottom: $spacing--20;
+      }
+
+      @include media(lg) {
+        bottom: 6px;
+      }
     }
 
     &__trigger,
@@ -277,9 +298,11 @@
     &__trigger:visited {
       border: none;
       display: inline-block;
+      width: 100%;
       margin: $spacing--30;
       padding: 0;
       text-decoration: none;
+      cursor: pointer;
 
       @include media(xs) {
         margin: $spacing--50;

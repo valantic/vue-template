@@ -227,7 +227,7 @@
     }
 
     &__info {
-      @include z-index(info);
+      @include z-index('info-label');
 
       position: absolute;
       top: $spacing--15;
