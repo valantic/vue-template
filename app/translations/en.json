@@ -42,5 +42,8 @@
   },
   "c-linklist": {
     "downloadTitle": "Download file"
+  },
+  "e-select": {
+    "chooseOption": "Please choose"
   }
 }

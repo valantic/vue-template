@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <div :class="b(stateModifiers)">
     <select :value="value"
             :class="b('select')"
             :disabled="disabled"
@@ -7,7 +7,7 @@
             @change="onChange"
     >
       <option disabled value="">{{ selectText }}</option>
-      <option v-for="item in optionsList" :key="name + '-' + item.value" :value="item.value">{{ item.label }}</option>
+      <option v-for="item in optionsList" :key="`${name} - ${item.value}`" :value="item.value">{{ item.label }}</option>
     </select>
     <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
   </div>
@@ -56,7 +56,9 @@
        * The text to display if no option is selected by default.
        */
       selectText: {
-        default: 'Please choose...',
+        default: function() {
+          return this.$t('e-select.chooseOption');
+        },
         type: String,
       }
     },
@@ -64,27 +66,7 @@
     //   return {};
     // },
 
-    computed: {
-      /**
-       * Defines state modifier classes
-       *
-       * @returns {Object} BEM classes
-       */
-      modifiers() {
-        return {
-          ...this.stateModifiers,
-        };
-      },
-
-      /**
-       * Checks if the component is in default state.
-       *
-       * @returns {Boolean}
-       */
-      hasDefaultState() {
-        return this.state === 'default';
-      },
-    },
+    // computed: {},
     // watch: {},
 
     // beforeCreate() {},
@@ -119,6 +101,8 @@
 </script>
 
 <style lang="scss">
+  $e-select-height: 30px;
+
   .e-select {
     @include half-border($color-grayscale--500);
 
@@ -128,6 +112,8 @@
     }
 
     &__select {
+      @include font($font-size--14, 18px);
+
       background: url('../assets/icons/i-arrow--down--info.svg') no-repeat right 5px center;
       border: 1px solid transparent;
       width: 100%;
@@ -135,7 +121,8 @@
       -moz-appearance: none;
       color: $color-grayscale--400;
       outline: none;
-      padding: 5px 30px 5px 10px;
+      padding: $spacing--0 $spacing--30 $spacing--0 $spacing--10;
+      height: $e-select-height;
 
       &::-ms-expand {
         display: none;

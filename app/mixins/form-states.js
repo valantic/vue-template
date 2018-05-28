@@ -96,6 +96,15 @@ export default {
         hover: this.isHover,
         checked: this.isChecked,
       };
-    }
+    },
+
+    /**
+     * Checks if the component is in default state.
+     *
+     * @returns {Boolean}
+     */
+    hasDefaultState() {
+      return this.state === 'default';
+    },
   }
 };

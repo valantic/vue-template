@@ -95,9 +95,6 @@
           ...this.stateModifiers,
           notification: this.$props.notification && this.hasFocus
         };
-      },
-      hasDefaultState() {
-        return this.state === 'default';
       }
     },
     // watch: {},
