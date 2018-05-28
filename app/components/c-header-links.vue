@@ -63,14 +63,6 @@
         type: Boolean,
         default: false,
       },
-
-      /**
-       * Defines if the login-link should be active.
-       */
-      login: {
-        type: Boolean,
-        default: false,
-      }
     },
     data() {
       return {
@@ -82,7 +74,7 @@
             name: 'wishlist', loggedIn: true, icon: 'i-wishlist', link: '/wishlist', label: 'c-header-links.labelWishlist', isActive: this.wishlist
           },
           {
-            name: 'login', loggedIn: false, icon: 'i-account', link: '/login', label: 'c-header-links.labelLogin', isActive: this.login
+            name: 'login', loggedIn: false, icon: 'i-account', link: '/login', label: 'c-header-links.labelLogin', isActive: !this.userLoggedIn
           }
         ],
       };
