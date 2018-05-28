@@ -1,33 +1,9 @@
 <!-- TODO - This component is supposed to be functional -->
 <template>
-  <!-- div :class="b()">
-    <div :class="b('inner')">
-      <div :class="b('logo')">Logo</div>
-      <div :class="b('header-links')">
-        <c-header-links />
-        <div :class="b('icons')">
-          <div v-if="userLoggedIn" :class="b('cart')">
-            <div :class="b('cart-inner')">
-              <c-mini-cart :state="state"/>
-            </div>
-          </div>
-        </div>
-        <div :class="b('assortment')">Sortiment</div>
-        <div :class="b('search')">
-          <c-search />
-        </div>
-      </div>
-    </div>
-  </div -->
-
   <div :class="b()">
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
-      <!-- div :class="b('header-links')">
-        <c-header-links />
-      </div -->
       <div :class="b('icons')">
-
         <c-header-links />
         <div v-if="userLoggedIn" :class="b('cart')">
           <div :class="b('cart-inner')">
