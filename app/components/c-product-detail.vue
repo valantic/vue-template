@@ -185,13 +185,13 @@
     }
 
     &__bottom {
-      @include media(sm) {
+      @include media(md) {
         display: flex;
       }
     }
 
     &__main {
-      @include media(sm) {
+      @include media(md) {
         flex: 1;
       }
     }
@@ -208,7 +208,7 @@
     &__main--area-bottom {
       flex-direction: column;
 
-      @include media(sm) {
+      @include media(md) {
         padding-bottom: $spacing--60;
       }
     }
@@ -229,18 +229,15 @@
       padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
 
       @include media(md) {
-        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
-      }
-
-      @include media(sm) {
         flex-basis: percentage(3 / 12);
+        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
       }
     }
 
     &__sidebar--area-bottom {
       padding-bottom: $spacing--60;
 
-      @include media(sm) {
+      @include media(md) {
         border-left: 4px solid $color-grayscale--600;
       }
     }
