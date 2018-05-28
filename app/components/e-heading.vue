@@ -125,7 +125,7 @@
   .e-heading {
     font-family: $font-family--primary;
     font-weight: $font-weight--regular;
-    color: var(--theme-color-secondary-1);
+    color: $color-secondary--1;
     line-height: 1.25;
     text-decoration: none;
     display: block;
@@ -135,13 +135,13 @@
     }
 
     &__inner a {
-      color: var(--theme-color-secondary-1);
+      color: $color-secondary--1;
       border: none;
       padding: $spacing--0;
     }
 
     &--underline &__inner {
-      border-bottom: 1px solid var(--theme-color-primary-1);
+      border-bottom: 1px solid $color-primary--1;
       padding: $spacing--15 $spacing--20;
     }
 
@@ -190,10 +190,10 @@
     }
 
     &--color-blue {
-      color: var(--theme-color-secondary-1);
+      color: $color-secondary--1;
 
       a {
-        color: var(--theme-color-secondary-1);
+        color: $color-secondary--1;
       }
     }
 
