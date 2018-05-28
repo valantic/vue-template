@@ -151,3 +151,35 @@ Always use **v-model** to bind value to form elements!
   };
 </script>
 ```
+
+#### No focus shadow
+```
+<template>
+  <e-input v-model="demo" :focusShadow="false" /> 
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
+```
+
+#### No border
+```
+<template>
+  <e-input v-model="demo" border="0" /> 
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
+```

@@ -25,9 +25,19 @@
   "c-product-detail": {
     "productDescriptionTitle": "Produktbeschreibung",
     "productDocumentsTitle": "Dokumente",
+    "productVideosTitle": "Videos"
+  },
+  "c-header-links": {
+    "labelWishlist": "Merkliste",
+    "labelLogin": "Anmelden",
     "productPdfsTitle": "PDFs",
     "productVideosTitle": "Videos",
-    "technicalDataTitle": "Technische Daten"
+    "technicalDataTitle": "Technische Daten",
+    "profile": "Profil"
+  },
+  "c-search": {
+    "placeholder": "Nach Produkten und Kategorien suchen",
+    "title": "Suchen"
   },
   "e-info-label": {
     "priceType1": "Aktion",
@@ -51,6 +61,9 @@
     "zoom": "Bild vergrössern"
   },
   "urls": {
-    "cart": "/cart"
+    "cart": "/cart",
+    "linkAccount": "/account",
+    "linkWishlist": "/wishlist",
+    "linkLogin": "/login"
   }
 }

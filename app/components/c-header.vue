@@ -4,25 +4,32 @@
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">
-        <div v-if="userLoggedIn" :class="b('cart')">
+        <c-header-links :state="state" />
+        <div v-if="isLoggedInUser" :class="b('cart')">
           <div :class="b('cart-inner')">
             <c-mini-cart :state="state"/>
           </div>
         </div>
       </div>
       <div :class="b('assortment')">Sortiment</div>
-      <div :class="b('search')">Search</div>
+      <div :class="b('search')">
+        <c-search />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import cHeaderLinks from '@/components/c-header-links';
+  import cSearch from '@/components/c-search';
   import cMiniCart from '@/components/c-mini-cart';
   import { mapGetters } from 'vuex';
 
   export default {
     name: 'c-header',
     components: {
+      cHeaderLinks,
+      cSearch,
       cMiniCart,
     },
     // mixins: [],
@@ -51,7 +58,7 @@
     computed: {
       ...mapGetters('session', [
         'user',
-        'userLoggedIn',
+        'isLoggedInUser',
       ]),
     },
     // watch: {},
@@ -135,7 +142,8 @@
 
     &__icons {
       flex: 0 1 percentage(7 / 12);
-      text-align: right;
+      display: flex;
+      justify-content: flex-end;
 
       @include media(sm) {
         flex: 0 1 percentage(3 / 12);
@@ -144,6 +152,7 @@
     }
 
     &__cart-inner {
+      padding-left: $spacing--10;
       padding-right: $spacing--10;
 
       @include media(sm) {

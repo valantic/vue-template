@@ -25,9 +25,19 @@
   "c-product-detail": {
     "productDescriptionTitle": "Product description",
     "productDocumentsTitle": "Documents",
+    "productVideosTitle": "Videos"
+  },
+  "c-header-links": {
+    "labelWishlist": "Wishlist",
+    "labelLogin": "Login",
     "productPdfsTitle": "PDFs",
     "productVideosTitle": "Videos",
-    "technicalDataTitle": "Technical data"
+    "technicalDataTitle": "Technical data",
+    "profile": "Profile"
+  },
+  "c-search": {
+    "placeholder": "Search for products and categories",
+    "title": "Search"
   },
   "e-info-label": {
     "priceType1": "Promotion",
@@ -51,6 +61,9 @@
     "zoom": "zoom image"
   },
   "urls": {
-    "cart": "/cart"
+    "cart": "/cart",
+    "linkAccount": "/account",
+    "linkWishlist": "/wishlist",
+    "linkLogin": "/login"
   }
 }
