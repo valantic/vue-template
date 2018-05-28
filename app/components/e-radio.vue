@@ -224,39 +224,5 @@
     &--disabled &__label {
       cursor: default;
     }
-
-    /*
-     * states
-     */
-    &--state-info {
-      pointer-events: none;
-
-      .e-radio__fake-button,
-      .e-radio__field--disabled .e-radio__fake-button,
-      .e-radio__field:disabled .e-radio__fake-button,
-      .e-radio__field:checked ~ .e-radio__fake-button,
-      .e-radio__field:disabled:checked ~ .e-radio__fake-button {
-        background-color: $color-grayscale--1000;
-        border: 1px solid $color-grayscale--400;
-
-        &::after,
-        &:hover {
-          background-color: $color-grayscale--1000;
-          border-color: $color-grayscale--400;
-        }
-      }
-
-      .e-radio__field:disabled:checked ~ .e-radio__fake-button::after,
-      .e-radio__field:checked ~ .e-radio__fake-button::after {
-        background-color: $color-grayscale--400;
-      }
-
-      .e-radio__field ~ .e-radio__label-name,
-      .e-radio__field:disabled ~ .e-radio__label-name,
-      .e-radio__field:disabled:checked ~ .e-radio__label-name,
-      .e-radio__field:checked ~ .e-radio__label-name {
-        color: $color-grayscale--400;
-      }
-    }
   }
 </style>

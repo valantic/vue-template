@@ -118,35 +118,3 @@ Always use **v-model** to bind value to form elements!
   };
 </script>
 ```
-
-
-#### `:info`
-```vue
-<template>
-  <div>
-    <e-radio disabled
-             state="info" 
-             v-model="demo" 
-             name="example-radio-info" 
-             value="radio-1" 
-             displayName="Select Radio Button"
-    />
-    <e-radio disabled
-             state="info" 
-             v-model="demo" 
-             name="example-radio-info" 
-             value="radio-2" 
-             displayName="Select Radio Button"
-    />  
-  </div>
-</template>
-
-<script>
-  export default {
-    name: 'example',
-    data: () => ({
-      demo: 'radio-1'
-    })
-  };
-</script>
-```
