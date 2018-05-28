@@ -1,11 +1,12 @@
 #### default options
 
-```
+```vue
 <template>
   <div class="demo">
-    <c-swiper-gallery :images="images"/>
+    <div style="max-width: 400px;">
+      <c-swiper-gallery :images="images"/>
+    </div>
   </div>
-
 </template>
 
 <script>
@@ -22,10 +23,12 @@
 
 #### single picture
 
-```
+```vue
 <template>
   <div class="demo">
-    <c-swiper-gallery :images="images"/>
+    <div style="max-width: 400px;">
+      <c-swiper-gallery :images="images"/>
+    </div>
   </div>
 
 </template>
@@ -57,10 +60,12 @@
 
 #### less than seven pictures
 
-```
+```vue
 <template>
   <div class="demo">
-    <c-swiper-gallery :images="images"/>
+    <div style="max-width: 400px;">
+      <c-swiper-gallery :images="images"/>
+    </div>
   </div>
 
 </template>
@@ -112,10 +117,12 @@
 
 #### custom options
 
-```
+```vue
 <template>
   <div class="demo">
-    <c-swiper-gallery :images="images" :options="customOptions"/>
+    <div style="max-width: 400px;">
+      <c-swiper-gallery :images="images" :options="customOptions"/>
+    </div>
   </div>
 
 </template>
