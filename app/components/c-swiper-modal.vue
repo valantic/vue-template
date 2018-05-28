@@ -267,7 +267,6 @@
 
     .gallery-thumbs .swiper-slide .e-picture img {
       margin: 0 auto;
-      -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
     }
 
     .gallery-thumbs .swiper-slide-active::before {
