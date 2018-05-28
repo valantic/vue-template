@@ -1,24 +1,25 @@
 <template>
   <div :class="b()">
     <h1>Swiper example (c-swiper-gallery)</h1>
-    <c-swiper-gallery :images="images"/>
+    <c-swiper-gallery :images="product.images"/>
 
   </div>
 </template>
 
 <script>
   import CSwiperGallery from '@/components/c-swiper-gallery';
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'swiper',
     components: {
       CSwiperGallery,
     },
-    data() {
-      return {
-        images: this.$store.getters['product/images'],
-      };
-    },
+    computed: {
+      ...mapGetters({
+        product: 'product/product',
+      }),
+    }
   };
 </script>
 

@@ -2,12 +2,12 @@
   <div :class="b()">
     <div ref="gallery" :class="b('container swiper-container gallery-top')">
       <div :class="b('wrapper swiper-wrapper')">
-        <div v-for="picture in pictures" :class="b('slide swiper-slide')" :key="picture.id">
+        <div v-for="image in images" :class="b('slide swiper-slide')" :key="image.id">
           <e-picture
             :sizes="sizes"
-            :srcset="picture.srcset"
-            :fallback="picture.fallback"
-            :alt="picture.alt"/>
+            :srcset="image.srcset"
+            :fallback="image.fallback"
+            :alt="image.alt"/>
         </div>
       </div>
       <div :class="b('button-prev swiper-button-prev')"></div>
@@ -15,12 +15,12 @@
     </div>
     <div ref="thumbnails" :class="b('container swiper-container gallery-thumbs')">
       <div :class="b('wrapper swiper-wrapper')">
-        <div v-for="picture in pictures" :class="b('slide swiper-slide')" :key="picture.id">
+        <div v-for="image in images" :class="b('slide swiper-slide')" :key="image.id">
           <e-picture
             :sizes="sizes"
-            :srcset="picture.srcset"
-            :fallback="picture.fallback"
-            :alt="picture.alt"/>
+            :srcset="image.srcset"
+            :fallback="image.fallback"
+            :alt="image.alt"/>
         </div>
       </div>
     </div>
@@ -83,6 +83,11 @@
             prevEl: '.swiper-button-prev',
             hideOnClick: true,
           },
+          on: {
+            slideChange: function() {
+              this.$emit('change', this.$refs.gallery.swiper.activeIndex);
+            }.bind(this),
+          }
         },
         optionsThumbnails: {
           slidesPerGroup: 1,
@@ -114,22 +119,6 @@
           ...this.optionsDefault,
           ...this.options,
         };
-      },
-
-      pictures() {
-        return this.images.map((image) => {
-          const srcset = {};
-
-          image.thumbs.map((thumb) => {
-            Object.assign(srcset, { [thumb.width]: thumb.absolute_path });
-          });
-
-          return {
-            fallback: image.external_url_small,
-            srcset,
-            alt: '',
-          };
-        });
       },
     },
     // watch: {},
@@ -263,12 +252,13 @@
     }
 
     .gallery-thumbs .swiper-slide-active::before {
+      @include z-index(modal);
+
       content: '';
       display: block;
       position: absolute;
       left: 50%;
       margin-left: -11px;
-      z-index: 1000;
       border-left: 11px solid transparent;
       border-right: 11px solid transparent;
       border-bottom: 15px solid $color-primary--1;

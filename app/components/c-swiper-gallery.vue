@@ -41,7 +41,7 @@
         inner-spacing="0"
         @close="modalClose"
       >
-        <c-swiper-modal :images="images" :initial-slide="swiper.activeIndex"/>
+        <c-swiper-modal :images="pictures" :initial-slide="swiper.activeIndex" @change="onModalSlideChanged"/>
       </c-modal>
     </div>
 
@@ -187,6 +187,9 @@
       modalClose() {
         this.modalOpen = false;
       },
+      onModalSlideChanged(index) {
+        this.$refs.container.swiper.slideTo(index);
+      }
     },
     // render() {},
   };
