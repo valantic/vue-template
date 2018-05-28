@@ -137,7 +137,7 @@
     @include font($font-size--14, 18px);
 
     position: relative;
-    padding-top: 3px;
+    padding-top: 4px;
 
     &__field {
       opacity: 0;
