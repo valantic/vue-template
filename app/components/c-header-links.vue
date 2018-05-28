@@ -33,7 +33,7 @@
 
     props: {
       /**
-       * Sets the display state of the minicart
+       * Sets the display state of the header-links
        *
        * Valid values: `full, reduced`
        */
@@ -190,4 +190,5 @@
       }
     }
   }
+
 </style>
