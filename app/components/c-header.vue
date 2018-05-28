@@ -5,7 +5,7 @@
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">
         <c-header-links :state="state" />
-        <div v-if="userLoggedIn" :class="b('cart')">
+        <div v-if="isLoggedInUser" :class="b('cart')">
           <div :class="b('cart-inner')">
             <c-mini-cart :state="state"/>
           </div>
@@ -58,7 +58,7 @@
     computed: {
       ...mapGetters('session', [
         'user',
-        'userLoggedIn',
+        'isLoggedInUser',
       ]),
     },
     // watch: {},

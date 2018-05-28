@@ -27,17 +27,13 @@
     "productDocumentsTitle": "Dokumente",
     "productVideosTitle": "Videos"
   },
-  "urls": {
-    "linkAccount": "/account",
-    "linkWishlist": "/wishlist",
-    "linkLogin": "/login"
-  },
   "c-header-links": {
     "labelWishlist": "Merkliste",
     "labelLogin": "Anmelden",
     "productPdfsTitle": "PDFs",
     "productVideosTitle": "Videos",
-    "technicalDataTitle": "Technische Daten"
+    "technicalDataTitle": "Technische Daten",
+    "profile": "Profil"
   },
   "c-search": {
     "placeholder": "Suche"
@@ -64,6 +60,9 @@
     "zoom": "Bild vergrössern"
   },
   "urls": {
-    "cart": "/cart"
+    "cart": "/cart",
+    "linkAccount": "/account",
+    "linkWishlist": "/wishlist",
+    "linkLogin": "/login"
   }
 }
