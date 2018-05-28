@@ -188,6 +188,8 @@
       list-style: none;
       margin: 0;
       min-width: 200px;
+      max-height: 100vh;
+      overflow: auto;
     }
 
     &__navigation-item {
