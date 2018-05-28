@@ -11,6 +11,7 @@ Always use **v-model** to bind value to form elements!
              :value="item.value"
              v-model="selected"
              :display-name="item.displayName"
+             class="spacing--bottom-10"
         />
   
     <div class="spacing--top-15">
@@ -46,6 +47,7 @@ Always use **v-model** to bind value to form elements!
            :value="item.value" 
            :display-name="item.displayName"
            v-model="selected"
+           class="spacing--bottom-10"
     />
   </div>
 </template>

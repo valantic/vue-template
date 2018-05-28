@@ -137,7 +137,6 @@
     @include font($font-size--14, 18px);
 
     position: relative;
-    padding-top: 4px;
 
     &__field {
       opacity: 0;
@@ -159,7 +158,7 @@
       position: absolute;
       width: 16px;
       height: 16px;
-      top: 4px;
+      top: 0;
       left: 0;
       cursor: pointer;
     }
