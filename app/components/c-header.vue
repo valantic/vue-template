@@ -5,7 +5,9 @@
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">
         <div v-if="userLoggedIn" :class="b('cart')">
-          <c-mini-cart :state="state"/>
+          <div :class="b('cart-inner')">
+            <c-mini-cart :state="state"/>
+          </div>
         </div>
       </div>
       <div :class="b('assortment')">Sortiment</div>
@@ -134,11 +136,17 @@
     &__icons {
       flex: 0 1 percentage(7 / 12);
       text-align: right;
-      padding-right: $spacing--10;
 
       @include media(sm) {
         flex: 0 1 percentage(3 / 12);
         order: 4;
+      }
+    }
+
+    &__cart-inner {
+      padding-right: $spacing--10;
+
+      @include media(sm) {
         padding-right: $spacing--15;
       }
 

@@ -1,8 +1,8 @@
 <template>
   <a :class="b({ active, state })" :href="$t('urls.cart')">
-    <div v-if="quantity" :class="b('count')">{{ quantity }}</div>
+    <div :class="b('count', { quantity: !!quantity })">{{ quantity }}</div>
     <div :class="b('icon')"><e-icon inline icon="i-cart"/></div>
-    <div v-if="subtotal" :class="b('total')">{{ displayPrice }}</div>
+    <div :class="b('total', { subtotal: !!subtotal })">{{ displayPrice }}</div>
   </a>
 </template>
 
@@ -97,9 +97,7 @@
     }
 
     &--state-reduced &__icon {
-      @include media(sm) {
-        margin: $spacing--10 auto $spacing--0 auto;
-      }
+      margin-top: $spacing--10;
     }
 
     &:hover,
@@ -122,46 +120,53 @@
     }
 
     &__count {
+      display: none;
       position: absolute;
-      left: $spacing--0;
-      transform: translateX(-100%);
+      left: 50%;
+      line-height: 1em;
+      margin-left: -#{$spacing--15};
+      transform: translateX(-50%);
       top: $spacing--10;
-      display: inline-block;
       color: var(--theme-color-secondary-1);
       padding: 1px 2px;
       background-color: $color-grayscale--1000;
       border-radius: 2px;
       min-width: 1em;
       text-align: center;
+    }
 
+    &--state-full &__count {
       @include media(sm) {
-        left: 20%;
-        transform: translateX(-50%);
+        top: $spacing--10;
       }
     }
 
     &--state-reduced &__count {
-      @include media(sm) {
-        top: 6px;
-      }
+      top: 4px;
+    }
+
+    &__count--quantity {
+      display: block;
     }
 
     &__total {
+      visibility: hidden;
       margin-top: 0;
       padding: 3px 0 6px 0;
       text-align: center;
     }
 
-    &--state-full &__total {
+    &--state-reduced &__total {
+      display: none;
+    }
+
+    &--state-full &__total--subtotal {
       display: none;
 
       @include media(sm) {
         display: block;
+        visibility: visible;
       }
-    }
-
-    &--state-reduced &__total {
-      display: none;
     }
   }
 </style>

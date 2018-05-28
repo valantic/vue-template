@@ -61,9 +61,10 @@
         document.getElementsByClassName('l-default__content')[0].style.marginTop = `${height}px`;
       },
       setHeaderState() {
-        this.lastKnownScrollPosition = window.scrollY;
+        this.lastKnownScrollPosition = window.scrollY ? window.scrollY : window.pageYOffset;
 
         if (!this.ticking) {
+          console.log(this.lastKnownScrollPosition);
           window.requestAnimationFrame(() => {
             this.headerState = this.lastKnownScrollPosition > 0 ? 'reduced' : 'full';
             this.ticking = false;
