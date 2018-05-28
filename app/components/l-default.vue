@@ -73,7 +73,15 @@
       background: $color-grayscale--1000;
       box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
       margin: $spacing--20 auto;
-      max-width: map-get($grid-breakpoints, xl);
+      max-width: #{map-get($grid-breakpoints, xl) - 20px};
+
+      @include media(sm) {
+        margin: $spacing--20 $spacing--10;
+      }
+
+      @include media(xl) {
+        margin: $spacing--20 auto;
+      }
     }
   }
 
