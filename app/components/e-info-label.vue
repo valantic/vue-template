@@ -35,7 +35,7 @@
        * Valid values: `1, 2, 3, 4, 5`
        */
       priceType: {
-        type: [Number],
+        type: Number,
         required: true,
         validator(value) {
           return [1, 2, 3, 4, 5].includes(value);
@@ -113,7 +113,7 @@
       width: 0;
       height: 0;
       border-top: 10px solid transparent;
-      border-bottom: 8px solid transparent;
+      border-bottom: 11px solid transparent;
       border-left: 8px solid $color-primary--1;
     }
 
@@ -166,11 +166,11 @@
     }
 
     &__info {
-      @include font($font-size: $font-size--14, $line-height: 14px, $font-weight: $font-weight--regular);
+      @include font($font-size--14, 14px, $font-weight--regular);
 
       display: inline-block;
       vertical-align: middle;
-      padding: 1px $spacing--0 2px $spacing--0;
+      padding: $spacing--2 $spacing--0;
       opacity: 0;
       max-width: 0;
       transition: 0.25s ease-out;
