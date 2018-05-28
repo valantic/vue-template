@@ -1,7 +1,7 @@
 export default {
   totals: {
-    subtotal: 9000,
-    grandTotal: 9000,
-    netTotal: 9000,
+    subtotal: 123456,
+    grandTotal: 89000000,
+    netTotal: 89000000,
   },
 };
