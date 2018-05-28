@@ -257,6 +257,7 @@ module.exports = function(env = {}, options = {}) {
       extensions: ['.js', '.vue', '.json'],
       alias: {
         vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+        swiper$: 'swiper/dist/js/swiper.js', // Use builded code from swiper when importing from 'swiper'
         '@': path.join(__dirname, 'app'),
       },
     },
@@ -293,7 +294,12 @@ module.exports = function(env = {}, options = {}) {
           use: scssLoader(),
         },
         {
+          test: /\.css$/,
+          use:[ 'style-loader', 'css-loader'],
+        },
+        {
           test: /\.js$/,
+          exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/,
           use: 'babel-loader',
           include,
         },

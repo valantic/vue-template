@@ -8,6 +8,7 @@ import buttons from '../styleguide/routes/buttons';
 import forms from '../styleguide/routes/forms';
 import collapse from '../styleguide/routes/collapse';
 import modals from '../styleguide/routes/modals';
+import swiper from '../styleguide/routes/swiper';
 
 const root = '/styleguide';
 
@@ -93,6 +94,14 @@ export default [
     component: modals,
     meta: {
       title: 'Modals',
+    }
+  },
+  {
+    path: `${root}/swiper`,
+    name: 'styleguideSwiper',
+    component: swiper,
+    meta: {
+      title: 'Swiper',
     }
   },
   {
