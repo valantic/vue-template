@@ -257,6 +257,7 @@ module.exports = function(env = {}, options = {}) {
       extensions: ['.js', '.vue', '.json'],
       alias: {
         vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+        swiper$: 'swiper/dist/js/swiper.js', // Use 'swiper.esm' when importing from 'swiper'
         '@': path.join(__dirname, 'app'),
       },
     },
