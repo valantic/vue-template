@@ -4,6 +4,7 @@
       <e-input v-model="searchstring"
                :placeholder="$t('c-search.placeholder')"
                :title="$t('c-search.title')"
+               :focus-shadow="false"
                autocomplete="off"
                type="search"
                name="searchfield"
