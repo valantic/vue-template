@@ -19,6 +19,9 @@
     "xingUrl": "https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e",
     "xingTitle": "Xing"
   },
+  "c-productlist-wrapper": {
+    "prductlistArticles": "0 Artikel | 1 Artikel | {count} Artikel"
+  },
   "c-product-detail": {
     "productDescriptionTitle": "Produktbeschreibung",
     "productDocumentsTitle": "Dokumente",
@@ -55,5 +58,9 @@
   },
   "c-linklist": {
     "downloadTitle": "Datei herunterladen"
+  },
+  "c-swiper": {
+    "images": "0 Bilder | 1 Bild | {count} Bilder",
+    "zoom": "Bild vergrössern"
   }
 }
