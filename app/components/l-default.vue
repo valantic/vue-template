@@ -62,7 +62,7 @@
     background: $color-grayscale--600;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
 
     &__content {
       flex: 1 0 auto;
