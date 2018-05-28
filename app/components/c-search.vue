@@ -45,7 +45,7 @@
 
 <style lang="scss">
   .c-search {
-    height: percentage(1);
+    height: 100%;
     padding: $spacing--10;
 
     @include media(sm) {
@@ -54,7 +54,7 @@
       align-items: center;
 
       .e-input {
-        width: percentage(1);
+        width: 100%;
       }
     }
 

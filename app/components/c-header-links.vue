@@ -5,17 +5,14 @@
          :class="b('item', { active: item.isActive })"
          :key="item.link"
     >
-      <a :class="b('link')" :href="$t(item.link)">
+      <a :class="b('link', { state })" :href="item.link" title="link">
         <e-icon
-          :class="b('icon')"
           :icon="item.icon"
           inline
-          width="25px"
-          height="25px"
           @click="onClick"
         />
-        <span v-if="item.label" :class="b('label')">{{ $t(item.label) }}</span>
-        <span v-else :class="b('label')">{{ username }}</span>
+        <span v-if="item.label" :class="b('label', { state })">{{ $t(item.label) }}</span>
+        <span v-else-if="username" :class="b('label', { state })">{{ username }}</span>
       </a>
     </div>
   </div>
@@ -35,6 +32,22 @@
     // mixins: [],
 
     props: {
+      /**
+       * Sets the display state of the minicart
+       *
+       * Valid values: `full, reduced`
+       */
+      state: {
+        type: String,
+        default: 'full',
+        validator(value) {
+          return [
+            'full',
+            'reduced'
+          ].includes(value);
+        }
+      },
+
       /**
        * Defines if the account-link should be active.
        */
@@ -63,13 +76,13 @@
       return {
         items: [
           {
-            name: 'account', loggedIn: true, icon: 'i-account', link: 'urls.linkAccount', label: '', isActive: this.account
+            name: 'account', loggedIn: true, icon: 'i-account', link: '/ccount', label: '', isActive: this.account
           },
           {
-            name: 'wishlist', loggedIn: true, icon: 'i-wishlist', link: 'urls.linkWishlist', label: 'c-header-links.labelWishlist', isActive: this.wishlist
+            name: 'wishlist', loggedIn: true, icon: 'i-wishlist', link: '/wishlist', label: 'c-header-links.labelWishlist', isActive: this.wishlist
           },
           {
-            name: 'login', loggedIn: false, icon: 'i-account', link: 'urls.linkLogin', label: 'c-header-links.labelLogin', isActive: this.login
+            name: 'login', loggedIn: false, icon: 'i-account', link: '/login', label: 'c-header-links.labelLogin', isActive: this.login
           }
         ],
       };
@@ -116,7 +129,7 @@
     display: flex;
     justify-content: flex-end;
 
-    &__icon {
+    .e-icon {
       display: flex;
       justify-content: center;
 
@@ -126,7 +139,8 @@
     }
 
     &__item {
-      &--active {
+      &--active,
+      &:hover {
         .e-icon path {
           fill: $color-primary--1;
         }
@@ -134,15 +148,19 @@
     }
 
     &__link {
-      width: percentage(1);
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       border-bottom: none;
-      padding: $spacing--10 $spacing--10 $spacing--5 $spacing--10;
+      padding: $spacing--15 $spacing--10 $spacing--5 $spacing--10;
 
       @include media(xs) {
-        padding: $spacing--10 $spacing--20 $spacing--5 $spacing--20;
+        padding: $spacing--15 $spacing--10 $spacing--5 $spacing--10;
+      }
+
+      &--state-reduced {
+        padding: $spacing--10 $spacing--10 $spacing--5 $spacing--10;
       }
 
       &:hover {
@@ -155,13 +173,20 @@
     }
 
     &__label {
-      @include font($font-size--10, 13px, $font-weight--semi-bold);
+      @include font($font-size--10, 13px);
 
       display: none;
       color: $color-grayscale--1000;
+      margin-top: 0;
+      padding: 3px 0 6px 0;
+      text-align: center;
 
       @include media(xs) {
         display: block;
+      }
+
+      &--state-reduced {
+        display: none;
       }
     }
   }

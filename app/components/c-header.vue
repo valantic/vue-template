@@ -4,7 +4,7 @@
     <div :class="b('inner')">
       <div :class="b('logo')">Logo</div>
       <div :class="b('icons')">
-        <c-header-links />
+        <c-header-links :state="state" />
         <div v-if="userLoggedIn" :class="b('cart')">
           <div :class="b('cart-inner')">
             <c-mini-cart :state="state"/>
@@ -152,6 +152,7 @@
     }
 
     &__cart-inner {
+      padding-left: $spacing--10;
       padding-right: $spacing--10;
 
       @include media(sm) {
