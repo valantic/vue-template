@@ -329,17 +329,18 @@ Check svg files delivered from designers and remove unnecessary attributes like 
 
 #### Themes
 Theme styles are delivered seperatly in a *.css file. In this files are the global css-vars defined which can be used in every vue component.
-* For the available css-vars check the theme files: `app/setup/scss/themes/theme-**.scss`
+* For the available theme colors check the theme files: `app/setup/scss/themes/theme-**.scss`
 * Vue mixin for including theme class-names into component `app/mixins/themes.js`
 * The current theme is always available in the store `app/store/modules/session/index.js`
+* Developers can always use the SASS color variables `$color-primary--1,...`, the mapping of the SASS variable will handle the usage of a CSS variable, BUT: you have to use the --rgb SASS variable for a rgba() use case
 * [Infos css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) (For the IE polyfill we use [this](https://github.com/jhildenbiddle/css-vars-ponyfill))
 
 Usage example:
 ```css
   .class {
-    color: var(--theme-color-primary-1);
-    background: linear-gradient(to right, var(--theme-color-gradient-2-0), var(--theme-color-gradient-2-1));
-    background-color: rgba(var(--theme-color-primary-1--rgb), 0.5);
+    color: $color-primary--1;
+    background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
+    background-color: rgba($color-primary--1--rgb, 0.5);
   }
 ```
 

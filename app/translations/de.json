@@ -19,12 +19,24 @@
     "xingUrl": "https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e",
     "xingTitle": "Xing"
   },
+  "c-productlist-wrapper": {
+    "prductlistArticles": "0 Artikel | 1 Artikel | {count} Artikel"
+  },
   "c-product-detail": {
     "productDescriptionTitle": "Produktbeschreibung",
     "productDocumentsTitle": "Dokumente",
     "productPdfsTitle": "PDFs",
-    "productVideosTitle": "Videos",
-    "technicalDataTitle": "Technische Daten"
+    "technicalDataTitle": "Technische Daten",
+    "productVideosTitle": "Videos"
+  },
+  "c-header-links": {
+    "labelWishlist": "Merkliste",
+    "labelLogin": "Anmelden",
+    "profile": "Profil"
+  },
+  "c-search": {
+    "placeholder": "Nach Produkten und Kategorien suchen",
+    "title": "Suchen"
   },
   "e-info-label": {
     "priceType1": "Aktion",
@@ -42,5 +54,18 @@
   },
   "c-linklist": {
     "downloadTitle": "Datei herunterladen"
+  },
+  "c-swiper": {
+    "images": "0 Bilder | 1 Bild | {count} Bilder",
+    "zoom": "Bild vergrössern"
+  },
+  "urls": {
+    "cart": "/cart",
+    "linkAccount": "/account",
+    "linkWishlist": "/wishlist",
+    "linkLogin": "/login"
+  },
+  "e-select": {
+    "chooseOption": "Bitte wählen"
   }
 }

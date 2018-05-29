@@ -80,6 +80,31 @@
       notification: {
         type: String,
         default: null
+      },
+
+      /**
+       * Defines the border Style
+       *
+       * Available values: 0, 500
+       * Default: 500
+       */
+      border: {
+        default: '500', // vue-bem-cn currently does not support number values
+        type: [Number, String],
+        validator(value) {
+          return [
+            0,
+            500
+          ].includes(parseInt(value, 10));
+        }
+      },
+
+      /**
+       * Determines if the input should have a shadow on focus
+       */
+      focusShadow: {
+        default: true,
+        type: [Boolean]
       }
     },
 
@@ -93,11 +118,11 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          notification: this.$props.notification && this.hasFocus
+          notification: this.$props.notification && this.hasFocus,
+          type: this.$attrs.type || 'text',
+          border: this.$props.border,
+          focusShadow: this.$props.focusShadow
         };
-      },
-      hasDefaultState() {
-        return this.state === 'default';
       }
     },
     // watch: {},
@@ -166,10 +191,15 @@
 </script>
 
 <style lang="scss">
+  // stylelint-disable no-descending-specificity
+  // TODO: refactor style to get rid of no-descending-specificity
+
   $e-input-height: 30px;
 
   .e-input {
-    @include half-border($color-grayscale--500);
+    &:not(&--border-0) {
+      @include half-border($color-grayscale--500);
+    }
 
     // input
     &__field {
@@ -234,23 +264,31 @@
     }
 
     // active
-    &__field:active,
-    &--active &__field {
+    &:not(&--border-0) &__field:active,
+    &--active:not(&--border-0) &__field {
       border: 1px solid $color-grayscale--500;
     }
 
     // focus
     &__field:focus,
     &--focus &__field {
-      border: 1px solid $color-grayscale--500;
-      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
-      color: var(--theme-color-secondary-1);
+      color: $color-secondary--1;
       outline: none;
     }
 
+    &:not(&--border-0) &__field:focus,
+    &--focus:not(&--border-0) &__field {
+      border: 1px solid $color-grayscale--500;
+    }
+
+    &--focus-shadow &__field:focus,
+    &--focus-shadow.e-input--focus &__field {
+      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
+    }
+
     // hover
-    &__field:hover,
-    &--hover &__field {
+    &:not(&--border-0) &__field:hover,
+    &--hover:not(&--border-0) &__field {
       border: 1px solid $color-grayscale--500;
     }
 
@@ -275,25 +313,24 @@
     /**
     * states
     **/
-    /* stylelint-disable no-descending-specificity */
     &--state-error {
-      @include half-border(var(--theme-color-status-danger));
+      @include half-border($color-status--danger);
 
       .e-input__field {
         @include form-state-icon('error');
       }
 
       .e-input__icon-splitter {
-        border-color: var(--theme-color-status-danger);
+        border-color: $color-status--danger;
       }
     }
 
     &--state-error &__field:hover {
-      border: 1px solid var(--theme-color-status-danger);
+      border: 1px solid $color-status--danger;
     }
 
     &--state-error &__field:focus {
-      border: 1px solid var(--theme-color-status-danger);
+      border: 1px solid $color-status--danger;
     }
 
     &--state-info {
@@ -309,6 +346,16 @@
     &--state-success {
       .e-input__field {
         @include form-state-icon('success');
+      }
+
+      .e-input__icon-splitter {
+        display: none;
+      }
+    }
+
+    &--type-search {
+      .e-input__field {
+        @include form-state-icon('search');
       }
 
       .e-input__icon-splitter {

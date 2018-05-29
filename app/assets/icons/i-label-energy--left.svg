@@ -8,14 +8,14 @@
             }
         </style>
     </defs>
-    <g id="icons/i-label-energie--links" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle-12" fill="#19A315" x="0" y="0" width="42" height="16"></rect>
-        <text id="A" font-family="SourceSansPro-Regular, Source Sans Pro" font-size="16" font-weight="normal" fill="#FFFFFF">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#19A315" x="0" y="0" width="42" height="16"></rect>
+        <text font-family="SourceSansPro-Regular, Source Sans Pro" font-size="16" font-weight="normal" fill="#FFFFFF">
             <tspan x="4" y="16">A</tspan>
         </text>
-        <text id="+++" font-family="OpenSans, Open Sans" font-size="12" font-weight="normal" fill="#FFFFFF">
+        <text font-family="OpenSans, Open Sans" font-size="12" font-weight="normal" fill="#FFFFFF">
             <tspan x="17" y="9">+++</tspan>
         </text>
-        <polyline id="Triangle" fill="#19A315" transform="translate(46.500000, 8.000000) rotate(180.000000) translate(-46.500000, -8.000000) " points="42 8 51 0 51 16"></polyline>
+        <polyline fill="#19A315" transform="translate(46.500000, 8.000000) rotate(180.000000) translate(-46.500000, -8.000000) " points="42 8 51 0 51 16"></polyline>
     </g>
 </svg>

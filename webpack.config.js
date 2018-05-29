@@ -92,8 +92,8 @@ module.exports = function(env = {}, options = {}) {
     }
 
     return hasStyleguide
-        ? use
-        : ExtractTextPlugin.extract({ use });
+      ? use
+      : ExtractTextPlugin.extract({ use });
   }
 
   function webpackStats() {
@@ -257,6 +257,7 @@ module.exports = function(env = {}, options = {}) {
       extensions: ['.js', '.vue', '.json'],
       alias: {
         vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+        swiper$: 'swiper/dist/js/swiper.js', // Use builded code from swiper when importing from 'swiper'
         '@': path.join(__dirname, 'app'),
       },
     },
@@ -293,7 +294,12 @@ module.exports = function(env = {}, options = {}) {
           use: scssLoader(),
         },
         {
+          test: /\.css$/,
+          use:[ 'style-loader', 'css-loader'],
+        },
+        {
           test: /\.js$/,
+          exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/,
           use: 'babel-loader',
           include,
         },
@@ -312,7 +318,42 @@ module.exports = function(env = {}, options = {}) {
               loader: 'image-webpack-loader', // @see https://github.com/tcoopman/image-webpack-loader
               options: {
                 svgo: {
-                  removeEmptyContainers: true,
+                  plugins: [
+                    //{ cleanupAttrs: false, },
+                    //{ removeDoctype: false, },
+                    //{ removeXMLProcInst: false, },
+                    //{ removeComments: false, },
+                    //{ removeMetadata: false, },
+                    //{ removeTitle: false, },
+                    //{ removeDesc: false, },
+                    { removeUselessDefs: false, },
+                    //{ removeEditorsNSData: false, },
+                    //{ removeEmptyAttrs: false, },
+                    //{ removeHiddenElems: false, },
+                    //{ removeEmptyText: false, },
+                    //{ removeEmptyContainers: false, },
+                    //{ removeViewBox: false, },
+                    //{ cleanUpEnableBackground: true, },
+                    //{ convertStyleToAttrs: true, },
+                    //{ convertColors: true, },
+                    //{ convertPathData: true, },
+                    //{ convertTransform: true, },
+                    //{ removeUnknownsAndDefaults: true, },
+                    //{ removeNonInheritableGroupAttrs: true, },
+                    //{ removeUselessStrokeAndFill: true, },
+                    //{ removeUnusedNS: true, },
+                    { cleanupIDs: false, },
+                    //{ cleanupNumericValues: false, },
+                    //{ moveElemsAttrsToGroup: true, },
+                    //{ moveGroupAttrsToElems: true, },
+                    //{ collapseGroups: false, },
+                    //{ removeRasterImages: false, },
+                    //{ mergePaths: true, },
+                    //{ convertShapeToPath: true, },
+                    //{ sortAttrs: true, },
+                    //{ transformsWithOnePath: false, },
+                    //{ removeDimensions: true, }
+                  ]
                 },
               }
             },

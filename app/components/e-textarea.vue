@@ -82,15 +82,6 @@
           notification: Boolean(this.$props.notification && this.hasFocus)
         };
       },
-
-      /**
-       * Checks if the component is in default state.
-       *
-       * @returns {Boolean}
-       */
-      hasDefaultState() {
-        return this.state === 'default';
-      }
     },
     // watch: {},
 
@@ -151,6 +142,8 @@
     }
 
     &__field {
+      @include font($font-size--14, 18px);
+
       padding: $spacing--5 $spacing--10;
       color: $color-grayscale--400;
       resize: none;
@@ -203,7 +196,7 @@
       outline: none;
       box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
       border: 1px solid $color-grayscale--500;
-      color: var(--theme-color-secondary-1);
+      color: $color-secondary--1;
     }
 
     // hover
@@ -235,23 +228,23 @@
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
-      @include half-border(var(--theme-color-status-danger));
+      @include half-border($color-status--danger);
 
       .e-textarea__field {
         @include form-state-icon('error');
       }
 
       .e-textarea__icon-splitter {
-        border-color: var(--theme-color-status-danger);
+        border-color: $color-status--danger;
       }
     }
 
     &--state-error &__field:hover {
-      border-color: var(--theme-color-status-danger);
+      border-color: $color-status--danger;
     }
 
     &--state-error &__field:focus {
-      border-color: var(--theme-color-status-danger);
+      border-color: $color-status--danger;
     }
 
     &--state-info {
