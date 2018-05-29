@@ -144,7 +144,7 @@
   .forms {
     padding: $spacing--50;
 
-    .e-label {
+    .e-label:not(:last-child) {
       margin-bottom: $spacing--10;
     }
   }
