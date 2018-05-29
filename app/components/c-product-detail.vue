@@ -14,7 +14,7 @@
           />
         </div>
         <div :class="b('gallery')">
-          <c-swiper-gallery :images="images"/>
+          <c-swiper-gallery :images="product.images"/>
         </div>
 
         <div :class="b('specs')">
@@ -43,21 +43,19 @@
       <div :class="b('main', { area: 'bottom' })">
         <div :class="b('details')">
           <div v-if="product.description" :class="b('description')">
-            <e-heading underline tag-name="h2" color="gray">{{ $t('c-product-detail.productDescriptionTitle') }}</e-heading>
+            <e-heading underline tag-name="h2" color="gray">{{ productDescriptionTitle }}</e-heading>
             <div :class="b('description-text')" v-html="product.description"></div>
           </div>
         </div>
         <div :class="b('details')">
           <c-collapse-group>
-            <c-collapse v-if="product.tech_attributes"
-                        :title="$t('c-product-detail.technicalDataTitle')"
-            >
+            <c-collapse v-if="product.tech_attributes" :title="technicalDataTitle">
               <c-attribute-grid :attributes="product.tech_attributes"/>
             </c-collapse>
             <c-collapse v-if="hasMedia" :title="$t('c-product-detail.productDocumentsTitle')">
-              <e-heading v-if="hasPdfDocuments" tag-name="h3" color="gray">{{ $t('c-product-detail.productPdfsTitle') }}</e-heading>
+              <e-heading v-if="hasPdfDocuments" tag-name="h3" color="gray">{{ productPdfsTitle }}</e-heading>
               <c-linklist v-if="hasPdfDocuments" :items="product.media_attributes.productDataSheet"/>
-              <e-heading v-if="hasVideos" tag-name="h3" color="gray">{{ $t('c-product-detail.productVideosTitle') }}</e-heading>
+              <e-heading v-if="hasVideos" tag-name="h3" color="gray">{{ productVideosTitle }}</e-heading>
               <c-linklist v-if="hasVideos" :items="product.media_attributes.video"/>
             </c-collapse>
           </c-collapse-group>
@@ -145,7 +143,22 @@
       },
       hasMedia() {
         return this.hasPdfDocuments || this.hasVideos;
-      }
+      },
+      productDescriptionTitle() {
+        return this.$t('c-product-detail.productDescriptionTitle');
+      },
+      technicalDataTitle() {
+        return this.$t('c-product-detail.technicalDataTitle');
+      },
+      productDocumentsTitle() {
+        return this.$t('c-product-detail.productDocumentsTitle');
+      },
+      productPdfsTitle() {
+        return this.$t('c-product-detail.productPdfsTitle');
+      },
+      productVideosTitle() {
+        return this.$t('c-product-detail.productVideosTitle');
+      },
     },
     // watch: {},
 
