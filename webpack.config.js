@@ -14,6 +14,7 @@ const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
 const postCssCriticalSplit = require('postcss-critical-split');
 const cssNano = require('cssnano');
 const openInEditor = require('launch-editor-middleware');
+const WebpackCleanPlugin = require('webpack-clean');
 
 module.exports = function(env = {}, options = {}) {
   // Flags
@@ -125,7 +126,16 @@ module.exports = function(env = {}, options = {}) {
       new ExtractTextPlugin({
         filename: assetsSubDirectory + `css/${prefix}[name].css?[chunkhash]`, // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
         allChunks: true,
-      })
+      }),
+
+      // Cleans dist directory and removes specific unnecessary files
+      new WebpackCleanPlugin([
+        'theme-01.js',
+        'theme-02.js',
+        'theme-03.js',
+        'theme-04.js',
+        'theme-05.js'
+      ], { basePath: path.join(__dirname, 'dist/static/js') })
     ];
 
     if (isProduction) {
