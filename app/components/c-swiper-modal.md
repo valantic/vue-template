@@ -3,20 +3,20 @@
 ```vue
 <c-swiper-modal :images="[
 {
-  fallback: 'http://localhost:8080/static/mock/dummy_square_500--v1.jpg',
+  fallback: '/static/mock/dummy_square_500--v1.jpg',
   srcset: {
-    500: 'http://localhost:8080/static/mock/dummy_square_500--v1.jpg',
-    800: 'http://localhost:8080/static/mock/dummy_square_800--v1.jpg',
-    1200: 'http://localhost:8080/static/mock/dummy_square_1200--v1.jpg'
+    500: '/static/mock/dummy_square_500--v1.jpg',
+    800: '/static/mock/dummy_square_800--v1.jpg',
+    1200: '/static/mock/dummy_square_1200--v1.jpg'
   },
   alt: ''
 },
 {
-  fallback: 'http://localhost:8080/static/mock/dummy_square_500--v2.jpg',
+  fallback: '/static/mock/dummy_square_500--v2.jpg',
   srcset: {
-    500: 'http://localhost:8080/static/mock/dummy_square_500--v2.jpg',
-    800: 'http://localhost:8080/static/mock/dummy_square_800--v2.jpg',
-    1200: 'http://localhost:8080/static/mock/dummy_square_1200--v2.jpg'
+    500: '/static/mock/dummy_square_500--v2.jpg',
+    800: '/static/mock/dummy_square_800--v2.jpg',
+    1200: '/static/mock/dummy_square_1200--v2.jpg'
   },
   alt: ''
 },

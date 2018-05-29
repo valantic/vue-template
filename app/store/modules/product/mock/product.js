@@ -2,43 +2,43 @@
 export default {
   images: [{
     id_product_image: 1,
-    external_url_large: 'http://localhost:8080/static/mock/dummy_square_1200--v1.jpg',
-    external_url_small: 'http://localhost:8080/static/mock/dummy_square_500--v1.jpg',
+    external_url_large: '/static/mock/dummy_square_1200--v1.jpg',
+    external_url_small: '/static/mock/dummy_square_500--v1.jpg',
     thumbs: [{
-      absolute_path: 'http://localhost:8080/static/mock/dummy_square_240--v1.jpg',
+      absolute_path: '/static/mock/dummy_square_240--v1.jpg',
       width: 240,
       height: 240,
     }, {
-      absolute_path: 'http://localhost:8080/static/mock/dummy_square_500--v1.jpg',
+      absolute_path: '/static/mock/dummy_square_500--v1.jpg',
       width: 500,
       height: 500,
     }, {
-      absolute_path: 'http://localhost:8080/static/mock/dummy_square_800--v1.jpg',
+      absolute_path: '/static/mock/dummy_square_800--v1.jpg',
       width: 800,
       height: 800,
     }, {
-      absolute_path: 'http://localhost:8080/static/mock/dummy_square_1200--v1.jpg',
+      absolute_path: '/static/mock/dummy_square_1200--v1.jpg',
       width: 1200,
       height: 1200,
     }]
   }, {
     id_product_image: 1,
     external_url_large: 'http://via.placeholder.com/600x350',
-    external_url_small: 'http://localhost:8080/static/mock/dummy_square_240--v2.jpg',
+    external_url_small: '/static/mock/dummy_square_240--v2.jpg',
     thumbs: [{
-      absolute_path: 'http://localhost:8080/static/mock/dummy_square_500--v2.jpg',
+      absolute_path: '/static/mock/dummy_square_500--v2.jpg',
       width: 240,
       height: 240,
     }, {
-      absolute_path: 'http://localhost:8080/static/mock/dummy_square_500--v2.jpg',
+      absolute_path: '/static/mock/dummy_square_500--v2.jpg',
       width: 500,
       height: 500,
     }, {
-      absolute_path: 'http://localhost:8080/static/mock/dummy_square_800--v2.jpg',
+      absolute_path: '/static/mock/dummy_square_800--v2.jpg',
       width: 800,
       height: 800,
     }, {
-      absolute_path: 'http://localhost:8080/static/mock/dummy_square_1200--v2.jpg',
+      absolute_path: '/static/mock/dummy_square_1200--v2.jpg',
       width: 1200,
       height: 1200,
     }]
