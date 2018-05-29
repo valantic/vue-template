@@ -7,9 +7,9 @@
 
       <div :class="b('wrapper swiper-wrapper')">
         <!-- Slides -->
-        <div v-for="img in images"
+        <div v-for="picture in pictures"
              :class="b('slide swiper-slide')"
-             :key="img.id">
+             :key="picture.id">
 
           <button :class="b('trigger')"
                   :title="$t('c-swiper.zoom')"
@@ -18,9 +18,9 @@
 
             <e-picture
               :sizes="sizes"
-              :srcset="img.srcset"
-              :fallback="img.fallback"
-              :alt="img.altText"/>
+              :srcset="picture.srcset"
+              :fallback="picture.fallback"
+              :alt="picture.alt"/>
 
           </button>
 
@@ -35,8 +35,14 @@
       <div :class="b('button-next swiper-button-next')"></div>
 
       <!-- modal -->
-      <c-modal :open="modalOpen" @close="modalClose">hello world...</c-modal>
-
+      <c-modal
+        :open="modalOpen"
+        size="600"
+        inner-spacing="0"
+        @close="modalClose"
+      >
+        <c-swiper-modal :images="pictures" :initial-slide="swiper.activeIndex" @change="onModalSlideChanged"/>
+      </c-modal>
     </div>
 
     <!-- counter -->
@@ -52,6 +58,7 @@
 
   import Swiper from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
+  import cSwiperModal from '@/components/c-swiper-modal';
 
   // require styles
   import 'swiper/dist/css/swiper.css';
@@ -62,7 +69,9 @@
    */
   export default {
     name: 'c-swiper-gallery',
-    // components: {},
+    components: {
+      cSwiperModal,
+    },
     // mixins: [],
 
     props: {
@@ -106,7 +115,9 @@
           },
         },
         // this.images.length > this.dynamicBullets
-        swiper: null,
+        swiper: {
+          activeIndex: 0,
+        },
         isHover: false,
         modalOpen: false,
         sizes: BREAKPOINTS, // todo add as prop
@@ -138,6 +149,21 @@
         };
       },
 
+      pictures() {
+        return this.images.map((image) => {
+          const srcset = {};
+
+          image.thumbs.map((thumb) => {
+            Object.assign(srcset, { [thumb.width]: thumb.absolute_path });
+          });
+
+          return {
+            fallback: image.external_url_small,
+            srcset,
+            alt: '',
+          };
+        });
+      },
     },
     // watch: {},
 
@@ -161,6 +187,9 @@
       modalClose() {
         this.modalOpen = false;
       },
+      onModalSlideChanged(index) {
+        this.$refs.container.swiper.slideTo(index);
+      }
     },
     // render() {},
   };
@@ -207,6 +236,7 @@
         margin: 0 3px;
         opacity: 1;
         transform: scale(1);
+        outline: none;
 
         &-active {
           background-color: $color-primary--1;
@@ -231,6 +261,7 @@
       visibility: hidden;
       transition: all 0.2s linear;
       transition-delay: 0.1s;
+      outline: none;
     }
 
     .swiper-button-prev {

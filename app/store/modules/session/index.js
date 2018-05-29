@@ -24,13 +24,22 @@ export default {
     user: state => state.user,
 
     /**
+     * Returns the name of the currently logged in user
+     *
+     * @param   {object}    state   Store state
+     *
+     * @returns {string|null}       Name of the current user
+     */
+    userName: state => (state.user && state.user.name) || null,
+
+    /**
      * Check if a user is logged in.
      *
      * @param   {Object}  state   Current state
      *
-     * @returns  {Boolean}  userLoggedIn   True if user is logged in, false otherwise
+     * @returns  {Boolean}  True if user is logged in, false otherwise
      */
-    userLoggedIn: state => state.user && !!state.user.name,
+    isLoggedInUser: state => state.user && !!state.user.name,
 
     /**
      * Gets the current theme id
