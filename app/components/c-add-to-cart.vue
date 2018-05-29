@@ -5,6 +5,7 @@
         v-model.number="quantity"
         :min="step"
         :step="step"
+        type="number"
         inputmode="numeric"
         name="quantity"
         pattern="\d*"
@@ -113,6 +114,14 @@
 
       input {
         text-align: right;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          margin: 0;
+        }
       }
     }
 
