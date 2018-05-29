@@ -56,6 +56,7 @@
       @include font($font-size--18, 22px, $font-weight--regular);
 
       color: $color-secondary--1;
+      margin-bottom: $spacing--0;
     }
 
     &__inner {
