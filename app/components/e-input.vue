@@ -123,9 +123,6 @@
           border: this.$props.border,
           focusShadow: this.$props.focusShadow
         };
-      },
-      hasDefaultState() {
-        return this.state === 'default';
       }
     },
     // watch: {},
@@ -316,7 +313,6 @@
     /**
     * states
     **/
-    /* stylelint-disable no-descending-specificity */
     &--state-error {
       @include half-border($color-status--danger);
 

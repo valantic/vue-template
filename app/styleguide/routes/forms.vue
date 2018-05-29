@@ -55,6 +55,13 @@
                     notification="You can add a specific comment here.<br>Please do so."
         />
       </e-label>
+      <e-label name="Country:" position="top">
+        <e-select v-model="name.country"
+                  :options-list="countries"
+                  name="country-select"
+                  select-text="Please choose country..."
+        />
+      </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <p>You are {{ gender }}.</p>
       <pre>{{ name }}</pre>
@@ -84,6 +91,7 @@
           firstName: '',
           lastName: '',
           street: '',
+          country: '',
           comment: ''
         },
         gender: 'female',
@@ -103,7 +111,19 @@
           checked: false,
           name: 'checkbox',
           value: 'Hello world...'
-        }
+        },
+        countries: [
+          {
+            value: 'at',
+            label: 'Austria',
+          }, {
+            value: 'li',
+            label: 'Liechtenstein',
+          }, {
+            value: 'ch',
+            label: 'Switzerland',
+          },
+        ]
       };
     }
   };
