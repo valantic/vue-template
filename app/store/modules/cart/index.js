@@ -1,18 +1,50 @@
-import cartData from './mock/cart';
+import miniCartData from './mock/miniCart';
 import api from './../../utils/api';
 
 export default {
   namespaced: true,
   state: {
     /**
-     * @type {Object}   Stores cart items
+     * @type {Object}   Stores cart object
      */
-    cart: cartData,
+    cart: {},
+
+    /**
+     * @type {Object}   Stores mini cart object
+     */
+    miniCart: miniCartData,
   },
-  getters: { },
+  getters: {
+    /**
+     * Gets the items in the cart
+     *
+     * @param   {Object}  state   Current state
+     *
+     * @returns  {Array}  items   Items in cart
+     */
+    items: state => state.cart.items,
+
+    /**
+     * Gets number of items in cart.
+     *
+     * @param   {Object}  state   Current state
+     *
+     * @returns  {Number}  quantity   Number of items in cart
+     */
+    quantity: state => (state.cart.items ? state.cart.items.length : state.miniCart.cartQuantity),
+
+    /**
+     * Gets subtotal price for all cart items
+     *
+     * @param   {Object}  state   Current state
+     *
+     * @returns  {Number}  subtotal   Subtotal of items in cart
+     */
+    subtotal: state => (state.cart.items ? state.cart.totals.subtotal : state.miniCart.netTotal)
+  },
   mutations: {
     /**
-     * Initial cart data provided by spryker
+     * Cart data provided by backend
      *
      * @param {Object} state   Current state
      * @param {Object} data   Cart data
@@ -22,13 +54,38 @@ export default {
     },
 
     /**
-     * Update totals for cart
+     * Mini cart data provided by backend
+     *
+     * @param {Object} state   Current state
+     * @param {Object} data   Cart data
+     */
+    dataMiniCart(state, data) {
+      state.miniCart = data;
+    },
+
+    /**
+     * Update cart totals object
      *
      * @param {Object} state   Current state
      * @param {Object} totals   Totals data
      */
     updateTotals(state, totals) {
-      state.cart.totals = totals;
+      if (state.cart.items) {
+        state.cart.totals = totals;
+      } else {
+        state.miniCart.netTotal = totals.subtotal;
+      }
+    },
+
+    /**
+     * Increments quantity count
+     *
+     * @param {Object} state   Current state
+     */
+    incrementQuantity(state) {
+      if (!state.cart.items) {
+        state.miniCart.cartQuantity += 1;
+      }
     },
   },
   actions: {
@@ -45,6 +102,7 @@ export default {
         .then((response) => {
           if (response && response.data && response.data.totals && Object.keys(response.data.totals).length) {
             commit('updateTotals', response.data.totals);
+            commit('incrementQuantity');
 
             return response;
           }

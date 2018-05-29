@@ -19,9 +19,24 @@
     "xingUrl": "https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e",
     "xingTitle": "Xing"
   },
+  "c-productlist-wrapper": {
+    "prductlistArticles": "0 Articles | 1 Article | {count} Articles"
+  },
   "c-product-detail": {
     "productDescriptionTitle": "Product description",
-    "technicalDataTitle": "Technical data"
+    "productDocumentsTitle": "Documents",
+    "productPdfsTitle": "PDFs",
+    "technicalDataTitle": "Technical data",
+    "productVideosTitle": "Videos"
+  },
+  "c-header-links": {
+    "labelWishlist": "Wishlist",
+    "labelLogin": "Login",
+    "profile": "Profile"
+  },
+  "c-search": {
+    "placeholder": "Search for products and categories",
+    "title": "Search"
   },
   "e-info-label": {
     "priceType1": "Promotion",
@@ -36,5 +51,21 @@
   },
   "c-add-to-cart": {
     "addToCart": "add to cart"
+  },
+  "c-linklist": {
+    "downloadTitle": "Download file"
+  },
+  "c-swiper": {
+    "images": "0 pictures | 1 picture | {count} pictures",
+    "zoom": "zoom image"
+  },
+  "urls": {
+    "cart": "/cart",
+    "linkAccount": "/account",
+    "linkWishlist": "/wishlist",
+    "linkLogin": "/login"
+  },
+  "e-select": {
+    "chooseOption": "Please choose"
   }
 }

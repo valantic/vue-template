@@ -1,4 +1,5 @@
 // keep in sync with app/setup/js/_color.js
+// The main colors are in the theme files (setup/scss/themes)
 
 $color-grayscale--0: #000000;
 $color-grayscale--200: #646464;
@@ -8,22 +9,39 @@ $color-grayscale--600: #f3f3f3;
 $color-grayscale--700: #fcfcfc;
 $color-grayscale--1000: #ffffff;
 
-$color-primary--1: #ffed00;
-$color-primary--2: $color-grayscale--0;
-$color-primary--3: $color-grayscale--1000;
+$color-gradient--1-0: $color-grayscale--0;
+$color-gradient--1-1: $color-grayscale--1000;
 
-$color-secondary--1: #2c68a0;
-$color-secondary--2: #75b4e0;
-$color-secondary--3: #2fa61c;
-$color-secondary--4: #b50f0f;
-$color-secondary--5: #e2951f;
+// CSS Variables
+$color-primary--1: var(--theme-color-primary-1);
+$color-primary--1--rgb: var(--theme-color-primary-1--rgb);
+$color-primary--2: var(--theme-color-primary-2);
+$color-primary--2--rgb: var(--theme-color-primary-2--rgb);
+$color-primary--3: var(--theme-color-primary-3);
+$color-primary--3--rgb: var(--theme-color-primary-3--rgb);
 
-$color-gradient--1-0: $color-primary--2;
-$color-gradient--1-1: $color-primary--3;
-$color-gradient--2-0: $color-secondary--1;
-$color-gradient--2-1: $color-secondary--2;
+$color-secondary--1: var(--theme-color-secondary-1);
+$color-secondary--1--rgb: var(--theme-color-secondary-1--rgb);
+$color-secondary--2: var(--theme-color-secondary-2);
+$color-secondary--2--rgb: var(--theme-color-secondary-2--rgb);
+$color-secondary--3: var(--theme-color-secondary-3);
+$color-secondary--3--rgb: var(--theme-color-secondary-3--rgb);
+$color-secondary--4: var(--theme-color-secondary-4);
+$color-secondary--4--rgb: var(--theme-color-secondary-4--rgb);
+$color-secondary--5: var(--theme-color-secondary-5);
+$color-secondary--5--rgb: var(--theme-color-secondary-5--rgb);
 
-$color-status--success: $color-secondary--3;
-$color-status--warning: $color-secondary--5;
-$color-status--danger: $color-secondary--4;
-$color-status--info: $color-secondary--2;
+$color-gradient--2-0: var(--theme-color-gradient-2-0);
+$color-gradient--2-0--rgb: var(--theme-color-gradient-2-0--rgb);
+$color-gradient--2-1: var(--theme-color-gradient-2-1);
+$color-gradient--2-1--rgb: var(--theme-color-gradient-2-1--rgb);
+
+$color-status--success: var(--theme-color-status-success);
+$color-status--success--rgb: var(--theme-color-status-success--rgb);
+$color-status--warning: var(--theme-color-status-warning);
+$color-status--warning--rgb: var(--theme-color-status-warning--rgb);
+$color-status--danger: var(--theme-color-status-danger);
+$color-status--danger--rgb: var(--theme-color-status-danger--rgb);
+$color-status--info: var(--theme-color-status-info);
+$color-status--info--rgb: var(--theme-color-status-info--rgb);
+

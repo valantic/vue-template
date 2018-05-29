@@ -1,6 +1,6 @@
 <template>
   <div :class="b({ design })">
-    <div
+    <button
       :class="b('inner', { design, hasInfo })"
       @click="onClick"
       @mouseover="onMouseOver"
@@ -8,7 +8,7 @@
     >
       <span :class="b('label')">{{ label }}</span>
       <span ref="info" :class="b('info')"><span :class="b('separator')"></span>{{ info }}</span>
-    </div>
+    </button>
   </div>
 </template>
 
@@ -132,6 +132,13 @@
       overflow: hidden;
       white-space: nowrap;
       cursor: default;
+      border: 0;
+
+      &:active,
+      &:focus {
+        border: 0;
+        outline: 0;
+      }
 
       &--design-new {
         background-color: $color-primary--1;

@@ -1,6 +1,6 @@
-import productData from './mock/product';
 import api from './../../utils/api';
 import collapsibleData from './mock/collapsible';
+import productData from './mock/product';
 
 export default {
   namespaced: true,
@@ -27,13 +27,22 @@ export default {
   },
   getters: {
     /**
-     * Gets a product
+     * Gets collapsible items to create an accordion
      *
      * @param   {Object}  state   Current state
      *
-     * @returns  {Object}  product   Product data
+     * @returns  {Array}  items   Collapsible items (accordion)
      */
-    product: state => state.product,
+    collapsible: state => state.collapsible,
+
+    /**
+     * Gets product gallery items
+     *
+     * @param   {Object}  state   Current state
+     *
+     * @returns  {Array}  images   Image set of the current product
+     */
+    images: state => state.images,
 
     /**
      * The ERP - or "Live" data for the product
@@ -45,13 +54,13 @@ export default {
     erp: state => state.erp,
 
     /**
-     * Gets collapsible items to create an accordion
+     * Gets a product
      *
      * @param   {Object}  state   Current state
      *
-     * @returns  {Array}  items   Collapsible items (accordion)
+     * @returns  {Object}  product   Product data
      */
-    collapsible: state => state.collapsible
+    product: state => state.product,
   },
   mutations: {
     /**

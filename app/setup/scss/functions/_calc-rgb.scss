@@ -1,0 +1,14 @@
+////
+// Calculates the rgb value of a HEX value
+//
+// @param   {String}    $hex       hex value
+//
+// @returns {String}    RGB value like "100,100,100"
+////
+@function calc-rgb($hex) {
+  $red: red($hex);
+  $green: green($hex);
+  $blue: blue($hex);
+
+  @return $red, $green, $blue;
+}
