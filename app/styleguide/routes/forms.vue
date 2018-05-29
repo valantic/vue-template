@@ -66,6 +66,16 @@
       <p>You are {{ gender }}.</p>
       <pre>{{ name }}</pre>
 
+      <h2>e-fieldset</h2>
+      <e-fieldset legend="Sample legend">
+        <e-label name="Label" position="top">
+          <e-input v-model="demo" name="demo" placeholder="enter text..."/>
+        </e-label>
+        <e-label name="Label" position="top">
+          <e-input v-model="demo" name="demo" placeholder="enter text..."/>
+        </e-label>
+      </e-fieldset>
+
       <h2>e-checkbox</h2>
       <e-checkbox
         v-model="checkbox.checked"
@@ -87,6 +97,7 @@
     },
     data() {
       return {
+        demo: '',
         name: {
           firstName: '',
           lastName: '',
@@ -133,7 +144,7 @@
   .forms {
     padding: $spacing--50;
 
-    .e-label {
+    .e-label:not(:last-child) {
       margin-bottom: $spacing--10;
     }
   }
