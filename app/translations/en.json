@@ -25,14 +25,13 @@
   "c-product-detail": {
     "productDescriptionTitle": "Product description",
     "productDocumentsTitle": "Documents",
+    "productPdfsTitle": "PDFs",
+    "technicalDataTitle": "Technical data",
     "productVideosTitle": "Videos"
   },
   "c-header-links": {
     "labelWishlist": "Wishlist",
     "labelLogin": "Login",
-    "productPdfsTitle": "PDFs",
-    "productVideosTitle": "Videos",
-    "technicalDataTitle": "Technical data",
     "profile": "Profile"
   },
   "c-search": {
