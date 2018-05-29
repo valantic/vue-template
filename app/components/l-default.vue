@@ -80,12 +80,12 @@
 <style lang="scss">
 
   .l-default {
-    background: $color-grayscale--600;
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    height: 100vh;
 
     &__content {
+      background: $color-grayscale--600;
       flex: 1 0 auto;
       min-height: 1px; // Fixes a content shifting issue with IE11 if a child element has hover
     }
