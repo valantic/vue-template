@@ -69,7 +69,7 @@
     },
     data() {
       return {
-        items: [
+        items: [ // TODO: refactor icon set
           {
             name: ITEM_NAME_ACCOUNT,
             loggedIn: true,
@@ -92,7 +92,7 @@
             icon: 'i-account',
             link: '/login',
             label: 'c-header-links.labelLogin',
-            isActive: !this.isLoggedInUser
+            isActive: false
           }
         ],
       };
