@@ -56,28 +56,23 @@
       @include font($font-size--18, 22px, $font-weight--regular);
 
       color: $color-secondary--1;
-      margin-bottom: $spacing--25;
-
-      @include media(xs) {
-        margin-bottom: $spacing--30;
-      }
     }
 
     &__inner {
       display: inline-block;
       border-bottom: 1px solid $color-primary--1;
-      padding: $spacing--0 $spacing--10 $spacing--5;
+      padding: $spacing--25 $spacing--10 $spacing--5;
 
       @include media(xs) {
-        padding: $spacing--0 $spacing--20 $spacing--5;
+        padding: $spacing--30 $spacing--20 $spacing--5;
       }
     }
 
     &__fields {
-      padding: $spacing--0 $spacing--10 $spacing--20;
+      padding: $spacing--25 $spacing--10 $spacing--20;
 
       @include media(xs) {
-        padding: $spacing--0 $spacing--30 $spacing--25;
+        padding: $spacing--30;
       }
     }
   }
