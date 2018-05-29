@@ -95,7 +95,7 @@
 </script>
 
 <style lang="scss">
-  $s-navigation--border: $spacing--10 solid var(--theme-color-status-danger);
+  $s-navigation--border: $spacing--10 solid $color-status--danger;
   $s-navigation--trigger-size: 40px;
 
   .s-navigation {
@@ -105,7 +105,7 @@
       position: fixed;
       opacity: 0.2;
       min-width: $spacing--40;
-      background: var(--theme-color-primary-3);
+      background: $color-primary--3;
       z-index: 10000;
       height: 100%;
 
@@ -114,7 +114,7 @@
         position: absolute;
         width: $s-navigation--trigger-size;
         height: $s-navigation--trigger-size;
-        background-color: var(--theme-color-status-danger);
+        background-color: $color-status--danger;
         background-image: url('../assets/menu-button.svg');
         background-repeat: no-repeat;
         background-size: $s-navigation--trigger-size - 15px;
@@ -188,6 +188,8 @@
       list-style: none;
       margin: 0;
       min-width: 200px;
+      max-height: 100vh;
+      overflow: auto;
     }
 
     &__navigation-item {

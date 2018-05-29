@@ -1,5 +1,6 @@
 import index from '../styleguide/routes/index';
 import lDefault from '../components/l-default';
+import twoColumns from '../styleguide/routes/two-columns';
 import productDetail from '../styleguide/routes/product-detail';
 import lazyload from '../styleguide/routes/lazyload';
 import headings from '../styleguide/routes/headings';
@@ -8,6 +9,7 @@ import buttons from '../styleguide/routes/buttons';
 import forms from '../styleguide/routes/forms';
 import collapse from '../styleguide/routes/collapse';
 import modals from '../styleguide/routes/modals';
+import swiper from '../styleguide/routes/swiper';
 
 const root = '/styleguide';
 
@@ -80,6 +82,14 @@ export default [
     }
   },
   {
+    path: `${root}/two-columns`,
+    name: 'styleguideTwoColumnsLayout',
+    component: twoColumns,
+    meta: {
+      title: 'Two Columns Layout',
+    }
+  },
+  {
     path: `${root}/product-detail`,
     name: 'styleguideProductDetail',
     component: productDetail,
@@ -93,6 +103,14 @@ export default [
     component: modals,
     meta: {
       title: 'Modals',
+    }
+  },
+  {
+    path: `${root}/swiper`,
+    name: 'styleguideSwiper',
+    component: swiper,
+    meta: {
+      title: 'Swiper',
     }
   },
   {

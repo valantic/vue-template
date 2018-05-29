@@ -8,13 +8,13 @@
             }
         </style>
     </defs>
-    <g id="icons/i-label-new" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-27">
-            <rect id="Rectangle-12" fill="#FFED00" x="0" y="0" width="41" height="16"></rect>
-            <text id="NEU" font-family="SourceSansPro-Semibold, Source Sans Pro" font-size="14" font-weight="500" fill="#3A77AD">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <rect fill="#FFED00" x="0" y="0" width="41" height="16"></rect>
+            <text font-family="SourceSansPro-Semibold, Source Sans Pro" font-size="14" font-weight="500" fill="#3A77AD">
                 <tspan x="7" y="14">NEU</tspan>
             </text>
         </g>
-        <polygon id="Star" fill="#FFED00" transform="translate(46.000000, 8.000000) rotate(90.000000) translate(-46.000000, -8.000000) " points="46 13 38 13 42 8 46 3 50 8 54 13"></polygon>
+        <polygon fill="#FFED00" transform="translate(46.000000, 8.000000) rotate(90.000000) translate(-46.000000, -8.000000) " points="46 13 38 13 42 8 46 3 50 8 54 13"></polygon>
     </g>
 </svg>

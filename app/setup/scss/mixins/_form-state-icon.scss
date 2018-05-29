@@ -1,7 +1,7 @@
 ////
 // Adds the state icon as a background-image
 //
-// @param  {String}   Color of the border
+// @param  {String}   State the icon
 //
 ////
 
@@ -12,6 +12,8 @@
     background-image: url('../assets/icons/i-info.svg');
   } @else if $state == 'success' {
     background-image: url('../assets/icons/i-check.svg');
+  } @else if $state == 'search' {
+    background-image: url('../assets/icons/i-search.svg');
   }
 
   background-repeat: no-repeat;
