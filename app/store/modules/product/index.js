@@ -1,6 +1,5 @@
 import api from './../../utils/api';
 import collapsibleData from './mock/collapsible';
-import imagesData from './mock/images';
 import productData from './mock/product';
 
 export default {
@@ -25,11 +24,6 @@ export default {
       priceType: 0,
       priceTypeEndDate: '',
     },
-
-    /**
-     * @property {Array}   Stores gallery items
-     */
-    images: imagesData,
   },
   getters: {
     /**

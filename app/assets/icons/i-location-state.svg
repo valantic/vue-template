@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
-    <g id="icons/i-location-status--green" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M11,21 C9.11119417,21 4,11.7765998 4,7.94241172 C4,4.1082236 7.13400675,1 11,1 C14.8659932,1 18,4.1082236 18,7.94241172 C18,11.7765998 12.8888058,21 11,21 Z M11,12 C13.209139,12 15,10.209139 15,8 C15,5.790861 13.209139,4 11,4 C8.790861,4 7,5.790861 7,8 C7,10.209139 8.790861,12 11,12 Z" id="Combined-Shape" fill="#2FA61C"></path>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M11,21 C9.11119417,21 4,11.7765998 4,7.94241172 C4,4.1082236 7.13400675,1 11,1 C14.8659932,1 18,4.1082236 18,7.94241172 C18,11.7765998 12.8888058,21 11,21 Z M11,12 C13.209139,12 15,10.209139 15,8 C15,5.790861 13.209139,4 11,4 C8.790861,4 7,5.790861 7,8 C7,10.209139 8.790861,12 11,12 Z" fill="#2FA61C"></path>
     </g>
 </svg>
