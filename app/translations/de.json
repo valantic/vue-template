@@ -64,7 +64,6 @@
     "linkAccount": "/account",
     "linkWishlist": "/wishlist",
     "linkLogin": "/login"
-    "cart": "/cart"
   },
   "e-select": {
     "chooseOption": "Bitte wählen"

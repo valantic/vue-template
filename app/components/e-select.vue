@@ -7,7 +7,7 @@
             @change="onChange"
     >
       <option disabled value="">{{ selectText }}</option>
-      <option v-for="item in optionsList" :key="`${name} - ${item.value}`" :value="item.value">{{ item.label }}</option>
+      <option v-for="item in optionsList" :key="`${name}-${item.value}`" :value="item.value">{{ item.label }}</option>
     </select>
     <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
   </div>
@@ -56,9 +56,7 @@
        * The text to display if no option is selected by default.
        */
       selectText: {
-        default: function() {
-          return this.$t('e-select.chooseOption');
-        },
+        default() { return this.$t('e-select.chooseOption'); },
         type: String,
       }
     },

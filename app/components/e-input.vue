@@ -313,7 +313,6 @@
     /**
     * states
     **/
-    /* stylelint-disable no-descending-specificity */
     &--state-error {
       @include half-border($color-status--danger);
 
