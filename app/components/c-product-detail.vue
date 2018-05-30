@@ -34,7 +34,7 @@
             <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
           </div>
           <div :class="b('add-to-cart-wrapper')">
-            <c-add-to-cart :sku="product.sku" :step="3" label/>
+            <c-add-to-cart :sku="product.sku" label/>
           </div>
         </div>
       </aside>
