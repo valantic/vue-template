@@ -149,9 +149,9 @@
          * input event fires on input
          *
          * @event input
-         * @type {String}
+         * @type {InputEvent}
          */
-        this.$emit('input', event.target.value);
+        this.$emit('input', event);
       },
 
       /**

@@ -1,6 +1,6 @@
 <template>
   <div :class="b()">
-    <div :class="b('quantity')">
+    <div :class="b('quantity', { hasSteps })">
       <e-input
         v-model.number="quantity"
         :min="step"
@@ -9,6 +9,7 @@
         inputmode="numeric"
         name="quantity"
         pattern="\d*"
+        @input="onQuantityInput"
       />
     </div>
     <div :class="b('button')">
@@ -69,11 +70,17 @@
       };
     },
 
-    // computed: {},
+    computed: {
+      hasSteps() {
+        return this.step > 1 ? 'steps' : 'no-steps';
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      window.addEventListener('keyup', this.onKeyupHandler);
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -97,6 +104,17 @@
         this.addToCart(this.sku, this.quantity)
           .finally(() => { this.progress = false; });
       },
+      onKeyupHandler(event) {
+        if (event.code === 'Enter') {
+          this.onClick();
+        }
+      },
+      onQuantityInput(event) {
+        if (this.step > 1) {
+          // alert(event);
+          event.preventDefault();
+        }
+      },
     },
     // render() {},
   };
@@ -110,11 +128,13 @@
     &__quantity {
       flex: 0 1 auto;
       width: 100%;
-      margin-bottom: $spacing--15;
+      margin-bottom: $spacing--10;
 
       input {
         text-align: right;
+      }
 
+      &--has-steps-no-steps input {
         &::-webkit-inner-spin-button,
         &::-webkit-outer-spin-button {
           -webkit-appearance: none;

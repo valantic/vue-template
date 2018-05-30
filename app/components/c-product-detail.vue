@@ -30,8 +30,12 @@
 
       <aside :class="b('sidebar', {area: 'top' })">
         <div :class="b('add-to-cart')">
-          <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
-          <c-add-to-cart :sku="product.sku" label/>
+          <div :class="b('prices-wrapper')">
+            <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          </div>
+          <div :class="b('add-to-cart-wrapper')">
+            <c-add-to-cart :sku="product.sku" label/>
+          </div>
         </div>
       </aside>
 
@@ -239,15 +243,22 @@
     }
 
     &__sidebar {
-      padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: $spacing--0 $spacing--10 $spacing--20 $spacing--10;
 
       @include media(md) {
-        padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
+        padding: $spacing--0 $spacing--30 $spacing--20 $spacing--30;
       }
 
       @include media(sm) {
         flex-basis: percentage(3 / 12);
       }
+    }
+
+    &__prices-wrapper {
+      margin-bottom: $spacing--40;
     }
 
     &__sidebar--area-bottom {
