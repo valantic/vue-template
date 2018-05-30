@@ -13,6 +13,7 @@ import eRadio from '@/components/e-radio';
 import cModal from '@/components/c-modal';
 import cModalHeader01 from '@/components/c-modal-header-01';
 import eSelect from '@/components/e-select';
+import eFieldset from '@/components/e-fieldset';
 
 export default {
   install(Vue) {
@@ -55,6 +56,7 @@ export default {
       Vue.component(cModal.name, cModal);
       Vue.component(cModalHeader01.name, cModalHeader01);
       Vue.component(eSelect.name, eSelect);
+      Vue.component(eFieldset.name, eFieldset);
     }
   },
 };
