@@ -34,7 +34,7 @@
             <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
           </div>
           <div :class="b('add-to-cart-wrapper')">
-            <c-add-to-cart :sku="product.sku" label/>
+            <c-add-to-cart :sku="product.sku" :step="3" label/>
           </div>
         </div>
       </aside>
@@ -337,6 +337,7 @@
         justify-content: flex-end;
         border: none;
       }
+
       @include media(md) {
         flex-direction: column;
       }

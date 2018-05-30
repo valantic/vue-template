@@ -65,6 +65,7 @@
     data() {
       return {
         quantity: this.$props.step,
+        quantityPrev: this.$props.step,
         hasLabel: !!this.$props.label,
         progress: false,
       };
@@ -78,9 +79,11 @@
     // watch: {},
 
     // beforeCreate() {},
+
     created() {
       window.addEventListener('keyup', this.onKeyupHandler);
     },
+
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -88,7 +91,10 @@
     // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
-    // destroyed() {},
+
+    destroyed() {
+      window.removeEventListener('keyup', this.onKeyupHandler);
+    },
 
     methods: {
       ...mapActions('cart', [
@@ -97,11 +103,11 @@
       onClick() {
         const quantity = this.quantity.toString().match(/[0-9]/g);
 
-        this.quantity = quantity && quantity.length ? parseInt(quantity[0], 10) : 1; // IE 11 / Safari
+        let quantityTemp = quantity && quantity.length ? parseInt(quantity[0], 10) : this.step; // IE 11 / Safari
 
         this.progress = true;
 
-        this.addToCart(this.sku, this.quantity)
+        this.addToCart(this.sku, quantityTemp)
           .finally(() => { this.progress = false; });
       },
       onKeyupHandler(event) {
@@ -115,10 +121,11 @@
           }
         }
       },
-      onQuantityInput(event) {
-        if (this.step > 1) {
-          // alert(event);
-          // event.preventDefault();
+      onQuantityInput(value) {
+        if (value % this.step !== 0) {
+          this.quantity = this.quantityPrev;
+        } else {
+          this.quantityPrev = value;
         }
       },
     },

@@ -108,6 +108,7 @@
       }
     },
 
+    // data() {},
     computed: {
 
       /**
@@ -184,7 +185,7 @@
          */
         this.$emit('blur');
         this.$parent.$emit('blur');
-      }
+      },
     }
     // render() {},
   };
