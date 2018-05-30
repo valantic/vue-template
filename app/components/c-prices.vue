@@ -76,8 +76,14 @@
 
 <style lang="scss">
   .c-prices {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
     &__price-definition {
+      flex-grow: 1;
       display: flex;
+      align-items: center;
       margin-bottom: $spacing--0;
     }
 

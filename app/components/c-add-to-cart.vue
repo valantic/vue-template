@@ -105,14 +105,20 @@
           .finally(() => { this.progress = false; });
       },
       onKeyupHandler(event) {
-        if (event.code === 'Enter') {
-          this.onClick();
+        if (typeof event.code !== 'undefined') {
+          if (event.code === 'Enter') {
+            this.onClick();
+          }
+        } else if (event.which !== 'undefined') { // IE 11 doesn´t have the event.code attribute.
+          if (event.which === 13) {
+            this.onClick();
+          }
         }
       },
       onQuantityInput(event) {
         if (this.step > 1) {
           // alert(event);
-          event.preventDefault();
+          // event.preventDefault();
         }
       },
     },

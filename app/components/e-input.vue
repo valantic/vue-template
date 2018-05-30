@@ -151,7 +151,7 @@
          * @event input
          * @type {InputEvent}
          */
-        this.$emit('input', event);
+        this.$emit('input', event.target.value);
       },
 
       /**
@@ -207,7 +207,8 @@
 
       border: 1px solid transparent;
       border-radius: $border-radius--default;
-      color: $color-grayscale--400;
+      // color: $color-grayscale--400;
+      color: $color-secondary--1;
       font-family: $font-family--primary;
       height: $e-input-height;
       position: relative;
@@ -272,7 +273,6 @@
     // focus
     &__field:focus,
     &--focus &__field {
-      color: $color-secondary--1;
       outline: none;
     }
 
