@@ -10,5 +10,5 @@
 
 ### Default with step
 ```vue
-<c-add-to-cart sku="12345" step="3"/>
+<c-add-to-cart sku="12345" :step="3"/>
 ```
