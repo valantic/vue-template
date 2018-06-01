@@ -18,6 +18,7 @@
         </div>
 
         <div :class="b('specs')">
+          <e-heading tag-name="h1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod dwddwedwdwd</e-heading>
           <div :class="b('technical-data')">
             <c-attribute-grid :attributes="product.main_attributes"/>
           </div>
@@ -271,15 +272,19 @@
         flex-basis: percentage(3 / 12);
         padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
       }
+    }
 
+    &__sidebar--area-top {
       &::before {
-        position: absolute;
-        content: '';
-        height: calc(100% - 50px);
-        width: 1px;
-        top: $spacing--30;
-        left: $spacing--0;
-        border-left: 1px solid $color-grayscale--600;
+        @include media(md) {
+          position: absolute;
+          content: '';
+          height: calc(100% - 45px);
+          width: 1px;
+          top: $spacing--25;
+          left: $spacing--0;
+          border-left: 1px solid $color-grayscale--600;
+        }
       }
     }
 
@@ -304,7 +309,7 @@
       margin-bottom: $spacing--15;
 
       @include media(sm) {
-        margin-bottom: $spacing--10;
+        margin-bottom: $spacing--25;
       }
     }
 
@@ -321,9 +326,14 @@
 
     &__specs {
       border-bottom: 2px solid $color-grayscale--600;
+      padding: $spacing--25 $spacing--10 $spacing--0;
 
       @include media(sm) {
         border: none;
+      }
+
+      .e-heading {
+        margin-bottom: $spacing--20;
       }
     }
 

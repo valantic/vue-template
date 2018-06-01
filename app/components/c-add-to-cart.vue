@@ -112,7 +112,7 @@
       },
       onKeyupHandler(event) {
         if (typeof event.code !== 'undefined') {
-          if (event.code === 'Enter') {
+          if (event.code === 'Enter' || event.code === 'NumpadEnter') {
             this.onClick();
           }
         } else if (event.which !== 'undefined') { // IE 11 doesn´t have the event.code attribute.

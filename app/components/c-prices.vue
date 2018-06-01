@@ -50,10 +50,10 @@
 
     computed: {
       displayPriceGross() {
-        return this.$n(this.$props.priceGross / 100);
+        return this.$n(this.$props.priceGross / 100, 'currency', 'de-CH');
       },
       displayNetPrice() {
-        return this.$n(this.$props.price / 100);
+        return this.$n(this.$props.price / 100, 'currency', 'de-CH');
       }
     },
     // watch: {},

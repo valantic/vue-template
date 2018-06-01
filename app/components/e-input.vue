@@ -208,7 +208,6 @@
 
       border: 1px solid transparent;
       border-radius: $border-radius--default;
-      // color: $color-grayscale--400;
       color: $color-secondary--1;
       font-family: $font-family--primary;
       height: $e-input-height;
