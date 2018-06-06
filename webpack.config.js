@@ -14,15 +14,16 @@ const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
 const postCssCriticalSplit = require('postcss-critical-split');
 const cssNano = require('cssnano');
 const openInEditor = require('launch-editor-middleware');
+const WebpackCleanPlugin = require('webpack-clean');
 
 module.exports = function(env = {}, options = {}) {
   // Flags
   const isProduction = (env.production || process.env.NODE_ENV === 'production') || false;
   const hasStyleguide = env.styleguide || false;
   const hasMessage = env.message || false;
-  const hotReload = !isProduction;
-  const isProfileBuild = (options.profile && options.json) || false;
   const hasWatcher = env.watch || false;
+  const hotReload = !hasWatcher || !isProduction;
+  const isProfileBuild = (options.profile && options.json) || false;
 
   const themes = {
     'theme-01': path.resolve(__dirname, 'app/setup/scss/themes/theme-01.scss'),
@@ -31,6 +32,9 @@ module.exports = function(env = {}, options = {}) {
     'theme-04': path.resolve(__dirname, 'app/setup/scss/themes/theme-04.scss'),
     'theme-05': path.resolve(__dirname, 'app/setup/scss/themes/theme-05.scss'),
   };
+  const clean = [
+    ...Object.keys(themes).map(theme => `js/${theme}.js`)
+  ];
 
   // Configuration
   const buildPath = path.resolve(__dirname, 'dist');
@@ -45,7 +49,7 @@ module.exports = function(env = {}, options = {}) {
   };
 
   const host = '0.0.0.0';
-  const prefix = filePrefix ? `${filePrefix}_` : '';
+  const prefix = filePrefix ? `${filePrefix}.` : '';
   const include = [
     path.resolve(__dirname, 'app'),
     path.resolve(__dirname, 'test'),
@@ -112,6 +116,20 @@ module.exports = function(env = {}, options = {}) {
     return !isProfileBuild ? stats : undefined;
   }
 
+  function getPostCSSPipeline(output) {
+    const pipeline = [
+      postCssCriticalSplit({
+        output: output,
+      })
+    ];
+
+    if (!hasWatcher) {
+      pipeline.push(cssNano());
+    }
+
+    return pipeline;
+  }
+
   function plugins() {
     const pluginCollection = [
       new webpack.DefinePlugin(globalVariables),
@@ -129,11 +147,45 @@ module.exports = function(env = {}, options = {}) {
     ];
 
     if (isProduction) {
-      pluginCollection.push(new UglifyJsPlugin({
-        test: /\.js($|\?)/i, // MUST be defined because of file has as query
-        parallel: true,
-        sourceMap: hasStyleguide,
-      }));
+      if (!hasWatcher) {
+        // Create webpack monitor snapshot
+        pluginCollection.push(new WebpackMonitor({
+          capture: !hasStyleguide,
+          target: '../stats/monitor.json',
+          launch: env && env.monitor
+        }));
+
+        pluginCollection.push(new UglifyJsPlugin({
+          test: /\.js($|\?)/i, // MUST be defined because file has as query
+          parallel: true,
+          sourceMap: hasStyleguide,
+        }));
+
+        // Note: version auto inject is currently not working with query hash (https://github.com/radswiat/webpack-auto-inject-version/issues/25)
+        pluginCollection.push(new WebpackAutoInject({
+          SILENT: true,
+          components: {
+            AutoIncreaseVersion: false,
+            InjectAsComment: true,
+            InjectByTag: true
+          },
+          componentsOptions: {
+            InjectAsComment: {
+              tag: 'Build version: {version} - {date}',
+              dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
+            }
+          }
+        }));
+
+        if (hasMessage) {
+          pluginCollection.push(
+            // Cleans dist directory and removes specific unnecessary files
+            new WebpackCleanPlugin(
+              clean,
+              { basePath: path.join(__dirname, 'dist/static/') })
+          );
+        }
+      }
 
       // split vendor js into its own file
       pluginCollection.push(new webpack.optimize.CommonsChunkPlugin({
@@ -157,13 +209,6 @@ module.exports = function(env = {}, options = {}) {
         minChunks: Infinity
       }));
 
-      // Create webpack monitor snapshot
-      pluginCollection.push(new WebpackMonitor({
-        capture: !hasStyleguide,
-        target: '../stats/monitor.json',
-        launch: env && env.monitor
-      }));
-
       // keep module.id stable when vender modules does not change
       pluginCollection.push(new webpack.HashedModuleIdsPlugin());
 
@@ -172,23 +217,13 @@ module.exports = function(env = {}, options = {}) {
         // provide an optional function to filter out unwanted CSS
         predicate: name => name.indexOf('app.css') > -1,
         suffix: 'critical',
-        pipeline: [
-          postCssCriticalSplit({
-            output: 'critical',
-          }),
-          cssNano()
-        ]
+        pipeline: getPostCSSPipeline('critical')
       }));
 
       // Create minimized CSS (Full css => incl. critical css)
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
         suffix: '', // Defining an empty string makes it possible not create an additional file
-        pipeline: [
-          postCssCriticalSplit({
-            'output': 'input',
-          }),
-          cssNano()
-        ]
+        pipeline: getPostCSSPipeline('input')
       }));
 
       // copy custom static assets
@@ -205,22 +240,6 @@ module.exports = function(env = {}, options = {}) {
 
       // enable scope hoisting
       pluginCollection.push(new webpack.optimize.ModuleConcatenationPlugin());
-
-      // Note: version auto inject is currently not working with query hash (https://github.com/radswiat/webpack-auto-inject-version/issues/25)
-      pluginCollection.push(new WebpackAutoInject({
-        SILENT: true,
-        components: {
-          AutoIncreaseVersion: false,
-          InjectAsComment: true,
-          InjectByTag: true
-        },
-        componentsOptions: {
-          InjectAsComment: {
-            tag: 'Build version: {version} - {date}',
-            dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
-          }
-        }
-      }));
     } else {
       // pluginCollection.push(new StyleLintPlugin({ // TODO: add scss linting an re-enable
       //   context: 'app',
@@ -269,8 +288,8 @@ module.exports = function(env = {}, options = {}) {
           enforce: 'pre',
           include,
           options: {
-            failOnError: isProduction, // TODO: prevent output on error
-            emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
+            failOnError: isProduction && !hasWatcher,
+            emitWarning: !isProduction && !hasWatcher, // Keeps overlay from showing during development, because it's annoying
           },
         },
         {
@@ -290,12 +309,12 @@ module.exports = function(env = {}, options = {}) {
           }
         },
         {
-          test: /\.(scss)$/,
+          test: /\.scss$/,
           use: scssLoader(),
         },
         {
           test: /\.css$/,
-          use:[ 'style-loader', 'css-loader'],
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.js$/,
@@ -429,12 +448,12 @@ module.exports = function(env = {}, options = {}) {
       publicPath: '/', // Public path to 'dist' scope in production
     },
     // @see https://webpack.js.org/configuration/devtool/#src/components/Sidebar/Sidebar.jsx
-    devtool: hasStyleguide ? 'source-map' : false,
+    devtool: (hasWatcher || hasStyleguide) ? 'source-map' : false,
     // Customizes build log
     stats: webpackStats(),
     // Warn about performance issues
     performance: {
-      hints: hasStyleguide ? false : 'warning',
+      hints: (hasWatcher || hasStyleguide) ? false : 'warning',
       maxEntrypointSize: 500000, // 500kb
       maxAssetSize: 150000, // 150kb
     },

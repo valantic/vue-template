@@ -88,6 +88,7 @@
     display: flex;
     border-bottom: 2px solid $color-primary--1;
     box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 
     &::before {
       content: '';
@@ -111,6 +112,7 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      padding: 0 $spacing--10;
     }
 
     &__logo {

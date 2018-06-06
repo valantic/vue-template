@@ -66,6 +66,7 @@
     border-bottom-left-radius: $border-radius--default;
     border-bottom-right-radius: $border-radius--default;
     color: $color-grayscale--1000;
+    box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
 
     &--state-error {
       background-image: url('../assets/icons/i-error--negative.svg');

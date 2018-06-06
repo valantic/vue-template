@@ -1,13 +1,15 @@
 <template>
   <div :class="b()">
-    <div :class="b('quantity')">
+    <div :class="b('quantity', { hasSteps })">
       <e-input
         v-model.number="quantity"
         :min="step"
         :step="step"
         type="number"
+        inputmode="numeric"
         name="quantity"
         pattern="\d*"
+        @input="onQuantityInput"
       />
     </div>
     <div :class="b('button')">
@@ -63,16 +65,25 @@
     data() {
       return {
         quantity: this.$props.step,
+        quantityPrev: this.$props.step,
         hasLabel: !!this.$props.label,
         progress: false,
       };
     },
 
-    // computed: {},
+    computed: {
+      hasSteps() {
+        return this.step > 1 ? 'steps' : 'no-steps';
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+
+    created() {
+      window.addEventListener('keyup', this.onKeyupHandler);
+    },
+
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -80,7 +91,10 @@
     // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
-    // destroyed() {},
+
+    destroyed() {
+      window.removeEventListener('keyup', this.onKeyupHandler);
+    },
 
     methods: {
       ...mapActions('cart', [
@@ -88,13 +102,30 @@
       ]),
       onClick() {
         const quantity = this.quantity.toString().match(/[0-9]/g);
-
-        this.quantity = quantity && quantity.length ? parseInt(quantity[0], 10) : 1; // IE 11 / Safari
+        const quantityTemp = quantity && quantity.length ? parseInt(quantity[0], 10) : this.step; // IE 11 / Safari
 
         this.progress = true;
 
-        this.addToCart(this.sku, this.quantity)
+        this.addToCart(this.sku, quantityTemp)
           .finally(() => { this.progress = false; });
+      },
+      onKeyupHandler(event) {
+        if (typeof event.code !== 'undefined') {
+          if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+            this.onClick();
+          }
+        } else if (event.which !== 'undefined') { // IE 11 doesn´t have the event.code attribute.
+          if (event.which === 13) {
+            this.onClick();
+          }
+        }
+      },
+      onQuantityInput(value) {
+        if (value % this.step !== 0) {
+          this.quantity = this.quantityPrev;
+        } else {
+          this.quantityPrev = value;
+        }
       },
     },
     // render() {},
@@ -109,10 +140,20 @@
     &__quantity {
       flex: 0 1 auto;
       width: 100%;
-      margin-bottom: $spacing--15;
+      margin-bottom: $spacing--10;
 
       input {
         text-align: right;
+      }
+
+      &--has-steps-no-steps input {
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          margin: 0;
+        }
       }
     }
 
