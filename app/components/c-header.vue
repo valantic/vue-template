@@ -112,6 +112,7 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      padding: 0 $spacing--10;
     }
 
     &__logo {

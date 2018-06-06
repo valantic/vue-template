@@ -105,14 +105,14 @@
 
 <style lang="scss">
   .e-info-label {
-    @include font($font-size--14, 14px, $font-weight--semi-bold);
+    @include font($font-size--14, 22px, $font-weight--semi-bold);
 
     &--design-new::after {
       content: '';
       display: inline-block;
       width: 0;
       height: 0;
-      border-top: 10px solid transparent;
+      border-top: 11px solid transparent;
       border-bottom: 11px solid transparent;
       border-left: 8px solid $color-primary--1;
     }
@@ -132,12 +132,22 @@
       overflow: hidden;
       white-space: nowrap;
       cursor: default;
+      line-height: 0;
       border: 0;
+      padding: 0;
 
       &:active,
       &:focus {
         border: 0;
         outline: 0;
+        line-height: 0;
+
+        // is needed for fixing IE bug text jumping when clicking
+        span {
+          position: relative;
+          top: 0;
+          left: 0;
+        }
       }
 
       &--design-new {
@@ -162,15 +172,15 @@
     &__label {
       display: inline-block;
       vertical-align: middle;
-      padding: 2px 3px 2px 8px;
+      padding: 0 3px 0 8px;
     }
 
     &__info {
-      @include font($font-size--14, 14px, $font-weight--regular);
+      @include font($font-size--14, 22px, $font-weight--regular);
 
       display: inline-block;
       vertical-align: middle;
-      padding: $spacing--2 $spacing--0;
+      padding: 0;
       opacity: 0;
       max-width: 0;
       transition: 0.25s ease-out;

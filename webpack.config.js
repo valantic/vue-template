@@ -32,6 +32,9 @@ module.exports = function(env = {}, options = {}) {
     'theme-04': path.resolve(__dirname, 'app/setup/scss/themes/theme-04.scss'),
     'theme-05': path.resolve(__dirname, 'app/setup/scss/themes/theme-05.scss'),
   };
+  const clean = [
+    ...Object.keys(themes).map(theme => `js/${theme}.js`)
+  ];
 
   // Configuration
   const buildPath = path.resolve(__dirname, 'dist');
@@ -126,16 +129,7 @@ module.exports = function(env = {}, options = {}) {
       new ExtractTextPlugin({
         filename: assetsSubDirectory + `css/${prefix}[name].css?[chunkhash]`, // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
         allChunks: true,
-      }),
-
-      // Cleans dist directory and removes specific unnecessary files
-      new WebpackCleanPlugin([
-        'theme-01.js',
-        'theme-02.js',
-        'theme-03.js',
-        'theme-04.js',
-        'theme-05.js'
-      ], { basePath: path.join(__dirname, 'dist/static/js') })
+      })
     ];
 
     if (isProduction) {
@@ -231,6 +225,15 @@ module.exports = function(env = {}, options = {}) {
           }
         }
       }));
+
+      if (hasMessage) {
+        pluginCollection.push(
+            // Cleans dist directory and removes specific unnecessary files
+            new WebpackCleanPlugin(
+                clean,
+                { basePath: path.join(__dirname, 'dist/static/') })
+        );
+      }
     } else {
       // pluginCollection.push(new StyleLintPlugin({ // TODO: add scss linting an re-enable
       //   context: 'app',
