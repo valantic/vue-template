@@ -18,6 +18,7 @@
         </div>
 
         <div :class="b('specs')">
+          <e-heading tag-name="h1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod dwddwedwdwd</e-heading>
           <div :class="b('technical-data')">
             <c-attribute-grid :attributes="product.main_attributes"/>
           </div>
@@ -30,8 +31,12 @@
 
       <aside :class="b('sidebar', {area: 'top' })">
         <div :class="b('add-to-cart')">
-          <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
-          <c-add-to-cart :sku="product.sku" label/>
+          <div :class="b('prices-wrapper')">
+            <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
+          </div>
+          <div :class="b('add-to-cart-wrapper')">
+            <c-add-to-cart :sku="product.sku" label/>
+          </div>
         </div>
       </aside>
 
@@ -194,6 +199,7 @@
       @include media(sm) {
         border-bottom: 4px solid $color-grayscale--600;
         display: flex;
+        flex-wrap: wrap;
       }
     }
 
@@ -204,17 +210,29 @@
     }
 
     &__main {
-      @include media(md) {
+      padding-bottom: $spacing--20;
+
+      @include media(sm) {
         flex: 1;
+        border-bottom: 1px solid $color-grayscale--600;
+      }
+
+      @include media(md) {
+        border-bottom: none;
       }
     }
 
     &__main--area-top {
       position: relative;
+      max-width: 100%;
 
       @include media(sm) {
         display: flex;
-        max-width: 75%;
+        max-width: 100%;
+      }
+
+      @include media(md) {
+        max-width: percentage(9 / 12);
       }
     }
 
@@ -239,11 +257,34 @@
     }
 
     &__sidebar {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       padding: $spacing--0 $spacing--10 $spacing--30 $spacing--10;
+
+      @include media(sm) {
+        flex-basis: 100%;
+        padding-top: $spacing--20;
+      }
 
       @include media(md) {
         flex-basis: percentage(3 / 12);
         padding: $spacing--0 $spacing--30 $spacing--30 $spacing--30;
+      }
+    }
+
+    &__sidebar--area-top {
+      &::before {
+        @include media(md) {
+          position: absolute;
+          content: '';
+          height: calc(100% - 45px);
+          width: 1px;
+          top: $spacing--25;
+          left: $spacing--0;
+          border-left: 1px solid $color-grayscale--600;
+        }
       }
     }
 
@@ -268,7 +309,7 @@
       margin-bottom: $spacing--15;
 
       @include media(sm) {
-        margin-bottom: $spacing--10;
+        margin-bottom: $spacing--25;
       }
     }
 
@@ -285,21 +326,56 @@
 
     &__specs {
       border-bottom: 2px solid $color-grayscale--600;
+      padding: $spacing--25 $spacing--10 $spacing--0;
 
       @include media(sm) {
         border: none;
+      }
+
+      .e-heading {
+        margin-bottom: $spacing--20;
       }
     }
 
     &__add-to-cart {
+      display: flex;
+      flex-direction: column;
       border-bottom: 2px solid $color-grayscale--600;
 
       @include media(sm) {
+        flex-direction: row;
+        justify-content: flex-end;
         border: none;
+      }
+
+      @include media(md) {
+        flex-direction: column;
       }
     }
 
-    &__details,
+    &__prices-wrapper {
+      @include media(sm) {
+        width: percentage(4 / 12);
+        padding-right: $spacing--40;
+      }
+
+      @include media(md) {
+        width: 100%;
+        padding-right: $spacing--0;
+        margin-bottom: $spacing--40;
+      }
+    }
+
+    &__add-to-cart-wrapper {
+      @include media(sm) {
+        width: percentage(4 / 12);
+      }
+
+      @include media(md) {
+        width: auto;
+      }
+    }
+
     &__related {
       border-bottom: 2px solid $color-grayscale--600;
 

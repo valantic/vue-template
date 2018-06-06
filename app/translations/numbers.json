@@ -1,7 +1,7 @@
 {
   "de-CH": {
     "currency": {
-      "style": "currency", "currency": "CHF", "decimal": "'"
+      "style": "decimal", "currency": "CHF", "decimal": "'"
     }
   }
 }

@@ -336,7 +336,7 @@ Theme styles are delivered seperatly in a *.css file. In this files are the glob
 * [Infos css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) (For the IE polyfill we use [this](https://github.com/jhildenbiddle/css-vars-ponyfill))
 
 Usage example:
-```css
+```scss
   .class {
     color: $color-primary--1;
     background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);

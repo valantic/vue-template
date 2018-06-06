@@ -55,9 +55,26 @@
                     notification="You can add a specific comment here.<br>Please do so."
         />
       </e-label>
+      <e-label name="Country:" position="top">
+        <e-select v-model="name.country"
+                  :options-list="countries"
+                  name="country-select"
+                  select-text="Please choose country..."
+        />
+      </e-label>
       <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
       <p>You are {{ gender }}.</p>
       <pre>{{ name }}</pre>
+
+      <h2>e-fieldset</h2>
+      <e-fieldset legend="Sample legend">
+        <e-label name="Label" position="top">
+          <e-input v-model="demo" name="demo" placeholder="enter text..."/>
+        </e-label>
+        <e-label name="Label" position="top">
+          <e-input v-model="demo" name="demo" placeholder="enter text..."/>
+        </e-label>
+      </e-fieldset>
 
       <h2>e-checkbox</h2>
       <e-checkbox
@@ -80,10 +97,12 @@
     },
     data() {
       return {
+        demo: '',
         name: {
           firstName: '',
           lastName: '',
           street: '',
+          country: '',
           comment: ''
         },
         gender: 'female',
@@ -103,7 +122,19 @@
           checked: false,
           name: 'checkbox',
           value: 'Hello world...'
-        }
+        },
+        countries: [
+          {
+            value: 'at',
+            label: 'Austria',
+          }, {
+            value: 'li',
+            label: 'Liechtenstein',
+          }, {
+            value: 'ch',
+            label: 'Switzerland',
+          },
+        ]
       };
     }
   };
@@ -113,7 +144,7 @@
   .forms {
     padding: $spacing--50;
 
-    .e-label {
+    .e-label:not(:last-child) {
       margin-bottom: $spacing--10;
     }
   }

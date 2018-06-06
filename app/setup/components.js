@@ -12,6 +12,8 @@ import eInfoLabel from '@/components/e-info-label';
 import eRadio from '@/components/e-radio';
 import cModal from '@/components/c-modal';
 import cModalHeader01 from '@/components/c-modal-header-01';
+import eSelect from '@/components/e-select';
+import eFieldset from '@/components/e-fieldset';
 
 export default {
   install(Vue) {
@@ -30,6 +32,7 @@ export default {
       ePanel,
       cModal,
       cModalHeader01,
+      eSelect,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -52,6 +55,8 @@ export default {
       Vue.component(eRadio.name, eRadio);
       Vue.component(cModal.name, cModal);
       Vue.component(cModalHeader01.name, cModalHeader01);
+      Vue.component(eSelect.name, eSelect);
+      Vue.component(eFieldset.name, eFieldset);
     }
   },
 };

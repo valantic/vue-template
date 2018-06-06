@@ -64,5 +64,8 @@
     "linkAccount": "/account",
     "linkWishlist": "/wishlist",
     "linkLogin": "/login"
+  },
+  "e-select": {
+    "chooseOption": "Please choose"
   }
 }

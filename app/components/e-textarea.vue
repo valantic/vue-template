@@ -82,15 +82,6 @@
           notification: Boolean(this.$props.notification && this.hasFocus)
         };
       },
-
-      /**
-       * Checks if the component is in default state.
-       *
-       * @returns {Boolean}
-       */
-      hasDefaultState() {
-        return this.state === 'default';
-      }
     },
     // watch: {},
 
@@ -151,6 +142,8 @@
     }
 
     &__field {
+      @include font($font-size--14, 18px);
+
       padding: $spacing--5 $spacing--10;
       color: $color-grayscale--400;
       resize: none;
