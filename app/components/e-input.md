@@ -155,7 +155,7 @@ Always use **v-model** to bind value to form elements!
 #### No focus shadow
 ```
 <template>
-  <e-input v-model="demo" :focusShadow="false" /> 
+  <e-input v-model="demo" name="demo" :focusShadow="false" /> 
 </template>
 
 <script>
@@ -171,7 +171,7 @@ Always use **v-model** to bind value to form elements!
 #### No border
 ```
 <template>
-  <e-input v-model="demo" border="0" /> 
+  <e-input v-model="demo" name="demo" border="0" /> 
 </template>
 
 <script>
