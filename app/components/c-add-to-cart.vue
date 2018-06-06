@@ -102,8 +102,7 @@
       ]),
       onClick() {
         const quantity = this.quantity.toString().match(/[0-9]/g);
-
-        let quantityTemp = quantity && quantity.length ? parseInt(quantity[0], 10) : this.step; // IE 11 / Safari
+        const quantityTemp = quantity && quantity.length ? parseInt(quantity[0], 10) : this.step; // IE 11 / Safari
 
         this.progress = true;
 

@@ -80,12 +80,12 @@
 <style lang="scss">
 
   .l-default {
-    background: $color-grayscale--600;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
 
     &__content {
+      background: $color-grayscale--600;
       flex: 1 0 auto;
       min-height: 1px; // Fixes a content shifting issue with IE11 if a child element has hover
     }
@@ -94,7 +94,15 @@
       background: $color-grayscale--1000;
       box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
       margin: $spacing--20 auto;
-      max-width: map-get($grid-breakpoints, xl);
+      max-width: #{map-get($grid-breakpoints, xl) - 20px};
+
+      @include media(sm) {
+        margin: $spacing--20 $spacing--10;
+      }
+
+      @include media(xl) {
+        margin: $spacing--20 auto;
+      }
     }
   }
 

@@ -3,5 +3,5 @@
 #### Header-Links
 
 ```vue
-<c-header-links account="true" wishlist="true" />
+<c-header-links account wishlist/>
 ```

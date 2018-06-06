@@ -204,7 +204,7 @@
     }
 
     &__bottom {
-      @include media(sm) {
+      @include media(md) {
         display: flex;
       }
     }
@@ -239,7 +239,7 @@
     &__main--area-bottom {
       flex-direction: column;
 
-      @include media(sm) {
+      @include media(md) {
         padding-bottom: $spacing--60;
       }
     }
@@ -291,7 +291,7 @@
     &__sidebar--area-bottom {
       padding-bottom: $spacing--60;
 
-      @include media(sm) {
+      @include media(md) {
         border-left: 4px solid $color-grayscale--600;
       }
     }
