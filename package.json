@@ -1,6 +1,6 @@
 {
   "name": "vue-template",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A customized Vue.js project template",
   "scripts": {
     "clean": "rimraf dist",
@@ -35,14 +35,14 @@
   "keywords": [
     "vue",
     "vuejs",
-    "verstärker"
+    "valantic"
   ],
   "author": "Patric Eberle",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/patric-eberle/vue-template/issues"
+    "url": "https://github.com/valantic/vue-template/issues"
   },
-  "homepage": "https://github.com/patric-eberle/vue-template#readme",
+  "homepage": "https://github.com/valantic/vue-template",
   "jest": {
     "moduleFileExtensions": [
       "js",
