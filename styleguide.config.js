@@ -26,7 +26,7 @@ module.exports = {
       content: '',
       sections: [
         {
-          name: 'Informations',
+          name: 'Information',
           content: 'app/styleguide/core/index.md',
         }
       ]
