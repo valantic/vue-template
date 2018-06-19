@@ -162,7 +162,7 @@
     },
 
     /**
-     * Creates a button or button like link based on defined/missing href link
+     * Creates a button or button like link based on defined/missing href link.
      *
      * @param   {function}    createElement   Vue helper
      *
@@ -253,7 +253,7 @@
 
     position: relative;
     display: inline-block;
-    background: transparent;
+    background: $color-grayscale--600;
     padding: 6px $spacing--10;
     border: 0;
     color: $color-grayscale--400;
@@ -263,33 +263,6 @@
     text-align: center;
     cursor: pointer;
 
-    &::before, // TODO: create mixin
-    &::after {
-      position: absolute;
-      display: block;
-      content: "";
-      top: 0;
-      right: 0;
-      left: 0;
-      border: 1px solid $color-grayscale--500;
-      border-radius: $_e-button__radius;
-      height: 20%;
-    }
-
-    &::before {
-      border-bottom: 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    &::after {
-      top: auto;
-      bottom: 0;
-      border-top: 0;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-
     &--focus,
     &:focus {
       color: $color-primary--3;
@@ -297,10 +270,6 @@
       outline: none;
       border: 0; // Overwrite link style
 
-      &::before,
-      &::after {
-        display: none;
-      }
     }
 
     &--hover,
@@ -308,11 +277,6 @@
       color: $color-primary--3;
       background-color: $color-grayscale--500;
       border-bottom: 0; // Overwrite link styles
-
-      &:not([disabled])::before,
-      &:not([disabled])::after {
-        display: none;
-      }
     }
 
     &--focus path,
@@ -328,16 +292,10 @@
       background-color: $color-grayscale--400;
       position: relative;
 
-      &::before,
-      &::after {
-        display: none;
-      }
     }
 
     &[disabled],
     &--disabled,
-    &[disabled]::before,
-    &--disabled::after,
     &[disabled]:hover,
     &--disabled:hover {
       background-color: transparent;
@@ -358,11 +316,6 @@
     &--negative {
       background: $color-primary--2;
       color: $color-primary--3;
-
-      &::before,
-      &::after {
-        display: none;
-      }
     }
 
     &--spacing-0 {
@@ -375,7 +328,7 @@
     &--progress[disabled]:focus,
     &--progress:hover,
     &--progress:focus {
-      background-color: $color-grayscale--400; // TODO: double check with Christoph what the correct value should be
+      background-color: $color-grayscale--400;
 
       &::before,
       &::after {
@@ -398,12 +351,6 @@
   .e-button--primary {
     &:not([disabled]) {
       color: $color-secondary--2;
-
-      &::before,
-      &::after {
-        border-width: 2px;
-        border-color: $color-primary--1;
-      }
 
       &.e-button:focus,
       &.e-button--focus {
@@ -431,11 +378,6 @@
     &.e-button--progress:hover,
     &.e-button--progress:focus {
       background-color: $color-secondary--2;
-
-      &::before,
-      &::after {
-        display: none;
-      }
     }
   }
 </style>
