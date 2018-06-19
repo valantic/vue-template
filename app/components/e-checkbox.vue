@@ -119,10 +119,10 @@
 
     methods: {
       /**
-       * Emits state to parent and wrapper component
+       * Emits state to parent and wrapper component.
        * Update "isChecked" state
        *
-       * @param   {Boolean}  event   Field input
+       * @param   {Object}  event   Field input
        */
       onChange(event) {
         this.isChecked = event.target.checked;
@@ -131,13 +131,12 @@
          * Change event
          *
          * @event change
-         * @type {String}
          */
         this.$parent.$emit('change');
       },
 
       /**
-       * Emits focus to parent and wrapper component
+       * Emits focus to parent and wrapper component.
        * Update "hasFocus" state
        */
       onFocus() {
@@ -154,7 +153,7 @@
       },
 
       /**
-       * Emits blur to parent and wrapper component
+       * Emits blur to parent and wrapper component.
        * Update "hasFocus" state
        */
       onBlur() {
