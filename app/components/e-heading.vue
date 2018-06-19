@@ -87,7 +87,7 @@
     // methods: {},
 
     /**
-     * Creates a heading element
+     * Creates a heading element.
      *
      * @param   {function}    createElement   Vue helper
      *
