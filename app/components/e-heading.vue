@@ -125,8 +125,6 @@
   .e-heading {
     @include font($font-size--18, 22px, $font-weight--regular);
 
-    color: $color-secondary--1;
-    text-decoration: none;
     display: block;
 
     &__inner {
@@ -135,17 +133,11 @@
 
     &__inner a {
       color: $color-secondary--1;
-      border: none;
       padding: $spacing--0;
     }
 
     &--underline &__inner {
       border-bottom: 1px solid $color-primary--1;
-      padding: $spacing--15 $spacing--20;
-    }
-
-    &--underline &__inner--color-gray {
-      border-bottom: 1px solid $color-grayscale--600;
     }
 
     &--h1 {
