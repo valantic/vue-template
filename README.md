@@ -348,6 +348,8 @@ Usage example:
 
 The living styleguide is defined in two parts: one is documenting all available Vue components of the project, in the second one you can create example pages to test and share the design with the client or developer.
 
+Notes for making examples in the styleguide: For each example only one 'root' element is allowed. If there should be multiple elements in one example, wrap them with another element (div, span ...).
+
 ### File system
 
 Please note, that the living styleguide has its on section in `/app/styleguide` where you can find `components`, `routes` and anything else, which is only related to the living styleguide. This makes it more easy to identify and split out unneeded code during the build.
@@ -469,6 +471,16 @@ $ brew install nasm
 # OR
 
 $ brew upgrade nasm
+```
+
+### Peer Dependencies
+
+Following warnings when installing Bootstrap can be ignored since we only use the grid out of the Bootstrap framework.
+
+```
+npm WARN bootstrap@4.0.0 requires a peer of jquery@1.9.1 - 3 but none is installed. You must install peer dependencies yourself.`
+
+npm WARN bootstrap@4.0.0 requires a peer of popper.js@^1.12.9 but none is installed. You must install peer dependencies yourself.
 ```
 
 ## ToDo
