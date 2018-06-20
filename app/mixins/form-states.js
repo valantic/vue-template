@@ -8,7 +8,7 @@
 export default {
   props: {
     /**
-     * form states for class names (default, error, success, warning, info)
+     * Form states for class names (default, error, success, warning, info)
      */
     state: {
       type: String,
@@ -66,7 +66,7 @@ export default {
   },
 
   /**
-   * Default data for the mixin props (will be merged with the components data function)
+   * Default data for the mixin props (will be merged with the components data function).
    *
    * @returns {{isActive: *, isDisabled: *, hasFocus: *, isHover: (hover|{type, default}|*), isChecked: *}}
    */
@@ -83,7 +83,7 @@ export default {
   computed: {
 
     /**
-     * Defines the default Modifier classes, have to be merged with custom classes or include directly in component
+     * Defines the default Modifier classes, have to be merged with custom classes or include directly in component.
      *
      * @returns {{state: *, active: *, disabled: *, focus: *, hover: *, checked: *}}
      */
