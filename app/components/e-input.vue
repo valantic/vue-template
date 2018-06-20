@@ -112,7 +112,7 @@
     computed: {
 
       /**
-       * Defines state modifier classes
+       * Defines state modifier classes.
        *
        * @returns  {Object}   BEM classes
        */
@@ -141,7 +141,7 @@
 
     methods: {
       /**
-       * Emits input to parent component
+       * Emits input to parent component.
        *
        * @param   {String}  event   Field input
        */
@@ -156,14 +156,14 @@
       },
 
       /**
-       * Emits focus to parent and wrapper component
+       * Emits focus to parent and wrapper component.
        * Update "hasFocus" state
        */
       onFocus() {
         this.hasFocus = true;
 
         /**
-         * focus event fires on focus
+         * Focus event fires on focus
          *
          * @event focus
          */
@@ -172,7 +172,7 @@
       },
 
       /**
-       * Emits blur to parent and wrapper component
+       * Emits blur to parent and wrapper component.
        * Update "hasFocus" state
        */
       onBlur() {
@@ -198,18 +198,14 @@
   $e-input-height: 30px;
 
   .e-input {
-    &:not(&--border-0) {
-      @include half-border($color-grayscale--500);
-    }
 
     // input
     &__field {
       @include font-size($font-size--14);
 
-      border: 1px solid transparent;
+      border: 1px solid $color-grayscale--500;
       border-radius: $border-radius--default;
       color: $color-secondary--1;
-      font-family: $font-family--primary;
       height: $e-input-height;
       position: relative;
       transition: box-shadow 0.15s ease-in-out;
@@ -314,7 +310,6 @@
     * states
     **/
     &--state-error {
-      @include half-border($color-status--danger);
 
       .e-input__field {
         @include form-state-icon('error');
