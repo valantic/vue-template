@@ -90,7 +90,7 @@
         margin-bottom: 0;
 
         @include media(sm) {
-          padding-left: $spacing--50;
+          margin-left: $spacing--50;
         }
       }
     }
