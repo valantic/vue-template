@@ -47,7 +47,7 @@
 
     computed: {
       /**
-       * Defines state modifier classes
+       * Defines state modifier classes.
        *
        * @returns  {Object}   BEM classes
        */
