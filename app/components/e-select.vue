@@ -102,7 +102,6 @@
   $e-select-height: 30px;
 
   .e-select {
-    @include half-border($color-grayscale--500);
 
     &::before,
     &::after {
@@ -113,7 +112,7 @@
       @include font($font-size--14, 18px);
 
       background: url('../assets/icons/i-arrow--down--info.svg') no-repeat right 5px center;
-      border: 1px solid transparent;
+      border: 1px solid $color-grayscale--500;
       border-radius: 3px;
       width: 100%;
       -webkit-appearance: none;
@@ -160,17 +159,11 @@
       background-image: url('../assets/icons/i-arrow--down--disabled.svg');
     }
 
-    &--disabled::before,
-    &--disabled::after {
-      border-color: $color-grayscale--600;
-    }
-
     /**
      * states
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
-      @include half-border($color-status--danger);
 
       .e-select__select {
         @include form-state-icon('error');
