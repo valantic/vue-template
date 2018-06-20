@@ -20,7 +20,7 @@
    * the information provided to it as attributes.
    * This means that the parent component is responsible for fetching the data.
    * It's also the parent components responsibility to check if priceType is available or not.
-   * On touch devices the infos show when touching the label.
+   * On touch devices the info shows when touching the label.
    *
    */
   export default {
