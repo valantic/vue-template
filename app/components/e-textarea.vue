@@ -72,7 +72,7 @@
     computed: {
 
       /**
-       * Defines state modifier classes
+       * Defines state modifier classes.
        *
        * @returns  {Object}   BEM classes
        */
@@ -98,7 +98,7 @@
 
     methods: {
       /**
-       * Emits input to parent component
+       * Emits input to parent component.
        *
        * @param   {String}  event   Field input
        */
@@ -134,12 +134,6 @@
 
 <style lang="scss">
   .e-textarea {
-    @include half-border($color-grayscale--500);
-
-    &::before,
-    &::after {
-      pointer-events: none;
-    }
 
     &__field {
       @include font($font-size--14, 18px);
@@ -149,7 +143,7 @@
       resize: none;
       width: 100%;
       border-radius: 3px;
-      border: 1px solid transparent;
+      border: 1px solid $color-grayscale--500;
       display: block;
       position: relative;
 
@@ -218,17 +212,11 @@
       }
     }
 
-    &--disabled::before,
-    &--disabled::after {
-      border-color: $color-grayscale--600;
-    }
-
     /**
      * states
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
-      @include half-border($color-status--danger);
 
       .e-textarea__field {
         @include form-state-icon('error');
