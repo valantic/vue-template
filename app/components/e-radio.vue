@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
   <div :class="b(modifiers)">
     <label :class="b('label')"
@@ -114,7 +115,7 @@
 
     methods: {
       /**
-       * Emits input to parent component
+       * Emits input to parent component.
        *
        * @param   {String}  event   Field input
        */
