@@ -62,18 +62,13 @@
     &__inner {
       display: inline-block;
       border-bottom: 1px solid $color-primary--1;
-      padding: $spacing--25 $spacing--10 $spacing--5;
-
-      @include media(xs) {
-        padding: $spacing--30 $spacing--20 $spacing--5;
-      }
     }
 
     &__fields {
-      padding: $spacing--25 $spacing--10 $spacing--20;
+      padding: $spacing--25 0 $spacing--20;
 
       @include media(xs) {
-        padding: $spacing--30;
+        padding: $spacing--30 0;
       }
     }
   }
