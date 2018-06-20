@@ -126,7 +126,7 @@
 
     computed: {
       /**
-       * Defines state modifier classes
+       * Defines state modifier classes.
        *
        * @returns  {Object}   BEM classes
        */
@@ -138,7 +138,7 @@
       },
 
       /**
-       * Merges default with custom component options
+       * Merges default with custom component options.
        *
        * @returns  {Object}  optionsMerged    Combination of default and custom options.
        */
@@ -182,7 +182,7 @@
 
     methods: {
       /**
-       * Close modal box
+       * Close modal box.
        */
       modalClose() {
         this.modalOpen = false;
@@ -230,9 +230,6 @@
       // single dot
       .swiper-pagination-bullet {
         background: $color-grayscale--600;
-        border-radius: 2.5px;
-        height: 5px;
-        width: 20px;
         margin: 0 3px;
         opacity: 1;
         transform: scale(1);
@@ -240,7 +237,6 @@
 
         &-active {
           background-color: $color-primary--1;
-          box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
         }
 
         &-active-prev,
