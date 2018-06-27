@@ -12,11 +12,11 @@
   },
   "c-social-media": {
     "followUs": "Follow us:",
-    "facebookUrl": "https://www.facebook.com/winterhalterfenner/",
+    "facebookUrl": "https://www.facebook.com/foo/",
     "facebookTitle": "Facebook",
     "inUrl": "https://www.linkedin.com/m/login/",
     "inTitle": "LinkedIn",
-    "xingUrl": "https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e",
+    "xingUrl": "https://www.xing.com/companies/foo",
     "xingTitle": "Xing"
   },
   "c-productlist-wrapper": {
