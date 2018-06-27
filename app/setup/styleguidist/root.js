@@ -1,11 +1,11 @@
 import { i18n } from '@/setup/i18n';
 
 /**
- * Root component setup for styleguidist
+ * Root component setup for styleguidist.
  *
- * @param   {object}    previewComponent    The to be displayed component
+ * @param   {Object}    previewComponent    The to be displayed component
  *
- * @returns {object}
+ * @returns {Object}
  */
 export default previewComponent => ({
   i18n,

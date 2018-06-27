@@ -21,9 +21,9 @@ export const i18n = new VueI18n({
 });
 
 /**
- * Load messages for given locale if not already loaded
+ * Load messages for given locale if not already loaded.
  *
- * @param   {string}    locale    A locale identifier
+ * @param   {String}    locale    A locale identifier
  *
  * @returns {Promise}
  */
@@ -41,10 +41,10 @@ export const i18nLoadMessages = function(locale) {
 };
 
 /**
- * Sets the application locale to the given value
- * Loads locale messages if needed
+ * Sets the application locale to the given value.
+ * Loads locale messages if needed.
  *
- * @param   {string}    locale    A locale identifier
+ * @param   {String}    locale    A locale identifier
  *
  * @returns {Promise}
  */

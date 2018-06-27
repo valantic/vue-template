@@ -29,7 +29,7 @@ export default {
     }),
 
     /**
-     * Get's a Object with the active theme (global theme if nothing specific is defined)
+     * Get's a Object with the active theme (global theme if nothing specific is defined).
      *
      * @returns {String}   active theme id for BEM class name
      */

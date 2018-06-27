@@ -76,9 +76,9 @@
 
     computed: {
       /**
-       * Sets modifier classes depending on props
+       * Sets modifier classes depending on props.
        *
-       * @returns   {object}  modifiers   Modifier BEM classes
+       * @returns   {Object}  modifiers   Modifier BEM classes
        */
       modifiers() {
         return {
@@ -115,9 +115,9 @@
 
     methods: {
       /**
-       * Toggles state and emits event to EventBus
+       * Toggles state and emits event to EventBus.
        *
-       * @param   {object}    event   Original event
+       * @param   {Object}    event   Original event
        */
       toggleState(event) {
         event.preventDefault();
@@ -143,7 +143,7 @@
       },
 
       /**
-       * Opens the collapsible
+       * Opens the collapsible.
        */
       open() {
         this.setMaxHeight();
@@ -156,7 +156,7 @@
       },
 
       /**
-       * Closes the collapsible
+       * Closes the collapsible.
        */
       close() {
         this.setMaxHeight();
@@ -169,7 +169,7 @@
       },
 
       /**
-       * Sets the collapsible height according to its current content
+       * Sets the collapsible height according to its current content.
        */
       setMaxHeight() {
         this.maxHeight = `${this.$refs.inner.clientHeight}px`;

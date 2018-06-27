@@ -11,7 +11,7 @@ import cCartPost from '../../styleguide/mock-data/cCartPost';
  * By default returns a 500 'no route defined' error.
  * If 'isErrorTest=xxx' is defined in the request params the defined error number is returned.
  *
- * @param   {object}          config                          The request configuration
+ * @param   {Object}          config                          The request configuration
  * @param   {number|string}   [config.params.isErrorTest]     Number of to be tested error response
  *
  * @returns {array}
@@ -40,7 +40,7 @@ function wildcard(config) {
 
 export default {
   /**
-   * Defines API mocks for development and styleguide build
+   * Defines API mocks for development and styleguide build.
    */
   install(/* Vue, options */) {
     const mock = new MockAdapter(axios, {

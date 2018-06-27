@@ -24,11 +24,11 @@ export default {
     user: state => state.user,
 
     /**
-     * Returns the name of the currently logged in user
+     * Returns the name of the currently logged in user.
      *
-     * @param   {object}    state   Store state
+     * @param   {Object}    state   Store state
      *
-     * @returns {string|null}       Name of the current user
+     * @returns {String|null}       Name of the current user
      */
     userName: state => (state.user && state.user.name) || null,
 
@@ -42,7 +42,7 @@ export default {
     isLoggedInUser: state => state.user && !!state.user.name,
 
     /**
-     * Gets the current theme id
+     * Gets the current theme id.
      *
      * @param {Object}    state   Current state
      *
@@ -54,7 +54,7 @@ export default {
   },
   mutations: {
     /**
-     * User data provided by backend
+     * User data provided by backend.
      *
      * @param {Object} state   State
      * @param {Object} data   Userdata
@@ -64,7 +64,7 @@ export default {
     },
 
     /**
-     * Sets the global theme id
+     * Sets the global theme id.
      *
      * @param {Object}  state   session/state
      * @param {String}  id      theme id

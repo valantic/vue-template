@@ -8,7 +8,7 @@ import cssVars from 'css-vars-ponyfill';
 import 'intersection-observer';
 import 'picturefill';
 import 'lazysizes';
-import './lib/ls.attrchange'; // lazy sizes attribute change observer
+import './lib/ls.attrchange'; // Lazy sizes attribute change observer
 
 /**
  * Polyfill for css vars on IE11 https://github.com/jhildenbiddle/css-vars-ponyfill

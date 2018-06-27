@@ -27,7 +27,7 @@ export default {
   },
   getters: {
     /**
-     * Gets collapsible items to create an accordion
+     * Gets collapsible items to create an accordion.
      *
      * @param   {Object}  state   Current state
      *
@@ -36,7 +36,7 @@ export default {
     collapsible: state => state.collapsible,
 
     /**
-     * Gets product gallery items
+     * Gets product gallery items.
      *
      * @param   {Object}  state   Current state
      *
@@ -45,7 +45,7 @@ export default {
     images: state => state.images,
 
     /**
-     * The ERP - or "Live" data for the product
+     * The ERP - or "Live" data for the product.
      *
      * @param   {Object}  state   Current state
      *
@@ -54,7 +54,7 @@ export default {
     erp: state => state.erp,
 
     /**
-     * Gets a product
+     * Gets a product.
      *
      * @param   {Object}  state   Current state
      *
@@ -64,7 +64,7 @@ export default {
   },
   mutations: {
     /**
-     * Initial product data provided by spryker
+     * Initial product data provided by spryker.
      *
      * @param {Object} state   State
      * @param {Object} data   Product data
@@ -74,7 +74,7 @@ export default {
     },
 
     /**
-     * Sets ERP data
+     * Sets ERP data.
      *
      * @param {Object} state   Current state
      * @param {Object} erp   ERP data for product
@@ -85,7 +85,7 @@ export default {
   },
   actions: {
     /**
-     * Fetches data from ERP
+     * Fetches data from ERP.
      *
      * @returns  {Promise}  promise   Promise
      */

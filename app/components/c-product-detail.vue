@@ -18,7 +18,9 @@
         </div>
 
         <div :class="b('specs')">
-          <e-heading tag-name="h1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod dwddwedwdwd</e-heading>
+          <e-heading tag-name="h1">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod dwddwedwdwd
+          </e-heading>
           <div :class="b('technical-data')">
             <c-attribute-grid :attributes="product.main_attributes"/>
           </div>
@@ -118,31 +120,31 @@
       }),
 
       /**
-       * Checks if this product has PDF documents (attribute of the "media-attributes"-Object)
+       * Checks if this product has PDF documents (attribute of the "media-attributes"-Object).
        *
-       * @returns {boolean}
+       * @returns {Boolean}
        */
       hasPdfDocuments() {
-        if (Object.keys(this.product.media_attributes).length === 0) return false;
+        if (Object.keys(this.product.media_attributes).length === 0) { return false; }
 
-        if (this.product.media_attributes.productDataSheet == null) return false;
+        if (this.product.media_attributes.productDataSheet == null) { return false; }
 
-        if (Object.keys(this.product.media_attributes.productDataSheet).length === 0) return false;
+        if (Object.keys(this.product.media_attributes.productDataSheet).length === 0) { return false; }
 
         return true;
       },
 
       /**
-       * Checks if this product has Videos (attribute of the "media-attributes"-Object)
+       * Checks if this product has Videos (attribute of the "media-attributes"-Object).
        *
-       * @returns {boolean}
+       * @returns {Boolean}
        */
       hasVideos() {
-        if (Object.keys(this.product.media_attributes).length === 0) return false;
+        if (Object.keys(this.product.media_attributes).length === 0) { return false; }
 
-        if (this.product.media_attributes.video == null) return false;
+        if (this.product.media_attributes.video == null) { return false; }
 
-        if (Object.keys(this.product.media_attributes.video).length === 0) return false;
+        if (Object.keys(this.product.media_attributes.video).length === 0) { return false; }
 
         return true;
       },

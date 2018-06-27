@@ -16,7 +16,7 @@ export default {
   },
   getters: {
     /**
-     * Gets the items in the cart
+     * Gets the items in the cart.
      *
      * @param   {Object}  state   Current state
      *
@@ -34,7 +34,7 @@ export default {
     quantity: state => (state.cart.items ? state.cart.items.length : state.miniCart.cartQuantity),
 
     /**
-     * Gets subtotal price for all cart items
+     * Gets subtotal price for all cart items.
      *
      * @param   {Object}  state   Current state
      *
@@ -44,7 +44,7 @@ export default {
   },
   mutations: {
     /**
-     * Cart data provided by backend
+     * Cart data provided by backend.
      *
      * @param {Object} state   Current state
      * @param {Object} data   Cart data
@@ -54,7 +54,7 @@ export default {
     },
 
     /**
-     * Mini cart data provided by backend
+     * Mini cart data provided by backend.
      *
      * @param {Object} state   Current state
      * @param {Object} data   Cart data
@@ -64,7 +64,7 @@ export default {
     },
 
     /**
-     * Update cart totals object
+     * Update cart totals object.
      *
      * @param {Object} state   Current state
      * @param {Object} totals   Totals data
@@ -78,7 +78,7 @@ export default {
     },
 
     /**
-     * Increments quantity count
+     * Increments quantity count.
      *
      * @param {Object} state   Current state
      */
@@ -90,10 +90,10 @@ export default {
   },
   actions: {
     /**
-     * Asynchronously add product to cart
+     * Asynchronously add product to cart.
      *
-     * @param {string} quantity   Amount of product units to be added
-     * @param {string} sku   Sku of the product to be added
+     * @param {String} quantity   Amount of product units to be added
+     * @param {String} sku   Sku of the product to be added
      *
      * @returns {Promise} Promise object
      */

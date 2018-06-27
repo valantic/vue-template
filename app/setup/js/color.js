@@ -1,4 +1,4 @@
-// keep in sync with app/setup/scss/_color.scss
+// Keep in sync with app/setup/scss/_color.scss
 module.exports = {
   primary: [
     { name: '$color-primary--1', value: ['#ffed00'] },

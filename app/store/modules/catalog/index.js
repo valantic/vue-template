@@ -10,7 +10,7 @@ export default {
   },
   getters: {
     /**
-     * Gets a productlist
+     * Gets a productlist.
      *
      * @param   {Object}  state   Current state
      *

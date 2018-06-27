@@ -79,7 +79,7 @@
 
     computed: {
       /**
-       * Converts srcset object to string
+       * Converts srcset object to string.
        *
        * @returns {String|null}
        */
@@ -94,7 +94,7 @@
       },
 
       /**
-       * Converts sizes object to string
+       * Converts sizes object to string.
        *
        * @returns {String|null}
        */
@@ -128,7 +128,7 @@
       },
 
       /**
-       * Converts sources to definition to <source> attribute data
+       * Converts sources to definition to <source> attribute data.
        *
        * @returns {Object[]|null}
        */

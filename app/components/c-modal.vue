@@ -86,7 +86,7 @@
 
     computed: {
       /**
-       * Checks if the header can be rendered
+       * Checks if the header can be rendered.
        *
        * @returns {Boolean}   state if header should be visible
        */
@@ -195,7 +195,7 @@
     },
 
     /**
-     * Empty render function because this don't have to render something initial
+     * Empty render function because this don't have to render something initial.
      *
      * @returns {null}
      */
