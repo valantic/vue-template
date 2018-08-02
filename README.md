@@ -24,7 +24,7 @@ Before you start working on this project, you **MUST** read the following docume
 You **MUST** also be familiar with the following tools:
 
 * [BEM](http://getbem.com/)
-* [ES2015](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
+* [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
 * [Git](https://git-scm.com/)
 * [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/)
@@ -74,7 +74,7 @@ $ git remote set-url origin <project-repository-url>
 
 ### Installing npm packages
 
-Before executing the following command, please **make sure your Node and NPM version meet the requirements** in package.json's `endignes` section. Changing the Node or NPM version later on can cause issues which force you to re-install the project.
+Before executing the following command, please **make sure your Node and NPM version meet the requirements** in package.json's `engines` section. Changing the Node or NPM version later on can cause issues which force you to re-install the project.
 
 ```
 # Print node version
@@ -88,6 +88,26 @@ Finally it's time to install the project dependencies and start developing!
 
 ```
 $ npm install
+```
+
+## Integrate vue-template into an other repository
+
+If you need to integrate this repository into an other project (e.g. a backend repository) we recommend to use `git subtree`. This will create a copy of a certain branch and allow updates later on while not changing the other projects git setup. For more information see [Atlassian Blog](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree) and [Git subtree](https://git-scm.com/book/de/v1/Git-Tools-Subtree-Merging).
+
+WARNING: Please don't commit anything from inside the parent repository into the vue-template repository!
+
+### Pull this repository into an other one
+
+Note: the `target-folder` shall not exist and we be crated during pull. `--squash` will flatten the change history.
+
+```
+git subtree add --prefix <target-folder> <source> <branch> --squash
+```
+
+### Update the files inside the parent repository
+
+```
+git subtree pull --prefix <target-folder> <source> <branch> --squash -m "Merges vue-template @ version x.x.x into project"
 ```
 
 ## This project
@@ -133,27 +153,7 @@ The app should now run on [http://localhost:8080](http://localhost:8080)
 If you prefer to develop inside the component styleguide run the following script instead or in a new tab:
 
 ```
-$ npm run dev:styleguide
-```
-
-### Integrate vue-template into an other repository
-
-If you need to integrate this repository into an other project (e.g. a backend repository) we recommend to use `git subtree`. This will create a copy of a certain branch and allow updates later on while not changing the other projects git setup. For more information see [Atlassian Blog](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree) and [Git subtree](https://git-scm.com/book/de/v1/Git-Tools-Subtree-Merging).
-
-WARNING: Please don't commit anything from inside the parent repository into the vue-template repository!
-
-#### Pull this repository into an other one
-
-Note: the `target-folder` shall not exist and we be crated during pull. `--squash` will flatten the change history.
-
-```
-git subtree add --prefix <target-folder> <source> <branch> --squash
-```
-
-#### Update the files inside the parent repository
-
-```
-git subtree pull --prefix <target-folder> <source> <branch> --squash -m "Merges vue-template @ version x.x.x into project"
+$ npm run dev:s
 ```
 
 ## Folder structure
@@ -178,7 +178,7 @@ git subtree pull --prefix <target-folder> <source> <branch> --squash -m "Merges 
 
 ## BEM
 
-We heavily use the [BEM](http://getbem.com/) methodology to define our style classes and component names. It's mandatory that you understand the concept behind it before starting to develop or fixing existing code.
+We heavily rely on the [BEM](http://getbem.com/) methodology to define our style classes and component names. It's mandatory that you understand the concept behind it before starting to develop or fixing existing code.
 
 ### Namespace
 
@@ -190,7 +190,7 @@ Marks an ordinary **component** which can contain other components and/or elemen
 
 #### `e-`
 
-Marks an **element** "component" which itself doesn't contain an other component/element (except for scoped ones) but can be part of an other component.
+Marks an **element** "component" which itself (in general) doesn't contain an other component/element (except for scoped ones) but can be part of an other component.
 
 #### `l-`
 
