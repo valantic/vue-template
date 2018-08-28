@@ -33,7 +33,7 @@ module.exports = function(env = {}, options = {}) {
     'theme-05': path.resolve(__dirname, 'app/setup/scss/themes/theme-05.scss'),
   };
   const clean = [
-    ...Object.keys(themes).map(theme => `js/${theme}.js`)
+    ...Object.keys(themes).map(theme => `js/${theme}.js`),
   ];
 
   // Configuration
@@ -44,11 +44,11 @@ module.exports = function(env = {}, options = {}) {
   const globalVariables = {
     'process.env': {
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
-      HAS_STYLEGUIDE: JSON.stringify(hasStyleguide)
+      HAS_STYLEGUIDE: JSON.stringify(hasStyleguide),
     },
   };
 
-  const host = '0.0.0.0';
+  const host = options.host || '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
   const prefix = filePrefix ? `${filePrefix}.` : '';
   const include = [
     path.resolve(__dirname, 'app'),
@@ -70,7 +70,7 @@ module.exports = function(env = {}, options = {}) {
         loader: 'css-loader', // Note: will also call postcss
         options: {
           sourceMap: !isProduction || hasStyleguide,
-          minimize: false // TODO: isProduction
+          minimize: false, // TODO: isProduction
         },
       },
       {
@@ -113,6 +113,10 @@ module.exports = function(env = {}, options = {}) {
       warnings: true,
     };
 
+    if (hasWatcher) {
+      return false;
+    }
+
     return !isProfileBuild ? stats : undefined;
   }
 
@@ -120,11 +124,41 @@ module.exports = function(env = {}, options = {}) {
     const pipeline = [
       postCssCriticalSplit({
         output: output,
-      })
+      }),
     ];
 
     if (!hasWatcher) {
-      pipeline.push(cssNano());
+      pipeline.push(cssNano({
+        // 'css-declaration-sorter': false,
+        // 'cssnano-util-raw-cache': false,
+        // 'postcss-calc': false,
+        // 'postcss-colormin': false,
+        // 'postcss-convert-values': false,
+        // 'postcss-discard-comments': false,
+        // 'postcss-discard-duplicates': false,
+        // 'postcss-discard-empty': false,
+        // 'postcss-discard-overridden': false,
+        // 'postcss-merge-longhand': false,
+        // 'postcss-merge-rules': false,
+        // 'postcss-minify-font-values': false,
+        // 'postcss-minify-gradients': false,
+        // 'postcss-minify-params': false,
+        // 'postcss-minify-selectors': false,
+        // 'postcss-normalize-charset': false,
+        // 'postcss-normalize-display-values': false,
+        // 'postcss-normalize-positions': false,
+        // 'postcss-normalize-repeat-style': false,
+        // 'postcss-normalize-string': false,
+        // 'postcss-normalize-timing-functions': false,
+        // 'postcss-normalize-unicode': false,
+        // 'postcss-normalize-url': false,
+        // 'postcss-normalize-whitespace': false,
+        // 'postcss-ordered-values': false,
+        // 'postcss-reduce-initial': false,
+        // 'postcss-reduce-transforms': false,
+        // 'postcss-svgo': false,
+        // 'postcss-unique-selectors': false,
+      }));
     }
 
     return pipeline;
@@ -255,7 +289,7 @@ module.exports = function(env = {}, options = {}) {
       if (!hasStyleguide) {
         pluginCollection.push(new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
-            messages: [`Your application is running on http://${host}:${devPort}.`],
+            messages: [ `Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.` ],
           },
         }));
       }
@@ -269,7 +303,7 @@ module.exports = function(env = {}, options = {}) {
       ...themes,
       app: [
         'babel-polyfill',
-        path.resolve(__dirname, 'app/main.js')
+        path.resolve(__dirname, 'app/main.js'),
       ],
     },
     resolve: {
@@ -290,6 +324,7 @@ module.exports = function(env = {}, options = {}) {
           options: {
             failOnError: isProduction && !hasWatcher,
             emitWarning: !isProduction && !hasWatcher, // Keeps overlay from showing during development, because it's annoying
+            cache: hasWatcher || !isProduction, // Improves linting performance
           },
         },
         {
@@ -304,9 +339,9 @@ module.exports = function(env = {}, options = {}) {
             // https://vue-loader.vuejs.org/en/options.html#cachebusting
             cacheBusting: false, // TODO: shouldn't this be true?
             loaders: {
-              scss: scssLoader()
-            }
-          }
+              scss: scssLoader(),
+            },
+          },
         },
         {
           test: /\.scss$/,
@@ -372,9 +407,9 @@ module.exports = function(env = {}, options = {}) {
                     //{ sortAttrs: true, },
                     //{ transformsWithOnePath: false, },
                     //{ removeDimensions: true, }
-                  ]
+                  ],
                 },
-              }
+              },
             },
           ],
         },
@@ -383,22 +418,22 @@ module.exports = function(env = {}, options = {}) {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubDirectory + 'media/[name].[ext]?[hash]'
-          }
+            name: assetsSubDirectory + 'media/[name].[ext]?[hash]',
+          },
         },
         {
           test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubDirectory + 'fonts/[name].[ext]?[hash]'
-          }
+            name: assetsSubDirectory + 'fonts/[name].[ext]?[hash]',
+          },
         },
         {
           test: /\.md$/,
-          loader: 'vue-markdown-loader'
-        }
-      ]
+          loader: 'vue-markdown-loader',
+        },
+      ],
     },
     node: {
       // prevent webpack from injecting useless setImmediate polyfill because Vue
