@@ -8,12 +8,20 @@ import eCheckbox from '@/components/e-checkbox';
 import eLabel from '@/components/e-label';
 import eProgress from '@/components/e-progress';
 import eTextarea from '@/components/e-textarea';
-import eInfoLabel from '@/components/e-info-label';
 import eRadio from '@/components/e-radio';
 import cModal from '@/components/c-modal';
 import cModalHeader01 from '@/components/c-modal-header-01';
 import eSelect from '@/components/e-select';
 import eFieldset from '@/components/e-fieldset';
+import eLink from '@/components/e-link';
+import cBreadcrumb from '@/components/c-breadcrumb';
+import cSearch from '@/components/c-search';
+
+// Twig related imports
+import lDefault from '@/components/l-default';
+
+// Import style only 'components'.
+require.context('@/components', false, /\.scss/);
 
 export default {
   install(Vue) {
@@ -27,12 +35,15 @@ export default {
       eLabel,
       eProgress,
       eTextarea,
-      eInfoLabel,
       eRadio,
       ePanel,
       cModal,
       cModalHeader01,
       eSelect,
+      lDefault,
+      eLink,
+      cBreadcrumb,
+      cSearch,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -51,12 +62,15 @@ export default {
       Vue.component(eCheckbox.name, eCheckbox);
       Vue.component(eLabel.name, eLabel);
       Vue.component(eTextarea.name, eTextarea);
-      Vue.component(eInfoLabel.name, eInfoLabel);
       Vue.component(eRadio.name, eRadio);
       Vue.component(cModal.name, cModal);
       Vue.component(cModalHeader01.name, cModalHeader01);
       Vue.component(eSelect.name, eSelect);
       Vue.component(eFieldset.name, eFieldset);
+      Vue.component(lDefault.name, lDefault);
+      Vue.component(eLink.name, eLink);
+      Vue.component(cBreadcrumb.name, cBreadcrumb);
+      Vue.component(cSearch.name, cSearch);
     }
   },
 };

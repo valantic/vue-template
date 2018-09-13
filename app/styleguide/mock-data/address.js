@@ -1,0 +1,17 @@
+export default {
+  id: 1,
+  contractId: 1,
+  isTemporary: false,
+  company: 'Valantic CEC Schweiz AG',
+  address1: 'Breitfeldstrasse',
+  address2: '13',
+  address3: '',
+  address4: 'Postfach 999',
+  address5: 'Max Mustermann',
+  city: 'St. Gallen',
+  zipCode: '9015',
+  comment: 'this is a comment example...',
+  salutation: 'Herr',
+  name: 'My name',
+  fax: '+41123456789',
+};

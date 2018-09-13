@@ -1,13 +1,14 @@
 ### e-picture
 
 #### Picture element (sources)
-```
+```vue
 <template>
   <e-picture
     :sources="sources"
     :fallback="fallback"
     alt="Picture element (sources)"/>
 </template>
+
 <script>
   export default {
     name: 'example',
@@ -28,7 +29,7 @@
 
 *Note: lower resolutions are not loaded, if a higher resolution has already been requested by the browser. Reload page to test smaller screens. When scaling up, the higher resolution should be requested.*
 
-```
+```vue
 <template>
   <e-picture
     :sizes="sizes"
@@ -36,6 +37,7 @@
     :fallback="fallback"
     alt="Img element with srcset and sizes"/>
 </template>
+
 <script>
   export default {
     name: 'example',
@@ -59,7 +61,7 @@
 ```
 
 #### Show as inline element
-```
+```vue
 <template>
   <div>
     <e-picture
@@ -79,6 +81,7 @@
       alt="Show as inline element"/>
   </div>
 </template>
+
 <script>
   export default {
     name: 'example',
@@ -93,7 +96,7 @@
 ```
 
 #### Preserve aspect ratio (tinted background for visualisation)
-```
+```vue
 <template>
   <div>
     <e-picture
@@ -105,6 +108,7 @@
       alt="Show as inline element"/>
   </div>
 </template>
+
 <script>
   export default {
     name: 'example',
@@ -127,7 +131,7 @@
 ```
 
 #### Preserve aspect ratio inline (tinted background for visualisation)
-```
+```vue
 <template>
   <div>
     <e-picture
@@ -140,6 +144,7 @@
       alt="Show as inline element"/>
   </div>
 </template>
+
 <script>
   export default {
     name: 'example',

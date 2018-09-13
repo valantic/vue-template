@@ -115,7 +115,10 @@
         type: [Number, String],
         default: 0,
         validator(value) {
-          return [0, 500].includes(parseInt(value, 10));
+          return [
+            0,
+            500
+          ].includes(parseInt(value, 10));
         },
       },
 
@@ -146,23 +149,23 @@
     computed: {
       panelModifiers() {
         return {
-          border: this.border.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+          border: this.border,
           color: this.color,
         };
       },
       headingModifiers() {
         return {
-          spacing: this.headingSpacing.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+          spacing: this.headingSpacing,
         };
       },
       contentModifiers() {
         return {
-          spacing: this.contentSpacing.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+          spacing: this.contentSpacing,
         };
       },
       triangleButtonModifiers() {
         return {
-          size: this.triangleButtonSize.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+          size: this.triangleButtonSize,
         };
       },
       shadowModifiers() {

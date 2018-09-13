@@ -1,7 +1,7 @@
 <template>
   <div :class="b(modifiers)"
-       @mouseenter="isHover = true"
-       @mouseleave="isHover = false">
+       @mouseenter="hasHover = true"
+       @mouseleave="hasHover = false">
 
     <div ref="container" :class="b('container swiper-container')">
 
@@ -20,7 +20,7 @@
               :sizes="sizes"
               :srcset="picture.srcset"
               :fallback="picture.fallback"
-              :alt="picture.alt"/>
+              :alt="picture.alt" />
 
           </button>
 
@@ -37,11 +37,18 @@
       <!-- modal -->
       <c-modal
         :open="modalOpen"
+        :header-component="null"
         size="600"
         inner-spacing="0"
-        @close="modalClose"
-      >
-        <c-swiper-modal :images="pictures" :initial-slide="swiper.activeIndex" @change="onModalSlideChanged"/>
+        mobile-transition="fade"
+        @close="modalClose">
+        <div :class="b('modal-close-icon')" @click="modalOpen = false">
+          <e-icon :inline="true"
+                  icon="i-close"
+                  width="25"
+                  height="25" />
+        </div>
+        <c-swiper-modal :images="pictures" :initial-slide="swiper.activeIndex" @change="onModalSlideChanged" />
       </c-modal>
     </div>
 
@@ -59,9 +66,7 @@
   import Swiper from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import cSwiperModal from '@/components/c-swiper-modal';
-
-  // require styles
-  import 'swiper/dist/css/swiper.css';
+  import mapImages from '@/helpers/map-images';
 
   /**
    * Touch enabled slider component based on
@@ -111,14 +116,14 @@
             type: 'bullets',
             clickable: true,
             dynamicBullets: this.images.length > 7 || false,
-            dynamicMainBullets: 5,
+            dynamicMainBullets: 3,
           },
         },
         // this.images.length > this.dynamicBullets
         swiper: {
           activeIndex: 0,
         },
-        isHover: false,
+        hasHover: false,
         modalOpen: false,
         sizes: BREAKPOINTS, // todo add as prop
       };
@@ -132,7 +137,7 @@
        */
       modifiers() {
         return {
-          hover: this.isHover,
+          hover: this.hasHover,
           modalOpen: this.modalOpen,
         };
       },
@@ -149,20 +154,13 @@
         };
       },
 
+      /**
+       * Maps image data object and prepares it for e-picture component.
+       *
+       * @returns  {Object}  image   Image including fallback
+       */
       pictures() {
-        return this.images.map((image) => {
-          const srcset = {};
-
-          image.thumbs.map((thumb) => {
-            Object.assign(srcset, { [thumb.width]: thumb.absolute_path });
-          });
-
-          return {
-            fallback: image.external_url_small,
-            srcset,
-            alt: '',
-          };
-        });
+        return mapImages(this.images);
       },
     },
     // watch: {},
@@ -189,7 +187,7 @@
       },
       onModalSlideChanged(index) {
         this.$refs.container.swiper.slideTo(index);
-      }
+      },
     },
     // render() {},
   };
@@ -215,14 +213,15 @@
         padding-top: $spacing--30;
         position: relative;
         text-align: left;
+        font-size: 0;
+        bottom: $spacing--15;
 
         @include media(xs) {
           padding-top: 0;
         }
 
         &.swiper-pagination-bullets-dynamic {
-          bottom: 15px;
-          left: 70px;
+          left: $spacing--40;
           overflow: hidden;
         }
       }
@@ -230,6 +229,9 @@
       // single dot
       .swiper-pagination-bullet {
         background: $color-grayscale--600;
+        border-radius: 2.5px;
+        height: 5px;
+        width: 20px;
         margin: 0 3px;
         opacity: 1;
         transform: scale(1);
@@ -237,6 +239,7 @@
 
         &-active {
           background-color: $color-primary--1;
+          box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
         }
 
         &-active-prev,
@@ -255,8 +258,8 @@
       margin-top: -15px;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.2s linear;
-      transition-delay: 0.1s;
+      transition: all $transition-duration-200 linear;
+      transition-delay: $transition-duration-100;
       outline: none;
     }
 
@@ -274,21 +277,13 @@
       @include font(14px, 18px);
 
       color: $color-grayscale--400;
-      bottom: $spacing--20;
+      bottom: $spacing--10;
       position: absolute;
       text-align: right;
       width: 100%;
 
-      @include media(xs) {
-        bottom: 6px;
-      }
-
       @include media(sm) {
-        bottom: $spacing--20;
-      }
-
-      @include media(lg) {
-        bottom: 6px;
+        bottom: $spacing--5;
       }
     }
 
@@ -298,13 +293,26 @@
       border: none;
       display: inline-block;
       width: 100%;
-      margin: $spacing--30;
+      margin: 5%;
       padding: 0;
       text-decoration: none;
       cursor: pointer;
 
-      @include media(xs) {
+      @include media(md) {
         margin: $spacing--50;
+      }
+    }
+
+    &__modal-close-icon {
+      @include z-index(navigation);
+
+      position: absolute;
+      top: $spacing--15;
+      right: $spacing--15;
+      cursor: pointer;
+
+      path {
+        fill: $color-primary--1;
       }
     }
 
@@ -314,8 +322,8 @@
       .swiper-button-next:not(.swiper-button-disabled) {
         @include media(xs) {
           opacity: 1;
-          transition: all 0.2s linear;
-          transition-delay: 0.2s;
+          transition: all $transition-duration-200 linear;
+          transition-delay: $transition-duration-200;
           visibility: visible;
         }
       }

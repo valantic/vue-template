@@ -9,7 +9,7 @@
     <div ref="content" :class="b('content')" :style="{ maxHeight }">
       <div ref="inner" :class="b('inner')">
         <!-- @slot Used for item content -->
-        <slot></slot>
+        <slot :is-open="isOpen"></slot>
       </div>
     </div>
 
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-  import EventBus from '@/setup/event-bus';
 
   /**
    * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
@@ -39,7 +38,7 @@
       },
 
       /**
-       * Defines if the item has a grey background
+       * Defines if the item has a grey background.
        */
       background: {
         type: Boolean,
@@ -47,7 +46,7 @@
       },
 
       /**
-       * Defines if inner content has padding left/right
+       * Defines if inner content has padding left/right.
        *
        *
        */
@@ -57,7 +56,7 @@
       },
 
       /**
-       * Title of the toggle item
+       * Title of the toggle item.
        */
       title: {
         type: String,
@@ -67,10 +66,31 @@
 
     data() {
       return {
+        /**
+         * @type {Boolean} Defines the current state of the collapse.
+         */
         isExpanded: this.$props.active,
+
+        /**
+         * @type {String|Number} The maxHeight of the content used for transition.
+         */
         maxHeight: '',
+
+        /**
+         * @type {Number} The timeout for transition open the collapse.
+         */
         openTimeout: null,
+
+        /**
+         * @type {Number} The timeout for the transition before it can start closing the collapse.
+         */
         closeTimeout: null,
+
+        /**
+         * @type {Boolean} Defines if the collapse is currently open. This also waits until the transition is finished,
+         * so that calculations depending on the height of the content can be done by the child component.
+         */
+        isOpen: this.$props.active,
       };
     },
 
@@ -94,7 +114,7 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      EventBus.$on('c-collapse-group.toggle', (payload) => {
+      this.$eventBus.$on('c-collapse-group.toggle', (payload) => {
         const toggledElement = payload.toggledCollapse;
         const toggleGroup = payload.component;
 
@@ -133,13 +153,13 @@
         }
 
         /**
-         * Emits toggled event to EventBus
+         * Emits toggled event to EventBus.
          *
          * @event     c-collapse.toggled
          * @type      {object}
          * @property  {object}   component  Current component
          */
-        EventBus.$emit('c-collapse.toggled', { component: this });
+        this.$eventBus.$emit('c-collapse.toggled', { component: this });
       },
 
       /**
@@ -152,7 +172,8 @@
 
         this.openTimeout = setTimeout(() => {
           this.maxHeight = 'none';
-        }, 500);
+          this.isOpen = true;
+        }, 300);
       },
 
       /**
@@ -160,6 +181,7 @@
        */
       close() {
         this.setMaxHeight();
+        this.isOpen = false;
 
         clearTimeout(this.openTimeout);
 
@@ -182,7 +204,6 @@
 <style lang="scss">
   .c-collapse {
     border-top: 1px solid $color-grayscale--600;
-    font-family: $font-family--primary;
 
     &:last-child {
       border-bottom: 1px solid $color-grayscale--600;
@@ -265,7 +286,7 @@
     }
 
     &__inner {
-      padding: $spacing--10 0 $spacing--10 0;
+      padding: $spacing--10 0;
 
       .c-collapse--padding & {
         padding: $spacing--10 $spacing--10 $spacing--10 $spacing--30;

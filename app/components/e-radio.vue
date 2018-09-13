@@ -1,10 +1,9 @@
-<!--suppress ALL -->
 <template>
   <div :class="b(modifiers)">
     <label :class="b('label')"
-           @mouseenter="isHover = true"
-           @mouseleave="isHover = false">
-      <input :class="b('field')"
+           @mouseenter="hasHover = true"
+           @mouseleave="hasHover = false">
+      <input :class="b('field', { selected: internalValue === value })"
              v-bind="$attrs"
              :disabled="disabled"
              :value="value"
@@ -14,7 +13,9 @@
              @change="onChange"
       >
       <span :class="b('fake-button')"></span>
-      <span :class="b('label-name')">{{ displayName }}</span>
+      <span :class="b('label-name')">
+        <slot></slot>
+      </span>
     </label>
   </div>
 </template>
@@ -24,6 +25,8 @@
 
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
+   *
+   * The displayed name can either be provided by the property `displayName` or as a slot.
    */
   export default {
     name: 'e-radio',
@@ -46,15 +49,7 @@
        */
       value: {
         required: true,
-        type: String,
-      },
-
-      /**
-       * Adds displayed value of the radio element.
-       */
-      displayName: {
-        required: true,
-        type: String,
+        type: [String, Number],
       },
 
       /**
@@ -70,7 +65,7 @@
        */
       selected: {
         default: '',
-        type: String,
+        type: [String, Number],
       }
     },
     // data() {
@@ -165,7 +160,6 @@
     }
 
     &__label-name {
-      padding-left: $spacing--25;
       cursor: pointer;
       color: $color-grayscale--400;
     }
@@ -173,10 +167,11 @@
     &__label {
       cursor: pointer;
       margin-bottom: 0;
+      padding-left: $spacing--25;
     }
 
     &__field:checked ~ &__fake-button::after {
-      background-color: var(--theme-color-secondary-2);
+      background-color: $color-secondary--2;
       border-radius: 25px;
       content: '';
       display: block;
@@ -187,11 +182,11 @@
     }
 
     &__field:checked ~ &__fake-button {
-      border: 1px solid var(--theme-color-primary-1);
+      border: 1px solid $color-primary--1;
     }
 
     &__field:checked ~ &__label-name {
-      color: var(--theme-color-secondary-2);
+      color: $color-secondary--2;
     }
 
     /* stylelint-disable no-descending-specificity */
@@ -199,13 +194,7 @@
     // hover
     &--hover &__fake-button,
     &__field:hover ~ &__fake-button {
-      border: 1px solid var(--theme-color-primary-1);
-    }
-
-    // focus
-    &--focus &__fake-button,
-    &__field:focus ~ &__fake-button {
-      border: 1px solid var(--theme-color-primary-1);
+      border: 1px solid $color-primary--1;
     }
 
     // disabled

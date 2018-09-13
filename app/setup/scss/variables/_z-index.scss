@@ -1,8 +1,13 @@
 $z-index: (
   back: -1,
   front: 1,
+  navigation: 10,
+  dropdown: 15,
+  searchSuggestions: 20,
+  info-label: 100,
+  date-picker: 120,
   form-notification: 300,
   header: 900,
   modal: 1000,
-  info-label: 100,
+  global-notification: 1100,
 );

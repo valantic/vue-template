@@ -4,8 +4,9 @@ Always use **v-model** to bind value to form elements!
 ```vue
 <template>
 <div>
-
-  <e-checkbox v-model="checked" :name="name" :value="value" :display-name="value"/>
+  <div style="display: block;">
+    <e-checkbox v-model="checked" :name="name" :value="value" :display-name="value">example</e-checkbox>
+  </div>
   
   <div class="spacing--top-15">
     <pre>checked: {{ checked }}</pre>
@@ -41,7 +42,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
     :name="item.name" 
     :value="item.value" 
     :display-name="item.displayName"
-    style="margin-bottom: 10px"/>
+    style="margin-bottom: 10px">example</e-checkbox>
   
   <div class="spacing--top-15">
     <pre>checked: {{ checked }}</pre>
@@ -63,7 +64,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
       ],
       
       // The list of IDs of checked items
-      checked: []
+      checked: ['checkbox2']
     })
   };
 </script>
@@ -74,7 +75,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 <template>
 <div>
 
-  <e-checkbox checked v-model="checked" :name="name" :value="value" :display-name="value"/>
+  <e-checkbox checked v-model="checked" :name="name" :value="value" :display-name="value">example</e-checkbox>
   
 </div>
 </template>
@@ -96,7 +97,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 <template>
 <div>
 
-  <e-checkbox disabled v-model="checked" :name="name" :value="value" :display-name="value"/>
+  <e-checkbox disabled v-model="checked" :name="name" :value="value" :display-name="value">example</e-checkbox>
   
 </div>
 </template>

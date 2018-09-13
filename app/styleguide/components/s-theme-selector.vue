@@ -1,17 +1,22 @@
 <template>
-  <select :class="b()" @change="onChange">
-    <option v-for="theme in themes"
-            :value="theme.id"
-            :key="theme.id"
-            :selected="theme.selected"
-    >
-      {{ theme.name }}
-    </option>
-  </select>
+  <label>
+    <span class="invisible">Theme</span>
+    <select :class="b()" @change="onChange">
+      <option v-for="theme in themes"
+              :value="theme.id"
+              :key="theme.id"
+              :selected="theme.selected"
+      >
+        {{ theme.name }}
+      </option>
+    </select>
+  </label>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
+
+  const THEME_PATH = '/assets/css/shop.theme-';
 
   export default {
     name: 's-theme-selector',
@@ -23,23 +28,23 @@
       return {
         defaultThemes: [
           {
-            name: 'Foo01',
+            name: 'Winterhalter - Fenner',
             id: '01'
           },
           {
-            name: 'Foo02',
+            name: 'Electro LAN SA',
             id: '02'
           },
           {
-            name: 'Foo03',
+            name: 'Fabri',
             id: '03'
           },
           {
-            name: 'Foo04',
+            name: 'Dysbox',
             id: '04'
           },
           {
-            name: 'Foo05',
+            name: 'Electroplast SA',
             id: '05'
           }
         ],
@@ -53,7 +58,7 @@
          *
          * @returns  {String}  theme id
          */
-        globalTheme: 'session/getTheme'
+        globalTheme: 'session/theme'
       }),
 
       /**
@@ -97,7 +102,7 @@
           } else {
             const link = document.getElementById(cssId);
 
-            link.href = `/static/css/theme-${theme}.css`;
+            link.href = `${THEME_PATH}${theme}.css`;
           }
         }
       }
@@ -124,7 +129,7 @@
         link.id = cssId;
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = `/static/css/theme-${themeId}.css`;
+        link.href = `${THEME_PATH}${themeId}.css`;
         link.media = 'all';
 
         head.appendChild(link);

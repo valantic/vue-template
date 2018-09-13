@@ -1,25 +1,87 @@
 <template>
-  <div :class="b()">
-    <h1>Swiper example (c-swiper-gallery)</h1>
-    <c-swiper-gallery :images="product.images"/>
+  <l-default>
+    <div :class="b()">
+      <h1>Hero slider examples</h1>
+      <div :class="b('hero-gallery')">
+        <h2>Less than seven images (c-swiper-hero)</h2>
+        <c-swiper-hero :images="items" :options="{ loop: false }" />
+      </div>
 
-  </div>
+      <div :class="b('hero-gallery')">
+        <h2>More than seven images (c-swiper-hero)</h2>
+        <c-swiper-hero :images="items2" :options="{ speed: 1000 }" />
+      </div>
+
+      <div :class="b('product-gallery')">
+        <h2>Swiper example (c-swiper-gallery)</h2>
+        <c-swiper-gallery :images="product.images" />
+      </div>
+    </div>
+  </l-default>
 </template>
 
 <script>
-  import CSwiperGallery from '@/components/c-swiper-gallery';
+  import cSwiperGallery from '@/components/c-swiper-gallery';
+  import cSwiperHero from '@/components/c-swiper-hero';
+  import lDefault from '@/components/l-default';
   import { mapGetters } from 'vuex';
 
   export default {
     name: 'swiper',
     components: {
-      CSwiperGallery,
+      cSwiperGallery,
+      cSwiperHero,
+      lDefault,
+    },
+    data() {
+      return {
+        items: [
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.google.ch',
+          },
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.valantic.com',
+          },
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.github.com',
+          },
+        ],
+        items2: [
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.google.ch',
+          },
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.google.ch',
+          },
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.google.ch',
+          },
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.google.ch',
+          },
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.google.ch',
+          },
+          {
+            imageUrl: 'http://via.placeholder.com/1600x500',
+            href: 'http://www.google.ch',
+          },
+        ],
+      };
     },
     computed: {
-      ...mapGetters({
-        product: 'product/product',
-      }),
-    }
+      ...mapGetters('product', [
+        'product',
+      ]),
+    },
   };
 </script>
 
@@ -30,6 +92,15 @@
     @include media(xs) {
       max-width: 1000px;
       padding: $spacing--30;
+    }
+
+    &__hero-gallery {
+      max-width: 845px;
+      margin-bottom: $spacing--30;
+    }
+
+    &__product-gallery {
+      max-width: 400px;
     }
   }
 </style>

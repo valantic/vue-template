@@ -5,7 +5,7 @@
 /// @param   {string|number}   [$down]         Either a breakpoint identifier (xxs, xs, ...) or an absolute value (with unit)
 /// @param   {string}          [$media=all]    The targeted media
 ///
-@mixin media($up: null, $down: null, $media: all, $breakpoints: $grid-breakpoints) {
+@mixin media($up: null, $down: null, $media: all, $breakpoints: $breakpoints) {
   $query: if($media == all, "all", "only #{$media}");
   $indexOfUpBreakpoint: index(map-keys($breakpoints), $up);
   $indexOfDownBreakpoint: index(map-keys($breakpoints), $down);
@@ -23,13 +23,15 @@
   $downIsBiggerThanUp: (not($up) or not($down)) or ($isValidUpValue and $isValidDownValue and $upValue < $downValue);
 
   @if not($isValidUpValue) {
-    @warn "media(): no valid $up value";
+    @error "media(): no valid $up value.";
   } @else if not($isValidDownValue) {
-    @warn "media(): no valid $down value";
+    @error "media(): no valid $down value.";
   } @else if not($downIsBiggerThanUp) {
-    @warn "media(): $up is bigger than $down";
+    @error "media(): $up is bigger than $down.";
   } @else if $up == null and $down == null and $media == all {
-    @warn "media(): At least one of the parameters MUST be defined ($up, $down, $media)";
+    @error "media(): At least one of the parameters MUST be defined ($up, $down, $media).";
+  } @else if $upValue == 0 and $down == null and $media == all {
+    @error "media(): The given selector would not define a meaningful scope and should be removed.";
   } @else {
     @if $up {
       @if $upValue != 0 {

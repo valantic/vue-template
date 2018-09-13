@@ -1,29 +1,55 @@
 {
   "s-language": {
-    "en": "Englisch",
     "de": "Deutsch"
   },
   "e-progress": {
     "loading": "Lade …"
   },
+  "c-footer": {
+    "sonepar": "A Sonepar Company",
+    "soneparLink": "http://www.sonepar.ch"
+  },
   "c-social-media": {
     "followUs": "Folgen Sie uns auf:",
-    "facebookUrl": "https://www.facebook.com/foo/",
+    "facebookUrl": "https://www.facebook.com/winterhalterfenner/",
     "facebookTitle": "Facebook",
     "inUrl": "https://www.linkedin.com/m/login/",
     "inTitle": "LinkedIn",
-    "xingUrl": "https://www.xing.com/companies/foo",
+    "xingUrl": "https://www.xing.com/companies/winterhalter+fennerag?sc_o=da980_e",
     "xingTitle": "Xing"
   },
-  "c-productlist-wrapper": {
-    "prductlistArticles": "0 Artikel | 1 Artikel | {count} Artikel"
+  "c-product-list-wrapper": {
+    "productListArticles": "0 Artikel | 1 Artikel | {count} Artikel",
+    "amount": "Menge",
+    "grossPriceLabel": "Bto. CHF.",
+    "loadMoreProducts": "weitere Produkte laden",
+    "netPriceLabel": "Nto. CHF.",
+    "noProductsFound": "Keine Produkte gefunden",
+    "sorting": "Sortierung"
   },
-  "c-product-detail": {
+  "c-product-list": {
+    "amount": "Menge",
+    "grossPriceLabel": "Bto. CHF.",
+    "netPriceLabel": "Nto. CHF.",
+    "scrollToTop": "Nach oben scrollen"
+  },
+  "c-product-detail-wrapper": {
     "productDescriptionTitle": "Produktbeschreibung",
     "productDocumentsTitle": "Dokumente",
     "productPdfsTitle": "PDFs",
     "technicalDataTitle": "Technische Daten",
-    "productVideosTitle": "Videos"
+    "productVideosTitle": "Videos",
+    "downloadLinkTitle": "Datei herunterladen",
+    "videoLinkTitle": "Video öffnen",
+    "accessoryProductsTitle": "Zubehör",
+    "alternativeProductsTitle": "Alternativartikel",
+    "lessAccessories": "weniger Zubehör",
+    "lessProducts": "weniger Produkte",
+    "moreAccessories": "weiteres Zubehör ({amount})",
+    "moreProducts": "weitere Produkte ({amount})",
+    "necessaryAccessoryProductsTitle": "Nötiges Zubehör",
+    "productConsistsOfTitle": "Bestandteile",
+    "replacementProductsTitle": "Ersatzartikel"
   },
   "c-header-links": {
     "labelWishlist": "Merkliste",
@@ -32,36 +58,478 @@
   },
   "c-search": {
     "placeholder": "Nach Produkten und Kategorien suchen",
-    "title": "Suchen"
+    "title": "Suchen",
+    "input": "Suche",
+    "removeSearchTerm": "Suchbegriff löschen",
+    "searchButton": "Suchen"
   },
   "e-info-label": {
     "priceType1": "Aktion",
     "priceType2": "Neu",
-    "priceType3": "Sonderpreis",
-    "priceType4": "Aktion solange Vorrat",
-    "priceType5": "Währungsrabatt"
+    "priceType3": "Aktion",
+    "priceType4": "Aktion",
+    "priceType5": "Aktion"
   },
   "c-prices": {
     "grossLabel": "Bruttopreis",
     "netLabel": "Nettopreis"
   },
   "c-add-to-cart": {
-    "addToCart": "in den Warenkorb"
-  },
-  "c-linklist": {
-    "downloadTitle": "Datei herunterladen"
+    "addToCart": "in den Warenkorb",
+    "inputLabel": "Menge",
+    "notLoggedInMessage": "Sie müssen sich einloggen, um den Artikel zu bestellen.",
+    "notLoggedInTitle": "Bitte anmelden",
+    "replaceItem": "Produkt ersetzen"
   },
   "c-swiper": {
     "images": "0 Bilder | 1 Bild | {count} Bilder",
     "zoom": "Bild vergrössern"
   },
+  "c-notification": {
+    "confirm": "OK",
+    "decline": "Abbrechen"
+  },
+  "c-mini-cart": {
+    "cart": "Warenkorb"
+  },
   "urls": {
     "cart": "/cart",
     "linkAccount": "/account",
-    "linkWishlist": "/wishlist",
-    "linkLogin": "/login"
+    "linkShoppingList": "/shopping-list",
+    "linkLogin": "/login",
+    "account": "/account",
+    "addShoppingList": "/shopping-list",
+    "addShoppingListsToCart": "/shopping-list/batch-add-to-cart",
+    "addToShoppingList": "/shopping-list/{listId}",
+    "cartData": "/cart-data",
+    "category": "/category",
+    "checkout": "/checkout",
+    "confirmCartChange": "/confirm-cart-change",
+    "createUser": "/company/user/create",
+    "deleteAccount": "/account/remove/{userId}",
+    "login": "/login",
+    "logout": "/logout",
+    "multiGet": "/product/multi-get",
+    "orderSuccess": "/checkout/success",
+    "placeOrder": "/checkout/place-order",
+    "product": "/product",
+    "productRelations": "/product-relations",
+    "quickAddToShoppingList": "/shopping-list/{listId}/quick-add",
+    "removeAllItemsFromShoppingList": "/shopping-list",
+    "removeItemFromShoppingList": "/shopping-list",
+    "removeShoppingLists": "/shopping-list/batch-remove",
+    "restorePassword": "/restore-password",
+    "shoppingListDetail": "/shopping-list/details",
+    "shoppingListsGetOverview": "/shopping-list/overview",
+    "shoppingListsOverview": "/shopping-list",
+    "updatePassword": "/update-password",
+    "updateSharingState": "/shopping-list",
+    "updateShoppingList": "/shopping-list",
+    "updateShoppingListDetail": "/shopping-list/{listId}",
+    "updateShoppingListQuantities": "/shopping-list/{listId}/change-quantity",
+    "updateUser": "/user",
+    "userManagementDetail": "/company/user/view/{userId}",
+    "userManagementOverview": "/company/user/view"
   },
   "e-select": {
     "chooseOption": "Bitte wählen"
+  },
+  "c-multiselect": {
+    "search": "suchen",
+    "save": "Speichern",
+    "itemsEmpty": "Keine Ergebnisse.",
+    "searchTitle": "Suche"
+  },
+  "e-logo": {
+    "linkTitle": "zur Startseite",
+    "alt01": "Winterhalter Fenner Logo",
+    "alt02": "Electro LAN Logo",
+    "alt03": "Fabbri Logo",
+    "alt04": "Dysbox Logo",
+    "alt05": "Electroplast Logo"
+  },
+  "c-product-tile": {
+    "eNumber": "E-Nr",
+    "alternatives": "Alternativartikel",
+    "replacementAvailable": "Ersatzartikel verfügbar",
+    "accessories": "Zubehör",
+    "necessaryAccessories": "nötiges Zubehör",
+    "consists": "Bestandteile",
+    "grossPriceLabel": "Bruttopreis CHF.",
+    "netPriceLabel": "Nettopreis CHF.",
+    "relationsClose": "Schliessen",
+    "removeItemButtonText": "Artikel \"{name}\" löschen",
+    "removeItemTitle": "Artikel löschen"
+  },
+  "c-login": {
+    "loginTitle": "Anmeldung",
+    "username": "Benutzername oder E-Mail",
+    "password": "Passwort",
+    "forgotPasswordText": "Passwort vergessen",
+    "forgotPasswordTitle": "Klicken Sie hier um Ihr Passwort zurückzusetzen.",
+    "buttonText": "Anmelden",
+    "buttonTitle": "Klicken Sie hier um sich anzumelden.",
+    "saveLogin": "Angemeldet bleiben",
+    "registerTitle": "Neukunde?",
+    "registerLinkText": "zum Registrierungsformular",
+    "registerLinkTitle": "Noch kein Kunde? Dann gehts hier zur Registrierung.",
+    "accountLinkTitle": "Gehe zu {name}",
+    "accountTitle": "Konto {firstName} {lastName}",
+    "logoutText": "Abmelden",
+    "logoutTitle": "Klicken Sie hier um sich abzumelden"
+  },
+  "c-address-selector": {
+    "noResultsText": "Keine Adressen gefunden",
+    "searchPlaceholder": "Suchen",
+    "searchTitle": "Filtern Sie die Adressen mit einem Suchbegriff"
+  },
+  "c-availability-detail": {
+    "moreWarehouses": "weitere Abholstandorte",
+    "quantityOnHand": "Total an Lager: {stock}"
+  },
+  "c-availability": {
+    "title": "Lieferstatus und Abholstatus"
+  },
+  "c-breadcrumb": {
+    "linkTitle": "Gehe zu {name}"
+  },
+  "c-cart-address-form": {
+    "labelAdditionalAddress": "Adresszusatz (optional)",
+    "labelAdditionalName": "Namenzusatz (optional)",
+    "labelAdditionalStreet": "Strassenzusatz (optional)",
+    "labelCity": "Ort",
+    "labelCompanyName": "Firmenname",
+    "labelStreet": "Strasse",
+    "labelStreetNumber": "Nr.",
+    "labelZip": "PLZ",
+    "submitText": "Verwenden"
+  },
+  "c-cart-wrapper": {
+    "cartItems": "0 Artikel | 1 Artikel | {count} Artikel",
+    "contractSelectorLabel": "Objekt Bezeichnung",
+    "contractSelectorText": "Die Verfügbarkeit und Preise basieren auf der gewählten Adresse oder Objekt.",
+    "deliveryAddressModalTabName": "Lieferadresse wählen",
+    "deliveryAddressModalTitle": "Lieferadresse ändern",
+    "deliveryAddressSaveButton": "Übernehmen",
+    "deliveryOptionTitle": "Adress- und Objektauswahl",
+    "editAddressTitle": "Bearbeiten",
+    "exportLink": "Export als PDF / Drucken",
+    "nextName": "Weiter",
+    "nextTitle": "Weiter zum Checkout",
+    "noAddressSelected": "Keine Adresse ausgewählt",
+    "noItemsText": "Keine Artikel im Warenkorb",
+    "noPickupOptionSelected": "Abholstandort wählen",
+    "orderButtonLabel": "Bestellen",
+    "pickupLocationSaveButton": "Übernehmen",
+    "pickupLocationTitle": "Abholstandort ändern",
+    "quickOrderTitle": "Direktbestellung",
+    "refreshTitle": "Warenkorb aktualisieren",
+    "removeAllItems": "Alle Artikel löschen",
+    "removeAllItemsTitle": "Klicken Sie hier um alle Artikel aus der Liste zu entfernen",
+    "temporaryAddressModalTabName": "einmalige Lieferadresse verwenden",
+    "title": "Warenkorb",
+    "totalTitle": "Gesamtbetrag",
+    "updateAndNextName": "Aktualisieren und Weiter",
+    "withoutPrice": "ohne Preis"
+  },
+  "c-catalog-filter": {
+    "buttonMobileCancel": "Schliessen",
+    "buttonMobileSave": "Übernehmen",
+    "chooseOption": "Bitte wählen",
+    "removeAllTitle": "Klicken Sie hier um alle Filter zurückzusetzen",
+    "resetAllFilters": "Alle Filter löschen",
+    "titleMobileClosed": "Filter",
+    "titleMobileOpen": "Filter"
+  },
+  "c-category-tile": {
+    "productsCount": "0 Produkte | 1 Produkt | {count} Produkte"
+  },
+  "c-checkout-notes": {
+    "contactName": "Ihr Name | Ihr Name (optional)",
+    "contactNameNotification": "Ihr Name",
+    "customerCommission": "Kostenstelle | Kostenstelle (optional)",
+    "customerCommissionNotification": null,
+    "fieldOptional": "(optional)",
+    "messageToSales": "Mitteilung für den Verkauf | Mitteilung für den Verkauf (optional)",
+    "messageToSalesNotification": "Mitteilung für den Verkauf",
+    "orderText": "Text zur Bestellung | Text zur Bestellung (optional)",
+    "orderTextNotification": "Text zur Bestellung",
+    "textReference": "Referenz | Referenz (optional)",
+    "textReferenceNotification": "Referenz",
+    "title": "Kennzeichnung"
+  },
+  "c-checkout-wrapper": {
+    "backButtonHref": "/cart",
+    "backButtonText": "Zurück zum Warenkorb",
+    "deliveryAddress": "Lieferadresse",
+    "noObjectSelected": "Kein Objekt gewählt",
+    "object": "Objekt",
+    "orderButtonTitle": "Bestellen",
+    "productOverview": "Produktübersicht",
+    "title": "Bestellübersicht"
+  },
+  "c-date-picker-input": {
+    "chooseDate": "Datum wählen",
+    "chooseYear": "Jahr wählen"
+  },
+  "c-delivery-confirmation": {
+    "label": "Auftragsbestätigung",
+    "title": "Bestätigung"
+  },
+  "c-delivery-options": {
+    "allowSplitDelivery": "Teillieferung erlauben",
+    "chooseDate": "Datum wählen",
+    "deliveryDate": "Lieferdatum",
+    "immediate": "Sofort",
+    "splitDelivery": "Teillieferung",
+    "title": "Lieferoptionen"
+  },
+  "c-header": {
+    "assortment": "Sortiment",
+    "loginCloseButtonText": "Schliessen des Login / Account Fensters",
+    "menu": "Menü"
+  },
+  "c-main-navigation-desktop": {
+    "back": "Zurück",
+    "close": "schliessen",
+    "favorites": "meine Favoriten",
+    "goToProductList": "Zur Produktliste",
+    "more": "mehr"
+  },
+  "c-main-navigation-mobile": {
+    "back": "Zurück",
+    "close": "schliessen",
+    "favorites": "meine Favoriten"
+  },
+  "c-modal-header-01": {
+    "closeTitle": "Fenster schliessen"
+  },
+  "c-news-teaser": {
+    "linkText": "mehr Infos",
+    "linkTitle": "mehr zu {name}"
+  },
+  "c-notification-product-tile": {
+    "checkoutLink": "zur Kasse",
+    "eNumber": "E-Nr."
+  },
+  "c-order-success-wrapper": {
+    "continueShopping": "Weiter einkaufen",
+    "viewInAccount": "Im Konto ansehen"
+  },
+  "c-promotion-item": {
+    "linkTitle": "Mehr zu {name}"
+  },
+  "c-quick-order": {
+    "buttonText": "Erfassen",
+    "buttonTitle": "Artikel hinzufügen",
+    "erpLabel": "Artikel Nummer die Sie erfassen möchten (ERP)",
+    "erpPlaceholder": "Artikel Nr.",
+    "quantityLabel": "Anzahl der Einheiten welche Sie hinzufügen möchten"
+  },
+  "c-restore-password-form": {
+    "passwordDoesNotMatch": "Die angegebenen Passwörter stimmen nicht überein."
+  },
+  "c-restore-password": {
+    "submit": "Passwort senden",
+    "title": "Passwort anfordern",
+    "usernameLabel": "Benutzername oder E-Mail"
+  },
+  "c-search-categories": {
+    "linkTitle": "zur Kategorie {name}",
+    "title": "Kategorien"
+  },
+  "c-search-category-item": {
+    "amountOfProducts": "0 Produkte | 1 Produkt | {count} Produkte",
+    "linkTitle": "Gehe zu {name}"
+  },
+  "c-search-product-item": {
+    "eNumberLabel": "E-No:",
+    "linkTitle": "Gehe zu {name}"
+  },
+  "c-search-result-wrapper": {
+    "categoryFilter": "Kategoriefilter",
+    "loadMoreProducts": "weitere Produkte laden",
+    "noProductsFound": "Keine Produkte gefunden",
+    "productListArticles": "0 Artikel | 1 Artikel | {count} Artikel",
+    "sorting": "Sortierung",
+    "subTitle": "Keine Ergebnisse für \"{term}\"",
+    "title": "0 Ergebnisse für \"{term}\" | 1 Ergebnis für \"{term}\" | {count} Ergebnisse für \"{term}\"",
+    "titleAdditional": "0 Ergebnisse für \"{term}\" | 1 Ergebnis für \"{term}\" | {count} Ergebnisse für \"{term}\"",
+    "titleCorrection": "Meinten Sie \"{term}\"?"
+  },
+  "c-search-suggestions": {
+    "categoryTitle": "Kategorien",
+    "productTitle": "Produkte"
+  },
+  "c-shopping-list-detail-wrapper": {
+    "addAllToCart": "Alles in den Warenkorb",
+    "addAllToCartTitle": "Alle Artikel in den Warenkorb legen.",
+    "back": "Zurück",
+    "backTitle": "Zurück zu den Shopping-Listen",
+    "description": "Bemerkungen (optional)",
+    "editButtonTitle": "Bearbeiten",
+    "editDescriptionTitle": "Beschreibung",
+    "editNameTitle": "Name",
+    "editTextReferenceTitle": "Referenz",
+    "isShared": "Freigegeben",
+    "itemsCountLabel": "Position | Positionen",
+    "owner": "Ersteller",
+    "refreshAndAllToCart": "Aktualisieren und in den Warenkorb",
+    "refreshTitle": "Aktualisieren",
+    "removeAllItems": "Alle Artikel löschen",
+    "removeAllItemsTitle": "Klicken Sie hier um alle Artikel aus der Liste zu entfernen",
+    "save": "Speichern",
+    "saveButtonTitle": "Änderungen speichern",
+    "textReference": "Referenz (optional)",
+    "totalTitle": "Gesamtbetrag",
+    "updateAndAddAllToCart": "Aktualisieren und alles in den Warenkorb",
+    "updateAndAddAllToCartTitle": "Aktualisieren und alles in den Warenkorb",
+    "updatedAt": "Letzte Änderung"
+  },
+  "c-shopping-list-modal": {
+    "description": "Bezeichnung",
+    "input": "Suche",
+    "newListPlaceholder": "Merkliste hinzufügen",
+    "noResultsQuery": "{searchQueryInput}",
+    "noResultsText": "Keine Ergebnisse für:",
+    "noShoppingLists": "Noch keine Merklisten vorhanden.",
+    "notLoggedInMessage": "Sie müssen sich einloggen, um den Artikel zur Merkliste hinzufügen zu können. ",
+    "notLoggedInTitle": "Bitte anmelden",
+    "searchPlaceholder": "Durchsuchen",
+    "title": "Merkliste hinzufügen/anlegen"
+  },
+  "c-shopping-list-modal-icon": {
+    "addItemTitle": "Produkt zur Merkliste hinzufügen"
+  },
+  "c-shopping-list-toolbar": {
+    "addToCartText": "In den Warenkorb",
+    "addToCartTitle": "Alle markierten Listen in den Warenkorb legen.",
+    "deleteText": "Löschen",
+    "deleteTitle": "Alle markierten Listen löschen.",
+    "duplicateText": "Duplizieren",
+    "duplicateTitle": "Alle markierten Listen duplizieren.",
+    "exportText": "Exportieren",
+    "exportTitle": "Alle markierten Listen exportieren.",
+    "selectedLists": "Merklisten ausgewählt | Merkliste ausgewählt | Merklisten ausgewählt",
+    "unselectTitle": "Selektierung aufheben"
+  },
+  "c-shopping-list-wrapper": {
+    "addItemButtonText": "Merkliste hinzufügen",
+    "addItemButtonTitle": "Neue Merkliste hinzufügen",
+    "defaultName": "Neue Merkliste",
+    "iconLinkTitle": "Merkliste anzeigen",
+    "name": "Merkliste Bezeichnung",
+    "noResultsText": "Noch keine Merklisten verfügbar",
+    "numberOfItems": "Anzahl Positionen",
+    "overviewTitle": "Shopping-Liste",
+    "owner": "Ersteller",
+    "searchPlaceholder": "Durchsuchen",
+    "searchTitle": "Tabelle durchsuchen",
+    "shared": "Freigegeben",
+    "sharedCheckboxLabel": "Liste Freigeben",
+    "totalPrice": "Warenwert",
+    "updatedAt": "Letzte Änderung"
+  },
+  "c-table": {
+    "deselectAll": "Auswahl aufheben",
+    "linkLabel": "Link zur Detailseite",
+    "noResultsFound": "Keine Resultate gefunden",
+    "searchPlaceholder": "Durchsuchen",
+    "searchTitle": "Suchen Sie hier innerhalb der Tabelle",
+    "selectAll": "Alle auswählen",
+    "selectItem": "Auswählen"
+  },
+  "c-table-pagination": {
+    "from": "von",
+    "itemsPerPage": "Anzahl pro Seite:",
+    "lastPageTitle": "Gehe zur vorherigen Seite",
+    "nextPageTitle": "Gehe zur nächsten Seite",
+    "pageNumberTitle": "Gehe zur Seite {pageNumber}"
+  },
+  "c-total-price": {
+    "discountTotal": "Rabatte",
+    "expenseTotal": "Zuschläge",
+    "grandTotal": "Total",
+    "inclTax": "inkl. MwSt",
+    "netTotal": "Total exkl. MwSt",
+    "subTotal": "Warenwert",
+    "taxTotal": "MwSt"
+  },
+  "c-user": {
+    "account": "Konto",
+    "adminTitle": "Konto Einstellungen",
+    "backLinkText": "Zurück",
+    "backLinkTitle": "Zurück zur Übersicht",
+    "deleteAccount": "Konto löschen",
+    "deliveryAndPickupTitle": "Lieferung & Abholung",
+    "orderAndDeliveryOptions": "Bestell- und Lieferoptionen",
+    "orderConfirmationTitle": "Auftragsbestätigung",
+    "permissions": "Rechte",
+    "role": "Rolle",
+    "title": "Konto",
+    "userData": "Kontodaten",
+    "userId": "User ID"
+  },
+  "c-user-account-data": {
+    "email": "E-Mail",
+    "fax": "Fax (optional)",
+    "firstName": "Vorname",
+    "languageSelectorLabel": "Sprache",
+    "lastName": "Name",
+    "mobile": "Mobile",
+    "phone": "Telefon",
+    "submitText": "Speichern"
+  },
+  "c-user-account-password-form": {
+    "confirmPassword": "Neues Passwort wiederholen*",
+    "newPassword": "Neues Passwort*",
+    "submitText": "Speichern"
+  },
+  "c-user-confirmation-settings": {
+    "confirmationMethodsTitle": "Auftragsbestätigung",
+    "emailPlaceholder": "Neue E-Mail Adresse eintragen",
+    "emailTitle": "E-Mail",
+    "emailTo": "Kopie an",
+    "saveButtonText": "Speichern"
+  },
+  "c-user-create-form": {
+    "confirmPassword": "Passwort wiederholen (optional)",
+    "email": "E-Mail",
+    "fax": "Fax (optional)",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "mobile": "Mobile (optional)",
+    "password": "Passwort (optional)",
+    "phone": "Telefon (optional)",
+    "submitText": "Speichern"
+  },
+  "c-user-delivery-options": {
+    "deliveryAddressTitle": "Lieferadresse",
+    "deliverySettings": "Versandart",
+    "deliverySettingsCheckbox": "Kontoauszug / OP anzeigen",
+    "editButtonTitle": "Adresse ändern",
+    "partDeliveryCheckbox": "Bestellungen tätigen",
+    "partDeliveryTitle": "Teillieferungen",
+    "pickupLocation": "Standard Abholstandort",
+    "saveButtonText": "Speichern"
+  },
+  "c-user-management": {
+    "createUserButtonText": "Benutzer anlegen",
+    "createUserButtonTitle": "Neuen Benutzer anlegen",
+    "createUserModalTitle": "Benutzer anlegen",
+    "email": "E-Mail",
+    "iconLinkTitle": "Benutzer anzeigen",
+    "name": "Anzeige Name",
+    "noResultsText": "Keine Benutzer gefunden",
+    "role": "Benutzerrolle",
+    "searchPlaceholder": "Durchsuchen",
+    "searchTitle": "Tabelle durchsuchen",
+    "userId": "User ID"
+  },
+  "globalMessages": {
+    "unknownApiError": "Es ist ein unbekannter Fehler aufgetreten."
+  },
+  "search": {
+    "getSuggestionUrl": "/search/suggestion/"
   }
 }

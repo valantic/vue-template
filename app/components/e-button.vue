@@ -35,17 +35,19 @@
       /**
        * Modifies the inner spacing for the button.
        *
-       * Valid values: `0, 500`
+       * Valid values: `0, 500, 600, 700`
        */
       spacing: {
         type: [String, Number],
-        default: 0,
+        default: 500,
         validator(value) {
           return [
             0,
-            500
+            500,
+            600,
+            700,
           ].includes(parseInt(value, 10));
-        }
+        },
       },
 
       /**
@@ -107,8 +109,19 @@
 
     data() {
       return {
+        /**
+         * @type {Boolean} Internal flag to determine hover state.
+         */
         hasHover: this.$props.hover,
+
+        /**
+         * @type {Boolean} Internal flag to determine active state.
+         */
         isActive: this.$props.active,
+
+        /**
+         * @type {Boolean} Internal flag to determine focus state.
+         */
         hasFocus: this.$props.focus,
       };
     },
@@ -128,25 +141,56 @@
     // destroyed() {},
 
     methods: {
+
+      /**
+       * Mouseenter event handler.
+       */
       onMouseEnter() {
         this.hasHover = true;
       },
+
+      /**
+       * Mouseleave event handler.
+       */
       onMouseLeave() {
         this.hasHover = false;
         this.isActive = false;
       },
+
+      /**
+       * Mousedown event handler.
+       */
       onMouseDown() {
         this.isActive = true;
       },
+
+      /**
+       * Mouseup event handler.
+       */
       onMouseUp() {
         this.isActive = false;
       },
+
+      /**
+       * Focus event handler.
+       */
       onFocus() {
         this.hasFocus = true;
       },
+
+      /**
+       * Blur event handler.
+       */
       onBlur() {
+        this.hasHover = false;
         this.hasFocus = false;
       },
+
+      /**
+       * Click event handler.
+       *
+       * @param {Event} event - The click event instance.
+       */
       onClick(event) {
         this.$el.blur();
 
@@ -159,12 +203,24 @@
          */
         this.$emit('click', event);
       },
+
+      /**
+       * Returns the current width and height of the button.
+       *
+       * @returns {Object}
+       */
+      getElementDimensions() {
+        return {
+          width: `${this.$el.offsetWidth}px`,
+          height: `${this.$el.offsetHeight}px`,
+        };
+      },
     },
 
     /**
      * Creates a button or button like link based on defined/missing href link.
      *
-     * @param   {function}    createElement   Vue helper
+     * @param   {Function}    createElement   Vue helper
      *
      * @returns {*}
      */
@@ -203,7 +259,7 @@
           mouseup: this.onMouseUp,
           focus: this.onFocus,
           blur: this.onBlur,
-          click: this.onClick
+          click: this.onClick,
         },
       };
       const isButton = !this.$attrs.href;
@@ -211,16 +267,20 @@
       let content = this.$slots.default;
 
       if (progress) {
+        if (this.$el) { // If already initially a 'progress' button, there will be no element at this point.
+          options.style = this.getElementDimensions(); // Defines width/height to keep button dimension.
+        }
+
         content = [
           createElement( // e-progress
             eProgress,
             {
               props: {
                 spacing: '0',
-                negative: true
-              }
-            }
-          )
+                negative: true,
+              },
+            },
+          ),
         ];
       }
 
@@ -235,10 +295,10 @@
           createElement( // Wrapper is needed to prevent content shifting in IE11
             'span',
             {
-              class: this.b('inner')
+              class: this.b('inner'),
             },
             content,
-          )
+          ),
         ],
       );
     },
@@ -269,7 +329,6 @@
       background-color: $color-grayscale--500;
       outline: none;
       border: 0; // Overwrite link style
-
     }
 
     &--hover,
@@ -291,17 +350,21 @@
       color: $color-primary--3;
       background-color: $color-grayscale--400;
       position: relative;
-
     }
 
     &[disabled],
     &--disabled,
+    &[disabled]::before,
+    &[disabled]::after,
+    &--disabled::before,
+    &--disabled::after,
     &[disabled]:hover,
     &--disabled:hover {
       background-color: transparent;
       border-color: $color-grayscale--600;
       color: $color-grayscale--500;
       cursor: default;
+      pointer-events: none;
     }
 
     &--width-full {
@@ -322,6 +385,16 @@
       padding: 0;
     }
 
+    &--spacing-600 {
+      padding-left: $spacing--40;
+      padding-right: $spacing--40;
+    }
+
+    &--spacing-700 {
+      padding-left: $spacing--70;
+      padding-right: $spacing--70;
+    }
+
     &--progress,
     &--progress[disabled],
     &--progress[disabled]:hover,
@@ -329,6 +402,7 @@
     &--progress:hover,
     &--progress:focus {
       background-color: $color-grayscale--400;
+      overflow: hidden; // Prevents overflow of animation
 
       &::before,
       &::after {
@@ -378,6 +452,11 @@
     &.e-button--progress:hover,
     &.e-button--progress:focus {
       background-color: $color-secondary--2;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
   }
 </style>

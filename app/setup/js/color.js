@@ -1,7 +1,7 @@
 // Keep in sync with app/setup/scss/_color.scss
 module.exports = {
   primary: [
-    { name: '$color-primary--1', value: ['#ffed00'] },
+    { name: '$color-primary--1', value: ['#ff4b4b'] },
     { name: '$color-primary--2', value: ['#000000'] },
     { name: '$color-primary--3', value: ['#ffffff'] }
   ],

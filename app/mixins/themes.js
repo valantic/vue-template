@@ -25,7 +25,7 @@ export default {
        *
        * @returns  {String}  theme id
        */
-      globalTheme: 'session/getTheme'
+      globalTheme: 'session/theme'
     }),
 
     /**

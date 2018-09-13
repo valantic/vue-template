@@ -10,9 +10,9 @@ Always use **v-model** to bind value to form elements!
              :name="name" 
              :value="item.value"
              v-model="selected"
-             :display-name="item.displayName"
-             class="spacing--bottom-10"
-        />
+             class="spacing--bottom-10">
+      {{ item.displayName }}
+    </e-radio>
   
     <div class="spacing--top-15">
       <p>{{ selected }}</p>
@@ -45,10 +45,10 @@ Always use **v-model** to bind value to form elements!
            :key="item.id"
            :name="name" 
            :value="item.value" 
-           :display-name="item.displayName"
            v-model="selected"
-           class="spacing--bottom-10"
-    />
+           class="spacing--bottom-10">
+       {{ item.displayName }}
+    </e-radio>
   </div>
 </template>
     
@@ -74,9 +74,9 @@ Always use **v-model** to bind value to form elements!
     <e-radio hover 
              name="example-radio-hover" 
              value="radio-1" 
-             v-model="demo" 
-             displayName="Select Radio Button"
-    />
+             v-model="demo">
+      Select Radio Button
+    </e-radio>
   
     <div class="spacing--top-15">
       <p>{{ demo }}</p>
@@ -101,9 +101,9 @@ Always use **v-model** to bind value to form elements!
     <e-radio focus 
              v-model="demo" 
              name="example-radio-focus" 
-             value="radio-1" 
-             displayName="Select Radio Button"
-    />
+             value="radio-1">
+      Select Radio Button
+    </e-radio>
   
     <div class="spacing--top-15">
       <p>{{ demo }}</p>

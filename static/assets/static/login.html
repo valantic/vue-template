@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html id="login-html" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Login</title>
+  <link href="/assets/css/shop.app.css" rel="stylesheet">
+  <link id="themeStylesheet" rel="stylesheet" type="text/css" href="/assets/css/shop.theme-01.css" media="all">
+</head>
+<body class="c-login__body">
+<form id="login-form" class="c-login__form">
+  <div class="c-login__input-wrapper c-login__input-wrapper--top">
+    <label class="e-label e-label--state-default e-label--position-top">
+      <span class="e-label__name" id="label-username"></span>
+      <span class="e-label__inner">
+        <div class="e-input e-input--state-default e-input--type-text e-input--border-500 e-input--focus-shadow">
+          <input autocomplete="off" name="username" class="e-input__field" id="username">
+        </div>
+      </span>
+    </label>
+  </div>
+  <div class="c-login__input-wrapper">
+    <label class="e-label e-label--state-default e-label--position-top">
+      <span class="e-label__name" id="label-password"></span>
+      <span class="e-label__inner">
+        <div class="e-input e-input--state-default e-input--type-password e-input--border-500 e-input--focus-shadow">
+          <input autocomplete="off" name="password" type="password" class="e-input__field" id="password">
+        </div>
+      </span>
+    </label>
+  </div>
+  <div class="c-login__forgot-password" id="forgot-password-wrapper">
+    <a href="#" class="e-link c-login__link" id="link-text"></a><!-- TODO: set correct href -->
+  </div>
+  <div class="c-login__submit-wrapper">
+    <button title="Click here for log in." class="e-button e-button--primary e-button--width-full" type="submit" id="submit-btn">
+      <span class="e-button__inner" id="submit-btn-inner"></span>
+    </button>
+  </div>
+</form>
+
+<!-- Polyfill for the usage of css vars (themes) -->
+<script src="https://unpkg.com/css-vars-ponyfill@1"></script>
+<script>
+  cssVars();
+</script>
+<script>
+  const CLASS_MOBILE_FORGOT_PASSWORD = 'c-login__forgot-password--mobile';
+  const vm = parent.window.vm;
+  const loginForm = document.getElementById('login-form');
+  let viewportWidth = parent.innerWidth;
+
+  /**
+   * Save current content height to vuex of parent.
+   */
+  function saveContentHeightToVuex() {
+    vm.$store.commit('session/setLoginFormHeight', loginForm.offsetHeight);
+  }
+
+  /**
+   * Add/remove responsive classes based on viewport width of parent.
+   */
+  function setResponsiveClasses() {
+    const forgotPasswordWrapper = document.getElementById('forgot-password-wrapper');
+
+    if (viewportWidth <= 480) {
+      forgotPasswordWrapper.classList.add(CLASS_MOBILE_FORGOT_PASSWORD);
+    } else {
+      forgotPasswordWrapper.classList.remove(CLASS_MOBILE_FORGOT_PASSWORD);
+    }
+
+    saveContentHeightToVuex();
+  }
+
+  /**
+   * Set translations for form elements.
+   */
+  function setTranslations() {
+    document.getElementById('label-username').innerHTML = vm.$i18n.t('c-login.username');
+    document.getElementById('label-password').innerHTML = vm.$i18n.t('c-login.password');
+    document.getElementById('link-text').innerHTML = vm.$i18n.t('c-login.forgotPasswordText');
+    document.getElementById('link-text').title = vm.$i18n.t('c-login.forgotPasswordTitle');
+    document.getElementById('submit-btn').title = vm.$i18n.t('c-login.buttonTitle');
+    document.getElementById('submit-btn-inner').innerHTML = vm.$i18n.t('c-login.buttonText');
+  }
+
+  function onRestorePasswordClick(event) {
+    event.preventDefault();
+
+    vm.$eventBus.$emit('login.restorePassword');
+  }
+
+  /**
+   * Event handler for parent resize event.
+   */
+  function onParentResize() {
+    viewportWidth = parent.innerWidth;
+
+    setResponsiveClasses();
+  }
+
+  /**
+   * Event handler for form submit
+   *
+   * @param {Event} event - The event instance.
+   */
+  function onFormSubmit(event) {
+    const user = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // password:password is needed for IE11
+    vm.$store.dispatch('session/login', { userId: user, password: password });
+    event.preventDefault();
+  }
+
+  /**
+   * Bind event handlers.
+   */
+  function bindEventHandlers() {
+    loginForm.addEventListener('submit', onFormSubmit);
+
+    document.querySelector('.c-login__link').addEventListener('click', onRestorePasswordClick);
+
+    parent.addEventListener('resizeend', onParentResize);
+  }
+
+  if (vm) {
+    // Set correct language read from the i18n of the parent.
+    document.getElementById('login-html').lang = vm.$i18n.locale;
+
+    // Add correct theme file to page header.
+    document.getElementById('themeStylesheet').href = '/assets/css/shop.theme-' + vm.$store.getters['session/theme'] + '.css';
+
+    setTranslations();
+
+    setResponsiveClasses();
+
+    bindEventHandlers();
+  }
+</script>
+</body>
+</html>

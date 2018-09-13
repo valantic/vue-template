@@ -1,0 +1,52 @@
+import productListItem from './productListItem';
+
+export default [
+  {
+    ...productListItem,
+  },
+  {
+    ...productListItem,
+    id: 2,
+    sku: '706127',
+    quantity: 1,
+    quantityInterval: 1,
+    quantityMin: 1,
+    priceUnit: 100,
+    priceGross: 49900,
+    price: 47904,
+    groupKey: '111',
+    unitPriceGross: 49900,
+    unitPrice: 47904,
+    priceType: null,
+    priceTypeEndDate: null,
+    name: 'Kabelbinder PANDUIT 2,4×102mm transparent',
+    eNumber: '111 222 333',
+    relations: {},
+  },
+  {
+    ...productListItem,
+    id: 3,
+    sku: '706130',
+    quantity: 5,
+    quantityInterval: 5,
+    quantityMin: 5,
+    priceUnit: 100,
+    priceGross: 24900,
+    price: 119520,
+    unitPriceGross: 24900,
+    unitPrice: 119520,
+    priceType: null,
+    priceTypeEndDate: null,
+    name: 'Schriftbandkassette TC 9mmx7,7m go-s',
+    groupKey: '03',
+    eNumber: '123 123 123',
+    relations: {
+      consistsProducts: 0,
+      productAlternative: 1,
+      productNecessaryAccessory: 0,
+      productReplacement: 0,
+      productAccessory: 0,
+      relatedProducts: 0,
+    },
+  }
+];

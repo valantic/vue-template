@@ -6,10 +6,10 @@
     <p>including e-label</p>
     <form>
       <e-label name="First name:" position="top">
-        <e-input v-model="name.firstName" name="firstname" placeholder="..."/>
+        <e-input v-model="name.firstName" name="firstname" placeholder="..." />
       </e-label>
       <e-label name="Last name:" position="left">
-        <e-input v-model="name.lastName" name="lastname" placeholder="..."/>
+        <e-input v-model="name.lastName" name="lastname" placeholder="..." />
       </e-label>
       <e-label name="Street:" position="top" state="error">
         <e-input v-model="name.street"
@@ -38,14 +38,14 @@
                  state="success"
         />
       </e-label>
-      <e-label name="Gender:" position="top"/>
+      <e-label name="Gender:" position="top" />
       <e-radio v-for="item in genders"
                v-model="gender"
                :value="item.value"
-               :display-name="item.displayName"
                :key="item.id"
-               name="gender"
-      />
+               name="gender">
+        {{ item.displayName }}
+      </e-radio>
       <e-label name="Comment" position="top">
         <e-textarea v-model="name.comment"
                     :rows="5"
@@ -69,32 +69,27 @@
       <h2>e-fieldset</h2>
       <e-fieldset legend="Sample legend">
         <e-label name="Label" position="top">
-          <e-input v-model="demo" name="demo" placeholder="enter text..."/>
+          <e-input v-model="demo" name="demo" placeholder="enter text..." />
         </e-label>
         <e-label name="Label" position="top">
-          <e-input v-model="demo" name="demo" placeholder="enter text..."/>
+          <e-input v-model="demo" name="demo" placeholder="enter text..." />
         </e-label>
       </e-fieldset>
 
       <h2>e-checkbox</h2>
-      <e-checkbox
-        v-model="checkbox.checked"
-        :name="checkbox.name"
-        :value="checkbox.value"
-        :display-name="checkbox.value"/>
-
+      <e-checkbox v-model="checkbox.checked"
+                  :name="checkbox.name"
+                  :value="checkbox.value">
+        <span>{{ checkbox.value }}</span>
+      </e-checkbox>
     </form>
   </div>
 </template>
 
 <script>
-  import cAddToCart from '@/components/c-add-to-cart';
-
   export default {
     name: 'forms',
-    components: {
-      cAddToCart,
-    },
+    // components: {},
     data() {
       return {
         demo: '',
@@ -103,7 +98,7 @@
           lastName: '',
           street: '',
           country: '',
-          comment: ''
+          comment: '',
         },
         gender: 'female',
         genders: [
@@ -121,7 +116,7 @@
         checkbox: {
           checked: false,
           name: 'checkbox',
-          value: 'Hello world...'
+          value: 'Hello world...',
         },
         countries: [
           {
@@ -134,9 +129,9 @@
             value: 'ch',
             label: 'Switzerland',
           },
-        ]
+        ],
       };
-    }
+    },
   };
 </script>
 

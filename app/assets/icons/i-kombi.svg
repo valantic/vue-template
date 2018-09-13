@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M2,1 L20,1 C20.5522847,1 21,1.44771525 21,2 L21,20 C21,20.5522847 20.5522847,21 20,21 L2,21 C1.44771525,21 1,20.5522847 1,20 L1,2 C1,1.44771525 1.44771525,1 2,1 Z M7,6 C6.44771525,6 6,6.44771525 6,7 L6,15 C6,15.5522847 6.44771525,16 7,16 L15,16 C15.5522847,16 16,15.5522847 16,15 L16,7 C16,6.44771525 15.5522847,6 15,6 L7,6 Z" fill="#75B4E0"></path>
-        <rect fill="#FFED00" x="7" y="7" width="8" height="8" rx="1"></rect>
-    </g>
-</svg>

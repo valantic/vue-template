@@ -34,7 +34,7 @@
 <style lang="scss">
   /* stylelint-disable selector-class-pattern */
   .index {
-    max-width: map-get($grid-breakpoints, xl);
+    max-width: map-get($breakpoints, xl);
     margin: 0 auto;
     padding: $spacing--30;
 
