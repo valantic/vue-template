@@ -360,7 +360,7 @@
     &--disabled::after,
     &[disabled]:hover,
     &--disabled:hover {
-      background-color: transparent;
+      background-color: $color-grayscale--600;
       border-color: $color-grayscale--600;
       color: $color-grayscale--500;
       cursor: default;

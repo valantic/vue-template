@@ -191,36 +191,6 @@ See Confluence page for "Messages" for more details.
 
 ```
 
-#### Add to cart
-
-```vue
-<template>
-  <c-notification :notification="notification"/>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        notification: {
-          message: {
-            type: 'add-to-cart',
-            message: 'Product is added to cart successfully',
-            meta: {
-              product: this.$store.getters['product/product'],
-            },
-          },
-          id: 1,
-          expire: false,
-          title: '',
-          confirm: false,
-        }
-      };
-    },
-  };
-</script>
-```
-
 ### Success (field)
 
 ```vue
@@ -322,36 +292,6 @@ See Confluence page for "Messages" for more details.
           expire: false,
           title: 'A title',
           confirm: true,
-        }
-      };
-    },
-  };
-</script>
-```
-
-### Add to cart (field)
-
-```vue
-<template>
-  <c-notification display-type="field" :notification="notification"/>
-</template>
-  
-<script>
-  export default {
-    data() {
-      return {
-        notification: {
-          message: {
-            type: 'add-to-cart',
-            message: 'Product is added to cart successfully',
-            meta: {
-              product: this.$store.getters['product/product']
-            },
-          },
-          id: 1,
-          expire: false,
-          title: '',
-          confirm: false,
         }
       };
     },

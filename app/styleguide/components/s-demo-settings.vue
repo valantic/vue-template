@@ -1,7 +1,7 @@
 <template>
   <ul :class="b()">
     <li :class="b('item')">
-      <s-toggle v-model="isLoggedIn">
+      <s-toggle checked>
         Logged in
       </s-toggle>
     </li>
@@ -9,8 +9,6 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  import userData from '@/store/modules/session/mock/user';
   import SToggle from './s-toggle';
 
   export default {
@@ -25,19 +23,7 @@
     //   return {};
     // },
 
-    computed: {
-      ...mapGetters('session', [
-        'isLoggedInUser'
-      ]),
-      isLoggedIn: {
-        get() {
-          return this.isLoggedInUser;
-        },
-        set(isLoggedIn) {
-          this.$store.commit('session/data', isLoggedIn ? userData : null);
-        }
-      }
-    },
+    // computed: {},
     // watch: {},
 
     // beforeCreate() {},

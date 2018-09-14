@@ -120,7 +120,7 @@
   import api from '@/store/utils/api';
   import lDefault from '@/components/l-default';
   import cNotificationContainer from '@/components/c-notification-container';
-  import notificationData from '../../store/modules/notification/mock/notifications';
+  import notificationData from '../../styleguide/mock-data/notifications';
 
   export default {
     name: 'notifications',

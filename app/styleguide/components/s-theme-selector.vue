@@ -28,23 +28,23 @@
       return {
         defaultThemes: [
           {
-            name: 'Winterhalter - Fenner',
+            name: 'Theme 01',
             id: '01'
           },
           {
-            name: 'Electro LAN SA',
+            name: 'Theme 02',
             id: '02'
           },
           {
-            name: 'Fabri',
+            name: 'Theme 03',
             id: '03'
           },
           {
-            name: 'Dysbox',
+            name: 'Theme 04',
             id: '04'
           },
           {
-            name: 'Electroplast SA',
+            name: 'Theme 05',
             id: '05'
           }
         ],

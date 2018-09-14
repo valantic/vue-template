@@ -14,7 +14,7 @@
 
       <div :class="b('product-gallery')">
         <h2>Swiper example (c-swiper-gallery)</h2>
-        <c-swiper-gallery :images="product.images" />
+        <c-swiper-gallery :images="productImages" />
       </div>
     </div>
   </l-default>
@@ -24,7 +24,7 @@
   import cSwiperGallery from '@/components/c-swiper-gallery';
   import cSwiperHero from '@/components/c-swiper-hero';
   import lDefault from '@/components/l-default';
-  import { mapGetters } from 'vuex';
+  import dummyImages from '../../styleguide/mock-data/images';
 
   export default {
     name: 'swiper',
@@ -75,12 +75,8 @@
             href: 'http://www.google.ch',
           },
         ],
+        productImages: dummyImages,
       };
-    },
-    computed: {
-      ...mapGetters('product', [
-        'product',
-      ]),
     },
   };
 </script>

@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import cCmsWrapperMockData from '@/styleguide/mock-data/cCmsWrapper';
 import styleguideRoutes from './styleguide.routes';
 import sLayout from '../styleguide/components/s-layout';
 import AxiosMockAdapter from './plugins/styleguide.axios-mock';
+import dummyImages from '../styleguide/mock-data/images';
+import dummyTableDate from '../styleguide/mock-data/table';
 
 /**
  * In development and on styleguide build, include router and example pages
@@ -18,7 +19,8 @@ Vue.mixin({
   data() {
     return {
       mockData: {
-        cCmsWrapperMockData,
+        dummyImages,
+        dummyTableDate,
       }
     };
   },

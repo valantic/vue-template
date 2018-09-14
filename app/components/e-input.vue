@@ -446,6 +446,7 @@
     &--disabled:not(&--border-0) &__field:hover {
       background-color: $color-grayscale--1000;
       color: $color-grayscale--600;
+      border-color: $color-grayscale--600;
 
       &::placeholder {
         color: $color-grayscale--600;

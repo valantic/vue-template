@@ -4,7 +4,7 @@
 <template>
   <div class="demo">
     <div style="max-width: 400px;">
-      <c-swiper-gallery :images="images"/>
+      <c-swiper-gallery :images="mockData.dummyImages"/>
     </div>
   </div>
 </template>
@@ -12,11 +12,6 @@
 <script>
   export default {
     name: 'swiper',
-    data() {
-      return {
-        images: this.$store.getters['product/product'].images,
-      };
-    },
   };
 </script>
 ```
@@ -27,7 +22,7 @@
 <template>
   <div class="demo">
     <div style="max-width: 400px;">
-      <c-swiper-gallery :images="images"/>
+      <c-swiper-gallery :images="mockData.dummyImages"/>
     </div>
   </div>
 
@@ -36,11 +31,6 @@
 <script>
   export default {
     name: 'swiper2',
-    data() {
-      return {
-        images: this.$store.getters['product/product'].images.slice(0,1),
-      };
-    },
   };
 </script>
 ```
@@ -51,7 +41,7 @@
 <template>
   <div class="demo">
     <div style="max-width: 400px;">
-      <c-swiper-gallery :images="images"/>
+      <c-swiper-gallery :images="mockData.dummyImages"/>
     </div>
   </div>
 
@@ -60,11 +50,6 @@
 <script>
   export default {
     name: 'swiper3',
-    data() {
-      return {
-        images: this.$store.getters['product/product'].images.slice(0,4),
-      };
-    },
   };
 </script>
 ```
@@ -75,7 +60,7 @@
 <template>
   <div class="demo">
     <div style="max-width: 400px;">
-      <c-swiper-gallery :images="images" :options="customOptions"/>
+      <c-swiper-gallery :images="mockData.dummyImages" :options="customOptions"/>
     </div>
   </div>
 
@@ -90,7 +75,6 @@
           slidesPerView: 2,
           speed: 500
         },
-        images: this.$store.getters['product/product'].images,
       };
     },
   };

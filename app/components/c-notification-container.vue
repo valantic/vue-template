@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({ state, displayType, modalOpen: displayType !== 'modal' && modalIsOpen })">
+  <div :class="b({ state, displayType, modalOpen: displayType !== 'modal' })">
     <div :class="b('inner')">
       <c-notification
         v-for="notification in notifications"
@@ -84,9 +84,6 @@
         'selectorNotifications',
         'fieldNotifications',
         'globalAndAddToCartNotifications',
-      ]),
-      ...mapGetters('session', [
-        'modalIsOpen',
       ]),
 
       notifications() {

@@ -23,7 +23,7 @@
     <div v-if="selectedItems.length">{{ selectedItems }}</div>
 
     <!-- TABLE -->
-    <c-table :items="getOverview"
+    <c-table :items="items"
              :headers="headers"
              :search-term="searchTerm"
              is-selectable
@@ -77,9 +77,9 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
   import cTable from '@/components/c-table';
   import cTablePagination from '@/components/c-table-pagination';
+  import tableMockData from '../../styleguide/mock-data/table';
 
   export default {
     name: 'tables',
@@ -94,25 +94,21 @@
       return {
         searchTerm: '',
         headers: [
-          { text: 'ID', value: 'idShoppingList', type: 'text' },
-          { text: 'Kundenreferenz', value: 'customerReference', type: 'text' },
-          { text: 'Name', value: 'name', type: 'text' },
-          { text: 'Beschreibung', value: 'description', type: 'text' },
-          { text: 'Aktualisiert am', value: 'updatedAt', type: 'text' },
-          { text: 'Anzahl Inhalte', value: 'numberOfItems', type: 'text' },
-          { text: 'Freigabe', value: 'isShared', type: 'checkbox' },
-          { text: 'Ersteller', value: 'owner', type: 'text' },
-          { text: 'Register ID', value: 'requesterId', type: 'text' },
+          { text: 'ID', value: 'id', type: 'text' },
+          { text: 'Vorname', value: 'firstName', type: 'text' },
+          { text: 'Nachname', value: 'lastName', type: 'text' },
+          { text: 'Stadt', value: 'city', type: 'text' },
+          { text: 'Geburtsdatum', value: 'birthDate', type: 'date' },
+          { text: 'Firma', value: 'company', type: 'text' },
+          { text: 'Infos komplett', value: 'isComplete', type: 'checkbox' },
+          { text: 'Kinder', value: 'children', type: 'text' },
         ],
         selectedItems: [],
+        items: tableMockData,
       };
     },
 
-    computed: {
-      ...mapGetters('shoppingList', [
-        'getOverview',
-      ]),
-    },
+    // computed: {},
     // watch: {},
 
     // beforeCreate() {},

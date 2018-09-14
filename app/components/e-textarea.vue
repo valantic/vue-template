@@ -235,7 +235,7 @@
     &--disabled &__field,
     &--disabled &__field:hover {
       background-color: $color-grayscale--1000;
-      border-color: transparent;
+      border-color: $color-grayscale--600;
       color: $color-grayscale--600;
 
       &::placeholder {
@@ -253,7 +253,8 @@
       }
     }
 
-    &--state-error &__field:hover {
+    &--state-error &__field:hover,
+    &--state-error &__field {
       border-color: $color-status--danger;
     }
 
@@ -271,6 +272,11 @@
       .e-textarea__icon-splitter {
         display: none;
       }
+    }
+
+    &--state-success &__field:hover,
+    &--state-success &__field {
+      border-color: $color-status--success;
     }
 
     /*

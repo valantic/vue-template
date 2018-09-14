@@ -51,33 +51,33 @@
 
         switch (theme) {
           case '01':
-            icon = 'logo_winterhalter--white';
-            alt = this.$t('e-logo.alt01');
+            icon = 'styleguide-heart';
+            alt = 'example logo default';
             break;
 
           case '02':
-            icon = 'logo_electrolan--white';
-            alt = this.$t('e-logo.alt02');
+            icon = 'svg-logo-name-02';
+            alt = 'example logo 02';
             break;
 
           case '03':
-            icon = 'logo_fabbri--white';
-            alt = this.$t('e-logo.alt03');
+            icon = 'svg-logo-name-03';
+            alt = 'example logo 03';
             break;
 
           case '04':
-            icon = 'logo_dysbox--white';
-            alt = this.$t('e-logo.alt04');
+            icon = 'svg-logo-name-04';
+            alt = 'example logo 04';
             break;
 
           case '05':
-            icon = 'logo_electroplast--white';
-            alt = this.$t('e-logo.alt05');
+            icon = 'svg-logo-name-05';
+            alt = 'example logo 05';
             break;
 
           default:
-            icon = 'logo_winterhalter--white';
-            alt = this.$t('e-logo.alt01');
+            icon = 'styleguide-heart';
+            alt = 'example logo default';
         }
 
         return {

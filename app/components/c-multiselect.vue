@@ -109,7 +109,6 @@
 <script>
   import 'simplebar';
   import 'simplebar/dist/simplebar.css';
-  import CSearch from '@/components/c-search';
   import formStates from '../mixins/form-states';
 
   /**
@@ -119,7 +118,7 @@
    */
   export default {
     name: 'c-multiselect',
-    components: { CSearch },
+    // components: {},
     mixins: [formStates],
 
     props: {
@@ -626,6 +625,10 @@
     &--disabled &__placeholder,
     &--disabled &__value {
       color: $color-grayscale--600;
+    }
+
+    &--disabled &__output {
+      border-color: $color-grayscale--600;
     }
 
     &__icon-wrapper {

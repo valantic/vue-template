@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
     <div :class="b('buttons-wrapper')">
-      <div :class="b('input')">
+      <div :class="b('input', { open: isDatePickerOpen })">
         <e-input :value="formatDate(validDate)"
                  :id="`date-picker-value-${uuid}`"
                  :placeholder="$t('c-date-picker-input.chooseDate')"
@@ -314,6 +314,7 @@
 <style lang="scss">
   .c-date-picker-input {
     position: relative;
+    max-width: 350px;
 
     &__overlay {
       @include z-index(dropdown);
@@ -321,7 +322,6 @@
       position: absolute;
       background-color: $color-grayscale--1000;
       width: 100%;
-      margin-left: -$spacing--30;
 
       @include media(xs) {
         width: auto;
@@ -332,21 +332,20 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
-      padding-right: $spacing--10;
-      min-width: 220px;
+    }
 
-      @include media(xs) {
-        width: 300px; // Width of the date-picker.
+    &__input {
+      width: 100%;
+
+      input {
+        background-color: $color-grayscale--1000;
+        min-width: 110px;
+        width: 100%;
       }
     }
 
-    &__input input {
-      background-color: $color-grayscale--1000;
-      min-width: 110px;
-
-      @include media(xs) {
-        width: 170px;
-      }
+    &__input--open {
+      margin-right: $spacing--25;
     }
 
     &__select {

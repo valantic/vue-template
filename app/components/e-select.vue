@@ -167,7 +167,7 @@
     &__select:disabled,
     &--disabled &__select,
     &--disabled &__select:hover {
-      border: none;
+      border-color: $color-grayscale--600;
       color: $color-grayscale--600;
       background-image: url('../assets/icons/i-arrow--down--disabled.svg');
     }

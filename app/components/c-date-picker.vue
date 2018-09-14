@@ -72,13 +72,9 @@
 <style lang="scss">
   .c-date-picker {
     color: $color-grayscale--400;
-    width: calc(100% + 30px);
+    width: 100%;
     min-width: 220px;
     background-color: $color-grayscale--1000;
-
-    @include media(xs) {
-      width: 330px;
-    }
 
     .v-date-picker-header {
       padding: $spacing--5 0;

@@ -141,12 +141,7 @@
     "searchTitle": "Suche"
   },
   "e-logo": {
-    "linkTitle": "zur Startseite",
-    "alt01": "Winterhalter Fenner Logo",
-    "alt02": "Electro LAN Logo",
-    "alt03": "Fabbri Logo",
-    "alt04": "Dysbox Logo",
-    "alt05": "Electroplast Logo"
+    "linkTitle": "zur Startseite"
   },
   "c-product-tile": {
     "eNumber": "E-Nr",
