@@ -52,14 +52,9 @@
     },
 
     computed: {
-      ...mapGetters({
-        /**
-         * Gets the global theme
-         *
-         * @returns  {String}  theme id
-         */
-        globalTheme: 'session/theme'
-      }),
+      ...mapGetters('session', [
+        'theme',
+      ]),
 
       /**
        * Loops the themes and mark the selected by the global theme.
@@ -68,7 +63,7 @@
        */
       themes() {
         const list = this.defaultThemes;
-        const activeId = this.globalTheme;
+        const activeId = this.theme;
 
         return list.map((theme) => {
           let selected = false;
@@ -88,14 +83,14 @@
 
     watch: {
       /**
-       * Watches for changes of the «globalTheme» and sets or changes the stylesheet with the
+       * Watches for changes of the «theme» and sets or changes the stylesheet with the
        * custom theme css-variables
        */
-      globalTheme: {
+      theme: {
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
-          const theme = this.globalTheme;
+          const theme = this.theme;
 
           if (!document.getElementById(cssId)) {
             this.createStyleElement(theme, cssId);
