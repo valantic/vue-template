@@ -34,7 +34,7 @@ module.exports = function(env = {}, options = {}) {
     'theme-05': path.resolve(__dirname, 'app/setup/scss/themes/theme-05.scss'),
   };
   const clean = [
-    ...Object.keys(themes).map(theme => `js/${theme}.js`),
+    ...Object.keys(themes).map(theme => `js/shop.${theme}.js`),
   ];
 
   // Configuration
@@ -235,7 +235,7 @@ module.exports = function(env = {}, options = {}) {
             // Cleans dist directory and removes specific unnecessary files
             new WebpackCleanPlugin(
               clean,
-              { basePath: path.join(__dirname, 'dist/static/') }),
+              { basePath: path.join(__dirname, 'dist/assets/') }),
           );
         }
       }

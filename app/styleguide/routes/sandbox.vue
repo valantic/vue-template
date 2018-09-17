@@ -1,22 +1,15 @@
 <template>
   <div :class="b()">
-    <tabs>
-      <tab name="First tab">
-        foo
-      </tab>
-      <tab name="Second tab">
-        baa
-      </tab>
-      <tab name="Third tab">
-        Third tab content
-      </tab>
-    </tabs>
+    <h1>Sandbox</h1>
+    <div>
+      <!-- Add any content here -->
+    </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'tab-example',
+    name: 'sandbox',
     // components: {},
     // mixins: [],
 
@@ -45,7 +38,7 @@
 </script>
 
 <style lang="scss">
-  .tab-example {
-    // add custom styles
+  .sandbox {
+    // Add specific styles.
   }
 </style>

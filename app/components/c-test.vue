@@ -42,5 +42,6 @@
 
 <style lang="scss">
   .c-test {
+    // Add CSS Style definitions.
   }
 </style>

@@ -90,7 +90,7 @@
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
-          const theme = this.theme;
+          const { theme } = this;
 
           if (!document.getElementById(cssId)) {
             this.createStyleElement(theme, cssId);
