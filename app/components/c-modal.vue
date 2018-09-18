@@ -26,7 +26,6 @@
 
 <script>
   import cModalHeader01 from '@/components/c-modal-header-01';
-  import viewport from '@/services/viewport';
   import uuid from '@/mixins/uuid';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
@@ -165,7 +164,7 @@
        * @returns {Boolean}
        */
       isMobile() {
-        return !viewport.isSm;
+        return !this.$viewport.isSm;
       },
 
       /**

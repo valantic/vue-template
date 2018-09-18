@@ -40,7 +40,6 @@
 
 <script>
   import cNotificationContainer from '@/components/c-notification-container';
-  import viewport from '@/services/viewport';
 
   /**
    * Component is used to render the default header in the modal
@@ -95,7 +94,7 @@
        * @returns {Boolean}
        */
       isMobile() {
-        return !viewport.isSm;
+        return !this.$viewport.isSm;
       },
     },
     // watch: {},

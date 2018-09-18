@@ -5,6 +5,7 @@ import VueBemCn from 'vue-bem-cn';
 import { Vuetify } from 'vuetify';
 import resizeEnd from './plugins/resize-end';
 import eventBus from './plugins/event-bus';
+import viewport from './plugins/viewport';
 
 // Polyfills and self executing
 import cssVars from 'css-vars-ponyfill';
@@ -28,6 +29,7 @@ Vue.use(resizeEnd);
 Vue.use(VueAxios);
 Vue.use(Vuetify);
 Vue.use(eventBus);
+Vue.use(viewport);
 
 Vue.use(VueBemCn, {
   hyphenate: true,
