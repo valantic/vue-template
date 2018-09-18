@@ -107,6 +107,7 @@
     <e-button @click="exampleModalIsOpen = true">open 1st modal</e-button>
     <c-modal :open="exampleModalIsOpen" @close="exampleModalIsOpen = false" title="I'm a modal!">
       hello World..
+      <img src="https://dummyimage.com/600x400/000/fff" alt="">
       <div>
         <e-button @click="innerModalIsOpen = true">Open 2nd modal</e-button>
       </div>

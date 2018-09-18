@@ -1,6 +1,6 @@
 import { NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
 import { i18n } from '@/setup/i18n';
-import api from '@/store/utils/api';
+import api from '@/helpers/api';
 
 /**
  * Pushes the given notification to the notification stack.

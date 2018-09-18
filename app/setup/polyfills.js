@@ -1,4 +1,5 @@
 import smoothscroll from 'smoothscroll-polyfill';
+import cssVars from 'css-vars-ponyfill';
 
 /**
  * Polyfills the Element.closest() method, which is not supported by IE11.
@@ -33,3 +34,10 @@ function polyfillElementClosest() {
 polyfillElementClosest();
 
 smoothscroll.polyfill();
+
+/*
+ * Polyfill for css vars on IE11 https://github.com/jhildenbiddle/css-vars-ponyfill
+ */
+cssVars({
+  silent: process.env.NODE_ENV === 'production'
+});

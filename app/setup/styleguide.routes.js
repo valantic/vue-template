@@ -2,6 +2,8 @@ import index from '../styleguide/routes/index';
 import sandbox from '../styleguide/routes/sandbox';
 import lDefault from '../components/l-default';
 import forms from '../styleguide/routes/forms';
+import lazyload from '../styleguide/routes/lazyload';
+import notifications from '../styleguide/routes/notifications';
 
 const root = '/styleguide';
 
@@ -39,6 +41,22 @@ export default [
     component: forms,
     meta: {
       title: 'Forms',
+    },
+  },
+  {
+    path: `${root}/lazyload`,
+    name: 'Lazy load',
+    component: lazyload,
+    meta: {
+      title: 'Lazy load',
+    },
+  },
+  {
+    path: `${root}/notifications`,
+    name: 'Notifications',
+    component: notifications,
+    meta: {
+      title: 'Notifications',
     },
   },
   {

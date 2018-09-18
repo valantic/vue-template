@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-e
 import { axios } from './axios';
 
 // Import mocks
+import notification from '../../styleguide/mock-data/notifications';
 
 /**
  * By default returns a 500 'no route defined' error.
@@ -47,6 +48,14 @@ export default {
     // See https://github.com/ctimmerm/axios-mock-adapter
     mock
       // EXAMPLE => .onPost('api-url').reply(200, mockDataResponse)
+      .onPost('/notifications/global/success').reply(200, notification.success)
+      .onPost('/notifications/global/warning').reply(200, notification.warning)
+      .onPost('/notifications/global/error').reply(500, notification.error)
+      .onPost('/notifications/global/info').reply(200, notification.info)
+      .onPost('/notifications/field/error').reply(500, notification.fieldError)
+      .onPost('/notifications/selector/info1').reply(200, notification.selectorInfo1)
+
+      // Global
       .onAny(/\/?static|assets/).passThrough()
       .onAny().reply(wildcard);
   },

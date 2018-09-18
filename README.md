@@ -24,7 +24,7 @@ Before you start working on this project, you **MUST** read the following docume
 You **MUST** also be familiar with the following tools:
 
 * [BEM](http://getbem.com/)
-* [ES2015](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
+* [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
 * [Git](https://git-scm.com/)
 * [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/)
@@ -74,7 +74,7 @@ $ git remote set-url origin <project-repository-url>
 
 ### Installing npm packages
 
-Before executing the following command, please **make sure your Node and NPM version meet the requirements** in package.json's `endignes` section. Changing the Node or NPM version later on can cause issues which force you to re-install the project.
+Before executing the following command, please **make sure your Node and NPM version meet the requirements** in package.json's `engines` section. Changing the Node or NPM version later on can cause issues which force you to re-install the project.
 
 ```
 # Print node version
@@ -157,16 +157,6 @@ git subtree add --prefix <target-folder> <source> <branch> --squash
 ```
 git subtree pull --prefix assets/vue https://github.com/valantic/vue-template.git master --squash -m "Merges vue-template @ version x.x.x into project"
 ```
-
-### Webpack customization
-
-#### Build setup
-
-The build target urls and file names have been changed compared to the original project blueprint.
-
-#### image-webpack-loader
-
-This package was removed because of the incompatibility of the VM. Pixel based images are no longer processed and only copied. SVGs are still processed by the `svgo-loader`.
 
 ## Folder structure
 
@@ -699,17 +689,12 @@ $ brew upgrade nasm
 * [x] Folder structure
 * [x] Naming (only singular)
 * [x] Vuex & modules
-* [ ] Axios request mocking
+* [x] Axios request mocking https://github.com/ctimmerm/axios-mock-adapter
 * [x] Styleguide components
 * [x] webpack alias
 * [x] webpackChunkName
-* [ ] Bootstrap grid
-* [ ] Bootstrap reset
-* [ ] Bootstrap mixins/extends: clearfix, style-less list
 * [ ] Custom element style reset (e.g. iframe)
 * [ ] Fallback image for e-picture
-* [ ] Input components should expect name, title and autocomplete value
-* [ ] Ajax error handling
 * [x] e-picture should support relation property and fallback image
 * [ ] npm update: only update one package at a time, test, then update next.
 

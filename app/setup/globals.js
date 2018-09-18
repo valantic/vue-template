@@ -12,16 +12,9 @@ export const BREAKPOINTS = { // Keep in sync with SCSS variables!
 
 export const RESIZE_DEBOUNCE = 100;
 
-export const SESSION_KEY_SEARCH_TERM = 'searchTerm';
-
 export const NOTIFICATION_UNKNOWN_ERROR = {
   message: {
     type: 'error',
     message: i18n.t('globalMessages.unknownApiError'),
   }
 };
-
-export const VUEX_COMMIT_ROOT_CONFIG = { root: true, namespaced: true };
-
-export const SHIPMENT_METHOD_DELIVERY = 1;
-export const SHIPMENT_METHOD_PICKUP = 2;

@@ -9,7 +9,7 @@ Vue.use(VueI18n);
 
 export const I18N_FALLBACK = 'de';
 export const I18N_FALLBACK_MESSAGES = fallbackMessages;
-export const I18N_LOCALES = [I18N_FALLBACK, 'fr', 'it'];
+export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 
 export const i18n = new VueI18n({
   locale: I18N_FALLBACK,

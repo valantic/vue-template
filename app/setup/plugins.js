@@ -8,7 +8,6 @@ import eventBus from './plugins/event-bus';
 import viewport from './plugins/viewport';
 
 // Polyfills and self executing
-import cssVars from 'css-vars-ponyfill';
 import VModal from 'vue-js-modal';
 import PortalVue from 'portal-vue';
 import Tabs from 'vue-tabs-component';
@@ -17,13 +16,6 @@ import 'picturefill';
 import 'lazysizes';
 import './lib/ls.attrchange'; // Lazy sizes attribute change observer
 import './polyfills';
-
-/**
- * Polyfill for css vars on IE11 https://github.com/jhildenbiddle/css-vars-ponyfill
- */
-cssVars({
-  silent: process.env.NODE_ENV === 'production'
-});
 
 Vue.use(resizeEnd);
 Vue.use(VueAxios);

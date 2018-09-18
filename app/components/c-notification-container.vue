@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({ state, displayType, modalOpen: displayType !== 'modal' })">
+  <div :class="b({ state, displayType })">
     <div :class="b('inner')">
       <c-notification
         v-for="notification in notifications"

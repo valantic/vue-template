@@ -29,9 +29,6 @@ module.exports = function(env = {}, options = {}) {
   const themes = {
     'theme-01': path.resolve(__dirname, 'app/setup/scss/themes/theme-01.scss'),
     'theme-02': path.resolve(__dirname, 'app/setup/scss/themes/theme-02.scss'),
-    'theme-03': path.resolve(__dirname, 'app/setup/scss/themes/theme-03.scss'),
-    'theme-04': path.resolve(__dirname, 'app/setup/scss/themes/theme-04.scss'),
-    'theme-05': path.resolve(__dirname, 'app/setup/scss/themes/theme-05.scss'),
   };
   const clean = [
     ...Object.keys(themes).map(theme => `js/shop.${theme}.js`),
