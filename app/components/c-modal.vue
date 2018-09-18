@@ -1,5 +1,5 @@
 <template>
-  <portal :order="uuidInt" to="modal-container">
+  <portal :order="uuidInt" :to="portalTarget">
     <modal :name="uuid"
            :classes="b({ size })"
            :width="width"
@@ -29,7 +29,6 @@
   import viewport from '@/services/viewport';
   import uuid from '@/mixins/uuid';
   import { BREAKPOINTS } from '@/setup/globals';
-  import { mapMutations } from 'vuex';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
 
   /**
@@ -47,6 +46,14 @@
     ],
 
     props: {
+      /**
+       * Describes the name of the portal-target to render the modal.
+       */
+      portalTarget: {
+        type: String,
+        default: 'modal-container',
+      },
+
       /**
        * Set's the inner spacing of the modal [0, 500].
        */
@@ -209,7 +216,6 @@
           this.scrollPositionY = window.scrollY;
           avoidContentResizing(true);
           this.$modal.show(this.uuid);
-          this.addModal(this);
         } else {
           this.$modal.hide(this.uuid);
         }
@@ -217,9 +223,7 @@
     },
 
     // beforeCreate() {},
-    created() {
-      window.addEventListener('resizeend', this.toggleFixedScrollbarWidth);
-    },
+    // created() {},
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -227,16 +231,9 @@
     // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
-    destroyed() {
-      window.removeEventListener('resizeend', this.toggleFixedScrollbarWidth);
-    },
+    // destroyed() {},
 
     methods: {
-      ...mapMutations('session', [
-        'addModal',
-        'removeModal',
-      ]),
-
       /**
        * Hides the modal.
        */
@@ -254,7 +251,6 @@
          * @event close
          */
         this.$emit('close');
-        this.removeModal(this);
         window.scrollTo(0, this.scrollPositionY);
       },
 
