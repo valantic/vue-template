@@ -8,7 +8,7 @@
          :class="b('close', { mobile: true })"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
-         @click="close">
+         @click.prevent="close">
         <span v-t="'c-modal-header-01.closeTitle'" class="invisible"></span>
       </a>
       <div :class="b('close-icon-mobile')">
@@ -25,7 +25,7 @@
          :class="b('close')"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
-         @click="close">
+         @click.prevent="close">
         <e-icon
           :inline="true"
           icon="i-close"
@@ -111,13 +111,13 @@
     // destroyed() {},
 
     methods: {
-      close(event) {
+      close() {
         /**
          * Sends close event.
          *
          * @event close
          */
-        this.$emit('close', event);
+        this.$emit('close');
       },
     },
     // render() {},
