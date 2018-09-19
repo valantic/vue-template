@@ -1,30 +1,10 @@
 html,
 body {
   height: 100%;
-  font-size: 1rem;
   font-family: $font-family--primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-// global link definitions
-a,
-.e-link {
-  outline: none;
-  border-bottom: 1px solid $color-grayscale--600;
-  color: $color-grayscale--400;
-  font-family: $font-family--primary;
-  padding: 0 $spacing--10;
-  text-decoration: none;
-
-  &:focus,
-  &--focus,
-  &:hover,
-  &--hover {
-    color: $color-secondary--1;
-    border-bottom: 1px solid $color-primary--1;
-    text-decoration: none;
-  }
+  background-color: $color-grayscale--1000;
 }
 
 h1 {
@@ -41,10 +21,14 @@ h3 {
 
 h4 {
   @include font($font-size--14);
+
+  font-weight: $font-weight--bold;
 }
 
 h5 {
   @include font($font-size--14);
+
+  font-weight: $font-weight--semi-bold;
 }
 
 h6 {
@@ -54,5 +38,46 @@ h6 {
 p {
   @include font($font-size--14);
 
-  font-weight: $font-weight--regular;
+  font-weight: 400;
+}
+
+/* stylelint-disable selector-class-pattern, selector-max-id */
+html.scroll {
+  overflow-y: scroll;
+}
+
+body.no-scroll--x-y {
+  overflow: hidden;
+  height: 100%;
+  position: fixed;
+}
+
+body.no-scroll--x {
+  overflow-x: hidden;
+}
+
+body.no-scroll--y {
+  overflow-y: hidden; // TODO: not yet tested.
+  height: 100%;
+}
+
+body.no-scroll--position-fixed {
+  position: fixed;
+}
+
+#app {
+  height: 100%;
+}
+
+.invisible {
+  position: absolute;
+  overflow: hidden;
+  height: 0;
+  width: 0;
+  top: 0;
+}
+/* stylelint-enable */
+
+[inline-template] { // Hides inline templates from flashing before rendering
+  display: none;
 }

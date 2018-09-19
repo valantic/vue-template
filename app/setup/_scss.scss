@@ -1,14 +1,18 @@
-/* critical:start */
-
 // Variables, mixins and functions
 // NOTE: globals must also be imported in webpack.config.js via 'sass-resources-loader'
 @import "scss/variables";
+@import "scss/config";
 @import "scss/functions";
 @import "scss/mixins";
+@import "scss/extends";
 
-// Vendor styles
-@import "~bootstrap/scss/bootstrap-reboot";
-// @import "~bootstrap/scss/bootstrap-grid";
+// Font imports
+@import "scss/font";
+
+/* critical:start */
+
+// Style reboot
+@import "scss/reboot";
 
 // Global styles
 @import "scss/spacings";
@@ -16,4 +20,6 @@
 
 /* critical:end */
 
-@import "scss/font";
+// Vendor styles
+// - Note: don't add *.css extension to import. Else the style will be moved to top of output file!
+@import "~swiper/dist/css/swiper";

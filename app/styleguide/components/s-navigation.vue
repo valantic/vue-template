@@ -16,6 +16,10 @@
         <li :class="b('navigation-item', { theme: true })" @click.stop>
           <s-theme-selector/>
         </li>
+        <li :class="b('navigation-item', { settings: true })">
+          <h2>Settings</h2>
+          <s-demo-settings />
+        </li>
         <router-link
           v-for="route in routes"
           v-if="route.meta"
@@ -42,10 +46,12 @@
 <script>
   import SLanguage from './s-language';
   import SThemeSelector from './s-theme-selector';
+  import SDemoSettings from './s-demo-settings';
 
   export default {
     name: 's-navigation',
     components: {
+      SDemoSettings,
       SLanguage,
       SThemeSelector
     },
@@ -95,7 +101,7 @@
 </script>
 
 <style lang="scss">
-  $s-navigation--border: $spacing--10 solid $color-status--danger;
+  $s-navigation--border: $spacing--10 solid $color-grayscale--400;
   $s-navigation--trigger-size: 40px;
 
   .s-navigation {
@@ -105,7 +111,7 @@
       position: fixed;
       opacity: 0.2;
       min-width: $spacing--40;
-      background: $color-primary--3;
+      background-color: $color-grayscale--1000;
       z-index: 10000;
       height: 100%;
 
@@ -114,7 +120,9 @@
         position: absolute;
         width: $s-navigation--trigger-size;
         height: $s-navigation--trigger-size;
-        background-color: $color-status--danger;
+        background-color: $color-grayscale--1000;
+        border-top: 1px solid $color-grayscale--400;
+        border-left: 1px solid $color-grayscale--400;
         background-image: url('../assets/menu-button.svg');
         background-repeat: no-repeat;
         background-size: $s-navigation--trigger-size - 15px;
@@ -184,9 +192,8 @@
     }
 
     &__navigation {
-      padding: 0;
-      list-style: none;
-      margin: 0;
+      @extend %list-reset;
+
       min-width: 200px;
       max-height: 100vh;
       overflow: auto;
@@ -198,7 +205,8 @@
       }
 
       &--language,
-      &--theme {
+      &--theme,
+      &--settings {
         padding: $spacing--10 $spacing--20;
         border-bottom: 1px solid $color-grayscale--400;
       }

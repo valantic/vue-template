@@ -2,31 +2,20 @@ const { theme, styles } = require('./app/setup/styleguide.styles');
 const path = require('path');
 
 module.exports = {
-  webpackConfig(env) {
-    return require('./webpack.config')({
-      production: env === 'production',
-      styleguide: true
-    })
-  },
   renderRootJsx: path.join(__dirname, 'app/setup/styleguidist/root.js'),
-  require: [
-    'babel-polyfill', // In vue application imported by webpack. Was not supported by vue-styleguidist
-    path.join(__dirname, 'app/setup/_scss.scss'), // In vue application imported by main.js. Was not supported by vue-stylgudist
-    path.join(__dirname, 'app/setup/styleguidist/style.scss'),
-    path.join(__dirname, 'app/setup/styleguidist/required.js'),
-  ],
   defaultExample: 'app/setup/styleguide.fallback.md',
   components: 'app/components/**/*.vue',
   styleguideDir: 'dist/styleguidist',
-  showUsage: false,
-  vuex: './app/store/index',
+  usageMode: 'collapse',
+  previewDelay: 0, // This is already done by editor.
+  pagePerSection: true,
   sections: [
     {
       name: 'Welcome',
       content: '',
       sections: [
         {
-          name: 'Information',
+          name: 'Informations',
           content: 'app/styleguide/core/index.md',
         }
       ]
@@ -50,7 +39,25 @@ module.exports = {
         {
           name: 'Spacing',
           content: 'app/styleguide/core/spacing/spacing.md',
-        }
+        },
+        {
+          name: 'Global styles',
+          content: 'app/styleguide/core/global-styles/global-styles.md',
+        },
+      ]
+    },
+    {
+      name: 'Plugins',
+      content: '',
+      sections: [
+        {
+          name: 'Vuetify',
+          content: 'app/styleguide/core/vuetify/vuetify.md',
+        },
+        {
+          name: 'Tabs',
+          content: 'app/styleguide/core/plugins/tabs.md',
+        },
       ]
     },
     {
@@ -66,18 +73,31 @@ module.exports = {
       components: 'app/styleguide/components/!(s-readme).vue',
     },
   ],
-  mixins: [
-    'app/setup/styleguidist/mixins.js'
+  require: [
+    'babel-polyfill', // In vue application imported by webpack. Was not supported by vue-styleguidist
+    path.join(__dirname, 'app/setup/_scss.scss'), // In vue application imported by main.js. Was not supported by vue-styleguidist
+    path.join(__dirname, 'app/setup/vuetify/main.styl'), // In vue application imported by main.js. Was not supported by vue-styleguidist
+    path.join(__dirname, 'app/setup/styleguidist/style.scss'),
+    // Style only components
+    path.join(__dirname, 'app/components/c-form.scss'),
+    path.join(__dirname, 'app/components/c-tabs.scss'),
+    path.join(__dirname, 'app/setup/styleguidist/required.js'),
   ],
+  webpackConfig(env) {
+    return require('./webpack.config')({
+      production: env === 'production',
+      styleguide: true
+    })
+  },
   ignore: [
     '**/components/s-palette-item.vue',
     '**/components/s-color-item.vue',
     '**/components/l-default.vue',
-    '**/components/c-footer.vue',
     '**/components/s-layout.vue',
-    '**/components/c-social-media.vue',
-    '**/components/c-attribute-grid-items.vue',
     '**/components/c-swiper-modal.vue',
+    '**/components/s-demo-settings.vue',
+    '**/components/s-navigation.vue',
+    '**/components/s-toggle.vue',
   ],
   theme,
   styles,

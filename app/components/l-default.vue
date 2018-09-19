@@ -1,84 +1,71 @@
-<!-- TODO - This component is supposed to be functional -->
 <template>
-  <div :class="b()">
-    <c-header :state="headerState"/>
-    <div :class="b('content')">
-      <div :class="b('inner')">
+  <div :class="b()" data-app>
+    <div ref="content" :class="b('content')" >
+      <div ref="inner"
+           :class="b('inner')">
+        <c-notification-container />
         <slot></slot>
       </div>
     </div>
-    <c-footer/>
+    <portal-target name="modal-container" multiple />
   </div>
 </template>
 
 <script>
-  import cHeader from '@/components/c-header';
-  import cFooter from '@/components/c-footer';
+  import cNotificationContainer from '@/components/c-notification-container';
 
   export default {
     name: 'l-default',
     components: {
-      cHeader,
-      cFooter
+      cNotificationContainer,
     },
     // mixins: [],
 
     // props: {},
-    data() {
-      return {
-        lastKnownScrollPosition: 0,
-        ticking: false,
-        headerState: 'full',
-      };
-    },
+    // data() {
+    //   return {};
+    // },
 
     // computed: {},
     // watch: {},
 
     // beforeCreate() {},
-    created() {
-      window.addEventListener('resize', this.setContentPosition);
-      window.addEventListener('scroll', this.setHeaderState);
-    },
+    // created() {},
     // beforeMount() {},
     mounted() {
-      this.setContentPosition();
+      this.getNotificationsFromStorage();
     },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
-    destroyed() {
-      window.removeEventListener('resize', this.setContentPosition);
-      window.removeEventListener('scroll', this.setHeaderState);
-    },
+    // destroyed() {},
 
     methods: {
-      setContentPosition() {
-        const height = document.getElementsByClassName('c-header')[0].offsetHeight;
 
-        document.getElementsByClassName('l-default__content')[0].style.marginTop = `${height}px`;
-      },
-      setHeaderState() {
-        this.lastKnownScrollPosition = window.scrollY ? window.scrollY : window.pageYOffset;
+      /**
+       * Gets localStorage messages and pushes them in the notification store to display.
+       */
+      getNotificationsFromStorage() {
+        const messages = window.localStorage.getItem('notifications');
+        const messagesParsed = messages && JSON.parse(messages) ? JSON.parse(messages) : [];
 
-        if (!this.ticking) {
-          window.requestAnimationFrame(() => {
-            this.headerState = this.lastKnownScrollPosition > 0 ? 'reduced' : 'full';
-            this.ticking = false;
+        if (messages && Array.isArray(messagesParsed)) {
+          messagesParsed.forEach((message) => {
+            this.pushNotification({ message });
           });
 
-          this.ticking = true;
+          // Clears the localStorage notifications.
+          window.localStorage.removeItem('notifications');
         }
-      }
+      },
     },
     // render() {},
   };
 </script>
 
 <style lang="scss">
-
   .l-default {
     display: flex;
     flex-direction: column;
@@ -91,18 +78,10 @@
     }
 
     &__inner {
+      position: relative;
       background: $color-grayscale--1000;
       box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
-      margin: $spacing--20 auto;
-      max-width: #{map-get($grid-breakpoints, xl) - 20px};
-
-      @include media(sm) {
-        margin: $spacing--20 $spacing--10;
-      }
-
-      @include media(xl) {
-        margin: $spacing--20 auto;
-      }
+      max-width: #{map-get($breakpoints, xl) - 20px};
     }
   }
 

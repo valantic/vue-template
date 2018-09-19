@@ -6,11 +6,21 @@
   ],
   "plugins": [
     "syntax-dynamic-import",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    ["transform-imports", {
+      "vuetify": {
+        "transform": "vuetify/es5/components/${member}",
+        "preventFullImport": true
+      }
+    }]
   ],
   "env": {
+    "development": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    },
     "test": {
-      "presets": ["env"]
+      "presets": ["env"],
+      "plugins": ["transform-es2015-modules-commonjs", "dynamic-import-node"]
     }
   }
 }

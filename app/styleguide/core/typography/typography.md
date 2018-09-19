@@ -1,3 +1,4 @@
+
 ### SCSS mixins
 
 Font. See app/setup/scss/mixins/_font.scss
@@ -113,12 +114,6 @@ Please make sure that you use the defined SCSS mixins for font, font-size and li
 ### Links
 ```
 <a href="#0">no class</a>
-```
-```
-<a href="#0" class="e-link">with class e-link</a>
-```
-```
-<a href="#0" class="e-link e-link--hover">with hover state</a>
 ```
 
 ### Font Families

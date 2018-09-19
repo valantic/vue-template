@@ -1,4 +1,5 @@
 import { i18n } from '@/setup/i18n';
+import store from '@/store/index';
 
 /**
  * Root component setup for styleguidist.
@@ -9,8 +10,8 @@ import { i18n } from '@/setup/i18n';
  */
 export default previewComponent => ({
   i18n,
+  store,
   render(createElement) {
-    // v-app to support vuetify plugin
     return createElement(previewComponent);
   }
 });

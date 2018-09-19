@@ -1,8 +1,9 @@
-@import "variables/bootstrap";
+@import "variables/breakpoints";
 @import "variables/color";
 @import "variables/spacing";
 @import "variables/font";
 @import "variables/z-index";
+@import "variables/transitions";
 
 // general
 $border-radius--default: 3px;

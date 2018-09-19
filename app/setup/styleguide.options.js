@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import styleguideRoutes from './styleguide.routes';
 import sLayout from '../styleguide/components/s-layout';
 import AxiosMockAdapter from './plugins/styleguide.axios-mock';
+import dummyImages from '../styleguide/mock-data/images';
+import dummyTableDate from '../styleguide/mock-data/table';
 
 /**
  * In development and on styleguide build, include router and example pages
@@ -13,10 +15,29 @@ import AxiosMockAdapter from './plugins/styleguide.axios-mock';
 Vue.use(VueRouter);
 Vue.use(AxiosMockAdapter);
 
+Vue.mixin({
+  data() {
+    return {
+      mockData: {
+        dummyImages,
+        dummyTableDate,
+      }
+    };
+  },
+  methods: {
+    onStyleguideClick(event) {
+      // eslint-disable-next-line no-console
+      console.log('You clicked:', event.target);
+    },
+  }
+});
+
 const router = new VueRouter({
   routes: styleguideRoutes,
   mode: 'history',
 });
+
+window.vm = new Vue();
 
 export default {
   data: {

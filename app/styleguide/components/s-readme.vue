@@ -8,7 +8,7 @@
   import readme from '../../../README.md';
 
   export default {
-    name: 's-readme', // TODO: update name according to filename
+    name: 's-readme',
     components: {
       readme,
     },

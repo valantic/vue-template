@@ -3,14 +3,14 @@
 #### Default
 
 ```vue
-<e-button @click="onClick">Default</e-button>
+<e-button @click="onStyleguideClick">Default</e-button>
 
 ```
 
 #### Primary
 
 ```vue
-<e-button primary @click="onClick">Primary</e-button>
+<e-button primary @click="onStyleguideClick">Primary</e-button>
 ```
 
 ### Width
@@ -18,35 +18,41 @@
 #### full
 
 ```vue
-<e-button width="full" @click="onClick">Full width</e-button>
+<e-button width="full" @click="onStyleguideClick">Full width</e-button>
 ```
 
 #### auto
 
 ```vue
-<e-button width="auto" @click="onClick">Auto width</e-button>
+<e-button width="auto" @click="onStyleguideClick">Auto width</e-button>
 ```
 
-### ~~Negative~~
+### Negative
 
 Not defined yet.
 
 ```vue
-<e-button negative @click="onClick">Negative</e-button>
+<e-button negative @click="onStyleguideClick">Negative</e-button>
 ```
 
 ### Spacing
 
-#### default
+#### 500 (default)
 
 ```vue
-<e-button width="auto" @click="onClick">Spacing (default)</e-button>
+<e-button width="auto" @click="onStyleguideClick">Spacing (default)</e-button>
 ```
 
 #### 0
 
 ```vue
-<e-button spacing="0" width="auto" @click="onClick">Spacing 0</e-button>
+<e-button spacing="0" width="auto" @click="onStyleguideClick">Spacing 0</e-button>
+```
+
+#### 700
+
+```vue
+<e-button spacing="700" width="auto" @click="onStyleguideClick">Spacing 700</e-button>
 ```
 
 ### Progress
@@ -54,56 +60,56 @@ Not defined yet.
 #### Default
 
 ```vue
-<e-button progress @click="onClick">Progress</e-button>
+<e-button progress @click="onStyleguideClick">Progress</e-button>
 ```
 
 #### Primary
 
 ```vue
-<e-button progress primary @click="onClick">Progress</e-button>
+<e-button progress primary @click="onStyleguideClick">Progress</e-button>
 ```
 
 ### Native states
 
 #### :hover
 ```vue
-<e-button hover @click="onClick">:hover</e-button>
+<e-button hover @click="onStyleguideClick">:hover</e-button>
 ```
 
 #### :active
 ```vue
-<e-button active @click="onClick">:active</e-button>
+<e-button active @click="onStyleguideClick">:active</e-button>
 ```
 
 #### :focus
 ```vue
-<e-button focus @click="onClick">:focus</e-button>
+<e-button focus @click="onStyleguideClick">:focus</e-button>
 ```
 
 #### \[disabled\]
 ```vue
-<e-button disabled @click="onClick">[disabled]</e-button>
+<e-button disabled @click="onStyleguideClick">[disabled]</e-button>
 ```
 
 #### primary:hover
 ```vue
-<e-button hover primary @click="onClick">:hover</e-button>
+<e-button hover primary @click="onStyleguideClick">:hover</e-button>
 ```
 
 #### primary:active
 ```vue
-<e-button active primary @click="onClick">:active</e-button>
+<e-button active primary @click="onStyleguideClick">:active</e-button>
 ```
 
 #### primary:focus
 ```vue
-<e-button focus primary @click="onClick">:focus</e-button>
+<e-button focus primary @click="onStyleguideClick">:focus</e-button>
 ```
 
 #### primary\[disabled\]
 
 ```vue
-<e-button disabled primary @click="onClick">[disabled]</e-button>
+<e-button disabled primary @click="onStyleguideClick">[disabled]</e-button>
 ```
 
 ### Link
@@ -133,5 +139,5 @@ Creates a button like link.
 #### Multiline
 
 ```vue
-<e-button @click="onClick">A button<br>with wrapping<br>text</e-button>
+<e-button @click="onStyleguideClick">A button<br>with wrapping<br>text</e-button>
 ```
