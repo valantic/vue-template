@@ -1,7 +1,7 @@
 import { BREAKPOINTS } from '@/setup/globals';
 
 /**
- * Adds an eventBus instance to Vue itself, which can be used by calling this.$eventBus.
+ * Adds an viewport instance to Vue itself, which can be used by calling this.$viewport.
  */
 export default {
   install(Vue) {

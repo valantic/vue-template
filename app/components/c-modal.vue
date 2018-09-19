@@ -6,11 +6,13 @@
            :max-width="maxWidth"
            :pivot-y="0.1"
            :transition="isMobile ? mobileTransition : 'false'"
+           :click-to-close="false"
            height="auto"
            adaptive
            scrollable
            @closed="closedModal"
-           @before-close="onModalBeforeClose">
+           @before-close="onModalBeforeClose"
+           @opened="onModalOpened">
       <component :is="headerComponent"
                  :title="title"
                  :title-spacing="titleSpacing"
@@ -215,6 +217,7 @@
           this.scrollPositionY = window.scrollY;
           avoidContentResizing(true);
           this.$modal.show(this.uuid);
+          this.$globalModal.addToArray(this.uuid);
         } else {
           this.$modal.hide(this.uuid);
         }
@@ -234,6 +237,16 @@
 
     methods: {
       /**
+       * Event gets fired after modal is opened.
+       */
+      onModalOpened() {
+        const background = window.document.querySelectorAll('.v--modal-background-click');
+
+        background[background.length - 1].addEventListener('mousedown', this.closeModal);
+        background[background.length - 1].addEventListener('touchstart', this.closeModal);
+      },
+      
+      /**
        * Hides the modal.
        */
       closeModal() {
@@ -250,6 +263,7 @@
          * @event close
          */
         this.$emit('close');
+        this.$globalModal.removeFromArray(this.uuid);
         window.scrollTo(0, this.scrollPositionY);
       },
 

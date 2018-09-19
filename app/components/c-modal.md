@@ -105,7 +105,7 @@
 <template>
   <div>
     <e-button @click="exampleModalIsOpen = true">open 1st modal</e-button>
-    <c-modal :open="exampleModalIsOpen" @close="exampleModalIsOpen = false" title="I'm a modal!">
+    <c-modal :open="exampleModalIsOpen" title="I'm a modal!" @close="exampleModalIsOpen = false">
       hello World..
       <img src="https://dummyimage.com/600x400/000/fff" alt="">
       <div>

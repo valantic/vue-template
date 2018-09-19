@@ -6,6 +6,7 @@ import { Vuetify } from 'vuetify';
 import resizeEnd from './plugins/resize-end';
 import eventBus from './plugins/event-bus';
 import viewport from './plugins/viewport';
+import modal from './plugins/modal';
 
 // Polyfills and self executing
 import VModal from 'vue-js-modal';
@@ -22,6 +23,7 @@ Vue.use(VueAxios);
 Vue.use(Vuetify);
 Vue.use(eventBus);
 Vue.use(viewport);
+Vue.use(modal);
 
 Vue.use(VueBemCn, {
   hyphenate: true,
