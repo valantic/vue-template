@@ -19,7 +19,6 @@ import cModalHeader01 from '@/components/c-modal-header-01';
 import cBreadcrumb from '@/components/c-breadcrumb';
 
 // Twig related imports
-import cTest from '@/components/c-test';
 import lDefault from '@/components/l-default';
 
 // Import style only 'components'.
@@ -45,7 +44,6 @@ export default {
       lDefault,
       eLink,
       cBreadcrumb,
-      cTest,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -71,7 +69,6 @@ export default {
       Vue.component(lDefault.name, lDefault);
       Vue.component(eLink.name, eLink);
       Vue.component(cBreadcrumb.name, cBreadcrumb);
-      Vue.component(cTest.name, cTest);
     }
   },
 };

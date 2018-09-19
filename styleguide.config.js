@@ -95,7 +95,6 @@ module.exports = {
     '**/components/l-default.vue',
     '**/components/s-layout.vue',
     '**/components/c-swiper-modal.vue',
-    '**/components/c-test.vue',
     '**/components/s-demo-settings.vue',
     '**/components/s-navigation.vue',
     '**/components/s-toggle.vue',
