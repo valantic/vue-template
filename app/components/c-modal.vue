@@ -217,7 +217,7 @@
           this.scrollPositionY = window.scrollY;
           avoidContentResizing(true);
           this.$modal.show(this.uuid);
-          this.$globalModal.addToArray(this.uuid);
+          this.$modalStack.add(this.uuid);
         } else {
           this.$modal.hide(this.uuid);
         }
@@ -248,8 +248,13 @@
       
       /**
        * Hides the modal.
+       *
+       * @param {Object} event - The event object.
        */
-      closeModal() {
+      closeModal(event) {
+        if (event) {
+          event.preventDefault();
+        }
         this.$modal.hide(this.uuid);
       },
 
@@ -263,7 +268,7 @@
          * @event close
          */
         this.$emit('close');
-        this.$globalModal.removeFromArray(this.uuid);
+        this.$modalStack.remove(this.uuid);
         window.scrollTo(0, this.scrollPositionY);
       },
 

@@ -1,9 +1,9 @@
 /**
- * Adds an globalModal instance to Vue itself, which can be used by calling this.$globalModal.
+ * Adds a modalStack instance to Vue itself, which can be used by calling this.$modalStack.
  */
 export default {
   install(Vue) {
-    Vue.prototype.$globalModal = new Vue({
+    Vue.prototype.$modalStack = new Vue({
       data: {
         /**
          * Holds a list of open modal names (uuid).
@@ -45,7 +45,7 @@ export default {
          *
          * @param {String} uuid - Name of the modal (uuid).
          */
-        removeFromArray(uuid) {
+        remove(uuid) {
           this.openModals.splice(this.openModals.indexOf(uuid), 1);
         },
 
@@ -54,7 +54,7 @@ export default {
          *
          * @param {String} uuid - Name of the modal (uuid).
          */
-        addToArray(uuid) {
+        add(uuid) {
           this.openModals.push(uuid);
         }
       },

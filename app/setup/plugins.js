@@ -6,7 +6,7 @@ import { Vuetify } from 'vuetify';
 import resizeEnd from './plugins/resize-end';
 import eventBus from './plugins/event-bus';
 import viewport from './plugins/viewport';
-import modal from './plugins/modal';
+import modal from './plugins/modalStack';
 
 // Polyfills and self executing
 import VModal from 'vue-js-modal';

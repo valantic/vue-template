@@ -111,13 +111,13 @@
     // destroyed() {},
 
     methods: {
-      close() {
+      close(event) {
         /**
          * Sends close event.
          *
          * @event close
          */
-        this.$emit('close');
+        this.$emit('close', event);
       },
     },
     // render() {},
