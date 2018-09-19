@@ -211,7 +211,14 @@
          * @property {Array} - The list of all the selected elements.
          */
         this.$emit('onChangeSelected', this.selected);
-      }
+      },
+
+      /**
+       * Observes if the items array got changed and updates the pagination object.
+       */
+      items() {
+        this.pagination.totalItems = this.items.length;
+      },
     },
 
     // beforeCreate() {},
