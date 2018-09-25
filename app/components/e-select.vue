@@ -7,7 +7,12 @@
             @change="onChange"
     >
       <option :disabled="!hasSelectablePlaceholder" value="">{{ selectText }}</option>
-      <option v-for="item in optionsList" :key="`${name}-${item.value}`" :value="item.value">{{ item.label }}</option>
+      <option v-for="item in optionsList"
+              :key="`${name}-${item.value}`"
+              :value="item.value"
+              :selected="item.value === value">
+        {{ item.label }}
+      </option>
     </select>
     <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
     <div v-if="progress" :class="b('progress-container')">
