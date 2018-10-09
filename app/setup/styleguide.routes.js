@@ -1,15 +1,9 @@
 import index from '../styleguide/routes/index';
+import sandbox from '../styleguide/routes/sandbox';
 import lDefault from '../components/l-default';
-import twoColumns from '../styleguide/routes/two-columns';
-import productDetail from '../styleguide/routes/product-detail';
-import lazyload from '../styleguide/routes/lazyload';
-import headings from '../styleguide/routes/headings';
-import panels from '../styleguide/routes/panels';
-import buttons from '../styleguide/routes/buttons';
 import forms from '../styleguide/routes/forms';
-import collapse from '../styleguide/routes/collapse';
-import modals from '../styleguide/routes/modals';
-import swiper from '../styleguide/routes/swiper';
+import lazyload from '../styleguide/routes/lazyload';
+import notifications from '../styleguide/routes/notifications';
 
 const root = '/styleguide';
 
@@ -26,11 +20,11 @@ export default [
     }
   },
   {
-    path: `${root}/lazyload`,
-    name: 'styleguideLazyload',
-    component: lazyload,
+    path: `${root}/sandbox`,
+    name: 'sandbox',
+    component: sandbox,
     meta: {
-      title: 'Lazyload'
+      title: 'Sandbox',
     }
   },
   {
@@ -42,22 +36,6 @@ export default [
     }
   },
   {
-    path: `${root}/headings`,
-    name: 'styleguideHeadings',
-    component: headings,
-    meta: {
-      title: 'Headings',
-    }
-  },
-  {
-    path: `${root}/panels`,
-    name: 'styleguidePanels',
-    component: panels,
-    meta: {
-      title: 'Panels',
-    }
-  },
-  {
     path: `${root}/forms`,
     name: 'styleguideForms',
     component: forms,
@@ -66,55 +44,23 @@ export default [
     },
   },
   {
-    path: `${root}/buttons`,
-    name: 'styleguideButtons',
-    component: buttons,
+    path: `${root}/lazyload`,
+    name: 'Lazy load',
+    component: lazyload,
     meta: {
-      title: 'Buttons',
-    }
+      title: 'Lazy load',
+    },
   },
   {
-    path: `${root}/collapse`,
-    name: 'styleguideCollapse',
-    component: collapse,
+    path: `${root}/notifications`,
+    name: 'Notifications',
+    component: notifications,
     meta: {
-      title: 'Collapse',
-    }
-  },
-  {
-    path: `${root}/two-columns`,
-    name: 'styleguideTwoColumnsLayout',
-    component: twoColumns,
-    meta: {
-      title: 'Two Columns Layout',
-    }
-  },
-  {
-    path: `${root}/product-detail`,
-    name: 'styleguideProductDetail',
-    component: productDetail,
-    meta: {
-      title: 'Product Detail',
-    }
-  },
-  {
-    path: `${root}/modals`,
-    name: 'styleguideModals',
-    component: modals,
-    meta: {
-      title: 'Modals',
-    }
-  },
-  {
-    path: `${root}/swiper`,
-    name: 'styleguideSwiper',
-    component: swiper,
-    meta: {
-      title: 'Swiper',
-    }
+      title: 'Notifications',
+    },
   },
   {
     path: '*',
     redirect: root,
-  }
+  },
 ];

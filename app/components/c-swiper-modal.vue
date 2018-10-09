@@ -31,7 +31,6 @@
 
   import Swiper from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
-  import 'swiper/dist/css/swiper.css';
 
   /**
    * Touch enabled slider component with thumbnails based on
@@ -186,8 +185,8 @@
       margin-top: -#{$spacing--15};
       opacity: 0;
       visibility: hidden;
-      transition: all 0.2s linear;
-      transition-delay: 0.1s;
+      transition: all $transition-duration-200 linear;
+      transition-delay: $transition-duration-100;
       outline: none;
     }
 
@@ -269,8 +268,8 @@
       .swiper-button-next:not(.swiper-button-disabled) {
         @include media(xs) {
           opacity: 1;
-          transition: all 0.2s linear;
-          transition-delay: 0.2s;
+          transition: all $transition-duration-200 linear;
+          transition-delay: $transition-duration-200;
           visibility: visible;
         }
       }

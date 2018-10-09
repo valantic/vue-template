@@ -1,17 +1,22 @@
 <template>
-  <select :class="b()" @change="onChange">
-    <option v-for="theme in themes"
-            :value="theme.id"
-            :key="theme.id"
-            :selected="theme.selected"
-    >
-      {{ theme.name }}
-    </option>
-  </select>
+  <label>
+    <span class="invisible">Theme</span>
+    <select :class="b()" @change="onChange">
+      <option v-for="theme in themes"
+              :value="theme.id"
+              :key="theme.id"
+              :selected="theme.selected"
+      >
+        {{ theme.name }}
+      </option>
+    </select>
+  </label>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
+
+  const THEME_PATH = '/assets/css/shop.theme-';
 
   export default {
     name: 's-theme-selector',
@@ -23,23 +28,23 @@
       return {
         defaultThemes: [
           {
-            name: 'Foo01',
+            name: 'Theme 01',
             id: '01'
           },
           {
-            name: 'Foo02',
+            name: 'Theme 02',
             id: '02'
           },
           {
-            name: 'Foo03',
+            name: 'Theme 03',
             id: '03'
           },
           {
-            name: 'Foo04',
+            name: 'Theme 04',
             id: '04'
           },
           {
-            name: 'Foo05',
+            name: 'Theme 05',
             id: '05'
           }
         ],
@@ -47,14 +52,9 @@
     },
 
     computed: {
-      ...mapGetters({
-        /**
-         * Gets the global theme
-         *
-         * @returns  {String}  theme id
-         */
-        globalTheme: 'session/getTheme'
-      }),
+      ...mapGetters('session', [
+        'theme',
+      ]),
 
       /**
        * Loops the themes and mark the selected by the global theme.
@@ -63,7 +63,7 @@
        */
       themes() {
         const list = this.defaultThemes;
-        const activeId = this.globalTheme;
+        const activeId = this.theme;
 
         return list.map((theme) => {
           let selected = false;
@@ -83,21 +83,21 @@
 
     watch: {
       /**
-       * Watches for changes of the «globalTheme» and sets or changes the stylesheet with the
+       * Watches for changes of the «theme» and sets or changes the stylesheet with the
        * custom theme css-variables
        */
-      globalTheme: {
+      theme: {
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
-          const theme = this.globalTheme;
+          const { theme } = this;
 
           if (!document.getElementById(cssId)) {
             this.createStyleElement(theme, cssId);
           } else {
             const link = document.getElementById(cssId);
 
-            link.href = `/static/css/theme-${theme}.css`;
+            link.href = `${THEME_PATH}${theme}.css`;
           }
         }
       }
@@ -124,7 +124,7 @@
         link.id = cssId;
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = `/static/css/theme-${themeId}.css`;
+        link.href = `${THEME_PATH}${themeId}.css`;
         link.media = 'all';
 
         head.appendChild(link);

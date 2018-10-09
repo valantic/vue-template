@@ -1,0 +1,39 @@
+/* Styles the tab plugin */
+.tabs-component {
+  $this: &;
+
+  &-tabs {
+    @extend %list-reset;
+
+    display: flex;
+  }
+
+  &-tab {
+    flex: 1 0 0%; // flex-basis unit is mandatory for IE11.
+    text-align: center;
+    border-bottom: 1px solid $color-grayscale--500;
+  }
+
+  &-tab.is-active {
+    border-bottom-width: 5px;
+
+    #{$this}-tab-a {
+      color: $color-secondary--1;
+    }
+  }
+
+  &-tab-a,
+  &-tab-a:hover,
+  &-tab-a:focus {
+    @include font($font-size--18, 23px);
+
+    display: block;
+    padding: $spacing--15 0;
+    color: $color-grayscale--400;
+    text-decoration: none;
+  }
+
+  &-panels {
+    padding: $spacing--25;
+  }
+}

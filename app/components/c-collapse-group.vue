@@ -6,7 +6,6 @@
 </template>
 
 <script>
-  import EventBus from '@/setup/event-bus';
 
   /**
    * Wrapper for multiple (c-collapse) itmes.
@@ -39,7 +38,7 @@
       /**
        * Emits toggled event
        */
-      EventBus.$on('c-collapse.toggled', (payload) => {
+      this.$eventBus.$on('c-collapse.toggled', (payload) => {
         const collapseComponent = payload.component; // child
 
         /**
@@ -51,7 +50,7 @@
          * @property  {object}  payload.toggleCollapse    Component instance of original event
          */
         if (this.$el.contains(collapseComponent.$el) && this.oneActive) {
-          EventBus.$emit('c-collapse-group.toggle', { component: this, toggledCollapse: collapseComponent });
+          this.$eventBus.$emit('c-collapse-group.toggle', { component: this, toggledCollapse: collapseComponent });
         }
       });
     },

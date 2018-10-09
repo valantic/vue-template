@@ -1,0 +1,24 @@
+.c-form {
+  &__field + &__field {
+    margin-top: $spacing--20;
+  }
+
+  &__actions {
+    margin-top: $spacing--60;
+
+    .e-button {
+      @include media(sm) {
+        display: inline-block;
+        width: auto;
+      }
+    }
+
+    .e-button + .e-button {
+      margin-top: $spacing--20;
+
+      @include media(sm) {
+        margin: 0 0 0 $spacing--20;
+      }
+    }
+  }
+}

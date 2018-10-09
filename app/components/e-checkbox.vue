@@ -3,8 +3,8 @@
   <div :class="b(stateModifiers)">
     <label
       :class="b('label')"
-      @mouseenter="isHover = true"
-      @mouseleave="isHover = false">
+      @mouseenter="hasHover = true"
+      @mouseleave="hasHover = false">
       <input
         :aria-checked="isChecked ? 'true' : 'false'"
         :class="b('field')"
@@ -18,7 +18,9 @@
         @blur="onBlur"
         @change="onChange"
         @focus="onFocus">
-      <span :class="b('label-name')">{{ displayName }}</span>
+      <span :class="b('label-name')">
+        <slot></slot>
+      </span>
     </label>
   </div>
 
@@ -66,17 +68,9 @@
        * Adds value attribute
        */
       value: {
-        type: String,
+        type: [String, Number],
         required: true,
       },
-
-      /**
-       * Display name for the label
-       */
-      displayName: {
-        type: String,
-        required: true
-      }
     },
 
     // data() {
@@ -87,7 +81,7 @@
       /**
        * Sets value of component model to parent model
        *
-       * @returns  {Boolean}   Status of the checkbox
+       * @returns  {Boolean|Array}   Status of the checkbox
        */
       internalValue: {
         get() {
@@ -102,7 +96,7 @@
            */
           this.$emit('change', value);
         }
-      }
+      },
     },
     // watch: {},
 
@@ -120,9 +114,9 @@
     methods: {
       /**
        * Emits state to parent and wrapper component.
-       * Update "isChecked" state
+       * Update "isChecked" state.
        *
-       * @param   {Object}  event   Field input
+       * @param   {Boolean}  event   Field input
        */
       onChange(event) {
         this.isChecked = event.target.checked;
@@ -131,13 +125,25 @@
          * Change event
          *
          * @event change
+         * @type {String}
          */
         this.$parent.$emit('change');
       },
 
       /**
+       * Updates the checked state of the checkbox.
+       */
+      updateCheckedState() {
+        if (typeof this.value === 'string') {
+          this.isChecked = this.checked.indexOf(this.value.trim()) > -1;
+        } else if (typeof this.value === 'number') {
+          this.isChecked = this.checked.indexOf(this.value) > -1;
+        }
+      },
+
+      /**
        * Emits focus to parent and wrapper component.
-       * Update "hasFocus" state
+       * Update "hasFocus" state.
        */
       onFocus() {
         this.hasFocus = true;
@@ -154,13 +160,13 @@
 
       /**
        * Emits blur to parent and wrapper component.
-       * Update "hasFocus" state
+       * Update "hasFocus" state.
        */
       onBlur() {
         this.hasFocus = false;
 
         /**
-         * Blur event
+         * Blur event.
          *
          * @event blur
          * @type {String}
@@ -185,6 +191,7 @@
 
     // general label
     &__label {
+      display: block;
       color: $color-grayscale--400;
       cursor: pointer;
       position: relative;
@@ -202,7 +209,7 @@
         top: 0;
         width: 17px;
         height: 17px;
-        transition: border 0.3s ease;
+        transition: border $transition-duration-300 ease;
       }
 
       // custom field marker
@@ -220,7 +227,7 @@
         width: 17px;
         opacity: 0;
         transform: scale(0);
-        transition: all 0.1s;
+        transition: all $transition-duration-100;
       }
     }
 
@@ -247,6 +254,7 @@
     &--disabled &__label,
     &__field:disabled + &__label {
       color: $color-grayscale--500;
+      cursor: default;
 
       // custom field disabled
       &::before,

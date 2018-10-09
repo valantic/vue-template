@@ -214,7 +214,7 @@
             attrs: imgAttributes,
           }
         ));
-      } else if (this.parsedSizes && this.parsedSrcset) {
+      } else if (parsedSizes && this.parsedSrcset) {
         imgAttributes.sizes = parsedSizes;
         imgAttributes[lazyload ? 'data-srcset' : 'srcset'] = this.parsedSrcset;
         imgAttributes[lazyload ? 'data-src' : 'src'] = this.fallback;

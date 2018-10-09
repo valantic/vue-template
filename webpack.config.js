@@ -24,31 +24,32 @@ module.exports = function(env = {}, options = {}) {
   const hasWatcher = env.watch || false;
   const hotReload = !hasWatcher || !isProduction;
   const isProfileBuild = (options.profile && options.json) || false;
+  const hasMonitorSnapshot = env.monitor || false;
 
   const themes = {
     'theme-01': path.resolve(__dirname, 'app/setup/scss/themes/theme-01.scss'),
     'theme-02': path.resolve(__dirname, 'app/setup/scss/themes/theme-02.scss'),
-    'theme-03': path.resolve(__dirname, 'app/setup/scss/themes/theme-03.scss'),
-    'theme-04': path.resolve(__dirname, 'app/setup/scss/themes/theme-04.scss'),
-    'theme-05': path.resolve(__dirname, 'app/setup/scss/themes/theme-05.scss'),
   };
   const clean = [
-    ...Object.keys(themes).map(theme => `js/${theme}.js`)
+    ...Object.keys(themes).map(theme => `js/shop.${theme}.js`),
   ];
 
   // Configuration
   const buildPath = path.resolve(__dirname, 'dist');
-  const filePrefix = '';
+  const filePrefix = 'shop';
   const devPort = 8080;
-  const assetsSubDirectory = 'static/';
+  const assetsSubDirectory = 'assets/';
   const globalVariables = {
     'process.env': {
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
-      HAS_STYLEGUIDE: JSON.stringify(hasStyleguide)
+      HAS_STYLEGUIDE: JSON.stringify(hasStyleguide),
+      HAS_WATCHER: hasWatcher,
     },
   };
 
-  const host = '0.0.0.0';
+  const host = options.host !== 'localhost'
+    ? options.host
+    : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
   const prefix = filePrefix ? `${filePrefix}.` : '';
   const include = [
     path.resolve(__dirname, 'app'),
@@ -70,7 +71,7 @@ module.exports = function(env = {}, options = {}) {
         loader: 'css-loader', // Note: will also call postcss
         options: {
           sourceMap: !isProduction || hasStyleguide,
-          minimize: false // TODO: isProduction
+          minimize: false, // TODO: isProduction
         },
       },
       {
@@ -84,9 +85,11 @@ module.exports = function(env = {}, options = {}) {
         options: {
           resources: [
             './app/setup/scss/_variables.scss',
+            './app/setup/scss/_config.scss',
             './app/setup/scss/_functions.scss',
             './app/setup/scss/_mixins.scss',
-          ]
+            './app/setup/scss/_extends.scss',
+          ],
         },
       },
     ];
@@ -113,6 +116,10 @@ module.exports = function(env = {}, options = {}) {
       warnings: true,
     };
 
+    if (hasWatcher) {
+      return false;
+    }
+
     return !isProfileBuild ? stats : undefined;
   }
 
@@ -120,11 +127,41 @@ module.exports = function(env = {}, options = {}) {
     const pipeline = [
       postCssCriticalSplit({
         output: output,
-      })
+      }),
     ];
 
     if (!hasWatcher) {
-      pipeline.push(cssNano());
+      pipeline.push(cssNano({
+        // 'css-declaration-sorter': false,
+        // 'cssnano-util-raw-cache': false,
+        // 'postcss-calc': false,
+        // 'postcss-colormin': false,
+        // 'postcss-convert-values': false,
+        // 'postcss-discard-comments': false,
+        // 'postcss-discard-duplicates': false,
+        // 'postcss-discard-empty': false,
+        // 'postcss-discard-overridden': false,
+        // 'postcss-merge-longhand': false,
+        // 'postcss-merge-rules': false,
+        // 'postcss-minify-font-values': false,
+        // 'postcss-minify-gradients': false,
+        // 'postcss-minify-params': false,
+        // 'postcss-minify-selectors': false,
+        // 'postcss-normalize-charset': false,
+        // 'postcss-normalize-display-values': false,
+        // 'postcss-normalize-positions': false,
+        // 'postcss-normalize-repeat-style': false,
+        // 'postcss-normalize-string': false,
+        // 'postcss-normalize-timing-functions': false,
+        // 'postcss-normalize-unicode': false,
+        // 'postcss-normalize-url': false,
+        // 'postcss-normalize-whitespace': false,
+        // 'postcss-ordered-values': false,
+        // 'postcss-reduce-initial': false,
+        // 'postcss-reduce-transforms': false,
+        // 'postcss-svgo': false,
+        // 'postcss-unique-selectors': false,
+      }));
     }
 
     return pipeline;
@@ -133,28 +170,41 @@ module.exports = function(env = {}, options = {}) {
   function plugins() {
     const pluginCollection = [
       new webpack.DefinePlugin(globalVariables),
-      new HtmlWebpackPlugin({ // Script tag injection
-        inject: true,
-        template: 'index.html',
-        chunksSortMode: 'dependency',
-        excludeChunks: Object.keys(themes),
-      }),
       // extract css into its own file
       new ExtractTextPlugin({
-        filename: assetsSubDirectory + `css/${prefix}[name].css?[chunkhash]`, // NOTE: postcss-pipeline currently does not support query hash (https://github.com/mistakster/postcss-pipeline-webpack-plugin/issues/30)
+        filename: assetsSubDirectory + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
         allChunks: true,
-      })
+      }),
+
+      // copy custom static assets
+      new CopyWebpackPlugin([
+        {
+          from: path.resolve(__dirname, 'static'),
+          ignore: ['.*']
+        },
+      ]),
+
+      // Only load locales for moment.js which are actually used. See https://github.com/moment/moment/issues/1435#issuecomment-187100876
+      new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(de|fr|it)$/)
     ];
 
-    if (isProduction) {
-      if (!hasWatcher) {
-        // Create webpack monitor snapshot
-        pluginCollection.push(new WebpackMonitor({
-          capture: !hasStyleguide,
-          target: '../stats/monitor.json',
-          launch: env && env.monitor
-        }));
+    if (hasMonitorSnapshot) {
+      // Create webpack monitor snapshot
+      pluginCollection.push(new WebpackMonitor({
+        capture: !hasStyleguide,
+        target: '../stats/monitor.json',
+        launch: hasMonitorSnapshot
+      }));
+    }
 
+    if (isProduction) {
+      if (hasWatcher) {
+        pluginCollection.push(new FriendlyErrorsPlugin({
+          compilationSuccessInfo: {
+            messages: ['Your production build was updated.'],
+          },
+        }));
+      } else {
         pluginCollection.push(new UglifyJsPlugin({
           test: /\.js($|\?)/i, // MUST be defined because file has as query
           parallel: true,
@@ -162,27 +212,27 @@ module.exports = function(env = {}, options = {}) {
         }));
 
         // Note: version auto inject is currently not working with query hash (https://github.com/radswiat/webpack-auto-inject-version/issues/25)
-        pluginCollection.push(new WebpackAutoInject({
-          SILENT: true,
-          components: {
-            AutoIncreaseVersion: false,
-            InjectAsComment: true,
-            InjectByTag: true
-          },
-          componentsOptions: {
-            InjectAsComment: {
-              tag: 'Build version: {version} - {date}',
-              dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
-            }
-          }
-        }));
+        // pluginCollection.push(new WebpackAutoInject({
+        //   SILENT: true,
+        //   components: {
+        //     AutoIncreaseVersion: false,
+        //     InjectAsComment: true,
+        //     InjectByTag: true
+        //   },
+        //   componentsOptions: {
+        //     InjectAsComment: {
+        //       tag: 'Build version: {version} - {date}',
+        //       dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
+        //     }
+        //   }
+        // }));
 
         if (hasMessage) {
           pluginCollection.push(
             // Cleans dist directory and removes specific unnecessary files
             new WebpackCleanPlugin(
               clean,
-              { basePath: path.join(__dirname, 'dist/static/') })
+              { basePath: path.join(__dirname, 'dist/assets/') }),
           );
         }
       }
@@ -196,17 +246,17 @@ module.exports = function(env = {}, options = {}) {
             module.resource &&
             /\.js$/.test(module.resource) &&
             module.resource.indexOf(
-              path.join(__dirname, 'node_modules')
+              path.join(__dirname, 'node_modules'),
             ) === 0
           );
-        }
+        },
       }));
 
       // extract webpack runtime and module manifest to its own file in order to
       // prevent vendor hash from being updated whenever app bundle is updated
       pluginCollection.push(new webpack.optimize.CommonsChunkPlugin({
         name: 'manifest',
-        minChunks: Infinity
+        minChunks: Infinity,
       }));
 
       // keep module.id stable when vender modules does not change
@@ -217,26 +267,14 @@ module.exports = function(env = {}, options = {}) {
         // provide an optional function to filter out unwanted CSS
         predicate: name => name.indexOf('app.css') > -1,
         suffix: 'critical',
-        pipeline: getPostCSSPipeline('critical')
+        pipeline: getPostCSSPipeline('critical'),
       }));
 
       // Create minimized CSS (Full css => incl. critical css)
       pluginCollection.push(new PostCssPipelineWebpackPlugin({
         suffix: '', // Defining an empty string makes it possible not create an additional file
-        pipeline: getPostCSSPipeline('input')
+        pipeline: getPostCSSPipeline('input'),
       }));
-
-      // copy custom static assets
-      pluginCollection.push(new CopyWebpackPlugin([
-        {
-          from: path.resolve(__dirname, 'static'),
-          to: assetsSubDirectory, // TODO: is this correct? If yes, is .htaccess correct?
-          ignore: ['.*']
-        },
-        {
-          from: path.resolve(__dirname, 'static/.htaccess'),
-        },
-      ]));
 
       // enable scope hoisting
       pluginCollection.push(new webpack.optimize.ModuleConcatenationPlugin());
@@ -249,13 +287,22 @@ module.exports = function(env = {}, options = {}) {
       //   ],
       // }));
 
+      // Create index.html for dev server
+      pluginCollection.push(new HtmlWebpackPlugin({ // Script tag injection
+        inject: true,
+        template: 'index.html', // TODO: check if this can be replaced with a twig template in production build
+        chunksSortMode: 'dependency',
+        excludeChunks: Object.keys(themes),
+      }));
+
       pluginCollection.push(new webpack.NamedModulesPlugin()); // Hot Module Replacement
-      pluginCollection.push(new webpack.HotModuleReplacementPlugin()); // Hot Module Replacement
 
       if (!hasStyleguide) {
+        pluginCollection.push(new webpack.HotModuleReplacementPlugin()); // Hot Module Replacement => vue-styleguidist applies this aswell, which caused problems with scss imports
+
         pluginCollection.push(new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
-            messages: [`Your application is running on http://${host}:${devPort}.`],
+            messages: [ `Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.` ],
           },
         }));
       }
@@ -269,11 +316,11 @@ module.exports = function(env = {}, options = {}) {
       ...themes,
       app: [
         'babel-polyfill',
-        path.resolve(__dirname, 'app/main.js')
+        path.resolve(__dirname, 'app/main.js'),
       ],
     },
     resolve: {
-      extensions: ['.js', '.vue', '.json'],
+      extensions: [ '.js', '.vue', '.json' ],
       alias: {
         vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
         swiper$: 'swiper/dist/js/swiper.js', // Use builded code from swiper when importing from 'swiper'
@@ -289,7 +336,8 @@ module.exports = function(env = {}, options = {}) {
           include,
           options: {
             failOnError: isProduction && !hasWatcher,
-            emitWarning: !isProduction && !hasWatcher, // Keeps overlay from showing during development, because it's annoying
+            emitWarning: hasWatcher || !isProduction, // Keeps overlay from showing during development, because it's annoying
+            cache: hasWatcher || !isProduction, // Improves linting performance
           },
         },
         {
@@ -304,9 +352,9 @@ module.exports = function(env = {}, options = {}) {
             // https://vue-loader.vuejs.org/en/options.html#cachebusting
             cacheBusting: false, // TODO: shouldn't this be true?
             loaders: {
-              scss: scssLoader()
-            }
-          }
+              scss: scssLoader(),
+            },
+          },
         },
         {
           test: /\.scss$/,
@@ -314,7 +362,27 @@ module.exports = function(env = {}, options = {}) {
         },
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
+          use: [ 'style-loader', 'css-loader' ],
+        },
+        {
+          test: /\.styl$/,
+          use: ExtractTextPlugin.extract({
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1,
+                  sourceMap: !isProduction
+                }
+              },
+              {
+                loader: 'stylus-loader',
+                options: {
+                  sourceMap: !isProduction
+                },
+              },
+            ]
+          })
         },
         {
           test: /\.js$/,
@@ -345,7 +413,7 @@ module.exports = function(env = {}, options = {}) {
                     //{ removeMetadata: false, },
                     //{ removeTitle: false, },
                     //{ removeDesc: false, },
-                    { removeUselessDefs: false, },
+                    { removeUselessDefs: false },
                     //{ removeEditorsNSData: false, },
                     //{ removeEmptyAttrs: false, },
                     //{ removeHiddenElems: false, },
@@ -361,7 +429,7 @@ module.exports = function(env = {}, options = {}) {
                     //{ removeNonInheritableGroupAttrs: true, },
                     //{ removeUselessStrokeAndFill: true, },
                     //{ removeUnusedNS: true, },
-                    { cleanupIDs: false, },
+                    { cleanupIDs: false },
                     //{ cleanupNumericValues: false, },
                     //{ moveElemsAttrsToGroup: true, },
                     //{ moveGroupAttrsToElems: true, },
@@ -372,9 +440,9 @@ module.exports = function(env = {}, options = {}) {
                     //{ sortAttrs: true, },
                     //{ transformsWithOnePath: false, },
                     //{ removeDimensions: true, }
-                  ]
+                  ],
                 },
-              }
+              },
             },
           ],
         },
@@ -383,22 +451,22 @@ module.exports = function(env = {}, options = {}) {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubDirectory + 'media/[name].[ext]?[hash]'
-          }
+            name: assetsSubDirectory + 'media/[name].[ext]?[hash]',
+          },
         },
         {
           test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: assetsSubDirectory + 'fonts/[name].[ext]?[hash]'
-          }
+            name: assetsSubDirectory + 'fonts/[name].[ext]?[hash]',
+          },
         },
         {
           test: /\.md$/,
-          loader: 'vue-markdown-loader'
-        }
-      ]
+          loader: 'vue-markdown-loader',
+        },
+      ],
     },
     node: {
       // prevent webpack from injecting useless setImmediate polyfill because Vue

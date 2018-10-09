@@ -119,12 +119,12 @@
     }
 
     &__bubble {
-      height: 1em;
-      width: 1em;
+      height: 0.6em;
+      width: 0.6em;
       background-color: $color-secondary--1;
       left: 100%;
       position: absolute;
-      margin: 0 auto;
+      margin: $spacing--5 auto 0;
       border-radius: 50%;
       transform: translateX(-50%) scale(0) rotate(0.02deg); // NOTE: the rotation smooths animation in FF
       animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;

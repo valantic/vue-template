@@ -1,6 +1,6 @@
 <template>
   <label :class="b(modifiers)">
-    <span :class="b('name')">{{ name }}</span>
+    <span :class="b('name', { invisible })">{{ name }}</span>
     <span v-if="this.$slots.default" :class="b('inner')">
       <!-- @slot Label content -->
       <slot></slot>
@@ -42,7 +42,15 @@
             'left',
           ].includes(value);
         }
-      }
+      },
+
+      /**
+       * Hides the label-text for the normal user (only available for screen readers).
+       */
+      invisible: {
+        type: Boolean,
+        default: false,
+      },
     },
 
     computed: {
@@ -54,7 +62,7 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          position: this.$props.position
+          position: this.$props.position,
         };
       }
     },
@@ -91,9 +99,9 @@
 
 <style lang="scss">
   .e-label {
+    color: $color-grayscale--400;
     display: block;
     margin: 0;
-    color: $color-grayscale--400;
 
     &__inner {
       width: 100%;
@@ -104,6 +112,14 @@
 
       color: inherit;
       display: block;
+    }
+
+    &__name--invisible {
+      position: absolute;
+      overflow: hidden;
+      height: 0;
+      width: 0;
+      top: 0;
     }
 
     &--position-top {

@@ -3,18 +3,16 @@ import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-e
 import { axios } from './axios';
 
 // Import mocks
-import cSuggestions from '../../styleguide/mock-data/cSuggestions';
-import cProductErp from '../../styleguide/mock-data/cProductErp';
-import cCartPost from '../../styleguide/mock-data/cCartPost';
+import notification from '../../styleguide/mock-data/notifications';
 
 /**
  * By default returns a 500 'no route defined' error.
  * If 'isErrorTest=xxx' is defined in the request params the defined error number is returned.
  *
  * @param   {Object}          config                          The request configuration
- * @param   {number|string}   [config.params.isErrorTest]     Number of to be tested error response
+ * @param   {Number|String}   [config.params.isErrorTest]     Number of to be tested error response
  *
- * @returns {array}
+ * @returns {Array}
  */
 function wildcard(config) {
   const errorCode = Number(config.params && config.params.isErrorTest);
@@ -44,16 +42,21 @@ export default {
    */
   install(/* Vue, options */) {
     const mock = new MockAdapter(axios, {
-      delayResponse: 400,
+      delayResponse: 2000,
     });
 
     // See https://github.com/ctimmerm/axios-mock-adapter
     mock
-      .onGet('/suggestions').reply(200, cSuggestions)
-      .onPost('/product/multi-get').reply(200, cProductErp)
-      .onPost('/cart/1').reply(200, cCartPost)
+      // EXAMPLE => .onPost('api-url').reply(200, mockDataResponse)
+      .onPost('/notifications/global/success').reply(200, notification.success)
+      .onPost('/notifications/global/warning').reply(200, notification.warning)
+      .onPost('/notifications/global/error').reply(500, notification.error)
+      .onPost('/notifications/global/info').reply(200, notification.info)
+      .onPost('/notifications/field/error').reply(500, notification.fieldError)
+      .onPost('/notifications/selector/info1').reply(200, notification.selectorInfo1)
 
-      .onAny(/\/?static/).passThrough()
+      // Global
+      .onAny(/\/?static|assets/).passThrough()
       .onAny().reply(wildcard);
   },
 };

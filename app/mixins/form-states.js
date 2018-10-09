@@ -68,19 +68,30 @@ export default {
   /**
    * Default data for the mixin props (will be merged with the components data function).
    *
-   * @returns {{isActive: *, isDisabled: *, hasFocus: *, isHover: (hover|{type, default}|*), isChecked: *}}
+   * @returns {{isActive: *, hasFocus: *, hasHover: (hover|{type, default}|*)}}
    */
   data() {
     return {
       isActive: this.active,
-      isDisabled: this.disabled,
       hasFocus: this.focus,
-      isHover: this.hover,
-      isChecked: this.checked,
+      hasHover: this.hover,
     };
   },
 
   computed: {
+    /**
+     * Sets the isChecked state for the stateModifiers.
+     *
+     * @returns {Boolean}
+     */
+    isChecked: {
+      get() {
+        return Array.isArray(this.checked) ? this.checked.includes(this.value) : this.checked;
+      },
+      set(value) {
+        return value;
+      }
+    },
 
     /**
      * Defines the default Modifier classes, have to be merged with custom classes or include directly in component.
@@ -91,9 +102,9 @@ export default {
       return {
         state: this.state,
         active: this.isActive,
-        disabled: this.isDisabled,
+        disabled: this.disabled,
         focus: this.hasFocus,
-        hover: this.isHover,
+        hover: this.hasHover,
         checked: this.isChecked,
       };
     },
@@ -106,5 +117,26 @@ export default {
     hasDefaultState() {
       return this.state === 'default';
     },
+
+    /**
+     * Checks the current state and delivers the correct state icon, which can be used for e.g. in input fields.
+     *
+     * @returns {String}
+     */
+    stateIcon() {
+      switch (this.state) {
+        case 'error':
+          return 'i-error';
+
+        case 'success':
+          return 'i-check';
+
+        case 'info':
+          return 'i-info';
+
+        default:
+          return '';
+      }
+    }
   }
 };

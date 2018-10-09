@@ -2,14 +2,22 @@
   <div :class="b(stateModifiers)">
     <select :value="value"
             :class="b('select')"
-            :disabled="disabled"
+            :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
     >
-      <option disabled value="">{{ selectText }}</option>
-      <option v-for="item in optionsList" :key="`${name}-${item.value}`" :value="item.value">{{ item.label }}</option>
+      <option :disabled="!hasSelectablePlaceholder" value="">{{ selectText }}</option>
+      <option v-for="item in optionsList"
+              :key="`${name}-${item.value}`"
+              :value="item.value"
+              :selected="item.value === value">
+        {{ item.label }}
+      </option>
     </select>
     <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
+    <div v-if="progress" :class="b('progress-container')">
+      <e-progress/>
+    </div>
   </div>
 </template>
 
@@ -31,7 +39,7 @@
        */
       value: {
         required: true,
-        type: String,
+        type: [String, Number],
       },
 
       /**
@@ -58,7 +66,23 @@
       selectText: {
         default() { return this.$t('e-select.chooseOption'); },
         type: String,
-      }
+      },
+
+      /**
+       * Defines if the placeholder text is selectable to reset the select (empty value).
+       */
+      hasSelectablePlaceholder: {
+        type: Boolean,
+        default: false,
+      },
+
+      /**
+       * Shows a progress bar.
+       */
+      progress: {
+        type: Boolean,
+        default: false,
+      },
     },
     // data() {
     //   return {};
@@ -102,12 +126,6 @@
   $e-select-height: 30px;
 
   .e-select {
-
-    &::before,
-    &::after {
-      pointer-events: none;
-    }
-
     &__select {
       @include font($font-size--14, 18px);
 
@@ -154,7 +172,7 @@
     &__select:disabled,
     &--disabled &__select,
     &--disabled &__select:hover {
-      border: none;
+      border-color: $color-grayscale--600;
       color: $color-grayscale--600;
       background-image: url('../assets/icons/i-arrow--down--disabled.svg');
     }
@@ -164,6 +182,7 @@
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
+      @include half-border($color-status--danger);
 
       .e-select__select {
         @include form-state-icon('error');
@@ -190,6 +209,13 @@
       .e-select__icon-splitter {
         display: none;
       }
+    }
+
+    &__progress-container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 </style>

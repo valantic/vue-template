@@ -68,6 +68,23 @@
           ].includes(value);
         },
       },
+
+      /**
+       * Defines spacing for the heading element.
+       *
+       * Valid values: `500, 700, 800`
+       */
+      spacing: {
+        type: [Number, String],
+        default: 500,
+        validator(value) {
+          return [
+            500,
+            700,
+            800,
+          ].includes(parseInt(value, 10));
+        },
+      }
     },
 
     // computed: {},
@@ -89,7 +106,7 @@
     /**
      * Creates a heading element.
      *
-     * @param   {function}    createElement   Vue helper
+     * @param   {Function}    createElement   Vue helper
      *
      * @returns {*}
      */
@@ -100,6 +117,7 @@
           color: this.$props.color,
           underline: this.$props.underline,
           fontWeight: this.$props.fontWeight,
+          spacing: this.$props.spacing,
           [this.$props.tagName]: true
         }),
         attrs: {
@@ -107,7 +125,7 @@
         },
       };
       const childAttributes = {
-        class: this.b('inner', { color: this.$props.color }),
+        class: this.b('inner', { color: this.$props.color, spacing: this.$props.spacing }),
       };
 
       return createElement(
@@ -133,11 +151,31 @@
 
     &__inner a {
       color: $color-secondary--1;
-      padding: $spacing--0;
+      text-decoration: none;
     }
 
     &--underline &__inner {
       border-bottom: 1px solid $color-primary--1;
+
+      @include media(sm) {
+        padding: $spacing--15 $spacing--20;
+      }
+    }
+
+    &--underline &__inner--color-gray {
+      border-bottom: 1px solid $color-grayscale--600;
+    }
+
+    &--underline &__inner--spacing-500 {
+      padding: $spacing--15 $spacing--10;
+    }
+
+    &--underline &__inner--spacing-700 {
+      padding: $spacing--20 $spacing--20 $spacing--5;
+    }
+
+    &--underline &__inner--spacing-800 {
+      padding: $spacing--20 $spacing--25 $spacing--5;
     }
 
     &--h1 {

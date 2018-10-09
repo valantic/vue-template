@@ -1,5 +1,5 @@
 ### Available breakpoints
-See app/setup/scss/variables/_bootstrap.scss
+See app/setup/scss/variables/_breakpoints.scss
 
 | Name | Breakpoint |
 |-----:|:-----------|
@@ -14,7 +14,7 @@ See app/setup/scss/variables/_bootstrap.scss
 Use the media-mixin for media queries. See app/setup/scss/mixins/_media.scss
 
 ```scss
-@mixin media($up: null, $down: null, $media: all, $breakpoints: $grid-breakpoints)
+@mixin media($up: null, $down: null, $media: all, $breakpoints: $breakpoints) {}
 ```
 
 Use media-mixin within selectors, not the other way around

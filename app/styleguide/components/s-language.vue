@@ -1,11 +1,14 @@
 <template>
-  <select :class="b()" :value="language" @change="onChange">
-    <option v-t="`s-language.${language}`"
-            v-for="language in i18nLocales"
-            :value="language"
-            :key="language">
-    </option>
-  </select>
+  <label>
+    <span class="invisible">Language</span>
+    <select :class="b()" :value="language" @change="onChange">
+      <option v-t="`s-language.${language}`"
+              v-for="language in i18nLocales"
+              :value="language"
+              :key="language">
+      </option>
+    </select>
+  </label>
 </template>
 
 <script>

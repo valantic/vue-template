@@ -1,151 +1,99 @@
 <template>
   <div :class="b()">
-    <h1>Form example</h1>
-
-    <h2>e-input</h2>
-    <p>including e-label</p>
-    <form>
-      <e-label name="First name:" position="top">
-        <e-input v-model="name.firstName" name="firstname" placeholder="..."/>
-      </e-label>
-      <e-label name="Last name:" position="left">
-        <e-input v-model="name.lastName" name="lastname" placeholder="..."/>
-      </e-label>
-      <e-label name="Street:" position="top" state="error">
-        <e-input v-model="name.street"
-                 name="street"
-                 placeholder="..."
-                 state="error"
-                 notification="this is the error message"
-        />
-      </e-label>
-      <e-label name="Notes:" position="top" state="info">
-        <e-input v-model="name.notes"
-                 name="notes"
-                 placeholder="your notes"
-                 state="info"
-                 notification="this is the info message
-                 <br/>this is the info message
-                 <br/>this is the info message
-                 <br/>this is the info message
-                 <br/>this is the info message<br/>"
-        />
-      </e-label>
-      <e-label name="Notes2:" position="top" state="success">
-        <e-input v-model="name.notes2"
-                 name="notes2"
-                 placeholder="your notes"
-                 state="success"
-        />
-      </e-label>
-      <e-label name="Gender:" position="top"/>
-      <e-radio v-for="item in genders"
-               v-model="gender"
-               :value="item.value"
-               :display-name="item.displayName"
-               :key="item.id"
-               name="gender"
-      />
-      <e-label name="Comment" position="top">
-        <e-textarea v-model="name.comment"
-                    :rows="5"
-                    name="comment"
-                    placeholder="Insert comment"
-                    state="info"
-                    notification="You can add a specific comment here.<br>Please do so."
-        />
-      </e-label>
-      <e-label name="Country:" position="top">
-        <e-select v-model="name.country"
-                  :options-list="countries"
-                  name="country-select"
-                  select-text="Please choose country..."
-        />
-      </e-label>
-      <p>Your name is: <strong>{{ name.firstName }} {{ name.lastName }}</strong></p>
-      <p>You are {{ gender }}.</p>
-      <pre>{{ name }}</pre>
-
-      <h2>e-fieldset</h2>
-      <e-fieldset legend="Sample legend">
-        <e-label name="Label" position="top">
-          <e-input v-model="demo" name="demo" placeholder="enter text..."/>
+    <h1>Example form</h1>
+    <form action="#form-url" method="POST">
+      <!-- e-input -->
+      <div :class="b('part')">
+        <e-label name="Firstname" position="top">
+          <e-input v-model="demo.firstName" name="firstName" placeholder="Firstname..."/>
         </e-label>
-        <e-label name="Label" position="top">
-          <e-input v-model="demo" name="demo" placeholder="enter text..."/>
+      </div>
+
+      <!-- e-textarea -->
+      <div :class="b('part')">
+        <e-label name="Message" position="top">
+          <e-textarea v-model="demo.message" name="message" placeholder="Message..."/>
         </e-label>
-      </e-fieldset>
+      </div>
 
-      <h2>e-checkbox</h2>
-      <e-checkbox
-        v-model="checkbox.checked"
-        :name="checkbox.name"
-        :value="checkbox.value"
-        :display-name="checkbox.value"/>
+      <!-- e-checkbox -->
+      <div :class="b('part')">
+        <e-label name="Meal" position="top">
+          <e-checkbox v-model="demo.meal" value="pizza" name="meal">Pizza</e-checkbox>
+          <e-checkbox v-model="demo.meal" value="spaghetti" name="meal">Spaghetti</e-checkbox>
+          <e-checkbox v-model="demo.meal" value="lasagne" name="meal">Lasagne</e-checkbox>
+        </e-label>
+      </div>
 
+      <!-- e-radio -->
+      <div :class="b('part')">
+        <e-label name="Drink" position="top">
+          <e-radio v-model="demo.drink" value="cola" name="drink">Cola</e-radio>
+          <e-radio v-model="demo.drink" value="fanta" name="drink">Fanta</e-radio>
+          <e-radio v-model="demo.drink" value="sprite" name="drink">Sprite</e-radio>
+        </e-label>
+      </div>
+
+      <!-- e-select -->
+      <div :class="b('part')">
+        <e-label name="Language" position="top">
+          <e-select v-model="demo.language" :options-list="mock.selects" name="language" />
+        </e-label>
+      </div>
+
+      <!-- e-button -->
+      <div :class="b('part')">
+        <e-button type="submit">Submit</e-button>
+      </div>
     </form>
+    <hr style="margin-top: 50px;">
+    <h3>Data:</h3>
+    <small>
+      <pre>{{ demo }}</pre>
+    </small>
   </div>
 </template>
-
 <script>
-  import cAddToCart from '@/components/c-add-to-cart';
-
   export default {
     name: 'forms',
-    components: {
-      cAddToCart,
-    },
+    // components: {},
     data() {
       return {
-        demo: '',
-        name: {
+        demo: {
           firstName: '',
-          lastName: '',
-          street: '',
-          country: '',
-          comment: ''
+          message: '',
+          meal: [],
+          drink: '',
+          language: '',
         },
-        gender: 'female',
-        genders: [
-          {
-            id: 'gender-male',
-            value: 'male',
-            displayName: 'Male',
-          },
-          {
-            id: 'gender-female',
-            value: 'female',
-            displayName: 'Female',
-          },
-        ],
-        checkbox: {
-          checked: false,
-          name: 'checkbox',
-          value: 'Hello world...'
-        },
-        countries: [
-          {
-            value: 'at',
-            label: 'Austria',
-          }, {
-            value: 'li',
-            label: 'Liechtenstein',
-          }, {
-            value: 'ch',
-            label: 'Switzerland',
-          },
-        ]
+        mock: {
+          selects: [
+            {
+              label: 'German',
+              value: 'german',
+            },
+            {
+              label: 'Italian',
+              value: 'italian',
+            },
+            {
+              label: 'French',
+              value: 'french',
+            }
+          ],
+        }
       };
-    }
+    },
   };
 </script>
 
 <style lang="scss">
   .forms {
     padding: $spacing--50;
+    max-width: 400px;
 
-    .e-label:not(:last-child) {
-      margin-bottom: $spacing--10;
+    &__part {
+      margin-bottom: $spacing--15;
     }
   }
 </style>
