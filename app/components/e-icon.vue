@@ -151,5 +151,9 @@
 <style lang="scss">
   .e-icon {
     display: inline-block;
+
+    svg {
+      pointer-events: none; // Prevents IE11 from swallowing events.
+    }
   }
 </style>
