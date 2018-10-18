@@ -12,7 +12,6 @@ import modal from './plugins/modalStack';
 import VModal from 'vue-js-modal';
 import PortalVue from 'portal-vue';
 import Tabs from 'vue-tabs-component';
-import 'intersection-observer';
 import 'picturefill';
 import 'lazysizes';
 import './lib/ls.attrchange'; // Lazy sizes attribute change observer
