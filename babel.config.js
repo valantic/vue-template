@@ -17,8 +17,10 @@ module.exports = function (api) {
       plugins: ['transform-es2015-modules-commonjs']
     },
     test: {
-      presets: ['env'],
-      plugins: ['transform-es2015-modules-commonjs', 'dynamic-import-node']
+      plugins: [
+        'transform-es2015-modules-commonjs',
+        'dynamic-import-node'
+      ]
     }
   };
 
@@ -30,4 +32,3 @@ module.exports = function (api) {
     env
   };
 };
-
