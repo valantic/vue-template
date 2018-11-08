@@ -56,7 +56,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * [moment](https://momentjs.com/) - Date handling library.
 * [picturefill](https://github.com/scottjehl/picturefill) - A polyfill for picture and srcset. Required by `e-picture`.
 * [portal-vue](https://github.com/LinusBorg/portal-vue) - Let's render something in a «wormhole» somewhere else on the page. It's used to render all the modals on a single place 
-* [simplebar](https://github.com/Grsmto/simplebar) - A javascript library for creating custom scrollbars. Required by `c-multiselect`
+* [simplebar](https://github.com/Grsmto/simplebar) - A javascript library for creating custom scrollbars. Required by `c-multiselect`. **NOTE**: This plugin causes memory leaks in IE11!
 * [smoothscroll-polyfill](https://github.com/iamdustan/smoothscroll) - A scroll behaviour polyfill.
 * [swiper](https://github.com/nolimits4web/Swiper) - An image gallery.
 * [vue](https://github.com/vuejs/vue) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
@@ -78,6 +78,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * [@babel/plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/) - This plugin only allows Babel to parse import syntax. **Don't use babel-plugin-dynamic-import-node since it breaks code splitting!**
 * [@babel/plugin-syntax-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/) - Transform rest properties for object destructuring assignment and spread properties for object literals
 * [@babel/preset-env](https://www.npmjs.com/package/babel-preset-env) - A Babel preset that compiles ES2015+ down to ES5 by automatically determining the Babel plugins and polyfills you need based on your targeted browser or runtime environments.
+* [@vue/test-utils](https://github.com/vuejs/vue-test-utils) - Utilities for testing Vue components.
 * [axios-mock-adapter](https://github.com/ctimmerm/axios-mock-adapter) - Axios adapter that allows to easily mock requests.
 * [babel-eslint](https://github.com/babel/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
 * [babel-jest](https://www.npmjs.com/package/babel-jest) - Babel compiler plugin for Jest testing.
@@ -91,15 +92,16 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * [eslint-config-valantic](https://github.com/valantic/eslint-config-valantic) - The ESLint configuration of valantic.
 * [eslint-import-resolver-webpack](https://github.com/benmosher/eslint-plugin-import/tree/master/resolvers/webpack) - Webpack-literate module resolution plugin for eslint-plugin-import.
 * [eslint-loader](https://github.com/webpack-contrib/eslint-loader) - eslint loader for webpack.
-* [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) - Official ESLint plugin for Vue.js.
 * [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) - ESLint plugin with rules that help validate proper imports.
+* [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) - Official ESLint plugin for Vue.js.
 * [file-loader](https://github.com/webpack-contrib/file-loader) - Instructs webpack to emit the required object as file and to return its public URL.
 * [friendly-errors-webpack-plugin](https://github.com/geowarin/friendly-errors-webpack-plugin) - Friendly-errors-webpack-plugin recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them to provide a better Developer Experience.
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
+* [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image loader module for webpack.
 * `image-webpack-loader` was removed for this project because of VM incompatibility
 * [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing.
-* [license-checker](https://github.com/davglass/license-checker) - Allows us to check the whole project for use licenses (see scripts).
 * [launch-editor-middleware](https://github.com/yyx990803/launch-editor) - Allows to open Vue components in editor from Vue inspector.
+* [license-checker](https://github.com/davglass/license-checker) - Allows us to check the whole project for use licenses (see scripts).
 * [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) - Official webpack CSS extractor.
 * [node-sass](https://github.com/sass/node-sass) - Node-sass is a library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass.
 * [postcss-critical-split](https://github.com/mrnocreativity/postcss-critical-split) - A PostCSS plugin that takes existing CSS files and splits out the annotated critical styles into a separate file.
