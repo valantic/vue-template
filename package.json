@@ -9,7 +9,7 @@
     "build:profile": "webpack --mode production --profile --json > stats/profile.json",
     "build:styleguide": "npm run build -- --env.styleguide && vue-styleguidist build",
     "build:watch": "npm run build -- --env.watch",
-    "eslint": "eslint --cache --ext .js,.vue app test/unit/specs; exit 0;",
+    "eslint": "eslint --cache --ext .js,.vue app tests/unit/specs; exit 0;",
     "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
     "stylelint": "stylelint --cache 'app/**/*.?(vue|scss)'; exit 0",
     "stylelint:fix": "echo \"Using stylelint --fix is not a good idea when using *.vue files...\"",
@@ -44,34 +44,6 @@
     "url": "https://github.com/valantic/vue-template/issues"
   },
   "homepage": "https://github.com/valantic/vue-template",
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "vue"
-    ],
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/app/$1"
-    },
-    "roots": [
-      "<rootDir>/tests"
-    ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
-    },
-    "setupFiles": [
-      "<rootDir>/tests/unit/setup"
-    ],
-    "coverageDirectory": "<rootDir>/test/unit/coverage",
-    "collectCoverageFrom": [
-      "app/components/**/*.{js,vue}",
-      "app/plugins/**/*.{js,vue}",
-      "!app/main.js",
-      "!**/node_modules/**"
-    ],
-    "testURL": "http://localhost/"
-  },
   "dependencies": {
     "@babel/polyfill": "~7.0.0",
     "axios": "~0.18.0",
