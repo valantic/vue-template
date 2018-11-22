@@ -172,7 +172,7 @@ module.exports = function(env = {}, options = {}) {
       new webpack.DefinePlugin(globalVariables),
       // extract css into its own file
       new ExtractTextPlugin({
-        filename: assetsSubDirectory + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
+        filename: assetsSubDirectory + `css/${prefix}[name].css${isProduction ? '?[contenthash]' : ''}`,
         allChunks: true,
       }),
 
