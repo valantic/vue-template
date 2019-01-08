@@ -135,11 +135,6 @@ module.exports = function(env = {}, options = {}) {
       new VueLoaderPlugin(),
 
       new webpack.DefinePlugin(globalVariables),
-      // extract css into its own file
-      // new ExtractTextPlugin({
-      //   filename: assetsSubDirectory + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
-      //   allChunks: true,
-      // }),
 
       new MiniCssExtractPlugin({
         filename: assetsSubDirectory + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
@@ -174,22 +169,6 @@ module.exports = function(env = {}, options = {}) {
           },
         }));
       } else {
-        // Note: version auto inject is currently not working with query hash (https://github.com/radswiat/webpack-auto-inject-version/issues/25)
-        // pluginCollection.push(new WebpackAutoInject({
-        //   SILENT: true,
-        //   components: {
-        //     AutoIncreaseVersion: false,
-        //     InjectAsComment: true,
-        //     InjectByTag: true
-        //   },
-        //   componentsOptions: {
-        //     InjectAsComment: {
-        //       tag: 'Build version: {version} - {date}',
-        //       dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
-        //     }
-        //   }
-        // }));
-
         if (hasMessage) {
           pluginCollection.push(
             // Cleans dist directory and removes specific unnecessary files
@@ -199,28 +178,6 @@ module.exports = function(env = {}, options = {}) {
           );
         }
       }
-
-      // split vendor js into its own file
-      // pluginCollection.push(new webpack.optimize.CommonsChunkPlugin({
-      //   name: 'vendor',
-      //   minChunks(module) {
-      //     any required modules inside node_modules are extracted to vendor
-          // return (
-          //   module.resource &&
-          //   /\.js$/.test(module.resource) &&
-          //   module.resource.indexOf(
-          //     path.join(__dirname, 'node_modules'),
-          //   ) === 0
-          // );
-        // },
-      // }));
-
-      // extract webpack runtime and module manifest to its own file in order to
-      // prevent vendor hash from being updated whenever app bundle is updated
-      // pluginCollection.push(new webpack.optimize.CommonsChunkPlugin({
-      //   name: 'manifest',
-      //   minChunks: Infinity,
-      // }));
 
       // keep module.id stable when vender modules does not change
       pluginCollection.push(new webpack.HashedModuleIdsPlugin());
