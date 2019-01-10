@@ -7,13 +7,11 @@ export default {
       absolutePath: 'http://via.placeholder.com/200x200',
       width: 200,
       height: 200,
-
     },
     {
       absolutePath: 'http://via.placeholder.com/400x400',
       width: 400,
       height: 400,
-
     },
     {
       absolutePath: 'http://via.placeholder.com/600x600',
