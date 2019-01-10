@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-e
 import { axios } from './axios';
 
 // Import mocks
-import notification from '../../styleguide/mock-data/notifications';
+import notification from '../../styleguide/mock-data/api-response/notifications';
 
 /**
  * By default returns a 500 'no route defined' error.

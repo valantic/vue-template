@@ -3,8 +3,8 @@ import VueRouter from 'vue-router';
 import styleguideRoutes from './styleguide.routes';
 import sLayout from '../styleguide/components/s-layout';
 import AxiosMockAdapter from './plugins/styleguide.axios-mock';
-import dummyImages from '../styleguide/mock-data/images';
-import dummyTableDate from '../styleguide/mock-data/table';
+import dummyImages from '../styleguide/mock-data/initial-data/images';
+import dummyTableDate from '../styleguide/mock-data/initial-data/table';
 
 /**
  * In development and on styleguide build, include router and example pages
