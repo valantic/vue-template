@@ -1,15 +1,19 @@
-import Vue from 'vue';
+import { mount, createLocalVue } from '@vue/test-utils';
+import VueBemCn from 'vue-bem-cn';
 import component from '@/components/c-component'; // TODO: Update source
 
 describe('component | c-component', () => { // TODO: update title
+  const localVue = createLocalVue();
+
+  localVue.use(VueBemCn);
+
   it('has name property', () => {
     expect(component.name).toBeTruthy();
   });
 
   it('renders (has bem block name on wrapper element)', () => {
-    const Constructor = Vue.extend(component);
-    const vm = new Constructor().$mount();
+    const wrapper = mount(component, { localVue });
 
-    expect(vm.$el.classList.contains(component.name)).toBeTruthy();
+    expect(wrapper.classes()).toContain(component.name);
   });
 });

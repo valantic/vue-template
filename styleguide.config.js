@@ -74,7 +74,7 @@ module.exports = {
     },
   ],
   require: [
-    'babel-polyfill', // In vue application imported by webpack. Was not supported by vue-styleguidist
+    '@babel/polyfill', // In vue application imported by webpack. Was not supported by vue-styleguidist
     path.join(__dirname, 'app/setup/_scss.scss'), // In vue application imported by main.js. Was not supported by vue-styleguidist
     path.join(__dirname, 'app/setup/vuetify/main.styl'), // In vue application imported by main.js. Was not supported by vue-styleguidist
     path.join(__dirname, 'app/setup/styleguidist/style.scss'),

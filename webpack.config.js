@@ -3,7 +3,7 @@
 const path = require('path'); // Cross platform path resolver
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -15,10 +15,11 @@ const postCssCriticalSplit = require('postcss-critical-split');
 const cssNano = require('cssnano');
 const openInEditor = require('launch-editor-middleware');
 const WebpackCleanPlugin = require('webpack-clean');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = function(env = {}, options = {}) {
   // Flags
-  const isProduction = (env.production || process.env.NODE_ENV === 'production') || false;
+  const isProduction = ((options.mode || process.env.NODE_ENV) === 'production') || false;
   const hasStyleguide = env.styleguide || false;
   const hasMessage = env.message || false;
   const hasWatcher = env.watch || false;
@@ -65,44 +66,6 @@ module.exports = function(env = {}, options = {}) {
     console.info('\x1b[36m%s\x1b[0m', '## Building for ' + target + ' ##');
   }
 
-  function scssLoader() {
-    const use = [
-      {
-        loader: 'css-loader', // Note: will also call postcss
-        options: {
-          sourceMap: !isProduction || hasStyleguide,
-          minimize: false, // TODO: isProduction
-        },
-      },
-      {
-        loader: 'sass-loader',
-        options: {
-          sourceMap: !isProduction || hasStyleguide,
-        },
-      },
-      {
-        loader: 'sass-resources-loader',
-        options: {
-          resources: [
-            './app/setup/scss/_variables.scss',
-            './app/setup/scss/_config.scss',
-            './app/setup/scss/_functions.scss',
-            './app/setup/scss/_mixins.scss',
-            './app/setup/scss/_extends.scss',
-          ],
-        },
-      },
-    ];
-
-    if (hasStyleguide) {
-      use.unshift('vue-style-loader');
-    }
-
-    return hasStyleguide
-      ? use
-      : ExtractTextPlugin.extract({ use });
-  }
-
   function webpackStats() {
     const stats = {
       all: false,
@@ -114,10 +77,23 @@ module.exports = function(env = {}, options = {}) {
       timings: true,
       // Show warnings
       warnings: true,
+      // Filter warning keywords
+      warningsFilter: [
+        'Conflicting order between',
+        /Conflicting order between/,
+        /mini-css-extract-plugin/,
+        'mini-css-extract-plugin',
+      ]
     };
 
     if (hasWatcher) {
-      return false;
+      return {
+        ...stats,
+        assets: false,
+        warnings: false,
+        errors: false,
+        timings: false,
+      };
     }
 
     return !isProfileBuild ? stats : undefined;
@@ -169,11 +145,12 @@ module.exports = function(env = {}, options = {}) {
 
   function plugins() {
     const pluginCollection = [
+      new VueLoaderPlugin(),
+
       new webpack.DefinePlugin(globalVariables),
-      // extract css into its own file
-      new ExtractTextPlugin({
-        filename: assetsSubDirectory + `css/${prefix}[name].css${isProduction ? '?[contenthash]' : ''}`,
-        allChunks: true,
+
+      new MiniCssExtractPlugin({
+        filename: assetsSubDirectory + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
       }),
 
       // copy custom static assets
@@ -205,28 +182,6 @@ module.exports = function(env = {}, options = {}) {
           },
         }));
       } else {
-        pluginCollection.push(new UglifyJsPlugin({
-          test: /\.js($|\?)/i, // MUST be defined because file has as query
-          parallel: true,
-          sourceMap: hasStyleguide,
-        }));
-
-        // Note: version auto inject is currently not working with query hash (https://github.com/radswiat/webpack-auto-inject-version/issues/25)
-        // pluginCollection.push(new WebpackAutoInject({
-        //   SILENT: true,
-        //   components: {
-        //     AutoIncreaseVersion: false,
-        //     InjectAsComment: true,
-        //     InjectByTag: true
-        //   },
-        //   componentsOptions: {
-        //     InjectAsComment: {
-        //       tag: 'Build version: {version} - {date}',
-        //       dateFormat: 'dddd, mmmm d, yyyy, hh:MM:ss'
-        //     }
-        //   }
-        // }));
-
         if (hasMessage) {
           pluginCollection.push(
             // Cleans dist directory and removes specific unnecessary files
@@ -236,28 +191,6 @@ module.exports = function(env = {}, options = {}) {
           );
         }
       }
-
-      // split vendor js into its own file
-      pluginCollection.push(new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks(module) {
-          // any required modules inside node_modules are extracted to vendor
-          return (
-            module.resource &&
-            /\.js$/.test(module.resource) &&
-            module.resource.indexOf(
-              path.join(__dirname, 'node_modules'),
-            ) === 0
-          );
-        },
-      }));
-
-      // extract webpack runtime and module manifest to its own file in order to
-      // prevent vendor hash from being updated whenever app bundle is updated
-      pluginCollection.push(new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        minChunks: Infinity,
-      }));
 
       // keep module.id stable when vender modules does not change
       pluginCollection.push(new webpack.HashedModuleIdsPlugin());
@@ -278,7 +211,7 @@ module.exports = function(env = {}, options = {}) {
 
       // enable scope hoisting
       pluginCollection.push(new webpack.optimize.ModuleConcatenationPlugin());
-    } else {
+    } else { // Development
       // pluginCollection.push(new StyleLintPlugin({ // TODO: add scss linting an re-enable
       //   context: 'app',
       //   files: [
@@ -315,7 +248,7 @@ module.exports = function(env = {}, options = {}) {
     entry: {
       ...themes,
       app: [
-        'babel-polyfill',
+        '@babel/polyfill', // TODO: is this still needed?
         path.resolve(__dirname, 'app/main.js'),
       ],
     },
@@ -351,23 +284,52 @@ module.exports = function(env = {}, options = {}) {
             // set this to false - it *may* help
             // https://vue-loader.vuejs.org/en/options.html#cachebusting
             cacheBusting: false, // TODO: shouldn't this be true?
-            loaders: {
-              scss: scssLoader(),
-            },
           },
         },
         {
           test: /\.scss$/,
-          use: scssLoader(),
+          use: [
+            hasStyleguide ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader', // Note: will also call postcss
+              options: {
+                sourceMap: !isProduction || hasStyleguide,
+                minimize: isProduction,
+              },
+            },
+            'postcss-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: !isProduction || hasStyleguide,
+              },
+            },
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                resources: [
+                  './app/setup/scss/_variables.scss',
+                  './app/setup/scss/_config.scss',
+                  './app/setup/scss/_functions.scss',
+                  './app/setup/scss/_mixins.scss',
+                  './app/setup/scss/_extends.scss',
+                ],
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,
-          use: [ 'style-loader', 'css-loader' ],
+          use: [
+            hasStyleguide ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+            'style-loader',
+            'css-loader'
+          ],
         },
         {
           test: /\.styl$/,
-          use: ExtractTextPlugin.extract({
             use: [
+              hasStyleguide ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
               {
                 loader: 'css-loader',
                 options: {
@@ -382,12 +344,16 @@ module.exports = function(env = {}, options = {}) {
                 },
               },
             ]
-          })
         },
         {
           test: /\.js$/,
           exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/,
-          use: 'babel-loader',
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          },
           include,
         },
         {
@@ -419,7 +385,7 @@ module.exports = function(env = {}, options = {}) {
                     //{ removeHiddenElems: false, },
                     //{ removeEmptyText: false, },
                     //{ removeEmptyContainers: false, },
-                    //{ removeViewBox: false, },
+                    { removeViewBox: false, },
                     //{ cleanUpEnableBackground: true, },
                     //{ convertStyleToAttrs: true, },
                     //{ convertColors: true, },
@@ -464,7 +430,15 @@ module.exports = function(env = {}, options = {}) {
         },
         {
           test: /\.md$/,
-          loader: 'vue-markdown-loader',
+          loader: [
+            'vue-loader',
+            {
+              loader: 'vue-markdown-loader/lib/markdown-compiler',
+              options: {
+                raw: true
+              }
+            }
+          ],
         },
       ],
     },
@@ -526,6 +500,28 @@ module.exports = function(env = {}, options = {}) {
       maxAssetSize: 150000, // 150kb
     },
     plugins: plugins(),
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          test: /\.js($|\?)/i, // MUST be defined because file has as query
+          cache: true,
+          parallel: true,
+          sourceMap: hasStyleguide
+        })
+      ],
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'initial',
+          },
+        }
+      },
+      runtimeChunk: {
+        name: 'manifest'
+      }
+    }
   };
 
   if (isProduction) {

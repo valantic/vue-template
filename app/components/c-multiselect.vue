@@ -243,9 +243,13 @@
         if (this.activeValue) {
           if (Array.isArray(this.activeValue)) {
             return this.activeValue;
-          } else if (typeof this.activeValue === 'string') {
+          }
+
+          if (typeof this.activeValue === 'string') {
             return this.activeValue.split(',');
-          } else if (typeof this.activeValue === 'number') {
+          }
+
+          if (typeof this.activeValue === 'number') {
             return [this.activeValue];
           }
         }
@@ -501,7 +505,9 @@
         if (typeof value1 === 'number' && typeof value2 === 'number') {
           if (value1 > value2) {
             return 1;
-          } else if (value1 < value2) {
+          }
+
+          if (value1 < value2) {
             return -1;
           }
         } else if (typeof value1 === 'string' && typeof value2 === 'string') {
