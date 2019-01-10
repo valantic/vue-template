@@ -103,7 +103,7 @@
   import api from '@/helpers/api';
   import lDefault from '@/components/l-default';
   import cNotificationContainer from '@/components/c-notification-container';
-  import notificationData from '../mock-data/notifications';
+  import notificationData from '../mock-data/api-response/notifications';
 
   export default {
     name: 'notifications',

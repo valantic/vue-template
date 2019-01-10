@@ -5,7 +5,7 @@ export default {
      * @type {Array} Stores breadcrumb items.
      */
     items: process.env.NODE_ENV !== 'production'
-      ? require('../../../styleguide/mock-data/breadcrumbs').default // eslint-disable-line global-require
+      ? require('../../../styleguide/mock-data/initial-data/breadcrumbs').default // eslint-disable-line global-require
       : null,
   },
   getters: {
