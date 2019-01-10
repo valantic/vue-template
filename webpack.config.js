@@ -77,10 +77,23 @@ module.exports = function(env = {}, options = {}) {
       timings: true,
       // Show warnings
       warnings: true,
+      // Filter warning keywords
+      warningsFilter: [
+        'Conflicting order between',
+        /Conflicting order between/,
+        /mini-css-extract-plugin/,
+        'mini-css-extract-plugin',
+      ]
     };
 
     if (hasWatcher) {
-      return false;
+      return {
+        ...stats,
+        assets: false,
+        warnings: false,
+        errors: false,
+        timings: false,
+      };
     }
 
     return !isProfileBuild ? stats : undefined;
