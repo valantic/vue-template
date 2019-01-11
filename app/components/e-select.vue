@@ -1,12 +1,12 @@
 <template>
-  <div :class="b(stateModifiers)">
+  <span :class="b(stateModifiers)">
     <select :value="value"
             :class="b('select')"
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
     >
-      <option :disabled="!hasSelectablePlaceholder" value="">{{ selectText }}</option>
+      <option :disabled="!hasSelectablePlaceholder" value="">{{ placeholder }}</option>
       <option v-for="item in optionsList"
               :key="`${name}-${item.value}`"
               :value="item.value"
@@ -18,7 +18,7 @@
     <div v-if="progress" :class="b('progress-container')">
       <e-progress/>
     </div>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -38,7 +38,7 @@
        * Value for vue model binding.
        */
       value: {
-        required: true,
+        default: null,
         type: [String, Number],
       },
 
@@ -63,7 +63,7 @@
       /**
        * The text to display if no option is selected by default.
        */
-      selectText: {
+      placeholder: {
         default() { return this.$t('e-select.chooseOption'); },
         type: String,
       },

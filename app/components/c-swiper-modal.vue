@@ -1,9 +1,27 @@
 <template>
   <div :class="b()">
+    <!-- 'swiper' classes needed for the swiper plugin. -->
     <div ref="gallery" :class="b('container swiper-container gallery-top')">
       <div :class="b('wrapper swiper-wrapper')">
-        <div v-for="image in images" :class="b('slide swiper-slide')" :key="image.id">
+        <div v-for="image in images"
+             :class="b('slide swiper-slide', { video: image.isVideo })"
+             :key="image.id">
+          <!-- Video -->
+          <div v-if="image.isVideo" :class="b('video-wrapper')">
+            <div :class="b('iframe-wrapper')">
+              <iframe ref="video"
+                      :class="b('video-iframe')"
+                      :src="`https://www.youtube.com/embed/${image.youtubeId}?enablejsapi=1&version=3&playerapiid=ytplayer`"
+                      width="560"
+                      height="315"
+                      frameborder="0"
+                      allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <!-- Image -->
           <e-picture
+            v-else
             :sizes="sizes"
             :srcset="image.srcset"
             :fallback="image.fallback"
@@ -16,7 +34,15 @@
     <div ref="thumbnails" :class="b('container swiper-container gallery-thumbs')">
       <div :class="b('wrapper swiper-wrapper')">
         <div v-for="image in images" :class="b('slide swiper-slide')" :key="image.id">
+          <!-- Video -->
+          <div v-if="image.isVideo" :class="b('video-preview-wrapper')">
+            <img :src="image.thumbSrc" :class="b('video-thumbnail')" alt="">
+            <span :class="b('video-thumbnail-overlay')"></span>
+          </div>
+
+          <!-- Image -->
           <e-picture
+            v-else
             :sizes="sizes"
             :srcset="image.srcset"
             :fallback="image.fallback"
@@ -64,12 +90,15 @@
        */
       options: {
         type: Object,
-        default: () => {},
+        default: () => {
+        },
       },
     },
 
     data() {
       return {
+        gallerySwiper: null,
+        thumbsSwiper: null,
         optionsDefault: {
           slidesPerGroup: 1,
           watchOverflow: true,
@@ -85,6 +114,7 @@
           on: {
             slideChange: function() {
               this.$emit('change', this.$refs.gallery.swiper.activeIndex);
+              this.stopAllVideos();
             }.bind(this),
           }
         },
@@ -127,12 +157,13 @@
     // beforeMount() {},
     mounted() {
       const galleryOptions = Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsMerged);
-      const gallery = new Swiper(this.$refs.gallery, galleryOptions);
       const thumbnailOptions = Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsThumbnails);
-      const thumbnails = new Swiper(this.$refs.thumbnails, thumbnailOptions);
 
-      gallery.controller.control = thumbnails;
-      thumbnails.controller.control = gallery;
+      this.gallerySwiper = new Swiper(this.$refs.gallery, galleryOptions);
+      this.thumbsSwiper = new Swiper(this.$refs.thumbnails, thumbnailOptions);
+
+      this.gallerySwiper.controller.control = this.thumbsSwiper;
+      this.thumbsSwiper.controller.control = this.gallerySwiper;
 
       this.setThumbnailSlidesPerView();
       window.addEventListener('resize', this.setThumbnailSlidesPerView);
@@ -144,10 +175,16 @@
     beforeDestroy() {
       clearTimeout(this.resizeTimerId);
       window.removeEventListener('resize', this.setThumbnailSlidesPerView);
+
+      this.gallerySwiper.destroy();
+      this.thumbsSwiper.destroy();
     },
     // destroyed() {},
 
     methods: {
+      /**
+       * Sets the thumbnails for the swiper.
+       */
       setThumbnailSlidesPerView() {
         clearTimeout(this.resizeTimerId);
         this.resizeTimerId = setTimeout(() => {
@@ -155,6 +192,12 @@
           this.$refs.thumbnails.swiper.update();
         }, 250);
       },
+
+      /**
+       * Gets the number of thumbnails for the current viewport.
+       *
+       * @returns {Number}
+       */
       getThumbnailSlidesPerView() {
         const breakpoints = Object.keys(this.slidesPerBreakpoint);
 
@@ -167,6 +210,19 @@
         }
 
         return this.slidesPerBreakpoint.xl;
+      },
+
+      /**
+       * Stops all videos in the modal.
+       */
+      stopAllVideos() {
+        const videos = this.$refs.video;
+
+        if (videos) {
+          videos.forEach((video) => {
+            video.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+          });
+        }
       }
     },
     // render() {},
@@ -183,21 +239,26 @@
       height: 30px;
       width: 25px;
       margin-top: -#{$spacing--15};
-      opacity: 0;
-      visibility: hidden;
-      transition: all $transition-duration-200 linear;
-      transition-delay: $transition-duration-100;
+      transition: all $transition-duration-100 linear;
       outline: none;
     }
 
     .swiper-button-prev {
       background-image: url('../assets/icons/i-arrow-full--left.svg');
       left: $spacing--30;
+
+      &:hover {
+        background-image: url('../assets/icons/i-arrow-full--left--active.svg');
+      }
     }
 
     .swiper-button-next {
       background-image: url('../assets/icons/i-arrow-full--right.svg');
       right: $spacing--30;
+
+      &:hover {
+        background-image: url('../assets/icons/i-arrow-full--right--active.svg');
+      }
     }
 
     .gallery-top {
@@ -230,6 +291,7 @@
     .gallery-thumbs .swiper-slide {
       width: 20%;
       height: 100%;
+      padding: 0 $spacing--10;
     }
 
     .gallery-thumbs .swiper-slide .e-picture {
@@ -273,6 +335,64 @@
           visibility: visible;
         }
       }
+    }
+
+    .swiper-slide--video {
+      display: flex;
+      justify-content: center;
+    }
+
+    &__video-wrapper {
+      padding-top: $spacing--50;
+      flex: 1 0 100%;
+      max-width: 700px;
+
+      @include media(sm) {
+        padding: $spacing--50;
+      }
+    }
+
+    &__iframe-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      padding-top: 25px;
+      padding-left: 50px;
+      padding-right: 50px;
+      height: 0;
+    }
+
+    &__video-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__video-preview-wrapper {
+      position: relative;
+      margin-top: $spacing--30;
+      margin-bottom: $spacing--15;
+      max-height: 85px;
+      height: 85px;
+      max-width: 128px;
+    }
+
+    &__video-thumbnail {
+      width: 100%;
+      max-height: 100%;
+    }
+
+    &__video-thumbnail-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('../assets/icons/i-play.svg');
+      background-size: 50px 50px;
+      background-position: center center;
+      background-repeat: no-repeat;
     }
   }
 

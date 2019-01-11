@@ -13,8 +13,8 @@
     <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
-              :inline="true"
-              :icon="stateIcon" />
+              :icon="stateIcon"
+              inline />
     </span>
     <div v-if="notification && hasFocus" :class="b('notification')">
       <c-form-notification :state="state" v-html="notification" />
@@ -24,7 +24,7 @@
 
 <script>
   import formStates from '@/mixins/form-states';
-  import CFormNotification from '@/components/c-form-notification';
+  import cFormNotification from '@/components/c-form-notification';
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -33,7 +33,7 @@
   export default {
     name: 'e-textarea',
     components: {
-      CFormNotification,
+      cFormNotification,
     },
     mixins: [formStates],
     inheritAttrs: false,

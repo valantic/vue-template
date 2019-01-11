@@ -8,7 +8,7 @@
 
     props: {
       /**
-       * Defines the color of the heading (h1-h6)
+       * Defines the color of the heading (h1-h6).
        *
        * Valid values: `blue, gray`
        */
@@ -24,7 +24,7 @@
       },
 
       /**
-       * Defines the tagname of the heading (h1-h6)
+       * Defines the tagname of the heading (h1-h6).
        *
        * Valid values: `h1, h2, h3, h4, h5, h6`
        */
@@ -44,7 +44,7 @@
       },
 
       /**
-       * Defines if the heading should have an underline
+       * Defines if the heading should have an underline.
        */
       underline: {
         type: Boolean,
@@ -72,19 +72,28 @@
       /**
        * Defines spacing for the heading element.
        *
-       * Valid values: `500, 700, 800`
+       * Valid values: `400, 500, 700, 800`
        */
       spacing: {
         type: [Number, String],
         default: 500,
         validator(value) {
           return [
+            400,
             500,
             700,
             800,
           ].includes(parseInt(value, 10));
         },
-      }
+      },
+
+      /**
+       * Defines if the heading shall be uppercase.
+       */
+      uppercase: {
+        type: Boolean,
+        default: false,
+      },
     },
 
     // computed: {},
@@ -106,7 +115,7 @@
     /**
      * Creates a heading element.
      *
-     * @param   {Function}    createElement   Vue helper
+     * @param {Function} createElement - Vue helper.
      *
      * @returns {*}
      */
@@ -116,6 +125,7 @@
         class: this.b({
           color: this.$props.color,
           underline: this.$props.underline,
+          uppercase: this.$props.uppercase,
           fontWeight: this.$props.fontWeight,
           spacing: this.$props.spacing,
           [this.$props.tagName]: true
@@ -124,6 +134,7 @@
           ...this.$attrs,
         },
       };
+
       const childAttributes = {
         class: this.b('inner', { color: this.$props.color, spacing: this.$props.spacing }),
       };
@@ -166,6 +177,10 @@
       border-bottom: 1px solid $color-grayscale--600;
     }
 
+    &--underline &__inner--spacing-400 {
+      padding: $spacing--10 $spacing--20;
+    }
+
     &--underline &__inner--spacing-500 {
       padding: $spacing--15 $spacing--10;
     }
@@ -176,6 +191,10 @@
 
     &--underline &__inner--spacing-800 {
       padding: $spacing--20 $spacing--25 $spacing--5;
+    }
+
+    &--uppercase {
+      text-transform: uppercase;
     }
 
     &--h1 {

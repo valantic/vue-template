@@ -1,7 +1,7 @@
 ### c-date-picker-input
 ```vue
 <template>
-  <c-date-picker-input :selected-date="selectedDate" @input="onInputDate"/>
+  <c-date-picker-input :selected-date="selectedDate" @input="onInputDate" :validate-date="isValidDate" />
 </template>
 
 <script>
@@ -14,7 +14,11 @@
     methods: {
       onInputDate({ date }) {
        this.selectedDate = date;
-      }
+      },
+      isValidDate(date) {
+        return this.$moment(date, 'YYYY-MM-DD', true).isValid()
+          && this.$moment(date).isSameOrAfter('1920-01-01', 'year');
+      },
     }
   };
 </script>

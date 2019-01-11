@@ -10,11 +10,11 @@ Always use **v-model** to bind value to form elements!
              :name="name" 
              :value="item.value"
              v-model="selected"
-             class="spacing--bottom-10">
+             style="margin-bottom: 10px;">
       {{ item.displayName }}
     </e-radio>
   
-    <div class="spacing--top-15">
+    <div style="margin-top: 15px;">
       <p>{{ selected }}</p>
     </div>
   </div>
@@ -22,10 +22,9 @@ Always use **v-model** to bind value to form elements!
 
 <script>
   export default {
-    name: 'example',
     data: () => ({
       selected: 'radio-2',
-      name: 'radio',
+      name: 'radio-1',
       items: [
         {id: 1, value: 'radio-1', displayName: 'Radio 1'},
         {id: 2, value: 'radio-2', displayName: 'Radio 2'},
@@ -40,13 +39,14 @@ Always use **v-model** to bind value to form elements!
 ```vue
 <template>
   <div>
+  {{name}}
     <e-radio disabled 
            v-for="item in items"
            :key="item.id"
            :name="name" 
            :value="item.value" 
            v-model="selected"
-           class="spacing--bottom-10">
+           style="margin-bottom: 10px;">
        {{ item.displayName }}
     </e-radio>
   </div>
@@ -54,10 +54,9 @@ Always use **v-model** to bind value to form elements!
     
 <script>
   export default {
-    name: 'example',
     data: () => ({
       selected: 'radio-1',
-      name: 'radio',
+      name: 'radio-2',
       items: [
         {id: 1, value: 'radio-1', displayName: 'Radio 1'},
         {id: 2, value: 'radio-2', displayName: 'Radio 2'},
@@ -78,7 +77,7 @@ Always use **v-model** to bind value to form elements!
       Select Radio Button
     </e-radio>
   
-    <div class="spacing--top-15">
+    <div style="margin-top: 15px;">
       <p>{{ demo }}</p>
     </div>
   </div>
@@ -86,7 +85,6 @@ Always use **v-model** to bind value to form elements!
 
 <script>
   export default {
-    name: 'example',
     data: () => ({
       demo: ''
     })
@@ -105,7 +103,7 @@ Always use **v-model** to bind value to form elements!
       Select Radio Button
     </e-radio>
   
-    <div class="spacing--top-15">
+    <div style="margin-top: 15px;">
       <p>{{ demo }}</p>
     </div>
   </div>
@@ -113,7 +111,6 @@ Always use **v-model** to bind value to form elements!
 
 <script>
   export default {
-    name: 'example',
     data: () => ({
       demo: ''
     })

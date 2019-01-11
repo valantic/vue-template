@@ -1,6 +1,7 @@
 <!-- This component has no <template> because of dynamic root element -->
 
 <script>
+  import touchDevice from '@/mixins/touch-device';
   import eProgress from './e-progress';
 
   /**
@@ -13,7 +14,9 @@
   export default {
     name: 'e-button',
     // components: {},
-    // mixins: [],
+    mixins: [
+      touchDevice,
+    ],
 
     props: {
       /**
@@ -245,6 +248,7 @@
           hover: hover || this.hasHover,
           focus: focus || this.hasFocus,
           active: active || this.isActive,
+          touch: this.hasTouch,
           disabled,
           primary,
         }),
@@ -268,7 +272,7 @@
 
       if (progress) {
         if (this.$el) { // If already initially a 'progress' button, there will be no element at this point.
-          options.style = this.getElementDimensions(); // Defines width/height to keep button dimension.
+          options.style = this.width !== 'full' ? this.getElementDimensions() : null; // Defines width/height to keep button dimension.
         }
 
         content = [
@@ -313,7 +317,7 @@
 
     position: relative;
     display: inline-block;
-    background: $color-grayscale--600;
+    background: transparent;
     padding: 6px $spacing--10;
     border: 0;
     color: $color-grayscale--400;
@@ -323,26 +327,48 @@
     text-align: center;
     cursor: pointer;
 
+    &:hover {
+      text-decoration: none;
+    }
+
+    &::before, // TODO: create mixin
+    &::after {
+      position: absolute;
+      display: block;
+      content: "";
+      top: 0;
+      right: 0;
+      left: 0;
+      border: 1px solid $color-grayscale--500;
+      border-radius: $_e-button__radius;
+      height: 20%;
+    }
+
+    &::before {
+      border-bottom: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &::after {
+      top: auto;
+      bottom: 0;
+      border-top: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
     &--focus,
     &:focus {
       color: $color-primary--3;
       background-color: $color-grayscale--500;
       outline: none;
       border: 0; // Overwrite link style
-    }
 
-    &--hover,
-    &:hover {
-      color: $color-primary--3;
-      background-color: $color-grayscale--500;
-      border-bottom: 0; // Overwrite link styles
-    }
-
-    &--focus path,
-    &--hover path,
-    &:focus path,
-    &:hover path {
-      fill: $color-primary--3;
+      &::before,
+      &::after {
+        display: none;
+      }
     }
 
     &:active:not([disabled]),
@@ -350,6 +376,30 @@
       color: $color-primary--3;
       background-color: $color-grayscale--400;
       position: relative;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+
+    &--hover:not(&--touch),
+    &:hover:not(&--touch) {
+      color: $color-primary--3;
+      background-color: $color-grayscale--500;
+      border-bottom: 0; // Overwrite link styles
+
+      &:not([disabled])::before,
+      &:not([disabled])::after {
+        display: none;
+      }
+    }
+
+    &--focus path,
+    &--hover:not(&--touch) path,
+    &:focus path,
+    &:hover:not(&--touch) path {
+      fill: $color-primary--3;
     }
 
     &[disabled],
@@ -360,9 +410,9 @@
     &--disabled::after,
     &[disabled]:hover,
     &--disabled:hover {
-      background-color: $color-grayscale--600;
+      background-color: transparent;
       border-color: $color-grayscale--600;
-      color: $color-grayscale--500;
+      color: $color-grayscale--450;
       cursor: default;
       pointer-events: none;
     }
@@ -379,6 +429,11 @@
     &--negative {
       background: $color-primary--2;
       color: $color-primary--3;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
 
     &--spacing-0 {
@@ -426,14 +481,20 @@
     &:not([disabled]) {
       color: $color-secondary--2;
 
+      &::before,
+      &::after {
+        border-width: 2px;
+        border-color: $color-primary--1;
+      }
+
       &.e-button:focus,
       &.e-button--focus {
         color: $color-primary--3;
         background-color: $color-primary--1;
       }
 
-      &.e-button:hover:not([disabled]),
-      &.e-button--hover:not([disabled]) {
+      &.e-button:hover:not(.e-button--touch),
+      &.e-button--hover:not(.e-button--touch) {
         color: $color-primary--3;
         background-color: $color-primary--1;
       }

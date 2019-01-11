@@ -1,9 +1,6 @@
 ```vue
 <template>
-  <div>
-    <c-date-picker v-model="selectedDate"/>
-    <p><span>Selected date:</span>{{ selectedDate }}</p>
-  </div>
+  <c-date-picker v-model="selectedDate"/>
 </template>
 
 <script>

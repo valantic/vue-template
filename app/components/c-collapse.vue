@@ -1,20 +1,20 @@
 <template>
-
   <div :class="b(modifiers)">
     <a :class="b('toggle')" href="#" @click="toggleState">
-      <e-icon :class="b('icon')" :inline="true" icon="i-plus"/>
+      <e-icon icon="i-plus"
+              width="12"
+              height="12"
+              inline />
       {{ title }}
     </a>
 
-    <div ref="content" :class="b('content')" :style="{ maxHeight }">
+    <div v-if="isRendered" :class="b('content')" :style="{ maxHeight }">
       <div ref="inner" :class="b('inner')">
         <!-- @slot Used for item content -->
         <slot :is-open="isOpen"></slot>
       </div>
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -30,7 +30,7 @@
 
     props: {
       /**
-       * Sets state of the item
+       * Sets state of the item.
        */
       active: {
         type: Boolean,
@@ -46,13 +46,18 @@
       },
 
       /**
-       * Defines if inner content has padding left/right.
-       *
-       *
+       * Defines the padding of the inner content.
        */
       padding: {
-        type: Boolean,
-        default: true,
+        type: String,
+        default: '500',
+        validator(value) {
+          return [
+            '0',
+            '300',
+            '500',
+          ].includes(value);
+        },
       },
 
       /**
@@ -91,6 +96,11 @@
          * so that calculations depending on the height of the content can be done by the child component.
          */
         isOpen: this.$props.active,
+
+        /**
+         * @type {Boolean} Flag shows if the collapse content is already rendered in the DOM.
+         */
+        isRendered: false,
       };
     },
 
@@ -104,6 +114,7 @@
         return {
           background: this.$props.background,
           expanded: this.isExpanded,
+          open: this.isOpen,
           padding: this.$props.padding,
         };
       },
@@ -111,7 +122,9 @@
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      this.isRendered = this.isOpen;
+    },
     // beforeMount() {},
     mounted() {
       this.$eventBus.$on('c-collapse-group.toggle', (payload) => {
@@ -166,8 +179,25 @@
        * Opens the collapsible.
        */
       open() {
-        this.setMaxHeight();
+        if (!this.isRendered) {
+          this.isRendered = true;
 
+          /**
+           * Calls the function after the content is rendered in the DOM.
+           */
+          this.$nextTick(() => {
+            this.openContent();
+          });
+        } else {
+          this.openContent();
+        }
+      },
+
+      /**
+       * Sets the max-height of the content and opens the content.
+       */
+      openContent() {
+        this.setMaxHeight();
         clearTimeout(this.closeTimeout);
 
         this.openTimeout = setTimeout(() => {
@@ -204,6 +234,7 @@
 <style lang="scss">
   .c-collapse {
     border-top: 1px solid $color-grayscale--600;
+    font-family: $font-family--primary;
 
     &:last-child {
       border-bottom: 1px solid $color-grayscale--600;
@@ -216,11 +247,11 @@
       color: $color-grayscale--400;
       cursor: pointer;
       height: 40px;
-      overflow-y: hidden;
+      overflow: hidden;
       padding: 0 $spacing--10 0 $spacing--30;
       position: relative;
       text-overflow: ellipsis;
-      transition: color 0.1s;
+      transition: color $transition-duration-100;
       white-space: nowrap;
       border-bottom: 0;
 
@@ -230,41 +261,22 @@
         left: 0;
         content: "";
         position: absolute;
-        transition: width 0.3s ease;
+        transition: width $transition-duration-300 ease;
         width: 0;
       }
 
       &:hover {
         color: $color-secondary--1;
-        border-bottom: 0;
+        text-decoration: none;
       }
 
       .c-collapse--expanded & {
         color: $color-secondary--1;
-        transition: color 0.3s;
+        transition: color $transition-duration-300;
 
         &::after {
           width: 100%;
         }
-      }
-    }
-
-    &__icon {
-      left: $spacing--10;
-      position: absolute;
-      transition: transform 0.15s ease;
-
-      svg {
-        height: 12px;
-        width: 12px;
-      }
-
-      path {
-        fill: $color-grayscale--400;
-      }
-
-      .c-collapse--expanded & {
-        transform: rotate(45deg);
       }
     }
 
@@ -274,23 +286,46 @@
       color: $color-grayscale--200;
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.2s ease-in-out;
+      transition: max-height $transition-duration-200 ease-in-out;
 
       .c-collapse--background & {
         background: $color-grayscale--700;
       }
 
-      .c-collapse--expanded & {
+      .c-collapse--open & {
         max-height: none;
       }
     }
 
     &__inner {
-      padding: $spacing--10 0;
+      .c-collapse--padding-0 & {
+        padding: 0;
+      }
 
-      .c-collapse--padding & {
+      .c-collapse--padding-300 & {
+        padding: $spacing--10 0 $spacing--10 0;
+      }
+
+      .c-collapse--padding-500 & {
         padding: $spacing--10 $spacing--10 $spacing--10 $spacing--30;
       }
+    }
+
+    &__toggle .e-icon {
+      left: $spacing--10;
+      position: absolute;
+      transition: transform $transition-duration-200 ease;
+      top: 50%;
+      transform: translateY(-50%);
+      transform-origin: center;
+
+      path {
+        fill: $color-grayscale--400;
+      }
+    }
+
+    &--expanded &__toggle .e-icon {
+      transform: translateY(-50%) rotate(45deg);
     }
   }
 </style>
