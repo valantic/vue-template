@@ -381,15 +381,15 @@
 
     position: relative;
 
-    &:not(&--border-0) {
-      @include half-border($color-grayscale--500);
+    &--border-0 &__field {
+      border: 1px solid transparent;
     }
 
     // input
     &__field {
       @include font($font-size--14, 18px);
 
-      border: 1px solid transparent;
+      border: 1px solid $color-grayscale--500;
       border-radius: $border-radius--default;
       color: $color-secondary--1;
       font-family: $font-family--primary;
@@ -486,7 +486,7 @@
     // active
     &:not(&--border-0) &__field:active,
     &--active:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     // focus
@@ -497,7 +497,7 @@
 
     &:not(&--border-0) &__field:focus,
     &--focus:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     &--focus-shadow &__field:focus,
@@ -508,7 +508,7 @@
     // hover
     &:not(&--border-0) &__field:hover,
     &--hover:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     // disabled
@@ -519,17 +519,12 @@
     &--disabled &__field:hover,
     &--disabled:not(&--border-0) &__field:hover {
       background-color: $color-grayscale--1000;
-      border-color: transparent;
+      border-color: $color-grayscale--600;
       color: $color-grayscale--450;
 
       &::placeholder {
         color: $color-grayscale--450;
       }
-    }
-
-    &--disabled:not(&--border-0)::before,
-    &--disabled:not(&--border-0)::after {
-      border-color: $color-grayscale--600;
     }
 
     &--disabled {
@@ -547,14 +542,12 @@
       }
     }
 
-    &--state-error {
-      &:not(.e-input--border-0) {
-        @include half-border($color-status--danger);
-      }
+    &--state-error:not(.e-input--border-0) &__field {
+      border-color: $color-status--danger;
+    }
 
-      .e-input__icon-splitter {
-        border-color: $color-status--danger;
-      }
+    &--state-error .e-input__icon-splitter {
+      border-color: $color-status--danger;
     }
 
     &--state-error:not(.e-input--border-0) &__field:hover {

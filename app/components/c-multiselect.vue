@@ -573,8 +573,6 @@
     }
 
     &__content {
-      @include half-border($color-grayscale--500);
-
       width: 100%;
       transition: box-shadow $transition-duration-200 ease-in-out;
     }
@@ -587,40 +585,10 @@
       border-radius: $border-radius--default;
       box-shadow: 0 2px 5px 0 rgba($color-grayscale--500, 0.5);
       top: calc(100% - 30px);
-
-      &::before,
-      &::after {
-        content: none;
-      }
-    }
-
-    &--disabled &__content {
-      &::before,
-      &::after {
-        border-color: $color-grayscale--600;
-      }
     }
 
     &--error &__content {
-      border-color: $color-status--danger;
       box-shadow: none;
-
-      &::before,
-      &::after {
-        border-color: $color-status--danger;
-      }
-
-      &::after {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-    }
-
-    &--error:not(&--active) &__content {
-      &::after {
-        border-bottom-left-radius: $border-radius--default;
-        border-bottom-right-radius: $border-radius--default;
-      }
     }
 
     &__title {
@@ -650,12 +618,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1px solid transparent;
+      border: 1px solid $color-grayscale--500;
       border-radius: $border-radius--default;
     }
 
     &--hover &__output {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
+    }
+
+    &--error &__output {
+      border-color: $color-status--danger;
     }
 
     // placeholder and value
@@ -674,7 +646,7 @@
     &--disabled &__value,
     &--disabled &__output {
       color: $color-grayscale--450;
-      border: none;
+      border-color: $color-grayscale--600;
     }
 
     &__icon-wrapper {

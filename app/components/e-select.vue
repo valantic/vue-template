@@ -182,10 +182,10 @@
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
-      @include half-border($color-status--danger);
-
       .e-select__select {
         @include form-state-icon('error');
+
+        border-color: $color-status--danger;
       }
 
       .e-select__icon-splitter {
