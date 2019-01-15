@@ -90,17 +90,15 @@
 <style lang="scss">
   .c-date-picker {
     color: $color-grayscale--400;
-    width: calc(100% + 30px);
+    width: 100%;
     min-width: 220px;
     background-color: $color-grayscale--1000;
 
     @include media(xs) {
-      width: 330px;
+      width: 300px;
     }
 
     &--is-full-width {
-      width: 100%;
-
       @include media(xs) {
         width: 100%;
       }

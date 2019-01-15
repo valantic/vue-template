@@ -5,13 +5,13 @@
              :position="labelPosition">
       <div :class="b('fields')">
         <c-date-picker-input :id="startId"
-                             :selected-date="internalValue.start"
+                             :selected-date="internalStart"
                              :validate-date="isValidStartDate"
                              :is-event-date="isEventDate"
                              @input="onInputStartValue"
         />
         <div :class="b('to')">—</div>
-        <c-date-picker-input :selected-date="internalValue.end"
+        <c-date-picker-input :selected-date="internalEnd"
                              :validate-date="isValidEndDate"
                              :is-event-date="isEventDate"
                              @input="onInputEndValue"
@@ -39,7 +39,7 @@
 
     props: {
       /**
-       * The currently selected start date. The format needs to be an ISO 8601 string (YYYY-MM-DD).
+       * The preselected start date. The format needs to be an ISO 8601 string (YYYY-MM-DD).
        */
       start: {
         type: String,
@@ -47,7 +47,7 @@
       },
 
       /**
-       * The currently selected end date. The format needs to be an ISO 8601 string (YYYY-MM-DD).
+       * The preselected end date. The format needs to be an ISO 8601 string (YYYY-MM-DD).
        */
       end: {
         type: String,
@@ -86,12 +86,14 @@
         isDatePickerOpen: false,
 
         /**
-         * @type {Object} Stores the values.
+         * @type {String} The currently selected start date. The format needs to be an ISO 8601 string (YYYY-MM-DD).
          */
-        internalValue: {
-          start: this.start,
-          end: this.end,
-        },
+        internalStart: this.start,
+
+        /**
+         * @type {String} The currently selected end date. The format needs to be an ISO 8601 string (YYYY-MM-DD).
+         */
+        internalEnd: this.end,
       };
     },
 
@@ -158,8 +160,8 @@
           return false;
         }
 
-        if (this.internalValue.end) {
-          return this.$moment(date).isSameOrBefore(this.internalValue.end, 'day');
+        if (this.internalEnd) {
+          return this.$moment(date).isSameOrBefore(this.internalEnd, 'day');
         }
 
         return true;
@@ -177,8 +179,8 @@
           return false;
         }
 
-        if (this.isValidDate(date) && this.internalValue.start) {
-          return this.$moment(date).isSameOrAfter(this.internalValue.start, 'day');
+        if (this.isValidDate(date) && this.internalStart) {
+          return this.$moment(date).isSameOrAfter(this.internalStart, 'day');
         }
 
         return true;
@@ -194,17 +196,17 @@
       isEventDate(dateString) {
         const date = this.$moment(dateString);
 
-        if (this.internalValue.start && this.internalValue.end) {
-          return date.isSameOrAfter(this.internalValue.start, 'day')
-            && date.isSameOrBefore(this.internalValue.end, 'day');
+        if (this.internalStart && this.internalEnd) {
+          return date.isSameOrAfter(this.internalStart, 'day')
+            && date.isSameOrBefore(this.internalEnd, 'day');
         }
 
-        if (this.internalValue.start) {
-          return date.isSameOrAfter(this.internalValue.start, 'day');
+        if (this.internalStart) {
+          return date.isSameOrAfter(this.internalStart, 'day');
         }
 
-        if (this.internalValue.end) {
-          return date.isSameOrBefore(this.internalValue.end, 'day');
+        if (this.internalEnd) {
+          return date.isSameOrBefore(this.internalEnd, 'day');
         }
 
         return false;
@@ -217,7 +219,7 @@
        * @param {String} payload.date - Formatted date string.
        */
       onInputStartValue(payload) {
-        this.internalValue.start = payload.date;
+        this.internalStart = payload.date;
 
         /**
          * @event updateStartDate - Update event for start date.
@@ -237,7 +239,7 @@
        * @param {String} payload.date - Formatted date string.
        */
       onInputEndValue(payload) {
-        this.internalValue.end = payload.date;
+        this.internalEnd = payload.date;
 
         /**
          * @event updateEndDate - Update event for end date.

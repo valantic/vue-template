@@ -30,10 +30,9 @@
         </label>
       </div>
     </div>
-    <div v-if="isDatePickerOpen" :class="b('overlay', { hasOffset })">
+    <div v-if="isDatePickerOpen" :class="b('overlay')">
       <c-date-picker :value="selectedDate"
                      :validate-date="validateDate"
-                     :is-full-width="!hasOffset"
                      :events="isEventDate"
                      @input="onDatePickerInput"
       />
@@ -93,14 +92,6 @@
        * Defines if the input has a year selector.
        */
       hasYearSelector: {
-        type: Boolean,
-        default: false,
-      },
-
-      /**
-       * Defines if the input has an offset (e.g. used with radio button)
-       */
-      hasOffset: {
         type: Boolean,
         default: false,
       },
@@ -360,10 +351,6 @@
       background-color: $color-grayscale--1000;
       width: 100%;
       margin-left: 0;
-
-      &--has-offset {
-        margin-left: -$spacing--30;
-      }
     }
 
     &__buttons-wrapper {
