@@ -1,12 +1,13 @@
 
 ```vue
 <template>
-  <div>
+ <div>
     <div>
+    {{showRoot}}
       <e-with-root :show-root="showRoot">
         <a href="https://www.google.com">
           <span>
-            Text or link, depending on the toggle. <br>
+            Text or link, depending on the toggle. <br />
             Link: {{ showRoot }}
           </span>
         </a>

@@ -139,5 +139,5 @@ Creates a button like link.
 #### Multiline
 
 ```vue
-<e-button @click="onStyleguideClick">A button<br>with wrapping<br>text</e-button>
+<e-button @click="onStyleguideClick">A button<br />with wrapping<br />text</e-button>
 ```

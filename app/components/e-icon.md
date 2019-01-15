@@ -15,7 +15,7 @@
 ```
 <div>
     <e-icon icon="styleguide-heart" width="50"/> 50px (as img)
-    <br>
+    <br />
     <e-icon icon="styleguide-heart" width="50" :inline="true"/> 50px (inline)
 </div>
 ```
