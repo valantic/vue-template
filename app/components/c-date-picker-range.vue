@@ -195,18 +195,19 @@
        */
       isEventDate(dateString) {
         const date = this.$moment(dateString);
+        const { internalStart, internalEnd } = this;
 
-        if (this.internalStart && this.internalEnd) {
-          return date.isSameOrAfter(this.internalStart, 'day')
-            && date.isSameOrBefore(this.internalEnd, 'day');
+        if (internalStart && internalEnd) {
+          return date.isSameOrAfter(internalStart, 'day')
+            && date.isSameOrBefore(internalEnd, 'day');
         }
 
-        if (this.internalStart) {
-          return date.isSameOrAfter(this.internalStart, 'day');
+        if (internalStart) {
+          return date.isSameOrAfter(internalStart, 'day');
         }
 
-        if (this.internalEnd) {
-          return date.isSameOrBefore(this.internalEnd, 'day');
+        if (internalEnd) {
+          return date.isSameOrBefore(internalEnd, 'day');
         }
 
         return false;

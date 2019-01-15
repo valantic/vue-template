@@ -57,5 +57,8 @@
   },
   "e-logo": {
     "linkTitle": "zur Startseite"
+  },
+  "c-modal-header-01": {
+    "closeTitle": "Fenster schliessen"
   }
 }

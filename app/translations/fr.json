@@ -57,5 +57,8 @@
   },
   "e-logo": {
     "linkTitle": "à la page d'accueil"
+  },
+  "c-modal-header-01": {
+    "closeTitle": "fermer la fenêtre"
   }
 }
