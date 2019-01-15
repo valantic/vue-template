@@ -1,26 +1,31 @@
-import Vue from 'vue';
+import { mount, createLocalVue } from '@vue/test-utils';
 import price from '@/directives/price';
 
+const testCases = {
+  '10.00': 'v-price="1000"',
+  'CHF 10.00': 'v-price.currencyBefore="1000"',
+  '10.00 CHF': 'v-price.currencyAfter="1000"',
+  '': 'v-price',
+};
+
 describe('directive | v-price', () => {
+  const localVue = createLocalVue();
+
+  localVue.directive(price.name, price);
+
   it('has name property', () => {
     expect(price.name).toBeTruthy();
   });
 
-  xit('renders (has bem block name on wrapper element)', () => {
-    // TODO: Make this test work. Currently we get undefined in vm.$el.innerHTML.
+  Object.entries(testCases).forEach((entry) => {
+    const [output, input] = entry;
 
-    const template = `<div>
-        <span v-price.currencyBefore="1000"></span>
-    </div>`;
+    it('renders formated price', () => {
+      const wrapper = mount({
+        template: `<div><span ${input}></span></div>`
+      }, { localVue });
 
-    Vue.directive(price);
-
-    const vm = new Vue({
-      template,
-    }).$mount();
-
-    Vue.nextTick(() => {
-      expect(vm.$el.innerHTML).toEqual(expect.stringContaining('CHF 10.00'));
+      expect(wrapper.text()).toEqual(output);
     });
   });
 });

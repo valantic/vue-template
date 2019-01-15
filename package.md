@@ -56,9 +56,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * [moment](https://momentjs.com/) - Date handling library.
 * [picturefill](https://github.com/scottjehl/picturefill) - A polyfill for picture and srcset. Required by `e-picture`.
 * [portal-vue](https://github.com/LinusBorg/portal-vue) - Let's render something in a «wormhole» somewhere else on the page. It's used to render all the modals on a single place 
-* [simplebar](https://github.com/Grsmto/simplebar) - A javascript library for creating custom scrollbars. Required by `c-multiselect`. **NOTE**: This plugin causes memory leaks in IE11!
 * [smoothscroll-polyfill](https://github.com/iamdustan/smoothscroll) - A scroll behaviour polyfill.
-* [swiper](https://github.com/nolimits4web/Swiper) - An image gallery.
+* [swiper](https://github.com/nolimits4web/swiper) - Mobile touch slider (swiper) with hardware accelerated transitions. 
 * [vue](https://github.com/vuejs/vue) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
 * [vue-bem-cn](http://codepen.io/c01nd01r/pen/Qdeovv)- Simple BEM class name generator for Vue.JS.
 * [vue-i18n](https://github.com/kazupon/vue-i18n) - Internationalization plugin for Vue.js
@@ -99,7 +98,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * [friendly-errors-webpack-plugin](https://github.com/geowarin/friendly-errors-webpack-plugin) - Friendly-errors-webpack-plugin recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them to provide a better Developer Experience.
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
 * [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image loader module for webpack.
-* `image-webpack-loader` was removed for this project because of VM incompatibility
 * [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing.
 * [launch-editor-middleware](https://github.com/yyx990803/launch-editor) - Allows to open Vue components in editor from Vue inspector.
 * [license-checker](https://github.com/davglass/license-checker) - Allows us to check the whole project for use licenses (see scripts).
@@ -110,20 +108,21 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * [postcss-pipeline-webpack-plugin](https://github.com/mistakster/postcss-pipeline-webpack-plugin) - A webpack plugin to process generated assets with PostCSS pipeline.
 * [rimraf](https://github.com/isaacs/rimraf) - A `rm -rf` util for nodejs.
 * [sass-loader](https://github.com/webpack-contrib/sass-loader) - Sass loader for webpack. Compiles Sass to CSS. 
+* [sass-resources-loader](https://github.com/shakacode/sass-resources-loader) - Imports SASS modules into required SASS modules to easily use shared variables and mixins. 
 * [stylelint](https://github.com/stylelint/stylelint) - A mighty, modern CSS linter and fixer that helps you avoid errors and enforce consistent conventions in your stylesheets.
-* [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) - The standard shareable config for stylelint .
+* [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) - The standard shareable config for stylelint.
+* [stylelint-config-valantic](https://github.com/valantic/stylelint-config-valantic) - The customised config for stylelint from valantic.
 * [stylelint-webpack-plugin](https://github.com/JaKXz/stylelint-webpack-plugin) -  A webpack plugin to lint your CSS/Sass code using stylelint.
 * [stylus](http://stylus-lang.com/) - CSS preprocessor. Used by `vuetify`.
 * [stylus-loader](https://github.com/shama/stylus-loader) - Stylus loader for webpack. Used by `vuetify`.
 * [svgo](https://github.com/svg/svgo) - Node.js tool for optimizing SVG files
-* [svgo-loader](https://github.com/rpominov/svgo-loader) - svgo loader for webpack
 * [typescript](https://github.com/Microsoft/TypeScript) - TypeScript is a superset of JavaScript that compiles to clean JavaScript output. - Needed by `vue-styleguidist`
 * [uglifyjs-webpack-plugin](https://github.com/webpack-contrib/uglifyjs-webpack-plugin) - This plugin uses UglifyJS v3 (`uglify-es`) to minify your JavaScript.
 * [url-loader](https://github.com/webpack-contrib/url-loader) - Loads files as `base64` encoded URL.
-* [swiper](https://github.com/nolimits4web/swiper) - Mobile touch slider (swiper) with hardware accelerated transitions. 
 * [vue-jest](https://github.com/vuejs/vue-jest) - Jest Vue transformer.
 * [vue-loader](https://github.com/vuejs/vue-loader) - Vue.js component loader for Webpack.
-* [vue-styleguidist]() - Created from react styleguidist for Vue Components with a living style guide.
+* [vue-markdown-loader](https://github.com/QingWei-Li/vue-markdown-loader) - Convert Markdown file to Vue Component using markdown-it.
+* [vue-styleguidist](https://github.com/vue-styleguidist/vue-styleguidist) - Created from react styleguidist for Vue Components with a living style guide.
 * [webpack](https://github.com/webpack/webpack) - webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
 * [webpack-auto-inject-version](https://github.com/radswiat/webpack-auto-inject-version) - Webpack plugin to auto inject version into html or file.
 * [webpack-clean](https://www.npmjs.com/package/webpack-clean) - Plugin let's remove specific files after the build process.
