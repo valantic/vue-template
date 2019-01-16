@@ -1,5 +1,5 @@
 <template>
-  <span :class="b({ color })"><!-- needed for inline usage -->
+  <span :class="b({ color, [icon]: true })"><!-- needed for inline usage -->
     <img v-if="!inline"
          :class="b('icon')"
          :src="src"
@@ -13,6 +13,7 @@
 
 <script>
   const cache = {};
+  const nodeCache = {};
 
   export default {
     name: 'e-icon',
@@ -62,7 +63,7 @@
             'lightgray',
             'blue',
             'white',
-            'yellow'
+            'yellow',
           ].includes(value);
         },
       },
@@ -72,15 +73,16 @@
        */
       title: {
         type: String,
-        default: null
+        default: null,
       },
 
       /**
-       * Alternative text for image usage
+       * Alternative text for image usage. This will not be added in case of inline usage as alt attribute is not
+       * allowed on svg elements.
        */
       alt: {
         type: String,
-        default: '' // A11y 1.1.1
+        default: '', // A11y 1.1.1
       },
 
       /**
@@ -89,8 +91,16 @@
        */
       focusable: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
+
+      /**
+       * Native tabindex attribute for the svg-element (inline usage).
+       */
+      tabindex: {
+        type: String,
+        default: '-1',
+      },
     },
     computed: {
       src() {
@@ -104,24 +114,22 @@
         }
       },
     },
-    mounted() {
-      if (!this.inline || !this.src) {
-        return;
-      }
 
-      if (!cache[this.icon]) {
-        cache[this.icon] = this.$axios
-          .get(this.src)
-          .then(response => response.data);
-      }
-
-      cache[this.icon].then((svg) => {
-        this.$el.innerHTML = svg;
-
-        this.setAttributes(this.$el.children[0]);
-      });
+    watch: {
+      icon: {
+        immediate: true,
+        handler() {
+          this.loadIcon();
+        },
+      },
     },
+
     methods: {
+      /**
+       * Sets the attributes for the icon.
+       *
+       * @param {Node} svg - Element for which the attributes should be set.
+       */
       setAttributes(svg) {
         if (this.width || this.height) {
           svg.removeAttribute('width');
@@ -136,13 +144,63 @@
           }
         }
 
-        if (this.$props.alt) {
-          svg.setAttribute('alt', this.$props.alt);
-        }
-
+        svg.setAttribute('tabindex', this.tabindex);
         svg.setAttribute('role', 'img');
         svg.setAttribute('aria-label', this.icon);
         svg.setAttribute('focusable', this.focusable);
+      },
+
+      /**
+       * Creates a new SVG element if not already in cache.
+       *
+       * @param {String} content - The SVG content as string.
+       *
+       * @returns {Node}
+       */
+      createSvgElement(content) {
+        if (!nodeCache[this.icon]) {
+          const container = document.createElement('div');
+
+          container.innerHTML = content;
+
+          nodeCache[this.icon] = container;
+        }
+
+        return nodeCache[this.icon].cloneNode(true).children[0];
+      },
+
+      /**
+       * Gets an SVG element for the given content.
+       *
+       * @param {String} content - The SVG content as string.
+       *
+       * @returns {Node}
+       */
+      getSvgElement(content) {
+        const svg = this.createSvgElement(content);
+
+        this.setAttributes(svg);
+
+        return svg;
+      },
+
+      /**
+       * Load the icon.
+       */
+      loadIcon() {
+        if (!this.inline || !this.src) {
+          return;
+        }
+
+        if (!cache[this.icon]) {
+          cache[this.icon] = this.$axios
+            .get(this.src)
+            .then(response => response.data);
+        }
+
+        cache[this.icon].then((svg) => {
+          this.$el.appendChild(this.getSvgElement(svg));
+        });
       },
     },
   };

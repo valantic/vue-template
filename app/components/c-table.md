@@ -66,7 +66,7 @@
 ```vue
 <template>
   <div>
-    <input type="text" v-model="searchTerm" placeholder="search...">
+    <input type="text" v-model="searchTerm" placeholder="search..." />
     <c-table :items="mockData.dummyTableDate"
              :headers="headers"
              :search-term="searchTerm">

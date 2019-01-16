@@ -4,13 +4,12 @@
 ```vue
 <template>
   <div>
-    <c-multiselect
-      v-model="checked"
-      :items="items"
-      title="Title"
-      placeholder="Lorem ipsum"
-      facetName="foo"
-      @change="onMultiselectChange"
+    <c-multiselect :active-value="activeValues"
+                   :items="items"
+                   title="Title"
+                   placeholder="Lorem ipsum"
+                   facetName="foo"
+                   @update="onMultiselectUpdate"
     />
     <pre>{{ itemsChecked }}</pre>
   </div>
@@ -39,11 +38,11 @@
         },
       ],
       itemsChecked: [],
-      checked: false
+      activeValues: ['value1', 'value3'],
     }),
     methods: {
-      onMultiselectChange(checked) {
-        this.itemsChecked = checked;
+      onMultiselectUpdate(component) {
+        this.itemsChecked = component.checkedItems;
       }
     }
   };
@@ -97,13 +96,12 @@
 ```vue
 <template>
   <div>
-    <c-multiselect
-      :items="items"
-      title="Title"
-      placeholder="Lorem ipsum"
-      hover
-      facetName="foo"
-      @change="onMultiselectChange"
+    <c-multiselect :items="items"
+                     title="Title"
+                     placeholder="Lorem ipsum"
+                     facetName="foo"
+                     hover
+                     @update="onMultiselectUpdate"
     />
     <pre>{{ itemsChecked }}</pre>
   </div>
@@ -142,10 +140,10 @@
       itemsChecked: []
     }),
     methods: {
-      onMultiselectChange(checked) {
-        this.itemsChecked = checked;
-      }
-    }
+       onMultiselectUpdate(component) {
+         this.itemsChecked = component.checkedItems;
+       }
+     }
   };
 </script>
 ```
@@ -154,13 +152,12 @@
 ```vue
 <template>
   <div>
-    <c-multiselect
-      :items="items"
-      title="Title"
-      placeholder="Lorem ipsum"
-      active
-      facetName="foo"
-      @change="onMultiselectChange"
+    <c-multiselect :items="items"
+                   title="Title"
+                   placeholder="Lorem ipsum"
+                   facetName="foo"
+                   active
+                   @update="onMultiselectUpdate"
     />
     <pre>{{ itemsChecked }}</pre>
   </div>
@@ -207,10 +204,10 @@
       itemsChecked: []
     }),
     methods: {
-      onMultiselectChange(checked) {
-        this.itemsChecked = checked;
-      }
-    }
+       onMultiselectUpdate(component) {
+         this.itemsChecked = component.checkedItems;
+       }
+     }
   };
 </script>
 ```
@@ -220,13 +217,12 @@
 ```vue
 <template>
   <div>
-    <c-multiselect
-      :items="items"
-      title="Title"
-      placeholder="Lorem ipsum"
-      state="error"
-      facetName="foo"
-      @change="onMultiselectChange"
+    <c-multiselect :items="items"
+                     title="Title"
+                     placeholder="Lorem ipsum"
+                     facetName="foo"
+                     state="error"
+                     @update="onMultiselectUpdate"
     />
     <pre>{{ itemsChecked }}</pre>
   </div>
@@ -273,8 +269,8 @@
       itemsChecked: []
     }),
     methods: {
-      onMultiselectChange(checked) {
-        this.itemsChecked = checked;
+      onMultiselectUpdate(component) {
+        this.itemsChecked = component.checkedItems;
       }
     }
   };
@@ -285,13 +281,12 @@
 ```vue
 <template>
   <div>
-    <c-multiselect
-      :items="items"
-      title="Title"
-      placeholder="Lorem ipsum"
-      state="success"
-      facetName="foo"
-      @change="onMultiselectChange"
+    <c-multiselect :items="items"
+                   title="Title"
+                   placeholder="Lorem ipsum"
+                   facetName="foo"
+                   state="success"
+                   @update="onMultiselectUpdate"
     />
     <pre>{{ itemsChecked }}</pre>
   </div>
@@ -322,8 +317,8 @@
       itemsChecked: []
     }),
     methods: {
-      onMultiselectChange(checked) {
-        this.itemsChecked = checked;
+      onMultiselectUpdate(component) {
+        this.itemsChecked = component.checkedItems;
       }
     }
   };

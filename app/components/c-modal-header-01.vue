@@ -8,7 +8,7 @@
          :class="b('close', { mobile: true })"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
-         @click.prevent="close">
+         @click="close">
         <span v-t="'c-modal-header-01.closeTitle'" class="invisible"></span>
       </a>
       <div :class="b('close-icon-mobile')">
@@ -25,12 +25,12 @@
          :class="b('close')"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
-         @click.prevent="close">
+         @click="close">
         <e-icon
-          :inline="true"
           icon="i-close"
           width="25"
           height="25"
+          inline
         />
         <span v-t="'c-modal-header-01.closeTitle'" class="invisible"></span>
       </a>

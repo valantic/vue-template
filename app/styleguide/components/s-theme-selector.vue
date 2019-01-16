@@ -34,18 +34,6 @@
           {
             name: 'Theme 02',
             id: '02'
-          },
-          {
-            name: 'Theme 03',
-            id: '03'
-          },
-          {
-            name: 'Theme 04',
-            id: '04'
-          },
-          {
-            name: 'Theme 05',
-            id: '05'
           }
         ],
       };

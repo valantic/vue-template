@@ -3,7 +3,7 @@
        @mouseenter="hasHover=true"
        @mouseleave="hasHover=false"
   >
-    <span v-if="title.length" :class="b('title')">{{ title }}</span>
+    <p v-if="title.length" :class="b('title')">{{ title }}</p>
     <div :class="b('wrapper', { isActive })" @click="onInsideClick">
       <div :class="b('content')">
         <div v-if="!isActive" :class="b('output')" @click="onOutputClick">
@@ -48,39 +48,34 @@
                    @input="onSearchInput"
           >
             <e-icon :class="b('icon')"
-                    :inline="true"
                     icon="i-search"
-                    tabindex="-1" />
+                    inline />
           </e-input>
         </div>
-
-        <div :class="b('items-wrapper')" data-simplebar data-simplebar-auto-hide="false">
-          <div class="simplebar-scroll-content">
-            <div class="simplebar-content">
-              <div
-                v-for="item in checkboxItemsFiltered"
-                v-show="item.display"
-                :class="b('item-wrapper')"
-                :key="item.id"
-              >
-                <e-checkbox v-model="checkedItems"
-                            :name="item.name"
-                            :value="trimValue(item.value)"
-                            :ref="item.name"
-                            @change="onCheckboxChange">
-                  <span>{{ item.displayName }}</span>
-                </e-checkbox>
-              </div>
-
-              <span v-if="checkboxItemsFilteredEmpty" :class="b('list-empty')">
-                {{ $t('c-multiselect.itemsEmpty') }}
-              </span>
-            </div>
+        <div :class="b('items-wrapper')">
+          <div
+            v-for="item in checkboxItemsFiltered"
+            v-show="item.display"
+            :class="b('item-wrapper')"
+            :key="item.id"
+          >
+            <e-checkbox v-model="checkedItems"
+                        :name="item.name"
+                        :value="trimValue(item.value)"
+                        :ref="item.name"
+                        @change="onCheckboxChange">
+              <span>{{ item.displayName }}</span>
+            </e-checkbox>
           </div>
+
+          <span v-if="checkboxItemsFilteredEmpty" :class="b('list-empty')">
+            <span v-t="'c-multiselect.itemsEmpty'"></span>
+          </span>
         </div>
         <div :class="b('button-wrapper')">
           <e-button :disabled="!isChanged"
                     width="full"
+                    type="button"
                     primary
                     @click="onSaveClick"
           >
@@ -107,8 +102,6 @@
 </template>
 
 <script>
-  import 'simplebar';
-  import 'simplebar/dist/simplebar.css';
   import formStates from '../mixins/form-states';
 
   /**
@@ -150,8 +143,8 @@
        * Initially selected active values.
        */
       activeValue: {
-        type: String,
-        default: '',
+        type: [String, Number, Array],
+        default: null,
       },
 
       /**
@@ -240,18 +233,20 @@
        * @returns {Array}
        */
       activeValuesArray() {
-        if (this.activeValue) {
-          if (Array.isArray(this.activeValue)) {
-            return this.activeValue;
-          }
+        switch (typeof this.activeValue) {
+          case 'object':
+            if (Array.isArray(this.activeValue)) {
+              return this.activeValue;
+            }
+            break;
 
-          if (typeof this.activeValue === 'string') {
+          case 'string':
             return this.activeValue.split(',');
-          }
 
-          if (typeof this.activeValue === 'number') {
+          case 'number':
             return [this.activeValue];
-          }
+
+            // no default
         }
 
         return null;
@@ -271,16 +266,21 @@
         };
       },
     },
-    // watch: {},
+    watch: {
+      items: {
+        immediate: true,
+        handler() {
+          this.initCheckboxItems();
+          this.updateCheckboxes();
+        },
+      },
+    },
     // beforeCreate() {},
     created() {
       window.addEventListener('click', this.onOutsideClick);
     },
     // beforeMount() {},
-    mounted() {
-      this.initCheckboxItems();
-      this.updateCheckboxes();
-    },
+    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -304,12 +304,14 @@
        * string array provided by the parent component.
        */
       initCheckboxItems() {
+        this.checkboxItems = [];
+
         this.items.forEach((element, index) => {
           this.checkboxItems.push({
             id: index,
             name: 'multiple',
             value: element.value,
-            displayName: element.doc_count ? `${element.value} (${element.doc_count})` : element.value,
+            displayName: element.docCount ? `${element.value} (${element.docCount})` : element.value,
             display: true,
           });
         });
@@ -317,6 +319,8 @@
         this.checkboxItemsFiltered = this.checkboxItems;
 
         if (this.activeValuesArray) {
+          this.checkedItems = [];
+
           this.items.forEach((element) => {
             this.activeValuesArray.forEach((activeValue) => {
               if (element.value === activeValue) {
@@ -427,7 +431,10 @@
            *
            * @event save
            */
-          this.$emit('save');
+          this.$emit('save', {
+            facetName: this.facetName,
+            checkedItems: this.checkedItems,
+          });
         }
 
         this.isActive = false;
@@ -581,12 +588,15 @@
     }
 
     &--error &__content {
-      border-color: $color-status--danger;
       box-shadow: none;
     }
 
     &__title {
+      @extend %hyphens;
+      @include font($font-size--16, $spacing--20);
+
       color: $color-grayscale--400;
+      margin-bottom: $spacing--5;
     }
 
     &--active &__title,
@@ -595,7 +605,7 @@
     }
 
     &--disabled &__title {
-      color: $color-grayscale--500;
+      color: $color-grayscale--450;
     }
 
     &--error &__title {
@@ -608,12 +618,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid $color-grayscale--500;
       border-radius: $border-radius--default;
     }
 
     &--hover &__output {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
+    }
+
+    &--error &__output {
+      border-color: $color-status--danger;
     }
 
     // placeholder and value
@@ -621,7 +635,7 @@
     &__value {
       @include font-size($font-size--14);
 
-      padding: 0 $spacing--5;
+      padding: 0 $spacing--10;
       color: $color-grayscale--400;
       white-space: nowrap;
       overflow: hidden;
@@ -629,11 +643,9 @@
     }
 
     &--disabled &__placeholder,
-    &--disabled &__value {
-      color: $color-grayscale--600;
-    }
-
+    &--disabled &__value,
     &--disabled &__output {
+      color: $color-grayscale--450;
       border-color: $color-grayscale--600;
     }
 
@@ -662,12 +674,15 @@
     }
 
     &__items-wrapper {
+      @extend %hyphens;
+
       display: none;
-      padding: $spacing--5 $spacing--1 $spacing--5 0; // spacing right is needed, otherwise IE11 shows a scrollbar.
-      background-color: #f8f8f8;
+      padding: $spacing--5 0;
+      background-color: $color-grayscale--700;
       border-top: 1px solid $color-grayscale--500;
       border-bottom: 1px solid $color-grayscale--500;
-      overflow-y: scroll;
+      overflow-y: auto;
+      max-height: 165px;
     }
 
     &--active &__items-wrapper {
@@ -723,35 +738,6 @@
       @include font-size($font-size--14);
 
       color: $color-grayscale--1000;
-    }
-
-    // styles for the custom scrollbar (simplebar)
-    [data-simplebar] {
-      max-height: 165px;
-    }
-
-    [data-simplebar="init"] {
-      display: none;
-    }
-
-    &--active [data-simplebar="init"] {
-      display: block;
-    }
-
-    /* Necessary disabling of stylelint due to the specific structure of the simplebar library */
-    /* stylelint-disable-next-line */
-    .simplebar-track.vertical {
-      top: 4px;
-      bottom: $spacing--2;
-    }
-
-    .simplebar-scrollbar {
-      right: 4px;
-    }
-
-    .simplebar-scrollbar::before {
-      border: 1px solid $color-grayscale--500;
-      background: $color-grayscale--1000;
     }
   }
 </style>

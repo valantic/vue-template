@@ -1,10 +1,11 @@
 <template>
-  <div :class="b({ negative, spacing })" :data-message="message">
+  <div :class="b({ negative, spacing })">
     <div :class="b('inner')">
       <div :class="b('bubble')"></div>
       <div :class="b('bubble')"></div>
       <div :class="b('bubble')"></div>
     </div>
+    <span class="invisible">{{ loadingMessage }}</span>
   </div>
 </template>
 
@@ -78,17 +79,15 @@
 
   @keyframes e-progress-rotation-animation {
     0% {
-      left: 100%;
-      transform: translateX(-50%) scale(0) rotate(0.02deg); // NOTE: the rotation smooths animation in FF
+      transform: translate(-50% * -6, 0) scale(0) rotate(0.02deg); // NOTE: the rotation smooths animation in FF.
     }
 
     50% {
-      transform: translateX(-50%) scale(1) rotate(0.02deg);
+      transform: translate(-50%, 0) scale(1) rotate(0.02deg);
     }
 
     100% {
-      left: 0;
-      transform: translateX(-50%) scale(0) rotate(0.02deg);
+      transform: translate(-50% * 8, 0) scale(0) rotate(0.02deg);
     }
   }
 
@@ -97,15 +96,6 @@
     padding: $_e-progress--padding;
     display: flex;
     align-items: center;
-
-    &::after {
-      content: attr(data-message);
-      display: block;
-      white-space: nowrap;
-      float: right;
-      width: 0;
-      overflow: hidden;
-    }
 
     &--spacing-0 {
       padding: 0;
@@ -121,12 +111,11 @@
     &__bubble {
       height: 0.6em;
       width: 0.6em;
+      left: 50%;
       background-color: $color-secondary--1;
-      left: 100%;
       position: absolute;
       margin: $spacing--5 auto 0;
       border-radius: 50%;
-      transform: translateX(-50%) scale(0) rotate(0.02deg); // NOTE: the rotation smooths animation in FF
       animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;
 
       &:nth-child(1) {

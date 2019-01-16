@@ -1,0 +1,5 @@
+%hyphens {
+  hyphens: auto;
+  word-wrap: break-word; // Legacy support for non-hyphens browsers.
+  overflow-wrap: break-word; // Legacy support for non-hyphens browsers.
+}

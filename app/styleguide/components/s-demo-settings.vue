@@ -9,12 +9,12 @@
 </template>
 
 <script>
-  import SToggle from './s-toggle';
+  import sToggle from './s-toggle';
 
   export default {
     name: 's-demo-settings',
     components: {
-      SToggle,
+      sToggle,
     },
     // mixins: [],
 

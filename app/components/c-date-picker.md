@@ -1,9 +1,28 @@
+### c-date-picker
+
+#### Default
+
 ```vue
 <template>
-  <div>
-    <c-date-picker v-model="selectedDate"/>
-    <p><span>Selected date:</span>{{ selectedDate }}</p>
-  </div>
+  <c-date-picker v-model="selectedDate"/>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        selectedDate: '',
+      }
+    }
+  };
+</script>
+```
+
+#### Small
+
+```vue
+<template>
+  <c-date-picker v-model="selectedDate" :is-full-width="false" />
 </template>
 
 <script>

@@ -148,7 +148,7 @@
     &__fake-button {
       -webkit-appearance: none;
       background-color: $color-grayscale--1000;
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid $color-grayscale--500;
       border-radius: 10px;
       display: inline-block;
       position: absolute;
@@ -186,7 +186,7 @@
     }
 
     &__field:checked ~ &__label-name {
-      color: $color-secondary--2;
+      color: $color-secondary--1;
     }
 
     /* stylelint-disable no-descending-specificity */
@@ -198,19 +198,21 @@
     }
 
     // disabled
-    &--disabled &__fake-button,
+    &--disabled &__field ~ &__fake-button,
     &__field:disabled ~ &__fake-button {
-      border-color: $color-grayscale--500;
+      border-color: $color-grayscale--600;
       cursor: default;
     }
 
+    &--disabled &__field:checked ~ &__fake-button::after,
     &__field:disabled:checked ~ &__fake-button::after {
-      background-color: $color-grayscale--500;
+      background-color: $color-grayscale--450;
     }
 
+    &--disabled &__field ~ &__label-name,
     &__field:disabled ~ &__label-name {
       cursor: default;
-      color: $color-grayscale--500;
+      color: $color-grayscale--450;
     }
 
     &--disabled &__label {

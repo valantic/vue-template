@@ -18,11 +18,11 @@
 </template>
 
 <script>
-  import SReadme from '@/styleguide/components/s-readme';
+  import sReadme from '@/styleguide/components/s-readme';
 
   export default {
     name: 'index',
-    components: { SReadme },
+    components: { sReadme },
     computed: {
       isProduction() {
         return process.env.NODE_ENV === 'production';

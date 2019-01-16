@@ -2,7 +2,7 @@
 
 Always use **v-model** to bind value to form elements!
 
-```
+```vue
 <template>
   <div>
   
@@ -26,19 +26,19 @@ Always use **v-model** to bind value to form elements!
 ```
 
 #### static `:disabled`
-```
-<e-input disabled name="demo" value="Lorem ipsum..."/>
+```vue
+  <e-input name="demo" value="Lorem ipsum" disabled />
 ```
 
 #### dynamic `:disabled`
-```
+```vue
 <template>
   <div>
     <p>
       disabled: {{ disabled }}
     </p>
     <e-input :disabled="disabled" name="demo" value="Lorem ipsum..."/>
-    <br>
+    <br />
     <e-button @click="disabled = !disabled" primary>toggle disabled state</e-button>
   </div>
 </template>
@@ -54,7 +54,7 @@ Always use **v-model** to bind value to form elements!
 
 
 #### `:hover`
-```
+```vue
 <template>
   <div>
   
@@ -79,7 +79,7 @@ Always use **v-model** to bind value to form elements!
 
 
 #### `:focus`
-```
+```vue
 <template>
   <div>
   
@@ -103,7 +103,7 @@ Always use **v-model** to bind value to form elements!
 ```
 
 #### state: `error`
-```
+```vue
 <template>
   <div>
   
@@ -127,7 +127,7 @@ Always use **v-model** to bind value to form elements!
 ```
 
 #### state: `success`
-```
+```vue
 <template>
   <div>
   
@@ -151,7 +151,7 @@ Always use **v-model** to bind value to form elements!
 ```
 
 #### state: `info`
-```
+```vue
 <template>
   <div>
   
@@ -175,7 +175,7 @@ Always use **v-model** to bind value to form elements!
 ```
 
 #### No focus shadow
-```
+```vue
 <template>
   <e-input v-model="demo" name="demo" :focusShadow="false" /> 
 </template>
@@ -191,7 +191,7 @@ Always use **v-model** to bind value to form elements!
 ```
 
 #### No border
-```
+```vue
 <template>
   <e-input v-model="demo" name="demo" border="0" /> 
 </template>
@@ -210,7 +210,7 @@ Always use **v-model** to bind value to form elements!
 
 Always use **v-model** to bind value to form elements!
 
-```
+```vue
 <template>
   <div>
   

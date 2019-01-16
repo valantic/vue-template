@@ -1,8 +1,9 @@
 <template>
-  <div :class="b()">
-    <div :class="b('buttons-wrapper')">
-      <div :class="b('input', { open: isDatePickerOpen })">
-        <e-input :value="formatDate(validDate)"
+  <div :class="b({ hasYearSelector })">
+    <div :class="b('buttons-wrapper', { hasYearSelector })">
+      <div :class="b('input', { hasYearSelector })">
+        <e-input ref="input"
+                 :value="formatDate(validDate)"
                  :id="`date-picker-value-${uuid}`"
                  :placeholder="$t('c-date-picker-input.chooseDate')"
                  :disabled="disabled"
@@ -15,7 +16,7 @@
                class="invisible">
         </label>
       </div>
-      <div :class="b('select')">
+      <div v-if="hasYearSelector" :class="b('select')">
         <e-select v-if="isDatePickerOpen"
                   :value="selectedYear"
                   :options-list="years"
@@ -32,6 +33,7 @@
     <div v-if="isDatePickerOpen" :class="b('overlay')">
       <c-date-picker :value="selectedDate"
                      :validate-date="validateDate"
+                     :events="isEventDate"
                      @input="onDatePickerInput"
       />
     </div>
@@ -39,7 +41,6 @@
 </template>
 
 <script>
-  import moment from 'moment';
   import cDatePicker from '@/components/c-date-picker';
   import uuid from '@/mixins/uuid';
 
@@ -64,6 +65,14 @@
       },
 
       /**
+       * A function that checks if the current date is an event date (Used in range input to show selected dates).
+       */
+      isEventDate: {
+        type: Function,
+        default: null,
+      },
+
+      /**
        * A function that checks for allowed dates.
        */
       validateDate: {
@@ -75,6 +84,14 @@
        * Defines if the form fields are disabled.
        */
       disabled: {
+        type: Boolean,
+        default: false,
+      },
+
+      /**
+       * Defines if the input has a year selector.
+       */
+      hasYearSelector: {
         type: Boolean,
         default: false,
       },
@@ -98,10 +115,10 @@
       /**
        * Gets the year out of the date string.
        *
-       * @returns {String}
+       * @returns {Number}
        */
       selectedYear() {
-        return (this.selectedDate && parseInt(this.selectedDate, 10).toString()) || moment().year().toString();
+        return (this.selectedDate && parseInt(this.selectedDate, 10)) || this.$moment().year();
       },
 
       /**
@@ -128,12 +145,13 @@
         this.$emit('toggle', {
           toggle: value,
         });
-      }
+      },
     },
 
     // beforeCreate() {},
     created() {
       window.addEventListener('click', this.onOutsideClick);
+      window.addEventListener('touchend', this.onOutsideClick);
     },
 
     beforeMount() {
@@ -147,6 +165,7 @@
     // beforeDestroy() {},
     destroyed() {
       window.removeEventListener('click', this.onOutsideClick);
+      window.removeEventListener('touchend', this.onOutsideClick);
     },
 
     methods: {
@@ -158,6 +177,10 @@
       onOutsideClick(event) {
         if (this.isDatePickerOpen && !this.$el.contains(event.target) && this.$el !== event.target) {
           this.isDatePickerOpen = false;
+
+          if (this.$refs.input && this.$refs.input.$refs.input) {
+            this.$refs.input.$refs.input.blur();
+          }
         }
       },
 
@@ -216,11 +239,11 @@
        * @param {String} year - The selected year.
        */
       onUpdateYear(year) {
-        const rest = (this.selectedDate && this.selectedDate.slice(5)) || moment().year(year).format('YYYY-MM');
+        const rest = (this.selectedDate && this.selectedDate.slice(5)) || this.$moment().year(year).format('MM-DD');
         let date = `${year}-${rest}`;
 
         if (!this.isValidDate(date)) {
-          date = moment().year(year).format('YYYY-MM');
+          date = this.$moment().year(year).format('YYYY-MM-DD');
         }
 
         /**
@@ -285,7 +308,7 @@
 
         const [day, month, year] = date.split('.');
 
-        return moment()
+        return this.$moment()
           .year(year)
           .month(month - 1)
           .date(day)
@@ -305,7 +328,7 @@
         }
 
         return true;
-      }
+      },
     },
     // render() {},
   };
@@ -314,7 +337,12 @@
 <style lang="scss">
   .c-date-picker-input {
     position: relative;
-    max-width: 350px;
+
+    &--has-year-selector {
+      @include media(xs) {
+        width: 300px; // Width of the date-picker.
+      }
+    }
 
     &__overlay {
       @include z-index(dropdown);
@@ -322,16 +350,18 @@
       position: absolute;
       background-color: $color-grayscale--1000;
       width: 100%;
-
-      @include media(xs) {
-        width: auto;
-      }
+      margin-left: 0;
     }
 
     &__buttons-wrapper {
       display: flex;
       justify-content: space-between;
       width: 100%;
+      min-width: 220px;
+
+      &--has-year-selector {
+        padding-right: $spacing--10;
+      }
     }
 
     &__input {
@@ -340,12 +370,17 @@
       input {
         background-color: $color-grayscale--1000;
         min-width: 110px;
-        width: 100%;
       }
     }
 
-    &__input--open {
-      margin-right: $spacing--25;
+    &__input--has-year-selector {
+      width: auto;
+
+      input {
+        @include media(xs) {
+          width: 170px;
+        }
+      }
     }
 
     &__select {

@@ -44,16 +44,16 @@
 </template>
 
 <script>
-  import SLanguage from './s-language';
-  import SThemeSelector from './s-theme-selector';
-  import SDemoSettings from './s-demo-settings';
+  import sLanguage from './s-language';
+  import sThemeSelector from './s-theme-selector';
+  import sDemoSettings from './s-demo-settings';
 
   export default {
     name: 's-navigation',
     components: {
-      SDemoSettings,
-      SLanguage,
-      SThemeSelector
+      sDemoSettings,
+      sLanguage,
+      sThemeSelector
     },
     props: {
       /**

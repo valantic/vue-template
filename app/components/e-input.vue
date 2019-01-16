@@ -1,24 +1,46 @@
 <template>
 
   <div :class="b(modifiers)">
-    <input
-      ref="input"
-      :autocomplete="autocomplete"
-      :class="b('field')"
-      :disabled="disabled"
-      :name="name"
-      :value="standalone ? internalValue : value"
-      :title="title"
-      v-bind="$attrs"
-      @blur="onBlur"
-      @focus="onFocus"
-      @input="onInput"
-      @keyup.enter="onEnterKeyUp"
-      @mouseenter="hasHover = true"
-      @mouseleave="hasHover = false"
-      @keyup.up="onArrowKeyUp"
-      @keyup.down="onArrowKeyUp"
+    <input v-if="uncontrolled"
+           ref="input"
+           :autocomplete="autocomplete"
+           :class="b('field')"
+           :disabled="disabled"
+           :name="name"
+           :title="title"
+           v-bind="$attrs"
+           @blur="onBlur"
+           @focus="onFocus"
+           @input="onInput"
+           @keyup.enter="onEnterKeyUp"
+           @mouseenter="hasHover = true"
+           @mouseleave="hasHover = false"
+           @keyup.up="onArrowKeyUp"
+           @keyup.down="onArrowKeyUp"
     >
+    <input v-else
+           ref="input"
+           :autocomplete="autocomplete"
+           :class="b('field')"
+           :disabled="disabled"
+           :name="name"
+           :value="standalone ? internalValue : value"
+           :title="title"
+           v-bind="$attrs"
+           @blur="onBlur"
+           @focus="onFocus"
+           @input="onInput"
+           @keyup.enter="onEnterKeyUp"
+           @mouseenter="hasHover = true"
+           @mouseleave="hasHover = false"
+           @keyup.up="onArrowKeyUp"
+           @keyup.down="onArrowKeyUp"
+    >
+
+    <span v-if="$slots.fixedLabel" ref="fixedLabel" :class="b('fixed-label')">
+      <!-- @slot Use this slot for a fixed label inside the input field. -->
+      <slot name="fixedLabel"></slot>
+    </span>
     <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
       <span v-if="$slots.default" :class="b('slot')">
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
@@ -27,8 +49,8 @@
       <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
       <e-icon v-if="!hasDefaultState && !hasFocus"
               :class="b('state-icon')"
-              :inline="true"
-              :icon="stateIcon"/>
+              :icon="stateIcon"
+              inline />
     </span>
     <div v-if="showNotification" :class="b('notification')">
       <c-form-notification :state="state" v-html="notification"/>
@@ -38,7 +60,7 @@
 </template>
 
 <script>
-  import CFormNotification from '@/components/c-form-notification';
+  import cFormNotification from '@/components/c-form-notification';
   import formStates from '../mixins/form-states';
 
   /**
@@ -47,7 +69,7 @@
   export default {
     name: 'e-input',
     components: {
-      CFormNotification
+      cFormNotification
     },
     mixins: [formStates],
     inheritAttrs: false,
@@ -150,6 +172,15 @@
         type: Boolean,
         default: false
       },
+
+      /**
+       * Lets input handle value itself. This is used as in some cases the IE11 couldn't handle new input values
+       * (e.g. skipped random keystrokes in searchSuggestion field).
+       */
+      uncontrolled: {
+        type: Boolean,
+        default: false
+      },
     },
 
     data() {
@@ -192,15 +223,25 @@
     // beforeMount() {},
     mounted() {
       /**
-       * Calls the "setSlotSpacings" in a timeout function with a delay of 200ms because without
+       * Calls the "setSlotSpacings" and "setFixedLabelSpacings" in a timeout function with a delay of 200ms because without
        * it's not working on iOS
        */
+      this.setSlotSpacings();
       setTimeout(this.setSlotSpacings, 200);
+
+      this.setFixedLabelSpacings();
+      setTimeout(this.setFixedLabelSpacings, 200);
+
       window.addEventListener('resizeend', this.setSlotSpacings);
+
+      if (this.uncontrolled && this.$refs.input) {
+        this.$refs.input.value = this.standalone ? this.internalValue : this.value;
+      }
     },
     // beforeUpdate() {},
     updated() {
       setTimeout(this.setSlotSpacings);
+      setTimeout(this.setFixedLabelSpacings);
     },
     // activated() {},
     // deactivated() {},
@@ -289,6 +330,17 @@
       },
 
       /**
+       * Calculates the width of the fixed label and sets it as padding-left to the input field.
+       */
+      setFixedLabelSpacings() {
+        if (this.$refs.fixedLabel) {
+          const labelWidth = this.$refs.fixedLabel.clientWidth;
+
+          this.$refs.input.style.paddingLeft = `${labelWidth + 10}px`;
+        }
+      },
+
+      /**
        * Selects the value of the input field.
        */
       selectValue() {
@@ -329,11 +381,15 @@
 
     position: relative;
 
+    &--border-0 &__field {
+      border: 1px solid transparent;
+    }
+
     // input
     &__field {
       @include font($font-size--14, 18px);
 
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid $color-grayscale--500;
       border-radius: $border-radius--default;
       color: $color-secondary--1;
       font-family: $font-family--primary;
@@ -366,18 +422,36 @@
       right: 0;
     }
 
-    // placeholder
-    &__field::-webkit-input-placeholder, // WebKit, Blink, Edge
-    &__field:-moz-placeholder, // Mozilla Firefox 4 to 18
+    // placeholder (has to be split in seperate blocks to work on each browser)
+    &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
+      color: $color-grayscale--400;
+      opacity: 1;
+    }
+
+    &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
+      color: $color-grayscale--400;
+      opacity: 1;
+    }
+
     &__field::placeholder { // Most modern browsers support this now
       color: $color-grayscale--400;
       opacity: 1;
     }
 
-    &__field:-ms-input-placeholder { // Internet Explorer 11 needs the !important flag
-      /* stylelint-disable-next-line */
+    &__field:-ms-input-placeholder { // IE 11
       color: $color-grayscale--400;
       opacity: 1;
+    }
+
+    &__fixed-label {
+      @include font($font-size--14, 18px);
+
+      color: $color-grayscale--400;
+      position: absolute;
+      left: $spacing--5;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
     }
 
     &__icon-splitter {
@@ -412,7 +486,7 @@
     // active
     &:not(&--border-0) &__field:active,
     &--active:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     // focus
@@ -423,7 +497,7 @@
 
     &:not(&--border-0) &__field:focus,
     &--focus:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     &--focus-shadow &__field:focus,
@@ -434,7 +508,7 @@
     // hover
     &:not(&--border-0) &__field:hover,
     &--hover:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     // disabled
@@ -445,22 +519,17 @@
     &--disabled &__field:hover,
     &--disabled:not(&--border-0) &__field:hover {
       background-color: $color-grayscale--1000;
-      color: $color-grayscale--600;
       border-color: $color-grayscale--600;
+      color: $color-grayscale--450;
 
       &::placeholder {
-        color: $color-grayscale--600;
+        color: $color-grayscale--450;
       }
-    }
-
-    &--disabled:not(&--border-0)::before,
-    &--disabled:not(&--border-0)::after {
-      border-color: $color-grayscale--600;
     }
 
     &--disabled {
       #{$this}__slot {
-        color: $color-grayscale--600;
+        color: $color-grayscale--450;
       }
     }
 
@@ -473,14 +542,12 @@
       }
     }
 
-    &--state-error {
-      &:not(.e-input--border-0) {
-        @include half-border($color-status--danger);
-      }
+    &--state-error:not(.e-input--border-0) &__field {
+      border-color: $color-status--danger;
+    }
 
-      .e-input__icon-splitter {
-        border-color: $color-status--danger;
-      }
+    &--state-error .e-input__icon-splitter {
+      border-color: $color-status--danger;
     }
 
     &--state-error:not(.e-input--border-0) &__field:hover {
@@ -525,8 +592,10 @@
 
   .e-input--no-native-control {
     .e-input__field {
-      -moz-appearance: textfield;
-      appearance: none;
+      // NOTE: FF also uses webkit style. But it will be overwritten by 'appearance' (and vendor prefixing).
+      // 'none' must be used to remove native webkit shadow.
+      -webkit-appearance: none;
+      appearance: textfield;
 
       &::-webkit-inner-spin-button,
       &::-webkit-outer-spin-button {

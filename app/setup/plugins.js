@@ -8,6 +8,7 @@ import Tabs from 'vue-tabs-component';
 import { Vuetify } from 'vuetify';
 import resizeEnd from './plugins/resize-end';
 import eventBus from './plugins/event-bus';
+import moment from './plugins/moment';
 import viewport from './plugins/viewport';
 import modal from './plugins/modalStack';
 
@@ -21,6 +22,7 @@ Vue.use(resizeEnd);
 Vue.use(VueAxios);
 Vue.use(Vuetify);
 Vue.use(eventBus);
+Vue.use(moment);
 Vue.use(viewport);
 Vue.use(modal);
 

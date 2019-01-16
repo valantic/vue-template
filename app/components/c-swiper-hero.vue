@@ -3,6 +3,7 @@
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
 
+    <!-- 'swiper' classes needed for the swiper plugin. -->
     <div ref="container" :class="b('container swiper-container')">
 
       <div :class="b('wrapper swiper-wrapper')">
@@ -46,10 +47,12 @@
 </template>
 
 <script>
-
   import Swiper from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import mapHeroImages from '@/helpers/map-hero-images';
+  import uuid from '@/mixins/uuid';
+
+  const swiperInstances = {};
 
   /**
    * Touch enabled slider component based on
@@ -58,7 +61,7 @@
   export default {
     name: 'c-swiper-hero',
     // components: {},
-    // mixins: [],
+    mixins: [uuid],
 
     props: {
       /**
@@ -159,13 +162,15 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      this.swiper = new Swiper(this.$refs.container, this.optionsMerged); // init swiper
+      swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
     },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
+    beforeDestroy() {
+      swiperInstances[this.uuid].destroy();
+    },
     // destroyed() {},
 
     // methods: {},

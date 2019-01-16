@@ -117,14 +117,14 @@
 </template>
 
 <script>
-  import LDefault from '@/components/l-default';
-  import EHeading from '@/components/e-heading';
+  import lDefault from '@/components/l-default';
+  import eHeading from '@/components/e-heading';
 
   export default {
     name: 'headings',
     components: {
-      LDefault,
-      EHeading
+      lDefault,
+      eHeading
     },
 
     // components: {},
@@ -159,7 +159,7 @@
     &__examplecontainer {
       margin: $spacing--30;
     }
-    
+
     &__examplebox {
       margin: $spacing--30 $spacing--0;
     }

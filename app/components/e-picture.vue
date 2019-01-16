@@ -64,18 +64,24 @@
         type: Object,
         default: null,
       },
-      lazyload: { // Note: breaks srcset in IE11, because picturefill will be initialized AFTER the fallback has been loaded
-        type: Boolean,
-        default: true,
-      },
+
+      /**
+       * Defines if image is displayed as inline-block element.
+       */
       inline: {
         type: [Boolean, String],
         default: false,
       }
     },
-    // data() {
-    //   return {};
-    // },
+
+    data() {
+      return {
+        /**
+         * @type {Boolean} Determines if the current render is initial.
+         */
+        initial: true,
+      };
+    },
 
     computed: {
       /**
@@ -178,12 +184,12 @@
 
     // methods: {},
     render(createElement) {
-      const { lazyload, ratio, parsedSizes } = this;
+      const { ratio, parsedSizes } = this;
       const pictureChilds = [];
       const imgAttributes = {
         ...this.$attrs,
         alt: this.alt,
-        [lazyload ? 'data-src' : 'src']: this.fallback
+        src: this.fallback,
       };
       const style = {};
       let element = 'img';
@@ -200,7 +206,7 @@
               class: this.b('source'),
               attrs: {
                 media: source.media,
-                [lazyload ? 'data-srcset' : 'srcset']: source.srcset,
+                srcset: source.srcset,
               },
             }
           ));
@@ -210,14 +216,14 @@
         pictureChilds.push(createElement(
           'img',
           {
-            class: this.b('image', lazyload ? 'lazyload' : null),
+            class: this.b('image'),
             attrs: imgAttributes,
           }
         ));
       } else if (parsedSizes && this.parsedSrcset) {
         imgAttributes.sizes = parsedSizes;
-        imgAttributes[lazyload ? 'data-srcset' : 'srcset'] = this.parsedSrcset;
-        imgAttributes[lazyload ? 'data-src' : 'src'] = this.fallback;
+        imgAttributes.srcset = this.parsedSrcset;
+        imgAttributes.src = this.fallback;
       }
 
       if (ratio > 0 && parsedSizes) { // <picture> would need dynamic ratios
@@ -231,14 +237,13 @@
             inline: this.isInline,
             image: !this.parsedSources,
             ratio: ratio > 0,
-            lazyload
           }),
           style,
         },
         [createElement( // img / picture
           element,
           {
-            class: this.b(element === 'img' ? 'image' : 'picture', lazyload ? 'lazyload' : null),
+            class: this.b(element === 'img' ? 'image' : 'picture'),
             attrs: imgAttributes,
           },
           pictureChilds // picture sources

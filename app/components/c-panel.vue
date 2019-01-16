@@ -19,10 +19,14 @@
 </template>
 
 <script>
+  import touchDevice from '@/mixins/touch-device';
+
   export default {
     name: 'c-panel',
     // components: {},
-    // mixins: [],
+    mixins: [
+      touchDevice,
+    ],
 
     props: {
       /**
@@ -139,12 +143,9 @@
       },
 
     },
-    data() {
-      return {
-        hasTouch: 'ontouchstart' in document.documentElement
-          || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
-      };
-    },
+    // data() {
+    //   return {};
+    // },
 
     computed: {
       panelModifiers() {
@@ -282,7 +283,7 @@
       transform: rotate(135deg);
       box-shadow: inset 0 0 $_shadow-blur-radius $color-grayscale--200;
       box-shadow: inset 0 0 $_shadow-blur-radius $color-grayscale--200, 0 0 0 $color-grayscale--200;
-      transition: box-shadow 0.25s;
+      transition: box-shadow $transition-duration-300;
     }
 
     &__shadow--color-yellow {
@@ -308,7 +309,7 @@
       bottom: 0;
       transform-origin: 50% 50%;
       transform: rotate(0deg);
-      transition: 0.25s ease-out;
+      transition: $transition-duration-300 ease-out;
     }
 
     &__plus--size-0 {
@@ -321,15 +322,8 @@
       height: $spacing--20;
     }
 
-    &__plus--hover,
     &__plus--open {
       transform: rotate(135deg);
-    }
-
-    &__plus--open {
-      &.c-panel__plus--hover {
-        transform: rotate(270deg);
-      }
     }
 
     &__plus::before {
@@ -337,7 +331,7 @@
       position: absolute;
       display: block;
       background-color: $color-grayscale--1000;
-      transition: 0.25s ease-out;
+      transition: $transition-duration-300 ease-out;
     }
 
     &__plus::after {
@@ -345,7 +339,7 @@
       position: absolute;
       display: block;
       background-color: $color-grayscale--1000;
-      transition: 0.25s ease-out;
+      transition: $transition-duration-300 ease-out;
     }
 
     &__plus--size-0::before {
@@ -387,11 +381,11 @@
     }
 
     &__plus--hover::before {
-      background-color: $color-grayscale--1000;
+      background-color: $color-secondary--2;
     }
 
     &__plus--hover::after {
-      background-color: $color-grayscale--1000;
+      background-color: $color-secondary--2;
     }
   }
 

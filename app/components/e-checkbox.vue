@@ -13,7 +13,6 @@
         :name="name"
         v-bind="$attrs"
         v-model="internalValue"
-        role="checkbox"
         type="checkbox"
         @blur="onBlur"
         @change="onChange"
@@ -68,7 +67,7 @@
        * Adds value attribute
        */
       value: {
-        type: [String, Number],
+        type: [String, Number, Boolean],
         required: true,
       },
     },
@@ -253,7 +252,7 @@
     // disabled label
     &--disabled &__label,
     &__field:disabled + &__label {
-      color: $color-grayscale--500;
+      color: $color-grayscale--450;
       cursor: default;
 
       // custom field disabled
@@ -265,7 +264,6 @@
       // custom field marker disabled
       &::after {
         background: transparent url('../assets/icons/i-check--disabled.svg') no-repeat center;
-        color: $color-grayscale--500;
       }
     }
 

@@ -16,6 +16,24 @@
 </script>
 ```
 
+#### including videos
+
+```vue
+<template>
+  <div class="demo">
+    <div style="max-width: 400px;">
+      <c-swiper-gallery :images="mockData.dummyImages" :videos="mockData.dummyVideos" />
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'swiper',
+  };
+</script>
+```
+
 #### single picture
 
 ```vue

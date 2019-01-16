@@ -13,8 +13,8 @@
     <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
-              :inline="true"
-              :icon="stateIcon" />
+              :icon="stateIcon"
+              inline />
     </span>
     <div v-if="notification && hasFocus" :class="b('notification')">
       <c-form-notification :state="state" v-html="notification" />
@@ -24,7 +24,7 @@
 
 <script>
   import formStates from '@/mixins/form-states';
-  import CFormNotification from '@/components/c-form-notification';
+  import cFormNotification from '@/components/c-form-notification';
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -33,7 +33,7 @@
   export default {
     name: 'e-textarea',
     components: {
-      CFormNotification,
+      cFormNotification,
     },
     mixins: [formStates],
     inheritAttrs: false,
@@ -158,7 +158,7 @@
       resize: none;
       width: 100%;
       border-radius: 3px;
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid $color-grayscale--500;
       display: block;
       position: relative;
 
@@ -213,7 +213,7 @@
     // active
     &__field:active,
     &--active &__field {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     // focus
@@ -221,13 +221,13 @@
     &--focus &__field {
       outline: none;
       box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     // hover
     &__field:hover,
     &--hover &__field {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid $color-grayscale--400;
     }
 
     // disabled

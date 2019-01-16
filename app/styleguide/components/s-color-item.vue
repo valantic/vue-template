@@ -39,7 +39,7 @@
 
     computed: {
       displayName() {
-        return this.name.split(' - ').join('<br>');
+        return this.name.split(' - ').join('<br />');
       },
       displayValue() {
         return this.value.join(' - ');

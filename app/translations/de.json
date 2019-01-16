@@ -1,1 +1,64 @@
-{}
+{
+  "s-language": {
+    "de": "Deutsch",
+    "fr": "Französisch"
+  },
+  "globalMessages": {
+    "unknownApiError": "Es ist ein unbekannter Fehler aufgetreten."
+  },
+  "c-table": {
+    "deselectAll": "Auswahl aufheben",
+    "linkLabel": "Link zur Detailseite",
+    "noResultsFound": "Keine Resultate gefunden",
+    "searchPlaceholder": "Durchsuchen",
+    "searchTitle": "Suchen Sie hier innerhalb der Tabelle",
+    "selectAll": "Alle auswählen",
+    "selectItem": "Auswählen"
+  },
+  "c-table-pagination": {
+    "from": "von",
+    "itemsPerPage": "Anzahl pro Seite:",
+    "lastPageTitle": "Gehe zur vorherigen Seite",
+    "nextPageTitle": "Gehe zur nächsten Seite",
+    "pageNumberTitle": "Gehe zur Seite {pageNumber}"
+  },
+  "c-swiper": {
+    "images": "0 Bilder | 1 Bild | {count} Bilder",
+    "zoom": "Bild vergrössern",
+    "videos": "0 Videos | 1 Video | {count} Videos"
+  },
+  "e-select": {
+    "chooseOption": "Bitte wählen"
+  },
+  "e-progress": {
+    "loading": "Lade …"
+  },
+  "c-notification": {
+    "confirm": "OK",
+    "decline": "Abbrechen",
+    "close": "Schliessen"
+  },
+  "c-multiselect": {
+    "search": "suchen",
+    "save": "Speichern",
+    "itemsEmpty": "Keine Ergebnisse.",
+    "searchTitle": "Suche"
+  },
+  "c-date-picker-input": {
+    "chooseDate": "Datum wählen",
+    "chooseYear": "Jahr wählen"
+  },
+  "c-date-picker-range": {
+    "endLabel": "Enddatum",
+    "startLabel": "Startdatum"
+  },
+  "c-breadcrumb": {
+    "linkTitle": "Gehe zu {name}"
+  },
+  "e-logo": {
+    "linkTitle": "zur Startseite"
+  },
+  "c-modal-header-01": {
+    "closeTitle": "Fenster schliessen"
+  }
+}

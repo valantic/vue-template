@@ -170,7 +170,7 @@
     }
 
     &--disabled {
-      color: $color-grayscale--500;
+      color: $color-grayscale--450;
     }
 
     &--state-error {
