@@ -61,9 +61,7 @@
             'default',
             'gray',
             'lightgray',
-            'blue',
             'white',
-            'yellow',
           ].includes(value);
         },
       },
@@ -212,6 +210,18 @@
 
     svg {
       pointer-events: none; // Prevents IE11 from swallowing events.
+    }
+
+    &--color-gray svg path {
+      fill: $color-grayscale--400;
+    }
+
+    &--color-lightgray svg path {
+      fill: $color-grayscale--600;
+    }
+
+    &--color-white svg path {
+      fill: $color-grayscale--1000;
     }
   }
 </style>
