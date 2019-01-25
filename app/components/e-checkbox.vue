@@ -17,7 +17,7 @@
         @blur="onBlur"
         @change="onChange"
         @focus="onFocus">
-      <span :class="b('label-name')">
+      <span v-bem:label-name>
         <slot></slot>
       </span>
     </label>

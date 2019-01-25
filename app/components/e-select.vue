@@ -14,8 +14,8 @@
         {{ item.label }}
       </option>
     </select>
-    <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
-    <div v-if="progress" :class="b('progress-container')">
+    <span v-if="!hasDefaultState" v-bem:icon-splitter></span>
+    <div v-if="progress" v-bem:progress-container>
       <e-progress/>
     </div>
   </span>

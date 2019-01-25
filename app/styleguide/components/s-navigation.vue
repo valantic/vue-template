@@ -1,9 +1,9 @@
 <template>
   <div v-bem>
     <div :class="b('navigation-wrapper', { position: navPosition, open: isOpen })" @click="onClick">
-      <ul :class="b('navigation')">
+      <ul v-bem:navigation>
         <li :class="b('navigation-item', { logo: true })">
-          <a :class="b('navigation-link')"
+          <a v-bem:navigation-link
              href="http://www.valantic.com"
              target="_blank"
           >
@@ -31,10 +31,10 @@
           :exact-active-class="`${$options.name}-item--active`"
           tag="li"
           exact>
-          <a :class="b('navigation-link')">{{ route.meta.title }}</a>
+          <a v-bem:navigation-link>{{ route.meta.title }}</a>
         </router-link>
         <li :class="b('navigation-item', { components: true })">
-          <a :class="b('navigation-link')"
+          <a v-bem:navigation-link
              :href="styleguidistUrl"
              target="_blank"
           >Components</a>

@@ -1,13 +1,13 @@
 <template>
   <label v-bem>
-    <span v-if="this.$slots.default" :class="b('label')">
+    <span v-if="this.$slots.default" v-bem:label>
       <!-- @slot renders its content as element label -->
       <slot></slot>
     </span>
     <input v-model="internalValue"
-           :class="b('input')"
+           v-bem:input
            type="checkbox">
-    <span :class="b('slider')"></span>
+    <span v-bem:slider></span>
   </label>
 </template>
 

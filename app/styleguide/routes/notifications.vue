@@ -39,7 +39,7 @@
       <e-button @click="addConfirmation">Confirmation</e-button>
       <e-button @click="addFieldError">Field Error</e-button>
 
-      <div :class="b('selector')">
+      <div v-bem:selector>
         <c-notification-container display-type="selector" selector="1"/>
         <e-button style="margin-top: 10px; margin-right: 10px;" @click="addSelectorInfo1">Selector Info (1)</e-button>
       </div>
@@ -87,7 +87,7 @@
           <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalInfo">Info</e-button>
           <e-button style="margin-top: 10px; margin-right: 10px;" @click="addFieldError">Field Error</e-button>
 
-          <div :class="b('selector')">
+          <div v-bem:selector>
             <c-notification-container display-type="selector" selector="1"/>
             <e-button style="margin-top: 10px; margin-right: 10px;" @click="addSelectorInfo1">Selector Info (1)</e-button>
           </div>

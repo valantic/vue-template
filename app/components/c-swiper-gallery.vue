@@ -4,22 +4,25 @@
        @mouseleave="hasHover = false">
 
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container" :class="b('container swiper-container')">
+    <div ref="container"
+         v-bem:container
+         class="swiper-container">
 
-      <div :class="b('wrapper swiper-wrapper')">
+      <div v-bem:wrapper
+           class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="picture in pictures"
              :key="picture.id"
              v-bem:slide
              class="swiper-slide">
 
-          <button :class="b('trigger')"
+          <button v-bem:trigger
                   type="button"
                   @click.prevent="modalOpen = true">
-            <span :class="b('image-wrapper-inner')">
-              <div v-if="picture.isVideo" :class="b('video-preview-wrapper')">
+            <span v-bem:image-wrapper-inner>
+              <div v-if="picture.isVideo" v-bem:video-preview-wrapper>
                 <img :src="picture.thumbSrc" :class="b('video-thumbnail')" alt="">
-                <span :class="b('video-thumbnail-overlay')"></span>
+                <span v-bem:video-thumbnail-overlay></span>
               </div>
               <e-picture
                 v-else
@@ -37,11 +40,14 @@
       </div>
 
       <!-- navigation -->
-      <div :class="b('pagination swiper-pagination')"></div>
+      <div v-bem:pagination
+           class="swiper-pagination"></div>
 
       <!-- buttons-->
-      <div :class="b('button-prev swiper-button-prev')"></div>
-      <div :class="b('button-next swiper-button-next')"></div>
+      <div v-bem:button-prev
+           class="swiper-button-prev"></div>
+      <div v-bem:button-next
+           class="swiper-button-next"></div>
 
       <!-- modal -->
       <c-modal
@@ -64,7 +70,7 @@
     </div>
 
     <!-- counter -->
-    <div v-if="pictures.length > 1" :class="b('counter')">
+    <div v-if="pictures.length > 1" v-bem:counter>
       <div :class="b('counter-detail', { image: true })">
         {{ $tc('c-swiper.images', images.length, {count: images.length}) }}
       </div>

@@ -9,7 +9,7 @@
     </a>
 
     <div v-if="isRendered" :class="b('content')" :style="{ maxHeight }">
-      <div ref="inner" :class="b('inner')">
+      <div ref="inner" v-bem:inner>
         <!-- @slot Used for item content -->
         <slot :is-open="isOpen"></slot>
       </div>

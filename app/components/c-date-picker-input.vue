@@ -16,7 +16,7 @@
                class="invisible">
         </label>
       </div>
-      <div v-if="hasYearSelector" :class="b('select')">
+      <div v-if="hasYearSelector" v-bem:select>
         <e-select v-if="isDatePickerOpen"
                   :id="`date-picker-year-${uuid}`"
                   :value="selectedYear"
@@ -30,7 +30,7 @@
         </label>
       </div>
     </div>
-    <div v-if="isDatePickerOpen" :class="b('overlay')">
+    <div v-if="isDatePickerOpen" v-bem:overlay>
       <c-date-picker :value="selectedDate"
                      :validate-date="validateDate"
                      :events="isEventDate"

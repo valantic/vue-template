@@ -4,9 +4,12 @@
        @mouseleave="hasHover = false">
 
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container" :class="b('container swiper-container')">
+    <div ref="container"
+         v-bem:container
+         class="swiper-container">
 
-      <div :class="b('wrapper swiper-wrapper')">
+      <div v-bem:wrapper
+           class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="picture in pictures"
              :key="picture.id"
@@ -36,11 +39,14 @@
       </div>
 
       <!-- navigation -->
-      <div :class="b('pagination swiper-pagination')"></div>
+      <div v-bem:pagination
+           class="swiper-pagination"></div>
 
       <!-- buttons-->
-      <div :class="b('button-prev swiper-button-prev')"></div>
-      <div :class="b('button-next swiper-button-next')"></div>
+      <div v-bem:button-prev
+           class="swiper-button-prev"></div>
+      <div v-bem:button-next
+           class="swiper-button-next"></div>
 
     </div>
 

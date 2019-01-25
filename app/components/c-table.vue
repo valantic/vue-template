@@ -12,7 +12,7 @@
     >
       <!-- TABLE-HEADER -->
       <template slot="headers" slot-scope="props">
-        <tr :class="b('header-row')">
+        <tr v-bem:header-row>
           <th v-if="isSelectable">
             <e-checkbox :checked="!!selected.length"
                         :disabled="isDisabled"
@@ -78,7 +78,7 @@
     </v-data-table>
 
     <!-- PAGINATION (optional) -->
-    <div v-if="hasPagination" :class="b('pagination-wrapper')">
+    <div v-if="hasPagination" v-bem:pagination-wrapper>
       <c-table-pagination :total-amount="pagination.totalItems"
                           :rows-per-page-value="pagination.rowsPerPage"
                           :current-page="pagination.page"

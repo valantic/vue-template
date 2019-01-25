@@ -1,6 +1,6 @@
 <template>
   <div :class="b(modifiers)">
-    <label :class="b('label')"
+    <label v-bem:label
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false">
       <input v-model="internalValue"
@@ -12,8 +12,8 @@
              type="radio"
              @change="onChange"
       >
-      <span :class="b('fake-button')"></span>
-      <span :class="b('label-name')">
+      <span v-bem:fake-button></span>
+      <span v-bem:label-name>
         <slot></slot>
       </span>
     </label>

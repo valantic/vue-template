@@ -1,10 +1,10 @@
 <template>
   <div v-bem>
-    <div :class="b('left')">
+    <div v-bem:left>
       <label v-t="'c-table-pagination.itemsPerPage'"
              v-bem:select-label
              :for="`table-rows--${uuid}`"></label>
-      <div :class="b('select-wrapper')">
+      <div v-bem:select-wrapper>
         <e-select :id="`table-rows--${uuid}`"
                   :value="rowsPerPageValue"
                   :options-list="rowsPerPageOptionsFormatted"
@@ -13,23 +13,23 @@
         />
       </div>
     </div>
-    <div :class="b('right')">
-      <div :class="b('amount')">
+    <div v-bem:right>
+      <div v-bem:amount>
         <div>
           {{ currentItemRange.minValue }} - {{ currentItemRange.maxValue }}
           {{ $t('c-table-pagination.from') }}
           {{ totalAmount }}
         </div>
       </div>
-      <ul :class="b('pages')">
+      <ul v-bem:pages>
         <li v-for="pageNumber in pages" :key="`page-${pageNumber}`" :class="b('page-item', {active: currentPage === pageNumber})">
-          <a :class="b('page-link')"
+          <a v-bem:page-link
              :title="$t('c-table-pagination.pageNumberTitle', {pageNumber})"
              href="#"
              @click.prevent="goToPage({ pageNumber })">{{ pageNumber }}</a>
         </li>
       </ul>
-      <div :class="b('arrows')">
+      <div v-bem:arrows>
         <a :class="b('arrow', {disabled: currentPage <= 1})"
            :title="$t('c-table-pagination.lastPageTitle')"
            href="#"

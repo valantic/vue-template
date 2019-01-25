@@ -1,9 +1,9 @@
 <template>
   <div :class="b({ type: notification.message.type, confirm: notification.confirm, displayType, visible })">
-    <div :class="b('icon')"></div>
+    <div v-bem:icon></div>
     <div :class="b('inner', { isProductTile: notification.message.type === 'add-to-cart'})">
       <template v-if="notification.message.type !== 'add-to-cart'">
-        <div v-if="notification.title" :class="b('title')">
+        <div v-if="notification.title" v-bem:title>
           {{ notification.title }}
         </div>
         {{ notification.message.message }}
@@ -13,7 +13,7 @@
         foo
       </div>
     </div>
-    <div v-if="typeof notification.confirm === 'function'" :class="b('actions')">
+    <div v-if="typeof notification.confirm === 'function'" v-bem:actions>
       <div v-if="typeof notification.decline === 'function'" :class="b('action', { decline: true })">
         <e-button :progress="declineProgress"
                   :disabled="confirmProgress"

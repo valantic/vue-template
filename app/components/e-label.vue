@@ -1,7 +1,7 @@
 <template>
   <label :class="b(modifiers)">
     <span :class="b('name', { invisible })">{{ name }}</span>
-    <span v-if="this.$slots.default" :class="b('inner')">
+    <span v-if="this.$slots.default" v-bem:inner>
       <!-- @slot Label content -->
       <slot></slot>
     </span>
