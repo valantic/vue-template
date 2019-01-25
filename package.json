@@ -1,6 +1,6 @@
 {
   "name": "vue-template",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "A customized Vue.js project template",
   "scripts": {
     "clean": "rimraf dist",
@@ -55,7 +55,7 @@
     "portal-vue": "~1.4.0",
     "smoothscroll-polyfill": "~0.4.3",
     "swiper": "~4.4.6",
-    "vue": "~2.5.21",
+    "vue": "~2.5.22",
     "vue-bem-cn": "~1.1.1",
     "vue-i18n": "~8.3.2",
     "vue-js-modal": "~1.3.28",
@@ -114,7 +114,7 @@
     "vue-jest": "~3.0.2",
     "vue-loader": "~15.4.2",
     "vue-markdown-loader": "~2.4.1",
-    "vue-styleguidist": "~2.1.1",
+    "vue-styleguidist": "~3.0.2",
     "webpack": "~4.25.1",
     "webpack-auto-inject-version": "~1.2.2",
     "webpack-clean": "~1.2.3",

@@ -126,6 +126,8 @@
   $e-select-height: 30px;
 
   .e-select {
+    position: relative;
+
     &__select {
       @include font($font-size--14, 18px);
 
