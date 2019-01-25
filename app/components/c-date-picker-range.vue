@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <e-label :for="startId"
              :name="labelName"
              :position="labelPosition">
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
   import cDatePickerInput from './c-date-picker-input';
 
   /**

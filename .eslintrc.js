@@ -84,6 +84,10 @@ module.exports = {
       }
     }],
     'vue/name-property-casing': [2, 'kebab-case'],
+    'vue/html-closing-bracket-spacing': [0],
+    'vue/html-closing-bracket-newline': [0],
+    'vue/singleline-html-element-content-newline': [0],
+    'vue/multiline-html-element-content-newline': [0],
     'indent': 0, // Indent is not working with html script tag. Use 'vue/script-indent' instead
     'vue/script-indent': ['error', 2, {
       'baseIndent': 1,

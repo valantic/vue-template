@@ -3,8 +3,8 @@
     <div :class="b('inner')">
       <c-notification
         v-for="notification in notifications"
-        :selector="selector"
         :key="notification.id"
+        :selector="selector"
         :notification="notification"
         :display-type="displayType"/>
     </div>

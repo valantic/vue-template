@@ -28,7 +28,7 @@
 
 <script>
   import cModalHeader01 from '@/components/c-modal-header-01';
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
 
@@ -245,7 +245,7 @@
         background[background.length - 1].addEventListener('mousedown', this.closeModal);
         background[background.length - 1].addEventListener('touchstart', this.closeModal);
       },
-      
+
       /**
        * Hides the modal.
        *

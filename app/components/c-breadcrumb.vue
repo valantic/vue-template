@@ -1,9 +1,9 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <ul :class="b('list')">
       <li v-for="(item, index) in items"
           :key="`breadcrumb--${index}`"
-          :class="b('item')">
+          v-bem:item>
         <a :class="b('link')"
            :href="item.url"
            :title="$t('c-breadcrumb.linkTitle', { name: item.name })">{{ item.name }}</a>

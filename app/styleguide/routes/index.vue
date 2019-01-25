@@ -1,6 +1,6 @@
 <!-- eslint-disable max-len -->
 <template>
-  <div :class="b()">
+  <div v-bem>
     <h1>Styleguide
       <small>[AIV]{version}[/AIV]</small>
     </h1>

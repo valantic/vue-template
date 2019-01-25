@@ -22,7 +22,7 @@
         <e-heading v-if="title" :underline="!isMobile" tag-name="h1">{{ title }}</e-heading>
       </div>
       <a v-if="closable"
-         :class="b('close')"
+         v-bem:close
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
          @click="close">

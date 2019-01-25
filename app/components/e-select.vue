@@ -1,7 +1,7 @@
 <template>
   <span :class="b(stateModifiers)">
-    <select :value="value"
-            :class="b('select')"
+    <select v-bem:select
+            :value="value"
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
 
   /**
    * Renders a styled select element. Options can be passed with the `optionsList` property.

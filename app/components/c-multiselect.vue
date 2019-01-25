@@ -56,13 +56,13 @@
           <div
             v-for="item in checkboxItemsFiltered"
             v-show="item.display"
-            :class="b('item-wrapper')"
             :key="item.id"
+            v-bem:item-wrapper
           >
-            <e-checkbox v-model="checkedItems"
+            <e-checkbox :ref="item.name"
+                        v-model="checkedItems"
                         :name="item.name"
                         :value="trimValue(item.value)"
-                        :ref="item.name"
                         @change="onCheckboxChange">
               <span>{{ item.displayName }}</span>
             </e-checkbox>

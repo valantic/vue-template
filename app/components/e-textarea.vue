@@ -17,13 +17,14 @@
               inline />
     </span>
     <div v-if="notification && hasFocus" :class="b('notification')">
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification :state="state" v-html="notification" />
     </div>
   </div>
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
   import cFormNotification from '@/components/c-form-notification';
 
   /**

@@ -1,12 +1,13 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <h4 :class="b('headline')">{{ headline }}</h4>
     <div :class="b('grid')">
       <s-color-item
         v-for="(color, index) in colors"
+        :key="index"
         :name="color.name"
         :value="color.value"
-        :key="index"/>
+      />
     </div>
   </div>
 </template>

@@ -9,11 +9,12 @@
       <div :class="b('wrapper swiper-wrapper')">
         <!-- Slides -->
         <div v-for="picture in pictures"
-             :class="b('slide swiper-slide')"
-             :key="picture.id">
+             :key="picture.id"
+             v-bem:slide
+             class="swiper-slide">
 
           <a v-if="picture.href"
-             :class="b('link')"
+             v-bem:link
              :href="picture.href">
 
             <e-picture
@@ -50,7 +51,7 @@
   import Swiper from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import mapHeroImages from '@/helpers/map-hero-images';
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
 
   const swiperInstances = {};
 

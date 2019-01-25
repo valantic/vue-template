@@ -92,7 +92,7 @@
 <script>
   import * as VDataTable from 'vuetify/es5/components/VDataTable';
   import cTablePagination from '@/components/c-table-pagination';
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
 
   /**
    * This component wraps the vuetify table "v-data-table" and styles the table.
@@ -365,7 +365,7 @@
     &__content-row--selected + &__content-row {
       border-top: 1px solid $color-secondary--1;
     }
-    
+
     &__content-row--is-clickable {
       cursor: pointer;
 
@@ -373,7 +373,7 @@
         background-color: $color-grayscale--700;
       }
     }
-    
+
     &__link {
       display: flex;
       justify-content: flex-end;
@@ -405,7 +405,7 @@
         padding: 0 $spacing--20;
       }
     }
-    
+
     .v-datatable__progress {
       display: none;
     }

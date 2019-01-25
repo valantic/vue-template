@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <div :class="b('navigation-wrapper', { position: navPosition, open: isOpen })" @click="onClick">
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', { logo: true })">
@@ -18,14 +18,15 @@
         </li>
         <li :class="b('navigation-item', { settings: true })">
           <h2>Settings</h2>
-          <s-demo-settings />
+          <s-demo-settings/>
         </li>
+        <!-- eslint-disable vue/no-use-v-if-with-v-for -->
         <router-link
           v-for="route in routes"
           v-if="route.meta"
           :key="route.name"
+          v-bem:navigationItem
           :to="{ name: route.name }"
-          :class="b('navigation-item')"
           :active-class="`${$options.name}-item--active-path`"
           :exact-active-class="`${$options.name}-item--active`"
           tag="li"

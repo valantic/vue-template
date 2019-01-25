@@ -1,32 +1,32 @@
 <template>
   <l-default>
-    <div :class="b()">
+    <div v-bem>
       <e-button @click="modalOpen = true">Open modal</e-button>
 
       <c-notification-container display-type="field"/>
       <e-label :state="errors['first-name'].state" name="First name:" position="top">
         <e-input
+          v-model="form.firstName"
           :state="errors['first-name'].state"
           :notification="errors['first-name'].notification"
-          v-model="form.firstName"
           name="first-name"
           placeholder="First name"
         />
       </e-label>
       <e-label :state="errors['last-name'].state" name="Last name:" position="top">
         <e-input
+          v-model="form.lastName"
           :state="errors['last-name'].state"
           :notification="errors['last-name'].notification"
-          v-model="form.lastName"
           name="last-name"
           placeholder="Last name"
         />
       </e-label>
       <e-label :state="errors['email'].state" name="Email:" position="top">
         <e-input
+          v-model="form.email"
           :state="errors['email'].state"
           :notification="errors['email'].notification"
-          v-model="form.email"
           name="email"
           placeholder="email"
         />
@@ -55,27 +55,27 @@
 
           <e-label :state="errors['first-name'].state" name="First name:" position="top">
             <e-input
+              v-model="form.firstName"
               :state="errors['first-name'].state"
               :notification="errors['first-name'].notification"
-              v-model="form.firstName"
               name="first-name"
               placeholder="First name"
             />
           </e-label>
           <e-label :state="errors['last-name'].state" name="Last name:" position="top">
             <e-input
+              v-model="form.lastName"
               :state="errors['last-name'].state"
               :notification="errors['last-name'].notification"
-              v-model="form.lastName"
               name="last-name"
               placeholder="Last name"
             />
           </e-label>
           <e-label :state="errors['email'].state" name="Email:" position="top">
             <e-input
+              v-model="form.email"
               :state="errors['email'].state"
               :notification="errors['email'].notification"
-              v-model="form.email"
               name="email"
               placeholder="email"
             />
@@ -183,7 +183,7 @@
             }
 
             return Promise.resolve(response);
-        });
+          });
       },
       addSelectorInfo1() {
         api.post('/notifications/selector/info1', {}, { expire: true });

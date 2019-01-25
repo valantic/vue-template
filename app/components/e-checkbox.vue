@@ -2,17 +2,17 @@
 
   <div :class="b(stateModifiers)">
     <label
-      :class="b('label')"
+      v-bem:label
       @mouseenter="hasHover = true"
       @mouseleave="hasHover = false">
       <input
+        v-model="internalValue"
+        v-bem:field
         :aria-checked="isChecked ? 'true' : 'false'"
-        :class="b('field')"
         :disabled="disabled"
         :value="value"
         :name="name"
         v-bind="$attrs"
-        v-model="internalValue"
         type="checkbox"
         @blur="onBlur"
         @change="onChange"

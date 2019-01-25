@@ -1,13 +1,13 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <div :class="b('left')">
       <label v-t="'c-table-pagination.itemsPerPage'"
-             :class="b('select-label')"
+             v-bem:select-label
              :for="`table-rows--${uuid}`"></label>
       <div :class="b('select-wrapper')">
-        <e-select :value="rowsPerPageValue"
+        <e-select :id="`table-rows--${uuid}`"
+                  :value="rowsPerPageValue"
                   :options-list="rowsPerPageOptionsFormatted"
-                  :id="`table-rows--${uuid}`"
                   name="sorting"
                   @input="onUpdateRowsPerPage"
         />
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
 
   /**
    * This component is for the usage with a vuetify v-data-table component for the external pagination.
@@ -302,7 +302,7 @@
       display: flex;
       padding: $spacing--5 0 $spacing--5 $spacing--30;
     }
-    
+
     &__amount {
       display: none;
       align-items: center;
@@ -312,7 +312,7 @@
         display: flex;
       }
     }
-    
+
     &__pages {
       display: flex;
       align-items: center;
@@ -342,12 +342,12 @@
       color: inherit;
       cursor: pointer;
     }
-    
+
     &__arrows {
       display: flex;
       align-items: center;
     }
-    
+
     &__arrow {
       .e-icon {
         display: flex;

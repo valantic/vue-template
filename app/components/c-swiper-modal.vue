@@ -1,16 +1,16 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <!-- 'swiper' classes needed for the swiper plugin. -->
     <div ref="gallery" :class="b('container swiper-container gallery-top')">
       <div :class="b('wrapper swiper-wrapper')">
         <div v-for="image in images"
-             :class="b('slide swiper-slide', { video: image.isVideo })"
-             :key="image.id">
+             :key="image.id"
+             :class="b('slide swiper-slide', { video: image.isVideo })">
           <!-- Video -->
           <div v-if="image.isVideo" :class="b('video-wrapper')">
             <div :class="b('iframe-wrapper')">
               <iframe ref="video"
-                      :class="b('video-iframe')"
+                      v-bem:video-iframe
                       :src="`https://www.youtube.com/embed/${image.youtubeId}?enablejsapi=1&version=3&playerapiid=ytplayer`"
                       width="560"
                       height="315"
@@ -33,7 +33,9 @@
     </div>
     <div ref="thumbnails" :class="b('container swiper-container gallery-thumbs')">
       <div :class="b('wrapper swiper-wrapper')">
-        <div v-for="image in images" :class="b('slide swiper-slide')" :key="image.id">
+        <div v-for="image in images"
+             :key="image.id"
+             :class="b('slide swiper-slide')">
           <!-- Video -->
           <div v-if="image.isVideo" :class="b('video-preview-wrapper')">
             <img :src="image.thumbSrc" :class="b('video-thumbnail')" alt="">

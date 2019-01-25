@@ -9,7 +9,7 @@
         {{ notification.message.message }}
       </template>
       <div v-if="notification.message.type === 'add-to-cart' && hasProductData"
-           :class="b('product-tile-wrapper')">
+           v-bem:product-tile-wrapper>
         foo
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <div :class="b('examplecontainer')">
       <h1>Headings</h1>
       <div :class="b('examplebox')">
@@ -117,13 +117,11 @@
 </template>
 
 <script>
-  import lDefault from '@/components/l-default';
   import eHeading from '@/components/e-heading';
 
   export default {
     name: 'headings',
     components: {
-      lDefault,
       eHeading
     },
 

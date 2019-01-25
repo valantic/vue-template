@@ -3,11 +3,11 @@
     <label :class="b('label')"
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false">
-      <input :class="b('field', { selected: internalValue === value })"
+      <input v-model="internalValue"
+             :class="b('field', { selected: internalValue === value })"
              v-bind="$attrs"
              :disabled="disabled"
              :value="value"
-             v-model="internalValue"
              :name="name"
              type="radio"
              @change="onChange"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
 
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.

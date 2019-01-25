@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <router-view/>
     <s-navigation :routes="routes" nav-position="bottom-right"/>
   </div>

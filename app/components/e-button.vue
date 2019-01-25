@@ -1,7 +1,7 @@
 <!-- This component has no <template> because of dynamic root element -->
 
 <script>
-  import touchDevice from '@/mixins/touch-device';
+  import touchDevice from '../mixins/touch-device';
   import eProgress from './e-progress';
 
   /**

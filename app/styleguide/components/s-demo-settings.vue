@@ -1,5 +1,5 @@
 <template>
-  <ul :class="b()">
+  <ul v-bem>
     <li :class="b('item')">
       <s-toggle checked>
         Logged in

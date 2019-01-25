@@ -1,10 +1,11 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <s-palette-item
       v-for="palette in palettes"
+      :key="palette"
       :palette="palette"
       :colors="colors[palette]"
-      :key="palette"/>
+    />
   </div>
 </template>
 

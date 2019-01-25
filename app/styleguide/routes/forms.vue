@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <h1>Example form</h1>
     <form action="#form-url" method="POST">
       <!-- e-input -->

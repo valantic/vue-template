@@ -3,8 +3,8 @@
   <div :class="b(modifiers)">
     <input v-if="uncontrolled"
            ref="input"
+           v-bem:field
            :autocomplete="autocomplete"
-           :class="b('field')"
            :disabled="disabled"
            :name="name"
            :title="title"
@@ -20,8 +20,8 @@
     >
     <input v-else
            ref="input"
+           v-bem:field
            :autocomplete="autocomplete"
-           :class="b('field')"
            :disabled="disabled"
            :name="name"
            :value="standalone ? internalValue : value"
@@ -48,11 +48,12 @@
       </span>
       <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
       <e-icon v-if="!hasDefaultState && !hasFocus"
-              :class="b('state-icon')"
+              v-bem:state-icon
               :icon="stateIcon"
               inline />
     </span>
     <div v-if="showNotification" :class="b('notification')">
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification :state="state" v-html="notification"/>
     </div>
   </div>
