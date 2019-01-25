@@ -1,6 +1,6 @@
 <template>
-  <div :class="b(modifiers)">
-    <textarea :class="b('field', { isResizable })"
+  <div v-bem="modifiers">
+    <textarea v-bem:field="{ isResizable }"
               :name="name"
               :disabled="disabled"
               :rows="rows"

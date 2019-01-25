@@ -1,8 +1,8 @@
 <template>
   <div v-bem>
-    <div :class="b('navigation-wrapper', { position: navPosition, open: isOpen })" @click="onClick">
+    <div v-bem:navigation-wrapper="{ position: navPosition, open: isOpen }" @click="onClick">
       <ul v-bem:navigation>
-        <li :class="b('navigation-item', { logo: true })">
+        <li v-bem:navigation-item="{ logo: true }">
           <a v-bem:navigation-link
              href="http://www.valantic.com"
              target="_blank"
@@ -10,13 +10,13 @@
             <img src="../assets/valantic.svg" alt="valantic">
           </a>
         </li>
-        <li :class="b('navigation-item', { language: true })" @click.stop>
+        <li v-bem:navigation-item="{ language: true }" @click.stop>
           <s-language/>
         </li>
-        <li :class="b('navigation-item', { theme: true })" @click.stop>
+        <li v-bem:navigation-item="{ theme: true }" @click.stop>
           <s-theme-selector/>
         </li>
-        <li :class="b('navigation-item', { settings: true })">
+        <li v-bem:navigation-item="{ settings: true }">
           <h2>Settings</h2>
           <s-demo-settings/>
         </li>
@@ -33,7 +33,7 @@
           exact>
           <a v-bem:navigation-link>{{ route.meta.title }}</a>
         </router-link>
-        <li :class="b('navigation-item', { components: true })">
+        <li v-bem:navigation-item="{ components: true }">
           <a v-bem:navigation-link
              :href="styleguidistUrl"
              target="_blank"

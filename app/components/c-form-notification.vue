@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <div v-bem="modifiers">
     <!-- @slot Slot is used for the notification content (message) -->
     <slot></slot>
   </div>

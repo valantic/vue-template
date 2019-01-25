@@ -1,6 +1,6 @@
 <template>
 
-  <div :class="b(modifiers)">
+  <div v-bem="modifiers">
     <input v-if="uncontrolled"
            ref="input"
            v-bem:field

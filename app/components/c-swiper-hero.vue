@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)"
+  <div v-bem="modifiers"
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
 

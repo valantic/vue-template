@@ -1,11 +1,11 @@
 <template>
-  <div :class="b({ titleSpacing })">
+  <div v-bem="{ titleSpacing }">
     <div v-bem:notifications>
       <c-notification-container display-type="modal" />
     </div>
-    <div :class="b('inner', { mobile: isMobile })">
+    <div v-bem:inner="{ mobile: isMobile }">
       <a v-if="closable"
-         :class="b('close', { mobile: true })"
+         v-bem:close="{ mobile: true }"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
          @click="close">

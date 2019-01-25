@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)"
+  <div v-bem="modifiers"
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
 
@@ -21,7 +21,9 @@
                   @click.prevent="modalOpen = true">
             <span v-bem:image-wrapper-inner>
               <div v-if="picture.isVideo" v-bem:video-preview-wrapper>
-                <img :src="picture.thumbSrc" :class="b('video-thumbnail')" alt="">
+                <img v-bem:video-thumbnail
+                     :src="picture.thumbSrc"
+                     alt="">
                 <span v-bem:video-thumbnail-overlay></span>
               </div>
               <e-picture
@@ -57,7 +59,7 @@
         inner-spacing="0"
         mobile-transition="fade"
         @close="modalClose">
-        <div :class="b('modal-close-icon')" @click="modalOpen = false">
+        <div v-bem:modal-close-icon @click="modalOpen = false">
           <e-icon icon="i-close"
                   width="25"
                   height="25"
@@ -71,10 +73,10 @@
 
     <!-- counter -->
     <div v-if="pictures.length > 1" v-bem:counter>
-      <div :class="b('counter-detail', { image: true })">
+      <div v-bem:counter-detail="{ image: true }">
         {{ $tc('c-swiper.images', images.length, {count: images.length}) }}
       </div>
-      <div v-if="videos && videos.length" :class="b('counter-detail', { video: true })">
+      <div v-if="videos && videos.length" v-bem:counter-detail="{ video: true }">
         {{ $tc('c-swiper.videos', videos.length, {count: videos.length}) }}
       </div>
     </div>

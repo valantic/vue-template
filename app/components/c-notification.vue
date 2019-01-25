@@ -1,7 +1,7 @@
 <template>
-  <div :class="b({ type: notification.message.type, confirm: notification.confirm, displayType, visible })">
+  <div v-bem="{ type: notification.message.type, confirm: notification.confirm, displayType, visible }">
     <div v-bem:icon></div>
-    <div :class="b('inner', { isProductTile: notification.message.type === 'add-to-cart'})">
+    <div v-bem:inner="{ isProductTile: notification.message.type === 'add-to-cart'}">
       <template v-if="notification.message.type !== 'add-to-cart'">
         <div v-if="notification.title" v-bem:title>
           {{ notification.title }}
@@ -14,20 +14,22 @@
       </div>
     </div>
     <div v-if="typeof notification.confirm === 'function'" v-bem:actions>
-      <div v-if="typeof notification.decline === 'function'" :class="b('action', { decline: true })">
+      <div v-if="typeof notification.decline === 'function'" v-bem:action="{ decline: true }">
         <e-button :progress="declineProgress"
                   :disabled="confirmProgress"
                   width="auto"
                   @click="onDecline">{{ $t('c-notification.decline') }}</e-button>
       </div>
-      <div :class="b('action', { confirm: true })">
+      <div v-bem:action="{ confirm: true }">
         <e-button :progress="confirmProgress"
                   :disabled="declineProgress"
                   width="auto"
                   @click="onConfirm">{{ $t('c-notification.confirm') }}</e-button>
       </div>
     </div>
-    <button v-if="!notification.confirm" :class="b('close')" @click="close">
+    <button v-if="!notification.confirm"
+            v-bem:close
+            @click="close">
       <e-icon
         icon="i-close"
         width="15"

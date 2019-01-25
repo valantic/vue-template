@@ -1,6 +1,6 @@
 <template>
 
-  <div :class="b(stateModifiers)">
+  <div v-bem="stateModifiers">
     <label
       v-bem:label
       @mouseenter="hasHover = true"

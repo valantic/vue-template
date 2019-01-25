@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({ negative, spacing })">
+  <div v-bem="{ negative, spacing }">
     <div v-bem:inner>
       <div v-bem:bubble></div>
       <div v-bem:bubble></div>

@@ -1,7 +1,7 @@
 <template>
-  <div :class="b({ hasYearSelector })">
-    <div :class="b('buttons-wrapper', { hasYearSelector })">
-      <div :class="b('input', { hasYearSelector })">
+  <div v-bem="{ hasYearSelector }">
+    <div v-bem:buttons-wrapper="{ hasYearSelector }">
+      <div v-bem:input="{ hasYearSelector }">
         <e-input :id="`date-picker-value-${uuid}`"
                  ref="input"
                  :value="formatDate(validDate)"

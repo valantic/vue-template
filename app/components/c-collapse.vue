@@ -1,6 +1,6 @@
 <template>
-  <div :class="b(modifiers)">
-    <a :class="b('toggle')" href="#" @click="toggleState">
+  <div v-bem="modifiers">
+    <a v-bem:toggle href="#" @click="toggleState">
       <e-icon icon="i-plus"
               width="12"
               height="12"
@@ -8,7 +8,7 @@
       {{ title }}
     </a>
 
-    <div v-if="isRendered" :class="b('content')" :style="{ maxHeight }">
+    <div v-if="isRendered" v-bem:content :style="{ maxHeight }">
       <div ref="inner" v-bem:inner>
         <!-- @slot Used for item content -->
         <slot :is-open="isOpen"></slot>

@@ -1,6 +1,6 @@
 <template>
   <div v-bem>
-    <h1>Example form</h1>
+    <e-heading tag-name="h1">Example form</e-heading>
     <form action="#form-url" method="POST">
       <!-- e-input -->
       <div v-bem:part>

@@ -1,10 +1,10 @@
 <template>
-  <div :class="b(modifiers)">
+  <div v-bem="modifiers">
     <label v-bem:label
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false">
       <input v-model="internalValue"
-             :class="b('field', { selected: internalValue === value })"
+             v-bem:field="{ selected: internalValue === value }"
              v-bind="$attrs"
              :disabled="disabled"
              :value="value"

@@ -8,7 +8,9 @@
            class="swiper-wrapper">
         <div v-for="image in images"
              :key="image.id"
-             :class="b('slide swiper-slide', { video: image.isVideo })">
+             v-bem:slide="{ video: image.isVideo }"
+             class="swiper-slide"
+        >
           <!-- Video -->
           <div v-if="image.isVideo" v-bem:video-wrapper>
             <div v-bem:iframe-wrapper>
@@ -47,7 +49,9 @@
              class="swiper-slide">
           <!-- Video -->
           <div v-if="image.isVideo" v-bem:video-preview-wrapper>
-            <img :src="image.thumbSrc" :class="b('video-thumbnail')" alt="">
+            <img v-bem:video-thumbnail
+                 :src="image.thumbSrc"
+                 alt="">
             <span v-bem:video-thumbnail-overlay></span>
           </div>
 

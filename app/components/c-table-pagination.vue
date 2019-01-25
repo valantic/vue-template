@@ -22,7 +22,9 @@
         </div>
       </div>
       <ul v-bem:pages>
-        <li v-for="pageNumber in pages" :key="`page-${pageNumber}`" :class="b('page-item', {active: currentPage === pageNumber})">
+        <li v-for="pageNumber in pages"
+            :key="`page-${pageNumber}`"
+            v-bem:page-item="{active: currentPage === pageNumber}">
           <a v-bem:page-link
              :title="$t('c-table-pagination.pageNumberTitle', {pageNumber})"
              href="#"
@@ -30,7 +32,7 @@
         </li>
       </ul>
       <div v-bem:arrows>
-        <a :class="b('arrow', {disabled: currentPage <= 1})"
+        <a v-bem:arrow="{disabled: currentPage <= 1}"
            :title="$t('c-table-pagination.lastPageTitle')"
            href="#"
            @click.prevent="onClickBack">
@@ -40,7 +42,7 @@
                   inline/>
           <span v-t="'c-table-pagination.lastPageTitle'" class="invisible"></span>
         </a>
-        <a :class="b('arrow', {disabled: maxPage <= currentPage})"
+        <a v-bem:arrow="{disabled: maxPage <= currentPage}"
            :title="$t('c-table-pagination.nextPageTitle')"
            href="#"
            @click.prevent="onClickNext">

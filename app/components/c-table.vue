@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({noResults: pagination.totalItems < 1})">
+  <div v-bem="{noResults: pagination.totalItems < 1}">
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -35,7 +35,7 @@
             @click="changeSort(header.value)"
           >
             {{ header.text }}
-            <e-icon :class="b('sort-icon', { desc: pagination.descending, active: header.value === pagination.sortBy})"
+            <e-icon v-bem:sort-icon="{ desc: pagination.descending, active: header.value === pagination.sortBy}"
                     icon="i-arrow--down"
                     width="10"
                     height="10"
@@ -49,9 +49,8 @@
 
       <!-- TABLE-BODY -->
       <template slot="items" slot-scope="props">
-        <tr :active="props.selected"
-            :class="b('content-row',
-                      { selected: selected.includes(props.item.id), isClickable: isRowClickable && !isDisabled })"
+        <tr v-bem:content-row="{ selected: selected.includes(props.item.id), isClickable: isRowClickable && !isDisabled }"
+            :active="props.selected"
             :role="rowRole"
             @click="onClickRow(props.item)"
         >

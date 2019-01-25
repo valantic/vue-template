@@ -1,5 +1,5 @@
 <template>
-  <span :class="b(stateModifiers)">
+  <span v-bem="stateModifiers">
     <select v-bem:select
             :value="value"
             :disabled="disabled || progress"
