@@ -176,7 +176,7 @@
       },
       plusModifiers() {
         return {
-          size: this.triangleButtonSize.toString(), /* TODO - remove .toString() once vue-bem-cn accepts numbers */
+          size: this.triangleButtonSize.toString(),
           color: this.triangleButtonPlusColor,
           open: this.triangleButtonOpen,
         };

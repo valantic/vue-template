@@ -126,7 +126,7 @@
        * Default: 500
        */
       border: {
-        default: '500', // vue-bem-cn currently does not support number values
+        default: '500',
         type: [Number, String],
         validator(value) {
           return [
