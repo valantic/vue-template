@@ -1,7 +1,6 @@
 /* eslint-disable import/first */
 import Vue from 'vue';
 import VueAxios from '@/setup/plugins/axios';
-import VueBemCn from 'vue-bem-cn';
 import VueBem from '@verstaerker/vue-bem';
 import VModal from 'vue-js-modal';
 import PortalVue from 'portal-vue';
@@ -27,7 +26,6 @@ Vue.use(moment);
 Vue.use(viewport);
 Vue.use(modal);
 
-Vue.use(VueBemCn);
 Vue.use(VueBem);
 Vue.use(PortalVue);
 Vue.use(VModal);
