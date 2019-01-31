@@ -1,5 +1,4 @@
 <template>
-
   <div v-bem="stateModifiers">
     <label
       v-bem:label
@@ -22,7 +21,6 @@
       </span>
     </label>
   </div>
-
 </template>
 
 <script>

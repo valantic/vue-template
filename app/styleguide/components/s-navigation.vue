@@ -11,14 +11,14 @@
           </a>
         </li>
         <li v-bem:navigation-item="{ language: true }" @click.stop>
-          <s-language/>
+          <s-language />
         </li>
         <li v-bem:navigation-item="{ theme: true }" @click.stop>
-          <s-theme-selector/>
+          <s-theme-selector />
         </li>
         <li v-bem:navigation-item="{ settings: true }">
           <h2>Settings</h2>
-          <s-demo-settings/>
+          <s-demo-settings />
         </li>
         <!-- eslint-disable vue/no-use-v-if-with-v-for -->
         <router-link
@@ -31,13 +31,17 @@
           :exact-active-class="`${$options.name}-item--active`"
           tag="li"
           exact>
-          <a v-bem:navigation-link>{{ route.meta.title }}</a>
+          <a v-bem:navigation-link>
+            {{ route.meta.title }}
+          </a>
         </router-link>
         <li v-bem:navigation-item="{ components: true }">
           <a v-bem:navigation-link
              :href="styleguidistUrl"
              target="_blank"
-          >Components</a>
+          >
+            Components
+          </a>
         </li>
       </ul>
     </div>

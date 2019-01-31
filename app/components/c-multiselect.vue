@@ -3,12 +3,18 @@
        @mouseenter="hasHover=true"
        @mouseleave="hasHover=false"
   >
-    <p v-if="title.length" v-bem:title>{{ title }}</p>
+    <p v-if="title.length" v-bem:title>
+      {{ title }}
+    </p>
     <div v-bem:wrapper="{ isActive }" @click="onInsideClick">
       <div v-bem:content>
         <div v-if="!isActive" v-bem:output @click="onOutputClick">
-          <span v-if="outputValue" v-bem:value>{{ outputValue }}</span>
-          <span v-else v-bem:placeholder>{{ placeholder }}</span>
+          <span v-if="outputValue" v-bem:value>
+            {{ outputValue }}
+          </span>
+          <span v-else v-bem:placeholder>
+            {{ placeholder }}
+          </span>
 
           <div v-show="isError" v-bem:icon-wrapper>
             <span v-bem:icon-splitter></span>

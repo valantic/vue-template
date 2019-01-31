@@ -10,6 +10,7 @@
                              :is-event-date="isEventDate"
                              @input="onInputStartValue"
         />
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
         <div v-bem:to>—</div>
         <c-date-picker-input :selected-date="internalEnd"
                              :validate-date="isValidEndDate"

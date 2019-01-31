@@ -1,5 +1,6 @@
 <template>
-  <span v-bem="{ color, [icon]: true }"><!-- needed for inline usage -->
+  <!-- <span> needed for inline usage -->
+  <span v-bem="{ color, [icon]: true }">
     <img v-if="!inline"
          v-bem:icon
          :src="src"

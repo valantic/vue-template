@@ -18,13 +18,17 @@
         <e-button :progress="declineProgress"
                   :disabled="confirmProgress"
                   width="auto"
-                  @click="onDecline">{{ $t('c-notification.decline') }}</e-button>
+                  @click="onDecline">
+          {{ $t('c-notification.decline') }}
+        </e-button>
       </div>
       <div v-bem:action="{ confirm: true }">
         <e-button :progress="confirmProgress"
                   :disabled="declineProgress"
                   width="auto"
-                  @click="onConfirm">{{ $t('c-notification.confirm') }}</e-button>
+                  @click="onConfirm">
+          {{ $t('c-notification.confirm') }}
+        </e-button>
       </div>
     </div>
     <button v-if="!notification.confirm"

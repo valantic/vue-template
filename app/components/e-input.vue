@@ -1,5 +1,4 @@
 <template>
-
   <div v-bem="modifiers">
     <input v-if="uncontrolled"
            ref="input"
@@ -54,10 +53,9 @@
     </span>
     <div v-if="showNotification" v-bem:notification>
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <c-form-notification :state="state" v-html="notification"/>
+      <c-form-notification :state="state" v-html="notification" />
     </div>
   </div>
-
 </template>
 
 <script>

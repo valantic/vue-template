@@ -1,9 +1,11 @@
 <template>
   <l-default>
     <div v-bem>
-      <e-button @click="modalOpen = true">Open modal</e-button>
+      <e-button @click="modalOpen = true">
+        Open modal
+      </e-button>
 
-      <c-notification-container display-type="field"/>
+      <c-notification-container display-type="field" />
       <e-label :state="errors['first-name'].state" name="First name:" position="top">
         <e-input
           v-model="form.firstName"
@@ -32,16 +34,30 @@
         />
       </e-label>
 
-      <e-button @click="addGlobalSuccess">Success</e-button>
-      <e-button @click="addGlobalWarning">Warning</e-button>
-      <e-button @click="addGlobalError">Error</e-button>
-      <e-button @click="addGlobalInfo">Info</e-button>
-      <e-button @click="addConfirmation">Confirmation</e-button>
-      <e-button @click="addFieldError">Field Error</e-button>
+      <e-button @click="addGlobalSuccess">
+        Success
+      </e-button>
+      <e-button @click="addGlobalWarning">
+        Warning
+      </e-button>
+      <e-button @click="addGlobalError">
+        Error
+      </e-button>
+      <e-button @click="addGlobalInfo">
+        Info
+      </e-button>
+      <e-button @click="addConfirmation">
+        Confirmation
+      </e-button>
+      <e-button @click="addFieldError">
+        Field Error
+      </e-button>
 
       <div v-bem:selector>
-        <c-notification-container display-type="selector" selector="1"/>
-        <e-button style="margin-top: 10px; margin-right: 10px;" @click="addSelectorInfo1">Selector Info (1)</e-button>
+        <c-notification-container display-type="selector" selector="1" />
+        <e-button style="margin-top: 10px; margin-right: 10px;" @click="addSelectorInfo1">
+          Selector Info (1)
+        </e-button>
       </div>
 
       <c-modal
@@ -49,9 +65,10 @@
         title="Example title small"
         size="300"
         @close="modalOpen = false">
-
         <div>
-          <e-button @click="addToCart">Add to cart</e-button>
+          <e-button @click="addToCart">
+            Add to cart
+          </e-button>
 
           <e-label :state="errors['first-name'].state" name="First name:" position="top">
             <e-input
@@ -81,17 +98,28 @@
             />
           </e-label>
 
-          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalSuccess">Success</e-button>
-          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalWarning">Warning</e-button>
-          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalError">Error</e-button>
-          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalInfo">Info</e-button>
-          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addFieldError">Field Error</e-button>
+          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalSuccess">
+            Success
+          </e-button>
+          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalWarning">
+            Warning
+          </e-button>
+          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalError">
+            Error
+          </e-button>
+          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalInfo">
+            Info
+          </e-button>
+          <e-button style="margin-top: 10px; margin-right: 10px;" @click="addFieldError">
+            Field Error
+          </e-button>
 
           <div v-bem:selector>
-            <c-notification-container display-type="selector" selector="1"/>
-            <e-button style="margin-top: 10px; margin-right: 10px;" @click="addSelectorInfo1">Selector Info (1)</e-button>
+            <c-notification-container display-type="selector" selector="1" />
+            <e-button style="margin-top: 10px; margin-right: 10px;" @click="addSelectorInfo1">
+              Selector Info (1)
+            </e-button>
           </div>
-
         </div>
       </c-modal>
     </div>

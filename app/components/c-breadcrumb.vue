@@ -6,7 +6,9 @@
           v-bem:item>
         <a v-bem:link
            :href="item.url"
-           :title="$t('c-breadcrumb.linkTitle', { name: item.name })">{{ item.name }}</a>
+           :title="$t('c-breadcrumb.linkTitle', { name: item.name })">
+          {{ item.name }}
+        </a>
       </li>
     </ul>
   </div>

@@ -19,7 +19,6 @@
                         value="0"
                         name="total"
                         @change="toggleAll">
-
               <!-- eslint-disable-next-line vue/attributes-order-->
               <span v-if="!!selected.length" v-t="'c-table.deselectAll'" class="invisible"></span>
               <!-- eslint-disable-next-line vue/attributes-order-->
@@ -39,7 +38,7 @@
                     icon="i-arrow--down"
                     width="10"
                     height="10"
-                    inline/>
+                    inline />
           </th>
           <th v-if="hasLink">
             <span v-t="'c-table.linkLabel'" class="invisible"></span>
@@ -71,7 +70,6 @@
               {{ props.item[headerItem.value] }}
             </td>
           </slot>
-
         </tr>
       </template>
     </v-data-table>

@@ -11,7 +11,7 @@
         :sizes="item.sizes"
         :fallback="item.fallback"
         alt="an image"
-        inline="true"/>
+        inline="true" />
     </div>
   </div>
 </template>

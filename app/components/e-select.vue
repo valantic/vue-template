@@ -6,7 +6,9 @@
             v-bind="$attrs"
             @change="onChange"
     >
-      <option :disabled="!hasSelectablePlaceholder" value="">{{ placeholder }}</option>
+      <option :disabled="!hasSelectablePlaceholder" value="">
+        {{ placeholder }}
+      </option>
       <option v-for="item in optionsList"
               :key="`${name}-${item.value}`"
               :value="item.value"
@@ -16,7 +18,7 @@
     </select>
     <span v-if="!hasDefaultState" v-bem:icon-splitter></span>
     <div v-if="progress" v-bem:progress-container>
-      <e-progress/>
+      <e-progress />
     </div>
   </span>
 </template>

@@ -30,7 +30,7 @@
             :sizes="sizes"
             :srcset="image.srcset"
             :fallback="image.fallback"
-            :alt="image.alt"/>
+            :alt="image.alt" />
         </div>
       </div>
       <div v-bem:button-prev
@@ -61,7 +61,7 @@
             :sizes="sizes"
             :srcset="image.srcset"
             :fallback="image.fallback"
-            :alt="image.alt"/>
+            :alt="image.alt" />
         </div>
       </div>
     </div>

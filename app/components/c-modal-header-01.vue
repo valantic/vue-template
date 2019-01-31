@@ -19,7 +19,9 @@
         />
       </div>
       <div v-bem:title>
-        <e-heading v-if="title" :underline="!isMobile" tag-name="h1">{{ title }}</e-heading>
+        <e-heading v-if="title" :underline="!isMobile" tag-name="h1">
+          {{ title }}
+        </e-heading>
       </div>
       <a v-if="closable"
          v-bem:close

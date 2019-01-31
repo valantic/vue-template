@@ -1,6 +1,8 @@
 <template>
   <div v-bem>
-    <h4 v-bem:headline>{{ headline }}</h4>
+    <h4 v-bem:headline>
+      {{ headline }}
+    </h4>
     <div v-bem:grid>
       <s-color-item
         v-for="(color, index) in colors"

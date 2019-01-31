@@ -14,12 +14,16 @@
            @click="copyToClipboard(icon)"
       >
         <div v-bem:icon-wrapper>
-          <e-icon :key="icon.name" :icon="icon.name" width="50"/>
+          <e-icon :key="icon.name" :icon="icon.name" width="50" />
         </div>
-        <div v-bem:icon-label>{{ icon.name }}</div>
+        <div v-bem:icon-label>
+          {{ icon.name }}
+        </div>
       </div>
     </div>
-    <div v-if="notification" v-bem:notification>{{ notification }}</div>
+    <div v-if="notification" v-bem:notification>
+      {{ notification }}
+    </div>
     <input ref="input" v-bem:clipboard type="text">
   </div>
 </template>

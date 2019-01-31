@@ -1,7 +1,8 @@
 <!-- eslint-disable max-len -->
 <template>
   <div v-bem>
-    <h1>Styleguide
+    <h1>
+      Styleguide
       <small>[AIV]{version}[/AIV]</small>
     </h1>
     <hr>
@@ -13,7 +14,7 @@
 
     <h2>README.md</h2>
     <hr>
-    <s-readme/>
+    <s-readme />
   </div>
 </template>
 

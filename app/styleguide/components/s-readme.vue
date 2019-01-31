@@ -1,6 +1,6 @@
 <template>
   <div v-bem>
-    <readme/>
+    <readme />
   </div>
 </template>
 

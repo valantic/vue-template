@@ -5,7 +5,9 @@
       <div v-bem:bubble></div>
       <div v-bem:bubble></div>
     </div>
-    <span class="invisible">{{ loadingMessage }}</span>
+    <span class="invisible">
+      {{ loadingMessage }}
+    </span>
   </div>
 </template>
 

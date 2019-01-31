@@ -1,7 +1,9 @@
 <template>
   <div v-bem="panelModifiers">
     <div v-bem:heading="headingModifiers">
-      <e-heading v-if="heading" tag-name="h2" underline>{{ heading }}</e-heading>
+      <e-heading v-if="heading" tag-name="h2" underline>
+        {{ heading }}
+      </e-heading>
     </div>
     <div v-bem:content="contentModifiers">
       <slot></slot>

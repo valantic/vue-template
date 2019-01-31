@@ -28,7 +28,9 @@
           <a v-bem:page-link
              :title="$t('c-table-pagination.pageNumberTitle', {pageNumber})"
              href="#"
-             @click.prevent="goToPage({ pageNumber })">{{ pageNumber }}</a>
+             @click.prevent="goToPage({ pageNumber })">
+            {{ pageNumber }}
+          </a>
         </li>
       </ul>
       <div v-bem:arrows>
@@ -39,7 +41,7 @@
           <e-icon icon="i-arrow--left--info"
                   width="15"
                   height="15"
-                  inline/>
+                  inline />
           <span v-t="'c-table-pagination.lastPageTitle'" class="invisible"></span>
         </a>
         <a v-bem:arrow="{disabled: maxPage <= currentPage}"
@@ -49,7 +51,7 @@
           <e-icon icon="i-arrow--right--info"
                   width="15"
                   height="15"
-                  inline/>
+                  inline />
           <span v-t="'c-table-pagination.nextPageTitle'" class="invisible"></span>
         </a>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div v-bem>
-    <router-view/>
-    <s-navigation :routes="routes" nav-position="bottom-right"/>
+    <router-view />
+    <s-navigation :routes="routes" nav-position="bottom-right" />
   </div>
 </template>
 

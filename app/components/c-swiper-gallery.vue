@@ -2,12 +2,10 @@
   <div v-bem="modifiers"
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
-
     <!-- 'swiper' classes needed for the swiper plugin. -->
     <div ref="container"
          v-bem:container
          class="swiper-container">
-
       <div v-bem:wrapper
            class="swiper-wrapper">
         <!-- Slides -->
@@ -15,7 +13,6 @@
              :key="picture.id"
              v-bem:slide
              class="swiper-slide">
-
           <button v-bem:trigger
                   type="button"
                   @click.prevent="modalOpen = true">
@@ -35,9 +32,7 @@
             </span>
 
             <span v-t="'c-swiper.zoom'" class="invisible"></span>
-
           </button>
-
         </div>
       </div>
 
@@ -80,7 +75,6 @@
         {{ $tc('c-swiper.videos', videos.length, {count: videos.length}) }}
       </div>
     </div>
-
   </div>
 </template>
 
