@@ -9,9 +9,7 @@
         {{ notification.message.message }}
       </template>
       <div v-if="notification.message.type === 'add-to-cart' && hasProductData"
-           v-bem:product-tile-wrapper>
-        foo
-      </div>
+           v-bem:product-tile-wrapper></div>
     </div>
     <div v-if="typeof notification.confirm === 'function'" v-bem:actions>
       <div v-if="typeof notification.decline === 'function'" v-bem:action="{ decline: true }">

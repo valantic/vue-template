@@ -124,7 +124,7 @@
        * Default: 500
        */
       border: {
-        default: '500',
+        default: 500,
         type: [Number, String],
         validator(value) {
           return [

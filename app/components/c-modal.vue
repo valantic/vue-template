@@ -61,13 +61,13 @@
        * Set's the inner spacing of the modal [0, 500].
        */
       innerSpacing: {
-        type: String,
-        default: '500',
+        type: [Number, String],
+        default: 500,
         validator(value) {
           return [
-            '0',
-            '500'
-          ].includes(value);
+            0,
+            500
+          ].includes(parseInt(value, 10));
         },
       },
 
@@ -75,13 +75,13 @@
        * Defines size for modal [300, 600].
        */
       size: {
-        type: String,
-        default: '300',
+        type: [Number, String],
+        default: 300,
         validator(value) {
           return [
-            '300',
-            '600',
-          ].includes(value);
+            300,
+            600,
+          ].includes(parseInt(value, 10));
         }
       },
 
@@ -111,14 +111,14 @@
        * Sets a modifier class for title spacing.
        */
       titleSpacing: {
-        type: String,
-        default: '500',
+        type: [Number, String],
+        default: 500,
         validator(value) {
           return [
-            '0',
-            '300',
-            '500'
-          ].includes(value);
+            0,
+            300,
+            500
+          ].includes(parseInt(value, 10));
         },
       },
 

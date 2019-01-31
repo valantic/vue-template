@@ -49,14 +49,14 @@
        * Defines the padding of the inner content.
        */
       padding: {
-        type: String,
-        default: '500',
+        type: [Number, String],
+        default: 500,
         validator(value) {
           return [
-            '0',
-            '300',
-            '500',
-          ].includes(value);
+            0,
+            300,
+            500,
+          ].includes(parseInt(value, 10));
         },
       },
 
