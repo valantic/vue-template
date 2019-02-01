@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  import propValidationScale from '@/helpers/prop-validation-scale';
 
   /**
    * Creates a styled text link.
@@ -23,12 +24,10 @@
       spacing: {
         type: [String, Number],
         default: 500,
-        validator(value) {
-          return [
-            0,
-            500
-          ].includes(parseInt(value, 10));
-        }
+        validator: propValidationScale([
+          0,
+          500
+        ])
       }
     },
     // data() {

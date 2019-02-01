@@ -49,11 +49,11 @@
       <e-icon v-if="!hasDefaultState && !hasFocus"
               v-bem:state-icon
               :icon="stateIcon"
-              inline />
+              inline/>
     </span>
     <div v-if="showNotification" v-bem:notification>
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <c-form-notification :state="state" v-html="notification" />
+      <c-form-notification :state="state" v-html="notification"/>
     </div>
   </div>
 </template>
@@ -61,6 +61,7 @@
 <script>
   import cFormNotification from '@/components/c-form-notification';
   import formStates from '../mixins/form-states';
+  import propValidationScale from '@/helpers/prop-validation-scale';
 
   /**
    * Input form component
@@ -126,12 +127,10 @@
       border: {
         default: 500,
         type: [Number, String],
-        validator(value) {
-          return [
-            0,
-            500
-          ].includes(parseInt(value, 10));
-        }
+        validator: propValidationScale([
+          0,
+          500,
+        ])
       },
 
       /**

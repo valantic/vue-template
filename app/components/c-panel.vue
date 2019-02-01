@@ -22,6 +22,7 @@
 
 <script>
   import touchDevice from '../mixins/touch-device';
+  import propValidationScale from '@/helpers/prop-validation-scale';
 
   export default {
     name: 'c-panel',
@@ -39,9 +40,10 @@
       headingSpacing: {
         type: [String, Number],
         default: 0,
-        validator(value) {
-          return [0, 500].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          0,
+          500
+        ]),
       },
 
       /**
@@ -52,9 +54,10 @@
       contentSpacing: {
         type: [String, Number],
         default: 500,
-        validator(value) {
-          return [0, 500].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          0,
+          500
+        ]),
       },
 
       /**
@@ -74,9 +77,11 @@
       border: {
         type: [String, Number],
         default: 0,
-        validator(value) {
-          return [0, 1, 2].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          0,
+          1,
+          2
+        ]),
       },
 
       /**
@@ -120,12 +125,10 @@
       triangleButtonSize: {
         type: [Number, String],
         default: 0,
-        validator(value) {
-          return [
-            0,
-            500
-          ].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          0,
+          500
+        ]),
       },
 
       /**

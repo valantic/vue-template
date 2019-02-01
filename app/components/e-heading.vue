@@ -2,6 +2,7 @@
 
 <script>
   import * as bem from '@verstaerker/vue-bem';
+  import propValidationScale from '@/helpers/prop-validation-scale';
 
   export default {
     name: 'e-heading',
@@ -81,14 +82,12 @@
       spacing: {
         type: [Number, String],
         default: 500,
-        validator(value) {
-          return [
-            400,
-            500,
-            700,
-            800,
-          ].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          400,
+          500,
+          700,
+          800,
+        ]),
       },
 
       /**

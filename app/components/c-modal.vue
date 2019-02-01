@@ -17,7 +17,7 @@
                  :title="title"
                  :title-spacing="titleSpacing"
                  :closable="closeIcon"
-                 @close="closeModal" />
+                 @close="closeModal"/>
       <div v-bem:content="{ innerSpacing }">
         <!-- @slot Used for the modal content. -->
         <slot></slot>
@@ -32,6 +32,7 @@
   import * as bem from '@verstaerker/vue-bem';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
+  import propValidationScale from '@/helpers/prop-validation-scale';
 
   /**
    * Components wraps the plugin https://github.com/euvl/vue-js-modal, it's output is rendered through vue-portal.
@@ -63,12 +64,10 @@
       innerSpacing: {
         type: [Number, String],
         default: 500,
-        validator(value) {
-          return [
-            0,
-            500
-          ].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          0,
+          500
+        ]),
       },
 
       /**
@@ -77,12 +76,10 @@
       size: {
         type: [Number, String],
         default: 300,
-        validator(value) {
-          return [
-            300,
-            600,
-          ].includes(parseInt(value, 10));
-        }
+        validator: propValidationScale([
+          300,
+          600,
+        ])
       },
 
       /**
@@ -113,13 +110,11 @@
       titleSpacing: {
         type: [Number, String],
         default: 500,
-        validator(value) {
-          return [
-            0,
-            300,
-            500
-          ].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          0,
+          300,
+          500
+        ]),
       },
 
       /**

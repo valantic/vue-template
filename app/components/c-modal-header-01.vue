@@ -1,7 +1,7 @@
 <template>
   <div v-bem="{ titleSpacing }">
     <div v-bem:notifications>
-      <c-notification-container display-type="modal" />
+      <c-notification-container display-type="modal"/>
     </div>
     <div v-bem:inner.mobile>
       <a v-if="closable"
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+  import propValidationScale from '@/helpers/prop-validation-scale';
   import cNotificationContainer from '@/components/c-notification-container';
 
   /**
@@ -68,13 +69,11 @@
       titleSpacing: {
         type: [Number, String],
         default: 500,
-        validator(value) {
-          return [
-            0,
-            300,
-            500,
-          ].includes(parseInt(value, 10));
-        },
+        validation: propValidationScale([
+          0,
+          300,
+          500
+        ]),
       },
 
       /**

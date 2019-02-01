@@ -4,7 +4,7 @@
       <e-icon icon="i-plus"
               width="12"
               height="12"
-              inline />
+              inline/>
       {{ title }}
     </a>
 
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import propValidationScale from '@/helpers/prop-validation-scale';
 
   /**
    * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
@@ -51,13 +52,11 @@
       padding: {
         type: [Number, String],
         default: 500,
-        validator(value) {
-          return [
-            0,
-            300,
-            500,
-          ].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          0,
+          300,
+          500,
+        ]),
       },
 
       /**

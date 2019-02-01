@@ -4,6 +4,7 @@
   import * as bem from '@verstaerker/vue-bem';
   import touchDevice from '../mixins/touch-device';
   import eProgress from './e-progress';
+  import propValidationScale from '@/helpers/prop-validation-scale';
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
@@ -45,14 +46,12 @@
       spacing: {
         type: [String, Number],
         default: 500,
-        validator(value) {
-          return [
-            0,
-            500,
-            600,
-            700,
-          ].includes(parseInt(value, 10));
-        },
+        validator: propValidationScale([
+          0,
+          500,
+          600,
+          700,
+        ]),
       },
 
       /**
