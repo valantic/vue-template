@@ -3,7 +3,7 @@
     <div v-bem:notifications>
       <c-notification-container display-type="modal" />
     </div>
-    <div v-bem:inner="{ mobile: isMobile }">
+    <div v-bem:inner.mobile>
       <a v-if="closable"
          v-bem:close="{ mobile: true }"
          :title="$t('c-modal-header-01.closeTitle')"

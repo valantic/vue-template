@@ -1,5 +1,5 @@
 <template>
-  <div v-bem="{ negative, spacing }">
+  <div v-bem="componentModifiers">
     <div v-bem:inner>
       <div v-bem:bubble></div>
       <div v-bem:bubble></div>
@@ -55,7 +55,19 @@
     computed: {
       loadingMessage() {
         return this.message || this.$i18n.t('e-progress.loading');
-      }
+      },
+
+      /**
+       * Returns all modifiers for the component main class.
+       *
+       * @returns {Object}
+       */
+      componentModifiers() {
+        return {
+          negative: this.negative,
+          spacing: this.spacing,
+        };
+      },
     },
     // watch: {},
 

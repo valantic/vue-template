@@ -68,10 +68,10 @@
 
     <!-- counter -->
     <div v-if="pictures.length > 1" v-bem:counter>
-      <div v-bem:counter-detail="{ image: true }">
+      <div v-bem:counter-detail.image>
         {{ $tc('c-swiper.images', images.length, {count: images.length}) }}
       </div>
-      <div v-if="videos && videos.length" v-bem:counter-detail="{ video: true }">
+      <div v-if="videos && videos.length" v-bem:counter-detail.video>
         {{ $tc('c-swiper.videos', videos.length, {count: videos.length}) }}
       </div>
     </div>

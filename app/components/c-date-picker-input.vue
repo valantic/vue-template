@@ -1,7 +1,7 @@
 <template>
-  <div v-bem="{ hasYearSelector }">
-    <div v-bem:buttons-wrapper="{ hasYearSelector }">
-      <div v-bem:input="{ hasYearSelector }">
+  <div v-bem="modifiers">
+    <div v-bem:buttons-wrapper="modifiers">
+      <div v-bem:input="modifiers">
         <e-input :id="`date-picker-value-${uuid}`"
                  ref="input"
                  :value="formatDate(validDate)"
@@ -132,6 +132,17 @@
         }
 
         return this.selectedDate;
+      },
+
+      /**
+       * Defines state modifier classes.
+       *
+       * @returns {Object} BEM classes
+       */
+      modifiers() {
+        return {
+          hasYearSelector: this.hasYearSelector,
+        };
       },
     },
     watch: {

@@ -1,5 +1,5 @@
 <template>
-  <div v-bem="{noResults: pagination.totalItems < 1}">
+  <div v-bem="componentModifiers">
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -19,9 +19,7 @@
                         value="0"
                         name="total"
                         @change="toggleAll">
-              <!-- eslint-disable-next-line vue/attributes-order-->
               <span v-if="!!selected.length" v-t="'c-table.deselectAll'" class="invisible"></span>
-              <!-- eslint-disable-next-line vue/attributes-order-->
               <span v-else v-t="'c-table.selectAll'" class="invisible"></span>
             </e-checkbox>
           </th>
@@ -195,7 +193,18 @@
       };
     },
 
-    // computed: {},
+    computed: {
+      /**
+       * Returns all modifiers for the component main class.
+       *
+       * @returns {Object}
+       */
+      componentModifiers() {
+        return {
+          noResults: this.pagination.totalItems < 1,
+        };
+      },
+    },
     watch: {
       /**
        * Observes the selected lists and sends the update event on every change.

@@ -159,3 +159,9 @@
   };
 </script>
 ```
+
+
+#### is rezisable
+```vue
+<e-textarea name="demo" is-resizable placeholder="insert text..."/>
+```

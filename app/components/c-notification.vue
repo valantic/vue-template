@@ -1,7 +1,7 @@
 <template>
-  <div v-bem="{ type: notification.message.type, confirm: notification.confirm, displayType, visible }">
+  <div v-bem="componentModifiers">
     <div v-bem:icon></div>
-    <div v-bem:inner="{ isProductTile: notification.message.type === 'add-to-cart'}">
+    <div v-bem:inner="innerModifiers">
       <template v-if="notification.message.type !== 'add-to-cart'">
         <div v-if="notification.title" v-bem:title>
           {{ notification.title }}
@@ -12,7 +12,7 @@
            v-bem:product-tile-wrapper></div>
     </div>
     <div v-if="typeof notification.confirm === 'function'" v-bem:actions>
-      <div v-if="typeof notification.decline === 'function'" v-bem:action="{ decline: true }">
+      <div v-if="typeof notification.decline === 'function'" v-bem:action.decline>
         <e-button :progress="declineProgress"
                   :disabled="confirmProgress"
                   width="auto"
@@ -20,7 +20,7 @@
           {{ $t('c-notification.decline') }}
         </e-button>
       </div>
-      <div v-bem:action="{ confirm: true }">
+      <div v-bem:action.confirm>
         <e-button :progress="confirmProgress"
                   :disabled="declineProgress"
                   width="auto"
@@ -129,6 +129,32 @@
       hasProductData() {
         return !!(this.notification.message && this.notification.message.meta && this.notification.message.meta.product);
       },
+
+      /**
+       * Returns all modifiers for the component main class.
+       *
+       * @returns {Object}
+       */
+      componentModifiers() {
+        return {
+          type: this.notification.message.type,
+          confirm: this.notification.confirm,
+          displayType: this.displayType,
+          visible: this.visible,
+        };
+      },
+
+      /**
+       * Returns all modifiers for the component inner class.
+       *
+       * @returns {Object}
+       */
+      innerModifiers() {
+        return {
+          isProductTile: this.notification.message.type === 'add-to-cart'
+        };
+      },
+
     },
     // watch: {},
 

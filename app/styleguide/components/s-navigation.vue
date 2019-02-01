@@ -1,8 +1,8 @@
 <template>
   <div v-bem>
-    <div v-bem:navigation-wrapper="{ position: navPosition, open: isOpen }" @click="onClick">
+    <div v-bem:navigation-wrapper="wrapperModifiers" @click="onClick">
       <ul v-bem:navigation>
-        <li v-bem:navigation-item="{ logo: true }">
+        <li v-bem:navigation-item.logo>
           <a v-bem:navigation-link
              href="http://www.valantic.com"
              target="_blank"
@@ -10,13 +10,13 @@
             <img src="../assets/valantic.svg" alt="valantic">
           </a>
         </li>
-        <li v-bem:navigation-item="{ language: true }" @click.stop>
+        <li v-bem:navigation-item.language @click.stop>
           <s-language />
         </li>
-        <li v-bem:navigation-item="{ theme: true }" @click.stop>
+        <li v-bem:navigation-item.theme @click.stop>
           <s-theme-selector />
         </li>
-        <li v-bem:navigation-item="{ settings: true }">
+        <li v-bem:navigation-item.settings>
           <h2>Settings</h2>
           <s-demo-settings />
         </li>
@@ -25,7 +25,7 @@
           v-for="route in routes"
           v-if="route.meta"
           :key="route.name"
-          v-bem:navigationItem
+          v-bem:navigation-item
           :to="{ name: route.name }"
           :active-class="`${$options.name}-item--active-path`"
           :exact-active-class="`${$options.name}-item--active`"
@@ -35,7 +35,7 @@
             {{ route.meta.title }}
           </a>
         </router-link>
-        <li v-bem:navigation-item="{ components: true }">
+        <li v-bem:navigation-item.components>
           <a v-bem:navigation-link
              :href="styleguidistUrl"
              target="_blank"
@@ -96,6 +96,18 @@
           ? '/styleguidist'
           : '//localhost:6060';
       },
+
+      /**
+       * Returns all modifiers for the wrapper class.
+       *
+       * @returns {Object}
+       */
+      wrapperModifiers() {
+        return {
+          position: this.navPosition,
+          open: this.isOpen,
+        };
+      }
     },
     methods: {
       onClick() {

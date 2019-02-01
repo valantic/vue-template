@@ -4,7 +4,7 @@
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false">
       <input v-model="internalValue"
-             v-bem:field="{ selected: internalValue === value }"
+             v-bem:field="fieldModifiers"
              v-bind="$attrs"
              :disabled="disabled"
              :value="value"
@@ -93,7 +93,18 @@
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
         };
-      }
+      },
+
+      /**
+       * Returns all modifiers for the field class.
+       *
+       * @returns {Object}
+       */
+      fieldModifiers() {
+        return {
+          selected: this.internalValue === this.value,
+        };
+      },
     },
     // watch: {},
 

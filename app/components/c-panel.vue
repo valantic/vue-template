@@ -178,7 +178,7 @@
       },
       plusModifiers() {
         return {
-          size: this.triangleButtonSize.toString(),
+          size: this.triangleButtonSize,
           color: this.triangleButtonPlusColor,
           open: this.triangleButtonOpen,
         };

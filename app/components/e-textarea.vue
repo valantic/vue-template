@@ -1,6 +1,6 @@
 <template>
   <div v-bem="modifiers">
-    <textarea v-bem:field="{ isResizable }"
+    <textarea v-bem:field="fieldModifiers"
               :name="name"
               :disabled="disabled"
               :rows="rows"
@@ -97,6 +97,17 @@
           notification: Boolean(this.$props.notification && this.hasFocus),
         };
       },
+
+      /**
+       * Returns all modifiers for the field class.
+       *
+       * @returns {Object}
+       */
+      fieldModifiers() {
+        return {
+          isResizable: this.isResizable,
+        };
+      }
     },
     // watch: {},
 

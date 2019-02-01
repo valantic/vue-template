@@ -29,7 +29,7 @@
 <script>
   import cModalHeader01 from '@/components/c-modal-header-01';
   import uuid from '../mixins/uuid';
-  import { bemMixin } from '@verstaerker/vue-bem';
+  import * as bem from '@verstaerker/vue-bem';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
 
@@ -45,7 +45,7 @@
     },
     mixins: [
       uuid,
-      bemMixin, // TODO: Check why this removes the component in styleguidist.
+      bem.bemMixin,
     ],
 
     props: {

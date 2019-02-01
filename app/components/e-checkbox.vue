@@ -7,11 +7,11 @@
       <input
         v-model="internalValue"
         v-bem:field
+        v-bind="$attrs"
         :aria-checked="isChecked ? 'true' : 'false'"
         :disabled="disabled"
         :value="value"
         :name="name"
-        v-bind="$attrs"
         type="checkbox"
         @blur="onBlur"
         @change="onChange"
