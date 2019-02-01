@@ -1,10 +1,10 @@
 <template>
   <label>
     <span class="invisible">Theme</span>
-    <select :class="b()" @change="onChange">
+    <select v-bem @change="onChange">
       <option v-for="theme in themes"
-              :value="theme.id"
               :key="theme.id"
+              :value="theme.id"
               :selected="theme.selected"
       >
         {{ theme.name }}

@@ -1,53 +1,57 @@
 <template>
-  <div :class="b()">
-    <div :class="b('left')">
+  <div v-bem>
+    <div v-bem:left>
       <label v-t="'c-table-pagination.itemsPerPage'"
-             :class="b('select-label')"
+             v-bem:select-label
              :for="`table-rows--${uuid}`"></label>
-      <div :class="b('select-wrapper')">
-        <e-select :value="rowsPerPageValue"
+      <div v-bem:select-wrapper>
+        <e-select :id="`table-rows--${uuid}`"
+                  :value="rowsPerPageValue"
                   :options-list="rowsPerPageOptionsFormatted"
-                  :id="`table-rows--${uuid}`"
                   name="sorting"
                   @input="onUpdateRowsPerPage"
         />
       </div>
     </div>
-    <div :class="b('right')">
-      <div :class="b('amount')">
+    <div v-bem:right>
+      <div v-bem:amount>
         <div>
           {{ currentItemRange.minValue }} - {{ currentItemRange.maxValue }}
           {{ $t('c-table-pagination.from') }}
           {{ totalAmount }}
         </div>
       </div>
-      <ul :class="b('pages')">
-        <li v-for="pageNumber in pages" :key="`page-${pageNumber}`" :class="b('page-item', {active: currentPage === pageNumber})">
-          <a :class="b('page-link')"
+      <ul v-bem:pages>
+        <li v-for="pageNumber in pages"
+            :key="`page-${pageNumber}`"
+            v-bem:page-item="{active: currentPage === pageNumber}">
+          <a v-bem:page-link
              :title="$t('c-table-pagination.pageNumberTitle', {pageNumber})"
              href="#"
-             @click.prevent="goToPage({ pageNumber })">{{ pageNumber }}</a>
+             @click.prevent="goToPage({ pageNumber })">
+            {{ pageNumber }}
+          </a>
         </li>
       </ul>
-      <div :class="b('arrows')">
-        <a :class="b('arrow', {disabled: currentPage <= 1})"
+      <div v-bem:arrows>
+        <a v-bem:arrow="{disabled: currentPage <= 1}"
            :title="$t('c-table-pagination.lastPageTitle')"
            href="#"
            @click.prevent="onClickBack">
           <e-icon icon="i-arrow--left--info"
                   width="15"
                   height="15"
-                  inline/>
+                  inline />
           <span v-t="'c-table-pagination.lastPageTitle'" class="invisible"></span>
         </a>
-        <a :class="b('arrow', {disabled: maxPage <= currentPage})"
+        <a v-bem:arrow="{disabled: maxPage <= currentPage}"
            :title="$t('c-table-pagination.nextPageTitle')"
            href="#"
            @click.prevent="onClickNext">
           <e-icon icon="i-arrow--right--info"
                   width="15"
                   height="15"
-                  inline/>
+                  inline />
           <span v-t="'c-table-pagination.nextPageTitle'" class="invisible"></span>
         </a>
       </div>
@@ -56,7 +60,7 @@
 </template>
 
 <script>
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
 
   /**
    * This component is for the usage with a vuetify v-data-table component for the external pagination.
@@ -302,7 +306,7 @@
       display: flex;
       padding: $spacing--5 0 $spacing--5 $spacing--30;
     }
-    
+
     &__amount {
       display: none;
       align-items: center;
@@ -312,7 +316,7 @@
         display: flex;
       }
     }
-    
+
     &__pages {
       display: flex;
       align-items: center;
@@ -342,12 +346,12 @@
       color: inherit;
       cursor: pointer;
     }
-    
+
     &__arrows {
       display: flex;
       align-items: center;
     }
-    
+
     &__arrow {
       .e-icon {
         display: flex;

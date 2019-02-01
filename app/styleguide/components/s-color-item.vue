@@ -1,8 +1,11 @@
 <template>
-  <div :class="b()">
-    <div :class="b('color')" :style="backgroundColor"></div>
-    <div :class="b('name')" v-html="displayName"></div>
-    <div :class="b('value')">{{ displayValue }}</div>
+  <div v-bem>
+    <div v-bem:color :style="backgroundColor"></div>
+    <!-- eslint-disable-next-line vue/no-v-html -->
+    <div v-bem:name v-html="displayName"></div>
+    <div v-bem:value>
+      {{ displayValue }}
+    </div>
   </div>
 </template>
 

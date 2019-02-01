@@ -1,33 +1,37 @@
 <template>
-  <div :class="b({ type: notification.message.type, confirm: notification.confirm, displayType, visible })">
-    <div :class="b('icon')"></div>
-    <div :class="b('inner', { isProductTile: notification.message.type === 'add-to-cart'})">
+  <div v-bem="componentModifiers">
+    <div v-bem:icon></div>
+    <div v-bem:inner="innerModifiers">
       <template v-if="notification.message.type !== 'add-to-cart'">
-        <div v-if="notification.title" :class="b('title')">
+        <div v-if="notification.title" v-bem:title>
           {{ notification.title }}
         </div>
         {{ notification.message.message }}
       </template>
       <div v-if="notification.message.type === 'add-to-cart' && hasProductData"
-           :class="b('product-tile-wrapper')">
-        foo
-      </div>
+           v-bem:product-tile-wrapper></div>
     </div>
-    <div v-if="typeof notification.confirm === 'function'" :class="b('actions')">
-      <div v-if="typeof notification.decline === 'function'" :class="b('action', { decline: true })">
+    <div v-if="typeof notification.confirm === 'function'" v-bem:actions>
+      <div v-if="typeof notification.decline === 'function'" v-bem:action.decline>
         <e-button :progress="declineProgress"
                   :disabled="confirmProgress"
                   width="auto"
-                  @click="onDecline">{{ $t('c-notification.decline') }}</e-button>
+                  @click="onDecline">
+          {{ $t('c-notification.decline') }}
+        </e-button>
       </div>
-      <div :class="b('action', { confirm: true })">
+      <div v-bem:action.confirm>
         <e-button :progress="confirmProgress"
                   :disabled="declineProgress"
                   width="auto"
-                  @click="onConfirm">{{ $t('c-notification.confirm') }}</e-button>
+                  @click="onConfirm">
+          {{ $t('c-notification.confirm') }}
+        </e-button>
       </div>
     </div>
-    <button v-if="!notification.confirm" :class="b('close')" @click="close">
+    <button v-if="!notification.confirm"
+            v-bem:close
+            @click="close">
       <e-icon
         icon="i-close"
         width="15"
@@ -125,6 +129,32 @@
       hasProductData() {
         return !!(this.notification.message && this.notification.message.meta && this.notification.message.meta.product);
       },
+
+      /**
+       * Returns all modifiers for the component main class.
+       *
+       * @returns {Object}
+       */
+      componentModifiers() {
+        return {
+          type: this.notification.message.type,
+          confirm: this.notification.confirm,
+          displayType: this.displayType,
+          visible: this.visible,
+        };
+      },
+
+      /**
+       * Returns all modifiers for the component inner class.
+       *
+       * @returns {Object}
+       */
+      innerModifiers() {
+        return {
+          isProductTile: this.notification.message.type === 'add-to-cart'
+        };
+      },
+
     },
     // watch: {},
 

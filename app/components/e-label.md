@@ -3,7 +3,7 @@
 <template>
   <div>
   
-  <e-label name="Label" position="top">
+  <e-label name="Label" position="top" invisible>
      <e-input v-model="demo" name="demo" placeholder="enter text..."/> 
   </e-label>
   

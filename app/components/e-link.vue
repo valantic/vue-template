@@ -1,5 +1,5 @@
 <template>
-  <a :class="b({ spacing })">
+  <a v-bem="{ spacing }">
     <slot></slot>
   </a>
 </template>

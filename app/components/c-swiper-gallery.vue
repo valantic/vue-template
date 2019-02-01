@@ -1,24 +1,27 @@
 <template>
-  <div :class="b(modifiers)"
+  <div v-bem="modifiers"
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
-
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container" :class="b('container swiper-container')">
-
-      <div :class="b('wrapper swiper-wrapper')">
+    <div ref="container"
+         v-bem:container
+         class="swiper-container">
+      <div v-bem:wrapper
+           class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="picture in pictures"
-             :class="b('slide swiper-slide')"
-             :key="picture.id">
-
-          <button :class="b('trigger')"
+             :key="picture.id"
+             v-bem:slide
+             class="swiper-slide">
+          <button v-bem:trigger
                   type="button"
                   @click.prevent="modalOpen = true">
-            <span :class="b('image-wrapper-inner')">
-              <div v-if="picture.isVideo" :class="b('video-preview-wrapper')">
-                <img :src="picture.thumbSrc" :class="b('video-thumbnail')" alt="">
-                <span :class="b('video-thumbnail-overlay')"></span>
+            <span v-bem:image-wrapper-inner>
+              <div v-if="picture.isVideo" v-bem:video-preview-wrapper>
+                <img v-bem:video-thumbnail
+                     :src="picture.thumbSrc"
+                     alt="">
+                <span v-bem:video-thumbnail-overlay></span>
               </div>
               <e-picture
                 v-else
@@ -29,18 +32,19 @@
             </span>
 
             <span v-t="'c-swiper.zoom'" class="invisible"></span>
-
           </button>
-
         </div>
       </div>
 
       <!-- navigation -->
-      <div :class="b('pagination swiper-pagination')"></div>
+      <div v-bem:pagination
+           class="swiper-pagination"></div>
 
       <!-- buttons-->
-      <div :class="b('button-prev swiper-button-prev')"></div>
-      <div :class="b('button-next swiper-button-next')"></div>
+      <div v-bem:button-prev
+           class="swiper-button-prev"></div>
+      <div v-bem:button-next
+           class="swiper-button-next"></div>
 
       <!-- modal -->
       <c-modal
@@ -50,7 +54,7 @@
         inner-spacing="0"
         mobile-transition="fade"
         @close="modalClose">
-        <div :class="b('modal-close-icon')" @click="modalOpen = false">
+        <div v-bem:modal-close-icon @click="modalOpen = false">
           <e-icon icon="i-close"
                   width="25"
                   height="25"
@@ -63,15 +67,14 @@
     </div>
 
     <!-- counter -->
-    <div v-if="pictures.length > 1" :class="b('counter')">
-      <div :class="b('counter-detail', { image: true })">
+    <div v-if="pictures.length > 1" v-bem:counter>
+      <div v-bem:counter-detail.image>
         {{ $tc('c-swiper.images', images.length, {count: images.length}) }}
       </div>
-      <div v-if="videos && videos.length" :class="b('counter-detail', { video: true })">
+      <div v-if="videos && videos.length" v-bem:counter-detail.video>
         {{ $tc('c-swiper.videos', videos.length, {count: videos.length}) }}
       </div>
     </div>
-
   </div>
 </template>
 
@@ -80,7 +83,7 @@
   import { BREAKPOINTS } from '@/setup/globals';
   import cSwiperModal from '@/components/c-swiper-modal';
   import mapImages from '@/helpers/map-images';
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
 
   const swiperInstances = {};
 

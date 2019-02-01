@@ -1,49 +1,65 @@
 <template>
-  <div :class="b()">
-    <h1>Example form</h1>
+  <div v-bem>
+    <e-heading tag-name="h1">
+      Example form
+    </e-heading>
     <form action="#form-url" method="POST">
       <!-- e-input -->
-      <div :class="b('part')">
+      <div v-bem:part>
         <e-label name="Firstname" position="top">
-          <e-input v-model="demo.firstName" name="firstName" placeholder="Firstname..."/>
+          <e-input v-model="demo.firstName" name="firstName" placeholder="Firstname..." />
         </e-label>
       </div>
 
       <!-- e-textarea -->
-      <div :class="b('part')">
+      <div v-bem:part>
         <e-label name="Message" position="top">
-          <e-textarea v-model="demo.message" name="message" placeholder="Message..."/>
+          <e-textarea v-model="demo.message" name="message" placeholder="Message..." />
         </e-label>
       </div>
 
       <!-- e-checkbox -->
-      <div :class="b('part')">
+      <div v-bem:part>
         <e-label name="Meal" position="top">
-          <e-checkbox v-model="demo.meal" value="pizza" name="meal">Pizza</e-checkbox>
-          <e-checkbox v-model="demo.meal" value="spaghetti" name="meal">Spaghetti</e-checkbox>
-          <e-checkbox v-model="demo.meal" value="lasagne" name="meal">Lasagne</e-checkbox>
+          <e-checkbox v-model="demo.meal" value="pizza" name="meal">
+            Pizza
+          </e-checkbox>
+          <e-checkbox v-model="demo.meal" value="spaghetti" name="meal">
+            Spaghetti
+          </e-checkbox>
+          <e-checkbox v-model="demo.meal" value="lasagne" name="meal">
+            Lasagne
+          </e-checkbox>
         </e-label>
       </div>
 
       <!-- e-radio -->
-      <div :class="b('part')">
+      <div v-bem:part>
         <e-label name="Drink" position="top">
-          <e-radio v-model="demo.drink" value="cola" name="drink">Cola</e-radio>
-          <e-radio v-model="demo.drink" value="fanta" name="drink">Fanta</e-radio>
-          <e-radio v-model="demo.drink" value="sprite" name="drink">Sprite</e-radio>
+          <e-radio v-model="demo.drink" value="cola" name="drink">
+            Cola
+          </e-radio>
+          <e-radio v-model="demo.drink" value="fanta" name="drink">
+            Fanta
+          </e-radio>
+          <e-radio v-model="demo.drink" value="sprite" name="drink">
+            Sprite
+          </e-radio>
         </e-label>
       </div>
 
       <!-- e-select -->
-      <div :class="b('part')">
+      <div v-bem:part>
         <e-label name="Language" position="top">
           <e-select v-model="demo.language" :options-list="mock.selects" name="language" />
         </e-label>
       </div>
 
       <!-- e-button -->
-      <div :class="b('part')">
-        <e-button type="submit">Submit</e-button>
+      <div v-bem:part>
+        <e-button type="submit">
+          Submit
+        </e-button>
       </div>
     </form>
     <hr style="margin-top: 50px;">

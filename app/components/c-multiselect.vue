@@ -1,24 +1,30 @@
 <template>
-  <div :class="b(modifiers)"
+  <div v-bem="modifiers"
        @mouseenter="hasHover=true"
        @mouseleave="hasHover=false"
   >
-    <p v-if="title.length" :class="b('title')">{{ title }}</p>
-    <div :class="b('wrapper', { isActive })" @click="onInsideClick">
-      <div :class="b('content')">
-        <div v-if="!isActive" :class="b('output')" @click="onOutputClick">
-          <span v-if="outputValue" :class="b('value')">{{ outputValue }}</span>
-          <span v-else :class="b('placeholder')">{{ placeholder }}</span>
+    <p v-if="title.length" v-bem:title>
+      {{ title }}
+    </p>
+    <div v-bem:wrapper="{ isActive }" @click="onInsideClick">
+      <div v-bem:content>
+        <div v-if="!isActive" v-bem:output @click="onOutputClick">
+          <span v-if="outputValue" v-bem:value>
+            {{ outputValue }}
+          </span>
+          <span v-else v-bem:placeholder>
+            {{ placeholder }}
+          </span>
 
-          <div v-show="isError" :class="b('icon-wrapper')">
-            <span :class="b('icon-splitter')"></span>
+          <div v-show="isError" v-bem:icon-wrapper>
+            <span v-bem:icon-splitter></span>
             <e-icon inline
                     icon="i-error"
                     width="20px"
                     height="20px"
             />
           </div>
-          <div v-show="!isError" :class="b('icon-wrapper')">
+          <div v-show="!isError" v-bem:icon-wrapper>
             <e-icon v-show="isSuccess"
                     inline
                     icon="i-check"
@@ -33,7 +39,7 @@
           </div>
         </div>
 
-        <div v-else :class="b('search-wrapper')">
+        <div v-else v-bem:search-wrapper>
           <e-input ref="searchInput"
                    v-model="searchTerm"
                    :placeholder="$t('c-multiselect.search')"
@@ -47,32 +53,32 @@
                    tabindex="0"
                    @input="onSearchInput"
           >
-            <e-icon :class="b('icon')"
+            <e-icon v-bem:icon
                     icon="i-search"
                     inline />
           </e-input>
         </div>
-        <div :class="b('items-wrapper')">
+        <div v-bem:items-wrapper>
           <div
             v-for="item in checkboxItemsFiltered"
             v-show="item.display"
-            :class="b('item-wrapper')"
             :key="item.id"
+            v-bem:item-wrapper
           >
-            <e-checkbox v-model="checkedItems"
+            <e-checkbox :ref="item.name"
+                        v-model="checkedItems"
                         :name="item.name"
                         :value="trimValue(item.value)"
-                        :ref="item.name"
                         @change="onCheckboxChange">
               <span>{{ item.displayName }}</span>
             </e-checkbox>
           </div>
 
-          <span v-if="checkboxItemsFilteredEmpty" :class="b('list-empty')">
+          <span v-if="checkboxItemsFilteredEmpty" v-bem:list-empty>
             <span v-t="'c-multiselect.itemsEmpty'"></span>
           </span>
         </div>
-        <div :class="b('button-wrapper')">
+        <div v-bem:button-wrapper>
           <e-button :disabled="!isChanged"
                     width="full"
                     type="button"
@@ -83,11 +89,11 @@
           </e-button>
         </div>
 
-        <div v-if="isError && isActive" :class="b('error-msg-wrapper')">
-          <span :class="b('error-msg')">
+        <div v-if="isError && isActive" v-bem:error-msg-wrapper>
+          <span v-bem:error-msg>
             {{ errorMessage }}
           </span>
-          <div :class="b('error-icon-wrapper')">
+          <div v-bem:error-icon-wrapper>
             <e-icon inline
                     icon="i-error"
                     color="white"

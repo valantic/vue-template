@@ -1,6 +1,6 @@
 <template>
-  <div :class="b(modifiers)">
-    <textarea :class="b('field', { isResizable })"
+  <div v-bem="modifiers">
+    <textarea v-bem:field="fieldModifiers"
               :name="name"
               :disabled="disabled"
               :rows="rows"
@@ -10,20 +10,21 @@
               @blur="onBlur"
               @input="onInput">
     </textarea>
-    <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-wrapper')">
-      <span :class="b('icon-splitter')"></span>
-      <e-icon :class="b('state-icon')"
+    <span v-if="!hasDefaultState && !hasFocus" v-bem:icon-wrapper>
+      <span v-bem:icon-splitter></span>
+      <e-icon v-bem:state-icon
               :icon="stateIcon"
               inline />
     </span>
-    <div v-if="notification && hasFocus" :class="b('notification')">
+    <div v-if="notification && hasFocus" v-bem:notification>
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification :state="state" v-html="notification" />
     </div>
   </div>
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
   import cFormNotification from '@/components/c-form-notification';
 
   /**
@@ -96,6 +97,17 @@
           notification: Boolean(this.$props.notification && this.hasFocus),
         };
       },
+
+      /**
+       * Returns all modifiers for the field class.
+       *
+       * @returns {Object}
+       */
+      fieldModifiers() {
+        return {
+          isResizable: this.isResizable,
+        };
+      }
     },
     // watch: {},
 

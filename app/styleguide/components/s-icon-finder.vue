@@ -1,26 +1,30 @@
 <template>
-  <div :class="b()">
-    <div :class="b('filter')">
-      <input :class="b('filter-input')"
-             v-model="filter"
+  <div v-bem>
+    <div v-bem:filter>
+      <input v-model="filter"
+             v-bem:filter-input
              placeholder="Search …"
       >
     </div>
-    <div :class="b('grid')">
+    <div v-bem:grid>
       <div v-for="(icon, index) in filteredIcons"
-           :class="b('grid-item', { negative: icon.negative })"
            :key="index"
+           v-bem:grid-item="{ negative: icon.negative }"
            role="button"
            @click="copyToClipboard(icon)"
       >
-        <div :class="b('icon-wrapper')">
-          <e-icon :icon="icon.name" :key="icon.name" width="50"/>
+        <div v-bem:icon-wrapper>
+          <e-icon :key="icon.name" :icon="icon.name" width="50" />
         </div>
-        <div :class="b('icon-label')">{{ icon.name }}</div>
+        <div v-bem:icon-label>
+          {{ icon.name }}
+        </div>
       </div>
     </div>
-    <div v-if="notification" :class="b('notification')">{{ notification }}</div>
-    <input ref="input" :class="b('clipboard')" type="text">
+    <div v-if="notification" v-bem:notification>
+      {{ notification }}
+    </div>
+    <input ref="input" v-bem:clipboard type="text">
   </div>
 </template>
 

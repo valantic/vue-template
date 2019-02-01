@@ -1,42 +1,47 @@
 <template>
-  <div :class="b()">
-    <div :class="b('navigation-wrapper', { position: navPosition, open: isOpen })" @click="onClick">
-      <ul :class="b('navigation')">
-        <li :class="b('navigation-item', { logo: true })">
-          <a :class="b('navigation-link')"
+  <div v-bem>
+    <div v-bem:navigation-wrapper="wrapperModifiers" @click="onClick">
+      <ul v-bem:navigation>
+        <li v-bem:navigation-item.logo>
+          <a v-bem:navigation-link
              href="http://www.valantic.com"
              target="_blank"
           >
             <img src="../assets/valantic.svg" alt="valantic">
           </a>
         </li>
-        <li :class="b('navigation-item', { language: true })" @click.stop>
-          <s-language/>
+        <li v-bem:navigation-item.language @click.stop>
+          <s-language />
         </li>
-        <li :class="b('navigation-item', { theme: true })" @click.stop>
-          <s-theme-selector/>
+        <li v-bem:navigation-item.theme @click.stop>
+          <s-theme-selector />
         </li>
-        <li :class="b('navigation-item', { settings: true })">
+        <li v-bem:navigation-item.settings>
           <h2>Settings</h2>
           <s-demo-settings />
         </li>
+        <!-- eslint-disable vue/no-use-v-if-with-v-for -->
         <router-link
           v-for="route in routes"
           v-if="route.meta"
           :key="route.name"
+          v-bem:navigation-item
           :to="{ name: route.name }"
-          :class="b('navigation-item')"
           :active-class="`${$options.name}-item--active-path`"
           :exact-active-class="`${$options.name}-item--active`"
           tag="li"
           exact>
-          <a :class="b('navigation-link')">{{ route.meta.title }}</a>
+          <a v-bem:navigation-link>
+            {{ route.meta.title }}
+          </a>
         </router-link>
-        <li :class="b('navigation-item', { components: true })">
-          <a :class="b('navigation-link')"
+        <li v-bem:navigation-item.components>
+          <a v-bem:navigation-link
              :href="styleguidistUrl"
              target="_blank"
-          >Components</a>
+          >
+            Components
+          </a>
         </li>
       </ul>
     </div>
@@ -91,6 +96,18 @@
           ? '/styleguidist'
           : '//localhost:6060';
       },
+
+      /**
+       * Returns all modifiers for the wrapper class.
+       *
+       * @returns {Object}
+       */
+      wrapperModifiers() {
+        return {
+          position: this.navPosition,
+          open: this.isOpen,
+        };
+      }
     },
     methods: {
       onClick() {

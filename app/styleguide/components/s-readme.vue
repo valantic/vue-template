@@ -1,6 +1,6 @@
 <template>
-  <div :class="b()">
-    <readme/>
+  <div v-bem>
+    <readme />
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
-  <div :class="b()" data-app>
-    <div ref="content" :class="b('content')" >
+  <div v-bem data-app>
+    <div ref="content" v-bem:content>
       <div ref="inner"
-           :class="b('inner')">
+           v-bem:inner>
         <c-notification-container />
         <slot></slot>
       </div>

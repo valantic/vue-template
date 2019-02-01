@@ -1,6 +1,6 @@
 <template>
-  <ul :class="b()">
-    <li :class="b('item')">
+  <ul v-bem>
+    <li v-bem:item>
       <s-toggle checked>
         Logged in
       </s-toggle>

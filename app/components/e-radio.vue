@@ -1,19 +1,19 @@
 <template>
-  <div :class="b(modifiers)">
-    <label :class="b('label')"
+  <div v-bem="modifiers">
+    <label v-bem:label
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false">
-      <input :class="b('field', { selected: internalValue === value })"
+      <input v-model="internalValue"
+             v-bem:field="fieldModifiers"
              v-bind="$attrs"
              :disabled="disabled"
              :value="value"
-             v-model="internalValue"
              :name="name"
              type="radio"
              @change="onChange"
       >
-      <span :class="b('fake-button')"></span>
-      <span :class="b('label-name')">
+      <span v-bem:fake-button></span>
+      <span v-bem:label-name>
         <slot></slot>
       </span>
     </label>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
 
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
@@ -93,7 +93,18 @@
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
         };
-      }
+      },
+
+      /**
+       * Returns all modifiers for the field class.
+       *
+       * @returns {Object}
+       */
+      fieldModifiers() {
+        return {
+          selected: this.internalValue === this.value,
+        };
+      },
     },
     // watch: {},
 

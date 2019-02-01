@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
 
   </div>
 </template>

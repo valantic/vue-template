@@ -1,16 +1,17 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <e-label :for="startId"
              :name="labelName"
              :position="labelPosition">
-      <div :class="b('fields')">
+      <div v-bem:fields>
         <c-date-picker-input :id="startId"
                              :selected-date="internalStart"
                              :validate-date="isValidStartDate"
                              :is-event-date="isEventDate"
                              @input="onInputStartValue"
         />
-        <div :class="b('to')">—</div>
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+        <div v-bem:to>—</div>
         <c-date-picker-input :selected-date="internalEnd"
                              :validate-date="isValidEndDate"
                              :is-event-date="isEventDate"
@@ -22,7 +23,7 @@
 </template>
 
 <script>
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
   import cDatePickerInput from './c-date-picker-input';
 
   /**

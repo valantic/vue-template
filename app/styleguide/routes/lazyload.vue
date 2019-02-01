@@ -1,17 +1,17 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <h1>Lazyload</h1>
 
     <div
       v-for="item in items"
       :key="item.key"
-      :class="b('item')">
+      v-bem:item>
       <e-picture
         :srcset="item.srcset"
         :sizes="item.sizes"
         :fallback="item.fallback"
         alt="an image"
-        inline="true"/>
+        inline="true" />
     </div>
   </div>
 </template>

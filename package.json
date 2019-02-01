@@ -10,7 +10,7 @@
     "build:styleguide": "npm run build -- --env.styleguide && vue-styleguidist build",
     "build:watch": "npm run build -- --env.watch",
     "eslint": "eslint --cache --ext .js,.vue app tests/unit/specs; exit 0;",
-    "eslint:fix": "eslint --ext .js,.vue app test/unit/specs --fix; exit 0;",
+    "eslint:fix": "eslint --ext .js,.vue app tests/unit/specs --fix; exit 0;",
     "stylelint": "stylelint --cache 'app/**/*.?(vue|scss)'; exit 0",
     "stylelint:fix": "echo \"Using stylelint --fix is not a good idea when using *.vue files...\"",
     "lint": "npm run eslint && npm run stylelint",
@@ -29,7 +29,7 @@
     "url": "git+https://github.com/valantic/vue-template.git"
   },
   "engines": {
-    "node": ">=8.10.0 <9.0.0",
+    "node": ">=10.0.0 <11.0.0",
     "npm": ">=5.7.1"
   },
   "keywords": [
@@ -45,6 +45,7 @@
   "homepage": "https://github.com/valantic/vue-template",
   "dependencies": {
     "@babel/polyfill": "~7.0.0",
+    "@verstaerker/vue-bem": "~1.2.0",
     "axios": "~0.18.0",
     "css-vars-ponyfill": "~1.12.2",
     "lazysizes": "~4.1.5",
@@ -79,13 +80,13 @@
     "babel-plugin-transform-imports": "~1.5.1",
     "copy-webpack-plugin": "~4.6.0",
     "css-loader": "~1.0.1",
-    "eslint": "~5.12.0",
+    "eslint": "~5.12.1",
     "eslint-config-airbnb-base": "~13.1.0",
     "eslint-config-valantic": "~6.0.0",
-    "eslint-import-resolver-webpack": "~0.10.1",
+    "eslint-import-resolver-webpack": "~0.11.0",
     "eslint-loader": "~2.1.1",
-    "eslint-plugin-import": "~2.14.0",
-    "eslint-plugin-vue": "~4.7.1",
+    "eslint-plugin-import": "~2.16.0",
+    "eslint-plugin-vue": "~5.1.0",
     "faker": "~4.1.0",
     "file-loader": "~2.0.0",
     "friendly-errors-webpack-plugin": "~1.7.0",

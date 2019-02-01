@@ -1,8 +1,8 @@
 <template>
-  <div :class="b()">
-    <div :class="b('examplecontainer')">
+  <div v-bem>
+    <div v-bem:example-container>
       <h1>Headings</h1>
-      <div :class="b('examplebox')">
+      <div v-bem:example-box>
         <e-heading
           tag-name="h1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -30,7 +30,7 @@
       </div>
 
       <h1>Headings with underline</h1>
-      <div :class="b('examplebox')">
+      <div v-bem:example-box>
         <e-heading
           tag-name="h1"
           underline>
@@ -67,7 +67,7 @@
       </div>
 
       <h1>Headings with links</h1>
-      <div :class="b('examplebox')">
+      <div v-bem:example-box>
         <e-heading
           tag-name="h1"
           underline>
@@ -117,13 +117,11 @@
 </template>
 
 <script>
-  import lDefault from '@/components/l-default';
   import eHeading from '@/components/e-heading';
 
   export default {
     name: 'headings',
     components: {
-      lDefault,
       eHeading
     },
 
@@ -156,11 +154,11 @@
 
 <style lang="scss">
   .headings {
-    &__examplecontainer {
+    &__example-container {
       margin: $spacing--30;
     }
 
-    &__examplebox {
+    &__example-box {
       margin: $spacing--30 $spacing--0;
     }
   }

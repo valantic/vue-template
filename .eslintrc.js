@@ -84,6 +84,22 @@ module.exports = {
       }
     }],
     'vue/name-property-casing': [2, 'kebab-case'],
+    'vue/html-closing-bracket-newline': [0],
+    // 'vue/multiline-html-element-content-newline': [1, { // TODO: currently does not allow additional properties (bug, https://github.com/vuejs/eslint-plugin-vue/issues/792)
+    //   ignoreWhenEmpty: true,
+    //   ignores: ['pre', 'textarea'],
+    //   allowEmptyLines: true
+    // }],
+    'vue/singleline-html-element-content-newline': [1, {
+      'ignoreWhenNoAttributes': true,
+      'ignoreWhenEmpty': true,
+      'ignores': [
+        'code',
+        'pre',
+        'span',
+        'textarea',
+      ]
+    }],
     'indent': 0, // Indent is not working with html script tag. Use 'vue/script-indent' instead
     'vue/script-indent': ['error', 2, {
       'baseIndent': 1,
