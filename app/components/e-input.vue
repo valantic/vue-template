@@ -61,7 +61,7 @@
 <script>
   import cFormNotification from '@/components/c-form-notification';
   import formStates from '../mixins/form-states';
-  import propValidationScale from '@/helpers/prop-validation-scale';
+  import propScale from '@/helpers/prop.scale';
 
   /**
    * Input form component
@@ -121,17 +121,13 @@
       /**
        * Defines the border Style
        *
-       * Available values: 0, 500
+       * Available values: [0, 500]
        * Default: 500
        */
-      border: {
-        default: 500,
-        type: [Number, String],
-        validator: propValidationScale([
-          0,
-          500,
-        ])
-      },
+      border: propScale([
+        0,
+        500,
+      ]),
 
       /**
        * Determines if the input should have a shadow on focus

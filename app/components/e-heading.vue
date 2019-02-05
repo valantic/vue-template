@@ -2,7 +2,7 @@
 
 <script>
   import * as bem from '@verstaerker/vue-bem';
-  import propValidationScale from '@/helpers/prop-validation-scale';
+  import propScale from '@/helpers/prop.scale';
 
   export default {
     name: 'e-heading',
@@ -77,18 +77,14 @@
       /**
        * Defines spacing for the heading element.
        *
-       * Valid values: `400, 500, 700, 800`
+       * Valid values: [400, 500, 700, 800]
        */
-      spacing: {
-        type: [Number, String],
-        default: 500,
-        validator: propValidationScale([
-          400,
-          500,
-          700,
-          800,
-        ]),
-      },
+      spacing: propScale([
+        400,
+        500,
+        700,
+        800,
+      ]),
 
       /**
        * Defines if the heading shall be uppercase.

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import propValidationScale from '@/helpers/prop-validation-scale';
+  import propScale from '@/helpers/prop.scale';
 
   /**
    * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
@@ -49,15 +49,11 @@
       /**
        * Defines the padding of the inner content.
        */
-      padding: {
-        type: [Number, String],
-        default: 500,
-        validator: propValidationScale([
-          0,
-          300,
-          500,
-        ]),
-      },
+      padding: propScale([
+        0,
+        300,
+        500,
+      ]),
 
       /**
        * Title of the toggle item.

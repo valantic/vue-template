@@ -32,7 +32,7 @@
   import * as bem from '@verstaerker/vue-bem';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
-  import propValidationScale from '@/helpers/prop-validation-scale';
+  import propScale from '@/helpers/prop.scale';
 
   /**
    * Components wraps the plugin https://github.com/euvl/vue-js-modal, it's output is rendered through vue-portal.
@@ -61,26 +61,18 @@
       /**
        * Set's the inner spacing of the modal [0, 500].
        */
-      innerSpacing: {
-        type: [Number, String],
-        default: 500,
-        validator: propValidationScale([
-          0,
-          500
-        ]),
-      },
+      innerSpacing: propScale([
+        0,
+        500
+      ]),
 
       /**
        * Defines size for modal [300, 600].
        */
-      size: {
-        type: [Number, String],
-        default: 300,
-        validator: propValidationScale([
-          300,
-          600,
-        ])
-      },
+      size: propScale([
+        300,
+        600,
+      ], 300),
 
       /**
        * Custom header component name.
@@ -106,16 +98,14 @@
 
       /**
        * Sets a modifier class for title spacing.
+       *
+       * Valid values: [0, 300, 500]
        */
-      titleSpacing: {
-        type: [Number, String],
-        default: 500,
-        validator: propValidationScale([
-          0,
-          300,
-          500
-        ]),
-      },
+      titleSpacing: propScale([
+        0,
+        300,
+        500
+      ]),
 
       /**
        * If 'true' adds a close icon to the header.

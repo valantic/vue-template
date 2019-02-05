@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import propValidationScale from '@/helpers/prop-validation-scale';
+  import propScale from '@/helpers/prop.scale';
 
   export default {
     name: 'e-progress',
@@ -30,15 +30,13 @@
 
       /**
        * Sets the inner spacing for the animation
+       *
+       * Valid values: [0, 500]
        */
-      spacing: {
-        type: [String, Number],
-        default: 500,
-        validator: propValidationScale([
-          0,
-          500
-        ])
-      },
+      spacing: propScale([
+        0,
+        500
+      ]),
 
       /**
        * Defines a fallback message. "e-progress.loading" is used by default

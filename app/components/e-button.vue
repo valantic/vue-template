@@ -4,7 +4,7 @@
   import * as bem from '@verstaerker/vue-bem';
   import touchDevice from '../mixins/touch-device';
   import eProgress from './e-progress';
-  import propValidationScale from '@/helpers/prop-validation-scale';
+  import propScale from '@/helpers/prop.scale';
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
@@ -41,18 +41,14 @@
       /**
        * Modifies the inner spacing for the button.
        *
-       * Valid values: `0, 500, 600, 700`
+       * Valid values: [0, 500, 600, 700]
        */
-      spacing: {
-        type: [String, Number],
-        default: 500,
-        validator: propValidationScale([
-          0,
-          500,
-          600,
-          700,
-        ]),
-      },
+      spacing: propScale([
+        0,
+        500,
+        600,
+        700,
+      ]),
 
       /**
        * If `true` the button gets the negative style

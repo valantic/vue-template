@@ -41,7 +41,7 @@
 </template>
 
 <script>
-  import propValidationScale from '@/helpers/prop-validation-scale';
+  import propScale from '@/helpers/prop.scale';
   import cNotificationContainer from '@/components/c-notification-container';
 
   /**
@@ -65,16 +65,14 @@
 
       /**
        * Sets a modifier class for title spacing options
+       *
+       * Valid values: [0, 300, 500]
        */
-      titleSpacing: {
-        type: [Number, String],
-        default: 500,
-        validation: propValidationScale([
-          0,
-          300,
-          500
-        ]),
-      },
+      titleSpacing: propScale([
+        0,
+        300,
+        500
+      ]),
 
       /**
        * Header option with closable icon
