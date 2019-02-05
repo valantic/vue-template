@@ -1,10 +1,9 @@
 <template>
-
-  <div :class="b(modifiers)">
+  <div v-bem="modifiers">
     <input v-if="uncontrolled"
            ref="input"
+           v-bem:field
            :autocomplete="autocomplete"
-           :class="b('field')"
            :disabled="disabled"
            :name="name"
            :title="title"
@@ -20,8 +19,8 @@
     >
     <input v-else
            ref="input"
+           v-bem:field
            :autocomplete="autocomplete"
-           :class="b('field')"
            :disabled="disabled"
            :name="name"
            :value="standalone ? internalValue : value"
@@ -37,26 +36,26 @@
            @keyup.down="onArrowKeyUp"
     >
 
-    <span v-if="$slots.fixedLabel" ref="fixedLabel" :class="b('fixed-label')">
+    <span v-if="$slots.fixedLabel" ref="fixedLabel" v-bem:fixed-label>
       <!-- @slot Use this slot for a fixed label inside the input field. -->
       <slot name="fixedLabel"></slot>
     </span>
-    <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
-      <span v-if="$slots.default" :class="b('slot')">
+    <span v-if="$slots.default || !hasDefaultState" ref="slot" v-bem:slot-wrapper>
+      <span v-if="$slots.default" v-bem:slot>
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
       </span>
-      <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
+      <span v-if="!hasDefaultState && !hasFocus" v-bem:icon-splitter></span>
       <e-icon v-if="!hasDefaultState && !hasFocus"
-              :class="b('state-icon')"
+              v-bem:state-icon
               :icon="stateIcon"
               inline />
     </span>
-    <div v-if="showNotification" :class="b('notification')">
-      <c-form-notification :state="state" v-html="notification"/>
+    <div v-if="showNotification" v-bem:notification>
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <c-form-notification :state="state" v-html="notification" />
     </div>
   </div>
-
 </template>
 
 <script>
@@ -125,7 +124,7 @@
        * Default: 500
        */
       border: {
-        default: '500', // vue-bem-cn currently does not support number values
+        default: 500,
         type: [Number, String],
         validator(value) {
           return [

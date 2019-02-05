@@ -1,28 +1,30 @@
 <template>
-  <div :class="b({ titleSpacing })">
-    <div :class="b('notifications')">
+  <div v-bem="{ titleSpacing }">
+    <div v-bem:notifications>
       <c-notification-container display-type="modal" />
     </div>
-    <div :class="b('inner', { mobile: isMobile })">
+    <div v-bem:inner.mobile>
       <a v-if="closable"
-         :class="b('close', { mobile: true })"
+         v-bem:close="{ mobile: true }"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
          @click="close">
         <span v-t="'c-modal-header-01.closeTitle'" class="invisible"></span>
       </a>
-      <div :class="b('close-icon-mobile')">
+      <div v-bem:close-icon-mobile>
         <e-icon
           icon="i-arrow--left--info"
           width="18"
           height="18"
         />
       </div>
-      <div :class="b('title')">
-        <e-heading v-if="title" :underline="!isMobile" tag-name="h1">{{ title }}</e-heading>
+      <div v-bem:title>
+        <e-heading v-if="title" :underline="!isMobile" tag-name="h1">
+          {{ title }}
+        </e-heading>
       </div>
       <a v-if="closable"
-         :class="b('close')"
+         v-bem:close
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
          @click="close">
@@ -64,14 +66,14 @@
        * Sets a modifier class for title spacing options
        */
       titleSpacing: {
-        type: String,
-        default: '500',
+        type: [Number, String],
+        default: 500,
         validator(value) {
           return [
-            '0',
-            '300',
-            '500',
-          ].includes(value);
+            0,
+            300,
+            500,
+          ].includes(parseInt(value, 10));
         },
       },
 

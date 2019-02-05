@@ -1,7 +1,7 @@
 <template>
   <portal :order="uuidInt" :to="portalTarget">
     <modal :name="uuid"
-           :classes="b({ size })"
+           :classes="$bem({ size })"
            :width="width"
            :max-width="maxWidth"
            :pivot-y="0.1"
@@ -17,8 +17,8 @@
                  :title="title"
                  :title-spacing="titleSpacing"
                  :closable="closeIcon"
-                 @close="closeModal"/>
-      <div :class="b('content', { innerSpacing })">
+                 @close="closeModal" />
+      <div v-bem:content="{ innerSpacing }">
         <!-- @slot Used for the modal content. -->
         <slot></slot>
       </div>
@@ -28,7 +28,8 @@
 
 <script>
   import cModalHeader01 from '@/components/c-modal-header-01';
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
+  import * as bem from '@verstaerker/vue-bem';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
 
@@ -44,6 +45,7 @@
     },
     mixins: [
       uuid,
+      bem.bemMixin,
     ],
 
     props: {
@@ -59,13 +61,13 @@
        * Set's the inner spacing of the modal [0, 500].
        */
       innerSpacing: {
-        type: String,
-        default: '500',
+        type: [Number, String],
+        default: 500,
         validator(value) {
           return [
-            '0',
-            '500'
-          ].includes(value);
+            0,
+            500
+          ].includes(parseInt(value, 10));
         },
       },
 
@@ -73,13 +75,13 @@
        * Defines size for modal [300, 600].
        */
       size: {
-        type: String,
-        default: '300',
+        type: [Number, String],
+        default: 300,
         validator(value) {
           return [
-            '300',
-            '600',
-          ].includes(value);
+            300,
+            600,
+          ].includes(parseInt(value, 10));
         }
       },
 
@@ -109,14 +111,14 @@
        * Sets a modifier class for title spacing.
        */
       titleSpacing: {
-        type: String,
-        default: '500',
+        type: [Number, String],
+        default: 500,
         validator(value) {
           return [
-            '0',
-            '300',
-            '500'
-          ].includes(value);
+            0,
+            300,
+            500
+          ].includes(parseInt(value, 10));
         },
       },
 
@@ -245,7 +247,7 @@
         background[background.length - 1].addEventListener('mousedown', this.closeModal);
         background[background.length - 1].addEventListener('touchstart', this.closeModal);
       },
-      
+
       /**
        * Hides the modal.
        *

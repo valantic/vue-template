@@ -1,11 +1,13 @@
 <template>
-  <div :class="b({ negative, spacing })">
-    <div :class="b('inner')">
-      <div :class="b('bubble')"></div>
-      <div :class="b('bubble')"></div>
-      <div :class="b('bubble')"></div>
+  <div v-bem="componentModifiers">
+    <div v-bem:inner>
+      <div v-bem:bubble></div>
+      <div v-bem:bubble></div>
+      <div v-bem:bubble></div>
     </div>
-    <span class="invisible">{{ loadingMessage }}</span>
+    <span class="invisible">
+      {{ loadingMessage }}
+    </span>
   </div>
 </template>
 
@@ -53,7 +55,19 @@
     computed: {
       loadingMessage() {
         return this.message || this.$i18n.t('e-progress.loading');
-      }
+      },
+
+      /**
+       * Returns all modifiers for the component main class.
+       *
+       * @returns {Object}
+       */
+      componentModifiers() {
+        return {
+          negative: this.negative,
+          spacing: this.spacing,
+        };
+      },
     },
     // watch: {},
 

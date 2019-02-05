@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({noResults: pagination.totalItems < 1})">
+  <div v-bem="componentModifiers">
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -12,17 +12,14 @@
     >
       <!-- TABLE-HEADER -->
       <template slot="headers" slot-scope="props">
-        <tr :class="b('header-row')">
+        <tr v-bem:header-row>
           <th v-if="isSelectable">
             <e-checkbox :checked="!!selected.length"
                         :disabled="isDisabled"
                         value="0"
                         name="total"
                         @change="toggleAll">
-
-              <!-- eslint-disable-next-line vue/attributes-order-->
               <span v-if="!!selected.length" v-t="'c-table.deselectAll'" class="invisible"></span>
-              <!-- eslint-disable-next-line vue/attributes-order-->
               <span v-else v-t="'c-table.selectAll'" class="invisible"></span>
             </e-checkbox>
           </th>
@@ -35,11 +32,11 @@
             @click="changeSort(header.value)"
           >
             {{ header.text }}
-            <e-icon :class="b('sort-icon', { desc: pagination.descending, active: header.value === pagination.sortBy})"
+            <e-icon v-bem:sort-icon="{ desc: pagination.descending, active: header.value === pagination.sortBy}"
                     icon="i-arrow--down"
                     width="10"
                     height="10"
-                    inline/>
+                    inline />
           </th>
           <th v-if="hasLink">
             <span v-t="'c-table.linkLabel'" class="invisible"></span>
@@ -49,9 +46,8 @@
 
       <!-- TABLE-BODY -->
       <template slot="items" slot-scope="props">
-        <tr :active="props.selected"
-            :class="b('content-row',
-                      { selected: selected.includes(props.item.id), isClickable: isRowClickable && !isDisabled })"
+        <tr v-bem:content-row="{ selected: selected.includes(props.item.id), isClickable: isRowClickable && !isDisabled }"
+            :active="props.selected"
             :role="rowRole"
             @click="onClickRow(props.item)"
         >
@@ -72,13 +68,12 @@
               {{ props.item[headerItem.value] }}
             </td>
           </slot>
-
         </tr>
       </template>
     </v-data-table>
 
     <!-- PAGINATION (optional) -->
-    <div v-if="hasPagination" :class="b('pagination-wrapper')">
+    <div v-if="hasPagination" v-bem:pagination-wrapper>
       <c-table-pagination :total-amount="pagination.totalItems"
                           :rows-per-page-value="pagination.rowsPerPage"
                           :current-page="pagination.page"
@@ -92,7 +87,7 @@
 <script>
   import * as VDataTable from 'vuetify/es5/components/VDataTable';
   import cTablePagination from '@/components/c-table-pagination';
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
 
   /**
    * This component wraps the vuetify table "v-data-table" and styles the table.
@@ -198,7 +193,18 @@
       };
     },
 
-    // computed: {},
+    computed: {
+      /**
+       * Returns all modifiers for the component main class.
+       *
+       * @returns {Object}
+       */
+      componentModifiers() {
+        return {
+          noResults: this.pagination.totalItems < 1,
+        };
+      },
+    },
     watch: {
       /**
        * Observes the selected lists and sends the update event on every change.
@@ -365,7 +371,7 @@
     &__content-row--selected + &__content-row {
       border-top: 1px solid $color-secondary--1;
     }
-    
+
     &__content-row--is-clickable {
       cursor: pointer;
 
@@ -373,7 +379,7 @@
         background-color: $color-grayscale--700;
       }
     }
-    
+
     &__link {
       display: flex;
       justify-content: flex-end;
@@ -405,7 +411,7 @@
         padding: 0 $spacing--20;
       }
     }
-    
+
     .v-datatable__progress {
       display: none;
     }

@@ -1,10 +1,14 @@
 <!-- This component has no <template> because of dynamic root element -->
 
 <script>
+  import * as bem from '@verstaerker/vue-bem';
+
   export default {
     name: 'e-heading',
     // components: {},
-    // mixins: [],
+    mixins: [
+      bem.bemMixin,
+    ],
 
     props: {
       /**
@@ -122,7 +126,7 @@
     render(createElement) {
       const element = this.$props.tagName;
       const attributes = {
-        class: this.b({
+        class: this.$bem({
           color: this.$props.color,
           underline: this.$props.underline,
           uppercase: this.$props.uppercase,
@@ -136,7 +140,7 @@
       };
 
       const childAttributes = {
-        class: this.b('inner', { color: this.$props.color, spacing: this.$props.spacing }),
+        class: this.$bem('inner', { color: this.$props.color, spacing: this.$props.spacing }),
       };
 
       return createElement(

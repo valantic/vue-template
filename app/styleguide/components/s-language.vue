@@ -1,11 +1,11 @@
 <template>
   <label>
     <span class="invisible">Language</span>
-    <select :class="b()" :value="language" @change="onChange">
-      <option v-t="`s-language.${language}`"
-              v-for="language in i18nLocales"
-              :value="language"
-              :key="language">
+    <select v-bem :value="language" @change="onChange">
+      <option v-for="locale in i18nLocales"
+              :key="locale"
+              v-t="`s-language.${locale}`"
+              :value="locale">
       </option>
     </select>
   </label>

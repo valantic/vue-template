@@ -1,7 +1,11 @@
 <template>
-  <fieldset :class="b()">
-    <legend v-if="legend" :class="b('legend')"><span :class="b('inner')">{{ legend }}</span></legend>
-    <div :class="b('fields')"><slot></slot></div>
+  <fieldset v-bem>
+    <legend v-if="legend" v-bem:legend>
+      <span v-bem:inner>{{ legend }}</span>
+    </legend>
+    <div v-bem:fields>
+      <slot></slot>
+    </div>
   </fieldset>
 </template>
 

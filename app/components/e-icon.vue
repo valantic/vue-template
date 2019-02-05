@@ -1,7 +1,8 @@
 <template>
-  <span :class="b({ color, [icon]: true })"><!-- needed for inline usage -->
+  <span v-bem="componentModifiers">
+    <!-- <span> needed for inline usage. -->
     <img v-if="!inline"
-         :class="b('icon')"
+         v-bem:icon
          :src="src"
          :alt="alt"
          :width="width"
@@ -110,6 +111,18 @@
 
           return null;
         }
+      },
+
+      /**
+       * Returns all modifiers for the component main class.
+       *
+       * @returns {Object}
+       */
+      componentModifiers() {
+        return {
+          color: this.color,
+          [this.icon]: true,
+        };
       },
     },
 

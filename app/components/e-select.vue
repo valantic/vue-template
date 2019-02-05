@@ -1,12 +1,14 @@
 <template>
-  <span :class="b(stateModifiers)">
-    <select :value="value"
-            :class="b('select')"
+  <span v-bem="stateModifiers">
+    <select v-bem:select
+            :value="value"
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
     >
-      <option :disabled="!hasSelectablePlaceholder" value="">{{ placeholder }}</option>
+      <option :disabled="!hasSelectablePlaceholder" value="">
+        {{ placeholder }}
+      </option>
       <option v-for="item in optionsList"
               :key="`${name}-${item.value}`"
               :value="item.value"
@@ -14,15 +16,15 @@
         {{ item.label }}
       </option>
     </select>
-    <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
-    <div v-if="progress" :class="b('progress-container')">
-      <e-progress/>
+    <span v-if="!hasDefaultState" v-bem:icon-splitter></span>
+    <div v-if="progress" v-bem:progress-container>
+      <e-progress />
     </div>
   </span>
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import formStates from '../mixins/form-states';
 
   /**
    * Renders a styled select element. Options can be passed with the `optionsList` property.

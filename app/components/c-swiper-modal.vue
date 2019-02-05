@@ -1,16 +1,21 @@
 <template>
-  <div :class="b()">
+  <div v-bem>
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="gallery" :class="b('container swiper-container gallery-top')">
-      <div :class="b('wrapper swiper-wrapper')">
+    <div ref="gallery"
+         v-bem:container
+         class="swiper-container gallery-top">
+      <div v-bem:wrapper
+           class="swiper-wrapper">
         <div v-for="image in images"
-             :class="b('slide swiper-slide', { video: image.isVideo })"
-             :key="image.id">
+             :key="image.id"
+             v-bem:slide="{ video: image.isVideo }"
+             class="swiper-slide"
+        >
           <!-- Video -->
-          <div v-if="image.isVideo" :class="b('video-wrapper')">
-            <div :class="b('iframe-wrapper')">
+          <div v-if="image.isVideo" v-bem:video-wrapper>
+            <div v-bem:iframe-wrapper>
               <iframe ref="video"
-                      :class="b('video-iframe')"
+                      v-bem:video-iframe
                       :src="`https://www.youtube.com/embed/${image.youtubeId}?enablejsapi=1&version=3&playerapiid=ytplayer`"
                       width="560"
                       height="315"
@@ -25,19 +30,29 @@
             :sizes="sizes"
             :srcset="image.srcset"
             :fallback="image.fallback"
-            :alt="image.alt"/>
+            :alt="image.alt" />
         </div>
       </div>
-      <div :class="b('button-prev swiper-button-prev')"></div>
-      <div :class="b('button-next swiper-button-next')"></div>
+      <div v-bem:button-prev
+           class="swiper-button-prev"></div>
+      <div v-bem:button-next
+           class="swiper-button-next"></div>
     </div>
-    <div ref="thumbnails" :class="b('container swiper-container gallery-thumbs')">
-      <div :class="b('wrapper swiper-wrapper')">
-        <div v-for="image in images" :class="b('slide swiper-slide')" :key="image.id">
+    <div ref="thumbnails"
+         v-bem:container
+         class="swiper-container gallery-thumbs">
+      <div v-bem:wrapper
+           class="swiper-wrapper">
+        <div v-for="image in images"
+             :key="image.id"
+             v-bem:slide
+             class="swiper-slide">
           <!-- Video -->
-          <div v-if="image.isVideo" :class="b('video-preview-wrapper')">
-            <img :src="image.thumbSrc" :class="b('video-thumbnail')" alt="">
-            <span :class="b('video-thumbnail-overlay')"></span>
+          <div v-if="image.isVideo" v-bem:video-preview-wrapper>
+            <img v-bem:video-thumbnail
+                 :src="image.thumbSrc"
+                 alt="">
+            <span v-bem:video-thumbnail-overlay></span>
           </div>
 
           <!-- Image -->
@@ -46,7 +61,7 @@
             :sizes="sizes"
             :srcset="image.srcset"
             :fallback="image.fallback"
-            :alt="image.alt"/>
+            :alt="image.alt" />
         </div>
       </div>
     </div>

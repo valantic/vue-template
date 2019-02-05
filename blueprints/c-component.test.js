@@ -1,11 +1,11 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import VueBemCn from 'vue-bem-cn';
+import VueBem from '@verstaerker/vue-bem';
 import component from '@/components/c-component'; // TODO: Update source
 
 describe('component | c-component', () => { // TODO: update title
   const localVue = createLocalVue();
 
-  localVue.use(VueBemCn);
+  localVue.use(VueBem);
 
   it('has name property', () => {
     expect(component.name).toBeTruthy();

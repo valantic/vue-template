@@ -1,27 +1,26 @@
 <template>
-  <div :class="b(modifiers)"
+  <div v-bem="modifiers"
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
-
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container" :class="b('container swiper-container')">
-
-      <div :class="b('wrapper swiper-wrapper')">
+    <div ref="container"
+         v-bem:container
+         class="swiper-container">
+      <div v-bem:wrapper
+           class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="picture in pictures"
-             :class="b('slide swiper-slide')"
-             :key="picture.id">
-
+             :key="picture.id"
+             v-bem:slide
+             class="swiper-slide">
           <a v-if="picture.href"
-             :class="b('link')"
+             v-bem:link
              :href="picture.href">
-
             <e-picture
               :sizes="sizes"
               :srcset="picture.srcset"
               :fallback="picture.fallback"
               :alt="picture.alt" />
-
           </a>
 
           <e-picture
@@ -31,18 +30,18 @@
             :fallback="picture.fallback"
             :alt="picture.alt" /> <!-- Todo: Replace as soon as @mathias-obers 'with-root' component is merged. -->
         </div>
-
       </div>
 
       <!-- navigation -->
-      <div :class="b('pagination swiper-pagination')"></div>
+      <div v-bem:pagination
+           class="swiper-pagination"></div>
 
       <!-- buttons-->
-      <div :class="b('button-prev swiper-button-prev')"></div>
-      <div :class="b('button-next swiper-button-next')"></div>
-
+      <div v-bem:button-prev
+           class="swiper-button-prev"></div>
+      <div v-bem:button-next
+           class="swiper-button-next"></div>
     </div>
-
   </div>
 </template>
 
@@ -50,7 +49,7 @@
   import Swiper from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import mapHeroImages from '@/helpers/map-hero-images';
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
 
   const swiperInstances = {};
 

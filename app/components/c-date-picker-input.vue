@@ -1,10 +1,10 @@
 <template>
-  <div :class="b({ hasYearSelector })">
-    <div :class="b('buttons-wrapper', { hasYearSelector })">
-      <div :class="b('input', { hasYearSelector })">
-        <e-input ref="input"
+  <div v-bem="modifiers">
+    <div v-bem:buttons-wrapper="modifiers">
+      <div v-bem:input="modifiers">
+        <e-input :id="`date-picker-value-${uuid}`"
+                 ref="input"
                  :value="formatDate(validDate)"
-                 :id="`date-picker-value-${uuid}`"
                  :placeholder="$t('c-date-picker-input.chooseDate')"
                  :disabled="disabled"
                  name="date-picker-value"
@@ -16,11 +16,11 @@
                class="invisible">
         </label>
       </div>
-      <div v-if="hasYearSelector" :class="b('select')">
+      <div v-if="hasYearSelector" v-bem:select>
         <e-select v-if="isDatePickerOpen"
+                  :id="`date-picker-year-${uuid}`"
                   :value="selectedYear"
                   :options-list="years"
-                  :id="`date-picker-year-${uuid}`"
                   name="date-picker-year"
                   @input="onUpdateYear"
         />
@@ -30,7 +30,7 @@
         </label>
       </div>
     </div>
-    <div v-if="isDatePickerOpen" :class="b('overlay')">
+    <div v-if="isDatePickerOpen" v-bem:overlay>
       <c-date-picker :value="selectedDate"
                      :validate-date="validateDate"
                      :events="isEventDate"
@@ -42,7 +42,7 @@
 
 <script>
   import cDatePicker from '@/components/c-date-picker';
-  import uuid from '@/mixins/uuid';
+  import uuid from '../mixins/uuid';
 
   /**
    * Renders an input field which opens a date picker in an overlay. Additionally a select will be rendered to easily
@@ -132,6 +132,17 @@
         }
 
         return this.selectedDate;
+      },
+
+      /**
+       * Defines state modifier classes.
+       *
+       * @returns {Object} BEM classes
+       */
+      modifiers() {
+        return {
+          hasYearSelector: this.hasYearSelector,
+        };
       },
     },
     watch: {
