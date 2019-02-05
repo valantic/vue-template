@@ -17,7 +17,7 @@
                  :title="title"
                  :title-spacing="titleSpacing"
                  :closable="closeIcon"
-                 @close="closeModal"/>
+                 @close="closeModal" />
       <div v-bem:content="{ innerSpacing }">
         <!-- @slot Used for the modal content. -->
         <slot></slot>

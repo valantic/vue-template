@@ -1,7 +1,7 @@
 <template>
   <div v-bem="{ titleSpacing }">
     <div v-bem:notifications>
-      <c-notification-container display-type="modal"/>
+      <c-notification-container display-type="modal" />
     </div>
     <div v-bem:inner.mobile>
       <a v-if="closable"

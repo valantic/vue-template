@@ -4,7 +4,7 @@
       <e-icon icon="i-plus"
               width="12"
               height="12"
-              inline/>
+              inline />
       {{ title }}
     </a>
 
