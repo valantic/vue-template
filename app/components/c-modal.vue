@@ -311,8 +311,12 @@
     background: rgba($color-grayscale--700, 0.9) !important;
 
     .v--modal-background-click {
-      // stylelint-disable-next-line declaration-no-important
+      width: 100%;
+      // stylelint-disable declaration-no-important
       padding: 0 !important;
+      height: auto !important;
+      min-height: 100% !important;
+      // stylelint-enable declaration-no-important
 
       @include media(sm) {
         // stylelint-disable-next-line declaration-no-important
@@ -342,11 +346,5 @@
   .slide-enter,
   .slide-leave-to {
     transform: translateX(100%);
-  }
-
-  .v--modal-overlay .v--modal-background-click {
-    width: 100%;
-    height: auto !important;
-    min-height: 100% !important;
   }
 </style>
