@@ -6,13 +6,11 @@
            :max-width="maxWidth"
            :pivot-y="0.1"
            :transition="isMobile ? mobileTransition : 'false'"
-           :click-to-close="false"
            height="auto"
            adaptive
            scrollable
            @closed="closedModal"
-           @before-close="onModalBeforeClose"
-           @opened="onModalOpened">
+           @before-close="onModalBeforeClose">
       <component :is="headerComponent"
                  :title="title"
                  :title-spacing="titleSpacing"
@@ -239,16 +237,6 @@
 
     methods: {
       /**
-       * Event gets fired after modal is opened.
-       */
-      onModalOpened() {
-        const background = window.document.querySelectorAll('.v--modal-background-click');
-
-        background[background.length - 1].addEventListener('mousedown', this.closeModal);
-        background[background.length - 1].addEventListener('touchstart', this.closeModal);
-      },
-
-      /**
        * Hides the modal.
        *
        * @param {Object} event - The event object.
@@ -318,12 +306,6 @@
     }
   }
 
-  // Is needed because the plugin will add the class to the html what scrolls the viewport to top.
-  html.v--modal-block-scroll {
-    // stylelint-disable-next-line declaration-no-important
-    overflow: visible !important;
-  }
-
   .v--modal-overlay {
     // stylelint-disable-next-line declaration-no-important
     background: rgba($color-grayscale--700, 0.9) !important;
@@ -360,5 +342,11 @@
   .slide-enter,
   .slide-leave-to {
     transform: translateX(100%);
+  }
+
+  .v--modal-overlay .v--modal-background-click {
+    width: 100%;
+    height: auto !important;
+    min-height: 100% !important;
   }
 </style>
