@@ -14,8 +14,8 @@
       @click="onTriangleButtonClick"
       @mouseover="onPlusToggle"
       @mouseout="onPlusToggle">
-      <div ref="shadow" v-bem:shadow="shadowModifiers"></div>
-      <span ref="plus" v-bem:plus="plusModifiers"></span>
+      <div v-bem:shadow="shadowModifiers" ref="shadow"></div>
+      <span v-bem:plus="plusModifiers" ref="plus"></span>
     </div>
   </div>
 </template>

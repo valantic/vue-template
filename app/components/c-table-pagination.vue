@@ -23,8 +23,8 @@
       </div>
       <ul v-bem:pages>
         <li v-for="pageNumber in pages"
-            :key="`page-${pageNumber}`"
-            v-bem:page-item="{active: currentPage === pageNumber}">
+            v-bem:page-item="{active: currentPage === pageNumber}"
+            :key="`page-${pageNumber}`">
           <a v-bem:page-link
              :title="$t('c-table-pagination.pageNumberTitle', {pageNumber})"
              href="#"

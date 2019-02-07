@@ -113,6 +113,23 @@ module.exports = {
       },
       'svg': 'always',
       'math': 'always'
+    }],
+    'vue/attributes-order': [2, {
+      'order': [
+        'CONDITIONALS',
+        [
+          'LIST_RENDERING',
+          'RENDER_MODIFIERS',
+          'OTHER_DIRECTIVES',
+          'TWO_WAY_BINDING',
+          'CONTENT'
+        ],
+        'DEFINITION',
+        'GLOBAL',
+        'UNIQUE',
+        'OTHER_ATTR',
+        'EVENTS',
+      ]
     }]
   },
   globals: {
