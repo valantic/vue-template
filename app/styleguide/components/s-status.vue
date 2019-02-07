@@ -7,6 +7,11 @@
 </template>
 
 <script>
+  import { availableStatus } from '@/setup/plugins/styleguide.status-label';
+
+  /**
+   * Creates a status label which can be used to document component development status.
+   */
   export default {
     name: 's-status',
     status: 1,
@@ -18,15 +23,13 @@
       /**
        * Accepts a state modifier for the component.
        *
-       * Valid values: ['ready']
+       * Valid values: [0, 1]
        */
       modifier: {
-        type: String,
+        type: [String, Number],
         default: null,
         validator(value) {
-          return [
-            'ready',
-          ].includes(value);
+          return !!availableStatus[value];
         }
       }
     },
@@ -36,9 +39,14 @@
 
     computed: {
       modifiers() {
-        return {
-          [this.modifier]: true
-        };
+        const modifier = availableStatus[this.modifier];
+        const modifiers = {};
+
+        if (modifier) {
+          modifiers[modifier.modifier] = true;
+        }
+
+        return modifiers;
       }
     },
     // watch: {},

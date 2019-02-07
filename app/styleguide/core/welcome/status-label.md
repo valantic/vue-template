@@ -1,25 +1,6 @@
-### Welcome to the component styleguide
-Here you see all the project components.
-
-For example pages go to
-<a href="http://localhost:8080/styleguide" target="_blank">localhost:8080/styleguide</a><br />
-To serve the Vue environment run:
-
-``` Apache
-$ npm run dev
-```
-
-#### Components language
-
-```vue
-<s-language/>
-```
-
-### Component status
-
 The styleguide will automatically create a status label for each component entry. It retrieves the status information from the `status` property on the component. `Not ready` is the default status if no status is defined on the component. This way we can make sure that new projects only use adjusted components.
 
-#### Component status example
+### Component status example
 
 ```javascript
 export default {
@@ -29,13 +10,13 @@ export default {
 }
 ```
 
-#### Available status
+### Available status
 
 ```vue
 <ul style="margin: 0; padding: 0;">
   <li v-for="(value, key) in availableStatus" style="display: flex; padding-bottom: 10px;">
     <span style="margin-right: 20px">{{ key }}</span>
-    <s-status :modifier="value.modifier">{{ value.text }}</s-status>
+    <s-status :modifier="key">{{ value.text }}</s-status>
   </li>
 </ul>
 ```
