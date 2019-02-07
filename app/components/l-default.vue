@@ -16,6 +16,8 @@
 
   export default {
     name: 'l-default',
+    // status: 1,
+
     components: {
       cNotificationContainer,
     },

@@ -95,6 +95,8 @@
    */
   export default {
     name: 'c-table',
+    // status: 1,
+
     components: {
       ...VDataTable,
       cTablePagination,

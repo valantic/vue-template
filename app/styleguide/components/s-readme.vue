@@ -9,6 +9,8 @@
 
   export default {
     name: 's-readme',
+    status: 1,
+
     components: {
       readme,
     },

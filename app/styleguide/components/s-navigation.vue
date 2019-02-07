@@ -55,6 +55,8 @@
 
   export default {
     name: 's-navigation',
+    // status: 1,
+
     components: {
       sDemoSettings,
       sLanguage,

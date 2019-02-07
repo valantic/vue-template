@@ -22,6 +22,8 @@
    */
   export default {
     name: 'c-breadcrumb',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 

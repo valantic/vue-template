@@ -33,6 +33,8 @@
    */
   export default {
     name: 'e-textarea',
+    // status: 1,
+
     components: {
       cFormNotification,
     },

@@ -14,6 +14,8 @@
    */
   export default {
     name: 'e-button',
+    // status: 1,
+
     // components: {},
     mixins: [
       touchDevice,
