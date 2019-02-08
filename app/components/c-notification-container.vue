@@ -20,6 +20,8 @@
    */
   export default {
     name: 'c-notification-container',
+    // status: 1,
+
     components: {
       cNotification,
     },

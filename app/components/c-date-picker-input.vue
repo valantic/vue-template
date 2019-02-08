@@ -50,6 +50,8 @@
    */
   export default {
     name: 'c-date-picker-input',
+    // status: 1,
+
     components: {
       cDatePicker,
     },

@@ -67,6 +67,8 @@
    */
   export default {
     name: 'c-table-pagination',
+    // status: 1,
+
     // components: {},
     mixins: [
       uuid,

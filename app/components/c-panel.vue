@@ -25,6 +25,8 @@
 
   export default {
     name: 'c-panel',
+    // status: 1,
+
     // components: {},
     mixins: [
       touchDevice,

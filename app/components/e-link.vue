@@ -11,6 +11,8 @@
    */
   export default {
     name: 'e-link',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 

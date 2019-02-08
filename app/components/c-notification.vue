@@ -50,6 +50,8 @@
    */
   export default {
     name: 'c-notification',
+    // status: 1,
+
     // components: {},
     // components: {},
     // mixins: [],

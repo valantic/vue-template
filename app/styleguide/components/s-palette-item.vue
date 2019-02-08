@@ -20,6 +20,8 @@
 
   export default {
     name: 's-palette-item',
+    // status: 1,
+
     components: {
       's-color-item': sColorItem
     },

@@ -59,6 +59,8 @@
    */
   export default {
     name: 'c-swiper-hero',
+    // status: 1,
+
     // components: {},
     mixins: [uuid],
 

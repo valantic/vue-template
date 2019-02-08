@@ -14,6 +14,8 @@
 <script>
   export default {
     name: 'e-progress',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 

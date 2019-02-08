@@ -18,6 +18,8 @@
 
   export default {
     name: 'e-icon',
+    // status: 1,
+
     props: {
       /**
        * Name of the svg icon

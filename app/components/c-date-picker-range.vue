@@ -31,6 +31,8 @@
    */
   export default {
     name: 'c-date-picker-range',
+    // status: 1,
+
     components: {
       cDatePickerInput,
     },

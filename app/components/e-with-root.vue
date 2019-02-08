@@ -10,7 +10,9 @@
    */
   export default {
     name: 'e-with-root',
+    // status: 1,
     functional: true,
+
     // components: {},
     // mixins: [],
 

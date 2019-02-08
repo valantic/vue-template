@@ -79,8 +79,9 @@
    */
   export default {
     name: 'c-swiper-modal',
-    // components: {},
+    // status: 1,
 
+    // components: {},
     // mixins: [],
 
     props: {
