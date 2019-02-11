@@ -17,8 +17,8 @@
        this.selectedDate = date;
       },
       isValidDate(date) {
-        return this.$moment(date, 'YYYY-MM-DD', true).isValid()
-          && this.$moment(date).isSameOrAfter('1920-01-01', 'year');
+        return this.$dayjs(date).isValid()
+          && this.$dayjs(date).isSameOrAfter('1920-01-01');
       },
     }
   };
@@ -44,8 +44,8 @@
        this.selectedDate = date;
       },
       isValidDate(date) {
-        return this.$moment(date, 'YYYY-MM-DD', true).isValid()
-          && this.$moment(date).isSameOrAfter('1920-01-01', 'year');
+        return this.$dayjs(date).isValid()
+          && this.$dayjs(date).isSameOrAfter('1920-01-01');
       },
     }
   };
