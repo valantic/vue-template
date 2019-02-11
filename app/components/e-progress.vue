@@ -33,7 +33,7 @@
       /**
        * Sets the inner spacing for the animation
        *
-       * Valid values: [0, 500]
+       * Valid values: `[0, 500]`
        */
       spacing: propScale(500, [
         0,

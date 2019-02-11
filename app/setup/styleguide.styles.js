@@ -26,7 +26,7 @@ module.exports = {
       logo: {
         border: 'none',
         paddingBottom: 0
-      }
+      },
     },
     Logo: {
       logo: {
@@ -85,6 +85,20 @@ module.exports = {
         fontWeight: '600 !important',
         color: '#fff !important'
       }
+    },
+    Table: {
+      cell: {
+        borderBottom: '1px solid #e8e8e8',
+      }
+    },
+    Code: {
+      code: {
+        padding: '2px 4px',
+        fontSize: '90%',
+        color: '#c7254e',
+        backgroundColor: '#f9f2f4',
+        borderRadius: '4px',
+      },
     }
   }
 };

@@ -68,7 +68,7 @@
       /**
        * Sets a modifier class for title spacing options
        *
-       * Valid values: [0, 300, 500]
+       * Valid values: `[0, 300, 500]`
        */
       titleSpacing: propScale(500, [
         0,

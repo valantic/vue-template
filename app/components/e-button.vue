@@ -27,7 +27,7 @@
       /**
        * Defines the width of the button
        *
-       * Valid values: `full`
+       * Valid values: `[full, auto]`
        */
       width: {
         type: String,
@@ -43,7 +43,7 @@
       /**
        * Modifies the inner spacing for the button.
        *
-       * Valid values: [0, 500, 600, 700]
+       * Valid values: `[0, 500, 600, 700]`
        */
       spacing: propScale(500, [
         0,

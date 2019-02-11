@@ -17,7 +17,7 @@
       /**
        * Defines the color of the heading (h1-h6).
        *
-       * Valid values: `blue, gray`
+       * Valid values: `[blue, gray]`
        */
       color: {
         type: String,
@@ -33,7 +33,7 @@
       /**
        * Defines the tagname of the heading (h1-h6).
        *
-       * Valid values: `h1, h2, h3, h4, h5, h6`
+       * Valid values: `[h1, h2, h3, h4, h5, h6]`
        */
       tagName: {
         type: String,
@@ -61,7 +61,7 @@
       /**
        * Defines the font-weight
        *
-       * Valid values: `normal, semibold, bold`
+       * Valid values: `[normal, semibold, bold]`
        */
       fontWeight: {
         type: String,
@@ -79,7 +79,7 @@
       /**
        * Defines spacing for the heading element.
        *
-       * Valid values: [400, 500, 700, 800]
+       * Valid values: `[400, 500, 700, 800]`
        */
       spacing: propScale(500, [
         400,
