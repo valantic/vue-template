@@ -124,7 +124,7 @@
        * Available values: [0, 500]
        * Default: 500
        */
-      border: propScale([
+      border: propScale(500, [
         0,
         500,
       ]),

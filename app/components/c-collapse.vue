@@ -49,7 +49,7 @@
       /**
        * Defines the padding of the inner content.
        */
-      padding: propScale([
+      padding: propScale(500, [
         0,
         300,
         500,

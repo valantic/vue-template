@@ -61,7 +61,7 @@
       /**
        * Set's the inner spacing of the modal [0, 500].
        */
-      innerSpacing: propScale([
+      innerSpacing: propScale(500, [
         0,
         500
       ]),
@@ -69,10 +69,10 @@
       /**
        * Defines size for modal [300, 600].
        */
-      size: propScale([
+      size: propScale(300, [
         300,
         600,
-      ], 300),
+      ]),
 
       /**
        * Custom header component name.
@@ -101,7 +101,7 @@
        *
        * Valid values: [0, 300, 500]
        */
-      titleSpacing: propScale([
+      titleSpacing: propScale(500, [
         0,
         300,
         500

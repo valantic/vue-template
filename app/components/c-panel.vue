@@ -37,17 +37,17 @@
        *
        * Valid values: [0, 500]
        */
-      headingSpacing: propScale([
+      headingSpacing: propScale(0, [
         0,
         500
-      ], 0),
+      ]),
 
       /**
        * Defines the spacing of the content
        *
        * Valid values: [0, 500]
        */
-      contentSpacing: propScale([
+      contentSpacing: propScale(500, [
         0,
         500
       ]),
@@ -66,11 +66,11 @@
        *
        * Valid values: [0, 1, 2]
        */
-      border: propScale([
+      border: propScale(0, [
         0,
         1,
         2
-      ], 0),
+      ]),
 
       /**
        * Defines the border color of the panel
@@ -110,10 +110,10 @@
        *
        * Valid values: [0, 500]
        */
-      triangleButtonSize: propScale([
+      triangleButtonSize: propScale(0, [
         0,
         500
-      ], 0),
+      ]),
 
       /**
        * Defines the plus color of the plus for the triangle button

@@ -43,7 +43,7 @@
        *
        * Valid values: [0, 500, 600, 700]
        */
-      spacing: propScale([
+      spacing: propScale(500, [
         0,
         500,
         600,

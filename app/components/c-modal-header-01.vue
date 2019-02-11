@@ -68,7 +68,7 @@
        *
        * Valid values: [0, 300, 500]
        */
-      titleSpacing: propScale([
+      titleSpacing: propScale(500, [
         0,
         300,
         500
