@@ -22,10 +22,10 @@
         </li>
         <!-- eslint-disable vue/no-use-v-if-with-v-for -->
         <router-link
-          v-for="route in routes"
           v-if="route.meta"
-          :key="route.name"
+          v-for="route in routes"
           v-bem:navigation-item
+          :key="route.name"
           :to="{ name: route.name }"
           :active-class="`${$options.name}-item--active-path`"
           :exact-active-class="`${$options.name}-item--active`"
@@ -55,6 +55,8 @@
 
   export default {
     name: 's-navigation',
+    // status: 1,
+
     components: {
       sDemoSettings,
       sLanguage,

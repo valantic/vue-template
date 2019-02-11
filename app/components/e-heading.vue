@@ -6,6 +6,8 @@
 
   export default {
     name: 'e-heading',
+    // status: 1,
+
     // components: {},
     mixins: [
       bem.bemMixin,

@@ -9,7 +9,7 @@
     </a>
 
     <div v-if="isRendered" v-bem:content :style="{ maxHeight }">
-      <div ref="inner" v-bem:inner>
+      <div v-bem:inner ref="inner">
         <!-- @slot Used for item content -->
         <slot :is-open="isOpen"></slot>
       </div>
@@ -26,6 +26,8 @@
    */
   export default {
     name: 'c-collapse',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 

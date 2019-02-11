@@ -6,6 +6,8 @@
 
   export default {
     name: 'e-picture',
+    // status: 1,
+
     // components: {},
     mixins: [
       bem.bemMixin,

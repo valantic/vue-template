@@ -3,15 +3,15 @@
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container"
-         v-bem:container
+    <div v-bem:container
+         ref="container"
          class="swiper-container">
       <div v-bem:wrapper
            class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="picture in pictures"
-             :key="picture.id"
              v-bem:slide
+             :key="picture.id"
              class="swiper-slide">
           <button v-bem:trigger
                   type="button"
@@ -93,6 +93,8 @@
    */
   export default {
     name: 'c-swiper-gallery',
+    // status: 1,
+
     components: {
       cSwiperModal,
     },

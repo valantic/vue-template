@@ -2,8 +2,8 @@
   <div v-bem>
     <ul v-bem:list>
       <li v-for="(item, index) in items"
-          :key="`breadcrumb--${index}`"
-          v-bem:item>
+          v-bem:item
+          :key="`breadcrumb--${index}`">
         <a v-bem:link
            :href="item.url"
            :title="$t('c-breadcrumb.linkTitle', { name: item.name })">
@@ -22,6 +22,8 @@
    */
   export default {
     name: 'c-breadcrumb',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 

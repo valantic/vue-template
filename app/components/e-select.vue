@@ -31,6 +31,8 @@
    */
   export default {
     name: 'e-select',
+    // status: 1,
+
     // components: {},
     mixins: [formStates],
     inheritAttrs: false,

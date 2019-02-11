@@ -25,6 +25,8 @@
    */
   export default {
     name: 'c-date-picker',
+    // status: 1,
+
     components: {
       ...VDatePicker,
       ...VGrid,

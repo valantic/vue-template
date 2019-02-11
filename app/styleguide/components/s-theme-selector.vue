@@ -20,6 +20,8 @@
 
   export default {
     name: 's-theme-selector',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 

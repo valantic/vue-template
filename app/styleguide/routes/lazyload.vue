@@ -4,8 +4,8 @@
 
     <div
       v-for="item in items"
-      :key="item.key"
-      v-bem:item>
+      v-bem:item
+      :key="item.key">
       <e-picture
         :srcset="item.srcset"
         :sizes="item.sizes"

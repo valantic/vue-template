@@ -1,8 +1,8 @@
 <template>
   <div v-bem="modifiers">
     <input v-if="uncontrolled"
-           ref="input"
            v-bem:field
+           ref="input"
            :autocomplete="autocomplete"
            :disabled="disabled"
            :name="name"
@@ -18,8 +18,8 @@
            @keyup.down="onArrowKeyUp"
     >
     <input v-else
-           ref="input"
            v-bem:field
+           ref="input"
            :autocomplete="autocomplete"
            :disabled="disabled"
            :name="name"
@@ -36,11 +36,11 @@
            @keyup.down="onArrowKeyUp"
     >
 
-    <span v-if="$slots.fixedLabel" ref="fixedLabel" v-bem:fixed-label>
+    <span v-if="$slots.fixedLabel" v-bem:fixed-label ref="fixedLabel">
       <!-- @slot Use this slot for a fixed label inside the input field. -->
       <slot name="fixedLabel"></slot>
     </span>
-    <span v-if="$slots.default || !hasDefaultState" ref="slot" v-bem:slot-wrapper>
+    <span v-if="$slots.default || !hasDefaultState" v-bem:slot-wrapper ref="slot">
       <span v-if="$slots.default" v-bem:slot>
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
@@ -53,7 +53,7 @@
     </span>
     <div v-if="showNotification" v-bem:notification>
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <c-form-notification :state="state" v-html="notification" />
+      <c-form-notification v-html="notification" :state="state" />
     </div>
   </div>
 </template>
@@ -68,6 +68,8 @@
    */
   export default {
     name: 'e-input',
+    // status: 1,
+
     components: {
       cFormNotification
     },

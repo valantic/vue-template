@@ -18,7 +18,7 @@
     </span>
     <div v-if="notification && hasFocus" v-bem:notification>
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <c-form-notification :state="state" v-html="notification" />
+      <c-form-notification v-html="notification" :state="state" />
     </div>
   </div>
 </template>
@@ -33,6 +33,8 @@
    */
   export default {
     name: 'e-textarea',
+    // status: 1,
+
     components: {
       cFormNotification,
     },
