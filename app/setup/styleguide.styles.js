@@ -1,3 +1,5 @@
+// To find the correct 'section' name, try to use React Developer Tools
+// @see https://react-styleguidist.js.org/docs/cookbook.html#how-to-change-styles-of-a-style-guide
 module.exports = {
   theme: {
     maxWidth: '100%',
