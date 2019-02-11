@@ -47,6 +47,23 @@ module.exports = {
     'import/extensions': [0, 'always', {
       js: 'never',
       vue: 'never'
+    }],
+    'vue/attributes-order': [2, {
+      'order': [
+        'CONDITIONALS',
+        [
+          'LIST_RENDERING',
+          'RENDER_MODIFIERS',
+          'OTHER_DIRECTIVES',
+          'TWO_WAY_BINDING',
+          'CONTENT'
+        ],
+        'DEFINITION',
+        'GLOBAL',
+        'UNIQUE',
+        'OTHER_ATTR',
+        'EVENTS',
+      ]
     }]
   },
   globals: {

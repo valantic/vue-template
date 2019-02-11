@@ -3,8 +3,8 @@
     <span class="invisible">Language</span>
     <select v-bem :value="language" @change="onChange">
       <option v-for="locale in i18nLocales"
-              :key="locale"
               v-t="`s-language.${locale}`"
+              :key="locale"
               :value="locale">
       </option>
     </select>

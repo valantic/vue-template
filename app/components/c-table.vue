@@ -11,7 +11,7 @@
       hide-actions
     >
       <!-- TABLE-HEADER -->
-      <template slot="headers" slot-scope="props">
+      <template slot-scope="props" slot="headers">
         <tr v-bem:header-row>
           <th v-if="isSelectable">
             <e-checkbox :checked="!!selected.length"
@@ -45,7 +45,7 @@
       </template>
 
       <!-- TABLE-BODY -->
-      <template slot="items" slot-scope="props">
+      <template slot-scope="props" slot="items">
         <tr v-bem:content-row="{ selected: selected.includes(props.item.id), isClickable: isRowClickable && !isDisabled }"
             :active="props.selected"
             :role="rowRole"
