@@ -1,6 +1,7 @@
 ## Changes
 
 ### v 3.0.1
+ - Adds status label to components. #70
  - update eslint config. #68
  - update vue-i18n. #72
  - Add scale validator. #67
