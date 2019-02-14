@@ -1,8 +1,8 @@
 <template>
   <div v-bem="modifiers">
     <input v-if="uncontrolled"
-           ref="input"
            v-bem:field
+           ref="input"
            :autocomplete="autocomplete"
            :disabled="disabled"
            :name="name"
@@ -18,8 +18,8 @@
            @keyup.down="onArrowKeyUp"
     >
     <input v-else
-           ref="input"
            v-bem:field
+           ref="input"
            :autocomplete="autocomplete"
            :disabled="disabled"
            :name="name"
@@ -36,11 +36,11 @@
            @keyup.down="onArrowKeyUp"
     >
 
-    <span v-if="$slots.fixedLabel" ref="fixedLabel" v-bem:fixed-label>
+    <span v-if="$slots.fixedLabel" v-bem:fixed-label ref="fixedLabel">
       <!-- @slot Use this slot for a fixed label inside the input field. -->
       <slot name="fixedLabel"></slot>
     </span>
-    <span v-if="$slots.default || !hasDefaultState" ref="slot" v-bem:slot-wrapper>
+    <span v-if="$slots.default || !hasDefaultState" v-bem:slot-wrapper ref="slot">
       <span v-if="$slots.default" v-bem:slot>
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
@@ -53,7 +53,7 @@
     </span>
     <div v-if="showNotification" v-bem:notification>
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <c-form-notification :state="state" v-html="notification" />
+      <c-form-notification v-html="notification" :state="state" />
     </div>
   </div>
 </template>
@@ -61,12 +61,15 @@
 <script>
   import cFormNotification from '@/components/c-form-notification';
   import formStates from '../mixins/form-states';
+  import propScale from '@/helpers/prop.scale';
 
   /**
    * Input form component
    */
   export default {
     name: 'e-input',
+    // status: 1,
+
     components: {
       cFormNotification
     },
@@ -120,19 +123,13 @@
       /**
        * Defines the border Style
        *
-       * Available values: 0, 500
+       * Available values: [0, 500]
        * Default: 500
        */
-      border: {
-        default: 500,
-        type: [Number, String],
-        validator(value) {
-          return [
-            0,
-            500
-          ].includes(parseInt(value, 10));
-        }
-      },
+      border: propScale(500, [
+        0,
+        500,
+      ]),
 
       /**
        * Determines if the input should have a shadow on focus

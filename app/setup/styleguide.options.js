@@ -6,10 +6,9 @@ import AxiosMockAdapter from './plugins/styleguide.axios-mock';
 import dummyImages from '../styleguide/mock-data/initial-data/images';
 import dummyVideos from '../styleguide/mock-data/initial-data/videos';
 import dummyTableDate from '../styleguide/mock-data/initial-data/table';
+import { availableStatus } from './plugins/styleguide.status-label';
 
-/**
- * In development and on styleguide build, include router and example pages
- */
+// In development and on styleguide build, include router and example pages
 
 // NOTE: replace if you use router in your application by default!
 // See https://router.vuejs.org/en/
@@ -19,10 +18,11 @@ Vue.use(AxiosMockAdapter);
 Vue.mixin({
   data() {
     return {
+      availableStatus,
       mockData: {
         dummyImages,
         dummyVideos,
-        dummyTableDate,
+        dummyTableDate
       }
     };
   },

@@ -50,10 +50,10 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill) - Polyfills JS functionality for older browsers.
 * [axios](https://github.com/axios/axios) - Promise based HTTP client for browser and node.js.
 * [css-vars-ponyfill](https://github.com/jhildenbiddle/css-vars-ponyfill) - :horse: IE Polyfill for CSS Variables (used for themes)
+* [dayjs](https://github.com/iamkun/dayjs) - Date library alternative to moment.js
 * [lazysizes](https://github.com/aFarkas/lazysizes) - Lazy loader for images and iframes. Required by `e-picture`.
 * [lodash](https://github.com/lodash/lodash) - A modern JavaScript utility library delivering modularity, performance, & extras.
 * [material-design-icons-iconfont](https://github.com/jossef/material-design-icons-iconfont) - Developer optimized version of material design icon font. Required by `vuetify`.
-* [moment](https://momentjs.com/) - Date handling library.
 * [picturefill](https://github.com/scottjehl/picturefill) - A polyfill for picture and srcset. Required by `e-picture`.
 * [portal-vue](https://github.com/LinusBorg/portal-vue) - Let's render something in a «wormhole» somewhere else on the page. It's used to render all the modals on a single place 
 * [smoothscroll-polyfill](https://github.com/iamdustan/smoothscroll) - A scroll behaviour polyfill.

@@ -5,12 +5,15 @@
 </template>
 
 <script>
+  import propScale from '@/helpers/prop.scale';
 
   /**
    * Creates a styled text link.
    */
   export default {
     name: 'e-link',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 
@@ -18,18 +21,12 @@
       /**
        * Sets a predefined inner spacing for the link.
        *
-       * Available values: `0`, `500`
+       * Available values: [0, 500]
        */
-      spacing: {
-        type: [String, Number],
-        default: 500,
-        validator(value) {
-          return [
-            0,
-            500
-          ].includes(parseInt(value, 10));
-        }
-      }
+      spacing: propScale(500, [
+        0,
+        500
+      ])
     },
     // data() {
     //   return {};

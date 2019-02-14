@@ -30,6 +30,8 @@
    */
   export default {
     name: 'e-radio',
+    // status: 1,
+
     // components: {},
     mixins: [formStates],
     inheritAttrs: false,

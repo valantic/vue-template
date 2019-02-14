@@ -16,6 +16,8 @@
    */
   export default {
     name: 'e-label',
+    // status: 1,
+
     // components: {},
     mixins: [formStates],
 

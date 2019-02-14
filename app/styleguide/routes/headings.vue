@@ -121,6 +121,7 @@
 
   export default {
     name: 'headings',
+
     components: {
       eHeading
     },

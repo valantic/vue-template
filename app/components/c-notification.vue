@@ -50,6 +50,8 @@
    */
   export default {
     name: 'c-notification',
+    // status: 1,
+
     // components: {},
     // components: {},
     // mixins: [],
@@ -58,7 +60,7 @@
       /**
        * Sets the display type which defines how the notifications are being rendered.
        *
-       * Valid values: `global`, `modal`, `field`, `add-to-cart`, `selector`.
+       * Valid values: `[global, modal, field, add-to-cart, selector]`
        */
       displayType: {
         type: String,

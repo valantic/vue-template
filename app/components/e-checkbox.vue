@@ -32,6 +32,8 @@
    */
   export default {
     name: 'e-checkbox',
+    // status: 1,
+
     mixins: [formStates],
     inheritAttrs: false,
 

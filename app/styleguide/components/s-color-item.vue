@@ -12,6 +12,8 @@
 <script>
   export default {
     name: 's-color-item',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 

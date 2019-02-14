@@ -9,7 +9,7 @@
     </a>
 
     <div v-if="isRendered" v-bem:content :style="{ maxHeight }">
-      <div ref="inner" v-bem:inner>
+      <div v-bem:inner ref="inner">
         <!-- @slot Used for item content -->
         <slot :is-open="isOpen"></slot>
       </div>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import propScale from '@/helpers/prop.scale';
 
   /**
    * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
@@ -25,6 +26,8 @@
    */
   export default {
     name: 'c-collapse',
+    // status: 1,
+
     // components: {},
     // mixins: [],
 
@@ -48,17 +51,11 @@
       /**
        * Defines the padding of the inner content.
        */
-      padding: {
-        type: [Number, String],
-        default: 500,
-        validator(value) {
-          return [
-            0,
-            300,
-            500,
-          ].includes(parseInt(value, 10));
-        },
-      },
+      padding: propScale(500, [
+        0,
+        300,
+        500,
+      ]),
 
       /**
        * Title of the toggle item.

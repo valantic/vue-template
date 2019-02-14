@@ -13,6 +13,8 @@
 
   export default {
     name: 's-demo-settings',
+    // status: 1,
+
     components: {
       sToggle,
     },
