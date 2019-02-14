@@ -120,7 +120,7 @@
        * @returns {Number}
        */
       selectedYear() {
-        return (this.selectedDate && parseInt(this.selectedDate, 10)) || this.$moment().year();
+        return (this.selectedDate && parseInt(this.selectedDate, 10)) || this.$dayjs().year();
       },
 
       /**
@@ -246,18 +246,10 @@
        * Is called when the year is changed in the select. This needs to update the selected date so the date-picker
        * reacts to the change.
        *
-       * TODO: Find a solution without slicing the string. It's not easily possible with momentJS because we don't
-       * know if we get a full datestring or just year and month (If year is changed without selecting a date).
-       *
        * @param {String} year - The selected year.
        */
       onUpdateYear(year) {
-        const rest = (this.selectedDate && this.selectedDate.slice(5)) || this.$moment().year(year).format('MM-DD');
-        let date = `${year}-${rest}`;
-
-        if (!this.isValidDate(date)) {
-          date = this.$moment().year(year).format('YYYY-MM-DD');
-        }
+        const date = this.selectedDate ? this.$dayjs(this.selectedDate) : this.$dayjs();
 
         /**
          * @event input - Input event for date picker input.
@@ -266,7 +258,7 @@
          * @type {String} payload.date - Formatted date string.
          */
         this.$emit('input', {
-          date,
+          date: date.set('year', year).format('YYYY-MM-DD'),
         });
       },
 
@@ -321,10 +313,10 @@
 
         const [day, month, year] = date.split('.');
 
-        return this.$moment()
-          .year(year)
-          .month(month - 1)
-          .date(day)
+        return this.$dayjs()
+          .set('year', year)
+          .set('month', month - 1)
+          .set('date', day)
           .format('YYYY-MM-DD');
       },
 

@@ -160,9 +160,6 @@ module.exports = function(env = {}, options = {}) {
           ignore: ['.*']
         },
       ]),
-
-      // Only load locales for moment.js which are actually used. See https://github.com/moment/moment/issues/1435#issuecomment-187100876
-      new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(de|fr|it)$/)
     ];
 
     if (hasMonitorSnapshot) {

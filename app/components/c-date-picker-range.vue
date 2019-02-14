@@ -147,8 +147,8 @@
        * @returns {Boolean}
        */
       isValidDate(date) {
-        return this.$moment(date, 'YYYY-MM-DD', true).isValid()
-          && this.$moment(date).isSameOrAfter('1920-01-01', 'year');
+        return this.$dayjs(date).isValid()
+          && this.$dayjs(date).isAfter(this.$dayjs('1920-01-01'));
       },
 
       /**
@@ -164,7 +164,7 @@
         }
 
         if (this.internalEnd) {
-          return this.$moment(date).isSameOrBefore(this.internalEnd, 'day');
+          return this.$dayjs(date).isSameOrBefore(this.internalEnd);
         }
 
         return true;
@@ -183,7 +183,7 @@
         }
 
         if (this.isValidDate(date) && this.internalStart) {
-          return this.$moment(date).isSameOrAfter(this.internalStart, 'day');
+          return this.$dayjs(date).isSameOrAfter(this.internalStart);
         }
 
         return true;
@@ -197,23 +197,7 @@
        * @returns {Boolean}
        */
       isEventDate(dateString) {
-        const date = this.$moment(dateString);
-        const { internalStart, internalEnd } = this;
-
-        if (internalStart && internalEnd) {
-          return date.isSameOrAfter(internalStart, 'day')
-            && date.isSameOrBefore(internalEnd, 'day');
-        }
-
-        if (internalStart) {
-          return date.isSameOrAfter(internalStart, 'day');
-        }
-
-        if (internalEnd) {
-          return date.isSameOrBefore(internalEnd, 'day');
-        }
-
-        return false;
+        return this.$dayjs(dateString).isBetween(this.internalStart, this.internalEnd);
       },
 
       /**
