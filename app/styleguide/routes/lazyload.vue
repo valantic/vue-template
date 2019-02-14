@@ -5,15 +5,13 @@
     <div
       v-for="item in items"
       :key="item.key"
-      v-bem:item
-    >
+      v-bem:item>
       <e-picture
         :srcset="item.srcset"
         :sizes="item.sizes"
         :fallback="item.fallback"
         alt="an image"
-        inline="true"
-      />
+        inline="true" />
     </div>
   </div>
 </template>

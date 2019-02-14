@@ -49,8 +49,7 @@
       <e-icon v-if="!hasDefaultState && !hasFocus"
               v-bem:state-icon
               :icon="stateIcon"
-              inline
-      />
+              inline />
     </span>
     <div v-if="showNotification" v-bem:notification>
       <!-- eslint-disable-next-line vue/no-v-html -->

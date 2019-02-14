@@ -13,8 +13,7 @@
         />
         <label v-t="'c-date-picker-input.chooseDate'"
                :for="`date-picker-value-${uuid}`"
-               class="invisible"
-        >
+               class="invisible">
         </label>
       </div>
       <div v-if="hasYearSelector" v-bem:select>
@@ -27,8 +26,7 @@
         />
         <label v-t="'c-date-picker-input.chooseYear'"
                :for="`date-picker-year-${uuid}`"
-               class="invisible"
-        >
+               class="invisible">
         </label>
       </div>
     </div>

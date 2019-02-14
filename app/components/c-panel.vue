@@ -13,8 +13,7 @@
       v-bem:triangle-button="triangleButtonModifiers"
       @click="onTriangleButtonClick"
       @mouseover="onPlusToggle"
-      @mouseout="onPlusToggle"
-    >
+      @mouseout="onPlusToggle">
       <div ref="shadow" v-bem:shadow="shadowModifiers"></div>
       <span ref="plus" v-bem:plus="plusModifiers"></span>
     </div>

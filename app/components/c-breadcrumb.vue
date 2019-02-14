@@ -3,12 +3,10 @@
     <ul v-bem:list>
       <li v-for="(item, index) in items"
           :key="`breadcrumb--${index}`"
-          v-bem:item
-      >
+          v-bem:item>
         <a v-bem:link
            :href="item.url"
-           :title="$t('c-breadcrumb.linkTitle', { name: item.name })"
-        >
+           :title="$t('c-breadcrumb.linkTitle', { name: item.name })">
           {{ item.name }}
         </a>
       </li>

@@ -3,8 +3,7 @@
     <label
       v-bem:label
       @mouseenter="hasHover = true"
-      @mouseleave="hasHover = false"
-    >
+      @mouseleave="hasHover = false">
       <input
         v-model="internalValue"
         v-bem:field
@@ -16,8 +15,7 @@
         type="checkbox"
         @blur="onBlur"
         @change="onChange"
-        @focus="onFocus"
-      >
+        @focus="onFocus">
       <span v-bem:label-name>
         <slot></slot>
       </span>

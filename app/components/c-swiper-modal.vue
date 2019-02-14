@@ -3,11 +3,9 @@
     <!-- 'swiper' classes needed for the swiper plugin. -->
     <div ref="gallery"
          v-bem:container
-         class="swiper-container gallery-top"
-    >
+         class="swiper-container gallery-top">
       <div v-bem:wrapper
-           class="swiper-wrapper"
-      >
+           class="swiper-wrapper">
         <div v-for="image in images"
              :key="image.id"
              v-bem:slide="{ video: image.isVideo }"
@@ -22,8 +20,7 @@
                       width="560"
                       height="315"
                       frameborder="0"
-                      allowfullscreen
-              ></iframe>
+                      allowfullscreen></iframe>
             </div>
           </div>
 
@@ -33,35 +30,28 @@
             :sizes="sizes"
             :srcset="image.srcset"
             :fallback="image.fallback"
-            :alt="image.alt"
-          />
+            :alt="image.alt" />
         </div>
       </div>
       <div v-bem:button-prev
-           class="swiper-button-prev"
-      ></div>
+           class="swiper-button-prev"></div>
       <div v-bem:button-next
-           class="swiper-button-next"
-      ></div>
+           class="swiper-button-next"></div>
     </div>
     <div ref="thumbnails"
          v-bem:container
-         class="swiper-container gallery-thumbs"
-    >
+         class="swiper-container gallery-thumbs">
       <div v-bem:wrapper
-           class="swiper-wrapper"
-      >
+           class="swiper-wrapper">
         <div v-for="image in images"
              :key="image.id"
              v-bem:slide
-             class="swiper-slide"
-        >
+             class="swiper-slide">
           <!-- Video -->
           <div v-if="image.isVideo" v-bem:video-preview-wrapper>
             <img v-bem:video-thumbnail
                  :src="image.thumbSrc"
-                 alt=""
-            >
+                 alt="">
             <span v-bem:video-thumbnail-overlay></span>
           </div>
 
@@ -71,8 +61,7 @@
             :sizes="sizes"
             :srcset="image.srcset"
             :fallback="image.fallback"
-            :alt="image.alt"
-          />
+            :alt="image.alt" />
         </div>
       </div>
     </div>

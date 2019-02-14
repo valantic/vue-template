@@ -8,15 +8,13 @@
               v-bind="$attrs"
               @focus="onFocus"
               @blur="onBlur"
-              @input="onInput"
-    >
+              @input="onInput">
     </textarea>
     <span v-if="!hasDefaultState && !hasFocus" v-bem:icon-wrapper>
       <span v-bem:icon-splitter></span>
       <e-icon v-bem:state-icon
               :icon="stateIcon"
-              inline
-      />
+              inline />
     </span>
     <div v-if="notification && hasFocus" v-bem:notification>
       <!-- eslint-disable-next-line vue/no-v-html -->

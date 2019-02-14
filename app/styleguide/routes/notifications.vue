@@ -64,8 +64,7 @@
         :open="modalOpen"
         title="Example title small"
         size="300"
-        @close="modalOpen = false"
-      >
+        @close="modalOpen = false">
         <div>
           <e-button @click="addToCart">
             Add to cart

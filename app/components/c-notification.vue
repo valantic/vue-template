@@ -9,16 +9,14 @@
         {{ notification.message.message }}
       </template>
       <div v-if="notification.message.type === 'add-to-cart' && hasProductData"
-           v-bem:product-tile-wrapper
-      ></div>
+           v-bem:product-tile-wrapper></div>
     </div>
     <div v-if="typeof notification.confirm === 'function'" v-bem:actions>
       <div v-if="typeof notification.decline === 'function'" v-bem:action.decline>
         <e-button :progress="declineProgress"
                   :disabled="confirmProgress"
                   width="auto"
-                  @click="onDecline"
-        >
+                  @click="onDecline">
           {{ $t('c-notification.decline') }}
         </e-button>
       </div>
@@ -26,16 +24,14 @@
         <e-button :progress="confirmProgress"
                   :disabled="declineProgress"
                   width="auto"
-                  @click="onConfirm"
-        >
+                  @click="onConfirm">
           {{ $t('c-notification.confirm') }}
         </e-button>
       </div>
     </div>
     <button v-if="!notification.confirm"
             v-bem:close
-            @click="close"
-    >
+            @click="close">
       <e-icon
         icon="i-close"
         width="15"

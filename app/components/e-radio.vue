@@ -2,8 +2,7 @@
   <div v-bem="modifiers">
     <label v-bem:label
            @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
-    >
+           @mouseleave="hasHover = false">
       <input v-model="internalValue"
              v-bem:field="fieldModifiers"
              v-bind="$attrs"

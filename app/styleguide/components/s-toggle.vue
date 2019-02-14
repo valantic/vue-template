@@ -6,8 +6,7 @@
     </span>
     <input v-model="internalValue"
            v-bem:input
-           type="checkbox"
-    >
+           type="checkbox">
     <span v-bem:slider></span>
   </label>
 </template>

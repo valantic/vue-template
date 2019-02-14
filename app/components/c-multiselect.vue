@@ -55,8 +55,7 @@
           >
             <e-icon v-bem:icon
                     icon="i-search"
-                    inline
-            />
+                    inline />
           </e-input>
         </div>
         <div v-bem:items-wrapper>
@@ -70,8 +69,7 @@
                         v-model="checkedItems"
                         :name="item.name"
                         :value="trimValue(item.value)"
-                        @change="onCheckboxChange"
-            >
+                        @change="onCheckboxChange">
               <span>{{ item.displayName }}</span>
             </e-checkbox>
           </div>

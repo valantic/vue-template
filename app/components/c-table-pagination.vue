@@ -3,8 +3,7 @@
     <div v-bem:left>
       <label v-t="'c-table-pagination.itemsPerPage'"
              v-bem:select-label
-             :for="`table-rows--${uuid}`"
-      ></label>
+             :for="`table-rows--${uuid}`"></label>
       <div v-bem:select-wrapper>
         <e-select :id="`table-rows--${uuid}`"
                   :value="rowsPerPageValue"
@@ -25,13 +24,11 @@
       <ul v-bem:pages>
         <li v-for="pageNumber in pages"
             :key="`page-${pageNumber}`"
-            v-bem:page-item="{active: currentPage === pageNumber}"
-        >
+            v-bem:page-item="{active: currentPage === pageNumber}">
           <a v-bem:page-link
              :title="$t('c-table-pagination.pageNumberTitle', {pageNumber})"
              href="#"
-             @click.prevent="goToPage({ pageNumber })"
-          >
+             @click.prevent="goToPage({ pageNumber })">
             {{ pageNumber }}
           </a>
         </li>
@@ -40,25 +37,21 @@
         <a v-bem:arrow="{disabled: currentPage <= 1}"
            :title="$t('c-table-pagination.lastPageTitle')"
            href="#"
-           @click.prevent="onClickBack"
-        >
+           @click.prevent="onClickBack">
           <e-icon icon="i-arrow--left--info"
                   width="15"
                   height="15"
-                  inline
-          />
+                  inline />
           <span v-t="'c-table-pagination.lastPageTitle'" class="invisible"></span>
         </a>
         <a v-bem:arrow="{disabled: maxPage <= currentPage}"
            :title="$t('c-table-pagination.nextPageTitle')"
            href="#"
-           @click.prevent="onClickNext"
-        >
+           @click.prevent="onClickNext">
           <e-icon icon="i-arrow--right--info"
                   width="15"
                   height="15"
-                  inline
-          />
+                  inline />
           <span v-t="'c-table-pagination.nextPageTitle'" class="invisible"></span>
         </a>
       </div>
