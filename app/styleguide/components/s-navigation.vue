@@ -30,7 +30,8 @@
           :active-class="`${$options.name}-item--active-path`"
           :exact-active-class="`${$options.name}-item--active`"
           tag="li"
-          exact>
+          exact
+        >
           <a v-bem:navigation-link>
             {{ route.meta.title }}
           </a>

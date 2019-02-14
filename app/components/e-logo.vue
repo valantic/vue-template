@@ -4,7 +4,8 @@
        v-bem:link
        :title="logo.title"
        v-bind="$attrs"
-       tabindex="-1">
+       tabindex="-1"
+    >
       <!-- TODO: Check if e-icon is the best way to render the logo -->
       <e-icon :icon="logo.icon"
               :alt="logo.alt"

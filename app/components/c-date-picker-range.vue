@@ -2,7 +2,8 @@
   <div v-bem>
     <e-label :for="startId"
              :name="labelName"
-             :position="labelPosition">
+             :position="labelPosition"
+    >
       <div v-bem:fields>
         <c-date-picker-input :id="startId"
                              :selected-date="internalStart"

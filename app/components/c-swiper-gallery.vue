@@ -1,26 +1,32 @@
 <template>
   <div v-bem="modifiers"
        @mouseenter="hasHover = true"
-       @mouseleave="hasHover = false">
+       @mouseleave="hasHover = false"
+  >
     <!-- 'swiper' classes needed for the swiper plugin. -->
     <div ref="container"
          v-bem:container
-         class="swiper-container">
+         class="swiper-container"
+    >
       <div v-bem:wrapper
-           class="swiper-wrapper">
+           class="swiper-wrapper"
+      >
         <!-- Slides -->
         <div v-for="picture in pictures"
              :key="picture.id"
              v-bem:slide
-             class="swiper-slide">
+             class="swiper-slide"
+        >
           <button v-bem:trigger
                   type="button"
-                  @click.prevent="modalOpen = true">
+                  @click.prevent="modalOpen = true"
+          >
             <span v-bem:image-wrapper-inner>
               <div v-if="picture.isVideo" v-bem:video-preview-wrapper>
                 <img v-bem:video-thumbnail
                      :src="picture.thumbSrc"
-                     alt="">
+                     alt=""
+                >
                 <span v-bem:video-thumbnail-overlay></span>
               </div>
               <e-picture
@@ -28,7 +34,8 @@
                 :sizes="sizes"
                 :srcset="picture.srcset"
                 :fallback="picture.fallback"
-                :alt="picture.alt" />
+                :alt="picture.alt"
+              />
             </span>
 
             <span v-t="'c-swiper.zoom'" class="invisible"></span>
@@ -38,13 +45,16 @@
 
       <!-- navigation -->
       <div v-bem:pagination
-           class="swiper-pagination"></div>
+           class="swiper-pagination"
+      ></div>
 
       <!-- buttons-->
       <div v-bem:button-prev
-           class="swiper-button-prev"></div>
+           class="swiper-button-prev"
+      ></div>
       <div v-bem:button-next
-           class="swiper-button-next"></div>
+           class="swiper-button-next"
+      ></div>
 
       <!-- modal -->
       <c-modal
@@ -53,16 +63,19 @@
         size="600"
         inner-spacing="0"
         mobile-transition="fade"
-        @close="modalClose">
+        @close="modalClose"
+      >
         <div v-bem:modal-close-icon @click="modalOpen = false">
           <e-icon icon="i-close"
                   width="25"
                   height="25"
-                  inline />
+                  inline
+          />
         </div>
         <c-swiper-modal :images="pictures"
                         :initial-slide="swiper.activeIndex"
-                        @change="onModalSlideChanged" />
+                        @change="onModalSlideChanged"
+        />
       </c-modal>
     </div>
 

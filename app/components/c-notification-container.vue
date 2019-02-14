@@ -6,7 +6,8 @@
         :key="notification.id"
         :selector="selector"
         :notification="notification"
-        :display-type="displayType" />
+        :display-type="displayType"
+      />
     </div>
   </div>
 </template>

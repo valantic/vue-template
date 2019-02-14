@@ -4,27 +4,33 @@
       <h1>Headings</h1>
       <div v-bem:example-box>
         <e-heading
-          tag-name="h1">
+          tag-name="h1"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
-          tag-name="h2">
+          tag-name="h2"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
-          tag-name="h3">
+          tag-name="h3"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
-          tag-name="h4">
+          tag-name="h4"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
-          tag-name="h5">
+          tag-name="h5"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
-          tag-name="h6">
+          tag-name="h6"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
       </div>
@@ -33,33 +39,39 @@
       <div v-bem:example-box>
         <e-heading
           tag-name="h1"
-          underline>
+          underline
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
           tag-name="h2"
-          underline>
+          underline
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
           tag-name="h3"
-          underline>
+          underline
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
           tag-name="h4"
-          underline>
+          underline
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
           tag-name="h5"
-          underline>
+          underline
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </e-heading>
         <e-heading
           tag-name="h6"
           font-weight="normal"
-          underline>
+          underline
+        >
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
@@ -70,35 +82,40 @@
       <div v-bem:example-box>
         <e-heading
           tag-name="h1"
-          underline>
+          underline
+        >
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
           tag-name="h2"
-          underline>
+          underline
+        >
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
           tag-name="h3"
-          underline>
+          underline
+        >
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
           tag-name="h4"
-          underline>
+          underline
+        >
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
           tag-name="h5"
-          underline>
+          underline
+        >
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
@@ -106,7 +123,8 @@
         <e-heading
           tag-name="h6"
           font-weight="bold"
-          underline>
+          underline
+        >
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>

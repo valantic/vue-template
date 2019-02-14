@@ -8,7 +8,8 @@
          v-bem:close="{ mobile: true }"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
-         @click="close">
+         @click="close"
+      >
         <span v-t="'c-modal-header-01.closeTitle'" class="invisible"></span>
       </a>
       <div v-bem:close-icon-mobile>
@@ -27,7 +28,8 @@
          v-bem:close
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
-         @click="close">
+         @click="close"
+      >
         <e-icon
           icon="i-close"
           width="25"

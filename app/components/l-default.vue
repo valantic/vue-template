@@ -2,7 +2,8 @@
   <div v-bem data-app>
     <div ref="content" v-bem:content>
       <div ref="inner"
-           v-bem:inner>
+           v-bem:inner
+      >
         <c-notification-container />
         <slot></slot>
       </div>
