@@ -84,7 +84,7 @@ module.exports = {
       }
     }],
     'vue/name-property-casing': [2, 'kebab-case'],
-    'vue/html-closing-bracket-newline': [0],
+    'vue/html-closing-bracket-newline': [1],
     // 'vue/multiline-html-element-content-newline': [1, { // TODO: currently does not allow additional properties (bug, https://github.com/vuejs/eslint-plugin-vue/issues/792)
     //   ignoreWhenEmpty: true,
     //   ignores: ['pre', 'textarea'],
