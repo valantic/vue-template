@@ -23,7 +23,7 @@
       /**
        * Accepts a state modifier for the component.
        *
-       * Valid values: [0, 1]
+       * Valid values: `[0, 1]`
        */
       modifier: {
         type: [String, Number],

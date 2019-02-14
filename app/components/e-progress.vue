@@ -12,6 +12,8 @@
 </template>
 
 <script>
+  import propScale from '@/helpers/prop.scale';
+
   export default {
     name: 'e-progress',
     // status: 1,
@@ -30,17 +32,13 @@
 
       /**
        * Sets the inner spacing for the animation
+       *
+       * Valid values: `[0, 500]`
        */
-      spacing: {
-        type: [String, Number],
-        default: 500,
-        validator(value) {
-          return [
-            0,
-            500
-          ].includes(parseInt(value, 10));
-        }
-      },
+      spacing: propScale(500, [
+        0,
+        500
+      ]),
 
       /**
        * Defines a fallback message. "e-progress.loading" is used by default

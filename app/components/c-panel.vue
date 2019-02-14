@@ -22,6 +22,7 @@
 
 <script>
   import touchDevice from '../mixins/touch-device';
+  import propScale from '@/helpers/prop.scale';
 
   export default {
     name: 'c-panel',
@@ -36,28 +37,22 @@
       /**
        * Defines the spacing of the heading
        *
-       * Valid values: `0`, `500`
+       * Valid values: `[0, 500]`
        */
-      headingSpacing: {
-        type: [String, Number],
-        default: 0,
-        validator(value) {
-          return [0, 500].includes(parseInt(value, 10));
-        },
-      },
+      headingSpacing: propScale(0, [
+        0,
+        500
+      ]),
 
       /**
        * Defines the spacing of the content
        *
-       * Valid values: `0`, `500`
+       * Valid values: `[0, 500]`
        */
-      contentSpacing: {
-        type: [String, Number],
-        default: 500,
-        validator(value) {
-          return [0, 500].includes(parseInt(value, 10));
-        },
-      },
+      contentSpacing: propScale(500, [
+        0,
+        500
+      ]),
 
       /**
        * Defines the heading of the panel
@@ -71,20 +66,18 @@
       /**
        * Defines the border of the panel
        *
-       * Valid values: `0`, `1`, `2`
+       * Valid values: `[0, 1, 2]`
        */
-      border: {
-        type: [String, Number],
-        default: 0,
-        validator(value) {
-          return [0, 1, 2].includes(parseInt(value, 10));
-        },
-      },
+      border: propScale(0, [
+        0,
+        1,
+        2
+      ]),
 
       /**
        * Defines the border color of the panel
        *
-       * Valid values: `yellow`, `blue`, `gray`
+       * Valid values: `[yellow, blue, gray]`
        */
       color: {
         type: String,
@@ -117,23 +110,17 @@
       /**
        * Defines the size of the triangle button
        *
-       * Valid values: `0`, `500`
+       * Valid values: `[0, 500]`
        */
-      triangleButtonSize: {
-        type: [Number, String],
-        default: 0,
-        validator(value) {
-          return [
-            0,
-            500
-          ].includes(parseInt(value, 10));
-        },
-      },
+      triangleButtonSize: propScale(0, [
+        0,
+        500
+      ]),
 
       /**
        * Defines the plus color of the plus for the triangle button
        *
-       * Valid values: `white`, `blue`
+       * Valid values: `[white, blue]`
        */
       triangleButtonPlusColor: {
         type: String,

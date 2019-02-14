@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import propScale from '@/helpers/prop.scale';
 
   /**
    * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
@@ -50,17 +51,11 @@
       /**
        * Defines the padding of the inner content.
        */
-      padding: {
-        type: [Number, String],
-        default: 500,
-        validator(value) {
-          return [
-            0,
-            300,
-            500,
-          ].includes(parseInt(value, 10));
-        },
-      },
+      padding: propScale(500, [
+        0,
+        300,
+        500,
+      ]),
 
       /**
        * Title of the toggle item.

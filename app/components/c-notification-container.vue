@@ -31,7 +31,7 @@
       /**
        * Sets the display type which defines how the notifications are being rendered.
        *
-       * Valid values: `global`, `modal`, `field`, `add-to-cart`, `selector`.
+       * Valid values: `[global, modal, field, add-to-cart, selector]`
        */
       displayType: {
         type: String,
@@ -50,7 +50,7 @@
       /**
        * Sets the display state of the container.
        *
-       * Valid values: `full, reduced`.
+       * Valid values: `[full, reduced]`.
        */
       state: {
         type: String,
