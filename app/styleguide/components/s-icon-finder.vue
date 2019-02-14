@@ -8,8 +8,8 @@
     </div>
     <div v-bem:grid>
       <div v-for="(icon, index) in filteredIcons"
-           :key="index"
            v-bem:grid-item="{ negative: icon.negative }"
+           :key="index"
            role="button"
            @click="copyToClipboard(icon)"
       >
@@ -24,7 +24,7 @@
     <div v-if="notification" v-bem:notification>
       {{ notification }}
     </div>
-    <input ref="input" v-bem:clipboard type="text">
+    <input v-bem:clipboard ref="input" type="text">
   </div>
 </template>
 

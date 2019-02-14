@@ -1,8 +1,8 @@
 <template>
   <div v-bem data-app>
-    <div ref="content" v-bem:content>
-      <div ref="inner"
-           v-bem:inner>
+    <div v-bem:content ref="content">
+      <div v-bem:inner
+           ref="inner">
         <c-notification-container />
         <slot></slot>
       </div>
@@ -16,6 +16,8 @@
 
   export default {
     name: 'l-default',
+    // status: 1,
+
     components: {
       cNotificationContainer,
     },

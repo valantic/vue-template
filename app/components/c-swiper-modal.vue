@@ -1,21 +1,21 @@
 <template>
   <div v-bem>
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="gallery"
-         v-bem:container
+    <div v-bem:container
+         ref="gallery"
          class="swiper-container gallery-top">
       <div v-bem:wrapper
            class="swiper-wrapper">
         <div v-for="image in images"
-             :key="image.id"
              v-bem:slide="{ video: image.isVideo }"
+             :key="image.id"
              class="swiper-slide"
         >
           <!-- Video -->
           <div v-if="image.isVideo" v-bem:video-wrapper>
             <div v-bem:iframe-wrapper>
-              <iframe ref="video"
-                      v-bem:video-iframe
+              <iframe v-bem:video-iframe
+                      ref="video"
                       :src="`https://www.youtube.com/embed/${image.youtubeId}?enablejsapi=1&version=3&playerapiid=ytplayer`"
                       width="560"
                       height="315"
@@ -38,14 +38,14 @@
       <div v-bem:button-next
            class="swiper-button-next"></div>
     </div>
-    <div ref="thumbnails"
-         v-bem:container
+    <div v-bem:container
+         ref="thumbnails"
          class="swiper-container gallery-thumbs">
       <div v-bem:wrapper
            class="swiper-wrapper">
         <div v-for="image in images"
-             :key="image.id"
              v-bem:slide
+             :key="image.id"
              class="swiper-slide">
           <!-- Video -->
           <div v-if="image.isVideo" v-bem:video-preview-wrapper>
@@ -79,8 +79,9 @@
    */
   export default {
     name: 'c-swiper-modal',
-    // components: {},
+    // status: 1,
 
+    // components: {},
     // mixins: [],
 
     props: {

@@ -10,13 +10,13 @@
 </template>
 
 <script>
-
   import paletteColors from '../../setup/js/color';
   import sPaletteItem from './s-palette-item';
 
   export default {
-
     name: 's-palette-list',
+    // status: 1,
+
     components: {
       's-palette-item': sPaletteItem
     },

@@ -1,7 +1,6 @@
 // https://eslint.org/docs/user-guide/configuring
 const webpackConfig = require('./webpack.config');
-
-// TODO: review
+const vueRules = require('eslint-config-valantic/plugins/vue');
 
 module.exports = {
   root: true,
@@ -33,6 +32,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    ...vueRules,
     'require-jsdoc': [2, {
       require: {
         FunctionDeclaration: true,
@@ -42,78 +42,29 @@ module.exports = {
         FunctionExpression: false
       }
     }],
-    'id-length': [1, {
-      min: 3,
-      properties: 'always',
-      exceptions: [
-        '$',
-        'a',
-        'b',
-        'e',
-        'i',
-        'in', // ember-cp-validations
-        'j',
-        'x',
-        'y',
-        '_', // _Lowdash
-        'fs', // ember
-        'gt', // ember-cp-validations
-        'id',
-        'DS', // ember-data
-        'el', // Vue
-        'on', // Vue
-        'vm', // Vue
-        'xs', // Bootstrap
-        'sm', // Bootstrap
-        'md', // Bootstrap
-        'lg', // Bootstrap
-        'xl', // Bootstrap
-      ]
-    }],
 
     // don't require .vue extension when importing
     'import/extensions': [0, 'always', {
       js: 'never',
       vue: 'never'
     }],
-    'vue/max-attributes-per-line': [2, {
-      'singleline': 3,
-      'multiline': {
-        'max': 1,
-        'allowFirstLine': true
-      }
+    'vue/attributes-order': [2, {
+      'order': [
+        'CONDITIONALS',
+        [
+          'LIST_RENDERING',
+          'RENDER_MODIFIERS',
+          'OTHER_DIRECTIVES',
+          'TWO_WAY_BINDING',
+          'CONTENT'
+        ],
+        'DEFINITION',
+        'GLOBAL',
+        'UNIQUE',
+        'OTHER_ATTR',
+        'EVENTS',
+      ],
     }],
-    'vue/name-property-casing': [2, 'kebab-case'],
-    'vue/html-closing-bracket-newline': [1],
-    // 'vue/multiline-html-element-content-newline': [1, { // TODO: currently does not allow additional properties (bug, https://github.com/vuejs/eslint-plugin-vue/issues/792)
-    //   ignoreWhenEmpty: true,
-    //   ignores: ['pre', 'textarea'],
-    //   allowEmptyLines: true
-    // }],
-    'vue/singleline-html-element-content-newline': [1, {
-      'ignoreWhenNoAttributes': true,
-      'ignoreWhenEmpty': true,
-      'ignores': [
-        'code',
-        'pre',
-        'span',
-        'textarea',
-      ]
-    }],
-    'indent': 0, // Indent is not working with html script tag. Use 'vue/script-indent' instead
-    'vue/script-indent': ['error', 2, {
-      'baseIndent': 1,
-      'switchCase': 1
-    }],
-    'vue/html-self-closing': [2, {
-      'html': {
-        'void': 'never',
-        'normal': 'never', // Don't close default elements
-        'component': 'always'
-      },
-      'svg': 'always',
-      'math': 'always'
-    }]
   },
   globals: {
   }

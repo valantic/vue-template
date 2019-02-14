@@ -41,6 +41,7 @@
 </template>
 
 <script>
+  import propScale from '@/helpers/prop.scale';
   import cNotificationContainer from '@/components/c-notification-container';
 
   /**
@@ -48,6 +49,8 @@
    */
   export default {
     name: 'c-modal-header-01',
+    // status: 1,
+
     components: {
       cNotificationContainer,
     },
@@ -64,18 +67,14 @@
 
       /**
        * Sets a modifier class for title spacing options
+       *
+       * Valid values: `[0, 300, 500]`
        */
-      titleSpacing: {
-        type: [Number, String],
-        default: 500,
-        validator(value) {
-          return [
-            0,
-            300,
-            500,
-          ].includes(parseInt(value, 10));
-        },
-      },
+      titleSpacing: propScale(500, [
+        0,
+        300,
+        500
+      ]),
 
       /**
        * Header option with closable icon

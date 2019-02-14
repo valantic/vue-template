@@ -40,8 +40,8 @@
         </div>
 
         <div v-else v-bem:search-wrapper>
-          <e-input ref="searchInput"
-                   v-model="searchTerm"
+          <e-input v-model="searchTerm"
+                   ref="searchInput"
                    :placeholder="$t('c-multiselect.search')"
                    :title="$t('c-multiselect.searchTitle')"
                    :focus-shadow="false"
@@ -60,13 +60,13 @@
         </div>
         <div v-bem:items-wrapper>
           <div
-            v-for="item in checkboxItemsFiltered"
             v-show="item.display"
-            :key="item.id"
+            v-for="item in checkboxItemsFiltered"
             v-bem:item-wrapper
+            :key="item.id"
           >
-            <e-checkbox :ref="item.name"
-                        v-model="checkedItems"
+            <e-checkbox v-model="checkedItems"
+                        :ref="item.name"
                         :name="item.name"
                         :value="trimValue(item.value)"
                         @change="onCheckboxChange">
@@ -117,6 +117,8 @@
    */
   export default {
     name: 'c-multiselect',
+    // status: 1,
+
     // components: {},
     mixins: [formStates],
 

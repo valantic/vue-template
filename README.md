@@ -471,6 +471,18 @@ All text which is defined in frontend MUST be placed trough translations. There 
 
 We use the [vue-i18n](https://github.com/kazupon/vue-i18n) plugin to handle translations. This tool also allows us to handle localizations (e.g. number or date formats). The documentation can be found [here](https://kazupon.github.io/vue-i18n/guide/started.html).
 
+Use as directive:
+```html
+<span v-t="'c-example.title'"></span>
+```
+
+Use as directive inside a transition:
+```html
+<transition name="fade">
+  <span v-if="toggle" v-t.preserve="'c-example.title'"></span>
+</transition>
+```
+
 ### Placeholders
 
 vue-i18n allows the usage of [placeholders](https://kazupon.github.io/vue-i18n/guide/formatting.html#named-formatting). This means you should add dynamic parts with a placeholder to the translation and not concatenate them in the component template or JavaScript.

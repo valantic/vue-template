@@ -16,7 +16,11 @@ module.exports = {
       sections: [
         {
           name: 'Informations',
-          content: 'app/styleguide/core/index.md',
+          content: 'app/styleguide/core/welcome/information.md',
+        },
+        {
+          name: 'Status labels',
+          content: 'app/styleguide/core/welcome/status-label.md',
         }
       ]
     },
