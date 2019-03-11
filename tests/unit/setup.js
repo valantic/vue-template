@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import VueBem from '@verstaerker/vue-bem';
+import vueBemCn from '@/setup/plugins/vue-bem-cn';
 
 Vue.config.productionTip = false;
 
-Vue.use(VueBem);
+Vue.use(vueBemCn);

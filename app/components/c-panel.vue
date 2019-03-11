@@ -1,21 +1,21 @@
 <template>
-  <div v-bem="panelModifiers">
-    <div v-bem:heading="headingModifiers">
+  <div :class="b(panelModifiers)">
+    <div :class="b('heading', headingModifiers)">
       <e-heading v-if="heading" tag-name="h2" underline>
         {{ heading }}
       </e-heading>
     </div>
-    <div v-bem:content="contentModifiers">
+    <div :class="b('content', contentModifiers)">
       <slot></slot>
     </div>
     <div
       v-if="triangleButton"
-      v-bem:triangle-button="triangleButtonModifiers"
+      :class="b('triangle-button', triangleButtonModifiers)"
       @click="onTriangleButtonClick"
       @mouseover="onPlusToggle"
       @mouseout="onPlusToggle">
-      <div v-bem:shadow="shadowModifiers" ref="shadow"></div>
-      <span v-bem:plus="plusModifiers" ref="plus"></span>
+      <div ref="shadow" :class="b('shadow', shadowModifiers)"></div>
+      <span ref="plus" :class="b('plus', plusModifiers)"></span>
     </div>
   </div>
 </template>

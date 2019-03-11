@@ -1,5 +1,5 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
     <h1>Sandbox</h1>
     <div>
       <!-- Add any content here -->

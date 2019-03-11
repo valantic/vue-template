@@ -1,6 +1,6 @@
 <template>
-  <div v-bem="{ state, displayType }">
-    <div v-bem:inner>
+  <div :class="b({ state, displayType })">
+    <div :class="b('inner')">
       <c-notification
         v-for="notification in notifications"
         :key="notification.id"

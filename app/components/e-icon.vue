@@ -1,8 +1,8 @@
 <template>
-  <span v-bem="componentModifiers">
+  <span :class="b(componentModifiers)">
     <!-- <span> needed for inline usage. -->
     <img v-if="!inline"
-         v-bem:icon
+         :class="b('icon')"
          :src="src"
          :alt="alt"
          :width="width"

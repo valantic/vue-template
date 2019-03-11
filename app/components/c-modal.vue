@@ -1,7 +1,7 @@
 <template>
   <portal :order="uuidInt" :to="portalTarget">
     <modal :name="uuid"
-           :classes="$bem({ size })"
+           :classes="b({ size })"
            :width="width"
            :max-width="maxWidth"
            :pivot-y="0.1"
@@ -16,7 +16,7 @@
                  :title-spacing="titleSpacing"
                  :closable="closeIcon"
                  @close="closeModal" />
-      <div v-bem:content="{ innerSpacing }">
+      <div :class="b('content', { innerSpacing })">
         <!-- @slot Used for the modal content. -->
         <slot></slot>
       </div>
@@ -27,7 +27,6 @@
 <script>
   import cModalHeader01 from '@/components/c-modal-header-01';
   import uuid from '../mixins/uuid';
-  import * as bem from '@verstaerker/vue-bem';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
   import propScale from '@/helpers/prop.scale';
@@ -46,7 +45,6 @@
     },
     mixins: [
       uuid,
-      bem.bemMixin,
     ],
 
     props: {

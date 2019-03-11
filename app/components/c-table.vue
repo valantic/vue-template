@@ -1,5 +1,5 @@
 <template>
-  <div v-bem="componentModifiers">
+  <div :class="b(componentModifiers)">
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -12,7 +12,7 @@
     >
       <!-- TABLE-HEADER -->
       <template slot-scope="props" slot="headers">
-        <tr v-bem:header-row>
+        <tr :class="b('header-row')">
           <th v-if="isSelectable">
             <e-checkbox :checked="!!selected.length"
                         :disabled="isDisabled"
@@ -32,7 +32,7 @@
             @click="changeSort(header.value)"
           >
             {{ header.text }}
-            <e-icon v-bem:sort-icon="{ desc: pagination.descending, active: header.value === pagination.sortBy}"
+            <e-icon :class="b('sort-icon', { desc: pagination.descending, active: header.value === pagination.sortBy})"
                     icon="i-arrow--down"
                     width="10"
                     height="10"
@@ -46,7 +46,7 @@
 
       <!-- TABLE-BODY -->
       <template slot-scope="props" slot="items">
-        <tr v-bem:content-row="{ selected: selected.includes(props.item.id), isClickable: isRowClickable && !isDisabled }"
+        <tr :class="b('content-row', { selected: selected.includes(props.item.id), isClickable: isRowClickable && !isDisabled })"
             :active="props.selected"
             :role="rowRole"
             @click="onClickRow(props.item)"
@@ -73,7 +73,7 @@
     </v-data-table>
 
     <!-- PAGINATION (optional) -->
-    <div v-if="hasPagination" v-bem:pagination-wrapper>
+    <div v-if="hasPagination" :class="b('pagination-wrapper')">
       <c-table-pagination :total-amount="pagination.totalItems"
                           :rows-per-page-value="pagination.rowsPerPage"
                           :current-page="pagination.page"

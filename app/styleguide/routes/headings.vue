@@ -1,8 +1,8 @@
 <template>
-  <div v-bem>
-    <div v-bem:example-container>
+  <div :class="b()">
+    <div :class="b('example-container')">
       <h1>Headings</h1>
-      <div v-bem:example-box>
+      <div :class="b('example-box')">
         <e-heading
           tag-name="h1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -30,7 +30,7 @@
       </div>
 
       <h1>Headings with underline</h1>
-      <div v-bem:example-box>
+      <div :class="b('example-box')">
         <e-heading
           tag-name="h1"
           underline>
@@ -67,7 +67,7 @@
       </div>
 
       <h1>Headings with links</h1>
-      <div v-bem:example-box>
+      <div :class="b('example-box')">
         <e-heading
           tag-name="h1"
           underline>

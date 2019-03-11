@@ -1,9 +1,9 @@
 <template>
-  <div v-bem="modifiers">
+  <div :class="b(modifiers)">
     <input v-if="uncontrolled"
-           v-bem:field
            ref="input"
            :autocomplete="autocomplete"
+           :class="b('field')"
            :disabled="disabled"
            :name="name"
            :title="title"
@@ -18,9 +18,9 @@
            @keyup.down="onArrowKeyUp"
     >
     <input v-else
-           v-bem:field
            ref="input"
            :autocomplete="autocomplete"
+           :class="b('field')"
            :disabled="disabled"
            :name="name"
            :value="standalone ? internalValue : value"
@@ -36,22 +36,22 @@
            @keyup.down="onArrowKeyUp"
     >
 
-    <span v-if="$slots.fixedLabel" v-bem:fixed-label ref="fixedLabel">
+    <span v-if="$slots.fixedLabel" ref="fixedLabel" :class="b('fixed-label')">
       <!-- @slot Use this slot for a fixed label inside the input field. -->
       <slot name="fixedLabel"></slot>
     </span>
-    <span v-if="$slots.default || !hasDefaultState" v-bem:slot-wrapper ref="slot">
-      <span v-if="$slots.default" v-bem:slot>
+    <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
+      <span v-if="$slots.default" :class="b('slot')">
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
       </span>
-      <span v-if="!hasDefaultState && !hasFocus" v-bem:icon-splitter></span>
+      <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
       <e-icon v-if="!hasDefaultState && !hasFocus"
-              v-bem:state-icon
+              :class="b('state-icon')"
               :icon="stateIcon"
               inline />
     </span>
-    <div v-if="showNotification" v-bem:notification>
+    <div v-if="showNotification" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
     </div>

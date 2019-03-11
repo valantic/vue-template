@@ -1,22 +1,22 @@
 <template>
-  <div v-bem>
-    <div v-bem:navigation-wrapper="wrapperModifiers" @click="onClick">
-      <ul v-bem:navigation>
-        <li v-bem:navigation-item.logo>
-          <a v-bem:navigation-link
+  <div :class="b()">
+    <div :class="b('navigation-wrapper', wrapperModifiers)" @click="onClick">
+      <ul :class="b('navigation')">
+        <li :class="b('navigation-item', { logo: true })">
+          <a :class="b('navigation-link')"
              href="http://www.valantic.com"
              target="_blank"
           >
             <img src="../assets/valantic.svg" alt="valantic">
           </a>
         </li>
-        <li v-bem:navigation-item.language @click.stop>
+        <li :class="b('navigation-item', { language: true })" @click.stop>
           <s-language />
         </li>
-        <li v-bem:navigation-item.theme @click.stop>
+        <li :class="b('navigation-item', { theme: true })" @click.stop>
           <s-theme-selector />
         </li>
-        <li v-bem:navigation-item.settings>
+        <li :class="b('navigation-item', { settings: true })">
           <h2>Settings</h2>
           <s-demo-settings />
         </li>
@@ -24,19 +24,19 @@
         <router-link
           v-if="route.meta"
           v-for="route in routes"
-          v-bem:navigation-item
           :key="route.name"
           :to="{ name: route.name }"
+          :class="b('navigation-item')"
           :active-class="`${$options.name}-item--active-path`"
           :exact-active-class="`${$options.name}-item--active`"
           tag="li"
           exact>
-          <a v-bem:navigation-link>
+          <a :class="b('navigation-link')">
             {{ route.meta.title }}
           </a>
         </router-link>
-        <li v-bem:navigation-item.components>
-          <a v-bem:navigation-link
+        <li :class="b('navigation-item', { components: true })">
+          <a :class="b('navigation-link')"
              :href="styleguidistUrl"
              target="_blank"
           >

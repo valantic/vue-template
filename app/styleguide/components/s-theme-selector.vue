@@ -1,7 +1,7 @@
 <template>
   <label>
     <span class="invisible">Theme</span>
-    <select v-bem @change="onChange">
+    <select :class="b()" @change="onChange">
       <option v-for="theme in themes"
               :key="theme.id"
               :value="theme.id"

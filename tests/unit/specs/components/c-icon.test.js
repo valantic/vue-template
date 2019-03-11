@@ -1,11 +1,11 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import VueBem from '@verstaerker/vue-bem';
+import VueBemCn from '@/setup/plugins/vue-bem-cn';
 import component from '@/components/e-icon';
 
 describe('component | e-button', () => {
   const localVue = createLocalVue();
 
-  localVue.use(VueBem);
+  localVue.use(VueBemCn);
 
   it('has name property', () => {
     expect(component.name).toBeTruthy();

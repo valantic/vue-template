@@ -1,9 +1,9 @@
 <template>
-  <div v-bem>
-    <h4 v-bem:headline>
+  <div :class="b()">
+    <h4 :class="b('headline')">
       {{ headline }}
     </h4>
-    <div v-bem:grid>
+    <div :class="b('grid')">
       <s-color-item
         v-for="(color, index) in colors"
         :key="index"

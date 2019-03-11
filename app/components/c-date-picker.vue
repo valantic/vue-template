@@ -1,5 +1,5 @@
 <template>
-  <div v-bem="{ isFullWidth }">
+  <div :class="b({ isFullWidth })">
     <v-date-picker
       :value="value"
       :scrollable="false"

@@ -1,6 +1,6 @@
 <template>
-  <div v-bem="modifiers">
-    <textarea v-bem:field="fieldModifiers"
+  <div :class="b(modifiers)">
+    <textarea :class="b('field', fieldModifiers)"
               :name="name"
               :disabled="disabled"
               :rows="rows"
@@ -10,13 +10,13 @@
               @blur="onBlur"
               @input="onInput">
     </textarea>
-    <span v-if="!hasDefaultState && !hasFocus" v-bem:icon-wrapper>
-      <span v-bem:icon-splitter></span>
-      <e-icon v-bem:state-icon
+    <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-wrapper')">
+      <span :class="b('icon-splitter')"></span>
+      <e-icon :class="b('state-icon')"
               :icon="stateIcon"
               inline />
     </span>
-    <div v-if="notification && hasFocus" v-bem:notification>
+    <div v-if="notification && hasFocus" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
     </div>

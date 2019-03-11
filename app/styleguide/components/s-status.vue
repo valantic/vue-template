@@ -1,6 +1,6 @@
 <template>
-  <div v-bem="modifiers">
-    <span v-bem:inner>
+  <div :class="b(modifiers)">
+    <span :class="b('inner')">
       <slot></slot>
     </span>
   </div>

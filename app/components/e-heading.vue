@@ -1,7 +1,6 @@
 <!-- This component has no <template> because of dynamic root element -->
 
 <script>
-  import * as bem from '@verstaerker/vue-bem';
   import propScale from '@/helpers/prop.scale';
 
   export default {
@@ -9,9 +8,7 @@
     // status: 1,
 
     // components: {},
-    mixins: [
-      bem.bemMixin,
-    ],
+    // mixins: [],
 
     props: {
       /**
@@ -123,7 +120,7 @@
     render(createElement) {
       const element = this.$props.tagName;
       const attributes = {
-        class: this.$bem({
+        class: this.b({
           color: this.$props.color,
           underline: this.$props.underline,
           uppercase: this.$props.uppercase,
@@ -137,7 +134,7 @@
       };
 
       const childAttributes = {
-        class: this.$bem('inner', { color: this.$props.color, spacing: this.$props.spacing }),
+        class: this.b('inner', { color: this.$props.color, spacing: this.$props.spacing }),
       };
 
       return createElement(

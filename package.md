@@ -59,7 +59,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * [smoothscroll-polyfill](https://github.com/iamdustan/smoothscroll) - A scroll behaviour polyfill.
 * [swiper](https://github.com/nolimits4web/swiper) - Mobile touch slider (swiper) with hardware accelerated transitions. 
 * [vue](https://github.com/vuejs/vue) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
-* [vue-bem](https://github.com/verstaerker/vue-bem)- Simple BEM class name generator for Vue.JS.
+* [vue-bem-cn](http://codepen.io/c01nd01r/pen/Qdeovv)- Simple BEM class name generator for Vue.JS (We copied the source of this plugin into the project, because the developer did not merge the improvement PR).
 * [vue-i18n](https://github.com/kazupon/vue-i18n) - Internationalization plugin for Vue.js
 * [vue-js-modal](https://github.com/euvl/vue-js-modal) - A modal plugin for Vue.js.
 * [vue-router](https://github.com/vuejs/vue-router) - The official router for Vue.js.
