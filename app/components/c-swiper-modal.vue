@@ -1,21 +1,21 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div v-bem:container
-         ref="gallery"
+    <div ref="gallery"
+         :class="b('container')"
          class="swiper-container gallery-top">
-      <div v-bem:wrapper
+      <div :class="b('wrapper')"
            class="swiper-wrapper">
         <div v-for="image in images"
-             v-bem:slide="{ video: image.isVideo }"
              :key="image.id"
+             :class="b('slide', { video: image.isVideo })"
              class="swiper-slide"
         >
           <!-- Video -->
-          <div v-if="image.isVideo" v-bem:video-wrapper>
-            <div v-bem:iframe-wrapper>
-              <iframe v-bem:video-iframe
-                      ref="video"
+          <div v-if="image.isVideo" :class="b('video-wrapper')">
+            <div :class="b('iframe-wrapper')">
+              <iframe ref="video"
+                      :class="b('video-iframe')"
                       :src="`https://www.youtube.com/embed/${image.youtubeId}?enablejsapi=1&version=3&playerapiid=ytplayer`"
                       width="560"
                       height="315"
@@ -33,26 +33,26 @@
             :alt="image.alt" />
         </div>
       </div>
-      <div v-bem:button-prev
+      <div :class="b('button-prev')"
            class="swiper-button-prev"></div>
-      <div v-bem:button-next
+      <div :class="b('button-next')"
            class="swiper-button-next"></div>
     </div>
-    <div v-bem:container
-         ref="thumbnails"
+    <div ref="thumbnails"
+         :class="b('container')"
          class="swiper-container gallery-thumbs">
-      <div v-bem:wrapper
+      <div :class="b('wrapper')"
            class="swiper-wrapper">
         <div v-for="image in images"
-             v-bem:slide
              :key="image.id"
+             :class="b('slide')"
              class="swiper-slide">
           <!-- Video -->
-          <div v-if="image.isVideo" v-bem:video-preview-wrapper>
-            <img v-bem:video-thumbnail
+          <div v-if="image.isVideo" :class="b('video-preview-wrapper')">
+            <img :class="b('video-thumbnail')"
                  :src="image.thumbSrc"
                  alt="">
-            <span v-bem:video-thumbnail-overlay></span>
+            <span :class="b('video-thumbnail-overlay')"></span>
           </div>
 
           <!-- Image -->

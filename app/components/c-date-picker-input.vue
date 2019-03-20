@@ -1,7 +1,7 @@
 <template>
-  <div v-bem="modifiers">
-    <div v-bem:buttons-wrapper="modifiers">
-      <div v-bem:input="modifiers">
+  <div :class="b(modifiers)">
+    <div :class="b('buttons-wrapper', modifiers)">
+      <div :class="b('input', modifiers)">
         <e-input :id="`date-picker-value-${uuid}`"
                  ref="input"
                  :value="formatDate(validDate)"
@@ -16,7 +16,7 @@
                class="invisible">
         </label>
       </div>
-      <div v-if="hasYearSelector" v-bem:select>
+      <div v-if="hasYearSelector" :class="b('select')">
         <e-select v-if="isDatePickerOpen"
                   :id="`date-picker-year-${uuid}`"
                   :value="selectedYear"
@@ -30,7 +30,7 @@
         </label>
       </div>
     </div>
-    <div v-if="isDatePickerOpen" v-bem:overlay>
+    <div v-if="isDatePickerOpen" :class="b('overlay')">
       <c-date-picker :value="selectedDate"
                      :validate-date="validateDate"
                      :events="isEventDate"

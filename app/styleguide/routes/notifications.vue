@@ -1,6 +1,6 @@
 <template>
   <l-default>
-    <div v-bem>
+    <div :class="b()">
       <e-button @click="modalOpen = true">
         Open modal
       </e-button>
@@ -53,7 +53,7 @@
         Field Error
       </e-button>
 
-      <div v-bem:selector>
+      <div :class="b('selector')">
         <c-notification-container display-type="selector" selector="1" />
         <e-button style="margin-top: 10px; margin-right: 10px;" @click="addSelectorInfo1">
           Selector Info (1)
@@ -114,7 +114,7 @@
             Field Error
           </e-button>
 
-          <div v-bem:selector>
+          <div :class="b('selector')">
             <c-notification-container display-type="selector" selector="1" />
             <e-button style="margin-top: 10px; margin-right: 10px;" @click="addSelectorInfo1">
               Selector Info (1)

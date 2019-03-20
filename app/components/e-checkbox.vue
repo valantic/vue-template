@@ -1,13 +1,13 @@
 <template>
-  <div v-bem="stateModifiers">
+  <div :class="b(stateModifiers)">
     <label
-      v-bem:label
+      :class="b('label')"
       @mouseenter="hasHover = true"
       @mouseleave="hasHover = false">
       <input
         v-model="internalValue"
-        v-bem:field
         v-bind="$attrs"
+        :class="b('field')"
         :aria-checked="isChecked ? 'true' : 'false'"
         :disabled="disabled"
         :value="value"
@@ -16,7 +16,7 @@
         @blur="onBlur"
         @change="onChange"
         @focus="onFocus">
-      <span v-bem:label-name>
+      <span :class="b('label-name')">
         <slot></slot>
       </span>
     </label>

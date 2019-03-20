@@ -1,19 +1,19 @@
 <template>
-  <div v-bem="modifiers">
-    <label v-bem:label
+  <div :class="b(modifiers)">
+    <label :class="b('label')"
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false">
       <input v-model="internalValue"
-             v-bem:field="fieldModifiers"
              v-bind="$attrs"
+             :class="b('field', fieldModifiers)"
              :disabled="disabled"
              :value="value"
              :name="name"
              type="radio"
              @change="onChange"
       >
-      <span v-bem:fake-button></span>
-      <span v-bem:label-name>
+      <span :class="b('fake-button')"></span>
+      <span :class="b('label-name')">
         <slot></slot>
       </span>
     </label>

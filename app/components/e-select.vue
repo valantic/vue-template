@@ -1,7 +1,7 @@
 <template>
-  <span v-bem="stateModifiers">
-    <select v-bem:select
-            :value="value"
+  <span :class="b(stateModifiers)">
+    <select :value="value"
+            :class="b('select')"
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
@@ -16,8 +16,8 @@
         {{ item.label }}
       </option>
     </select>
-    <span v-if="!hasDefaultState" v-bem:icon-splitter></span>
-    <div v-if="progress" v-bem:progress-container>
+    <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
+    <div v-if="progress" :class="b('progress-container')">
       <e-progress />
     </div>
   </span>

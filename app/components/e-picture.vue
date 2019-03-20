@@ -1,7 +1,6 @@
 <!-- This component has no <template> because of dynamic root element -->
 
 <script>
-  import * as bem from '@verstaerker/vue-bem';
   import { BREAKPOINTS } from '@/setup/globals';
 
   export default {
@@ -9,9 +8,7 @@
     // status: 1,
 
     // components: {},
-    mixins: [
-      bem.bemMixin,
-    ],
+    // mixins: [],
 
     props: {
       /**
@@ -208,7 +205,7 @@
           pictureChilds.push(createElement(
             'source',
             {
-              class: this.$bem('source'),
+              class: this.b('source'),
               attrs: {
                 media: source.media,
                 srcset: source.srcset,
@@ -221,7 +218,7 @@
         pictureChilds.push(createElement(
           'img',
           {
-            class: this.$bem('image'),
+            class: this.b('image'),
             attrs: imgAttributes,
           }
         ));
@@ -238,7 +235,7 @@
       return createElement( // Wrapper
         'span',
         {
-          class: this.$bem({
+          class: this.b({
             inline: this.isInline,
             image: !this.parsedSources,
             ratio: ratio > 0,
@@ -248,7 +245,7 @@
         [createElement( // img / picture
           element,
           {
-            class: this.$bem(element === 'img' ? 'image' : 'picture'),
+            class: this.b(element === 'img' ? 'image' : 'picture'),
             attrs: imgAttributes,
           },
           pictureChilds // picture sources

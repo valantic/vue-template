@@ -1,20 +1,20 @@
 <template>
-  <div v-bem="modifiers"
+  <div :class="b(modifiers)"
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div v-bem:container
-         ref="container"
+    <div ref="container"
+         :class="b('container swiper-container')"
          class="swiper-container">
-      <div v-bem:wrapper
+      <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="picture in pictures"
-             v-bem:slide
              :key="picture.id"
+             :class="b('slide')"
              class="swiper-slide">
           <a v-if="picture.href"
-             v-bem:link
+             :class="b('link')"
              :href="picture.href">
             <e-picture
               :sizes="sizes"
@@ -33,13 +33,13 @@
       </div>
 
       <!-- navigation -->
-      <div v-bem:pagination
+      <div :class="b('pagination')"
            class="swiper-pagination"></div>
 
       <!-- buttons-->
-      <div v-bem:button-prev
+      <div :class="b('button-prev')"
            class="swiper-button-prev"></div>
-      <div v-bem:button-next
+      <div :class="b('button-next')"
            class="swiper-button-next"></div>
     </div>
   </div>

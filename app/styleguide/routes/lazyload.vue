@@ -1,11 +1,12 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
     <h1>Lazyload</h1>
 
     <div
       v-for="item in items"
-      v-bem:item
-      :key="item.key">
+      :key="item.key"
+      :class="b('item')"
+    >
       <e-picture
         :srcset="item.srcset"
         :sizes="item.sizes"

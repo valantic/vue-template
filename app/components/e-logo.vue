@@ -1,7 +1,7 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
     <a v-if="$attrs.href"
-       v-bem:link
+       :class="b('link')"
        :title="logo.title"
        v-bind="$attrs"
        tabindex="-1">

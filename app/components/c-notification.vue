@@ -1,18 +1,18 @@
 <template>
-  <div v-bem="componentModifiers">
-    <div v-bem:icon></div>
-    <div v-bem:inner="innerModifiers">
+  <div :class="b(componentModifiers)">
+    <div :class="b('icon')"></div>
+    <div :class="b('inner', innerModifiers)">
       <template v-if="notification.message.type !== 'add-to-cart'">
-        <div v-if="notification.title" v-bem:title>
+        <div v-if="notification.title" :class="b('title')">
           {{ notification.title }}
         </div>
         {{ notification.message.message }}
       </template>
       <div v-if="notification.message.type === 'add-to-cart' && hasProductData"
-           v-bem:product-tile-wrapper></div>
+           :class="b('product-tile-wrapper')"></div>
     </div>
-    <div v-if="typeof notification.confirm === 'function'" v-bem:actions>
-      <div v-if="typeof notification.decline === 'function'" v-bem:action.decline>
+    <div v-if="typeof notification.confirm === 'function'" :class="b('actions')">
+      <div v-if="typeof notification.decline === 'function'" :class="b('action', { decline: true })">
         <e-button :progress="declineProgress"
                   :disabled="confirmProgress"
                   width="auto"
@@ -20,7 +20,7 @@
           {{ $t('c-notification.decline') }}
         </e-button>
       </div>
-      <div v-bem:action.confirm>
+      <div :class="b('action', { confirm: true })">
         <e-button :progress="confirmProgress"
                   :disabled="declineProgress"
                   width="auto"
@@ -30,7 +30,7 @@
       </div>
     </div>
     <button v-if="!notification.confirm"
-            v-bem:close
+            :class="b('close')"
             @click="close">
       <e-icon
         icon="i-close"

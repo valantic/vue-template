@@ -1,0 +1,14 @@
+{
+  "env": {
+    "build": {
+      "presets": [
+        ["es2015", { "modules": false }],
+        "stage-2"
+      ],
+      "plugins": [ "external-helpers"]
+    },
+    "test": {
+      "presets": ["es2015", "stage-2"]
+    }
+  }
+}

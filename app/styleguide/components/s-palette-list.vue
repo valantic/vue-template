@@ -1,5 +1,5 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
     <s-palette-item
       v-for="palette in palettes"
       :key="palette"

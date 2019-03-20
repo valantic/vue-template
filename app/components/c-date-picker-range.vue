@@ -1,9 +1,9 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
     <e-label :for="startId"
              :name="labelName"
              :position="labelPosition">
-      <div v-bem:fields>
+      <div :class="b('fields')">
         <c-date-picker-input :id="startId"
                              :selected-date="internalStart"
                              :validate-date="isValidStartDate"
@@ -11,7 +11,7 @@
                              @input="onInputStartValue"
         />
         <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-        <div v-bem:to>—</div>
+        <div :class="b('to')">—</div>
         <c-date-picker-input :selected-date="internalEnd"
                              :validate-date="isValidEndDate"
                              :is-event-date="isEventDate"

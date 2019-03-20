@@ -1,30 +1,30 @@
 <template>
-  <div v-bem="{ titleSpacing }">
-    <div v-bem:notifications>
+  <div :class="b({ titleSpacing })">
+    <div :class="b('notifications')">
       <c-notification-container display-type="modal" />
     </div>
-    <div v-bem:inner.mobile>
+    <div :class="b('inner', { mobile: isMobile })">
       <a v-if="closable"
-         v-bem:close="{ mobile: true }"
+         :class="b('close', { mobile: true })"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
          @click="close">
         <span v-t="'c-modal-header-01.closeTitle'" class="invisible"></span>
       </a>
-      <div v-bem:close-icon-mobile>
+      <div :class="b('close-icon-mobile')">
         <e-icon
           icon="i-arrow--left--info"
           width="18"
           height="18"
         />
       </div>
-      <div v-bem:title>
+      <div :class="b('title')">
         <e-heading v-if="title" :underline="!isMobile" tag-name="h1">
           {{ title }}
         </e-heading>
       </div>
       <a v-if="closable"
-         v-bem:close
+         :class="b('close')"
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
          @click="close">

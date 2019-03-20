@@ -1,9 +1,9 @@
 <template>
-  <div v-bem="componentModifiers">
-    <div v-bem:inner>
-      <div v-bem:bubble></div>
-      <div v-bem:bubble></div>
-      <div v-bem:bubble></div>
+  <div :class="b(componentModifiers)">
+    <div :class="b('inner')">
+      <div :class="b('bubble')"></div>
+      <div :class="b('bubble')"></div>
+      <div :class="b('bubble')"></div>
     </div>
     <span class="invisible">
       {{ loadingMessage }}

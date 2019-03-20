@@ -1,14 +1,14 @@
 <!-- eslint-disable max-len -->
 <template>
-  <div v-bem>
+  <div :class="b()">
     <h1>
       Styleguide
       <small>[AIV]{version}[/AIV]</small>
     </h1>
     <hr>
     <p>Welcome to the styleguide.</p>
-    <div v-if="isProduction" v-bem:warning>
-      Please note: this build is not meant for production. Please use <code v-bem:code>npm run build</code> to
+    <div v-if="isProduction" :class="b('warning')">
+      Please note: this build is not meant for production. Please use <code :class="b('code')">npm run build</code> to
       create a production build.
     </div>
 

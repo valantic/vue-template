@@ -1,7 +1,6 @@
 <!-- This component has no <template> because of dynamic root element -->
 
 <script>
-  import * as bem from '@verstaerker/vue-bem';
   import touchDevice from '../mixins/touch-device';
   import eProgress from './e-progress';
   import propScale from '@/helpers/prop.scale';
@@ -20,7 +19,6 @@
     // components: {},
     mixins: [
       touchDevice,
-      bem.bemMixin,
     ],
 
     props: {
@@ -239,7 +237,7 @@
         primary,
       } = this.$props;
       const options = {
-        class: this.$bem({
+        class: this.b({
           width,
           spacing,
           negative,
@@ -298,7 +296,7 @@
           createElement( // Wrapper is needed to prevent content shifting in IE11
             'span',
             {
-              class: this.$bem('inner'),
+              class: this.b('inner'),
             },
             content,
           ),

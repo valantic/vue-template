@@ -1,10 +1,10 @@
 <template>
-  <div v-bem>
-    <div v-bem:left>
+  <div :class="b()">
+    <div :class="b('left')">
       <label v-t="'c-table-pagination.itemsPerPage'"
-             v-bem:select-label
+             :class="b('select-label')"
              :for="`table-rows--${uuid}`"></label>
-      <div v-bem:select-wrapper>
+      <div :class="b('select-wrapper')">
         <e-select :id="`table-rows--${uuid}`"
                   :value="rowsPerPageValue"
                   :options-list="rowsPerPageOptionsFormatted"
@@ -13,19 +13,20 @@
         />
       </div>
     </div>
-    <div v-bem:right>
-      <div v-bem:amount>
+    <div :class="b('right')">
+      <div :class="b('amount')">
         <div>
           {{ currentItemRange.minValue }} - {{ currentItemRange.maxValue }}
           {{ $t('c-table-pagination.from') }}
           {{ totalAmount }}
         </div>
       </div>
-      <ul v-bem:pages>
+      <ul :class="b('pages')">
         <li v-for="pageNumber in pages"
-            v-bem:page-item="{active: currentPage === pageNumber}"
-            :key="`page-${pageNumber}`">
-          <a v-bem:page-link
+            :key="`page-${pageNumber}`"
+            :class="b('page-item', {active: currentPage === pageNumber})"
+        >
+          <a :class="b('page-link')"
              :title="$t('c-table-pagination.pageNumberTitle', {pageNumber})"
              href="#"
              @click.prevent="goToPage({ pageNumber })">
@@ -33,8 +34,8 @@
           </a>
         </li>
       </ul>
-      <div v-bem:arrows>
-        <a v-bem:arrow="{disabled: currentPage <= 1}"
+      <div :class="b('arrows')">
+        <a :class="b('arrow', {disabled: currentPage <= 1})"
            :title="$t('c-table-pagination.lastPageTitle')"
            href="#"
            @click.prevent="onClickBack">
@@ -44,7 +45,7 @@
                   inline />
           <span v-t="'c-table-pagination.lastPageTitle'" class="invisible"></span>
         </a>
-        <a v-bem:arrow="{disabled: maxPage <= currentPage}"
+        <a :class="b('arrow', {disabled: maxPage <= currentPage})"
            :title="$t('c-table-pagination.nextPageTitle')"
            href="#"
            @click.prevent="onClickNext">

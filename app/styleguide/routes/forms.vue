@@ -1,25 +1,25 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
     <e-heading tag-name="h1">
       Example form
     </e-heading>
     <form action="#form-url" method="POST">
       <!-- e-input -->
-      <div v-bem:part>
+      <div :class="b('part')">
         <e-label name="Firstname" position="top">
           <e-input v-model="demo.firstName" name="firstName" placeholder="Firstname..." />
         </e-label>
       </div>
 
       <!-- e-textarea -->
-      <div v-bem:part>
+      <div :class="b('part')">
         <e-label name="Message" position="top">
           <e-textarea v-model="demo.message" name="message" placeholder="Message..." />
         </e-label>
       </div>
 
       <!-- e-checkbox -->
-      <div v-bem:part>
+      <div :class="b('part')">
         <e-label name="Meal" position="top">
           <e-checkbox v-model="demo.meal" value="pizza" name="meal">
             Pizza
@@ -34,7 +34,7 @@
       </div>
 
       <!-- e-radio -->
-      <div v-bem:part>
+      <div :class="b('part')">
         <e-label name="Drink" position="top">
           <e-radio v-model="demo.drink" value="cola" name="drink">
             Cola
@@ -49,14 +49,14 @@
       </div>
 
       <!-- e-select -->
-      <div v-bem:part>
+      <div :class="b('part')">
         <e-label name="Language" position="top">
           <e-select v-model="demo.language" :options-list="mock.selects" name="language" />
         </e-label>
       </div>
 
       <!-- e-button -->
-      <div v-bem:part>
+      <div :class="b('part')">
         <e-button type="submit">
           Submit
         </e-button>

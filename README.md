@@ -208,7 +208,7 @@ This are components, which are only used in the styleguide. Make sure to keep th
 
 ### Using BEM with Vue
 
-We added the [vue-bem](https://github.com/verstaerker/vue-bem) plugin for Vue to improve the handling of BEM classes and especially modifiers in Vue components. Just use `v-bem:<element>.<staticModifiers>="<dynamicModifiers>"` on any template element to add blocks, elements and modifiers.
+We added the [vue-bem-cn](https://github.com/c01nd01r/vue-bem-cn) plugin for Vue to improve the handling of BEM classes and especially modifiers in Vue components. Just use `:class="b(<customConfiguration>)"` on any template element to add blocks, elements and modifiers. Make sure your component has a `name` property, since it is mandatory for this plugin.
 
 ### Guidelines
 

@@ -1,27 +1,27 @@
 <template>
-  <div v-bem="modifiers"
+  <div :class="b(modifiers)"
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div v-bem:container
-         ref="container"
+    <div ref="container"
+         :class="b('container')"
          class="swiper-container">
-      <div v-bem:wrapper
+      <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="picture in pictures"
-             v-bem:slide
              :key="picture.id"
+             :class="b('slide')"
              class="swiper-slide">
-          <button v-bem:trigger
+          <button :class="b('trigger')"
                   type="button"
                   @click.prevent="modalOpen = true">
-            <span v-bem:image-wrapper-inner>
-              <div v-if="picture.isVideo" v-bem:video-preview-wrapper>
-                <img v-bem:video-thumbnail
+            <span :class="b('image-wrapper-inner')">
+              <div v-if="picture.isVideo" :class="b('video-preview-wrapper')">
+                <img :class="b('video-thumbnail')"
                      :src="picture.thumbSrc"
                      alt="">
-                <span v-bem:video-thumbnail-overlay></span>
+                <span :class="b('video-thumbnail-overlay')"></span>
               </div>
               <e-picture
                 v-else
@@ -37,13 +37,13 @@
       </div>
 
       <!-- navigation -->
-      <div v-bem:pagination
+      <div :class="b('pagination')"
            class="swiper-pagination"></div>
 
       <!-- buttons-->
-      <div v-bem:button-prev
+      <div :class="b('button-prev')"
            class="swiper-button-prev"></div>
-      <div v-bem:button-next
+      <div :class="b('button-next')"
            class="swiper-button-next"></div>
 
       <!-- modal -->
@@ -54,7 +54,7 @@
         inner-spacing="0"
         mobile-transition="fade"
         @close="modalClose">
-        <div v-bem:modal-close-icon @click="modalOpen = false">
+        <div :class="b('modal-close-icon')" @click="modalOpen = false">
           <e-icon icon="i-close"
                   width="25"
                   height="25"
@@ -67,11 +67,11 @@
     </div>
 
     <!-- counter -->
-    <div v-if="pictures.length > 1" v-bem:counter>
-      <div v-bem:counter-detail.image>
+    <div v-if="pictures.length > 1" :class="b('counter')">
+      <div :class="b('counter-detail', { image: true })">
         {{ $tc('c-swiper.images', images.length, {count: images.length}) }}
       </div>
-      <div v-if="videos && videos.length" v-bem:counter-detail.video>
+      <div v-if="videos && videos.length" :class="b('counter-detail', { video: true })">
         {{ $tc('c-swiper.videos', videos.length, {count: videos.length}) }}
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
     <!-- @slot Use this for multiple c-collapsible items -->
     <slot></slot>
   </div>
