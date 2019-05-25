@@ -175,7 +175,7 @@
 
       attributes() {
         return {
-          role: this.href ? 'button' : null, // Fallback
+          role: this.$attrs.href ? 'button' : null, // Fallback
           ...this.$attrs,
           disabled: this.disabled || this.progress,
         };
