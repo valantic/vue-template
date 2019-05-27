@@ -1,4 +1,27 @@
-<!-- This component has no <template> because of dynamic root element -->
+<template>
+  <component :is="type"
+             :class="b(modifiers)"
+             :style="style"
+             v-bind="attributes"
+             @mouseenter="onMouseEnter"
+             @mouseleave="onMouseLeave"
+             @mousedown="onMouseDown"
+             @mouseup="onMouseUp"
+             @focus="onFocus"
+             @blur="onBlur"
+             @click="onClick"
+  >
+    <!-- span is required to prevent content shifting in IE11. -->
+    <span :class="b('inner')">
+      <e-progress v-if="progress"
+                  :spacing="0"
+                  negative
+      />
+      <!-- @slot Button content. -->
+      <slot v-else></slot>
+    </span>
+  </component>
+</template>
 
 <script>
   import touchDevice from '../mixins/touch-device';
@@ -9,14 +32,17 @@
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
    * The component uses a `<slot>` to render the content.
    *
-   * @link [You can also define inherited attributes for `<button>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/button#Attribute)
-   * @link [You can also define inherited attributes for `<a>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/a#Attribute)
+   * [You can also define inherited attributes for `<button>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/button#Attribute)
+   *
+   * [You can also define inherited attributes for `<a>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/a#Attribute)
    */
   export default {
     name: 'e-button',
     // status: 1,
 
-    // components: {},
+    components: {
+      eProgress
+    },
     mixins: [
       touchDevice,
     ],
@@ -112,21 +138,55 @@
         /**
          * @type {Boolean} Internal flag to determine hover state.
          */
-        hasHover: this.$props.hover,
+        hasHover: this.hover,
 
         /**
          * @type {Boolean} Internal flag to determine active state.
          */
-        isActive: this.$props.active,
+        isActive: this.active,
 
         /**
          * @type {Boolean} Internal flag to determine focus state.
          */
-        hasFocus: this.$props.focus,
+        hasFocus: this.focus,
+
+        /**
+         * Sets the element type for the component.
+         */
+        type: this.$attrs.href ? 'a' : 'button',
       };
     },
 
-    // computed: {},
+    computed: {
+      modifiers() {
+        return {
+          width: this.width,
+          spacing: this.spacing,
+          negative: this.negative,
+          progress: this.progress,
+          disabled: this.disabled,
+          primary: this.primary,
+          hover: this.hover || this.hasHover,
+          focus: this.focus || this.hasFocus,
+          active: this.active || this.isActive,
+          touch: this.hasTouch,
+        };
+      },
+
+      attributes() {
+        return {
+          role: this.$attrs.href ? 'button' : null, // Fallback
+          ...this.$attrs,
+          disabled: this.disabled || this.progress,
+        };
+      },
+
+      style() {
+        return this.progress && this.width !== 'full'
+          ? this.getElementDimensions()
+          : null;
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -141,7 +201,6 @@
     // destroyed() {},
 
     methods: {
-
       /**
        * Mouseenter event handler.
        */
@@ -199,7 +258,7 @@
          *
          * @event click
          *
-         * @type {object}
+         * @property {Event} event - The original DOM event.
          */
         this.$emit('click', event);
       },
@@ -210,98 +269,12 @@
        * @returns {Object}
        */
       getElementDimensions() {
-        return {
-          width: `${this.$el.offsetWidth}px`,
-          height: `${this.$el.offsetHeight}px`,
-        };
+        const element = this.$el;
+
+        return element
+          ? { width: `${element.offsetWidth}px`, height: `${element.offsetHeight}px` }
+          : null;
       },
-    },
-
-    /**
-     * Creates a button or button like link based on defined/missing href link.
-     *
-     * @param   {Function}    createElement   Vue helper
-     *
-     * @returns {*}
-     */
-    render(createElement) {
-      const {
-        width,
-        spacing,
-        negative,
-        progress,
-        hover,
-        focus,
-        active,
-        disabled,
-        primary,
-      } = this.$props;
-      const options = {
-        class: this.b({
-          width,
-          spacing,
-          negative,
-          progress,
-          hover: hover || this.hasHover,
-          focus: focus || this.hasFocus,
-          active: active || this.isActive,
-          touch: this.hasTouch,
-          disabled,
-          primary,
-        }),
-        attrs: {
-          ...this.$attrs,
-          disabled: progress || disabled,
-        },
-        on: {
-          mouseenter: this.onMouseEnter,
-          mouseleave: this.onMouseLeave,
-          mousedown: this.onMouseDown,
-          mouseup: this.onMouseUp,
-          focus: this.onFocus,
-          blur: this.onBlur,
-          click: this.onClick,
-        },
-      };
-      const isButton = !this.$attrs.href;
-      const element = isButton ? 'button' : 'a';
-      let content = this.$slots.default;
-
-      if (progress) {
-        if (this.$el) { // If already initially a 'progress' button, there will be no element at this point.
-          options.style = this.width !== 'full' ? this.getElementDimensions() : null; // Defines width/height to keep button dimension.
-        }
-
-        content = [
-          createElement( // e-progress
-            eProgress,
-            {
-              props: {
-                spacing: '0',
-                negative: true,
-              },
-            },
-          ),
-        ];
-      }
-
-      if (!isButton && !options.attrs.role) {
-        options.attrs.role = 'button';
-      }
-
-      return createElement(
-        element,
-        options,
-        [
-          createElement( // Wrapper is needed to prevent content shifting in IE11
-            'span',
-            {
-              class: this.b('inner'),
-            },
-            content,
-          ),
-        ],
-      );
     },
   };
 </script>
