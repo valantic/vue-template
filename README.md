@@ -710,6 +710,11 @@ $ brew upgrade nasm
 * [x] e-picture should support relation property and fallback image
 * [ ] npm update: only update one package at a time, test, then update next.
 
+## Version 4 Roadmap
+
+* [ ] Replace Axios with fetch()
+* [ ] Double check polyfills (e.g. smoothscroll)
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)

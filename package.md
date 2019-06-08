@@ -32,6 +32,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 ### Template
 
+* [@babel/plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/) - This plugin is required to use inline (dynamic) module imports (e.g. when importing language files). **Don't use babel-plugin-dynamic-import-node since it breaks code splitting!**
+
 
 ## Dev-Dependencies
 

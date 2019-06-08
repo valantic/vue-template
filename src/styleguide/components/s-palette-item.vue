@@ -30,7 +30,7 @@
     props: {
 
       /**
-       * Palette name to be rendered. See keys in app/setup/js/color.js
+       * Palette name to be rendered. See keys in src/setup/js/color.js
        */
       palette: {
         type: String,
@@ -39,7 +39,7 @@
       },
 
       /**
-       * Array of color objects to be rendered. See app/setup/js/color.js
+       * Array of color objects to be rendered. See src/setup/js/color.js
        */
       colors: {
         type: Array,
