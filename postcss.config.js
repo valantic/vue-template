@@ -1,8 +1,6 @@
-// https://github.com/michael-ciniawsky/postcss-load-config
-
 module.exports = {
-  plugins: [
-    require('autoprefixer'),
+  plugins: {
+    autoprefixer: {},
     // Browser config is fetched from package.json:browserslist
-  ]
+  },
 };
