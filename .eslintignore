@@ -1,7 +1,4 @@
-/build/
-/config/
 /dist/
 /*.js
 /test/unit/coverage/
 /node_modules/
-/app/setup/plugins/vue-bem-cn
