@@ -13,10 +13,7 @@ import viewport from './plugins/viewport';
 import modal from './plugins/modalStack';
 
 // Polyfills and self executing
-import 'picturefill';
-import 'lazysizes';
 import './lib/ls.attrchange'; // Lazy sizes attribute change observer
-import './polyfills';
 
 Vue.use(resizeEnd);
 Vue.use(VueAxios);

@@ -15,7 +15,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 module.exports = (env = {}, options = {}) => {
   // Instance variables
   const isProduction = ((options.mode || process.env.NODE_ENV) === 'production') || false;
-  const hasStyleguide = options.styleguide;
+  const hasStyleguide = !!options.styleguide;
   const hasWatcher = env.watch || false;
   const hotReload = !hasWatcher || !isProduction;
   const globalVariables = {
@@ -72,7 +72,7 @@ module.exports = (env = {}, options = {}) => {
       inject: true,
       template: 'index.html',
       chunksSortMode: 'dependency',
-      excludeChunks: Object.keys(themes),
+      excludeChunks: Object.keys(themes).slice(1, themes.length - 1),
     }),
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
@@ -139,7 +139,7 @@ module.exports = (env = {}, options = {}) => {
     quiet: true, // Handled by FriendlyErrorsPlugin
     inline: true,
     before(app) {
-      if (hasStyleguide) {
+      if (!hasStyleguide) {
         console.clear();
         console.log('\x1b[34m%s\x1b[0m', 'Starting development server...');
       }
@@ -313,7 +313,9 @@ module.exports = (env = {}, options = {}) => {
     mode: isProduction ? 'production' : 'development',
     entry: {
       ...themes,
-      app: ['./src/main.js']
+      app: [
+        path.resolve(__dirname, 'src/main.js'),
+      ]
     },
     resolve: {
       extensions,

@@ -3,6 +3,8 @@
 import './setup/_scss.scss';
 import './setup/vuetify/main.styl';
 
+import './setup/polyfills';
+
 import Vue from 'vue'; // eslint-disable-line import/first
 import options from './setup/options';
 import directives from './setup/directives';

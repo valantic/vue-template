@@ -3,14 +3,17 @@
     <h4 :class="b('headline')">
       {{ headline }}
     </h4>
-    <div :class="b('grid')">
-      <s-color-item
-        v-for="(color, index) in colors"
-        :key="index"
-        :name="color.name"
-        :value="color.value"
-      />
-    </div>
+    <ul :class="b('grid')">
+      <li v-for="(color) in colors"
+          :key="color.name"
+          :class="b('grid-item')"
+      >
+        <s-color-item
+          :name="color.name"
+          :value="color.value"
+        />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -77,9 +80,24 @@
 <style lang="scss">
   .s-palette-item {
     &__grid {
+      @extend %list-reset;
+
       display: flex;
       flex-wrap: wrap;
       margin: $spacing--0 (-$spacing--5);
+    }
+
+    &__grid-item {
+      padding: $spacing--5;
+      flex: 0 1 percentage(6 / 12);
+
+      @include media(sm) {
+        flex-basis: percentage(4 / 12);
+      }
+
+      @include media(md) {
+        flex-basis: percentage(2 / 12);
+      }
     }
 
     &__headline {

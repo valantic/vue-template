@@ -714,6 +714,7 @@ $ brew upgrade nasm
 
 * [ ] Replace Axios with fetch()
 * [ ] Double check polyfills (e.g. smoothscroll)
+* [ ] Fix broken themes
 
 ## License
 

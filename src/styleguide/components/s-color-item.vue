@@ -78,14 +78,13 @@
 <style lang="scss">
   .s-color-item {
     border: 1px solid $color-primary--2;
-    margin: $spacing--5;
-    flex: 0 1 200px;
 
     &__color {
-      height: 180px;
+      padding-top: 100%;
     }
 
     &__name {
+      white-space: nowrap;
       text-align: center;
       font-size: 14px;
       line-height: 24px;
