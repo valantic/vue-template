@@ -3,7 +3,6 @@
   <div :class="b()">
     <h1>
       Styleguide
-      <small>[AIV]{version}[/AIV]</small>
     </h1>
     <hr>
     <p>Welcome to the styleguide.</p>

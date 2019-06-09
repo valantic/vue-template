@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = (env = {}, options = {}) => {
   // Instance variables
@@ -59,7 +60,9 @@ module.exports = (env = {}, options = {}) => {
 
   const plugins = [
     new webpack.DefinePlugin(globalVariables), // Set node variables.
-    new CleanWebpackPlugin(), // Cleans the dist folder before build.
+    new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
+      cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
+    }),
 
     new VueLoaderPlugin(), // *.vue file parser.
     new MiniCssExtractPlugin({ // Extract CSS code
@@ -75,7 +78,14 @@ module.exports = (env = {}, options = {}) => {
       compilationSuccessInfo: {
         messages: [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`],
       },
-    })
+    }),
+    new StyleLintPlugin({
+      context: 'src',
+      files: [
+        '**/*.vue',
+        '**/*.scss',
+      ],
+    }),
   ];
 
   const svgoPlugins = [
@@ -123,6 +133,7 @@ module.exports = (env = {}, options = {}) => {
     hot: hotReload,
     compress: true,
     overlay: true,
+    // TODO: check if quite can be disabled, because it may tries to show errors during startup.
     quiet: true, // Handled by FriendlyErrorsPlugin
     inline: true,
     before(app) {
@@ -296,7 +307,10 @@ module.exports = (env = {}, options = {}) => {
 
   return {
     mode: isProduction ? 'production' : 'development',
-    entry: './src/main.js',
+    entry: {
+      ...themes,
+      app: ['./src/main.js']
+    },
     resolve: {
       extensions,
       alias,
