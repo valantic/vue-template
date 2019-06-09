@@ -1,19 +1,36 @@
+// Basics
 const path = require('path'); // Cross platform path resolver
+const webpack = require('webpack');
+
+// Development & build
+const openInEditor = require('launch-editor-middleware');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
-const openInEditor = require('launch-editor-middleware');
+
+// CSS
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env = {}, options = {}) => {
   // Instance variables
   const isProduction = ((options.mode || process.env.NODE_ENV) === 'production') || false;
   const hasWatcher = env.watch || false;
+  const hasStyleguide = false; // TODO: make dynamic
   const hotReload = !hasWatcher || !isProduction;
+  const globalVariables = {
+    'process.env': {
+      NODE_ENV: isProduction ? 'production' : 'development', // Needed by vendor scripts
+      HAS_STYLEGUIDE: JSON.stringify(hasStyleguide),
+      HAS_WATCHER: hasWatcher,
+    },
+  };
 
   // Project variables
   const outputAssetsFolder = 'assets/';
+  const filePrefix = 'app';
   const themes = {
-    'theme-01': path.resolve(__dirname, 'app/setup/scss/themes/theme-01.scss'),
-    'theme-02': path.resolve(__dirname, 'app/setup/scss/themes/theme-02.scss'),
+    'theme-01': path.resolve(__dirname, 'src/setup/scss/themes/theme-01.scss'),
+    'theme-02': path.resolve(__dirname, 'src/setup/scss/themes/theme-02.scss'),
   };
   const devPort = 8080;
   const host = options.host !== 'localhost'
@@ -21,6 +38,7 @@ module.exports = (env = {}, options = {}) => {
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
 
   // webpack configuration variables
+  const prefix = filePrefix ? `${filePrefix}.` : '';
   const extensions = ['.js', '.vue', '.json'];
   const alias = {
     '@': path.join(__dirname, 'src'),
@@ -75,7 +93,12 @@ module.exports = (env = {}, options = {}) => {
   ];
 
   const plugins = [
+    new webpack.DefinePlugin(globalVariables),
+    new CleanWebpackPlugin(), // Cleans the dist folder before build.
     new VueLoaderPlugin(), // *.vue file parser.
+    new MiniCssExtractPlugin({ // Extract CSS code
+      filename: outputAssetsFolder + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
+    }),
     new HtmlWebpackPlugin({ // Script tag injection.
       inject: true,
       template: 'index.html',
@@ -136,14 +159,7 @@ module.exports = (env = {}, options = {}) => {
     {
       test: /\.scss$/,
       use: [
-        // hasStyleguide ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-        {
-          loader: 'vue-style-loader',
-          options: {
-            sourceMap: false,
-            shadowMode: false
-          }
-        },
+        isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
         {
           loader: 'css-loader',
           options: {
@@ -151,12 +167,7 @@ module.exports = (env = {}, options = {}) => {
             importLoaders: 2
           }
         },
-        // {
-        //   loader: 'postcss-loader',
-        //   options: {
-        //     sourceMap: false
-        //   }
-        // },
+        'postcss-loader', // See ./postcss.config.js for configuration.
         {
           loader: 'sass-loader',
           options: {
@@ -175,6 +186,7 @@ module.exports = (env = {}, options = {}) => {
       test: /\.styl$/, // Required for Vuetify
       use: [
         // hasStyleguide ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: {
@@ -182,6 +194,7 @@ module.exports = (env = {}, options = {}) => {
             sourceMap: !isProduction
           }
         },
+        'postcss-loader', // See ./postcss.config.js for configuration.
         {
           loader: 'stylus-loader',
           options: {
@@ -204,7 +217,7 @@ module.exports = (env = {}, options = {}) => {
         {
           loader: 'file-loader',
           options: {
-            context: 'app/assets/',
+            context: 'src/assets/',
             name: '[path]/[name].[ext]?[hash]',
             outputPath: `${outputAssetsFolder}img/`,
           },
