@@ -15,8 +15,8 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 module.exports = (env = {}, options = {}) => {
   // Instance variables
   const isProduction = ((options.mode || process.env.NODE_ENV) === 'production') || false;
+  const hasStyleguide = options.styleguide;
   const hasWatcher = env.watch || false;
-  const hasStyleguide = false; // TODO: make dynamic
   const hotReload = !hasWatcher || !isProduction;
   const globalVariables = {
     'process.env': {
@@ -76,7 +76,9 @@ module.exports = (env = {}, options = {}) => {
     }),
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
-        messages: [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`],
+        messages: !hasStyleguide
+          ? [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`]
+          : null,
       },
     }),
     new StyleLintPlugin({
@@ -137,8 +139,10 @@ module.exports = (env = {}, options = {}) => {
     quiet: true, // Handled by FriendlyErrorsPlugin
     inline: true,
     before(app) {
-      console.clear();
-      console.log('\x1b[34m%s\x1b[0m', 'Starting development server...');
+      if (hasStyleguide) {
+        console.clear();
+        console.log('\x1b[34m%s\x1b[0m', 'Starting development server...');
+      }
 
       app.use('/__open-in-editor', openInEditor()); // Adds 'open in editor' support for Vue Inspector
     },

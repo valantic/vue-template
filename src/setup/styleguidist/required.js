@@ -10,6 +10,13 @@ import status from '@/styleguide/components/s-status';
 import '@/setup/styleguide.options';
 import '@/setup/plugins';
 
+// Global styles
+import '@/setup/_scss.scss';
+import '@/setup/vuetify/main.styl';
+import '@/components/c-form.scss';
+import '@/components/c-tabs.scss';
+import './style.scss';
+
 Vue.use(directives);
 Vue.use(components);
 Vue.use(statusLabel);

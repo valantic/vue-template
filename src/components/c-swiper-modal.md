@@ -11,29 +11,29 @@
       return {
         images: [
           {
-            fallback: '/static/mock/dummy_square_500--v1.jpg',
+            fallback: 'http://via.placeholder.com/500/0000ff',
             srcset: {
-              500: '/static/mock/dummy_square_500--v1.jpg',
-              800: '/static/mock/dummy_square_800--v1.jpg',
-              1200: '/static/mock/dummy_square_1200--v1.jpg'
+              500: 'http://via.placeholder.com/500/0000ff',
+              800: 'http://via.placeholder.com/800/0000ff',
+              1200: 'http://via.placeholder.com/1200/0000ff'
             },
             alt: ''
           },
           {
-            fallback: '/static/mock/dummy_square_500--v2.jpg',
+            fallback: 'http://via.placeholder.com/500/0000ff',
             srcset: {
-              500: '/static/mock/dummy_square_500--v2.jpg',
-              800: '/static/mock/dummy_square_800--v2.jpg',
-              1200: '/static/mock/dummy_square_1200--v2.jpg'
+              500: 'http://via.placeholder.com/500/0000ff',
+              800: 'http://via.placeholder.com/800/0000ff',
+              1200: 'http://via.placeholder.com/1200/0000ff'
             },
             alt: ''
           },
           {
-            fallback: 'http://via.placeholder.com/272x159',
+            fallback: 'http://via.placeholder.com/500/0000ff',
             srcset: {
-              200: 'http://via.placeholder.com/200x200',
-              400: 'http://via.placeholder.com/400x400',
-              600: 'http://via.placeholder.com/600x600'
+              500: 'http://via.placeholder.com/500/0000ff',
+              800: 'http://via.placeholder.com/800/0000ff',
+              1200: 'http://via.placeholder.com/1200/0000ff'
             },
             alt: ''
           }]
