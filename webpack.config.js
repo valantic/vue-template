@@ -19,7 +19,7 @@ module.exports = (env = {}, options = {}) => {
   const hotReload = !hasWatcher || !isProduction;
   const globalVariables = {
     'process.env': {
-      NODE_ENV: isProduction ? 'production' : 'development', // Needed by vendor scripts
+      NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
       HAS_STYLEGUIDE: JSON.stringify(hasStyleguide),
       HAS_WATCHER: hasWatcher,
     },
@@ -295,6 +295,7 @@ module.exports = (env = {}, options = {}) => {
   };
 
   return {
+    mode: isProduction ? 'production' : 'development',
     entry: './src/main.js',
     resolve: {
       extensions,
