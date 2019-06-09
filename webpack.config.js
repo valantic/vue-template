@@ -7,9 +7,9 @@ const openInEditor = require('launch-editor-middleware');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
-
-// CSS
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 
 module.exports = (env = {}, options = {}) => {
   // Instance variables
@@ -26,6 +26,8 @@ module.exports = (env = {}, options = {}) => {
   };
 
   // Project variables
+  const buildPath = path.resolve(__dirname, 'dist');
+  const publicPath = '/'; // Base path which is used in production to load modules via http.
   const outputAssetsFolder = 'assets/';
   const filePrefix = 'app';
   const themes = {
@@ -53,6 +55,27 @@ module.exports = (env = {}, options = {}) => {
     `_functions.scss`,
     `_mixins.scss`,
     `_extends.scss`,
+  ];
+
+  const plugins = [
+    new webpack.DefinePlugin(globalVariables), // Set node variables.
+    new CleanWebpackPlugin(), // Cleans the dist folder before build.
+
+    new VueLoaderPlugin(), // *.vue file parser.
+    new MiniCssExtractPlugin({ // Extract CSS code
+      filename: outputAssetsFolder + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
+    }),
+    new HtmlWebpackPlugin({ // Script tag injection.
+      inject: true,
+      template: 'index.html',
+      chunksSortMode: 'dependency',
+      excludeChunks: Object.keys(themes),
+    }),
+    new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`],
+      },
+    })
   ];
 
   const svgoPlugins = [
@@ -92,23 +115,8 @@ module.exports = (env = {}, options = {}) => {
     //{ removeDimensions: true, }
   ];
 
-  const plugins = [
-    new webpack.DefinePlugin(globalVariables),
-    new CleanWebpackPlugin(), // Cleans the dist folder before build.
-    new VueLoaderPlugin(), // *.vue file parser.
-    new MiniCssExtractPlugin({ // Extract CSS code
-      filename: outputAssetsFolder + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
-    }),
-    new HtmlWebpackPlugin({ // Script tag injection.
-      inject: true,
-      template: 'index.html',
-      chunksSortMode: 'dependency',
-      excludeChunks: Object.keys(themes),
-    })
-  ];
-
-  const devServer = {
-    clientLogLevel: 'error', // Removes ESLint warnings from console
+  const devServer = { // TODO: check if 'lazy' is the reason Style changes trigger no update
+    clientLogLevel: 'error', // Removes ESLint warnings from browser console
     historyApiFallback: true, // Enables routing support
     host,
     port: devPort,
@@ -118,6 +126,9 @@ module.exports = (env = {}, options = {}) => {
     quiet: true, // Handled by FriendlyErrorsPlugin
     inline: true,
     before(app) {
+      console.clear();
+      console.log('\x1b[34m%s\x1b[0m', 'Starting development server...');
+
       app.use('/__open-in-editor', openInEditor()); // Adds 'open in editor' support for Vue Inspector
     },
   };
@@ -185,8 +196,7 @@ module.exports = (env = {}, options = {}) => {
     {
       test: /\.styl$/, // Required for Vuetify
       use: [
-        // hasStyleguide ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-        MiniCssExtractPlugin.loader,
+        isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
         {
           loader: 'css-loader',
           options: {
@@ -246,6 +256,44 @@ module.exports = (env = {}, options = {}) => {
     },
   ];
 
+  const optimization = isProduction
+    ? {
+      nodeEnv: false,
+      minimizer: [
+        new UglifyJsPlugin({
+          test: /\.js($|\?)/i, // MUST be defined because file has as query
+          cache: true,
+          parallel: true,
+          sourceMap: hasStyleguide
+        })
+      ],
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'initial',
+          },
+        }
+      },
+      runtimeChunk: {
+        name: 'manifest'
+      }
+    }
+    : {};
+
+  const stats = {
+    all: false, // Fallback
+    assets: true, // Show list of created files
+    assetsSort: '!size', // Order list of created files by ...
+    errors: true, // Show errors
+    excludeAssets: /assets\/(img|fonts)/,
+    hash: true, // Show build hash
+    performance: true, // Show warnings for big files
+    timings: true, // Show timing information
+    warnings: true, // Show warnings
+  };
+
   return {
     entry: './src/main.js',
     resolve: {
@@ -255,11 +303,20 @@ module.exports = (env = {}, options = {}) => {
     module: {
       rules,
     },
+    stats: (!isProduction || hasWatcher) ? { all: false } : stats,
+    performance: { // Warn about performance issues
+      hints: !isProduction ? false : 'warning',
+      maxEntrypointSize: 500000, // 500kb
+      maxAssetSize: 150000, // 150kb
+    },
     output: {
-      path: __dirname + '/dist',
-      filename: 'app.js',
+      path: buildPath,
+      filename: isProduction ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
+      chunkFilename: `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]`,
+      publicPath,
     },
     plugins,
+    optimization,
     devServer,
   };
 };
