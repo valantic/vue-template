@@ -1,6 +1,13 @@
-import { blocks, elements, block, delimiters, delimitersTest, hyphenate } from './testingEntitys';
-import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from '../src/globals';
-import bemCn from '../src/bem-cn/index';
+import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from '@/setup/plugins/vue-bem-cn/src/globals';
+import bemCn from '@/setup/plugins/vue-bem-cn/src/bem-cn';
+import {
+  blocks,
+  elements,
+  block,
+  delimiters,
+  delimitersTest,
+  hyphenate
+} from './testingEntitys';
 
 const config = {
   ...DEFAULT_CONFIG,
@@ -11,6 +18,7 @@ const config = {
 
 describe('Block', () => {
   const b = bemCn(block, config);
+
   Object.keys(blocks).forEach((item) => {
     test(item, () => {
       expect(b(blocks[item].mods, blocks[item].mixin)).toBe(item);
@@ -19,6 +27,7 @@ describe('Block', () => {
 
   test('BlockName BlockName--mod, when elem = false', () => {
     const val = { el: false, mods: { mod: 'val' } };
+
     expect(b(val.el, val.mods)).toBe('BlockName BlockName--mod-val');
   });
 });

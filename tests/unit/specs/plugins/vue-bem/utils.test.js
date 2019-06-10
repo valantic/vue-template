@@ -1,4 +1,10 @@
-import { isString, isPObject, hyphenate, isNumber } from '../src/utils';
+/* eslint-disable no-undefined */
+import {
+  isString,
+  isPObject,
+  hyphenate,
+  isNumber
+} from '@/setup/plugins/vue-bem-cn/src/utils';
 
 describe('isString', () => {
   test('Expected false for undefined', () => {

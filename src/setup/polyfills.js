@@ -5,9 +5,9 @@ import 'core-js/features/symbol/';
 import 'core-js/features/object/';
 
 // Special polyfills
-import cssVars from 'css-vars-ponyfill';
 import 'picturefill';
 import 'lazysizes';
+import cssVars from 'css-vars-ponyfill';
 
 /*
  * Polyfill for css vars on IE11 https://github.com/jhildenbiddle/css-vars-ponyfill

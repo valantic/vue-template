@@ -1,9 +1,0 @@
-{
-  "extends": "airbnb-base",
-  "env": {
-    "jest": true
-  },
-  "rules": {
-    "prefer-template": 0
-  }
-}

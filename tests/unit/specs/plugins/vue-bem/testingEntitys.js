@@ -1,4 +1,4 @@
-/* eslint-disable quote-props */
+/* eslint-disable quote-props, id-length */
 export const block = 'BlockName';
 export const el = 'elementName';
 export const delimiters = {
@@ -15,7 +15,11 @@ export const blocks = {
   [`${block} ${block}--mod-123`]: { block, mods: { mod: 123 } },
   [`${block} ${block}--mod-val ${block}--modbool`]: {
     block,
-    mods: { mod: 'val', modbool: true, 'some-mod': false },
+    mods: {
+      mod: 'val',
+      modbool: true,
+      'some-mod': false
+    },
   },
   [`${block} mix`]: { block, mixin: 'mix' },
   [`${block} ${block}--mod mix`]: { block, mods: { mod: true }, mixin: 'mix' },
@@ -29,7 +33,11 @@ export const elements = {
   [`${block}__${el} ${block}__${el}--mod-val ${block}__${el}--modbool`]: {
     block,
     el,
-    mods: { mod: 'val', modbool: true, 'some-mod': false },
+    mods: {
+      mod: 'val',
+      modbool: true,
+      'some-mod': false
+    },
   },
   [`${block}__${el} mix`]: { block, el, mixin: 'mix' },
   [`${block}__${el} ${block}__${el}--mod-val mix`]: {

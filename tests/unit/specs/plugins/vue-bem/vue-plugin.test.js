@@ -1,5 +1,6 @@
+/* eslint-disable id-length */
 import { mount, createLocalVue } from '@vue/test-utils';
-import vueBemCn from '../dist/vue-bem-cn.umd.min';
+import vueBemCn from '@/setup/plugins/vue-bem-cn';
 
 describe('Check installation', () => {
   const comp = {
@@ -21,6 +22,7 @@ describe('Check installation', () => {
 
 describe('Check vm.b() method', () => {
   const localVue = createLocalVue();
+
   localVue.use(vueBemCn);
 
   const comp = {
@@ -43,6 +45,7 @@ describe('Check vm.b() method', () => {
       block: 'bonjour',
     };
     const { vm: vmBlock } = mount(compBlock, { localVue });
+
     expect(vmBlock.b()).toBe('bonjour');
   });
 });

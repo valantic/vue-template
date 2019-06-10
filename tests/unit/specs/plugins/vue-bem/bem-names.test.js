@@ -1,6 +1,11 @@
-import { blocks, elements, delimiters, delimitersTest } from './testingEntitys';
-import bemNames from '../src/bem-cn/bem-names';
-import { DEFAULT_DELIMITERS } from '../src/globals';
+import bemNames from '@/setup/plugins/vue-bem-cn/src/bem-cn/bem-names';
+import { DEFAULT_DELIMITERS } from '@/setup/plugins/vue-bem-cn/src/globals';
+import {
+  blocks,
+  elements,
+  delimiters,
+  delimitersTest
+} from './testingEntitys';
 
 describe('Block', () => {
   Object.keys(blocks).forEach((item) => {
