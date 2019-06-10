@@ -1,3 +1,4 @@
+import '@/setup/polyfills';
 import Vue from 'vue';
 import components from '@/setup/components';
 import directives from '@/setup/directives';

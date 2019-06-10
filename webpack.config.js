@@ -170,12 +170,10 @@ module.exports = (env = {}, options = {}) => {
     },
     {
       test: /\.js$/,
-      exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/,
+      // The excessive exclude are required to make vue-styleguidist work in IE11.
+      exclude: /node_modules\/(?!(dom7|ssr-window|swiper|regexpu-core|unicode-match-property-ecmascript|unicode-match-property-value-ecmascript|acorn-jsx|@znck\/prop-types|chalk|react-dev-utils|strip-ansi|ansi-regex|ansi-styles)\/).*/,
       use: {
         loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env']
-        }
       },
     },
     {
@@ -324,6 +322,7 @@ module.exports = (env = {}, options = {}) => {
     entry: {
       ...themes,
       app: [
+        '@babel/polyfill',
         path.resolve(__dirname, 'src/main.js'),
       ]
     },

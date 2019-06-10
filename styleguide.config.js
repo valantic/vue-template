@@ -9,6 +9,7 @@ module.exports = {
   previewDelay: 0, // This is already done by editor.
   pagePerSection: true,
   require: [
+    '@babel/polyfill', // Normally used on webpack entry point but was not supported by vue-styleguidist
     path.join(__dirname, 'src/setup/styleguidist/required.js'),
   ],
   webpackConfig(env) {

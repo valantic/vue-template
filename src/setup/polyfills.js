@@ -1,10 +1,4 @@
-// Basic ES2015+ polyfills
-import 'core-js/features/array/';
-import 'core-js/features/promise/';
-import 'core-js/features/symbol/';
-import 'core-js/features/object/';
-
-// Special polyfills
+// ES2015+ is polyfilled with @babel/polyfills in webpack configuration.
 import 'picturefill';
 import 'lazysizes';
 import cssVars from 'css-vars-ponyfill';

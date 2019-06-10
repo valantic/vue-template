@@ -1,6 +1,6 @@
 #### default: background and padding
 
-```
+```vue
 <template>
   
   <c-collapse :title="title">
@@ -22,7 +22,7 @@
 ```
 
 #### no padding, no background (e.g. for product list)
-```
+```vue
 <template>
   
   <c-collapse :background="false" :title="title" padding="300">
