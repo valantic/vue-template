@@ -17,7 +17,6 @@ import eLink from '@/components/e-link';
 import cModal from '@/components/c-modal';
 import cModalHeader01 from '@/components/c-modal-header-01';
 import cBreadcrumb from '@/components/c-breadcrumb';
-import cDatePickerRange from '@/components/c-date-picker-range';
 
 // Twig related imports
 import lDefault from '@/components/l-default';
@@ -45,7 +44,6 @@ export default {
       lDefault,
       eLink,
       cBreadcrumb,
-      cDatePickerRange,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -71,7 +69,6 @@ export default {
       Vue.component(lDefault.name, lDefault);
       Vue.component(eLink.name, eLink);
       Vue.component(cBreadcrumb.name, cBreadcrumb);
-      Vue.component(cDatePickerRange.name, cDatePickerRange);
     }
   },
 };
