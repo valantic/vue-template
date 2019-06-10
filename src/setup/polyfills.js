@@ -8,6 +8,7 @@ import 'core-js/features/object/';
 import 'picturefill';
 import 'lazysizes';
 import cssVars from 'css-vars-ponyfill';
+import './lib/ls.attrchange'; // Lazy sizes attribute change observer
 
 /*
  * Polyfill for css vars on IE11 https://github.com/jhildenbiddle/css-vars-ponyfill

@@ -11,9 +11,8 @@ import dayjs from './plugins/dayjs';
 import viewport from './plugins/viewport';
 import modal from './plugins/modalStack';
 
-// Polyfills and self executing
-import './vuetify';
-import './lib/ls.attrchange'; // Lazy sizes attribute change observer
+// Self executing
+import './vuetify'; // Only import if required by project!
 
 Vue.use(resizeEnd);
 Vue.use(VueAxios);
