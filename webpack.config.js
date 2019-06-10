@@ -278,8 +278,7 @@ module.exports = (env = {}, options = {}) => {
     },
   ];
 
-  const optimization = isProduction
-    ? {
+  const optimization = {
       nodeEnv: false,
       minimizer: [
         new UglifyJsPlugin({
@@ -301,8 +300,7 @@ module.exports = (env = {}, options = {}) => {
       runtimeChunk: {
         name: 'manifest'
       }
-    }
-    : {};
+    };
 
   const stats = {
     all: false, // Fallback
@@ -349,7 +347,7 @@ module.exports = (env = {}, options = {}) => {
       ignored: /node_modules/
     },
     plugins,
-    optimization,
+    optimization: isProduction ? optimization : {},
     devServer,
   };
 };
