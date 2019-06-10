@@ -85,7 +85,7 @@
 </template>
 
 <script>
-  import * as VDataTable from 'vuetify/es5/components/VDataTable';
+  import { VDataTable } from 'vuetify/lib';
   import cTablePagination from '@/components/c-table-pagination';
   import uuid from '../mixins/uuid';
 
@@ -98,7 +98,7 @@
     // status: 1,
 
     components: {
-      ...VDataTable,
+      VDataTable,
       cTablePagination,
     },
     mixins: [

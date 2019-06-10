@@ -35,7 +35,7 @@ module.exports = (env = {}, options = {}) => {
     'theme-01': path.resolve(__dirname, 'src/setup/scss/themes/theme-01.scss'),
     'theme-02': path.resolve(__dirname, 'src/setup/scss/themes/theme-02.scss'),
   };
-  const devPort = 8080;
+  const devPort = hasStyleguide ? 6060 : 8080;
   const host = options.host !== 'localhost'
     ? options.host
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
@@ -59,36 +59,42 @@ module.exports = (env = {}, options = {}) => {
   ];
 
   const plugins = [
-    new webpack.DefinePlugin(globalVariables), // Set node variables.
-    new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
-      cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
-    }),
+      new webpack.DefinePlugin(globalVariables), // Set node variables.
 
-    new VueLoaderPlugin(), // *.vue file parser.
-    new MiniCssExtractPlugin({ // Extract CSS code
-      filename: outputAssetsFolder + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
-    }),
-    new HtmlWebpackPlugin({ // Script tag injection.
-      inject: true,
-      template: 'index.html',
-      chunksSortMode: 'dependency',
-      excludeChunks: Object.keys(themes).slice(1, themes.length - 1),
-    }),
-    new FriendlyErrorsPlugin({
-      compilationSuccessInfo: {
-        messages: !hasStyleguide
-          ? [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`]
-          : null,
-      },
-    }),
-    new StyleLintPlugin({
-      context: 'src',
-      files: [
-        '**/*.vue',
-        '**/*.scss',
-      ],
-    }),
-  ];
+      new VueLoaderPlugin(), // *.vue file parser.
+      new MiniCssExtractPlugin({ // Extract CSS code
+        filename: outputAssetsFolder + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
+      }),
+      new HtmlWebpackPlugin({ // Script tag injection.
+        inject: true,
+        template: 'index.html',
+        chunksSortMode: 'dependency',
+        excludeChunks: isProduction // TODO: improve this...
+          ? Object.keys(themes)
+          : Object.keys(themes).slice(1, themes.length - 1),
+      }),
+      new FriendlyErrorsPlugin({
+        compilationSuccessInfo: {
+          messages: !hasStyleguide
+            ? [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`]
+            : null,
+        },
+      }),
+      new StyleLintPlugin({
+        context: 'src',
+        files: [
+          '**/*.vue',
+          '**/*.scss',
+        ],
+      }),
+    ]
+  ;
+
+  if (isProduction) {
+    plugins.push(new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
+      cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
+    }));
+  }
 
   const svgoPlugins = [
     //{ cleanupAttrs: false, },
@@ -127,7 +133,7 @@ module.exports = (env = {}, options = {}) => {
     //{ removeDimensions: true, }
   ];
 
-  const devServer = { // TODO: check if 'lazy' is the reason Style changes trigger no update
+  const devServer = {
     clientLogLevel: 'error', // Removes ESLint warnings from browser console
     historyApiFallback: true, // Enables routing support
     host,
@@ -135,9 +141,9 @@ module.exports = (env = {}, options = {}) => {
     hot: hotReload,
     compress: true,
     overlay: true,
-    // TODO: check if quite can be disabled, because it may tries to show errors during startup.
     quiet: true, // Handled by FriendlyErrorsPlugin
     inline: true,
+    progress: true,
     before(app) {
       if (!hasStyleguide) {
         console.clear();

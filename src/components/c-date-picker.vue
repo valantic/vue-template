@@ -16,8 +16,7 @@
 </template>
 
 <script>
-  import * as VDatePicker from 'vuetify/es5/components/VDatePicker';
-  import * as VGrid from 'vuetify/es5/components/VGrid';
+  import { VDatePicker } from 'vuetify/lib';
 
   /**
    * Renders a custom styled vuetify date picker.
@@ -28,8 +27,7 @@
     // status: 1,
 
     components: {
-      ...VDatePicker,
-      ...VGrid,
+      VDatePicker,
     },
     // mixins: [],
 

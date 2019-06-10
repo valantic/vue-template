@@ -16,7 +16,7 @@
 <script>
   import { mapGetters } from 'vuex';
 
-  const THEME_PATH = '/assets/css/shop.theme-';
+  const THEME_PATH = '/assets/css/app.theme-';
 
   export default {
     name: 's-theme-selector',

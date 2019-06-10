@@ -34,7 +34,7 @@
        */
       tagName: {
         type: String,
-        required: true,
+        default: 'h1',
         validator(value) {
           return [
             'h1',
