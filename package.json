@@ -7,7 +7,8 @@
     "dev:s": "npm run styleguide",
     "styleguide": "vue-styleguidist server",
     "test": "eslint --cache --ext .js,.vue src tests/unit/specs && stylelint --cache 'src/**/*.?(vue|scss)' && jest tests --config jest.config.js; exit 0;",
-    "build": "webpack --mode production --progress"
+    "build": "webpack --mode production --progress",
+    "build:watch": "webpack --mode production --watch"
   },
   "repository": {
     "type": "git",

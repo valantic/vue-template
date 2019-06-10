@@ -3,7 +3,6 @@ import Vue from 'vue';
 import VModal from 'vue-js-modal';
 import PortalVue from 'portal-vue';
 import Tabs from 'vue-tabs-component';
-import Vuetify from 'vuetify/lib';
 import VueAxios from './plugins/axios';
 import VueBemCn from './plugins/vue-bem-cn';
 import resizeEnd from './plugins/resize-end';
@@ -13,11 +12,11 @@ import viewport from './plugins/viewport';
 import modal from './plugins/modalStack';
 
 // Polyfills and self executing
+import './vuetify';
 import './lib/ls.attrchange'; // Lazy sizes attribute change observer
 
 Vue.use(resizeEnd);
 Vue.use(VueAxios);
-Vue.use(Vuetify);
 Vue.use(eventBus);
 Vue.use(dayjs);
 Vue.use(viewport);

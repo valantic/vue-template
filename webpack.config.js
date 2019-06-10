@@ -16,7 +16,7 @@ module.exports = (env = {}, options = {}) => {
   // Instance variables
   const isProduction = ((options.mode || process.env.NODE_ENV) === 'production') || false;
   const hasStyleguide = !!options.styleguide;
-  const hasWatcher = env.watch || false;
+  const hasWatcher = options.watch || false;
   const hotReload = !hasWatcher || !isProduction;
   const globalVariables = {
     'process.env': {
@@ -73,13 +73,6 @@ module.exports = (env = {}, options = {}) => {
           ? Object.keys(themes)
           : Object.keys(themes).slice(1, themes.length - 1),
       }),
-      new FriendlyErrorsPlugin({
-        compilationSuccessInfo: {
-          messages: !hasStyleguide
-            ? [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`]
-            : null,
-        },
-      }),
       new StyleLintPlugin({
         context: 'src',
         files: [
@@ -93,6 +86,16 @@ module.exports = (env = {}, options = {}) => {
   if (isProduction) {
     plugins.push(new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
       cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
+    }));
+  }
+
+  if (!isProduction || hasWatcher) {
+    plugins.push(new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: !hasStyleguide
+          ? [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`]
+          : null,
+      },
     }));
   }
 
@@ -316,6 +319,7 @@ module.exports = (env = {}, options = {}) => {
   };
 
   return {
+    watch: hasWatcher,
     mode: isProduction ? 'production' : 'development',
     entry: {
       ...themes,
@@ -332,7 +336,7 @@ module.exports = (env = {}, options = {}) => {
     },
     stats: (!isProduction || hasWatcher) ? { all: false } : stats,
     performance: { // Warn about performance issues
-      hints: !isProduction ? false : 'warning',
+      hints: (!isProduction || hasWatcher) ? false : 'warning',
       maxEntrypointSize: 500000, // 500kb
       maxAssetSize: 150000, // 150kb
     },
@@ -341,6 +345,9 @@ module.exports = (env = {}, options = {}) => {
       filename: isProduction ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]`,
       publicPath,
+    },
+    watchOptions: {
+      ignored: /node_modules/
     },
     plugins,
     optimization,
