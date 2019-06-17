@@ -716,6 +716,7 @@ $ brew upgrade nasm
 * [ ] Double check polyfills (e.g. smoothscroll)
 * [ ] Fix broken themes
 * [ ] Element styles should be moved to reboot.
+* [ ] Update package.md.
 
 ## License
 
