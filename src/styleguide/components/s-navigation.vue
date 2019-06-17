@@ -27,8 +27,8 @@
           :key="route.name"
           :to="{ name: route.name }"
           :class="b('navigation-item')"
-          :active-class="`${$options.name}-item--active-path`"
-          :exact-active-class="`${$options.name}-item--active`"
+          :active-class="`${b('navigation-item')}--active-path`"
+          :exact-active-class="`${b('navigation-item')}--active`"
           tag="li"
           exact>
           <a :class="b('navigation-link')">
