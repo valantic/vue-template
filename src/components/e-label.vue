@@ -103,7 +103,6 @@
   .e-label {
     color: $color-grayscale--400;
     display: block;
-    margin: 0;
 
     &__inner {
       width: 100%;
