@@ -1,8 +1,7 @@
 <template>
   <div :class="b()" data-app>
-    <div ref="content" :class="b('content')">
-      <div ref="inner"
-           :class="b('inner')">
+    <div :class="b('content')">
+      <div :class="b('inner')">
         <c-notification-container />
         <slot></slot>
       </div>
