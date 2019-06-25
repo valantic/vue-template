@@ -27,8 +27,8 @@
           :key="route.name"
           :to="{ name: route.name }"
           :class="b('navigation-item')"
-          :active-class="`${b('navigation-item')}--active-path`"
-          :exact-active-class="`${b('navigation-item')}--active`"
+          :active-class="b('navigation-item', { activePath: true })"
+          :exact-active-class="b('navigation-item', { active: true })"
           tag="li"
           exact>
           <a :class="b('navigation-link')">
@@ -228,6 +228,11 @@
       &--settings {
         padding: $spacing--10 $spacing--20;
         border-bottom: 1px solid $color-grayscale--400;
+      }
+
+      &--active,
+      &--active-path {
+        font-weight: 700;
       }
     }
 
