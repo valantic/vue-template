@@ -64,9 +64,9 @@
     </form>
     <hr style="margin-top: 50px;">
     <h3>Data:</h3>
-    <small>
+    <div id="data">
       <pre>{{ demo }}</pre>
-    </small>
+    </div>
   </div>
 </template>
 <script>
