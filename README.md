@@ -62,7 +62,7 @@ Make a local git clone of this project/template by using the following command:
 ```
 $ git clone <repository-url> <[target-folder]>
 
-# If you wan't a clean copy (no history) use the following command
+# If you want a clean copy (no history) use the following command
 $ git clone --depth 1 -b master <repository-url>
 ```
 
