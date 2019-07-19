@@ -4,7 +4,7 @@ import {
   isPObject,
   hyphenate,
   isNumber
-} from '@/setup/plugins/vue-bem-cn/src/utils';
+} from '@/plugins/vue-bem-cn/src/utils';
 
 describe('isString', () => {
   test('Expected false for undefined', () => {

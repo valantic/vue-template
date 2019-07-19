@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
 import { mount, createLocalVue } from '@vue/test-utils';
-import vueBemCn from '@/setup/plugins/vue-bem-cn';
+import vueBemCn from '@/plugins/vue-bem-cn';
 
 describe('Check installation', () => {
   const comp = {
