@@ -1,4 +1,4 @@
-import { RESIZE_DEBOUNCE } from '../globals';
+import { RESIZE_DEBOUNCE } from '../setup/globals';
 
 /**
  * Defines a custom 'resizeend' event which debounces the native

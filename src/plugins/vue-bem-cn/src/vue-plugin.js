@@ -1,4 +1,4 @@
-import bemCn from './bem-cn/index';
+import bemCn from './bem-cn';
 import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from './globals';
 import { hyphenate, isString } from './utils';
 

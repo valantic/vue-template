@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import { availableStatus } from '@/setup/plugins/styleguide.status-label';
+  import { availableStatus } from '@/plugins/styleguide.status-label';
 
   /**
    * Creates a status label which can be used to document component development status.
