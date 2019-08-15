@@ -320,6 +320,11 @@ button:focus {
   outline: 5px auto -webkit-focus-ring-color;
 }
 
+// Disables shifting of button content in IE11
+button > * {
+  position: relative;
+}
+
 input,
 button,
 select,
