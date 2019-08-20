@@ -74,6 +74,7 @@ module.exports = (env = {}, options = {}) => {
           : Object.keys(themes).slice(1, themes.length - 1),
       }),
       new StyleLintPlugin({
+        emitErrors: isProduction,
         context: 'src',
         files: [
           '**/*.vue',

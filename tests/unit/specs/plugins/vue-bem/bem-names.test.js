@@ -1,5 +1,5 @@
-import bemNames from '@/setup/plugins/vue-bem-cn/src/bem-cn/bem-names';
-import { DEFAULT_DELIMITERS } from '@/setup/plugins/vue-bem-cn/src/globals';
+import bemNames from '@/plugins/vue-bem-cn/src/bem-cn/bem-names';
+import { DEFAULT_DELIMITERS } from '@/plugins/vue-bem-cn/src/globals';
 import {
   blocks,
   elements,
