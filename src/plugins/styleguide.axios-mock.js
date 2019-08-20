@@ -1,5 +1,5 @@
 /* eslint-disable newline-per-chained-call */
-import MockAdapter from 'axios-mock-adapter/types'; // eslint-disable-line import/no-extraneous-dependencies
+import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-extraneous-dependencies
 import { axios } from './axios';
 
 // Import mocks
