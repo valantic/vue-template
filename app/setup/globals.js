@@ -31,7 +31,8 @@ export const NOTIFICATION_UNKNOWN_ERROR = {
 };
 
 /**
- * @type {Boolean} Holds a flag if local and session storage are available. They can lead to exceptions if cookies are disabled on the client.
+ * @type {Boolean} Holds a flag if local and session storage are available.
+ * They can lead to exceptions if cookies are disabled on the client.
  */
 export const IS_STORAGE_AVAILABLE = (function isStorageAvailable() {
   const keyValue = '__storage_test__';
