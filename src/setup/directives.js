@@ -1,13 +1,11 @@
-const requireFunction = require.context('../directives/', true, /\.(js|vue)$/i);
+const directives = process.env.NODE_ENV === 'production'
+  ? require.context('../directives/', true, /\.(js)$/i)
+  : require.context('../directives/', true, /^(?!dev\.).*?\.(js)$/i);
 
 export default {
   install(Vue) {
-    // TODO: Write jest test for directive.
-
-    requireFunction.keys().map((key) => {
-      const name = key.match(/\w+/)[0];
-
-      Vue.directive(name, requireFunction(key).default);
-    });
+    directives
+      .keys()
+      .forEach(key => Vue.directive(directives(key).default.name, directives(key).default));
   },
 };
