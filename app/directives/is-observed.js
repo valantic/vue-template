@@ -6,13 +6,15 @@
  * @param {*} binding.value - The attribute value.
  */
 function checkObservable(element, binding) {
-  let hasObservable = false;
+  if (process.env.NODE_ENV !== 'production') {
+    let hasObservable = false;
 
-  if (binding.value && binding.value.__ob__) { // eslint-disable-line no-underscore-dangle
-    hasObservable = true;
+    if (binding.value && binding.value.__ob__) { // eslint-disable-line no-underscore-dangle
+      hasObservable = true;
+    }
+
+    console.info(`The value on "${element.classList.value}" is ${hasObservable ? '' : 'not'} an observable.`, element); // eslint-disable-line no-console
   }
-
-  console.info(`The value on "${element.classList.value}" is ${hasObservable ? '' : 'not'} an observable.`, element); // eslint-disable-line no-console
 }
 
 export default {
