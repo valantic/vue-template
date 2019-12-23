@@ -75,7 +75,7 @@
           </div>
 
           <span v-if="checkboxItemsFilteredEmpty" :class="b('list-empty')">
-            <span v-t="'c-multiselect.itemsEmpty'"></span>
+            {{ $t('c-multiselect.itemsEmpty') }}
           </span>
         </div>
         <div :class="b('button-wrapper')">

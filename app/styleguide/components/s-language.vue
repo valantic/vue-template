@@ -3,9 +3,9 @@
     <span class="invisible">Language</span>
     <select :class="b()" :value="language" @change="onChange">
       <option v-for="locale in i18nLocales"
-              v-t="`s-language.${locale}`"
               :key="locale"
               :value="locale">
+        {{ $t(`s-language.${locale}`) }}
       </option>
     </select>
   </label>

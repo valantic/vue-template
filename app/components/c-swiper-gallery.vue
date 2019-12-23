@@ -31,7 +31,9 @@
                 :alt="picture.alt" />
             </span>
 
-            <span v-t="'c-swiper.zoom'" class="invisible"></span>
+            <span class="invisible">
+              {{ $('c-swiper.zoom') }}
+            </span>
           </button>
         </div>
       </div>

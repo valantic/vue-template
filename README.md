@@ -471,17 +471,7 @@ All text which is defined in frontend MUST be placed trough translations. There 
 
 We use the [vue-i18n](https://github.com/kazupon/vue-i18n) plugin to handle translations. This tool also allows us to handle localizations (e.g. number or date formats). The documentation can be found [here](https://kazupon.github.io/vue-i18n/guide/started.html).
 
-Use as directive:
-```html
-<span v-t="'c-example.title'"></span>
-```
-
-Use as directive inside a transition:
-```html
-<transition name="fade">
-  <span v-if="toggle" v-t.preserve="'c-example.title'"></span>
-</transition>
-```
+We discovered that the provided directive `v-t` accelerates the memory leak issue in IE11 since it creates copies of the translation JSON for each use (as of v8.15.3). For this reason, please use the `{{$t()}}` method.
 
 ### Placeholders
 

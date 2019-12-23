@@ -11,9 +11,9 @@
                  @focus="isDatePickerOpen = true"
                  @input="onFieldInput"
         />
-        <label v-t="'c-date-picker-input.chooseDate'"
-               :for="`date-picker-value-${uuid}`"
+        <label :for="`date-picker-value-${uuid}`"
                class="invisible">
+          {{ $t('c-date-picker-input.chooseDate') }}
         </label>
       </div>
       <div v-if="hasYearSelector" :class="b('select')">
@@ -24,9 +24,9 @@
                   name="date-picker-year"
                   @input="onUpdateYear"
         />
-        <label v-t="'c-date-picker-input.chooseYear'"
-               :for="`date-picker-year-${uuid}`"
+        <label :for="`date-picker-year-${uuid}`"
                class="invisible">
+          {{ $t('c-date-picker-input.chooseYear') }}
         </label>
       </div>
     </div>

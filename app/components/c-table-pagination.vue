@@ -1,9 +1,10 @@
 <template>
   <div :class="b()">
     <div :class="b('left')">
-      <label v-t="'c-table-pagination.itemsPerPage'"
-             :class="b('select-label')"
-             :for="`table-rows--${uuid}`"></label>
+      <label :class="b('select-label')"
+             :for="`table-rows--${uuid}`">
+        {{ $('c-table-pagination.itemsPerPage') }}
+      </label>
       <div :class="b('select-wrapper')">
         <e-select :id="`table-rows--${uuid}`"
                   :value="rowsPerPageValue"
@@ -43,7 +44,9 @@
                   width="15"
                   height="15"
                   inline />
-          <span v-t="'c-table-pagination.lastPageTitle'" class="invisible"></span>
+          <span class="invisible">
+            {{ $t('c-table-pagination.lastPageTitle') }}
+          </span>
         </a>
         <a :class="b('arrow', {disabled: maxPage <= currentPage})"
            :title="$t('c-table-pagination.nextPageTitle')"
@@ -53,7 +56,9 @@
                   width="15"
                   height="15"
                   inline />
-          <span v-t="'c-table-pagination.nextPageTitle'" class="invisible"></span>
+          <span class="invisible">
+            {{ $t('c-table-pagination.nextPageTitle') }}
+          </span>
         </a>
       </div>
     </div>

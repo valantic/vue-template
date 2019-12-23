@@ -19,8 +19,9 @@
                         value="0"
                         name="total"
                         @change="toggleAll">
-              <span v-if="!!selected.length" v-t="'c-table.deselectAll'" class="invisible"></span>
-              <span v-else v-t="'c-table.selectAll'" class="invisible"></span>
+              <span class="invisible">
+                {{ $(selected.length ? 'c-table.deselectAll' : 'c-table.selectAll') }}
+              </span>
             </e-checkbox>
           </th>
           <th
@@ -39,7 +40,9 @@
                     inline />
           </th>
           <th v-if="hasLink">
-            <span v-t="'c-table.linkLabel'" class="invisible"></span>
+            <span class="invisible">
+              {{ $t('c-table.linkLabel') }}
+            </span>
           </th>
         </tr>
       </template>
@@ -57,7 +60,9 @@
                         :value="props.item.id"
                         :name="`table-${uuid}-select-row`"
                         :disabled="isDisabled">
-              <span v-t="'c-table.selectItem'" class="invisible"></span>
+              <span class="invisible">
+                {{ $t('c-table.selectItem') }}
+              </span>
             </e-checkbox>
           </td>
 
