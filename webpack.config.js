@@ -3,6 +3,8 @@ const path = require('path'); // Cross platform path resolver
 const webpack = require('webpack');
 
 // Development & build
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const openInEditor = require('launch-editor-middleware');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
@@ -35,7 +37,7 @@ module.exports = (env = {}, options = {}) => {
     'theme-01': path.resolve(__dirname, 'src/setup/scss/themes/theme-01.scss'),
     'theme-02': path.resolve(__dirname, 'src/setup/scss/themes/theme-02.scss'),
   };
-  const devPort = hasStyleguide ? 6060 : 8080;
+  const devPort = 8080;
   const host = options.host !== 'localhost'
     ? options.host
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
@@ -45,7 +47,7 @@ module.exports = (env = {}, options = {}) => {
   const extensions = ['.js', '.vue', '.json'];
   const alias = {
     '@': path.join(__dirname, 'src'),
-    vue$: 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+    vue$: (isProduction && !hasStyleguide) ? 'vue/dist/vue.runtime.esm.js' : 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
     swiper$: 'swiper/dist/js/swiper.js', // Use builded code from swiper when importing from 'swiper'
   };
 
@@ -59,7 +61,15 @@ module.exports = (env = {}, options = {}) => {
   ];
 
   const plugins = [
+      // new BundleAnalyzerPlugin({
+      //   generateStatsFile: false,
+      // }),
       new webpack.DefinePlugin(globalVariables), // Set node variables.
+      new CopyWebpackPlugin([
+        {
+          from: path.resolve(__dirname, 'static'),
+        },
+      ]),
 
       new VueLoaderPlugin(), // *.vue file parser.
       new MiniCssExtractPlugin({ // Extract CSS code
@@ -69,7 +79,7 @@ module.exports = (env = {}, options = {}) => {
         inject: true,
         template: 'index.html',
         chunksSortMode: 'dependency',
-        excludeChunks: isProduction // TODO: improve this...
+        excludeChunks: isProduction
           ? Object.keys(themes)
           : Object.keys(themes).slice(1, themes.length - 1),
       }),
@@ -84,7 +94,7 @@ module.exports = (env = {}, options = {}) => {
     ]
   ;
 
-  if (isProduction) {
+  if (isProduction || hasStyleguide) {
     plugins.push(new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
       cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
     }));
@@ -280,28 +290,28 @@ module.exports = (env = {}, options = {}) => {
   ];
 
   const optimization = {
-      nodeEnv: false,
-      minimizer: [
-        new UglifyJsPlugin({
-          test: /\.js($|\?)/i, // MUST be defined because file has as query
-          cache: true,
-          parallel: true,
-          sourceMap: hasStyleguide
-        })
-      ],
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor',
-            chunks: 'initial',
-          },
-        }
-      },
-      runtimeChunk: {
-        name: 'manifest'
+    nodeEnv: false,
+    minimizer: [
+      new UglifyJsPlugin({
+        test: /\.js($|\?)/i, // MUST be defined because file has as query
+        cache: true,
+        parallel: true,
+        sourceMap: !isProduction
+      })
+    ],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: chunk => chunk.name !== 'polyfills.ie11', // Excludes node modules which are required by IE11 polyfills
+        },
       }
-    };
+    },
+    runtimeChunk: {
+      name: 'manifest'
+    }
+  };
 
   const stats = {
     all: false, // Fallback
@@ -320,10 +330,11 @@ module.exports = (env = {}, options = {}) => {
     mode: isProduction ? 'production' : 'development',
     entry: {
       ...themes,
-      app: [
+      'polyfills.ie11': path.resolve(__dirname, 'src/setup/polyfill-ie11.js'),
+      'app': [
         '@babel/polyfill',
         path.resolve(__dirname, 'src/main.js'),
-      ]
+      ],
     },
     resolve: {
       extensions,
@@ -340,7 +351,7 @@ module.exports = (env = {}, options = {}) => {
     },
     output: {
       path: buildPath,
-      filename: isProduction ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
+      filename: (isProduction || hasStyleguide) ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]`,
       publicPath,
     },

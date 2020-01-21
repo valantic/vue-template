@@ -4,12 +4,14 @@
   "description": "A customized Vue.js project template",
   "scripts": {
     "clean:caches": "rm -f .eslintcache .stylelintcache node_modules/.cache",
-    "dev": "webpack-dev-server --mode=development",
+    "dev": "webpack-dev-server --mode development",
     "dev:s": "npm run styleguide",
     "jest": "jest tests --config jest.config.js",
     "styleguide": "vue-styleguidist server",
     "test": "eslint --cache --ext .js,.vue src tests/unit/specs && stylelint --cache 'src/**/*.?(vue|scss)' && npm run jest; exit 0;",
     "build": "webpack --mode production --progress",
+    "build:profile": "webpack --mode production --json > profile.json",
+    "build:styleguide": "webpack --mode production --styleguide",
     "build:watch": "webpack --mode production --watch"
   },
   "husky": {
@@ -31,7 +33,7 @@
     "url": "git+https://github.com/valantic/vue-template.git"
   },
   "engines": {
-    "node": ">=12.0.0 <13.0.0",
+    "node": "12.14",
     "npm": ">=6.13.1"
   },
   "keywords": [
@@ -113,6 +115,7 @@
     "vue-styleguidist": "~3.14.2",
     "vue-template-compiler": "~2.6.10",
     "webpack": "~4.33.0",
+    "webpack-bundle-analyzer": "~3.6.0",
     "webpack-clean": "~1.2.3",
     "webpack-cli": "~3.3.3",
     "webpack-dev-server": "~3.7.1"
