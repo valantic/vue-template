@@ -10,7 +10,7 @@
     "styleguide": "vue-styleguidist server",
     "test": "eslint --cache --ext .js,.vue src tests/unit/specs && stylelint --cache 'src/**/*.?(vue|scss)' && npm run jest; exit 0;",
     "build": "webpack --mode production --progress",
-    "build:profile": "webpack --mode production --json > profile.json",
+    "build:profile": "webpack --mode production --profile",
     "build:styleguide": "webpack --mode production --styleguide",
     "build:watch": "webpack --mode production --watch"
   },

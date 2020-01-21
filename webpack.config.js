@@ -20,6 +20,7 @@ module.exports = (env = {}, options = {}) => {
   const hasStyleguide = !!options.styleguide;
   const hasWatcher = options.watch || false;
   const hotReload = !hasWatcher || !isProduction;
+  const showProfile = options.profile || false;
   const globalVariables = {
     'process.env': {
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
@@ -61,9 +62,6 @@ module.exports = (env = {}, options = {}) => {
   ];
 
   const plugins = [
-      // new BundleAnalyzerPlugin({
-      //   generateStatsFile: false,
-      // }),
       new webpack.DefinePlugin(globalVariables), // Set node variables.
       new CopyWebpackPlugin([
         {
@@ -91,8 +89,11 @@ module.exports = (env = {}, options = {}) => {
           '**/*.scss',
         ],
       }),
-    ]
-  ;
+    ];
+
+  if (showProfile) {
+    plugins.push(new BundleAnalyzerPlugin());
+  }
 
   if (isProduction || hasStyleguide) {
     plugins.push(new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.

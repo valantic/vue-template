@@ -1,15 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import camelCase from 'lodash/camelCase';
 
 const requireModule = require.context('./modules/', true, /index\.js/);
-const modules = requireModule.keys().reduce((accumulator, fileName) => {
-  const moduleName = camelCase(fileName.replace(/(\.\/|\/index\.js)/g, ''));
+const modules = {};
 
-  accumulator[moduleName] = requireModule(fileName).default;
+requireModule.keys().forEach((fileName) => {
+  const moduleName = fileName.replace(/(\.\/|\/index\.js)/g, '').replace(/-([a-z])/g, group => group[1].toUpperCase());
 
-  return accumulator;
-}, {});
+  modules[moduleName] = requireModule(fileName).default;
+});
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production' || process.env.HAS_WATCHER;
 
