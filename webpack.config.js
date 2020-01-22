@@ -77,7 +77,7 @@ module.exports = (env = {}, options = {}) => {
       inject: true,
       template: 'index.html',
       chunksSortMode: 'dependency',
-      excludeChunks: Object.keys(themes),
+      excludeChunks: hasStyleguide ? Object.keys(themes).slice(1, themes.length - 1) : Object.keys(themes),
     }),
     new StyleLintPlugin({
       emitErrors: isProduction,
@@ -233,7 +233,12 @@ module.exports = (env = {}, options = {}) => {
     {
       test: /\.styl$/, // Required for Vuetify
       use: [
-        isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: !isProduction,
+          },
+        },
         {
           loader: 'css-loader',
           options: {
