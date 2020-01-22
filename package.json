@@ -114,11 +114,11 @@
     "vue-markdown-loader": "~2.4.1",
     "vue-styleguidist": "~3.14.2",
     "vue-template-compiler": "~2.6.10",
-    "webpack": "~4.33.0",
+    "webpack": "~4.41.5",
     "webpack-bundle-analyzer": "~3.6.0",
     "webpack-clean": "~1.2.3",
-    "webpack-cli": "~3.3.3",
-    "webpack-dev-server": "~3.7.1"
+    "webpack-cli": "~3.3.10",
+    "webpack-dev-server": "~3.10.1"
   },
   "browserslist": [
     "> 1%",
