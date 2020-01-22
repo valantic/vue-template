@@ -80,13 +80,12 @@
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
+          const link = document.getElementById(cssId);
           const { theme } = this;
 
-          if (!document.getElementById(cssId)) {
+          if (!link) {
             this.createStyleElement(theme, cssId);
           } else {
-            const link = document.getElementById(cssId);
-
             link.href = `${THEME_PATH}${theme}.css`;
           }
         }

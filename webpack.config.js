@@ -62,34 +62,32 @@ module.exports = (env = {}, options = {}) => {
   ];
 
   const plugins = [
-      new webpack.DefinePlugin(globalVariables), // Set node variables.
-      new CopyWebpackPlugin([
-        {
-          from: path.resolve(__dirname, 'static'),
-        },
-      ]),
+    new webpack.DefinePlugin(globalVariables), // Set node variables.
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, 'static'),
+      },
+    ]),
 
-      new VueLoaderPlugin(), // *.vue file parser.
-      new MiniCssExtractPlugin({ // Extract CSS code
-        filename: outputAssetsFolder + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
-      }),
-      new HtmlWebpackPlugin({ // Script tag injection.
-        inject: true,
-        template: 'index.html',
-        chunksSortMode: 'dependency',
-        excludeChunks: isProduction
-          ? Object.keys(themes)
-          : Object.keys(themes).slice(1, themes.length - 1),
-      }),
-      new StyleLintPlugin({
-        emitErrors: isProduction,
-        context: 'src',
-        files: [
-          '**/*.vue',
-          '**/*.scss',
-        ],
-      }),
-    ];
+    new VueLoaderPlugin(), // *.vue file parser.
+    new MiniCssExtractPlugin({ // Extract CSS code
+      filename: outputAssetsFolder + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
+    }),
+    new HtmlWebpackPlugin({ // Script and style tag injection.
+      inject: true,
+      template: 'index.html',
+      chunksSortMode: 'dependency',
+      excludeChunks: Object.keys(themes),
+    }),
+    new StyleLintPlugin({
+      emitErrors: isProduction,
+      context: 'src',
+      files: [
+        '**/*.vue',
+        '**/*.scss',
+      ],
+    }),
+  ];
 
   if (showProfile) {
     plugins.push(new BundleAnalyzerPlugin());
@@ -204,7 +202,12 @@ module.exports = (env = {}, options = {}) => {
     {
       test: /\.scss$/,
       use: [
-        isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: !isProduction,
+          },
+        },
         {
           loader: 'css-loader',
           options: {
