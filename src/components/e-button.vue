@@ -158,6 +158,11 @@
     },
 
     computed: {
+      /**
+       * Returns an Object of class modifiers.
+       *
+       * @returns {Object}
+       */
       modifiers() {
         return {
           width: this.width,
@@ -173,6 +178,11 @@
         };
       },
 
+      /**
+       * Returns an Object of attributes.
+       *
+       * @returns {Object}
+       */
       attributes() {
         return {
           role: this.$attrs.href ? 'button' : null, // Fallback
@@ -181,6 +191,11 @@
         };
       },
 
+      /**
+       * Returns inline styles to keep dimensions during progress state.
+       *
+       * @returns {Object}
+       */
       style() {
         return this.progress && this.width !== 'full'
           ? this.getElementDimensions()

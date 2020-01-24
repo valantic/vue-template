@@ -112,6 +112,9 @@
     // destroyed() {},
 
     methods: {
+      /**
+       * Event handler for the close event of the modal plugin.
+       */
       close() {
         /**
          * Sends close event.

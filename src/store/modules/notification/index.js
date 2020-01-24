@@ -122,6 +122,12 @@ export default {
     globalAndAddToCartNotifications: state => state.notifications.filter(({ message }) => !message.source),
   },
   mutations: {
+    /**
+     * Accepts the initial data Array of notification Objects.
+     *
+     * @param {Object} state - Current state.
+     * @param {Array.<Object>} [payload] - An Array of notification Objects.
+     */
     data(state, payload) {
       if (!Array.isArray(payload)) {
         return;

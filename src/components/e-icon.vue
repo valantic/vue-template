@@ -104,6 +104,11 @@
       },
     },
     computed: {
+      /**
+       * Returns the source path for the given icon.
+       *
+       * @returns {String}
+       */
       src() {
         try {
           return require.context('../assets/icons/', false, /\.svg/)(`./${this.icon}.svg`) || null;

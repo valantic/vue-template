@@ -88,6 +88,11 @@
         'globalAndAddToCartNotifications',
       ]),
 
+      /**
+       * Returns an Array of notifications, which should be displayed by this container.
+       *
+       * @returns {Array.<Object>}
+       */
       notifications() {
         switch (this.displayType) {
           case 'global':
@@ -130,6 +135,9 @@
     },
 
     methods: {
+      /**
+       * Event handler for the resizeend event.
+       */
       onResize() {
         this.addToCartLeft = window.innerWidth < 1024;
       }

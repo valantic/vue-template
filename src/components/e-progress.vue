@@ -53,6 +53,11 @@
     // },
 
     computed: {
+      /**
+       * Returns a readable loading message.
+       *
+       * @returns {String}
+       */
       loadingMessage() {
         return this.message || this.$i18n.t('e-progress.loading');
       },

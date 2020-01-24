@@ -93,6 +93,11 @@
       };
     },
     computed: {
+      /**
+       * Returns the styleguidest url, based on the current environment.
+       *
+       * @returns {String}
+       */
       styleguidistUrl() {
         return process.env.NODE_ENV === 'production'
           ? '/styleguidist'
@@ -112,6 +117,9 @@
       }
     },
     methods: {
+      /**
+       * Click handler for the open button.
+       */
       onClick() {
         this.isOpen = !this.isOpen;
       }

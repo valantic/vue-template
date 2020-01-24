@@ -55,6 +55,11 @@
     // },
 
     computed: {
+      /**
+       * Returns the headline for the component.
+       *
+       * @returns {String}
+       */
       headline() {
         return `${this.palette} colors`;
       }

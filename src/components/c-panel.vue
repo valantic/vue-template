@@ -139,32 +139,67 @@
     // },
 
     computed: {
+      /**
+       * Returns an Object of modifiers.
+       *
+       * @returns {Object}
+       */
       panelModifiers() {
         return {
           border: this.border,
           color: this.color,
         };
       },
+
+      /**
+       * Returns an Object of heading modifiers.
+       *
+       * @returns {Object}
+       */
       headingModifiers() {
         return {
           spacing: this.headingSpacing,
         };
       },
+
+      /**
+       * Returns an Object of content modifiers.
+       *
+       * @returns {Object}
+       */
       contentModifiers() {
         return {
           spacing: this.contentSpacing,
         };
       },
+
+      /**
+       * Returns an Object of button modifiers.
+       *
+       * @returns {Object}
+       */
       triangleButtonModifiers() {
         return {
           size: this.triangleButtonSize,
         };
       },
+
+      /**
+       * Returns an Object of shadow modifiers.
+       *
+       * @returns {Object}
+       */
       shadowModifiers() {
         return {
           color: this.color,
         };
       },
+
+      /**
+       * Returns an Object of plus button modifiers.
+       *
+       * @returns {Object}
+       */
       plusModifiers() {
         return {
           size: this.triangleButtonSize,
@@ -187,13 +222,21 @@
     // destroyed() {},
 
     methods: {
+      /**
+       * Event handler for plus toggle.
+       */
       onPlusToggle() {
-        // onPlusToggle() gets triggered on touch devices as well, which is not what we want.
-        if (!this.hasTouch) {
+        if (!this.hasTouch) { // onPlusToggle() gets triggered on touch devices as well, which is not what we want.
           this.$refs.plus.classList.toggle('c-panel__plus--hover');
           this.$refs.shadow.classList.toggle('c-panel__shadow--hover');
         }
       },
+
+      /**
+       * Event handler for triangle button click.
+       *
+       * @param {Event} event - The related DOM event.
+       */
       onTriangleButtonClick(event) {
         /**
          * Click event.

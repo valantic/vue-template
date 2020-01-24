@@ -24,6 +24,11 @@
     // },
 
     computed: {
+      /**
+       * An Array of available routes.
+       *
+       * @returns {Array.<Object>}
+       */
       routes() {
         return styleguideRoutes;
       }

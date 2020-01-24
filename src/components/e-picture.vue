@@ -162,6 +162,12 @@
           })
           .sort((a, b) => (a.sort < b.sort ? 1 : -1));
       },
+
+      /**
+       * Returns a flag, if the current display mode is 'inline'.
+       *
+       * @returns {boolean}
+       */
       isInline() {
         return this.inline === 'true' || this.inline === true;
       }

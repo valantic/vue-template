@@ -14,6 +14,13 @@ export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 export const i18n = new VueI18n({
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
+
+  /**
+   * Callback for the 'missing' event, during translation lookup.
+   *
+   * @param {String} locale - The current locale.
+   * @param {String} messageKey - The request message key.
+   */
   missing(locale, messageKey) {
     console.error(`No '${locale}' translations found for '${messageKey}'`); // eslint-disable-line no-console
   },

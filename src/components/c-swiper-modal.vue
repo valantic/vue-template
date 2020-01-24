@@ -172,8 +172,8 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      const galleryOptions = Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsMerged);
-      const thumbnailOptions = Object.assign({ initialSlide: this.$props.initialSlide }, this.optionsThumbnails);
+      const galleryOptions = { initialSlide: this.$props.initialSlide, ...this.optionsMerged };
+      const thumbnailOptions = { initialSlide: this.$props.initialSlide, ...this.optionsThumbnails };
 
       this.gallerySwiper = new Swiper(this.$refs.gallery, galleryOptions);
       this.thumbsSwiper = new Swiper(this.$refs.thumbnails, thumbnailOptions);

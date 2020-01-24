@@ -46,6 +46,11 @@
 
     // components: {},
     computed: {
+      /**
+       * Returns an array of query filtered icons.
+       *
+       * @returns {Array.<Object>}
+       */
       filteredIcons() {
         const list = this.icons.filter(icon => icon.indexOf(this.filter) > -1);
 
@@ -58,6 +63,10 @@
       },
     },
     methods: {
+      /**
+       * Event handler for copy to clipboard button.
+       * @param icon
+       */
       copyToClipboard(icon) {
         const value = `<e-icon icon="${icon.name}"/>`;
         const hiddenInput = this.$refs.input;
@@ -68,6 +77,12 @@
         this.setNotification(`copied! - ${value}`);
         setTimeout(() => { this.setNotification(''); }, 2000);
       },
+
+      /**
+       * Shows the given notification.
+       *
+       * @param {String} message - The to be shown message.
+       */
       setNotification(message) {
         this.notification = message;
       }

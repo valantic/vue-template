@@ -43,12 +43,29 @@
     // },
 
     computed: {
+      /**
+       * Returns the name HTML of the color.
+       *
+       * @returns {String}
+       */
       displayName() {
         return this.name.split(' - ').join('<br />');
       },
+
+      /**
+       * Returns the value HTML of the color.
+       *
+       * @returns {String}
+       */
       displayValue() {
         return this.value.join(' - ');
       },
+
+      /**
+       * Returns the background style for the color.
+       *
+       * @returns {String}
+       */
       backgroundColor() {
         const [color1, color2] = this.value;
 

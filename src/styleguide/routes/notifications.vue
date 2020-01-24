@@ -179,24 +179,52 @@
         'flushFieldNotifications',
         'popNotification'
       ]),
+
+      /**
+       * Event handler for add-to-cart message button.
+       */
       addToCart() {
         api.post('/notifications/global/success', {}, { title: 'Some title', expire: true });
       },
+
+      /**
+       * Event handler for global success message button.
+       */
       addGlobalSuccess() {
         api.post('/notifications/global/success', {}, { title: 'Some title', expire: true });
       },
+
+      /**
+       * Event handler for global warning message button.
+       */
       addGlobalWarning() {
         api.post('/notifications/global/warning', {}, { title: 'Some title', expire: true });
       },
+
+      /**
+       * Event handler for global error message button.
+       */
       addGlobalError() {
         api.post('/notifications/global/error', {}, { title: 'Some title', expire: true });
       },
+
+      /**
+       * Event handler for global info message button.
+       */
       addGlobalInfo() {
         api.post('/notifications/global/info', {}, { title: 'Some title', expire: true });
       },
+
+      /**
+       * Event handler for add confirmation button.
+       */
       addConfirmation() {
         this.pushNotification(notificationData[1]);
       },
+
+      /**
+       * Event handler for add field error button.
+       */
       addFieldError() {
         this.flushFieldNotifications();
         api.post('/notifications/field/error')
@@ -213,6 +241,10 @@
             return Promise.resolve(response);
           });
       },
+
+      /**
+       * Event handler for add selector info button.
+       */
       addSelectorInfo1() {
         api.post('/notifications/selector/info1', {}, { expire: true });
       },

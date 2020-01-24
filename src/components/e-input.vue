@@ -185,6 +185,11 @@
       };
     },
     computed: {
+      /**
+       * Returns a flag, if field notifications should be displayed.
+       *
+       * @returns {Boolean}
+       */
       showNotification() {
         return this.state && this.state !== 'default' && this.notification && this.hasFocus;
       },

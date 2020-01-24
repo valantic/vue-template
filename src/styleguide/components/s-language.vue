@@ -26,11 +26,21 @@
 
     // components: {},
     computed: {
+      /**
+       * The current language.
+       *
+       * @returns {String}
+       */
       language() {
         return this.$i18n.locale;
       },
     },
     methods: {
+      /**
+       * Event handler for the change event of the language selector.
+       *
+       * @param {Event} event - The related DOM event.
+       */
       onChange(event) {
         this.i18nSetLocale(event.target.value);
       },

@@ -49,7 +49,7 @@
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
    */
   export default {
-    name: 'c-notification',
+    // name: 'c-notification',
     // status: 1,
 
     // components: {},
