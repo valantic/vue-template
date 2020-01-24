@@ -257,9 +257,8 @@ module.exports = (env = {}, options = {}) => {
     },
     {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/, // Required for Vuetify
-      loader: 'url-loader',
+      loader: 'file-loader',
       options: {
-        limit: 10000,
         name: outputAssetsFolder + 'fonts/[name].[ext]?[hash]',
       },
     },
