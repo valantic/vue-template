@@ -180,7 +180,7 @@
         'popNotification'
       ]),
       addToCart() {
-        api.post('/notifications/add-to-cart/success', {}, { title: 'Some title', expire: true });
+        api.post('/notifications/global/success', {}, { title: 'Some title', expire: true });
       },
       addGlobalSuccess() {
         api.post('/notifications/global/success', {}, { title: 'Some title', expire: true });
