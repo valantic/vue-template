@@ -171,6 +171,7 @@ module.exports = (env = {}, options = {}) => {
     {
       test: /\.(js|vue)$/,
       loader: 'eslint-loader',
+      exclude: /node_modules/,
       enforce: 'pre',
       options: {
         failOnError: isProduction,
