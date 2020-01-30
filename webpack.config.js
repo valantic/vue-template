@@ -177,8 +177,6 @@ module.exports = (env = {}, options = {}) => {
   const rules = [
     {
       test: /\.js$/,
-      // The excessive exclude are required to make vue-styleguidist work in IE11.
-      exclude: /node_modules\/(?!(dom7|ssr-window|swiper|regexpu-core|unicode-match-property-ecmascript|unicode-match-property-value-ecmascript|acorn-jsx|@znck\/prop-types|chalk|react-dev-utils|strip-ansi|ansi-regex|ansi-styles)\/).*/,
       use: {
         loader: 'babel-loader',
       },
@@ -187,13 +185,7 @@ module.exports = (env = {}, options = {}) => {
       test: /\.vue$/,
       loader: 'vue-loader',
       options: {
-        // extractCSS can not be used because of scss
-        // cssSourceMap can not be used because of scss
         hotReload,
-        // If you have problems debugging vue-files in devtools,
-        // set this to false - it *may* help
-        // https://vue-loader.vuejs.org/en/options.html#cachebusting
-        cacheBusting: false, // TODO: shouldn't this be true?
       },
     },
     {
