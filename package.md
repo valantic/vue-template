@@ -40,18 +40,18 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 ### Project
 
 ### Template
-- @babel/core
-- @babel/plugin-syntax-dynamic-import
-- @babel/preset-env
-- @vue/test-utils
-- autoprefixer
-- axios-mock-adapter
-- babel-core - Required by vue-jest and jest tests.
-- babel-eslint
-- babel-jest
-- babel-loader
-- clean-webpack-plugin
-- css-loader
+- [@babel/core](https://www.npmjs.com/package/@babel/core) - JS compiler to create ES5 code from ES2015+.
+- [@babel/plugin-syntax-dynamic-import](https://www.npmjs.com/package/@babel/plugin-syntax-dynamic-import) - Makes @babel/core understand the not yet standardized import() syntax.
+- [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env) - Transform preset, which will transform the input code according to browserlist settings in package.json
+- [@vue/test-utils](https://www.npmjs.com/package/@vue/test-utils) - The official test library for Vue.js.
+- [autoprefixer](https://www.npmjs.com/package/autoprefixer) - PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from caniuse.com.
+- [axios-mock-adapter](https://www.npmjs.com/package/axios-mock-adapter) - Axios adapter that allows to easily mock requests.
+- [babel-core](https://www.npmjs.com/package/babel-core/v/7.0.0-bridge.0) - Required by vue-jest and jest tests.
+- [babel-eslint](https://www.npmjs.com/package/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
+- [babel-jest](https://www.npmjs.com/package/babel-jest) - Compiles modern JavaScript for Jest.
+- [babel-loader](https://www.npmjs.com/package/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
+- [clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin) - A webpack plugin to remove/clean your build folder(s).
+- [css-loader](https://www.npmjs.com/package/css-loader) - The css-loader interprets @import and url() like import/require() and will resolve them.
 - cssnano
 - eslint
 - eslint-config-airbnb-base
