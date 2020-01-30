@@ -1,21 +1,23 @@
+/* eslint-disable no-console */
+
 // Basics
 const path = require('path'); // Cross platform path resolver
 const webpack = require('webpack');
 
 // Development & build
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const openInEditor = require('launch-editor-middleware');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-module.exports = (env = {}, options = {}) => {
+module.exports = (env, options = {}) => {
   // Instance variables
   const isProduction = ((options.mode || process.env.NODE_ENV) === 'production') || false;
   const hasStyleguide = !!options.styleguide;
@@ -49,17 +51,17 @@ module.exports = (env = {}, options = {}) => {
   const extensions = ['.js', '.vue', '.json'];
   const alias = {
     '@': path.join(__dirname, 'src'),
-    vue$: (isProduction && !hasStyleguide) ? 'vue/dist/vue.runtime.esm.js' : 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
-    swiper$: 'swiper/dist/js/swiper.js', // Use builded code from swiper when importing from 'swiper'
+    'vue$': isProduction && !hasStyleguide ? 'vue/dist/vue.runtime.esm.js' : 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+    'swiper$': 'swiper/dist/js/swiper.js', // Use builded code from swiper when importing from 'swiper'
   };
 
   const scssResourcesFolder = './src/setup/scss/';
   const scssResources = [
-    `_variables.scss`,
-    `_config.scss`,
-    `_functions.scss`,
-    `_mixins.scss`,
-    `_extends.scss`,
+    '_variables.scss',
+    '_config.scss',
+    '_functions.scss',
+    '_mixins.scss',
+    '_extends.scss',
   ];
 
   const plugins = [
@@ -78,7 +80,7 @@ module.exports = (env = {}, options = {}) => {
 
     new VueLoaderPlugin(), // *.vue file parser.
     new MiniCssExtractPlugin({ // Extract CSS code
-      filename: outputAssetsFolder + `css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
+      filename: `${outputAssetsFolder}css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
     }),
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
@@ -117,40 +119,40 @@ module.exports = (env = {}, options = {}) => {
   }
 
   const svgoPlugins = [
-    //{ cleanupAttrs: false, },
-    //{ removeDoctype: false, },
-    //{ removeXMLProcInst: false, },
-    //{ removeComments: false, },
-    //{ removeMetadata: false, },
-    //{ removeTitle: false, },
-    //{ removeDesc: false, },
+    // { cleanupAttrs: false, },
+    // { removeDoctype: false, },
+    // { removeXMLProcInst: false, },
+    // { removeComments: false, },
+    // { removeMetadata: false, },
+    // { removeTitle: false, },
+    // { removeDesc: false, },
     { removeUselessDefs: false },
-    //{ removeEditorsNSData: false, },
-    //{ removeEmptyAttrs: false, },
-    //{ removeHiddenElems: false, },
-    //{ removeEmptyText: false, },
-    //{ removeEmptyContainers: false, },
+    // { removeEditorsNSData: false, },
+    // { removeEmptyAttrs: false, },
+    // { removeHiddenElems: false, },
+    // { removeEmptyText: false, },
+    // { removeEmptyContainers: false, },
     { removeViewBox: false, },
-    //{ cleanUpEnableBackground: true, },
-    //{ convertStyleToAttrs: true, },
-    //{ convertColors: true, },
-    //{ convertPathData: true, },
-    //{ convertTransform: true, },
-    //{ removeUnknownsAndDefaults: true, },
-    //{ removeNonInheritableGroupAttrs: true, },
-    //{ removeUselessStrokeAndFill: true, },
-    //{ removeUnusedNS: true, },
+    // { cleanUpEnableBackground: true, },
+    // { convertStyleToAttrs: true, },
+    // { convertColors: true, },
+    // { convertPathData: true, },
+    // { convertTransform: true, },
+    // { removeUnknownsAndDefaults: true, },
+    // { removeNonInheritableGroupAttrs: true, },
+    // { removeUselessStrokeAndFill: true, },
+    // { removeUnusedNS: true, },
     { cleanupIDs: false },
-    //{ cleanupNumericValues: false, },
-    //{ moveElemsAttrsToGroup: true, },
-    //{ moveGroupAttrsToElems: true, },
-    //{ collapseGroups: false, },
-    //{ removeRasterImages: false, },
-    //{ mergePaths: true, },
-    //{ convertShapeToPath: true, },
-    //{ sortAttrs: true, },
-    //{ transformsWithOnePath: false, },
-    //{ removeDimensions: true, }
+    // { cleanupNumericValues: false, },
+    // { moveElemsAttrsToGroup: true, },
+    // { moveGroupAttrsToElems: true, },
+    // { collapseGroups: false, },
+    // { removeRasterImages: false, },
+    // { mergePaths: true, },
+    // { convertShapeToPath: true, },
+    // { sortAttrs: true, },
+    // { transformsWithOnePath: false, },
+    // { removeDimensions: true, }
   ];
 
   const devServer = {
@@ -248,7 +250,7 @@ module.exports = (env = {}, options = {}) => {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/, // Required for Vuetify
       loader: 'file-loader',
       options: {
-        name: outputAssetsFolder + 'fonts/[name].[ext]?[hash]',
+        name: `${outputAssetsFolder}fonts/[name].[ext]?[hash]`,
       },
     },
     {
@@ -340,15 +342,15 @@ module.exports = (env = {}, options = {}) => {
     module: {
       rules,
     },
-    stats: (!isProduction || hasWatcher) ? { all: false } : stats,
+    stats: !isProduction || hasWatcher ? { all: false } : stats,
     performance: { // Warn about performance issues
-      hints: (!isProduction || hasWatcher) ? false : 'warning',
+      hints: !isProduction || hasWatcher ? false : 'warning',
       maxEntrypointSize: 500000, // 500kb
       maxAssetSize: 150000, // 150kb
     },
     output: {
       path: buildPath,
-      filename: (isProduction || hasStyleguide) ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
+      filename: isProduction || hasStyleguide ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]`,
       publicPath,
     },
