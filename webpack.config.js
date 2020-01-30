@@ -13,6 +13,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = (env = {}, options = {}) => {
   // Instance variables
@@ -62,6 +63,12 @@ module.exports = (env = {}, options = {}) => {
   ];
 
   const plugins = [
+    new ESLintPlugin({
+      extensions: ['vue', 'js'],
+      failOnError: isProduction,
+      emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
+      cache: !isProduction, // Improves linting performance
+    }),
     new webpack.DefinePlugin(globalVariables), // Set node variables.
     new CopyWebpackPlugin([
       {
@@ -168,17 +175,6 @@ module.exports = (env = {}, options = {}) => {
   };
 
   const rules = [
-    {
-      test: /\.(js|vue)$/,
-      loader: 'eslint-loader',
-      exclude: /node_modules/,
-      enforce: 'pre',
-      options: {
-        failOnError: isProduction,
-        emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
-        cache: !isProduction, // Improves linting performance
-      },
-    },
     {
       test: /\.js$/,
       // The excessive exclude are required to make vue-styleguidist work in IE11.
