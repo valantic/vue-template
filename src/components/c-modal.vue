@@ -1,5 +1,5 @@
 <template>
-  <portal :order="uuidInt" :to="portalTarget">
+  <portal :order="parseInt(uuid, 10)" :to="portalTarget">
     <modal :name="uuid"
            :classes="b({ size })"
            :width="width"

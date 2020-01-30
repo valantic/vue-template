@@ -166,7 +166,7 @@
       /**
        * Returns a flag, if the current display mode is 'inline'.
        *
-       * @returns {boolean}
+       * @returns {Boolean}
        */
       isInline() {
         return this.inline === 'true' || this.inline === true;

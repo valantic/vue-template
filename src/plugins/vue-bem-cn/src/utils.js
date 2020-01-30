@@ -1,7 +1,35 @@
-export const isString = val => val && typeof val === 'string';
-export const isPObject = val => !!(val && typeof val === 'object' && val.constructor === Object && Object.keys(val).length);
+/**
+ * Checks if the given value is a non empty String.
+ *
+ * @param {*} value - The to be tested value.
+ *
+ * @returns {Boolean}
+ */
+export const isString = value => value && typeof value === 'string';
 
-export const hyphenate = str => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
+/**
+ * Checks if the given value is a native JS Object with values.
+ *
+ * @param {*} value - The to be tested value.
+ *
+ * @returns {Boolean}
+ */
+export const isPObject = value => !!(value && typeof value === 'object' && value.constructor === Object && Object.keys(value).length); // eslint-disable-line max-len
 
-// eslint-disable-next-line no-restricted-globals
-export const isNumber = val => typeof val === 'number' && isFinite(val);
+/**
+ * Checks if the given value is a finite number.
+ *
+ * @param {*} value - The to be tested value.
+ *
+ * @returns {Boolean}
+ */
+export const isNumber = value => !Number.isNaN(value) && Number.isFinite(value);
+
+/**
+ * Converts the given camelCase String to kebab-case.
+ *
+ * @param {String} value - The to be converted String.
+ *
+ * @returns {String}
+ */
+export const hyphenate = value => value.replace(/\B([A-Z])/g, '-$1').toLowerCase();

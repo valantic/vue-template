@@ -103,9 +103,21 @@
     // destroyed() {},
 
     methods: {
+      /**
+       * Event handler for the change event of the theme selector.
+       *
+       * @param {Event} event - The related DOM event.
+       */
       onChange(event) {
         this.$store.commit('session/setTheme', event.target.value);
       },
+
+      /**
+       * Creates a new style link element.
+       *
+       * @param {String} themeId - The name of the desired theme.
+       * @param {String} cssId - The unique ID for the link element.
+       */
       createStyleElement(themeId, cssId) {
         const head = document.getElementsByTagName('head')[0];
         const link = document.createElement('link');

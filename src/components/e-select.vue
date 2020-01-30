@@ -68,7 +68,9 @@
        * The text to display if no option is selected by default.
        */
       placeholder: {
-        default() { return this.$t('e-select.chooseOption'); },
+        default() {
+          return this.$t('e-select.chooseOption');
+        },
         type: String,
       },
 

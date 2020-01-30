@@ -1,6 +1,16 @@
 import { isString, isPObject, hyphenate } from '../utils';
 import bemNames from './bem-names';
 
+/**
+ * Returns a BEM name creator method with the given options applied.
+ *
+ * @param {String} block - The BEM block name.
+ * @param {Object} options - Parser options.
+ * @param {Object} options.delimiters - An Object of delimiter defintions.
+ * @param {Object} [options.hyphenate] - If true, camel case names will be converted to kebab-case.
+ *
+ * @returns {Function}
+ */
 export default function bemCn(block, options) {
   return function entities(elem, mods, mix) {
     const resultObj = {

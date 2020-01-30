@@ -159,6 +159,11 @@
     },
 
     computed: {
+      /**
+       * Returns an options Object which combines the default and custom options.
+       *
+       * @returns {Object}
+       */
       optionsMerged() {
         return {
           ...this.optionsDefault,

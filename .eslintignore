@@ -3,5 +3,4 @@
 /test/unit/coverage/
 /node_modules/
 
-# TODO: the following should be refactored and removed from ignore
-/src/plugins/vue-bem-cn
+/src/setup/lib

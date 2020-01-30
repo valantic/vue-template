@@ -1,3 +1,5 @@
+/* eslint-disable id-length */
+
 export const DEFAULT_DELIMITERS = {
   ns: '',
   el: '__',

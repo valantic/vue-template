@@ -28,6 +28,11 @@ Vue.mixin({
     };
   },
   methods: {
+    /**
+     * General event handler for styleguide click events.
+     *
+     * @param {Event} event - The related DOM event.
+     */
     onStyleguideClick(event) {
       // eslint-disable-next-line no-console
       console.log('You clicked:', event.target);

@@ -65,7 +65,8 @@
     methods: {
       /**
        * Event handler for copy to clipboard button.
-       * @param icon
+       *
+       * @param {Object} icon - The icon instance for which the example code should be copied.
        */
       copyToClipboard(icon) {
         const value = `<e-icon icon="${icon.name}"/>`;

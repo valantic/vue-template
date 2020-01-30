@@ -75,6 +75,11 @@
     // },
 
     computed: {
+      /**
+       * Getter/setter for the internal value.
+       *
+       * @returns {Boolean}
+       */
       internalValue: {
         get() {
           return this.selected;
@@ -90,6 +95,11 @@
         }
       },
 
+      /**
+       * Returns a configuration Object for modifier classes.
+       *
+       * @returns {Object}
+       */
       modifiers() {
         return {
           ...this.stateModifiers,

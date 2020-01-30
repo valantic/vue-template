@@ -28,9 +28,20 @@
     // },
 
     computed: {
+      /**
+       * Returns an Object of color lists.
+       *
+       * @returns {Object}
+       */
       colors() {
         return paletteColors;
       },
+
+      /**
+       * Returns an Array of color palette names.
+       *
+       * @returns {Array.<String>}
+       */
       palettes() {
         return Object.keys(paletteColors);
       }

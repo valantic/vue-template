@@ -16,12 +16,13 @@ export default {
     Vue.mixin({
       created() {
         const block = this.$options.block || this.$options.name;
+
+        if (!isString(block)) {
+          return;
+        }
+
         const nsBlock = cfg.delimiters.ns + block;
-        let generator = null;
-
-        if (!isString(block)) return;
-
-        generator = bemCn(cfg.hyphenate ? hyphenate(nsBlock) : nsBlock, cfg);
+        const generator = bemCn(cfg.hyphenate ? hyphenate(nsBlock) : nsBlock, cfg);
 
         this[cfg.methodName] = (...args) => generator(...args);
       },

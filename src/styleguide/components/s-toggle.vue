@@ -77,6 +77,11 @@
     // destroyed() {},
 
     methods: {
+      /**
+       * Event handler for the change event of the toggle element.
+       *
+       * @param {Event} event - The related DOM event.
+       */
       onChange(event) {
         this.internalValue = event.target.checked;
       }

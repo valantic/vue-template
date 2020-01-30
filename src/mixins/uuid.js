@@ -7,7 +7,6 @@ let uuid = 0;
  */
 export default {
   beforeCreate() {
-    this.uuidInt = uuid;
     this.uuid = uuid.toString();
     uuid += 1;
   },
