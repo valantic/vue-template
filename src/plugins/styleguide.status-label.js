@@ -12,13 +12,14 @@ const labels = {};
  * @param {Number} statusId - The id of the current status.
  */
 function appendStatusLabel(name, statusId) {
-  const container = document.getElementById(`${name}-container`);
-  const label = document.createElement('label');
-  const content = document.createElement('span');
-  const statusClassBlock = 's-status';
-  const status = availableStatus[statusId] || availableStatus[0];
-  
+  const container = document.querySelector(`[data-testid="${name}-container"]`);
+
   if (container) {
+    const label = document.createElement('label');
+    const content = document.createElement('span');
+    const statusClassBlock = 's-status';
+    const status = availableStatus[statusId] || availableStatus[0];
+
     content.innerText = status.text;
     content.classList.add(`${statusClassBlock}__inner`);
 
