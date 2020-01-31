@@ -9,10 +9,10 @@
     "jest": "jest tests --config jest.config.js",
     "styleguide": "vue-styleguidist server",
     "test": "eslint --cache --ext .js,.vue src tests/unit/specs && stylelint --cache 'src/**/*.?(vue|scss)' && npm run jest; exit 0;",
-    "build": "webpack --mode production --progress",
-    "build:profile": "webpack --mode production --profile",
-    "build:styleguide": "webpack --mode production --styleguide",
-    "build:watch": "webpack --mode production --watch"
+    "build": "NODE_ENV=production webpack --mode production --progress",
+    "build:profile": "NODE_ENV=production webpack --mode production --profile",
+    "build:styleguide": "NODE_ENV=production webpack --mode production --styleguide && vue-styleguidist build",
+    "build:watch": "NODE_ENV=production webpack --mode production --watch"
   },
   "husky": {
     "hooks": {

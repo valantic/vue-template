@@ -10,11 +10,13 @@ There are several scripts that will support you during the development and deplo
 
 Creates the production build of the current code and moves it to the `/dist` folder. This will also perform **code splitting**, **critical CSS splitting** and **minification/uglyfication**. `npm run test` **MUST** be executed before building!
 
+> NOTE: the environment had to be defined explicitly on the NODE_ENV. webpack's "--mode production" did not work, because the config was requested multiple times but switched to "development" on the second request. See https://github.com/webpack/webpack/issues/6460
+
 #### `npm run dev`
 
 Starts the development-environment with styleguide example pages. Please note, that for performance reasons no minification, uglyfication and CSS extraction is performed.
 
-#### `npm run dev:styleguide`
+#### `npm run dev:s` or `npm run styleguide`
 
 Starts [Vue-Styleguidist](https://github.com/vue-styleguidist/vue-styleguidist) in a separate webpack and localhost instance.
 
@@ -24,7 +26,16 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 #### All scripts
 
+* `npm run clean:caches` - Clears linter caches.
 * `npm run dev` - See above.
+* `npm run dev:s` - See above.
+* `npm run jest` - Executes Jest tests.
+* `npm run styleguide` - See above.
+* `npm run test` - See above.
+* `npm run build` - See above.
+* `npm run build:profile` - Runs a build and shows a package content overview
+* `npm run build:styleguide` - Creates a standalone build of the development and component styleguide.
+* `npm run build:watch` - Allows to develop with a continuous productive build.
 
 ## Dependencies
 
@@ -58,10 +69,10 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > c-modal
 - [vue-router](https://www.npmjs.com/package/vue-router) - The official router for Vue.js.
   > core
-- [vuetify]() - foo
-  > 
-- [vue]() - foo
-  > 
+- [vuetify](https://www.npmjs.com/package/vuetify) - Material Component Framework for Vue.
+  > c-date-picker, c-table
+- [vuex](https://www.npmjs.com/package/vuex) - Centralized State Management for Vue.js.
+  > core
 
 
 ## Dev-Dependencies

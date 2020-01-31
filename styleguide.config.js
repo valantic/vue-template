@@ -1,6 +1,21 @@
 const path = require('path');
 const { theme, styles } = require('./src/setup/styleguide.styles');
 
+const productiveTemplateCustomization = { // @see https://vue-styleguidist.github.io/Configuration.html#template
+  head: {
+    links: [
+      {
+        rel: 'stylesheet',
+        href: 'assets/css/app.vendor.css',
+      },
+      {
+        rel: 'stylesheet',
+        href: 'assets/css/app.main.css',
+      },
+    ],
+  },
+};
+
 module.exports = {
   renderRootJsx: path.join(__dirname, 'src/setup/styleguidist/root.js'),
   defaultExample: 'src/setup/styleguide.fallback.md',
@@ -9,6 +24,11 @@ module.exports = {
   previewDelay: 0, // This is already done by editor.
   pagePerSection: true,
   copyCodeButton: true,
+  theme,
+  styles,
+  template: process.env.NODE_ENV === 'production'
+    ? productiveTemplateCustomization
+    : undefined,
   require: [
     '@babel/polyfill', // Normally used on webpack entry point but was not supported by vue-styleguidist
     path.join(__dirname, 'src/setup/styleguidist/required.js'),
@@ -29,8 +49,6 @@ module.exports = {
     '**/components/s-navigation.vue',
     '**/components/s-toggle.vue',
   ],
-  theme,
-  styles,
   sections: [
     {
       name: 'Welcome',

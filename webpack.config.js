@@ -17,13 +17,13 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-module.exports = (env, options = {}) => {
+module.exports = (env, argv = {}) => {
   // Instance variables
-  const isProduction = ((options.mode || process.env.NODE_ENV) === 'production') || false;
-  const hasStyleguide = !!options.styleguide;
-  const hasWatcher = options.watch || false;
+  const isProduction = process.env.NODE_ENV === 'production';
+  const hasStyleguide = !!argv.styleguide;
+  const hasWatcher = argv.watch || false;
   const hotReload = !hasWatcher || !isProduction;
-  const showProfile = options.profile || false;
+  const showProfile = argv.profile || false;
   const globalVariables = {
     'process.env': {
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
@@ -42,8 +42,8 @@ module.exports = (env, options = {}) => {
     'theme-02': path.resolve(__dirname, 'src/setup/scss/themes/theme-02.scss'),
   };
   const devPort = 8080;
-  const host = options.host !== 'localhost'
-    ? options.host
+  const host = argv.host !== 'localhost'
+    ? argv.host
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
 
   // webpack configuration variables
