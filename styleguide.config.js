@@ -15,10 +15,10 @@ module.exports = {
   ],
   webpackConfig(env) {
     return require('./webpack.config')({
-      mode: env
+      mode: env,
     }, {
-      styleguide: true
-    })
+      styleguide: true,
+    });
   },
   ignore: [
     '**/components/s-palette-item.vue',
@@ -43,8 +43,8 @@ module.exports = {
         {
           name: 'Status labels',
           content: 'src/styleguide/core/welcome/status-label.md',
-        }
-      ]
+        },
+      ],
     },
     {
       name: 'Core',
@@ -70,7 +70,7 @@ module.exports = {
           name: 'Global styles',
           content: 'src/styleguide/core/global-styles/global-styles.md',
         },
-      ]
+      ],
     },
     {
       name: 'Plugins',
@@ -80,11 +80,7 @@ module.exports = {
           name: 'Vuetify',
           content: 'src/styleguide/core/vuetify/vuetify.md',
         },
-        {
-          name: 'Tabs',
-          content: 'src/styleguide/core/plugins/tabs.md',
-        },
-      ]
+      ],
     },
     {
       name: 'Elements',

@@ -42,24 +42,22 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core, polyfill, ie11
 - [dayjs](https://www.npmjs.com/package/dayjs) - Fast 2kB alternative to Moment.js with the same modern API.
   > c-date-picker-input, c-date-picker-range
-- [material-design-icons-iconfont]() - foo
-  > 
-- [picturefill]() - foo
-  > 
-- [portal-vue]() - foo
-  > 
-- [swiper]() - foo
-  > 
-- [vue]() - foo
-  > 
-- [vue-i18n]() - foo
-  > 
-- [vue-js-modal]() - foo
-  > 
-- [vue-router]() - foo
-  > 
-- [vue-tabs-component]() - foo
-  > 
+- [material-design-icons-iconfont](https://www.npmjs.com/package/material-design-icons-iconfont) - MDIDX is a ~fork (+ fixes) of Google's Material Design icons repository.
+  > Vuetify
+- [picturefill](https://www.npmjs.com/package/picturefill) - A responsive image polyfill.
+  > core, polyfill, ie11
+- [portal-vue](https://www.npmjs.com/package/portal-vue) - A Portal Component for Vuejs, to render DOM outside of a component, anywhere in the document.
+  > c-modal
+- [swiper](https://www.npmjs.com/package/swiper) - Swiper is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.
+  > c-swiper-modal, c-swiper-gallery, c-swiper-hero
+- [vue](https://www.npmjs.com/package/vue) - Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
+  > core
+- [vue-i18n](https://www.npmjs.com/package/vue-i18n) - Internationalization plugin for Vue.js
+  > core
+- [vue-js-modal](https://www.npmjs.com/package/vue-js-modal) - https://github.com/euvl/vue-js-modal
+  > c-modal
+- [vue-router](https://www.npmjs.com/package/vue-router) - The official router for Vue.js.
+  > core
 - [vuetify]() - foo
   > 
 - [vue]() - foo

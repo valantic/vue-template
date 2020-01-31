@@ -15,7 +15,6 @@ import '@/setup/vuetify'; // Only import if required by project!
 // Global styles
 import '@/setup/_scss.scss';
 import '@/components/c-form.scss';
-import '@/components/c-tabs.scss';
 import './style.scss';
 
 Vue.use(directives);
