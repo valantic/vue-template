@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import './styleguide.polyfills';
 import styleguideRoutes from './styleguide.routes';
 import sLayout from '../styleguide/components/s-layout';
 import AxiosMockAdapter from '../plugins/styleguide.axios-mock';
