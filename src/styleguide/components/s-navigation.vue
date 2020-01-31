@@ -20,21 +20,9 @@
           <h2>Settings</h2>
           <s-demo-settings />
         </li>
-        <!-- eslint-disable vue/no-use-v-if-with-v-for -->
-        <router-link
-          v-if="route.meta"
-          v-for="route in routes"
-          :key="route.name"
-          :to="{ name: route.name }"
-          :class="b('navigation-item')"
-          :active-class="b('navigation-item', { activePath: true })"
-          :exact-active-class="b('navigation-item', { active: true })"
-          tag="li"
-          exact>
-          <a :class="b('navigation-link')">
-            {{ route.meta.title }}
-          </a>
-        </router-link>
+        <li :class="b('navigation-item')">
+          <s-navigation-block :routes="$router.options.routes" />
+        </li>
         <li :class="b('navigation-item', { components: true })">
           <a :class="b('navigation-link')"
              :href="styleguidistUrl"
@@ -52,6 +40,7 @@
   import sLanguage from './s-language';
   import sThemeSelector from './s-theme-selector';
   import sDemoSettings from './s-demo-settings';
+  import sNavigationBlock from './s-navigation-block';
 
   export default {
     name: 's-navigation',
@@ -60,7 +49,8 @@
     components: {
       sDemoSettings,
       sLanguage,
-      sThemeSelector
+      sThemeSelector,
+      sNavigationBlock,
     },
     props: {
       /**

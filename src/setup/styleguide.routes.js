@@ -6,6 +6,9 @@ import lazyload from '../styleguide/routes/lazyload';
 import notifications from '../styleguide/routes/notifications';
 
 const root = '/styleguide';
+const categoryWrapper = {
+  template: '<router-view />'
+};
 
 /**
  * This file is only meant for style-example routes
@@ -21,43 +24,54 @@ export default [
   },
   {
     path: `${root}/sandbox`,
-    name: 'sandbox',
-    component: sandbox,
+    name: 'sandboxWrapper',
+    redirect: `${root}/sandbox/index`,
+    component: categoryWrapper,
     meta: {
       title: 'Sandbox',
-    }
-  },
-  {
-    path: `${root}/layout`,
-    name: 'styleguideLayout',
-    component: lDefault,
-    meta: {
-      title: 'Layout',
-    }
-  },
-  {
-    path: `${root}/forms`,
-    name: 'styleguideForms',
-    component: forms,
-    meta: {
-      title: 'Forms',
     },
-  },
-  {
-    path: `${root}/lazyload`,
-    name: 'Lazy load',
-    component: lazyload,
-    meta: {
-      title: 'Lazy load',
-    },
-  },
-  {
-    path: `${root}/notifications`,
-    name: 'Notifications',
-    component: notifications,
-    meta: {
-      title: 'Notifications',
-    },
+    children: [
+      {
+        path: 'index',
+        name: 'sandbox',
+        component: sandbox,
+        meta: {
+          title: 'Sandbox',
+        },
+      },
+      {
+        path: 'layout',
+        name: 'styleguideLayout',
+        component: lDefault,
+        meta: {
+          title: 'Layout',
+        }
+      },
+      {
+        path: 'forms',
+        name: 'styleguideForms',
+        component: forms,
+        meta: {
+          title: 'Forms',
+        },
+      },
+      {
+        path: 'lazyload',
+        name: 'Lazy load',
+        component: lazyload,
+        meta: {
+          title: 'Lazy load',
+        },
+      },
+      {
+        path: 'notifications',
+        name: 'Notifications',
+        component: notifications,
+        meta: {
+          title: 'Notifications',
+        },
+      },
+    ]
   },
   {
     path: '*',
