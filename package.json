@@ -84,7 +84,6 @@
     "eslint-config-airbnb-base": "~14.0.0",
     "eslint-config-valantic": "~7.1.1",
     "eslint-import-resolver-webpack": "~0.12.1",
-    "eslint-loader": "~3.0.3",
     "eslint-plugin-import": "~2.20.0",
     "eslint-plugin-vue": "~6.1.2",
     "eslint-webpack-plugin": "~0.1.0",
@@ -116,7 +115,6 @@
     "vue-template-compiler": "~2.6.11",
     "webpack": "~4.41.5",
     "webpack-bundle-analyzer": "~3.6.0",
-    "webpack-clean": "~1.2.3",
     "webpack-cli": "~3.3.10",
     "webpack-dev-server": "~3.10.1"
   },

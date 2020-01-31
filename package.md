@@ -41,54 +41,102 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 ### Template
 - [@babel/core](https://www.npmjs.com/package/@babel/core) - JS compiler to create ES5 code from ES2015+.
+  > webpack
 - [@babel/plugin-syntax-dynamic-import](https://www.npmjs.com/package/@babel/plugin-syntax-dynamic-import) - Makes @babel/core understand the not yet standardized import() syntax.
+  > webpack
 - [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env) - Transform preset, which will transform the input code according to browserlist settings in package.json
+  > webpack
 - [@vue/test-utils](https://www.npmjs.com/package/@vue/test-utils) - The official test library for Vue.js.
+  > test environment
 - [autoprefixer](https://www.npmjs.com/package/autoprefixer) - PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from caniuse.com.
+  > webpack, scss
 - [axios-mock-adapter](https://www.npmjs.com/package/axios-mock-adapter) - Axios adapter that allows to easily mock requests.
+  > development environment, mock data
 - [babel-core](https://www.npmjs.com/package/babel-core/v/7.0.0-bridge.0) - Required by vue-jest and jest tests.
+  > webpack setup
 - [babel-eslint](https://www.npmjs.com/package/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
+  > eslint
 - [babel-jest](https://www.npmjs.com/package/babel-jest) - Compiles modern JavaScript for Jest.
+  > test environment
 - [babel-loader](https://www.npmjs.com/package/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
+  > webpack
 - [clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin) - A webpack plugin to remove/clean your build folder(s).
+  > webpack
 - [css-loader](https://www.npmjs.com/package/css-loader) - The css-loader interprets @import and url() like import/require() and will resolve them.
+  > webpack
 - cssnano
+  > webpack, scss
 - eslint
+  > eslint
 - eslint-config-airbnb-base
+  > eslint
 - eslint-config-valantic
+  > eslint
 - eslint-import-resolver-webpack
-- eslint-loader
+  > eslint
 - eslint-plugin-import
+  > eslint
 - eslint-plugin-vue
+  > eslint
 - eslint-webpack-plugin
+  > webpack, eslint
 - faker
+  > development environment, mock data
 - file-loader
+  > webpack
 - friendly-errors-webpack-plugin
+  > webpack
 - html-webpack-plugin
+  > webpack
 - husky
+  > development environment, eslint, test environment
 - image-webpack-loader
+  > webpack
 - jest
+  > test environment
 - jest-transform-stub
+  > test environment
 - launch-editor-middleware
+  > development environment
 - lint-staged
+  > husky, development environment, eslint, test environment
 - mini-css-extract-plugin
+  > webpack
 - node-sass
+  > webpack, scss
 - postcss-loader
+  > webpack, scss
 - sass-loader
+  > webpack, scss
 - sass-resources-loader
+  > webpack, scss
 - stylelint
+  > stylelint
 - stylelint-config-valantic
+  > stylelint
 - stylelint-webpack-plugin
+  > webpack, stylelint
 - stylus
+  > stylus
 - stylus-loader
+  > webpack, stylus
 - uglifyjs-webpack-plugin
+  > webpack
 - vue-jest
+  > test environment
 - vue-loader
+  > webpack
 - vue-markdown-loader
+  > development environment
 - vue-styleguidist
+  > development environment
 - vue-template-compiler
+  > webpack
 - webpack
+  > webpack
 - webpack-bundle-analyzer
-- webpack-clean
+  > webpack
 - webpack-cli
+  > webpack
 - webpack-dev-serve
+  > webpack, development environment
