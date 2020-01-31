@@ -7,7 +7,7 @@
              href="http://www.valantic.com"
              target="_blank"
           >
-            <img src="../assets/valantic.svg" alt="valantic">
+            <img src="@/assets/valantic.svg" alt="valantic">
           </a>
         </li>
         <li :class="b('navigation-item', { language: true })" @click.stop>
@@ -246,6 +246,7 @@
 
     &__navigation-item--logo {
       border-bottom: 1px solid $color-grayscale--400;
+      padding: 0 $spacing--15;
 
       img {
         max-width: 150px;

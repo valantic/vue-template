@@ -250,6 +250,7 @@ module.exports = (env, options = {}) => {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/, // Required for Vuetify
       loader: 'file-loader',
       options: {
+        esModule: false,
         name: `${outputAssetsFolder}fonts/[name].[ext]?[hash]`,
       },
     },
@@ -259,6 +260,7 @@ module.exports = (env, options = {}) => {
         {
           loader: 'file-loader',
           options: {
+            esModule: false,
             context: 'src/assets/',
             name: '[path]/[name].[ext]?[hash]',
             outputPath: `${outputAssetsFolder}img/`,

@@ -111,9 +111,7 @@
        */
       src() {
         try {
-          const requireModule = require.context('../assets/icons/', false, /\.svg/)(`./${this.icon}.svg`);
-
-          return requireModule ? requireModule.default : null;
+          return require.context('../assets/icons/', false, /\.svg/)(`./${this.icon}.svg`) || null;
         } catch (e) {
           // eslint-disable-next-line no-console
           console.warn(`e-icon was unable to find icon "${this.icon}"`);
