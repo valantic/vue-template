@@ -43,8 +43,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 ### Template
 
-- [@babel/polyfill](https://www.npmjs.com/package/@babel/polyfill) - Provides polyfills necessary for a full ES2015+ environment.
-  > core, polyfill
 - [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js.
   > core
 - [core-js]() - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.

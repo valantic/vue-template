@@ -179,6 +179,7 @@ module.exports = (env, argv = {}) => {
   const rules = [
     {
       test: /\.js$/,
+      exclude: /core-js/,
       use: {
         loader: 'babel-loader',
       },
@@ -333,7 +334,7 @@ module.exports = (env, argv = {}) => {
       ...themes,
       'polyfills.ie11': path.resolve(__dirname, 'src/setup/polyfill-ie11.js'),
       'app': [
-        '@babel/polyfill',
+        'core-js/stable', // If code still fails, you may need to add regenerator as well. See https://babeljs.io/docs/en/babel-polyfill
         path.resolve(__dirname, 'src/main.js'),
       ],
     },

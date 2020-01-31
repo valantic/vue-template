@@ -30,7 +30,7 @@ module.exports = {
     ? productiveTemplateCustomization
     : undefined,
   require: [
-    '@babel/polyfill', // Normally used on webpack entry point but was not supported by vue-styleguidist
+    'core-js/stable', // Normally used on webpack entry point but was not supported by vue-styleguidist
     path.join(__dirname, 'src/setup/styleguidist/required.js'),
   ],
   webpackConfig(env) {

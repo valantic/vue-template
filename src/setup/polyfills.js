@@ -1,1 +1,1 @@
-// ES2015+ is polyfilled with @babel/polyfills in webpack configuration.
+// ES2015+ is polyfilled with core-js/stable in webpack configuration.
