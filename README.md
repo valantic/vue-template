@@ -712,14 +712,17 @@ $ brew upgrade nasm
 
 ## Version 4 Roadmap
 
+* [ ] Update vuetify
+* [ ] Update swiper
+* [ ] Implement dual build (ES5/ES2015+)
 * [ ] Replace Axios with fetch()
     * Promise not rejected when non 2** status
     * Cookies not part of the request by default
     * See also https://medium.com/cameron-nokes/4-common-mistakes-front-end-developers-make-when-using-fetch-1f974f9d1aa1
-* [ ] Double check polyfills (e.g. smoothscroll)
-* [ ] Fix broken themes
+* [x] Double check polyfills (e.g. smoothscroll)
+* [x] Fix broken themes
 * [ ] Element styles should be moved to reboot.
-* [ ] Update package.md.
+* [x] Update package.md.
 
 ## License
 
