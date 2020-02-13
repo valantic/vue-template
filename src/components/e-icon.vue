@@ -229,6 +229,7 @@
     display: inline-block;
 
     svg {
+      display: block; // Removes additional letter spacing around element.
       pointer-events: none; // Prevents IE11 from swallowing events.
     }
 
