@@ -63,6 +63,17 @@ export default {
         isXl() {
           return this.viewport >= BREAKPOINTS.xl;
         },
+
+        /**
+         * Returns the short name of the current viewport (e.g. 'md').
+         *
+         * @returns {String}
+         */
+        currentViewport() {
+          return Object.entries(BREAKPOINTS)
+            .reverse()
+            .find(breakpoint => this.viewport >= breakpoint[1])[0];
+        },
       },
       created() {
         window.addEventListener('resizeend', this.update);

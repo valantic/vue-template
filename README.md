@@ -723,6 +723,7 @@ $ brew upgrade nasm
 * [x] Fix broken themes
 * [ ] Element styles should be moved to reboot.
 * [x] Update package.md.
+* [ ] Add current viewport info to development environment.
 
 ## License
 
