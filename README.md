@@ -724,6 +724,7 @@ $ brew upgrade nasm
 * [ ] Element styles should be moved to reboot.
 * [x] Update package.md.
 * [ ] Add current viewport info to development environment.
+* [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 
 ## License
 
