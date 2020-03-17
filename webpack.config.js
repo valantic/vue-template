@@ -105,7 +105,7 @@ module.exports = (env, argv = {}) => {
 
   if (isProduction || hasStyleguide) {
     plugins.push(new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
-      cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
+      cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`),
     }));
   }
 
@@ -118,6 +118,29 @@ module.exports = (env, argv = {}) => {
       },
     }));
   }
+
+  const sassUse = [
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        hmr: !isProduction,
+      },
+    },
+    {
+      loader: 'css-loader',
+      options: {
+        sourceMap: false,
+        importLoaders: 2
+      }
+    },
+    'postcss-loader', // See ./postcss.config.js for configuration.
+    {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: false
+      }
+    },
+  ];
 
   const svgoPlugins = [
     // { cleanupAttrs: false, },
@@ -133,7 +156,7 @@ module.exports = (env, argv = {}) => {
     // { removeHiddenElems: false, },
     // { removeEmptyText: false, },
     // { removeEmptyContainers: false, },
-    { removeViewBox: false, },
+    { removeViewBox: false },
     // { cleanUpEnableBackground: true, },
     // { convertStyleToAttrs: true, },
     // { convertColors: true, },
@@ -193,28 +216,13 @@ module.exports = (env, argv = {}) => {
       },
     },
     {
+      test: /\.sass$/, // Required for Vuetify
+      use: sassUse,
+    },
+    {
       test: /\.scss$/,
       use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            hmr: !isProduction,
-          },
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            sourceMap: false,
-            importLoaders: 2
-          }
-        },
-        'postcss-loader', // See ./postcss.config.js for configuration.
-        {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: false
-          }
-        },
+        ...sassUse,
         {
           loader: 'sass-resources-loader',
           options: {
@@ -222,31 +230,6 @@ module.exports = (env, argv = {}) => {
           },
         },
       ],
-    },
-    {
-      test: /\.styl$/, // Required for Vuetify
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            hmr: !isProduction,
-          },
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1,
-            sourceMap: !isProduction
-          }
-        },
-        'postcss-loader', // See ./postcss.config.js for configuration.
-        {
-          loader: 'stylus-loader',
-          options: {
-            sourceMap: !isProduction
-          },
-        },
-      ]
     },
     {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/, // Required for Vuetify
@@ -272,7 +255,7 @@ module.exports = (env, argv = {}) => {
           loader: 'image-webpack-loader', // @see https://github.com/tcoopman/image-webpack-loader
           options: {
             svgo: {
-              plugins: svgoPlugins
+              plugins: svgoPlugins,
             },
           },
         },
@@ -285,9 +268,9 @@ module.exports = (env, argv = {}) => {
         {
           loader: 'vue-markdown-loader/lib/markdown-compiler',
           options: {
-            raw: true
-          }
-        }
+            raw: true,
+          },
+        },
       ],
     },
   ];
@@ -299,8 +282,8 @@ module.exports = (env, argv = {}) => {
         test: /\.js($|\?)/i, // MUST be defined because file has as query
         cache: true,
         parallel: true,
-        sourceMap: !isProduction
-      })
+        sourceMap: !isProduction,
+      }),
     ],
     splitChunks: {
       cacheGroups: {
@@ -309,11 +292,11 @@ module.exports = (env, argv = {}) => {
           name: 'vendor',
           chunks: chunk => !['polyfills.ie11', 'polyfills'].includes(chunk.name), // Excludes node modules which are required by IE11 polyfills
         },
-      }
+      },
     },
     runtimeChunk: {
-      name: 'manifest'
-    }
+      name: 'manifest',
+    },
   };
 
   const stats = {
@@ -359,7 +342,7 @@ module.exports = (env, argv = {}) => {
       publicPath,
     },
     watchOptions: {
-      ignored: /node_modules/
+      ignored: /node_modules/,
     },
     plugins,
     optimization: isProduction ? optimization : {},

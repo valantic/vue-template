@@ -6,10 +6,10 @@
              :for="`table-rows--${uuid}`"></label>
       <div :class="b('select-wrapper')">
         <e-select :id="`table-rows--${uuid}`"
-                  :value="rowsPerPageValue"
-                  :options-list="rowsPerPageOptionsFormatted"
+                  :value="itemsPerPage"
+                  :options-list="mappedItemsPerPageOptions"
                   name="sorting"
-                  @input="onUpdateRowsPerPage"
+                  @input="onUpdateItemPerPage"
         />
       </div>
     </div>
@@ -18,7 +18,7 @@
         <div>
           {{ currentItemRange.minValue }} - {{ currentItemRange.maxValue }}
           {{ $t('c-table-pagination.from') }}
-          {{ totalAmount }}
+          {{ itemsTotal }}
         </div>
       </div>
       <ul :class="b('pages')">
@@ -43,7 +43,9 @@
                   width="15"
                   height="15"
                   inline />
-          <span v-t="'c-table-pagination.lastPageTitle'" class="invisible"></span>
+          <span class="invisible">
+            {{ $t('c-table-pagination.lastPageTitle') }}
+          </span>
         </a>
         <a :class="b('arrow', {disabled: maxPage <= currentPage})"
            :title="$t('c-table-pagination.nextPageTitle')"
@@ -53,7 +55,9 @@
                   width="15"
                   height="15"
                   inline />
-          <span v-t="'c-table-pagination.nextPageTitle'" class="invisible"></span>
+          <span class="invisible">
+            {{ $t('c-table-pagination.nextPageTitle') }}
+          </span>
         </a>
       </div>
     </div>
@@ -79,7 +83,7 @@
       /**
        * The available options for the select element.
        */
-      rowsPerPageOptions: {
+      itemsPerPageOptions: {
         type: Array,
         default: () => [
           10, 50, 100,
@@ -89,7 +93,7 @@
       /**
        * Current value of the amount of rows per page.
        */
-      rowsPerPageValue: {
+      itemsPerPage: {
         type: Number,
         default: 10,
       },
@@ -97,7 +101,7 @@
       /**
        * The total amount of items in the table.
        */
-      totalAmount: {
+      itemsTotal: {
         type: Number,
         default: 0,
       },
@@ -120,8 +124,8 @@
        *
        * @returns {Array}
        */
-      rowsPerPageOptionsFormatted() {
-        return this.rowsPerPageOptions.map(item => ({
+      mappedItemsPerPageOptions() {
+        return this.itemsPerPageOptions.map(item => ({
           value: item,
           label: item,
         }));
@@ -133,12 +137,12 @@
        * @returns {{minValue: Number, maxValue: Number}}
        */
       currentItemRange() {
-        const fromValue = (((this.totalAmount / this.maxPage) * this.currentPage) - this.rowsPerPageValue) + 1;
-        const toValue = (fromValue + this.rowsPerPageValue) - 1;
+        const fromValue = (((this.itemsTotal / this.maxPage) * this.currentPage) - this.itemsPerPage) + 1;
+        const toValue = (fromValue + this.itemsPerPage) - 1;
 
         return {
           minValue: fromValue || 0,
-          maxValue: (toValue > this.totalAmount ? this.totalAmount : toValue) || 0,
+          maxValue: (toValue > this.itemsTotal ? this.itemsTotal : toValue) || 0,
         };
       },
 
@@ -148,11 +152,11 @@
        * @returns {Number}
        */
       pages() {
-        if (this.rowsPerPageValue === null || this.totalAmount === null) {
+        if (this.itemsPerPage === null || this.itemsTotal === null) {
           return 0;
         }
 
-        return Math.ceil(this.totalAmount / this.rowsPerPageValue);
+        return Math.ceil(this.itemsTotal / this.itemsPerPage);
       },
 
       /**
@@ -161,7 +165,7 @@
        * @returns {Number}
        */
       maxPage() {
-        return this.totalAmount / this.rowsPerPageValue;
+        return this.itemsTotal / this.itemsPerPage;
       }
     },
     watch: {
@@ -193,14 +197,14 @@
        *
        * @param {Number} value - The amount of items per page.
        */
-      onUpdateRowsPerPage(value) {
+      onUpdateItemPerPage(value) {
         /**
          * Emits the new amount of items per page.
          *
-         * @event updateRowsPerPage
+         * @event updateItemsPerPage
          * @property {object} value - The amount of items per page.
          */
-        this.$emit('updateRowsPerPage', { value });
+        this.$emit('updateItemsPerPage', { value });
       },
 
       /**

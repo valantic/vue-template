@@ -11,7 +11,7 @@ import viewport from '../plugins/viewport';
 import modal from '../plugins/modalStack';
 
 // Self executing
-// import './vuetify'; // Only import if required by project!
+import './vuetify'; // TODO: Only import if required by project!
 
 Vue.use(resizeEnd);
 Vue.use(VueAxios);

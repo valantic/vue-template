@@ -140,9 +140,9 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > husky, development environment, eslint, test environment
 - [mini-css-extract-plugin](https://www.npmjs.com/package/mini-css-extract-plugin) - This plugin extracts CSS into separate files.
   > webpack
-- [node-sass](https://www.npmjs.com/package/node-sass) - Node.js bindings to libsass.
-  > webpack, scss
 - [postcss-loader](https://www.npmjs.com/package/postcss-loader) - Loader for webpack to process CSS with PostCSS.
+  > webpack, scss
+- [sass](https://www.npmjs.com/package/sass) - Node.js bindings to libsass.
   > webpack, scss
 - [sass-loader](https://www.npmjs.com/package/sass-loader) - Loads a Sass/SCSS file and compiles it to CSS.
   > webpack, scss

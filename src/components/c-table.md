@@ -3,7 +3,7 @@
 ```vue
 <template>
   <div>
-    <c-table :items="mockData.dummyTableDate"
+    <c-table :items="mockData.dummyTableData"
              :headers="headers">
       <template slot-scope="slotProps">
         
@@ -67,7 +67,7 @@
 <template>
   <div>
     <input type="text" v-model="searchTerm" placeholder="search..." />
-    <c-table :items="mockData.dummyTableDate"
+    <c-table :items="mockData.dummyTableData"
              :headers="headers"
              :search-term="searchTerm">
       <template slot-scope="slotProps">
@@ -132,7 +132,7 @@
 ```vue
 <template>
   <div>
-    <c-table :items="mockData.dummyTableDate"
+    <c-table :items="mockData.dummyTableData"
              :headers="headers"
              is-selectable
              @onChangeSelected="onChangeSelected">
@@ -205,7 +205,7 @@
 ```vue
 <template>
   <div>
-    <c-table :items="mockData.dummyTableDate"
+    <c-table :items="mockData.dummyTableData"
              :headers="headers"
              has-pagination>
       <template slot-scope="slotProps">
@@ -269,7 +269,7 @@
 ```vue
 <template>
   <div>
-    <c-table :items="mockData.dummyTableDate"
+    <c-table :items="mockData.dummyTableData"
              :headers="headers"
              has-link>
       <template slot-scope="slotProps">

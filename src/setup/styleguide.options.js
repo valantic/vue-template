@@ -5,7 +5,7 @@ import sLayout from '../styleguide/components/s-layout';
 import AxiosMockAdapter from '../plugins/styleguide.axios-mock';
 import dummyImages from '../styleguide/mock-data/initial-data/images';
 import dummyVideos from '../styleguide/mock-data/initial-data/videos';
-import dummyTableDate from '../styleguide/mock-data/initial-data/table';
+import dummyTableData from '../styleguide/mock-data/initial-data/table';
 import { availableStatus } from '../plugins/styleguide.status-label';
 
 // In development and on styleguide build, include router and example pages
@@ -22,7 +22,7 @@ Vue.mixin({
       mockData: {
         dummyImages,
         dummyVideos,
-        dummyTableDate
+        dummyTableData
       }
     };
   },

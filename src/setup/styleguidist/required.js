@@ -9,7 +9,6 @@ import status from '@/styleguide/components/s-status';
 // Polyfills and self executing
 import '@/setup/styleguide.options';
 import '@/setup/plugins';
-import '@/setup/vuetify'; // Only import if required by project!
 
 // Global styles
 import '@/setup/_scss.scss';

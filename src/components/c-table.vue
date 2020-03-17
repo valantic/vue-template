@@ -1,17 +1,16 @@
 <template>
   <div :class="b(componentModifiers)">
     <v-data-table
-      v-model="selected"
       :headers="headers"
       :items="items"
-      :pagination.sync="pagination"
+      :options.sync="pagination"
       :search="searchTerm"
       :no-results-text="$t('c-table.noResultsFound')"
-      select-all
-      hide-actions
+      hide-default-footer
+      hide-default-header
     >
       <!-- TABLE-HEADER -->
-      <template slot-scope="props" slot="headers">
+      <template v-slot:header="{ props }">
         <tr :class="b('header-row')">
           <th v-if="isSelectable">
             <e-checkbox :checked="!!selected.length"
@@ -19,65 +18,68 @@
                         value="0"
                         name="total"
                         @change="toggleAll">
-              <span v-if="!!selected.length" v-t="'c-table.deselectAll'" class="invisible"></span>
-              <span v-else v-t="'c-table.selectAll'" class="invisible"></span>
+              <span class="invisible">
+                {{ $t(selected.length ? 'c-table.deselectAll' : 'c-table.selectAll') }}
+              </span>
             </e-checkbox>
           </th>
           <th
             v-for="header in props.headers"
             :key="header.text"
             :class="['column sortable',
-                     pagination.descending ? 'desc' : 'asc',
+                     pagination.sortDesc ? 'desc' : 'asc',
                      header.value === pagination.sortBy ? 'active' : '']"
             @click="changeSort(header.value)"
           >
             {{ header.text }}
-            <e-icon :class="b('sort-icon', { desc: pagination.descending, active: header.value === pagination.sortBy})"
+            <e-icon :class="b('sort-icon', { desc: pagination.sortDesc, active: header.value === pagination.sortBy})"
                     icon="i-arrow--down"
                     width="10"
                     height="10"
                     inline />
           </th>
           <th v-if="hasLink">
-            <span v-t="'c-table.linkLabel'" class="invisible"></span>
+            <span class="invisible">
+              {{ $t('c-table.linkLabel') }}
+            </span>
           </th>
         </tr>
       </template>
 
       <!-- TABLE-BODY -->
-      <template slot-scope="props" slot="items">
-        <tr :class="b('content-row', { selected: selected.includes(props.item.id), isClickable: isRowClickable && !isDisabled })"
-            :active="props.selected"
+      <template v-slot:body="props">
+        <tr v-for="item in props.items"
+            :key="item.id"
+            :class="b('content-row', { selected: selected.includes(item.id), isClickable: isRowClickable && !isDisabled })"
+            :active="item.selected"
             :role="rowRole"
-            @click="onClickRow(props.item)"
+            @click="onClickRow(item)"
         >
           <!-- Optional select row cell -->
           <td v-if="isSelectable">
             <e-checkbox v-model="selected"
-                        :value="props.item.id"
+                        :value="item.id"
                         :name="`table-${uuid}-select-row`"
                         :disabled="isDisabled">
-              <span v-t="'c-table.selectItem'" class="invisible"></span>
+              <span class="invisible">
+                {{ $t('c-table.selectItem') }}
+              </span>
             </e-checkbox>
           </td>
 
-          <!-- @slot Renders the cell templates -->
-          <slot :props="props" :headers="headers">
-            <!-- Fallback content -->
-            <td v-for="headerItem in headers" :key="headerItem.value">
-              {{ props.item[headerItem.value] }}
-            </td>
-          </slot>
+          <td v-for="headerItem in headers" :key="headerItem.value">
+            {{ item[headerItem.value] }}
+          </td>
         </tr>
       </template>
     </v-data-table>
 
     <!-- PAGINATION (optional) -->
     <div v-if="hasPagination" :class="b('pagination-wrapper')">
-      <c-table-pagination :total-amount="pagination.totalItems"
-                          :rows-per-page-value="pagination.rowsPerPage"
+      <c-table-pagination :items-total="items.length"
+                          :items-per-page="pagination.itemsPerPage"
                           :current-page="pagination.page"
-                          @updateRowsPerPage="onUpdateRowsPerPage"
+                          @updateItemsPerPage="updateItemsPerPage"
                           @changePage="onChangePage"
       />
     </div>
@@ -171,12 +173,12 @@
       },
 
       /**
-       * Defines the attribute role for the rows.
+       * Defines the attribute 'role' for the rows.
        */
       rowRole: {
         type: [String, Boolean],
         default: false,
-      }
+      },
     },
 
     data() {
@@ -190,8 +192,8 @@
          * @type {Object} pagination - The default pagination setup.
          */
         pagination: {
-          rowsPerPage: this.hasPagination ? 10 : 9999,
-        }
+          itemsPerPage: this.hasPagination ? 10 : 9999,
+        },
       };
     },
 
@@ -203,7 +205,7 @@
        */
       componentModifiers() {
         return {
-          noResults: this.pagination.totalItems < 1,
+          noResults: !this.items.length,
         };
       },
     },
@@ -219,13 +221,6 @@
          * @property {Array} - The list of all the selected elements.
          */
         this.$emit('onChangeSelected', this.selected);
-      },
-
-      /**
-       * Observes if the items array got changed and updates the pagination object.
-       */
-      items() {
-        this.pagination.totalItems = this.items.length;
       },
     },
 
@@ -245,11 +240,9 @@
        * Toggles the select all option.
        */
       toggleAll() {
-        if (this.selected.length) {
-          this.selected = [];
-        } else {
-          this.selected = this.items.map(item => item.id);
-        }
+        this.selected = this.selected.length
+          ? []
+          : this.items.map(item => item.id);
       },
 
       /**
@@ -259,10 +252,10 @@
        */
       changeSort(column) {
         if (this.pagination.sortBy === column) {
-          this.pagination.descending = !this.pagination.descending;
+          this.pagination.sortDesc = !this.pagination.sortDesc;
         } else {
           this.pagination.sortBy = column;
-          this.pagination.descending = false;
+          this.pagination.sortDesc = false;
         }
       },
 
@@ -271,8 +264,8 @@
        *
        * @param {Number} value - The amount of rows.
        */
-      onUpdateRowsPerPage({ value }) {
-        this.pagination.rowsPerPage = parseInt(value, 10);
+      updateItemsPerPage({ value }) {
+        this.pagination.itemsPerPage = parseInt(value, 10);
       },
 
       /**
@@ -300,7 +293,7 @@
            */
           this.$emit('clickRow', { item });
         }
-      }
+      },
     },
     // render() {},
   };
