@@ -33,10 +33,8 @@
             :alt="image.alt" />
         </div>
       </div>
-      <div :class="b('button-prev')"
-           class="swiper-button-prev"></div>
-      <div :class="b('button-next')"
-           class="swiper-button-next"></div>
+      <div ref="previous" :class="b('button', { previous: true })"></div>
+      <div ref="next" :class="b('button', { next: true })"></div>
     </div>
     <div ref="thumbnails"
          :class="b('container')"
@@ -123,8 +121,8 @@
           },
           lazy: false,
           navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: null, // $ref is not available on init
+            prevEl: null, // $ref is not available on init
             hideOnClick: true,
           },
           on: {
@@ -167,6 +165,11 @@
       optionsMerged() {
         return {
           ...this.optionsDefault,
+          navigation: {
+            ...this.optionsDefault.navigation,
+            nextEl: this.$refs.next,
+            prevEl: this.$refs.previous,
+          },
           ...this.options,
         };
       },
@@ -252,33 +255,49 @@
 
 <style lang="scss">
   .c-swiper-modal {
+    $this: &;
+
     position: relative;
 
-    .swiper-button-prev,
-    .swiper-button-next {
-      background-size: 25px 30px;
-      height: 30px;
-      width: 25px;
-      margin-top: -#{$spacing--15};
-      transition: all $transition-duration-100 linear;
+    // arrow navigation
+    &__button {
+      @include z-index(front);
+
+      display: none;
+      position: absolute;
+      top: 50%;
+      opacity: 0;
+      transform: translateY(-50%);
+      transition: opacity $transition-duration-200 linear;
+      transition-delay: $transition-duration-100;
       outline: none;
-    }
+      border: 20px solid transparent;
+      cursor: pointer;
 
-    .swiper-button-prev {
-      background-image: url('../assets/icons/i-arrow-full--left.svg');
-      left: $spacing--30;
+      @include media(xs) {
+        display: block;
+      }
 
-      &:hover {
-        background-image: url('../assets/icons/i-arrow-full--left--active.svg');
+      &--previous {
+        left: 0;
+        border-right-color: $color-grayscale--200;
+      }
+
+      &--next {
+        background-image: url('../assets/icons/i-arrow-full--right.svg');
+        right: 0;
+        border-left-color: $color-grayscale--200;
       }
     }
 
-    .swiper-button-next {
-      background-image: url('../assets/icons/i-arrow-full--right.svg');
-      right: $spacing--30;
-
-      &:hover {
-        background-image: url('../assets/icons/i-arrow-full--right--active.svg');
+    &--hover,
+    &:hover {
+      #{$this}__button--previous:not(.swiper-button-disabled),
+      #{$this}__button--next:not(.swiper-button-disabled) {
+        @include media(xs) {
+          opacity: 1;
+          transition-delay: $transition-duration-200;
+        }
       }
     }
 

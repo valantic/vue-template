@@ -8,12 +8,6 @@
     </div>
   </div>
 </template>
-
-<script>
-  export default {
-    name: 'swiper',
-  };
-</script>
 ```
 
 #### including videos
@@ -26,12 +20,6 @@
     </div>
   </div>
 </template>
-
-<script>
-  export default {
-    name: 'swiper',
-  };
-</script>
 ```
 
 #### single picture
@@ -40,17 +28,10 @@
 <template>
   <div class="demo">
     <div style="max-width: 400px;">
-      <c-swiper-gallery :images="mockData.dummyImages"/>
+      <c-swiper-gallery :images="[mockData.dummyImages[0]]"/>
     </div>
   </div>
-
 </template>
-
-<script>
-  export default {
-    name: 'swiper2',
-  };
-</script>
 ```
 
 #### less than seven pictures
@@ -59,17 +40,10 @@
 <template>
   <div class="demo">
     <div style="max-width: 400px;">
-      <c-swiper-gallery :images="mockData.dummyImages"/>
+      <c-swiper-gallery :images="mockData.dummyImages.slice(0, 5)"/>
     </div>
   </div>
-
 </template>
-
-<script>
-  export default {
-    name: 'swiper3',
-  };
-</script>
 ```
 
 #### custom options

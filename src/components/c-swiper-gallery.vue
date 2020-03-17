@@ -36,15 +36,12 @@
         </div>
       </div>
 
-      <!-- navigation -->
-      <div :class="b('pagination')"
-           class="swiper-pagination"></div>
-
       <!-- buttons-->
-      <div :class="b('button-prev')"
-           class="swiper-button-prev"></div>
-      <div :class="b('button-next')"
-           class="swiper-button-next"></div>
+      <div ref="previous" :class="b('button', { previous: true })"></div>
+      <div ref="next" :class="b('button', { next: true })"></div>
+
+      <!-- navigation -->
+      <div ref="pagination" :class="b('pagination')"></div>
 
       <!-- modal -->
       <c-modal
@@ -71,7 +68,7 @@
       <div :class="b('counter-detail', { image: true })">
         {{ $tc('c-swiper.images', images.length, {count: images.length}) }}
       </div>
-      <div v-if="videos && videos.length" :class="b('counter-detail', { video: true })">
+      <div v-if="videos && videos.length > 1" :class="b('counter-detail', { video: true })">
         {{ $tc('c-swiper.videos', videos.length, {count: videos.length}) }}
       </div>
     </div>
@@ -136,12 +133,12 @@
           },
           lazy: false,
           navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: null, // $ref is not available on init
+            prevEl: null, // $ref is not available on init
             hideOnClick: true,
           },
           pagination: {
-            el: '.swiper-pagination',
+            el: null, // $ref is not available on init
             type: 'bullets',
             clickable: true,
             dynamicBullets: this.images.length > 7 || false,
@@ -151,7 +148,7 @@
             slideChange: function() {
               this.swiper.activeIndex = this.$refs.container.swiper.activeIndex;
             }.bind(this),
-          }
+          },
         },
         // this.images.length > this.dynamicBullets
         swiper: {
@@ -184,6 +181,15 @@
       optionsMerged() {
         return {
           ...this.optionsDefault,
+          navigation: {
+            ...this.optionsDefault.navigation,
+            nextEl: this.$refs.next,
+            prevEl: this.$refs.previous,
+          },
+          pagination: {
+            ...this.optionsDefault.pagination,
+            el: this.$refs.pagination,
+          },
           ...this.options,
         };
       },
@@ -281,6 +287,8 @@
 
 <style lang="scss">
   .c-swiper-gallery {
+    $this: &;
+
     position: relative;
     height: 100%;
 
@@ -293,70 +301,46 @@
       align-items: center;
     }
 
-    // dots navigation
-    .swiper-container-horizontal {
-      & > .swiper-pagination-bullets {
-        padding-top: $spacing--30;
-        position: relative;
-        text-align: left;
-        font-size: 0;
-        bottom: $spacing--15;
-
-        @include media(xs) {
-          padding-top: 0;
-        }
-
-        &.swiper-pagination-bullets-dynamic {
-          left: $spacing--40;
-          overflow: hidden;
-        }
-      }
-
-      // single dot
-      .swiper-pagination-bullet {
-        background: $color-grayscale--600;
-        border-radius: 2.5px;
-        height: 5px;
-        width: 20px;
-        margin: 0 3px;
-        opacity: 1;
-        transform: scale(1);
-        outline: none;
-
-        &-active {
-          background-color: $color-primary--1;
-          box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
-        }
-
-        &-active-prev,
-        &-active-prev-prev {
-          visibility: hidden;
-        }
-      }
-    }
-
     // arrow navigation
-    .swiper-button-prev,
-    .swiper-button-next {
-      background-size: 25px 30px;
-      height: 30px;
-      width: 25px;
-      margin-top: -15px;
+    &__button {
+      @include z-index(front);
+
+      display: none;
+      position: absolute;
+      top: 50%;
       opacity: 0;
-      visibility: hidden;
-      transition: all $transition-duration-200 linear;
+      transform: translateY(-50%);
+      transition: opacity $transition-duration-200 linear;
       transition-delay: $transition-duration-100;
       outline: none;
+      border: 20px solid transparent;
+      cursor: pointer;
+
+      @include media(xs) {
+        display: block;
+      }
+
+      &--previous {
+        left: 0;
+        border-right-color: $color-grayscale--200;
+      }
+
+      &--next {
+        background-image: url('../assets/icons/i-arrow-full--right.svg');
+        right: 0;
+        border-left-color: $color-grayscale--200;
+      }
     }
 
-    .swiper-button-prev {
-      background-image: url('../assets/icons/i-arrow-full--left.svg');
-      left: 0;
-    }
-
-    .swiper-button-next {
-      background-image: url('../assets/icons/i-arrow-full--right.svg');
-      right: 0;
+    &--hover,
+    &:hover {
+      #{$this}__button--previous:not(.swiper-button-disabled),
+      #{$this}__button--next:not(.swiper-button-disabled) {
+        @include media(xs) {
+          opacity: 1;
+          transition-delay: $transition-duration-200;
+        }
+      }
     }
 
     &__counter {
@@ -420,19 +404,6 @@
       }
     }
 
-    &--hover,
-    &:hover {
-      .swiper-button-prev:not(.swiper-button-disabled),
-      .swiper-button-next:not(.swiper-button-disabled) {
-        @include media(xs) {
-          opacity: 1;
-          transition: all $transition-duration-200 linear;
-          transition-delay: $transition-duration-200;
-          visibility: visible;
-        }
-      }
-    }
-
     &__img-counter,
     &__video-counter {
       @include z-index(front);
@@ -459,6 +430,65 @@
     &__video-thumbnail {
       max-width: 100%;
       width: 100%;
+    }
+
+    // dots navigation
+    .swiper-container-horizontal {
+      .swiper-pagination-bullets {
+        @include z-index(front);
+
+        position: relative;
+        bottom: $spacing--15;
+        width: 100% !important; /* stylelint-disable-line declaration-no-important */
+        margin: auto;
+        padding-top: $spacing--20;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 0;
+
+        @include media(xs) {
+          padding-top: 0;
+        }
+
+        &.swiper-pagination-lock {
+          display: none;
+        }
+      }
+
+      // single dot
+      .swiper-pagination-bullet {
+        display: inline-block;
+        opacity: 1;
+        height: 5px;
+        width: 20px;
+        margin: 0 3px;
+        background: $color-grayscale--600;
+        border-radius: 2.5px;
+        transform: scale(1);
+        outline: none;
+        cursor: pointer;
+        transition: width $transition-duration-200 linear;
+
+        &-active {
+          background-color: $color-primary--1;
+          box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
+        }
+      }
+
+      .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+        display: none;
+
+        &[class*="swiper-pagination-bullet-active"] {
+          display: inline-block;
+        }
+
+        &-active-prev,
+        &-active-prev-prev,
+        &-active-next,
+        &-active-next-next {
+          width: 10px;
+        }
+      }
     }
   }
 </style>
