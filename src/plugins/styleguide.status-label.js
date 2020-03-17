@@ -1,5 +1,5 @@
 export const availableStatus = {
-  0: { text: 'Not ready', modifier: '' },
+  0: { text: 'Not ready', modifier: 'not-ready' },
   1: { text: 'Ready', modifier: 'ready' }
 };
 const statusTimeouts = {};
@@ -25,7 +25,7 @@ function appendStatusLabel(name, statusId) {
 
     content.setAttribute(
       'title',
-      'This label shows component’s current working status. For a full list see “Getting Started” view.'
+      'This label shows component’s current working status. For a full list see the “Welcome” section.'
     );
 
     label.classList.add(statusClassBlock, `${statusClassBlock}--sticky`);
