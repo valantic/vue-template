@@ -24,9 +24,9 @@
 </template>
 
 <script>
-  import touchDevice from '../mixins/touch-device';
-  import eProgress from './e-progress';
   import propScale from '@/helpers/prop.scale';
+  import eProgress from './e-progress';
+  import touchDevice from '../mixins/touch-device';
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.

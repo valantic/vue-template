@@ -26,10 +26,10 @@
 
 <script>
   import cModalHeader01 from '@/components/c-modal-header-01';
-  import uuid from '../mixins/uuid';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
   import propScale from '@/helpers/prop.scale';
+  import uuid from '../mixins/uuid';
 
   /**
    * Components wraps the plugin https://github.com/euvl/vue-js-modal, it's output is rendered through vue-portal.

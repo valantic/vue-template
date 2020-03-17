@@ -21,8 +21,8 @@
 </template>
 
 <script>
-  import touchDevice from '../mixins/touch-device';
   import propScale from '@/helpers/prop.scale';
+  import touchDevice from '../mixins/touch-device';
 
   export default {
     name: 'c-panel',

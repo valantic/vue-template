@@ -59,9 +59,9 @@
 </template>
 
 <script>
+  import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification';
   import formStates from '../mixins/form-states';
-  import propScale from '@/helpers/prop.scale';
 
   /**
    * Input form component
