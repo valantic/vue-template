@@ -9,7 +9,9 @@
          :title="$t('c-modal-header-01.closeTitle')"
          href="#"
          @click="close">
-        <span v-t="'c-modal-header-01.closeTitle'" class="invisible"></span>
+        <span class="invisible">
+          {{ $t('c-modal-header-01.closeTitle') }}
+        </span>
       </a>
       <div :class="b('close-icon-mobile')">
         <e-icon
@@ -34,7 +36,9 @@
           height="25"
           inline
         />
-        <span v-t="'c-modal-header-01.closeTitle'" class="invisible"></span>
+        <span class="invisible">
+          {{ $('c-modal-header-01.closeTitle') }}
+        </span>
       </a>
     </div>
   </div>
