@@ -190,6 +190,9 @@ module.exports = (env, argv = {}) => {
       loader: 'vue-loader',
       options: {
         hotReload,
+        compilerOptions: { // @see https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#options
+          whitespace: 'condense',
+        }
       },
     },
     {
@@ -198,6 +201,7 @@ module.exports = (env, argv = {}) => {
         {
           loader: MiniCssExtractPlugin.loader,
           options: {
+            publicPath: '/', // This was required to prevent invalid asset urls in development
             hmr: !isProduction,
           },
         },
@@ -205,7 +209,7 @@ module.exports = (env, argv = {}) => {
           loader: 'css-loader',
           options: {
             sourceMap: false,
-            importLoaders: 2
+            importLoaders: 2,
           }
         },
         'postcss-loader', // See ./postcss.config.js for configuration.
