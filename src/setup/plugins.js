@@ -6,17 +6,15 @@ import VueAxios from '../plugins/axios';
 import VueBemCn from '../plugins/vue-bem-cn';
 import resizeEnd from '../plugins/resize-end';
 import eventBus from '../plugins/event-bus';
-import dayjs from '../plugins/dayjs';
 import viewport from '../plugins/viewport';
 import modal from '../plugins/modalStack';
+// import dayjs from '../plugins/dayjs';
 
 // Self executing
-import './vuetify'; // TODO: Only import if required by project!
 
 Vue.use(resizeEnd);
 Vue.use(VueAxios);
 Vue.use(eventBus);
-Vue.use(dayjs);
 Vue.use(viewport);
 Vue.use(modal);
 Vue.use(VueBemCn, {
@@ -24,3 +22,4 @@ Vue.use(VueBemCn, {
 });
 Vue.use(PortalVue);
 Vue.use(VModal);
+// Vue.use(dayjs);

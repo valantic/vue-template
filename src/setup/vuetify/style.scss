@@ -1,7 +1,0 @@
-/* Notes:
- * - Dont import 'vuetify/src/style/main.sass' since it will also add reset and element styles which conflict with our styles.
- * - Try to import styles inside the specific component first. By default styles should be imported automatically when importing components. */
-
-@import "~vuetify/src/styles/settings/_variables.scss";
-@import "~vuetify/src/styles/generic/_transitions.scss";
-@import "~material-design-icons-iconfont/dist/material-design-icons.css";

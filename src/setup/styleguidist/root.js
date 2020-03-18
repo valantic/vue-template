@@ -1,4 +1,3 @@
-import Vuetify from 'vuetify/lib';
 import { i18n } from '@/setup/i18n';
 import store from '@/store/index';
 
@@ -11,7 +10,6 @@ import store from '@/store/index';
  */
 export default previewComponent => ({
   i18n,
-  vuetify: new Vuetify(), // TODO: only enable if required by project.
   store,
   render(createElement) {
     return createElement(previewComponent);

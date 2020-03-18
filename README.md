@@ -712,7 +712,6 @@ $ brew upgrade nasm
 
 ## Version 4 Roadmap
 
-* [ ] Update vuetify
 * [ ] Update swiper
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Replace Axios with fetch()

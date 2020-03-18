@@ -90,16 +90,16 @@ module.exports = {
         },
       ],
     },
-    {
-      name: 'Plugins',
-      content: '',
-      sections: [
-        {
-          name: 'Vuetify',
-          content: 'src/styleguide/core/vuetify/vuetify.md',
-        },
-      ],
-    },
+    // {
+    //   name: 'Plugins',
+    //   content: '',
+    //   sections: [
+    //     {
+    //       name: 'Vuetify',
+    //       content: 'src/styleguide/core/....md',
+    //     },
+    //   ],
+    // },
     {
       name: 'Elements',
       components: 'src/components/**/e-*.vue',

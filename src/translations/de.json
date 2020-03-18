@@ -44,14 +44,6 @@
     "itemsEmpty": "Keine Ergebnisse.",
     "searchTitle": "Suche"
   },
-  "c-date-picker-input": {
-    "chooseDate": "Datum wählen",
-    "chooseYear": "Jahr wählen"
-  },
-  "c-date-picker-range": {
-    "endLabel": "Enddatum",
-    "startLabel": "Startdatum"
-  },
   "c-breadcrumb": {
     "linkTitle": "Gehe zu {name}"
   },
