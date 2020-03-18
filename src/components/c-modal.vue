@@ -38,7 +38,7 @@
    */
   export default {
     name: 'c-modal',
-    // status: 1,
+    status: 0,
 
     components: {
       cModalHeader01,

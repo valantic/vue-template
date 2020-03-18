@@ -20,7 +20,7 @@
 
   export default {
     name: 's-theme-selector',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],

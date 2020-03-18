@@ -5,7 +5,7 @@
 
   export default {
     name: 'e-heading',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],

@@ -14,7 +14,7 @@
    */
   export default {
     name: 'c-form-notification',
-    // status: 1,
+    status: 0,
 
     // components: {},
     mixins: [formStates],

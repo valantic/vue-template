@@ -12,7 +12,7 @@
 <script>
   export default {
     name: 's-color-item',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],

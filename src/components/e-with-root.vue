@@ -10,7 +10,7 @@
    */
   export default {
     name: 'e-with-root',
-    // status: 1,
+    status: 0,
     functional: true,
 
     // components: {},

@@ -18,7 +18,7 @@
    */
   export default {
     name: 'e-fieldset',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],

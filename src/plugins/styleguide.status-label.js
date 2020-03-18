@@ -52,7 +52,7 @@ export default {
       mounted() {
         const { name, status } = this.$options;
 
-        if (name) {
+        if (status === 0 && name) {
           clearTimeout(statusTimeouts[name]);
 
           statusTimeouts[name] = setTimeout(() => {

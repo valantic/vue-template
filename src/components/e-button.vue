@@ -38,7 +38,7 @@
    */
   export default {
     name: 'e-button',
-    // status: 1,
+    status: 0,
 
     components: {
       eProgress

@@ -15,7 +15,7 @@
 
   export default {
     name: 's-palette-list',
-    // status: 1,
+    status: 0,
 
     components: {
       's-palette-item': sPaletteItem

@@ -11,7 +11,7 @@
 
   export default {
     name: 's-layout',
-    // status: 1,
+    status: 0,
 
     components: {
       sNavigation,

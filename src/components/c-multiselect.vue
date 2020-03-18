@@ -117,7 +117,7 @@
    */
   export default {
     name: 'c-multiselect',
-    // status: 1,
+    status: 0,
 
     // components: {},
     mixins: [formStates],

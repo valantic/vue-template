@@ -68,7 +68,7 @@
    */
   export default {
     name: 'e-input',
-    // status: 1,
+    status: 0,
 
     components: {
       cFormNotification

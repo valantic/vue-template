@@ -49,7 +49,7 @@
    */
   export default {
     name: 'c-modal-header-01',
-    // status: 1,
+    status: 0,
 
     components: {
       cNotificationContainer,

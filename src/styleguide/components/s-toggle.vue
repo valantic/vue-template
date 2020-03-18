@@ -18,7 +18,7 @@
    */
   export default {
     name: 's-toggle',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],

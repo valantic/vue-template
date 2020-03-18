@@ -50,7 +50,7 @@
    */
   export default {
     name: 'c-notification',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // components: {},

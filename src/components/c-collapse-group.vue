@@ -12,7 +12,7 @@
    */
   export default {
     name: 'c-collapse-group',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],

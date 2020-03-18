@@ -16,7 +16,7 @@
 
   export default {
     name: 's-language',
-    // status: 1,
+    status: 0,
 
     mixins: [i18nMixin],
 

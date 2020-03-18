@@ -23,7 +23,7 @@
 
   export default {
     name: 's-palette-item',
-    // status: 1,
+    status: 0,
 
     components: {
       's-color-item': sColorItem

@@ -26,7 +26,7 @@
 
   export default {
     name: 'c-panel',
-    // status: 1,
+    status: 0,
 
     // components: {},
     mixins: [

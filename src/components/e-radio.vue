@@ -30,7 +30,7 @@
    */
   export default {
     name: 'e-radio',
-    // status: 1,
+    status: 0,
 
     // components: {},
     mixins: [formStates],

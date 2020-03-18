@@ -18,7 +18,7 @@
 
   export default {
     name: 'e-icon',
-    // status: 1,
+    status: 0,
 
     props: {
       /**

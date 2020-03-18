@@ -5,7 +5,7 @@
 
   export default {
     name: 'e-picture',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],

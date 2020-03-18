@@ -16,7 +16,7 @@
 
   export default {
     name: 'e-progress',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],

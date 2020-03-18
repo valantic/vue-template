@@ -90,7 +90,7 @@
    */
   export default {
     name: 'c-swiper-gallery',
-    // status: 1,
+    status: 0,
 
     components: {
       cSwiperModal,

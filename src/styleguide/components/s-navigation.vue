@@ -44,7 +44,7 @@
 
   export default {
     name: 's-navigation',
-    // status: 1,
+    status: 0,
 
     components: {
       sDemoSettings,

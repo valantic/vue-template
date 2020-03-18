@@ -27,7 +27,7 @@
    */
   export default {
     name: 'e-logo',
-    // status: 1,
+    status: 0,
 
     // components: {},
     mixins: [themes],

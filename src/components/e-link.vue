@@ -12,7 +12,7 @@
    */
   export default {
     name: 'e-link',
-    // status: 1,
+    status: 0,
 
     // components: {},
     // mixins: [],
