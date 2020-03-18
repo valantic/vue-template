@@ -13,10 +13,13 @@ export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 
 // Add styleguide only translations
 if (process.env.NODE_ENV !== 'production') {
-  I18N_FALLBACK_MESSAGES['s-language'] = {
-    de: 'German', // eslint-disable-line id-length
-    fr: 'French' // eslint-disable-line id-length
-  };
+  const styleguideTranslations = require('@/translations/styleguide'); // eslint-disable-line global-require
+
+  if (styleguideTranslations[I18N_FALLBACK]) {
+    Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
+      I18N_FALLBACK_MESSAGES[key] = value;
+    });
+  }
 }
 
 export const i18n = new VueI18n({
@@ -49,6 +52,17 @@ export const i18nLoadMessages = function(locale) {
   if (!Object.keys(i18n.messages).includes(locale)) {
     return import(/* webpackChunkName: 'lang-[request]' */`../translations/${locale}`)
       .then((localeMessages) => {
+        // Add styleguide only translations
+        if (process.env.NODE_ENV !== 'production') {
+          const styleguideTranslations = require('@/translations/styleguide'); // eslint-disable-line global-require
+
+          if (styleguideTranslations[locale]) {
+            Object.entries(styleguideTranslations[locale]).forEach(([key, value]) => {
+              localeMessages[key] = value;
+            });
+          }
+        }
+
         i18n.setLocaleMessage(locale, localeMessages);
 
         return locale;
