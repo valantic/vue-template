@@ -161,13 +161,13 @@ git subtree pull --prefix assets/vue https://github.com/valantic/vue-template.gi
 ## Folder structure
 
 ```
-|- app                  Main folder of the application
+|- src                  Main folder of the application
 .  |- assets            Assets for the application
 .  |- components        Components for the application
 .  |- directives        Custom Vue directives
 .  |- helpers           Helper functions which can be used to handle certain tasks
 .  |- mixins            Vue mixins
-.  |- services          Single instance services like event bus or viewport state handler
+.  |- plugins           Self maintained plugins
 .  |- setup             Configuration and setup of the application
 .  |- store             Vuex store and modules
 .  |- styleguide        Assets, components, mock data and routes for the stylguide 
