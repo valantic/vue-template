@@ -3,7 +3,7 @@
 <template>
   <div>
   
-  <e-label name="Label" position="top" invisible>
+  <e-label name="Label" position="top">
      <e-input v-model="demo" name="demo" placeholder="enter text..."/> 
   </e-label>
   
@@ -70,6 +70,28 @@
   <div>
   
   <e-label name="Label" position="right">
+     <e-input v-model="demo" name="demo" placeholder="enter text..."/> 
+  </e-label>
+  
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      demo: ''
+    })
+  };
+</script>
+```
+
+### Invisible
+```
+<template>
+  <div>
+  
+  <e-label name="Label" invisible>
      <e-input v-model="demo" name="demo" placeholder="enter text..."/> 
   </e-label>
   
