@@ -3,7 +3,7 @@ See app/setup/scss/variables/_spacing.scss and app/setup/scss/mixins/_spacings.s
 
 ### Available global variables
 
-```html
+```text
 $spacing--0
 $spacing--5
 $spacing--10
@@ -22,14 +22,14 @@ $spacing--100
 ### Available classes
 General
 
-```html
+```text
 .spacing--bottom-{0-100}
 .spacing--top-{0-100}
 ```
 
 Media queries "UP"
 
-```html
+```text
 .spacing--{bottom/top}-xxs-up-{0-100}
 .spacing--{bottom/top}-xs-up-{0-100}
 .spacing--{bottom/top}-sm-up-{0-100}
@@ -40,7 +40,7 @@ Media queries "UP"
 ```
 Media queries "ONLY" - use this only where it's not possible with "UP"
 
-```html
+```text
 .spacing--{bottom/top}-xxs-only-{0-100}
 .spacing--{bottom/top}-xs-only-{0-100}
 .spacing--{bottom/top}-sm-only-{0-100}
