@@ -133,7 +133,7 @@ The app should now run on [http://localhost:8080](http://localhost:8080)
 If you prefer to develop inside the component styleguide run the following script instead or in a new tab:
 
 ```
-$ npm run dev:styleguide
+$ npm run dev:s
 ```
 
 ### Integrate vue-template into an other repository

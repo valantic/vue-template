@@ -325,7 +325,7 @@
 
     .gallery-thumbs {
       box-sizing: border-box;
-      margin-top: -#{$spacing--15};
+      margin-top: -$spacing--15;
     }
 
     .gallery-thumbs .swiper-slide {

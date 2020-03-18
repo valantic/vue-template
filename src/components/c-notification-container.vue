@@ -175,11 +175,11 @@
       }
 
       &.c-notification-container--state-full {
-        margin-top: -#{$spacing--5};
+        margin-top: -$spacing--5;
       }
 
       &.c-notification-container--state-reduced {
-        margin-top: -#{$spacing--15};
+        margin-top: -$spacing--15;
       }
     }
 

@@ -418,7 +418,7 @@
         display: block;
         position: absolute;
         right: 1px;
-        bottom: -#{$spacing--5};
+        bottom: -$spacing--5;
       }
     }
 
