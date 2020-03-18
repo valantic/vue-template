@@ -1,6 +1,9 @@
 <template>
   <div :class="b()">
     <div :class="b('navigation-wrapper', wrapperModifiers)" @click="onClick">
+      <div :class="b('viewport')">
+        {{ $viewport.currentViewport }}<sup>{{ $viewport.viewport }}</sup>
+      </div>
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', { logo: true })">
           <a :class="b('navigation-link')"
@@ -118,10 +121,11 @@
 </script>
 
 <style lang="scss">
-  $s-navigation--border: $spacing--10 solid $color-grayscale--400;
-  $s-navigation--trigger-size: 40px;
-
   .s-navigation {
+    $this: &;
+    $border: $spacing--10 solid $color-grayscale--400;
+    $trigger-size: 40px;
+
     &__navigation-wrapper {
       font-family: $font-family--primary;
       margin: auto;
@@ -132,17 +136,17 @@
       z-index: 10000;
       height: 100%;
 
-      &::before {
+      &::after { // Toggle
         content: '';
         position: absolute;
-        width: $s-navigation--trigger-size;
-        height: $s-navigation--trigger-size;
+        width: $trigger-size;
+        height: $trigger-size;
         background-color: $color-grayscale--1000;
         border-top: 1px solid $color-grayscale--400;
         border-left: 1px solid $color-grayscale--400;
         background-image: url('../assets/menu-button.svg');
         background-repeat: no-repeat;
-        background-size: $s-navigation--trigger-size - 15px;
+        background-size: $trigger-size - 15px;
         background-position: center;
         cursor: pointer;
       }
@@ -167,18 +171,18 @@
         right: 0;
         bottom: 0;
 
-        &::before {
+        &::after {
           top: 0;
-          left: -$s-navigation--trigger-size;
+          left: -$trigger-size;
         }
 
         &.s-navigation__navigation-wrapper--open {
-          border-left: $s-navigation--border;
+          border-left: $border;
         }
       }
 
       &--position-bottom-right {
-        &::before {
+        &::after {
           top: auto;
           bottom: 0;
         }
@@ -190,21 +194,34 @@
         min-width: 0;
         top: 0;
 
-        &::before {
+        &::after {
           top: 0;
           left: 100%;
         }
 
         &.s-navigation__navigation-wrapper--open {
-          border-right: $s-navigation--border;
+          border-right: $border;
         }
       }
 
       &--position-bottom-left {
-        &::before {
+        &::after {
           top: auto;
           bottom: 0;
         }
+      }
+    }
+
+    &__viewport {
+      display: block;
+      position: absolute;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: $spacing--10;
+      text-shadow: 0 0 3px $color-grayscale--1000;
+
+      #{$this}__navigation-wrapper--open & {
+        padding-right: $spacing--20;
       }
     }
 

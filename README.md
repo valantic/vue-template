@@ -712,7 +712,7 @@ $ brew upgrade nasm
 
 ## Version 4 Roadmap
 
-* [ ] Update swiper
+* [x] Update swiper
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Replace Axios with fetch()
     * Promise not rejected when non 2** status
@@ -722,7 +722,7 @@ $ brew upgrade nasm
 * [x] Fix broken themes
 * [ ] Element styles should be moved to reboot.
 * [x] Update package.md.
-* [ ] Add current viewport info to development environment.
+* [*] Add current viewport info to development environment.
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
 
