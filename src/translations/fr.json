@@ -1,26 +1,6 @@
 {
-  "s-language": {
-    "de": "Allemand",
-    "fr": "Français"
-  },
   "globalMessages": {
     "unknownApiError": "Une erreur inconnue s'est produite."
-  },
-  "c-table": {
-    "deselectAll": "Annuler la sélection",
-    "linkLabel": "Lien vers la page de détail",
-    "noResultsFound": "Aucun résultat trouvé",
-    "searchPlaceholder": "Rechercher",
-    "searchTitle": "Rechercher ici dans le tabelle",
-    "selectAll": "Sélectionner tout",
-    "selectItem": "Sélectionner"
-  },
-  "c-table-pagination": {
-    "from": "de",
-    "itemsPerPage": "Nombre par page:",
-    "lastPageTitle": "Aller à la page précédente",
-    "nextPageTitle": "Aller à la page suivante",
-    "pageNumberTitle": "Aller à la page {pageNumber}"
   },
   "c-swiper": {
     "images": "0 image | 1 Image | {count} Images",

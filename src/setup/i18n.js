@@ -11,6 +11,14 @@ export const I18N_FALLBACK = 'de';
 export const I18N_FALLBACK_MESSAGES = fallbackMessages;
 export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 
+// Add styleguide only translations
+if (process.env.NODE_ENV !== 'production') {
+  I18N_FALLBACK_MESSAGES['s-language'] = {
+    de: 'German', // eslint-disable-line id-length
+    fr: 'French' // eslint-disable-line id-length
+  };
+}
+
 export const i18n = new VueI18n({
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
