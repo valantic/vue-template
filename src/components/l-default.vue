@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()" data-app>
+  <div :class="b()">
     <div :class="b('content')">
       <div :class="b('inner')">
         <c-notification-container />
