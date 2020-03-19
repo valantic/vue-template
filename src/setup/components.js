@@ -20,8 +20,10 @@ import cModal from '@/components/c-modal';
 import cModalHeader01 from '@/components/c-modal-header-01';
 import cBreadcrumb from '@/components/c-breadcrumb';
 
-// Twig related imports
+// SSR related
 import lDefault from '@/components/l-default';
+import cHeader from '@/components/c-header';
+import cFooter from '@/components/c-footer';
 
 // Import style only 'components'.
 require.context('@/components', false, /\.scss/);
@@ -29,6 +31,7 @@ require.context('@/components', false, /\.scss/);
 export default {
   install(Vue) {
     const components = [
+      // Elements
       eLabel,
       eInput,
       eSelect,
@@ -41,11 +44,17 @@ export default {
       eHeading,
       eProgress,
       ePanel,
+      eLink,
+
+      // Components
       cModal,
       cModalHeader01,
-      lDefault,
-      eLink,
       cBreadcrumb,
+
+      // SSR related
+      lDefault,
+      cHeader,
+      cFooter,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -54,6 +63,7 @@ export default {
         Vue.component(component.name, component);
       });
     } else {
+      // Elements
       Vue.component(eLabel.name, eLabel);
       Vue.component(eInput.name, eInput);
       Vue.component(eSelect.name, eSelect);
@@ -66,11 +76,17 @@ export default {
       Vue.component(eHeading.name, eHeading);
       Vue.component(ePanel.name, ePanel);
       Vue.component(eProgress.name, eProgress);
+      Vue.component(eLink.name, eLink);
+
+      // Components
       Vue.component(cModal.name, cModal);
       Vue.component(cModalHeader01.name, cModalHeader01);
-      Vue.component(lDefault.name, lDefault);
-      Vue.component(eLink.name, eLink);
       Vue.component(cBreadcrumb.name, cBreadcrumb);
+
+      // SSR related
+      Vue.component(lDefault.name, lDefault);
+      Vue.component(cHeader.name, cHeader);
+      Vue.component(cFooter.name, cFooter);
     }
   },
 };

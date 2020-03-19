@@ -85,9 +85,4 @@
       max-width: #{map-get($breakpoints, xl) - 20px};
     }
   }
-
-  .s-layout {
-    max-width: initial;
-    margin: initial;
-  }
 </style>

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import styleguideRoutes from './styleguide.routes';
-import sLayout from '../styleguide/components/s-layout';
+import app from '../styleguide/components/app';
 import AxiosMockAdapter from '../plugins/styleguide.axios-mock';
 import dummyImages from '../styleguide/mock-data/initial-data/images';
 import dummyVideos from '../styleguide/mock-data/initial-data/videos';
@@ -51,8 +51,8 @@ export default {
     styleguideRoutes,
   },
   router,
-  template: '<s-layout/>',
+  template: '<app />',
   components: {
-    sLayout,
+    app,
   }
 };

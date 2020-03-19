@@ -44,7 +44,7 @@ module.exports = {
     '**/components/s-palette-item.vue',
     '**/components/s-color-item.vue',
     '**/components/l-default.vue',
-    '**/components/s-layout.vue',
+    '**/components/app.vue',
     '**/components/s-demo-settings.vue',
     '**/components/s-navigation.vue',
     '**/components/s-toggle.vue',

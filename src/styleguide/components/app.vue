@@ -1,6 +1,8 @@
 <template>
-  <div :class="b()">
+  <div id="app">
+    <header is="c-header" />
     <router-view />
+    <footer is="c-footer" />
     <s-navigation :routes="routes" nav-position="bottom-right" />
   </div>
 </template>
@@ -10,7 +12,7 @@
   import styleguideRoutes from '@/setup/styleguide.routes';
 
   export default {
-    name: 's-layout',
+    name: 'app',
     status: 0,
 
     components: {
@@ -52,7 +54,5 @@
 </script>
 
 <style lang="scss">
-  .s-layout > :first-child {
-    height: 100vh;
-  }
+  // Define #app styles in @/setup/scss/_globals.scss
 </style>
