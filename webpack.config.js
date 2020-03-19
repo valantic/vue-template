@@ -51,7 +51,7 @@ module.exports = (env, argv = {}) => {
   const extensions = ['.js', '.vue', '.json'];
   const alias = {
     '@': path.join(__dirname, 'src'),
-    'vue$': isProduction && !hasStyleguide ? 'vue/dist/vue.runtime.esm.js' : 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue'
+    'vue$': 'vue/dist/vue.esm.js',  // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
   };
 
   const scssResourcesFolder = './src/setup/scss/';
