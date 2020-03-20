@@ -1,11 +1,10 @@
 // https://eslint.org/docs/user-guide/configuring
-const webpackConfig = require('./webpack.config');
 const vueRules = require('eslint-config-valantic/plugins/vue');
 
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: 'babel-eslint', // Don't use on upper scope as documented by ESLint. The Vue plugin already defines itself as parser.
     sourceType: 'module',
   },
   env: {
@@ -22,13 +21,7 @@ module.exports = {
   ],
   // Uses eslint-import-resolver-webpack
   settings: {
-    'import/resolver': {
-      webpack: {
-        config: { // Linking the webpack.config.js instead caused console noise and linting issues
-          resolve: webpackConfig().resolve
-        }
-      }
-    }
+    'import/resolver': 'webpack'
   },
   // add your custom rules here
   rules: {

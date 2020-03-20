@@ -4,11 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Vue template</title>
+  <script>
+    window.initialData = {};
+  </script>
 </head>
 <body>
   <div id="app">
-
+    <header is="c-header"></header>
+    <div is="l-default"></div>
+    <footer is="c-footer"></footer>
   </div>
+
+  <script>
+    const payload = '[{ "message": "This notification was delivered trough initial data.", "type": "success" }]';
+
+    window.initialData['notification/data'] = payload;
+  </script>
+
   <noscript>
     <div class="c-no-script">
       To view this website you need to enable JavaScript.

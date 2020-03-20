@@ -4,6 +4,7 @@
 .LSOverride
 .eslintcache
 .stylelintcache
+report.*.json
 
 # IntelliJ project files
 .idea

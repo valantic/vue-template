@@ -1,14 +1,54 @@
-const { theme, styles } = require('./app/setup/styleguide.styles');
 const path = require('path');
+const { theme, styles } = require('./src/setup/styleguide.styles');
+
+const productiveTemplateCustomization = { // @see https://vue-styleguidist.github.io/Configuration.html#template
+  head: {
+    links: [
+      {
+        rel: 'stylesheet',
+        href: 'assets/css/app.vendor.css',
+      },
+      {
+        rel: 'stylesheet',
+        href: 'assets/css/app.main.css',
+      },
+    ],
+  },
+};
 
 module.exports = {
-  renderRootJsx: path.join(__dirname, 'app/setup/styleguidist/root.js'),
-  defaultExample: 'app/setup/styleguide.fallback.md',
-  components: 'app/components/**/*.vue',
+  renderRootJsx: path.join(__dirname, 'src/setup/styleguidist/root.js'),
+  defaultExample: 'src/setup/styleguide.fallback.md',
+  components: 'src/components/**/*.vue',
   styleguideDir: 'dist/styleguidist',
-  usageMode: 'collapse',
   previewDelay: 0, // This is already done by editor.
   pagePerSection: true,
+  copyCodeButton: true,
+  theme,
+  styles,
+  template: process.env.NODE_ENV === 'production'
+    ? productiveTemplateCustomization
+    : undefined,
+  require: [
+    'core-js/stable', // Normally used on webpack entry point but was not supported by vue-styleguidist
+    path.join(__dirname, 'src/setup/styleguidist/required.js'),
+  ],
+  webpackConfig(env) {
+    return require('./webpack.config')({
+      mode: env,
+    }, {
+      styleguide: true,
+    });
+  },
+  ignore: [
+    '**/components/s-palette-item.vue',
+    '**/components/s-color-item.vue',
+    '**/components/l-default.vue',
+    '**/components/app.vue',
+    '**/components/s-demo-settings.vue',
+    '**/components/s-navigation.vue',
+    '**/components/s-toggle.vue',
+  ],
   sections: [
     {
       name: 'Welcome',
@@ -16,13 +56,13 @@ module.exports = {
       sections: [
         {
           name: 'Informations',
-          content: 'app/styleguide/core/welcome/information.md',
+          content: 'src/styleguide/core/welcome/information.md',
         },
         {
           name: 'Status labels',
-          content: 'app/styleguide/core/welcome/status-label.md',
-        }
-      ]
+          content: 'src/styleguide/core/welcome/status-label.md',
+        },
+      ],
     },
     {
       name: 'Core',
@@ -30,79 +70,47 @@ module.exports = {
       sections: [
         {
           name: 'Typography',
-          content: 'app/styleguide/core/typography/typography.md',
+          content: 'src/styleguide/core/typography/typography.md',
         },
         {
           name: 'Grid',
-          content: 'app/styleguide/core/grid/grid.md',
+          content: 'src/styleguide/core/grid/grid.md',
         },
         {
           name: 'Z-Index',
-          content: 'app/styleguide/core/z-index/z-index.md',
+          content: 'src/styleguide/core/z-index/z-index.md',
         },
         {
           name: 'Spacing',
-          content: 'app/styleguide/core/spacing/spacing.md',
+          content: 'src/styleguide/core/spacing/spacing.md',
         },
         {
           name: 'Global styles',
-          content: 'app/styleguide/core/global-styles/global-styles.md',
+          content: 'src/styleguide/core/global-styles/global-styles.md',
         },
-      ]
+      ],
     },
-    {
-      name: 'Plugins',
-      content: '',
-      sections: [
-        {
-          name: 'Vuetify',
-          content: 'app/styleguide/core/vuetify/vuetify.md',
-        },
-        {
-          name: 'Tabs',
-          content: 'app/styleguide/core/plugins/tabs.md',
-        },
-      ]
-    },
+    // {
+    //   name: 'Plugins',
+    //   content: '',
+    //   sections: [
+    //     {
+    //       name: 'Vuetify',
+    //       content: 'src/styleguide/core/....md',
+    //     },
+    //   ],
+    // },
     {
       name: 'Elements',
-      components: 'app/components/**/e-*.vue',
+      components: 'src/components/**/e-*.vue',
     },
     {
       name: 'Components',
-      components: 'app/components/**/c-*.vue',
+      components: 'src/components/**/c-*.vue',
     },
     {
       name: 'Styleguide',
-      components: 'app/styleguide/components/!(s-readme).vue',
+      components: 'src/styleguide/components/!(s-readme).vue',
     },
   ],
-  require: [
-    '@babel/polyfill', // In vue application imported by webpack. Was not supported by vue-styleguidist
-    path.join(__dirname, 'app/setup/_scss.scss'), // In vue application imported by main.js. Was not supported by vue-styleguidist
-    path.join(__dirname, 'app/setup/vuetify/main.styl'), // In vue application imported by main.js. Was not supported by vue-styleguidist
-    path.join(__dirname, 'app/setup/styleguidist/style.scss'),
-    // Style only components
-    path.join(__dirname, 'app/components/c-form.scss'),
-    path.join(__dirname, 'app/components/c-tabs.scss'),
-    path.join(__dirname, 'app/setup/styleguidist/required.js'),
-  ],
-  webpackConfig(env) {
-    return require('./webpack.config')({
-      production: env === 'production',
-      styleguide: true
-    })
-  },
-  ignore: [
-    '**/components/s-palette-item.vue',
-    '**/components/s-color-item.vue',
-    '**/components/l-default.vue',
-    '**/components/s-layout.vue',
-    '**/components/c-swiper-modal.vue',
-    '**/components/s-demo-settings.vue',
-    '**/components/s-navigation.vue',
-    '**/components/s-toggle.vue',
-  ],
-  theme,
-  styles,
 };

@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import VueBemCn from '@/setup/plugins/vue-bem-cn';
+import VueBemCn from '@/plugins/vue-bem-cn';
 import component from '@/components/e-icon';
 
 describe('component | e-button', () => {

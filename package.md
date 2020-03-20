@@ -10,11 +10,13 @@ There are several scripts that will support you during the development and deplo
 
 Creates the production build of the current code and moves it to the `/dist` folder. This will also perform **code splitting**, **critical CSS splitting** and **minification/uglyfication**. `npm run test` **MUST** be executed before building!
 
+> NOTE: the environment had to be defined explicitly on the NODE_ENV. webpack's "--mode production" did not work, because the config was requested multiple times but switched to "development" on the second request. See https://github.com/webpack/webpack/issues/6460
+
 #### `npm run dev`
 
 Starts the development-environment with styleguide example pages. Please note, that for performance reasons no minification, uglyfication and CSS extraction is performed.
 
-#### `npm run dev:styleguide`
+#### `npm run dev:s` or `npm run styleguide`
 
 Starts [Vue-Styleguidist](https://github.com/vue-styleguidist/vue-styleguidist) in a separate webpack and localhost instance.
 
@@ -24,22 +26,16 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 #### All scripts
 
-* `npm run clean` - Cross platform removal of `/dist` folder.
-* `npm run build` - See above.
-* `npm run build:monitor` will run a normal build but also open a statistics page after the build, where you can review the package size development for all created builds. Please note, that the data can become invalid if the webpack configuration is changed.
-* `npm run build:profile` creates a `profile.json` in the `stats` folder which you can use to find the source of unexpected build size increases. There are []several tools](https://survivejs.com/webpack/optimizing/build-analysis/) you can use to examine the data.
-* `npm run build:styleguide` will create a build which looks exactly like your development environment. You can use this to deploy the living styleguide to a remote server. Please note, that you can only view the export inside a server instance where the provided `.htaccess` must be installed or merged.
-* `npm run build:watch` creates a build and then watches the source code for changes. This can be used when developing inside a vendor environment.
-* `npm run eslint` performs the ESLint tests.
-* `npm run eslint:fix` performs the ESLint tests and automatic issue fixing where possible. **Only use this if you know what you're doing!** Always check and rerun the application before committing!
-* `npm run stylelint` performs the Stylelint tests.
-* `npm run lint` performs ESLint and Stylelint tests.
-* `npm run license` logs a summary of the used npm package licenses.
-* `npm run license:stats` creates a CSV file inside `/stats` with a detailed list of used npm package licenses.
-* `npm run test` - See above.
-* `npm run test:unit` runs unit tests.
+* `npm run clean:caches` - Clears linter caches.
 * `npm run dev` - See above.
-* `npm run dev:styleguide` - See above.
+* `npm run dev:s` - See above.
+* `npm run jest` - Executes Jest tests.
+* `npm run styleguide` - See above.
+* `npm run test` - See above.
+* `npm run build` - See above.
+* `npm run build:profile` - Runs a build and shows a package content overview
+* `npm run build:styleguide` - Creates a standalone build of the development and component styleguide.
+* `npm run build:watch` - Allows to develop with a continuous productive build.
 
 ## Dependencies
 
@@ -47,85 +43,132 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 ### Template
 
-* [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill) - Polyfills JS functionality for older browsers.
-* [axios](https://github.com/axios/axios) - Promise based HTTP client for browser and node.js.
-* [css-vars-ponyfill](https://github.com/jhildenbiddle/css-vars-ponyfill) - :horse: IE Polyfill for CSS Variables (used for themes)
-* [dayjs](https://github.com/iamkun/dayjs) - Date library alternative to moment.js
-* [lazysizes](https://github.com/aFarkas/lazysizes) - Lazy loader for images and iframes. Required by `e-picture`.
-* [lodash](https://github.com/lodash/lodash) - A modern JavaScript utility library delivering modularity, performance, & extras.
-* [material-design-icons-iconfont](https://github.com/jossef/material-design-icons-iconfont) - Developer optimized version of material design icon font. Required by `vuetify`.
-* [picturefill](https://github.com/scottjehl/picturefill) - A polyfill for picture and srcset. Required by `e-picture`.
-* [portal-vue](https://github.com/LinusBorg/portal-vue) - Let's render something in a «wormhole» somewhere else on the page. It's used to render all the modals on a single place 
-* [smoothscroll-polyfill](https://github.com/iamdustan/smoothscroll) - A scroll behaviour polyfill.
-* [swiper](https://github.com/nolimits4web/swiper) - Mobile touch slider (swiper) with hardware accelerated transitions. 
-* [vue](https://github.com/vuejs/vue) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
-* [vue-bem-cn](http://codepen.io/c01nd01r/pen/Qdeovv)- Simple BEM class name generator for Vue.JS (We copied the source of this plugin into the project, because the developer did not merge the improvement PR).
-* [vue-i18n](https://github.com/kazupon/vue-i18n) - Internationalization plugin for Vue.js
-* [vue-js-modal](https://github.com/euvl/vue-js-modal) - A modal plugin for Vue.js.
-* [vue-router](https://github.com/vuejs/vue-router) - The official router for Vue.js.
-* [vue-tabs-component](https://github.com/spatie/vue-tabs-component) - Tab component is used to render content in tabs. For e.g. on the cart / address selector.
-* [vuetify](https://vuetifyjs.com) - A component library for vue. Required by `c-date-picker` and `c-table`.
-* [vuex](https://github.com/vuejs/vuex) - Centralized State Management for Vue.js.
+- [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js.
+  > core
+- [core-js]() - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.
+  > core, polyfill
+- [css-vars-ponyfill](https://www.npmjs.com/package/css-vars-ponyfill) - A ponyfill that provides client-side support for CSS custom properties (aka "CSS variables") in legacy and modern browsers.
+  > core, polyfill, ie11
+- [dayjs](https://www.npmjs.com/package/dayjs) - Fast 2kB alternative to Moment.js with the same modern API.
+  > c-date-picker-input, c-date-picker-range
+- [picturefill](https://www.npmjs.com/package/picturefill) - A responsive image polyfill.
+  > core, polyfill, ie11
+- [portal-vue](https://www.npmjs.com/package/portal-vue) - A Portal Component for Vuejs, to render DOM outside of a component, anywhere in the document.
+  > c-modal
+- [swiper](https://www.npmjs.com/package/swiper) - Swiper is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.
+  > c-swiper-modal, c-swiper-gallery, c-swiper-hero
+- [vue](https://www.npmjs.com/package/vue) - Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
+  > core
+- [vue-i18n](https://www.npmjs.com/package/vue-i18n) - Internationalization plugin for Vue.js
+  > core
+- [vue-js-modal](https://www.npmjs.com/package/vue-js-modal) - https://github.com/euvl/vue-js-modal
+  > c-modal
+- [vue-router](https://www.npmjs.com/package/vue-router) - The official router for Vue.js.
+  > core
+- [vuex](https://www.npmjs.com/package/vuex) - Centralized State Management for Vue.js.
+  > core
+
 
 ## Dev-Dependencies
 
 ### Project
 
 ### Template
-
-* [@babel/core](https://github.com/babel/babel/tree/master/packages/babel-core) - Babel compiler core.
-* [@babel/plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/) - This plugin only allows Babel to parse import syntax. **Don't use babel-plugin-dynamic-import-node since it breaks code splitting!**
-* [@babel/plugin-syntax-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/) - Transform rest properties for object destructuring assignment and spread properties for object literals
-* [@babel/preset-env](https://www.npmjs.com/package/babel-preset-env) - A Babel preset that compiles ES2015+ down to ES5 by automatically determining the Babel plugins and polyfills you need based on your targeted browser or runtime environments.
-* [@vue/test-utils](https://github.com/vuejs/vue-test-utils) - Utilities for testing Vue components.
-* [axios-mock-adapter](https://github.com/ctimmerm/axios-mock-adapter) - Axios adapter that allows to easily mock requests.
-* [babel-eslint](https://github.com/babel/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
-* [babel-jest](https://www.npmjs.com/package/babel-jest) - Babel compiler plugin for Jest testing.
-* [babel-loader](https://github.com/babel/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
-* [babel-plugin-dynamic-import-node](https://github.com/airbnb/babel-plugin-dynamic-import-node) - Babel plugin to transpile import() to a deferred require(), for node (used by jest).
-* [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports) - Transforms member style imports into default style imports. Used by `vuetify`.
-* [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin) - webpack plugin to copie individual files or entire directories to the build directory.
-* [css-loader](https://github.com/webpack-contrib/css-loader) - The webpack css-loader interprets @import and url() like import/require() and will resolve them.
-* [eslint](https://github.com/eslint/eslint) - A fully pluggable tool for identifying and reporting on patterns in JavaScript.
-* [eslint-config-airbnb-base](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) - This package provides Airbnb's base JS .eslintrc (without React plugins) as an extensible shared config.
-* [eslint-config-valantic](https://github.com/valantic/eslint-config-valantic) - The ESLint configuration of valantic.
-* [eslint-import-resolver-webpack](https://github.com/benmosher/eslint-plugin-import/tree/master/resolvers/webpack) - Webpack-literate module resolution plugin for eslint-plugin-import.
-* [eslint-loader](https://github.com/webpack-contrib/eslint-loader) - eslint loader for webpack.
-* [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) - ESLint plugin with rules that help validate proper imports.
-* [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) - Official ESLint plugin for Vue.js.
-* [faker.js](https://github.com/marak/Faker.js/) - Faker.js for generating authentic mock-data.
-* [file-loader](https://github.com/webpack-contrib/file-loader) - Instructs webpack to emit the required object as file and to return its public URL.
-* [friendly-errors-webpack-plugin](https://github.com/geowarin/friendly-errors-webpack-plugin) - Friendly-errors-webpack-plugin recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them to provide a better Developer Experience.
-* [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
-* [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) - Image loader module for webpack.
-* [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing.
-* [launch-editor-middleware](https://github.com/yyx990803/launch-editor) - Allows to open Vue components in editor from Vue inspector.
-* [license-checker](https://github.com/davglass/license-checker) - Allows us to check the whole project for use licenses (see scripts).
-* [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) - Official webpack CSS extractor.
-* [node-sass](https://github.com/sass/node-sass) - Node-sass is a library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass.
-* [postcss-critical-split](https://github.com/mrnocreativity/postcss-critical-split) - A PostCSS plugin that takes existing CSS files and splits out the annotated critical styles into a separate file.
-* [postcss-html](https://github.com/gucong3000/postcss-html) - PostCSS Syntax for parsing HTML / Markdown / Vue component
-* [postcss-pipeline-webpack-plugin](https://github.com/mistakster/postcss-pipeline-webpack-plugin) - A webpack plugin to process generated assets with PostCSS pipeline.
-* [rimraf](https://github.com/isaacs/rimraf) - A `rm -rf` util for nodejs.
-* [sass-loader](https://github.com/webpack-contrib/sass-loader) - Sass loader for webpack. Compiles Sass to CSS. 
-* [sass-resources-loader](https://github.com/shakacode/sass-resources-loader) - Imports SASS modules into required SASS modules to easily use shared variables and mixins. 
-* [stylelint](https://github.com/stylelint/stylelint) - A mighty, modern CSS linter and fixer that helps you avoid errors and enforce consistent conventions in your stylesheets.
-* [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) - The standard shareable config for stylelint.
-* [stylelint-config-valantic](https://github.com/valantic/stylelint-config-valantic) - The customised config for stylelint from valantic.
-* [stylelint-webpack-plugin](https://github.com/JaKXz/stylelint-webpack-plugin) -  A webpack plugin to lint your CSS/Sass code using stylelint.
-* [stylus](http://stylus-lang.com/) - CSS preprocessor. Used by `vuetify`.
-* [stylus-loader](https://github.com/shama/stylus-loader) - Stylus loader for webpack. Used by `vuetify`.
-* [svgo](https://github.com/svg/svgo) - Node.js tool for optimizing SVG files
-* [typescript](https://github.com/Microsoft/TypeScript) - TypeScript is a superset of JavaScript that compiles to clean JavaScript output. - Needed by `vue-styleguidist`
-* [uglifyjs-webpack-plugin](https://github.com/webpack-contrib/uglifyjs-webpack-plugin) - This plugin uses UglifyJS v3 (`uglify-es`) to minify your JavaScript.
-* [url-loader](https://github.com/webpack-contrib/url-loader) - Loads files as `base64` encoded URL.
-* [vue-jest](https://github.com/vuejs/vue-jest) - Jest Vue transformer.
-* [vue-loader](https://github.com/vuejs/vue-loader) - Vue.js component loader for Webpack.
-* [vue-markdown-loader](https://github.com/QingWei-Li/vue-markdown-loader) - Convert Markdown file to Vue Component using markdown-it.
-* [vue-styleguidist](https://github.com/vue-styleguidist/vue-styleguidist) - Created from react styleguidist for Vue Components with a living style guide.
-* [webpack](https://github.com/webpack/webpack) - webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
-* [webpack-auto-inject-version](https://github.com/radswiat/webpack-auto-inject-version) - Webpack plugin to auto inject version into html or file.
-* [webpack-clean](https://www.npmjs.com/package/webpack-clean) - Plugin let's remove specific files after the build process.
-* [webpack-cli](https://github.com/webpack/webpack-cli) - Official webpack CLI.
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server) - Serves a webpack app. Updates the browser on changes.
-* [webpack-monitor](https://github.com/webpackmonitor/webpackmonitor) - Webpack Monitor is a configurable Webpack plugin that captures relevant statistics on your production builds.
+- [@babel/core](https://www.npmjs.com/package/@babel/core) - JS compiler to create ES5 code from ES2015+.
+  > webpack
+- [@babel/plugin-syntax-dynamic-import](https://www.npmjs.com/package/@babel/plugin-syntax-dynamic-import) - Makes @babel/core understand the not yet standardized import() syntax.
+  > webpack
+- [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env) - Transform preset, which will transform the input code according to browserlist settings in package.json
+  > webpack
+- [@vue/test-utils](https://www.npmjs.com/package/@vue/test-utils) - The official test library for Vue.js.
+  > test environment
+- [autoprefixer](https://www.npmjs.com/package/autoprefixer) - PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from caniuse.com.
+  > webpack, scss
+- [axios-mock-adapter](https://www.npmjs.com/package/axios-mock-adapter) - Axios adapter that allows to easily mock requests.
+  > development environment, mock data
+- [babel-core](https://www.npmjs.com/package/babel-core/v/7.0.0-bridge.0) - Required by vue-jest and jest tests.
+  > webpack setup
+- [babel-eslint](https://www.npmjs.com/package/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
+  > eslint
+- [babel-jest](https://www.npmjs.com/package/babel-jest) - Compiles modern JavaScript for Jest.
+  > test environment
+- [babel-loader](https://www.npmjs.com/package/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
+  > webpack
+- [clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin) - A webpack plugin to remove/clean your build folder(s).
+  > webpack
+- [css-loader](https://www.npmjs.com/package/css-loader) - The css-loader interprets @import and url() like import/require() and will resolve them.
+  > webpack
+- [cssnano](https://www.npmjs.com/package/cssnano) - A modular CSS minifier, built on top of the PostCSS ecosystem.
+  > webpack, scss
+- [eslint](https://www.npmjs.com/package/eslint) - ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
+  > eslint
+- [eslint-config-airbnb-base](https://www.npmjs.com/package/eslint-config-airbnb-base) - This package provides Airbnb's base JS .eslintrc (without React plugins) as an extensible shared config.
+  > eslint
+- [eslint-config-valantic](https://www.npmjs.com/package/eslint-config-valantic) - The default ESLint config of valantic. .
+  > eslint
+- [eslint-import-resolver-webpack](https://www.npmjs.com/package/eslint-import-resolver-webpack) - Webpack-literate module resolution plugin for eslint-plugin-import.
+  > webpack, eslint
+- [eslint-plugin-import](https://www.npmjs.com/package/eslint-plugin-import) - This plugin intends to support linting of ES2015+ (ES6+) import/export syntax, and prevent issues with misspelling of file paths and import names.
+  > eslint
+- [eslint-plugin-vue](https://www.npmjs.com/package/eslint-plugin-vue) - Official ESLint plugin for Vue.js
+  > eslint
+- [eslint-webpack-plugin](https://www.npmjs.com/package/eslint-webpack-plugin) - A ESLint plugin for webpack.
+  > webpack, eslint
+- [faker](https://www.npmjs.com/package/faker) - Generate massive amounts of fake data in the browser and node.js.
+  > development environment, mock data
+- [file-loader](https://www.npmjs.com/package/file-loader) - The file-loader resolves import/require() on a file into a url and emits the file into the output directory.
+  > webpack
+- [friendly-errors-webpack-plugin](https://www.npmjs.com/package/friendly-errors-webpack-plugin) - Friendly-errors-webpack-plugin recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them to provide a better Developer Experience.
+  > webpack
+- [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin) - Plugin that simplifies creation of HTML files to serve your bundles.
+  > webpack
+- [husky](https://www.npmjs.com/package/husky) - Git hooks made easy.
+  > development environment, eslint, test environment
+- [image-webpack-loader](https://www.npmjs.com/package/image-webpack-loader) - Image loader module for webpack. Minify PNG, JPEG, GIF, SVG and WEBP images with imagemin.
+  > webpack
+- [jest](https://www.npmjs.com/package/jest) - Delightful JavaScript Testing.
+  > test environment
+- [jest-transform-stub](https://www.npmjs.com/package/jest-transform-stub) - Jest doesn't handle non JavaScript assets by default.
+  > test environment
+- [launch-editor-middleware](https://www.npmjs.com/package/launch-editor-middleware) - Open file in editor from Node.js.
+  > development environment
+- [lint-staged](https://www.npmjs.com/package/lint-staged) - Run linters against staged git files and don't let 💩 slip into your code base!
+  > husky, development environment, eslint, test environment
+- [mini-css-extract-plugin](https://www.npmjs.com/package/mini-css-extract-plugin) - This plugin extracts CSS into separate files.
+  > webpack
+- [postcss-loader](https://www.npmjs.com/package/postcss-loader) - Loader for webpack to process CSS with PostCSS.
+  > webpack, scss
+- [sass](https://www.npmjs.com/package/sass) - Node.js bindings to libsass.
+  > webpack, scss
+- [sass-loader](https://www.npmjs.com/package/sass-loader) - Loads a Sass/SCSS file and compiles it to CSS.
+  > webpack, scss
+- [sass-resources-loader](https://www.npmjs.com/package/sass-resources-loader) - This loader will @import your SASS resources into every required SASS module.
+  > webpack, scss
+- [stylelint](https://www.npmjs.com/package/stylelint) - A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.
+  > stylelint
+- [stylelint-config-valantic](https://www.npmjs.com/package/stylelint-config-valantic) - Default valantic configuration for stylelint.
+  > stylelint
+- [stylelint-webpack-plugin](https://www.npmjs.com/package/stylelint-webpack-plugin) - A Stylelint plugin for webpack
+  > webpack, stylelint
+- [stylus](https://www.npmjs.com/package/stylus) - Expressive, robust, feature-rich CSS language built for nodejs.
+  > stylus
+- [stylus-loader](https://www.npmjs.com/package/stylus-loader) - A stylus loader for webpack.
+  > webpack, stylus
+- [uglifyjs-webpack-plugin](https://www.npmjs.com/package/uglifyjs-webpack-plugin) - This plugin uses uglify-js to minify your JavaScript.
+  > webpack
+- [vue-jest](https://www.npmjs.com/package/vue-jest) - Jest Vue transformer with source map support.
+  > test environment
+- [vue-loader](https://www.npmjs.com/package/vue-loader) - webpack loader for Vue Single-File Components.
+  > webpack
+- [vue-markdown-loader](https://www.npmjs.com/package/vue-markdown-loader) - Convert Markdown file to Vue Component using markdown-it.
+  > development environment
+- [vue-styleguidist](https://www.npmjs.com/package/vue-styleguidist) - Isolated Vue component development environment with a living style guide.
+  > development environment
+- [webpack](https://www.npmjs.com/package/webpack) - webpack is a module bundler.
+  > webpack
+- [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) - Visualize size of webpack output files with an interactive zoomable treemap.
+  > webpack
+- [webpack-cli](https://www.npmjs.com/package/webpack-cli) - The official CLI of webpack.
+  > webpack
+- [webpack-dev-serve](https://www.npmjs.com/package/webpack-dev-server) - Use webpack with a development server that provides live reloading.
+  > webpack, development environment
