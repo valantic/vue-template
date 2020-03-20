@@ -25,9 +25,23 @@ export default {
      * @param {Object} state - Current state.
      * @param {Array} data - List of breadcrumb items.
      */
-    data(state, data) {
+    setItems(state, data) {
       state.items = data || null;
     }
   },
-  actions: {},
+  actions: {
+    /**
+     * Handles the initial data for breadcrumbs.
+     *
+     * @param {Object} state - Current state.
+     * @param {Array} payload - List of breadcrumb items.
+     */
+    data({ commit }, payload) {
+      if (!Array.isArray(payload)) {
+        throw Error("The payload data given to 'breadcrumb/data' is not of type Array.");
+      }
+
+      commit('setItems', payload);
+    }
+  },
 };

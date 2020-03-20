@@ -123,22 +123,6 @@ export default {
   },
   mutations: {
     /**
-     * Accepts the initial data Array of notification Objects.
-     *
-     * @param {Object} state - Current state.
-     * @param {Array.<Object>} [payload] - An Array of notification Objects.
-     */
-    data(state, payload) {
-      if (!Array.isArray(payload)) {
-        return;
-      }
-
-      payload.forEach((message) => {
-        pushNotification(state, { message, delay: 6 });
-      });
-    },
-
-    /**
      * Adds a notification.
      *
      * @param {Object} state - Current state.
@@ -169,6 +153,23 @@ export default {
     },
   },
   actions: {
+    /**
+     * Accepts the initial data Array of notification Objects.
+     *
+     * @param {Object} context - An object of context related methods.
+     * @param {Function} context.commit - The vuex commit method.
+     * @param {Array.<Object>} [payload] - An Array of notification Objects.
+     */
+    data({ commit }, payload) {
+      if (!Array.isArray(payload)) {
+        throw Error("The payload data given to 'notification/data' is not of type Array.");
+      }
+
+      payload.forEach((message) => {
+        commit('pushNotification', { message, delay: 6 });
+      });
+    },
+
     /**
      * Adds an "unknown error" to the notification stack.
      *

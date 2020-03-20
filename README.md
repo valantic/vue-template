@@ -401,26 +401,45 @@ store
 
 ### Initial data
 
-To inject initial data into the Vuex store, we decided to prepare mutation, which handle an initial payload.
+To inject initial data into the Vuex store, we decided to prepare actions (since mutations are limited in regards of store actions), which handle an initial payload.
+ 
+ The data is exchanged via a global JS object. It is recommended to assign JSON strings to the global object, rather than a pure JS object, since parsing of JSON is faster. @see https://www.youtube.com/watch?v=ff4fgQxPaO0
+ 
+ NOTE: make sure that initial data is **SANITIZED** and **DOES NOT** contain closing script tags!
+ 
+ See also `/index.html` as an example.
 
-```javascript
-// main.js
-
-window.vm = new Vue();
-```
-
-```
+```html
 <html>
 <body>
-  <script src="vue-app.js"></script>
   <script>
-    var commit = window.vm.$store.commit;
-    var payload = {/* data */};
-     
-    commit('<storeModule>/<propertySetter>', payload);
-</script>
+    window.initialData = {};
+  </script>
+  ...
+  <script>
+    window.initialData['<storeModule>/<propertySetter>'] = 'payloadJSON';
+  </script>
+  <script src="vue-app.js"></script>
 </body>
 </html>
+```
+
+```javascript
+// @/store/index
+
+const data = window.initialData || {};
+
+// ...
+
+Object.keys(data).forEach((action) => {
+  try {
+    store.dispatch(action, JSON.parse(data[action]));
+  } catch (error) {
+    throw new Error(`The initial data provided for '${action}' is no valid JSON.`);
+  }
+});
+
+window.initialData = {};
 ```
 
 #### Props
