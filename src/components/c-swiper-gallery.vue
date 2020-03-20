@@ -32,7 +32,7 @@
             </span>
 
             <span class="invisible">
-              {{ $('c-swiper.zoom') }}
+              {{ $t('c-swiper.zoom') }}
             </span>
           </button>
         </div>
@@ -328,7 +328,6 @@
       }
 
       &--next {
-        background-image: url('../assets/icons/i-arrow-full--right.svg');
         right: 0;
         border-left-color: $color-grayscale--200;
       }

@@ -69,11 +69,11 @@
 
 ```vue
 <div>
-  <e-heading tag-name="h1" spacing="700" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h2" spacing="700" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h3" spacing="700" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h4" spacing="700" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h5" spacing="700" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h6" spacing="700" underline><a href="#">This heading has spacing '500'</a></e-heading>
+  <e-heading tag-name="h1" spacing="700" underline>This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h2" spacing="700" underline>This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h3" spacing="700" underline>This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h4" spacing="700" underline>This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h5" spacing="700" underline>This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h6" spacing="700" underline><a href="#">This heading has spacing '700'</a></e-heading>
 </div>
 ```

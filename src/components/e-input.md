@@ -37,7 +37,7 @@ Always use **v-model** to bind value to form elements!
     <p>
       disabled: {{ disabled }}
     </p>
-    <e-input :disabled="disabled" name="demo" value="Lorem ipsum..."/>
+    <e-input :disabled="disabled" name="demo" v-model="value"/>
     <br />
     <e-button @click="disabled = !disabled" primary>toggle disabled state</e-button>
   </div>
@@ -46,7 +46,8 @@ Always use **v-model** to bind value to form elements!
 <script>
   export default {
     data: () => ({
-      disabled: false
+      disabled: false,
+      value: 'Lorem ipsum...'
     })
   };
 </script>

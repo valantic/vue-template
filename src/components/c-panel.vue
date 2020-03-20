@@ -8,7 +8,7 @@
     <div :class="b('content', contentModifiers)">
       <slot></slot>
     </div>
-    <div
+    <button
       v-if="triangleButton"
       :class="b('triangle-button', triangleButtonModifiers)"
       @click="onTriangleButtonClick"
@@ -16,7 +16,8 @@
       @mouseout="onPlusToggle">
       <div ref="shadow" :class="b('shadow', shadowModifiers)"></div>
       <span ref="plus" :class="b('plus', plusModifiers)"></span>
-    </div>
+      <span class="invisible">{{ buttonTitle }}</span>
+    </button>
   </div>
 </template>
 
@@ -207,6 +208,15 @@
           open: this.triangleButtonOpen,
         };
       },
+
+      /**
+       * Returns the title of the open/close button.
+       *
+       * @returns {String}
+       */
+      buttonTitle() {
+        return this.triangleButtonOpen ? this.$t('c-panel.openButtonTitle') : this.$t('c-panel.closedButtonTitle');
+      },
     },
     // watch: {},
 
@@ -290,6 +300,8 @@
     }
 
     &__triangle-button {
+      @extend %button-reset;
+
       position: absolute;
       bottom: 0;
       right: 0;

@@ -2,10 +2,8 @@
   "globalMessages": {
     "unknownApiError": "Es ist ein unbekannter Fehler aufgetreten."
   },
-  "c-swiper": {
-    "images": "0 Bilder | 1 Bild | {count} Bilder",
-    "zoom": "Bild vergrössern",
-    "videos": "0 Videos | 1 Video | {count} Videos"
+  "e-logo": {
+    "linkTitle": "zur Startseite"
   },
   "e-select": {
     "chooseOption": "Bitte wählen"
@@ -13,10 +11,16 @@
   "e-progress": {
     "loading": "Lade …"
   },
+  "c-breadcrumb": {
+    "linkTitle": "Gehe zu {name}"
+  },
   "c-notification": {
     "confirm": "OK",
     "decline": "Abbrechen",
     "close": "Schliessen"
+  },
+  "c-modal-header-01": {
+    "closeTitle": "Fenster schliessen"
   },
   "c-multiselect": {
     "search": "suchen",
@@ -24,13 +28,13 @@
     "itemsEmpty": "Keine Ergebnisse.",
     "searchTitle": "Suche"
   },
-  "c-breadcrumb": {
-    "linkTitle": "Gehe zu {name}"
+  "c-panel": {
+    "openButtonTitle": "Öffnen",
+    "closedButtonTitle": "Schliessen"
   },
-  "e-logo": {
-    "linkTitle": "zur Startseite"
-  },
-  "c-modal-header-01": {
-    "closeTitle": "Fenster schliessen"
+  "c-swiper": {
+    "images": "0 Bilder | 1 Bild | {count} Bilder",
+    "zoom": "Bild vergrössern",
+    "videos": "0 Videos | 1 Video | {count} Videos"
   }
 }

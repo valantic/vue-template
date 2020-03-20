@@ -37,7 +37,7 @@
           inline
         />
         <span class="invisible">
-          {{ $('c-modal-header-01.closeTitle') }}
+          {{ $t('c-modal-header-01.closeTitle') }}
         </span>
       </a>
     </div>

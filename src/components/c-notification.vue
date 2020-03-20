@@ -418,7 +418,6 @@
         display: block;
         position: absolute;
         right: 1px;
-        bottom: -$spacing--5;
       }
     }
 
