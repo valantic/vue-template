@@ -41,13 +41,8 @@ module.exports = {
     });
   },
   ignore: [
-    '**/components/s-palette-item.vue',
-    '**/components/s-color-item.vue',
-    '**/components/l-default.vue',
     '**/components/app.vue',
-    '**/components/s-demo-settings.vue',
-    '**/components/s-navigation.vue',
-    '**/components/s-toggle.vue',
+    '**/components/l-default.vue',
   ],
   sections: [
     {
@@ -56,11 +51,11 @@ module.exports = {
       sections: [
         {
           name: 'Informations',
-          content: 'src/styleguide/core/welcome/information.md',
+          content: 'src/styleguide/pages/welcome/information.md',
         },
         {
           name: 'Status labels',
-          content: 'src/styleguide/core/welcome/status-label.md',
+          content: 'src/styleguide/pages/welcome/status-label.md',
         },
       ],
     },
@@ -70,23 +65,31 @@ module.exports = {
       sections: [
         {
           name: 'Typography',
-          content: 'src/styleguide/core/typography/typography.md',
+          content: 'src/styleguide/pages/core/typography.md',
+        },
+        {
+          name: 'Colors',
+          content: 'src/styleguide/pages/core/colors.md',
+        },
+        {
+          name: 'Icons',
+          content: 'src/styleguide/pages/core/icons.md',
         },
         {
           name: 'Grid',
-          content: 'src/styleguide/core/grid/grid.md',
+          content: 'src/styleguide/pages/core/grid.md',
         },
         {
           name: 'Z-Index',
-          content: 'src/styleguide/core/z-index/z-index.md',
+          content: 'src/styleguide/pages/core/z-index.md',
         },
         {
           name: 'Spacing',
-          content: 'src/styleguide/core/spacing/spacing.md',
+          content: 'src/styleguide/pages/core/spacing.md',
         },
         {
           name: 'Global styles',
-          content: 'src/styleguide/core/global-styles/global-styles.md',
+          content: 'src/styleguide/pages/core/global-styles.md',
         },
       ],
     },
@@ -96,7 +99,7 @@ module.exports = {
     //   sections: [
     //     {
     //       name: 'Vuetify',
-    //       content: 'src/styleguide/core/....md',
+    //       content: 'src/styleguide/pages/plugins/....md',
     //     },
     //   ],
     // },
@@ -107,10 +110,6 @@ module.exports = {
     {
       name: 'Components',
       components: 'src/components/**/c-*.vue',
-    },
-    {
-      name: 'Styleguide',
-      components: 'src/styleguide/components/!(s-readme).vue',
     },
   ],
 };
