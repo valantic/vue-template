@@ -250,6 +250,19 @@ module.exports = (env, argv = {}) => {
       ],
     },
     {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            esModule: false,
+            name: `[path]/[name].[ext]?[hash]`,
+            outputPath: `${outputAssetsFolder}fonts/`,
+          },
+        }
+      ]
+    },
+    {
       test: /\.md$/, // Required by styleguide.
       loader: [
         'vue-loader',
