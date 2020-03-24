@@ -1,5 +1,5 @@
 <template>
-  <div v-bem>
+  <div :class="b()">
 
   </div>
 </template>
@@ -7,8 +7,7 @@
 <script>
   export default {
     name: 'c-component', // TODO: update name according to filename
-    // status: 1,
-    
+
     // components: {},
     // mixins: [],
 

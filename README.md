@@ -62,7 +62,7 @@ Make a local git clone of this project/template by using the following command:
 ```
 $ git clone <repository-url> <[target-folder]>
 
-# If you wan't a clean copy (no history) use the following command
+# If you want a clean copy (no history) use the following command
 $ git clone --depth 1 -b master <repository-url>
 ```
 
@@ -133,7 +133,7 @@ The app should now run on [http://localhost:8080](http://localhost:8080)
 If you prefer to develop inside the component styleguide run the following script instead or in a new tab:
 
 ```
-$ npm run dev:styleguide
+$ npm run dev:s
 ```
 
 ### Integrate vue-template into an other repository
@@ -161,13 +161,13 @@ git subtree pull --prefix assets/vue https://github.com/valantic/vue-template.gi
 ## Folder structure
 
 ```
-|- app                  Main folder of the application
+|- src                  Main folder of the application
 .  |- assets            Assets for the application
 .  |- components        Components for the application
 .  |- directives        Custom Vue directives
 .  |- helpers           Helper functions which can be used to handle certain tasks
 .  |- mixins            Vue mixins
-.  |- services          Single instance services like event bus or viewport state handler
+.  |- plugins           Self maintained plugins
 .  |- setup             Configuration and setup of the application
 .  |- store             Vuex store and modules
 .  |- styleguide        Assets, components, mock data and routes for the stylguide 
@@ -208,7 +208,7 @@ This are components, which are only used in the styleguide. Make sure to keep th
 
 ### Using BEM with Vue
 
-We added the [vue-bem](https://github.com/verstaerker/vue-bem) plugin for Vue to improve the handling of BEM classes and especially modifiers in Vue components. Just use `v-bem:<element>.<staticModifiers>="<dynamicModifiers>"` on any template element to add blocks, elements and modifiers.
+We added the [vue-bem-cn](https://github.com/c01nd01r/vue-bem-cn) plugin for Vue to improve the handling of BEM classes and especially modifiers in Vue components. Just use `:class="b(<customConfiguration>)"` on any template element to add blocks, elements and modifiers. Make sure your component has a `name` property, since it is mandatory for this plugin.
 
 ### Guidelines
 
@@ -401,26 +401,45 @@ store
 
 ### Initial data
 
-To inject initial data into the Vuex store, we decided to prepare mutation, which handle an initial payload.
+To inject initial data into the Vuex store, we decided to prepare actions (since mutations are limited in regards of store actions), which handle an initial payload.
+ 
+ The data is exchanged via a global JS object. It is recommended to assign JSON strings to the global object, rather than a pure JS object, since parsing of JSON is faster. @see https://www.youtube.com/watch?v=ff4fgQxPaO0
+ 
+ NOTE: make sure that initial data is **SANITIZED** and **DOES NOT** contain closing script tags!
+ 
+ See also `/index.html` as an example.
 
-```javascript
-// main.js
-
-window.vm = new Vue();
-```
-
-```
+```html
 <html>
 <body>
-  <script src="vue-app.js"></script>
   <script>
-    var commit = window.vm.$store.commit;
-    var payload = {/* data */};
-     
-    commit('<storeModule>/<propertySetter>', payload);
-</script>
+    window.initialData = {};
+  </script>
+  ...
+  <script>
+    window.initialData['<storeModule>/<propertySetter>'] = 'payloadJSON';
+  </script>
+  <script src="vue-app.js"></script>
 </body>
 </html>
+```
+
+```javascript
+// @/store/index
+
+const data = window.initialData || {};
+
+// ...
+
+Object.keys(data).forEach((action) => {
+  try {
+    store.dispatch(action, JSON.parse(data[action]));
+  } catch (error) {
+    throw new Error(`The initial data provided for '${action}' is no valid JSON.`);
+  }
+});
+
+window.initialData = {};
 ```
 
 #### Props
@@ -471,17 +490,7 @@ All text which is defined in frontend MUST be placed trough translations. There 
 
 We use the [vue-i18n](https://github.com/kazupon/vue-i18n) plugin to handle translations. This tool also allows us to handle localizations (e.g. number or date formats). The documentation can be found [here](https://kazupon.github.io/vue-i18n/guide/started.html).
 
-Use as directive:
-```html
-<span v-t="'c-example.title'"></span>
-```
-
-Use as directive inside a transition:
-```html
-<transition name="fade">
-  <span v-if="toggle" v-t.preserve="'c-example.title'"></span>
-</transition>
-```
+We discovered that the provided directive `v-t` accelerates the memory leak issue in IE11 since it creates copies of the translation JSON for each use (as of v8.15.3). For this reason, please use the `{{$t()}}` method.
 
 ### Placeholders
 
@@ -709,6 +718,22 @@ $ brew upgrade nasm
 * [ ] Fallback image for e-picture
 * [x] e-picture should support relation property and fallback image
 * [ ] npm update: only update one package at a time, test, then update next.
+
+## Version 4 Roadmap
+
+* [x] Update swiper
+* [ ] Implement dual build (ES5/ES2015+)
+* [ ] Replace Axios with fetch()
+    * Promise not rejected when non 2** status
+    * Cookies not part of the request by default
+    * See also https://medium.com/cameron-nokes/4-common-mistakes-front-end-developers-make-when-using-fetch-1f974f9d1aa1
+* [x] Double check polyfills (e.g. smoothscroll)
+* [x] Fix broken themes
+* [ ] Element styles should be moved to reboot.
+* [x] Update package.md.
+* [*] Add current viewport info to development environment.
+* [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
+* [ ] Add custom elements option to the "initial data" section.
 
 ## License
 

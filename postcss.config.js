@@ -1,8 +1,38 @@
-// https://github.com/michael-ciniawsky/postcss-load-config
-
 module.exports = {
-  plugins: [
-    require('autoprefixer'),
-    // Browser config is fetched from package.json:browserslist
-  ]
+  // Browser config is fetched from package.json:browserslist
+  map: false,
+  plugins: {
+    autoprefixer: {},
+    cssnano: {
+      // 'css-declaration-sorter': false,
+      // 'cssnano-util-raw-cache': false,
+      // 'postcss-calc': false,
+      // 'postcss-colormin': false,
+      // 'postcss-convert-values': false,
+      // 'postcss-discard-comments': false,
+      // 'postcss-discard-duplicates': false,
+      // 'postcss-discard-empty': false,
+      // 'postcss-discard-overridden': false,
+      // 'postcss-merge-longhand': false,
+      // 'postcss-merge-rules': false,
+      // 'postcss-minify-font-values': false,
+      // 'postcss-minify-gradients': false,
+      // 'postcss-minify-params': false,
+      // 'postcss-minify-selectors': false,
+      // 'postcss-normalize-charset': false,
+      // 'postcss-normalize-display-values': false,
+      // 'postcss-normalize-positions': false,
+      // 'postcss-normalize-repeat-style': false,
+      // 'postcss-normalize-string': false,
+      // 'postcss-normalize-timing-functions': false,
+      // 'postcss-normalize-unicode': false,
+      // 'postcss-normalize-url': false,
+      // 'postcss-normalize-whitespace': false,
+      // 'postcss-ordered-values': false,
+      // 'postcss-reduce-initial': false,
+      // 'postcss-reduce-transforms': false,
+      // 'postcss-svgo': false,
+      // 'postcss-unique-selectors': false,
+    }
+  },
 };
