@@ -156,8 +156,8 @@ export default {
     /**
      * Accepts the initial data Array of notification Objects.
      *
-     * @param {Object} context - An object of context related methods.
-     * @param {Function} context.commit - The vuex commit method.
+     * @param {Object} context - The current module context.
+     * @param {Function} context.commit - Triggers a mutation on the current module.
      * @param {Array.<Object>} [payload] - An Array of notification Objects.
      */
     data({ commit }, payload) {
@@ -173,8 +173,8 @@ export default {
     /**
      * Adds an "unknown error" to the notification stack.
      *
-     * @param {Object} context - An object of context related methods.
-     * @param {Function} context.commit - The vuex commit method.
+     * @param {Object} context - The current module context.
+     * @param {Function} context.commit - Triggers a mutation on the current module.
      */
     showUnknownError({ commit }) {
       commit('pushNotification', NOTIFICATION_UNKNOWN_ERROR);

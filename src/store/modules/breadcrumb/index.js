@@ -33,7 +33,8 @@ export default {
     /**
      * Handles the initial data for breadcrumbs.
      *
-     * @param {Object} state - The current module state.
+     * @param {Object} context - The current module context.
+     * @param {Function} context.commit - Triggers a mutation on the current module.
      * @param {Array} payload - List of breadcrumb items.
      */
     data({ commit }, payload) {
