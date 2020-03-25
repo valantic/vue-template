@@ -10,7 +10,7 @@ export default {
     /**
      * Gets the current theme id.
      *
-     * @param {Object} state - Current state object.
+     * @param {Object} state - The current module state.
      *
      * @returns {String}
      */

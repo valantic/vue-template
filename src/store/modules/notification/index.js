@@ -8,7 +8,7 @@ import api from '@/helpers/api';
  * This is a work around to handle app internal and external pushes of notifications.
  * A better way would be to refactor this to an action.
  *
- * @param {Object} state - The current Vuex module state.
+ * @param {Object} state - The current module state.
  * @param {Object} options - Notification object.
  * @param {Object} options.message - The message configuration.
  * @param {String} options.message.type - The message type (success, error, warning, info).
@@ -70,7 +70,7 @@ export default {
     /**
      * Gets all notifications that are bound to a selector.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
      * @returns {Array} selectorNotifications - All notifications bound to a selector.
      */
@@ -79,7 +79,7 @@ export default {
     /**
      * Gets all notifications that are not bound to a selector.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
      * @returns {Array} nonSelectorNotifications - All notifications not bound to a selector.
      */
@@ -88,7 +88,7 @@ export default {
     /**
      * Gets the global notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
      * @returns {Array} globalNotifications - The global notifications.
      */
@@ -97,7 +97,7 @@ export default {
     /**
      * Gets the add-to-cart notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
      * @returns {Array} addToCartNotifications - The add-to-cart notifications.
      */
@@ -106,7 +106,7 @@ export default {
     /**
      * Gets the field notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
      * @returns {Array} fieldNotifications - The field notifications.
      */
@@ -115,7 +115,7 @@ export default {
     /**
      * Gets the global and add-to-cart notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
      * @returns {Array} globalAndAddToCartNotifications - The global and add-to-cart notifications.
      */
@@ -125,7 +125,7 @@ export default {
     /**
      * Adds a notification.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      * @param {Object} options - Notification object.
      * @param {Object} options.message - The message configuration.
      * @param {String} options.message.type - The message type (success, error, warning, info).
@@ -136,7 +136,7 @@ export default {
     /**
      * Removes a notification.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      * @param {Number} id - Id of the notification.
      */
     popNotification(state, id) {
@@ -146,7 +146,7 @@ export default {
     /**
      * Flushes field notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      */
     flushFieldNotifications(state) {
       state.notifications = state.notifications.filter(notification => !notification.message.source || !notification.message.source.field); // eslint-disable-line max-len

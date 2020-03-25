@@ -12,7 +12,7 @@ export default {
     /**
      * Gets the list of current breadcrumb items.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
      * @returns {Array}
      */
@@ -22,7 +22,7 @@ export default {
     /**
      * Sets the list of breadcrumbs in the state.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      * @param {Array} data - List of breadcrumb items.
      */
     setItems(state, data) {
@@ -33,7 +33,7 @@ export default {
     /**
      * Handles the initial data for breadcrumbs.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      * @param {Array} payload - List of breadcrumb items.
      */
     data({ commit }, payload) {
