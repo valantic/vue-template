@@ -51,6 +51,19 @@ You **MUST** install the following tools globally, before you can use this templ
 
 Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](http://editorconfig.org/#download) linting/settings.
 
+### Know issues
+
+#### I use Windows and have issues with the line ending style
+
+Windows and Mac use different symbols for line endings in text files (`crlf` and `lf`). This can be an issue with GIT and/or the IDE you are using. This project ONLY uses `lf`. We recommend to set the following global configuration to resolve this issue before cloning the repository:
+
+```
+git config --global core.autocrlf input
+git config --global core.eol lf
+```
+
+NOTE: be aware that this might also effect other projects on your machine.
+
 ## Installation
 
 ### Cloning the repository
