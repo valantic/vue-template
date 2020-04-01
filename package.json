@@ -11,7 +11,7 @@
     "test": "eslint --cache --ext .js,.vue src tests/unit/specs && stylelint --cache 'src/**/*.?(vue|scss)' && npm run jest; exit 0;",
     "build": "NODE_ENV=production webpack --mode production --progress",
     "build:profile": "NODE_ENV=production webpack --mode production --profile",
-    "build:styleguide": "NODE_ENV=production webpack --mode production --styleguide && vue-styleguidist build",
+    "build:styleguide": "webpack --styleguide-build && vue-styleguidist build",
     "build:watch": "NODE_ENV=production webpack --mode production --watch"
   },
   "husky": {

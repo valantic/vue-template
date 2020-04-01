@@ -92,8 +92,8 @@
        * @returns {String}
        */
       styleguidistUrl() {
-        return process.env.NODE_ENV === 'production'
-          ? '/styleguidist'
+        return process.env.IS_STYLEGUIDE_BUILD
+          ? './styleguidist'
           : '//localhost:6060';
       },
 

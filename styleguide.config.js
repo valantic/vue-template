@@ -1,21 +1,6 @@
 const path = require('path');
 const { theme, styles } = require('./src/setup/styleguide.styles');
 
-const productiveTemplateCustomization = { // @see https://vue-styleguidist.github.io/Configuration.html#template
-  head: {
-    links: [
-      {
-        rel: 'stylesheet',
-        href: 'assets/css/app.vendor.css',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'assets/css/app.app.css',
-      },
-    ],
-  },
-};
-
 module.exports = {
   renderRootJsx: path.join(__dirname, 'src/setup/styleguidist/root.js'),
   defaultExample: 'src/setup/styleguide.fallback.md',
@@ -25,10 +10,7 @@ module.exports = {
   pagePerSection: true,
   copyCodeButton: true,
   theme,
-  styles,
-  template: process.env.NODE_ENV === 'production'
-    ? productiveTemplateCustomization
-    : undefined,
+  styles, // Production build seemed to ignore the styles. Because of that I forced the development environment for the build.
   require: [
     'core-js/stable', // Normally used on webpack entry point but was not supported by vue-styleguidist
     path.join(__dirname, 'src/setup/styleguidist/required.js'),
@@ -37,7 +19,7 @@ module.exports = {
     return require('./webpack.config')({
       mode: env,
     }, {
-      styleguide: true,
+      styleguideBuild: env === 'production', // In 'development' we always expect the styleguide.
     });
   },
   ignore: [
