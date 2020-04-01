@@ -1,7 +1,7 @@
 import VueI18n from 'vue-i18n';
 import Vue from 'vue'; // Default language
 import fallbackMessages from '../translations/de';
-import numberFormats from '../translations/numbers';
+import numberFormats from './localization';
 
 const pageLang = document && document.documentElement && document.documentElement.lang;
 
@@ -13,7 +13,7 @@ export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 
 // Add styleguide only translations
 if (process.env.NODE_ENV !== 'production') {
-  const styleguideTranslations = require('@/translations/styleguide'); // eslint-disable-line global-require
+  const styleguideTranslations = require('./styleguide.translations'); // eslint-disable-line global-require
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
@@ -54,7 +54,7 @@ export const i18nLoadMessages = function(locale) {
       .then((localeMessages) => {
         // Add styleguide only translations
         if (process.env.NODE_ENV !== 'production') {
-          const styleguideTranslations = require('@/translations/styleguide'); // eslint-disable-line global-require
+          const styleguideTranslations = require('./styleguide.translations'); // eslint-disable-line global-require
 
           if (styleguideTranslations[locale]) {
             Object.entries(styleguideTranslations[locale]).forEach(([key, value]) => {

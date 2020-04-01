@@ -8,6 +8,7 @@ import resizeEnd from '../plugins/resize-end';
 import eventBus from '../plugins/event-bus';
 import viewport from '../plugins/viewport';
 import modal from '../plugins/modalStack';
+import api from '../plugins/api';
 // import dayjs from '../plugins/dayjs';
 
 // Self executing
@@ -17,6 +18,7 @@ Vue.use(VueAxios);
 Vue.use(eventBus);
 Vue.use(viewport);
 Vue.use(modal);
+Vue.use(api);
 Vue.use(VueBemCn, {
   hyphenate: true,
 });

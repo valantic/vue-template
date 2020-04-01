@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiUrls from '@/setup/apiUrls';
 
 /**
  * Pushes an array of messages to the notification handler.
@@ -55,6 +56,30 @@ function handleError(error, options) {
 }
 
 export default {
+  /**
+   * Gets the url for the given 'urlKey'. The method also accepts an Object of interpolation values.
+   *
+   * @param {String} urlKey - The key for the requested url.
+   * @param {Object} [values] - An Object of key/value pairs. The related '{key}' in the URL will be replaced with its value.
+   *
+   * @returns {String}
+   */
+  getUrl(urlKey, values) {
+    let url = apiUrls[urlKey];
+
+    if (!url) {
+      throw new Error(`Unable to find an API url with the identifier ${urlKey}.`);
+    }
+
+    if (values) {
+      Object.entries(values).forEach(([key, value]) => {
+        url = url.replace(`{${key}}`, value);
+      });
+    }
+
+    return url;
+  },
+
   /**
    * Runs a get request with given url with given url params.
    *
