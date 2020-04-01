@@ -16,6 +16,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const WebpackManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = (env, argv = {}) => {
   // Instance variables
@@ -104,9 +105,12 @@ module.exports = (env, argv = {}) => {
   }
 
   if (isProduction || hasStyleguide) {
-    plugins.push(new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
-      cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
-    }));
+    plugins.push(
+      new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
+        cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
+      }),
+      new WebpackManifestPlugin(), // Creates a manifest.json for the build
+    );
   }
 
   if (!isProduction || hasWatcher) {
@@ -235,7 +239,7 @@ module.exports = (env, argv = {}) => {
           options: {
             esModule: false,
             context: 'src/assets/',
-            name: '[path]/[name].[ext]?[hash]',
+            name: '[path][name].[ext]?[hash]',
             outputPath: `${outputAssetsFolder}img/`,
           },
         },
@@ -256,7 +260,7 @@ module.exports = (env, argv = {}) => {
           loader: 'file-loader',
           options: {
             esModule: false,
-            name: `[path]/[name].[ext]?[hash]`,
+            name: `[path][name].[ext]?[hash]`,
             outputPath: `${outputAssetsFolder}fonts/`,
           },
         }

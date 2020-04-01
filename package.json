@@ -110,7 +110,8 @@
     "webpack": "~4.42.0",
     "webpack-bundle-analyzer": "~3.6.1",
     "webpack-cli": "~3.3.11",
-    "webpack-dev-server": "~3.10.3"
+    "webpack-dev-server": "~3.10.3",
+    "webpack-manifest-plugin": "~2.2.0"
   },
   "browserslist": [
     "> 1%",

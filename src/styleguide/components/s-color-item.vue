@@ -1,38 +1,49 @@
 <template>
   <div :class="b()">
-    <div :class="b('color')" :style="backgroundColor"></div>
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="displayName" :class="b('name')"></div>
-    <div :class="b('value')">
-      {{ displayValue }}
-    </div>
+    <h4 :class="b('headline')">
+      {{ headline }}
+    </h4>
+    <ul :class="b('grid')">
+      <li v-for="(color) in colors"
+          :key="color.name"
+          :class="b('grid-item')"
+      >
+        <s-color-specimen
+          :name="color.name"
+          :value="color.value"
+        />
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+  import sColorSpecimen from './s-color-specimen';
+
   export default {
     name: 's-color-item',
     status: 0,
 
-    // components: {},
+    components: {
+      sColorSpecimen
+    },
     // mixins: [],
 
     props: {
 
       /**
-       * Human readable name of the color
+       * Palette name to be rendered. See keys in src/setup/js/color.js
        */
-      name: {
+      palette: {
         type: String,
         default: null,
         required: true
       },
 
       /**
-       * Array of color values provided in hex format (#ff0000).
-       * If 2 values are given it will be treated as gradient.
+       * Array of color objects to be rendered. See src/setup/js/color.js
        */
-      value: {
+      colors: {
         type: Array,
         default: null,
         required: true
@@ -44,36 +55,14 @@
 
     computed: {
       /**
-       * Returns the name HTML of the color.
+       * Returns the headline for the component.
        *
        * @returns {String}
        */
-      displayName() {
-        return this.name.split(' - ').join('<br />');
-      },
-
-      /**
-       * Returns the value HTML of the color.
-       *
-       * @returns {String}
-       */
-      displayValue() {
-        return this.value.join(' - ');
-      },
-
-      /**
-       * Returns the background style for the color.
-       *
-       * @returns {String}
-       */
-      backgroundColor() {
-        const [color1, color2] = this.value;
-
-        return {
-          background: `linear-gradient(to right, ${color1} , ${color2 || color1})`
-        };
+      headline() {
+        return `${this.palette} colors`;
       }
-    }
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -94,24 +83,29 @@
 
 <style lang="scss">
   .s-color-item {
-    border: 1px solid $color-primary--2;
+    &__grid {
+      @extend %list-reset;
 
-    &__color {
-      padding-top: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin: $spacing--0 (-$spacing--5);
     }
 
-    &__name {
-      white-space: nowrap;
-      text-align: center;
-      font-size: 14px;
-      line-height: 24px;
-      font-weight: bold;
+    &__grid-item {
+      padding: $spacing--5;
+      flex: 0 1 percentage(6 / 12);
+
+      @include media(sm) {
+        flex-basis: percentage(4 / 12);
+      }
+
+      @include media(md) {
+        flex-basis: percentage(2 / 12);
+      }
     }
 
-    &__value {
-      text-align: center;
-      font-size: 12px;
-      line-height: 22px;
+    &__headline {
+      text-transform: capitalize;
     }
   }
 </style>

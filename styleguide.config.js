@@ -10,7 +10,7 @@ const productiveTemplateCustomization = { // @see https://vue-styleguidist.githu
       },
       {
         rel: 'stylesheet',
-        href: 'assets/css/app.main.css',
+        href: 'assets/css/app.app.css',
       },
     ],
   },
