@@ -56,7 +56,7 @@ export default {
       .onPost('/notifications/selector/info1').reply(200, notification.selectorInfo1)
 
       // Global
-      .onAny(/\/?static|assets/).passThrough()
+      .onAny(/\/?static|assets|passtrough/).passThrough()
       .onAny().reply(wildcard);
   },
 };
