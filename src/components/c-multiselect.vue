@@ -590,7 +590,7 @@
 
       position: absolute;
       border: 1px solid $color-grayscale--500;
-      border-radius: $border-radius--default;
+      border-radius: $border-radius--500;
       box-shadow: 0 2px 5px 0 rgba($color-grayscale--500, 0.5);
       top: calc(100% - 30px);
     }
@@ -627,7 +627,7 @@
       justify-content: space-between;
       align-items: center;
       border: 1px solid $color-grayscale--500;
-      border-radius: $border-radius--default;
+      border-radius: $border-radius--500;
     }
 
     &--hover &__output {
