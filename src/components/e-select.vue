@@ -129,6 +129,7 @@
 </script>
 
 <style lang="scss">
+  $this: &;
   $e-select-height: 30px;
 
   .e-select {
@@ -190,13 +191,13 @@
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
-      .e-select__select {
+      #{$this}__select {
         @include form-state-icon('error');
 
         border-color: $color-status--danger;
       }
 
-      .e-select__icon-splitter {
+      #{$this}__icon-splitter {
         border-color: $color-status--danger;
       }
     }
@@ -210,11 +211,11 @@
     }
 
     &--state-success {
-      .e-select__select {
+      #{$this}__select {
         @include form-state-icon('success');
       }
 
-      .e-select__icon-splitter {
+      #{$this}__icon-splitter {
         display: none;
       }
     }
