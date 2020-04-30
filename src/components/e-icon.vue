@@ -41,7 +41,7 @@
        * Custom width value
        */
       width: {
-        type: String,
+        type: [String, Number],
         default: null,
       },
 
@@ -49,7 +49,7 @@
        * Custom height value
        */
       height: {
-        type: String,
+        type: [String, Number],
         default: null,
       },
 
