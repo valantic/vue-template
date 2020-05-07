@@ -14,7 +14,7 @@ const directives = require.context('./directives/', true, /\.(js)$/i);
  *        v-focus-item="isEditMode"
  *   ></div>
  * </div>
- * <asside v-focus-mask></asside>
+ * <aside v-focus-mask></aside>
  *
  * - There can be multiple, separate v-focus-item which get focus separately or at the same time.
  * - All v-focus-masks will react to all v-focus-item. It's not possible to create "groups" of items and masks.
