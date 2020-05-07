@@ -12,7 +12,7 @@ const directives = require.context('./directives/', true, /\.(js)$/i);
  * >
  *   <div class="can-get-focus"
  *        v-focus-item="isEditMode"
- *   >
+ *   ></div>
  * </div>
  * <asside v-focus-mask></asside>
  *
