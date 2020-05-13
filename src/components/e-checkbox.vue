@@ -190,8 +190,9 @@
 
     // general label
     &__label {
+      $label-size: 17px;
+
       display: block;
-      color: $color-grayscale--400;
       cursor: pointer;
       position: relative;
       padding-left: $spacing--25;
@@ -206,8 +207,8 @@
         position: absolute;
         left: 0;
         top: 0;
-        width: 17px;
-        height: 17px;
+        width: $label-size;
+        height: $label-size;
         transition: border $transition-duration-300 ease;
       }
 
@@ -222,8 +223,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: 17px;
-        width: 17px;
+        height: $label-size;
+        width: $label-size;
         opacity: 0;
         transform: scale(0);
         transition: all $transition-duration-100;
