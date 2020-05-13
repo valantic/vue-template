@@ -209,14 +209,10 @@
 
     &--h4 {
       @include font($font-size--14);
-
-      font-weight: $font-weight--bold;
     }
 
     &--h5 {
       @include font($font-size--14);
-
-      font-weight: $font-weight--semi-bold;
     }
 
     &--h6 {
