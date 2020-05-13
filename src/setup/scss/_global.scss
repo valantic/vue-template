@@ -21,14 +21,10 @@ h3 {
 
 h4 {
   @include font($font-size--14);
-
-  font-weight: $font-weight--bold;
 }
 
 h5 {
   @include font($font-size--14);
-
-  font-weight: $font-weight--semi-bold;
 }
 
 h6 {
@@ -37,8 +33,6 @@ h6 {
 
 p {
   @include font($font-size--14);
-
-  font-weight: 400;
 }
 
 /* stylelint-disable selector-class-pattern, selector-max-id */
