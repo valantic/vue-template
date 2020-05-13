@@ -136,15 +136,12 @@
     position: relative;
 
     &__select {
-      @include font($font-size--14, 18px);
-
       background: url('../assets/icons/i-arrow--down--info.svg') no-repeat right 5px center;
       border: 1px solid $color-grayscale--500;
       border-radius: 3px;
       width: 100%;
       -webkit-appearance: none;
       -moz-appearance: none;
-      color: $color-grayscale--400;
       outline: none;
       padding: $spacing--0 $spacing--30 $spacing--0 $spacing--10;
       height: $e-select-height;
