@@ -62,7 +62,7 @@
 
     props: {
       /**
-       * Optional title which will rendered with the underline heading (h1)
+       * Optional title which will be rendered with the underline heading (h1)
        */
       title: {
         type: String,
