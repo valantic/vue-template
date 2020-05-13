@@ -4,7 +4,6 @@
 ```
 <c-panel
   border="2"
-  color="gray"
   heading-spacing="0"
   content-spacing="0"
 >

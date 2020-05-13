@@ -12,22 +12,6 @@
 
     props: {
       /**
-       * Defines the color of the heading (h1-h6).
-       *
-       * Valid values: `[blue, gray]`
-       */
-      color: {
-        type: String,
-        default: 'blue',
-        validator(value) {
-          return [
-            'blue',
-            'gray',
-          ].includes(value);
-        },
-      },
-
-      /**
        * Defines the tagname of the heading (h1-h6).
        *
        * Valid values: `[h1, h2, h3, h4, h5, h6]`
@@ -159,8 +143,7 @@
     }
 
     &__inner a {
-      color: $color-secondary--1;
-      text-decoration: none;
+      // custom styling for a anchor in a heading
     }
 
     &--underline &__inner {
@@ -169,10 +152,6 @@
       @include media(sm) {
         padding: $spacing--15 $spacing--20;
       }
-    }
-
-    &--underline &__inner--color-gray {
-      border-bottom: 1px solid $color-grayscale--600;
     }
 
     &--underline &__inner--spacing-400 {
@@ -229,22 +208,6 @@
 
     &--font-weight-bold {
       font-weight: $font-weight--bold;
-    }
-
-    &--color-blue {
-      color: $color-secondary--1;
-
-      a {
-        color: $color-secondary--1;
-      }
-    }
-
-    &--color-gray {
-      color: $color-grayscale--400;
-
-      a {
-        color: $color-grayscale--400;
-      }
     }
   }
 </style>
