@@ -1,8 +1,8 @@
 <template>
   <div :class="b()">
-    <e-heading tag-name="h1">
+    <h1 class="e-heading">
       Example form
-    </e-heading>
+    </h1>
     <form action="#form-url" method="POST">
       <!-- e-input -->
       <div :class="b('part')">

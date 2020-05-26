@@ -21,9 +21,9 @@
         />
       </div>
       <div :class="b('title')">
-        <e-heading v-if="title" tag-name="h1">
+        <h1 v-if="title" class="e-heading">
           {{ title }}
-        </e-heading>
+        </h1>
       </div>
       <a v-if="closable"
          :class="b('close')"

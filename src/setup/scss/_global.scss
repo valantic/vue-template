@@ -8,27 +8,27 @@ body {
 }
 
 h1 {
-  @include font($font-size--18);
+  @extend %heading-h1;
 }
 
 h2 {
-  @include font($font-size--16);
+  @extend %heading-h2;
 }
 
 h3 {
-  @include font($font-size--14);
+  @extend %heading-h3;
 }
 
 h4 {
-  @include font($font-size--14);
+  @extend %heading-h4;
 }
 
 h5 {
-  @include font($font-size--14);
+  @extend %heading-h5;
 }
 
 h6 {
-  @include font($font-size--14);
+  @extend %heading-h6;
 }
 
 p {

@@ -10,7 +10,6 @@ import eButton from '@/components/e-button';
 // Elements
 import eIcon from '@/components/e-icon';
 import ePicture from '@/components/e-picture';
-import eHeading from '@/components/e-heading';
 import ePanel from '@/components/c-panel';
 import eProgress from '@/components/e-progress';
 import eLink from '@/components/e-link';
@@ -41,7 +40,6 @@ export default {
       eButton,
       eIcon,
       ePicture,
-      eHeading,
       eProgress,
       ePanel,
       eLink,
@@ -73,7 +71,6 @@ export default {
       Vue.component(eButton.name, eButton);
       Vue.component(eIcon.name, eIcon);
       Vue.component(ePicture.name, ePicture);
-      Vue.component(eHeading.name, eHeading);
       Vue.component(ePanel.name, ePanel);
       Vue.component(eProgress.name, eProgress);
       Vue.component(eLink.name, eLink);
