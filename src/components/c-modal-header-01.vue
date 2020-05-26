@@ -21,7 +21,7 @@
         />
       </div>
       <div :class="b('title')">
-        <e-heading v-if="title" :underline="!isMobile" tag-name="h1">
+        <e-heading v-if="title" tag-name="h1">
           {{ title }}
         </e-heading>
       </div>
@@ -62,7 +62,7 @@
 
     props: {
       /**
-       * Optional title which will be rendered with the underline heading (h1)
+       * Optional title which will be rendered with heading (h1)
        */
       title: {
         type: String,
@@ -167,16 +167,6 @@
         @include media($down: sm) {
           margin-bottom: 0;
           font-weight: $font-weight--bold;
-        }
-      }
-
-      .e-heading--underline .e-heading__inner {
-        padding-top: 0;
-        margin-bottom: 0;
-
-        @include media(sm) {
-          padding-left: $spacing--50;
-          font-weight: $font-weight--regular;
         }
       }
     }

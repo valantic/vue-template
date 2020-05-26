@@ -24,19 +24,6 @@
 </div>
 ```
 
-### Headings with underline
-
-```
-<div>
-  <e-heading tag-name="h1" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h2" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h3" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h4" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h5" underline>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</e-heading>
-  <e-heading tag-name="h6" underline><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</a></e-heading>
-</div>
-```
-
 ### Headings with alternative font weights
 
 ```
@@ -50,18 +37,18 @@
 </div>
 ```
 
-### Spacings (with underline)
+### Spacings
 
 #### 500 (default)
 
 ```vue
 <div>
-  <e-heading tag-name="h1" spacing="500" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h2" spacing="500" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h3" spacing="500" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h4" spacing="500" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h5" spacing="500" underline>This heading has spacing '500'</e-heading>
-  <e-heading tag-name="h6" spacing="500" underline><a href="#">This heading has spacing '500'</a></e-heading>
+  <e-heading tag-name="h1" spacing="500">This heading has spacing '500'</e-heading>
+  <e-heading tag-name="h2" spacing="500">This heading has spacing '500'</e-heading>
+  <e-heading tag-name="h3" spacing="500">This heading has spacing '500'</e-heading>
+  <e-heading tag-name="h4" spacing="500">This heading has spacing '500'</e-heading>
+  <e-heading tag-name="h5" spacing="500">This heading has spacing '500'</e-heading>
+  <e-heading tag-name="h6" spacing="500"><a href="#">This heading has spacing '500'</a></e-heading>
 </div>
 ```
 
@@ -69,11 +56,11 @@
 
 ```vue
 <div>
-  <e-heading tag-name="h1" spacing="700" underline>This heading has spacing '700'</e-heading>
-  <e-heading tag-name="h2" spacing="700" underline>This heading has spacing '700'</e-heading>
-  <e-heading tag-name="h3" spacing="700" underline>This heading has spacing '700'</e-heading>
-  <e-heading tag-name="h4" spacing="700" underline>This heading has spacing '700'</e-heading>
-  <e-heading tag-name="h5" spacing="700" underline>This heading has spacing '700'</e-heading>
-  <e-heading tag-name="h6" spacing="700" underline><a href="#">This heading has spacing '700'</a></e-heading>
+  <e-heading tag-name="h1" spacing="700">This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h2" spacing="700">This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h3" spacing="700">This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h4" spacing="700">This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h5" spacing="700">This heading has spacing '700'</e-heading>
+  <e-heading tag-name="h6" spacing="700"><a href="#">This heading has spacing '700'</a></e-heading>
 </div>
 ```

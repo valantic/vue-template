@@ -29,84 +29,41 @@
         </e-heading>
       </div>
 
-      <h1>Headings with underline</h1>
-      <div :class="b('example-box')">
-        <e-heading
-          tag-name="h1"
-          underline>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        </e-heading>
-        <e-heading
-          tag-name="h2"
-          underline>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        </e-heading>
-        <e-heading
-          tag-name="h3"
-          underline>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        </e-heading>
-        <e-heading
-          tag-name="h4"
-          underline>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        </e-heading>
-        <e-heading
-          tag-name="h5"
-          underline>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        </e-heading>
-        <e-heading
-          tag-name="h6"
-          font-weight="normal"
-          underline>
-          <a href="#">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          </a>
-        </e-heading>
-      </div>
-
       <h1>Headings with links</h1>
       <div :class="b('example-box')">
         <e-heading
-          tag-name="h1"
-          underline>
+          tag-name="h1">
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
-          tag-name="h2"
-          underline>
+          tag-name="h2">
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
-          tag-name="h3"
-          underline>
+          tag-name="h3">
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
-          tag-name="h4"
-          underline>
+          tag-name="h4">
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
-          tag-name="h5"
-          underline>
+          tag-name="h5">
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>
         </e-heading>
         <e-heading
           tag-name="h6"
-          font-weight="bold"
-          underline>
+          font-weight="bold">
           <a href="#">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </a>

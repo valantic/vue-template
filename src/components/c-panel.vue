@@ -1,7 +1,7 @@
 <template>
   <div :class="b(panelModifiers)">
     <div :class="b('heading', headingModifiers)">
-      <e-heading v-if="heading" tag-name="h2" underline>
+      <e-heading v-if="heading" tag-name="h2">
         {{ heading }}
       </e-heading>
     </div>

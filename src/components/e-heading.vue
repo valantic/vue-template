@@ -32,14 +32,6 @@
       },
 
       /**
-       * Defines if the heading should have an underline.
-       */
-      underline: {
-        type: Boolean,
-        default: false,
-      },
-
-      /**
        * Defines the font-weight
        *
        * Valid values: `[normal, semibold, bold]`
@@ -106,7 +98,6 @@
       const attributes = {
         class: this.b({
           color: this.$props.color,
-          underline: this.$props.underline,
           uppercase: this.$props.uppercase,
           fontWeight: this.$props.fontWeight,
           spacing: this.$props.spacing,
@@ -144,30 +135,6 @@
 
     &__inner a {
       // custom styling for a anchor in a heading
-    }
-
-    &--underline &__inner {
-      border-bottom: 1px solid $color-primary--1;
-
-      @include media(sm) {
-        padding: $spacing--15 $spacing--20;
-      }
-    }
-
-    &--underline &__inner--spacing-400 {
-      padding: $spacing--10 $spacing--20;
-    }
-
-    &--underline &__inner--spacing-500 {
-      padding: $spacing--15 $spacing--10;
-    }
-
-    &--underline &__inner--spacing-700 {
-      padding: $spacing--20 $spacing--20 $spacing--5;
-    }
-
-    &--underline &__inner--spacing-800 {
-      padding: $spacing--20 $spacing--25 $spacing--5;
     }
 
     &--uppercase {
