@@ -25,5 +25,9 @@ export default {
 
   bind: update,
 
-  update
+  update,
+
+  unbind() {
+    state.enabled = false;
+  },
 };
