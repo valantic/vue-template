@@ -133,10 +133,6 @@
       display: inline-block;
     }
 
-    &__inner a {
-      // custom styling for a anchor in a heading
-    }
-
     &--uppercase {
       text-transform: uppercase;
     }
