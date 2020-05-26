@@ -132,14 +132,6 @@
       ]),
 
       /**
-       * Determines if the input should have a shadow on focus
-       */
-      focusShadow: {
-        default: true,
-        type: [Boolean]
-      },
-
-      /**
        * Option for selecting value text on focus.
        */
       selectOnFocus: {
@@ -202,7 +194,6 @@
       modifiers() {
         const {
           border,
-          focusShadow,
           noNativeControl,
           notification
         } = this;
@@ -212,7 +203,6 @@
           notification: notification && this.hasFocus,
           type: this.$attrs.type || 'text',
           border,
-          focusShadow,
           noNativeControl,
         };
       },
@@ -499,11 +489,6 @@
     &:not(&--border-0) &__field:focus,
     &--focus:not(&--border-0) &__field {
       border: 1px solid $color-grayscale--400;
-    }
-
-    &--focus-shadow &__field:focus,
-    &--focus-shadow.e-input--focus &__field {
-      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
     }
 
     // hover
