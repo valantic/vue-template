@@ -36,10 +36,6 @@
            @keyup.down="onArrowKeyUp"
     >
 
-    <span v-if="$slots.fixedLabel" ref="fixedLabel" :class="b('fixed-label')">
-      <!-- @slot Use this slot for a fixed label inside the input field. -->
-      <slot name="fixedLabel"></slot>
-    </span>
     <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
       <span v-if="$slots.default" :class="b('slot')">
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
@@ -214,14 +210,11 @@
     // beforeMount() {},
     mounted() {
       /**
-       * Calls the "setSlotSpacings" and "setFixedLabelSpacings" in a timeout function with a delay of 200ms because without
+       * Calls the "setSlotSpacings" in a timeout function with a delay of 200ms because without
        * it's not working on iOS
        */
       this.setSlotSpacings();
       setTimeout(this.setSlotSpacings, 200);
-
-      this.setFixedLabelSpacings();
-      setTimeout(this.setFixedLabelSpacings, 200);
 
       window.addEventListener('resizeend', this.setSlotSpacings);
 
@@ -232,7 +225,6 @@
     // beforeUpdate() {},
     updated() {
       setTimeout(this.setSlotSpacings);
-      setTimeout(this.setFixedLabelSpacings);
     },
     // activated() {},
     // deactivated() {},
@@ -317,17 +309,6 @@
           const slotWidth = this.$refs.slot.clientWidth;
 
           this.$refs.input.style.paddingRight = `${slotWidth + 10}px`;
-        }
-      },
-
-      /**
-       * Calculates the width of the fixed label and sets it as padding-left to the input field.
-       */
-      setFixedLabelSpacings() {
-        if (this.$refs.fixedLabel) {
-          const labelWidth = this.$refs.fixedLabel.clientWidth;
-
-          this.$refs.input.style.paddingLeft = `${labelWidth + 10}px`;
         }
       },
 
