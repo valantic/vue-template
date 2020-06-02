@@ -51,7 +51,7 @@
       <!-- e-select -->
       <div :class="b('part')">
         <e-label name="Language" position="top">
-          <e-select v-model="demo.language" :options-list="mock.selects" name="language" />
+          <e-select v-model="demo.language" :options="mock.selects" name="language" />
         </e-label>
       </div>
 
