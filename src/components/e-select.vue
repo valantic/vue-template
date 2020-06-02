@@ -1,33 +1,37 @@
 <template>
-  <span :class="b(stateModifiers)">
+  <div :class="b(stateModifiers)">
     <select :value="value"
             :class="b('select')"
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
     >
-      <option :disabled="!hasSelectablePlaceholder" value="">
+      <option v-if="placeholder"
+              :disabled="!hasSelectablePlaceholder"
+              value=""
+      >
         {{ placeholder }}
       </option>
-      <option v-for="item in optionsList"
-              :key="`${name}-${item.value}`"
-              :value="item.value"
-              :selected="item.value === value">
-        {{ item.label }}
+      <option v-for="option in options"
+              :key="`${option[valueField]}`"
+              :value="option[valueField]"
+              :selected="option[valueField] === value">
+        {{ option[labelField] }}
       </option>
     </select>
     <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
     <div v-if="progress" :class="b('progress-container')">
       <e-progress />
     </div>
-  </span>
+  </div>
 </template>
 
 <script>
+  import { i18n } from '@/setup/i18n';
   import formStates from '../mixins/form-states';
 
   /**
-   * Renders a styled select element. Options can be passed with the `optionsList` property.
+   * Renders a styled select element. Options can be passed with the `options` property.
    */
   export default {
     name: 'e-select',
@@ -55,23 +59,25 @@
       },
 
       /**
-       * OptionsList defines the options which are rendered in the select.
+       * 'options' defines the options which are rendered in the select.
        *
-       * e.g. `[{ value: <option-1>, label: <Option 1> },{ value: <option-2>, label: <Option 2>},...]`
+       * e.g. `[{ <valueField>: 'id1', <labelField>: 'Label 1' },{ <valueField>: 'id2', <labelField>: 'Label 2' },...]`
        */
-      optionsList: {
+      options: {
         required: true,
         type: Array,
       },
 
       /**
        * The text to display if no option is selected by default.
+       * The placeholder can also be disabled by passing 'false' to this prop.
        */
       placeholder: {
-        default() {
-          return this.$t('e-select.chooseOption');
+        type: [String, Boolean],
+        default: i18n.t('e-select.chooseOption'),
+        validator(value) {
+          return typeof value === 'string' || value === false;
         },
-        type: String,
       },
 
       /**
@@ -88,6 +94,22 @@
       progress: {
         type: Boolean,
         default: false,
+      },
+
+      /**
+       * Allows to change the default field, from which the value is taken for each option.
+       */
+      valueField: {
+        type: String,
+        default: 'value',
+      },
+
+      /**
+       * Allows to change the default field, from which the label text is taken for each option.
+       */
+      labelField: {
+        type: String,
+        default: 'label',
       },
     },
     // data() {
@@ -122,7 +144,7 @@
          * @type {String}
          */
         this.$emit('input', event.currentTarget.value);
-      }
+      },
     },
     // render() {},
   };
