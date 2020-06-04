@@ -217,7 +217,9 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
+    beforeDestroy() {
+      this.$modalStack.remove(this.uuid);
+    },
     // destroyed() {},
 
     methods: {
