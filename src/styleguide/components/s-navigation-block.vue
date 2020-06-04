@@ -4,7 +4,7 @@
       v-for="route in filteredRoutes"
       :key="route.name"
       :class="b('navigation-item')"
-      :to="{ name: route.name, params: { id: '123' } }"
+      :to="{ name: route.name, params: route.meta.params, query: route.meta.query }"
       :active-class="b('navigation-item', { activePath: true })"
       :exact-active-class="b('navigation-item', { active: true })"
       tag="li"
