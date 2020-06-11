@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '@/store/index';
 import apiUrls from '@/setup/apiUrls';
 
 /**
@@ -13,7 +14,7 @@ function showNotifications(messages, options) {
   }
 
   messages.forEach((message) => {
-    window.vm.$store.commit('notification/pushNotification', {
+    store.commit('notification/pushNotification', {
       ...options,
       message,
     });
@@ -49,7 +50,7 @@ function handleError(error, options) {
   if (error && error.response && error.response.data && error.response.data.messages) {
     showNotifications(error.response.data.messages, options);
   } else {
-    window.vm.$store.dispatch('notification/showUnknownError');
+    store.dispatch('notification/showUnknownError');
   }
 
   return Promise.reject(error);
