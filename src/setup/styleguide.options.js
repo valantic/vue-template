@@ -44,8 +44,6 @@ const router = new VueRouter({
   mode: process.env.IS_STYLEGUIDE_BUILD ? 'hash' : 'history', // Using 'hash' with the styleguide build requires less server configuration.
 });
 
-window.vm = new Vue();
-
 export default {
   data: {
     styleguideRoutes,
