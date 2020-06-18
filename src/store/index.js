@@ -26,9 +26,19 @@ const store = new Vuex.Store({
 // Set initial data
 Object.keys(data).forEach((action) => {
   try {
-    store.dispatch(action, JSON.parse(data[action]));
+    const parsedData = JSON.parse(data[action]);
+
+    store.dispatch(action, parsedData);
+
+    if (parsedData.messages) {
+      setTimeout(() => { // Make sure all general imports did run before.
+        parsedData.messages.forEach((message) => {
+          store.commit('notification/pushNotification', { message });
+        });
+      });
+    }
   } catch (error) {
-    throw new Error(`The initial data provided for '${action}' is no valid JSON.`);
+    console.error(new Error(`The initial data provided for '${action}' is no valid JSON.`)); // eslint-disable-line no-console
   }
 });
 
