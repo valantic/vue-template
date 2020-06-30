@@ -20,8 +20,8 @@
           height="18"
         />
       </div>
-      <div :class="b('title')">
-        <h1 v-if="title" class="e-heading">
+      <div :class="b('title-wrapper')">
+        <h1 v-if="title" class="b('title')">
           {{ title }}
         </h1>
       </div>
@@ -160,10 +160,10 @@
       padding: 0 $spacing--20;
     }
 
-    &__title {
+    &__title-wrapper {
       flex: 1 0;
 
-      .e-heading {
+      &__title {
         @include media($down: sm) {
           margin-bottom: 0;
           font-weight: $font-weight--bold;
@@ -204,12 +204,6 @@
 
       @include media(sm) {
         display: none;
-      }
-    }
-
-    &--title-spacing-300 {
-      .e-heading .e-heading__inner {
-        padding-left: $spacing--25;
       }
     }
   }
