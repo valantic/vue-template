@@ -49,12 +49,6 @@ Not defined yet.
 <e-button spacing="0" width="auto" @click="onStyleguideClick">Spacing 0</e-button>
 ```
 
-#### 700
-
-```vue
-<e-button spacing="700" width="auto" @click="onStyleguideClick">Spacing 700</e-button>
-```
-
 ### Progress
 
 #### Default

@@ -20,10 +20,10 @@
           height="18"
         />
       </div>
-      <div :class="b('title')">
-        <e-heading v-if="title" :underline="!isMobile" tag-name="h1">
+      <div :class="b('title-wrapper')">
+        <h1 v-if="title" class="b('title')">
           {{ title }}
-        </e-heading>
+        </h1>
       </div>
       <a v-if="closable"
          :class="b('close')"
@@ -62,7 +62,7 @@
 
     props: {
       /**
-       * Optional title which will rendered with the underline heading (h1)
+       * Optional title which will be rendered with heading (h1)
        */
       title: {
         type: String,
@@ -160,23 +160,13 @@
       padding: 0 $spacing--20;
     }
 
-    &__title {
+    &__title-wrapper {
       flex: 1 0;
 
-      .e-heading {
+      &__title {
         @include media($down: sm) {
           margin-bottom: 0;
           font-weight: $font-weight--bold;
-        }
-      }
-
-      .e-heading--underline .e-heading__inner {
-        padding-top: 0;
-        margin-bottom: 0;
-
-        @include media(sm) {
-          padding-left: $spacing--50;
-          font-weight: $font-weight--regular;
         }
       }
     }
@@ -214,12 +204,6 @@
 
       @include media(sm) {
         display: none;
-      }
-    }
-
-    &--title-spacing-300 {
-      .e-heading .e-heading__inner {
-        padding-left: $spacing--25;
       }
     }
   }
