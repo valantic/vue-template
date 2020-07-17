@@ -41,14 +41,6 @@
       },
 
       /**
-       * Defines if the item has a grey background.
-       */
-      background: {
-        type: Boolean,
-        default: true,
-      },
-
-      /**
        * Defines the padding of the inner content.
        */
       padding: propScale(500, [
@@ -109,7 +101,6 @@
        */
       modifiers() {
         return {
-          background: this.$props.background,
           expanded: this.isExpanded,
           open: this.isOpen,
           padding: this.$props.padding,
@@ -231,7 +222,6 @@
 <style lang="scss">
   .c-collapse {
     border-top: 1px solid $color-grayscale--600;
-    font-family: $font-family--primary;
 
     &:last-child {
       border-bottom: 1px solid $color-grayscale--600;
@@ -268,7 +258,6 @@
       }
 
       .c-collapse--expanded & {
-        color: $color-secondary--1;
         transition: color $transition-duration-300;
 
         &::after {
@@ -280,14 +269,9 @@
     &__content {
       @include font($font-size--14, 18px);
 
-      color: $color-grayscale--200;
       max-height: 0;
       overflow: hidden;
       transition: max-height $transition-duration-200 ease-in-out;
-
-      .c-collapse--background & {
-        background: $color-grayscale--700;
-      }
 
       .c-collapse--open & {
         max-height: none;

@@ -56,7 +56,6 @@
     outline: none;
     border-bottom: 1px solid $color-grayscale--600;
     color: $color-grayscale--400;
-    font-family: $font-family--primary;
     text-decoration: none;
 
     &:focus,

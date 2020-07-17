@@ -165,10 +165,7 @@
     position: relative;
 
     &__field {
-      @include font($font-size--14, 18px);
-
       padding: $spacing--5 $spacing--10;
-      color: $color-secondary--1;
       resize: none;
       width: 100%;
       border-radius: 3px;

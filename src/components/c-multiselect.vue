@@ -170,14 +170,6 @@
         type: String,
         default: '',
       },
-
-      /**
-       * Converts the component to a flex item which aligns title/dropdown at top/bottom of element.
-       */
-      equalHeight: {
-        type: Boolean,
-        default: false,
-      },
     },
 
     data() {
@@ -268,7 +260,6 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          equalHeight: this.$props.equalHeight,
           success: this.isSuccess,
           error: this.isError,
         };
@@ -561,13 +552,6 @@
 <style lang="scss">
   .c-multiselect {
     position: relative;
-
-    &--equal-height {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      height: 100%;
-    }
 
     &__wrapper {
       position: relative;
