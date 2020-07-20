@@ -1,3 +1,5 @@
+import options from '@/setup/options';
+
 // Form elements
 import eLabel from '@/components/e-label';
 import eInput from '@/components/e-input';
@@ -18,6 +20,7 @@ import eLink from '@/components/e-link';
 import cModal from '@/components/c-modal';
 import cModalHeader01 from '@/components/c-modal-header-01';
 import cBreadcrumb from '@/components/c-breadcrumb';
+import cCustomElement from '@/components/c-custom-element';
 
 // SSR related
 import lDefault from '@/components/l-default';
@@ -54,6 +57,11 @@ export default {
       cHeader,
       cFooter,
     ];
+
+    Vue.customElement(cCustomElement.name, {
+      ...cCustomElement,
+      ...options
+    });
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
     if (process.env.NODE_ENV === 'production') {
