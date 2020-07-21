@@ -16,7 +16,7 @@ export default {
      *
      * @returns {Array}
      */
-    items: state => state.items,
+    getItems: state => state.items,
   },
   mutations: {
     /**

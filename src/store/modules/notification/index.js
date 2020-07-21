@@ -72,54 +72,56 @@ export default {
      *
      * @param {Object} state - The current module state.
      *
-     * @returns {Array} selectorNotifications - All notifications bound to a selector.
+     * @returns {Array.<Object>} All notifications bound to a selector.
      */
-    selectorNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.selector),
+    getSelectorNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.selector),
 
     /**
      * Gets all notifications that are not bound to a selector.
      *
      * @param {Object} state - The current module state.
      *
-     * @returns {Array} nonSelectorNotifications - All notifications not bound to a selector.
+     * @returns {Array.Object} All notifications not bound to a selector.
      */
-    nonSelectorNotifications: state => state.notifications.filter(({ message }) => !message.source || !message.source.selector),
+    getNonSelectorNotifications: state => state.notifications
+      .filter(({ message }) => !message.source || !message.source.selector),
 
     /**
      * Gets the global notifications.
      *
      * @param {Object} state - The current module state.
      *
-     * @returns {Array} globalNotifications - The global notifications.
+     * @returns {Array.<Object>} The global notifications.
      */
-    globalNotifications: state => state.notifications.filter(({ message }) => !message.source && message.type !== 'add-to-cart'),
+    getGlobalNotifications: state => state.notifications
+      .filter(({ message }) => !message.source && message.type !== 'add-to-cart'),
 
     /**
      * Gets the add-to-cart notifications.
      *
      * @param {Object} state - The current module state.
      *
-     * @returns {Array} addToCartNotifications - The add-to-cart notifications.
+     * @returns {Array.<Object>} The add-to-cart notifications.
      */
-    addToCartNotifications: state => state.notifications.filter(({ message }) => message.type === 'add-to-cart'),
+    getAddToCartNotifications: state => state.notifications.filter(({ message }) => message.type === 'add-to-cart'),
 
     /**
      * Gets the field notifications.
      *
      * @param {Object} state - The current module state.
      *
-     * @returns {Array} fieldNotifications - The field notifications.
+     * @returns {Array.<Object>} The field notifications.
      */
-    fieldNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.field),
+    getFieldNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.field),
 
     /**
      * Gets the global and add-to-cart notifications.
      *
      * @param {Object} state - The current module state.
      *
-     * @returns {Array} globalAndAddToCartNotifications - The global and add-to-cart notifications.
+     * @returns {Array.<Object>} The global and add-to-cart notifications.
      */
-    globalAndAddToCartNotifications: state => state.notifications.filter(({ message }) => !message.source),
+    getGlobalAndAddToCartNotifications: state => state.notifications.filter(({ message }) => !message.source),
   },
   mutations: {
     /**

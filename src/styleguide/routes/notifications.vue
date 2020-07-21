@@ -167,7 +167,7 @@
     },
     computed: {
       ...mapGetters('notification', [
-        'fieldNotifications',
+        'getFieldNotifications',
       ]),
     },
     mounted() {
@@ -229,8 +229,8 @@
         this.flushFieldNotifications();
         api.post('/notifications/field/error')
           .then((response) => {
-            for (let i = 0; i < this.fieldNotifications.length; i += 1) {
-              const notification = this.fieldNotifications[i];
+            for (let i = 0; i < this.getFieldNotifications.length; i += 1) {
+              const notification = this.getFieldNotifications[i];
 
               if (notification.message.source) {
                 this.errors[notification.message.source.field].state = notification.message.type;

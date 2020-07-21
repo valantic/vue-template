@@ -80,12 +80,12 @@
 
     computed: {
       ...mapGetters('notification', [
-        'globalNotifications',
-        'addToCartNotifications',
-        'nonSelectorNotifications',
-        'selectorNotifications',
-        'fieldNotifications',
-        'globalAndAddToCartNotifications',
+        'getGlobalNotifications',
+        'getAddToCartNotifications',
+        'getNonSelectorNotifications',
+        'getSelectorNotifications',
+        'getFieldNotifications',
+        'getGlobalAndAddToCartNotifications',
       ]),
 
       /**
@@ -96,19 +96,19 @@
       notifications() {
         switch (this.displayType) {
           case 'global':
-            return this.addToCartLeft ? this.globalAndAddToCartNotifications : this.globalNotifications;
+            return this.addToCartLeft ? this.getGlobalAndAddToCartNotifications : this.getGlobalNotifications;
 
           case 'modal':
-            return this.nonSelectorNotifications;
+            return this.getNonSelectorNotifications;
 
           case 'add-to-cart':
-            return this.addToCartNotifications;
+            return this.getAddToCartNotifications;
 
           case 'selector':
-            return this.selectorNotifications;
+            return this.getSelectorNotifications;
 
           case 'field':
-            return this.fieldNotifications;
+            return this.getFieldNotifications;
 
           default:
             return [];

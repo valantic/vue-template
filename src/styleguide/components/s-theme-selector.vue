@@ -43,7 +43,7 @@
 
     computed: {
       ...mapGetters('session', [
-        'theme',
+        'getTheme',
       ]),
 
       /**
@@ -53,7 +53,7 @@
        */
       themes() {
         const list = this.defaultThemes;
-        const activeId = this.theme;
+        const activeId = this.getTheme;
 
         return list.map((theme) => {
           let selected = false;

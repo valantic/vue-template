@@ -14,7 +14,7 @@ export default {
      *
      * @returns {String}
      */
-    theme(state) {
+    getTheme(state) {
       return state.theme;
     },
   },
