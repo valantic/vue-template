@@ -2,6 +2,23 @@ import axios from 'axios';
 import store from '@/store/index';
 import apiUrls from '@/setup/apiUrls';
 
+// Enable tracking of requests in development environment.
+if (process.env.NODE_ENV !== 'production') {
+  axios.interceptors.request.use((config) => {
+    console.groupCollapsed(`${config.method.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
+    console.log('config', config); // eslint-disable-line no-console
+
+    return config;
+  });
+
+  axios.interceptors.response.use((response) => {
+    console.log('response', response); // eslint-disable-line no-console
+    console.groupEnd(); // eslint-disable-line no-console
+
+    return response;
+  });
+}
+
 /**
  * Pushes an array of messages to the notification handler.
  *
