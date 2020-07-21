@@ -113,15 +113,6 @@ export default {
      * @returns {Array.<Object>} The field notifications.
      */
     getFieldNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.field),
-
-    /**
-     * Gets the global and add-to-cart notifications.
-     *
-     * @param {Object} state - The current module state.
-     *
-     * @returns {Array.<Object>} The global and add-to-cart notifications.
-     */
-    getGlobalAndAddToCartNotifications: state => state.notifications.filter(({ message }) => !message.source),
   },
   mutations: {
     /**

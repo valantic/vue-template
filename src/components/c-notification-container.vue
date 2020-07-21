@@ -72,11 +72,9 @@
         default: null,
       },
     },
-    data() {
-      return {
-        addToCartLeft: false,
-      };
-    },
+    // data() {
+    //   return {};
+    // },
 
     computed: {
       ...mapGetters('notification', [
@@ -85,7 +83,6 @@
         'getNonSelectorNotifications',
         'getSelectorNotifications',
         'getFieldNotifications',
-        'getGlobalAndAddToCartNotifications',
       ]),
 
       /**
@@ -96,7 +93,7 @@
       notifications() {
         switch (this.displayType) {
           case 'global':
-            return this.addToCartLeft ? this.getGlobalAndAddToCartNotifications : this.getGlobalNotifications;
+            return this.getGlobalNotifications;
 
           case 'modal':
             return this.getNonSelectorNotifications;
@@ -134,14 +131,7 @@
       window.removeEventListener('resizeend', this.onResize);
     },
 
-    methods: {
-      /**
-       * Event handler for the resizeend event.
-       */
-      onResize() {
-        this.addToCartLeft = window.innerWidth < 1024;
-      }
-    },
+    // methods: {},
     // render() {},
   };
 </script>
