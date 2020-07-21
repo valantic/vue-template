@@ -100,8 +100,10 @@ $ npm -v
 Finally it's time to install the project dependencies and start developing!
 
 ```
-$ npm install
+$ npm ci
 ```
+
+NOTE: always use `npm ci` when setting up the project or updated the code base. Unlike `npm install`, `npm ci` will install only exactly the packages and versions which are defined in the `package-lock.json` file. `npm install` on the other hand will always check for updates, meeting the versioning criteria. 
 
 ## This project
 
@@ -346,39 +348,14 @@ store
   | |- index.js
 ````
 
-The main ```app/store/index.js``` file contains all modules, which are imported.
+All `index.js` files from `app/store/modules` will be auto imported, and the file name will be converted to a camelCased module name.
 
 **Note: the module name MUST be written in singular.**
-
-
-```
-import Vue from 'vue';
-import Vuex from 'vuex';
- 
-// modules
-import cart from './modules/cart';
-import navigation from './modules/navigation';;
-import session from './modules/session';
- 
-Vue.use(Vuex);
- 
-export default new Vuex.Store({
-  /**
-   * state, actions & getters
-   * must be defined within modules
-   * */
-  modules: {
-    cart,
-    navigation,
-    session,
-  },
-});
-```
 
 ### Namespacing
 By default, actions, mutations and getters inside modules are still registered under the global namespace. To make sure all modules are more self-contained and reusable, we make use of the 'namespace' option, which automatically adds a prefix for the specific module.
 
-```
+```javascript
 // store/modules/cart/index.js
 
 export default {
@@ -412,11 +389,31 @@ store
   | |- actions.js
 ```
 
+### Prefixing
+
+We defined several prefixes you should use on Vuex getters, mutations and actions, so they can be better distinguished when used in the components.
+
+#### get*
+
+Add the `get` prefix to all getters. This way it's clear in the component, that the used value is comming from Vuex.
+
+#### set*
+
+Add the `set` prefix to all setters. This way it is easier to identify setters from Vuex inside components.
+
+#### api*
+
+Use this prefix for all actions, that trigger an Ajax request. This way it is easier to identify code that triggers a server request from components.
+
+#### data*
+
+Add this prefix to actions, that handle initial data. See next section.
+
 ### Initial data
 
 To inject initial data into the Vuex store, we decided to prepare actions (since mutations are limited in regards of store actions), which handle an initial payload.
  
- The data is exchanged via a global JS object. It is recommended to assign JSON strings to the global object, rather than a pure JS object, since parsing of JSON is faster. @see https://www.youtube.com/watch?v=ff4fgQxPaO0
+ The data is exchanged via a global JS object.
  
  NOTE: make sure that initial data is **SANITIZED** and **DOES NOT** contain closing script tags!
  
@@ -430,7 +427,7 @@ To inject initial data into the Vuex store, we decided to prepare actions (since
   </script>
   ...
   <script>
-    window.initialData['<storeModule>/<propertySetter>'] = 'payloadJSON';
+    window.initialData['<storeModule>/<propertySetter>'] = { /* ... */ };
   </script>
   <script src="vue-app.js"></script>
 </body>
@@ -438,18 +435,14 @@ To inject initial data into the Vuex store, we decided to prepare actions (since
 ```
 
 ```javascript
-// @/store/index
+// @/store/index.js
 
 const data = window.initialData || {};
 
 // ...
 
 Object.keys(data).forEach((action) => {
-  try {
-    store.dispatch(action, JSON.parse(data[action]));
-  } catch (error) {
-    throw new Error(`The initial data provided for '${action}' is no valid JSON.`);
-  }
+  store.dispatch(action, data[action]);
 });
 
 window.initialData = {};
@@ -736,10 +729,6 @@ $ brew upgrade nasm
 
 * [x] Update swiper
 * [ ] Implement dual build (ES5/ES2015+)
-* [ ] Replace Axios with fetch()
-    * Promise not rejected when non 2** status
-    * Cookies not part of the request by default
-    * See also https://medium.com/cameron-nokes/4-common-mistakes-front-end-developers-make-when-using-fetch-1f974f9d1aa1
 * [x] Double check polyfills (e.g. smoothscroll)
 * [x] Fix broken themes
 * [ ] Element styles should be moved to reboot.
