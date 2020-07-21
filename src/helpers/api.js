@@ -6,13 +6,15 @@ import apiUrls from '@/setup/apiUrls';
 if (process.env.NODE_ENV !== 'production') {
   axios.interceptors.request.use((config) => {
     console.groupCollapsed(`${config.method.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
-    console.log('config', config); // eslint-disable-line no-console
+    console.dir(config); // eslint-disable-line no-console
+    console.groupEnd(); // eslint-disable-line no-console
 
     return config;
   });
 
   axios.interceptors.response.use((response) => {
-    console.log('response', response); // eslint-disable-line no-console
+    console.groupCollapsed(`Response ${response.config.method.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
+    console.dir(response); // eslint-disable-line no-console
     console.groupEnd(); // eslint-disable-line no-console
 
     return response;
