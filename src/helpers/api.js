@@ -104,14 +104,14 @@ export default {
    * Runs a get request with given url with given url params.
    *
    * @param {String} url - Url to get.
-   * @param {Object} params - Url parameters which will be attached to the url.
+   * @param {Object} config - Url parameters which will be attached to the url.
    * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  get(url, params, notificationOptions) {
+  get(url, config, notificationOptions) {
     return axios
-      .get(url, params)
+      .get(url, config)
       .then(response => handleSuccess(response, notificationOptions))
       .catch(error => handleError(error, notificationOptions));
   },
@@ -120,14 +120,15 @@ export default {
    * Runs a post request with a given url and payload.
    *
    * @param {String} url - Url to post to.
-   * @param {Object} payload - Post payload which will be attached to the request.
+   * @param {Object} data - Post payload which will be attached to the request.
+   * @param {Object} config - Axios request configuration.
    * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  post(url, payload, notificationOptions) {
+  post(url, data, config, notificationOptions) { // eslint-disable-line max-params
     return axios
-      .post(url, payload)
+      .post(url, data, config)
       .then(response => handleSuccess(response, notificationOptions))
       .catch(error => handleError(error, notificationOptions));
   },
@@ -136,14 +137,15 @@ export default {
    * Runs a patch request with a given url and payload.
    *
    * @param {String} url - Url to patch to.
-   * @param {Object} payload - Patch payload which will be attached to the request.
+   * @param {Object} data - Patch payload which will be attached to the request.
+   * @param {Object} config - Axios request configuration.
    * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  patch(url, payload, notificationOptions) {
+  patch(url, data, config, notificationOptions) { // eslint-disable-line max-params
     return axios
-      .patch(url, payload)
+      .patch(url, data, config)
       .then(response => handleSuccess(response, notificationOptions))
       .catch(error => handleError(error, notificationOptions));
   },
@@ -152,14 +154,14 @@ export default {
    * Runs a delete request with a given url and payload.
    *
    * @param {String} url - Url to send the delete to.
-   * @param {Object} params - Url parameters which will be attached to the url.
+   * @param {Object} config - Axios request configuration.
    * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  delete(url, params, notificationOptions) {
+  delete(url, config, notificationOptions) { // eslint-disable-line max-params
     return axios
-      .delete(url, params)
+      .delete(url, config)
       .then(response => handleSuccess(response, notificationOptions))
       .catch(error => handleError(error, notificationOptions));
   },

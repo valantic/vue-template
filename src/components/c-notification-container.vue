@@ -115,11 +115,7 @@
     // watch: {},
 
     // beforeCreate() {},
-    created() {
-      window.addEventListener('resizeend', this.onResize);
-
-      this.onResize();
-    },
+    // created() {},
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -127,9 +123,7 @@
     // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
-    destroyed() {
-      window.removeEventListener('resizeend', this.onResize);
-    },
+    // destroyed() {},
 
     // methods: {},
     // render() {},
