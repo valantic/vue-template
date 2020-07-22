@@ -216,7 +216,7 @@
           .then(() => {
             this.close();
           })
-          .catch(() => {}); // Makes sure we don't get a console error.
+          .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
       },
 
       /**
@@ -237,7 +237,7 @@
           .then(() => {
             this.close();
           })
-          .catch(() => {}); // Makes sure we don't get a console error.
+          .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
       },
     },
     // render() {},
