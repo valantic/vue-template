@@ -15,7 +15,7 @@ import notification from '../styleguide/mock-data/api-response/notifications';
  * @returns {Array}
  */
 function wildcard(config) {
-  const errorCode = Number(config.params && config.params.isErrorTest);
+  const errorCode = Number(config?.params?.isErrorTest);
 
   if (errorCode) {
     // eslint-disable-next-line no-console

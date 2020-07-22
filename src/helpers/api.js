@@ -58,8 +58,10 @@ function showNotifications(messages, options) {
  * @returns {Object}
  */
 function handleSuccess(response, options) {
-  if (response && response.data && response.data.messages) {
-    showNotifications(response.data.messages, options);
+  const { messages } = response?.data || {};
+
+  if (messages) {
+    showNotifications(messages, options);
   }
 
   return response || {};
@@ -75,8 +77,10 @@ function handleSuccess(response, options) {
  * @returns {Promise<never>}
  */
 function handleError(error, options) {
-  if (error && error.response && error.response.data && error.response.data.messages) {
-    showNotifications(error.response.data.messages, options);
+  const { messages } = error?.response?.data || {};
+
+  if (messages) {
+    showNotifications(messages, options);
   } else {
     store.dispatch('notification/showUnknownError');
   }

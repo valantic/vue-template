@@ -29,7 +29,7 @@ function pushNotification(state, options) {
     expire: options.expire !== false,
     delay: options.delay || 3
   };
-  const metaData = (notification.message && notification.message.meta && notification.message.meta) || {};
+  const metaData = notification?.message?.meta || {};
 
   // Attach confirmation actions (if confirmationType is missing, this is ignored)
   switch (metaData.confirmationType) {
@@ -74,7 +74,7 @@ export default {
      *
      * @returns {Array.<Object>} All notifications bound to a selector.
      */
-    getSelectorNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.selector),
+    getSelectorNotifications: state => state.notifications.filter(({ message }) => message?.source?.selector),
 
     /**
      * Gets all notifications that are not bound to a selector.
@@ -112,7 +112,7 @@ export default {
      *
      * @returns {Array.<Object>} The field notifications.
      */
-    getFieldNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.field),
+    getFieldNotifications: state => state.notifications.filter(({ message }) => message?.source?.field),
   },
   mutations: {
     /**

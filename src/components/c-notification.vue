@@ -129,7 +129,7 @@
        * @returns {Boolean}
        */
       hasProductData() {
-        return !!(this.notification.message && this.notification.message.meta && this.notification.message.meta.product);
+        return !!this.notification?.message?.meta?.product;
       },
 
       /**

@@ -8,7 +8,7 @@
 function checkObservable(element, binding) {
   let hasObservable = false;
 
-  if (binding.value && binding.value.__ob__) { // eslint-disable-line no-underscore-dangle
+  if (binding?.value?.__ob__) { // eslint-disable-line no-underscore-dangle
     hasObservable = true;
   }
 

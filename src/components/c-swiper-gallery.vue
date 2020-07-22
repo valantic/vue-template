@@ -201,7 +201,7 @@
        * @returns {Array} The list of mapped videos.
        */
       mappedVideos() {
-        if (this.videos && Array.isArray(this.videos)) {
+        if (Array.isArray(this.videos)) {
           return this.videos.map((video, index) => {
             const youtubeId = this.getYoutubeId(video.youtubeUrl);
 
@@ -275,7 +275,7 @@
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         const match = url.match(regExp);
 
-        if (match && match[2].length === 11) {
+        if (match?.[2]?.length === 11) {
           return match[2];
         }
 

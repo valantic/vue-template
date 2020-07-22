@@ -3,7 +3,7 @@ import Vue from 'vue'; // Default language
 import fallbackMessages from '../translations/de';
 import numberFormats from './localization';
 
-const pageLang = document && document.documentElement && document.documentElement.lang;
+const pageLang = document?.documentElement?.lang;
 
 Vue.use(VueI18n);
 

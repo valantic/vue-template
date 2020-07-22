@@ -51,6 +51,8 @@ You **MUST** install the following tools globally, before you can use this templ
 
 Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](http://editorconfig.org/#download) linting/settings.
 
+**This template supports ES2020+. Please make sure your IDE is configured accordingly.**
+
 ### Know issues
 
 #### I use Windows and have issues with the line ending style
