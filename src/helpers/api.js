@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   axios.interceptors.request.use((config) => {
     if (!exclude.find(pattern => pattern.test(config.url))) {
-      console.groupCollapsed(`${config.method.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
+      console.groupCollapsed(`=> ${config.method.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
       console.dir(config); // eslint-disable-line no-console
       console.groupEnd(); // eslint-disable-line no-console
     }
@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   axios.interceptors.response.use((response) => {
     if (!exclude.find(pattern => pattern.test(response.config.url))) {
-      console.groupCollapsed(`Response ${response.config.method.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
+      console.groupCollapsed(`<= ${response.config.method.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
       console.dir(response); // eslint-disable-line no-console
       console.groupEnd(); // eslint-disable-line no-console
     }
