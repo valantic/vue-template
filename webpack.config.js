@@ -45,7 +45,7 @@ module.exports = (env, args = {}) => {
     'theme-02': path.resolve(__dirname, 'src/setup/scss/themes/theme-02.scss'),
   };
   const devPort = 8080;
-  const host = args.host !== 'localhost'
+  const host = args.host && args.host !== 'localhost'
     ? args.host
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
 
