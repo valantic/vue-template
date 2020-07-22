@@ -87,8 +87,7 @@
   const swiperInstances = {};
 
   /**
-   * Touch enabled slider component based on
-   * [swiper](http://idangero.us/swiper/).
+   * Touch enabled slider component based on [swiper](http://idangero.us/swiper/).
    */
   export default {
     name: 'c-swiper-gallery',
