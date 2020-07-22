@@ -49,16 +49,20 @@
        * Gets localStorage messages and pushes them in the notification store to display.
        */
       getNotificationsFromStorage() {
-        const messages = window.localStorage.getItem('notifications');
-        const messagesParsed = messages && JSON.parse(messages) ? JSON.parse(messages) : [];
+        try {
+          const messages = window.localStorage.getItem('notifications');
+          const messagesParsed = messages ? JSON.parse(messages) : null;
 
-        if (messages && Array.isArray(messagesParsed)) {
-          messagesParsed.forEach((message) => {
-            this.pushNotification({ message });
-          });
+          if (Array.isArray(messagesParsed) && messagesParsed.length) {
+            messagesParsed.forEach((message) => {
+              this.pushNotification({ message });
+            });
 
-          // Clears the localStorage notifications.
-          window.localStorage.removeItem('notifications');
+            // Clears the localStorage notifications.
+            window.localStorage.removeItem('notifications');
+          }
+        } catch (error) {
+          throw new Error('An error occurred why retrieving messages from the localStorage.');
         }
       },
     },
