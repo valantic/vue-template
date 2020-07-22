@@ -39,7 +39,7 @@ module.exports = (env, args = {}) => {
     ? '/'
     : isStyleguideBuild ? '/' : '/';
   const outputAssetsFolder = 'assets/';
-  const filePrefix = 'app';
+  const filePrefix = '';
   const themes = {
     'theme-01': path.resolve(__dirname, 'src/setup/scss/themes/theme-01.scss'),
     'theme-02': path.resolve(__dirname, 'src/setup/scss/themes/theme-02.scss'),
@@ -87,7 +87,6 @@ module.exports = (env, args = {}) => {
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
       template: 'index.html',
-      chunksSortMode: 'dependency',
       excludeChunks: isStyleguideBuild ? Object.keys(themes).slice(1, themes.length - 1) : Object.keys(themes),
     }),
     new StyleLintPlugin({
