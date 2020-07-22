@@ -4,18 +4,26 @@ import apiUrls from '@/setup/apiUrls';
 
 // Enable tracking of requests in development environment.
 if (process.env.NODE_ENV !== 'production') {
+  const exclude = [
+    /assets\//,
+  ];
+
   axios.interceptors.request.use((config) => {
-    console.groupCollapsed(`${config.method.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
-    console.dir(config); // eslint-disable-line no-console
-    console.groupEnd(); // eslint-disable-line no-console
+    if (!exclude.find(pattern => pattern.test(config.url))) {
+      console.groupCollapsed(`${config.method.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
+      console.dir(config); // eslint-disable-line no-console
+      console.groupEnd(); // eslint-disable-line no-console
+    }
 
     return config;
   });
 
   axios.interceptors.response.use((response) => {
-    console.groupCollapsed(`Response ${response.config.method.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
-    console.dir(response); // eslint-disable-line no-console
-    console.groupEnd(); // eslint-disable-line no-console
+    if (!exclude.find(pattern => pattern.test(response.config.url))) {
+      console.groupCollapsed(`Response ${response.config.method.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
+      console.dir(response); // eslint-disable-line no-console
+      console.groupEnd(); // eslint-disable-line no-console
+    }
 
     return response;
   });
