@@ -3,7 +3,7 @@
   "version": "4.0.0",
   "description": "A customized Vue.js project template",
   "scripts": {
-    "clean:caches": "rm -f .eslintcache .stylelintcache node_modules/.cache",
+    "clean:caches": "rm -r -f .eslintcache .stylelintcache node_modules/.cache",
     "dev": "webpack-dev-server --mode development",
     "dev:s": "npm run styleguide",
     "jest": "jest tests --config jest.config.js",
