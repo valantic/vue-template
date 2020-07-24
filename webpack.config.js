@@ -303,9 +303,6 @@ module.exports = (env, args = {}) => {
         },
       }
     },
-    runtimeChunk: {
-      name: 'manifest'
-    }
   };
 
   const stats = {
