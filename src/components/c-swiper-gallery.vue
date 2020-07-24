@@ -78,7 +78,7 @@
 </template>
 
 <script>
-  import Swiper from 'swiper';
+  import Swiper, { Navigation, Pagination } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import cSwiperModal from '@/components/c-swiper-modal';
   import mapImages from '@/helpers/map-images';
@@ -235,6 +235,8 @@
     // created() {},
     // beforeMount() {},
     mounted() {
+      Swiper.use([Navigation, Pagination]);
+
       swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
     },
     // beforeUpdate() {},
