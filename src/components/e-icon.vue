@@ -41,7 +41,7 @@
        * Custom width value
        */
       width: {
-        type: String,
+        type: [String, Number],
         default: null,
       },
 
@@ -49,7 +49,7 @@
        * Custom height value
        */
       height: {
-        type: String,
+        type: [String, Number],
         default: null,
       },
 
@@ -217,7 +217,14 @@
         }
 
         cache[this.icon].then((svg) => {
-          this.$el.appendChild(this.getSvgElement(svg));
+          const { $el } = this;
+
+          // remove previous icon
+          while ($el.firstChild) {
+            $el.removeChild($el.firstChild);
+          }
+
+          $el.appendChild(this.getSvgElement(svg));
         });
       },
     },

@@ -17,7 +17,6 @@
 - [ ] Double checked target branch
  
 ## Review/Test checklist
-- [ ] Did run automated tests and linters
 - [ ] Did review code and documentation
 - [ ] Tested all links in project relevant browsers
 - [ ] Tested all links in different screen sizes

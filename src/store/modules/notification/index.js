@@ -8,7 +8,7 @@ import api from '@/helpers/api';
  * This is a work around to handle app internal and external pushes of notifications.
  * A better way would be to refactor this to an action.
  *
- * @param {Object} state - The current Vuex module state.
+ * @param {Object} state - The current module state.
  * @param {Object} options - Notification object.
  * @param {Object} options.message - The message configuration.
  * @param {String} options.message.type - The message type (success, error, warning, info).
@@ -29,7 +29,7 @@ function pushNotification(state, options) {
     expire: options.expire !== false,
     delay: options.delay || 3
   };
-  const metaData = (notification.message && notification.message.meta && notification.message.meta) || {};
+  const metaData = notification?.message?.meta || {};
 
   // Attach confirmation actions (if confirmationType is missing, this is ignored)
   switch (metaData.confirmationType) {
@@ -70,62 +70,55 @@ export default {
     /**
      * Gets all notifications that are bound to a selector.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
-     * @returns {Array} selectorNotifications - All notifications bound to a selector.
+     * @returns {Array.<Object>} All notifications bound to a selector.
      */
-    selectorNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.selector),
+    getSelectorNotifications: state => state.notifications.filter(({ message }) => message?.source?.selector),
 
     /**
      * Gets all notifications that are not bound to a selector.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
-     * @returns {Array} nonSelectorNotifications - All notifications not bound to a selector.
+     * @returns {Array.Object} All notifications not bound to a selector.
      */
-    nonSelectorNotifications: state => state.notifications.filter(({ message }) => !message.source || !message.source.selector),
+    getNonSelectorNotifications: state => state.notifications
+      .filter(({ message }) => !message.source || !message.source.selector),
 
     /**
      * Gets the global notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
-     * @returns {Array} globalNotifications - The global notifications.
+     * @returns {Array.<Object>} The global notifications.
      */
-    globalNotifications: state => state.notifications.filter(({ message }) => !message.source && message.type !== 'add-to-cart'),
+    getGlobalNotifications: state => state.notifications
+      .filter(({ message }) => !message.source && message.type !== 'add-to-cart'),
 
     /**
      * Gets the add-to-cart notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
-     * @returns {Array} addToCartNotifications - The add-to-cart notifications.
+     * @returns {Array.<Object>} The add-to-cart notifications.
      */
-    addToCartNotifications: state => state.notifications.filter(({ message }) => message.type === 'add-to-cart'),
+    getAddToCartNotifications: state => state.notifications.filter(({ message }) => message.type === 'add-to-cart'),
 
     /**
      * Gets the field notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      *
-     * @returns {Array} fieldNotifications - The field notifications.
+     * @returns {Array.<Object>} The field notifications.
      */
-    fieldNotifications: state => state.notifications.filter(({ message }) => message.source && message.source.field),
-
-    /**
-     * Gets the global and add-to-cart notifications.
-     *
-     * @param {Object} state - Current state.
-     *
-     * @returns {Array} globalAndAddToCartNotifications - The global and add-to-cart notifications.
-     */
-    globalAndAddToCartNotifications: state => state.notifications.filter(({ message }) => !message.source),
+    getFieldNotifications: state => state.notifications.filter(({ message }) => message?.source?.field),
   },
   mutations: {
     /**
      * Adds a notification.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      * @param {Object} options - Notification object.
      * @param {Object} options.message - The message configuration.
      * @param {String} options.message.type - The message type (success, error, warning, info).
@@ -136,7 +129,7 @@ export default {
     /**
      * Removes a notification.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      * @param {Number} id - Id of the notification.
      */
     popNotification(state, id) {
@@ -146,7 +139,7 @@ export default {
     /**
      * Flushes field notifications.
      *
-     * @param {Object} state - Current state.
+     * @param {Object} state - The current module state.
      */
     flushFieldNotifications(state) {
       state.notifications = state.notifications.filter(notification => !notification.message.source || !notification.message.source.field); // eslint-disable-line max-len
@@ -156,8 +149,8 @@ export default {
     /**
      * Accepts the initial data Array of notification Objects.
      *
-     * @param {Object} context - An object of context related methods.
-     * @param {Function} context.commit - The vuex commit method.
+     * @param {Object} context - The current module context.
+     * @param {Function} context.commit - Triggers a mutation on the current module.
      * @param {Array.<Object>} [payload] - An Array of notification Objects.
      */
     data({ commit }, payload) {
@@ -173,8 +166,8 @@ export default {
     /**
      * Adds an "unknown error" to the notification stack.
      *
-     * @param {Object} context - An object of context related methods.
-     * @param {Function} context.commit - The vuex commit method.
+     * @param {Object} context - The current module context.
+     * @param {Function} context.commit - Triggers a mutation on the current module.
      */
     showUnknownError({ commit }) {
       commit('pushNotification', NOTIFICATION_UNKNOWN_ERROR);

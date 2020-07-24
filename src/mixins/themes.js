@@ -20,7 +20,7 @@ export default {
 
   computed: {
     ...mapGetters('session', [
-      'theme',
+      'getTheme',
     ]),
 
     /**
@@ -29,7 +29,7 @@ export default {
      * @returns {String}   active theme id for BEM class name
      */
     theme() {
-      return this.customTheme ? this.customTheme : this.theme;
+      return this.customTheme ? this.customTheme : this.getTheme;
     },
   }
 };

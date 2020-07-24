@@ -12,5 +12,17 @@ $ npm run dev
 #### Components language
 
 ```vue
-<s-language/>
+<template>
+  <s-language />
+</template>
+
+<script >
+  import sLanguage from '@/styleguide/components/s-language';
+
+  export default {
+    components: {
+      sLanguage,
+    }
+  }
+</script>
 ```

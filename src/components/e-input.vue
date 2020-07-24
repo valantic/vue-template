@@ -36,10 +36,6 @@
            @keyup.down="onArrowKeyUp"
     >
 
-    <span v-if="$slots.fixedLabel" ref="fixedLabel" :class="b('fixed-label')">
-      <!-- @slot Use this slot for a fixed label inside the input field. -->
-      <slot name="fixedLabel"></slot>
-    </span>
     <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
       <span v-if="$slots.default" :class="b('slot')">
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
@@ -132,14 +128,6 @@
       ]),
 
       /**
-       * Determines if the input should have a shadow on focus
-       */
-      focusShadow: {
-        default: true,
-        type: [Boolean]
-      },
-
-      /**
        * Option for selecting value text on focus.
        */
       selectOnFocus: {
@@ -202,7 +190,6 @@
       modifiers() {
         const {
           border,
-          focusShadow,
           noNativeControl,
           notification
         } = this;
@@ -212,7 +199,6 @@
           notification: notification && this.hasFocus,
           type: this.$attrs.type || 'text',
           border,
-          focusShadow,
           noNativeControl,
         };
       },
@@ -224,14 +210,11 @@
     // beforeMount() {},
     mounted() {
       /**
-       * Calls the "setSlotSpacings" and "setFixedLabelSpacings" in a timeout function with a delay of 200ms because without
+       * Calls the "setSlotSpacings" in a timeout function with a delay of 200ms because without
        * it's not working on iOS
        */
       this.setSlotSpacings();
       setTimeout(this.setSlotSpacings, 200);
-
-      this.setFixedLabelSpacings();
-      setTimeout(this.setFixedLabelSpacings, 200);
 
       window.addEventListener('resizeend', this.setSlotSpacings);
 
@@ -242,7 +225,6 @@
     // beforeUpdate() {},
     updated() {
       setTimeout(this.setSlotSpacings);
-      setTimeout(this.setFixedLabelSpacings);
     },
     // activated() {},
     // deactivated() {},
@@ -331,17 +313,6 @@
       },
 
       /**
-       * Calculates the width of the fixed label and sets it as padding-left to the input field.
-       */
-      setFixedLabelSpacings() {
-        if (this.$refs.fixedLabel) {
-          const labelWidth = this.$refs.fixedLabel.clientWidth;
-
-          this.$refs.input.style.paddingLeft = `${labelWidth + 10}px`;
-        }
-      },
-
-      /**
        * Selects the value of the input field.
        */
       selectValue() {
@@ -391,7 +362,7 @@
       @include font($font-size--14, 18px);
 
       border: 1px solid $color-grayscale--500;
-      border-radius: $border-radius--default;
+      border-radius: $border-radius--500;
       color: $color-secondary--1;
       font-family: $font-family--primary;
       height: $e-input-height;
@@ -499,11 +470,6 @@
     &:not(&--border-0) &__field:focus,
     &--focus:not(&--border-0) &__field {
       border: 1px solid $color-grayscale--400;
-    }
-
-    &--focus-shadow &__field:focus,
-    &--focus-shadow.e-input--focus &__field {
-      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
     }
 
     // hover

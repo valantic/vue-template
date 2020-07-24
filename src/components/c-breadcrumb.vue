@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
     <ul :class="b('list')">
-      <li v-for="(item, index) in items"
+      <li v-for="(item, index) in getItems"
           :key="`breadcrumb--${index}`"
           :class="b('item')">
         <a :class="b('link')"
@@ -34,7 +34,7 @@
 
     computed: {
       ...mapGetters('breadcrumb', [
-        'items',
+        'getItems',
       ]),
     },
     // watch: {},

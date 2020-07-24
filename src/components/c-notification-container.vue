@@ -72,20 +72,17 @@
         default: null,
       },
     },
-    data() {
-      return {
-        addToCartLeft: false,
-      };
-    },
+    // data() {
+    //   return {};
+    // },
 
     computed: {
       ...mapGetters('notification', [
-        'globalNotifications',
-        'addToCartNotifications',
-        'nonSelectorNotifications',
-        'selectorNotifications',
-        'fieldNotifications',
-        'globalAndAddToCartNotifications',
+        'getGlobalNotifications',
+        'getAddToCartNotifications',
+        'getNonSelectorNotifications',
+        'getSelectorNotifications',
+        'getFieldNotifications',
       ]),
 
       /**
@@ -96,19 +93,19 @@
       notifications() {
         switch (this.displayType) {
           case 'global':
-            return this.addToCartLeft ? this.globalAndAddToCartNotifications : this.globalNotifications;
+            return this.getGlobalNotifications;
 
           case 'modal':
-            return this.nonSelectorNotifications;
+            return this.getNonSelectorNotifications;
 
           case 'add-to-cart':
-            return this.addToCartNotifications;
+            return this.getAddToCartNotifications;
 
           case 'selector':
-            return this.selectorNotifications;
+            return this.getSelectorNotifications;
 
           case 'field':
-            return this.fieldNotifications;
+            return this.getFieldNotifications;
 
           default:
             return [];
@@ -118,11 +115,7 @@
     // watch: {},
 
     // beforeCreate() {},
-    created() {
-      window.addEventListener('resizeend', this.onResize);
-
-      this.onResize();
-    },
+    // created() {},
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -130,18 +123,9 @@
     // activated() {},
     // deactivated() {},
     // beforeDestroy() {},
-    destroyed() {
-      window.removeEventListener('resizeend', this.onResize);
-    },
+    // destroyed() {},
 
-    methods: {
-      /**
-       * Event handler for the resizeend event.
-       */
-      onResize() {
-        this.addToCartLeft = window.innerWidth < 1024;
-      }
-    },
+    // methods: {},
     // render() {},
   };
 </script>

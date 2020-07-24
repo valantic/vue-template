@@ -1,4 +1,34 @@
 import axios from 'axios';
+import store from '@/store/index';
+import apiUrls from '@/setup/apiUrls';
+
+// Enable tracking of requests in development environment.
+if (process.env.NODE_ENV !== 'production') {
+  const clone = require('@/helpers/clone.js').default; // eslint-disable-line global-require
+  const exclude = [
+    /assets\//,
+  ];
+
+  axios.interceptors.request.use((config) => {
+    if (!exclude.find(pattern => pattern.test(config.url))) {
+      console.groupCollapsed(`=> ${config.method.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
+      console.dir(clone(config)); // eslint-disable-line no-console
+      console.groupEnd(); // eslint-disable-line no-console
+    }
+
+    return config;
+  });
+
+  axios.interceptors.response.use((response) => {
+    if (!exclude.find(pattern => pattern.test(response.config.url))) {
+      console.groupCollapsed(`<= ${response.config.method.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
+      console.dir(clone(response)); // eslint-disable-line no-console
+      console.groupEnd(); // eslint-disable-line no-console
+    }
+
+    return response;
+  });
+}
 
 /**
  * Pushes an array of messages to the notification handler.
@@ -12,7 +42,7 @@ function showNotifications(messages, options) {
   }
 
   messages.forEach((message) => {
-    window.vm.$store.commit('notification/pushNotification', {
+    store.commit('notification/pushNotification', {
       ...options,
       message,
     });
@@ -28,8 +58,10 @@ function showNotifications(messages, options) {
  * @returns {Object}
  */
 function handleSuccess(response, options) {
-  if (response && response.data && response.data.messages) {
-    showNotifications(response.data.messages, options);
+  const { messages } = response?.data || {};
+
+  if (messages) {
+    showNotifications(messages, options);
   }
 
   return response || {};
@@ -45,10 +77,12 @@ function handleSuccess(response, options) {
  * @returns {Promise<never>}
  */
 function handleError(error, options) {
-  if (error && error.response && error.response.data && error.response.data.messages) {
-    showNotifications(error.response.data.messages, options);
+  const { messages } = error?.response?.data || {};
+
+  if (messages) {
+    showNotifications(messages, options);
   } else {
-    window.vm.$store.dispatch('notification/showUnknownError');
+    store.dispatch('notification/showUnknownError');
   }
 
   return Promise.reject(error);
@@ -56,17 +90,41 @@ function handleError(error, options) {
 
 export default {
   /**
+   * Gets the url for the given 'urlKey'. The method also accepts an Object of interpolation values.
+   *
+   * @param {String} urlKey - The key for the requested url.
+   * @param {Object} [values] - An Object of key/value pairs. The related '{key}' in the URL will be replaced with its value.
+   *
+   * @returns {String}
+   */
+  getUrl(urlKey, values) {
+    let url = apiUrls[urlKey];
+
+    if (!url) {
+      throw new Error(`Unable to find an API url with the identifier ${urlKey}.`);
+    }
+
+    if (values) {
+      Object.entries(values).forEach(([key, value]) => {
+        url = url.replace(`{${key}}`, value);
+      });
+    }
+
+    return url;
+  },
+
+  /**
    * Runs a get request with given url with given url params.
    *
    * @param {String} url - Url to get.
-   * @param {Object} params - Url parameters which will be attached to the url.
+   * @param {Object} config - Url parameters which will be attached to the url.
    * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  get(url, params, notificationOptions) {
+  get(url, config, notificationOptions) {
     return axios
-      .get(url, params)
+      .get(url, config)
       .then(response => handleSuccess(response, notificationOptions))
       .catch(error => handleError(error, notificationOptions));
   },
@@ -75,14 +133,15 @@ export default {
    * Runs a post request with a given url and payload.
    *
    * @param {String} url - Url to post to.
-   * @param {Object} payload - Post payload which will be attached to the request.
+   * @param {Object} data - Post payload which will be attached to the request.
+   * @param {Object} config - Axios request configuration.
    * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  post(url, payload, notificationOptions) {
+  post(url, data, config, notificationOptions) { // eslint-disable-line max-params
     return axios
-      .post(url, payload)
+      .post(url, data, config)
       .then(response => handleSuccess(response, notificationOptions))
       .catch(error => handleError(error, notificationOptions));
   },
@@ -91,14 +150,15 @@ export default {
    * Runs a patch request with a given url and payload.
    *
    * @param {String} url - Url to patch to.
-   * @param {Object} payload - Patch payload which will be attached to the request.
+   * @param {Object} data - Patch payload which will be attached to the request.
+   * @param {Object} config - Axios request configuration.
    * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  patch(url, payload, notificationOptions) {
+  patch(url, data, config, notificationOptions) { // eslint-disable-line max-params
     return axios
-      .patch(url, payload)
+      .patch(url, data, config)
       .then(response => handleSuccess(response, notificationOptions))
       .catch(error => handleError(error, notificationOptions));
   },
@@ -107,14 +167,14 @@ export default {
    * Runs a delete request with a given url and payload.
    *
    * @param {String} url - Url to send the delete to.
-   * @param {Object} params - Url parameters which will be attached to the url.
+   * @param {Object} config - Axios request configuration.
    * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  delete(url, params, notificationOptions) {
+  delete(url, config, notificationOptions) { // eslint-disable-line max-params
     return axios
-      .delete(url, params)
+      .delete(url, config)
       .then(response => handleSuccess(response, notificationOptions))
       .catch(error => handleError(error, notificationOptions));
   },

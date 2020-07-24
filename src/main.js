@@ -20,18 +20,20 @@ Vue.use(directives);
 Vue.use(components);
 
 // Merge development configuration
-if (process.env.NODE_ENV !== 'production' || process.env.HAS_STYLEGUIDE) {
+if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line global-require
   vueOptions = Object.assign(vueOptions, require('./setup/styleguide.options').default); // Note: will overwrite duplicates
 }
 
-window.vm = new Vue(vueOptions);
+const vm = new Vue(vueOptions);
+
+vm.$mount('#app');
 
 // Set theme according to url in development. e.g. ?theme=01
-if (process.env.NODE_ENV !== 'production' || process.env.HAS_STYLEGUIDE) {
+if (process.env.NODE_ENV !== 'production') {
   const themeId = getUrlParameter('theme');
 
   if (themeId) {
-    window.vm.$store.commit('session/setTheme', themeId);
+    vm.$store.commit('session/setTheme', themeId);
   }
 }

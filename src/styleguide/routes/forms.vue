@@ -1,8 +1,8 @@
 <template>
   <div :class="b()">
-    <e-heading tag-name="h1">
+    <h1>
       Example form
-    </e-heading>
+    </h1>
     <form action="#form-url" method="POST">
       <!-- e-input -->
       <div :class="b('part')">
@@ -51,7 +51,7 @@
       <!-- e-select -->
       <div :class="b('part')">
         <e-label name="Language" position="top">
-          <e-select v-model="demo.language" :options-list="mock.selects" name="language" />
+          <e-select v-model="demo.language" :options="mock.selects" name="language" />
         </e-label>
       </div>
 

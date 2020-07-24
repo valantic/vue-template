@@ -5,6 +5,9 @@
 </template>
 
 <script>
+  /**
+   * TODO: add description for component styleguide.
+   */
   export default {
     name: 'c-component', // TODO: update name according to filename
 

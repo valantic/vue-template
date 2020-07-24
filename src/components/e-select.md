@@ -1,9 +1,11 @@
-### Default
+### States
+
+#### State: default
 
 ```vue
 <template>
   <div>
-    <e-select v-model="demo" :options-list="optionsList" name="demo-select"/>
+    <e-select v-model="demo" :options="optionsList" name="demo-select"/>
     <div v-if="demo" class="spacing--top-15">
       <p>{{ demo }}</p>
     </div>
@@ -33,10 +35,10 @@
 </script>
 ```
 
-#### `:disabled`
+#### State: `:disabled`
 ```vue
 <template>
-  <e-select v-model="demo" disabled :options-list="optionsList" name="demo-select"/>
+  <e-select v-model="demo" disabled :options="optionsList" name="demo-select"/>
 </template>
 
 <script>
@@ -54,12 +56,12 @@
 </script>
 ```
 
-#### `:hover`
+#### State: `:hover`
 
 ```vue
 <template>
   <div>
-    <e-select hover v-model="demo" :options-list="optionsList" name="demo-select"/>
+    <e-select hover v-model="demo" :options="optionsList" name="demo-select"/>
     <div v-if="demo" class="spacing--top-15">
       <p>{{ demo }}</p>
     </div>
@@ -89,12 +91,12 @@
 </script>
 ```
 
-#### `:focus`
+#### State: `:focus`
 
 ```vue
 <template>
   <div>
-    <e-select focus v-model="demo" :options-list="optionsList" name="demo-select"/>
+    <e-select focus v-model="demo" :options="optionsList" name="demo-select"/>
     <div v-if="demo" class="spacing--top-15">
       <p>{{ demo }}</p>
     </div>
@@ -124,12 +126,12 @@
 </script>
 ```
 
-#### state: `error`
+#### State: `error`
 
 ```vue
 <template>
   <div>
-    <e-select state="error" v-model="demo" :options-list="optionsList" name="demo-select"/>
+    <e-select state="error" v-model="demo" :options="optionsList" name="demo-select"/>
     <div v-if="demo" class="spacing--top-15">
       <p>{{ demo }}</p>
     </div>
@@ -159,12 +161,87 @@
 </script>
 ```
 
-#### state: `success`
+#### State: `success`
 
 ```vue
 <template>
   <div>
-    <e-select state="success" v-model="demo" :options-list="optionsList" name="demo-select"/>
+    <e-select state="success" v-model="demo" :options="optionsList" name="demo-select"/>
+    <div v-if="demo" class="spacing--top-15">
+      <p>{{ demo }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      demo: 'option-3',
+      optionsList: [
+        {
+          value: 'option-1',
+          label: 'Dies ist eine etwas längere option',
+        },
+        {
+          value: 'option-2',
+          label: 'Option 2',
+        },
+        {
+          value: 'option-3',
+          label: 'Option 3',
+        },
+      ]
+    })
+  };
+</script>
+```
+
+### Customized value and label fields
+
+```vue
+<template>
+  <div>
+    <e-select
+      v-model="demo"
+      :options="optionsList"
+      value-field="code"
+      label-field="text"
+      name="demo-select"/>
+    <div v-if="demo" class="spacing--top-15">
+      <p>{{ demo }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      demo: 'option-3',
+      optionsList: [
+        {
+          code: 'option-1',
+          text: 'Dies ist eine etwas längere option',
+        },
+        {
+          code: 'option-2',
+          text: 'Option 2',
+        },
+        {
+          code: 'option-3',
+          text: 'Option 3',
+        },
+      ]
+    })
+  };
+</script>
+```
+
+### Progress
+
+```vue
+<template>
+  <div>
+    <e-select v-model="demo" :options="optionsList" name="demo-select" progress />
     <div v-if="demo" class="spacing--top-15">
       <p>{{ demo }}</p>
     </div>

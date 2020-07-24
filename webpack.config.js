@@ -16,34 +16,41 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const WebpackManifestPlugin = require('webpack-manifest-plugin');
 
-module.exports = (env, argv = {}) => {
+module.exports = (env, args = {}) => {
   // Instance variables
-  const isProduction = process.env.NODE_ENV === 'production';
-  const hasStyleguide = !!argv.styleguide;
-  const hasWatcher = argv.watch || false;
+  const isStyleguideBuild = !!args.styleguideBuild;
+  const isProduction = process.env.NODE_ENV === 'production' && !isStyleguideBuild;
+  const hasWatcher = args.watch || false;
   const hotReload = !hasWatcher || !isProduction;
-  const showProfile = argv.profile || false;
+  const showProfile = args.profile || false;
   const globalVariables = {
     'process.env': {
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
-      HAS_STYLEGUIDE: JSON.stringify(hasStyleguide),
+      IS_STYLEGUIDE_BUILD: JSON.stringify(isStyleguideBuild),
       HAS_WATCHER: hasWatcher,
     },
   };
 
   // Project variables
   const buildPath = path.resolve(__dirname, 'dist');
-  const publicPath = '/'; // Base path which is used in production to load modules via http.
+  const productionPath = '/';
+  const styleguidePath = '/';
+  const developmentPath = '/';
+
+  const publicPath = isProduction // Base path which is used in production to load modules via http.
+    ? productionPath
+    : isStyleguideBuild ? styleguidePath : developmentPath;
   const outputAssetsFolder = 'assets/';
-  const filePrefix = 'app';
+  const filePrefix = '';
   const themes = {
     'theme-01': path.resolve(__dirname, 'src/setup/scss/themes/theme-01.scss'),
     'theme-02': path.resolve(__dirname, 'src/setup/scss/themes/theme-02.scss'),
   };
   const devPort = 8080;
-  const host = argv.host !== 'localhost'
-    ? argv.host
+  const host = args.host && args.host !== 'localhost'
+    ? args.host
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
 
   // webpack configuration variables
@@ -51,7 +58,7 @@ module.exports = (env, argv = {}) => {
   const extensions = ['.js', '.vue', '.json'];
   const alias = {
     '@': path.join(__dirname, 'src'),
-    'vue$': 'vue/dist/vue.esm.js',  // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
+    'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
   };
 
   const scssResourcesFolder = './src/setup/scss/';
@@ -84,8 +91,7 @@ module.exports = (env, argv = {}) => {
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
       template: 'index.html',
-      chunksSortMode: 'dependency',
-      excludeChunks: hasStyleguide ? Object.keys(themes).slice(1, themes.length - 1) : Object.keys(themes),
+      excludeChunks: isStyleguideBuild ? Object.keys(themes).slice(1, themes.length - 1) : Object.keys(themes),
     }),
     new StyleLintPlugin({
       emitErrors: isProduction,
@@ -103,16 +109,19 @@ module.exports = (env, argv = {}) => {
     plugins.push(new BundleAnalyzerPlugin());
   }
 
-  if (isProduction || hasStyleguide) {
-    plugins.push(new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
-      cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
-    }));
+  if (isProduction || isStyleguideBuild) {
+    plugins.push(
+      new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
+        cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
+      }),
+      new WebpackManifestPlugin(), // Creates a manifest.json for the build
+    );
   }
 
   if (!isProduction || hasWatcher) {
     plugins.push(new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
-        messages: !hasStyleguide
+        messages: !isStyleguideBuild
           ? [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`]
           : null,
       },
@@ -168,7 +177,7 @@ module.exports = (env, argv = {}) => {
     inline: true,
     progress: true,
     before(app) {
-      if (!hasStyleguide) {
+      if (!isStyleguideBuild) {
         console.clear();
         console.log('\x1b[34m%s\x1b[0m', 'Starting development server...');
       }
@@ -235,8 +244,9 @@ module.exports = (env, argv = {}) => {
           options: {
             esModule: false,
             context: 'src/assets/',
-            name: '[path]/[name].[ext]?[hash]',
+            name: '[path][name].[ext]?[hash]',
             outputPath: `${outputAssetsFolder}img/`,
+            publicPath: `${publicPath}${outputAssetsFolder}img/`
           },
         },
         {
@@ -248,6 +258,21 @@ module.exports = (env, argv = {}) => {
           },
         },
       ],
+    },
+    {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            esModule: false,
+            context: 'src/assets/fonts',
+            name: `[path][name].[ext]?[hash]`,
+            outputPath: `${outputAssetsFolder}fonts/`,
+            publicPath: `${publicPath}${outputAssetsFolder}fonts/`
+          },
+        }
+      ]
     },
     {
       test: /\.md$/, // Required by styleguide.
@@ -282,9 +307,6 @@ module.exports = (env, argv = {}) => {
         },
       }
     },
-    runtimeChunk: {
-      name: 'manifest'
-    }
   };
 
   const stats = {
@@ -325,7 +347,7 @@ module.exports = (env, argv = {}) => {
     },
     output: {
       path: buildPath,
-      filename: isProduction || hasStyleguide ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
+      filename: isProduction || isStyleguideBuild ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]`,
       publicPath,
     },

@@ -68,7 +68,7 @@
 
 <script>
 
-  import Swiper from 'swiper';
+  import Swiper, { Navigation, Controller } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
 
   /**
@@ -104,8 +104,7 @@
        */
       options: {
         type: Object,
-        default: () => {
-        },
+        default: () => ({}),
       },
     },
 
@@ -182,6 +181,8 @@
     mounted() {
       const galleryOptions = { initialSlide: this.$props.initialSlide, ...this.optionsMerged };
       const thumbnailOptions = { initialSlide: this.$props.initialSlide, ...this.optionsThumbnails };
+
+      Swiper.use([Navigation, Controller]);
 
       this.gallerySwiper = new Swiper(this.$refs.gallery, galleryOptions);
       this.thumbsSwiper = new Swiper(this.$refs.thumbnails, thumbnailOptions);

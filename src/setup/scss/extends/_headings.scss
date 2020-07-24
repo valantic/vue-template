@@ -1,0 +1,23 @@
+%heading-h1 {
+  @include font($font-size--18);
+}
+
+%heading-h2 {
+  @include font($font-size--16);
+}
+
+%heading-h3 {
+  @include font($font-size--14);
+}
+
+%heading-h4 {
+  @include font($font-size--14);
+}
+
+%heading-h5 {
+  @include font($font-size--14);
+}
+
+%heading-h6 {
+  @include font($font-size--14);
+}

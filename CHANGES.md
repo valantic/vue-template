@@ -1,7 +1,12 @@
 ## Changes
 
-### develop
-
+### v 5.0.0 (2020-07-24)
+ - Updates all NPM packages to the current version (2020-07-24, except babel-eslint because of an issue, https://github.com/babel/babel-eslint/issues/815)
+ - Updates and extends Vue Styleguidist documentations
+ - Replaces styleguide components section in Vue Styleguidist with pages
+ - Extends e-select with the optional props to define alternative value and label sources
+ - Extends e-select with the possibility to disable the placeholder entry
+ 
 ### v 4.0.0 (2020-03-20)
  - Updates all NPM packages to the current version (2020-03-18, except babel-eslint because of an issue. See https://github.com/babel/babel-eslint/issues/815)
  - Removes Vuetify because version 2 created a massive overhead in builded files

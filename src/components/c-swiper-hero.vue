@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import Swiper from 'swiper';
+  import Swiper, { Navigation, Pagination } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import mapHeroImages from '@/helpers/map-hero-images';
   import uuid from '../mixins/uuid';
@@ -80,8 +80,7 @@
        */
       options: {
         type: Object,
-        default: () => {
-        },
+        default: () => ({}),
       },
     },
     data() {
@@ -169,6 +168,8 @@
     // created() {},
     // beforeMount() {},
     mounted() {
+      Swiper.use([Navigation, Pagination]);
+
       swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
     },
     // beforeUpdate() {},

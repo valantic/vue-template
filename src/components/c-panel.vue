@@ -1,9 +1,9 @@
 <template>
   <div :class="b(panelModifiers)">
     <div :class="b('heading', headingModifiers)">
-      <e-heading v-if="heading" tag-name="h2" underline>
+      <h2 v-if="heading">
         {{ heading }}
-      </e-heading>
+      </h2>
     </div>
     <div :class="b('content', contentModifiers)">
       <slot></slot>

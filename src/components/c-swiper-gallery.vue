@@ -78,7 +78,7 @@
 </template>
 
 <script>
-  import Swiper from 'swiper';
+  import Swiper, { Navigation, Pagination } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import cSwiperModal from '@/components/c-swiper-modal';
   import mapImages from '@/helpers/map-images';
@@ -87,8 +87,7 @@
   const swiperInstances = {};
 
   /**
-   * Touch enabled slider component based on
-   * [swiper](http://idangero.us/swiper/).
+   * Touch enabled slider component based on [swiper](http://idangero.us/swiper/).
    */
   export default {
     name: 'c-swiper-gallery',
@@ -121,8 +120,7 @@
        */
       options: {
         type: Object,
-        default: () => {
-        },
+        default: () => ({}),
       },
 
     },
@@ -202,7 +200,7 @@
        * @returns {Array} The list of mapped videos.
        */
       mappedVideos() {
-        if (this.videos && Array.isArray(this.videos)) {
+        if (Array.isArray(this.videos)) {
           return this.videos.map((video, index) => {
             const youtubeId = this.getYoutubeId(video.youtubeUrl);
 
@@ -237,6 +235,8 @@
     // created() {},
     // beforeMount() {},
     mounted() {
+      Swiper.use([Navigation, Pagination]);
+
       swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
     },
     // beforeUpdate() {},
@@ -276,7 +276,7 @@
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         const match = url.match(regExp);
 
-        if (match && match[2].length === 11) {
+        if (match?.[2]?.length === 11) {
           return match[2];
         }
 

@@ -129,7 +129,7 @@
        * @returns {Boolean}
        */
       hasProductData() {
-        return !!(this.notification.message && this.notification.message.meta && this.notification.message.meta.product);
+        return !!this.notification?.message?.meta?.product;
       },
 
       /**
@@ -216,7 +216,7 @@
           .then(() => {
             this.close();
           })
-          .catch(() => {}); // Makes sure we don't get a console error.
+          .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
       },
 
       /**
@@ -237,7 +237,7 @@
           .then(() => {
             this.close();
           })
-          .catch(() => {}); // Makes sure we don't get a console error.
+          .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
       },
     },
     // render() {},

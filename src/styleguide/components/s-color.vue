@@ -1,6 +1,6 @@
 <template>
   <div :class="b()">
-    <s-palette-item
+    <s-color-item
       v-for="palette in palettes"
       :key="palette"
       :palette="palette"
@@ -10,15 +10,15 @@
 </template>
 
 <script>
-  import paletteColors from '../../setup/js/color';
-  import sPaletteItem from './s-palette-item';
+  import colors from '../../setup/js/color';
+  import sColorItem from './s-color-item';
 
   export default {
-    name: 's-palette-list',
+    name: 's-color',
     status: 0,
 
     components: {
-      's-palette-item': sPaletteItem
+      sColorItem
     },
     // mixins: [],
 
@@ -34,7 +34,7 @@
        * @returns {Object}
        */
       colors() {
-        return paletteColors;
+        return colors;
       },
 
       /**
@@ -43,7 +43,7 @@
        * @returns {Array.<String>}
        */
       palettes() {
-        return Object.keys(paletteColors);
+        return Object.keys(colors);
       }
     },
     // watch: {},
@@ -66,7 +66,7 @@
 </script>
 
 <style lang="scss">
-  .s-palette-list {
+  .s-color {
     font-family: $font-family--primary;
   }
 </style>

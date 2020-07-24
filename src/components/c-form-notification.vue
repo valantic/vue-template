@@ -65,8 +65,8 @@
     background-position-x: calc(100% - 5px);
     background-position-y: calc(#{$font-size--18} / 2 - 2px);
     background-repeat: no-repeat;
-    border-bottom-left-radius: $border-radius--default;
-    border-bottom-right-radius: $border-radius--default;
+    border-bottom-left-radius: $border-radius--500;
+    border-bottom-right-radius: $border-radius--500;
     color: $color-grayscale--1000;
     box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
 
