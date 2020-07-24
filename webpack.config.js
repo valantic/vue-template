@@ -35,9 +35,13 @@ module.exports = (env, args = {}) => {
 
   // Project variables
   const buildPath = path.resolve(__dirname, 'dist');
+  const productionPath = '/';
+  const styleguidePath = '/';
+  const developmentPath = '/';
+
   const publicPath = isProduction // Base path which is used in production to load modules via http.
-    ? '/'
-    : isStyleguideBuild ? '/' : '/';
+    ? productionPath
+    : isStyleguideBuild ? styleguidePath : developmentPath;
   const outputAssetsFolder = 'assets/';
   const filePrefix = '';
   const themes = {

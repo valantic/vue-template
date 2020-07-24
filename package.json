@@ -1,6 +1,6 @@
 {
   "name": "vue-template",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "A customized Vue.js project template",
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
