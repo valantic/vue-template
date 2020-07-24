@@ -54,7 +54,7 @@
     "dayjs": "~1.8.30",
     "picturefill": "~3.0.3",
     "portal-vue": "~2.1.7",
-    "swiper": "~5.3.8",
+    "swiper": "~5.4.5",
     "vue": "~2.6.11",
     "vue-i18n": "~8.18.2",
     "vue-js-modal": "~1.3.35",
