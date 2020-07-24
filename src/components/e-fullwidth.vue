@@ -70,7 +70,11 @@
         window.addEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
-    // mounted() {},
+    mounted() {
+      if (!this.resizeObserver) { // IE11 fallback.
+        this.updateScrollbarWidth();
+      }
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -78,7 +82,7 @@
     beforeDestroy() {
       if (this.resizeObserver) {
         this.resizeObserver.unobserve(window.document.body);
-      } else {
+      } else { // IE11 fallback.
         window.removeEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
