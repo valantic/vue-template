@@ -1,0 +1,15 @@
+{
+  "name": "Motorex Vue",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "dev": {
+        "url": "http://project.local:8080/pimcore-graphql-webservices/vue-dev?apikey=123",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

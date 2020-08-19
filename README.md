@@ -1,3 +1,9 @@
+# GraphQL demo
+
+**This branch holds a GraphQL demo we prepared when testing first integrations with Pimcore. This code is not production ready but rather an example for future implementations.**
+
+To see the demo run `npm run dev` and `npm run mockserver` and go to http://localhost:8080/styleguide/sandbox/index to see the vue component behaviour or http://localhost:4000/ for the mockserver.
+
 # vue-template
 
 This is a custom Vue template which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS like system.

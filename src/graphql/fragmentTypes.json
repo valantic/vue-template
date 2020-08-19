@@ -1,0 +1,604 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "OBJECT",
+        "name": "Query",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "String",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationQueryResultType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationNodeType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "ElementProperty",
+        "possibleTypes": [
+          {
+            "name": "property_checkbox"
+          },
+          {
+            "name": "property_text"
+          },
+          {
+            "name": "property_asset"
+          },
+          {
+            "name": "property_assetfolder"
+          },
+          {
+            "name": "property_objectfolder"
+          },
+          {
+            "name": "property_document"
+          },
+          {
+            "name": "property_documentfolder"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_checkbox",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_text",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_asset",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "asset",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Int",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "ID",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Float",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "resolutions",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "srcset",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "asset_metadata_item",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "asset_tree",
+        "possibleTypes": [
+          {
+            "name": "asset"
+          },
+          {
+            "name": "asset_folder"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "asset_folder",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_assetfolder",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_objectfolder",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "object_folder",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "object_tree",
+        "possibleTypes": [
+          {
+            "name": "object_folder"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_document",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "Document",
+        "possibleTypes": [
+          {
+            "name": "document_email"
+          },
+          {
+            "name": "document_hardlink"
+          },
+          {
+            "name": "document_link"
+          },
+          {
+            "name": "document_page"
+          },
+          {
+            "name": "document_snippet"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_email",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "document_tree",
+        "possibleTypes": [
+          {
+            "name": "document_folder"
+          },
+          {
+            "name": "document_email"
+          },
+          {
+            "name": "document_hardlink"
+          },
+          {
+            "name": "document_link"
+          },
+          {
+            "name": "document_page"
+          },
+          {
+            "name": "document_snippet"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_folder",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_hardlink",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "AnyDocumentTarget",
+        "possibleTypes": [
+          {
+            "name": "document_folder"
+          },
+          {
+            "name": "document_email"
+          },
+          {
+            "name": "document_hardlink"
+          },
+          {
+            "name": "document_link"
+          },
+          {
+            "name": "document_page"
+          },
+          {
+            "name": "document_snippet"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_link",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "AnyTarget",
+        "possibleTypes": [
+          {
+            "name": "asset"
+          },
+          {
+            "name": "asset_folder"
+          },
+          {
+            "name": "document_folder"
+          },
+          {
+            "name": "object_folder"
+          },
+          {
+            "name": "document_email"
+          },
+          {
+            "name": "document_hardlink"
+          },
+          {
+            "name": "document_link"
+          },
+          {
+            "name": "document_page"
+          },
+          {
+            "name": "document_snippet"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_page",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "DocumentElement",
+        "possibleTypes": [
+          {
+            "name": "document_tagCheckbox"
+          },
+          {
+            "name": "document_tagDate"
+          },
+          {
+            "name": "document_tagInput"
+          },
+          {
+            "name": "document_tagImage"
+          },
+          {
+            "name": "document_tagLink"
+          },
+          {
+            "name": "document_tagMultiselect"
+          },
+          {
+            "name": "document_tagNumeric"
+          },
+          {
+            "name": "document_tagPdf"
+          },
+          {
+            "name": "document_tagRelation"
+          },
+          {
+            "name": "document_tagRelations"
+          },
+          {
+            "name": "document_tagSelect"
+          },
+          {
+            "name": "document_tagTable"
+          },
+          {
+            "name": "document_tagTextarea"
+          },
+          {
+            "name": "document_tagWysiwyg"
+          },
+          {
+            "name": "document_tagVideo"
+          },
+          {
+            "name": "document_tagSnippet"
+          },
+          {
+            "name": "document_tagAreablock"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagCheckbox",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagDate",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagImage",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "HotspotCrop",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "HotspotHotspot",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "HotspotMetadata",
+        "possibleTypes": [
+          {
+            "name": "property_checkbox"
+          },
+          {
+            "name": "property_text"
+          },
+          {
+            "name": "property_textarea"
+          },
+          {
+            "name": "property_asset"
+          },
+          {
+            "name": "property_document"
+          },
+          {
+            "name": "property_object"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_textarea",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_object",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "hotspot_metadata_object",
+        "possibleTypes": [
+          {
+            "name": "document_email"
+          },
+          {
+            "name": "document_hardlink"
+          },
+          {
+            "name": "document_link"
+          },
+          {
+            "name": "document_page"
+          },
+          {
+            "name": "document_snippet"
+          },
+          {
+            "name": "asset"
+          },
+          {
+            "name": "asset_folder"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_snippet",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "KeyValue",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "HotspotMarker",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagLink",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagLink_data",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagMultiselect",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagNumeric",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagPdf",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagRelation",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagRelations",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagSelect",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagTable",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagTextarea",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagWysiwyg",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagVideo",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagSnippet",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "document_tagAreablock",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AreablockBrick",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "property_documentfolder",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RedirectQueryResultType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RedirectNodeType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TranslationQueryResultType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TranslationNodeType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TranslationTranslationsNodeType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TranslationFallbackType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AssetConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AssetEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Schema",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Type",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "__TypeKind",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Field",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__InputValue",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__EnumValue",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Directive",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "__DirectiveLocation",
+        "possibleTypes": null
+      }
+    ]
+  }
+}

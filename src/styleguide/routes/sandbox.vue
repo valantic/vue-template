@@ -2,14 +2,17 @@
   <div :class="b()">
     <h1>Sandbox</h1>
     <div>
-      <!-- Add any content here -->
+      <c-graphql-demo />
     </div>
   </div>
 </template>
 
 <script>
+  import CGraphqlDemo from '@/components/c-graphql-demo';
+
   export default {
     name: 'sandbox',
+    components: { CGraphqlDemo },
     // components: {},
     // mixins: [],
 

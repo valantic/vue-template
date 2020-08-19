@@ -1,0 +1,644 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+interface element {
+    id: ID
+}
+
+union AnyDocumentTarget = document_email | document_folder | document_hardlink | document_link | document_page | document_snippet
+
+union AnyTarget = asset | asset_folder | document_email | document_folder | document_hardlink | document_link | document_page | document_snippet | object_CustomText | object_folder
+
+union Document = document_email | document_hardlink | document_link | document_page | document_snippet
+
+union DocumentElement = document_tagAreablock | document_tagCheckbox | document_tagDate | document_tagImage | document_tagInput | document_tagLink | document_tagMultiselect | document_tagNumeric | document_tagPdf | document_tagRelation | document_tagRelations | document_tagSelect | document_tagSnippet | document_tagTable | document_tagTextarea | document_tagVideo | document_tagWysiwyg
+
+union ElementProperty = property_asset | property_assetfolder | property_checkbox | property_document | property_documentfolder | property_object | property_objectfolder | property_text
+
+union HotspotMetadata = property_asset | property_checkbox | property_document | property_object | property_text | property_textarea
+
+union asset_tree = asset | asset_folder
+
+union document_tree = document_email | document_folder | document_hardlink | document_link | document_page | document_snippet
+
+union hotspot_metadata_object = asset | asset_folder | document_email | document_hardlink | document_link | document_page | document_snippet | object_CustomText
+
+union object_tree = object_CustomText | object_folder
+
+type AreablockBrick {
+    elements: [String]
+    id: String!
+    name: String
+    order: Int
+    type: String
+}
+
+type AssetConnection {
+    edges: [AssetEdge]
+    "The total count of all queryable assets for this schema listing"
+    totalCount: Int
+}
+
+type AssetEdge {
+    cursor: String
+    node: asset_tree
+}
+
+type CustomTextConnection {
+    edges: [CustomTextEdge]
+    "The total count of all queryable objects for this schema listing"
+    totalCount: Int
+}
+
+type CustomTextEdge {
+    cursor: String
+    node: object_CustomText
+}
+
+type HotspotCrop {
+    cropHeight: Float
+    cropLeft: Float
+    cropPercent: Boolean
+    cropTop: Float
+    cropWidth: Float
+}
+
+type HotspotHotspot {
+    data(
+        "comma seperated list of key names"
+        keys: [String]
+    ): [HotspotMetadata]
+    height: Float
+    left: Float
+    name: String
+    top: Float
+    width: Float
+}
+
+type HotspotMarker {
+    data(
+        "comma seperated list of key names"
+        keys: [String]
+    ): [HotspotMetadata]
+    left: Float
+    name: String
+    top: Float
+}
+
+"An item in the navigation tree."
+type NavigationNodeType {
+    active: Boolean
+    activeRecursive: Boolean
+    children: [NavigationNodeType]
+    hasChildren: Boolean
+    href: String
+    label: String
+    properties: [ElementProperty]
+    title: String
+}
+
+"Represents a tree of navigation items."
+type NavigationQueryResultType {
+    "Contains the navigation items."
+    navigation: [NavigationNodeType]
+}
+
+type Query {
+    getAsset(defaultLanguage: String, id: Int!): asset
+    getAssetFolder(defaultLanguage: String, id: Int!): asset_folder
+    getAssetListing(
+        after: Int,
+        defaultLanguage: String,
+        filter: String,
+        first: Int,
+        ids: String,
+        sortBy: [String],
+        "Sort by ASC or DESC, use the same position as the sortBy argument for each column to sort by"
+        sortOrder: [String]
+    ): AssetConnection
+    getCustomText(defaultLanguage: String, id: Int!): object_CustomText
+    getCustomTextListing(
+        after: Int,
+        defaultLanguage: String,
+        filter: String,
+        first: Int,
+        ids: String,
+        published: Boolean,
+        sortBy: [String],
+        "Sort by ASC or DESC, use the same position as the sortBy argument for each column to sort by"
+        sortOrder: [String]
+    ): CustomTextConnection
+    getDocument(defaultLanguage: String, id: Int, path: String): Document
+    getDocumentFolder(defaultLanguage: String, id: Int!): document_folder
+    "Added by HeadlessBundle. Get navigation menu from root path and with support for active item(s)."
+    getNavigation(
+        "Current document path."
+        activePath: String = "/",
+        "Root path for navigation."
+        rootPath: String = "/"
+    ): NavigationQueryResultType
+    getObjectFolder(defaultLanguage: String, id: Int!): object_folder
+    "Added by HeadlessBundle. List the redirects configured in Pimcore."
+    getRedirects: RedirectQueryResultType
+    "Added by HeadlessBundle. Retrieve translations with fallback support."
+    getTranslations(
+        "Language to provide translations in."
+        language: String = "en",
+        "Additional languages to retrieve translations for."
+        languages: [String] = ["en"]
+    ): TranslationQueryResultType
+}
+
+"Represents one redirect."
+type RedirectNodeType {
+    active: Boolean
+    expiry: Int
+    priority: Int
+    source: String
+    target: String
+    type: String
+}
+
+"The result of a redirect query."
+type RedirectQueryResultType {
+    "Contains all redirects"
+    redirects: [RedirectNodeType]
+}
+
+type TranslationFallbackType {
+    fallbacks: [String]
+    id: String!
+    language: String
+}
+
+type TranslationNodeType {
+    fallback: String
+    id: String!
+    key: String!
+    translation: String
+    translations: [TranslationTranslationsNodeType]
+}
+
+type TranslationQueryResultType {
+    fallbacks: [TranslationFallbackType]
+    id: String
+    languages: [String]
+    translations: [TranslationNodeType]
+}
+
+type TranslationTranslationsNodeType {
+    fallback: String
+    id: String!
+    language: String
+    translation: String
+}
+
+type asset {
+    _siblings: [asset_tree]
+    children: [asset_tree]
+    creationDate: Int
+    data(thumbnail: String): String
+    filename: String
+    filesize: Int
+    fullpath(thumbnail: String): String
+    id: ID
+    metadata(ignore_language: Boolean, language: String): [asset_metadata_item]
+    mimetype: String
+    modificationDate: Int
+    parent: asset_tree
+    properties(
+        "comma separated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+    resolutions(
+        thumbnail: String!,
+        "List of resolution types [2, 5, ...]"
+        types: [Float] = [2.0]
+    ): [resolutions]
+    srcset(thumbnail: String!): [srcset]
+    type: String
+}
+
+type asset_folder {
+    _siblings: [asset_tree]
+    children: [asset_tree]
+    creationDate: Int
+    filename: String
+    fullpath(thumbnail: String): String
+    id: ID
+    modificationDateDate: Int
+    parent: asset_folder
+    properties(
+        "comma seperated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+}
+
+type asset_metadata_item {
+    data: String
+    language: String
+    name: String
+    type: String
+}
+
+type document_email {
+    _siblings: [document_tree]
+    action: String
+    bcc: String
+    cc: String
+    children: [document_tree]
+    controller: String
+    creationDate: Int
+    from: String
+    fullpath: String
+    id: ID
+    modificationDate: Int
+    parent: document_tree
+    properties(
+        "comma seperated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+    replyTo: String
+    subject: String
+    template: String
+    to: String
+    type: String
+}
+
+type document_folder {
+    _siblings: [document_tree]
+    children: [document_tree]
+    creationDate: Int
+    filename: String
+    fullpath: String
+    id: ID
+    modificationDateDate: Int
+    parent: document_tree
+}
+
+type document_hardlink {
+    _siblings: [document_tree]
+    action: String
+    children: [document_tree]
+    childrenFromSource: Boolean
+    controller: String
+    creationDate: Int
+    fullpath: String
+    id: ID
+    modificationDate: Int
+    parent: document_tree
+    properties(
+        "comma seperated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+    propertiesFromSource: Boolean
+    sourceId: Int
+    target: AnyDocumentTarget
+    template: String
+    type: String
+}
+
+type document_link {
+    _siblings: [document_tree]
+    action: String
+    children: [document_tree]
+    controller: String
+    creationDate: Int
+    direct: String
+    fullpath: String
+    href: String
+    id: ID
+    internal: Int
+    internalType: String
+    linktype: String
+    modificationDate: Int
+    object: AnyTarget
+    parent: document_tree
+    properties(
+        "comma seperated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+    template: String
+    type: String
+}
+
+type document_page {
+    _siblings: [document_tree]
+    action: String
+    children: [document_tree]
+    controller: String
+    creationDate: Int
+    description: String
+    elements: [DocumentElement]
+    fullpath: String
+    id: ID
+    modificationDate: Int
+    parent: document_tree
+    properties(
+        "comma seperated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+    rendered(
+        "Attributes passed into the controller/action"
+        attributes: [KeyValue] = [],
+        "Options passed into the controller/action"
+        options: [KeyValue] = [],
+        "Query Params passed into the controller/action"
+        query: [KeyValue] = [],
+        "Disable Layout Rendering"
+        use_layout: Boolean
+    ): String
+    template: String
+    title: String
+    type: String
+}
+
+type document_snippet {
+    _siblings: [document_tree]
+    action: String
+    children: [document_tree]
+    controller: String
+    creationDate: Int
+    description: String
+    elements: [DocumentElement]
+    fullpath: String
+    id: ID
+    modificationDate: Int
+    parent: document_tree
+    properties(
+        "comma seperated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+    rendered(
+        "Attributes passed into the controller/action"
+        attributes: [KeyValue] = [],
+        "Options passed into the controller/action"
+        options: [KeyValue] = [],
+        "Query Params passed into the controller/action"
+        query: [KeyValue] = [],
+        "Disable Layout Rendering"
+        use_layout: Boolean
+    ): String
+    template: String
+    title: String
+    type: String
+}
+
+type document_tagAreablock {
+    _tagName: String
+    _tagType: String
+    bricks: [AreablockBrick]
+    count: Int
+    id: Int
+    order: [Int]
+    types: [String]
+}
+
+type document_tagCheckbox {
+    _tagName: String
+    _tagType: String
+    checked: Boolean
+}
+
+type document_tagDate {
+    _tagName: String
+    _tagType: String
+    formatted(
+        "see Carbon::format"
+        format: String!
+    ): String
+    timestamp: Int
+}
+
+type document_tagImage {
+    _tagName: String
+    _tagType: String
+    alt: String
+    crop: HotspotCrop
+    hotspots: [HotspotHotspot]
+    image: asset
+    marker: [HotspotMarker]
+}
+
+type document_tagInput {
+    _tagName: String
+    _tagType: String
+    text: String
+}
+
+type document_tagLink {
+    _tagName: String
+    _tagType: String
+    data: document_tagLink_data
+}
+
+type document_tagLink_data {
+    _tagName: String
+    _tagType: String
+    anchor: String
+    internal: Boolean
+    internalId: Int
+    internalType: String
+    parameters: String
+    path: String
+    target: AnyTarget
+    text: String
+    title: String
+    windowTarget: String
+}
+
+type document_tagMultiselect {
+    _tagName: String
+    _tagType: String
+    selections: [String]
+}
+
+type document_tagNumeric {
+    _tagName: String
+    _tagType: String
+    number: String
+}
+
+type document_tagPdf {
+    _tagName: String
+    _tagType: String
+    pdf: asset
+}
+
+type document_tagRelation {
+    _tagName: String
+    _tagType: String
+    id: Int
+    relation: AnyTarget
+    subtype: String
+    type: String
+}
+
+type document_tagRelations {
+    _tagName: String
+    _tagType: String
+    relations: [AnyTarget]
+}
+
+type document_tagSelect {
+    _tagName: String
+    _tagType: String
+    text: String
+}
+
+type document_tagSnippet {
+    _tagName: String
+    _tagType: String
+    fullpath: String
+    id: Int
+}
+
+type document_tagTable {
+    _tagName: String
+    _tagType: String
+    text: String
+}
+
+type document_tagTextarea {
+    _tagName: String
+    _tagType: String
+    text: String
+}
+
+type document_tagVideo {
+    _tagName: String
+    _tagType: String
+    description: String
+    id: Int
+    posterAsset: asset
+    title: String
+    type: String
+    videoAsset: asset
+}
+
+type document_tagWysiwyg {
+    _tagName: String
+    _tagType: String
+    text: String
+}
+
+type object_CustomText implements element {
+    _siblings(
+        "list of object types (object, variant, folder)"
+        objectTypes: [String]
+    ): [object_tree]
+    children(
+        "list of object types (object, variant, folder)"
+        objectTypes: [String]
+    ): [object_tree]
+    childrenSortBy: String
+    classname: String
+    description: String
+    id: ID
+    index: Int
+    parent: object_tree
+    properties(
+        "comma separated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+    title: String
+}
+
+type object_folder {
+    _siblings(
+        "list of object types (object, variant, folder)"
+        objectTypes: [String]
+    ): [object_tree]
+    children(
+        "list of object types (object, variant, folder)"
+        objectTypes: [String]
+    ): [object_tree]
+    childrenSortBy: String
+    creationDate: Int
+    fullpath: String
+    id: ID
+    index: Int
+    key: String
+    modificationDateDate: Int
+    parent: object_tree
+    properties(
+        "comma separated list of key names"
+        keys: [String]
+    ): [ElementProperty]
+}
+
+type property_asset {
+    asset: asset
+    name: String
+    type: String
+}
+
+type property_assetfolder {
+    asset: asset_folder
+    name: String
+    type: String
+}
+
+type property_checkbox {
+    checked: Boolean
+    name: String
+    type: String
+}
+
+type property_document {
+    document: Document
+    name: String
+    type: String
+}
+
+type property_documentfolder {
+    document: document_folder
+    name: String
+    type: String
+}
+
+type property_object {
+    name: String
+    object: hotspot_metadata_object
+    type: String
+}
+
+type property_objectfolder {
+    name: String
+    object: object_folder
+    type: String
+}
+
+type property_text {
+    name: String
+    text: String
+    type: String
+}
+
+type property_textarea {
+    name: String
+    text: String
+    type: String
+}
+
+type resolutions {
+    resolution: Float
+    url: String
+}
+
+type srcset {
+    descriptor: String
+    resolutions(
+        "List of resolution types [2, 5, ...]"
+        types: [Float] = [2.0]
+    ): [resolutions]
+    url: String
+}
+
+input KeyValue {
+    key: String
+    value: String
+}

@@ -1,0 +1,42 @@
+query getNavigation($rootPath: String = "/", $activePath: String!) {
+  getNavigation(rootPath: $rootPath, activePath: $activePath) {
+    navigation {
+      __typename
+      href
+      title
+      label
+      active
+      activeRecursive
+      hasChildren
+      properties {
+        __typename
+        ... on property_checkbox {
+          name
+          checked
+        }
+        ... on property_text {
+          name
+          text
+        }
+      }
+      children {
+        href
+        title
+        label
+        active
+        activeRecursive
+        properties {
+          __typename
+          ... on property_checkbox {
+            name
+            checked
+          }
+          ... on property_text {
+            name
+            text
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import VModal from 'vue-js-modal';
 import PortalVue from 'portal-vue';
+import VueApollo from 'vue-apollo';
 import VueAxios from '../plugins/axios';
 import VueBemCn from '../plugins/vue-bem-cn';
 import resizeEnd from '../plugins/resize-end';
@@ -13,6 +14,7 @@ import api from '../plugins/api';
 
 // Self executing
 
+Vue.use(VueApollo);
 Vue.use(resizeEnd);
 Vue.use(VueAxios);
 Vue.use(eventBus);

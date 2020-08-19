@@ -286,6 +286,10 @@ module.exports = (env, args = {}) => {
         }
       ],
     },
+    {
+      test: /\.(gql|graphql)$/,
+      loader: 'graphql-tag/loader'
+    },
   ];
 
   const optimization = {
