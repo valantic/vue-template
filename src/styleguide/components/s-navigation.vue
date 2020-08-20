@@ -130,7 +130,6 @@
       font-family: $font-family--primary;
       margin: auto;
       position: fixed;
-      opacity: 0.2;
       min-width: $spacing--40;
       background-color: $color-grayscale--1000;
       z-index: 10000;
@@ -138,6 +137,7 @@
 
       &::after { // Toggle
         content: '';
+        opacity: 0.2;
         position: absolute;
         width: $trigger-size;
         height: $trigger-size;
@@ -156,7 +156,9 @@
       }
 
       &--open {
-        opacity: 1;
+        &::after {
+          opacity: 1;
+        }
 
         > * {
           display: block;
@@ -218,7 +220,8 @@
       left: 0;
       transform: translateX(-100%);
       padding-right: $spacing--10;
-      text-shadow: 0 0 3px $color-grayscale--1000;
+      text-shadow: 1px 1px 5px $color-grayscale--0;
+      color: $color-grayscale--1000;
 
       #{$this}__navigation-wrapper--open & {
         padding-right: $spacing--20;
