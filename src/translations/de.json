@@ -8,6 +8,10 @@
   "e-select": {
     "chooseOption": "Bitte wählen"
   },
+  "e-table": {
+    "sort": "Nach {name} sortieren",
+    "noResults": "Keine Ergebnisse für die aktuelle Auswahl."
+  },
   "e-progress": {
     "loading": "Lade …"
   },

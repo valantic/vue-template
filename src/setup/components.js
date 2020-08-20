@@ -12,7 +12,6 @@ import eIcon from '@/components/e-icon';
 import ePicture from '@/components/e-picture';
 import ePanel from '@/components/c-panel';
 import eProgress from '@/components/e-progress';
-import eLink from '@/components/e-link';
 
 // Components
 import cModal from '@/components/c-modal';
@@ -42,7 +41,6 @@ export default {
       ePicture,
       eProgress,
       ePanel,
-      eLink,
 
       // Components
       cModal,
@@ -73,7 +71,6 @@ export default {
       Vue.component(ePicture.name, ePicture);
       Vue.component(ePanel.name, ePanel);
       Vue.component(eProgress.name, eProgress);
-      Vue.component(eLink.name, eLink);
 
       // Components
       Vue.component(cModal.name, cModal);

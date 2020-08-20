@@ -47,7 +47,7 @@
 
   export default {
     name: 's-navigation',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sDemoSettings,

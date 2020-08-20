@@ -72,7 +72,6 @@
 <script>
   export default {
     name: 'forms',
-    status: 0,
 
     // components: {},
     data() {

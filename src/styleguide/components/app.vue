@@ -13,7 +13,7 @@
 
   export default {
     name: 'app',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sNavigation,

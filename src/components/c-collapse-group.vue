@@ -12,7 +12,7 @@
    */
   export default {
     name: 'c-collapse-group',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
     // mixins: [],

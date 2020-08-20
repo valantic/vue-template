@@ -10,7 +10,7 @@
    */
   export default {
     name: 'e-with-root',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
     functional: true,
 
     // components: {},
