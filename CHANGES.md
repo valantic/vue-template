@@ -5,6 +5,7 @@
    - babel-eslint because of the issue https://github.com/babel/babel-eslint/issues/815
    - vue-js-modal because version 2.0 is not ready
  - (Feature) New e-table component.
+ - (Removed) Removes e-link component.
 
 ### v 5.0.0 (2020-07-24)
  - Updates all NPM packages to the current version (2020-07-24, except babel-eslint because of an issue, https://github.com/babel/babel-eslint/issues/815)
