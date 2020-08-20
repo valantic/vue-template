@@ -1,4 +1,4 @@
-### v 5.1.0
+### v 5.1.0 (2020-08-20)
  - (Bug) Refactors the Google Analytics dataLayer condition. Testing for a native array could be problematic, since it may be replaced during initialisation.
  - (Update) Updates all NPM packages to the current version. Except:
    - babel-core because it is still needed by jest/vue-jest
