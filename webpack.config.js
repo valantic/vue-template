@@ -207,6 +207,10 @@ module.exports = (env, args = {}) => {
         hotReload,
         compilerOptions: { // @see https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#options
           whitespace: 'condense',
+          directives: {
+            // Remove the Pimcore directive from production.
+            pimcore: () => !isProduction,
+          }
         }
       },
     },
