@@ -16,7 +16,7 @@
 <script>
   import { mapGetters } from 'vuex';
 
-  const THEME_PATH = '/assets/css/app.theme-';
+  const THEME_PATH = '/assets/css/theme-';
 
   export default {
     name: 's-theme-selector',
@@ -76,12 +76,12 @@
        * Watches for changes of the «theme» and sets or changes the stylesheet with the
        * custom theme css-variables
        */
-      theme: {
+      getTheme: {
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
           const link = document.getElementById(cssId);
-          const { theme } = this;
+          const theme = this.getTheme;
 
           if (!link) {
             this.createStyleElement(theme, cssId);
