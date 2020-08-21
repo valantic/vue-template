@@ -131,11 +131,13 @@
   import api from '@/helpers/api';
   import lDefault from '@/components/l-default';
   import cNotificationContainer from '@/components/c-notification-container';
-  import notificationData from '../mock-data/api-response/notifications';
+  import notificationData from '@/styleguide/mock-data/api-response/notifications';
+  import CModal from '@/components/c-modal';
 
   export default {
     name: 'notifications',
     components: {
+      CModal,
       lDefault,
       cNotificationContainer,
     },

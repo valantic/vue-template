@@ -114,20 +114,20 @@
         sortBy: null,
 
         /**
-         * @type {Boolean} Bool which stores the 'sort-direction', default is ascending (true).
+         * @type {Boolean} Holds to sort direction in case a 'sortBy' is active.
          */
-        sortAscending: null,
+        sortAscending: true,
       };
     },
 
     computed: {
       /**
-       * Returns a sorted and modified copy of the table-items.
+       * Returns a sorted copy of the table-items.
        *
-       * @returns {Array}
+       * @returns {Array.<Object>}
        */
-      itemsSorted() {
-        const items = [...this.items]; // Creates a shallow clone to avoid mutating the prop
+      itemsSortedBy() {
+        const items = this.items.slice();
 
         if (this.sortBy) {
           const sort = typeof this.sortBy.sort === 'function'
@@ -137,11 +137,20 @@
           items.sort(sort);
         }
 
-        if (this.sortAscending === false) {
-          items.reverse();
+        return items;
+      },
+
+      /**
+       * Reverts the sort direction if required.
+       *
+       * @returns {Array.<Object>}
+       */
+      itemsSorted() {
+        if (!this.sortAscending) {
+          return this.itemsSortedBy.slice().reverse();
         }
 
-        return items;
+        return this.itemsSortedBy;
       },
     },
     // watch: {},
@@ -164,14 +173,13 @@
        */
       onClickSort(column) {
         if (this.sortBy === column) {
-          if (this.sortAscending === null) {
-            this.sortAscending = true;
-          } else if (this.sortAscending === true) {
-            this.sortAscending = false;
-          } else {
+          const asc = this.sortAscending;
+
+          if (!asc) {
             this.sortBy = null;
-            this.sortAscending = null;
           }
+
+          this.sortAscending = !asc;
         } else {
           this.sortBy = column;
           this.sortAscending = true;
@@ -197,9 +205,11 @@
        * @returns {Object}
        */
       getSortButtonModifiers(column) {
+        const active = this.sortBy === column;
+
         return {
-          active: this.sortBy === column && this.sortAscending !== null,
-          asc: this.sortBy !== column || this.sortAscending !== false
+          active,
+          desc: active && !this.sortAscending
         };
       }
     },
@@ -253,11 +263,11 @@
     width: 0;
     opacity: 0.3;
     border: 10px solid transparent;
-    border-top-color: $color-grayscale--0;
+    border-bottom-color: $color-grayscale--0;
 
-    &--asc {
-      border-top-color: transparent;
-      border-bottom-color: $color-grayscale--0;
+    &--desc {
+      border-bottom-color: transparent;
+      border-top-color: $color-grayscale--0;
     }
 
     &--active {
