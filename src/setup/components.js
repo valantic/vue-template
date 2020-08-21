@@ -15,7 +15,6 @@ import eProgress from '@/components/e-progress';
 
 // Components
 import cModal from '@/components/c-modal';
-import cModalHeader01 from '@/components/c-modal-header-01';
 import cBreadcrumb from '@/components/c-breadcrumb';
 
 // SSR related
@@ -44,7 +43,6 @@ export default {
 
       // Components
       cModal,
-      cModalHeader01,
       cBreadcrumb,
 
       // SSR related
@@ -74,7 +72,6 @@ export default {
 
       // Components
       Vue.component(cModal.name, cModal);
-      Vue.component(cModalHeader01.name, cModalHeader01);
       Vue.component(cBreadcrumb.name, cBreadcrumb);
 
       // SSR related

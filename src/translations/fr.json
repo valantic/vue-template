@@ -23,7 +23,7 @@
     "decline": "Annuler",
     "close": "Fermer"
   },
-  "c-modal-header-01": {
+  "c-modal": {
     "closeTitle": "fermer la fenêtre"
   },
   "c-multiselect": {

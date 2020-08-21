@@ -1,10 +1,10 @@
-### small
+### Size: default
 
 ```vue
 <template>
   <div>
     <e-button @click="exampleModalIsOpen = true">open</e-button>
-    <c-modal :open="exampleModalIsOpen" @close="exampleModalIsOpen = false">
+    <c-modal :open.sync="exampleModalIsOpen">
       hello World..
     </c-modal>
     <portal-target name="modal-container" multiple />
@@ -22,13 +22,15 @@
 </script>
 ```
 
-### large
+### Size: 600
 
 ```vue
 <template>
   <div>
     <e-button @click="exampleModalIsOpen = true">open</e-button>
-    <c-modal :open="exampleModalIsOpen" @close="exampleModalIsOpen = false" size="600">
+    <c-modal :open.sync="exampleModalIsOpen"
+             size="600"
+    >
       hello World..
     </c-modal>
   </div>
@@ -45,13 +47,45 @@
 </script>
 ```
 
-### title
+### Title
 
 ```vue
 <template>
   <div>
     <e-button @click="exampleModalIsOpen = true">open</e-button>
-    <c-modal :open="exampleModalIsOpen" @close="exampleModalIsOpen = false" title="I'm a modal!">
+    <c-modal :open.sync="exampleModalIsOpen"
+             title="I'm a modal!"
+    >
+      hello World..
+    </c-modal>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'example',
+    data() {
+      return {
+        exampleModalIsOpen: false,
+      };
+    },
+  };
+</script>
+```
+
+### Custom header
+
+```vue
+<template>
+  <div>
+    <e-button @click="exampleModalIsOpen = true">open</e-button>
+    <c-modal :open.sync="exampleModalIsOpen"
+             title="I'm a modal!"
+    >
+      <template v-slot:header="data">
+        <div style="padding: 20px; border-bottom: 1px solid black">
+          A custom header: {{ data.title}}
+        </div>
+      </template>
       hello World..
     </c-modal>
   </div>
@@ -74,7 +108,9 @@
 <template>
   <div>
     <e-button @click="exampleModalIsOpen = true">open</e-button>
-    <c-modal :open="exampleModalIsOpen" @close="exampleModalIsOpen = false" title="I'm a modal!">
+    <c-modal :open.sync="exampleModalIsOpen"
+             title="I'm a modal!"
+    >
       hello World..
       <div>
         <e-button @click="exampleModalIsOpen = false">Close modal here</e-button>
@@ -105,7 +141,9 @@
 <template>
   <div>
     <e-button @click="exampleModalIsOpen = true">open 1st modal</e-button>
-    <c-modal :open="exampleModalIsOpen" title="I'm a modal!" @close="exampleModalIsOpen = false">
+    <c-modal :open.sync="exampleModalIsOpen"
+             title="I'm a modal!"
+    >
       hello World..
       <img src="https://dummyimage.com/600x400/000/fff" alt="" />
       <div>
