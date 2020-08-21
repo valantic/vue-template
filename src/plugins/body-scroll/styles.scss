@@ -1,0 +1,26 @@
+/* stylelint-disable selector-class-pattern, selector-max-id */
+html.scroll {
+  overflow-y: scroll;
+}
+
+body.no-scroll--x-y {
+  overflow: scroll;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
+body.no-scroll--x {
+  overflow-x: scroll;
+}
+
+body.no-scroll--y {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+body.no-scroll--position-fixed {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
