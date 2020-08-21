@@ -14,6 +14,20 @@
     "build:styleguide": "webpack --styleguide-build && vue-styleguidist build",
     "build:watch": "NODE_ENV=production webpack --mode production --watch"
   },
+  "webpack": {
+    "buildPath": "dist",
+    "productionPath": "/",
+    "styleguidePath": "/",
+    "developmentPath": "/",
+    "outputAssetsFolder": "assets/",
+    "filePrefix": "",
+    "themeSource": "src/setup/scss/themes/",
+    "themeFiles": [
+      "theme-01",
+      "theme-02"
+    ],
+    "devPort": 8080
+  },
   "husky": {
     "hooks": {
       "pre-push": "npm run jest",

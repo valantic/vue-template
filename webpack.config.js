@@ -17,6 +17,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
+const { webpack: config } = require('./package.json');
 
 module.exports = (env, args = {}) => {
   // Instance variables
@@ -34,21 +35,26 @@ module.exports = (env, args = {}) => {
   };
 
   // Project variables
-  const buildPath = path.resolve(__dirname, 'dist');
-  const productionPath = '/';
-  const styleguidePath = '/';
-  const developmentPath = '/';
+  const {
+    buildPath,
+    productionPath,
+    styleguidePath,
+    developmentPath,
+    outputAssetsFolder,
+    filePrefix,
+    themeSource,
+    themeFiles,
+    devPort
+  } = config;
 
   const publicPath = isProduction // Base path which is used in production to load modules via http.
     ? productionPath
     : isStyleguideBuild ? styleguidePath : developmentPath;
-  const outputAssetsFolder = 'assets/';
-  const filePrefix = '';
-  const themes = {
-    'theme-01': path.resolve(__dirname, 'src/setup/scss/themes/theme-01.scss'),
-    'theme-02': path.resolve(__dirname, 'src/setup/scss/themes/theme-02.scss'),
-  };
-  const devPort = 8080;
+  const themes = themeFiles.reduce((accumulator, theme) => {
+    accumulator[theme] = path.resolve(__dirname, `${themeSource}${theme}.scss`);
+
+    return accumulator;
+  }, {});
   const host = args.host && args.host !== 'localhost'
     ? args.host
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
@@ -346,7 +352,7 @@ module.exports = (env, args = {}) => {
       maxAssetSize: 150000, // 150kb
     },
     output: {
-      path: buildPath,
+      path: path.resolve(__dirname, buildPath),
       filename: isProduction || isStyleguideBuild ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]`,
       publicPath,
