@@ -13,6 +13,8 @@ Auto-generates attributes for the Pimcore generator. Note, that the directive wi
 
 #### `v-pimcore:editable="[<editable>, <identifier>[, <restriction>]]"`
 
+Note: this is also the default for this directive. So you may drop the `editable` argument.
+
 **Requires** the definition of `editable` and `identifier` as an array. `restriction` is optional.
 
 - `editable` Defines the type of the editable. See [Pimcore documentation](https://pimcore.com/docs/6.x/Development_Documentation/Documents/Editables/index.html#page_List-of-Editables) for available types.
@@ -61,6 +63,24 @@ export default {
         classes: ["Product"]
       }
     }   
+  }
+}
+</script>
+```
+
+```vue
+<template>
+  <div v-pimcore="['input', 'title']">
+    Inspect me to see the added attributes. I don't use the argument.
+  </div>
+</template>
+
+<script>
+import pimcore from '@/directives/pimcore';
+
+export default {
+  directives: {
+    pimcore,
   }
 }
 </script>
