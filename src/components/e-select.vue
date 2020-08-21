@@ -151,10 +151,11 @@
 </script>
 
 <style lang="scss">
-  $this: &;
   $e-select-height: 30px;
 
   .e-select {
+    $this: &;
+
     position: relative;
 
     &__select {

@@ -15,8 +15,9 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import { webpack } from '@/../package.json';
 
-  const THEME_PATH = '/assets/css/app.theme-';
+  const themePath = `/${webpack.outputAssetsFolder}css/${webpack.filePrefix}theme-`;
 
   export default {
     name: 's-theme-selector',
@@ -76,17 +77,17 @@
        * Watches for changes of the «theme» and sets or changes the stylesheet with the
        * custom theme css-variables
        */
-      theme: {
+      getTheme: {
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
           const link = document.getElementById(cssId);
-          const { theme } = this;
+          const theme = this.getTheme;
 
           if (!link) {
             this.createStyleElement(theme, cssId);
           } else {
-            link.href = `${THEME_PATH}${theme}.css`;
+            link.href = `${themePath}${theme}.css`;
           }
         }
       }
@@ -125,7 +126,7 @@
         link.id = cssId;
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = `${THEME_PATH}${themeId}.css`;
+        link.href = `${themePath}${themeId}.css`;
         link.media = 'all';
 
         head.appendChild(link);
