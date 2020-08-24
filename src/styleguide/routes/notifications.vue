@@ -132,12 +132,12 @@
   import lDefault from '@/components/l-default';
   import cNotificationContainer from '@/components/c-notification-container';
   import notificationData from '@/styleguide/mock-data/api-response/notifications';
-  import CModal from '@/components/c-modal';
+  import cModal from '@/components/c-modal';
 
   export default {
     name: 'notifications',
     components: {
-      CModal,
+      cModal,
       lDefault,
       cNotificationContainer,
     },
