@@ -27,13 +27,15 @@ function bind(el, binding) {
       break;
 
     default:
-      if (Array.isArray(binding.value)) {
-        [
-          editable,
-          identifier,
-          restriction
-        ] = binding.value;
+      if (!Array.isArray(binding.value)) {
+        throw new Error('The data given to the v-pimcore directive is not of type Array.');
       }
+
+      [
+        editable,
+        identifier,
+        restriction
+      ] = binding.value;
 
       if (!editable) {
         throw new Error('No editable type given for Pimcore editable.');
