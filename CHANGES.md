@@ -2,6 +2,10 @@
  - (Breaking) Refactors c-modal header component to slot.
  - (Feature) New outside click directive.
  - (Feature) New body scroll plugin.
+ - (Update) Updates all NPM packages to the current version. Except:
+   - babel-core because it is still needed by jest/vue-jest
+   - babel-eslint because of the issue https://github.com/babel/babel-eslint/issues/815
+   - vue-js-modal because version 2.0 is not ready
  
  ### v 5.1.0 (2020-08-20)
  - (Bug) Refactors the Google Analytics dataLayer condition. Testing for a native array could be problematic, since it may be replaced during initialisation.
