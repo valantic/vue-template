@@ -13,11 +13,6 @@ import ePicture from '@/components/e-picture';
 import ePanel from '@/components/c-panel';
 import eProgress from '@/components/e-progress';
 
-// Components
-import cModal from '@/components/c-modal';
-import cModalHeader01 from '@/components/c-modal-header-01';
-import cBreadcrumb from '@/components/c-breadcrumb';
-
 // SSR related
 import lDefault from '@/components/l-default';
 import cHeader from '@/components/c-header';
@@ -41,11 +36,6 @@ export default {
       ePicture,
       eProgress,
       ePanel,
-
-      // Components
-      cModal,
-      cModalHeader01,
-      cBreadcrumb,
 
       // SSR related
       lDefault,
@@ -71,11 +61,6 @@ export default {
       Vue.component(ePicture.name, ePicture);
       Vue.component(ePanel.name, ePanel);
       Vue.component(eProgress.name, eProgress);
-
-      // Components
-      Vue.component(cModal.name, cModal);
-      Vue.component(cModalHeader01.name, cModalHeader01);
-      Vue.component(cBreadcrumb.name, cBreadcrumb);
 
       // SSR related
       Vue.component(lDefault.name, lDefault);

@@ -132,7 +132,7 @@
 
 <style lang="scss">
   .c-notification-container {
-    @include z-index(global-notification);
+    @include z-index(globalNotification);
 
     &--display-type-global {
       position: absolute;
