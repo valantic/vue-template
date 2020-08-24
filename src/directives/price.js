@@ -1,4 +1,4 @@
-import formatPrice from '../helpers/format-price';
+import formatPrice from '@/helpers/format-price';
 
 /**
  * Directive to provide formatted prices.
@@ -20,7 +20,7 @@ import formatPrice from '../helpers/format-price';
 export default {
   name: 'price',
 
-  bind: (el, binding) => {
+  bind(el, binding) {
     if (!binding.value && binding.value !== 0) {
       return;
     }
@@ -28,7 +28,7 @@ export default {
     el.innerHTML = formatPrice(binding.value, binding.modifiers.currencyBefore, binding.modifiers.currencyAfter);
   },
 
-  update: (el, binding) => {
+  update(el, binding) {
     if (!binding.value && binding.value !== 0) {
       return;
     }
