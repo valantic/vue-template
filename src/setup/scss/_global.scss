@@ -36,29 +36,6 @@ p {
 }
 
 /* stylelint-disable selector-class-pattern, selector-max-id */
-html.scroll {
-  overflow-y: scroll;
-}
-
-body.no-scroll--x-y {
-  overflow: hidden;
-  height: 100%;
-  position: fixed;
-}
-
-body.no-scroll--x {
-  overflow-x: hidden;
-}
-
-body.no-scroll--y {
-  overflow-y: hidden; // TODO: not yet tested.
-  height: 100%;
-}
-
-body.no-scroll--position-fixed {
-  position: fixed;
-}
-
 #app {
   height: 100%;
 }

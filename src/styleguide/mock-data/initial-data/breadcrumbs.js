@@ -1,6 +1,5 @@
+import faker from 'faker';
 import breadcrumb from '../data-object/breadcrumb';
-
-const faker = require('faker');
 
 export default [
   {
