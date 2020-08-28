@@ -129,7 +129,7 @@
     "webpack-manifest-plugin": "~2.2.0"
   },
   "browserslist": [
-    "> 2% in CH",
+    "> 2%",
     "last 2 years",
     "ie 11",
     "not ie_mob > 0",
