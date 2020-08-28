@@ -131,6 +131,28 @@ NOTE: always use `npm ci` when setting up the project or updated the code base. 
 | iPad Pro (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
 | iPad 5th (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
 
+#### Updating browserslist
+
+Please make sure, that the list above is also represented in the browserslist configuration, which is used to determine the required code parsing for CSS and JS to support older browsers.
+
+To check which browsers are currently targeted, run the following command:
+
+```
+npx browserslist
+```
+
+Excluding unsupported browsers can have a big impact on the build size. When removing older webkit versions in a test run we were able to reduce the CSS size by almost 25%!
+
+See the [browserslist documentation](https://github.com/browserslist/browserslist#query-composition) on how to define the query.
+
+#### Updating caniuse-lite
+
+The browserslist relies on up to date caniuse-lite information. To update this dependency you can run:
+
+```
+npx browserslist@latest --update-db
+```
+
 ### Running the project
 
 A complete list of available NPM scripts can be found in [package.md](package.md).
