@@ -56,7 +56,7 @@
    */
   export default {
     name: 'c-swiper-hero',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
     mixins: [uuid],

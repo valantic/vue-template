@@ -10,9 +10,15 @@
 </template>
 
 <script>
+
+  /**
+   * Renders a color specimen tile.
+   *
+   * **WARNING: uses 'v-html' for the 'displayName'. Make sure, that the source for this data is trustworthy.**
+   */
   export default {
     name: 's-color-specimen',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
     // mixins: [],

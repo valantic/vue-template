@@ -11,7 +11,7 @@
     <div v-if="isRendered" :class="b('content')" :style="{ maxHeight }">
       <div ref="inner" :class="b('inner')">
         <!-- @slot Used for item content -->
-        <slot :is-open="isOpen"></slot>
+        <slot :isOpen="isOpen"></slot>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
    */
   export default {
     name: 'c-collapse',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
     // mixins: [],

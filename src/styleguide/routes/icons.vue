@@ -1,22 +1,16 @@
 <template>
-  <ul :class="b()">
-    <li :class="b('item')">
-      <s-toggle checked>
-        Logged in
-      </s-toggle>
-    </li>
-  </ul>
+  <l-default>
+    <s-icon-finder :class="b('icon-finder')" />
+  </l-default>
 </template>
 
 <script>
-  import sToggle from './s-toggle';
+  import sIconFinder from '@/styleguide/components/s-icon-finder';
 
   export default {
-    name: 's-demo-settings',
-    status: 0, // TODO: remove when component was prepared for current project.
-
+    name: 'icons',
     components: {
-      sToggle,
+      sIconFinder
     },
     // mixins: [],
 
@@ -45,7 +39,9 @@
 </script>
 
 <style lang="scss">
-  .s-demo-settings {
-    @extend %list-reset;
+  .icons {
+    &__icon-finder {
+      max-width: 90%; // Prevent viewport overflow
+    }
   }
 </style>

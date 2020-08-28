@@ -20,7 +20,7 @@
    */
   export default {
     name: 'c-notification-container',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cNotification,
@@ -132,7 +132,7 @@
 
 <style lang="scss">
   .c-notification-container {
-    @include z-index(global-notification);
+    @include z-index(globalNotification);
 
     &--display-type-global {
       position: absolute;

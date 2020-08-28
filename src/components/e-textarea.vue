@@ -30,10 +30,12 @@
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
    * The height can be set by the `rows` property.
+   *
+   * **WARNING: uses 'v-html' for the 'notification'. Make sure, that the source for this data is trustworthy.**
    */
   export default {
     name: 'e-textarea',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cFormNotification,

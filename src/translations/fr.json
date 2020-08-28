@@ -8,6 +8,10 @@
   "e-select": {
     "chooseOption": "SVP Sélectionner"
   },
+  "e-table": {
+    "sort": "Trier par {name}",
+    "noResults": "Aucun résultat pour la sélection actuelle."
+  },
   "e-progress": {
     "loading": "Charge …"
   },
@@ -19,7 +23,7 @@
     "decline": "Annuler",
     "close": "Fermer"
   },
-  "c-modal-header-01": {
+  "c-modal": {
     "closeTitle": "fermer la fenêtre"
   },
   "c-multiselect": {

@@ -73,6 +73,10 @@ module.exports = {
           name: 'Global styles',
           content: 'src/styleguide/pages/core/global-styles.md',
         },
+        {
+          name: 'Directives',
+          content: 'src/styleguide/pages/core/directives.md',
+        },
       ],
     },
     // {

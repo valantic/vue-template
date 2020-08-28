@@ -55,7 +55,7 @@ export default {
      * @param {Object} payload - The new event data, which will be added to the dataLayer.
      */
     function push(payload) {
-      if (Array.isArray(window[dataLayer])) {
+      if (window[dataLayer] && window[dataLayer].push) {
         window[dataLayer].push(payload);
 
         // Log if debug and development mode are active

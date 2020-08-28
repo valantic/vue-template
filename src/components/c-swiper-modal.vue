@@ -77,7 +77,7 @@
    */
   export default {
     name: 'c-swiper-modal',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
     // mixins: [],

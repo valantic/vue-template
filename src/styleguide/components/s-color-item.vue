@@ -22,7 +22,7 @@
 
   export default {
     name: 's-color-item',
-    status: 0,
+    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sColorSpecimen
