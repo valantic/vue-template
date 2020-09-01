@@ -1,3 +1,6 @@
+### Next
+ - (Change) Changes remote asset protocols to https to prevent security exceptions on styleguide server.
+
 ### v 6.0.0 (2020-08-25)
  - (Breaking) Refactors c-modal header component to slot.
  - (Feature) New outside click directive.

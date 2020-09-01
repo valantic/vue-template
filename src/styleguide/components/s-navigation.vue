@@ -7,7 +7,7 @@
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', { logo: true })">
           <a :class="b('navigation-link')"
-             href="http://www.valantic.com"
+             href="https://www.valantic.com"
              target="_blank"
           >
             <img src="@/assets/valantic.svg" alt="valantic">

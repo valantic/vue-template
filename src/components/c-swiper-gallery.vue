@@ -88,7 +88,7 @@
   const swiperInstances = {};
 
   /**
-   * Touch enabled slider component based on [swiper](http://idangero.us/swiper/).
+   * Touch enabled slider component based on [swiper](https://idangero.us/swiper/).
    */
   export default {
     name: 'c-swiper-gallery',
@@ -210,7 +210,7 @@
               id: `${youtubeId}-${index}`,
               url: video.youtubeUrl,
               youtubeId,
-              thumbSrc: `http://img.youtube.com/vi/${youtubeId}/0.jpg`,
+              thumbSrc: `https://img.youtube.com/vi/${youtubeId}/0.jpg`,
               isVideo: true,
             };
           });

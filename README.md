@@ -27,7 +27,7 @@ You **MUST** also be familiar with the following tools:
 * [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
 * [Git](https://git-scm.com/)
-* [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/)
+* [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Jest](https://facebook.github.io/jest/)
 * [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
 * [SCSS](https://sass-lang.com/)
@@ -44,12 +44,12 @@ You **MUST** install the following tools globally, before you can use this templ
 
 * [Node.js & NPM](https://nodejs.org/en/) (See package.json for the required versions. Use a version manager in case you work on different projects (e.g. [n](https://www.npmjs.com/package/n) or [nvm](https://github.com/creationix/nvm/blob/master/README.md))).
 * [Vue-Devtools](https://github.com/vuejs/vue-devtools) for your browser.
-* [Homebrew](http://brew.sh/) is most likely also needed for 3rd party tools.
+* [Homebrew](https://brew.sh/) is most likely also needed for 3rd party tools.
 * A modern IDE
 
 ### Prepare your IDE
 
-Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](http://editorconfig.org/#download) linting/settings.
+Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
 
 **This template supports ES2020+. Please make sure your IDE is configured accordingly.**
 
@@ -620,7 +620,7 @@ The configuration file for the Babel compiler. Please note, that the browser ver
 
 ### .editorconfig
 
-The `.editorconfig` file in the project root defines project defaults for your IDE like indent and type of line-breaks. Please make sure that your IDE is configured to read this file. Help and plugins can be found [here](http://editorconfig.org/#download).
+The `.editorconfig` file in the project root defines project defaults for your IDE like indent and type of line-breaks. Please make sure that your IDE is configured to read this file. Help and plugins can be found [here](https://editorconfig.org/#download).
 
 ### .eslintignore
 
@@ -763,6 +763,6 @@ $ brew upgrade nasm
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](https://opensource.org/licenses/MIT)
 
 Copyright (c) 2017-present, valantic CEC Schweiz AG

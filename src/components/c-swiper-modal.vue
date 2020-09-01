@@ -73,7 +73,7 @@
 
   /**
    * Touch enabled slider component with thumbnails based on
-   * [swiper](http://idangero.us/swiper/api/).
+   * [swiper](https://idangero.us/swiper/api/).
    */
   export default {
     name: 'c-swiper-modal',
