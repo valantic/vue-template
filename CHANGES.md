@@ -1,4 +1,5 @@
 ### Next
+ - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
  - (Change) Changes remote asset protocols to https to prevent security exceptions on styleguide server.
 
 ### v 6.0.0 (2020-08-25)
