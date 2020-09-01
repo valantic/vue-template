@@ -3,7 +3,7 @@
 
 # AuthUserFile /path/to/.htpasswd
 # AuthType Basic
-# AuthName "My restricted Area"
+# AuthName "Please enter your credentials to continue."
 # Require valid-user
 
 <IfModule mod_rewrite.c>
