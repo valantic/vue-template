@@ -105,7 +105,7 @@ module.exports = (env, args = {}) => {
 
     new VueLoaderPlugin(), // *.vue file parser.
     new MiniCssExtractPlugin({ // Extract CSS code
-      filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction ? '.[chunkhash]' : ''}.css`,
+      filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction || isStyleguideBuild ? '.[chunkhash]' : ''}.css`,
     }),
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
