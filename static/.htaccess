@@ -1,11 +1,3 @@
-# Enableds authentication
-# For user/password creation @see https://www.web2generators.com/apache-tools/htpasswd-generator
-
-# AuthUserFile /path/to/.htpasswd
-# AuthType Basic
-# AuthName "Please enter your credentials to continue."
-# Require valid-user
-
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
