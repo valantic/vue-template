@@ -41,7 +41,7 @@ Vue.mixin({
 
 const router = new VueRouter({
   routes: styleguideRoutes,
-  mode: process.env.IS_STYLEGUIDE_BUILD ? 'hash' : 'history', // Using 'hash' with the styleguide build requires less server configuration.
+  mode: 'history', // Using 'hash' with the styleguide build requires less server configuration.
 });
 
 export default {

@@ -11,29 +11,29 @@
       return {
         images: [
           {
-            fallback: 'https://via.placeholder.com/500',
+            fallback: '//via.placeholder.com/500',
             srcset: {
-              500: 'https://via.placeholder.com/500',
-              800: 'https://via.placeholder.com/800',
-              1200: 'https://via.placeholder.com/1200'
+              500: '//via.placeholder.com/500',
+              800: '//via.placeholder.com/800',
+              1200: '//via.placeholder.com/1200'
             },
             alt: ''
           },
           {
-            fallback: 'https://via.placeholder.com/500',
+            fallback: '//via.placeholder.com/500',
             srcset: {
-              500: 'https://via.placeholder.com/500',
-              800: 'https://via.placeholder.com/800',
-              1200: 'https://via.placeholder.com/1200'
+              500: '//via.placeholder.com/500',
+              800: '//via.placeholder.com/800',
+              1200: '//via.placeholder.com/1200'
             },
             alt: ''
           },
           {
-            fallback: 'https://via.placeholder.com/500',
+            fallback: '//via.placeholder.com/500',
             srcset: {
-              500: 'https://via.placeholder.com/500',
-              800: 'https://via.placeholder.com/800',
-              1200: 'https://via.placeholder.com/1200'
+              500: '//via.placeholder.com/500',
+              800: '//via.placeholder.com/800',
+              1200: '//via.placeholder.com/1200'
             },
             alt: ''
           }]
