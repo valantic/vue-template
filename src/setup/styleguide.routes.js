@@ -1,9 +1,10 @@
-import index from '../styleguide/routes/index';
-import sandbox from '../styleguide/routes/sandbox';
-import icons from '../styleguide/routes/icons';
-import lDefault from '../components/l-default';
-import forms from '../styleguide/routes/forms';
-import notifications from '../styleguide/routes/notifications';
+import lDefault from '@/components/l-default';
+
+import index from '@/styleguide/routes/index';
+import sandbox from '@/styleguide/routes/sandbox';
+import icons from '@/styleguide/routes/icons';
+import forms from '@/styleguide/routes/forms';
+import notifications from '@/styleguide/routes/notifications';
 
 const root = '/styleguide';
 const categoryWrapper = {

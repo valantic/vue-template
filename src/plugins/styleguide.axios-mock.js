@@ -1,9 +1,9 @@
 /* eslint-disable newline-per-chained-call */
 import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-extraneous-dependencies
-import { axios } from './axios';
+import { axios } from '@/plugins/axios';
 
 // Import mocks
-import notification from '../styleguide/mock-data/api-response/notifications';
+import notification from '@/styleguide/mock-data/api-response/notifications';
 
 /**
  * By default returns a 500 'no route defined' error.

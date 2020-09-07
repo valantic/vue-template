@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import app from '@/styleguide/components/app';
+import AxiosMockAdapter from '@/plugins/styleguide.axios-mock';
+import dummyImages from '@/styleguide/mock-data/initial-data/images';
+import dummyVideos from '@/styleguide/mock-data/initial-data/videos';
+import dummyTableData from '@/styleguide/mock-data/initial-data/table';
+import { availableStatus } from '@/plugins/styleguide.status-label';
 import styleguideRoutes from './styleguide.routes';
-import app from '../styleguide/components/app';
-import AxiosMockAdapter from '../plugins/styleguide.axios-mock';
-import dummyImages from '../styleguide/mock-data/initial-data/images';
-import dummyVideos from '../styleguide/mock-data/initial-data/videos';
-import dummyTableData from '../styleguide/mock-data/initial-data/table';
-import { availableStatus } from '../plugins/styleguide.status-label';
 
 // In development and on styleguide build, include router and example pages
 
