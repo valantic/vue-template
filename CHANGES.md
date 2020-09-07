@@ -2,6 +2,7 @@
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
  - (Change) Changes remote asset protocols to https to prevent security exceptions on styleguide server.
  - (Change) Reverts router mode to 'history' for styleguide build.
+ - (Change) Replaces relative imports with alias based ones.
 
 ### v 6.0.0 (2020-08-25)
  - (Breaking) Refactors c-modal header component to slot.
