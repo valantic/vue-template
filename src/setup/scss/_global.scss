@@ -7,31 +7,31 @@ body {
   background-color: $color-grayscale--1000;
 }
 
-h1 {
+h1 { // TODO: update definition for project.
   @extend %heading-h1;
 }
 
-h2 {
+h2 { // TODO: update definition for project.
   @extend %heading-h2;
 }
 
-h3 {
+h3 { // TODO: update definition for project.
   @extend %heading-h3;
 }
 
-h4 {
+h4 { // TODO: update definition for project.
   @extend %heading-h4;
 }
 
-h5 {
+h5 { // TODO: update definition for project.
   @extend %heading-h5;
 }
 
-h6 {
+h6 { // TODO: update definition for project.
   @extend %heading-h6;
 }
 
-p {
+p { // TODO: update definition for project.
   @include font($font-size--14);
 }
 
