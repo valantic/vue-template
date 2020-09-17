@@ -65,6 +65,15 @@ export default {
         },
 
         /**
+         * Checks if current viewport is mobile (<= md).
+         *
+         * @returns {Boolean}
+         */
+        isMobile() {
+          return !this.isSm;
+        },
+
+        /**
          * Returns the short name of the current viewport (e.g. 'md').
          *
          * @returns {String}
