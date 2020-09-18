@@ -126,13 +126,14 @@
     $border: $spacing--10 solid $color-grayscale--400;
     $trigger-size: 40px;
 
+    z-index: 1;
+
     &__navigation-wrapper {
       font-family: $font-family--primary;
       margin: auto;
       position: fixed;
       min-width: $spacing--40;
       background-color: $color-grayscale--1000;
-      z-index: 10000;
       height: 100%;
 
       &::after { // Toggle
