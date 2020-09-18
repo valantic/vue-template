@@ -99,7 +99,9 @@ module.exports = (env, args = {}) => {
     new webpack.DefinePlugin(globalVariables), // Set node variables.
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, 'static'),
+        from: '**/*',
+        context: path.resolve(__dirname, 'static'),
+        globOptions: isProduction ? { dot: true, ignore: ['**/mockdata/**'] } : null,
       },
     ]),
 
