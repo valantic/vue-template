@@ -13,6 +13,7 @@ module.exports = {
   extends: [
     'valantic',
     'plugin:vue/recommended',
+    '@vue/typescript/recommended',
   ],
   // required to lint *.vue files
   plugins: [

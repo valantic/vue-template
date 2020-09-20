@@ -510,7 +510,7 @@ Be aware that [vue-i18n](https://github.com/kazupon/vue-i18n) also supports a [p
 
 ### Use outside of component or Vue instance
 
-If you need to use translations outside of a component or Vue instance, where the utilities are injected, you can use the vue-i18n instance which is exported from `setup/i18n.js`.
+If you need to use translations outside of a component or Vue instance, where the utilities are injected, you can use the vue-i18n instance which is exported from `setup/i18n.ts`.
 
 ```javascript
 import { i18n } from '@/setup/i18n';
@@ -578,13 +578,13 @@ Please note, that the living styleguide has its on section in `/app/styleguide` 
 
 ### Mock data
 
-You can share the mock data from the demo pages with the vue-styleguidist by importing them into the global mixin which is defined inside `app/setup/styleguide.options.js`. They will be merged with the `data()` object of each component which is displayed inside the component styleguide. Access the data with `mockData.<yourKey>` (e.g. `<c-cms-wrapper :components="mockData.cCmsWrapperMockData" />`).
+You can share the mock data from the demo pages with the vue-styleguidist by importing them into the global mixin which is defined inside `app/setup/styleguide.options.ts`. They will be merged with the `data()` object of each component which is displayed inside the component styleguide. Access the data with `mockData.<yourKey>` (e.g. `<c-cms-wrapper :components="mockData.cCmsWrapperMockData" />`).
 
 ## Webpack
 
 ### Path alias
 
-Webpack supports to use an [alias](https://webpack.js.org/loaders/css-loader/#alias) for paths. Thanks to this feature, you don't need to define relative paths when importing one JavaScript file into an other. The `@` alias stands for the application root (`/app`). So for example you can just write `import options from '@/setup/options'` in any file to import the `options.js` file from the `setup` folder without caring about relative path resolving.
+Webpack supports to use an [alias](https://webpack.js.org/loaders/css-loader/#alias) for paths. Thanks to this feature, you don't need to define relative paths when importing one JavaScript file into an other. The `@` alias stands for the application root (`/app`). So for example you can just write `import options from '@/setup/options'` in any file to import the `options.ts` file from the `setup` folder without caring about relative path resolving.
 
 ## Node.js and NPM
 

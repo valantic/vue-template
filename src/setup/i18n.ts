@@ -1,15 +1,15 @@
-import VueI18n from 'vue-i18n';
+import VueI18n, { IVueI18n } from 'vue-i18n';
 import Vue from 'vue'; // Default language
-import fallbackMessages from '../translations/de';
-import numberFormats from './localization';
+import fallbackMessages from '../translations/de.json';
+import numberFormats from './localization.json';
 
 const pageLang = document?.documentElement?.lang;
 
 Vue.use(VueI18n);
 
-export const I18N_FALLBACK = 'de';
-export const I18N_FALLBACK_MESSAGES = fallbackMessages;
-export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
+export const I18N_FALLBACK: string = 'de';
+export const I18N_FALLBACK_MESSAGES: any = fallbackMessages;
+export const I18N_LOCALES: string[] = [I18N_FALLBACK, 'fr'];
 
 // Add styleguide only translations
 if (process.env.NODE_ENV !== 'production') {
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-export const i18n = new VueI18n({
+export const i18n: IVueI18n = new VueI18n({
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
 

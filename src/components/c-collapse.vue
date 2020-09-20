@@ -17,8 +17,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import propScale from '@/helpers/prop.scale';
+
+  interface Data {
+    isExpanded: boolean;
+    maxHeight: number;
+  }
 
   /**
    * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
@@ -58,7 +63,7 @@
       },
     },
 
-    data() {
+    data(): Data {
       return {
         /**
          * @type {Boolean} Defines the current state of the collapse.
@@ -110,11 +115,11 @@
     // watch: {},
 
     // beforeCreate() {},
-    created() {
+    created(): void {
       this.isRendered = this.isOpen;
     },
     // beforeMount() {},
-    mounted() {
+    mounted(): void {
       this.$eventBus.$on('c-collapse-group.toggle', (payload) => {
         const toggledElement = payload.toggledCollapse;
         const toggleGroup = payload.component;
@@ -140,7 +145,7 @@
        *
        * @param   {Object}    event   Original event
        */
-      toggleState(event) {
+      toggleState(event): void {
         event.preventDefault();
 
         event.target.blur();
@@ -166,7 +171,7 @@
       /**
        * Opens the collapsible.
        */
-      open() {
+      open(): void {
         if (!this.isRendered) {
           this.isRendered = true;
 
@@ -184,7 +189,7 @@
       /**
        * Sets the max-height of the content and opens the content.
        */
-      openContent() {
+      openContent(): void {
         this.setMaxHeight();
         clearTimeout(this.closeTimeout);
 
@@ -197,7 +202,7 @@
       /**
        * Closes the collapsible.
        */
-      close() {
+      close(): void {
         this.setMaxHeight();
         this.isOpen = false;
 
@@ -211,7 +216,7 @@
       /**
        * Sets the collapsible height according to its current content.
        */
-      setMaxHeight() {
+      setMaxHeight(): void {
         this.maxHeight = `${this.$refs.inner.clientHeight}px`;
       }
     },

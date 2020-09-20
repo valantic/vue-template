@@ -2,14 +2,16 @@
   <div :class="b()">
     <h1>Sandbox</h1>
     <div>
-      <!-- Add any content here -->
+      <c-collapse>Foo</c-collapse>
     </div>
   </div>
 </template>
 
 <script>
+  import CCollapse from '@/components/c-collapse';
   export default {
     name: 'sandbox',
+    components: { CCollapse },
     // components: {},
     // mixins: [],
 

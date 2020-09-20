@@ -5,10 +5,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
   /**
-   * Wrapper for multiple (c-collapse) itmes.
+   * Wrapper for multiple (c-collapse) items.
    */
   export default {
     name: 'c-collapse-group',
@@ -36,7 +36,7 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted() {
+    mounted(): void {
       /**
        * Emits toggled event
        */
