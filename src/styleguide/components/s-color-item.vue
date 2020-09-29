@@ -94,6 +94,7 @@
     &__grid-item {
       padding: $spacing--5;
       flex: 0 1 percentage(6 / 12);
+      max-width: 200px;
 
       @include media(sm) {
         flex-basis: percentage(4 / 12);
