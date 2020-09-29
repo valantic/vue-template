@@ -3,6 +3,7 @@
              :class="b(modifiers)"
              :style="style"
              v-bind="attributes"
+             @touchstart="hasTouch = true"
              @mouseenter="onMouseEnter"
              @mouseleave="onMouseLeave"
              @mousedown="onMouseDown"
@@ -26,7 +27,6 @@
 <script>
   import propScale from '@/helpers/prop.scale';
   import eProgress from './e-progress';
-  import touchDevice from '../mixins/touch-device';
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
@@ -43,9 +43,7 @@
     components: {
       eProgress
     },
-    mixins: [
-      touchDevice,
-    ],
+    // mixins: [],
 
     props: {
       /**
@@ -152,6 +150,11 @@
          * Sets the element type for the component.
          */
         type: this.$attrs.href ? 'a' : 'button',
+
+        /**
+         * Determines if the current device uses touch.
+         */
+        hasTouch: false,
       };
     },
 
