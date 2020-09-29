@@ -37,7 +37,7 @@ p { // TODO: update definition for project.
 
 /* stylelint-disable selector-class-pattern, selector-max-id */
 #app {
-  height: 100%;
+  min-height: 100%;
 }
 
 .invisible {
