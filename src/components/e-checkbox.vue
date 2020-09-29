@@ -253,7 +253,7 @@
     // disabled label
     &--disabled &__label,
     &__field:disabled + &__label {
-      color: $color-grayscale--450;
+      color: $color-grayscale--300;
       cursor: default;
 
       // custom field disabled

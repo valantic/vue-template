@@ -349,7 +349,7 @@
     &--disabled:hover {
       background-color: transparent;
       border-color: $color-grayscale--600;
-      color: $color-grayscale--450;
+      color: $color-grayscale--300;
       cursor: default;
       pointer-events: none;
     }

@@ -1,3 +1,6 @@
+### Next
+ - (Change) Fixes invalid greyscale order.
+
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
  - (Feature) Adds 'isMobile' computed to the '$viewport' helper/tools.

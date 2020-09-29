@@ -229,13 +229,13 @@
 
     &--disabled &__field:checked ~ &__fake-button::after,
     &__field:disabled:checked ~ &__fake-button::after {
-      background-color: $color-grayscale--450;
+      background-color: $color-grayscale--300;
     }
 
     &--disabled &__field ~ &__label-name,
     &__field:disabled ~ &__label-name {
       cursor: default;
-      color: $color-grayscale--450;
+      color: $color-grayscale--300;
     }
 
     &--disabled &__label {

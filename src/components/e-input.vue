@@ -489,16 +489,16 @@
     &--disabled:not(&--border-0) &__field:hover {
       background-color: $color-grayscale--1000;
       border-color: $color-grayscale--600;
-      color: $color-grayscale--450;
+      color: $color-grayscale--300;
 
       &::placeholder {
-        color: $color-grayscale--450;
+        color: $color-grayscale--300;
       }
     }
 
     &--disabled {
       #{$this}__slot {
-        color: $color-grayscale--450;
+        color: $color-grayscale--300;
       }
     }
 

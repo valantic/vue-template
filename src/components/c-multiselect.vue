@@ -597,7 +597,7 @@
     }
 
     &--disabled &__title {
-      color: $color-grayscale--450;
+      color: $color-grayscale--300;
     }
 
     &--error &__title {
@@ -637,7 +637,7 @@
     &--disabled &__placeholder,
     &--disabled &__value,
     &--disabled &__output {
-      color: $color-grayscale--450;
+      color: $color-grayscale--300;
       border-color: $color-grayscale--600;
     }
 
