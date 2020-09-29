@@ -13,12 +13,12 @@
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'http://via.placeholder.com/180x150',
+      fallback: 'https://via.placeholder.com/180x150',
       sources: {
-        0: ['http://via.placeholder.com/180x150/000000 1x', 'http://via.placeholder.com/360x300/000000 2x'],
-        sm: ['http://via.placeholder.com/350x150/666666 1x', 'http://via.placeholder.com/700/666666 2x'],
-        800: ['http://via.placeholder.com/800x150/aaaaaa 1x', 'http://via.placeholder.com/1600x300/aaaaaa 2x'],
-        1440: ['http://via.placeholder.com/1440x150/dddddd 1x', 'http://via.placeholder.com/2880x300/dddddd 2x'],
+        0: ['https://via.placeholder.com/180x150/000000 1x', 'https://via.placeholder.com/360x300/000000 2x'],
+        sm: ['https://via.placeholder.com/350x150/666666 1x', 'https://via.placeholder.com/700/666666 2x'],
+        800: ['https://via.placeholder.com/800x150/aaaaaa 1x', 'https://via.placeholder.com/1600x300/aaaaaa 2x'],
+        1440: ['https://via.placeholder.com/1440x150/dddddd 1x', 'https://via.placeholder.com/2880x300/dddddd 2x'],
       },
     })
   };
@@ -42,12 +42,12 @@
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'http://via.placeholder.com/180x150/0000ff',
+      fallback: 'https://via.placeholder.com/180x150/0000ff',
       srcset: {
-        200: 'http://via.placeholder.com/200x100',
-        400: 'http://via.placeholder.com/400x200',
-        800: 'http://via.placeholder.com/800x400',
-        1400: 'http://via.placeholder.com/1400x700',
+        200: 'https://via.placeholder.com/200x100',
+        400: 'https://via.placeholder.com/400x200',
+        800: 'https://via.placeholder.com/800x400',
+        1400: 'https://via.placeholder.com/1400x700',
       },
       sizes: {
         1440: 1400,
@@ -86,9 +86,9 @@
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'http://via.placeholder.com/180x150/0000ff',
+      fallback: 'https://via.placeholder.com/180x150/0000ff',
       sources: {
-        0: ['http://via.placeholder.com/200 1x', 'http://via.placeholder.com/400 2x'],
+        0: ['https://via.placeholder.com/200 1x', 'https://via.placeholder.com/400 2x'],
       },
     })
   };
@@ -113,12 +113,12 @@
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'http://via.placeholder.com/180x150/0000ff',
+      fallback: 'https://via.placeholder.com/180x150/0000ff',
       srcset: {
-        100: 'http://via.placeholder.com/100x50',
-        400: 'http://via.placeholder.com/400x200',
-        500: 'http://via.placeholder.com/500x250',
-        600: 'http://via.placeholder.com/600x300',
+        100: 'https://via.placeholder.com/100x50',
+        400: 'https://via.placeholder.com/400x200',
+        500: 'https://via.placeholder.com/500x250',
+        600: 'https://via.placeholder.com/600x300',
       },
       sizes: {
         1200: 600,
@@ -149,12 +149,12 @@
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'http://via.placeholder.com/180x150/0000ff',
+      fallback: 'https://via.placeholder.com/180x150/0000ff',
       srcset: {
-          100: 'http://via.placeholder.com/100x50',
-          400: 'http://via.placeholder.com/400x200',
-          500: 'http://via.placeholder.com/500x250',
-          600: 'http://via.placeholder.com/600x300',
+          100: 'https://via.placeholder.com/100x50',
+          400: 'https://via.placeholder.com/400x200',
+          500: 'https://via.placeholder.com/500x250',
+          600: 'https://via.placeholder.com/600x300',
         },
         sizes: {
           1200: 600,

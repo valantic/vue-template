@@ -19,6 +19,19 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
 const { webpack: config } = require('./package.json');
 
+/**
+ * A note about [hash]: Using the hash in query could cause troubles with caching proxies. Therefore
+ * it is recommended to use build hashes only on file names, not as an url query!
+ */
+
+/**
+ * Creates a webpack configuration based on the current environment and arguments.
+ *
+ * @param {String|Object} env - The currently active environment.
+ * @param {Object} args - An Object of additional arguments.
+ *
+ * @returns {Object}
+ */
 module.exports = (env, args = {}) => {
   // Instance variables
   const isStyleguideBuild = !!args.styleguideBuild;
@@ -86,13 +99,15 @@ module.exports = (env, args = {}) => {
     new webpack.DefinePlugin(globalVariables), // Set node variables.
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, 'static'),
+        from: '**/*',
+        context: path.resolve(__dirname, 'static'),
+        globOptions: isProduction ? { dot: true, ignore: ['**/mockdata/**'] } : null,
       },
     ]),
 
     new VueLoaderPlugin(), // *.vue file parser.
     new MiniCssExtractPlugin({ // Extract CSS code
-      filename: `${outputAssetsFolder}css/${prefix}[name].css${isProduction ? '?[chunkhash]' : ''}`,
+      filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction || isStyleguideBuild ? '.[chunkhash]' : ''}.css`,
     }),
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
@@ -254,7 +269,7 @@ module.exports = (env, args = {}) => {
           options: {
             esModule: false,
             context: 'src/assets/',
-            name: '[path][name].[ext]?[hash]',
+            name: '[path][name].[hash].[ext]',
             outputPath: `${outputAssetsFolder}img/`,
             publicPath: `${publicPath}${outputAssetsFolder}img/`
           },
@@ -277,7 +292,7 @@ module.exports = (env, args = {}) => {
           options: {
             esModule: false,
             context: 'src/assets/fonts',
-            name: `[path][name].[ext]?[hash]`,
+            name: `[path][name].[hash].[ext]`,
             outputPath: `${outputAssetsFolder}fonts/`,
             publicPath: `${publicPath}${outputAssetsFolder}fonts/`
           },
@@ -357,8 +372,8 @@ module.exports = (env, args = {}) => {
     },
     output: {
       path: path.resolve(__dirname, buildPath),
-      filename: isProduction || isStyleguideBuild ? `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]` : '[name].js',
-      chunkFilename: `${outputAssetsFolder}js/${prefix}[name].js?[chunkhash]`,
+      filename: isProduction || isStyleguideBuild ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
+      chunkFilename: `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js`,
       publicPath,
     },
     watchOptions: {

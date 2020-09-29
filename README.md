@@ -27,7 +27,7 @@ You **MUST** also be familiar with the following tools:
 * [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
 * [Git](https://git-scm.com/)
-* [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/)
+* [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Jest](https://facebook.github.io/jest/)
 * [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
 * [SCSS](https://sass-lang.com/)
@@ -44,12 +44,12 @@ You **MUST** install the following tools globally, before you can use this templ
 
 * [Node.js & NPM](https://nodejs.org/en/) (See package.json for the required versions. Use a version manager in case you work on different projects (e.g. [n](https://www.npmjs.com/package/n) or [nvm](https://github.com/creationix/nvm/blob/master/README.md))).
 * [Vue-Devtools](https://github.com/vuejs/vue-devtools) for your browser.
-* [Homebrew](http://brew.sh/) is most likely also needed for 3rd party tools.
+* [Homebrew](https://brew.sh/) is most likely also needed for 3rd party tools.
 * A modern IDE
 
 ### Prepare your IDE
 
-Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](http://editorconfig.org/#download) linting/settings.
+Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
 
 **This template supports ES2020+. Please make sure your IDE is configured accordingly.**
 
@@ -130,6 +130,28 @@ NOTE: always use `npm ci` when setting up the project or updated the code base. 
 | Galaxy S8 (Android 7) | Chrome Mobile (newest) | low | xxs, xs, sm (md) |
 | iPad Pro (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
 | iPad 5th (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
+
+#### Updating browserslist
+
+Please make sure, that the list above is also represented in the browserslist configuration, which is used to determine the required code parsing for CSS and JS to support older browsers.
+
+To check which browsers are currently targeted, run the following command:
+
+```
+npx browserslist
+```
+
+Excluding unsupported browsers can have a big impact on the build size. When removing older webkit versions in a test run we were able to reduce the CSS size by almost 25%!
+
+See the [browserslist documentation](https://github.com/browserslist/browserslist#query-composition) on how to define the query.
+
+#### Updating caniuse-lite
+
+The browserslist relies on up to date caniuse-lite information. To update this dependency you can run:
+
+```
+npx browserslist@latest --update-db
+```
 
 ### Running the project
 
@@ -598,7 +620,7 @@ The configuration file for the Babel compiler. Please note, that the browser ver
 
 ### .editorconfig
 
-The `.editorconfig` file in the project root defines project defaults for your IDE like indent and type of line-breaks. Please make sure that your IDE is configured to read this file. Help and plugins can be found [here](http://editorconfig.org/#download).
+The `.editorconfig` file in the project root defines project defaults for your IDE like indent and type of line-breaks. Please make sure that your IDE is configured to read this file. Help and plugins can be found [here](https://editorconfig.org/#download).
 
 ### .eslintignore
 
@@ -699,48 +721,15 @@ $ brew install nasm
 $ brew upgrade nasm
 ```
 
-## ToDo
+## Roadmap
 
-* [x] Add info about npm version
-* [x] Functional components
-* [x] Node scripts
-* [x] Inspector
-* [x] Must read
-* [x] Installation (npm, inspector)
-* [x] Best practice
-* [x] Minification/Code splitting
-* [x] Vue exceptions
-* [x] Blueprints
-* [x] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
-* [x] Data injection/handling
-* [x] BEM helper
-* [x] BEM guidelines
-* [x] Folder structure
-* [x] Naming (only singular)
-* [x] Vuex & modules
-* [x] Axios request mocking https://github.com/ctimmerm/axios-mock-adapter
-* [x] Styleguide components
-* [x] webpack alias
-* [x] webpackChunkName
-* [ ] Custom element style reset (e.g. iframe)
-* [ ] Fallback image for e-picture
-* [x] e-picture should support relation property and fallback image
-* [ ] npm update: only update one package at a time, test, then update next.
-
-## Version 4 Roadmap
-
-* [x] Update swiper
 * [ ] Implement dual build (ES5/ES2015+)
-* [x] Double check polyfills (e.g. smoothscroll)
-* [x] Fix broken themes
-* [ ] Element styles should be moved to reboot.
-* [x] Update package.md.
-* [*] Add current viewport info to development environment.
+* [ ] Element styles should be moved to reboot.
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](https://opensource.org/licenses/MIT)
 
 Copyright (c) 2017-present, valantic CEC Schweiz AG

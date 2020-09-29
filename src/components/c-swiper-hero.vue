@@ -52,7 +52,7 @@
 
   /**
    * Touch enabled slider component based on
-   * [swiper](http://idangero.us/swiper/).
+   * [swiper](https://idangero.us/swiper/).
    */
   export default {
     name: 'c-swiper-hero',
