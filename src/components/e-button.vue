@@ -67,12 +67,11 @@
       /**
        * Modifies the inner spacing for the button.
        *
-       * Valid values: `[0, 500, 600]`
+       * Valid values: `[0, 500]`
        */
       spacing: propScale(500, [
         0,
         500,
-        600,
       ]),
 
       /**
@@ -370,11 +369,6 @@
 
     &--spacing-0 {
       padding: 0;
-    }
-
-    &--spacing-600 {
-      padding-left: $spacing--40;
-      padding-right: $spacing--40;
     }
 
     &--progress,
