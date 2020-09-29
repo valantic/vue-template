@@ -4,6 +4,11 @@
  - (Change) Changes remote asset protocols to https to prevent security exceptions on styleguide server.
  - (Change) Reverts router mode to 'history' for styleguide build.
  - (Change) Replaces relative imports with alias based ones.
+ - (Change) Adds postcss as standalone NPM package because it is no longer a dependency of the postcss-loader.
+ - (Update) Updates all NPM packages to the current version. Except:
+   - babel-core because it is still needed by jest/vue-jest
+   - babel-eslint because of the issue https://github.com/babel/babel-eslint/issues/815
+   - vue-js-modal because version 2.0 is not ready
 
 ### v 6.0.0 (2020-08-25)
  - (Breaking) Refactors c-modal header component to slot.
