@@ -6,7 +6,7 @@
 //
 // @returns {List}    Converted pixel values
 ////
-@function calc-em($values, $context: $font-size--default) {
+@function calc-em($values, $context: $_config--font-size) {
   $result: ();
 
   @each $value in $values {

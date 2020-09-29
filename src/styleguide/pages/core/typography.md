@@ -3,17 +3,17 @@
 
 Font. See app/setup/scss/mixins/_font.scss
 ```scss
-@mixin font($font-size: $font-size--default, $line-height: null, $font-weight: null);
+@mixin font($font-size: $_config--font-size, $line-height: null, $font-weight: null);
 ```
 
 Font-size. See app/setup/scss/mixins/_font-size.scss
 ```scss
-@mixin font-size($size-value: $font-size--default);
+@mixin font-size($size-value: $_config--font-size);
 ```
 
 Line-height. See app/setup/scss/mixins/_line-height.scss
 ```scss
-@mixin line-height($line-height: $line-height--default, $font-size: $font-size--default);
+@mixin line-height($line-height: $_config--line-height, $font-size: $_config--font-size);
 ```
 
 Please make sure that you use the defined SCSS mixins for font, font-size and line-height.  This way we can make sure that all of the font units are relative (rem/em). Use mixins within styles, not the other way around
@@ -108,7 +108,7 @@ Please make sure that you use the defined SCSS mixins for font, font-size and li
 
 **p**
 ```
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 ```
 
 ### Links
