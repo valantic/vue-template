@@ -5,6 +5,7 @@
  - (Change) Reverts router mode to 'history' for styleguide build.
  - (Change) Replaces relative imports with alias based ones.
  - (Change) Adds postcss as standalone NPM package because it is no longer a dependency of the postcss-loader.
+ - (Change) Updates roadmap in readme file.
  - (Update) Updates all NPM packages to the current version. Except:
    - babel-core because it is still needed by jest/vue-jest
    - babel-eslint because of the issue https://github.com/babel/babel-eslint/issues/815

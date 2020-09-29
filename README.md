@@ -721,43 +721,10 @@ $ brew install nasm
 $ brew upgrade nasm
 ```
 
-## ToDo
+## Roadmap
 
-* [x] Add info about npm version
-* [x] Functional components
-* [x] Node scripts
-* [x] Inspector
-* [x] Must read
-* [x] Installation (npm, inspector)
-* [x] Best practice
-* [x] Minification/Code splitting
-* [x] Vue exceptions
-* [x] Blueprints
-* [x] eslint-plugin-vue https://github.com/vuejs/eslint-plugin-vue
-* [x] Data injection/handling
-* [x] BEM helper
-* [x] BEM guidelines
-* [x] Folder structure
-* [x] Naming (only singular)
-* [x] Vuex & modules
-* [x] Axios request mocking https://github.com/ctimmerm/axios-mock-adapter
-* [x] Styleguide components
-* [x] webpack alias
-* [x] webpackChunkName
-* [ ] Custom element style reset (e.g. iframe)
-* [ ] Fallback image for e-picture
-* [x] e-picture should support relation property and fallback image
-* [ ] npm update: only update one package at a time, test, then update next.
-
-## Version 4 Roadmap
-
-* [x] Update swiper
 * [ ] Implement dual build (ES5/ES2015+)
-* [x] Double check polyfills (e.g. smoothscroll)
-* [x] Fix broken themes
-* [ ] Element styles should be moved to reboot.
-* [x] Update package.md.
-* [*] Add current viewport info to development environment.
+* [ ] Element styles should be moved to reboot.
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
 
