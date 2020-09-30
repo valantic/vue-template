@@ -1,5 +1,6 @@
 ### Next
  - (Change) Fixes invalid greyscale order.
+ - (Change) Replaces deprecated webpack-manifest-plugin with webpack-assets-manifest
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.

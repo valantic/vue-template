@@ -16,7 +16,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const WebpackManifestPlugin = require('webpack-manifest-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 const { webpack: config } = require('./package.json');
 
 /**
@@ -135,7 +135,9 @@ module.exports = (env, args = {}) => {
       new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
         cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
       }),
-      new WebpackManifestPlugin(), // Creates a manifest.json for the build
+      new WebpackAssetsManifest({ // Creates a manifest.json for the build
+        publicPath: true,
+      })
     );
   }
 

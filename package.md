@@ -168,11 +168,11 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > development environment
 - [webpack](https://www.npmjs.com/package/webpack) - webpack is a module bundler.
   > webpack
+- [webpack-assets-manifest](https://www.npmjs.com/package/webpack-assets-manifest) - Creates a manifest.json to map webpack input with output.
+  > webpack
 - [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) - Visualize size of webpack output files with an interactive zoomable treemap.
   > webpack
 - [webpack-cli](https://www.npmjs.com/package/webpack-cli) - The official CLI of webpack.
   > webpack
 - [webpack-dev-serve](https://www.npmjs.com/package/webpack-dev-server) - Use webpack with a development server that provides live reloading.
   > webpack, development environment
-- [webpack-manifest-plugin](https://www.npmjs.com/package/webpack-manifest-plugin) - Creates a manifest.json to map webpack input with output.
-  > webpack
