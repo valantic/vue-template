@@ -175,22 +175,6 @@ Always use **v-model** to bind value to form elements!
 </script>
 ```
 
-#### No focus shadow
-```vue
-<template>
-  <e-input v-model="demo" name="demo" :focusShadow="false" /> 
-</template>
-
-<script>
-  export default {
-    name: 'example',
-    data: () => ({
-      demo: ''
-    })
-  };
-</script>
-```
-
 #### No border
 ```vue
 <template>
