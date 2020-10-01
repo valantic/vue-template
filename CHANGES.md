@@ -1,6 +1,10 @@
 ### Next
  - (Change) Fixes invalid greyscale order.
- - (Change) Replaces deprecated webpack-manifest-plugin with webpack-assets-manifest
+ - (Change) Replaces deprecated webpack-manifest-plugin with webpack-assets-manifest.
+ - (Change) Simplyfies s-readme styles, so they align more with the current project.
+ - (Change) Updates browser support table.
+ - (Change) Makes form mixin imports absolute to prevent ESLint errors.
+ - (Change) Removes deprecated prop from e-checkbox demos.
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
