@@ -115,21 +115,19 @@ NOTE: always use `npm ci` when setting up the project or updated the code base. 
 
 | Operating systems/Devices | Browser | Priority | Breakpoints |
 | --- | --- | --- | --- |
-| Windows 7 | IE11 | **high** | all |
-| Windows 8 | IE11 | **high** | all |
-| Windows 10 | IE11 | **high** | all |
-| Windows 10 | Edge (newest) | **high** | all |
-| Windows 10 | Chrome (newest) | _medium_ | all |
-| Windows 10 | Firefox (newest) | _medium_ | all |
-| Mac OS X 10.13 | Safari (newest) | _medium_ | all |
-| Mac OS X 10.13 | Chrome (newest) | low | all |
-| Mac OS X 10.13 | Firefox (newest) | low | all |
-| Phone 8 (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
-| Phone 8 Plus (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
-| Phone X (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
-| Galaxy S8 (Android 7) | Chrome Mobile (newest) | low | xxs, xs, sm (md) |
-| iPad Pro (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
-| iPad 5th (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
+| Windows 10 | Chrome (current) | **high** | all |
+| Windows 10 | Edge (current) | **high** | all |
+| Windows 10 | Firefox (current) | _medium_| all |
+| Windows 10 | IE11 | low | >= md |
+| Windows 7 | IE11 | low | >= md |
+| Mac OS X 10.15 | Chrome (current) | **high** | all |
+| Mac OS X 10.15 | Safari (current) | **high** | all |
+| Mac OS X 10.15 | Firefox (current) | _medium_ | all |
+| iPhone X (current iOS) | Safari (current) | low | <= md |
+| iPhone 11 (current iOS) | Safari (current) | low | <= md |
+| Galaxy S20 (current Android) | Chrome Mobile (current) | low | <= md |
+| iPad Pro 4th (current iOS) | Safari Mobile (current) | low | sm, md, lg |
+| iPad 7th (current iOS) | Safari Mobile (current) | low | sm, md, lg |
 
 #### Updating browserslist
 
