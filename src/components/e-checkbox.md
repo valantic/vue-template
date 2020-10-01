@@ -107,4 +107,21 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 </script>
 ```
 
+#### Multiline
 
+```vue
+<template>
+<div>
+  <e-checkbox checked v-model="checked" name="checked" value="checked">This label<br>runs over<br>multiple lines</e-checkbox>
+</div>
+</template>
+
+<script>
+  export default {
+    name: 'example',
+    data: () => ({
+      checked: true,
+    })
+  };
+</script>
+```
