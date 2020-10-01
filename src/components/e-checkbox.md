@@ -43,7 +43,6 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
   
   <div class="spacing--top-15">
     <pre>checked: {{ checked }}</pre>
-    <pre>items: {{ items }}</pre>
   </div>
 
 </div>
