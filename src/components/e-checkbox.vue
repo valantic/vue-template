@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import formStates from '../mixins/form-states';
+  import formStates from '@/mixins/form-states';
 
   /**
    * Checkbox component for form elements.

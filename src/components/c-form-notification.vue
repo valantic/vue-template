@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import formStates from '../mixins/form-states';
+  import formStates from '@/mixins/form-states';
 
   /**
    * Component is used to display a notification (status message) directly in the form field.

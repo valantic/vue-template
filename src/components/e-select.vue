@@ -28,7 +28,7 @@
 
 <script>
   import { i18n } from '@/setup/i18n';
-  import formStates from '../mixins/form-states';
+  import formStates from '@/mixins/form-states';
 
   /**
    * Renders a styled select element. Options can be passed with the `options` property.

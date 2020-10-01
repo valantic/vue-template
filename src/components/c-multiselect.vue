@@ -108,7 +108,7 @@
 </template>
 
 <script>
-  import formStates from '../mixins/form-states';
+  import formStates from '@/mixins/form-states';
 
   /**
    * Multiselect component which contains a list of checkboxes. It contains an input field for filtering the values
