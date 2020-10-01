@@ -5,7 +5,7 @@ Always use **v-model** to bind value to form elements!
 <template>
 <div>
   <div style="display: block;">
-    <e-checkbox v-model="checked" :name="name" :value="value" :display-name="value">example</e-checkbox>
+    <e-checkbox v-model="checked" :name="name" :value="value">example</e-checkbox>
   </div>
   
   <div class="spacing--top-15">
@@ -75,7 +75,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 <template>
 <div>
 
-  <e-checkbox checked v-model="checked" :name="name" :value="value" :display-name="value">example</e-checkbox>
+  <e-checkbox checked v-model="checked" :name="name" :value="value">example</e-checkbox>
   
 </div>
 </template>
@@ -97,7 +97,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 <template>
 <div>
 
-  <e-checkbox disabled v-model="checked" :name="name" :value="value" :display-name="value">example</e-checkbox>
+  <e-checkbox disabled v-model="checked" :name="name" :value="value">example</e-checkbox>
   
 </div>
 </template>
