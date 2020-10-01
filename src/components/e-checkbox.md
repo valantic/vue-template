@@ -90,9 +90,8 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 ```vue
 <template>
 <div>
-
-  <e-checkbox disabled v-model="checked" name="disabled" value="disabled">example</e-checkbox>
-  
+  <e-checkbox disabled v-model="checked" name="checked" value="checked">example</e-checkbox>
+  <e-checkbox disabled v-model="unchecked" name="unchecked" value="unchecked">example</e-checkbox>
 </div>
 </template>
 
@@ -101,6 +100,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
     name: 'example',
     data: () => ({
       checked: true,
+      unchecked: false,
     })
   };
 </script>

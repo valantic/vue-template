@@ -1,4 +1,5 @@
 ### Next
+ - (Breaking) Refactors e-checkbox, so the styling of the states does not need to rely on JS anymore.
  - (Change) Fixes invalid greyscale order.
  - (Change) Replaces deprecated webpack-manifest-plugin with webpack-assets-manifest.
  - (Change) Simplyfies s-readme styles, so they align more with the current project.
