@@ -55,11 +55,10 @@
   */
   .s-readme {
     color: black;
-    font: 15px helvetica, arial, freesans, clean, sans-serif;
     background: #fff;
 
     border-radius: 3px;
-    line-height: 1.6;
+
     > * {
       &:first-child {
         margin-top: 0 !important;
@@ -112,8 +111,6 @@
     h1 {
       @include font(38);
 
-      font-weight: 700;
-      line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
@@ -127,8 +124,6 @@
     h2 {
       @include font(30);
 
-      font-weight: 700;
-      line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
@@ -142,8 +137,6 @@
     h3 {
       @include font(22);
 
-      font-weight: 700;
-      line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
@@ -156,8 +149,6 @@
     h4 {
       @include font(18);
 
-      font-weight: 700;
-      line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
@@ -170,8 +161,6 @@
     h5 {
       @include font(16);
 
-      font-weight: 700;
-      line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
@@ -185,8 +174,6 @@
     h6 {
       @include font(14);
 
-      font-weight: 700;
-      line-height: 1.7;
       cursor: text;
       position: relative;
       margin: 1em 0 15px;
