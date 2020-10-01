@@ -14,8 +14,6 @@
            @keyup.enter="onEnterKeyUp"
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false"
-           @keyup.up="onArrowKeyUp"
-           @keyup.down="onArrowKeyUp"
     >
     <input v-else
            ref="input"
@@ -32,8 +30,6 @@
            @keyup.enter="onEnterKeyUp"
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false"
-           @keyup.up="onArrowKeyUp"
-           @keyup.down="onArrowKeyUp"
     >
 
     <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
@@ -330,15 +326,6 @@
           }
         }
       },
-
-      /**
-       * Handles the bubbling of the arrow key (up/down).
-       *
-       * @param {Event} event - The DOM Event.
-       */
-      onArrowKeyUp(event) {
-        this.$emit('onArrowKeyUp', event);
-      }
     }
     // render() {},
   };
