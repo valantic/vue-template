@@ -163,8 +163,7 @@
       border: 1px solid $color-grayscale--500;
       border-radius: 3px;
       width: 100%;
-      -webkit-appearance: none;
-      -moz-appearance: none;
+      appearance: none;
       outline: none;
       padding: $spacing--0 $spacing--30 $spacing--0 $spacing--10;
       height: $e-select-height;
