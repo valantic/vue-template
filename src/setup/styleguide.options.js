@@ -6,8 +6,8 @@ import dummyImages from '@/styleguide/mock-data/initial-data/images';
 import dummyVideos from '@/styleguide/mock-data/initial-data/videos';
 import dummyTableData from '@/styleguide/mock-data/initial-data/table';
 import { availableStatus } from '@/plugins/styleguide.status-label';
-import styleguideRoutes from '@/styleguide.routes';
 import pimcore from '@/plugins/pimcore';
+import styleguideRoutes from './styleguide.routes';
 
 // In development and on styleguide build, include router and example pages
 
