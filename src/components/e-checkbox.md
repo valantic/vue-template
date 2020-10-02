@@ -5,7 +5,7 @@ Always use **v-model** to bind value to form elements!
 <template>
 <div>
   <div style="display: block;">
-    <e-checkbox v-model="checked" name="xyz" value="xyz">example</e-checkbox>
+    <e-checkbox v-model="checked" name="xyz" value="xyz">Example</e-checkbox>
   </div>
   
   <div class="spacing--top-15">
@@ -17,7 +17,6 @@ Always use **v-model** to bind value to form elements!
 
 <script>
   export default {
-    name: 'example',
     data: () => ({
       checked: false,
     })
@@ -39,7 +38,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
     v-model="checked" 
     :name="item.name" 
     :value="item.value" 
-    style="margin-bottom: 10px">example</e-checkbox>
+    style="margin-bottom: 10px">{{ item.displayName }}</e-checkbox>
   
   <div class="spacing--top-15">
     <pre>checked: {{ checked }}</pre>
@@ -50,7 +49,6 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 
 <script>
   export default {
-    name: 'example',
     data: () => ({
       // The list of items we need to do operation on
       items: [
@@ -71,14 +69,13 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 <template>
 <div>
 
-  <e-checkbox checked v-model="checked" name="checked" value="checked">example</e-checkbox>
+  <e-checkbox checked v-model="checked" name="checked" value="checked">Example</e-checkbox>
   
 </div>
 </template>
 
 <script>
   export default {
-    name: 'example',
     data: () => ({
       checked: true,
     })
@@ -90,14 +87,13 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 ```vue
 <template>
 <div>
-  <e-checkbox disabled v-model="checked" name="checked" value="checked">example</e-checkbox>
-  <e-checkbox disabled v-model="unchecked" name="unchecked" value="unchecked">example</e-checkbox>
+  <e-checkbox disabled v-model="checked" name="checked" value="checked">Example</e-checkbox>
+  <e-checkbox disabled v-model="unchecked" name="unchecked" value="unchecked">Example</e-checkbox>
 </div>
 </template>
 
 <script>
   export default {
-    name: 'example',
     data: () => ({
       checked: true,
       unchecked: false,
@@ -117,7 +113,6 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 
 <script>
   export default {
-    name: 'example',
     data: () => ({
       checked: true,
     })
