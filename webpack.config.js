@@ -226,7 +226,10 @@ module.exports = (env, args = {}) => {
           whitespace: 'condense',
           directives: {
             // Remove the Pimcore directive from production.
-            pimcore: () => !isProduction,
+            'pimcore': () => !isProduction,
+            'pimcore-areabrick': () => !isProduction,
+            'pimcore-snippet': () => !isProduction,
+            'pimcore-template': () => !isProduction,
           }
         }
       },
