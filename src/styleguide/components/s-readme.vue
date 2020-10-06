@@ -70,9 +70,8 @@
     p {
       margin: 15px 0;
     }
+
     a {
-      color: #4183c4;
-      text-decoration: none;
       &:first-child {
         h1 {
           margin-top: 0;
