@@ -27,16 +27,6 @@ Note: this is also the default for this directive. So you may drop the `editable
     Inspect me to see the added attributes.
   </div>
 </template>
-
-<script>
-import pimcore from '@/directives/pimcore';
-
-export default {
-  directives: {
-    pimcore,
-  }
-}
-</script>
 ```
 
 ```vue
@@ -47,12 +37,7 @@ export default {
 </template>
 
 <script>
-import pimcore from '@/directives/pimcore';
-
 export default {
-  directives: {
-    pimcore,
-  },
   data() {
     return {
       restriction: {
@@ -74,16 +59,6 @@ export default {
     Inspect me to see the added attributes. I don't use the argument.
   </div>
 </template>
-
-<script>
-import pimcore from '@/directives/pimcore';
-
-export default {
-  directives: {
-    pimcore,
-  }
-}
-</script>
 ```
 
 <br>
@@ -100,16 +75,6 @@ export default {
     Inspect me to see the added attributes.
   </div>
 </template>
-
-<script>
-import pimcore from '@/directives/pimcore';
-
-export default {
-  directives: {
-    pimcore,
-  }
-}
-</script>
 ```
 
 <br>
@@ -124,16 +89,6 @@ Marks the related element as snippet content.
     Inspect me to see the added attributes.
   </div>
 </template>
-
-<script>
-import pimcore from '@/directives/pimcore';
-
-export default {
-  directives: {
-    pimcore,
-  }
-}
-</script>
 ```
 
 <br>
@@ -148,14 +103,4 @@ Marks the related element as `disabled` in the Pimcore editor.
     Inspect me to see the added attributes.
   </a>
 </template>
-
-<script>
-import pimcore from '@/directives/pimcore';
-
-export default {
-  directives: {
-    pimcore,
-  }
-}
-</script>
 ```

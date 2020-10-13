@@ -51,6 +51,7 @@ module.exports = (env, args = {}) => {
   const {
     buildPath,
     productionPath,
+    styleguideBuildPath,
     styleguidePath,
     developmentPath,
     outputAssetsFolder,
@@ -101,7 +102,9 @@ module.exports = (env, args = {}) => {
       {
         from: '**/*',
         context: path.resolve(__dirname, 'static'),
-        globOptions: isProduction ? { dot: true, ignore: ['**/mockdata/**'] } : null,
+        globOptions: isProduction
+          ? { dot: true, ignore: ['**/mockdata/**'] }
+          : isStyleguideBuild ? { dot: true } : undefined,
       },
     ]),
 
@@ -376,7 +379,7 @@ module.exports = (env, args = {}) => {
       maxAssetSize: 150000, // 150kb
     },
     output: {
-      path: path.resolve(__dirname, buildPath),
+      path: path.resolve(__dirname, isStyleguideBuild ? styleguideBuildPath : buildPath),
       filename: isProduction || isStyleguideBuild ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js`,
       publicPath,

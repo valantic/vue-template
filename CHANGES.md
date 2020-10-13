@@ -9,6 +9,7 @@
  - (Change) Makes form mixin imports absolute to prevent ESLint errors.
  - (Change) Removes deprecated prop from e-checkbox demos.
  - (Change) Adds multi line demo for e-checkbox.
+ - (Bug) Fixes broken styleguide build.
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
