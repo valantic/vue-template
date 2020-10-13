@@ -3,6 +3,9 @@
   <div :class="b()">
     <h1>
       Styleguide
+      <small :class="b('build-info')">
+        {{ buildDate }}
+      </small>
     </h1>
     <hr>
     <p>Welcome to the styleguide.</p>
@@ -19,10 +22,22 @@
 
 <script>
   import sReadme from '@/styleguide/components/s-readme';
+  import dayjs from 'dayjs';
 
   export default {
     name: 'index',
     components: { sReadme },
+
+    data() {
+      const buildDate = process.env.BUILD_TIMESTAMP
+        ? dayjs(process.env.BUILD_TIMESTAMP).format('DD.MM.YYYY HH:mm')
+        : null;
+
+      return {
+        buildDate
+      };
+    },
+
     computed: {
       /**
        * Checks, if production mode is active.
@@ -55,6 +70,12 @@
       border: 1px solid $color-grayscale--400;
       background: rgba($color-primary--2--rgb, 0.5);
       color: $color-primary--3;
+    }
+
+    &__build-info {
+      @include font-size($font-size--14);
+
+      margin-left: $spacing--5;
     }
   }
 </style>

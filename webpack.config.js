@@ -44,6 +44,7 @@ module.exports = (env, args = {}) => {
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
       IS_STYLEGUIDE_BUILD: JSON.stringify(isStyleguideBuild),
       HAS_WATCHER: hasWatcher,
+      BUILD_TIMESTAMP: new Date().getTime(),
     },
   };
 
