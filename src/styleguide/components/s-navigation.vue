@@ -93,7 +93,7 @@
        */
       styleguidistUrl() {
         return process.env.IS_STYLEGUIDE_BUILD
-          ? './styleguidist'
+          ? '/styleguidist'
           : '//localhost:6060';
       },
 
