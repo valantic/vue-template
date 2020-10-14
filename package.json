@@ -16,6 +16,7 @@
   },
   "webpack": {
     "buildPath": "dist",
+    "localDist": "webpack-dist",
     "productionPath": "/",
     "styleguideBuildPath": "./dist",
     "styleguidePath": "/",

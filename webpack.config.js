@@ -52,6 +52,7 @@ module.exports = (env, args = {}) => {
   const {
     buildPath,
     productionPath,
+    localDist,
     styleguideBuildPath,
     styleguidePath,
     developmentPath,
@@ -59,7 +60,7 @@ module.exports = (env, args = {}) => {
     filePrefix,
     themeSource,
     themeFiles,
-    devPort
+    devPort,
   } = config;
 
   const publicPath = isProduction // Base path which is used in production to load modules via http.
@@ -73,6 +74,11 @@ module.exports = (env, args = {}) => {
   const host = args.host && args.host !== 'localhost'
     ? args.host
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
+  const outputPath = process.env.WEBPACK_LOCAL_DIST
+    ? localDist
+    : isStyleguideBuild
+      ? styleguideBuildPath
+      : buildPath;
 
   // webpack configuration variables
   const prefix = filePrefix ? `${filePrefix}.` : '';
@@ -380,7 +386,7 @@ module.exports = (env, args = {}) => {
       maxAssetSize: 150000, // 150kb
     },
     output: {
-      path: path.resolve(__dirname, isStyleguideBuild ? styleguideBuildPath : buildPath),
+      path: path.resolve(__dirname, outputPath),
       filename: isProduction || isStyleguideBuild ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js`,
       publicPath,

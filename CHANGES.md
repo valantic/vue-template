@@ -1,5 +1,6 @@
 ### Next
  - (Feature) Adds styleguide build information to the index page.
+ - (Feature) Adds support for local webpack dist (Pimcore).
  - (Breaking) Refactors e-checkbox, so the styling of the states does not need to rely on JS anymore.
  - (Breaking) Removes e-with-root component.
    - The same behaviour can be achieved with :is="""
