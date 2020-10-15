@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
   /**
    * TODO: add description for component styleguide.
    */
