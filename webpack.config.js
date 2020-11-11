@@ -18,6 +18,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const { webpack: config } = require('./package.json');
+const chokidar = require('chokidar');
 
 /**
  * A note about [hash]: Using the hash in query could cause troubles with caching proxies. Therefore
@@ -209,11 +210,18 @@ module.exports = (env, args = {}) => {
     quiet: true, // Handled by FriendlyErrorsPlugin
     inline: true,
     progress: true,
-    before(app) {
+    before(app, server) {
       if (!isStyleguideBuild) {
         console.clear();
         console.log('\x1b[34m%s\x1b[0m', 'Starting development server...');
       }
+
+      // Refresh browser on non js/vue file changes
+      chokidar.watch([
+        './src/**/*.scss'
+      ]).on('all', function() {
+        server.sockWrite(server.sockets, 'content-changed');
+      });
 
       app.use('/__open-in-editor', openInEditor()); // Adds 'open in editor' support for Vue Inspector
     },
