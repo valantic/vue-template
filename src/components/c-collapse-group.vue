@@ -8,7 +8,7 @@
 <script>
 
   /**
-   * Wrapper for multiple (c-collapse) itmes.
+   * Wrapper for multiple (c-collapse) items.
    */
   export default {
     name: 'c-collapse-group',
