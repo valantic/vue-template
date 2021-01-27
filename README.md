@@ -719,6 +719,19 @@ $ brew install nasm
 $ brew upgrade nasm
 ```
 
+#### Error on Windows machines while running the `npm run build script`
+
+If you're on a Windows machine, and you need to build the project – there is a problem with assign node env. variables like
+`NODE_ENV=production`. To get rid of this problem there is an npm package that could help you => https://www.npmjs.com/package/cross-env
+Be sure that you add "cross-env" at the start of the script like:
+
+package.json:
+```json
+"scripts": {
+    "build": "cross-env NODE_ENV=production webpack --mode production --progress",
+  },
+```
+
 ## Roadmap
 
 * [ ] Implement dual build (ES5/ES2015+)
