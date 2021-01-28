@@ -12,7 +12,8 @@
     "build": "NODE_ENV=production webpack --mode production --progress",
     "build:profile": "NODE_ENV=production webpack --mode production --profile",
     "build:styleguide": "webpack --styleguide-build && vue-styleguidist build",
-    "build:watch": "NODE_ENV=production webpack --mode production --watch"
+    "build:watch": "NODE_ENV=production webpack --mode production --watch",
+    "build:icons": "svg-sprite --symbol --symbol-dest=src/assets/ --symbol-sprite=icons.svg src/assets/icons/*.svg"
   },
   "webpack": {
     "buildPath": "dist",
@@ -118,6 +119,7 @@
     "stylelint-webpack-plugin": "~2.1.0",
     "stylus": "~0.54.8",
     "stylus-loader": "~3.0.2",
+    "svg4everybody": "~2.1.9",
     "uglifyjs-webpack-plugin": "~2.2.0",
     "vue-jest": "~3.0.7",
     "vue-loader": "~15.9.3",

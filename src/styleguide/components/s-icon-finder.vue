@@ -14,7 +14,7 @@
            @click="copyToClipboard(icon)"
       >
         <div :class="b('icon-wrapper')">
-          <e-icon :key="icon.name" :icon="icon.name" width="50" />
+          <e-icon :key="icon.name" :icon="icon.name" size="50" />
         </div>
         <div :class="b('icon-label')">
           {{ icon.name }}

@@ -2,6 +2,6 @@
 <svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M6,11 L17,11 C17.5522847,11 18,11.4477153 18,12 C18,12.5522847 17.5522847,13 17,13 L5,13 C4.44771525,13 4,12.5522847 4,12 L4,8 C4,7.44771525 4.44771525,7 5,7 C5.55228475,7 6,7.44771525 6,8 L6,11 Z" fill="#2FA61C" transform="translate(11.000000, 10.000000) rotate(-45.000000) translate(-11.000000, -10.000000) "></path>
+        <path d="M6,11 L17,11 C17.5522847,11 18,11.4477153 18,12 C18,12.5522847 17.5522847,13 17,13 L5,13 C4.44771525,13 4,12.5522847 4,12 L4,8 C4,7.44771525 4.44771525,7 5,7 C5.55228475,7 6,7.44771525 6,8 L6,11 Z" fill="currentColor" transform="translate(11.000000, 10.000000) rotate(-45.000000) translate(-11.000000, -10.000000) "></path>
     </g>
 </svg>
