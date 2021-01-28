@@ -54,10 +54,9 @@
         mobile-transition="fade"
         @close="modalClose">
         <div :class="b('modal-close-icon')" @click="modalOpen = false">
-          <e-icon icon="i-close"
+          <e-icon icon="close"
                   width="25"
-                  height="25"
-                  inline />
+                  height="25" />
         </div>
         <c-swiper-modal :images="pictures"
                         :initial-slide="swiper.activeIndex"
@@ -424,7 +423,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url('../assets/icons/i-play.svg');
+      background-image: url('../assets/icons/play.svg');
       background-size: 50px 50px;
       background-position: center center;
       background-repeat: no-repeat;

@@ -2,7 +2,7 @@
   <div :class="b()">
     <h1>Sandbox</h1>
     <div>
-      <!-- Add any content here -->
+      <e-icon :class="b('icon')" icon="styleguide-heart" />
     </div>
   </div>
 </template>
@@ -39,6 +39,8 @@
 
 <style lang="scss">
   .sandbox {
-    // Add specific styles.
+    &__icon {
+      color: $color-status--danger;
+    }
   }
 </style>

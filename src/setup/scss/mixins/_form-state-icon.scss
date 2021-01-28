@@ -7,13 +7,13 @@
 
 @mixin form-state-icon($state: 'error') {
   @if $state == 'error' {
-    background-image: url('../assets/icons/i-error.svg');
+    background-image: url('../assets/icons/error.svg');
   } @else if $state == 'info' {
-    background-image: url('../assets/icons/i-info.svg');
+    background-image: url('../assets/icons/info.svg');
   } @else if $state == 'success' {
-    background-image: url('../assets/icons/i-check.svg');
+    background-image: url('../assets/icons/check.svg');
   } @else if $state == 'search' {
-    background-image: url('../assets/icons/i-search.svg');
+    background-image: url('../assets/icons/search.svg');
   }
 
   background-repeat: no-repeat;

@@ -40,8 +40,7 @@
       <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
       <e-icon v-if="!hasDefaultState && !hasFocus"
               :class="b('state-icon')"
-              :icon="stateIcon"
-              inline />
+              :icon="stateIcon" />
     </span>
     <div v-if="showNotification" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->

@@ -33,10 +33,9 @@
             :class="b('close')"
             @click="close">
       <e-icon
-        icon="i-close"
+        icon="close"
         width="15"
         height="15"
-        inline
       />&nbsp;
     </button>
   </div>
@@ -444,7 +443,7 @@
       margin-left: -28px;
       margin-right: 13px;
       margin-top: 1px;
-      background-image: url('../assets/icons/i-check--negative.svg');
+      background-image: url('../assets/icons/check--negative.svg');
     }
 
     &--type-warning {
@@ -464,7 +463,7 @@
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/i-warning--negative.svg');
+      background-image: url('../assets/icons/warning--negative.svg');
       background-size: 10px;
     }
 
@@ -485,7 +484,7 @@
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/i-error--negative.svg');
+      background-image: url('../assets/icons/error--negative.svg');
     }
 
     &--type-info {
@@ -505,7 +504,7 @@
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/i-info--negative.svg');
+      background-image: url('../assets/icons/info--negative.svg');
     }
 
     &--display-type-modal {

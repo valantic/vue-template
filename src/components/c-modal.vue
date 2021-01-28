@@ -35,7 +35,7 @@
                     @click="closeModal"
             >
               <e-icon
-                icon="i-arrow--left--info"
+                icon="arrow--left--info"
                 width="18"
                 height="18"
               />
@@ -51,10 +51,9 @@
                     @click="closeModal"
             >
               <e-icon
-                icon="i-close"
+                icon="close"
                 width="25"
                 height="25"
-                inline
               />
             </button>
           </div>

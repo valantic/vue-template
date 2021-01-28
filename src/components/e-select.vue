@@ -159,7 +159,7 @@
     position: relative;
 
     &__select {
-      background: url('../assets/icons/i-arrow--down--info.svg') no-repeat right 5px center;
+      background: url('../assets/icons/arrow--down--info.svg') no-repeat right 5px center;
       border: 1px solid $color-grayscale--500;
       border-radius: 3px;
       width: 100%;
@@ -202,7 +202,7 @@
     &--disabled &__select:hover {
       border-color: $color-grayscale--600;
       color: $color-grayscale--600;
-      background-image: url('../assets/icons/i-arrow--down--disabled.svg');
+      background-image: url('../assets/icons/arrow--down--disabled.svg');
     }
 
     /**

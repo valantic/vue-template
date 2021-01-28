@@ -1,10 +1,9 @@
 <template>
   <div :class="b(modifiers)">
     <a :class="b('toggle')" href="#" @click="toggleState">
-      <e-icon icon="i-plus"
+      <e-icon icon="plus"
               width="12"
-              height="12"
-              inline />
+              height="12" />
       {{ title }}
     </a>
 

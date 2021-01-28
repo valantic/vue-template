@@ -19,6 +19,7 @@
    *
    * TODO: gradients in SVG files break.
    * TODO: add color picker for icon grid.
+   * TODO: Check if fill can be controlled with <use>.
    */
   export default {
     name: 'e-icon',

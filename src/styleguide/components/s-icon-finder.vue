@@ -1,10 +1,20 @@
 <template>
-  <div :class="b()">
+  <div :class="b()" :style="{ '--s-icon-finder--color': color }">
     <div :class="b('filter')">
-      <input v-model="filter"
-             :class="b('filter-input')"
-             placeholder="Search …"
-      >
+      <label :class="b('label')">
+        Search:
+        <input v-model="filter"
+               :class="b('filter-input')"
+               placeholder="Search …"
+        >
+      </label>
+      <label :class="b('label')">
+        Color:
+        <input v-model="color"
+               :class="b('filter-input')"
+               type="color"
+        >
+      </label>
     </div>
     <div :class="b('grid')">
       <div v-for="(icon, index) in filteredIcons"
@@ -38,9 +48,25 @@
       const icons = require.context('../../assets/icons/', false, /\.svg/).keys();
 
       return {
+        /**
+         * @type {Array} An array of available icons.
+         */
         icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
+
+        /**
+         * @type {String} The currently applied query filter.
+         */
         filter: '',
-        notification: ''
+
+        /**
+         * @type {String} Clipboard notification.
+         */
+        notification: '',
+
+        /**
+         * @type {String} The currently selected color.
+         */
+        color: '#000000',
       };
     },
 
@@ -57,7 +83,7 @@
         return list.map((icon) => { // eslint-disable-line arrow-body-style
           return {
             name: icon,
-            negative: Boolean(icon.match(/negative/))
+            negative: Boolean(icon.match(/negative/)),
           };
         });
       },
@@ -76,7 +102,9 @@
         hiddenInput.select();
         document.execCommand('Copy');
         this.setNotification(`copied! - ${value}`);
-        setTimeout(() => { this.setNotification(''); }, 2000);
+        setTimeout(() => {
+          this.setNotification('');
+        }, 2000);
       },
 
       /**
@@ -86,8 +114,8 @@
        */
       setNotification(message) {
         this.notification = message;
-      }
-    }
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -104,80 +132,96 @@
 </script>
 
 <style lang="scss">
-  .s-icon-finder {
-    font-family: $font-family--primary;
+.s-icon-finder {
+  font-family: $font-family--primary;
 
-    &__filter-input {
+  &__filter {
+    display: flex;
+    margin-bottom: $spacing--35;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    margin-right: $spacing--10;
+  }
+
+  &__filter-input {
+    display: block;
+    margin-left: $spacing--5;
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -5px;
+  }
+
+  &__grid-item {
+    overflow: hidden;
+    border: 1px solid #000000;
+    margin: 5px;
+    flex: 0 1 10%;
+    cursor: pointer;
+    min-width: 100px;
+
+    &::before {
       display: block;
+      content: '';
+      float: left;
+      width: 0;
+      padding-top: 100%;
     }
 
-    &__grid {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0 -5px;
+    .s-icon {
+      display: block;
+      width: 50%;
+      height: 50%;
+      margin: auto;
     }
 
-    &__grid-item {
-      overflow: hidden;
-      border: 1px solid #000000;
-      margin: 5px;
-      flex: 0 1 10%;
-      cursor: pointer;
-      min-width: 100px;
-
-      &::before {
-        display: block;
-        content: "";
-        float: left;
-        width: 0;
-        padding-top: 100%;
-      }
-
-      .s-icon {
-        display: block;
-        width: 50%;
-        height: 50%;
-        margin: auto;
-      }
-
-      .s-icon__icon {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    &__grid-item--negative {
-      background-color: $color-grayscale--500;
-    }
-
-    &__icon-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 100%;
-      height: 80%;
-    }
-
-    &__icon-label {
-      @include font(10);
-
-      text-align: center;
-    }
-
-    &__clipboard {
-      position: absolute;
-      left: -99999px;
-    }
-
-    &__notification {
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: $color-status--success;
+    .s-icon__icon {
       width: 100%;
-      text-align: center;
-      z-index: 999;
-      padding: $spacing--10;
+      height: 100%;
     }
   }
+
+  &__grid-item--negative {
+    background-color: $color-grayscale--500;
+  }
+
+  &__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    height: 80%;
+  }
+
+  &__icon-label {
+    @include font(10);
+
+    text-align: center;
+  }
+
+  &__clipboard {
+    position: absolute;
+    left: -99999px;
+  }
+
+  &__notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $color-status--success;
+    width: 100%;
+    text-align: center;
+    z-index: 999;
+    padding: $spacing--10;
+  }
+
+  .e-icon {
+    color: var(--s-icon-finder--color);
+  }
+}
 </style>
