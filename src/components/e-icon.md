@@ -5,42 +5,33 @@
 <e-icon icon="styleguide-heart" />
 ```
 
-### Custom size
+### Prop: size
 
+The 'size' prop can be used to give a specific size to the icon. The combined or separate values will be used for width/height and the viewBox definition.
+
+#### size="50"
 ```vue
-
-<div>
 <e-icon icon="styleguide-heart" size="50" />
-</div>
-<div>
-<e-icon icon="styleguide-heart" width="50" height="50" />
-</div>
-<div>
-<e-icon icon="valantic" width="160" height="35" />
-</div>
+```
+
+#### size="160 35"
+```vue
+<e-icon icon="valantic" size="160 35" />
 ```
 
 ### Limitations
 
+#### ID referenced definitions are not supported
+
 The use of `defs` with id reference is not supported in most browsers. If an icon e.g. applies a background gradient, defined in `defs` by id, it won't be applied (e.g. fill="url(#background)"). the only fix for this issue seems to be to inline the definitions, the whole image or use it as a normal image.
 
 ```vue
-
 <div>
-  <h3>SVG Sprite</h3>
-  <e-icon icon="play" width="50" />
-  <h3>Should be</h3>
-  <img src="/assets/icons.svg#play" width="50">
+  <h3>Icons like this can't be used from the sprite file</h3>
+  <img src="/assets/icons/play.svg" width="50">
 </div>
 ```
 
-### Sprite types
+#### CSS mask masks whole element
 
-SVG sprites can be created in different ways. The single images inside the SVG sprite can be defined as `stack of svg`, `symbol`, `def` or `view`. Each of this variants has it's advantage/downsides.
-
-| Type        | CSS mask           | Inline |
-|:------------- |:------------- |:---|
-| view      | x (other sprites may be visible) | - |
-| def      | -      | |
-| symbol | -      | |
-| stack | / (size fails)      | x |
+When you use the CSS mask, to place a colored SVG sprite image, the whole elements content will be masked to the icon. This means, that it's content most likely won't be visible at all.

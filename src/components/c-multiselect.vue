@@ -29,7 +29,7 @@
             />
             <e-icon v-show="!isSuccess"
                     :color="disabled ? 'lightgray' : 'default'"
-                    icon="arrow--down--info"
+                    icon="arrow--down"
                     width="18px"
                     height="18px"
             />

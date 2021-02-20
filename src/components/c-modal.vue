@@ -35,7 +35,7 @@
                     @click="closeModal"
             >
               <e-icon
-                icon="arrow--left--info"
+                icon="arrow--left"
                 width="18"
                 height="18"
               />

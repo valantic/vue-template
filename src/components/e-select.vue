@@ -159,7 +159,7 @@
     position: relative;
 
     &__select {
-      background: url('../assets/icons/sprite/arrow--down--info.svg') no-repeat right 5px center;
+      background: url('../assets/icons.svg#arrow--down') no-repeat right 5px center / 22px 22px;
       border: 1px solid $color-grayscale--500;
       border-radius: 3px;
       width: 100%;
@@ -202,7 +202,7 @@
     &--disabled &__select:hover {
       border-color: $color-grayscale--600;
       color: $color-grayscale--600;
-      background-image: url('../assets/icons/sprite/arrow--down--disabled.svg');
+      background-image: url('../assets/icons.svg#arrow--down');
     }
 
     /**
@@ -211,8 +211,7 @@
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       #{$this}__select {
-        @include form-state-icon('error');
-
+        background-image: url('../assets/icons.svg#error');
         border-color: $color-status--danger;
       }
 
@@ -231,7 +230,7 @@
 
     &--state-success {
       #{$this}__select {
-        @include form-state-icon('success');
+        background-image: url('../assets/icons.svg#check');
       }
 
       #{$this}__icon-splitter {

@@ -423,7 +423,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url('../assets/icons/sprite/play.svg');
+      background-image: url('../assets/icons/play.svg');
       background-size: 50px 50px;
       background-position: center center;
       background-repeat: no-repeat;

@@ -119,6 +119,7 @@
     "stylelint-webpack-plugin": "~2.1.0",
     "stylus": "~0.54.8",
     "stylus-loader": "~3.0.2",
+    "svg-sprite": "~1.5.0",
     "svg4everybody": "~2.1.9",
     "uglifyjs-webpack-plugin": "~2.2.0",
     "vue-jest": "~3.0.7",

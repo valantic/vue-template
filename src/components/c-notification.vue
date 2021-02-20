@@ -31,12 +31,13 @@
     </div>
     <button v-if="!notification.confirm"
             :class="b('close')"
+            :area-label="$t('c-notification.close')"
             @click="close">
       <e-icon
         icon="close"
         width="15"
         height="15"
-      />&nbsp;
+      />
     </button>
   </div>
 </template>
@@ -408,10 +409,7 @@
       border: none;
       padding: $spacing--0;
       cursor: pointer;
-
-      path {
-        fill: $color-grayscale--1000;
-      }
+      color: $color-grayscale--1000;
 
       .e-icon {
         display: block;
@@ -440,10 +438,12 @@
 
     &--type-success &__icon,
     &--type-add-to-cart &__icon {
+      @include icon(check, $size: 15px);
+
       margin-left: -28px;
       margin-right: 13px;
       margin-top: 1px;
-      background-image: url('../assets/icons/sprite/check--negative.svg');
+      color: $color-grayscale--1000;
     }
 
     &--type-warning {
@@ -460,12 +460,12 @@
     }
 
     &--type-warning &__icon {
+      @include icon(warning, $size: 15px);
+
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      // background-image: url('../assets/icons.svg#warning--negative');
-      background-color: $color-grayscale--1000;
-      mask: url('../assets/icons.svg#warning--negative') no-repeat center center/15px 15px;
+      color: $color-grayscale--1000;
     }
 
     &--type-error {
@@ -482,10 +482,12 @@
     }
 
     &--type-error &__icon {
+      @include icon(error, $size: 15px);
+
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/sprite/error--negative.svg');
+      color: $color-grayscale--1000;
     }
 
     &--type-info {
@@ -502,10 +504,12 @@
     }
 
     &--type-info &__icon {
+      @include icon(info, $size: 15px);
+
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/sprite/info--negative.svg');
+      color: $color-grayscale--1000;
     }
 
     &--display-type-modal {

@@ -1,8 +1,5 @@
 {
   "dest": "src/assets/",
-  "svg": {
-    "dimensionAttributes": false
-  },
   "mode": {
     "stack": {
       "sprite": "icons.svg",
