@@ -443,7 +443,7 @@
       margin-left: -28px;
       margin-right: 13px;
       margin-top: 1px;
-      background-image: url('../assets/icons/check--negative.svg');
+      background-image: url('../assets/icons/sprite/check--negative.svg');
     }
 
     &--type-warning {
@@ -463,8 +463,9 @@
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/warning--negative.svg');
-      background-size: 10px;
+      // background-image: url('../assets/icons.svg#warning--negative');
+      background-color: $color-grayscale--1000;
+      mask: url('../assets/icons.svg#warning--negative') no-repeat center center/15px 15px;
     }
 
     &--type-error {
@@ -484,7 +485,7 @@
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/error--negative.svg');
+      background-image: url('../assets/icons/sprite/error--negative.svg');
     }
 
     &--type-info {
@@ -504,7 +505,7 @@
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/info--negative.svg');
+      background-image: url('../assets/icons/sprite/info--negative.svg');
     }
 
     &--display-type-modal {

@@ -1,8 +1,9 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg"
-       :class="b({ [icon]: true} )"
-       :width="width || size"
-       :height="height || size"
+       :class="b({ [icon]: true } )"
+       :viewBox="`0 0 ${viewBox.width} ${viewBox.height}`"
+       :width="viewBox.width"
+       :height="viewBox.height"
        focusable="false"
        tabindex="-1"
   >
@@ -11,15 +12,17 @@
 </template>
 
 <script>
-  const filePath = require.context('../assets/', false, /\.svg/)('./icons.svg');
+  const filePath = require.context('../assets/', false, /icons\.svg/)('./icons.svg');
   const defaultSize = 24;
+  const sizeLookup = {
+    valantic: [160, 36]
+  };
 
   /**
    * Places an svg sprite icon.
    *
-   * TODO: gradients in SVG files break.
-   * TODO: add color picker for icon grid.
-   * TODO: Check if fill can be controlled with <use>.
+   * TODO: Resizing tests.
+   * TODO: test icon replace.
    */
   export default {
     name: 'e-icon',
@@ -38,37 +41,38 @@
       },
 
       /**
-       * Sets width and height at once.
+       * Sets the width and height of the svg icon.
        */
       size: {
-        type: [String, Number],
-        default: defaultSize,
-      },
-
-      /**
-       * Custom width value
-       */
-      width: {
-        type: [String, Number],
-        default: null,
-      },
-
-      /**
-       * Custom height value
-       */
-      height: {
-        type: [String, Number],
+        type: String,
         default: null,
       },
     },
 
     data() {
       return {
+        /**
+         * The local path to the svg sprite.
+         */
         filePath,
       };
     },
 
-    // computed: {},
+    computed: {
+      /**
+       * Returns a viewBox definition object.
+       *
+       * @returns {Object}
+       */
+      viewBox() {
+        const size = this.size?.split(' ') || sizeLookup[this.icon] || [defaultSize, defaultSize];
+
+        return {
+          width: size[0],
+          height: size[1] || size[0],
+        };
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},

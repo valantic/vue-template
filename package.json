@@ -4,16 +4,16 @@
   "description": "A customized Vue.js project template",
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
-    "dev": "npm run build:icons && webpack-dev-server --mode development",
+    "dev": "webpack-dev-server --mode development",
     "dev:s": "npm run styleguide",
     "jest": "jest tests --config jest.config.js --silent",
     "styleguide": "vue-styleguidist server",
     "test": "eslint --cache --ext .js,.vue src tests/unit/specs && stylelint --cache 'src/**/*.?(vue|scss)' && npm run jest; exit 0;",
-    "build": "npm run build:icons && NODE_ENV=production webpack --mode production --progress",
+    "build": "NODE_ENV=production webpack --mode production --progress",
     "build:profile": "NODE_ENV=production webpack --mode production --profile",
     "build:styleguide": "webpack --styleguide-build && vue-styleguidist build",
     "build:watch": "NODE_ENV=production webpack --mode production --watch",
-    "build:icons": "svg-sprite --symbol --symbol-dest=src/assets/ --symbol-sprite=icons.svg src/assets/icons/*.svg"
+    "build:icons": "svg-sprite --config .svg-sprite.json src/assets/icons/sprite/*.svg"
   },
   "webpack": {
     "buildPath": "dist",

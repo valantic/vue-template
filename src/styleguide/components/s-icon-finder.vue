@@ -24,7 +24,7 @@
            @click="copyToClipboard(icon)"
       >
         <div :class="b('icon-wrapper')">
-          <e-icon :key="icon.name" :icon="icon.name" size="50" />
+          <e-icon :key="icon.name" :icon="icon.name" size="80" />
         </div>
         <div :class="b('icon-label')">
           {{ icon.name }}
@@ -45,7 +45,7 @@
     // props: {},
 
     data() {
-      const icons = require.context('../../assets/icons/', false, /\.svg/).keys();
+      const icons = require.context('../../assets/icons/sprite/', false, /\.svg/).keys();
 
       return {
         /**
@@ -222,6 +222,12 @@
 
   .e-icon {
     color: var(--s-icon-finder--color);
+  }
+
+  &__grid-item:hover {
+    .e-icon {
+      color: $color-primary--1;
+    }
   }
 }
 </style>
