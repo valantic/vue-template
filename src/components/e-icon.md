@@ -123,4 +123,4 @@ Tried to use this webpack loader. Unfortunately, the loader failed to replace ur
 
 #### extract-svg-sprite-webpack-plugin
 
-Seemed to work, but was not able to handline base64 images (edge case) or exclude some files from the sprite.
+Was unable to get it to work in JS context, because url to file was not available.
