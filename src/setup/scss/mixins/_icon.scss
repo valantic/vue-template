@@ -8,7 +8,7 @@
 // @param  {String}   State the icon
 //
 ////
-@mixin icon($icon, $size: 24px, $color: currentColor) { // Keep size in sync with e-icon.
+@mixin icon($icon, $size: 24px, $color: currentColor, $mask: true) { // Keep size in sync with e-icon.
   $width: $size;
   $height: $size;
 
@@ -19,8 +19,10 @@
 
   background: url('../assets/icons.svg##{$icon}') no-repeat center center / $width $height; // Legacy support. No color applied.
 
-  @supports (mask: no-repeat) {
-    background: $color;
-    mask: url('../assets/icons.svg##{$icon}') no-repeat center center / $width $height;
+  @if mask {
+    @supports (mask: no-repeat) {
+      background: $color;
+      mask: url('../assets/icons.svg##{$icon}') no-repeat center center / $width $height;
+    }
   }
 }

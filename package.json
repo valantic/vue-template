@@ -13,7 +13,7 @@
     "build:profile": "NODE_ENV=production webpack --mode production --profile",
     "build:styleguide": "webpack --styleguide-build && vue-styleguidist build",
     "build:watch": "NODE_ENV=production webpack --mode production --watch",
-    "build:icons": "svg-sprite --config .svg-sprite.json src/assets/icons/sprite/*.svg"
+    "build:icons": "svg-sprite --config .svg-sprite.json src/assets/icons/*.svg"
   },
   "webpack": {
     "buildPath": "dist",

@@ -1,5 +1,6 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg"
+  <svg v-if="inline"
+       xmlns="http://www.w3.org/2000/svg"
        :class="b({ [icon]: true } )"
        :viewBox="`0 0 ${viewBox.width} ${viewBox.height}`"
        :width="viewBox.width"
@@ -7,12 +8,18 @@
        focusable="false"
        tabindex="-1"
   >
-    <use :xlink:href="`${filePath}#${icon}`" />
+    <use :xlink:href="`${spritePath}#${icon}`" />
   </svg>
+  <img v-else
+       :src="`${spritePath}#${icon}`"
+       :alt="alt"
+       :width="viewBox.width"
+       :height="viewBox.height"
+  >
 </template>
 
 <script>
-  const filePath = require.context('../assets/', false, /icons\.svg/)('./icons.svg');
+  const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
   const sizeLookup = {
     // example: [160, 36]
@@ -44,6 +51,22 @@
         type: String,
         default: null,
       },
+
+      /**
+       * Switches between inline and image use of the icon.
+       */
+      inline: {
+        type: Boolean,
+        default: true,
+      },
+
+      /**
+       * Allows to set an alt tag to the image.
+       */
+      alt: {
+        type: String,
+        default: '',
+      },
     },
 
     data() {
@@ -51,7 +74,7 @@
         /**
          * The local path to the svg sprite.
          */
-        filePath,
+        spritePath,
       };
     },
 
@@ -68,7 +91,7 @@
           width: size[0],
           height: size[1] || size[0],
         };
-      }
+      },
     },
     // watch: {},
 
@@ -89,8 +112,8 @@
 </script>
 
 <style lang="scss">
-.e-icon {
-  display: block;
-  pointer-events: none; // Prevents IE11 from swallowing events.
-}
+  .e-icon {
+    display: block;
+    pointer-events: none; // Prevents IE11 from swallowing events.
+  }
 </style>
