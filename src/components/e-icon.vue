@@ -15,14 +15,11 @@
   const filePath = require.context('../assets/', false, /icons\.svg/)('./icons.svg');
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
   const sizeLookup = {
-    valantic: [160, 36]
+    // example: [160, 36]
   };
 
   /**
    * Places an svg sprite icon.
-   *
-   * TODO: Resizing tests.
-   * TODO: test icon replace.
    */
   export default {
     name: 'e-icon',

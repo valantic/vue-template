@@ -25,6 +25,8 @@ The 'size' prop can be used to give a specific size to the icon. The combined or
 
 The use of `defs` with id reference is not supported in most browsers. If an icon e.g. applies a background gradient, defined in `defs` by id, it won't be applied (e.g. fill="url(#background)"). the only fix for this issue seems to be to inline the definitions, the whole image or use it as a normal image.
 
+See [this page](https://stackoverflow.com/questions/44235845/svg-use-and-gradients-as-fill) for more details and examples.
+
 ```vue
 <div>
   <h3>Icons like this can't be used from the sprite file</h3>
@@ -110,3 +112,15 @@ Wraps the sprite slices in a `def` element. The svg definitions inside `def` won
   </defs>
 </svg>
 ````
+
+### Loader findings
+
+In general a webpack loader would probably only make sense if some SVG files could be excluded from the sprite (e.g. because incompatible with sprites because using internal reference). The loaders I checked did not support this feature.
+
+#### svg-sprite-loader
+
+Tried to use this webpack loader. Unfortunately, the loader failed to replace urls in CSS.
+
+#### extract-svg-sprite-webpack-plugin
+
+Seemed to work, but was not able to handline base64 images (edge case) or exclude some files from the sprite.
