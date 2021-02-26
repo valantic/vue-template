@@ -19,8 +19,7 @@
           <div v-show="isError" :class="b('icon-wrapper')">
             <span :class="b('icon-splitter')"></span>
             <e-icon icon="error"
-                    width="20px"
-                    height="20px"
+                    size="20"
             />
           </div>
           <div v-show="!isError" :class="b('icon-wrapper')">
@@ -30,8 +29,7 @@
             <e-icon v-show="!isSuccess"
                     :color="disabled ? 'lightgray' : 'default'"
                     icon="arrow--down"
-                    width="18px"
-                    height="18px"
+                    size="18"
             />
           </div>
         </div>
@@ -92,8 +90,7 @@
           <div :class="b('error-icon-wrapper')">
             <e-icon icon="error"
                     color="white"
-                    width="20px"
-                    height="20px"
+                    size="20"
             />
           </div>
         </div>
