@@ -18,6 +18,9 @@ import lDefault from '@/components/l-default';
 import cHeader from '@/components/c-header';
 import cFooter from '@/components/c-footer';
 
+import component1 from '@/components/multi-template-component/c-component-1';
+import component2 from '@/components/multi-template-component/c-component-2';
+
 // Import style only 'components'.
 require.context('@/components', false, /\.scss/);
 
@@ -41,6 +44,9 @@ export default {
       lDefault,
       cHeader,
       cFooter,
+
+      component1,
+      component2,
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
@@ -66,6 +72,9 @@ export default {
       Vue.component(lDefault.name, lDefault);
       Vue.component(cHeader.name, cHeader);
       Vue.component(cFooter.name, cFooter);
+
+      Vue.component(component1.name, component1);
+      Vue.component(component2.name, component2);
     }
   },
 };
