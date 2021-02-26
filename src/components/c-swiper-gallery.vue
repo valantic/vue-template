@@ -55,8 +55,7 @@
         @close="modalClose">
         <div :class="b('modal-close-icon')" @click="modalOpen = false">
           <e-icon icon="close"
-                  width="25"
-                  height="25" />
+                  size="25" />
         </div>
         <c-swiper-modal :images="pictures"
                         :initial-slide="swiper.activeIndex"
@@ -400,10 +399,6 @@
       top: $spacing--15;
       right: $spacing--15;
       cursor: pointer;
-
-      path {
-        fill: $color-primary--1;
-      }
     }
 
     &__img-counter,
