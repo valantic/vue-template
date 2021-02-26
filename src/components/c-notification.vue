@@ -35,8 +35,7 @@
             @click="close">
       <e-icon
         icon="close"
-        width="15"
-        height="15"
+        size="15"
       />
     </button>
   </div>
