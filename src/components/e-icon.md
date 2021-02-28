@@ -1,8 +1,7 @@
 ### Default (img tag)
 
 ```vue
-
-<e-icon icon="styleguide-heart" />
+<e-icon icon="styleguide-heart" alt="Icon of a heart" />
 ```
 
 ### Prop: size
@@ -11,12 +10,12 @@ The 'size' prop can be used to give a specific size to the icon. The combined or
 
 #### size="50"
 ```vue
-<e-icon icon="styleguide-heart" size="50" />
+<e-icon icon="styleguide-heart" size="50" alt="Icon of a heart" />
 ```
 
 #### size="160 35"
 ```vue
-<e-icon icon="styleguide-heart" size="160 35" />
+<e-icon icon="styleguide-heart" size="160 35" alt="Icon of a heart" />
 ```
 
 ### Using the sprite
@@ -36,7 +35,7 @@ If you use the `<e-icon>` component, this approach will be applied. IE11 require
 Use as
 
 ```xml
-<e-icon icon="icon" size="50" />
+<e-icon icon="icon" size="50" alt="A random icon" />
 ```
 
 ##### As image
@@ -44,7 +43,7 @@ Use as
 To use as an image you can either define `:inline="false"` on the `e-icon` or use an image as normal, pointing to the icon inside the sprite.
 
 ```xml
-<e-icon icon="styleguide-heart" :inline="false" />
+<e-icon icon="styleguide-heart" :inline="false" alt="Icon of a heart" />
 OR
 <img src="sprite.svg#styleguide-heart" alt="An icon">
 ```
@@ -92,9 +91,9 @@ See [this page](https://stackoverflow.com/questions/44235845/svg-use-and-gradien
 ```vue
 <div>
   <h3>Fails as icon</h3>
-  <e-icon icon="play" size="80" />
+  <e-icon icon="play" size="80" alt="Play button icon" />
   <h3>Works as image</h3>
-  <e-icon icon="play" :inline="false" size="80" />
+  <e-icon icon="play" :inline="false" size="80" alt="Play button icon" />
 </div>
 ```
 

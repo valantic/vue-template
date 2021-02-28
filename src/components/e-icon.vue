@@ -1,13 +1,16 @@
 <template>
   <svg v-if="inline"
-       xmlns="http://www.w3.org/2000/svg"
        :class="b({ [icon]: true } )"
        :viewBox="`0 0 ${viewBox.width} ${viewBox.height}`"
        :width="viewBox.width"
        :height="viewBox.height"
+       :aria-hidden="!alt"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
        focusable="false"
        tabindex="-1"
   >
+    <title v-if="alt">{{ alt }}</title>
     <use :xlink:href="`${spritePath}#${icon}`" />
   </svg>
   <img v-else
@@ -65,7 +68,7 @@
        */
       alt: {
         type: String,
-        default: '',
+        default: null,
       },
     },
 
