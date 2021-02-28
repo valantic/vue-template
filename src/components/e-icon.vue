@@ -1,7 +1,6 @@
 <template>
   <svg v-if="inline"
        :class="b({ [icon]: true } )"
-       :viewBox="`0 0 ${viewBox.width} ${viewBox.height}`"
        :width="viewBox.width"
        :height="viewBox.height"
        :aria-hidden="!alt"
