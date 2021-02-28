@@ -22,7 +22,7 @@
   const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
   const sizeLookup = {
-    // example: [160, 36]
+    play: [1024, 721],
   };
 
   /**
@@ -85,7 +85,14 @@
        * @returns {Object}
        */
       viewBox() {
-        const size = this.size?.split(' ') || sizeLookup[this.icon] || [defaultSize, defaultSize];
+        const { icon } = this;
+        const lookup = sizeLookup[icon];
+        const size = this.size?.split(' ') || [defaultSize];
+
+        // Auto map height for non square icons.
+        if (size.length === 1 && lookup) {
+          size[1] = (size[0] / lookup[0]) * lookup[1];
+        }
 
         return {
           width: size[0],

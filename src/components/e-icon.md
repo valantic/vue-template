@@ -16,21 +16,85 @@ The 'size' prop can be used to give a specific size to the icon. The combined or
 
 #### size="160 35"
 ```vue
-<e-icon icon="valantic" size="160 35" />
+<e-icon icon="styleguide-heart" size="160 35" />
 ```
+
+### Using the sprite
+
+#### In HTML
+
+##### As svg use
+
+If you use the `<e-icon>` component, this approach will be applied. IE11 requires a polyfill (svg4everyone) for this to work.
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <use xlink:href="sprite.svg#icon"></use>
+</svg>
+```
+
+Use as
+
+```xml
+<e-icon icon="icon" size="50" />
+```
+
+##### As image
+
+To use as an image you can either define `:inline="false"` on the `e-icon` or use an image as normal, pointing to the icon inside the sprite.
+
+```xml
+<e-icon icon="styleguide-heart" :inline="false" />
+OR
+<img src="sprite.svg#styleguide-heart" alt="An icon">
+```
+
+#### In CSS
+
+##### As background image
+
+This method does not allow to change the color of the icon. You may need to add an additional slice.
+
+```css
+.icon {
+  background: url('sprite.svg#icon') center center / cover;
+}
+```
+
+##### As mask
+
+This method does allow you to change the color of the icon, but this won't work in older browsers, and you need a separate element to apply it, because anything inside the element will be masked.
+
+```css
+.icon {
+  mask: url('sprite.svg#icon') center center / cover;
+  background-color: blue;
+}
+```
+
+Use as
+
+```scss
+.icon {
+  @include icon(icon);
+}
+```
+
 
 ### Limitations
 
 #### ID referenced definitions are not supported
 
-The use of `defs` with id reference is not supported in most browsers. If an icon e.g. applies a background gradient, defined in `defs` by id, it won't be applied (e.g. fill="url(#background)"). the only fix for this issue seems to be to inline the definitions, the whole image or use it as a normal image.
+When using the `<use>` solution, the use of `defs` with id reference is not supported in most browsers. If an icon e.g. applies a background gradient, defined in `defs` by id, it won't be applied (e.g. fill="url(#background)"). the only fix for this issue seems to be to inline the definitions, the whole image or use it as a normal image.
 
 See [this page](https://stackoverflow.com/questions/44235845/svg-use-and-gradients-as-fill) for more details and examples.
 
 ```vue
 <div>
-  <h3>Icons like this can't be used from the sprite file</h3>
-  <img src="/assets/icons/play.svg" width="50">
+  <h3>Fails as icon</h3>
+  <e-icon icon="play" size="80" />
+  <h3>Works as image</h3>
+  <e-icon icon="play" :inline="false" size="80" />
 </div>
 ```
 
