@@ -10,7 +10,9 @@
        focusable="false"
        tabindex="-1"
   >
-    <title v-if="alt">{{ alt }}</title>
+    <title v-if="alt">
+      {{ alt }}
+    </title>
     <use :xlink:href="`${spritePath}#${icon}`" />
   </svg>
   <img v-else

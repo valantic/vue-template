@@ -13,7 +13,6 @@
   $height: $size;
 
   @if list.length($size) == 2 {
-    $width: list.nth($size, 1);
     $height: list.nth($size, 2);
   }
 
