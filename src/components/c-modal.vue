@@ -1,5 +1,5 @@
 <template>
-  <portal :order="parseInt(uuid, 10)" :to="portalTarget">
+  <portal :order="parseInt(uuid, 10)" :to="teleport">
     <modal :name="uuid"
            :classes="b({ size })"
            :width="width"
@@ -95,9 +95,9 @@
       /**
        * Describes the name of the portal-target to render the modal.
        */
-      portalTarget: {
+      teleport: {
         type: String,
-        default: 'modal-container',
+        default: 'teleport--modal',
       },
 
       /**
@@ -236,10 +236,10 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    beforeDestroy() {
+    beforeUnmount() {
       this.$modalStack.remove(this.uuid);
     },
-    // destroyed() {},
+    // unmounted() {},
 
     methods: {
       /**

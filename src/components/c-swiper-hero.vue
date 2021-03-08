@@ -176,10 +176,10 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    beforeDestroy() {
+    beforeUnmount() {
       swiperInstances[this.uuid].destroy();
     },
-    // destroyed() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},

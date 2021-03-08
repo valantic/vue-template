@@ -6,7 +6,7 @@
         <slot></slot>
       </div>
     </div>
-    <portal-target name="modal-container" multiple />
+    <div id="teleport--modal"></div>
   </div>
 </template>
 
@@ -40,8 +40,8 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
 

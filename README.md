@@ -747,6 +747,7 @@ package.json:
 * [ ] Test styleguide.
 * [ ] Replace event bus in collapsible components.
 * [ ] Replace vue-js-modal (not compatible with Vue 3).
+* [ ] Check if modal stacking in styleguide still needs multiple teleports.
 
 ## License
 

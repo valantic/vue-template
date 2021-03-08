@@ -79,14 +79,14 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.resizeObserver) {
         this.resizeObserver.unobserve(window.document.body);
       } else { // IE11 fallback.
         window.removeEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
-    // destroyed() {},
+    // unmounted() {},
 
     methods: {
       /**

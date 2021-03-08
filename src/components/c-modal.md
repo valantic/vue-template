@@ -7,7 +7,7 @@
     <c-modal :open.sync="exampleModalIsOpen">
       hello World..
     </c-modal>
-    <portal-target name="modal-container" multiple />
+    <div id="teleport--modal"></div>
   </div>
 </template>
 <script>
@@ -134,7 +134,7 @@
 **Note**: For nested modals you need to define a "portal-target" for each level. This can be defined in the l-default component.
 
 `
-<portal-target name="modal-container-2" multiple />
+<div id="teleport--c-modal-demo"></div>
 `
 
 ```vue
@@ -151,12 +151,12 @@
       </div>
       <c-modal :open="innerModalIsOpen" 
                title="I'm the inner modal"
-               portal-target="modal-container-2"
+               teleport="#teleport--c-modal-demo"
                @close="innerModalIsOpen = false">
         Inner Modal...
       </c-modal>
     </c-modal>
-    <portal-target name="modal-container-2" multiple />
+    <div id="#teleport--c-modal-demo"></div>
   </div>
 </template>
 <script>

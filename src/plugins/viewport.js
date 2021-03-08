@@ -90,7 +90,7 @@ export default {
 
         this.update();
       },
-      beforeDestroy() {
+      beforeUnmount() {
         window.removeEventListener('resizeend', this.update);
       },
       methods: {

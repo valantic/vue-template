@@ -197,14 +197,14 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    beforeDestroy() {
+    beforeUnmount() {
       clearTimeout(this.resizeTimerId);
       window.removeEventListener('resize', this.setThumbnailSlidesPerView);
 
       this.gallerySwiper.destroy();
       this.thumbsSwiper.destroy();
     },
-    // destroyed() {},
+    // unmounted() {},
 
     methods: {
       /**

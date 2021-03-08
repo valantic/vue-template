@@ -226,8 +226,8 @@
     },
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    destroyed() {
+    // beforeUnmount() {},
+    unmounted() {
       window.removeEventListener('resizeend', this.setSlotSpacings);
     },
 

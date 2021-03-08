@@ -72,28 +72,14 @@
 
     // beforeCreate() {},
     // created() {},
-    beforeMount() {
-      /**
-       * Setup event handler for "focus" event, which will be sent from the input in the slot
-       */
-      this.$on('focus', () => {
-        this.hasFocus = true;
-      });
-
-      /**
-       * Setup event handler for "blur" event, which will be sent from the input in the slot
-       */
-      this.$on('blur', () => {
-        this.hasFocus = false;
-      });
-    },
+    // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
     // methods: {}
     // render() {},
   };
