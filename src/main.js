@@ -2,24 +2,22 @@
 // NOTE: this is not working for styleguidist. There you need to add style imports to the required configuration
 import './setup/_scss.scss';
 
-import { createApp } from 'vue'; // eslint-disable-line import/first
+import { createApp } from 'vue/dist/vue.esm-bundler.js'; // eslint-disable-line import/first
 import options from './setup/options';
-import directives from './setup/directives';
-import components from './setup/components';
+import plugins from './setup/plugins';
 
-import './setup/plugins';
+const vueOptions = process.env.NODE_ENV !== 'production'
+  ? Object.assign(options, require('./setup/styleguide.options').options) // eslint-disable-line global-require
+  : options;
 
-let vueOptions = options;
-
-// Merge development configuration
-if (process.env.NODE_ENV !== 'production') {
-  // eslint-disable-next-line global-require
-  vueOptions = Object.assign(vueOptions, require('./setup/styleguide.options').default); // Note: will overwrite duplicates
-}
+const vuePlugins = process.env.NODE_ENV !== 'production'
+  ? [...plugins, ...require('./setup/styleguide.options').plugins] // eslint-disable-line global-require
+  : plugins;
 
 const app = createApp(vueOptions);
 
-app.use(directives);
-app.use(components);
+vuePlugins.forEach(([plugin, pluginOptions]) => {
+  app.use(plugin, pluginOptions);
+});
 
 app.mount('#app');

@@ -7,7 +7,7 @@ import isBetween from 'dayjs/plugin/isBetween';
 import de from 'dayjs/locale/de';
 
 export default {
-  install(Vue /* , options */) {
+  install(app /* , options */) {
     dayjs.locale('de-ch', de);
     dayjs.extend(customParseFormat);
     dayjs.extend(isSameOrBefore);
@@ -15,6 +15,6 @@ export default {
     dayjs.extend(isBetween);
 
     // eslint-disable-next-line no-param-reassign
-    Vue.prototype.$dayjs = dayjs;
+    app.config.globalProperties.$dayjs = dayjs;
   },
 };

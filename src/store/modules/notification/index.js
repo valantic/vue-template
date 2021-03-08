@@ -1,5 +1,5 @@
 import { NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
-import { i18n } from '@/setup/i18n';
+import i18n from '@/setup/i18n';
 import api from '@/helpers/api';
 
 /**
@@ -36,7 +36,7 @@ function pushNotification(state, options) {
     case 'cartChange':
       notification.confirm = notification.confirm || function(payload) {
         api
-          .post(i18n.t('urls.confirmCartChange'), {
+          .post(i18n.global.t('urls.confirmCartChange'), {
             id: metaData.id
           })
           .then(payload.resolve, payload.decline);

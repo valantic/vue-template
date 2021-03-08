@@ -47,8 +47,8 @@ function appendStatusLabel(name, statusId) {
 }
 
 export default {
-  install(vueInstance) {
-    vueInstance.mixin({
+  install(app) {
+    app.mixin({
       mounted() {
         const { name, status } = this.$options;
 

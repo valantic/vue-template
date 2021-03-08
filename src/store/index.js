@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 import getUrlParameter from '@/helpers/get-url-parameter';
 
 const data = window.initialData || {};
@@ -13,13 +12,7 @@ requireModule.keys().forEach((fileName) => {
   modules[moduleName] = requireModule(fileName).default;
 });
 
-Vue.use(Vuex);
-
-const store = new Vuex.Store({
-  /**
-   * state, actions & getters
-   * must be defined within modules
-   * */
+const store = createStore({
   modules
 });
 

@@ -20,10 +20,10 @@ const directives = require.context('./directives/', true, /\.(js)$/i);
  * - All v-focus-masks will react to all v-focus-item. It's not possible to create "groups" of items and masks.
  */
 export default {
-  install(Vue) {
+  install(app) {
     // Add directives to Vue.
     directives
       .keys()
-      .forEach(key => Vue.directive(directives(key).default.name, directives(key).default));
+      .forEach(key => app.directive(directives(key).default.name, directives(key).default));
   },
 };

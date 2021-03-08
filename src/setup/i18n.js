@@ -1,11 +1,8 @@
-import VueI18n from 'vue-i18n';
-import Vue from 'vue'; // Default language
+import { createI18n } from 'vue-i18n/dist/vue-i18n.esm-bundler';
 import fallbackMessages from '../translations/de';
 import numberFormats from './localization';
 
 const pageLang = document?.documentElement?.lang;
-
-Vue.use(VueI18n);
 
 export const I18N_FALLBACK = 'de';
 export const I18N_FALLBACK_MESSAGES = fallbackMessages;
@@ -22,7 +19,8 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-export const i18n = new VueI18n({
+const i18n = createI18n({
+  legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
 
@@ -41,6 +39,8 @@ export const i18n = new VueI18n({
   numberFormats,
 });
 
+export default i18n;
+
 /**
  * Load messages for given locale if not already loaded.
  *
@@ -49,9 +49,9 @@ export const i18n = new VueI18n({
  * @returns {Promise}
  */
 export const i18nLoadMessages = function(locale) {
-  if (!Object.keys(i18n.messages).includes(locale)) {
+  if (!Object.keys(i18n.global.messages).includes(locale)) {
     return import(/* webpackChunkName: 'lang-[request]' */`../translations/${locale}`)
-      .then((localeMessages) => {
+      .then(({ default: localeMessages }) => {
         // Add styleguide only translations
         if (process.env.NODE_ENV !== 'production') {
           const styleguideTranslations = require('./styleguide.translations'); // eslint-disable-line global-require
@@ -63,7 +63,7 @@ export const i18nLoadMessages = function(locale) {
           }
         }
 
-        i18n.setLocaleMessage(locale, localeMessages);
+        i18n.global.setLocaleMessage(locale, localeMessages);
 
         return locale;
       }); // eslint-disable-line vue/script-indent
@@ -85,9 +85,9 @@ export const i18nSetLocale = function(locale) { // eslint-disable-line no-param-
     locale = I18N_FALLBACK;
   }
 
-  if (i18n.locale !== locale) {
+  if (i18n.global.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
-      i18n.locale = newLocale;
+      i18n.global.locale = newLocale;
     });
   }
 

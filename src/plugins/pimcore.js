@@ -95,13 +95,13 @@ function template(el, binding) {
  * Registers directives to autogenerate Pimcore generator related attributes.
  */
 export default {
-  install(Vue) {
+  install(app) {
     /**
      * Directive to apply Pimcore generator attributes for an editable.
      *
      * v-pimcore[.disable]="[<editable>, <identifier>[, <restriction>]]"
      */
-    Vue.directive('pimcore', {
+    app.directive('pimcore', {
       name: 'pimcore',
 
       bind: editable,
@@ -114,7 +114,7 @@ export default {
      * v-pimcore-areabrick[.disable]="'<name>'"
      * v-pimcore:snippet
      */
-    Vue.directive('pimcore-areabrick', {
+    app.directive('pimcore-areabrick', {
       name: 'pimcore-areabrick',
 
       bind: areabrick,
@@ -126,7 +126,7 @@ export default {
      *
      * v-pimcore-snippet[.disable]
      */
-    Vue.directive('pimcore-snippet', {
+    app.directive('pimcore-snippet', {
       name: 'pimcore-snippet',
 
       bind: snippet,
@@ -138,7 +138,7 @@ export default {
      *
      * v-pimcore-template[.disable]
      */
-    Vue.directive('pimcore-template', {
+    app.directive('pimcore-template', {
       name: 'pimcore-template',
 
       bind: template,

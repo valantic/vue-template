@@ -7,7 +7,7 @@ import { RESIZE_DEBOUNCE } from '../setup/globals';
  * e.g. window.addEventListener('resizeend', (event) => {});
  */
 export default {
-  install(/* Vue */) {
+  install(/* app */) {
     const event = document.createEvent('CustomEvent');
     let debounce;
 

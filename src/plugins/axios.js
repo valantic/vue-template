@@ -3,8 +3,8 @@ import axios from 'axios/index';
 export { axios };
 
 export default {
-  install(Vue /* , options */) {
+  install(app /* , options */) {
     // eslint-disable-next-line no-param-reassign
-    Vue.prototype.$axios = axios;
+    app.config.globalProperties.$axios = axios;
   },
 };

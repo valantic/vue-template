@@ -1,9 +1,11 @@
+import { reactive } from 'vue';
+
 /**
  * Adds a modalStack instance to Vue itself, which can be used by calling this.$modalStack.
  */
 export default {
-  install(Vue) {
-    Vue.prototype.$modalStack = new Vue({
+  install(app) {
+    app.config.globalProperties.$modalStack = reactive({
       data: {
         /**
          * Holds a list of open modal names (uuid).

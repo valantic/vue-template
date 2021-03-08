@@ -27,7 +27,6 @@
 </template>
 
 <script>
-  import { i18n } from '@/setup/i18n';
   import formStates from '@/mixins/form-states';
 
   /**
@@ -74,7 +73,9 @@
        */
       placeholder: {
         type: [String, Boolean],
-        default: i18n.t('e-select.chooseOption'),
+        default() {
+          return this.$t('e-select.chooseOption');
+        },
         validator(value) {
           return typeof value === 'string' || value === false;
         },

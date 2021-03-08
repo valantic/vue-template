@@ -5,12 +5,12 @@ export default {
   /**
    * Install method of the Google Tag Manager plugin.
    *
-   * @param {Object} Vue - The Vue instance
+   * @param {Object} app - The Vue instance
    * @param {Object} [options] - Additional plugin options
    * @param {Boolean} [options.debug = false] - Allows to en-/disable debugging functionality.
    * @param {String} [options.dataLayer = 'dataLayer'] - Allows to define a custom dataLayer name.
    */
-  install(Vue, options) {
+  install(app, options) {
     const {
       dataLayer = 'dataLayer',
     } = options;
@@ -72,7 +72,7 @@ export default {
       }
     }
 
-    Vue.prototype.$gtm = {
+    app.config.globalProperties.$gtm = {
       push,
 
       /**

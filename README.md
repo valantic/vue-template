@@ -533,7 +533,7 @@ Be aware that [vue-i18n](https://github.com/kazupon/vue-i18n) also supports a [p
 If you need to use translations outside of a component or Vue instance, where the utilities are injected, you can use the vue-i18n instance which is exported from `setup/i18n.js`.
 
 ```javascript
-import { i18n } from '@/setup/i18n';
+import i18n from '@/setup/i18n';
  
 const translation = i18n.t('c-add-to-cart.notLoggedInTitle');
 ```
@@ -741,7 +741,12 @@ package.json:
 
 ### Vue 3
 
-* [ ] Devtools support
+* [ ] Devtools support.
+* [ ] Test v-focus state handling.
+* [ ] Test unit tests.
+* [ ] Test styleguide.
+* [ ] Replace event bus in collapsible components.
+* [ ] Replace vue-js-modal (not compatible with Vue 3).
 
 ## License
 

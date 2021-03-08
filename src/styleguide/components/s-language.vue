@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import i18n from '@/setup/i18n';
   import i18nMixin from '../../mixins/i18n';
 
   export default {
@@ -32,7 +33,7 @@
        * @returns {String}
        */
       language() {
-        return this.$i18n.locale;
+        return i18n.global.locale;
       },
     },
     methods: {

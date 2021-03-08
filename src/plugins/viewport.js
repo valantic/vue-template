@@ -1,11 +1,12 @@
+import { reactive } from 'vue';
 import { BREAKPOINTS } from '@/setup/globals';
 
 /**
  * Adds an viewport instance to Vue itself, which can be used by calling this.$viewport.
  */
 export default {
-  install(Vue) {
-    Vue.prototype.$viewport = new Vue({
+  install(app) {
+    app.config.globalProperties.$viewport = reactive({
       data: {
         viewport: 0,
       },

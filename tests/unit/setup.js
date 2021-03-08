@@ -1,6 +1,6 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import vueBemCn from '@/plugins/vue-bem-cn';
 
-Vue.config.productionTip = false;
+const app = createApp();
 
-Vue.use(vueBemCn);
+app.use(vueBemCn);
