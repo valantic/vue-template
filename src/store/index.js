@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import getUrlParameter from '@/helpers/get-url-parameter';
 
 const data = window.initialData || {};
 const requireModule = require.context('./modules/', true, /index\.js/);
@@ -11,8 +12,6 @@ requireModule.keys().forEach((fileName) => {
 
   modules[moduleName] = requireModule(fileName).default;
 });
-
-Vue.config.devtools = process.env.NODE_ENV !== 'production' || process.env.HAS_WATCHER;
 
 Vue.use(Vuex);
 
@@ -42,6 +41,15 @@ if (initialDataMessages.length) {
       store.commit('notification/pushNotification', { message });
     });
   });
+}
+
+// Set theme according to url in development. e.g. ?theme=01
+if (process.env.NODE_ENV !== 'production') {
+  const themeId = getUrlParameter('theme');
+
+  if (themeId) {
+    store.commit('session/setTheme', themeId);
+  }
 }
 
 window.initialData = {};

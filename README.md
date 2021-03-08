@@ -739,6 +739,10 @@ package.json:
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
 
+### Vue 3
+
+* [ ] Devtools support
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
