@@ -61,8 +61,8 @@
   "homepage": "https://github.com/valantic/vue-template",
   "dependencies": {
     "axios": "~0.21.1",
-    "core-js": "~3.6.5",
-    "css-vars-ponyfill": "~2.3.2",
+    "core-js": "~3.11.0",
+    "css-vars-ponyfill": "~2.4.3",
     "dayjs": "~1.10.4",
     "picturefill": "~3.0.3",
     "portal-vue": "~2.1.7",
