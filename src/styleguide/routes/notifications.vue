@@ -163,8 +163,6 @@
             notification: '',
           },
         },
-        errorMessage: '',
-        errorState: 'default',
       };
     },
     computed: {

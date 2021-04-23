@@ -51,14 +51,6 @@
       },
 
       /**
-       * Name is used to generate a unique key in vue.
-       */
-      name: {
-        required: true,
-        type: String,
-      },
-
-      /**
        * 'options' defines the options which are rendered in the select.
        *
        * e.g. `[{ <valueField>: 'id1', <labelField>: 'Label 1' },{ <valueField>: 'id2', <labelField>: 'Label 2' },...]`

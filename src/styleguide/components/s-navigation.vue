@@ -9,6 +9,7 @@
           <a :class="b('navigation-link')"
              href="https://www.valantic.com"
              target="_blank"
+             rel="noopener noreferrer"
           >
             <img src="@/assets/valantic.svg" alt="valantic">
           </a>
@@ -30,6 +31,7 @@
           <a :class="b('navigation-link')"
              :href="styleguidistUrl"
              target="_blank"
+             rel="noopener noreferrer"
           >
             Components
           </a>
@@ -56,14 +58,6 @@
       sNavigationBlock,
     },
     props: {
-      /**
-       * An array of styleguide routes
-       */
-      routes: {
-        type: Array,
-        default: () => [],
-      },
-
       /**
        * Position of navigation (top-right, top-left, bottom-left, bottom-right)
        */

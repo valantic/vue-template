@@ -76,14 +76,9 @@
       }
     },
 
-    data() {
-      return {
-        /**
-         * @type {Boolean} Determines if the current render is initial.
-         */
-        initial: true,
-      };
-    },
+    // data() {
+    //   return {};
+    // },
 
     computed: {
       /**
