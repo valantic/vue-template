@@ -12,7 +12,9 @@
     "build": "NODE_ENV=production webpack --mode production --progress",
     "build:profile": "NODE_ENV=production webpack --mode production --profile",
     "build:styleguide": "webpack --styleguide-build && vue-styleguidist build",
-    "build:watch": "NODE_ENV=production webpack --mode production --watch"
+    "build:watch": "NODE_ENV=production webpack --mode production --watch",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
   },
   "webpack": {
     "buildPath": "dist",
@@ -29,12 +31,6 @@
       "theme-02"
     ],
     "devPort": 8080
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run jest",
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{js,vue}": [
