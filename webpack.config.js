@@ -259,7 +259,7 @@ module.exports = (env, args = {}) => {
           loader: MiniCssExtractPlugin.loader,
           options: {
             publicPath: '/', // This was required to prevent invalid asset urls in development
-            hmr: !isProduction,
+            esModule: false, // Should be removed in the future but was required as of 2021-04-23.
           },
         },
         {

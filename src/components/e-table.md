@@ -20,7 +20,7 @@
 
 <script>
   import dayjs from 'dayjs';
-  import { name, commerce } from 'faker';
+  import { name, commerce } from 'faker/locale/en';
 
   export default {
       data() {
@@ -170,7 +170,7 @@ Note: the 'no results' row can be customized with the 'noResults' slot.
 
 <script>
   import dayjs from 'dayjs';
-  import { name, commerce } from 'faker';
+  import { name, commerce } from 'faker/locale/en';
 
   export default {
       data() {
