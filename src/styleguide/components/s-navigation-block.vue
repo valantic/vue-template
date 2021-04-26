@@ -1,23 +1,24 @@
 <template>
   <ul :class="b(componentModifiers)">
-    <router-link
-      v-for="route in filteredRoutes"
-      :key="route.name"
-      :class="b('navigation-item')"
-      :to="{ name: route.name, params: route.meta.params, query: route.meta.query }"
-      :active-class="b('navigation-item', { activePath: true })"
-      :exact-active-class="b('navigation-item', { active: true })"
-      tag="li"
-      exact
+    <li v-for="route in filteredRoutes"
+        :key="route.name"
+        :class="b('navigation-item')"
     >
-      <a :class="b('navigation-link')">
+      <router-link
+        :to="{ name: route.name, params: route.meta.params, query: route.meta.query }"
+        :class="b('navigation-link')"
+        :active-class="b('navigation-link', { activePath: true })"
+        :exact-active-class="b('navigation-link', { active: true })"
+        exact
+      >
         {{ route.meta.title }}
-      </a>
+      </router-link>
       <s-navigation-block v-if="route.children && route.children.length"
                           :routes="route.children"
                           has-indent
       />
-    </router-link>
+    </li>
+
   </ul>
 </template>
 
@@ -62,7 +63,7 @@
        */
       filteredRoutes() {
         return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide);
-      }
+      },
     },
     // methods: {},
     // created() {}
@@ -80,24 +81,6 @@
       padding-left: 20px;
     }
 
-    &__navigation-item {
-      &--components {
-        border-top: 1px solid $color-grayscale--400;
-      }
-
-      &--language,
-      &--theme,
-      &--settings {
-        padding: $spacing--10 $spacing--20;
-        border-bottom: 1px solid $color-grayscale--400;
-      }
-
-      &--active,
-      &--active-path {
-        font-weight: bold;
-      }
-    }
-
     &__navigation-link {
       padding: $spacing--5 $spacing--20;
       text-decoration: none;
@@ -106,17 +89,10 @@
       &:hover {
         text-decoration: underline;
       }
-    }
 
-    &__navigation-item--logo {
-      border-bottom: 1px solid $color-grayscale--400;
-
-      img {
-        max-width: 150px;
-      }
-
-      .s-navigation__navigation-link {
-        padding: $spacing--10 $spacing--5;
+      &--active,
+      &--active-path {
+        font-weight: bold;
       }
     }
   }
