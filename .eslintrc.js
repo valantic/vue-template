@@ -26,20 +26,6 @@ module.exports = {
   // add your custom rules here
   rules: {
     ...vueRules,
-    "vue/no-template-target-blank": ["error"],
-    "vue/component-definition-name-casing": ["error", "kebab-case"], "vue/html-comment-content-spacing": ["error", "always"],
-    "vue/no-duplicate-attr-inheritance": ["error"],
-    "vue/no-unused-properties": ["error", {
-      "groups": [
-        "props",
-        "data",
-        "computed",
-        "methods",
-        "setup"
-      ],
-      "ignorePublicMembers": true,
-    }],
-    "vue/no-potential-component-option-typo": ["error"]
   },
   globals: {},
 };
