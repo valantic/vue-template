@@ -63,8 +63,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core
 - [vue-js-modal](https://www.npmjs.com/package/vue-js-modal) - https://github.com/euvl/vue-js-modal
   > c-modal
-- [vue-router](https://www.npmjs.com/package/vue-router) - The official router for Vue.js.
-  > core
 - [vuex](https://www.npmjs.com/package/vuex) - Centralized State Management for Vue.js.
   > core
 
@@ -160,6 +158,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > webpack
 - [vue-markdown-loader](https://www.npmjs.com/package/vue-markdown-loader) - Convert Markdown file to Vue Component using markdown-it.
   > development environment
+- [vue-router](https://www.npmjs.com/package/vue-router) - The official router for Vue.js.
+  > core
 - [vue-styleguidist](https://www.npmjs.com/package/vue-styleguidist) - Isolated Vue component development environment with a living style guide.
   > development environment
 - [webpack](https://www.npmjs.com/package/webpack) - webpack is a module bundler.
