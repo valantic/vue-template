@@ -150,7 +150,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > stylelint
 - [stylelint-webpack-plugin](https://www.npmjs.com/package/stylelint-webpack-plugin) - A Stylelint plugin for webpack
   > webpack, stylelint
-- [uglifyjs-webpack-plugin](https://www.npmjs.com/package/uglifyjs-webpack-plugin) - This plugin uses uglify-js to minify your JavaScript.
+- [terser-webpack-plugin](https://www.npmjs.com/package/terser-webpack-plugin) - This plugin uses terser to minify your JavaScript.
   > webpack
 - [vue-jest](https://www.npmjs.com/package/vue-jest) - Jest Vue transformer with source map support.
   > test environment
