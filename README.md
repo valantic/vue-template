@@ -752,6 +752,7 @@ package.json:
 * [ ] Element styles should be moved to reboot.
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
+* [ ] Extend eslint-plugin-vue rules for Vue 3.
 
 ## License
 
