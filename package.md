@@ -76,6 +76,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 ### Template
 - [@babel/core](https://www.npmjs.com/package/@babel/core) - JS compiler to create ES5 code from ES2015+.
   > webpack
+- [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
+  > eslint
 - [@babel/plugin-syntax-dynamic-import](https://www.npmjs.com/package/@babel/plugin-syntax-dynamic-import) - Makes @babel/core understand the not yet standardized import() syntax.
   > webpack
 - [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env) - Transform preset, which will transform the input code according to browserlist settings in package.json
@@ -88,8 +90,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > development environment, mock data
 - [babel-core](https://www.npmjs.com/package/babel-core/v/7.0.0-bridge.0) - Required by vue-jest and jest tests.
   > webpack setup
-- [babel-eslint](https://www.npmjs.com/package/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
-  > eslint
 - [babel-jest](https://www.npmjs.com/package/babel-jest) - Compiles modern JavaScript for Jest.
   > test environment
 - [babel-loader](https://www.npmjs.com/package/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
@@ -152,10 +152,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > stylelint
 - [stylelint-webpack-plugin](https://www.npmjs.com/package/stylelint-webpack-plugin) - A Stylelint plugin for webpack
   > webpack, stylelint
-- [stylus](https://www.npmjs.com/package/stylus) - Expressive, robust, feature-rich CSS language built for nodejs.
-  > stylus
-- [stylus-loader](https://www.npmjs.com/package/stylus-loader) - A stylus loader for webpack.
-  > webpack, stylus
 - [uglifyjs-webpack-plugin](https://www.npmjs.com/package/uglifyjs-webpack-plugin) - This plugin uses uglify-js to minify your JavaScript.
   > webpack
 - [vue-jest](https://www.npmjs.com/package/vue-jest) - Jest Vue transformer with source map support.

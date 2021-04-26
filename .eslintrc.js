@@ -4,7 +4,7 @@ const vueRules = require('eslint-config-valantic/plugins/vue');
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint', // Don't use on upper scope as documented by ESLint. The Vue plugin already defines itself as parser.
+    parser: '@babel/eslint-parser', // Don't use on upper scope as documented by ESLint. The Vue plugin already defines itself as parser.
     sourceType: 'module',
   },
   env: {
