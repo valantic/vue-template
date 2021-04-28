@@ -45,7 +45,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 - [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js.
   > core
-- [core-js]() - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.
+- [core-js](https://www.npmjs.com/package/core-js) - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.
   > core, polyfill
 - [css-vars-ponyfill](https://www.npmjs.com/package/css-vars-ponyfill) - A ponyfill that provides client-side support for CSS custom properties (aka "CSS variables") in legacy and modern browsers.
   > core, polyfill, ie11

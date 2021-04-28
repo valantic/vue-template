@@ -18,7 +18,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const { webpack: config } = require('./package.json');
 const chokidar = require('chokidar');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 /**
  * A note about [hash]: Using the hash in query could cause troubles with caching proxies. Therefore
@@ -123,7 +123,9 @@ module.exports = (env, args = {}) => {
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
       template: 'index.html',
-      excludeChunks: isStyleguideBuild ? Object.keys(themes).slice(1, themes.length - 1) : Object.keys(themes),
+      excludeChunks: isStyleguideBuild
+        ? Object.keys(themes).slice(1)
+        : Object.keys(themes),
     }),
     new StyleLintPlugin({
       emitErrors: isProduction,
