@@ -25,6 +25,7 @@ if (process.env.NODE_ENV !== 'production') {
 export const i18n = new VueI18n({
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
+  warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
 
   /**
    * Callback for the 'missing' event, during translation lookup.
