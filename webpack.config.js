@@ -12,13 +12,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const { webpack: config } = require('./package.json');
 const chokidar = require('chokidar');
+const TerserPlugin = require('terser-webpack-plugin');
 
 /**
  * A note about [hash]: Using the hash in query could cause troubles with caching proxies. Therefore
@@ -123,7 +123,9 @@ module.exports = (env, args = {}) => {
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
       template: 'index.html',
-      excludeChunks: isStyleguideBuild ? Object.keys(themes).slice(1, themes.length - 1) : Object.keys(themes),
+      excludeChunks: isStyleguideBuild
+        ? Object.keys(themes).slice(1)
+        : Object.keys(themes),
     }),
     new StyleLintPlugin({
       emitErrors: isProduction,
@@ -259,7 +261,7 @@ module.exports = (env, args = {}) => {
           loader: MiniCssExtractPlugin.loader,
           options: {
             publicPath: '/', // This was required to prevent invalid asset urls in development
-            hmr: !isProduction,
+            esModule: false, // Should be removed in the future but was required as of 2021-04-23.
           },
         },
         {
@@ -339,12 +341,7 @@ module.exports = (env, args = {}) => {
   const optimization = {
     nodeEnv: false,
     minimizer: [
-      new UglifyJsPlugin({
-        test: /\.js($|\?)/i, // MUST be defined because file has as query
-        cache: true,
-        parallel: true,
-        sourceMap: !isProduction
-      })
+      new TerserPlugin(),
     ],
     splitChunks: {
       cacheGroups: {

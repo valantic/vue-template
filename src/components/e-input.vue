@@ -256,7 +256,7 @@
       onFocus(event) {
         this.hasFocus = true;
 
-        if (this.$props.selectOnFocus) {
+        if (this.selectOnFocus) {
           this.selectValue(event);
         }
 

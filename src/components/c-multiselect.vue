@@ -283,14 +283,6 @@
 
     methods: {
       /**
-       * Resets the active items.
-       */
-      reset() {
-        this.checkedItems.splice(0);
-        this.checkedStored.splice(0);
-      },
-
-      /**
        * Initializes the checkboxItems and checkboxItemsFiltered arrays, based on the given
        * string array provided by the parent component.
        */

@@ -140,8 +140,6 @@
           slideToClickedSlide: true,
           roundLengths: true,
         },
-        swiperGallery: null,
-        swiperThumbnails: null,
         sizes: BREAKPOINTS,
         slidesPerBreakpoint: {
           xxs: 3,
@@ -179,8 +177,8 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      const galleryOptions = { initialSlide: this.$props.initialSlide, ...this.optionsMerged };
-      const thumbnailOptions = { initialSlide: this.$props.initialSlide, ...this.optionsThumbnails };
+      const galleryOptions = { initialSlide: this.initialSlide, ...this.optionsMerged };
+      const thumbnailOptions = { initialSlide: this.initialSlide, ...this.optionsThumbnails };
 
       Swiper.use([Navigation, Controller]);
 

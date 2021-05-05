@@ -1,3 +1,5 @@
+/* eslint-disable vue/no-unused-properties */
+import './styleguide.polyfills';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import app from '@/styleguide/components/app';

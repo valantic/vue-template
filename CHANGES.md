@@ -13,7 +13,13 @@
  - (Change) Makes form mixin imports absolute to prevent ESLint errors.
  - (Change) Removes deprecated prop from e-checkbox demos.
  - (Change) Adds multi line demo for e-checkbox.
+ - (Change) Adds translation best practices to readme.
  - (Bug) Fixes broken styleguide build.
+ - (Update) Updates all NPM packages to the current version. Except:
+   - stylus-loader: was removed, because not required anymore
+   - stylus: was removed because not required anymore 
+   - vue-js-modal because version 2.0 is not ready
+   - uglifyjs-webpack-plugin: was replaced with terser-webpack-plugin because deprecated
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.

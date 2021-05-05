@@ -35,7 +35,7 @@
       <!-- navigation -->
       <div ref="pagination" :class="b('pagination')"></div>
 
-      <!-- buttons-->
+      <!-- buttons -->
       <div ref="previous" :class="b('button', { previous: true })"></div>
       <div ref="next" :class="b('button', { next: true })"></div>
     </div>
@@ -110,10 +110,6 @@
               : this.images.length > 7 || false,
             dynamicMainBullets: 5,
           },
-        },
-        // this.images.length > this.dynamicBullets
-        swiper: {
-          activeIndex: 0,
         },
         hasHover: false,
         sizes: BREAKPOINTS, // todo add as prop

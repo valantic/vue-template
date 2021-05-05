@@ -45,7 +45,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 
 - [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js.
   > core
-- [core-js]() - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.
+- [core-js](https://www.npmjs.com/package/core-js) - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.
   > core, polyfill
 - [css-vars-ponyfill](https://www.npmjs.com/package/css-vars-ponyfill) - A ponyfill that provides client-side support for CSS custom properties (aka "CSS variables") in legacy and modern browsers.
   > core, polyfill, ie11
@@ -63,8 +63,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core
 - [vue-js-modal](https://www.npmjs.com/package/vue-js-modal) - https://github.com/euvl/vue-js-modal
   > c-modal
-- [vue-router](https://www.npmjs.com/package/vue-router) - The official router for Vue.js.
-  > core
 - [vuex](https://www.npmjs.com/package/vuex) - Centralized State Management for Vue.js.
   > core
 
@@ -76,6 +74,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 ### Template
 - [@babel/core](https://www.npmjs.com/package/@babel/core) - JS compiler to create ES5 code from ES2015+.
   > webpack
+- [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
+  > eslint
 - [@babel/plugin-syntax-dynamic-import](https://www.npmjs.com/package/@babel/plugin-syntax-dynamic-import) - Makes @babel/core understand the not yet standardized import() syntax.
   > webpack
 - [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env) - Transform preset, which will transform the input code according to browserlist settings in package.json
@@ -88,8 +88,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > development environment, mock data
 - [babel-core](https://www.npmjs.com/package/babel-core/v/7.0.0-bridge.0) - Required by vue-jest and jest tests.
   > webpack setup
-- [babel-eslint](https://www.npmjs.com/package/babel-eslint) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
-  > eslint
 - [babel-jest](https://www.npmjs.com/package/babel-jest) - Compiles modern JavaScript for Jest.
   > test environment
 - [babel-loader](https://www.npmjs.com/package/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
@@ -152,11 +150,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > stylelint
 - [stylelint-webpack-plugin](https://www.npmjs.com/package/stylelint-webpack-plugin) - A Stylelint plugin for webpack
   > webpack, stylelint
-- [stylus](https://www.npmjs.com/package/stylus) - Expressive, robust, feature-rich CSS language built for nodejs.
-  > stylus
-- [stylus-loader](https://www.npmjs.com/package/stylus-loader) - A stylus loader for webpack.
-  > webpack, stylus
-- [uglifyjs-webpack-plugin](https://www.npmjs.com/package/uglifyjs-webpack-plugin) - This plugin uses uglify-js to minify your JavaScript.
+- [terser-webpack-plugin](https://www.npmjs.com/package/terser-webpack-plugin) - This plugin uses terser to minify your JavaScript.
   > webpack
 - [vue-jest](https://www.npmjs.com/package/vue-jest) - Jest Vue transformer with source map support.
   > test environment
@@ -164,6 +158,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > webpack
 - [vue-markdown-loader](https://www.npmjs.com/package/vue-markdown-loader) - Convert Markdown file to Vue Component using markdown-it.
   > development environment
+- [vue-router](https://www.npmjs.com/package/vue-router) - The official router for Vue.js.
+  > core
 - [vue-styleguidist](https://www.npmjs.com/package/vue-styleguidist) - Isolated Vue component development environment with a living style guide.
   > development environment
 - [webpack](https://www.npmjs.com/package/webpack) - webpack is a module bundler.

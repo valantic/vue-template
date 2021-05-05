@@ -128,6 +128,8 @@
 
       /**
        * Updates the checked state of the checkbox.
+       *
+       * @public Used by c-multiselect.
        */
       updateCheckedState() {
         if (typeof this.value === 'string') {

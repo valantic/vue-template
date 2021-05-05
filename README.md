@@ -512,13 +512,27 @@ In cases where HTML is pre-rendered by twig, slots can be used to give the HTML 
 
 ## Translations
 
-All text which is defined in frontend MUST be placed trough translations. There should not be any hard coded inline text in the component templates or JavaScript.
+All text which is defined in frontend MUST be placed trough translations. There should NOT be any hard coded inline text in the component templates or JavaScript.
 
 ### Plugin
 
 We use the [vue-i18n](https://github.com/kazupon/vue-i18n) plugin to handle translations. This tool also allows us to handle localizations (e.g. number or date formats). The documentation can be found [here](https://kazupon.github.io/vue-i18n/guide/started.html).
 
 We discovered that the provided directive `v-t` accelerates the memory leak issue in IE11 since it creates copies of the translation JSON for each use (as of v8.15.3). For this reason, please use the `{{$t()}}` method.
+
+### Keys
+
+Translations should be marked with a specific translation key. Don't use English text as ab identifier key, since it might interfere with other uses in the application or can simply have different meanings in other languages, that need to be distinguished.
+
+The key should always be namespaced with the components name. E.g. `c-component.specificKey`
+
+```js
+// Bad
+this.$t('Some translateable text.');
+
+// Good
+this.$t('e-button.defaultLabel')
+```
 
 ### Placeholders
 
@@ -719,12 +733,26 @@ $ brew install nasm
 $ brew upgrade nasm
 ```
 
+#### Error on Windows machines while running the `npm run build script`
+
+If you're on a Windows machine, and you need to build the project – there is a problem with assign node env. variables like
+`NODE_ENV=production`. To get rid of this problem there is an npm package that could help you => https://www.npmjs.com/package/cross-env
+Be sure that you add "cross-env" at the start of the script like:
+
+package.json:
+```json
+"scripts": {
+    "build": "cross-env NODE_ENV=production webpack --mode production --progress",
+  },
+```
+
 ## Roadmap
 
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Element styles should be moved to reboot.
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
+* [ ] Extend eslint-plugin-vue rules for Vue 3.
 
 ## License
 

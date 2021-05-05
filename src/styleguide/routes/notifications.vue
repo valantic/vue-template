@@ -24,11 +24,11 @@
           placeholder="Last name"
         />
       </e-label>
-      <e-label :state="errors['email'].state" name="Email:" position="top">
+      <e-label :state="errors.email.state" name="Email:" position="top">
         <e-input
           v-model="form.email"
-          :state="errors['email'].state"
-          :notification="errors['email'].notification"
+          :state="errors.email.state"
+          :notification="errors.email.notification"
           name="email"
           placeholder="email"
         />
@@ -88,11 +88,11 @@
               placeholder="Last name"
             />
           </e-label>
-          <e-label :state="errors['email'].state" name="Email:" position="top">
+          <e-label :state="errors.email.state" name="Email:" position="top">
             <e-input
               v-model="form.email"
-              :state="errors['email'].state"
-              :notification="errors['email'].notification"
+              :state="errors.email.state"
+              :notification="errors.email.notification"
               name="email"
               placeholder="email"
             />
@@ -163,8 +163,6 @@
             notification: '',
           },
         },
-        errorMessage: '',
-        errorState: 'default',
       };
     },
     computed: {
