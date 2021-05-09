@@ -1,7 +1,5 @@
 <template>
-  <header :class="b()">
-    Header
-  </header>
+  <header :class="b()"></header>
 </template>
 
 <script>
@@ -37,6 +35,8 @@
 
 <style lang="scss">
   .c-header {
-    // ...
+    &::before { // TODO: remove
+      content: "Header";
+    }
   }
 </style>

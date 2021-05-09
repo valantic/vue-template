@@ -162,7 +162,7 @@
 
     // beforeCreate() {},
     created() {
-      this.visible = this.$props.selector ? this.$props.selector === this.notification.message.source.selector : true;
+      this.visible = this.selector ? this.selector === this.notification.message.source.selector : true;
     },
     // beforeMount() {},
     mounted() {

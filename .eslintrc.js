@@ -4,7 +4,8 @@ const vueRules = require('eslint-config-valantic/plugins/vue');
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint', // Don't use on upper scope as documented by ESLint. The Vue plugin already defines itself as parser.
+    requireConfigFile: false, // Fixes an exception on sub folder eslintrc.js files
+    parser: '@babel/eslint-parser', // Don't use on upper scope as documented by ESLint. The Vue plugin already defines itself as parser.
     sourceType: 'module',
   },
   env: {
@@ -21,12 +22,11 @@ module.exports = {
   ],
   // Uses eslint-import-resolver-webpack
   settings: {
-    'import/resolver': 'webpack'
+    'import/resolver': 'webpack',
   },
   // add your custom rules here
   rules: {
     ...vueRules,
   },
-  globals: {
-  }
+  globals: {},
 };

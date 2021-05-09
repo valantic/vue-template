@@ -1,6 +1,6 @@
 <template>
   <label :class="b()">
-    <span v-if="this.$slots.default" :class="b('label')">
+    <span v-if="$slots.default" :class="b('label')">
       <!-- @slot renders its content as element label -->
       <slot></slot>
     </span>
@@ -76,16 +76,7 @@
     // beforeUnmount() {},
     // unmounted() {},
 
-    methods: {
-      /**
-       * Event handler for the change event of the toggle element.
-       *
-       * @param {Event} event - The related DOM event.
-       */
-      onChange(event) {
-        this.internalValue = event.target.checked;
-      }
-    },
+    // methods: {},
     // render() {},
   };
 </script>

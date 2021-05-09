@@ -1,7 +1,7 @@
 <template>
   <label :class="b(modifiers)">
     <span :class="b('name', { invisible })">{{ name }}</span>
-    <span v-if="this.$slots.default" :class="b('inner')">
+    <span v-if="$slots.default" :class="b('inner')">
       <!-- @slot Label content -->
       <slot></slot>
     </span>
@@ -64,7 +64,7 @@
       modifiers() {
         return {
           ...this.stateModifiers,
-          position: this.$props.position,
+          position: this.position,
         };
       }
     },

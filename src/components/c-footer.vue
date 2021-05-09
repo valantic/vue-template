@@ -1,7 +1,5 @@
 <template>
-  <footer :class="b()">
-    Footer
-  </footer>
+  <footer :class="b()"></footer>
 </template>
 
 <script>
@@ -37,6 +35,8 @@
 
 <style lang="scss">
   .c-footer {
-    // ...
+    &::before { // TODO: remove
+      content: "Footer";
+    }
   }
 </style>

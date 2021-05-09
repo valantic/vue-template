@@ -99,7 +99,7 @@ export default {
     /**
      * Directive to apply Pimcore generator attributes for an editable.
      *
-     * v-pimcore[.disable]="[<editable>, <identifier>[, <restriction>]]"
+     * v-pimcore="[<editable>, <identifier>[, <restriction>]]"
      */
     app.directive('pimcore', {
       name: 'pimcore',
@@ -111,8 +111,7 @@ export default {
     /**
      * Directive to apply Pimcore generator attributes for an editable.
      *
-     * v-pimcore-areabrick[.disable]="'<name>'"
-     * v-pimcore:snippet
+     * v-pimcore-areabrick="'<name>'"
      */
     app.directive('pimcore-areabrick', {
       name: 'pimcore-areabrick',
@@ -124,7 +123,7 @@ export default {
     /**
      * Directive to apply Pimcore generator attributes for an editable.
      *
-     * v-pimcore-snippet[.disable]
+     * v-pimcore-snippet[.disable]="'<name>'"
      */
     app.directive('pimcore-snippet', {
       name: 'pimcore-snippet',

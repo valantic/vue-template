@@ -23,6 +23,7 @@ const i18n = createI18n({
   legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
+  warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
 
   /**
    * Callback for the 'missing' event, during translation lookup.

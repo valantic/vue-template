@@ -35,6 +35,8 @@ export default {
 
         /**
          * Hides the latest modal in the array.
+         *
+         * @public
          */
         hideTopModal() {
           const uuid = this.openModals[this.openModals.length - 1];
@@ -45,6 +47,8 @@ export default {
         /**
          * Removes the given modal from the array.
          *
+         * @public
+         *
          * @param {String} uuid - Name of the modal (uuid).
          */
         remove(uuid) {
@@ -53,6 +57,8 @@ export default {
 
         /**
          * Adds the given modal to the array.
+         *
+         * @public
          *
          * @param {String} uuid - Name of the modal (uuid).
          */

@@ -10,7 +10,6 @@ import eButton from '@/components/e-button';
 // Elements
 import eIcon from '@/components/e-icon';
 import ePicture from '@/components/e-picture';
-import ePanel from '@/components/c-panel';
 import eProgress from '@/components/e-progress';
 
 // SSR related
@@ -35,7 +34,6 @@ export default {
       eIcon,
       ePicture,
       eProgress,
-      ePanel,
 
       // SSR related
       lDefault,
@@ -59,7 +57,6 @@ export default {
       Vue.component(eButton.name, eButton);
       Vue.component(eIcon.name, eIcon);
       Vue.component(ePicture.name, ePicture);
-      Vue.component(ePanel.name, ePanel);
       Vue.component(eProgress.name, eProgress);
 
       // SSR related

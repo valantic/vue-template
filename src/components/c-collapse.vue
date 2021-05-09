@@ -63,7 +63,7 @@
         /**
          * @type {Boolean} Defines the current state of the collapse.
          */
-        isExpanded: this.$props.active,
+        isExpanded: this.active,
 
         /**
          * @type {String|Number} The maxHeight of the content used for transition.
@@ -84,7 +84,7 @@
          * @type {Boolean} Defines if the collapse is currently open. This also waits until the transition is finished,
          * so that calculations depending on the height of the content can be done by the child component.
          */
-        isOpen: this.$props.active,
+        isOpen: this.active,
 
         /**
          * @type {Boolean} Flag shows if the collapse content is already rendered in the DOM.
@@ -103,7 +103,7 @@
         return {
           expanded: this.isExpanded,
           open: this.isOpen,
-          padding: this.$props.padding,
+          padding: this.padding,
         };
       },
     },

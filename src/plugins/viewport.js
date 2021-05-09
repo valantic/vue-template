@@ -14,6 +14,8 @@ export default {
         /**
          * Returns TRUE if viewport is smaller than XS.
          *
+         * @public
+         *
          * @returns {Boolean}
          */
         isXxs() {
@@ -22,6 +24,8 @@ export default {
 
         /**
          * Returns TRUE if viewport is at least XS.
+         *
+         * @public
          *
          * @returns {Boolean}
          */
@@ -32,6 +36,8 @@ export default {
         /**
          * Returns TRUE if viewport is at least SM.
          *
+         * @public
+         *
          * @returns {Boolean}
          */
         isSm() {
@@ -40,6 +46,8 @@ export default {
 
         /**
          * Returns TRUE if viewport is at least MD.
+         *
+         * @public
          *
          * @returns {Boolean}
          */
@@ -50,6 +58,8 @@ export default {
         /**
          * Returns TRUE if viewport is at least LG.
          *
+         * @public
+         *
          * @returns {Boolean}
          */
         isLg() {
@@ -58,6 +68,8 @@ export default {
 
         /**
          * Returns TRUE if viewport is at least XL.
+         *
+         * @public
          *
          * @returns {Boolean}
          */
@@ -68,6 +80,8 @@ export default {
         /**
          * Checks if current viewport is mobile (<= md).
          *
+         * @public
+         *
          * @returns {Boolean}
          */
         isMobile() {
@@ -76,6 +90,8 @@ export default {
 
         /**
          * Returns the short name of the current viewport (e.g. 'md').
+         *
+         * @public
          *
          * @returns {String}
          */

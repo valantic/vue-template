@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <!-- buttons-->
+      <!-- buttons -->
       <div ref="previous" :class="b('button', { previous: true })"></div>
       <div ref="next" :class="b('button', { next: true })"></div>
 

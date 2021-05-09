@@ -23,7 +23,7 @@ Note: this is also the default for this directive. So you may drop the `editable
 
 ```vue
 <template>
-  <div v-pimcore:editable="['input', 'title']">
+  <div v-pimcore="['input', 'title']">
     Inspect me to see the added attributes.
   </div>
 </template>
@@ -31,7 +31,7 @@ Note: this is also the default for this directive. So you may drop the `editable
 
 ```vue
 <template>
-  <div v-pimcore:editable="['relations', 'title', restriction]">
+  <div v-pimcore="['relations', 'title', restriction]">
     Inspect me to see the added attributes. I also have restrictions.
   </div>
 </template>
@@ -63,7 +63,7 @@ export default {
 
 <br>
 
-#### `v-pimcore:areabrick="'<name>'"`
+#### `v-pimcore-areabrick="'<name>'"`
 
 **Requires** the definition of an area brick name.
 
@@ -71,7 +71,7 @@ export default {
 
 ```vue
 <template>
-  <div v-pimcore:areabrick="'text_and_image'">
+  <div v-pimcore-areabrick="'text_and_image'">
     Inspect me to see the added attributes.
   </div>
 </template>
@@ -79,28 +79,16 @@ export default {
 
 <br>
 
-#### `v-pimcore:snippet`
+#### `v-pimcore-snippet="'<name>'"`
 
 Marks the related element as snippet content.
 
+- `name` The name that will be used for the Pimcore snippet. Only `[a-z_]` are allowed.
+
 ```vue
 <template>
-  <div v-pimcore:snippet>
+  <div v-pimcore-snippet="'footer'">
     Inspect me to see the added attributes.
   </div>
-</template>
-```
-
-<br>
-
-#### `v-pimcore:disable`
-
-Marks the related element as `disabled` in the Pimcore editor.
-
-```vue
-<template>
-  <a v-pimcore:disable href="#">
-    Inspect me to see the added attributes.
-  </a>
 </template>
 ```

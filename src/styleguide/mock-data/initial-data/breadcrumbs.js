@@ -1,17 +1,17 @@
-import faker from 'faker';
+import { commerce } from 'faker/locale/en';
 import breadcrumb from '../data-object/breadcrumb';
 
 export default [
   {
     ...breadcrumb,
-    name: faker.commerce.productName(),
+    name: commerce.productName(),
   },
   {
     ...breadcrumb,
-    name: faker.commerce.productName(),
+    name: commerce.productName(),
   },
   {
     ...breadcrumb,
-    name: faker.commerce.productName(),
+    name: commerce.productName(),
   },
 ];
