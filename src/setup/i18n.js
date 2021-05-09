@@ -1,4 +1,4 @@
-import { createI18n } from 'vue-i18n/dist/vue-i18n.esm-bundler';
+import { createI18n } from 'vue-i18n';
 import fallbackMessages from '../translations/de';
 import numberFormats from './localization';
 
