@@ -60,43 +60,43 @@
         </e-button>
       </div>
 
-      <!--      <c-modal-->
-      <!--        :open="modalOpen"-->
-      <!--        title="Example title small"-->
-      <!--        size="300"-->
-      <!--        @close="modalOpen = false">-->
+      <!--      <c-modal -->
+      <!--        :open="modalOpen" -->
+      <!--        title="Example title small" -->
+      <!--        size="300" -->
+      <!--        @close="modalOpen = false"> -->
       <div>
         <e-button @click="addToCart">
           Add to cart
         </e-button>
 
-          <e-label :state="errors['first-name'].state" name="First name:" position="top">
-            <e-input
-              v-model="form.firstName"
-              :state="errors['first-name'].state"
-              :notification="errors['first-name'].notification"
-              name="first-name"
-              placeholder="First name"
-            />
-          </e-label>
-          <e-label :state="errors['last-name'].state" name="Last name:" position="top">
-            <e-input
-              v-model="form.lastName"
-              :state="errors['last-name'].state"
-              :notification="errors['last-name'].notification"
-              name="last-name"
-              placeholder="Last name"
-            />
-          </e-label>
-          <e-label :state="errors.email.state" name="Email:" position="top">
-            <e-input
-              v-model="form.email"
-              :state="errors.email.state"
-              :notification="errors.email.notification"
-              name="email"
-              placeholder="email"
-            />
-          </e-label>
+        <e-label :state="errors['first-name'].state" name="First name:" position="top">
+          <e-input
+            v-model="form.firstName"
+            :state="errors['first-name'].state"
+            :notification="errors['first-name'].notification"
+            name="first-name"
+            placeholder="First name"
+          />
+        </e-label>
+        <e-label :state="errors['last-name'].state" name="Last name:" position="top">
+          <e-input
+            v-model="form.lastName"
+            :state="errors['last-name'].state"
+            :notification="errors['last-name'].notification"
+            name="last-name"
+            placeholder="Last name"
+          />
+        </e-label>
+        <e-label :state="errors.email.state" name="Email:" position="top">
+          <e-input
+            v-model="form.email"
+            :state="errors.email.state"
+            :notification="errors.email.notification"
+            name="email"
+            placeholder="email"
+          />
+        </e-label>
 
         <e-button style="margin-top: 10px; margin-right: 10px;" @click="addGlobalSuccess">
           Success
@@ -121,7 +121,7 @@
           </e-button>
         </div>
       </div>
-      <!--      </c-modal>-->
+      <!--      </c-modal> -->
     </div>
   </l-default>
 </template>
