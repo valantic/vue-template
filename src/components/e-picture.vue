@@ -12,6 +12,7 @@
          :loading="loading"
          :width="width || (ratio && ratio * fallbackHeight)"
          :height="height || (ratio && fallbackHeight)"
+         :decoding="decoding"
          @load="onLoad"
     >
   </picture>
@@ -107,6 +108,23 @@
           return [
             'lazy',
             'eager',
+            'auto',
+          ].includes(value);
+        },
+      },
+
+      /**
+       * Allows to move the image decoding off the main thread. This should be 'sync' or 'auto' for images above the fold.
+       *
+       * For browser support @see https://caniuse.com/mdn-html_elements_img_decoding
+       */
+      decoding: {
+        type: String,
+        default: 'async',
+        validator(value) {
+          return [
+            'sync',
+            'async',
             'auto',
           ].includes(value);
         },
