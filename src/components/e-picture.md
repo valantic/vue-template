@@ -38,6 +38,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
     :sizes="sizes"
     :srcset="image.srcset"
     :fallback="image.fallback"
+    :ratio="1440/720"
     alt="Img element with srcset and sizes"/>
 </template>
 

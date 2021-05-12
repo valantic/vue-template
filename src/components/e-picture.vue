@@ -10,8 +10,8 @@
          :src="fallback"
          :alt="alt"
          :loading="loading"
-         :width="width || (ratio && fallbackWidth)"
-         :height="height || (ratio && ratio * fallbackWidth)"
+         :width="width || (ratio && ratio * fallbackHeight)"
+         :height="height || (ratio && fallbackHeight)"
          @load="onLoad"
     >
   </picture>
@@ -133,7 +133,7 @@
        */
       placeholder: {
         type: Boolean,
-        default: false,
+        default: true,
       },
     },
     data() {
@@ -146,7 +146,7 @@
         /**
          * @type {Number} Holds a fallback width in case only the ratio is defined.
          */
-        fallbackWidth: 400,
+        fallbackHeight: 400,
       };
     },
 
@@ -217,17 +217,23 @@
     // watch: {},
 
     // beforeCreate() {},
-    created() {
+    // created() {},
+    // beforeMount() {},
+    mounted() {
+      const hasSrcSet = !!this.srcset;
+
       if (process.env.NODE_ENV === 'production') {
-        if (!this.srcset && !this.sources && !this.fallback) {
-          console.error("Neither 'srcset' nor 'sources' or 'fallback' where defined."); // eslint-disable-line no-console
-        } else if (this.srcset && !this.sizes) {
-          console.error("No 'sizes' where defined while using 'srcset'."); // eslint-disable-line no-console
+        if (!hasSrcSet && !this.sources && !this.fallback) {
+          console.error("Neither 'srcset' nor 'sources' or 'fallback' where defined.", this.$el); // eslint-disable-line no-console
+        } else if (hasSrcSet && !this.sizes) {
+          console.error("No 'sizes' where defined while using 'srcset'.", this.$el); // eslint-disable-line no-console
+        }
+      } else {
+        if (hasSrcSet && (!this.ratio && (!this.width || !this.height))) { // eslint-disable-line no-lonely-if
+          console.error("Neither a combination of 'width'/'height' nor 'ratio' was defined.", this.$el); // eslint-disable-line no-console
         }
       }
     },
-    // beforeMount() {},
-    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -271,10 +277,6 @@
 
     &--inline {
       display: inline-block;
-
-      img {
-        display: inline-block;
-      }
     }
 
     &--ratio {
