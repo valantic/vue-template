@@ -1,6 +1,9 @@
 ### e-picture
 
 #### Picture element (sources)
+
+Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Array of Strings. `fallback` is used on smallest screens.
+
 ```vue
 <template>
   <e-picture
@@ -15,10 +18,10 @@
     data: () => ({
       fallback: 'https://via.placeholder.com/180x150',
       sources: {
-        0: ['https://via.placeholder.com/180x150/000000 1x', 'https://via.placeholder.com/360x300/000000 2x'],
-        sm: ['https://via.placeholder.com/350x150/666666 1x', 'https://via.placeholder.com/700/666666 2x'],
-        800: ['https://via.placeholder.com/800x150/aaaaaa 1x', 'https://via.placeholder.com/1600x300/aaaaaa 2x'],
-        1440: ['https://via.placeholder.com/1440x150/dddddd 1x', 'https://via.placeholder.com/2880x300/dddddd 2x'],
+        '(min-width: 1440px)': ['https://via.placeholder.com/1440x150/dddddd 1x', 'https://via.placeholder.com/2880x300/dddddd 2x'],
+        '(min-width: 1200px)': ['https://via.placeholder.com/800x150/aaaaaa 1x', 'https://via.placeholder.com/1600x300/aaaaaa 2x'],
+        '(min-width: 768px)': ['https://via.placeholder.com/350x150/666666 1x', 'https://via.placeholder.com/700/666666 2x'],
+        '(min-width: 480px)': ['https://via.placeholder.com/180x150/000000 1x', 'https://via.placeholder.com/360x300/000000 2x'],
       },
     })
   };
@@ -33,22 +36,18 @@
 <template>
   <e-picture
     :sizes="sizes"
-    :srcset="srcset"
-    :fallback="fallback"
+    :srcset="image.srcset"
+    :fallback="image.fallback"
     alt="Img element with srcset and sizes"/>
 </template>
 
 <script>
+  import image from '@/styleguide/mock-data/data-object/srcset-image';
+  
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'https://via.placeholder.com/180x150/0000ff',
-      srcset: {
-        200: 'https://via.placeholder.com/200x100',
-        400: 'https://via.placeholder.com/400x200',
-        800: 'https://via.placeholder.com/800x400',
-        1400: 'https://via.placeholder.com/1400x700',
-      },
+      image,
       sizes: {
         1440: 1400,
         xs: 200,
@@ -67,18 +66,21 @@
     <e-picture
       :sources="sources"
       :fallback="fallback"
-      inline="true"
-      alt="Show as inline element"/>
+      alt="Show as inline element"
+      inline
+    />
     <e-picture
       :sources="sources"
       :fallback="fallback"
-      inline="true"
-      alt="Show as inline element"/>
+      alt="Show as inline element"
+      inline
+    />
     <e-picture
       :sources="sources"
       :fallback="fallback"
-      :inline="true"
-      alt="Show as inline element"/>
+      alt="Show as inline element"
+      inline
+    />
   </div>
 </template>
 
@@ -88,38 +90,33 @@
     data: () => ({
       fallback: 'https://via.placeholder.com/180x150/0000ff',
       sources: {
-        0: ['https://via.placeholder.com/200 1x', 'https://via.placeholder.com/400 2x'],
+        '(min-width: 1440px)': ['https://via.placeholder.com/200 1x', 'https://via.placeholder.com/400 2x'],
       },
     })
   };
 </script>
 ```
 
-#### Preserve aspect ratio (tinted background for visualisation)
+#### Preserve aspect ratio
 ```vue
 <template>
   <div>
     <e-picture
       :sizes="sizes"
-      :srcset="srcset"
-      :fallback="fallback"
+      :srcset="image.srcset"
+      :fallback="image.fallback"
       :ratio="800/500"
-      style="background: aliceblue;"
       alt="Show as inline element"/>
   </div>
 </template>
 
 <script>
+  import image from '@/styleguide/mock-data/data-object/srcset-image';
+
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'https://via.placeholder.com/180x150/0000ff',
-      srcset: {
-        100: 'https://via.placeholder.com/100x50',
-        400: 'https://via.placeholder.com/400x200',
-        500: 'https://via.placeholder.com/500x250',
-        600: 'https://via.placeholder.com/600x300',
-      },
+      image,
       sizes: {
         1200: 600,
         sm: 360,
@@ -130,32 +127,28 @@
 </script>
 ```
 
-#### Preserve aspect ratio inline (tinted background for visualisation)
+#### Preserve aspect ratio inline
 ```vue
 <template>
   <div>
     <e-picture
       :sizes="sizes"
-      :srcset="srcset"
-      :fallback="fallback"
-      :ratio="800/800"
-      :inline="true"
-      style="background: aliceblue;"
-      alt="Show as inline element"/>
+      :srcset="image.srcset"
+      :fallback="image.fallback"
+      :ratio="800/500"
+      alt="Show as inline element"
+      inline
+    />
   </div>
 </template>
 
 <script>
+  import image from '@/styleguide/mock-data/data-object/srcset-image';
+
   export default {
     name: 'example',
     data: () => ({
-      fallback: 'https://via.placeholder.com/180x150/0000ff',
-      srcset: {
-          100: 'https://via.placeholder.com/100x50',
-          400: 'https://via.placeholder.com/400x200',
-          500: 'https://via.placeholder.com/500x250',
-          600: 'https://via.placeholder.com/600x300',
-        },
+      image,
         sizes: {
           1200: 600,
           sm: 360,
