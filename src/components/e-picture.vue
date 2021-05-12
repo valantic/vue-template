@@ -1,8 +1,29 @@
-<!-- This component has no <template> because of dynamic root element -->
+<template>
+  <picture :class="b(modifiers)" :style="style">
+    <source v-for="(mediaSrcset, mediaQuery) in sources"
+            :key="mediaQuery"
+            :media="mediaQuery"
+            :srcset="mediaSrcset"
+    >
+    <img :sizes="mappedSizes"
+         :srcset="srcset"
+         :src="fallback"
+         :alt="alt"
+         :loading="loading"
+         :width="width || (ratio && ratio * fallbackHeight)"
+         :height="height || (ratio && fallbackHeight)"
+         :decoding="decoding"
+         @load="onLoad"
+    >
+  </picture>
+</template>
 
 <script>
-  import { BREAKPOINTS } from '@/setup/globals';
+  import { BREAKPOINTS_MAX } from '@/setup/globals';
 
+  /**
+   * Renders a picture element with srcset or sources, depending on provided data.
+   */
   export default {
     name: 'e-picture',
     status: 0, // TODO: remove when component was prepared for current project.
@@ -12,19 +33,39 @@
 
     props: {
       /**
-       * Alt text if no image found
+       * Accepts a srcset string of comma separated sources with width value.
+       *
+       * `'large.jpg 800w, medium.jpg 600w, ...'`
        */
-      alt: {
+      srcset: {
         type: String,
-        required: true
+        default: null,
       },
 
       /**
-       * Fallback image (assigned to img[src])
+       * Accepts an Object of key/value pairs which represent media/srcset for sources.
+       *
+       * `{ <media>: <srcset>, ... }`
+       */
+      sources: {
+        type: Object,
+        default: null,
+      },
+
+      /**
+       * The alternative text, which is displayed if the image can not be loaded.
+       */
+      alt: {
+        type: String,
+        required: true,
+      },
+
+      /**
+       * The fallback image path.
        */
       fallback: {
         type: String,
-        required: true
+        required: true,
       },
 
       /**
@@ -34,7 +75,7 @@
        */
       ratio: {
         type: [Number, String],
-        default: null
+        default: null,
       },
 
       /**
@@ -44,26 +85,6 @@
        */
       sizes: {
         type: Object,
-        default: null
-      },
-
-      /**
-       * A list of image sources
-       *
-       * `{ <width>: <url>, ... }`
-       */
-      srcset: {
-        type: Object,
-        default: null,
-      },
-
-      /**
-       * A list of source definitions
-       *
-       * `{ <breakpoint (px value|short name)>: [<url> & <density>], ... }`
-       */
-      sources: {
-        type: Object,
         default: null,
       },
 
@@ -71,29 +92,108 @@
        * Defines if image is displayed as inline-block element.
        */
       inline: {
-        type: [Boolean, String],
+        type: Boolean,
         default: false,
-      }
-    },
+      },
 
-    // data() {
-    //   return {};
-    // },
+      /**
+       * Allows to enable native lazy loading.
+       *
+       * For browser support @see https://caniuse.com/?search=load
+       */
+      loading: {
+        type: String,
+        default: 'lazy',
+        validator(value) {
+          return [
+            'lazy',
+            'eager',
+            'auto',
+          ].includes(value);
+        },
+      },
+
+      /**
+       * Allows to move the image decoding off the main thread. This should be 'sync' or 'auto' for images above the fold.
+       *
+       * For browser support @see https://caniuse.com/mdn-html_elements_img_decoding
+       */
+      decoding: {
+        type: String,
+        default: 'async',
+        validator(value) {
+          return [
+            'sync',
+            'async',
+            'auto',
+          ].includes(value);
+        },
+      },
+
+      /**
+       * Allows to set the image width.
+       */
+      width: {
+        type: [String, Number],
+        default: null,
+      },
+
+      /**
+       * Allows to set the image height.
+       */
+      height: {
+        type: [String, Number],
+        default: null,
+      },
+
+      /**
+       * Show a placeholder image while the image is loading or is not available.
+       */
+      placeholder: {
+        type: Boolean,
+        default: true,
+      },
+    },
+    data() {
+      return {
+        /**
+         * @type {Boolean} - Becomes true if the image is loaded.
+         */
+        loaded: false,
+
+        /**
+         * @type {Number} Holds a fallback width in case only the ratio is defined.
+         */
+        fallbackHeight: 400,
+      };
+    },
 
     computed: {
       /**
-       * Converts srcset object to string.
+       * Returns an object of BEM modifiers.
        *
-       * @returns {String|null}
+       * @returns {Object}
        */
-      parsedSrcset() {
-        if (!this.srcset) {
-          return null;
-        }
+      modifiers() {
+        return {
+          inline: this.inline,
+          ratio: !!this.ratio,
+          loaded: this.loaded,
+          placeholder: this.placeholder,
+        };
+      },
 
-        const srcBreakpoints = Object.keys(this.srcset);
+      /**
+       * Calculates root element styles.
+       *
+       * @returns {Object}
+       */
+      style() {
+        const { ratio } = this;
 
-        return srcBreakpoints.map(breakpoint => `${this.srcset[breakpoint]} ${breakpoint}w`).join(',');
+        return ratio
+          ? { '--aspect-ratio': ratio }
+          : null;
       },
 
       /**
@@ -101,83 +201,57 @@
        *
        * @returns {String|null}
        */
-      parsedSizes() {
-        if (!this.sizes) {
+      mappedSizes() {
+        const { sizes } = this;
+
+        if (!sizes) {
           return null;
         }
 
         const mappedSizesBreakpoints = {};
-        const sizesBreakpoints = Object
-          .keys(this.sizes)
-          .map((breakpoint) => {
-            const key = typeof BREAKPOINTS[breakpoint] === 'number' ? BREAKPOINTS[breakpoint] : breakpoint;
+        const fallback = ',100vw';
 
-            mappedSizesBreakpoints[key] = this.sizes[breakpoint];
+        return Object
+          .keys(sizes)
+          .map((breakpoint) => {
+            const key = Number.isNaN(BREAKPOINTS_MAX[breakpoint]) // The viewport could be 0, so we need to test the type.
+              ? breakpoint
+              : BREAKPOINTS_MAX[breakpoint];
+
+            mappedSizesBreakpoints[key] = sizes[breakpoint];
 
             return key;
           })
-          .filter(breakpoint => breakpoint > 0)
-          .sort((a, b) => (a < b ? 1 : -1));
-        const fallback = ',100vw';
-
-        return sizesBreakpoints
+          .filter(Boolean)
+          .sort((a, b) => (a > b ? 1 : -1))
           .map((breakpoint) => {
-            const viewWidth = Math.ceil((mappedSizesBreakpoints[breakpoint] / breakpoint) * 100);
+            const viewWidth = Math.floor((mappedSizesBreakpoints[breakpoint] / breakpoint) * 100);
 
-            return `(min-width: ${breakpoint}px) ${viewWidth}vw`;
+            return `(max-width: ${breakpoint}px) ${viewWidth}vw`;
           })
-          .filter(breakpoint => !!breakpoint)
           .join(',') + fallback;
       },
-
-      /**
-       * Converts sources to definition to <source> attribute data.
-       *
-       * @returns {Object[]|null}
-       */
-      parsedSources() {
-        if (!this.sources) {
-          return null;
-        }
-
-        return Object
-          .keys(this.sources)
-          .map((breakpoint) => {
-            const breakpointWidth = typeof BREAKPOINTS[breakpoint] === 'number' ? BREAKPOINTS[breakpoint] : breakpoint;
-
-            if (Number.isNaN(breakpointWidth)) {
-              throw new Error('Invalid breakpoint value for e-picture source.');
-            }
-
-            return {
-              sort: parseInt(breakpointWidth, 10),
-              media: `(min-width: ${breakpointWidth}px)`,
-              srcset: this.sources[breakpoint].join(',')
-            };
-          })
-          .sort((a, b) => (a.sort < b.sort ? 1 : -1));
-      },
-
-      /**
-       * Returns a flag, if the current display mode is 'inline'.
-       *
-       * @returns {Boolean}
-       */
-      isInline() {
-        return this.inline === 'true' || this.inline === true;
-      }
     },
     // watch: {},
 
     // beforeCreate() {},
-    created() {
-      if (this.parsedSources && this.parsedSrcset) {
-        // eslint-disable-next-line no-console
-        console.warn('You can not use sources and srcset at the same time for e-picture! Source is used.');
+    // created() {},
+    // beforeMount() {},
+    mounted() {
+      const hasSrcSet = !!this.srcset;
+
+      if (process.env.NODE_ENV === 'production') {
+        if (!hasSrcSet && !this.sources && !this.fallback) {
+          console.error("Neither 'srcset' nor 'sources' or 'fallback' where defined.", this.$el); // eslint-disable-line no-console
+        } else if (hasSrcSet && !this.sizes) {
+          console.error("No 'sizes' where defined while using 'srcset'.", this.$el); // eslint-disable-line no-console
+        }
+      } else {
+        if (hasSrcSet && (!this.ratio && (!this.width || !this.height))) { // eslint-disable-line no-lonely-if
+          console.error("Neither a combination of 'width'/'height' nor 'ratio' was defined.", this.$el); // eslint-disable-line no-console
+        }
       }
     },
-    // beforeMount() {},
-    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -185,82 +259,19 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
-    render(createElement) {
-      const { ratio, parsedSizes } = this;
-      const pictureChilds = [];
-      const imgAttributes = {
-        ...this.$attrs,
-        alt: this.alt,
-        src: this.fallback,
-      };
-      const style = {};
-      let element = 'img';
-
-      // Create picture element
-      if (this.parsedSources) {
-        element = 'picture';
-
-        // sources
-        this.parsedSources.forEach((source) => {
-          pictureChilds.push(createElement(
-            'source',
-            {
-              class: this.b('source'),
-              attrs: {
-                media: source.media,
-                srcset: source.srcset,
-              },
-            }
-          ));
-        });
-
-        // img
-        pictureChilds.push(createElement(
-          'img',
-          {
-            class: this.b('image'),
-            attrs: imgAttributes,
-          }
-        ));
-      } else if (parsedSizes && this.parsedSrcset) {
-        imgAttributes.sizes = parsedSizes;
-        imgAttributes.srcset = this.parsedSrcset;
-        imgAttributes.src = this.fallback;
-      }
-
-      if (ratio > 0 && parsedSizes) { // <picture> would need dynamic ratios
-        style['--aspect-ratio'] = ratio;
-      }
-
-      return createElement( // Wrapper
-        'span',
-        {
-          class: this.b({
-            inline: this.isInline,
-            image: !this.parsedSources,
-            ratio: ratio > 0,
-          }),
-          style,
-        },
-        [createElement( // img / picture
-          element,
-          {
-            class: this.b(element === 'img' ? 'image' : 'picture'),
-            attrs: imgAttributes,
-          },
-          pictureChilds // picture sources
-        )]
-      );
+    methods: {
+      /**
+       * Load event handler for the image element.
+       */
+      onLoad() {
+        this.loaded = true;
+      },
     },
+    // render() {},
   };
 </script>
 
 <style lang="scss">
-  :root {
-    --aspect-ratio: 1000; // Makes sure the variable is defined and creates a very small spacer
-  }
-
   .e-picture { // Can be <picture> or <img>!
     display: block;
     max-width: 100%;
@@ -269,15 +280,21 @@
     img {
       display: block;
       max-width: 100%;
+      width: 100%;
       height: auto;
+
+      &[loading='lazy'] {
+        opacity: 0;
+        transition: opacity $transition-duration-200;
+      }
+    }
+
+    &--loaded img[loading] { // Attribute selector was required to increase weight.
+      opacity: 1;
     }
 
     &--inline {
       display: inline-block;
-    }
-
-    &__image {
-      max-width: 100%;
     }
 
     &--ratio {
@@ -285,7 +302,7 @@
         display: block;
         content: '';
         float: left;
-        padding-top: calc(100% / (var(--aspect-ratio)));
+        padding-top: calc(100% / var(--aspect-ratio));
       }
 
       &::after {
@@ -293,6 +310,19 @@
         content: '';
         clear: both;
       }
+
+      @supports (aspect-ratio: initial) {
+        aspect-ratio: var(--aspect-ratio) / 1;
+
+        &::before,
+        &::after {
+          content: none;
+        }
+      }
+    }
+
+    &--placeholder {
+      background-color: $color-grayscale--500;
     }
   }
 </style>
