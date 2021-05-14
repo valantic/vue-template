@@ -81,6 +81,8 @@
       /**
        * Sizes definition for srcset use
        *
+       * The special breakpoint 'fallback' can be used to set the max-width, the image will ever be displayed.
+       *
        * `{ <breakpoint (px value|short name)>: <minWidth>, ... }`
        */
       sizes: {
@@ -209,11 +211,15 @@
         }
 
         const mappedSizesBreakpoints = {};
-        const fallback = ',100vw';
+        const fallback = sizes.fallback ? `,${sizes.fallback}px` : ',100vw';
 
         return Object
           .keys(sizes)
           .map((breakpoint) => {
+            if (breakpoint === 'fallback') {
+              return null;
+            }
+
             const key = Number.isNaN(BREAKPOINTS_MAX[breakpoint]) // The viewport could be 0, so we need to test the type.
               ? breakpoint
               : BREAKPOINTS_MAX[breakpoint];
