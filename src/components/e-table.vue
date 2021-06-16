@@ -61,7 +61,7 @@
   </table>
 </template>
 
-<script>
+<script lang="ts">
 
   /**
    * This component renders a table based on a given column setup and an array of row items.
@@ -154,16 +154,16 @@
       },
     },
     // watch: {},
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -213,7 +213,7 @@
         };
       }
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

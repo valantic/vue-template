@@ -754,6 +754,30 @@ package.json:
 * [ ] Add custom elements option to the "initial data" section.
 * [ ] Extend eslint-plugin-vue rules for Vue 3.
 
+### Vue 3
+
+* [ ] Devtools support.
+* [ ] Test v-focus state handling.
+* [ ] Test unit tests.
+* [ ] Test styleguide.
+* [ ] Replace event bus in collapsible components.
+* [ ] Replace vue-js-modal (not compatible with Vue 3).
+* [ ] Check if modal stacking in styleguide still needs multiple teleports.
+* [ ] Fix failing tests.
+
+### Typescript
+
+* [ ] Replace $eventBus with pubsup
+* [ ] Change Global BREAKPOINTS to enum
+* [ ] Plugin Parameter options typing
+* [ ] Remove all JSDocs
+* [ ] Add types for all Computed / Watch Properties
+* [ ] Fix Modal Stack / Viewport Reactive not working
+* [ ] Check if Pimcore directive works
+* [ ] Fix most of // @ts-ignore comments
+* [ ] Make styleguideist work
+* [ ] Type NotificationOptions
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)

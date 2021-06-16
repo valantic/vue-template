@@ -49,9 +49,9 @@
   </span>
 </template>
 
-<script>
+<script lang="ts">
   import propScale from '@/helpers/prop.scale';
-  import cFormNotification from '@/components/c-form-notification';
+  import cFormNotification from '@/components/c-form-notification.vue';
   import formStates from '@/mixins/form-states';
 
   /**
@@ -202,10 +202,10 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    mounted() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    mounted(): void {
       /**
        * Calls the "setSlotSpacings" in a timeout function with a delay of 200ms because without
        * it's not working on iOS
@@ -219,14 +219,14 @@
         this.$refs.input.value = this.standalone ? this.internalValue : this.value;
       }
     },
-    // beforeUpdate() {},
-    updated() {
+    // beforeUpdate(): void {},
+    updated(): void {
       setTimeout(this.setSlotSpacings);
     },
-    // activated() {},
-    // deactivated() {},
-    // beforeDestroy() {},
-    destroyed() {
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    unmounted(): void {
       window.removeEventListener('resizeend', this.setSlotSpacings);
     },
 
@@ -323,7 +323,7 @@
         }
       },
     }
-    // render() {},
+    // render(): void {},
   };
 </script>
 

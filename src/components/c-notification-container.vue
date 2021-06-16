@@ -11,9 +11,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import { mapGetters } from 'vuex';
-  import cNotification from '@/components/c-notification';
+  import cNotification from '@/components/c-notification.vue';
 
   /**
    * Container for rendering notifications. See /styleguide/notifications for demo.
@@ -114,19 +114,19 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     // methods: {},
-    // render() {},
+    // render(): void {},
   };
 </script>
 

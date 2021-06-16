@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import propScale from '@/helpers/prop.scale';
 
   /**
@@ -107,12 +107,12 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    created() {
+    // beforeCreate(): void {},
+    created(): void {
       this.isRendered = this.isOpen;
     },
-    // beforeMount() {},
-    mounted() {
+    // beforeMount(): void {},
+    mounted(): void {
       this.$eventBus.$on('c-collapse-group.toggle', (payload) => {
         const toggledElement = payload.toggledCollapse;
         const toggleGroup = payload.component;
@@ -125,12 +125,12 @@
         }
       });
     },
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -213,7 +213,7 @@
         this.maxHeight = `${this.$refs.inner.clientHeight}px`;
       }
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

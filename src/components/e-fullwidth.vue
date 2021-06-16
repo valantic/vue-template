@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import scrollbarWidth from '@/helpers/scrollbar-width';
 
   /**
@@ -61,32 +61,32 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    beforeMount() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    beforeMount(): void {
       if (this.resizeObserver) {
         this.resizeObserver.observe(window.document.body);
       } else { // Fallback for browsers without ResizeObserver support.
         window.addEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
-    mounted() {
+    mounted(): void {
       if (!this.resizeObserver) { // IE11 fallback.
         this.updateScrollbarWidth();
       }
     },
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    beforeDestroy() {
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    beforeUnmount(): void {
       if (this.resizeObserver) {
         this.resizeObserver.unobserve(window.document.body);
       } else { // IE11 fallback.
         window.removeEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
-    // destroyed() {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -101,7 +101,7 @@
       },
     },
 
-    // render() {},
+    // render(): void {},
   };
 </script>
 

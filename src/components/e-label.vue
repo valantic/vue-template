@@ -15,12 +15,13 @@
   </component>
 </template>
 
-<script>
+<script lang="ts">
   import formStates from '@/mixins/form-states';
 
   /**
    * Label component for form elements, can be used with a slot or a for attribute
    */
+
   export default {
     name: 'e-label',
     status: 0, // TODO: remove when component was prepared for current project.
@@ -93,9 +94,9 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    beforeMount() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    beforeMount(): void {
       /**
        * Setup event handler for "focus" event, which will be sent from the input in the slot
        */
@@ -110,15 +111,15 @@
         this.hasFocus = false;
       });
     },
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
     // methods: {}
-    // render() {},
+    // render(): void {},
   };
 </script>
 

@@ -83,7 +83,7 @@ module.exports = (env, args = {}) => {
 
   // webpack configuration variables
   const prefix = filePrefix ? `${filePrefix}.` : '';
-  const extensions = ['.js', '.vue', '.json'];
+  const extensions = ['.js', '.vue', '.json', '.ts'];
   const alias = {
     '@': path.resolve(__dirname, './src'),
     'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
@@ -288,6 +288,14 @@ module.exports = (env, args = {}) => {
       ],
     },
     {
+      test: /\.tsx?$/,
+      loader: 'ts-loader',
+      exclude: /node_modules/,
+      options: {
+        appendTsSuffixTo: [/\.vue$/],
+      }
+    },
+    {
       test: /\.(gif|png|jpe?g|svg)$/i,
       use: [
         {
@@ -373,10 +381,10 @@ module.exports = (env, args = {}) => {
     mode: isProduction ? 'production' : 'development',
     entry: {
       ...themes,
-      'polyfills': path.resolve(__dirname, 'src/setup/polyfills.js'), // If code still fails, you may need to add regenerator as well. See https://babeljs.io/docs/en/babel-polyfill
-      'polyfills.ie11': path.resolve(__dirname, 'src/setup/polyfills.ie11.js'),
+      'polyfills': path.resolve(__dirname, 'src/setup/polyfills.ts'), // If code still fails, you may need to add regenerator as well. See https://babeljs.io/docs/en/babel-polyfill
+      'polyfills.ie11': path.resolve(__dirname, 'src/setup/polyfills.ie11.ts'),
       'app': [
-        path.resolve(__dirname, 'src/main.js'),
+        path.resolve(__dirname, 'src/main.ts'),
       ],
     },
     resolve: {

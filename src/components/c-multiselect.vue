@@ -99,7 +99,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import formStates from '@/mixins/form-states';
 
   /**
@@ -271,13 +271,13 @@
       window.addEventListener('click', this.onOutsideClick);
     },
     // beforeMount() {},
-    // mounted() {},
+    // mounted(): void {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    destroyed() {
+    // beforeUnmount() {},
+    unmounted(): void {
       window.removeEventListener('click', this.onOutsideClick);
     },
 
@@ -529,7 +529,7 @@
         return typeof value === 'string' ? value.trim() : value;
       },
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

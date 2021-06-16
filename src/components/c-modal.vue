@@ -65,12 +65,13 @@
   </portal>
 </template>
 
-<script>
+<script lang="ts">
+
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
   import propScale from '@/helpers/prop.scale';
   import uuid from '@/mixins/uuid';
-  import cNotificationContainer from '@/components/c-notification-container';
+  import cNotificationContainer from '@/components/c-notification-container.vue';
 
   /**
    * Components wraps the plugin https://github.com/euvl/vue-js-modal, it's output is rendered through vue-portal.
@@ -225,18 +226,18 @@
       }
     },
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    beforeDestroy() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    beforeUnmount(): void {
       this.$modalStack.remove(this.uuid);
     },
-    // destroyed() {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -287,7 +288,7 @@
         avoidContentResizing(false);
       },
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

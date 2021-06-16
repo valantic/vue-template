@@ -75,13 +75,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import Swiper, { Navigation, Pagination } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
-  import cSwiperModal from '@/components/c-swiper-modal';
+  import cSwiperModal from '@/components/c-swiper-modal.vue';
   import mapImages from '@/helpers/map-images';
   import uuid from '@/mixins/uuid';
-  import cModal from '@/components/c-modal';
+  import cModal from '@/components/c-modal.vue';
 
   const swiperInstances = {};
 
@@ -234,7 +234,7 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted() {
+    mounted(): void {
       Swiper.use([Navigation, Pagination]);
 
       swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
@@ -246,7 +246,7 @@
     beforeDestroy() {
       swiperInstances[this.uuid].destroy();
     },
-    // destroyed() {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -283,7 +283,7 @@
         return '';
       },
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

@@ -26,8 +26,8 @@
   </span>
 </template>
 
-<script>
-  import { i18n } from '@/setup/i18n';
+<script lang="ts">
+  import i18n from '@/setup/i18n';
   import formStates from '@/mixins/form-states';
 
   /**
@@ -111,16 +111,16 @@
     // computed: {},
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -138,7 +138,7 @@
         this.$emit('input', event.currentTarget.value);
       },
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

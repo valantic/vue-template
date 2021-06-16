@@ -20,8 +20,8 @@
   </div>
 </template>
 
-<script>
-  import sReadme from '@/styleguide/components/s-readme';
+<script lang="ts">
+  import sReadme from '@/styleguide/components/s-readme.vue';
   import dayjs from 'dayjs';
 
   export default {

@@ -22,7 +22,7 @@
   >
 </template>
 
-<script>
+<script lang="ts">
   const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
   const sizeLookup = {

@@ -18,7 +18,7 @@
   </picture>
 </template>
 
-<script>
+<script lang="ts">
   import { BREAKPOINTS_MAX } from '@/setup/globals';
 
   /**
@@ -240,10 +240,10 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    mounted() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    mounted(): void {
       const hasSrcSet = !!this.srcset;
 
       if (process.env.NODE_ENV === 'production') {
@@ -258,12 +258,12 @@
         }
       }
     },
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
       /**

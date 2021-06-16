@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import Swiper, { Navigation, Pagination } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import mapHeroImages from '@/helpers/map-hero-images';
@@ -160,25 +160,25 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    mounted() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    mounted(): void {
       Swiper.use([Navigation, Pagination]);
 
       swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
     },
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    beforeDestroy() {
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    beforeUnmount(): void {
       swiperInstances[this.uuid].destroy();
     },
-    // destroyed() {},
+    // unmounted(): void {},
 
     // methods: {},
-    // render() {},
+    // render(): void {},
   };
 </script>
 

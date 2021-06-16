@@ -122,7 +122,7 @@
     </section>
   </div>
 </template>
-<script>
+<script lang="ts">
   import eFieldset from '@/components/e-fieldset';
   import { required, email } from 'vuelidate/lib/validators';
 
