@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
   /**
    * Wrapper for multiple (c-collapse) items.
@@ -33,10 +33,10 @@
     // computed: {},
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    mounted() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    mounted(): void {
       /**
        * Emits toggled event
        */
@@ -56,15 +56,15 @@
         }
       });
     },
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     // methods: {},
-    // render() {},
+    // render(): void {},
   };
 </script>
 

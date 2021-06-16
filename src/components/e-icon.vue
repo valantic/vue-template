@@ -12,7 +12,7 @@
   </span>
 </template>
 
-<script>
+<script lang="ts">
   const cache = {};
   const nodeCache = {};
 

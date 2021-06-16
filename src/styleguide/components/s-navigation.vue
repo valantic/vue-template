@@ -41,11 +41,12 @@
   </div>
 </template>
 
-<script>
-  import sLanguage from './s-language';
-  import sThemeSelector from './s-theme-selector';
-  import sDemoSettings from './s-demo-settings';
-  import sNavigationBlock from './s-navigation-block';
+<script lang="ts">
+
+  import sLanguage from './s-language.vue';
+  import sThemeSelector from './s-theme-selector.vue';
+  import sDemoSettings from './s-demo-settings.vue';
+  import sNavigationBlock from './s-navigation-block.vue';
 
   export default {
     name: 's-navigation',

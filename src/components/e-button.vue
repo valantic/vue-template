@@ -24,9 +24,9 @@
   </component>
 </template>
 
-<script>
+<script lang="ts">
   import propScale from '@/helpers/prop.scale';
-  import eProgress from './e-progress';
+  import eProgress from './e-progress.vue';
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
@@ -205,16 +205,16 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
       /**

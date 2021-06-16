@@ -126,14 +126,15 @@
   </l-default>
 </template>
 
-<script>
+<script lang="ts">
   import { mapGetters, mapMutations } from 'vuex';
   import api from '@/helpers/api';
-  import lDefault from '@/components/l-default';
-  import cNotificationContainer from '@/components/c-notification-container';
+  import lDefault from '@/components/l-default.vue';
+  import cNotificationContainer from '@/components/c-notification-container.vue';
   import notificationData from '@/styleguide/mock-data/api-response/notifications';
+  import { defineComponent } from 'vue';
 
-  export default {
+  export default defineComponent({
     name: 'notifications',
     components: {
       lDefault,
@@ -168,7 +169,7 @@
         'getFieldNotifications',
       ]),
     },
-    mounted() {
+    mounted(): void {
       notificationData.list.forEach(notification => this.pushNotification(notification));
     },
     methods: {
@@ -182,35 +183,35 @@
        * Event handler for add-to-cart message button.
        */
       addToCart() {
-        api.post('/notifications/global/success', {}, { title: 'Some title', expire: true });
+        api.post('/notifications/global/success', {}, { title: 'Some title', expire: true }, {});
       },
 
       /**
        * Event handler for global success message button.
        */
       addGlobalSuccess() {
-        api.post('/notifications/global/success', {}, { title: 'Some title', expire: true });
+        api.post('/notifications/global/success', {}, { title: 'Some title', expire: true }, {});
       },
 
       /**
        * Event handler for global warning message button.
        */
       addGlobalWarning() {
-        api.post('/notifications/global/warning', {}, { title: 'Some title', expire: true });
+        api.post('/notifications/global/warning', {}, { title: 'Some title', expire: true }, {});
       },
 
       /**
        * Event handler for global error message button.
        */
       addGlobalError() {
-        api.post('/notifications/global/error', {}, { title: 'Some title', expire: true });
+        api.post('/notifications/global/error', {}, { title: 'Some title', expire: true }, {});
       },
 
       /**
        * Event handler for global info message button.
        */
       addGlobalInfo() {
-        api.post('/notifications/global/info', {}, { title: 'Some title', expire: true });
+        api.post('/notifications/global/info', {}, { title: 'Some title', expire: true }, {});
       },
 
       /**
@@ -244,10 +245,10 @@
        * Event handler for add selector info button.
        */
       addSelectorInfo1() {
-        api.post('/notifications/selector/info1', {}, { expire: true });
+        api.post('/notifications/selector/info1', {}, { expire: true }, {});
       },
     },
-  };
+  });
 </script>
 
 <style lang="scss">

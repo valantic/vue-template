@@ -66,8 +66,7 @@
   </div>
 </template>
 
-<script>
-
+<script lang="ts">
   import Swiper, { Navigation, Controller } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
 
@@ -173,10 +172,10 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    mounted() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    mounted(): void {
       const galleryOptions = { initialSlide: this.initialSlide, ...this.optionsMerged };
       const thumbnailOptions = { initialSlide: this.initialSlide, ...this.optionsThumbnails };
 
@@ -191,18 +190,18 @@
       this.setThumbnailSlidesPerView();
       window.addEventListener('resize', this.setThumbnailSlidesPerView);
     },
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    beforeUnmount() {
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    beforeUnmount(): void {
       clearTimeout(this.resizeTimerId);
       window.removeEventListener('resize', this.setThumbnailSlidesPerView);
 
       this.gallerySwiper.destroy();
       this.thumbsSwiper.destroy();
     },
-    // unmounted() {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -248,7 +247,7 @@
         }
       }
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

@@ -17,8 +17,8 @@
   </div>
 </template>
 
-<script>
-  import sColorSpecimen from './s-color-specimen';
+<script lang="ts">
+  import sColorSpecimen from './s-color-specimen.vue';
 
   export default {
     name: 's-color-item',
@@ -59,25 +59,25 @@
        *
        * @returns {String}
        */
-      headline() {
+      headline(): string {
         return `${this.palette} colors`;
       }
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     // methods: {},
-    // render() {},
+    // render(): void {},
   };
 </script>
 

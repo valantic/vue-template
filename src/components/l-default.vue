@@ -10,8 +10,8 @@
   </div>
 </template>
 
-<script>
-  import cNotificationContainer from '@/components/c-notification-container';
+<script lang="ts">
+  import cNotificationContainer from '@/components/c-notification-container.vue';
 
   export default {
     name: 'l-default',
@@ -30,18 +30,18 @@
     // computed: {},
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    mounted() {
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    mounted(): void {
       this.getNotificationsFromStorage();
     },
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
 
@@ -66,7 +66,7 @@
         }
       },
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

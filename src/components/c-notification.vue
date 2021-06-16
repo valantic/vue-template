@@ -42,8 +42,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { PropType } from 'vue';
   import { mapMutations } from 'vuex';
+  import { INotification } from '@/types/c-notification';
 
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
@@ -65,7 +67,7 @@
       displayType: {
         type: String,
         default: 'global',
-        validator(value) {
+        validator(value: string) {
           return [
             'global',
             'modal',
@@ -99,11 +101,11 @@
        *
        */
       notification: {
-        type: Object,
+        type: Object as PropType<INotification>,
         required: true,
       },
     },
-    data() {
+    data(): object {
       return {
         /**
          * @type {Boolean} Defines if notification should be visible.
@@ -128,7 +130,7 @@
        *
        * @returns {Boolean}
        */
-      hasProductData() {
+      hasProductData(): boolean {
         return !!this.notification?.message?.meta?.product;
       },
 
@@ -137,7 +139,7 @@
        *
        * @returns {Object}
        */
-      componentModifiers() {
+      componentModifiers(): object {
         return {
           type: this.notification.message.type,
           confirm: this.notification.confirm,
@@ -151,7 +153,7 @@
        *
        * @returns {Object}
        */
-      innerModifiers() {
+      innerModifiers(): object {
         return {
           isProductTile: this.notification.message.type === 'add-to-cart'
         };
@@ -160,12 +162,12 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    created() {
+    // beforeCreate(): void {},
+    created(): void {
       this.visible = this.selector ? this.selector === this.notification.message.source.selector : true;
     },
-    // beforeMount() {},
-    mounted() {
+    // beforeMount(): void {},
+    mounted(): void {
       const { expire, delay } = this.$props.notification;
 
       if (expire) {
@@ -178,12 +180,12 @@
         }, timeoutDelay);
       }
     },
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
       ...mapMutations('notification', [
@@ -193,7 +195,7 @@
       /**
        * Removes current notification from stack.
        */
-      close() {
+      close(): void {
         this.$el.classList.add('c-notification--expire');
         setTimeout(() => { this.popNotification(this.$props.notification.id); }, 500);
       },
@@ -201,7 +203,7 @@
       /**
        * Callback for confirm button click.
        */
-      onConfirm() {
+      onConfirm(): void {
         const eventPromise = new Promise((resolve, reject) => {
           this.notification.confirm({
             notification: this.$props.notification,
@@ -222,7 +224,7 @@
       /**
        * Callback for delcine button click.
        */
-      onDecline() {
+      onDecline(): void {
         const eventPromise = new Promise((resolve, reject) => {
           this.notification.decline({
             notification: this.$props.notification,
@@ -240,7 +242,7 @@
           .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
       },
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

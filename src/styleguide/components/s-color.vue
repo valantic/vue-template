@@ -9,9 +9,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import colors from '../../setup/js/color';
-  import sColorItem from './s-color-item';
+  import sColorItem from './s-color-item.vue';
 
   export default {
     name: 's-color',
@@ -48,19 +48,19 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     // methods: {},
-    // render() {},
+    // render(): void {},
   };
 
 </script>

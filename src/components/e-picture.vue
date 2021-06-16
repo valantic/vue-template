@@ -1,6 +1,6 @@
 <!-- This component has no <template> because of dynamic root element -->
 
-<script>
+<script lang="ts">
   import { BREAKPOINTS } from '@/setup/globals';
 
   export default {
@@ -169,21 +169,21 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    created() {
+    // beforeCreate(): void {},
+    created(): void {
       if (this.parsedSources && this.parsedSrcset) {
         // eslint-disable-next-line no-console
         console.warn('You can not use sources and srcset at the same time for e-picture! Source is used.');
       }
     },
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     // methods: {},
     render(createElement) {

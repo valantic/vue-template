@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   export default {
     name: 's-icon-finder',
 
@@ -90,16 +90,16 @@
     }
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
   };
 </script>
 

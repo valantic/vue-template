@@ -13,7 +13,7 @@
   </label>
 </template>
 
-<script>
+<script lang="ts">
   import { mapGetters } from 'vuex';
   import { webpack } from '@/../package.json';
 
@@ -93,15 +93,15 @@
       }
     },
 
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -132,6 +132,6 @@
         head.appendChild(link);
       }
     },
-    // render() {},
+    // render(): void {},
   };
 </script>

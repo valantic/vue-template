@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import formStates from '@/mixins/form-states';
 
   /**
@@ -120,16 +120,16 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     methods: {
       /**
@@ -147,7 +147,7 @@
         this.$parent.$emit('change', event.target.value);
       },
     },
-    // render() {},
+    // render(): void {},
   };
 </script>
 

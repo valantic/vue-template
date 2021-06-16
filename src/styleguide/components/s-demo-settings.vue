@@ -8,8 +8,8 @@
   </ul>
 </template>
 
-<script>
-  import sToggle from './s-toggle';
+<script lang="ts">
+  import sToggle from './s-toggle.vue';
 
   export default {
     name: 's-demo-settings',
@@ -28,19 +28,19 @@
     // computed: {},
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     // methods: {},
-    // render() {},
+    // render(): void {},
   };
 </script>
 

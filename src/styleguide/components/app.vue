@@ -7,8 +7,8 @@
   </div>
 </template>
 
-<script>
-  import sNavigation from '@/styleguide/components/s-navigation';
+<script lang="ts">
+  import sNavigation from '@/styleguide/components/s-navigation.vue';
   import styleguideRoutes from '@/setup/styleguide.routes';
 
   export default {
@@ -37,19 +37,19 @@
     },
     // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+    // beforeCreate(): void {},
+    // created(): void {},
+    // beforeMount(): void {},
+    // mounted(): void {},
+    // beforeUpdate(): void {},
+    // updated(): void {},
+    // activated(): void {},
+    // deactivated(): void {},
+    // beforeUnmount(): void {},
+    // unmounted(): void {},
 
     // methods: {},
-    // render() {},
+    // render(): void {},
   };
 </script>
 
