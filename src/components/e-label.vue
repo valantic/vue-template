@@ -10,7 +10,7 @@
     </span>
     <span v-if="$slots.default" :class="b('inner')">
       <!-- @slot Label content -->
-      <slot></slot>
+      <slot @focus="focus = true" @blur="focus = false"></slot>
     </span>
   </component>
 </template>
@@ -103,21 +103,7 @@
 
     // beforeCreate() {},
     // created() {},
-    beforeMount() {
-      /**
-       * Setup event handler for "focus" event, which will be sent from the input in the slot
-       */
-      this.$on('focus', () => {
-        this.hasFocus = true;
-      });
-
-      /**
-       * Setup event handler for "blur" event, which will be sent from the input in the slot
-       */
-      this.$on('blur', () => {
-        this.hasFocus = false;
-      });
-    },
+    // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
     // updated() {},

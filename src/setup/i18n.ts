@@ -20,7 +20,8 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-export const i18n = new VueI18n({
+const i18n = createI18n({
+  legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
   warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
@@ -37,13 +38,15 @@ export const i18n = new VueI18n({
   numberFormats,
 });
 
+export default i18n;
+
 /**
  * Load messages for given locale if not already loaded.
  */
 export const i18nLoadMessages = function(locale: string) {
   if (!Object.keys(i18n.global.messages).includes(locale)) {
     return import(/* webpackChunkName: 'lang-[request]' */`../translations/${locale}`)
-      .then((localeMessages) => {
+      .then(({ default: localeMessages }) => {
         // Add styleguide only translations
         if (process.env.NODE_ENV !== 'production') {
           const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require
@@ -55,7 +58,7 @@ export const i18nLoadMessages = function(locale: string) {
           }
         }
 
-        i18n.setLocaleMessage(locale, localeMessages);
+        i18n.global.setLocaleMessage(locale, localeMessages);
 
         return locale;
       }); // eslint-disable-line vue/script-indent
@@ -73,9 +76,9 @@ export const i18nSetLocale = function(locale: string) { // eslint-disable-line n
     locale = I18N_FALLBACK;
   }
 
-  if (i18n.locale !== locale) {
+  if (i18n.global.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
-      i18n.locale = newLocale;
+      i18n.global.locale = newLocale;
     });
   }
 

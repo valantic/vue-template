@@ -1,4 +1,4 @@
-import { i18n } from '@/setup/i18n';
+import i18n from '@/setup/i18n';
 
 /**
  * Formats the price according to project standards (Price value in cents).

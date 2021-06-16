@@ -31,7 +31,7 @@ export interface IFormStates {
   hasDefaultState: ComputedRef<boolean>;
 }
 
-export default (defaultValue: string = ''): IFormStates => {
+export default (): IFormStates => {
   const inputState = ref<FieldStates>(FieldStates.Default);
   const active = ref<boolean>(false);
   const disabled = ref<boolean>(false);

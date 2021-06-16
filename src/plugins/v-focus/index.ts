@@ -25,7 +25,7 @@ const plugin: Plugin = {
     // Add directives to Vue.
     directives
       .keys()
-      .forEach(key => Vue.directive(directives(key).default.name, directives(key).default));
+      .forEach(key => app.directive(directives(key).default.name, directives(key).default));
   },
 };
 

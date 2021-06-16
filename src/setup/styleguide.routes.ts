@@ -86,7 +86,7 @@ export default [
     ]
   },
   {
-    path: '*',
+    path: '/:pathMatch(.*)*',
     redirect: root,
   },
 ];

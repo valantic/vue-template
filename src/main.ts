@@ -5,30 +5,21 @@ import './setup/_scss.scss';
 import { createApp } from 'vue';
 import store from '@/store';
 import options from './setup/options';
-import directives from './setup/directives';
-import components from './setup/components';
+import plugins from './setup/plugins';
 
-import './setup/plugins';
-import getUrlParameter from './helpers/get-url-parameter';
+const vueOptions = process.env.NODE_ENV !== 'production'
+  ? Object.assign(options, require('./setup/styleguide.options').options) // eslint-disable-line global-require
+  : options;
 
-Vue.config.devtools = process.env.NODE_ENV !== 'production' || process.env.HAS_WATCHER;
-Vue.config.performance = process.env.NODE_ENV !== 'production'; // NOTE: currently failing with watcher.
-Vue.config.productionTip = false;
+const vuePlugins = process.env.NODE_ENV !== 'production'
+  ? [...plugins, ...require('./setup/styleguide.options').plugins] // eslint-disable-line global-require
+  : plugins;
 
-let vueOptions = options;
+const app = createApp(vueOptions);
 
-Vue.use(directives);
-Vue.use(components);
-
-// Merge development configuration
-if (process.env.NODE_ENV !== 'production') {
-  // eslint-disable-next-line global-require
-  vueOptions = Object.assign(vueOptions, require('./setup/styleguide.options').default); // Note: will overwrite duplicates
-}
-
-const vm = new Vue(vueOptions);
-
-vm.$mount('#app');
+vuePlugins.forEach(([plugin, pluginOptions]) => {
+  app.use(plugin, pluginOptions);
+});
 
 app.use(store.original);
 

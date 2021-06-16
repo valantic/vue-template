@@ -44,7 +44,7 @@ const plugin: Plugin = {
   /**
    * Install method of the Google Tag Manager plugin.
    */
-  install(app, options: IOptions) {
+  install(app, options: IOptions = {}) {
     const {
       dataLayer = 'dataLayer',
     } = options;
@@ -92,7 +92,7 @@ const plugin: Plugin = {
       }
     }
 
-    Vue.prototype.$gtm = {
+    app.config.globalProperties.$gtm = {
       push,
 
       /**

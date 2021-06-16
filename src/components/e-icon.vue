@@ -25,9 +25,18 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
+  interface ISizeLookup {
+    [key: string]: number[];
+  }
+
+  interface ISize {
+    width: number;
+    height: number;
+  }
+
   const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
-  const sizeLookup = {
+  const sizeLookup: ISizeLookup = {
     play: [1024, 721],
   };
 
@@ -39,7 +48,6 @@
     status: 0,
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -90,10 +98,10 @@
        *
        * @returns {Object}
        */
-      viewBox() {
+      viewBox(): ISize {
         const { icon } = this;
         const lookup = sizeLookup[icon];
-        const size = this.size?.split(' ') || [defaultSize];
+        const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize];
 
         // Auto map height for non square icons.
         if (size.length === 1 && lookup) {

@@ -9,7 +9,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const openInEditor = require('launch-editor-middleware');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
@@ -42,11 +42,16 @@ module.exports = (env, args = {}) => {
   const showProfile = args.profile || false;
   const globalVariables = {
     'process.env': {
-      NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
-      IS_STYLEGUIDE_BUILD: JSON.stringify(isStyleguideBuild),
-      HAS_WATCHER: hasWatcher,
-      BUILD_TIMESTAMP: new Date().getTime(),
+      'NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
+      'IS_STYLEGUIDE_BUILD': JSON.stringify(isStyleguideBuild),
+      'HAS_WATCHER': hasWatcher,
+      'BUILD_TIMESTAMP': new Date().getTime(),
     },
+    '__VUE_OPTIONS_API__': true,
+    '__VUE_PROD_DEVTOOLS__': true, // TODO: make false by default.
+    '__VUE_I18N_FULL_INSTALL__': true,
+    '__VUE_I18N_LEGACY_API__': true,
+    '__INTLIFY_PROD_DEVTOOLS__': true,
   };
 
   // Project variables
@@ -86,7 +91,7 @@ module.exports = (env, args = {}) => {
   const extensions = ['.js', '.vue', '.json', '.ts'];
   const alias = {
     '@': path.resolve(__dirname, './src'),
-    'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
+    'vue$': 'vue/dist/vue.esm-bundler.js', // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
   };
 
   const scssResourcesFolder = './src/setup/scss/';

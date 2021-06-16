@@ -39,7 +39,7 @@
        * @returns {String}
        */
       language() {
-        return this.$i18n.locale;
+        return i18n.global.locale;
       },
     },
     methods: {

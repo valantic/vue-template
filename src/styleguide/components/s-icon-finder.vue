@@ -72,21 +72,26 @@
     input: Ref<HTMLInputElement | null>;
   }
 
-  const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
-  const icons = require.context('@/assets/icons/', false, /\.svg/).keys();
+  interface IFilteredIcon {
+    name: string;
+    negative: boolean;
+  }
 
   interface IData {
     icons: string[];
     filter: string;
     notification: string;
     color: string;
-    variant: string;
+    variant: 'inline' | 'image' | 'css' | 'mask';
     spritePath: string;
   }
 
   interface IIcon {
     name: string;
   }
+
+  const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
+  const icons = require.context('@/assets/icons/', false, /\.svg/).keys();
 
   export default defineComponent({
     name: 's-icon-finder',
@@ -104,28 +109,34 @@
     data(): IData {
       return {
         /**
-         * @type {Array} An array of available icons.
+         * An array of available icons.
          */
         // @ts-ignore
         icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
 
         /**
-         * @type {String} The currently applied query filter.
+         * The currently applied query filter.
          */
         filter: '',
 
         /**
-         * @type {String} Clipboard notification.
+         * Clipboard notification.
          */
         notification: '',
 
         /**
-         * @type {String} The currently selected color.
+         * The currently selected color.
          */
         color: '#000000',
 
+        /**
+         * The currently selected variant.
+         */
         variant: 'inline',
 
+        /**
+         * The sprite path to use.
+         */
         spritePath,
       };
     },
@@ -137,7 +148,7 @@
        *
        * @returns {Array.<Object>}
        */
-      filteredIcons(): object[] {
+      filteredIcons(): IFilteredIcon[] {
         const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);
 
         return list.map((icon: string) => { // eslint-disable-line arrow-body-style

@@ -5,7 +5,7 @@
       <h1>
         Newsletter Registration
       </h1>
-      <form ref="form"
+      <form ref="formElement"
             action="#form-url"
             method="POST"
             @submit.prevent="onSubmit"
@@ -20,21 +20,21 @@
           </e-label>
           <e-label name="E-Mail" required>
             <e-input v-model="form.email"
-                     :state="$v.form.email.$error ? 'error' : 'default'"
-                     :notification="$v.form.email.$error ? 'No valid email address' : ''"
+                     :state="v$.form.email.$error ? 'error' : 'default'"
+                     :notification="v$.form.email.$error ? 'No valid email address' : ''"
                      type="email"
                      name="email"
                      placeholder="Your E-Mail"
-                     @blur="$v.form.email.$touch()"
+                     @blur="v$.form.email.$touch()"
             />
           </e-label>
           <e-label name="Language" required>
             <e-select v-model="form.language"
                       :options="mock.languages"
-                      :state="$v.form.language.$error ? 'error' : 'default'"
-                      :notification="$v.form.language.$error ? 'Required field' : ''"
+                      :state="v$.form.language.$error ? 'error' : 'default'"
+                      :notification="v$.form.language.$error ? 'Required field' : ''"
                       name="language"
-                      @blur="$v.form.language.$touch()"
+                      @blur="v$.form.language.$touch()"
             />
           </e-label>
           <e-label name="Notes">
@@ -117,19 +117,26 @@
     <section :class="b('validation')">
       <h1>Validation:</h1>
       <small>
-        <pre>{{ $v.form }}</pre>
+        <pre>{{ v$.form }}</pre>
       </small>
     </section>
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref, Ref } from 'vue';
+  import useVuelidate, { Validation } from '@vuelidate/core';
+  import { required, email } from '@vuelidate/validators';
   import eFieldset from '@/components/e-fieldset';
-  import { required, email } from 'vuelidate/lib/validators';
+  // import { required, email } from 'vuelidate/lib/validators';
 
   interface ISelectItem {
     label: string;
     value: string;
+  }
+
+  interface ISetup {
+    v$: Ref<Validation>;
+    formElement: Ref<HTMLFormElement | null>;
   }
 
   interface IData {
@@ -148,10 +155,21 @@
 
   export default defineComponent({
     name: 'forms',
+
     components: {
-      eFieldset,
+      eFieldset
     },
-    // components: {},
+
+    setup(): ISetup {
+      const formElement = ref();
+
+      return {
+        // eslint-disable-next-line id-length
+        v$: useVuelidate(),
+        formElement,
+      };
+    },
+
     data(): IData {
       return {
         form: {
@@ -177,14 +195,6 @@
               value: 'french',
             }
           ],
-          mealValues: [
-            'pizza',
-            'spaghetti',
-            'lasagne',
-          ].map(item => ({
-            id: item,
-            value: item
-          }))
         }
       };
     },
@@ -209,16 +219,14 @@
        * Submit form event handler.
        */
       onSubmit() {
-        this.$v.$touch();
+        this.v$.$touch();
 
-        if (this.$v.$pending || this.$v.$error) {
+        if (this.v$.$pending || this.v$.$error) {
           return;
         }
 
-        const { form } = this.$refs;
-
-        if (form) {
-          form.submit();
+        if (this.formElement) {
+          this.formElement.submit();
         }
       },
     }

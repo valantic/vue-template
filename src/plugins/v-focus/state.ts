@@ -1,12 +1,10 @@
-import Vue from 'vue';
+import { reactive } from 'vue';
 
-export default new Vue({
-  data: {
-    /**
-     * @type {Boolean} The current focus state (enabled/disabled).
-     *
-     * @public
-     */
-    enabled: false,
-  },
+export default reactive({
+  /**
+    * @type {Boolean} The current focus state (enabled/disabled).
+   *
+   * @public
+    */
+  enabled: false,
 });

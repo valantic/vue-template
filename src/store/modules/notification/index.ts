@@ -1,5 +1,5 @@
 import { NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
-import { i18n } from '@/setup/i18n';
+import i18n from '@/setup/i18n';
 import api from '@/helpers/api';
 import { IMessage, INotification } from '@/types/c-notification';
 import { defineModule } from 'direct-vuex';
@@ -35,7 +35,7 @@ function pushNotification(state: IModNotificationState, options: INotification) 
     case 'cartChange':
       notification.confirm = notification.confirm || function(payload) {
         api
-          .post(i18n.t('urls.confirmCartChange'), {
+          .post(i18n.global.t('urls.confirmCartChange'), {
             id: metaData.id
           }, {}, {})
           .then(payload.resolve, payload.decline);

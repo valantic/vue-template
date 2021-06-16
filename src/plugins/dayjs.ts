@@ -16,7 +16,7 @@ const plugin: Plugin = {
     dayjs.extend(isBetween);
 
     // eslint-disable-next-line no-param-reassign
-    Vue.prototype.$dayjs = dayjs;
+    app.config.globalProperties.$dayjs = dayjs;
   },
 };
 

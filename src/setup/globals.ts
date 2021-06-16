@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { i18n } from './i18n';
+import i18n from './i18n';
 
 /**
  * @type {Object} Lookup table of available breakpoints.
@@ -39,7 +39,7 @@ export const RESIZE_DEBOUNCE = 100;
 export const NOTIFICATION_UNKNOWN_ERROR = {
   message: {
     type: 'error',
-    message: i18n.t('globalMessages.unknownApiError'),
+    message: i18n.global.t('globalMessages.unknownApiError'),
   }
 };
 
