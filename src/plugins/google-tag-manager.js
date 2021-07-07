@@ -10,7 +10,7 @@ export default {
    * @param {Boolean} [options.debug = false] - Allows to en-/disable debugging functionality.
    * @param {String} [options.dataLayer = 'dataLayer'] - Allows to define a custom dataLayer name.
    */
-  install(app, options) {
+  install(app, options = {}) {
     const {
       dataLayer = 'dataLayer',
     } = options;
