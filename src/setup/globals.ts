@@ -16,6 +16,17 @@ export const BREAKPOINTS = { // Keep in sync with SCSS variables!
 };
 
 /**
+ * @type {Object} Lookup table of available breakpoints max values.
+ */
+export const BREAKPOINTS_MAX = {
+  xxs: BREAKPOINTS.xs - 1,
+  xs: BREAKPOINTS.sm - 1,
+  sm: BREAKPOINTS.md - 1,
+  md: BREAKPOINTS.lg - 1,
+  lg: BREAKPOINTS.xl - 1,
+};
+
+/**
  * @type {Number} Global resize debounce value.
  */
 export const RESIZE_DEBOUNCE = 100;

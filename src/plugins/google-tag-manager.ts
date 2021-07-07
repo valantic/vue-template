@@ -30,7 +30,7 @@ const plugin: Plugin = {
    * @param {Boolean} [options.debug = false] - Allows to en-/disable debugging functionality.
    * @param {String} [options.dataLayer = 'dataLayer'] - Allows to define a custom dataLayer name.
    */
-  install(app, options: IOptions) {
+  install(app, options: IOptions = {}) {
     const {
       dataLayer = 'dataLayer',
     } = options;

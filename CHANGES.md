@@ -7,6 +7,7 @@
    - The same behaviour can be achieved with :is=""
  - (Breaking) Removes touch-device mixin
  - (Breaking) Removes c-panel  
+ - (Breaking) Refactors e-picture (inverts sizes definition, adds additional options)  
  - (Change) Fixes invalid greyscale order.
  - (Change) Replaces deprecated webpack-manifest-plugin with webpack-assets-manifest.
  - (Change) Simplyfies s-readme styles, so they align more with the current project.

@@ -1,6 +1,9 @@
 <template>
   <ul :class="b()">
     <li :class="b('item')">
+      <s-toggle v-model="htmlValidation">
+        HTML validation
+      </s-toggle>
       <s-toggle checked>
         Logged in
       </s-toggle>
@@ -10,6 +13,8 @@
 
 <script lang="ts">
   import sToggle from './s-toggle.vue';
+
+  const showHtmlValidationClass = 'html-validation';
 
   export default {
     name: 's-demo-settings',
@@ -21,12 +26,28 @@
     // mixins: [],
 
     // props: {},
-    // data() {
-    //   return {};
-    // },
+    data() {
+      return {
+        /**
+         * @type {Boolean} Determines if the HTML validation styles should be applied.
+         */
+        htmlValidation: true,
+      };
+    },
 
     // computed: {},
-    // watch: {},
+    watch: {
+      htmlValidation: {
+        immediate: true,
+        handler(show) {
+          if (show) {
+            document.body.classList.add(showHtmlValidationClass);
+          } else {
+            document.body.classList.remove(showHtmlValidationClass);
+          }
+        }
+      },
+    },
 
     // beforeCreate(): void {},
     // created(): void {},
@@ -49,3 +70,5 @@
     @extend %list-reset;
   }
 </style>
+
+<style src="@/styleguide/html-validation.scss"></style>
