@@ -769,7 +769,7 @@ package.json:
 
 ### Typescript
 
-* [ ] Replace $eventBus with pubsup
+* [ ] Replace $eventBus with pubsup, see https://morioh.com/p/f1bc7c5f9ca4 / https://github.com/developit/mitt
 * [ ] Change Global BREAKPOINTS to enum
 * [ ] Plugin Parameter options typing
 * [ ] Remove all JSDocs
@@ -778,8 +778,6 @@ package.json:
 * [ ] Check if Pimcore directive works
 * [ ] Fix most of // @ts-ignore comments / any usages
 * [ ] Make styleguideist work
-* [ ] Type NotificationOptions
-* [ ] Add typings for data modifiers
 * [ ] Check usages of Ref and calling methods on children
 * [ ] Check if mixins can be replaced by Composition API because typing is not really working
 * [ ] Add Documentation and Wiki Section about 
