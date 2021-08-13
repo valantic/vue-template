@@ -10,14 +10,14 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'collapse-item',
     data() {
       return {
         title: 'Hello world'
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -32,13 +32,13 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'collapse-item',
     data() {
       return {
         title: 'Hello world'
       };
     },
-  };
+  });
 </script>
 ```

@@ -76,19 +76,30 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent, Ref, ref } from 'vue';
   import Swiper, { Navigation, Pagination } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import cSwiperModal from '@/components/c-swiper-modal.vue';
   import mapImages from '@/helpers/map-images';
   import uuid from '@/mixins/uuid';
   import cModal from '@/components/c-modal.vue';
+  import { IVideo } from '@/types/c-swiper-gallery';
+  import { IImage } from '@/types/e-image';
 
-  const swiperInstances = {};
+  interface ISwiperInstances {
+    [key: string]: Swiper;
+  }
+
+  interface ISetup {
+    container: Ref<HTMLDivElement | null>;
+  }
+
+  const swiperInstances: ISwiperInstances = {};
 
   /**
    * Touch enabled slider component based on [swiper](https://idangero.us/swiper/).
    */
-  export default {
+  export default defineComponent({
     name: 'c-swiper-gallery',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -124,6 +135,15 @@
       },
 
     },
+
+    setup(): ISetup {
+      const container = ref(null);
+
+      return {
+        container,
+      };
+    },
+
     data() {
       return {
         optionsDefault: {
@@ -146,7 +166,8 @@
           },
           on: {
             slideChange: function() {
-              this.swiper.activeIndex = this.$refs.container.swiper.activeIndex;
+              // @ts-ignore
+              this.swiper.activeIndex = this.container.swiper.activeIndex;
             }.bind(this),
           },
         },
@@ -166,7 +187,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): object {
         return {
           hover: this.hasHover,
           modalOpen: this.modalOpen,
@@ -178,7 +199,7 @@
        *
        * @returns  {Object}  optionsMerged    Combination of default and custom options.
        */
-      optionsMerged() {
+      optionsMerged(): object {
         return {
           ...this.optionsDefault,
           navigation: {
@@ -199,7 +220,7 @@
        *
        * @returns {Array} The list of mapped videos.
        */
-      mappedVideos() {
+      mappedVideos(): IVideo[] {
         if (Array.isArray(this.videos)) {
           return this.videos.map((video, index) => {
             const youtubeId = this.getYoutubeId(video.youtubeUrl);
@@ -222,9 +243,11 @@
        *
        * @returns  {Object}  image   Image including fallback
        */
-      pictures() {
+      pictures(): (IImage | IVideo)[] {
+        const mappedImages = mapImages(this.images as any) || [];
+
         return [
-          ...mapImages(this.images),
+          ...mappedImages,
           ...this.mappedVideos,
         ];
       },
@@ -237,7 +260,9 @@
     mounted(): void {
       Swiper.use([Navigation, Pagination]);
 
-      swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
+      if (this.container) {
+        swiperInstances[this.uuid] = new Swiper(this.container, this.optionsMerged);
+      }
     },
     // beforeUpdate() {},
     // updated() {},
@@ -261,8 +286,11 @@
        *
        * @param {Number} index - The index of the swiper.
        */
-      onModalSlideChanged(index) {
-        this.$refs.container.swiper.slideTo(index);
+      onModalSlideChanged(index: number) {
+        if (this.container) {
+          // @ts-ignore
+          this.container.swiper.slideTo(index);
+        }
       },
 
       /**
@@ -272,7 +300,7 @@
        *
        * @returns {String}
        */
-      getYoutubeId(url) {
+      getYoutubeId(url: string) {
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         const match = url.match(regExp);
 
@@ -284,7 +312,7 @@
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

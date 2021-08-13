@@ -11,14 +11,14 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data() {
       return {
         exampleModalIsOpen: false,
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -36,14 +36,14 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data() {
       return {
         exampleModalIsOpen: false,
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -61,14 +61,14 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data() {
       return {
         exampleModalIsOpen: false,
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -91,14 +91,14 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data() {
       return {
         exampleModalIsOpen: false,
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -119,14 +119,14 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data() {
       return {
         exampleModalIsOpen: false,
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -160,7 +160,7 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data() {
       return {
@@ -168,6 +168,6 @@
         innerModalIsOpen: false,
       };
     },
-  };
+  });
 </script>
 ```

@@ -23,6 +23,8 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
+
   const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
   const sizeLookup = {
@@ -32,7 +34,7 @@
   /**
    * Places an svg sprite icon.
    */
-  export default {
+  export default defineComponent({
     name: 'e-icon',
     status: 0,
 
@@ -119,7 +121,7 @@
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -1,8 +1,8 @@
 import { ComponentInternalInstance, ComponentPublicInstance, Plugin } from 'vue';
 
 interface IOptions {
-  debug: boolean;
-  dataLayer: string;
+  debug?: boolean;
+  dataLayer?: string;
 }
 
 interface IProductData {

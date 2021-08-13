@@ -11,12 +11,12 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 
 ```
@@ -40,12 +40,12 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -63,12 +63,12 @@
 </template>
     
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -86,12 +86,12 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -108,12 +108,12 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -130,12 +130,12 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -151,12 +151,12 @@
   </div>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 

@@ -19,12 +19,23 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent, PropType } from 'vue';
   import { BREAKPOINTS_MAX } from '@/setup/globals';
+
+  interface ISizes {
+    fallback: number;
+    lg: number,
+    md: number,
+    sm: number,
+    xs: number,
+    xxs: number,
+    [key: number]: number;
+  }
 
   /**
    * Renders a picture element with srcset or sources, depending on provided data.
    */
-  export default {
+  export default defineComponent({
     name: 'e-picture',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -86,7 +97,7 @@
        * `{ <breakpoint (px value|short name)>: <minWidth>, ... }`
        */
       sizes: {
-        type: Object,
+        type: Object as PropType<ISizes>,
         default: null,
       },
 
@@ -106,13 +117,11 @@
       loading: {
         type: String,
         default: 'lazy',
-        validator(value) {
-          return [
-            'lazy',
-            'eager',
-            'auto',
-          ].includes(value);
-        },
+        validator: (value: string): boolean => [
+          'lazy',
+          'eager',
+          'auto',
+        ].includes(value),
       },
 
       /**
@@ -123,13 +132,11 @@
       decoding: {
         type: String,
         default: 'async',
-        validator(value) {
-          return [
-            'sync',
-            'async',
-            'auto',
-          ].includes(value);
-        },
+        validator: (value: string): boolean => [
+          'sync',
+          'async',
+          'auto',
+        ].includes(value)
       },
 
       /**
@@ -176,7 +183,7 @@
        *
        * @returns {Object}
        */
-      modifiers() {
+      modifiers(): object {
         return {
           inline: this.inline,
           ratio: !!this.ratio,
@@ -190,7 +197,7 @@
        *
        * @returns {Object}
        */
-      style() {
+      style(): object | null {
         const { ratio } = this;
 
         return ratio
@@ -203,8 +210,8 @@
        *
        * @returns {String|null}
        */
-      mappedSizes() {
-        const { sizes } = this;
+      mappedSizes(): string | null {
+        const { sizes } : { sizes: ISizes} = this;
 
         if (!sizes) {
           return null;
@@ -215,15 +222,18 @@
 
         return Object
           .keys(sizes)
-          .map((breakpoint) => {
+          .map((breakpoint: string) => {
             if (breakpoint === 'fallback') {
               return null;
             }
 
+            // @ts-ignore
             const key = Number.isNaN(BREAKPOINTS_MAX[breakpoint]) // The viewport could be 0, so we need to test the type.
               ? breakpoint
+              // @ts-ignore
               : BREAKPOINTS_MAX[breakpoint];
 
+            // @ts-ignore
             mappedSizesBreakpoints[key] = sizes[breakpoint];
 
             return key;
@@ -231,6 +241,7 @@
           .filter(Boolean)
           .sort((a, b) => (a > b ? 1 : -1))
           .map((breakpoint) => {
+            // @ts-ignore
             const viewWidth = Math.floor((mappedSizesBreakpoints[breakpoint] / breakpoint) * 100);
 
             return `(max-width: ${breakpoint}px) ${viewWidth}vw`;
@@ -269,12 +280,12 @@
       /**
        * Load event handler for the image element.
        */
-      onLoad() {
+      onLoad(): void {
         this.loaded = true;
       },
     },
-    // render() {},
-  };
+    // render(): void {},
+  });
 </script>
 
 <style lang="scss">

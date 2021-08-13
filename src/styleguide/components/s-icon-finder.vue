@@ -66,15 +66,27 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
+
   const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const icons = require.context('@/assets/icons/', false, /\.svg/).keys();
 
-  export default {
+  interface IData {
+    icons: string[];
+    filter: string;
+    notification: string;
+  }
+
+  interface IIcon {
+    name: string;
+  }
+
+  export default defineComponent({
     name: 's-icon-finder',
 
     // props: {},
 
-    data() {
+    data(): IData {
       return {
         /**
          * @type {Array} An array of available icons.
@@ -109,10 +121,10 @@
        *
        * @returns {Array.<Object>}
        */
-      filteredIcons() {
-        const list = this.icons.filter(icon => icon.indexOf(this.filter) > -1);
+      filteredIcons(): object[] {
+        const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);
 
-        return list.map((icon) => { // eslint-disable-line arrow-body-style
+        return list.map((icon: string) => { // eslint-disable-line arrow-body-style
           return {
             name: icon,
             negative: Boolean(icon.match(/negative/)),
@@ -126,7 +138,7 @@
        *
        * @param {Object} icon - The icon instance for which the example code should be copied.
        */
-      copyToClipboard(icon) {
+      copyToClipboard(icon: IIcon) {
         const hiddenInput = this.$refs.input;
         let template;
 
@@ -164,7 +176,7 @@
        *
        * @param {String} message - The to be shown message.
        */
-      setNotification(message) {
+      setNotification(message: string) {
         this.notification = message;
       },
     },
@@ -180,7 +192,7 @@
     // deactivated(): void {},
     // beforeUnmount(): void {},
     // unmounted(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

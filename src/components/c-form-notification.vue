@@ -6,13 +6,14 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import formStates from '@/mixins/form-states';
 
   /**
    * Component is used to display a notification (status message) directly in the form field.
    * It needs a content and a state
    */
-  export default {
+  export default defineComponent({
     name: 'c-form-notification',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -31,7 +32,7 @@
       *
       * @returns  {Object}   BEM classes
       */
-      modifiers() {
+      modifiers(): object {
         return {
           ...this.stateModifiers
         };
@@ -52,7 +53,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -10,13 +10,14 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
 
   /**
    *
    * Component to render a fieldset with or without legend.
    *
    */
-  export default {
+  export default defineComponent({
     name: 'e-fieldset',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -53,7 +54,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

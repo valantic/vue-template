@@ -12,9 +12,10 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import i18nMixin from '../../mixins/i18n';
 
-  export default {
+  export default defineComponent({
     name: 's-language',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -41,8 +42,10 @@
        *
        * @param {Event} event - The related DOM event.
        */
-      onChange(event) {
-        this.i18nSetLocale(event.target.value);
+      onChange(event: Event): void {
+        const target = event.target as HTMLSelectElement;
+
+        this.i18nSetLocale(target.value);
       },
     },
     // watch: {},
@@ -57,7 +60,7 @@
     // deactivated(): void {},
     // beforeUnmount(): void {},
     // unmounted(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

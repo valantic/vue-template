@@ -21,10 +21,11 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import sReadme from '@/styleguide/components/s-readme.vue';
   import dayjs from 'dayjs';
 
-  export default {
+  export default defineComponent({
     name: 'index',
     components: { sReadme },
 
@@ -48,7 +49,7 @@
         return process.env.NODE_ENV === 'production';
       },
     },
-  };
+  });
 </script>
 
 <style lang="scss">

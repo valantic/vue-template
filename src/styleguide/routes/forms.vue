@@ -123,10 +123,12 @@
   </div>
 </template>
 <script lang="ts">
+  import { defineComponent } from 'vue';
+
   import eFieldset from '@/components/e-fieldset';
   import { required, email } from 'vuelidate/lib/validators';
 
-  export default {
+  export default defineComponent({
     name: 'forms',
     components: {
       eFieldset,
@@ -194,7 +196,7 @@
         }
       },
     }
-  };
+  });
 </script>
 
 <style lang="scss">

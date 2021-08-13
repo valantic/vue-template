@@ -7,6 +7,7 @@ let uuid = 0;
  */
 export default {
   beforeCreate() {
+    // @ts-ignore
     this.uuid = uuid.toString();
     uuid += 1;
   },

@@ -42,14 +42,14 @@
 </template>
 
 <script lang="ts">
-  import { PropType } from 'vue';
+  import { defineComponent, PropType } from 'vue';
   import { mapMutations } from 'vuex';
   import { INotification } from '@/types/c-notification';
 
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
    */
-  export default {
+  export default defineComponent({
     name: 'c-notification',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -66,15 +66,13 @@
       displayType: {
         type: String,
         default: 'global',
-        validator(value: string) {
-          return [
-            'global',
-            'modal',
-            'field',
-            'add-to-cart',
-            'selector',
-          ].includes(value);
-        },
+        validator: (value: string): boolean => [
+          'global',
+          'modal',
+          'field',
+          'add-to-cart',
+          'selector',
+        ].includes(value),
       },
 
       /**
@@ -104,7 +102,7 @@
         required: true,
       },
     },
-    data(): object {
+    data() {
       return {
         /**
          * @type {Boolean} Defines if notification should be visible.
@@ -140,7 +138,7 @@
        */
       componentModifiers(): object {
         return {
-          type: this.notification.message.type,
+          type: this.notification.message?.type,
           confirm: this.notification.confirm,
           displayType: this.displayType,
           visible: this.visible,
@@ -154,7 +152,7 @@
        */
       innerModifiers(): object {
         return {
-          isProductTile: this.notification.message.type === 'add-to-cart'
+          isProductTile: this.notification.message?.type === 'add-to-cart'
         };
       },
 
@@ -163,7 +161,7 @@
 
     // beforeCreate(): void {},
     created(): void {
-      this.visible = this.selector ? this.selector === this.notification.message.source.selector : true;
+      this.visible = this.selector ? this.selector === this.notification.message?.source?.selector : true;
     },
     // beforeMount(): void {},
     mounted(): void {
@@ -203,46 +201,56 @@
        * Callback for confirm button click.
        */
       onConfirm(): void {
-        const eventPromise = new Promise((resolve, reject) => {
-          this.notification.confirm({
-            notification: this.$props.notification,
-            resolve,
-            reject
+        if (this.notification.confirm) {
+          const eventPromise = new Promise((resolve, reject) => {
+            if (typeof this.notification.confirm === 'function') {
+              this.notification.confirm({
+                notification: this.$props.notification,
+                resolve,
+                reject
+              });
+            }
+
+            resolve({});
           });
-        });
 
-        this.confirmProgress = true;
+          this.confirmProgress = true;
 
-        eventPromise
-          .then(() => {
-            this.close();
-          })
-          .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
+          eventPromise
+            .then(() => {
+              this.close();
+            })
+            .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
+        }
       },
 
       /**
-       * Callback for delcine button click.
+       * Callback for decline button click.
        */
       onDecline(): void {
-        const eventPromise = new Promise((resolve, reject) => {
-          this.notification.decline({
-            notification: this.$props.notification,
-            resolve,
-            reject
+        if (this.notification.decline) {
+          const eventPromise = new Promise((resolve, reject) => {
+            if (this.notification.decline) {
+              this.notification.decline({
+                notification: this.$props.notification,
+                resolve,
+                reject
+              });
+            }
           });
-        });
 
-        this.declineProgress = true;
+          this.declineProgress = true;
 
-        eventPromise
-          .then(() => {
-            this.close();
-          })
-          .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
+          eventPromise
+            .then(() => {
+              this.close();
+            })
+            .catch(() => {}); // eslint-disable-line no-empty-function -- Makes sure we don't get a console error.
+        }
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

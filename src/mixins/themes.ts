@@ -1,4 +1,5 @@
 import { mapGetters } from 'vuex';
+import { defineComponent } from 'vue';
 
 /**
  * Mixin can be included in components which needs a custom theme style class.
@@ -7,7 +8,7 @@ import { mapGetters } from 'vuex';
  *
  * @mixin
  */
-export default {
+export default defineComponent({
   props: {
     /**
      * Custom theme to overwrite the global defined theme id
@@ -32,4 +33,4 @@ export default {
       return this.customTheme ? this.customTheme : this.getTheme;
     },
   }
-};
+});

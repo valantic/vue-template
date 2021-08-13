@@ -20,13 +20,14 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent, PropType } from 'vue';
   import formStates from '@/mixins/form-states';
 
   /**
    * Checkbox component for form elements.
    * Can be used as single element with a Boolean value or multiple checkboxes with an Array.
    */
-  export default {
+  export default defineComponent({
     name: 'e-checkbox',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -47,7 +48,7 @@
        * Adds checked attribute to prevent type error
        */
       checked: {
-        type: [Boolean, Array],
+        type: [Boolean, Array] as PropType<boolean | string[]>,
         required: true,
       },
 
@@ -79,12 +80,10 @@
        * @returns  {Boolean|Array}   Status of the checkbox
        */
       internalValue: {
-        get() {
+        get(): boolean | string[] {
           return this.checked;
         },
-        set(value) {
-          this.isChecked = value;
-
+        set(value: boolean) {
           /**
            * Emits checkbox value e.g. true/false or value
            *
@@ -115,10 +114,12 @@
        * @public Used by c-multiselect.
        */
       updateCheckedState() {
-        if (typeof this.value === 'string') {
-          this.isChecked = this.checked.indexOf(this.value.trim()) > -1;
-        } else if (typeof this.value === 'number') {
-          this.isChecked = this.checked.indexOf(this.value) > -1;
+        if (Array.isArray(this.checked)) {
+          if (typeof this.value === 'string') {
+            this.isChecked = this.checked.indexOf(this.value.trim()) > -1;
+          } else if (typeof this.value === 'number') {
+            this.isChecked = this.checked.indexOf(this.value.toString()) > -1;
+          }
         }
       },
 
@@ -155,7 +156,7 @@
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

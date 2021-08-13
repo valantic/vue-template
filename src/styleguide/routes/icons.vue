@@ -5,9 +5,10 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import sIconFinder from '@/styleguide/components/s-icon-finder.vue';
 
-  export default {
+  export default defineComponent({
     name: 'icons',
     components: {
       sIconFinder
@@ -35,7 +36,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

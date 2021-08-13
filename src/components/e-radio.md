@@ -21,7 +21,7 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       selected: 'radio-2',
       name: 'radio-1',
@@ -31,7 +31,7 @@ Always use **v-model** to bind value to form elements!
         {id: 3, value: 'radio-3', displayName: 'Radio 3'}
       ],
     })
-  };
+  });
 </script>
 ```
 
@@ -53,7 +53,7 @@ Always use **v-model** to bind value to form elements!
 </template>
     
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       selected: 'radio-1',
       name: 'radio-2',
@@ -62,7 +62,7 @@ Always use **v-model** to bind value to form elements!
         {id: 2, value: 'radio-2', displayName: 'Radio 2'},
       ],
     })
-  };
+  });
 </script>
 ```
 
@@ -84,11 +84,11 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -110,10 +110,10 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```

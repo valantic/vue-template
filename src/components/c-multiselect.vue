@@ -100,14 +100,48 @@
 </template>
 
 <script lang="ts">
+  import {
+    ComponentPublicInstance, defineComponent, PropType, Ref, ref
+  } from 'vue';
   import formStates from '@/mixins/form-states';
+
+  interface IItems {
+    value: string;
+    docCount: number;
+  }
+
+  interface ICheckboxItems {
+    id: number;
+    name: string;
+    value: string;
+    displayName: string;
+    display: boolean;
+  }
+
+  interface IData {
+    isError: boolean;
+    isSuccess: boolean;
+    isChanged: boolean;
+    outputValue: string;
+    checkboxItems: ICheckboxItems[];
+    checkboxItemsFiltered: ICheckboxItems[];
+    checkedItems: (string | number)[];
+    checkedStored: (string | number)[];
+    checkboxItemsFilteredEmpty: boolean;
+    searchTerm: string;
+  }
+
+  interface ISetup {
+    multiple: Ref<ComponentPublicInstance[] | null>;
+    searchInput: Ref<ComponentPublicInstance[] | null>;
+  }
 
   /**
    * Multiselect component which contains a list of checkboxes. It contains an input field for filtering the values
    * of the checkboxes and a save button, to save the checked items to an array. By clicking on the save button or
    * clicking outside of the component, the component state gets updated and is emitted to the parent component.
    */
-  export default {
+  export default defineComponent({
     name: 'c-multiselect',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -119,7 +153,7 @@
        * Array of Strings which are the basis for the checkbox items.
        */
       items: {
-        type: Array,
+        type: Array as PropType<IItems[]>,
         required: true,
       },
 
@@ -164,16 +198,28 @@
       },
     },
 
-    data() {
+    setup(): ISetup {
+      const multiple = ref(null);
+      const searchInput = ref(null);
+
+      return {
+        multiple,
+        searchInput
+      };
+    },
+
+    data(): IData {
       return {
         /**
          * @type {Boolean} Defines if the multi-select is in error state.
          */
+        // @ts-ignore
         isError: this.$props.state === 'error',
 
         /**
          * @type {Boolean} Defines if the multi-select is in success state.
          */
+        // @ts-ignore
         isSuccess: this.$props.state === 'success',
 
         /**
@@ -224,7 +270,7 @@
        *
        * @returns {Array}
        */
-      activeValuesArray() {
+      activeValuesArray(): string | number | any[] | null {
         switch (typeof this.activeValue) {
           case 'object':
             if (Array.isArray(this.activeValue)) {
@@ -249,7 +295,7 @@
        *
        * @returns {Object}
        */
-      modifiers() {
+      modifiers(): object {
         return {
           ...this.stateModifiers,
           success: this.isSuccess,
@@ -305,11 +351,13 @@
           this.checkedItems = [];
 
           this.items.forEach((element) => {
-            this.activeValuesArray.forEach((activeValue) => {
-              if (element.value === activeValue) {
-                this.checkedItems.push(activeValue);
-              }
-            });
+            if (Array.isArray(this.activeValuesArray)) {
+              this.activeValuesArray.forEach((activeValue) => {
+                if (element.value === activeValue) {
+                  this.checkedItems.push(activeValue);
+                }
+              });
+            }
           });
         }
       },
@@ -325,9 +373,10 @@
        * Updates the state of the checkboxes and updates the state of the multiselect component.
        */
       updateCheckboxes() {
-        if (this.$refs.multiple) {
-          this.$refs.multiple.forEach((item) => {
-            item.updateCheckedState();
+        if (this.multiple) {
+          this.multiple.forEach((item) => {
+            // eslint-disable-next-line no-extra-parens
+            (item as any).updateCheckedState();
           });
         }
 
@@ -360,7 +409,7 @@
        *
        * @param {Event} event - Click event.
        */
-      onInsideClick(event) {
+      onInsideClick(event: Event) {
         event.stopPropagation();
       },
 
@@ -434,7 +483,7 @@
        *
        * @param {String} value - String value of the input field.
        */
-      onSearchInput(value) {
+      onSearchInput(value: string): void {
         let checkBoxItemsFilteredEmptyTemp = true;
 
         this.checkboxItemsFiltered.forEach((checkboxItem) => {
@@ -457,7 +506,7 @@
        *
        * @returns {Boolean}
        */
-      arraysEqual(array1, array2) {
+      arraysEqual(array1: (string | number)[], array2: (string | number)[]): boolean {
         if (array1.length !== array2.length) {
           return false;
         }
@@ -478,7 +527,7 @@
        *
        * @returns {String}
        */
-      getStringFromArray(array) {
+      getStringFromArray(array: (string | number)[]): string {
         return Array.isArray(array) ? array.join(', ') : '';
       },
 
@@ -491,7 +540,7 @@
        *
        * @returns {Number}
        */
-      compare(value1, value2) {
+      compare(value1: string | number, value2: string | number): number {
         if (typeof value1 === 'number' && typeof value2 === 'number') {
           if (value1 > value2) {
             return 1;
@@ -510,10 +559,11 @@
       /**
        * Sets the focus to the input element of the c-search component.
        */
-      setFocusOnInput() {
+      setFocusOnInput(): void {
         this.$nextTick(() => {
-          if (this.$refs.searchInput) {
-            this.$refs.searchInput.$refs.input.focus();
+          if (this.searchInput) {
+            // eslint-disable-next-line no-extra-parens
+            (this.searchInput as any).input.focus();
           }
         });
       },
@@ -525,12 +575,12 @@
        *
        * @returns {(String|Number)}
        */
-      trimValue(value) {
+      trimValue(value: string | number): string | number {
         return typeof value === 'string' ? value.trim() : value;
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

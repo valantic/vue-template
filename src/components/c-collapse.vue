@@ -16,13 +16,27 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent, ref, Ref } from 'vue';
   import propScale from '@/helpers/prop.scale';
+
+  interface IData {
+    isExpanded: boolean;
+    maxHeight: string | number;
+    openTimeout: ReturnType<typeof setTimeout> | null;
+    closeTimeout: ReturnType<typeof setTimeout> | null;
+    isOpen: boolean;
+    isRendered: boolean;
+  }
+
+  interface ISetup {
+    inner: Ref<HTMLElement | null>;
+  }
 
   /**
    * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
    * and if only one item should be open at the same time (:one-active=true).
    */
-  export default {
+  export default defineComponent({
     name: 'c-collapse',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -56,7 +70,15 @@
       },
     },
 
-    data() {
+    setup(): ISetup {
+      const inner = ref(null);
+
+      return {
+        inner
+      };
+    },
+
+    data(): IData {
       return {
         /**
          * @type {Boolean} Defines the current state of the collapse.
@@ -69,12 +91,12 @@
         maxHeight: '',
 
         /**
-         * @type {Number} The timeout for transition open the collapse.
+         * @type {Timeout} The timeout for transition open the collapse.
          */
         openTimeout: null,
 
         /**
-         * @type {Number} The timeout for the transition before it can start closing the collapse.
+         * @type {Timeout} The timeout for the transition before it can start closing the collapse.
          */
         closeTimeout: null,
 
@@ -97,7 +119,7 @@
        *
        * @returns   {Object}  modifiers   Modifier BEM classes
        */
-      modifiers() {
+      modifiers(): object {
         return {
           expanded: this.isExpanded,
           open: this.isOpen,
@@ -113,7 +135,7 @@
     },
     // beforeMount(): void {},
     mounted(): void {
-      this.$eventBus.$on('c-collapse-group.toggle', (payload) => {
+      this.$eventBus.$on('c-collapse-group.toggle', (payload: any) => {
         const toggledElement = payload.toggledCollapse;
         const toggleGroup = payload.component;
 
@@ -138,10 +160,12 @@
        *
        * @param   {Object}    event   Original event
        */
-      toggleState(event) {
+      toggleState(event: Event): void {
         event.preventDefault();
 
-        event.target.blur();
+        const toggleElement = event.target as HTMLElement;
+
+        toggleElement.blur();
 
         this.isExpanded = !this.isExpanded; // toggle state
 
@@ -164,7 +188,7 @@
       /**
        * Opens the collapsible.
        */
-      open() {
+      open(): void {
         if (!this.isRendered) {
           this.isRendered = true;
 
@@ -184,7 +208,10 @@
        */
       openContent() {
         this.setMaxHeight();
-        clearTimeout(this.closeTimeout);
+
+        if (this.closeTimeout) {
+          clearTimeout(this.closeTimeout);
+        }
 
         this.openTimeout = setTimeout(() => {
           this.maxHeight = 'none';
@@ -199,7 +226,9 @@
         this.setMaxHeight();
         this.isOpen = false;
 
-        clearTimeout(this.openTimeout);
+        if (this.openTimeout) {
+          clearTimeout(this.openTimeout);
+        }
 
         this.closeTimeout = setTimeout(() => {
           this.maxHeight = 0;
@@ -210,11 +239,13 @@
        * Sets the collapsible height according to its current content.
        */
       setMaxHeight() {
-        this.maxHeight = `${this.$refs.inner.clientHeight}px`;
+        if (this.inner !== null) {
+          this.maxHeight = `${this.inner.clientHeight}px`;
+        }
       }
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

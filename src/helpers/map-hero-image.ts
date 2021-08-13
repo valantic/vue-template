@@ -1,4 +1,4 @@
-import { IEImage } from '@/types/e-image';
+import { IImage } from '@/types/e-image';
 import { ISprykerImage } from '@/types/spryker';
 
 /**
@@ -9,7 +9,7 @@ import { ISprykerImage } from '@/types/spryker';
  *
  * @returns {Object|null}
  */
-export default function mapHeroImage(image: ISprykerImage, id: number): IEImage | null {
+export default function mapHeroImage(image: ISprykerImage, id: number): IImage | null {
   if (!image) {
     return null;
   }

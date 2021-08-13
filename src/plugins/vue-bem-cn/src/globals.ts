@@ -18,3 +18,9 @@ export const DEFAULT_CONFIG = {
   hyphenate: false,
   methodName: 'b',
 };
+
+interface IModifiers {
+  [key: string]: boolean
+}
+
+export type IVueBemFunction = (elementOrModifiers: string | IModifiers, modifiers?: IModifiers) => string;

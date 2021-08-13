@@ -14,12 +14,14 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import { mapGetters } from 'vuex';
   import { webpack } from '@/../package.json';
+  import { ITheme } from '@/types/s-theme-selector';
 
   const themePath = `/${webpack.outputAssetsFolder}css/${webpack.filePrefix}theme-`;
 
-  export default {
+  export default defineComponent({
     name: 's-theme-selector',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -52,7 +54,7 @@
        *
        * @returns {Array} list of themes
        */
-      themes() {
+      themes(): ITheme[] {
         const list = this.defaultThemes;
         const activeId = this.getTheme;
 
@@ -81,7 +83,7 @@
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
-          const link = document.getElementById(cssId);
+          const link = document.getElementById(cssId) as HTMLLinkElement;
           const theme = this.getTheme;
 
           if (!link) {
@@ -109,8 +111,10 @@
        *
        * @param {Event} event - The related DOM event.
        */
-      onChange(event) {
-        this.$store.commit('session/setTheme', event.target.value);
+      onChange(event: Event) {
+        const element = event.target as HTMLSelectElement;
+
+        this.$store.commit('session/setTheme', element.value);
       },
 
       /**
@@ -119,7 +123,7 @@
        * @param {String} themeId - The name of the desired theme.
        * @param {String} cssId - The unique ID for the link element.
        */
-      createStyleElement(themeId, cssId) {
+      createStyleElement(themeId: string, cssId: string) {
         const head = document.getElementsByTagName('head')[0];
         const link = document.createElement('link');
 
@@ -133,5 +137,5 @@
       }
     },
     // render(): void {},
-  };
+  });
 </script>

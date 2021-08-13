@@ -1,5 +1,5 @@
-import { isString, isNumber } from '../utils';
 import { IDelimiters } from '@/plugins/vue-bem-cn/src/globals';
+import { isString, isNumber } from '../utils';
 
 interface IModifiers {
   [key: string]: any

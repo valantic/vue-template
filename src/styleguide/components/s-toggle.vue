@@ -12,11 +12,9 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
 
-  /**
-   * Renders a checkbox as toggle element.
-   */
-  export default {
+  export default defineComponent({
     name: 's-toggle',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -49,10 +47,10 @@
        * @returns  {Boolean}   Status of the checkbox
        */
       internalValue: {
-        get() {
+        get(): boolean {
           return this.checked;
         },
-        set(value) {
+        set(value: boolean) {
           /**
            * Emits checkbox value e.g. true/false or value
            *
@@ -78,7 +76,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

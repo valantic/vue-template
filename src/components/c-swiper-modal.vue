@@ -67,14 +67,37 @@
 </template>
 
 <script lang="ts">
-  import Swiper, { Navigation, Controller } from 'swiper';
-  import { BREAKPOINTS } from '@/setup/globals';
+  import { defineComponent, ref, Ref } from 'vue';
+  import Swiper, { Navigation, Controller, SwiperOptions } from 'swiper';
+  import { BREAKPOINTS, BreakPointType } from '@/setup/globals';
+  import { NavigationOptions } from 'swiper/types/components/navigation';
+
+  interface ISetup {
+    gallery: Ref<HTMLDivElement | null>;
+    video: Ref<HTMLIFrameElement[] | null>;
+    thumbnails: Ref<HTMLDivElement | null>;
+    previous: Ref<HTMLDivElement | null>;
+    next: Ref<HTMLDivElement | null>;
+  }
+
+  interface IData {
+    gallerySwiper: Swiper | null;
+    thumbsSwiper: Swiper | null;
+    optionsDefault: SwiperOptions;
+    optionsThumbnails: SwiperOptions;
+    sizes: typeof BREAKPOINTS;
+    slidesPerBreakpoint: {
+      [key: string]: number;
+    };
+    // eslint-disable-next-line no-undef
+    resizeTimerId: NodeJS.Timeout | null;
+  }
 
   /**
    * Touch enabled slider component with thumbnails based on
    * [swiper](https://idangero.us/swiper/api/).
    */
-  export default {
+  export default defineComponent({
     name: 'c-swiper-modal',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -107,7 +130,23 @@
       },
     },
 
-    data() {
+    setup(): ISetup {
+      const gallery = ref(null);
+      const video = ref(null);
+      const thumbnails = ref(null);
+      const previous = ref(null);
+      const next = ref(null);
+
+      return {
+        gallery,
+        video,
+        thumbnails,
+        previous,
+        next,
+      };
+    },
+
+    data(): IData {
       return {
         gallerySwiper: null,
         thumbsSwiper: null,
@@ -125,7 +164,9 @@
           },
           on: {
             slideChange: function() {
-              this.$emit('change', this.$refs.gallery.swiper.activeIndex);
+              // @ts-ignore
+              this.$emit('change', this.gallery.swiper.activeIndex);
+              // @ts-ignore
               this.stopAllVideos();
             }.bind(this),
           }
@@ -158,14 +199,17 @@
        *
        * @returns {Object}
        */
-      optionsMerged() {
+      optionsMerged(): SwiperOptions {
+        const navigation = this.optionsDefault.navigation ? this.optionsDefault.navigation : {} as NavigationOptions;
+
+        if (typeof navigation === 'object') {
+          navigation.nextEl = this.next;
+          navigation.prevEl = this.previous;
+        }
+
         return {
           ...this.optionsDefault,
-          navigation: {
-            ...this.optionsDefault.navigation,
-            nextEl: this.$refs.next,
-            prevEl: this.$refs.previous,
-          },
+          navigation,
           ...this.options,
         };
       },
@@ -181,11 +225,18 @@
 
       Swiper.use([Navigation, Controller]);
 
-      this.gallerySwiper = new Swiper(this.$refs.gallery, galleryOptions);
-      this.thumbsSwiper = new Swiper(this.$refs.thumbnails, thumbnailOptions);
+      if (this.gallery !== null) {
+        this.gallerySwiper = new Swiper(this.gallery, galleryOptions);
+      }
 
-      this.gallerySwiper.controller.control = this.thumbsSwiper;
-      this.thumbsSwiper.controller.control = this.gallerySwiper;
+      if (this.thumbnails !== null) {
+        this.thumbsSwiper = new Swiper(this.thumbnails, thumbnailOptions);
+      }
+
+      if (this.gallerySwiper && this.thumbsSwiper) {
+        this.gallerySwiper.controller.control = this.thumbsSwiper;
+        this.thumbsSwiper.controller.control = this.gallerySwiper;
+      }
 
       this.setThumbnailSlidesPerView();
       window.addEventListener('resize', this.setThumbnailSlidesPerView);
@@ -195,11 +246,13 @@
     // activated(): void {},
     // deactivated(): void {},
     beforeUnmount(): void {
-      clearTimeout(this.resizeTimerId);
+      if (this.resizeTimerId) {
+        clearTimeout(this.resizeTimerId);
+      }
       window.removeEventListener('resize', this.setThumbnailSlidesPerView);
 
-      this.gallerySwiper.destroy();
-      this.thumbsSwiper.destroy();
+      this.gallerySwiper?.destroy();
+      this.thumbsSwiper?.destroy();
     },
     // unmounted(): void {},
 
@@ -208,10 +261,15 @@
        * Sets the thumbnails for the swiper.
        */
       setThumbnailSlidesPerView() {
-        clearTimeout(this.resizeTimerId);
+        if (this.resizeTimerId) {
+          clearTimeout(this.resizeTimerId);
+        }
+
         this.resizeTimerId = setTimeout(() => {
-          this.$refs.thumbnails.swiper.params.slidesPerView = this.getThumbnailSlidesPerView();
-          this.$refs.thumbnails.swiper.update();
+          // eslint-disable-next-line no-extra-parens
+          (this.thumbnails as any).swiper.params.slidesPerView = this.getThumbnailSlidesPerView();
+          // eslint-disable-next-line no-extra-parens
+          (this.thumbnails as any).swiper.update();
         }, 250);
       },
 
@@ -224,7 +282,7 @@
         const breakpoints = Object.keys(this.slidesPerBreakpoint);
 
         for (let i = 0; i < breakpoints.length; i += 1) {
-          const breakpoint = breakpoints[i];
+          const breakpoint = breakpoints[i] as BreakPointType;
 
           if (BREAKPOINTS[breakpoint] >= window.innerWidth) {
             return this.slidesPerBreakpoint[breakpoint];
@@ -238,17 +296,17 @@
        * Stops all videos in the modal.
        */
       stopAllVideos() {
-        const videos = this.$refs.video;
+        const videos = this.video;
 
         if (videos) {
           videos.forEach((video) => {
-            video.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+            video.contentWindow?.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
           });
         }
       }
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

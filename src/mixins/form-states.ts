@@ -1,3 +1,11 @@
+import { defineComponent } from 'vue';
+
+export interface IFormStatesData {
+  isActive: boolean;
+  hasFocus: boolean;
+  hasHover: boolean;
+}
+
 /**
  * Mixin can be used to add default form states to a form-element.
  * For modifiers class names combine the component modifier() computed function with the stateModifier()
@@ -5,7 +13,8 @@
  *
  * @mixin
  */
-export default {
+// TODO check if mixin works when using defineComponent (needed to fix TS scope errors)
+export default defineComponent({
   props: {
     /**
      * Form states for class names (default, error, success, warning, info)
@@ -13,15 +22,13 @@ export default {
     state: {
       type: String,
       default: 'default',
-      validator(value: string) {
-        return [
-          'error',
-          'success',
-          'warning',
-          'info',
-          'default'
-        ].includes(value);
-      }
+      validator: (value: string): boolean => [
+        'error',
+        'success',
+        'warning',
+        'info',
+        'default'
+      ].includes(value)
     },
 
     /**
@@ -70,7 +77,7 @@ export default {
    *
    * @returns {{isActive: *, hasFocus: *, hasHover: (hover|{type, default}|*)}}
    */
-  data() {
+  data(): IFormStatesData {
     return {
       isActive: this.active,
       hasFocus: this.focus,
@@ -86,9 +93,10 @@ export default {
      */
     isChecked: {
       get(): boolean {
+        // @ts-ignore
         return Array.isArray(this.checked) ? this.checked.includes(this.value) : this.checked;
       },
-      set(value: boolean) {
+      set(value: boolean): boolean {
         return value;
       }
     },
@@ -98,7 +106,8 @@ export default {
      *
      * @returns {{state: *, active: *, disabled: *, focus: *, hover: *, checked: *}}
      */
-    stateModifiers() {
+    // eslint-disable-next-line vue/no-unused-properties
+    stateModifiers(): object {
       return {
         state: this.state,
         active: this.isActive,
@@ -114,7 +123,8 @@ export default {
      *
      * @returns {Boolean}
      */
-    hasDefaultState() {
+    // eslint-disable-next-line vue/no-unused-properties
+    hasDefaultState(): boolean {
       return this.state === 'default';
     },
 
@@ -123,6 +133,7 @@ export default {
      *
      * @returns {String}
      */
+    // eslint-disable-next-line vue/no-unused-properties
     stateIcon() {
       switch (this.state) {
         case 'error':
@@ -139,4 +150,4 @@ export default {
       }
     }
   }
-};
+});

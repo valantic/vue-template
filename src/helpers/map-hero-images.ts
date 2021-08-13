@@ -1,5 +1,5 @@
 import { ISprykerImage } from '@/types/spryker';
-import { IEImage } from '@/types/e-image';
+import { IImage } from '@/types/e-image';
 import mapHeroImage from './map-hero-image';
 
 /**
@@ -9,10 +9,18 @@ import mapHeroImage from './map-hero-image';
  *
  * @returns {Array|null}
  */
-export default function mapHeroImages(images: ISprykerImage[]): (IEImage | null)[] | null {
+export default function mapHeroImages(images: ISprykerImage[]): IImage[] | null {
   if (!images) {
     return null;
   }
 
-  return images.map((image, index) => mapHeroImage(image, index));
+  return images.reduce((result: IImage[], inputImage, index) => {
+    const image = mapHeroImage(inputImage, index);
+
+    if (image !== null) {
+      result.push(image);
+    }
+
+    return result;
+  }, []);
 }

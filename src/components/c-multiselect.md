@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       items: [
@@ -45,7 +45,7 @@
         this.itemsChecked = component.checkedItems;
       }
     }
-  };
+  });
 </script>
 ```
 
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       items: [
@@ -88,7 +88,7 @@
       ],
       itemsChecked: []
     }),
-  };
+  });
 </script>
 ```
 
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       items: [
@@ -144,7 +144,7 @@
          this.itemsChecked = component.checkedItems;
        }
      }
-  };
+  });
 </script>
 ```
 
@@ -164,7 +164,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       items: [
@@ -208,7 +208,7 @@
          this.itemsChecked = component.checkedItems;
        }
      }
-  };
+  });
 </script>
 ```
 
@@ -229,7 +229,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       items: [
@@ -273,7 +273,7 @@
         this.itemsChecked = component.checkedItems;
       }
     }
-  };
+  });
 </script>
 ```
 
@@ -293,7 +293,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       items: [
@@ -321,6 +321,6 @@
         this.itemsChecked = component.checkedItems;
       }
     }
-  };
+  });
 </script>
 ```

@@ -12,18 +12,20 @@ import modal from '@/plugins/modalStack';
 import api from '@/plugins/api';
 // import dayjs from '@/plugins/dayjs';
 
-// Self executing
-
-Vue.use(resizeEnd);
-Vue.use(VueAxios);
-Vue.use(eventBus);
-Vue.use(viewport);
-Vue.use(modal);
-Vue.use(api);
-Vue.use(VueBemCn, {
-  hyphenate: true,
-});
-Vue.use(PortalVue);
-Vue.use(VModal);
-Vue.use(Vuelidate);
-// Vue.use(dayjs);
+export default [
+  [i18n],
+  [store],
+  [resizeEnd],
+  [VueAxios],
+  [Vuelidate],
+  [viewport],
+  [modal],
+  [api],
+  // please note: if you change the VueBemCn methodName, adjust the global definition in shims-vuex.d.ts
+  [VueBemCn, {
+    hyphenate: true,
+  }],
+  [directives],
+  [components],
+  // [dayjs]
+];

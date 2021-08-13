@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-
+  import { defineComponent } from 'vue';
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
   import propScale from '@/helpers/prop.scale';
@@ -78,7 +78,7 @@
    * You can give the component a custom header component. The scope content will be placed in the main
    * slot which represents the modal content.
    */
-  export default {
+  export default defineComponent({
     name: 'c-modal',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -144,12 +144,10 @@
       mobileTransition: {
         type: String,
         default: 'slide',
-        validator(value) {
-          return [
-            'slide',
-            'fade',
-          ].includes(value);
-        }
+        validator: (value: string) => [
+          'slide',
+          'fade',
+        ].includes(value)
       },
     },
     data() {
@@ -167,7 +165,7 @@
        *
        * @returns {Boolean}
        */
-      isMobile() {
+      isMobile(): boolean {
         return !this.$viewport.isSm;
       },
 
@@ -218,9 +216,12 @@
         if (this.open) {
           this.scrollPositionY = window.scrollY;
           avoidContentResizing(true);
+          // @ts-ignore
           this.$modal.show(this.uuid);
+          // @ts-ignore
           this.$modalStack.add(this.uuid);
         } else {
+          // @ts-ignore
           this.$modal.hide(this.uuid);
         }
       }
@@ -235,6 +236,7 @@
     // activated(): void {},
     // deactivated(): void {},
     beforeUnmount(): void {
+      // @ts-ignore
       this.$modalStack.remove(this.uuid);
     },
     // unmounted(): void {},
@@ -245,11 +247,12 @@
        *
        * @param {Object} event - The event object.
        */
-      closeModal(event) {
+      closeModal(event: Event) {
         if (event) {
           event.preventDefault();
         }
 
+        // @ts-ignore
         this.$modal.hide(this.uuid);
       },
 
@@ -271,6 +274,7 @@
          */
         this.$emit('update:open', false);
 
+        // @ts-ignore
         this.$modalStack.remove(this.uuid);
         window.scrollTo(0, this.scrollPositionY);
       },
@@ -280,7 +284,7 @@
        *
        * @param {Object} modal - The current modal instance.
        */
-      onModalBeforeClose(modal) {
+      onModalBeforeClose(modal: any) {
         if (!this.closeable) {
           modal.stop();
         }
@@ -289,7 +293,7 @@
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

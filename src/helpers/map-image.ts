@@ -1,4 +1,5 @@
 import { ISprykerImage } from '@/types/spryker';
+import { IImage } from '@/types/e-image';
 
 /**
  * Maps image object from spryker API to e-picture component.
@@ -7,7 +8,7 @@ import { ISprykerImage } from '@/types/spryker';
  *
  * @returns {Object|null}
  */
-export default function mapImage(image: ISprykerImage) {
+export default function mapImage(image: ISprykerImage): IImage | null {
   if (!image) {
     return null;
   }

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: 'option-3',
       optionsList: [
@@ -31,7 +31,7 @@
         },
       ]
     })
-  };
+  });
 </script>
 ```
 
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: 'option-1',
       optionsList: [
@@ -52,7 +52,7 @@
         }
       ]
     })
-  };
+  });
 </script>
 ```
 
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: 'option-3',
       optionsList: [
@@ -87,7 +87,7 @@
         },
       ]
     })
-  };
+  });
 </script>
 ```
 
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: 'option-3',
       optionsList: [
@@ -122,7 +122,7 @@
         },
       ]
     })
-  };
+  });
 </script>
 ```
 
@@ -139,7 +139,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: 'option-3',
       optionsList: [
@@ -157,7 +157,7 @@
         },
       ]
     })
-  };
+  });
 </script>
 ```
 
@@ -174,7 +174,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: 'option-3',
       optionsList: [
@@ -192,7 +192,7 @@
         },
       ]
     })
-  };
+  });
 </script>
 ```
 
@@ -214,7 +214,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: 'option-3',
       optionsList: [
@@ -232,7 +232,7 @@
         },
       ]
     })
-  };
+  });
 </script>
 ```
 
@@ -249,7 +249,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       demo: 'option-3',
       optionsList: [
@@ -267,6 +267,6 @@
         },
       ]
     })
-  };
+  });
 </script>
 ```

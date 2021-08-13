@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import store from '@/store/index';
 import apiUrls from '@/setup/api-urls.json';
+import { IMessage, INotification } from '@/types/c-notification';
 
 interface IUrlKeyValues {
   [key: string]: string;
@@ -40,7 +41,7 @@ if (process.env.NODE_ENV !== 'production') {
  * @param {Array} messages - An array of messages.
  * @param {Object} options - Display options for the notifications.
  */
-function showNotifications(messages: string[], options: object): void {
+function showNotifications(messages: IMessage[], options?: INotification): void {
   if (!Array.isArray(messages)) {
     return;
   }
@@ -61,7 +62,7 @@ function showNotifications(messages: string[], options: object): void {
  *
  * @returns {Object}
  */
-function handleSuccess(response: AxiosResponse, options: object): AxiosResponse {
+function handleSuccess(response: AxiosResponse, options?: INotification): AxiosResponse {
   const { messages } = response?.data || {};
 
   if (messages) {
@@ -80,7 +81,7 @@ function handleSuccess(response: AxiosResponse, options: object): AxiosResponse 
  *
  * @returns {Promise<never>}
  */
-function handleError(error: AxiosError, options: object): Promise<AxiosError> {
+function handleError(error: AxiosError, options?: INotification): Promise<AxiosError> {
   const { messages } = error?.response?.data || {};
 
   if (messages) {
@@ -126,7 +127,7 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
-  get(url: string, config: AxiosRequestConfig, notificationOptions: object): Promise<AxiosResponse<any> | AxiosError<any>> {
+  get(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> {
     return axios
       .get(url, config)
       .then(response => handleSuccess(response, notificationOptions))
@@ -143,7 +144,7 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
-  post(url: string, data: object, config: AxiosRequestConfig, notificationOptions: object): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
+  post(url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .post(url, data, config)
       .then(response => handleSuccess(response, notificationOptions))
@@ -160,7 +161,7 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
-  patch(url: string, data: object, config: AxiosRequestConfig, notificationOptions: object): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
+  patch(url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .patch(url, data, config)
       .then(response => handleSuccess(response, notificationOptions))
@@ -176,7 +177,7 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
-  delete(url: string, config: AxiosRequestConfig, notificationOptions: object): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
+  delete(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .delete(url, config)
       .then(response => handleSuccess(response, notificationOptions))

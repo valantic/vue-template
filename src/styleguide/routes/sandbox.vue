@@ -8,7 +8,9 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
     name: 'sandbox',
     // components: {},
     // mixins: [],
@@ -34,7 +36,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

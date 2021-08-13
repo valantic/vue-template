@@ -22,7 +22,22 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import { defineComponent, PropType } from 'vue';
+
+  interface IRoute {
+    path: string;
+    alias: string;
+    name: string;
+    redirect: string;
+    component: any;
+    meta: {
+      title: string;
+      hideInStyleguide: boolean;
+    }
+    children: IRoute[]
+  }
+
+  export default defineComponent({
     name: 's-navigation-block',
     // components: {},
     props: {
@@ -30,7 +45,7 @@
        * An array of styleguide routes.
        */
       routes: {
-        type: Array,
+        type: Array as PropType<IRoute[]>,
         default: () => [],
       },
 
@@ -49,7 +64,7 @@
        *
        * @returns {Object}
        */
-      componentModifiers() {
+      componentModifiers(): object {
         return {
           hasIndent: this.hasIndent,
         };
@@ -60,13 +75,13 @@
        *
        * @returns {Array.<Object>}
        */
-      filteredRoutes() {
+      filteredRoutes(): object[] {
         return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide);
       },
     },
     // methods: {},
     // created(): void {}
-  };
+  });
 </script>
 
 <style lang="scss">

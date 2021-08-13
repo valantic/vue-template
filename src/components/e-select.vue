@@ -27,13 +27,14 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import i18n from '@/setup/i18n';
   import formStates from '@/mixins/form-states';
 
   /**
    * Renders a styled select element. Options can be passed with the `options` property.
    */
-  export default {
+  export default defineComponent({
     name: 'e-select',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -66,10 +67,8 @@
        */
       placeholder: {
         type: [String, Boolean],
-        default: i18n.t('e-select.chooseOption'),
-        validator(value) {
-          return typeof value === 'string' || value === false;
-        },
+        default: i18n.global.t('e-select.chooseOption'),
+        validator: (value: string) => typeof value === 'string' || value === false,
       },
 
       /**
@@ -128,18 +127,20 @@
        *
        * @param   {Object}  event   Event object by onchange
        */
-      onChange(event) {
+      onChange(event: Event) {
+        const select = event.currentTarget as HTMLSelectElement;
+
         /**
          * Input event for v-model.
          *
          * @event input
          * @type {String}
          */
-        this.$emit('input', event.currentTarget.value);
+        this.$emit('input', select.value);
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

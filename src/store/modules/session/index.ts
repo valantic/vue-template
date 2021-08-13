@@ -1,5 +1,10 @@
-export default {
-  namespaced: true,
+import { createStore } from 'vuex';
+
+interface IThemeState {
+  theme: string;
+}
+
+export default createStore<IThemeState>({
   state: {
     /**
      * @type {String} Stores the theme id.
@@ -14,7 +19,7 @@ export default {
      *
      * @returns {String}
      */
-    getTheme(state) {
+    getTheme(state: IThemeState) {
       return state.theme;
     },
   },
@@ -25,9 +30,9 @@ export default {
      * @param {Object} state - Current state object.
      * @param {String} id - Theme id which should be set.
      */
-    setTheme(state, id) {
+    setTheme(state: IThemeState, id: string) {
       state.theme = id;
     },
   },
   // actions: {},
-};
+});

@@ -7,7 +7,7 @@ See Confluence page for "Messages" for more details.
   "type": "String",
   "code": "String",
   "source": {
-    "field": "String",
+    "field": "String"
   },
   "message": "String",
   "meta": {
@@ -28,7 +28,7 @@ See Confluence page for "Messages" for more details.
 </template>
   
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -42,7 +42,7 @@ See Confluence page for "Messages" for more details.
         }
       }
     }
-  }
+  });
 </script>
 ```
 
@@ -54,7 +54,7 @@ See Confluence page for "Messages" for more details.
 </template>
   
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -68,7 +68,7 @@ See Confluence page for "Messages" for more details.
         }
       }
     }
-  }
+  });
 </script>
 ```
 
@@ -80,7 +80,7 @@ See Confluence page for "Messages" for more details.
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -94,7 +94,7 @@ See Confluence page for "Messages" for more details.
         }
       }
     }
-  }
+  });
 </script>
 ```
 
@@ -106,7 +106,7 @@ See Confluence page for "Messages" for more details.
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -120,7 +120,7 @@ See Confluence page for "Messages" for more details.
         }
       }
     }
-  }
+  });
 </script>
 ```
 
@@ -134,7 +134,7 @@ See Confluence page for "Messages" for more details.
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -152,7 +152,7 @@ See Confluence page for "Messages" for more details.
         }
       }
     }
-  }
+  });
 </script>
 ```
 
@@ -164,7 +164,7 @@ See Confluence page for "Messages" for more details.
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -186,7 +186,7 @@ See Confluence page for "Messages" for more details.
         },
       }
     },
-  }
+  });
 </script>
 
 ```
@@ -199,7 +199,7 @@ See Confluence page for "Messages" for more details.
 </template>
   
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -214,7 +214,7 @@ See Confluence page for "Messages" for more details.
         },
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -226,7 +226,7 @@ See Confluence page for "Messages" for more details.
 </template>
   
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -241,7 +241,7 @@ See Confluence page for "Messages" for more details.
         },
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -253,7 +253,7 @@ See Confluence page for "Messages" for more details.
 </template>
   
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -268,7 +268,7 @@ See Confluence page for "Messages" for more details.
         }
       };
     },
-  };
+  });
 </script>
 ```
 
@@ -280,7 +280,7 @@ See Confluence page for "Messages" for more details.
 </template>
   
 <script>
-  export default {
+  export default defineComponent({
     data() {
       return {
         notification: {
@@ -295,6 +295,6 @@ See Confluence page for "Messages" for more details.
         }
       };
     },
-  };
+  });
 </script>
 ```

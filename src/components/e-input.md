@@ -16,12 +16,12 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -44,12 +44,12 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       disabled: false,
       value: 'Lorem ipsum...'
     })
-  };
+  });
 </script>
 ```
 
@@ -69,12 +69,12 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -94,12 +94,12 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -118,12 +118,12 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -142,12 +142,12 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -166,12 +166,12 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -182,12 +182,12 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 
@@ -209,11 +209,11 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```

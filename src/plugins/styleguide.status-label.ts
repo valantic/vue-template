@@ -1,4 +1,5 @@
 import { Plugin } from 'vue';
+import Timeout = NodeJS.Timeout;
 
 interface IAvailabilityStatus {
   text: string;
@@ -14,7 +15,7 @@ interface ILabels {
 }
 
 interface IStatusTimeouts {
-  [key: string]: number;
+  [key: string]: Timeout;
 }
 
 export const availableStatus: IAvailabilityStatusConfig = {

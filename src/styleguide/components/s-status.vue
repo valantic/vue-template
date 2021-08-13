@@ -7,12 +7,13 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import { availableStatus } from '@/plugins/styleguide.status-label';
 
   /**
    * Creates a status label which can be used to document component development status.
    */
-  export default {
+  export default defineComponent({
     name: 's-status',
     status: 1,
 
@@ -26,11 +27,9 @@
        * Valid values: `[0, 1]`
        */
       modifier: {
-        type: [String, Number],
+        type: [Number],
         default: null,
-        validator(value) {
-          return !!availableStatus[value];
-        }
+        validator: (value: number) => !!availableStatus[value]
       }
     },
     // data() {
@@ -43,11 +42,12 @@
        *
        * @returns {Object}
        */
-      modifiers() {
+      modifiers(): object {
         const modifier = availableStatus[this.modifier];
         const modifiers = {};
 
         if (modifier) {
+          // @ts-ignore
           modifiers[modifier.modifier] = true;
         }
 
@@ -69,7 +69,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

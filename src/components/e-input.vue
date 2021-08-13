@@ -50,16 +50,22 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent, ref, Ref } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification.vue';
   import formStates from '@/mixins/form-states';
+
+  interface ISetup {
+    input: Ref<HTMLInputElement | null>;
+    slot: Ref<HTMLSpanElement | null>;
+  }
 
   /**
    * Input form component
    *
    * **WARNING: uses 'v-html' for the 'notification'. Make sure, that the source for this data is trustworthy.**
    */
-  export default {
+  export default defineComponent({
     name: 'e-input',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -164,6 +170,16 @@
       },
     },
 
+    setup(): ISetup {
+      const input = ref(null);
+      const slot = ref(null);
+
+      return {
+        input,
+        slot,
+      };
+    },
+
     data() {
       return {
         internalValue: this.value
@@ -175,7 +191,8 @@
        *
        * @returns {Boolean}
        */
-      showNotification() {
+      showNotification(): boolean {
+        // @ts-ignore
         return this.state && this.state !== 'default' && this.notification && this.hasFocus;
       },
 
@@ -184,7 +201,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): object {
         const {
           border,
           noNativeControl,
@@ -215,8 +232,8 @@
 
       window.addEventListener('resizeend', this.setSlotSpacings);
 
-      if (this.uncontrolled && this.$refs.input) {
-        this.$refs.input.value = this.standalone ? this.internalValue : this.value;
+      if (this.uncontrolled && this.input) {
+        this.input.value = this.standalone ? this.internalValue.toString() : this.value.toString();
       }
     },
     // beforeUpdate(): void {},
@@ -236,28 +253,28 @@
        *
        * @param   {String}  event   Field input
        */
-      onInput(event) {
-        this.internalValue = event.target.value;
+      onInput(event: Event) {
+        const target = event.target as HTMLInputElement;
+
+        this.internalValue = target.value;
 
         /**
          * input event fires on input
          *
          * @event input
          */
-        this.$emit('input', event.target.value);
+        this.$emit('input', target.value);
       },
 
       /**
        * Emits focus to parent and wrapper component.
        * Update "hasFocus" state.
-       *
-       * @param {Event} event - The DOM event.
        */
-      onFocus(event) {
+      onFocus() {
         this.hasFocus = true;
 
         if (this.selectOnFocus) {
-          this.selectValue(event);
+          this.selectValue();
         }
 
         /**
@@ -299,10 +316,12 @@
        * Calculates the width of the slot content and sets it as a padding-right to the input-field.
        */
       setSlotSpacings() {
-        if (this.$refs.slot) {
-          const slotWidth = this.$refs.slot.clientWidth;
+        if (this.slot) {
+          const slotWidth = this.slot.clientWidth;
 
-          this.$refs.input.style.paddingRight = `${slotWidth + 10}px`;
+          if (this.input) {
+            this.input.style.paddingRight = `${slotWidth + 10}px`;
+          }
         }
       },
 
@@ -312,19 +331,21 @@
       selectValue() {
         if (this.$props.value) {
           // Needed to select a number value on Chrome.
-          this.$refs.input.select();
+          this.input?.select();
 
           // Timeout is needed that it works on all browsers (without there are problems on Safari, Edge, iOS)
           if ('ontouchstart' in window) {
             setTimeout(() => {
-              this.$refs.input.setSelectionRange(0, this.$props.value.length);
+              const selectionRange = typeof this.$props.value === 'string' ? this.$props.value.length : this.$props.value;
+
+              this.input?.setSelectionRange(0, selectionRange);
             });
           }
         }
       },
     }
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

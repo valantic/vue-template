@@ -127,6 +127,7 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import { mapGetters, mapMutations } from 'vuex';
   import api from '@/helpers/api';
   import lDefault from '@/components/l-default.vue';
@@ -134,6 +135,28 @@
   import notificationData from '@/styleguide/mock-data/api-response/notifications';
   import { defineComponent } from 'vue';
   import cModal from '@/components/c-modal';
+  import { INotification } from '@/types/c-notification';
+
+  interface IError {
+    state: string;
+    notification: string;
+  }
+
+  interface IErrors {
+    'first-name': IError;
+    'last-name': IError;
+    email: IError;
+  }
+
+  interface IData {
+    modalOpen: boolean;
+    form: {
+      firstName: string;
+      lastName: string;
+      email: string;
+    };
+    errors: IErrors
+  }
 
   export default defineComponent({
     name: 'notifications',
@@ -142,7 +165,7 @@
       lDefault,
       cNotificationContainer,
     },
-    data() {
+    data(): IData {
       return {
         modalOpen: false,
         form: {
@@ -185,42 +208,42 @@
        * Event handler for add-to-cart message button.
        */
       addToCart() {
-        api.post('/notifications/global/success', {}, { title: 'Some title', expire: true }, {});
+        api.post('/notifications/global/success', {}, { }, { title: 'Some title', expire: true } as INotification);
       },
 
       /**
        * Event handler for global success message button.
        */
       addGlobalSuccess() {
-        api.post('/notifications/global/success', {}, { title: 'Some title', expire: true }, {});
+        api.post('/notifications/global/success', {}, { }, { title: 'Some title', expire: true } as INotification);
       },
 
       /**
        * Event handler for global warning message button.
        */
       addGlobalWarning() {
-        api.post('/notifications/global/warning', {}, { title: 'Some title', expire: true }, {});
+        api.post('/notifications/global/warning', {}, { }, { title: 'Some title', expire: true } as INotification);
       },
 
       /**
        * Event handler for global error message button.
        */
       addGlobalError() {
-        api.post('/notifications/global/error', {}, { title: 'Some title', expire: true }, {});
+        api.post('/notifications/global/error', {}, { }, { title: 'Some title', expire: true } as INotification);
       },
 
       /**
        * Event handler for global info message button.
        */
       addGlobalInfo() {
-        api.post('/notifications/global/info', {}, { title: 'Some title', expire: true }, {});
+        api.post('/notifications/global/info', {}, { }, { title: 'Some title', expire: true } as INotification);
       },
 
       /**
        * Event handler for add confirmation button.
        */
       addConfirmation() {
-        this.pushNotification(notificationData[1]);
+        this.pushNotification(notificationData.confirmationMessage);
       },
 
       /**
@@ -231,11 +254,12 @@
         api.post('/notifications/field/error')
           .then((response) => {
             for (let i = 0; i < this.getFieldNotifications.length; i += 1) {
-              const notification = this.getFieldNotifications[i];
+              const notification = this.getFieldNotifications[i] as INotification;
+              const error = notification.message?.source?.field as keyof IErrors;
 
-              if (notification.message.source) {
-                this.errors[notification.message.source.field].state = notification.message.type;
-                this.errors[notification.message.source.field].notification = notification.message.message;
+              if (notification.message?.source) {
+                this.errors[error].state = notification.message.type;
+                this.errors[error].notification = notification.message.message;
               }
             }
 
@@ -247,7 +271,7 @@
        * Event handler for add selector info button.
        */
       addSelectorInfo1() {
-        api.post('/notifications/selector/info1', {}, { expire: true }, {});
+        api.post('/notifications/selector/info1', {}, { }, { expire: true });
       },
     },
   });

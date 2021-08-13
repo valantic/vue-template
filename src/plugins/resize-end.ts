@@ -10,7 +10,7 @@ import { RESIZE_DEBOUNCE } from '@/setup/globals';
 const plugin: Plugin = {
   install(/* app */) {
     const event = document.createEvent('CustomEvent');
-    let debounce: number;
+    let debounce: ReturnType<typeof setTimeout>;
 
     event.initCustomEvent('resizeend', true, true, {});
 

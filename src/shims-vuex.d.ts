@@ -1,5 +1,7 @@
 import { Store } from 'vuex';
 import axios from 'axios/index';
+import { IViewport } from '@/types/viewport';
+import { IVueBemFunction } from '@/plugins/vue-bem-cn/src/globals';
 
 declare module '@vue/runtime-core' {
   // declare your own store states
@@ -7,10 +9,12 @@ declare module '@vue/runtime-core' {
     count: number
   }
 
-  // provide typings for `this.$store`
+  // provide typings for global properties
   interface ComponentCustomProperties {
     $store: Store<State>;
-    $http: typeof axios
+    $axios: typeof axios;
+    $viewport: IViewport;
     gtmIdentifier: string;
+    b: IVueBemFunction;
   }
 }

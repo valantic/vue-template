@@ -19,7 +19,7 @@ $ npm run dev
 <script >
   import sLanguage from '@/styleguide/components/s-language';
 
-  export default {
+  export default defineComponent({
     components: {
       sLanguage,
     }

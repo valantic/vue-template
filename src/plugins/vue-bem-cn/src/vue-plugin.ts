@@ -1,3 +1,5 @@
+// this plugin is a copy of https://www.npmjs.com/package/vue-bem-cn with some optimisations applied
+
 import { Plugin } from 'vue';
 import bemCn from './bem-cn';
 import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from './globals';
