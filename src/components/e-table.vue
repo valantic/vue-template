@@ -62,6 +62,23 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
+
+  interface IColumn {
+    title: string | (() => string);
+    key: string;
+    titleHidden: boolean | (() => boolean);
+    slotName: string;
+    align: 'left' | 'center' | 'right';
+    sortable: boolean;
+    sort: () => number;
+    onClick: () => void;
+  }
+
+  interface IData {
+    sortBy: null | IColumn;
+    sortAscending: boolean;
+  }
 
   /**
    * This component renders a table based on a given column setup and an array of row items.
@@ -70,7 +87,7 @@
    * Custom cell templates can be defined by defining a 'slotName' for a column and give a custom template
    * by using an identical named slot binding ('v-slot:\<slotName\>') to the component.
    */
-  export default {
+  export default defineComponent({
     name: 'e-table',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -106,7 +123,7 @@
         required: true,
       },
     },
-    data() {
+    data(): IData {
       return {
         /**
          * @type {Object} The currently selected 'column' to be sorted.
@@ -126,13 +143,13 @@
        *
        * @returns {Array.<Object>}
        */
-      itemsSortedBy() {
+      itemsSortedBy(): any[] {
         const items = this.items.slice();
 
         if (this.sortBy) {
           const sort = typeof this.sortBy.sort === 'function'
             ? this.sortBy.sort
-            : (a, b) => a[this.sortBy.key].localeCompare(b[this.sortBy.key]);
+            : (a: any, b: any) => (this.sortBy ? a[this.sortBy.key].localeCompare(b[this.sortBy.key]) : -1);
 
           items.sort(sort);
         }
@@ -145,7 +162,7 @@
        *
        * @returns {Array.<Object>}
        */
-      itemsSorted() {
+      itemsSorted(): any[] {
         if (!this.sortAscending) {
           return this.itemsSortedBy.slice().reverse();
         }
@@ -171,8 +188,8 @@
        *
        * @param {Object} column - Object which holds the information about the current column.
        */
-      onClickSort(column) {
-        if (this.sortBy === column) {
+      onClickSort(column: IColumn) {
+        if (this.sortBy && this.sortBy === column) {
           const asc = this.sortAscending;
 
           if (!asc) {
@@ -193,7 +210,7 @@
        *
        * @returns {Boolean}
        */
-      isHeaderLabelVisible(column) {
+      isHeaderLabelVisible(column: IColumn) {
         return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden);
       },
 
@@ -204,8 +221,8 @@
        *
        * @returns {Object}
        */
-      getSortButtonModifiers(column) {
-        const active = this.sortBy === column;
+      getSortButtonModifiers(column: IColumn) {
+        const active = this.sortBy && this.sortBy === column;
 
         return {
           active,
@@ -214,7 +231,7 @@
       }
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -9,13 +9,14 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import formStates from '@/mixins/form-states';
 
   /**
    * Label component for form elements, can be used with a slot or a for attribute
    */
 
-  export default {
+  export default defineComponent({
     name: 'e-label',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -37,14 +38,12 @@
       position: {
         type: String,
         default: 'top',
-        validator(value) {
-          return [
-            'top',
-            'right',
-            'bottom',
-            'left',
-          ].includes(value);
-        }
+        validator: (value: string) => [
+          'top',
+          'right',
+          'bottom',
+          'left',
+        ].includes(value)
       },
 
       /**
@@ -62,7 +61,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): object {
         return {
           ...this.stateModifiers,
           position: this.position,
@@ -83,7 +82,7 @@
     // unmounted(): void {},
     // methods: {}
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -1,14 +1,32 @@
 import { createStore } from 'vuex';
 import getUrlParameter from '@/helpers/get-url-parameter';
 
-declare global {
-  interface Window { initialData: object; }
+interface IStoreModules {
+  [key: string]: object;
 }
 
-const data = window.initialData || {};
+interface IAction {
+  data: object;
+  messages: {
+    INFO: [];
+    ERROR: [];
+    SUCCESS: [];
+  };
+  assetsPath: string;
+}
+
+interface IInitialData {
+  [key: string]: IAction;
+}
+
+declare global {
+  interface Window { initialData: IInitialData; }
+}
+
+const data: IInitialData = window.initialData || {};
 const requireModule = require.context('./modules/', true, /index\.js/);
-const modules = {};
-let initialDataMessages = [];
+const modules: IStoreModules = {};
+let initialDataMessages: string[] = [];
 
 requireModule.keys().forEach((fileName) => {
   const moduleName = fileName.replace(/(\.\/|\/index\.js)/g, '').replace(/-([a-z])/g, group => group[1].toUpperCase());

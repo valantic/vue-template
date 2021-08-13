@@ -6,7 +6,7 @@
 <script >
   import sIconFinder from '@/styleguide/components/s-icon-finder';
 
-  export default {
+  export default defineComponent({
     components: {
       sIconFinder,
     }

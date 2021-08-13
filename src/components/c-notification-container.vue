@@ -12,13 +12,14 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import { mapGetters } from 'vuex';
   import cNotification from '@/components/c-notification.vue';
 
   /**
    * Container for rendering notifications. See /styleguide/notifications for demo.
    */
-  export default {
+  export default defineComponent({
     name: 'c-notification-container',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -36,15 +37,13 @@
       displayType: {
         type: String,
         default: 'global',
-        validator(value) {
-          return [
-            'global',
-            'modal',
-            'field',
-            'add-to-cart',
-            'selector'
-          ].includes(value);
-        }
+        validator: (value: string) => [
+          'global',
+          'modal',
+          'field',
+          'add-to-cart',
+          'selector'
+        ].includes(value)
       },
 
       /**
@@ -55,12 +54,10 @@
       state: {
         type: String,
         default: 'full',
-        validator(value) {
-          return [
-            'full',
-            'reduced'
-          ].includes(value);
-        }
+        validator: (value: string) => [
+          'full',
+          'reduced'
+        ].includes(value)
       },
 
       /**
@@ -127,7 +124,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

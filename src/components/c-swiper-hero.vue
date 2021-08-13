@@ -43,18 +43,31 @@
 </template>
 
 <script lang="ts">
-  import Swiper, { Navigation, Pagination } from 'swiper';
+  import { defineComponent, ref, Ref } from 'vue';
+  import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import mapHeroImages from '@/helpers/map-hero-images';
+  import { IImage } from '@/types/e-image';
   import uuid from '../mixins/uuid';
 
-  const swiperInstances = {};
+  interface ISwiperInstances {
+    [key: string]: Swiper;
+  }
+
+  interface ISetup {
+    container: Ref<HTMLDivElement | null>;
+    previous: Ref<HTMLDivElement | null>;
+    next: Ref<HTMLDivElement | null>;
+    pagination: Ref<HTMLDivElement | null>;
+  }
+
+  const swiperInstances: ISwiperInstances = {};
 
   /**
    * Touch enabled slider component based on
    * [swiper](https://idangero.us/swiper/).
    */
-  export default {
+  export default defineComponent({
     name: 'c-swiper-hero',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -83,6 +96,21 @@
         default: () => ({}),
       },
     },
+
+    setup(): ISetup {
+      const container = ref(null);
+      const previous = ref(null);
+      const next = ref(null);
+      const pagination = ref(null);
+
+      return {
+        container,
+        previous,
+        next,
+        pagination,
+      };
+    },
+
     data() {
       return {
         optionsDefault: {
@@ -105,7 +133,9 @@
             el: null, // $ref is not available on init
             type: 'bullets',
             clickable: true,
+            // @ts-ignore
             dynamicBullets: this.$props.data
+              // @ts-ignore
               ? this.$props.data.images.length > 7 || false
               : this.images.length > 7 || false,
             dynamicMainBullets: 5,
@@ -122,7 +152,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): object {
         return {
           hover: this.hasHover,
         };
@@ -133,17 +163,18 @@
        *
        * @returns  {Object}  optionsMerged    Combination of default and custom options.
        */
-      optionsMerged() {
+      optionsMerged(): SwiperOptions {
         return {
           ...this.optionsDefault,
           navigation: {
             ...this.optionsDefault.navigation,
-            nextEl: this.$refs.next,
-            prevEl: this.$refs.previous,
+            nextEl: this.next,
+            prevEl: this.previous,
           },
+          // @ts-ignore
           pagination: {
             ...this.optionsDefault.pagination,
-            el: this.$refs.pagination,
+            el: this.pagination,
           },
           ...this.options,
         };
@@ -154,8 +185,12 @@
        *
        * @returns  {Object}  image   Image including fallback
        */
-      pictures() {
-        return mapHeroImages(this.images);
+      pictures(): IImage[] {
+        const mappedHeroImages = mapHeroImages(this.images as any) || [];
+
+        return [
+          ...mappedHeroImages
+        ];
       },
     },
     // watch: {},
@@ -166,7 +201,9 @@
     mounted(): void {
       Swiper.use([Navigation, Pagination]);
 
-      swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
+      if (this.container) {
+        swiperInstances[this.uuid] = new Swiper(this.container, this.optionsMerged);
+      }
     },
     // beforeUpdate(): void {},
     // updated(): void {},
@@ -179,7 +216,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -10,10 +10,11 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import colors from '../../setup/js/color';
   import sColorItem from './s-color-item.vue';
 
-  export default {
+  export default defineComponent({
     name: 's-color',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -61,8 +62,7 @@
 
     // methods: {},
     // render(): void {},
-  };
-
+  });
 </script>
 
 <style lang="scss">

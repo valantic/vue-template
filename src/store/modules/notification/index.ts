@@ -1,6 +1,13 @@
 import { NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 import api from '@/helpers/api';
+import { INotification } from '@/types/c-notification';
+import { createStore } from 'vuex';
+
+interface INotificationState {
+  notifications: INotification[];
+  id: number;
+}
 
 /**
  * Pushes the given notification to the notification stack.
@@ -18,7 +25,7 @@ import api from '@/helpers/api';
  * @param {String} [options.message.meta.id] - A unique id to handle anything related to the message on backend side.
  * @param {String} [options.message.meta.confirmationType] - A type name to assign specific confirmation actions.
  */
-function pushNotification(state, options) {
+function pushNotification(state: INotificationState, options: INotification) {
   if (!options) {
     return;
   }
@@ -29,7 +36,7 @@ function pushNotification(state, options) {
     expire: options.expire !== false,
     delay: options.delay || 3
   };
-  const metaData = notification?.message?.meta || {};
+  const metaData = notification?.message?.meta || { confirmationType: '', id: '' };
 
   // Attach confirmation actions (if confirmationType is missing, this is ignored)
   switch (metaData.confirmationType) {
@@ -52,8 +59,7 @@ function pushNotification(state, options) {
   state.id += 1;
 }
 
-export default {
-  namespaced: true,
+export default createStore<INotificationState>({
   state: {
     /**
      * @type {Array} Stores notifications.
@@ -64,7 +70,7 @@ export default {
      * @type {Number} Stores notification id (needed for proper keying in frontend).
      */
     id: 1,
-  },
+  } as INotificationState,
   getters: {
 
     /**
@@ -74,7 +80,7 @@ export default {
      *
      * @returns {Array.<Object>} All notifications bound to a selector.
      */
-    getSelectorNotifications: state => state.notifications.filter(({ message }) => message?.source?.selector),
+    getSelectorNotifications: (state: INotificationState) => state.notifications.filter(({ message }) => message?.source?.selector),
 
     /**
      * Gets all notifications that are not bound to a selector.
@@ -83,8 +89,8 @@ export default {
      *
      * @returns {Array.Object} All notifications not bound to a selector.
      */
-    getNonSelectorNotifications: state => state.notifications
-      .filter(({ message }) => !message.source || !message.source.selector),
+    getNonSelectorNotifications: (state: INotificationState) => state.notifications
+      .filter(({ message }) => !message?.source || !message.source.selector),
 
     /**
      * Gets the global notifications.
@@ -93,8 +99,8 @@ export default {
      *
      * @returns {Array.<Object>} The global notifications.
      */
-    getGlobalNotifications: state => state.notifications
-      .filter(({ message }) => !message.source && message.type !== 'add-to-cart'),
+    getGlobalNotifications: (state: INotificationState) => state.notifications
+      .filter(({ message }) => !message?.source && message?.type !== 'add-to-cart'),
 
     /**
      * Gets the add-to-cart notifications.
@@ -103,7 +109,7 @@ export default {
      *
      * @returns {Array.<Object>} The add-to-cart notifications.
      */
-    getAddToCartNotifications: state => state.notifications.filter(({ message }) => message.type === 'add-to-cart'),
+    getAddToCartNotifications: (state: INotificationState) => state.notifications.filter(({ message }) => message?.type === 'add-to-cart'),
 
     /**
      * Gets the field notifications.
@@ -112,7 +118,7 @@ export default {
      *
      * @returns {Array.<Object>} The field notifications.
      */
-    getFieldNotifications: state => state.notifications.filter(({ message }) => message?.source?.field),
+    getFieldNotifications: (state: INotificationState): INotification[] => state.notifications.filter(({ message }) => message?.source?.field),
   },
   mutations: {
     /**
@@ -132,7 +138,7 @@ export default {
      * @param {Object} state - The current module state.
      * @param {Number} id - Id of the notification.
      */
-    popNotification(state, id) {
+    popNotification(state: INotificationState, id: number) {
       state.notifications = state.notifications.filter(notification => notification.id !== id);
     },
 
@@ -141,8 +147,8 @@ export default {
      *
      * @param {Object} state - The current module state.
      */
-    flushFieldNotifications(state) {
-      state.notifications = state.notifications.filter(notification => !notification.message.source || !notification.message.source.field); // eslint-disable-line max-len
+    flushFieldNotifications(state: INotificationState) {
+      state.notifications = state.notifications.filter(notification => !notification.message?.source || !notification.message.source.field); // eslint-disable-line max-len
     },
   },
   actions: {
@@ -153,7 +159,7 @@ export default {
      * @param {Function} context.commit - Triggers a mutation on the current module.
      * @param {Array.<Object>} [payload] - An Array of notification Objects.
      */
-    data({ commit }, payload) {
+    data({ commit }, payload: INotification[]) {
       if (!Array.isArray(payload)) {
         throw Error("The payload data given to 'notification/data' is not of type Array.");
       }
@@ -173,4 +179,4 @@ export default {
       commit('pushNotification', NOTIFICATION_UNKNOWN_ERROR);
     }
   },
-};
+});

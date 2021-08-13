@@ -42,13 +42,13 @@
 </template>
 
 <script lang="ts">
-
+  import { defineComponent } from 'vue';
   import sLanguage from './s-language.vue';
   import sThemeSelector from './s-theme-selector.vue';
   import sDemoSettings from './s-demo-settings.vue';
   import sNavigationBlock from './s-navigation-block.vue';
 
-  export default {
+  export default defineComponent({
     name: 's-navigation',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -65,14 +65,12 @@
       navPosition: {
         type: String,
         default: 'top-right',
-        validator(value) {
-          return [
-            'top-left',
-            'top-right',
-            'bottom-right',
-            'bottom-left',
-          ].includes(value);
-        },
+        validator: (value: string): boolean => [
+          'top-left',
+          'top-right',
+          'bottom-right',
+          'bottom-left',
+        ].includes(value),
       },
     },
     data() {
@@ -97,7 +95,7 @@
        *
        * @returns {Object}
        */
-      wrapperModifiers() {
+      wrapperModifiers(): object {
         return {
           position: this.navPosition,
           open: this.isOpen,
@@ -112,7 +110,7 @@
         this.isOpen = !this.isOpen;
       }
     }
-  };
+  });
 </script>
 
 <style lang="scss">

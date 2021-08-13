@@ -5,9 +5,11 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
+  // @ts-ignore
   import readme from '../../../README.md';
 
-  export default {
+  export default defineComponent({
     name: 's-readme',
     status: 1,
 
@@ -37,7 +39,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <!-- eslint-disable -->

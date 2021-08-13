@@ -6,7 +6,7 @@
 <script >
   import sColor from '@/styleguide/components/s-color';
 
-  export default {
+  export default defineComponent({
     components: {
       sColor,
     }

@@ -22,7 +22,7 @@
   import dayjs from 'dayjs';
   import { name, commerce } from 'faker/locale/en';
 
-  export default {
+  export default defineComponent({
       data() {
         return {
           columns: [
@@ -105,7 +105,7 @@ Note: the 'no results' row can be customized with the 'noResults' slot.
 <script>
   import dayjs from 'dayjs';
 
-  export default {
+  export default defineComponent({
       data() {
         return {
           columns: [
@@ -172,7 +172,7 @@ Note: the 'no results' row can be customized with the 'noResults' slot.
   import dayjs from 'dayjs';
   import { name, commerce } from 'faker/locale/en';
 
-  export default {
+  export default defineComponent({
       data() {
         return {
           columns: [

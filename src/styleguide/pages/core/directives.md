@@ -37,7 +37,7 @@ Note: this is also the default for this directive. So you may drop the `editable
 </template>
 
 <script>
-export default {
+export default defineComponent({
   data() {
     return {
       restriction: {

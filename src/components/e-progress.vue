@@ -12,9 +12,10 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
 
-  export default {
+  export default defineComponent({
     name: 'e-progress',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -58,8 +59,8 @@
        *
        * @returns {String}
        */
-      loadingMessage() {
-        return this.message || this.$i18n.t('e-progress.loading');
+      loadingMessage(): string {
+        return this.message || this.$t('e-progress.loading');
       },
 
       /**
@@ -67,7 +68,7 @@
        *
        * @returns {Object}
        */
-      componentModifiers() {
+      componentModifiers(): object {
         return {
           negative: this.negative,
           spacing: this.spacing,
@@ -89,7 +90,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -2,10 +2,10 @@ interface ISourceSet {
   [key: string]: string
 }
 
-export interface IEImage {
-  id: number;
+export interface IImage {
+  id: string | number;
   fallback: string;
   srcset: ISourceSet;
   alt: string;
-  href: string;
+  href?: string;
 }

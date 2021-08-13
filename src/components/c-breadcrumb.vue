@@ -15,12 +15,13 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import { mapGetters } from 'vuex';
 
   /**
    * Renders a list of breadcrumbs items from the store module.
    */
-  export default {
+  export default defineComponent({
     name: 'c-breadcrumb',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -52,7 +53,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

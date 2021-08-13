@@ -18,9 +18,10 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import sColorSpecimen from './s-color-specimen.vue';
 
-  export default {
+  export default defineComponent({
     name: 's-color-item',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -78,7 +79,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

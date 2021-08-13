@@ -1,3 +1,5 @@
+import { INotification } from '@/types/c-notification';
+
 const success = {
   message: {
     type: 'success',
@@ -38,7 +40,7 @@ const error = {
   title: '',
 };
 
-const confirmationMessage = {
+const confirmationMessage: INotification = {
   message: {
     type: 'warning',
     message: 'Please decline this message.',
@@ -46,17 +48,21 @@ const confirmationMessage = {
   id: 1,
   expire: false,
   title: 'A title',
-  confirm: ({ notification, resolve }) => {
+  confirm: ({ notification, resolve }: { notification: INotification, resolve?: (value: any) => void}) => {
     // eslint-disable-next-line no-console
     console.info(`Notification ${notification.id} was confirmed.`);
 
-    setTimeout(resolve, 2000);
+    if (resolve) {
+      setTimeout(resolve, 2000);
+    }
   },
-  decline: ({ notification, resolve }) => {
+  decline: ({ notification, resolve }: { notification: INotification, resolve?: (value: any) => void}) => {
     // eslint-disable-next-line no-console
     console.info(`Notification ${notification.id} was declined.`);
 
-    setTimeout(resolve, 2000);
+    if (resolve) {
+      setTimeout(resolve, 2000);
+    }
   },
 };
 
@@ -88,7 +94,7 @@ const selectorInfo1 = {
  *
  * @returns {Object}
  */
-function messageAsResponse(message) {
+function messageAsResponse(message: INotification) {
   return {
     data: {},
     messages: [message.message],

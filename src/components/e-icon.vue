@@ -13,10 +13,20 @@
 </template>
 
 <script lang="ts">
-  const cache = {};
-  const nodeCache = {};
+  import { defineComponent } from 'vue';
 
-  export default {
+  interface ICache {
+    [key: string]: Promise<string>;
+  }
+
+  interface INodeCache {
+    [key: string]: HTMLDivElement;
+  }
+
+  const cache: ICache = {};
+  const nodeCache: INodeCache = {};
+
+  export default defineComponent({
     name: 'e-icon',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -59,14 +69,12 @@
       color: {
         type: String,
         default: 'default',
-        validator(value) {
-          return [
-            'default',
-            'gray',
-            'lightgray',
-            'white',
-          ].includes(value);
-        },
+        validator: (value: string) => [
+          'default',
+          'gray',
+          'lightgray',
+          'white',
+        ].includes(value),
       },
 
       /**
@@ -109,7 +117,7 @@
        *
        * @returns {String}
        */
-      src() {
+      src(): string | null {
         try {
           return require.context('../assets/icons/', false, /\.svg/)(`./${this.icon}.svg`) || null;
         } catch (e) {
@@ -125,7 +133,7 @@
        *
        * @returns {Object}
        */
-      componentModifiers() {
+      componentModifiers(): object {
         return {
           color: this.color,
           [this.icon]: true,
@@ -148,24 +156,24 @@
        *
        * @param {Node} svg - Element for which the attributes should be set.
        */
-      setAttributes(svg) {
+      setAttributes(svg: SVGElement) {
         if (this.width || this.height) {
           svg.removeAttribute('width');
           svg.removeAttribute('height');
 
           if (this.width) {
-            svg.setAttribute('width', this.width);
+            svg.setAttribute('width', this.width.toString());
           }
 
           if (this.height) {
-            svg.setAttribute('height', this.height);
+            svg.setAttribute('height', this.height.toString());
           }
         }
 
         svg.setAttribute('tabindex', this.tabindex);
         svg.setAttribute('role', 'img');
         svg.setAttribute('aria-label', this.icon);
-        svg.setAttribute('focusable', this.focusable);
+        svg.setAttribute('focusable', this.focusable ? 'true' : 'false');
       },
 
       /**
@@ -175,7 +183,7 @@
        *
        * @returns {Node}
        */
-      createSvgElement(content) {
+      createSvgElement(content: string): SVGElement {
         if (!nodeCache[this.icon]) {
           const container = document.createElement('div');
 
@@ -184,7 +192,9 @@
           nodeCache[this.icon] = container;
         }
 
-        return nodeCache[this.icon].cloneNode(true).children[0];
+        const clonedNode = nodeCache[this.icon].cloneNode(true) as HTMLDivElement;
+
+        return clonedNode.children[0] as SVGElement;
       },
 
       /**
@@ -194,7 +204,7 @@
        *
        * @returns {Node}
        */
-      getSvgElement(content) {
+      getSvgElement(content: string): SVGElement {
         const svg = this.createSvgElement(content);
 
         this.setAttributes(svg);
@@ -212,11 +222,11 @@
 
         if (!cache[this.icon]) {
           cache[this.icon] = this.$axios
-            .get(this.src)
+            .get<string>(this.src)
             .then(response => response.data);
         }
 
-        cache[this.icon].then((svg) => {
+        cache[this.icon].then((svg: string) => {
           const { $el } = this;
 
           // remove previous icon
@@ -228,7 +238,7 @@
         });
       },
     },
-  };
+  });
 </script>
 
 <style lang="scss">

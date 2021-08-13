@@ -6,11 +6,12 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
 
   /**
    * Wrapper for multiple (c-collapse) items.
    */
-  export default {
+  export default defineComponent({
     name: 'c-collapse-group',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -40,7 +41,7 @@
       /**
        * Emits toggled event
        */
-      this.$eventBus.$on('c-collapse.toggled', (payload) => {
+      this.$eventBus.$on('c-collapse.toggled', (payload: any) => {
         const collapseComponent = payload.component; // child
 
         /**
@@ -65,6 +66,6 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 

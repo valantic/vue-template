@@ -21,13 +21,14 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent, PropType } from 'vue';
   import formStates from '@/mixins/form-states';
 
   /**
    * Checkbox component for form elements.
    * Can be used as single element with a Boolean value or multiple checkboxes with an Array.
    */
-  export default {
+  export default defineComponent({
     name: 'e-checkbox',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -48,7 +49,7 @@
        * Adds checked attribute to prevent type error
        */
       checked: {
-        type: [Boolean, Array],
+        type: [Boolean, Array] as PropType<boolean | string[]>,
         required: true,
       },
 
@@ -80,10 +81,10 @@
        * @returns  {Boolean|Array}   Status of the checkbox
        */
       internalValue: {
-        get() {
+        get(): boolean | string[] {
           return this.checked;
         },
-        set(value) {
+        set(value: boolean) {
           /**
            * Emits checkbox value e.g. true/false or value
            *
@@ -114,8 +115,10 @@
        *
        * @param   {Boolean}  event   Field input
        */
-      onChange(event) {
-        this.isChecked = event.target.checked;
+      onChange(event: Event) {
+        const target = event.target as HTMLInputElement;
+
+        this.isChecked = target.checked;
 
         /**
          * Change event
@@ -123,7 +126,10 @@
          * @event change
          * @type {String}
          */
-        this.$parent.$emit('change');
+
+        if (this.$parent) {
+          this.$parent.$emit('change');
+        }
       },
 
       /**
@@ -132,10 +138,12 @@
        * @public Used by c-multiselect.
        */
       updateCheckedState() {
-        if (typeof this.value === 'string') {
-          this.isChecked = this.checked.indexOf(this.value.trim()) > -1;
-        } else if (typeof this.value === 'number') {
-          this.isChecked = this.checked.indexOf(this.value) > -1;
+        if (Array.isArray(this.checked)) {
+          if (typeof this.value === 'string') {
+            this.isChecked = this.checked.indexOf(this.value.trim()) > -1;
+          } else if (typeof this.value === 'number') {
+            this.isChecked = this.checked.indexOf(this.value.toString()) > -1;
+          }
         }
       },
 
@@ -153,7 +161,10 @@
          * @type {String}
          */
         this.$emit('focus');
-        this.$parent.$emit('focus');
+
+        if (this.$parent) {
+          this.$parent.$emit('focus');
+        }
       },
 
       /**
@@ -170,11 +181,14 @@
          * @type {String}
          */
         this.$emit('blur');
-        this.$parent.$emit('blur');
+
+        if (this.$parent) {
+          this.$parent.$emit('blur');
+        }
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -9,7 +9,7 @@
   /**
    * TODO: add description for component styleguide.
    */
-  export default {
+  export default defineComponent({
     name: 'c-component', // TODO: update name according to filename
 
     // components: {},
@@ -36,7 +36,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

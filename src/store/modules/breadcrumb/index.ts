@@ -1,5 +1,18 @@
-export default {
-  namespaced: true,
+import { createStore } from 'vuex';
+
+interface IBreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface IBreadcrumbState {
+  items: IBreadcrumbItem[];
+}
+
+// TODO check if direct-store should be used
+//  see https://next.vuex.vuejs.org/guide/typescript-support.html
+//  see https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3
+export default createStore<IBreadcrumbState>({
   state: {
     /**
      * @type {Array} Stores breadcrumb items.
@@ -16,7 +29,7 @@ export default {
      *
      * @returns {Array}
      */
-    getItems: state => state.items,
+    getItems: (state: IBreadcrumbState) => state.items,
   },
   mutations: {
     /**
@@ -25,7 +38,7 @@ export default {
      * @param {Object} state - The current module state.
      * @param {Array} data - List of breadcrumb items.
      */
-    setItems(state, data) {
+    setItems(state: IBreadcrumbState, data: IBreadcrumbItem[]) {
       state.items = data || null;
     }
   },
@@ -37,7 +50,7 @@ export default {
      * @param {Function} context.commit - Triggers a mutation on the current module.
      * @param {Array} payload - List of breadcrumb items.
      */
-    data({ commit }, payload) {
+    data({ commit }, payload: IBreadcrumbItem[]) {
       if (!Array.isArray(payload)) {
         throw Error("The payload data given to 'breadcrumb/data' is not of type Array.");
       }
@@ -45,4 +58,4 @@ export default {
       commit('setItems', payload);
     }
   },
-};
+});

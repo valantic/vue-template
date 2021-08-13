@@ -5,7 +5,7 @@
   <c-swiper-modal :images="images"/>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'swiper-modal',
     data() {
       return {
@@ -39,6 +39,6 @@
           }]
       }
     },
-  };
+  });
 </script>
 ```

@@ -21,6 +21,7 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import formStates from '@/mixins/form-states';
 
   /**
@@ -28,7 +29,7 @@
    *
    * The displayed name can either be provided by the property `displayName` or as a slot.
    */
-  export default {
+  export default defineComponent({
     name: 'e-radio',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -81,10 +82,11 @@
        * @returns {Boolean}
        */
       internalValue: {
-        get() {
+        get(): string | number {
+          // @ts-ignore
           return this.selected;
         },
-        set(value) {
+        set(value: string): void {
           /**
            * Fired on select of radio button.
            *
@@ -100,7 +102,7 @@
        *
        * @returns {Object}
        */
-      modifiers() {
+      modifiers(): object {
         return {
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
@@ -112,7 +114,7 @@
        *
        * @returns {Object}
        */
-      fieldModifiers() {
+      fieldModifiers(): object {
         return {
           selected: this.internalValue === this.value,
         };
@@ -137,18 +139,20 @@
        *
        * @param   {String}  event   Field input
        */
-      onChange(event) {
+      onChange(event: Event) {
+        const radioButton = event.currentTarget as HTMLSelectElement;
+
         /**
          * Emits change event.
          *
          * @event change
          * @type {String}
          */
-        this.$parent.$emit('change', event.target.value);
+        this.$parent?.$emit('change', radioButton.value);
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

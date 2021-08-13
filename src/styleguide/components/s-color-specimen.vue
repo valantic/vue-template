@@ -10,14 +10,15 @@
 </template>
 
 <script lang="ts">
-
+  import { defineComponent } from 'vue';
 
   /**
    * Renders a color specimen tile.
    *
    * **WARNING: uses 'v-html' for the 'displayName'. Make sure, that the source for this data is trustworthy.**
    */
-  export default {
+
+  export default defineComponent({
     name: 's-color-specimen',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -55,7 +56,7 @@
        *
        * @returns {String}
        */
-      displayName() {
+      displayName(): string {
         return this.name.split(' - ').join('<br />');
       },
 
@@ -64,7 +65,7 @@
        *
        * @returns {String}
        */
-      displayValue() {
+      displayValue(): string {
         return this.value.join(' - ');
       },
 
@@ -73,7 +74,7 @@
        *
        * @returns {String}
        */
-      backgroundColor() {
+      backgroundColor(): object {
         const [color1, color2] = this.value;
 
         return {
@@ -96,7 +97,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

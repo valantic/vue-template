@@ -59,7 +59,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'swiper4',
     data() {
       return {
@@ -69,6 +69,6 @@
         },
       };
     },
-  };
+  });
 </script>
 ```

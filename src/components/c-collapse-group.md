@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'collapse',
     data() {
       return {
@@ -41,6 +41,6 @@
         ]
       };
     },
-  };
+  });
 </script>
 ```

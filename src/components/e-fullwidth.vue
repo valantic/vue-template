@@ -6,19 +6,27 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import scrollbarWidth from '@/helpers/scrollbar-width';
+
+  interface IData {
+    scrollbarWidth: number;
+    resizeObserver: ResizeObserver;
+    // eslint-disable-next-line no-undef
+    resizeTimeout: NodeJS.Timeout | null;
+  }
 
   /**
    * Allows to display a full width element inside a container with limited width.
    */
-  export default {
+  export default defineComponent({
     name: 'e-fullwidth',
 
     // components: {},
     // mixins: [],
 
     // props: {},
-    data() {
+    data(): IData {
       return {
         /**
          * @type {Number} Holds the width of the page scrollbar.
@@ -30,7 +38,7 @@
          * will also be triggered, if the height of the page changes, and the scrollbar becomes visible.
          * The resize event was only triggered, when the user manually changes the screen size.
          */
-        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth),
+        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth as any),
 
         /**
          * @type {Number} Holds the ID of the currently running resize timeout.
@@ -45,7 +53,7 @@
        *
        * @returns {Object}
        */
-      style() {
+      style(): object | null {
         if (this.scrollbarWidth) {
           const margin = `calc((50vw - ${this.scrollbarWidth / 2}px) * -1)`;
 
@@ -93,7 +101,9 @@
        * Recalculates the scrollbar width.
        */
       updateScrollbarWidth() {
-        clearTimeout(this.resizeTimeout);
+        if (this.resizeTimeout) {
+          clearTimeout(this.resizeTimeout);
+        }
 
         this.resizeTimeout = setTimeout(() => {
           this.scrollbarWidth = scrollbarWidth();
@@ -102,7 +112,7 @@
     },
 
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

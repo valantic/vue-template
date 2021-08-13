@@ -15,12 +15,12 @@
   </e-fieldset>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```
 #### With legend
@@ -37,11 +37,11 @@
   </e-fieldset>
 </template>
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       demo: ''
     })
-  };
+  });
 </script>
 ```

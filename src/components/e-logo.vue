@@ -18,14 +18,21 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import themes from '../mixins/themes';
+
+  interface ILogo {
+    icon: string;
+    alt: string;
+    title: string;
+  }
 
   /**
    * e-logo renders the company logo depending on the current theme (from the vuex store)
    *
    * Native link attributes can be used
    */
-  export default {
+  export default defineComponent({
     name: 'e-logo',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -45,7 +52,7 @@
        *
        * @returns {Object} logo-name
        */
-      logo() {
+      logo(): ILogo {
         const { theme } = this;
         const title = this.$t('e-logo.linkTitle');
         let icon = '';
@@ -104,7 +111,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -19,6 +19,7 @@ export default [
   [viewport],
   [modal],
   [api],
+  // please note: if you change the VueBemCn methodName, adjust the global definition in shims-vuex.d.ts
   [VueBemCn, {
     hyphenate: true,
   }],

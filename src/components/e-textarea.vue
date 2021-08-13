@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import cFormNotification from '@/components/c-form-notification.vue';
   import formStates from '@/mixins/form-states';
 
@@ -33,7 +34,7 @@
    *
    * **WARNING: uses 'v-html' for the 'notification'. Make sure, that the source for this data is trustworthy.**
    */
-  export default {
+  export default defineComponent({
     name: 'e-textarea',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -95,7 +96,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): object {
         return {
           ...this.stateModifiers,
           notification: Boolean(this.$props.notification && this.hasFocus),
@@ -107,7 +108,7 @@
        *
        * @returns {Object}
        */
-      fieldModifiers() {
+      fieldModifiers(): object {
         return {
           isResizable: this.isResizable,
         };
@@ -132,8 +133,10 @@
        *
        * @param   {String}  event   Field input
        */
-      onInput(event) {
-        this.$emit('input', event.target.value);
+      onInput(event: Event) {
+        const textArea = event.currentTarget as HTMLTextAreaElement;
+
+        this.$emit('input', textArea.value);
       },
 
       /**
@@ -144,7 +147,7 @@
         this.hasFocus = true;
 
         this.$emit('focus');
-        this.$parent.$emit('focus');
+        this.$parent?.$emit('focus');
       },
 
       /**
@@ -155,11 +158,11 @@
         this.hasFocus = false;
 
         this.$emit('blur');
-        this.$parent.$emit('blur');
+        this.$parent?.$emit('blur');
       },
     },
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

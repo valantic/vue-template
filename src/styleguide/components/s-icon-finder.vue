@@ -29,15 +29,28 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import { defineComponent } from 'vue';
+
+  interface IData {
+    icons: string[];
+    filter: string;
+    notification: string;
+  }
+
+  interface IIcon {
+    name: string;
+  }
+
+  export default defineComponent({
     name: 's-icon-finder',
 
     // props: {},
 
-    data() {
+    data(): IData {
       const icons = require.context('../../assets/icons/', false, /\.svg/).keys();
 
       return {
+        // @ts-ignore
         icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
         filter: '',
         notification: ''
@@ -51,10 +64,10 @@
        *
        * @returns {Array.<Object>}
        */
-      filteredIcons() {
-        const list = this.icons.filter(icon => icon.indexOf(this.filter) > -1);
+      filteredIcons(): object[] {
+        const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);
 
-        return list.map((icon) => { // eslint-disable-line arrow-body-style
+        return list.map((icon: string) => { // eslint-disable-line arrow-body-style
           return {
             name: icon,
             negative: Boolean(icon.match(/negative/))
@@ -68,9 +81,9 @@
        *
        * @param {Object} icon - The icon instance for which the example code should be copied.
        */
-      copyToClipboard(icon) {
+      copyToClipboard(icon: IIcon) {
         const value = `<e-icon icon="${icon.name}"/>`;
-        const hiddenInput = this.$refs.input;
+        const hiddenInput = this.$refs.input as HTMLInputElement;
 
         hiddenInput.value = value;
         hiddenInput.select();
@@ -84,7 +97,7 @@
        *
        * @param {String} message - The to be shown message.
        */
-      setNotification(message) {
+      setNotification(message: string) {
         this.notification = message;
       }
     }
@@ -100,7 +113,7 @@
     // deactivated(): void {},
     // beforeUnmount(): void {},
     // unmounted(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

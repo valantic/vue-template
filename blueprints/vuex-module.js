@@ -1,4 +1,4 @@
-export default {
+export default defineComponent({
   namespaced: true,
   // state: {},
   // getters: {},

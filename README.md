@@ -380,13 +380,13 @@ By default, actions, mutations and getters inside modules are still registered u
 ```javascript
 // store/modules/cart/index.js
 
-export default {
+export default defineComponent({
   namespaced: true,
   state: {},
   getters: {}, // e.g. -> getters['cart/product']
   mutations: {},
   actions: {},
-};
+});
 ```
 
 As the application grows it's possible to even split the module again e.g. into a structure like this:
@@ -595,7 +595,7 @@ Theme styles are delivered seperatly in a *.css file. In this files are the glob
 
 Usage example:
 ```scss
-  .class {
+  .c-class {
     color: $color-primary--1;
     background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
     background-color: rgba($color-primary--1--rgb, 0.5);
@@ -741,9 +741,11 @@ Be sure that you add "cross-env" at the start of the script like:
 
 package.json:
 ```json
-"scripts": {
-    "build": "cross-env NODE_ENV=production webpack --mode production --progress",
-  },
+{
+  "scripts": {
+      "build": "cross-env NODE_ENV=production webpack --mode production --progress"
+    }
+}
 ```
 
 ## Roadmap
@@ -774,9 +776,15 @@ package.json:
 * [ ] Add types for all Computed / Watch Properties
 * [ ] Fix Modal Stack / Viewport Reactive not working
 * [ ] Check if Pimcore directive works
-* [ ] Fix most of // @ts-ignore comments
+* [ ] Fix most of // @ts-ignore comments / any usages
 * [ ] Make styleguideist work
 * [ ] Type NotificationOptions
+* [ ] Add typings for data modifiers
+* [ ] Check usages of Ref and calling methods on children
+* [ ] Check if mixins can be replaced by Composition API because typing is not really working
+* [ ] Add Documentation and Wiki Section about 
+  - always returning an arrow function for custom validator of props (to fix random TS errors)
+  - always returning a defined type for any other functions (to fix random TS errors about undefined variables)
 
 ## License
 

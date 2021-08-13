@@ -8,10 +8,11 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
   import styleguideRoutes from '@/setup/styleguide.routes';
 
-  export default {
+  export default defineComponent({
     name: 'app',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -50,7 +51,7 @@
 
     // methods: {},
     // render(): void {},
-  };
+  });
 </script>
 
 <style lang="scss">

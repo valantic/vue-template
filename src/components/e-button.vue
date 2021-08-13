@@ -25,8 +25,20 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import eProgress from './e-progress.vue';
+
+  interface IAttributes {
+    role: string | null;
+    disabled: boolean;
+    [key: string]: string | boolean | null;
+  }
+
+  interface IElementDimensions {
+    width: string;
+    height: string;
+  }
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
@@ -36,7 +48,7 @@
    *
    * [You can also define inherited attributes for `<a>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/a#Attribute)
    */
-  export default {
+  export default defineComponent({
     name: 'e-button',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -54,12 +66,10 @@
       width: {
         type: String,
         default: null,
-        validator(value) {
-          return [
-            'full',
-            'auto',
-          ].includes(value);
-        },
+        validator: (value: string) => [
+          'full',
+          'auto',
+        ].includes(value),
       },
 
       /**
@@ -164,7 +174,7 @@
        *
        * @returns {Object}
        */
-      modifiers() {
+      modifiers(): object {
         return {
           width: this.width,
           spacing: this.spacing,
@@ -184,7 +194,7 @@
        *
        * @returns {Object}
        */
-      attributes() {
+      attributes(): IAttributes {
         return {
           role: this.$attrs.href ? 'button' : null, // Fallback
           ...this.$attrs,
@@ -197,7 +207,7 @@
        *
        * @returns {Object}
        */
-      style() {
+      style(): IElementDimensions | null {
         return this.progress && this.width !== 'full'
           ? this.getElementDimensions()
           : null;
@@ -266,7 +276,7 @@
        *
        * @param {Event} event - The click event instance.
        */
-      onClick(event) {
+      onClick(event: Event): void {
         this.$el.blur();
 
         /**
@@ -284,7 +294,7 @@
        *
        * @returns {Object}
        */
-      getElementDimensions() {
+      getElementDimensions(): IElementDimensions | null {
         const element = this.$el;
 
         return element
@@ -292,7 +302,7 @@
           : null;
       },
     },
-  };
+  });
 </script>
 
 <style lang="scss">
