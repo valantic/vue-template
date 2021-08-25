@@ -790,6 +790,7 @@ package.json:
 * [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
 * [ ] Update blueprints
 * [ ] Vuex is broken (module import, module definition)
+* [ ] Fix broken Jest tests
 
 ## License
 
