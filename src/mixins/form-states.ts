@@ -77,11 +77,14 @@ export default (defaultValue: string = ''): IFormStates => {
   });
 
   return {
+    // data
     active,
     disabled,
     focus,
     hover,
     state: inputState,
+
+    // computed
     stateModifiers,
     stateIcon,
     hasDefaultState,
