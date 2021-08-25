@@ -182,7 +182,7 @@
       };
     },
 
-    data() {
+    data() { // TODO: add interface. Why is no error thrown?
       return {
         internalValue: this.value
       };
@@ -194,8 +194,7 @@
        * @returns {Boolean}
        */
       showNotification(): boolean {
-        // @ts-ignore
-        return this.state && this.state !== 'default' && this.notification && this.hasFocus;
+        return !!(this.state && this.state !== 'default' && this.notification && this.focus);
       },
 
       /**
@@ -270,7 +269,7 @@
 
       /**
        * Emits focus to parent and wrapper component.
-       * Update "hasFocus" state.
+       * Update "focus" state.
        */
       onFocus() {
         this.focus = true;
@@ -289,7 +288,7 @@
 
       /**
        * Emits blur to parent and wrapper component.
-       * Update "hasFocus" state.
+       * Update "focus" state.
        */
       onBlur() {
         this.focus = false;
