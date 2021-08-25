@@ -31,7 +31,7 @@ export interface IFormStates {
   stateModifiers: ComputedRef<IStateModifiers>;
   stateIcon: ComputedRef<string>;
   hasDefaultState: ComputedRef<boolean>;
-  isChecked: WritableComputedRef<boolean>;
+  isChecked: ComputedRef<boolean>;
 }
 
 export default (defaultValue: string = ''): IFormStates => {
