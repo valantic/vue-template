@@ -20,6 +20,3 @@ gen
 
 # npm
 npm-debug.log
-
-# nvm
-.nvmrc
