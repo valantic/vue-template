@@ -786,6 +786,7 @@ package.json:
 * [ ] Add Documentation and Wiki Section about 
   - always returning an arrow function for custom validator of props (to fix random TS errors)
   - always returning a defined type for any other functions (to fix random TS errors about undefined variables)
+* [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
 
 ## License
 

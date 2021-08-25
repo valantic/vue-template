@@ -5,7 +5,6 @@ import {
   WritableComputedRef
 } from 'vue';
 
-// eslint-disable-next-line no-shadow
 enum FieldStates {
   Default = 'default',
   Success = 'success',
@@ -38,21 +37,17 @@ export interface IFormStates {
 export default (defaultValue: string = ''): IFormStates => {
   const inputState = ref<FieldStates>(FieldStates.Default);
   const inputValue = ref<string>(defaultValue);
-
   const active = ref<boolean>(false);
   const disabled = ref<boolean>(false);
   const focus = ref<boolean>(false);
   const hover = ref<boolean>(false);
   const checked = ref<boolean | string[]>(false);
 
-  const isChecked: WritableComputedRef<boolean> = computed({
-    get(): boolean {
-      return Array.isArray(checked.value) ? checked.value.includes(inputValue.value) : checked.value;
-    },
-    set(newValue: boolean): boolean {
-      return newValue;
-    },
-  });
+  const isChecked: WritableComputedRef<boolean> = computed((): boolean => { // eslint-disable-line arrow-body-style
+      return Array.isArray(checked.value)
+        ? checked.value.includes(inputValue.value)
+        : checked.value;
+    });
 
   const stateModifiers: ComputedRef<IStateModifiers> = computed(() => ({
       state: inputState.value,

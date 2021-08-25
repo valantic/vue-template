@@ -1,6 +1,11 @@
 // https://eslint.org/docs/user-guide/configuring
 const vueRules = require('eslint-config-valantic/plugins/vue');
 
+const tsRules = { // TODO: move to config package.
+  "no-shadow": "off",
+  "@typescript-eslint/no-shadow": "error"
+}
+
 module.exports = {
   root: true,
   parserOptions: {
@@ -28,6 +33,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     ...vueRules,
+    ...tsRules,
     'require-jsdoc': 0,
   },
   globals: {},
