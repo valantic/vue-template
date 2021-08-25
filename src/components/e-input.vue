@@ -12,8 +12,8 @@
            @focus="onFocus"
            @input="onInput"
            @keyup.enter="onEnterKeyUp"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
+           @mouseenter="hover = true"
+           @mouseleave="hover = false"
     >
     <input v-else
            ref="input"
@@ -28,8 +28,8 @@
            @focus="onFocus"
            @input="onInput"
            @keyup.enter="onEnterKeyUp"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
+           @mouseenter="hover = true"
+           @mouseleave="hover = false"
     >
 
     <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
@@ -37,8 +37,8 @@
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
       </span>
-      <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
-      <e-icon v-if="!hasDefaultState && !hasFocus"
+      <span v-if="!hasDefaultState && !focus" :class="b('icon-splitter')"></span>
+      <e-icon v-if="!hasDefaultState && !focus"
               :class="b('state-icon')"
               :icon="stateIcon" />
     </span>
@@ -53,9 +53,10 @@
   import { defineComponent, ref, Ref } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification.vue';
-  import formStates from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface ISetup {
+  interface ISetup extends IFormStates {
     input: Ref<HTMLInputElement | null>;
     slot: Ref<HTMLSpanElement | null>;
   }
@@ -72,7 +73,6 @@
     components: {
       cFormNotification
     },
-    mixins: [formStates],
     inheritAttrs: false,
 
     props: {
@@ -175,6 +175,7 @@
       const slot = ref(null);
 
       return {
+        ...useFormStates(),
         input,
         slot,
       };
@@ -201,7 +202,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         const {
           border,
           noNativeControl,
@@ -210,8 +211,8 @@
 
         return {
           ...this.stateModifiers,
-          notification: notification && this.hasFocus,
-          type: this.$attrs.type || 'text',
+          notification: notification && this.focus,
+          type: this.$attrs.type !== null || 'text',
           border,
           noNativeControl,
         };
@@ -271,7 +272,7 @@
        * Update "hasFocus" state.
        */
       onFocus() {
-        this.hasFocus = true;
+        this.focus = true;
 
         if (this.selectOnFocus) {
           this.selectValue();
@@ -290,7 +291,7 @@
        * Update "hasFocus" state.
        */
       onBlur() {
-        this.hasFocus = false;
+        this.focus = false;
 
         /**
          * blur event fires on blur

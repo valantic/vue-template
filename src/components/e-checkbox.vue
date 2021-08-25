@@ -1,7 +1,7 @@
 <template>
   <label :class="b(stateModifiers)"
-         @mouseenter="hasHover = true"
-         @mouseleave="hasHover = false">
+         @mouseenter="hover = true"
+         @mouseleave="hover = false">
     <input
       v-model="internalValue"
       v-bind="$attrs"
@@ -21,7 +21,9 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import formStates from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/mixins/form-states';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Checkbox component for form elements.
@@ -31,7 +33,6 @@
     name: 'e-checkbox',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    mixins: [formStates],
     inheritAttrs: false,
 
     model: {
@@ -67,6 +68,12 @@
         type: [String, Number, Boolean],
         required: true,
       },
+    },
+
+    setup(): ISetup {
+      return {
+        ...useFormStates(),
+      };
     },
 
     // data() {
@@ -128,7 +135,7 @@
        * Update "hasFocus" state.
        */
       onFocus() {
-        this.hasFocus = true;
+        this.focus = true;
 
         /**
          * Focus event
@@ -144,7 +151,7 @@
        * Update "hasFocus" state.
        */
       onBlur() {
-        this.hasFocus = false;
+        this.focus = false;
 
         /**
          * Blur event.

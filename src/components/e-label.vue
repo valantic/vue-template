@@ -17,7 +17,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import formStates from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Label component for form elements, can be used with a slot or a for attribute
@@ -28,7 +31,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
 
     props: {
       /**
@@ -78,13 +80,19 @@
       },
     },
 
+    setup(): ISetup {
+      return {
+        ...useFormStates(),
+      };
+    },
+
     computed: {
       /**
        * Defines state modifier classes.
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
           position: this.position,

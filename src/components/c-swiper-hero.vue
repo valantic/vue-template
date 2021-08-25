@@ -133,11 +133,8 @@
             el: null, // $ref is not available on init
             type: 'bullets',
             clickable: true,
-            // @ts-ignore
-            dynamicBullets: this.$props.data
-              // @ts-ignore
-              ? this.$props.data.images.length > 7 || false
-              : this.images.length > 7 || false,
+
+            dynamicBullets: this.images.length > 7 || false,
             dynamicMainBullets: 5,
           },
         },
