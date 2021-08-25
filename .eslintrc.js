@@ -28,6 +28,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     ...vueRules,
+    'require-jsdoc': 0,
   },
   globals: {},
 };
