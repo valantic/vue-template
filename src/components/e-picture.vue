@@ -30,6 +30,11 @@
     xs: number,
     xxs: number,
     [key: number]: number;
+    [key: string]: number;
+  }
+
+  interface ISizePerBreakpoint {
+    [key: number]: number
   }
 
   /**
@@ -211,38 +216,37 @@
        * @returns {String|null}
        */
       mappedSizes(): string | null {
-        const { sizes } : { sizes: ISizes} = this;
-
-        if (!sizes) {
+        if (!this.sizes) {
           return null;
         }
 
-        const mappedSizesBreakpoints = {};
-        const fallback = sizes.fallback ? `,${sizes.fallback}px` : ',100vw';
+        const mappedSizesPerBreakpoints: ISizePerBreakpoint = {};
+        const fallback = this.sizes.fallback ? `,${this.sizes.fallback}px` : ',100vw';
 
         return Object
-          .keys(sizes)
-          .map((breakpoint: string) => {
-            if (breakpoint === 'fallback') {
+          .keys(this.sizes)
+          .map((size: string | number) => {
+            if (size === 'fallback') {
               return null;
             }
 
-            // @ts-ignore
-            const key = Number.isNaN(BREAKPOINTS_MAX[breakpoint]) // The viewport could be 0, so we need to test the type.
-              ? breakpoint
-              // @ts-ignore
-              : BREAKPOINTS_MAX[breakpoint];
+            const breakpoint = size as keyof typeof BREAKPOINTS_MAX;
 
-            // @ts-ignore
-            mappedSizesBreakpoints[key] = sizes[breakpoint];
+            // check if the provided size key exists as breakpoint key
+            // if yes, take the corresponding breakpoint value,
+            // otherwise take the size key (which is a number in that case)
+            const breakpointValue = BREAKPOINTS_MAX[breakpoint] ? BREAKPOINTS_MAX[breakpoint] : size as number;
 
-            return key;
+            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size];
+
+            return breakpointValue;
           })
-          .filter(Boolean)
+          .filter(breakpointValue => breakpointValue)
+          // @ts-ignore
           .sort((a, b) => (a > b ? 1 : -1))
           .map((breakpoint) => {
             // @ts-ignore
-            const viewWidth = Math.floor((mappedSizesBreakpoints[breakpoint] / breakpoint) * 100);
+            const viewWidth = Math.floor((mappedSizesPerBreakpoints[breakpoint] / breakpoint) * 100);
 
             return `(max-width: ${breakpoint}px) ${viewWidth}vw`;
           })
