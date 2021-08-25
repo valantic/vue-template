@@ -766,6 +766,7 @@ package.json:
 * [ ] Replace vue-js-modal (not compatible with Vue 3).
 * [ ] Check if modal stacking in styleguide still needs multiple teleports.
 * [ ] Fix failing tests.
+* [ ] Update blueprints
 
 ### Typescript
 
@@ -787,6 +788,8 @@ package.json:
   - always returning an arrow function for custom validator of props (to fix random TS errors)
   - always returning a defined type for any other functions (to fix random TS errors about undefined variables)
 * [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
+* [ ] Update blueprints
+* [ ] Vuex is broken (module import, module definition)
 
 ## License
 
