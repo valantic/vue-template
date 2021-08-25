@@ -10,13 +10,13 @@
               @blur="onBlur"
               @input="onInput">
     </textarea>
-    <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-wrapper')">
+    <span v-if="!hasDefaultState && !focus" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
               :icon="stateIcon"
               inline />
     </span>
-    <div v-if="notification && hasFocus" :class="b('notification')">
+    <div v-if="notification && focus" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
     </div>
@@ -26,7 +26,10 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cFormNotification from '@/components/c-form-notification.vue';
-  import formStates from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -41,7 +44,6 @@
     components: {
       cFormNotification,
     },
-    mixins: [formStates],
     inheritAttrs: false,
 
     props: {
@@ -85,6 +87,13 @@
         default: false,
       }
     },
+
+    setup(): ISetup {
+      return {
+        ...useFormStates(),
+      };
+    },
+
     // data() {
     //   return {};
     // },
@@ -96,10 +105,10 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-          notification: Boolean(this.$props.notification && this.hasFocus),
+          notification: this.$props.notification && this.focus,
         };
       },
 
@@ -108,7 +117,7 @@
        *
        * @returns {Object}
        */
-      fieldModifiers(): object {
+      fieldModifiers(): IModifiers {
         return {
           isResizable: this.isResizable,
         };
@@ -144,10 +153,9 @@
        * Updates "hasFocus" state.
        */
       onFocus() {
-        this.hasFocus = true;
+        this.focus = true;
 
         this.$emit('focus');
-        this.$parent?.$emit('focus');
       },
 
       /**
@@ -155,10 +163,9 @@
        * Updates "hasFocus" state.
        */
       onBlur() {
-        this.hasFocus = false;
+        this.focus = false;
 
         this.$emit('blur');
-        this.$parent?.$emit('blur');
       },
     },
     // render(): void {},
