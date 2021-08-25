@@ -17,7 +17,7 @@ import { Plugin } from 'vue';
  * @returns {Array}
  */
 function wildcard(config: AxiosRequestConfig) {
-  const errorCode = Number(config?.params?.isErrorTest);
+  const errorCode = Number(config?.params?.isErrorTest || 500);
 
   if (errorCode) {
     // eslint-disable-next-line no-console

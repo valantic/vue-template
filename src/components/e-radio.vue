@@ -1,8 +1,8 @@
 <template>
   <div :class="b(modifiers)">
     <label :class="b('label')"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false">
+           @mouseenter="hover = true"
+           @mouseleave="hover = false">
       <input v-model="internalValue"
              v-bind="$attrs"
              :class="b('field', fieldModifiers)"
@@ -22,7 +22,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import formStates from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
@@ -34,7 +37,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
     inheritAttrs: false,
 
     model: {
@@ -71,6 +73,13 @@
         type: [String, Number],
       }
     },
+
+    setup(): ISetup {
+      return {
+        ...useFormStates(),
+      };
+    },
+
     // data() {
     //   return {};
     // },
@@ -102,7 +111,7 @@
        *
        * @returns {Object}
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
@@ -114,7 +123,7 @@
        *
        * @returns {Object}
        */
-      fieldModifiers(): object {
+      fieldModifiers(): IModifiers {
         return {
           selected: this.internalValue === this.value,
         };
@@ -148,7 +157,7 @@
          * @event change
          * @type {String}
          */
-        this.$parent?.$emit('change', radioButton.value);
+        this.$emit('change', radioButton.value);
       },
     },
     // render(): void {},

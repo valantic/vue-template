@@ -1,14 +1,14 @@
 <template>
   <div :class="b(modifiers)"
-       @mouseenter="hasHover=true"
-       @mouseleave="hasHover=false"
+       @mouseenter="hover=true"
+       @mouseleave="hover=false"
   >
     <p v-if="title.length" :class="b('title')">
       {{ title }}
     </p>
-    <div :class="b('wrapper', { isActive })" @click="onInsideClick">
+    <div :class="b('wrapper', { active })" @click="onInsideClick">
       <div :class="b('content')">
-        <div v-if="!isActive" :class="b('output')" @click="onOutputClick">
+        <div v-if="!active" :class="b('output')" @click="onOutputClick">
           <span v-if="outputValue" :class="b('value')">
             {{ outputValue }}
           </span>
@@ -89,7 +89,7 @@
           </e-button>
         </div>
 
-        <div v-if="isError && isActive" :class="b('error-msg-wrapper')">
+        <div v-if="isError && active" :class="b('error-msg-wrapper')">
           <span :class="b('error-msg')">
             {{ errorMessage }}
           </span>
@@ -111,7 +111,8 @@
   import {
     ComponentPublicInstance, defineComponent, PropType, Ref, ref
   } from 'vue';
-  import formStates from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface IItems {
     value: string;
@@ -139,7 +140,7 @@
     searchTerm: string;
   }
 
-  interface ISetup {
+  interface ISetup extends IFormStates {
     multiple: Ref<ComponentPublicInstance[] | null>;
     searchInput: Ref<ComponentPublicInstance[] | null>;
   }
@@ -154,7 +155,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
 
     props: {
       /**
@@ -211,6 +211,7 @@
       const searchInput = ref(null);
 
       return {
+        ...useFormStates(),
         multiple,
         searchInput
       };
@@ -303,7 +304,7 @@
        *
        * @returns {Object}
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
           success: this.isSuccess,
@@ -407,7 +408,7 @@
        * Checks, if the click was outside of the component, and if so, toggles the active state.
        */
       onOutsideClick() {
-        if (this.isActive) {
+        if (this.active) {
           this.update();
         }
       },
@@ -426,7 +427,7 @@
        */
       onOutputClick() {
         if (!this.disabled) {
-          this.isActive = true;
+          this.active = true;
           this.setFocusOnInput();
 
           /**
@@ -477,7 +478,7 @@
           });
         }
 
-        this.isActive = false;
+        this.active = false;
         this.isSuccess = this.checkedItems.length > 0;
         this.isChanged = false;
         this.checkboxItemsFiltered.forEach((checkboxItem) => {

@@ -236,13 +236,6 @@ module.exports = (env, args = {}) => {
 
   const rules = [
     {
-      test: /\.js$/,
-      exclude: /core-js/,
-      use: {
-        loader: 'babel-loader',
-      },
-    },
-    {
       test: /\.vue$/,
       loader: 'vue-loader',
       options: {
@@ -256,6 +249,25 @@ module.exports = (env, args = {}) => {
             'pimcore-snippet': () => !isProduction,
             'pimcore-template': () => !isProduction,
           }
+        }
+      },
+    },
+    {
+      test: /\.tsx?$/,
+      loader: 'ts-loader',
+      exclude: /node_modules/,
+      options: {
+        appendTsSuffixTo: [/\.vue$/],
+      }
+    },
+    {
+      test: /\.js$/,
+      exclude: /core-js/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env'],
+          plugins: ['@babel/plugin-proposal-optional-chaining', '@babel/plugin-proposal-nullish-coalescing-operator']
         }
       },
     },
@@ -290,14 +302,6 @@ module.exports = (env, args = {}) => {
           },
         },
       ],
-    },
-    {
-      test: /\.tsx?$/,
-      loader: 'ts-loader',
-      exclude: /node_modules/,
-      options: {
-        appendTsSuffixTo: [/\.vue$/],
-      }
     },
     {
       test: /\.(gif|png|jpe?g|svg)$/i,

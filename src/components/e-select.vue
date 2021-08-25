@@ -29,7 +29,9 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import i18n from '@/setup/i18n';
-  import formStates from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/mixins/form-states';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Renders a styled select element. Options can be passed with the `options` property.
@@ -39,7 +41,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
     inheritAttrs: false,
 
     props: {
@@ -103,6 +104,13 @@
         default: 'label',
       },
     },
+
+    setup(): ISetup {
+      return {
+        ...useFormStates(),
+      };
+    },
+
     // data() {
     //   return {};
     // },
