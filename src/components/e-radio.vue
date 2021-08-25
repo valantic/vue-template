@@ -92,7 +92,6 @@
        */
       internalValue: {
         get(): string | number {
-          // @ts-ignore
           return this.selected;
         },
         set(value: string): void {
