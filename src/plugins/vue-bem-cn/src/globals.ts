@@ -19,8 +19,8 @@ export const DEFAULT_CONFIG = {
   methodName: 'b',
 };
 
-interface IModifiers {
-  [key: string]: boolean
+export interface IModifiers {
+  [key: string]: boolean | string | number;
 }
 
-export type IVueBemFunction = (elementOrModifiers: string | IModifiers, modifiers?: IModifiers) => string;
+export type IVueBemFunction = (elementOrModifiers?: string | IModifiers, modifiers?: IModifiers) => string;

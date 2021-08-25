@@ -769,7 +769,10 @@ package.json:
 
 ### Typescript
 
-* [ ] Replace $eventBus with pubsup, see https://morioh.com/p/f1bc7c5f9ca4 / https://github.com/developit/mitt
+* [ ] Remove $eventBus 
+* [ ] Removoe Collapsible Component
+* [ ] Remove this.props.
+* [ ] Check if TS Loader can be combined with babel
 * [ ] Change Global BREAKPOINTS to enum
 * [ ] Plugin Parameter options typing
 * [ ] Remove all JSDocs
