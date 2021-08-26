@@ -178,7 +178,7 @@
        *
        * @returns {String}
        */
-      width() {
+      width(): string {
         if (this.isMobile) {
           return '100%';
         }

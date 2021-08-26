@@ -29,7 +29,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, Ref, ref } from 'vue';
+
+  interface ISetup {
+    input: Ref<HTMLInputElement | null>;
+  }
 
   interface IData {
     icons: string[];
@@ -45,6 +49,14 @@
     name: 's-icon-finder',
 
     // props: {},
+
+    setup(): ISetup {
+      const input = ref(null);
+
+      return {
+        input,
+      };
+    },
 
     data(): IData {
       const icons = require.context('../../assets/icons/', false, /\.svg/).keys();
@@ -83,7 +95,7 @@
        */
       copyToClipboard(icon: IIcon) {
         const value = `<e-icon icon="${icon.name}"/>`;
-        const hiddenInput = this.$refs.input as HTMLInputElement;
+        const hiddenInput = this.input as HTMLInputElement;
 
         hiddenInput.value = value;
         hiddenInput.select();

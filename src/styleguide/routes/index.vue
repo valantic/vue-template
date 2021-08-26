@@ -45,7 +45,7 @@
        *
        * @returns {Boolean}
        */
-      isProduction() {
+      isProduction(): boolean {
         return process.env.NODE_ENV === 'production';
       },
     },

@@ -79,7 +79,7 @@
 
 <script lang="ts">
   import { defineComponent, Ref, ref } from 'vue';
-  import Swiper, { Navigation, Pagination } from 'swiper';
+  import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import cSwiperModal from '@/components/c-swiper-modal.vue';
   import mapImages from '@/helpers/map-images';
@@ -87,12 +87,16 @@
   import cModal from '@/components/c-modal.vue';
   import { IVideo } from '@/types/c-swiper-gallery';
   import { IImage } from '@/types/e-image';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISwiperInstances {
     [key: string]: Swiper;
   }
 
   interface ISetup {
+    previous: Ref<HTMLDivElement | null>;
+    next: Ref<HTMLDivElement | null>;
+    pagination: Ref<HTMLDivElement | null>;
     container: Ref<HTMLDivElement | null>;
   }
 
@@ -140,9 +144,15 @@
 
     setup(): ISetup {
       const container = ref(null);
+      const previous = ref(null);
+      const next = ref(null);
+      const pagination = ref(null);
 
       return {
         container,
+        previous,
+        next,
+        pagination,
       };
     },
 
@@ -189,7 +199,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         return {
           hover: this.hasHover,
           modalOpen: this.modalOpen,
@@ -201,17 +211,18 @@
        *
        * @returns  {Object}  optionsMerged    Combination of default and custom options.
        */
-      optionsMerged(): object {
+      optionsMerged(): SwiperOptions {
         return {
           ...this.optionsDefault,
           navigation: {
             ...this.optionsDefault.navigation,
-            nextEl: this.$refs.next,
-            prevEl: this.$refs.previous,
+            nextEl: this.next,
+            prevEl: this.previous,
           },
+          // @ts-ignore
           pagination: {
             ...this.optionsDefault.pagination,
-            el: this.$refs.pagination,
+            el: this.pagination,
           },
           ...this.options,
         };

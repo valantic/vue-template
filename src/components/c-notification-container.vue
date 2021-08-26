@@ -15,6 +15,7 @@
   import { defineComponent } from 'vue';
   import { mapGetters } from 'vuex';
   import cNotification from '@/components/c-notification.vue';
+  import { INotification } from '@/types/c-notification';
 
   /**
    * Container for rendering notifications. See /styleguide/notifications for demo.
@@ -87,7 +88,7 @@
        *
        * @returns {Array.<Object>}
        */
-      notifications() {
+      notifications(): INotification[] {
         switch (this.displayType) {
           case 'global':
             return this.getGlobalNotifications;

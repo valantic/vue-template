@@ -46,6 +46,7 @@
   import { defineComponent, PropType } from 'vue';
   import { mapMutations } from 'vuex';
   import { INotification } from '@/types/c-notification';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
@@ -137,9 +138,10 @@
        *
        * @returns {Object}
        */
-      componentModifiers(): object {
+      componentModifiers(): IModifiers {
         return {
           type: this.notification.message?.type,
+          // @ts-ignore
           confirm: this.notification.confirm,
           displayType: this.displayType,
           visible: this.visible,
@@ -151,7 +153,7 @@
        *
        * @returns {Object}
        */
-      innerModifiers(): object {
+      innerModifiers(): IModifiers {
         return {
           isProductTile: this.notification.message?.type === 'add-to-cart'
         };

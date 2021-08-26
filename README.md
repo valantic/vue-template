@@ -770,19 +770,24 @@ package.json:
 
 ### Typescript
 
-* [ ] Remove $eventBus 
-* [ ] Removoe Collapsible Component
-* [ ] Remove this.props.
 * [ ] Check if TS Loader can be combined with babel
+  * Can be done by omitting babel
+* [ ] Make Store with Modules work
+  * see https://next.vuex.vuejs.org/guide/typescript-support.html
+  * See how its done manually: https://dev.to/shubhadip/vue-3-vuex-4-modules-typescript-2i2o
+  * See https://stackoverflow.com/questions/64080549/using-vuex-4-modules-in-vue-3-with-typescript-and-how-to-fix-cyclical-dependenc
+  * See https://codesandbox.io/s/using-vuex-4-modules-in-vue-3-with-typescript-7ygvy
+  * See https://github.com/timritzer/typed-vuex
+  * See https://github.com/victorgarciaesgi/vuex-typed-modules
+  * See https://github.com/paroi-tech/direct-vuex#implement-a-vuex-store-with-typed-helpers
+  * See https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3
 * [ ] Change Global BREAKPOINTS to enum
 * [ ] Plugin Parameter options typing
 * [ ] Remove all JSDocs
-* [ ] Add types for all Computed / Watch Properties
 * [ ] Fix Modal Stack / Viewport Reactive not working
 * [ ] Check if Pimcore directive works
 * [ ] Fix most of // @ts-ignore comments / any usages
 * [ ] Make styleguideist work
-* [ ] Check usages of Ref and calling methods on children
 * [ ] Check if mixins can be replaced by Composition API because typing is not really working
 * [ ] Add Documentation and Wiki Section about 
   - always returning an arrow function for custom validator of props (to fix random TS errors)

@@ -20,7 +20,7 @@ export const DEFAULT_CONFIG = {
 };
 
 export interface IModifiers {
-  [key: string]: boolean | string | number;
+  [key: string]: boolean | string | number | undefined;
 }
 
 export type IVueBemFunction = (elementOrModifiers?: string | IModifiers, modifiers?: IModifiers) => string;

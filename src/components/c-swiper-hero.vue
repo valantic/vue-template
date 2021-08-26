@@ -46,6 +46,7 @@
   import { defineComponent, ref, Ref } from 'vue';
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import mapHeroImages from '@/helpers/map-hero-images';
   import { IImage } from '@/types/e-image';
   import uuid from '../mixins/uuid';
@@ -149,7 +150,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         return {
           hover: this.hasHover,
         };

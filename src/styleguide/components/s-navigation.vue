@@ -43,6 +43,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import sLanguage from './s-language.vue';
   import sThemeSelector from './s-theme-selector.vue';
   import sDemoSettings from './s-demo-settings.vue';
@@ -84,7 +85,7 @@
        *
        * @returns {String}
        */
-      styleguidistUrl() {
+      styleguidistUrl(): string {
         return process.env.IS_STYLEGUIDE_BUILD
           ? '/styleguidist'
           : '//localhost:6060';
@@ -95,7 +96,7 @@
        *
        * @returns {Object}
        */
-      wrapperModifiers(): object {
+      wrapperModifiers(): IModifiers {
         return {
           position: this.navPosition,
           open: this.isOpen,

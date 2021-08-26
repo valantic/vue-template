@@ -14,6 +14,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ICache {
     [key: string]: Promise<string>;
@@ -133,7 +134,7 @@
        *
        * @returns {Object}
        */
-      componentModifiers(): object {
+      componentModifiers(): IModifiers {
         return {
           color: this.color,
           [this.icon]: true,

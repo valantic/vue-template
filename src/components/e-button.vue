@@ -27,6 +27,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eProgress from './e-progress.vue';
 
   interface IAttributes {
@@ -174,7 +175,7 @@
        *
        * @returns {Object}
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         return {
           width: this.width,
           spacing: this.spacing,
