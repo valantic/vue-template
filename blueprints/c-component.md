@@ -5,11 +5,14 @@
 ```
 
 ```vue
+
 <template>
-  <c-component/>
+  <c-component />
 </template>
 
-<script>
-  export default defineComponent({};
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({});
 </script>
 ```

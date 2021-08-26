@@ -7,8 +7,11 @@
 <script lang="ts">
 
   /**
-   * TODO: add description for component styleguide.
-   */
+ * TODO: add description for component styleguide.
+ */
+
+  import { defineComponent } from 'vue';
+
   export default defineComponent({
     name: 'c-component', // TODO: update name according to filename
 
