@@ -109,9 +109,13 @@
 
 <script lang="ts">
   import {
-    ComponentPublicInstance, defineComponent, PropType, Ref, ref
+    ComponentPublicInstance,
+    defineComponent,
+    PropType,
+    Ref,
+    ref
   } from 'vue';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { FieldStates, IFormStates } from '@/mixins/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface IItems {
@@ -223,13 +227,13 @@
          * @type {Boolean} Defines if the multi-select is in error state.
          */
         // @ts-ignore
-        isError: this.$props.state === 'error',
+        isError: this.state === FieldStates.Error,
 
         /**
          * @type {Boolean} Defines if the multi-select is in success state.
          */
         // @ts-ignore
-        isSuccess: this.$props.state === 'success',
+        isSuccess: this.state === FieldStates.Success,
 
         /**
          * @type {Boolean} Defines if the multi-select has been changed.

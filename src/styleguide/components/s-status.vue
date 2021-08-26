@@ -45,10 +45,9 @@
        */
       modifiers(): IModifiers {
         const modifier = availableStatus[this.modifier];
-        const modifiers = {};
+        const modifiers: IModifiers = {};
 
         if (modifier) {
-          // @ts-ignore
           modifiers[modifier.modifier] = true;
         }
 

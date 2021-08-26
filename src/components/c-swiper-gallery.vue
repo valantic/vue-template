@@ -178,7 +178,6 @@
           },
           on: {
             slideChange: function() {
-              // @ts-ignore
               this.swiper.activeIndex = this.container.swiper.activeIndex;
             }.bind(this),
           },
@@ -301,7 +300,6 @@
        */
       onModalSlideChanged(index: number) {
         if (this.container) {
-          // @ts-ignore
           this.container.swiper.slideTo(index);
         }
       },
