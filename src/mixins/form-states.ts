@@ -43,7 +43,7 @@ export default (defaultValue: string = ''): IFormStates => {
   const hover = ref<boolean>(false);
   const checked = ref<boolean | string[]>(false);
 
-  const isChecked: WritableComputedRef<boolean> = computed((): boolean => { // eslint-disable-line arrow-body-style
+  const isChecked: ComputedRef<boolean> = computed((): boolean => { // eslint-disable-line arrow-body-style
       return Array.isArray(checked.value)
         ? checked.value.includes(inputValue.value)
         : checked.value;
