@@ -66,7 +66,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, Ref, ref } from 'vue';
+
+  interface ISetup {
+    input: Ref<HTMLInputElement | null>;
+  }
 
   const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const icons = require.context('@/assets/icons/', false, /\.svg/).keys();
@@ -75,6 +79,9 @@
     icons: string[];
     filter: string;
     notification: string;
+    color: string;
+    variant: string;
+    spritePath: string;
   }
 
   interface IIcon {
@@ -86,11 +93,20 @@
 
     // props: {},
 
+    setup(): ISetup {
+      const input = ref(null);
+
+      return {
+        input,
+      };
+    },
+
     data(): IData {
       return {
         /**
          * @type {Array} An array of available icons.
          */
+        // @ts-ignore
         icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
 
         /**
@@ -139,7 +155,7 @@
        * @param {Object} icon - The icon instance for which the example code should be copied.
        */
       copyToClipboard(icon: IIcon) {
-        const hiddenInput = this.$refs.input;
+        const hiddenInput = this.input as HTMLInputElement;
         let template;
 
         switch (this.variant) {

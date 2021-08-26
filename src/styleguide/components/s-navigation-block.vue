@@ -23,6 +23,7 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface IRoute {
     path: string;
@@ -64,7 +65,7 @@
        *
        * @returns {Object}
        */
-      componentModifiers(): object {
+      componentModifiers(): IModifiers {
         return {
           hasIndent: this.hasIndent,
         };

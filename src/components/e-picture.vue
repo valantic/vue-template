@@ -21,6 +21,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { BREAKPOINTS_MAX } from '@/setup/globals';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISizes {
     fallback: number;
@@ -188,7 +189,7 @@
        *
        * @returns {Object}
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         return {
           inline: this.inline,
           ratio: !!this.ratio,

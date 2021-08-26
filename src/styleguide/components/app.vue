@@ -10,7 +10,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
-  import styleguideRoutes from '@/setup/styleguide.routes';
+  import styleguideRoutes, { IRoute } from '@/setup/styleguide.routes';
 
   export default defineComponent({
     name: 'app',
@@ -32,7 +32,7 @@
        *
        * @returns {Array.<Object>}
        */
-      routes() {
+      routes(): IRoute[] {
         return styleguideRoutes;
       }
     },

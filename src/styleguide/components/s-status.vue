@@ -9,6 +9,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { availableStatus } from '@/plugins/styleguide.status-label';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Creates a status label which can be used to document component development status.
@@ -42,7 +43,7 @@
        *
        * @returns {Object}
        */
-      modifiers(): object {
+      modifiers(): IModifiers {
         const modifier = availableStatus[this.modifier];
         const modifiers = {};
 
