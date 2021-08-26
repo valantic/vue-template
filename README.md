@@ -762,11 +762,9 @@ package.json:
 * [ ] Test v-focus state handling.
 * [ ] Test unit tests.
 * [ ] Test styleguide.
-* [ ] Replace event bus in collapsible components.
 * [ ] Replace vue-js-modal (not compatible with Vue 3).
+  * Can we use https://v3.vue-final-modal.org/
 * [ ] Check if modal stacking in styleguide still needs multiple teleports.
-* [ ] Fix failing tests.
-* [ ] Update blueprints
 
 ### Typescript
 
@@ -791,9 +789,8 @@ package.json:
 * [ ] Check if mixins can be replaced by Composition API because typing is not really working
 * [ ] Add Documentation and Wiki Section about 
   - always returning an arrow function for custom validator of props (to fix random TS errors)
-  - always returning a defined type for any other functions (to fix random TS errors about undefined variables)
+  - always returning a defined type for any other functions (computed / data) (to fix random TS errors about undefined variables)
 * [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
-* [ ] Update blueprints
 * [ ] Vuex is broken (module import, module definition)
 * [ ] Fix broken Jest tests
 

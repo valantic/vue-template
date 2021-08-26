@@ -1,4 +1,6 @@
-export default defineComponent({
+import { Module } from 'vuex';
+
+const myModule: Module<any, any> = {
   namespaced: true,
   // state: {},
   // getters: {},
@@ -6,3 +8,5 @@ export default defineComponent({
   // actions: {},
   // modules: [],
 };
+
+export default myModule;
