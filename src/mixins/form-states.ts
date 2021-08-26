@@ -5,7 +5,7 @@ import {
   WritableComputedRef
 } from 'vue';
 
-enum FieldStates {
+export enum FieldStates {
   Default = 'default',
   Success = 'success',
   Info = 'info',

@@ -164,9 +164,7 @@
           },
           on: {
             slideChange: function() {
-              // @ts-ignore
               this.$emit('change', this.gallery.swiper.activeIndex);
-              // @ts-ignore
               this.stopAllVideos();
             }.bind(this),
           }
