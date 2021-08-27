@@ -256,10 +256,10 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    mounted(): void {
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    mounted() {
       const hasSrcSet = !!this.srcset;
 
       if (process.env.NODE_ENV === 'production') {
@@ -274,22 +274,22 @@
         }
       }
     },
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Load event handler for the image element.
        */
-      onLoad(): void {
+      onLoad() {
         this.loaded = true;
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

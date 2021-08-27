@@ -193,27 +193,27 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    mounted(): void {
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    mounted() {
       Swiper.use([Navigation, Pagination]);
 
       if (this.container) {
         swiperInstances[this.uuid] = new Swiper(this.container, this.optionsMerged);
       }
     },
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    beforeUnmount(): void {
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    beforeUnmount() {
       swiperInstances[this.uuid].destroy();
     },
-    // unmounted(): void {},
+    // unmounted() {},
 
     // methods: {},
-    // render(): void {},
+    // render() {},
   });
 </script>
 
