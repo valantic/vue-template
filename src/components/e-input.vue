@@ -172,8 +172,8 @@
     },
 
     setup(): ISetup {
-      const input = ref(null);
-      const slot = ref(null);
+      const input = ref();
+      const slot = ref();
 
       return {
         ...useFormStates(),

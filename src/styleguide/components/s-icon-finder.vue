@@ -51,7 +51,7 @@
     // props: {},
 
     setup(): ISetup {
-      const input = ref(null);
+      const input = ref();
 
       return {
         input,
