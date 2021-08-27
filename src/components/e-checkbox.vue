@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
 
   interface ISetup extends IFormStates {}
 
