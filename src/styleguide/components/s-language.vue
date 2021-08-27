@@ -13,17 +13,19 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import i18nMixin from '../../mixins/i18n';
+  import i18n, { I18N_LOCALES } from '@/setup/i18n';
 
   export default defineComponent({
     name: 's-language',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    mixins: [i18nMixin],
-
     // props: {},
 
-    // data() {},
+    data() {
+      return {
+        i18nLocales: I18N_LOCALES,
+      };
+    },
 
     // components: {},
     computed: {
