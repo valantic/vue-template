@@ -2,7 +2,7 @@ import { NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 import api from '@/helpers/api';
 import { INotification } from '@/types/c-notification';
-import { createStore } from 'vuex';
+import { Module } from 'vuex';
 
 interface INotificationState {
   notifications: INotification[];
@@ -59,7 +59,8 @@ function pushNotification(state: INotificationState, options: INotification) {
   state.id += 1;
 }
 
-export default createStore<INotificationState>({
+const notificationModule: Module<any, any> = {
+  namespaced: true,
   state: {
     /**
      * @type {Array} Stores notifications.
@@ -80,6 +81,7 @@ export default createStore<INotificationState>({
      *
      * @returns {Array.<Object>} All notifications bound to a selector.
      */
+    // eslint-disable-next-line max-len
     getSelectorNotifications: (state: INotificationState) => state.notifications.filter(({ message }) => message?.source?.selector),
 
     /**
@@ -109,6 +111,7 @@ export default createStore<INotificationState>({
      *
      * @returns {Array.<Object>} The add-to-cart notifications.
      */
+    // eslint-disable-next-line max-len
     getAddToCartNotifications: (state: INotificationState) => state.notifications.filter(({ message }) => message?.type === 'add-to-cart'),
 
     /**
@@ -118,6 +121,7 @@ export default createStore<INotificationState>({
      *
      * @returns {Array.<Object>} The field notifications.
      */
+    // eslint-disable-next-line max-len
     getFieldNotifications: (state: INotificationState): INotification[] => state.notifications.filter(({ message }) => message?.source?.field),
   },
   mutations: {
@@ -179,4 +183,6 @@ export default createStore<INotificationState>({
       commit('pushNotification', NOTIFICATION_UNKNOWN_ERROR);
     }
   },
-});
+};
+
+export default notificationModule;
