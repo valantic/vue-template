@@ -322,13 +322,13 @@
       window.addEventListener('click', this.onOutsideClick);
     },
     // beforeMount() {},
-    // mounted(): void {},
+    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
     // beforeUnmount() {},
-    unmounted(): void {
+    unmounted() {
       window.removeEventListener('click', this.onOutsideClick);
     },
 
@@ -584,7 +584,7 @@
         return typeof value === 'string' ? value.trim() : value;
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

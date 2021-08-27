@@ -32,18 +32,18 @@
     // computed: {},
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    mounted(): void {
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    mounted() {
       this.getNotificationsFromStorage();
     },
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       ...mapMutations('notification', [
@@ -71,7 +71,7 @@
         }
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

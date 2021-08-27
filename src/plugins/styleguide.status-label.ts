@@ -68,7 +68,7 @@ function appendStatusLabel(name: string, statusId: number) {
 const plugin: Plugin = {
   install(app) {
     app.mixin({
-      mounted(): void {
+      mounted() {
         const { name, status } = this.$options;
 
         if (status === 0 && name) {

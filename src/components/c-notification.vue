@@ -161,12 +161,12 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    created(): void {
+    // beforeCreate() {},
+    created() {
       this.visible = this.selector ? this.selector === this.notification.message?.source?.selector : true;
     },
-    // beforeMount(): void {},
-    mounted(): void {
+    // beforeMount() {},
+    mounted() {
       const { expire, delay } = this.$props.notification;
 
       if (expire) {
@@ -179,12 +179,12 @@
         }, timeoutDelay);
       }
     },
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       ...mapMutations('notification', [
@@ -202,7 +202,7 @@
       /**
        * Callback for confirm button click.
        */
-      onConfirm(): void {
+      onConfirm() {
         if (this.notification.confirm) {
           const eventPromise = new Promise((resolve, reject) => {
             if (typeof this.notification.confirm === 'function') {
@@ -229,7 +229,7 @@
       /**
        * Callback for decline button click.
        */
-      onDecline(): void {
+      onDecline() {
         if (this.notification.decline) {
           const eventPromise = new Promise((resolve, reject) => {
             if (this.notification.decline) {
@@ -251,7 +251,7 @@
         }
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

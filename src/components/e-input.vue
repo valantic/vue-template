@@ -219,10 +219,10 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    mounted(): void {
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    mounted() {
       /**
        * Calls the "setSlotSpacings" in a timeout function with a delay of 200ms because without
        * it's not working on iOS
@@ -236,14 +236,14 @@
         this.input.value = this.standalone ? this.internalValue.toString() : this.value.toString();
       }
     },
-    // beforeUpdate(): void {},
-    updated(): void {
+    // beforeUpdate() {},
+    updated() {
       setTimeout(this.setSlotSpacings);
     },
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    unmounted(): void {
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    unmounted() {
       window.removeEventListener('resizeend', this.setSlotSpacings);
     },
 
@@ -344,7 +344,7 @@
         }
       },
     }
-    // render(): void {},
+    // render() {},
   });
 </script>
 

@@ -101,9 +101,9 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    beforeMount(): void {
+    // beforeCreate() {},
+    // created() {},
+    beforeMount() {
       /**
        * Setup event handler for "focus" event, which will be sent from the input in the slot
        */
@@ -118,15 +118,15 @@
         this.hasFocus = false;
       });
     },
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
     // methods: {}
-    // render(): void {},
+    // render() {},
   });
 </script>
 

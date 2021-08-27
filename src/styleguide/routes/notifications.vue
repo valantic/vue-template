@@ -194,7 +194,7 @@
         'getFieldNotifications',
       ]),
     },
-    mounted(): void {
+    mounted() {
       notificationData.list.forEach(notification => this.pushNotification(notification));
     },
     methods: {

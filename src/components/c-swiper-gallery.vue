@@ -232,7 +232,7 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted(): void {
+    mounted() {
       Swiper.use([Navigation, Pagination]);
 
       if (this.container) {
@@ -246,7 +246,7 @@
     beforeDestroy() {
       swiperInstances[this.uuid].destroy();
     },
-    // unmounted(): void {},
+    // unmounted() {},
 
     methods: {
       /**
@@ -267,7 +267,7 @@
         return '';
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 
