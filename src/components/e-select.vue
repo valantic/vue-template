@@ -29,7 +29,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import i18n from '@/setup/i18n';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
 
   interface ISetup extends IFormStates {}
 

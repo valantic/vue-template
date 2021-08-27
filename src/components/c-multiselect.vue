@@ -115,7 +115,7 @@
     Ref,
     ref
   } from 'vue';
-  import useFormStates, { FieldStates, IFormStates } from '@/mixins/form-states';
+  import useFormStates, { FieldStates, IFormStates } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface IItems {

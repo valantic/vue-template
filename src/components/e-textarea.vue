@@ -26,7 +26,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cFormNotification from '@/components/c-form-notification.vue';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
