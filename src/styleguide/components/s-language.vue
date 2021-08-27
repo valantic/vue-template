@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import i18n, { I18N_LOCALES } from '@/setup/i18n';
+  import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
   export default defineComponent({
     name: 's-language',
@@ -47,8 +47,17 @@
       onChange(event: Event): void {
         const target = event.target as HTMLSelectElement;
 
-        this.i18nSetLocale(target.value);
+        this.setLocale(target.value);
       },
+
+      /**
+       * Sets the locale within the i18n.
+       *
+       * @param {String} value - The new locale value.
+       */
+      setLocale(value: string) {
+        i18nSetLocale(value);
+      }
     },
     // watch: {},
 
