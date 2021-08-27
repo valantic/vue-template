@@ -7,6 +7,18 @@ interface IUrlKeyValues {
   [key: string]: string;
 }
 
+export interface IApi {
+  getUrl: (urlKey: keyof typeof apiUrls, values: IUrlKeyValues) => string;
+  // eslint-disable-next-line max-len
+  get: (url: string, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  // eslint-disable-next-line max-len
+  post: (url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  // eslint-disable-next-line max-len
+  patch: (url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  // eslint-disable-next-line max-len
+  delete: (url: string, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+}
+
 // Enable tracking of requests in development environment.
 if (process.env.NODE_ENV !== 'production') {
   const clone = require('@/helpers/clone.ts').default; // eslint-disable-line global-require
@@ -93,7 +105,7 @@ function handleError(error: AxiosError, options?: INotification): Promise<AxiosE
   return Promise.reject(error);
 }
 
-export default {
+const api: IApi = {
   /**
    * Gets the url for the given 'urlKey'. The method also accepts an Object of interpolation values.
    *
@@ -127,6 +139,7 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
+  // eslint-disable-next-line max-len
   get(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> {
     return axios
       .get(url, config)
@@ -144,6 +157,7 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
+  // eslint-disable-next-line max-len
   post(url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .post(url, data, config)
@@ -161,6 +175,7 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
+  // eslint-disable-next-line max-len
   patch(url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .patch(url, data, config)
@@ -177,6 +192,7 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
+  // eslint-disable-next-line max-len
   delete(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .delete(url, config)
@@ -184,3 +200,5 @@ export default {
       .catch(error => handleError(error, notificationOptions));
   },
 };
+
+export default api;
