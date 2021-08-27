@@ -5,7 +5,7 @@ import api from '@/helpers/api';
  * Adds a reference for the API helper to the Vue instance.
  */
 const plugin: Plugin = {
-  install(app /* , options */) {
+  install(app) {
     app.config.globalProperties.$api = api;
   },
 };

@@ -1,144 +1,88 @@
-import { Plugin, reactive } from 'vue';
-import { BREAKPOINTS } from '@/setup/globals';
+import {
+  computed,
+  ComputedRef,
+  Plugin,
+  reactive,
+  ref
+} from 'vue';
+import { BREAKPOINTS, BreakPointType } from '@/setup/globals';
+
+export interface IViewport {
+  isXxs: boolean;
+  isXs: boolean;
+  isSm: boolean;
+  isMd: boolean;
+  isLg: boolean;
+  isXl: boolean;
+  isMobile: boolean;
+  currentViewport: BreakPointType;
+}
 
 /**
  * Adds an viewport instance to Vue itself, which can be used by calling this.$viewport.
  */
 const plugin: Plugin = {
   install(app) {
+    // sets initial viewport width
+    const viewport = ref<number>(window.innerWidth);
+
     /**
-     * TODO:
-     * Event Listener (Updates values)
-     *
-     * Refs (hold current values)
-     *
-     * Methods (update values)
-     *
-     * $viewport Object (publishes computed values that relate to Refs)
+     * Returns TRUE if viewport is smaller than XS.
      */
+    const isXxs: ComputedRef<boolean> = computed(() => viewport.value < BREAKPOINTS.xs);
+
+    /**
+     * Returns TRUE if viewport is at least XS.
+     */
+    const isXs: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.xs);
+
+    /**
+     * Returns TRUE if viewport is at least SM.
+     */
+    const isSm: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.sm);
+
+    /**
+     * Returns TRUE if viewport is at least MD.
+     */
+    const isMd: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.md);
+
+    /**
+     * Returns TRUE if viewport is at least LG.
+     */
+    const isLg: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.lg);
+
+    /**
+     * Returns TRUE if viewport is at least XL.
+     */
+    const isXl: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.xl);
+
+    /**
+     * Checks if current viewport is mobile (<= md).
+     */
+    const isMobile: ComputedRef<boolean> = computed(() => !isSm);
+
+    /**
+     * Returns the short name of the current viewport (e.g. 'md').
+     */
+    // @ts-ignore
+    const currentViewport: ComputedRef<string> = computed(() => Object.entries(BREAKPOINTS)
+        .reverse()
+        // @ts-ignore
+        .find(breakpoint => viewport.value >= breakpoint[1])[0]);
+
+    window.addEventListener('resizeend', () => {
+      viewport.value = window.innerWidth;
+    });
+
     app.config.globalProperties.$viewport = reactive({
-      data: {
-        viewport: 0,
-      },
-      computed: {
-        /**
-         * Returns TRUE if viewport is smaller than XS.
-         *
-         * @public
-         *
-         * @returns {Boolean}
-         */
-        isXxs(): boolean {
-          // @ts-ignore
-          return this.viewport < BREAKPOINTS.xs;
-        },
-
-        /**
-         * Returns TRUE if viewport is at least XS.
-         *
-         * @public
-         *
-         * @returns {Boolean}
-         */
-        isXs(): boolean {
-          // @ts-ignore
-          return this.viewport >= BREAKPOINTS.xs;
-        },
-
-        /**
-         * Returns TRUE if viewport is at least SM.
-         *
-         * @public
-         *
-         * @returns {Boolean}
-         */
-        isSm(): boolean {
-          // @ts-ignore
-          return this.viewport >= BREAKPOINTS.sm;
-        },
-
-        /**
-         * Returns TRUE if viewport is at least MD.
-         *
-         * @public
-         *
-         * @returns {Boolean}
-         */
-        isMd():boolean {
-          // @ts-ignore
-          return this.viewport >= BREAKPOINTS.md;
-        },
-
-        /**
-         * Returns TRUE if viewport is at least LG.
-         *
-         * @public
-         *
-         * @returns {Boolean}
-         */
-        isLg(): boolean {
-          // @ts-ignore
-          return this.viewport >= BREAKPOINTS.lg;
-        },
-
-        /**
-         * Returns TRUE if viewport is at least XL.
-         *
-         * @public
-         *
-         * @returns {Boolean}
-         */
-        isXl(): boolean {
-          // @ts-ignore
-          return this.viewport >= BREAKPOINTS.xl;
-        },
-
-        /**
-         * Checks if current viewport is mobile (<= md).
-         *
-         * @public
-         *
-         * @returns {Boolean}
-         */
-        isMobile(): boolean {
-          return !this.isSm;
-        },
-
-        /**
-         * Returns the short name of the current viewport (e.g. 'md').
-         *
-         * @public
-         *
-         * @returns {String}
-         */
-        currentViewport(): string {
-          // @ts-ignore
-          return Object.entries(BREAKPOINTS)
-            .reverse()
-            // @ts-ignore
-            .find(breakpoint => this.viewport >= breakpoint[1])[0];
-        },
-      },
-      created() {
-        // @ts-ignore
-        window.addEventListener('resizeend', this.update);
-
-        // @ts-ignore
-        this.update();
-      },
-      beforeUnmount() {
-        // @ts-ignore
-        window.removeEventListener('resizeend', this.update);
-      },
-      methods: {
-        /**
-         * Event handler for the resize event.
-         */
-        update() {
-          // @ts-ignore
-          this.viewport = window.innerWidth;
-        }
-      }
+      isXxs,
+      isXs,
+      isSm,
+      isMd,
+      isLg,
+      isXl,
+      isMobile,
+      currentViewport
     });
   }
 };

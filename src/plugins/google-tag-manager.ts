@@ -1,4 +1,4 @@
-import { ComponentInternalInstance, ComponentPublicInstance, Plugin } from 'vue';
+import { ComponentPublicInstance, Plugin } from 'vue';
 
 interface IOptions {
   debug?: boolean;
@@ -10,6 +10,16 @@ interface IProductData {
   sku: string;
   eNumber: string;
   measurementUnitName: string;
+}
+
+export interface IGtm {
+  push: (payload: object) => void;
+  pushProductImpressions: (products: IProductData[], eventPath: string, startIndex: number) => void;
+  pushVirtualPage: () => void;
+  pushProductClick: ({ name, sku, eNumber }: IProductData, position: number, eventPath: string) => void;
+  pushAddToCart: (product: IProductData, quantity: number, eventPath: string) => void;
+  getEventPath: (component: ComponentPublicInstance, append: string) => string;
+  debug: (enable: boolean) => void;
 }
 
 type MapProductCallbackFunction = (productData: IProductData, index: number) => any | never;
@@ -207,7 +217,7 @@ const plugin: Plugin = {
        *
        * @returns {String}
        */
-      getEventPath(component: ComponentPublicInstance, append: string) {
+      getEventPath(component: ComponentPublicInstance, append: string): string {
         const path = [];
         let parent = component.$parent;
 

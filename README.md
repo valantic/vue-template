@@ -779,7 +779,6 @@ package.json:
   * See https://github.com/victorgarciaesgi/vuex-typed-modules
   * See https://github.com/paroi-tech/direct-vuex#implement-a-vuex-store-with-typed-helpers
   * See https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3
-* [ ] Change Global BREAKPOINTS to enum
 * [ ] Plugin Parameter options typing
 * [ ] Remove all JSDocs
 * [ ] Fix Modal Stack / Viewport Reactive not working
