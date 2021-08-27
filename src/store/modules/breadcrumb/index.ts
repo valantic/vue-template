@@ -1,4 +1,4 @@
-import { createStore } from 'vuex';
+import { Module } from 'vuex';
 
 interface IBreadcrumbItem {
   name: string;
@@ -9,10 +9,7 @@ interface IBreadcrumbState {
   items: IBreadcrumbItem[];
 }
 
-// TODO check if direct-store should be used
-//  see https://next.vuex.vuejs.org/guide/typescript-support.html
-//  see https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3
-export default createStore<IBreadcrumbState>({
+const breadcrumbModule: Module<any, any> = {
   state: {
     /**
      * @type {Array} Stores breadcrumb items.
@@ -58,4 +55,6 @@ export default createStore<IBreadcrumbState>({
       commit('setItems', payload);
     }
   },
-});
+};
+
+export default breadcrumbModule;

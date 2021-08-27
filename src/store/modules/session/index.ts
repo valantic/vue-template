@@ -1,10 +1,11 @@
-import { createStore } from 'vuex';
+import { Module } from 'vuex';
 
 interface IThemeState {
   theme: string;
 }
 
-export default createStore<IThemeState>({
+const sessionModule: Module<any, any> = {
+  namespaced: true,
   state: {
     /**
      * @type {String} Stores the theme id.
@@ -35,4 +36,6 @@ export default createStore<IThemeState>({
     },
   },
   // actions: {},
-});
+};
+
+export default sessionModule;

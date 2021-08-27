@@ -24,12 +24,12 @@ declare global {
 }
 
 const data: IInitialData = window.initialData || {};
-const requireModule = require.context('./modules/', true, /index\.js/);
+const requireModule = require.context('./modules/', true, /index\.ts/);
 const modules: IStoreModules = {};
 let initialDataMessages: string[] = [];
 
 requireModule.keys().forEach((fileName) => {
-  const moduleName = fileName.replace(/(\.\/|\/index\.js)/g, '').replace(/-([a-z])/g, group => group[1].toUpperCase());
+  const moduleName = fileName.replace(/(\.\/|\/index\.ts)/g, '').replace(/-([a-z])/g, group => group[1].toUpperCase());
 
   modules[moduleName] = requireModule(fileName).default;
 });
