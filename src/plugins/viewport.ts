@@ -6,6 +6,16 @@ import { BREAKPOINTS } from '@/setup/globals';
  */
 const plugin: Plugin = {
   install(app) {
+    /**
+     * TODO:
+     * Event Listener (Updates values)
+     *
+     * Refs (hold current values)
+     *
+     * Methods (update values)
+     *
+     * $viewport Object (publishes computed values that relate to Refs)
+     */
     app.config.globalProperties.$viewport = reactive({
       data: {
         viewport: 0,
