@@ -203,8 +203,8 @@
     },
 
     setup(): ISetup {
-      const multiple = ref(null);
-      const searchInput = ref(null);
+      const multiple = ref();
+      const searchInput = ref();
 
       return {
         ...useFormStates(),

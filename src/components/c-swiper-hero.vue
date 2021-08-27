@@ -99,10 +99,10 @@
     },
 
     setup(): ISetup {
-      const container = ref(null);
-      const previous = ref(null);
-      const next = ref(null);
-      const pagination = ref(null);
+      const container = ref();
+      const previous = ref();
+      const next = ref();
+      const pagination = ref();
 
       return {
         container,
