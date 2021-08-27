@@ -8,7 +8,6 @@ import VueBemCn from '@/plugins/vue-bem-cn';
 import resizeEnd from '@/plugins/resize-end';
 import eventBus from '@/plugins/event-bus';
 import viewport from '@/plugins/viewport';
-import modal from '@/plugins/modalStack';
 import api from '@/plugins/api';
 // import dayjs from '@/plugins/dayjs';
 
@@ -19,7 +18,6 @@ export default [
   [VueAxios],
   [Vuelidate],
   [viewport],
-  [modal],
   [api],
   // please note: if you change the VueBemCn methodName, adjust the global definition in shims-vuex.d.ts
   [VueBemCn, {
