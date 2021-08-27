@@ -91,7 +91,7 @@
         get(): boolean | string[] {
           return this.checked;
         },
-        set(value: boolean) {
+        set(value: boolean | string[]) {
           /**
            * Emits checkbox value e.g. true/false or value
            *

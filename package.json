@@ -67,9 +67,8 @@
     "picturefill": "~3.0.3",
     "swiper": "~6.5.8",
     "vue": "3.2.4",
-    "vue-i18n": "9.1.7",
-    "vue-js-modal": "~2.0.1",
-    "vuex": "~4.0.1"
+    "vue-i18n": "~9.1.7",
+    "vuex": "~4.0.2"
   },
   "devDependencies": {
     "@babel/core": "~7.15.0",
