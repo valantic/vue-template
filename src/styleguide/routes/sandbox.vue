@@ -13,7 +13,6 @@
   export default defineComponent({
     name: 'sandbox',
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {

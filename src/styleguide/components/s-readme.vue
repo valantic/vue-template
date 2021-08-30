@@ -16,7 +16,6 @@
     components: {
       readme,
     },
-    // mixins: [],
 
     // props: {},
     // data() {

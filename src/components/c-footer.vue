@@ -9,7 +9,6 @@
     name: 'c-footer',
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {

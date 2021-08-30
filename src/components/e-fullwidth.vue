@@ -23,7 +23,6 @@
     name: 'e-fullwidth',
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     data(): IData {

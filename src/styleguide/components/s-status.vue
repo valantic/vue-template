@@ -19,7 +19,6 @@
     status: 1,
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**

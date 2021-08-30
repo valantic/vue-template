@@ -21,7 +21,6 @@
     components: {
       sColorItem
     },
-    // mixins: [],
 
     // props: {},
     // data() {
