@@ -1,10 +1,10 @@
 <template>
   <label :class="b(modifiers)">
     <span :class="b('name', { invisible })">{{ name }}</span>
-    <span v-if="$slots.default" :class="b('inner')">
+    <div v-if="$slots.default" :class="b('inner')">
       <!-- @slot Label content -->
       <slot></slot>
-    </span>
+    </div>
   </label>
 </template>
 
