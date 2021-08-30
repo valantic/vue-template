@@ -108,7 +108,7 @@
       modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-          notification: this.$props.notification && this.focus,
+          notification: this.notification && this.focus,
         };
       },
 

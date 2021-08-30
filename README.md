@@ -764,12 +764,15 @@ package.json:
 
 ### Typescript
 
+* [ ] Fix broken Jest tests
 * [ ] Check if TS Loader can be combined with babel
   * Can be done by omitting babel
   * Browserlist only possible with Babel
 * [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
   * Help needed
-* [ ] Fix broken Jest tests
+* [ ] Replace this.$refs
+  * not possible due to having unknown property names otherwise
+* [ ] triggering a notification shows it 3 times
 
 * [ ] Add Documentation and Wiki Section about
   - always returning an arrow function for custom validator of props (to fix random TS errors)
