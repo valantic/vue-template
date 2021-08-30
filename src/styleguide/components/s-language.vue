@@ -41,8 +41,6 @@
     methods: {
       /**
        * Event handler for the change event of the language selector.
-       *
-       * @param {Event} event - The related DOM event.
        */
       onChange(event: Event): void {
         const target = event.target as HTMLSelectElement;
@@ -52,8 +50,6 @@
 
       /**
        * Sets the locale within the i18n.
-       *
-       * @param {String} value - The new locale value.
        */
       setLocale(value: string) {
         i18nSetLocale(value);

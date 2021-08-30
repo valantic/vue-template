@@ -764,12 +764,11 @@ package.json:
 
 ### Typescript
 
-* [ ] Refactor form fields to have valid markup
-
 * [ ] Check if TS Loader can be combined with babel
   * Can be done by omitting babel
-* [ ] Remove all JSDocs params / return types
+  * Browserlist only possible with Babel
 * [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
+  * Help needed
 * [ ] Fix broken Jest tests
 
 * [ ] Add Documentation and Wiki Section about

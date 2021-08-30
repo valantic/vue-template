@@ -273,8 +273,6 @@
 
       /**
        * Click event handler.
-       *
-       * @param {Event} event - The click event instance.
        */
       onClick(event: Event): void {
         this.$el.blur();

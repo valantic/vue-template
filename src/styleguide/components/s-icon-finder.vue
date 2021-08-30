@@ -151,8 +151,6 @@
     methods: {
       /**
        * Event handler for copy to clipboard button.
-       *
-       * @param {Object} icon - The icon instance for which the example code should be copied.
        */
       copyToClipboard(icon: IIcon) {
         const hiddenInput = this.input as HTMLInputElement;
@@ -189,8 +187,6 @@
 
       /**
        * Shows the given notification.
-       *
-       * @param {String} message - The to be shown message.
        */
       setNotification(message: string) {
         this.notification = message;

@@ -144,8 +144,6 @@
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
       onChange(event: Event) {
         const radioButton = event.currentTarget as HTMLSelectElement;

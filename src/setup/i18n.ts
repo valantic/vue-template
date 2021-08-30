@@ -27,9 +27,6 @@ export const i18n = new VueI18n({
 
   /**
    * Callback for the 'missing' event, during translation lookup.
-   *
-   * @param {String} locale - The current locale.
-   * @param {String} messageKey - The request message key.
    */
   missing(locale, messageKey) {
     console.error(`No '${locale}' translations found for '${messageKey}'`); // eslint-disable-line no-console
@@ -42,10 +39,6 @@ export const i18n = new VueI18n({
 
 /**
  * Load messages for given locale if not already loaded.
- *
- * @param   {String}    locale    A locale identifier
- *
- * @returns {Promise}
  */
 export const i18nLoadMessages = function(locale: string) {
   if (!Object.keys(i18n.global.messages).includes(locale)) {
@@ -74,10 +67,6 @@ export const i18nLoadMessages = function(locale: string) {
 /**
  * Sets the application locale to the given value.
  * Loads locale messages if needed.
- *
- * @param   {String}    locale    A locale identifier
- *
- * @returns {Promise}
  */
 export const i18nSetLocale = function(locale: string) { // eslint-disable-line no-param-reassign
   if (!I18N_LOCALES.includes(locale)) {

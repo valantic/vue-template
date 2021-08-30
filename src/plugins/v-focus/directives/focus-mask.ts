@@ -2,8 +2,6 @@ import state from '../state';
 
 /**
  * Adds or removes a focus class to the given element based on the current focus state.
- *
- * @param {Element} el - The DOM element which carries the directive.
  */
 function update(el: HTMLElement) {
   if (state.enabled) { // This will also make the directive reactive to the observable.

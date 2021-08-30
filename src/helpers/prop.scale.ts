@@ -6,11 +6,6 @@ interface IPropConfig {
 
 /**
  * Creates a scale validation function for scale value props.
- *
- * @param {Number} [defaultValue = 500] - The default value for this prop.
- * @param {Array.<Number>} validNumbers - An Array of valid scale numbers.
- *
- * @returns {Object}
  */
 export default function(defaultValue: number, validNumbers: number[]) {
   const propConfig: IPropConfig = {

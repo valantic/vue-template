@@ -3,10 +3,6 @@ import store from '@/store/index';
 
 /**
  * Root component setup for styleguidist.
- *
- * @param   {Object}    previewComponent    The to be displayed component
- *
- * @returns {Object}
  */
 // @ts-ignore
 export default previewComponent => ({

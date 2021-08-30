@@ -22,13 +22,6 @@ export default {
 
   /**
    * Binding method of the directive.
-   *
-   * @param {Object} el - The bound element.
-   * @param {Object} binding - The binding payload object.
-   * @param {Object} binding.value - The payload values.
-   * @param {Function} binding.value.handler - The outside click handler function.
-   * @param {Array.<String>} binding.value.exclude - The excluded $ref DOM elements.
-   * @param {Array.<String>} binding.value.excludeIds - The excluded global DOM id's.
    */
   bind(el: ICustomElement, binding: DirectiveBinding) {
     let userIsScrolling = false;

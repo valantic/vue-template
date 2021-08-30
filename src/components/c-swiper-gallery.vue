@@ -254,10 +254,6 @@
     methods: {
       /**
        * Gets the youtube id of a given youtube URL.
-       *
-       * @param {String} url - The given youtube url.
-       *
-       * @returns {String}
        */
       getYoutubeId(url: string) {
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;

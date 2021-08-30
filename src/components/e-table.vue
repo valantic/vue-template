@@ -184,8 +184,6 @@
     methods: {
       /**
        * Will set the sort-parameters.
-       *
-       * @param {Object} column - Object which holds the information about the current column.
        */
       onClickSort(column: IColumn) {
         if (this.sortBy && this.sortBy === column) {
@@ -204,10 +202,6 @@
 
       /**
        * Checks if the given column should display the header label.
-       *
-       * @param {Object} column - A column definition object.
-       *
-       * @returns {Boolean}
        */
       isHeaderLabelVisible(column: IColumn) {
         return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden);
@@ -215,10 +209,6 @@
 
       /**
        * Calculates a sort button modifier object.
-       *
-       * @param {Object} column - A column definition object.
-       *
-       * @returns {Object}
        */
       getSortButtonModifiers(column: IColumn) {
         const active = this.sortBy && this.sortBy === column;

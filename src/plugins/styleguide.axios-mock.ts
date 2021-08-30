@@ -10,11 +10,6 @@ import { Plugin } from 'vue';
 /**
  * By default returns a 500 'no route defined' error.
  * If 'isErrorTest=xxx' is defined in the request params the defined error number is returned.
- *
- * @param   {Object}          config                          The request configuration
- * @param   {Number|String}   [config.params.isErrorTest]     Number of to be tested error response
- *
- * @returns {Array}
  */
 function wildcard(config: AxiosRequestConfig) {
   const errorCode = Number(config?.params?.isErrorTest || 500);

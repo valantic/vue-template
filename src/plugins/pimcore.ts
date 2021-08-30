@@ -3,9 +3,6 @@ import { DirectiveBinding } from '@vue/runtime-core';
 
 /**
  * Append Pimcore editable attributes for the Pimcore generator.
- *
- * @param {Node} el - The element to which the directive is bound.
- * @param {Object} binding - Binding related data.
  */
 function editable(el: HTMLElement, binding: DirectiveBinding) {
   if (!Array.isArray(binding.value)) {
@@ -42,9 +39,6 @@ function editable(el: HTMLElement, binding: DirectiveBinding) {
 
 /**
  * Append Pimcore areabrick attributes for the Pimcore generator.
- *
- * @param {Node} el - The element to which the directive is bound.
- * @param {Object} binding - Binding related data.
  */
 function areabrick(el: HTMLElement, binding: DirectiveBinding) {
   if (!binding.value || typeof binding.value !== 'string') {
@@ -60,9 +54,6 @@ function areabrick(el: HTMLElement, binding: DirectiveBinding) {
 
 /**
  * Append Pimcore snippet attributes for the Pimcore generator.
- *
- * @param {Node} el - The element to which the directive is bound.
- * @param {Object} binding - Binding related data.
  */
 function snippet(el: HTMLElement, binding: DirectiveBinding) {
   if (!binding.value || typeof binding.value !== 'string') {
@@ -78,9 +69,6 @@ function snippet(el: HTMLElement, binding: DirectiveBinding) {
 
 /**
  * Append Pimcore areabrick attributes for the Pimcore generator.
- *
- * @param {Node} el - The element to which the directive is bound.
- * @param {Object} binding - Binding related data.
  */
 function template(el: HTMLElement, binding: DirectiveBinding) {
   if (!binding.value || typeof binding.value !== 'string') {

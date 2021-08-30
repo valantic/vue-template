@@ -89,10 +89,6 @@ const selectorInfo1 = {
 
 /**
  * Returns a message in a response JSON format.
- *
- * @param {Object} message - Message object from above.
- *
- * @returns {Object}
  */
 function messageAsResponse(message: INotification) {
   return {

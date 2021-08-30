@@ -2,8 +2,6 @@ import scrollbarWidth from '@/helpers/scrollbar-width';
 
 /**
  * Sets a max-width to the header and l-default wrapper so the hidden scrollbar will not cause content resizing.
- *
- * @param {Boolean} state [state = false] - Add / Remove the maxWidth property.
  */
 export default function avoidContentResizing(state = true): void {
   const scrollBar = scrollbarWidth();
