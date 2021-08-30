@@ -1,10 +1,6 @@
 /* eslint-disable prefer-rest-params, no-plusplus */
 /**
  * Node.replaceWith() polyfill.
- *
- * @param {Element} Ele - The new element.
- *
- * @constructor
  */
 function ReplaceWith(Ele: any) { // eslint-disable-line no-inner-declarations
   // @ts-ignore

@@ -154,8 +154,6 @@
     methods: {
       /**
        * Sets the attributes for the icon.
-       *
-       * @param {Node} svg - Element for which the attributes should be set.
        */
       setAttributes(svg: SVGElement) {
         if (this.width || this.height) {
@@ -179,10 +177,6 @@
 
       /**
        * Creates a new SVG element if not already in cache.
-       *
-       * @param {String} content - The SVG content as string.
-       *
-       * @returns {Node}
        */
       createSvgElement(content: string): SVGElement {
         if (!nodeCache[this.icon]) {
@@ -200,10 +194,6 @@
 
       /**
        * Gets an SVG element for the given content.
-       *
-       * @param {String} content - The SVG content as string.
-       *
-       * @returns {Node}
        */
       getSvgElement(content: string): SVGElement {
         const svg = this.createSvgElement(content);

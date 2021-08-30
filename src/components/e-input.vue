@@ -251,8 +251,6 @@
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
       onInput(event: Event) {
         const target = event.target as HTMLInputElement;

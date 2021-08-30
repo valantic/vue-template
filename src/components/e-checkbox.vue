@@ -118,9 +118,6 @@
     methods: {
       /**
        * Emits state to parent and wrapper component.
-       * Update "isChecked" state.
-       *
-       * @param   {Boolean}  event   Field input
        */
       onChange(event: Event) {
         const target = event.target as HTMLInputElement;

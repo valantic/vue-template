@@ -87,16 +87,6 @@
 
       /**
        * The notification object consisting of the following properties:
-       *
-       * @param {Object} notification.message - The actual message data.
-       * @param {String} notification.message.type - Type of response.
-       * @param {String} notification.message.message - The actual response message from backend.
-       * @param {Number} notification.id - Unique id provided by vuex.
-       * @param {Object} [notification.message.meta] - Meta data for the message.
-       * @param {String} [notification.title] - Adds title to the notification.
-       * @param {Function} [notification.confirm] - Adds confirm button and gets called when the confirm button is clicked.
-       * @param {Function} [notification.decline] - Adds decline button and gets called when the decline button is clicked.
-       *
        */
       notification: {
         type: Object as PropType<INotification>,

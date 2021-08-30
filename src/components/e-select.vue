@@ -132,8 +132,6 @@
     methods: {
       /**
        * Emits input event for v-model.
-       *
-       * @param   {Object}  event   Event object by onchange
        */
       onChange(event: Event) {
         const select = event.currentTarget as HTMLSelectElement;

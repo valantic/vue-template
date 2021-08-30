@@ -115,8 +115,6 @@
     methods: {
       /**
        * Event handler for the change event of the theme selector.
-       *
-       * @param {Event} event - The related DOM event.
        */
       onChange(event: Event) {
         const element = event.target as HTMLSelectElement;
@@ -126,9 +124,6 @@
 
       /**
        * Creates a new style link element.
-       *
-       * @param {String} themeId - The name of the desired theme.
-       * @param {String} cssId - The unique ID for the link element.
        */
       createStyleElement(themeId: string, cssId: string) {
         const head = document.getElementsByTagName('head')[0];

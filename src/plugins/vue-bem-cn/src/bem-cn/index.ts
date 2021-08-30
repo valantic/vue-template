@@ -9,13 +9,6 @@ interface IOptions {
 
 /**
  * Returns a BEM name creator method with the given options applied.
- *
- * @param {String} block - The BEM block name.
- * @param {Object} options - Parser options.
- * @param {Object} options.delimiters - An Object of delimiter defintions.
- * @param {Object} [options.hyphenate] - If true, camel case names will be converted to kebab-case.
- *
- * @returns {Function}
  */
 export default function bemCn(block: string, options: IOptions) {
   return function entities(elem: any, mods: string, mix: any) {

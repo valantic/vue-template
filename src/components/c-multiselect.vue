@@ -419,8 +419,6 @@
 
       /**
        * Detects a click inside the component and stops the event propagation, so that onOutputClick() is not triggered.
-       *
-       * @param {Event} event - Click event.
        */
       onInsideClick(event: Event) {
         event.stopPropagation();
@@ -493,8 +491,6 @@
       /**
        * Iterates through the checkboxItemsFiltered Array and checks if it contains an object, whose display
        * attribute value contains the value parameter (case sensitive).
-       *
-       * @param {String} value - String value of the input field.
        */
       onSearchInput(value: string): void {
         let checkBoxItemsFilteredEmptyTemp = true;
@@ -513,11 +509,6 @@
 
       /**
        * Checks if the two arrays are equal.
-       *
-       * @param {Array} array1 - First array.
-       * @param {Array} array2 - Second array.
-       *
-       * @returns {Boolean}
        */
       arraysEqual(array1: (string | number)[], array2: (string | number)[]): boolean {
         if (array1.length !== array2.length) {
@@ -535,10 +526,6 @@
 
       /**
        * Returns a string which contains all the array values, which are separated by a comma.
-       *
-       * @param {Array} array - Array of string or number values.
-       *
-       * @returns {String}
        */
       getStringFromArray(array: (string | number)[]): string {
         return Array.isArray(array) ? array.join(', ') : '';
@@ -547,11 +534,6 @@
       /**
        * Compares two array string values according to their localCompare method.
        * If the values are numbers, it compares them based on their value.
-       *
-       * @param {(String|Number)} value1 - First value to compare.
-       * @param {(String|Number)} value2 - Second value to compare.
-       *
-       * @returns {Number}
        */
       compare(value1: string | number, value2: string | number): number {
         if (typeof value1 === 'number' && typeof value2 === 'number') {
@@ -583,10 +565,6 @@
 
       /**
        * Trims the value if it is a string.
-       *
-       * @param {(String|Number)} value - Value to be trimmed.
-       *
-       * @returns {(String|Number)}
        */
       trimValue(value: string | number): string | number {
         return typeof value === 'string' ? value.trim() : value;

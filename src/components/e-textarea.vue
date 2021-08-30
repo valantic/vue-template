@@ -139,8 +139,6 @@
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
       onInput(event: Event) {
         const textArea = event.currentTarget as HTMLTextAreaElement;

@@ -111,8 +111,6 @@ const notificationModule = defineModule({
 
     /**
      * Flushes field notifications.
-     *
-     * @param {Object} state - The current module state.
      */
     flushFieldNotifications(state: IModNotificationState) {
       state.notifications = state.notifications.filter(notification => !notification.message?.source || !notification.message.source.field); // eslint-disable-line max-len
