@@ -56,7 +56,6 @@
     components: {
       eProgress
     },
-    // mixins: [],
 
     props: {
       /**

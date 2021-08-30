@@ -9,7 +9,6 @@
     name: 'c-header',
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {

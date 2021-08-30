@@ -24,7 +24,6 @@
     components: {
       sToggle,
     },
-    // mixins: [],
 
     // props: {},
     data() {

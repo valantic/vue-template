@@ -16,7 +16,6 @@
     name: 'c-component', // TODO: update name according to filename
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {

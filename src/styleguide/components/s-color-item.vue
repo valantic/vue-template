@@ -28,7 +28,6 @@
     components: {
       sColorSpecimen
     },
-    // mixins: [],
 
     props: {
 

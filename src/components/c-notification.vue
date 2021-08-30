@@ -56,7 +56,6 @@
 
     // components: {},
     // components: {},
-    // mixins: [],
 
     props: {
       /**

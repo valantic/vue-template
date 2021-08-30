@@ -22,7 +22,6 @@
     components: {
       cNotificationContainer,
     },
-    // mixins: [],
 
     // props: {},
     // data() {

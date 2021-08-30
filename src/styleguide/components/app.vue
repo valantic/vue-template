@@ -19,7 +19,6 @@
     components: {
       sNavigation,
     },
-    // mixins: [],
 
     // props: {},
     // data() {

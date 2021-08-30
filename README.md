@@ -761,7 +761,6 @@ package.json:
 * [ ] Devtools support.
 * [ ] Test v-focus state handling.
 * [ ] Test unit tests.
-* [ ] Test styleguide.
 
 ### Typescript
 
@@ -769,14 +768,13 @@ package.json:
 
 * [ ] Check if TS Loader can be combined with babel
   * Can be done by omitting babel
-* [ ] Remove all JSDocs
-* [ ] Check if mixins can be replaced by Composition API because typing is not really working
-* [ ] Add Documentation and Wiki Section about 
-  - always returning an arrow function for custom validator of props (to fix random TS errors)
-  - always returning a defined type for any other functions (computed / data) (to fix random TS errors about undefined variables)
+* [ ] Remove all JSDocs params / return types
 * [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
 * [ ] Fix broken Jest tests
 
+* [ ] Add Documentation and Wiki Section about
+  - always returning an arrow function for custom validator of props (to fix random TS errors)
+  - always returning a defined type for any other functions (computed / data) (to fix random TS errors about undefined variables)
 
 * [ ] Make styleguideist work
   * Vue 3 Currently not supported

@@ -13,7 +13,6 @@
     components: {
       sIconFinder
     },
-    // mixins: [],
 
     // props: {},
     // data() {

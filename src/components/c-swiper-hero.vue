@@ -47,15 +47,15 @@
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useUuid, { IUuid } from '@/compositions/uuid';
   import mapHeroImages from '@/helpers/map-hero-images';
   import { IImage } from '@/types/e-image';
-  import uuid from '../mixins/uuid';
 
   interface ISwiperInstances {
     [key: string]: Swiper;
   }
 
-  interface ISetup {
+  interface ISetup extends IUuid {
     container: Ref<HTMLDivElement | null>;
     previous: Ref<HTMLDivElement | null>;
     next: Ref<HTMLDivElement | null>;
@@ -73,7 +73,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [uuid],
 
     props: {
       /**
@@ -104,7 +103,12 @@
       const next = ref();
       const pagination = ref();
 
+      const { increaseUuid } = useUuid();
+
+      increaseUuid();
+
       return {
+        ...useUuid(),
         container,
         previous,
         next,

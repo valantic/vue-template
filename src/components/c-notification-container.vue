@@ -27,7 +27,6 @@
     components: {
       cNotification,
     },
-    // mixins: [],
 
     props: {
       /**

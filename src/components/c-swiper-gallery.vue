@@ -62,7 +62,7 @@
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import mapImages from '@/helpers/map-images';
-  import uuid from '@/mixins/uuid';
+  import useUuid, { IUuid } from '@/compositions/uuid';
   import { IVideo } from '@/types/c-swiper-gallery';
   import { IImage } from '@/types/e-image';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
@@ -71,7 +71,7 @@
     [key: string]: Swiper;
   }
 
-  interface ISetup {
+  interface ISetup extends IUuid {
     previous: Ref<HTMLDivElement | null>;
     next: Ref<HTMLDivElement | null>;
     pagination: Ref<HTMLDivElement | null>;
@@ -86,8 +86,6 @@
   export default defineComponent({
     name: 'c-swiper-gallery',
     status: 0, // TODO: remove when component was prepared for current project.
-
-    mixins: [uuid],
 
     props: {
       /**
@@ -122,7 +120,12 @@
       const next = ref();
       const pagination = ref();
 
+      const { increaseUuid } = useUuid();
+
+      increaseUuid();
+
       return {
+        ...useUuid(),
         container,
         previous,
         next,
