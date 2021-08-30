@@ -15,9 +15,14 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { mapGetters } from 'vuex';
   import { webpack } from '@/../package.json';
-  import { ITheme } from '@/types/s-theme-selector';
+  import store from '@/store';
+
+  interface ITheme {
+    name: string;
+    id: string;
+    selected: boolean;
+  }
 
   const themePath = `/${webpack.outputAssetsFolder}css/${webpack.filePrefix}theme-`;
 
@@ -45,9 +50,12 @@
     },
 
     computed: {
-      ...mapGetters('session', [
-        'getTheme',
-      ]),
+      /**
+       * Returns the currently active theme.
+       */
+      getTheme(): string {
+        return store.getters.session.getTheme;
+      },
 
       /**
        * Loops the themes and mark the selected by the global theme.
@@ -114,7 +122,7 @@
       onChange(event: Event) {
         const element = event.target as HTMLSelectElement;
 
-        this.$store.commit('session/setTheme', element.value);
+        store.commit.session.setTheme(element.value);
       },
 
       /**

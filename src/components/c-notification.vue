@@ -43,9 +43,9 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import { mapMutations } from 'vuex';
   import { INotification } from '@/types/c-notification';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import store from '@/store';
 
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
@@ -187,16 +187,16 @@
     // unmounted() {},
 
     methods: {
-      ...mapMutations('notification', [
-        'popNotification',
-      ]),
-
       /**
        * Removes current notification from stack.
        */
       close(): void {
         this.$el.classList.add('c-notification--expire');
-        setTimeout(() => { this.popNotification(this.$props.notification.id); }, 500);
+        setTimeout(() => {
+          if (this.notification.id) {
+            store.commit.notification.popNotification(this.notification.id);
+          }
+        }, 500);
       },
 
       /**

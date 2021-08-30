@@ -3,6 +3,7 @@
 import './setup/_scss.scss';
 
 import { createApp } from 'vue';
+import store from '@/store';
 import options from './setup/options';
 import directives from './setup/directives';
 import components from './setup/components';
@@ -29,11 +30,6 @@ const vm = new Vue(vueOptions);
 
 vm.$mount('#app');
 
-// Set theme according to url in development. e.g. ?theme=01
-if (process.env.NODE_ENV !== 'production') {
-  const themeId = getUrlParameter('theme');
+app.use(store.original);
 
-  if (themeId) {
-    vm.$store.commit('session/setTheme', themeId);
-  }
-}
+app.mount('#app');

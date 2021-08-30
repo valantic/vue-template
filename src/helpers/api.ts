@@ -59,7 +59,7 @@ function showNotifications(messages: IMessage[], options?: INotification): void 
   }
 
   messages.forEach((message) => {
-    store.commit('notification/pushNotification', {
+    store.commit.notification.pushNotification({
       ...options,
       message,
     });
@@ -99,7 +99,7 @@ function handleError(error: AxiosError, options?: INotification): Promise<AxiosE
   if (messages) {
     showNotifications(messages, options);
   } else {
-    store.dispatch('notification/showUnknownError');
+    store.dispatch.notification.showUnknownError();
   }
 
   return Promise.reject(error);
