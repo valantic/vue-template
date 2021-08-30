@@ -327,14 +327,14 @@
        * Selects the value of the input field.
        */
       selectValue() {
-        if (this.$props.value) {
+        if (this.value) {
           // Needed to select a number value on Chrome.
           this.input?.select();
 
           // Timeout is needed that it works on all browsers (without there are problems on Safari, Edge, iOS)
           if ('ontouchstart' in window) {
             setTimeout(() => {
-              const selectionRange = typeof this.$props.value === 'string' ? this.$props.value.length : this.$props.value;
+              const selectionRange = typeof this.value === 'string' ? this.value.length : this.value;
 
               this.input?.setSelectionRange(0, selectionRange);
             });

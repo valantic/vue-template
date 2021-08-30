@@ -156,7 +156,7 @@
     },
     // beforeMount() {},
     mounted() {
-      const { expire, delay } = this.$props.notification;
+      const { expire, delay } = this.notification;
 
       if (expire) {
         const timeoutDelay = delay
@@ -196,7 +196,7 @@
           const eventPromise = new Promise((resolve, reject) => {
             if (typeof this.notification.confirm === 'function') {
               this.notification.confirm({
-                notification: this.$props.notification,
+                notification: this.notification,
                 resolve,
                 reject
               });
@@ -223,7 +223,7 @@
           const eventPromise = new Promise((resolve, reject) => {
             if (this.notification.decline) {
               this.notification.decline({
-                notification: this.$props.notification,
+                notification: this.notification,
                 resolve,
                 reject
               });
