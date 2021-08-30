@@ -2,8 +2,10 @@
 const vueRules = require('eslint-config-valantic/plugins/vue');
 
 const tsRules = { // TODO: move to config package.
-  "no-shadow": "off",
-  "@typescript-eslint/no-shadow": "error"
+  'no-shadow': 'off',
+  '@typescript-eslint/no-shadow': 'error',
+  'require-jsdoc': 0, // TODO is deprecated, see https://eslint.org/blog/2018/11/jsdoc-end-of-life
+  'valid-jsdoc': 0, // TODO is deprecated, see https://eslint.org/blog/2018/11/jsdoc-end-of-life
 }
 
 module.exports = {
@@ -19,7 +21,7 @@ module.exports = {
   extends: [
     'valantic',
     'plugin:vue/recommended',
-    "@vue/typescript",
+    '@vue/typescript',
   ],
   // required to lint *.vue files
   plugins: [
@@ -34,7 +36,6 @@ module.exports = {
   rules: {
     ...vueRules,
     ...tsRules,
-    'require-jsdoc': 0,
   },
   globals: {},
 };

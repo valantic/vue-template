@@ -64,6 +64,7 @@
     "core-js": "~3.11.0",
     "css-vars-ponyfill": "~2.4.3",
     "dayjs": "~1.10.4",
+    "direct-vuex": "next",
     "picturefill": "~3.0.3",
     "swiper": "~6.5.8",
     "vue": "3.2.4",

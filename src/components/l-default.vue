@@ -13,7 +13,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import { mapMutations } from 'vuex';
+  import store from '@/store';
 
   export default defineComponent({
     name: 'l-default',
@@ -46,10 +46,6 @@
     // unmounted() {},
 
     methods: {
-      ...mapMutations('notification', [
-        'pushNotification',
-      ]),
-
       /**
        * Gets localStorage messages and pushes them in the notification store to display.
        */
@@ -60,7 +56,7 @@
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
             messagesParsed.forEach((message) => {
-              this.pushNotification({ message });
+              store.commit.notification.pushNotification({ message });
             });
 
             // Clears the localStorage notifications.

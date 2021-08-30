@@ -16,7 +16,8 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { mapGetters } from 'vuex';
+  import store from '@/store';
+  import { IBreadcrumbItem } from '@/store/modules/breadcrumb';
 
   /**
    * Renders a list of breadcrumbs items from the store module.
@@ -34,9 +35,12 @@
     // },
 
     computed: {
-      ...mapGetters('breadcrumb', [
-        'getItems',
-      ]),
+      /**
+       * Returns an Array of breadcrumb items.
+       */
+      getItems(): readonly IBreadcrumbItem[] {
+        return store.getters.breadcrumb.getItems;
+      },
     },
     // watch: {},
 

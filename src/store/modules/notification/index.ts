@@ -1,10 +1,11 @@
 import { NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 import api from '@/helpers/api';
-import { INotification } from '@/types/c-notification';
-import { Module } from 'vuex';
+import { IMessage, INotification } from '@/types/c-notification';
+import { defineModule } from 'direct-vuex';
+import { moduleActionContext } from '@/store';
 
-interface INotificationState {
+interface IModNotificationState {
   notifications: INotification[];
   id: number;
 }
@@ -15,17 +16,8 @@ interface INotificationState {
  * This is a work around to handle app internal and external pushes of notifications.
  * A better way would be to refactor this to an action.
  *
- * @param {Object} state - The current module state.
- * @param {Object} options - Notification object.
- * @param {Object} options.message - The message configuration.
- * @param {String} options.message.type - The message type (success, error, warning, info).
- * @param {String} options.message.message - The message text.
- * @param {Boolean} [options.message.expire] - Defines if the notification should auto expire.
- * @param {Object} [options.message.meta] - Additional information for the current message.
- * @param {String} [options.message.meta.id] - A unique id to handle anything related to the message on backend side.
- * @param {String} [options.message.meta.confirmationType] - A type name to assign specific confirmation actions.
  */
-function pushNotification(state: INotificationState, options: INotification) {
+function pushNotification(state: IModNotificationState, options: INotification) {
   if (!options) {
     return;
   }
@@ -59,90 +51,61 @@ function pushNotification(state: INotificationState, options: INotification) {
   state.id += 1;
 }
 
-const notificationModule: Module<any, any> = {
+const notificationModule = defineModule({
   namespaced: true,
-  state: {
+  state: (): IModNotificationState => ({
     /**
-     * @type {Array} Stores notifications.
+     * Stores notifications.
      */
     notifications: [],
 
     /**
-     * @type {Number} Stores notification id (needed for proper keying in frontend).
+     * Stores notification id (needed for proper keying in frontend).
      */
     id: 1,
-  } as INotificationState,
+  }),
   getters: {
-
     /**
      * Gets all notifications that are bound to a selector.
-     *
-     * @param {Object} state - The current module state.
-     *
-     * @returns {Array.<Object>} All notifications bound to a selector.
      */
     // eslint-disable-next-line max-len
-    getSelectorNotifications: (state: INotificationState) => state.notifications.filter(({ message }) => message?.source?.selector),
+    getSelectorNotifications: (state: IModNotificationState) => state.notifications.filter(({ message }) => message?.source?.selector),
 
     /**
      * Gets all notifications that are not bound to a selector.
-     *
-     * @param {Object} state - The current module state.
-     *
-     * @returns {Array.Object} All notifications not bound to a selector.
      */
-    getNonSelectorNotifications: (state: INotificationState) => state.notifications
+    getNonSelectorNotifications: (state: IModNotificationState) => state.notifications
       .filter(({ message }) => !message?.source || !message.source.selector),
 
     /**
      * Gets the global notifications.
-     *
-     * @param {Object} state - The current module state.
-     *
-     * @returns {Array.<Object>} The global notifications.
      */
-    getGlobalNotifications: (state: INotificationState) => state.notifications
+    getGlobalNotifications: (state: IModNotificationState) => state.notifications
       .filter(({ message }) => !message?.source && message?.type !== 'add-to-cart'),
 
     /**
      * Gets the add-to-cart notifications.
-     *
-     * @param {Object} state - The current module state.
-     *
-     * @returns {Array.<Object>} The add-to-cart notifications.
      */
     // eslint-disable-next-line max-len
-    getAddToCartNotifications: (state: INotificationState) => state.notifications.filter(({ message }) => message?.type === 'add-to-cart'),
+    getAddToCartNotifications: (state: IModNotificationState) => state.notifications.filter(({ message }) => message?.type === 'add-to-cart'),
 
     /**
      * Gets the field notifications.
-     *
-     * @param {Object} state - The current module state.
-     *
-     * @returns {Array.<Object>} The field notifications.
      */
     // eslint-disable-next-line max-len
-    getFieldNotifications: (state: INotificationState): INotification[] => state.notifications.filter(({ message }) => message?.source?.field),
+    getFieldNotifications: (state: IModNotificationState): INotification[] => state.notifications.filter(({ message }) => message?.source?.field),
   },
+
   mutations: {
     /**
      * Adds a notification.
-     *
-     * @param {Object} state - The current module state.
-     * @param {Object} options - Notification object.
-     * @param {Object} options.message - The message configuration.
-     * @param {String} options.message.type - The message type (success, error, warning, info).
-     * @param {String} options.message.message - The message text.
      */
     pushNotification,
 
     /**
      * Removes a notification.
-     *
-     * @param {Object} state - The current module state.
-     * @param {Number} id - Id of the notification.
      */
-    popNotification(state: INotificationState, id: number) {
+    popNotification(state: IModNotificationState, id: number) {
       state.notifications = state.notifications.filter(notification => notification.id !== id);
     },
 
@@ -151,38 +114,40 @@ const notificationModule: Module<any, any> = {
      *
      * @param {Object} state - The current module state.
      */
-    flushFieldNotifications(state: INotificationState) {
+    flushFieldNotifications(state: IModNotificationState) {
       state.notifications = state.notifications.filter(notification => !notification.message?.source || !notification.message.source.field); // eslint-disable-line max-len
     },
   },
+
   actions: {
     /**
      * Accepts the initial data Array of notification Objects.
-     *
-     * @param {Object} context - The current module context.
-     * @param {Function} context.commit - Triggers a mutation on the current module.
-     * @param {Array.<Object>} [payload] - An Array of notification Objects.
      */
-    data({ commit }, payload: INotification[]) {
+    data(context, payload: IMessage[]) {
       if (!Array.isArray(payload)) {
         throw Error("The payload data given to 'notification/data' is not of type Array.");
       }
 
+      // eslint-disable-next-line no-use-before-define
+      const { commit } = notificationActionContext(context);
+
       payload.forEach((message) => {
-        commit('pushNotification', { message, delay: 6 });
+        commit.pushNotification({ message, delay: 6 });
       });
     },
 
     /**
      * Adds an "unknown error" to the notification stack.
-     *
-     * @param {Object} context - The current module context.
-     * @param {Function} context.commit - Triggers a mutation on the current module.
      */
-    showUnknownError({ commit }) {
-      commit('pushNotification', NOTIFICATION_UNKNOWN_ERROR);
+    showUnknownError(context) {
+      // eslint-disable-next-line no-use-before-define
+      const { commit } = notificationActionContext(context);
+
+      commit.pushNotification(NOTIFICATION_UNKNOWN_ERROR);
     }
   },
-};
+});
 
 export default notificationModule;
+
+const notificationActionContext = (context: any) => moduleActionContext(context, notificationModule);

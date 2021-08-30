@@ -3,6 +3,7 @@
 import './setup/_scss.scss';
 
 import { createApp } from 'vue';
+import store from '@/store';
 import options from './setup/options';
 import plugins from './setup/plugins';
 
@@ -19,5 +20,7 @@ const app = createApp(vueOptions);
 vuePlugins.forEach(([plugin, pluginOptions]) => {
   app.use(plugin, pluginOptions);
 });
+
+app.use(store.original);
 
 app.mount('#app');
