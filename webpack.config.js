@@ -237,13 +237,6 @@ module.exports = (env, args = {}) => {
         hotReload,
         compilerOptions: { // @see https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#options
           whitespace: 'condense',
-          directives: {
-            // Remove the Pimcore directive from production.
-            'pimcore': () => !isProduction,
-            'pimcore-areabrick': () => !isProduction,
-            'pimcore-snippet': () => !isProduction,
-            'pimcore-template': () => !isProduction,
-          }
         }
       },
     },
@@ -262,7 +255,6 @@ module.exports = (env, args = {}) => {
         loader: 'babel-loader',
         options: {
           presets: ['@babel/preset-env'],
-          plugins: ['@babel/plugin-proposal-optional-chaining', '@babel/plugin-proposal-nullish-coalescing-operator']
         }
       },
     },
