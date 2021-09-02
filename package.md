@@ -90,6 +90,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > test environment
 - [babel-loader](https://www.npmjs.com/package/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
   > webpack
+- [ts-loader](https://www.npmjs.com/package/ts-loader) - This package allows showing typescript Errors and transpiling Typescript files to Javascript files using typescript and webpack.
+  > webpack
 - [clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin) - A webpack plugin to remove/clean your build folder(s).
   > webpack
 - [css-loader](https://www.npmjs.com/package/css-loader) - The css-loader interprets @import and url() like import/require() and will resolve them.
