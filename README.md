@@ -578,7 +578,7 @@ In webpack this separate parts of the application are called `chunks`. You can f
 
 ### Critical CSS
 
-Delivering critical CSS to the browser trough the HTML head can drastically decrease the time until first render. As long as the HTML file itself is gziped still below 14kb. Therefore we decided to ad a manual possibility to define critical CSS styles, which will be extracted in a separate `*.critical.css` file during the build.
+Delivering critical CSS to the browser trough the HTML head can drastically decrease the time until first render. As long as the HTML file itself is gziped still below 14kb. Therefore we decided to add a manual possibility to define critical CSS styles, which will be extracted in a separate `*.critical.css` file during the build.
 
 You can read more about critical CSS [here](https://css-tricks.com/annotating-critical-css/) and the tool we're using [here](https://github.com/mrnocreativity/postcss-critical-split)
 
@@ -620,6 +620,23 @@ You can share the mock data from the demo pages with the vue-styleguidist by imp
 
 Webpack supports to use an [alias](https://webpack.js.org/loaders/css-loader/#alias) for paths. Thanks to this feature, you don't need to define relative paths when importing one JavaScript file into an other. The `@` alias stands for the application root (`/app`). So for example you can just write `import options from '@/setup/options'` in any file to import the `options.js` file from the `setup` folder without caring about relative path resolving.
 
+## Build chain
+
+The build chain uses a combined solution of Typescript and Babel:
+
+1. The webpack ts-loader shows TS errors and compiles the Typescript to Javascript files
+2. The webpack babel-loader compiles the Javascript files to the final outpu based on the babel-preset and browserlist
+
+The reasons why we choose this setup are:
+
+1. Using just the `ts-loader` can only use an esXXXX Target, but not a browser / feature depending solution like browserlist
+2. Using just the `babel-loader` with the `@babel/preset-typescript`, one does not get typescript errors in the command line without starting a second `tsc` command
+
+### tsconfig Target
+
+At the moment, we are using `es2019` as typescript build target. The reason is, that `esNext` / `es2020` are not transpiling
+`optional-chaining` and `nullish-coalescing` and webpack 4 cannot handle them
+
 ## Node.js and NPM
 
 Please see the separate [package.md](package.md).
@@ -657,6 +674,10 @@ PostCSS configuration. PostCSS is used for **browser prefixing**, **minification
 ### .stylelintrc.js
 
 Stylelint setup for the current project.
+
+### tsconfig.json
+
+Typescript configuration for the current project.
 
 ## Known issues
 
@@ -765,13 +786,8 @@ package.json:
 ### Typescript
 
 * [ ] Fix broken Jest tests
-* [ ] Check if TS Loader can be combined with babel
-  * Can be done by omitting babel
-  * Browserlist only possible with Babel
-* [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
-  * Help needed
-* [ ] Replace this.$refs
-  * not possible due to having unknown property names otherwise
+* [ ] Remove IE11 polyfills  
+* [ ] Refactor model definitions to use standard model properties (search for "model: {" )
 * [ ] triggering a notification shows it 3 times
 
 * [ ] Add Documentation and Wiki Section about
