@@ -145,7 +145,6 @@
   }
 
   interface ISetup extends IFormStates {
-    multiple: Ref<ComponentPublicInstance[] | null>;
     searchInput: Ref<ComponentPublicInstance[] | null>;
   }
 
@@ -153,6 +152,8 @@
    * Multiselect component which contains a list of checkboxes. It contains an input field for filtering the values
    * of the checkboxes and a save button, to save the checked items to an array. By clicking on the save button or
    * clicking outside of the component, the component state gets updated and is emitted to the parent component.
+   *
+   * TODO: this component is too specific (e.g. docCount). Should be replaced with a simplified or more customizable variant.
    */
   export default defineComponent({
     name: 'c-multiselect',
@@ -211,12 +212,10 @@
     },
 
     setup(): ISetup {
-      const multiple = ref();
       const searchInput = ref();
 
       return {
         ...useFormStates(),
-        multiple,
         searchInput
       };
     },
@@ -386,13 +385,6 @@
        * Updates the state of the checkboxes and updates the state of the multiselect component.
        */
       updateCheckboxes() {
-        if (this.multiple) {
-          this.multiple.forEach((item) => {
-            // eslint-disable-next-line no-extra-parens
-            (item as any).updateCheckedState();
-          });
-        }
-
         this.checkedItems.sort(this.compare);
         this.checkedStored = this.checkedItems;
         this.outputValue = this.getStringFromArray(this.checkedStored);

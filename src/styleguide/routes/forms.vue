@@ -55,6 +55,16 @@
         </e-label>
       </div>
 
+      <div :class="b('part')">
+        <c-multiselect :active-value="demo.meal"
+                       :items="mock.mealValues"
+                       title="Multiselect"
+                       placeholder="Lorem ipsum"
+                       facet-name="foo"
+                       @update="onMultiselectUpdate"
+        />
+      </div>
+
       <!-- e-button -->
       <div :class="b('part')">
         <e-button type="submit">
@@ -71,11 +81,15 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import ELabel from '@/components/e-label.vue';
+  import CMultiselect from '@/components/c-multiselect.vue';
 
   export default defineComponent({
     name: 'forms',
-
-    // components: {},
+    components: {
+      CMultiselect,
+      ELabel
+    },
     data() {
       return {
         demo: {
@@ -100,9 +114,22 @@
               value: 'french',
             }
           ],
+          mealValues: [
+            'pizza',
+            'spaghetti',
+            'lasagne',
+          ].map(item => ({
+            id: item,
+            value: item
+          }))
         }
       };
     },
+    methods: {
+      onMultiselectUpdate(component: any) {
+        this.demo.meal = Object.values(component.checkedItems);
+      }
+    }
   });
 </script>
 
