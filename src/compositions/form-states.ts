@@ -18,7 +18,6 @@ interface IStateModifiers {
   disabled: boolean;
   focus: boolean;
   hover: boolean;
-  checked: boolean;
 }
 
 export interface IFormStates {
@@ -30,23 +29,14 @@ export interface IFormStates {
   stateModifiers: ComputedRef<IStateModifiers>;
   stateIcon: ComputedRef<string>;
   hasDefaultState: ComputedRef<boolean>;
-  isChecked: ComputedRef<boolean>;
 }
 
 export default (defaultValue: string = ''): IFormStates => {
   const inputState = ref<FieldStates>(FieldStates.Default);
-  const inputValue = ref<string>(defaultValue);
   const active = ref<boolean>(false);
   const disabled = ref<boolean>(false);
   const focus = ref<boolean>(false);
   const hover = ref<boolean>(false);
-  const checked = ref<boolean | string[]>(false);
-
-  const isChecked: ComputedRef<boolean> = computed((): boolean => { // eslint-disable-line arrow-body-style
-      return Array.isArray(checked.value)
-        ? checked.value.includes(inputValue.value)
-        : checked.value;
-    });
 
   const stateModifiers: ComputedRef<IStateModifiers> = computed(() => ({
       state: inputState.value,
@@ -54,7 +44,6 @@ export default (defaultValue: string = ''): IFormStates => {
       disabled: disabled.value,
       focus: focus.value,
       hover: hover.value,
-      checked: isChecked.value,
     }));
 
   const hasDefaultState: ComputedRef<boolean> = computed(() => inputState.value === FieldStates.Default);
@@ -87,6 +76,5 @@ export default (defaultValue: string = ''): IFormStates => {
     stateModifiers,
     stateIcon,
     hasDefaultState,
-    isChecked,
   };
 };

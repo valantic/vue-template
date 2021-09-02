@@ -124,7 +124,6 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-
   import eFieldset from '@/components/e-fieldset';
   import { required, email } from 'vuelidate/lib/validators';
 
@@ -159,6 +158,14 @@
               value: 'french',
             }
           ],
+          mealValues: [
+            'pizza',
+            'spaghetti',
+            'lasagne',
+          ].map(item => ({
+            id: item,
+            value: item
+          }))
         }
       };
     },

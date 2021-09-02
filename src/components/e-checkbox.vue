@@ -35,20 +35,11 @@
 
     inheritAttrs: false,
 
-    model: {
-      /**
-       * Changes v-model behavior and use 'checked' instead of 'value' as prop.
-       * Avoids conflict with default value attribute.
-       */
-      prop: 'checked',
-      event: 'change',
-    },
-
     props: {
       /**
        * Adds checked attribute to prevent type error
        */
-      checked: {
+      modelValue: {
         type: [Boolean, Array] as PropType<boolean | string[]>,
         required: true,
       },
@@ -88,7 +79,7 @@
        */
       internalValue: {
         get(): boolean | string[] {
-          return this.checked;
+          return this.modelValue;
         },
         set(value: boolean | string[]) {
           /**
@@ -97,9 +88,21 @@
            * @event change
            * @type {Boolean|Array}
            */
+          this.$emit('update:modelValue', value);
           this.$emit('change', value);
         },
       },
+
+      /**
+       * Evaluates if the checkbox is currently selected.
+       *
+       * @returns {Boolean}
+       */
+      isChecked() {
+        return Array.isArray(this.value)
+          ? this.value.includes(this.modelValue)
+          : this.value;
+      }
     },
     // watch: {},
 
@@ -115,21 +118,6 @@
     // unmounted() {},
 
     methods: {
-      /**
-       * Updates the checked state of the checkbox.
-       *
-       * @public Used by c-multiselect.
-       */
-      updateCheckedState() {
-        if (Array.isArray(this.checked)) {
-          if (typeof this.value === 'string') {
-            this.isChecked = this.checked.indexOf(this.value.trim()) > -1;
-          } else if (typeof this.value === 'number') {
-            this.isChecked = this.checked.indexOf(this.value.toString()) > -1;
-          }
-        }
-      },
-
       /**
        * Emits focus to parent and wrapper component.
        * Update "hasFocus" state.
