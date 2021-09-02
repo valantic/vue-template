@@ -22,7 +22,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -41,19 +40,19 @@
     // computed: {},
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
-    // render(): void {},
+    // render() {},
   });
 </script>
 

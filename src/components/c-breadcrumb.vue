@@ -16,7 +16,8 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { mapGetters } from 'vuex';
+  import store from '@/store';
+  import { IBreadcrumbItem } from '@/store/modules/breadcrumb';
 
   /**
    * Renders a list of breadcrumbs items from the store module.
@@ -26,7 +27,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -34,25 +34,28 @@
     // },
 
     computed: {
-      ...mapGetters('breadcrumb', [
-        'getItems',
-      ]),
+      /**
+       * Returns an Array of breadcrumb items.
+       */
+      getItems(): readonly IBreadcrumbItem[] {
+        return store.getters.breadcrumb.getItems;
+      },
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
-    // render(): void {},
+    // render() {},
   });
 </script>
 

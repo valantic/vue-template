@@ -1,61 +1,61 @@
-import { createStore } from 'vuex';
+import { defineModule } from 'direct-vuex';
+import { moduleActionContext } from '@/store';
 
-interface IBreadcrumbItem {
+export interface IBreadcrumbItem {
   name: string;
   url: string;
 }
 
-interface IBreadcrumbState {
+export interface IModBreadcrumbState {
   items: IBreadcrumbItem[];
 }
 
-// TODO check if direct-store should be used
-//  see https://next.vuex.vuejs.org/guide/typescript-support.html
-//  see https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3
-export default createStore<IBreadcrumbState>({
-  state: {
+const breadcrumbModule = defineModule({
+  namespaced: true,
+  state: (): IModBreadcrumbState => ({
     /**
-     * @type {Array} Stores breadcrumb items.
+     * Stores breadcrumb items.
      */
     items: process.env.NODE_ENV !== 'production'
       ? require('../../../styleguide/mock-data/initial-data/breadcrumbs').default // eslint-disable-line global-require
       : null,
-  },
+  }),
+
   getters: {
     /**
      * Gets the list of current breadcrumb items.
-     *
-     * @param {Object} state - The current module state.
-     *
-     * @returns {Array}
      */
-    getItems: (state: IBreadcrumbState) => state.items,
+    getItems(state: IModBreadcrumbState): IBreadcrumbItem[] {
+      return state.items;
+    }
   },
+
   mutations: {
     /**
      * Sets the list of breadcrumbs in the state.
-     *
-     * @param {Object} state - The current module state.
-     * @param {Array} data - List of breadcrumb items.
      */
-    setItems(state: IBreadcrumbState, data: IBreadcrumbItem[]) {
+    setItems(state: IModBreadcrumbState, data: IBreadcrumbItem[]) {
       state.items = data || null;
     }
   },
+
   actions: {
     /**
      * Handles the initial data for breadcrumbs.
-     *
-     * @param {Object} context - The current module context.
-     * @param {Function} context.commit - Triggers a mutation on the current module.
-     * @param {Array} payload - List of breadcrumb items.
      */
-    data({ commit }, payload: IBreadcrumbItem[]) {
+    data(context, payload: IBreadcrumbItem[]) {
       if (!Array.isArray(payload)) {
         throw Error("The payload data given to 'breadcrumb/data' is not of type Array.");
       }
 
-      commit('setItems', payload);
+      // eslint-disable-next-line no-use-before-define
+      const { commit } = breadcrumbActionContext(context);
+
+      commit.setItems(payload);
     }
   },
 });
+
+export default breadcrumbModule;
+
+const breadcrumbActionContext = (context: any) => moduleActionContext(context, breadcrumbModule);

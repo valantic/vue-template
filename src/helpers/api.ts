@@ -7,6 +7,18 @@ interface IUrlKeyValues {
   [key: string]: string;
 }
 
+export interface IApi {
+  getUrl: (urlKey: keyof typeof apiUrls, values: IUrlKeyValues) => string;
+  // eslint-disable-next-line max-len
+  get: (url: string, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  // eslint-disable-next-line max-len
+  post: (url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  // eslint-disable-next-line max-len
+  patch: (url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  // eslint-disable-next-line max-len
+  delete: (url: string, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+}
+
 // Enable tracking of requests in development environment.
 if (process.env.NODE_ENV !== 'production') {
   const clone = require('@/helpers/clone.ts').default; // eslint-disable-line global-require
@@ -37,9 +49,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 /**
  * Pushes an array of messages to the notification handler.
- *
- * @param {Array} messages - An array of messages.
- * @param {Object} options - Display options for the notifications.
  */
 function showNotifications(messages: IMessage[], options?: INotification): void {
   if (!Array.isArray(messages)) {
@@ -47,7 +56,7 @@ function showNotifications(messages: IMessage[], options?: INotification): void 
   }
 
   messages.forEach((message) => {
-    store.commit('notification/pushNotification', {
+    store.commit.notification.pushNotification({
       ...options,
       message,
     });
@@ -56,9 +65,6 @@ function showNotifications(messages: IMessage[], options?: INotification): void 
 
 /**
  * Handles successful ajax requests.
- *
- * @param {Object} response - Response object.
- * @param {Object} options - Display options for notification.
  *
  * @returns {Object}
  */
@@ -74,12 +80,6 @@ function handleSuccess(response: AxiosResponse, options?: INotification): AxiosR
 
 /**
  * Handles axios error responses.
- *
- * @param {Object} error - An axios error object.
- * @param {Object} error.response - The response data.
- * @param {Object} options - Additional request options.
- *
- * @returns {Promise<never>}
  */
 function handleError(error: AxiosError, options?: INotification): Promise<AxiosError> {
   const { messages } = error?.response?.data || {};
@@ -87,20 +87,15 @@ function handleError(error: AxiosError, options?: INotification): Promise<AxiosE
   if (messages) {
     showNotifications(messages, options);
   } else {
-    store.dispatch('notification/showUnknownError');
+    store.dispatch.notification.showUnknownError();
   }
 
   return Promise.reject(error);
 }
 
-export default {
+const api: IApi = {
   /**
    * Gets the url for the given 'urlKey'. The method also accepts an Object of interpolation values.
-   *
-   * @param {String} urlKey - The key for the requested url.
-   * @param {Object} [values] - An Object of key/value pairs. The related '{key}' in the URL will be replaced with its value.
-   *
-   * @returns {String}
    */
   getUrl(urlKey: keyof typeof apiUrls, values: IUrlKeyValues): string {
     let url = apiUrls[urlKey];
@@ -120,13 +115,8 @@ export default {
 
   /**
    * Runs a get request with given url with given url params.
-   *
-   * @param {String} url - Url to get.
-   * @param {Object} config - Url parameters which will be attached to the url.
-   * @param {Object} notificationOptions - Display options for notification.
-   *
-   * @returns {Promise} Promise with response data or error.
    */
+  // eslint-disable-next-line max-len
   get(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> {
     return axios
       .get(url, config)
@@ -136,14 +126,8 @@ export default {
 
   /**
    * Runs a post request with a given url and payload.
-   *
-   * @param {String} url - Url to post to.
-   * @param {Object} data - Post payload which will be attached to the request.
-   * @param {Object} config - Axios request configuration.
-   * @param {Object} notificationOptions - Display options for notification.
-   *
-   * @returns {Promise} Promise with response data or error.
    */
+  // eslint-disable-next-line max-len
   post(url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .post(url, data, config)
@@ -153,14 +137,8 @@ export default {
 
   /**
    * Runs a patch request with a given url and payload.
-   *
-   * @param {String} url - Url to patch to.
-   * @param {Object} data - Patch payload which will be attached to the request.
-   * @param {Object} config - Axios request configuration.
-   * @param {Object} notificationOptions - Display options for notification.
-   *
-   * @returns {Promise} Promise with response data or error.
    */
+  // eslint-disable-next-line max-len
   patch(url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .patch(url, data, config)
@@ -170,13 +148,8 @@ export default {
 
   /**
    * Runs a delete request with a given url and payload.
-   *
-   * @param {String} url - Url to send the delete to.
-   * @param {Object} config - Axios request configuration.
-   * @param {Object} notificationOptions - Display options for notification.
-   *
-   * @returns {Promise} Promise with response data or error.
    */
+  // eslint-disable-next-line max-len
   delete(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .delete(url, config)
@@ -184,3 +157,5 @@ export default {
       .catch(error => handleError(error, notificationOptions));
   },
 };
+
+export default api;

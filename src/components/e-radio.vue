@@ -22,7 +22,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
@@ -130,22 +130,20 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
       onChange(event: Event) {
         const radioButton = event.currentTarget as HTMLSelectElement;
@@ -159,7 +157,7 @@
         this.$emit('change', radioButton.value);
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

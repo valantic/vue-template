@@ -51,7 +51,7 @@
     // props: {},
 
     setup(): ISetup {
-      const input = ref(null);
+      const input = ref();
 
       return {
         input,
@@ -90,8 +90,6 @@
     methods: {
       /**
        * Event handler for copy to clipboard button.
-       *
-       * @param {Object} icon - The icon instance for which the example code should be copied.
        */
       copyToClipboard(icon: IIcon) {
         const value = `<e-icon icon="${icon.name}"/>`;
@@ -106,8 +104,6 @@
 
       /**
        * Shows the given notification.
-       *
-       * @param {String} message - The to be shown message.
        */
       setNotification(message: string) {
         this.notification = message;
@@ -115,16 +111,16 @@
     }
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
   });
 </script>
 

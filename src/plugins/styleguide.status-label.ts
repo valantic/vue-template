@@ -26,9 +26,6 @@ const labels: ILabels = {};
 
 /**
  * Appends a status label for the given component name to the styleguidist example.
- *
- * @param {String} name - The component name
- * @param {Number} statusId - The id of the current status.
  */
 function appendStatusLabel(name: string, statusId: number) {
   const container = document.querySelector(`[data-testid="${name}-container"]`);
@@ -68,7 +65,7 @@ function appendStatusLabel(name: string, statusId: number) {
 const plugin: Plugin = {
   install(app) {
     app.mixin({
-      mounted(): void {
+      mounted() {
         const { name, status } = this.$options;
 
         if (status === 0 && name) {

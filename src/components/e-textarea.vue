@@ -26,7 +26,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cFormNotification from '@/components/c-form-notification.vue';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
@@ -108,7 +108,7 @@
       modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-          notification: this.$props.notification && this.focus,
+          notification: this.notification && this.focus,
         };
       },
 
@@ -125,22 +125,20 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
       onInput(event: Event) {
         const textArea = event.currentTarget as HTMLTextAreaElement;
@@ -168,7 +166,7 @@
         this.$emit('blur');
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

@@ -53,16 +53,12 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > c-date-picker-input, c-date-picker-range
 - [picturefill](https://www.npmjs.com/package/picturefill) - A responsive image polyfill.
   > core, polyfill, ie11
-- [portal-vue](https://www.npmjs.com/package/portal-vue) - A Portal Component for Vuejs, to render DOM outside of a component, anywhere in the document.
-  > c-modal
 - [swiper](https://www.npmjs.com/package/swiper) - Swiper is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.
   > c-swiper-modal, c-swiper-gallery, c-swiper-hero
 - [vue](https://www.npmjs.com/package/vue) - Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
   > core
 - [vue-i18n](https://www.npmjs.com/package/vue-i18n) - Internationalization plugin for Vue.js
   > core
-- [vue-js-modal](https://www.npmjs.com/package/vue-js-modal) - https://github.com/euvl/vue-js-modal
-  > c-modal
 - [vuex](https://www.npmjs.com/package/vuex) - Centralized State Management for Vue.js.
   > core
 

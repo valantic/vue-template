@@ -761,41 +761,25 @@ package.json:
 * [ ] Devtools support.
 * [ ] Test v-focus state handling.
 * [ ] Test unit tests.
-* [ ] Test styleguide.
-* [ ] Replace event bus in collapsible components.
-* [ ] Replace vue-js-modal (not compatible with Vue 3).
-* [ ] Check if modal stacking in styleguide still needs multiple teleports.
-* [ ] Fix failing tests.
-* [ ] Update blueprints
 
 ### Typescript
 
+* [ ] Fix broken Jest tests
 * [ ] Check if TS Loader can be combined with babel
   * Can be done by omitting babel
-* [ ] Make Store with Modules work
-  * see https://next.vuex.vuejs.org/guide/typescript-support.html
-  * See how its done manually: https://dev.to/shubhadip/vue-3-vuex-4-modules-typescript-2i2o
-  * See https://stackoverflow.com/questions/64080549/using-vuex-4-modules-in-vue-3-with-typescript-and-how-to-fix-cyclical-dependenc
-  * See https://codesandbox.io/s/using-vuex-4-modules-in-vue-3-with-typescript-7ygvy
-  * See https://github.com/timritzer/typed-vuex
-  * See https://github.com/victorgarciaesgi/vuex-typed-modules
-  * See https://github.com/paroi-tech/direct-vuex#implement-a-vuex-store-with-typed-helpers
-  * See https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3
-* [ ] Change Global BREAKPOINTS to enum
-* [ ] Plugin Parameter options typing
-* [ ] Remove all JSDocs
-* [ ] Fix Modal Stack / Viewport Reactive not working
-* [ ] Check if Pimcore directive works
-* [ ] Fix most of // @ts-ignore comments / any usages
-* [ ] Make styleguideist work
-* [ ] Check if mixins can be replaced by Composition API because typing is not really working
-* [ ] Add Documentation and Wiki Section about 
-  - always returning an arrow function for custom validator of props (to fix random TS errors)
-  - always returning a defined type for any other functions (to fix random TS errors about undefined variables)
+  * Browserlist only possible with Babel
 * [ ] e-checkbox should support binding the v-model to array or primitive. Currently it only writes booleans. @see https://v3.vuejs.org/guide/forms.html#checkbox
-* [ ] Update blueprints
-* [ ] Vuex is broken (module import, module definition)
-* [ ] Fix broken Jest tests
+  * Help needed
+* [ ] Replace this.$refs
+  * not possible due to having unknown property names otherwise
+* [ ] triggering a notification shows it 3 times
+
+* [ ] Add Documentation and Wiki Section about
+  - always returning an arrow function for custom validator of props (to fix random TS errors)
+  - always returning a defined type for any other functions (computed / data) (to fix random TS errors about undefined variables)
+
+* [ ] Make styleguideist work
+  * Vue 3 Currently not supported
 
 ## License
 

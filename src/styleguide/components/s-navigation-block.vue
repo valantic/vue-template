@@ -81,7 +81,7 @@
       },
     },
     // methods: {},
-    // created(): void {}
+    // created() {}
   });
 </script>
 

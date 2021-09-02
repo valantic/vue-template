@@ -13,18 +13,19 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import i18n from '@/setup/i18n';
-  import i18nMixin from '../../mixins/i18n';
+  import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
   export default defineComponent({
     name: 's-language',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    mixins: [i18nMixin],
-
     // props: {},
 
-    // data() {},
+    data() {
+      return {
+        i18nLocales: I18N_LOCALES,
+      };
+    },
 
     // components: {},
     computed: {
@@ -40,27 +41,32 @@
     methods: {
       /**
        * Event handler for the change event of the language selector.
-       *
-       * @param {Event} event - The related DOM event.
        */
       onChange(event: Event): void {
         const target = event.target as HTMLSelectElement;
 
-        this.i18nSetLocale(target.value);
+        this.setLocale(target.value);
       },
+
+      /**
+       * Sets the locale within the i18n.
+       */
+      setLocale(value: string) {
+        i18nSetLocale(value);
+      }
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
   });
 </script>
 

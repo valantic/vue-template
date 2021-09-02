@@ -92,7 +92,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -171,22 +170,20 @@
       },
     },
     // watch: {},
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Will set the sort-parameters.
-       *
-       * @param {Object} column - Object which holds the information about the current column.
        */
       onClickSort(column: IColumn) {
         if (this.sortBy && this.sortBy === column) {
@@ -205,10 +202,6 @@
 
       /**
        * Checks if the given column should display the header label.
-       *
-       * @param {Object} column - A column definition object.
-       *
-       * @returns {Boolean}
        */
       isHeaderLabelVisible(column: IColumn) {
         return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden);
@@ -216,10 +209,6 @@
 
       /**
        * Calculates a sort button modifier object.
-       *
-       * @param {Object} column - A column definition object.
-       *
-       * @returns {Object}
        */
       getSortButtonModifiers(column: IColumn) {
         const active = this.sortBy && this.sortBy === column;
@@ -230,7 +219,7 @@
         };
       }
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

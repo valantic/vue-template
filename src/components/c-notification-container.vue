@@ -13,9 +13,9 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { mapGetters } from 'vuex';
   import cNotification from '@/components/c-notification.vue';
   import { INotification } from '@/types/c-notification';
+  import store from '@/store';
 
   /**
    * Container for rendering notifications. See /styleguide/notifications for demo.
@@ -27,7 +27,6 @@
     components: {
       cNotification,
     },
-    // mixins: [],
 
     props: {
       /**
@@ -75,35 +74,25 @@
     // },
 
     computed: {
-      ...mapGetters('notification', [
-        'getGlobalNotifications',
-        'getAddToCartNotifications',
-        'getNonSelectorNotifications',
-        'getSelectorNotifications',
-        'getFieldNotifications',
-      ]),
-
       /**
        * Returns an Array of notifications, which should be displayed by this container.
-       *
-       * @returns {Array.<Object>}
        */
-      notifications(): INotification[] {
+      notifications(): readonly INotification[] {
         switch (this.displayType) {
           case 'global':
-            return this.getGlobalNotifications;
+            return store.getters.notification.getGlobalNotifications;
 
           case 'modal':
-            return this.getNonSelectorNotifications;
+            return store.getters.notification.getNonSelectorNotifications;
 
           case 'add-to-cart':
-            return this.getAddToCartNotifications;
+            return store.getters.notification.getAddToCartNotifications;
 
           case 'selector':
-            return this.getSelectorNotifications;
+            return store.getters.notification.getSelectorNotifications;
 
           case 'field':
-            return this.getFieldNotifications;
+            return store.getters.notification.getFieldNotifications;
 
           default:
             return [];
@@ -112,19 +101,19 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
-    // render(): void {},
+    // render() {},
   });
 </script>
 

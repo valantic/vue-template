@@ -29,7 +29,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import i18n from '@/setup/i18n';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
 
   interface ISetup extends IFormStates {}
 
@@ -118,22 +118,20 @@
     // computed: {},
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Emits input event for v-model.
-       *
-       * @param   {Object}  event   Event object by onchange
        */
       onChange(event: Event) {
         const select = event.currentTarget as HTMLSelectElement;
@@ -147,7 +145,7 @@
         this.$emit('input', select.value);
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

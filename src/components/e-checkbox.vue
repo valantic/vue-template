@@ -22,7 +22,7 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
 
   interface ISetup extends IFormStates {}
 
@@ -91,7 +91,7 @@
         get(): boolean | string[] {
           return this.checked;
         },
-        set(value: boolean) {
+        set(value: boolean | string[]) {
           /**
            * Emits checkbox value e.g. true/false or value
            *
@@ -104,23 +104,20 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Emits state to parent and wrapper component.
-       * Update "isChecked" state.
-       *
-       * @param   {Boolean}  event   Field input
        */
       onChange(event: Event) {
         const target = event.target as HTMLInputElement;
@@ -183,7 +180,7 @@
         this.$emit('blur');
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

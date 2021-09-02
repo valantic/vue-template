@@ -44,9 +44,9 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import { mapMutations } from 'vuex';
   import { INotification } from '@/types/c-notification';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import store from '@/store';
 
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
@@ -57,7 +57,6 @@
 
     // components: {},
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -88,16 +87,6 @@
 
       /**
        * The notification object consisting of the following properties:
-       *
-       * @param {Object} notification.message - The actual message data.
-       * @param {String} notification.message.type - Type of response.
-       * @param {String} notification.message.message - The actual response message from backend.
-       * @param {Number} notification.id - Unique id provided by vuex.
-       * @param {Object} [notification.message.meta] - Meta data for the message.
-       * @param {String} [notification.title] - Adds title to the notification.
-       * @param {Function} [notification.confirm] - Adds confirm button and gets called when the confirm button is clicked.
-       * @param {Function} [notification.decline] - Adds decline button and gets called when the decline button is clicked.
-       *
        */
       notification: {
         type: Object as PropType<INotification>,
@@ -162,13 +151,13 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    created(): void {
+    // beforeCreate() {},
+    created() {
       this.visible = this.selector ? this.selector === this.notification.message?.source?.selector : true;
     },
-    // beforeMount(): void {},
-    mounted(): void {
-      const { expire, delay } = this.$props.notification;
+    // beforeMount() {},
+    mounted() {
+      const { expire, delay } = this.notification;
 
       if (expire) {
         const timeoutDelay = delay
@@ -180,35 +169,35 @@
         }, timeoutDelay);
       }
     },
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
-      ...mapMutations('notification', [
-        'popNotification',
-      ]),
-
       /**
        * Removes current notification from stack.
        */
       close(): void {
         this.$el.classList.add('c-notification--expire');
-        setTimeout(() => { this.popNotification(this.$props.notification.id); }, 500);
+        setTimeout(() => {
+          if (this.notification.id) {
+            store.commit.notification.popNotification(this.notification.id);
+          }
+        }, 500);
       },
 
       /**
        * Callback for confirm button click.
        */
-      onConfirm(): void {
+      onConfirm() {
         if (this.notification.confirm) {
           const eventPromise = new Promise((resolve, reject) => {
             if (typeof this.notification.confirm === 'function') {
               this.notification.confirm({
-                notification: this.$props.notification,
+                notification: this.notification,
                 resolve,
                 reject
               });
@@ -230,12 +219,12 @@
       /**
        * Callback for decline button click.
        */
-      onDecline(): void {
+      onDecline() {
         if (this.notification.decline) {
           const eventPromise = new Promise((resolve, reject) => {
             if (this.notification.decline) {
               this.notification.decline({
-                notification: this.$props.notification,
+                notification: this.notification,
                 resolve,
                 reject
               });
@@ -252,7 +241,7 @@
         }
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 

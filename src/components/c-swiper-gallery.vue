@@ -14,8 +14,7 @@
              :class="b('slide')"
              class="swiper-slide">
           <button :class="b('trigger')"
-                  type="button"
-                  @click.prevent="modalOpen = true">
+                  type="button">
             <span :class="b('image-wrapper-inner')">
               <div v-if="picture.isVideo" :class="b('video-preview-wrapper')">
                 <img :class="b('video-thumbnail')"
@@ -44,25 +43,6 @@
 
       <!-- navigation -->
       <div ref="pagination" :class="b('pagination')"></div>
-
-      <!-- modal -->
-      <c-modal
-        :open="modalOpen"
-        :header-component="null"
-        size="600"
-        inner-spacing="0"
-        mobile-transition="fade"
-        @close="modalClose">
-        <div :class="b('modal-close-icon')" @click="modalOpen = false">
-          <e-icon icon="i-close"
-                  width="25"
-                  height="25"
-                  inline />
-        </div>
-        <c-swiper-modal :images="pictures"
-                        :initial-slide="swiper.activeIndex"
-                        @change="onModalSlideChanged" />
-      </c-modal>
     </div>
 
     <!-- counter -->
@@ -81,10 +61,8 @@
   import { defineComponent, Ref, ref } from 'vue';
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
-  import cSwiperModal from '@/components/c-swiper-modal.vue';
   import mapImages from '@/helpers/map-images';
-  import uuid from '@/mixins/uuid';
-  import cModal from '@/components/c-modal.vue';
+  import useUuid, { IUuid } from '@/compositions/uuid';
   import { IVideo } from '@/types/c-swiper-gallery';
   import { IImage } from '@/types/e-image';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
@@ -93,7 +71,7 @@
     [key: string]: Swiper;
   }
 
-  interface ISetup {
+  interface ISetup extends IUuid {
     previous: Ref<HTMLDivElement | null>;
     next: Ref<HTMLDivElement | null>;
     pagination: Ref<HTMLDivElement | null>;
@@ -108,12 +86,6 @@
   export default defineComponent({
     name: 'c-swiper-gallery',
     status: 0, // TODO: remove when component was prepared for current project.
-
-    components: {
-      cModal,
-      cSwiperModal,
-    },
-    mixins: [uuid],
 
     props: {
       /**
@@ -143,12 +115,17 @@
     },
 
     setup(): ISetup {
-      const container = ref(null);
-      const previous = ref(null);
-      const next = ref(null);
-      const pagination = ref(null);
+      const container = ref();
+      const previous = ref();
+      const next = ref();
+      const pagination = ref();
+
+      const { increaseUuid } = useUuid();
+
+      increaseUuid();
 
       return {
+        ...useUuid(),
         container,
         previous,
         next,
@@ -176,18 +153,8 @@
             dynamicBullets: this.images.length > 7 || false,
             dynamicMainBullets: 3,
           },
-          on: {
-            slideChange: function() {
-              this.swiper.activeIndex = this.container.swiper.activeIndex;
-            }.bind(this),
-          },
-        },
-        // this.images.length > this.dynamicBullets
-        swiper: {
-          activeIndex: 0,
         },
         hasHover: false,
-        modalOpen: false,
         sizes: BREAKPOINTS, // todo add as prop
       };
     },
@@ -201,7 +168,6 @@
       modifiers(): IModifiers {
         return {
           hover: this.hasHover,
-          modalOpen: this.modalOpen,
         };
       },
 
@@ -269,7 +235,7 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted(): void {
+    mounted() {
       Swiper.use([Navigation, Pagination]);
 
       if (this.container) {
@@ -283,33 +249,11 @@
     beforeUnmount() {
       swiperInstances[this.uuid].destroy();
     },
-    // unmounted(): void {},
+    // unmounted() {},
 
     methods: {
       /**
-       * Close modal box.
-       */
-      modalClose() {
-        this.modalOpen = false;
-      },
-
-      /**
-       * Change event when the slider in the modal changes.
-       *
-       * @param {Number} index - The index of the swiper.
-       */
-      onModalSlideChanged(index: number) {
-        if (this.container) {
-          this.container.swiper.slideTo(index);
-        }
-      },
-
-      /**
        * Gets the youtube id of a given youtube URL.
-       *
-       * @param {String} url - The given youtube url.
-       *
-       * @returns {String}
        */
       getYoutubeId(url: string) {
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -322,7 +266,7 @@
         return '';
       },
     },
-    // render(): void {},
+    // render() {},
   });
 </script>
 
@@ -428,19 +372,6 @@
 
       .e-picture__image {
         margin: auto;
-      }
-    }
-
-    &__modal-close-icon {
-      @include z-index(navigation);
-
-      position: absolute;
-      top: $spacing--15;
-      right: $spacing--15;
-      cursor: pointer;
-
-      path {
-        fill: $color-primary--1;
       }
     }
 

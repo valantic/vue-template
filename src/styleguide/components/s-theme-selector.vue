@@ -15,9 +15,14 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { mapGetters } from 'vuex';
   import { webpack } from '@/../package.json';
-  import { ITheme } from '@/types/s-theme-selector';
+  import store from '@/store';
+
+  interface ITheme {
+    name: string;
+    id: string;
+    selected: boolean;
+  }
 
   const themePath = `/${webpack.outputAssetsFolder}css/${webpack.filePrefix}theme-`;
 
@@ -26,7 +31,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     data() {
@@ -45,9 +49,12 @@
     },
 
     computed: {
-      ...mapGetters('session', [
-        'getTheme',
-      ]),
+      /**
+       * Returns the currently active theme.
+       */
+      getTheme(): string {
+        return store.getters.session.getTheme;
+      },
 
       /**
        * Loops the themes and mark the selected by the global theme.
@@ -95,33 +102,28 @@
       }
     },
 
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Event handler for the change event of the theme selector.
-       *
-       * @param {Event} event - The related DOM event.
        */
       onChange(event: Event) {
         const element = event.target as HTMLSelectElement;
 
-        this.$store.commit('session/setTheme', element.value);
+        store.commit.session.setTheme(element.value);
       },
 
       /**
        * Creates a new style link element.
-       *
-       * @param {String} themeId - The name of the desired theme.
-       * @param {String} cssId - The unique ID for the link element.
        */
       createStyleElement(themeId: string, cssId: string) {
         const head = document.getElementsByTagName('head')[0];
@@ -136,6 +138,6 @@
         head.appendChild(link);
       }
     },
-    // render(): void {},
+    // render() {},
   });
 </script>

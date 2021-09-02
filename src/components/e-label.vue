@@ -1,16 +1,16 @@
 <template>
   <label :class="b(modifiers)">
     <span :class="b('name', { invisible })">{{ name }}</span>
-    <span v-if="$slots.default" :class="b('inner')">
+    <div v-if="$slots.default" :class="b('inner')">
       <!-- @slot Label content -->
       <slot></slot>
-    </span>
+    </div>
   </label>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
@@ -78,18 +78,17 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
     // methods: {}
-    // render(): void {},
+    // render() {},
   });
 </script>
 

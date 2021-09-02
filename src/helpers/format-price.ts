@@ -2,12 +2,6 @@ import i18n from '@/setup/i18n';
 
 /**
  * Formats the price according to project standards (Price value in cents).
- *
- * @param {Number|String} value - The price value.
- * @param {Boolean} [currencyBefore] - The currency will be added before the value.
- * @param {Boolean} [currencyAfter] - The currency will be added after the value.
- *
- * @returns {String | null}
  */
 export default function formatPrice(value: string, currencyBefore: boolean, currencyAfter: boolean): string | null {
   const locale = 'de-CH'; // TODO - replace hardcoded locale

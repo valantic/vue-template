@@ -56,7 +56,6 @@
     components: {
       eProgress
     },
-    // mixins: [],
 
     props: {
       /**
@@ -216,16 +215,16 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
@@ -274,8 +273,6 @@
 
       /**
        * Click event handler.
-       *
-       * @param {Event} event - The click event instance.
        */
       onClick(event: Event): void {
         this.$el.blur();

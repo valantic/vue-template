@@ -23,7 +23,6 @@
     name: 'e-fullwidth',
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     data(): IData {
@@ -69,32 +68,32 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    beforeMount(): void {
+    // beforeCreate() {},
+    // created() {},
+    beforeMount() {
       if (this.resizeObserver) {
         this.resizeObserver.observe(window.document.body);
       } else { // Fallback for browsers without ResizeObserver support.
         window.addEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
-    mounted(): void {
+    mounted() {
       if (!this.resizeObserver) { // IE11 fallback.
         this.updateScrollbarWidth();
       }
     },
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    beforeUnmount(): void {
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    beforeUnmount() {
       if (this.resizeObserver) {
         this.resizeObserver.unobserve(window.document.body);
       } else { // IE11 fallback.
         window.removeEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
-    // unmounted(): void {},
+    // unmounted() {},
 
     methods: {
       /**
@@ -111,7 +110,7 @@
       },
     },
 
-    // render(): void {},
+    // render() {},
   });
 </script>
 

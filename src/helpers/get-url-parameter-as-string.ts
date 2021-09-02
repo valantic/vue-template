@@ -1,9 +1,5 @@
 /**
  * Returns the given parameters as string to append to an URL.
- *
- * @param {Array} parameters - The parameters which should be returned as string.
- *
- * @returns {String}
  */
 export default function getUrlParameterAsString(parameters: string[]): string {
   let urlParametersString = '';

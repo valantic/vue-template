@@ -3,10 +3,6 @@ import { IImage } from '@/types/e-image';
 
 /**
  * Maps image object from spryker API to e-picture component.
- *
- * @param {Object} image - Image from API.
- *
- * @returns {Object|null}
  */
 export default function mapImage(image: ISprykerImage): IImage | null {
   if (!image) {

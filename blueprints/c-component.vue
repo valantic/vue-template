@@ -7,13 +7,15 @@
 <script lang="ts">
 
   /**
-   * TODO: add description for component styleguide.
-   */
+ * TODO: add description for component styleguide.
+ */
+
+  import { defineComponent } from 'vue';
+
   export default defineComponent({
     name: 'c-component', // TODO: update name according to filename
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -23,19 +25,19 @@
     // computed: {},
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
-    // render(): void {},
+    // render() {},
   });
 </script>
 

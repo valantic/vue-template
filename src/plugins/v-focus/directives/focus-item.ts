@@ -3,10 +3,6 @@ import state from '../state';
 
 /**
  * Sets or removes a class depending on the current focus state.
- *
- * @param {Element} el - The DOM element which carries the directive.
- * @param {Object} binding - Data given to the directive.
- * @param {Boolean} binding.value - The desired state of the focus.
  */
 function update(el: HTMLElement, binding: DirectiveBinding) {
   if (binding.value) {

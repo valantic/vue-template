@@ -47,15 +47,15 @@
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useUuid, { IUuid } from '@/compositions/uuid';
   import mapHeroImages from '@/helpers/map-hero-images';
   import { IImage } from '@/types/e-image';
-  import uuid from '../mixins/uuid';
 
   interface ISwiperInstances {
     [key: string]: Swiper;
   }
 
-  interface ISetup {
+  interface ISetup extends IUuid {
     container: Ref<HTMLDivElement | null>;
     previous: Ref<HTMLDivElement | null>;
     next: Ref<HTMLDivElement | null>;
@@ -73,7 +73,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [uuid],
 
     props: {
       /**
@@ -99,12 +98,17 @@
     },
 
     setup(): ISetup {
-      const container = ref(null);
-      const previous = ref(null);
-      const next = ref(null);
-      const pagination = ref(null);
+      const container = ref();
+      const previous = ref();
+      const next = ref();
+      const pagination = ref();
+
+      const { increaseUuid } = useUuid();
+
+      increaseUuid();
 
       return {
+        ...useUuid(),
         container,
         previous,
         next,
@@ -193,27 +197,27 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    mounted(): void {
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    mounted() {
       Swiper.use([Navigation, Pagination]);
 
       if (this.container) {
         swiperInstances[this.uuid] = new Swiper(this.container, this.optionsMerged);
       }
     },
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    beforeUnmount(): void {
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    beforeUnmount() {
       swiperInstances[this.uuid].destroy();
     },
-    // unmounted(): void {},
+    // unmounted() {},
 
     // methods: {},
-    // render(): void {},
+    // render() {},
   });
 </script>
 

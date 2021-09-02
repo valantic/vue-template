@@ -19,13 +19,15 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import themes from '../mixins/themes';
+  import useTheme, { ITheme } from '@/compositions/themes';
 
   interface ILogo {
     icon: string;
     alt: string;
     title: string;
   }
+
+  interface ISetup extends ITheme {}
 
   /**
    * e-logo renders the company logo depending on the current theme (from the vuex store)
@@ -37,7 +39,6 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [themes],
 
     inheritAttrs: false,
 
@@ -46,6 +47,12 @@
     //   return {};
     // },
 
+    setup(): ISetup {
+      return {
+        ...useTheme(),
+      };
+    },
+
     computed: {
       /**
        * Get's the correct logo depending on the theme value from the vuex store.
@@ -53,12 +60,11 @@
        * @returns {Object} logo-name
        */
       logo(): ILogo {
-        const { theme } = this;
         const title = this.$t('e-logo.linkTitle');
         let icon = '';
         let alt = '';
 
-        switch (theme) {
+        switch (this.theme) {
           case '01':
             icon = 'styleguide-heart';
             alt = 'example logo default';
@@ -98,19 +104,19 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    // mounted(): void {},
-    // beforeUpdate(): void {},
-    // updated(): void {},
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    // unmounted(): void {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
-    // render(): void {},
+    // render() {},
   });
 </script>
 

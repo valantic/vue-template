@@ -54,7 +54,7 @@
   import { defineComponent, ref, Ref } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification.vue';
-  import useFormStates, { IFormStates } from '@/mixins/form-states';
+  import useFormStates, { IFormStates } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {
@@ -172,8 +172,8 @@
     },
 
     setup(): ISetup {
-      const input = ref(null);
-      const slot = ref(null);
+      const input = ref();
+      const slot = ref();
 
       return {
         ...useFormStates(),
@@ -220,10 +220,10 @@
     },
     // watch: {},
 
-    // beforeCreate(): void {},
-    // created(): void {},
-    // beforeMount(): void {},
-    mounted(): void {
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    mounted() {
       /**
        * Calls the "setSlotSpacings" in a timeout function with a delay of 200ms because without
        * it's not working on iOS
@@ -237,22 +237,20 @@
         this.input.value = this.standalone ? this.internalValue.toString() : this.value.toString();
       }
     },
-    // beforeUpdate(): void {},
-    updated(): void {
+    // beforeUpdate() {},
+    updated() {
       setTimeout(this.setSlotSpacings);
     },
-    // activated(): void {},
-    // deactivated(): void {},
-    // beforeUnmount(): void {},
-    unmounted(): void {
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    unmounted() {
       window.removeEventListener('resizeend', this.setSlotSpacings);
     },
 
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
       onInput(event: Event) {
         const target = event.target as HTMLInputElement;
@@ -330,14 +328,14 @@
        * Selects the value of the input field.
        */
       selectValue() {
-        if (this.$props.value) {
+        if (this.value) {
           // Needed to select a number value on Chrome.
           this.input?.select();
 
           // Timeout is needed that it works on all browsers (without there are problems on Safari, Edge, iOS)
           if ('ontouchstart' in window) {
             setTimeout(() => {
-              const selectionRange = typeof this.$props.value === 'string' ? this.$props.value.length : this.$props.value;
+              const selectionRange = typeof this.value === 'string' ? this.value.length : this.value;
 
               this.input?.setSelectionRange(0, selectionRange);
             });
@@ -345,7 +343,7 @@
         }
       },
     }
-    // render(): void {},
+    // render() {},
   });
 </script>
 

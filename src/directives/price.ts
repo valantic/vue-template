@@ -12,11 +12,6 @@ import { DirectiveBinding } from '@vue/runtime-core';
  * Displaying with currency symbol behind:
  * <span v-price.currencyBefore="1000"></span> => CHF 10.00
  * <span v-price.currencyAfter="1000"></span> => 10.00 CHF
- *
- * @param {Object} options
- * @param {Boolean} options.value - The price value in cents.
- * @param {Boolean} [options.currencyBefore] - The modifier that renders the currency before the price.
- * @param {Boolean} [options.currencyAfter] - The modifier that renders the currency after the price.
  */
 export default {
   name: 'price',
