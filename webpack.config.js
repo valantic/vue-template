@@ -105,7 +105,7 @@ module.exports = (env, args = {}) => {
 
   const plugins = [
     new ESLintPlugin({
-      extensions: ['vue', 'js'],
+      extensions: ['vue', 'js', 'ts'],
       failOnError: isProduction,
       emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
       cache: !isProduction, // Improves linting performance
