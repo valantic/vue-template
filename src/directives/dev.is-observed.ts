@@ -15,6 +15,6 @@ function checkObservable(element: HTMLElement, binding: DirectiveBinding) {
 
 export default {
   name: 'is-observed',
-  bind: checkObservable,
-  update: checkObservable,
+  beforeMount: checkObservable,
+  updated: checkObservable,
 };
