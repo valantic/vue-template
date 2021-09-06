@@ -354,7 +354,7 @@ module.exports = (env, args = {}) => {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
-          chunks: chunk => !['polyfills.ie11', 'polyfills'].includes(chunk.name), // Excludes node modules which are required by IE11 polyfills
+          chunks: chunk => !['polyfills'].includes(chunk.name), // Excludes node modules which are required by IE11 polyfills
         },
       }
     },
@@ -378,7 +378,6 @@ module.exports = (env, args = {}) => {
     entry: {
       ...themes,
       'polyfills': path.resolve(__dirname, 'src/setup/polyfills.ts'), // If code still fails, you may need to add regenerator as well. See https://babeljs.io/docs/en/babel-polyfill
-      'polyfills.ie11': path.resolve(__dirname, 'src/setup/polyfills.ie11.ts'),
       'app': [
         path.resolve(__dirname, 'src/main.ts'),
       ],

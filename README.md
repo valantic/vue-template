@@ -771,29 +771,24 @@ package.json:
 
 ## Roadmap
 
+* [ ] Make styleguideist work again, as soon as Vue 3 is supported, 
+  see https://github.com/vue-styleguidist/vue-styleguidist/issues/997
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Element styles should be moved to reboot.
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
 * [ ] Extend eslint-plugin-vue rules for Vue 3.
 
-### Vue 3
-
-* [ ] Devtools support.
-
 ### Typescript
 
-* [ ] Remove IE11 polyfills  
 * [ ] Refactor model definitions to use standard model properties (search for "model: {" )
 * [ ] triggering a notification shows it 3 times
 
 * [ ] Add Documentation and Wiki Section about
+  - Dev Tools, use https://chrome.google.com/webstore/detail/vuejs-devtools/ljjemllljcmogpfapbkkighbhhppjdbg/related
   - always returning an arrow function for custom validator of props (to fix random TS errors)
   - always returning a defined type for any other functions (computed / data) (to fix random TS errors about undefined variables)
-
-* [ ] Make styleguideist work
-  * Vue 3 Currently not supported
-
+  
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
