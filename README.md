@@ -780,7 +780,6 @@ package.json:
 ### Vue 3
 
 * [ ] Devtools support.
-* [ ] Test v-focus state handling.
 
 ### Typescript
 

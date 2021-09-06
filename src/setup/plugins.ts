@@ -6,9 +6,10 @@ import resizeEnd from '@/plugins/resize-end';
 import viewport from '@/plugins/viewport';
 import api from '@/plugins/api';
 import i18n from '@/setup/i18n'; // MUST come after i18n because of build order.
-// import dayjs from '@/plugins/dayjs';
 import directives from '@/setup/directives';
 import components from '@/setup/components';
+// import dayjs from '@/plugins/dayjs';
+// import VueFocus from '@/plugins/v-focus';
 
 export default [
   [Vuex],
@@ -17,11 +18,13 @@ export default [
   [VueAxios],
   [viewport],
   [api],
-  // please note: if you change the VueBemCn methodName, adjust the global definition in shims-plugins.d.ts
   [VueBemCn, {
     hyphenate: true,
   }],
   [directives],
   [components],
+  // please note: if you change the VueBemCn methodName, adjust the global definition in shims-plugins.d.ts
+
+  // [VueFocus],
   // [dayjs]
 ];
