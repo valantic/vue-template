@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <header is="c-header" />
+    <header is="vue:c-header" />
     <router-view />
-    <footer is="c-footer" />
+    <footer is="vue:c-footer" />
     <s-navigation :routes="routes" nav-position="bottom-right" />
   </div>
 </template>
