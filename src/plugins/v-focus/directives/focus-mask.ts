@@ -17,7 +17,6 @@ function update(el: HTMLElement) {
 export default {
   name: 'focus-mask',
 
-  bind: update,
-
-  update,
+  beforeMount: update,
+  updated: update,
 };
