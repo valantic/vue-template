@@ -20,11 +20,9 @@ function update(el: HTMLElement, binding: DirectiveBinding) {
 export default {
   name: 'focus-item',
 
-  bind: update,
-
-  update,
-
-  unbind() {
+  beforeMount: update,
+  updated: update,
+  unmounted() {
     state.enabled = false;
   },
 };

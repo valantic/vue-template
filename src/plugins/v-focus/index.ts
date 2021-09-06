@@ -1,7 +1,7 @@
 import './styles/styles.scss';
 import { Plugin } from 'vue';
 
-const directives = require.context('./directives/', true, /\.(js)$/i);
+const directives = require.context('./directives/', true, /\.(ts)$/i);
 
 /**
  * This plugin adds two directives, to apply a "focus" effect to a page/element.

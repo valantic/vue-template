@@ -8,7 +8,7 @@ export interface IUuid {
 }
 
 /**
- * Mixin can be used to add a unique id for every instance of a component.
+ * Logic can be used to add a unique id for every instance of a component.
  *
  * @mixin
  */
