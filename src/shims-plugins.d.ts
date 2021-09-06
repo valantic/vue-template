@@ -15,5 +15,8 @@ declare module '@vue/runtime-core' {
     $gtm: IGtm;
     gtmIdentifier: string;
     b: IVueBemFunction;
+
+    // needed for tests
+    bem: IVueBemFunction;
   }
 }

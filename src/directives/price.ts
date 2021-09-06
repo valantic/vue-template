@@ -16,7 +16,7 @@ import { DirectiveBinding } from '@vue/runtime-core';
 export default {
   name: 'price',
 
-  bind(el: HTMLElement, binding: DirectiveBinding) {
+  beforeMount(el: HTMLElement, binding: DirectiveBinding) {
     if (!binding.value && binding.value !== 0) {
       return;
     }
@@ -24,7 +24,7 @@ export default {
     el.innerHTML = formatPrice(binding.value, binding.modifiers.currencyBefore, binding.modifiers.currencyAfter) || '';
   },
 
-  update(el: HTMLElement, binding: DirectiveBinding) {
+  updated(el: HTMLElement, binding: DirectiveBinding) {
     if (!binding.value && binding.value !== 0) {
       return;
     }

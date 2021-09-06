@@ -11,7 +11,7 @@ interface IOptions {
  * Returns a BEM name creator method with the given options applied.
  */
 export default function bemCn(block: string, options: IOptions) {
-  return function entities(elem: any, mods: string, mix: any) {
+  return function entities(elem: any, mods?: string | object, mix?: string) {
     const resultObj = {
       block,
       el: '',
@@ -23,7 +23,7 @@ export default function bemCn(block: string, options: IOptions) {
       return block;
     }
 
-    if (isPObject(mods)) {
+    if (mods && isPObject(mods)) {
       resultObj.mods = mods;
     } else if (isString(mods)) {
       resultObj.mixin += mods;

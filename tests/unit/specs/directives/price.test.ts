@@ -1,5 +1,10 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+/**
+ * @jest-environment jsdom
+ */
+
+import { mount } from '@vue/test-utils';
 import price from '@/directives/price';
+import { createApp } from 'vue';
 
 const testCases = {
   '10.00': 'v-price="1000"',
@@ -9,9 +14,9 @@ const testCases = {
 };
 
 describe('directive | v-price', () => {
-  const localVue = createLocalVue();
+  const app = createApp({});
 
-  localVue.directive(price.name, price);
+  app.directive(price.name, price);
 
   it('has name property', () => {
     expect(price.name).toBeTruthy();
@@ -20,10 +25,18 @@ describe('directive | v-price', () => {
   Object.entries(testCases).forEach((entry) => {
     const [output, input] = entry;
 
-    it('renders formated price', () => {
-      const wrapper = mount({
-        template: `<div><span ${input}></span></div>`
-      }, { localVue });
+    it('renders formatted price', () => {
+      const App = {
+        template: `<div><span ${input}></span></div>`,
+      };
+
+      const global = {
+        directives: {
+          Price: price,
+        }
+      };
+
+      const wrapper = mount(App, { global });
 
       expect(wrapper.text()).toEqual(output);
     });

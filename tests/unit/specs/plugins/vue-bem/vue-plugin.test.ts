@@ -1,15 +1,21 @@
+/**
+ * @jest-environment jsdom
+ */
+
 /* eslint-disable id-length */
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import vueBemCn from '@/plugins/vue-bem-cn';
 
 describe('Check installation', () => {
   const comp = {
     template: '<div>Hello</div>',
   };
-  const localVue = createLocalVue();
 
-  localVue.use(vueBemCn);
-  const { vm } = mount(comp, { localVue });
+  const { vm } = mount(comp, {
+    global: {
+      plugins: [vueBemCn]
+    },
+  });
 
   test('Expect vm.b() is undefined', () => {
     expect(vm.b).toBeUndefined();
@@ -21,15 +27,15 @@ describe('Check installation', () => {
 });
 
 describe('Check vm.b() method', () => {
-  const localVue = createLocalVue();
-
-  localVue.use(vueBemCn);
-
   const comp = {
     name: 'hello',
     template: '<div>Hello</div>',
   };
-  const { vm } = mount(comp, { localVue });
+  const { vm } = mount(comp, {
+    global: {
+      plugins: [vueBemCn]
+    },
+  });
 
   test('Expect vm.b() is function', () => {
     expect(vm.b).toEqual(expect.any(Function));
@@ -44,7 +50,11 @@ describe('Check vm.b() method', () => {
       ...comp,
       block: 'bonjour',
     };
-    const { vm: vmBlock } = mount(compBlock, { localVue });
+    const { vm: vmBlock } = mount(compBlock, {
+      global: {
+        plugins: [vueBemCn]
+      },
+    });
 
     expect(vmBlock.b()).toBe('bonjour');
   });
@@ -64,19 +74,20 @@ describe('Check custom settings', () => {
   };
 
   test('Expect function for custom method name', () => {
-    const localVue = createLocalVue();
     const config = {
       methodName: 'bem',
     };
 
-    localVue.use(vueBemCn, config);
-    const { vm } = mount(comp, { localVue });
+    const { vm } = mount(comp, {
+      global: {
+        plugins: [[vueBemCn, config]]
+      },
+    });
 
     expect(vm.bem).toEqual(expect.any(Function));
   });
 
   test('Expect corrent string for custom delimiters', () => {
-    const localVue = createLocalVue();
     const expectedString = `ns-${block}+${elem} ns-${block}+${elem}==hasMod ns-${block}+${elem}==mod__val`;
     const config = {
       delimiters: {
@@ -87,47 +98,56 @@ describe('Check custom settings', () => {
       },
     };
 
-    localVue.use(vueBemCn, config);
-    const { vm } = mount(comp, { localVue });
+    const { vm } = mount(comp, {
+      global: {
+        plugins: [[vueBemCn, config]]
+      },
+    });
 
     expect(vm.b(elem, mods)).toBe(expectedString);
   });
 
   test('Expect correct block string for hyphenate option and early exit (no arguments)', () => {
-    const localVue = createLocalVue();
     const expectedString = 'block-name';
     const config = {
       hyphenate: true,
     };
 
-    localVue.use(vueBemCn, config);
-    const { vm } = mount(comp, { localVue });
+    const { vm } = mount(comp, {
+      global: {
+        plugins: [[vueBemCn, config]]
+      },
+    });
 
     expect(vm.b()).toBe(expectedString);
   });
 
   test('Expect correct block string for hyphenate option with mods', () => {
-    const localVue = createLocalVue();
     const expectedString = 'block-name block-name--has-mod block-name--mod-val';
     const config = {
       hyphenate: true,
     };
 
-    localVue.use(vueBemCn, config);
-    const { vm } = mount(comp, { localVue });
+    const { vm } = mount(comp, {
+      global: {
+        plugins: [[vueBemCn, config]]
+      },
+    });
 
     expect(vm.b(mods)).toBe(expectedString);
   });
 
   test('Expect correct element string for hyphenate option', () => {
-    const localVue = createLocalVue();
     const expectedString = 'block-name__element-name block-name__element-name--has-mod block-name__element-name--mod-val';
     const config = {
       hyphenate: true,
     };
 
-    localVue.use(vueBemCn, config);
-    const { vm } = mount(comp, { localVue });
+    const { vm } = mount(comp, {
+      global: {
+        plugins: [[vueBemCn, config]]
+      },
+    });
 
     expect(vm.b(elem, mods)).toBe(expectedString);
   });

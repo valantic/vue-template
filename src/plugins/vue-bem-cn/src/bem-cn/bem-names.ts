@@ -7,9 +7,9 @@ interface IModifiers {
 
 interface IEntities {
   block: string;
-  el: string;
-  mods: IModifiers;
-  mixin: string;
+  el?: string;
+  mods?: IModifiers;
+  mixin?: string;
 }
 
 /**
@@ -24,7 +24,7 @@ export default function bemNames(entities: IEntities, delimiters: IDelimiters) {
 
   if (entities.mods) {
     resultString += Object.keys(entities.mods).reduce((prev, name) => {
-      const val = entities.mods[name];
+      const val = entities.mods ? entities.mods[name] : '';
 
       /* eslint-disable no-param-reassign */
       if (val === true) {

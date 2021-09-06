@@ -1,20 +1,22 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+/**
+ * @jest-environment jsdom
+ */
+
+import { mount } from '@vue/test-utils';
 import VueBemCn from '@/plugins/vue-bem-cn';
-import component from '@/components/e-icon';
+import component from '@/components/e-icon.vue';
 
 describe('component | e-button', () => {
-  const localVue = createLocalVue();
-
-  localVue.use(VueBemCn);
-
   it('has name property', () => {
     expect(component.name).toBeTruthy();
   });
 
   it('renders (has bem block name on wrapper element)', () => {
     const wrapper = mount(component, {
-      localVue,
-      propsData: {
+      global: {
+        plugins: [VueBemCn]
+      },
+      props: {
         icon: 'styleguide-heart'
       }
     });

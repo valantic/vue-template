@@ -119,6 +119,8 @@
        * @returns {String}
        */
       src(): string | null {
+        // eslint-disable-next-line no-debugger
+        debugger;
         try {
           return require.context('../assets/icons/', false, /\.svg/)(`./${this.icon}.svg`) || null;
         } catch (e) {
