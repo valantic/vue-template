@@ -1,18 +1,21 @@
-import { mount, createLocalVue } from '@vue/test-utils';
-import VueBemCn from '@/plugins/vue-bem-cn';
+import { mount } from '@vue/test-utils';
 import component from '@/components/c-component'; // TODO: Update source
 
 describe('component | c-component', () => { // TODO: update title
-  const localVue = createLocalVue();
-
-  localVue.use(VueBemCn);
-
   it('has name property', () => {
     expect(component.name).toBeTruthy();
   });
 
   it('renders (has bem block name on wrapper element)', () => {
-    const wrapper = mount(component, { localVue });
+
+    const wrapper = mount(component, {
+      global: {
+        // remove if not needed
+        plugins: [],
+        // remove if not needed
+        props: {}
+      },
+    });
 
     expect(wrapper.classes()).toContain(component.name);
   });

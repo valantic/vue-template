@@ -781,11 +781,9 @@ package.json:
 
 * [ ] Devtools support.
 * [ ] Test v-focus state handling.
-* [ ] Test unit tests.
 
 ### Typescript
 
-* [ ] Fix broken Jest tests
 * [ ] Remove IE11 polyfills  
 * [ ] Refactor model definitions to use standard model properties (search for "model: {" )
 * [ ] triggering a notification shows it 3 times

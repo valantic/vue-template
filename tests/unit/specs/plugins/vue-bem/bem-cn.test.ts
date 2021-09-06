@@ -47,7 +47,7 @@ describe('Delimiters', () => {
 
   Object.keys(delimitersTest).forEach((item) => {
     test(item, () => {
-      expect(b(delimitersTest[item].el, delimitersTest[item].mods, delimitersTest[item].mixin))
+      expect(b(delimitersTest[item].el, delimitersTest[item].mods))
         .toBe(item);
     });
   });
@@ -58,6 +58,7 @@ describe('Hyphenate', () => {
 
   Object.keys(hyphenate).forEach((item) => {
     test(item, () => {
+      // @ts-ignore
       expect(b(hyphenate[item].mods || hyphenate[item].el)).toBe(item);
     });
   });

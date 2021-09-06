@@ -235,7 +235,7 @@ module.exports = (env, args = {}) => {
       loader: 'vue-loader',
       options: {
         hotReload,
-        compilerOptions: { // @see https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#options
+        compilerOptions: { // @see https://vue-loader.vuejs.org/options.html
           whitespace: 'condense',
         }
       },
