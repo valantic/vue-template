@@ -28,16 +28,16 @@
     data(): IData {
       return {
         /**
-         * @type {Number} Holds the width of the page scrollbar.
+         * Holds the width of the page scrollbar.
          */
         scrollbarWidth: scrollbarWidth(),
 
         /**
-         * @type {Object} If available initializes a resize observer. Compared to the resize event, the observer
+         * If available initializes a resize observer. Compared to the resize event, the observer
          * will also be triggered, if the height of the page changes, and the scrollbar becomes visible.
          * The resize event was only triggered, when the user manually changes the screen size.
          */
-        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth as any),
+        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth),
 
         /**
          * @type {Number} Holds the ID of the currently running resize timeout.
