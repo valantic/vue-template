@@ -9,31 +9,17 @@
       <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
-        <div v-for="picture in pictures"
+        <div v-for="(picture, index) in images"
              :key="picture.id"
              :class="b('slide')"
              class="swiper-slide">
-          <button :class="b('trigger')"
-                  type="button">
-            <span :class="b('image-wrapper-inner')">
-              <div v-if="picture.isVideo" :class="b('video-preview-wrapper')">
-                <img :class="b('video-thumbnail')"
-                     :src="picture.thumbSrc"
-                     alt="">
-                <span :class="b('video-thumbnail-overlay')"></span>
-              </div>
-              <e-picture
-                v-else
-                :sizes="sizes"
-                :srcset="picture.srcset"
-                :fallback="picture.fallback"
-                :alt="picture.alt" />
-            </span>
-
-            <span class="invisible">
-              {{ $t('c-swiper.zoom') }}
-            </span>
-          </button>
+          <e-picture :sizes="sizes"
+                     :srcset="picture.srcset"
+                     :fallback="picture.fallback"
+                     :alt="picture.alt"
+                     :ratio="2 / 1"
+                     :loading="index > 0 && index < images.length - 1 ? 'lazy' : 'auto'"
+          />
         </div>
       </div>
 
@@ -46,25 +32,23 @@
     </div>
 
     <!-- counter -->
-    <div v-if="pictures.length > 1" :class="b('counter')">
+    <div v-if="images.length > 1" :class="b('counter')">
       <div :class="b('counter-detail', { image: true })">
         {{ $tc('c-swiper.images', images.length, {count: images.length}) }}
-      </div>
-      <div v-if="videos && videos.length > 1" :class="b('counter-detail', { video: true })">
-        {{ $tc('c-swiper.videos', videos.length, {count: videos.length}) }}
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, Ref, ref } from 'vue';
+  import {
+    defineComponent,
+    Ref,
+    ref
+  } from 'vue';
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
-  import mapImages from '@/helpers/map-images';
   import useUuid, { IUuid } from '@/compositions/uuid';
-  import { IVideo } from '@/types/c-swiper-gallery';
-  import { IImage } from '@/types/e-image';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISwiperInstances {
@@ -89,19 +73,11 @@
 
     props: {
       /**
-       * Gallery images passed to swiper.
+       * The list of slides.
        */
       images: {
         type: Array,
         required: true,
-      },
-
-      /**
-       * A list of youtube video objects.
-       */
-      videos: {
-        type: Array,
-        default: null,
       },
 
       /**
@@ -112,6 +88,13 @@
         default: () => ({}),
       },
 
+      /**
+       * Defines the sizes of the images.
+       */
+      sizes: {
+        type: Object,
+        default: () => BREAKPOINTS,
+      },
     },
 
     setup(): ISetup {
@@ -155,7 +138,6 @@
           },
         },
         hasHover: false,
-        sizes: BREAKPOINTS, // todo add as prop
       };
     },
 
@@ -192,43 +174,6 @@
           ...this.options,
         };
       },
-
-      /**
-       * Gets the mapped videos.
-       *
-       * @returns {Array} The list of mapped videos.
-       */
-      mappedVideos(): IVideo[] {
-        if (Array.isArray(this.videos)) {
-          return this.videos.map((video, index) => {
-            const youtubeId = this.getYoutubeId(video.youtubeUrl);
-
-            return {
-              id: `${youtubeId}-${index}`,
-              url: video.youtubeUrl,
-              youtubeId,
-              thumbSrc: `https://img.youtube.com/vi/${youtubeId}/0.jpg`,
-              isVideo: true,
-            };
-          });
-        }
-
-        return [];
-      },
-
-      /**
-       * Maps image data object and prepares it for e-picture component.
-       *
-       * @returns  {Object}  image   Image including fallback
-       */
-      pictures(): (IImage | IVideo)[] {
-        const mappedImages = mapImages(this.images as any) || [];
-
-        return [
-          ...mappedImages,
-          ...this.mappedVideos,
-        ];
-      },
     },
     // watch: {},
 
@@ -251,21 +196,7 @@
     },
     // unmounted() {},
 
-    methods: {
-      /**
-       * Gets the youtube id of a given youtube URL.
-       */
-      getYoutubeId(url: string) {
-        const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-        const match = url.match(regExp);
-
-        if (match?.[2]?.length === 11) {
-          return match[2];
-        }
-
-        return '';
-      },
-    },
+    // methods: {},
     // render() {},
   });
 </script>
@@ -375,30 +306,10 @@
       }
     }
 
-    &__img-counter,
-    &__video-counter {
+    &__img-counter {
       @include z-index(front);
 
       position: relative;
-    }
-
-    &__video-preview-wrapper {
-      position: relative;
-    }
-
-    &__video-thumbnail-overlay {
-      @include icon(play, 50px, $mask: false);
-
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-
-    &__video-thumbnail {
-      max-width: 100%;
-      width: 100%;
     }
 
     // dots navigation

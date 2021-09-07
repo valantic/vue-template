@@ -9,26 +9,19 @@
       <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
-        <div v-for="picture in pictures"
-             :key="picture.id"
+        <div v-for="(slide, index) in slides"
+             :key="slide.id"
              :class="b('slide')"
              class="swiper-slide">
-          <a v-if="picture.href"
-             :class="b('link')"
-             :href="picture.href">
-            <e-picture
-              :sizes="sizes"
-              :srcset="picture.srcset"
-              :fallback="picture.fallback"
-              :alt="picture.alt" />
-          </a>
-
-          <e-picture
-            v-else
-            :sizes="sizes"
-            :srcset="picture.srcset"
-            :fallback="picture.fallback"
-            :alt="picture.alt" /> <!-- Todo: Replace as soon as @mathias-obers 'with-root' component is merged. -->
+          <e-picture v-if="slide[imageProperty]"
+                     :sizes="sizes"
+                     :srcset="slide[imageProperty].srcset"
+                     :fallback="slide[imageProperty].fallback"
+                     :alt="slide[imageProperty].alt"
+                     :ratio="ratio"
+                     :loading="index > 0 && index < slides.length - 1 ? 'lazy' : 'auto'"
+          />
+          <!-- Lazy loading for images is not possible with the loop option for the first and last image. -->
         </div>
       </div>
 
@@ -43,13 +36,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, Ref } from 'vue';
+  import {
+    defineComponent,
+    ref,
+    Ref
+  } from 'vue';
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
-  import { BREAKPOINTS } from '@/setup/globals';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import useUuid, { IUuid } from '@/compositions/uuid';
-  import mapHeroImages from '@/helpers/map-hero-images';
-  import { IImage } from '@/types/e-image';
 
   interface ISwiperInstances {
     [key: string]: Swiper;
@@ -76,14 +70,9 @@
 
     props: {
       /**
-       * Gallery object passed to swiper including image (imageUrl) and url (href).
-       *
-       * @type {Array.Object} images
-       * @property {String} images.imageUrl - The image related source url.
-       * @property {String} images.fallback - The image related fallback source url.
-       * @property {String} [images.href] - The image related link href.
+       * The list of slides.
        */
-      images: {
+      slides: {
         type: Array,
         required: true,
       },
@@ -94,6 +83,37 @@
       options: {
         type: Object,
         default: () => ({}),
+      },
+
+      /**
+       * Defines the sizes of the images.
+       */
+      sizes: {
+        type: Object,
+        default: () => ({
+          xxs: 480,
+          xs: 768,
+          sm: 1024,
+          md: 1200,
+          lg: 1440,
+          xl: 2560,
+        }),
+      },
+
+      /**
+       * Defines the ratio of the images.
+       */
+      ratio: {
+        type: Number,
+        default: 24 / 11
+      },
+
+      /**
+       * Defines the property inside a slide which contains the image.
+       */
+      imageProperty: {
+        type: String,
+        default: 'image',
       },
     },
 
@@ -144,7 +164,6 @@
           },
         },
         hasHover: false,
-        sizes: BREAKPOINTS, // todo add as prop
       };
     },
 
@@ -180,19 +199,6 @@
           },
           ...this.options,
         };
-      },
-
-      /**
-       * Maps image data object and prepares it for e-picture component.
-       *
-       * @returns  {Object}  image   Image including fallback
-       */
-      pictures(): IImage[] {
-        const mappedHeroImages = mapHeroImages(this.images as any) || [];
-
-        return [
-          ...mappedHeroImages
-        ];
       },
     },
     // watch: {},
