@@ -109,7 +109,6 @@
 
 <script lang="ts">
   import {
-    ComponentPublicInstance,
     defineComponent,
     PropType,
     Ref,
@@ -117,6 +116,7 @@
   } from 'vue';
   import useFormStates, { FieldStates, IFormStates } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eInput from '@/components/e-input.vue';
 
   interface IItems {
     value: string;
@@ -145,7 +145,7 @@
   }
 
   interface ISetup extends IFormStates {
-    searchInput: Ref<ComponentPublicInstance[] | null>;
+    searchInput: Ref<InstanceType<typeof eInput> | null>;
   }
 
   /**
@@ -550,7 +550,7 @@
         this.$nextTick(() => {
           if (this.searchInput) {
             // eslint-disable-next-line no-extra-parens
-            (this.searchInput as any).input.focus();
+            this.searchInput.input?.focus();
           }
         });
       },
