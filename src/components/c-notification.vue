@@ -48,6 +48,12 @@
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import store from '@/store';
 
+  interface IData {
+    visible: boolean;
+    confirmProgress: boolean;
+    declineProgress: boolean;
+  }
+
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
    */
@@ -93,20 +99,21 @@
         required: true,
       },
     },
-    data() {
+
+    data(): IData {
       return {
         /**
-         * @type {Boolean} Defines if notification should be visible.
+         * Defines if notification should be visible.
          */
         visible: true,
 
         /**
-         * @type {Boolean} Handles en-/disabled state of progress animation for confirm button.
+         * Handles en-/disabled state of progress animation for confirm button.
          */
         confirmProgress: false,
 
         /**
-         * @type {boolean} Handles en-/disabled state of progress animation for decline button.
+         * Handles en-/disabled state of progress animation for decline button.
          */
         declineProgress: false,
       };
@@ -115,8 +122,6 @@
     computed: {
       /**
        * Checks if the current notification has product data.
-       *
-       * @returns {Boolean}
        */
       hasProductData(): boolean {
         return !!this.notification?.message?.meta?.product;

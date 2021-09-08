@@ -2,6 +2,7 @@
 /**
  * Node.replaceWith() polyfill.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function ReplaceWith(Ele: any) { // eslint-disable-line no-inner-declarations
   // @ts-ignore
   const parent = this.parentNode;

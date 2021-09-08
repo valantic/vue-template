@@ -21,7 +21,11 @@
   interface ITheme {
     name: string;
     id: string;
-    selected: boolean;
+    selected?: boolean;
+  }
+
+  interface IData {
+    defaultThemes: ITheme[];
   }
 
   const themePath = `/${webpack.outputAssetsFolder}css/${webpack.filePrefix}theme-`;
@@ -33,7 +37,7 @@
     // components: {},
 
     // props: {},
-    data() {
+    data(): IData {
       return {
         defaultThemes: [
           {

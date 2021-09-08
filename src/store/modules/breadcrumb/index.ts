@@ -1,5 +1,6 @@
 import { defineModule } from 'direct-vuex';
 import { moduleActionContext } from '@/store';
+import { ActionContext } from 'vuex';
 
 export interface IBreadcrumbItem {
   name: string;
@@ -58,4 +59,5 @@ const breadcrumbModule = defineModule({
 
 export default breadcrumbModule;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const breadcrumbActionContext = (context: any) => moduleActionContext(context, breadcrumbModule);

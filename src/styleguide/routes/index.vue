@@ -42,8 +42,6 @@
     computed: {
       /**
        * Checks, if production mode is active.
-       *
-       * @returns {Boolean}
        */
       isProduction(): boolean {
         return process.env.NODE_ENV === 'production';

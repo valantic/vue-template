@@ -44,6 +44,8 @@
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import useUuid, { IUuid } from '@/compositions/uuid';
+  import { NavigationOptions } from 'swiper/types/components/navigation';
+  import { PaginationOptions } from 'swiper/types/components/pagination';
 
   interface ISwiperInstances {
     [key: string]: Swiper;
@@ -54,6 +56,11 @@
     previous: Ref<HTMLDivElement | null>;
     next: Ref<HTMLDivElement | null>;
     pagination: Ref<HTMLDivElement | null>;
+  }
+
+  interface IData {
+    optionsDefault: SwiperOptions;
+    hasHover: boolean;
   }
 
   const swiperInstances: ISwiperInstances = {};
@@ -136,7 +143,7 @@
       };
     },
 
-    data() {
+    data(): IData {
       return {
         optionsDefault: {
           autoplay: {
@@ -188,13 +195,13 @@
         return {
           ...this.optionsDefault,
           navigation: {
-            ...this.optionsDefault.navigation,
+            ...this.optionsDefault.navigation as NavigationOptions,
             nextEl: this.next,
             prevEl: this.previous,
           },
           // @ts-ignore
           pagination: {
-            ...this.optionsDefault.pagination,
+            ...this.optionsDefault.pagination as PaginationOptions,
             el: this.pagination,
           },
           ...this.options,

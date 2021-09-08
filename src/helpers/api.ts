@@ -9,13 +9,13 @@ interface IUrlKeyValues {
 
 export interface IApi {
   getUrl: (urlKey: keyof typeof apiUrls, values: IUrlKeyValues) => string;
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
   get: (url: string, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
   post: (url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
   patch: (url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
   delete: (url: string, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
 }
 
@@ -116,7 +116,7 @@ const api: IApi = {
   /**
    * Runs a get request with given url with given url params.
    */
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len,@typescript-eslint/no-explicit-any
   get(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> {
     return axios
       .get(url, config)
@@ -127,7 +127,7 @@ const api: IApi = {
   /**
    * Runs a post request with a given url and payload.
    */
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
   post(url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .post(url, data, config)
@@ -138,7 +138,7 @@ const api: IApi = {
   /**
    * Runs a patch request with a given url and payload.
    */
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
   patch(url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .patch(url, data, config)
@@ -149,7 +149,7 @@ const api: IApi = {
   /**
    * Runs a delete request with a given url and payload.
    */
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
   delete(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
     return axios
       .delete(url, config)

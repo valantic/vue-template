@@ -148,4 +148,5 @@ const notificationModule = defineModule({
 
 export default notificationModule;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const notificationActionContext = (context: any) => moduleActionContext(context, notificationModule);

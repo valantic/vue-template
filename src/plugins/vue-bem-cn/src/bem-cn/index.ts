@@ -11,6 +11,7 @@ interface IOptions {
  * Returns a BEM name creator method with the given options applied.
  */
 export default function bemCn(block: string, options: IOptions) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function entities(elem: any, mods?: string | object, mix?: string) {
     const resultObj = {
       block,

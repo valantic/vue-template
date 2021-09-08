@@ -12,13 +12,17 @@
 
   import { defineComponent } from 'vue';
 
+  // interface IData {
+    // TODO add properties or remove
+  // }
+
   export default defineComponent({
     name: 'c-component', // TODO: update name according to filename
 
     // components: {},
 
     // props: {},
-    // data() {
+    // data(): IData {
     //   return {};
     // },
 

@@ -81,16 +81,40 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import ELabel from '@/components/e-label.vue';
-  import CMultiselect from '@/components/c-multiselect.vue';
+  import eLabel from '@/components/e-label.vue';
+  import cMultiselect from '@/components/c-multiselect.vue';
+
+  interface ISelectItem {
+    label: string;
+    value: string;
+  }
+
+  interface IMealItem {
+    value: string;
+    id: string;
+  }
+
+  interface IData {
+    demo: {
+      firstName: string;
+      message: string;
+      meal: (string | number)[];
+      drink: string;
+      language: string;
+    },
+    mock: {
+      selects: ISelectItem[];
+      mealValues: IMealItem[];
+    }
+  }
 
   export default defineComponent({
     name: 'forms',
     components: {
-      CMultiselect,
-      ELabel
+      cMultiselect,
+      eLabel
     },
-    data() {
+    data(): IData {
       return {
         demo: {
           firstName: '',
@@ -126,7 +150,7 @@
       };
     },
     methods: {
-      onMultiselectUpdate(component: any) {
+      onMultiselectUpdate(component: InstanceType<typeof cMultiselect>) {
         this.demo.meal = Object.values(component.checkedItems);
       }
     }

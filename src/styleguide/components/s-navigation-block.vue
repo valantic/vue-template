@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import { ComponentPublicInstance, defineComponent, PropType } from 'vue';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface IRoute {
@@ -30,7 +30,7 @@
     alias: string;
     name: string;
     redirect: string;
-    component: any;
+    component: ComponentPublicInstance;
     meta: {
       title: string;
       hideInStyleguide: boolean;

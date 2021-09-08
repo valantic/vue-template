@@ -78,8 +78,6 @@
     computed: {
       /**
        * Getter/setter for the internal value.
-       *
-       * @returns {Boolean}
        */
       internalValue: {
         get(): string | number {
@@ -88,9 +86,6 @@
         set(value: string): void {
           /**
            * Fired on select of radio button.
-           *
-           * @event change
-           * @type {String}
            */
           this.$emit('update:modelValue', value);
         }
@@ -141,9 +136,6 @@
 
         /**
          * Emits change event.
-         *
-         * @event change
-         * @type {String}
          */
         this.$emit('change', radioButton.value);
       },

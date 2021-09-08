@@ -46,9 +46,6 @@
         set(value: boolean) {
           /**
            * Emits checkbox value e.g. true/false or value
-           *
-           * @event change
-           * @type {Boolean|Array}
            */
           this.$emit('update:modelValue', value);
         }

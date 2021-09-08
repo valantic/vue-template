@@ -15,13 +15,17 @@
   import { defineComponent } from 'vue';
   import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
+  interface IData {
+    i18nLocales: string[];
+  }
+
   export default defineComponent({
     name: 's-language',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // props: {},
 
-    data() {
+    data(): IData {
       return {
         i18nLocales: I18N_LOCALES,
       };
