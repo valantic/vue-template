@@ -138,9 +138,6 @@
 
         /**
          * Input event for v-model.
-         *
-         * @event input
-         * @type {String}
          */
         this.$emit('input', select.value);
       },

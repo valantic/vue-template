@@ -50,6 +50,8 @@
   import { BREAKPOINTS } from '@/setup/globals';
   import useUuid, { IUuid } from '@/compositions/uuid';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { NavigationOptions } from 'swiper/types/components/navigation';
+  import { PaginationOptions } from 'swiper/types/components/pagination';
 
   interface ISwiperInstances {
     [key: string]: Swiper;
@@ -60,6 +62,11 @@
     next: Ref<HTMLDivElement | null>;
     pagination: Ref<HTMLDivElement | null>;
     container: Ref<HTMLDivElement | null>;
+  }
+
+  interface IData {
+    optionsDefault: SwiperOptions;
+    hasHover: boolean;
   }
 
   const swiperInstances: ISwiperInstances = {};
@@ -116,7 +123,7 @@
       };
     },
 
-    data() {
+    data(): IData {
       return {
         optionsDefault: {
           watchOverflow: true,
@@ -162,13 +169,13 @@
         return {
           ...this.optionsDefault,
           navigation: {
-            ...this.optionsDefault.navigation,
+            ...this.optionsDefault.navigation as NavigationOptions,
             nextEl: this.next,
             prevEl: this.previous,
           },
           // @ts-ignore
           pagination: {
-            ...this.optionsDefault.pagination,
+            ...this.optionsDefault.pagination as PaginationOptions,
             el: this.pagination,
           },
           ...this.options,

@@ -127,13 +127,32 @@
   import eFieldset from '@/components/e-fieldset';
   import { required, email } from 'vuelidate/lib/validators';
 
+  interface ISelectItem {
+    label: string;
+    value: string;
+  }
+
+  interface IData {
+    form: {
+      name: string;
+      email: string;
+      notes: string;
+      language: string;
+      topics: string[];
+      frequency: string;
+    },
+    mock: {
+      languages: ISelectItem[];
+    }
+  }
+
   export default defineComponent({
     name: 'forms',
     components: {
       eFieldset,
     },
     // components: {},
-    data() {
+    data(): IData {
       return {
         form: {
           name: '',

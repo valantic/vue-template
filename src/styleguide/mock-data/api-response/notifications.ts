@@ -48,6 +48,7 @@ const confirmationMessage: INotification = {
   id: 1,
   expire: false,
   title: 'A title',
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   confirm: ({ notification, resolve }: { notification: INotification, resolve?: (value: any) => void}) => {
     // eslint-disable-next-line no-console
     console.info(`Notification ${notification.id} was confirmed.`);
@@ -56,6 +57,7 @@ const confirmationMessage: INotification = {
       setTimeout(resolve, 2000);
     }
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   decline: ({ notification, resolve }: { notification: INotification, resolve?: (value: any) => void}) => {
     // eslint-disable-next-line no-console
     console.info(`Notification ${notification.id} was declined.`);

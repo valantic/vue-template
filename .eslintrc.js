@@ -4,6 +4,10 @@ const vueRules = require('eslint-config-valantic/plugins/vue');
 const tsRules = { // TODO: move to config package.
   'no-shadow': 'off',
   '@typescript-eslint/no-shadow': 'error',
+  '@typescript-eslint/no-explicit-any': [2, {
+    fixToUnknown: false,
+    ignoreRestArgs: true,
+  }],
   'require-jsdoc': 0, // TODO is deprecated, see https://eslint.org/blog/2018/11/jsdoc-end-of-life
   'valid-jsdoc': 0, // TODO is deprecated, see https://eslint.org/blog/2018/11/jsdoc-end-of-life
 }

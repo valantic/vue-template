@@ -61,6 +61,10 @@
     slot: Ref<HTMLSpanElement | null>;
   }
 
+  interface IData {
+    internalValue: string | number;
+  }
+
   /**
    * Input form component
    *
@@ -151,9 +155,8 @@
       /**
        * Allows to use the input as standalone.
        *
-       * If 'true'
-       * - $props.value will be used to set initial value.
-       * - the component is not reactive to $props.value changes.
+       * If 'true', $props.value will be used to set initial value.
+       * the component is not reactive to $props.value changes.
        */
       standalone: {
         type: Boolean,
@@ -181,7 +184,7 @@
       };
     },
 
-    data() { // TODO: add interface. Why is no error thrown?
+    data(): IData {
       return {
         internalValue: this.value
       };
@@ -189,8 +192,6 @@
     computed: {
       /**
        * Returns a flag, if field notifications should be displayed.
-       *
-       * @returns {Boolean}
        */
       showNotification(): boolean {
         return !!(this.state && this.state !== 'default' && this.notification && this.focus);

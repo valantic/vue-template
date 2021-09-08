@@ -215,54 +215,54 @@
     data(): IData {
       return {
         /**
-         * @type {Boolean} Defines if the multi-select is in error state.
+         * Defines if the multi-select is in error state.
          */
         // @ts-ignore
         isError: this.state === FieldStates.Error,
 
         /**
-         * @type {Boolean} Defines if the multi-select is in success state.
+         * Defines if the multi-select is in success state.
          */
         // @ts-ignore
         isSuccess: this.state === FieldStates.Success,
 
         /**
-         * @type {Boolean} Defines if the multi-select has been changed.
+         * Defines if the multi-select has been changed.
          */
         isChanged: false,
 
         /**
-         * @type {String} The output value as string.
+         * The output value as string.
          */
         outputValue: '',
 
         /**
-         * @type {Array} The filtered checkbox items.
+         * The filtered checkbox items.
          */
         checkboxItemsFiltered: [],
 
         /**
-         * @type {Array} The checkbox items.
+         * The checkbox items.
          */
         checkboxItems: [],
 
         /**
-         * @type {Array} The checked items.
+         * The checked items.
          */
         checkedItems: [],
 
         /**
-         * @type {Array} The checked and stored items.
+         * The checked and stored items.
          */
         checkedStored: [],
 
         /**
-         * @type {Boolean} Defines if there are no filtered checkbox items.
+         * Defines if there are no filtered checkbox items.
          */
         checkboxItemsFilteredEmpty: false,
 
         /**
-         * @type {String} The search term to filter values.
+         * The search term to filter values.
          */
         searchTerm: '',
       };
@@ -274,7 +274,7 @@
        *
        * @returns {Array}
        */
-      activeValuesArray(): string | number | any[] | null {
+      activeValuesArray(): string | string[] | number | number[] | null {
         switch (typeof this.activeValue) {
           case 'object':
             if (Array.isArray(this.activeValue)) {
@@ -384,10 +384,6 @@
 
         /**
          * Will be triggered when the multiselect component is updated.
-         *
-         * @event update
-         *
-         * @type {cMultiselect} Multiselect component.
          */
         this.$emit('update', this);
       },
@@ -418,10 +414,6 @@
 
           /**
            * Will be triggered when the multiselect component is active.
-           *
-           * @event active
-           *
-           * @type {cMultiselect} Multiselect component.
            */
           this.$emit('active', this);
         }
@@ -446,10 +438,6 @@
 
           /**
            * Will be triggered when the multiselect component is updated.
-           *
-           * @event update
-           *
-           * @type {cMultiselect} Multiselect component.
            */
           this.$emit('update', this);
 

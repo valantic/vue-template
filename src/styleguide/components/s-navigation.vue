@@ -49,6 +49,10 @@
   import sDemoSettings from './s-demo-settings.vue';
   import sNavigationBlock from './s-navigation-block.vue';
 
+  interface IData {
+    isOpen: boolean;
+  }
+
   export default defineComponent({
     name: 's-navigation',
     status: 0, // TODO: remove when component was prepared for current project.
@@ -74,7 +78,7 @@
         ].includes(value),
       },
     },
-    data() {
+    data(): IData {
       return {
         isOpen: false,
       };

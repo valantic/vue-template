@@ -84,9 +84,6 @@
         set(value: boolean | string[]) {
           /**
            * Emits checkbox value e.g. true/false or value
-           *
-           * @event change
-           * @type {Boolean|Array}
            */
           this.$emit('update:modelValue', value);
 
@@ -97,8 +94,6 @@
 
       /**
        * Evaluates if the checkbox is currently selected.
-       *
-       * @returns {Boolean}
        */
       isChecked() {
         return Array.isArray(this.value)
@@ -129,9 +124,6 @@
 
         /**
          * Focus event
-         *
-         * @event focus
-         * @type {String}
          */
         this.$emit('focus');
       },
@@ -145,9 +137,6 @@
 
         /**
          * Blur event.
-         *
-         * @event blur
-         * @type {String}
          */
         this.$emit('blur');
       },

@@ -781,12 +781,15 @@ package.json:
 
 ### Typescript
 
-* [ ] Refactor model definitions to use standard model properties (search for "model: {" )
-* [ ] triggering a notification shows it 3 times
-
 * [ ] Add Documentation and Wiki Section about
   - Dev Tools, use https://chrome.google.com/webstore/detail/vuejs-devtools/ljjemllljcmogpfapbkkighbhhppjdbg/related
-  - always returning an arrow function for custom validator of props (to fix random TS errors)
+  - needed Typings
+    - Props Validator: parameter and return types, use arrow function style (to fix random TS errors)
+    - Props: if needed, write `type: Array as PropType<string[]>` to have full typing on component props
+    - Setup: Define a Setup Interface if you need any refs / composition functionality
+    - Data: Define a Data Interface
+    - Computed Properties: parameter and return type
+    - Method Signatures: parameter and return types
   - always returning a defined type for any other functions (computed / data) (to fix random TS errors about undefined variables)
   
 ## License

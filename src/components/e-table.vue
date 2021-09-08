@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, PropType } from 'vue';
 
   interface IColumn {
     title: string | (() => string);
@@ -73,6 +73,10 @@
     sortable: boolean;
     sort: () => number;
     onClick: () => void;
+  }
+
+  interface IItem {
+    [key: string]: string;
   }
 
   interface IData {
@@ -100,7 +104,7 @@
        * @property {Boolean} [disabled = false] - Disables the interaction with the current row.
        */
       items: {
-        type: Array,
+        type: Array as PropType<IItem[]>,
         required: true,
       },
 
@@ -118,19 +122,19 @@
        *
        */
       columns: {
-        type: Array,
+        type: Array as PropType<IColumn[]>,
         required: true,
       },
     },
     data(): IData {
       return {
         /**
-         * @type {Object} The currently selected 'column' to be sorted.
+         * the currently selected 'column' to be sorted.
          */
         sortBy: null,
 
         /**
-         * @type {Boolean} Holds to sort direction in case a 'sortBy' is active.
+         * Holds to sort direction in case a 'sortBy' is active.
          */
         sortAscending: true,
       };
@@ -142,13 +146,13 @@
        *
        * @returns {Array.<Object>}
        */
-      itemsSortedBy(): any[] {
+      itemsSortedBy(): IItem[] {
         const items = this.items.slice();
 
         if (this.sortBy) {
           const sort = typeof this.sortBy.sort === 'function'
             ? this.sortBy.sort
-            : (a: any, b: any) => (this.sortBy ? a[this.sortBy.key].localeCompare(b[this.sortBy.key]) : -1);
+            : (a: IItem, b: IItem) => (this.sortBy ? a[this.sortBy.key].localeCompare(b[this.sortBy.key]) : -1);
 
           items.sort(sort);
         }
@@ -161,7 +165,7 @@
        *
        * @returns {Array.<Object>}
        */
-      itemsSorted(): any[] {
+      itemsSorted(): IItem[] {
         if (!this.sortAscending) {
           return this.itemsSortedBy.slice().reverse();
         }

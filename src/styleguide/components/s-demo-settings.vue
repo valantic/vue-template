@@ -15,6 +15,11 @@
   import { defineComponent } from 'vue';
   import sToggle from './s-toggle.vue';
 
+  interface IData {
+    htmlValidation: boolean;
+    loggedIn: boolean;
+  }
+
   const showHtmlValidationClass = 'html-validation';
 
   export default defineComponent({
@@ -26,15 +31,15 @@
     },
 
     // props: {},
-    data() {
+    data(): IData {
       return {
         /**
-         * @type {Boolean} Determines if the HTML validation styles should be applied.
+         * Determines if the HTML validation styles should be applied.
          */
         htmlValidation: true,
 
         /**
-         * @type {Boolean} Determines if the user is logged in.
+         * Determines if the user is logged in.
          */
         loggedIn: true,
       };

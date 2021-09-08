@@ -38,6 +38,11 @@
     [key: number]: number
   }
 
+  interface IData {
+    loaded: boolean;
+    fallbackHeight: number;
+  }
+
   /**
    * Renders a picture element with srcset or sources, depending on provided data.
    */
@@ -168,15 +173,15 @@
         default: true,
       },
     },
-    data() {
+    data(): IData {
       return {
         /**
-         * @type {Boolean} - Becomes true if the image is loaded.
+         * Becomes true if the image is loaded.
          */
         loaded: false,
 
         /**
-         * @type {Number} Holds a fallback width in case only the ratio is defined.
+         * Holds a fallback width in case only the ratio is defined.
          */
         fallbackHeight: 400,
       };

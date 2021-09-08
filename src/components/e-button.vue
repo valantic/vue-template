@@ -41,6 +41,14 @@
     height: string;
   }
 
+  interface IData {
+    hasHover: boolean;
+    isActive: boolean;
+    hasFocus: boolean;
+    type: 'a' | 'button';
+    hasTouch: boolean;
+  }
+
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
    * The component uses a `<slot>` to render the content.
@@ -139,20 +147,20 @@
       },
     },
 
-    data() {
+    data(): IData {
       return {
         /**
-         * @type {Boolean} Internal flag to determine hover state.
+         * Internal flag to determine hover state.
          */
         hasHover: this.hover,
 
         /**
-         * @type {Boolean} Internal flag to determine active state.
+         * Internal flag to determine active state.
          */
         isActive: this.active,
 
         /**
-         * @type {Boolean} Internal flag to determine focus state.
+         * Internal flag to determine focus state.
          */
         hasFocus: this.focus,
 
@@ -279,10 +287,6 @@
 
         /**
          * Click event
-         *
-         * @event click
-         *
-         * @property {Event} event - The original DOM event.
          */
         this.$emit('click', event);
       },
