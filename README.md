@@ -1,6 +1,7 @@
 # vue-template
 
-This is a custom Vue template which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
+This is a custom Vue template written in typescript which is based on the idea of using BEM, CriticalCSS and a living 
+styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
 
 ## Introduction
 
@@ -26,6 +27,7 @@ You **MUST** also be familiar with the following tools:
 * [BEM](http://getbem.com/)
 * [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
+* [Typescript](https://www.typescriptlang.org/)
 * [Git](https://git-scm.com/)
 * [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Jest](https://facebook.github.io/jest/)
@@ -49,7 +51,11 @@ You **MUST** install the following tools globally, before you can use this templ
 
 ### Prepare your IDE
 
-Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
+Please make sure your IDE is configured to apply 
+- [ESLint](https://eslint.org/docs/user-guide/integrations)
+- [Typescript](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
+- [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins)
+- [.editorconfig](https://editorconfig.org/#download) linting/settings.
 
 **This template supports ES2020+. Please make sure your IDE is configured accordingly.**
 
@@ -343,7 +349,7 @@ For information about best practices read the following guides:
 * This project uses always `kebab-case` for [Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended), [Component name casing in JS/JSX](https://vuejs.org/v2/style-guide/#Component-name-casing-in-JS-JSX-strongly-recommended) and [Component name casing in templates ](https://vuejs.org/v2/style-guide/#Component-name-casing-in-templates-strongly-recommended).
 * We use BEM namespace `e-` for [base component names](Bhttps://vuejs.org/v2/style-guide/#Base-component-names-strongly-recommended).
 
-### Single file components
+### Single file components (SFC)
 
 We build Vue components as [single file components](https://vuejs.org/v2/guide/single-file-components.html). All production components are placed within `/app/components` (styleguide only components in `/app/styleguide/components`).
 
@@ -351,6 +357,108 @@ We build Vue components as [single file components](https://vuejs.org/v2/guide/s
 
 * Naming follows BEM block convention.
 * Naming MUST always be singular.
+
+### Vue and Typescript
+
+To have the types working for vue SFC, they need to be defined as
+
+```vue
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    
+  });
+</script>
+```
+
+To fully benefit from the power of typescript, write the following types when creating new components:
+
+#### Props
+
+For Primitive Types, typescript is able to detect the type based on the Vue Prop Type definition:
+
+```ts
+myProp: {
+  type: String,
+  required: true,
+},
+```
+
+When using arrays or objects without further typings, typescript treats a prop as `any[]` or `any`. To have proper
+typing, you can define your array / object props like this:
+
+```ts
+myArrayProp: {
+  type: Array as PropType<string[]>,
+  default: () => [],
+},
+```
+
+When defining a Prop with a validator, it's important to use the arrow function style to prevent random typescript errors:
+
+```ts
+color: {
+  type: String,
+  default: 'yellow',
+  validator: (value: string) => [
+    'red',
+    'yellow',
+    'blue',
+    'white',
+  ].includes(value),
+},
+```
+
+#### Setup
+
+When Using Code from another File (Composition based) or accessing Component Elements via ref, the code it needs to be 
+defined in the Setup Method. The setup Method needs to have a proper Return Type by defining an Interface:
+
+```ts
+import { defineComponent, ref, Ref } from 'vue';
+import useFormStates, { IFormStates } from '@/compositions/form-states';
+
+interface ISetup extends IFormStates {
+  input: Ref<HTMLInputElement | null>;
+  slot: Ref<HTMLSpanElement | null>;
+}
+
+export default defineComponent({
+  setup(): ISetup {
+    const input = ref();
+    const slot = ref();
+
+    return {
+      ...useFormStates(),
+      input,
+      slot,
+    };
+  },
+});
+```
+
+#### Data
+
+To fully benefit from typescript, please define your Data function with an Interface like this:
+
+```ts
+interface IData {
+  myDataProperty: string;
+}
+export default defineComponent({
+  data(): IData {
+	  return {
+      myDataProperty: 'Hello World',
+	  }
+  }
+});
+```
+
+#### Computed / Methods
+
+To prevent random typescript errors in your component, make sure, to always type your computed return types and method 
+signatures!
 
 ## Vuex
 
@@ -778,19 +886,6 @@ package.json:
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
 * [ ] Extend eslint-plugin-vue rules for Vue 3.
-
-### Typescript
-
-* [ ] Add Documentation and Wiki Section about
-  - Dev Tools, use https://chrome.google.com/webstore/detail/vuejs-devtools/ljjemllljcmogpfapbkkighbhhppjdbg/related
-  - needed Typings
-    - Props Validator: parameter and return types, use arrow function style (to fix random TS errors)
-    - Props: if needed, write `type: Array as PropType<string[]>` to have full typing on component props
-    - Setup: Define a Setup Interface if you need any refs / composition functionality
-    - Data: Define a Data Interface
-    - Computed Properties: parameter and return type
-    - Method Signatures: parameter and return types
-  - always returning a defined type for any other functions (computed / data) (to fix random TS errors about undefined variables)
   
 ## License
 
