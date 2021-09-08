@@ -4,6 +4,7 @@ const vueRules = require('eslint-config-valantic/plugins/vue');
 module.exports = {
   root: true,
   parserOptions: {
+    requireConfigFile: false, // Fixes an exception on sub folder eslintrc.js files
     parser: '@babel/eslint-parser', // Don't use on upper scope as documented by ESLint. The Vue plugin already defines itself as parser.
     sourceType: 'module',
   },

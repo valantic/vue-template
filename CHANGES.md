@@ -4,8 +4,11 @@
  - (Feature) Adds auto-reload for scss file changes.
  - (Breaking) Refactors e-checkbox, so the styling of the states does not need to rely on JS anymore.
  - (Breaking) Removes e-with-root component.
-   - The same behaviour can be achieved with :is="""
- - (Breaking) Sprite support for e-icon. 
+   - The same behaviour can be achieved with :is=""
+ - (Breaking) Sprite support for e-icon.
+ - (Breaking) Removes touch-device mixin
+ - (Breaking) Removes c-panel  
+ - (Breaking) Refactors e-picture (inverts sizes definition, adds additional options)  
  - (Change) Fixes invalid greyscale order.
  - (Change) Replaces deprecated webpack-manifest-plugin with webpack-assets-manifest.
  - (Change) Simplyfies s-readme styles, so they align more with the current project.
@@ -14,6 +17,7 @@
  - (Change) Removes deprecated prop from e-checkbox demos.
  - (Change) Adds multi line demo for e-checkbox.
  - (Change) Adds translation best practices to readme.
+ - (Change) Enables console errors for HTML inside of translations
  - (Bug) Fixes broken styleguide build.
  - (Update) Updates all NPM packages to the current version. Except:
    - stylus-loader: was removed, because not required anymore

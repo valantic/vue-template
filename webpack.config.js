@@ -85,7 +85,7 @@ module.exports = (env, args = {}) => {
   const prefix = filePrefix ? `${filePrefix}.` : '';
   const extensions = ['.js', '.vue', '.json'];
   const alias = {
-    '@': path.join(__dirname, 'src'),
+    '@': path.resolve(__dirname, './src'),
     'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
   };
 
