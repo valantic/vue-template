@@ -20,17 +20,11 @@
 
     // components: {},
 
-    model: {
-      /**
-       * Changes v-model behavior and use 'checked' instead of 'value' as prop.
-       * Avoids conflict with default value attribute.
-       */
-      prop: 'checked',
-      event: 'change',
-    },
-
     props: {
-      checked: {
+      /**
+       * The model value to be used for v-model.
+       */
+      modelValue: {
         type: Boolean,
         default: false
       }
@@ -47,7 +41,7 @@
        */
       internalValue: {
         get(): boolean {
-          return this.checked;
+          return this.modelValue;
         },
         set(value: boolean) {
           /**
@@ -56,7 +50,7 @@
            * @event change
            * @type {Boolean|Array}
            */
-          this.$emit('change', value);
+          this.$emit('update:modelValue', value);
         }
       }
     },

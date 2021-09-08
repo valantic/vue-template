@@ -4,7 +4,7 @@
       <s-toggle v-model="htmlValidation">
         HTML validation
       </s-toggle>
-      <s-toggle checked>
+      <s-toggle v-model="loggedIn">
         Logged in
       </s-toggle>
     </li>
@@ -32,6 +32,11 @@
          * @type {Boolean} Determines if the HTML validation styles should be applied.
          */
         htmlValidation: true,
+
+        /**
+         * @type {Boolean} Determines if the user is logged in.
+         */
+        loggedIn: true,
       };
     },
 

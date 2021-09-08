@@ -37,7 +37,7 @@
 
     props: {
       /**
-       * Adds checked attribute to prevent type error
+       * The model value to be used for v-model.
        */
       modelValue: {
         type: [Boolean, Array] as PropType<boolean | string[]>,
@@ -45,7 +45,7 @@
       },
 
       /**
-       * Adds name attribute
+       * Adds name attribute.
        */
       name: {
         type: String,
@@ -53,7 +53,7 @@
       },
 
       /**
-       * Adds value attribute
+       * Adds value attribute.
        */
       value: {
         type: [String, Number, Boolean],
@@ -89,6 +89,8 @@
            * @type {Boolean|Array}
            */
           this.$emit('update:modelValue', value);
+
+          // event needed for the multiselect
           this.$emit('change', value);
         },
       },
