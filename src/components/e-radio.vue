@@ -39,20 +39,11 @@
     // components: {},
     inheritAttrs: false,
 
-    model: {
-      /**
-       * Changes v-model behavior and use 'selected' instead of 'value' as prop.
-       * Avoids conflict with default value attribute.
-       */
-      prop: 'selected',
-      event: 'change',
-    },
-
     props: {
       /**
-       * Adds value attribute.
+       * The model value to be used for v-model.
        */
-      value: {
+      modelValue: {
         required: true,
         type: [String, Number],
       },
@@ -66,12 +57,12 @@
       },
 
       /**
-       * Adds selected attribute to be used by v-model.
+       * Adds value attribute.
        */
-      selected: {
-        default: '',
-        type: [String, Number],
-      }
+      value: {
+        type: [String, Number, Boolean],
+        required: true,
+      },
     },
 
     setup(): ISetup {
@@ -92,7 +83,7 @@
        */
       internalValue: {
         get(): string | number {
-          return this.selected;
+          return this.modelValue;
         },
         set(value: string): void {
           /**
@@ -101,7 +92,7 @@
            * @event change
            * @type {String}
            */
-          this.$emit('change', value);
+          this.$emit('update:modelValue', value);
         }
       },
 
