@@ -51,7 +51,11 @@ export default {
       // EXAMPLE => .onPost('api-url').reply(200, mockDataResponse)
       .onGet('/notifications/global').reply((config) => {
         const { selector, type, redirectUrl } = config.params || {};
-        const message = messages.createMessage(type, '', true, selector, redirectUrl);
+        const message = messages.createMessage({
+          type,
+          selector,
+          redirectUrl
+        });
 
         return [200, notifications.createApiResponse(message)];
       })

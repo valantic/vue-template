@@ -1,33 +1,34 @@
 /**
  * Creates a notification object with the given params.
  *
- * @param {String} [type] - The message type.
- * @param {String} [message] - The message to display.
- * @param {Boolean} [expire] - Defines if the message should expire or stay.
- * @param {String|null} [selector] - Defines an optional container selector.
- * @param {String|null} [redirectUrl] - Defines the optional redirect URL.
+ * @param {Object} payload - The config payload.
+ * @param {String} [payload.type] - The message type.
+ * @param {String} [payload.message] - The message to display.
+ * @param {Boolean} [payload.expire] - Defines if the message should expire or stay.
+ * @param {String|null} [payload.selector] - Defines an optional container selector.
+ * @param {String|null} [payload.redirectUrl] - Defines the optional redirect URL.
  *
  * @returns {Object}
  */
-function createMessage( // eslint-disable-line max-params
-  type = 'success',
-  message = '',
-  expire = false,
-  selector = null,
-  redirectUrl = '',
-) {
+function createMessage({
+  type,
+  message,
+  expire,
+  selector,
+  redirectUrl,
+}) {
   return {
-    type,
+    type: type || 'success',
     message: message || `This is an example ${type} message.`,
-    expire,
-    selector,
-    redirectUrl,
+    expire: !!expire,
+    selector: selector || null,
+    redirectUrl: redirectUrl || '',
   };
 }
 
 export default {
-  success: createMessage('success'),
-  info: createMessage('info'),
-  error: createMessage('error'),
+  success: createMessage({ type: 'success' }),
+  info: createMessage({ type: 'info' }),
+  error: createMessage({ type: 'error' }),
   createMessage,
 };
