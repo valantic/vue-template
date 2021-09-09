@@ -116,11 +116,7 @@
     }
 
     &__name--invisible {
-      position: absolute;
-      overflow: hidden;
-      height: 0;
-      width: 0;
-      top: 0;
+      @extend %invisible;
     }
 
     &--position-top {

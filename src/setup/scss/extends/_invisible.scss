@@ -1,0 +1,8 @@
+%invisible {
+  position: absolute;
+  overflow: hidden;
+  height: 0;
+  width: 0;
+  top: 0;
+  left: -200vw; // Some elements ignore the width/height value (e.g. custom styled webkit form elements on iOS).
+}
