@@ -1,6 +1,6 @@
 # vue-template
 
-This is a custom Vue template written in typescript which is based on the idea of using BEM, CriticalCSS and a living 
+This is a custom Vue template written in Typescript which is based on the idea of using BEM, CriticalCSS and a living 
 styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
 
 ## Introduction
@@ -360,7 +360,7 @@ We build Vue components as [single file components](https://vuejs.org/v2/guide/s
 
 ### Vue and Typescript
 
-To have the types working for vue SFC, they need to be defined as
+To have the types working for Vue SFC, they need to be defined as
 
 ```vue
 <script lang="ts">
@@ -372,11 +372,11 @@ To have the types working for vue SFC, they need to be defined as
 </script>
 ```
 
-To fully benefit from the power of typescript, write the following types when creating new components:
+To fully benefit from the power of TypeScript, define the types according to the following examples:
 
 #### Props
 
-For Primitive Types, typescript is able to detect the type based on the Vue Prop Type definition:
+For Primitive Types, Typescript is able to detect the type based on the Vue Prop Type definition:
 
 ```ts
 myProp: {
@@ -385,7 +385,7 @@ myProp: {
 },
 ```
 
-When using arrays or objects without further typings, typescript treats a prop as `any[]` or `any`. To have proper
+When using arrays or objects without further typings, Typescript treats a prop as `any[]` or `any`. To have proper
 typing, you can define your array / object props like this:
 
 ```ts
@@ -440,7 +440,7 @@ export default defineComponent({
 
 #### Data
 
-To fully benefit from typescript, please define your Data function with an Interface like this:
+To fully benefit from Typescript, please define your Data function with an Interface like this:
 
 ```ts
 interface IData {
@@ -457,7 +457,7 @@ export default defineComponent({
 
 #### Computed / Methods
 
-To prevent random typescript errors in your component, make sure, to always type your computed return types and method 
+To prevent random Typescript errors in your component, make sure, to always type your computed return types and method 
 signatures!
 
 ## Vuex
@@ -742,7 +742,7 @@ The reasons why we choose this setup are:
 
 ### tsconfig Target
 
-At the moment, we are using `es2019` as typescript build target. The reason is, that `esNext` / `es2020` are not transpiling
+At the moment, we are using `es2019` as Typescript build target. The reason is, that `esNext` / `es2020` are not transpiling
 `optional-chaining` and `nullish-coalescing` and webpack 4 cannot handle them
 
 ## Node.js and NPM
