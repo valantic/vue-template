@@ -44,7 +44,7 @@ export default {
         return;
       }
 
-      state.notifications.unshift({
+      state.notifications.push({
         ...notification,
         id: Date.now(),
       });

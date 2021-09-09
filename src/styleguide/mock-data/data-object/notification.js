@@ -10,7 +10,7 @@
  *
  * @returns {Object}
  */
-function createMessage({
+function createNotification({
   type,
   message,
   expire,
@@ -20,15 +20,15 @@ function createMessage({
   return {
     type: type || 'success',
     message: message || `This is an example ${type} message.`,
-    expire: !!expire,
+    expire: typeof expire === 'boolean' ? expire : true,
     selector: selector || null,
     redirectUrl: redirectUrl || '',
   };
 }
 
 export default {
-  success: createMessage({ type: 'success' }),
-  info: createMessage({ type: 'info' }),
-  error: createMessage({ type: 'error' }),
-  createMessage,
+  success: createNotification({ type: 'success' }),
+  info: createNotification({ type: 'info' }),
+  error: createNotification({ type: 'error' }),
+  createNotification,
 };

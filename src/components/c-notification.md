@@ -17,17 +17,17 @@ See Confluence page for "Messages" for more details.
 #### Success
 
 ```vue
-<c-notification :notification="mockData.messages.success" />
+<c-notification :notification="mockData.notification.success" />
 ```
 
 #### Error
 
 ```vue
-<c-notification :notification="mockData.messages.error" />
+<c-notification :notification="mockData.notification.error" />
 ```
 
 #### Info
 
 ```vue
-<c-notification :notification="mockData.messages.info" />
+<c-notification :notification="mockData.notification.info" />
 ```

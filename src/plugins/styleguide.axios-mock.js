@@ -3,8 +3,8 @@ import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-e
 import { axios } from '@/plugins/axios';
 
 // Import mocks
-import notifications from '@/styleguide/mock-data/api-response/notifications';
-import messages from '@/styleguide/mock-data/data-object/messages';
+import notificationResponse from '@/styleguide/mock-data/api-response/notification-response';
+import notification from '@/styleguide/mock-data/data-object/notification';
 
 /**
  * By default returns a 500 'no route defined' error.
@@ -50,14 +50,20 @@ export default {
     mock
       // EXAMPLE => .onPost('api-url').reply(200, mockDataResponse)
       .onGet('/notifications/global').reply((config) => {
-        const { selector, type, redirectUrl } = config.params || {};
-        const message = messages.createMessage({
+        const {
+          selector,
+          type,
+          redirectUrl,
+          expire,
+        } = config.params || {};
+        const message = notification.createNotification({
           type,
           selector,
-          redirectUrl
+          redirectUrl,
+          expire,
         });
 
-        return [200, notifications.createApiResponse(message)];
+        return [200, notificationResponse.createApiResponse(message)];
       })
 
       // Global

@@ -45,11 +45,6 @@
     data() {
       return {
         /**
-         * @type {Boolean} Defines if notification should be visible.
-         */
-        visible: true,
-
-        /**
          * @type {Number} Defines the delay a notification expires in Milliseconds.
          */
         expireDelay: 3000,
@@ -65,7 +60,6 @@
       componentModifiers() {
         return {
           type: this.notification.type,
-          visible: this.visible,
         };
       },
     },
@@ -99,9 +93,7 @@
        * Removes current notification from stack.
        */
       close() {
-        this.visible = false;
-
-        setTimeout(() => this.popNotification(this.notification.id), 500);
+        this.popNotification(this.notification.id);
       },
     },
     // render() {},
@@ -110,13 +102,11 @@
 
 <style lang="scss">
   .c-notification {
-    width: 400px;
+    min-width: 400px;
     max-width: 100%;
     min-height: 60px;
     position: relative;
     padding: $spacing--5;
-    opacity: 0;
-    transition: opacity $transition-duration-200 linear;
 
     &--type-success {
       background-color: $color-status--success;
@@ -145,10 +135,6 @@
       top: $spacing--5;
       right: $spacing--5;
       color: inherit;
-    }
-
-    &--visible {
-      opacity: 1;
     }
   }
 </style>

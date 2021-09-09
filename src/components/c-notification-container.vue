@@ -1,9 +1,11 @@
 <template>
   <div :class="b()">
-    <c-notification v-for="notification in filteredNotifications"
-                    :key="notification.id"
-                    :notification="notification"
-    />
+    <transition-group name="list" tag="div">
+      <c-notification v-for="notification in filteredNotifications"
+                      :key="notification.id"
+                      :notification="notification"
+      />
+    </transition-group>
   </div>
 </template>
 
@@ -80,6 +82,28 @@
 
 <style lang="scss">
   .c-notification-container {
-    // Add custom styling.
+    /* VUE Animation styles */
+    .list-enter-active,
+    .list-leave-active {
+      transition: all $transition-duration-300;
+    }
+
+    .list-leave-active {
+      position: absolute;
+    }
+
+    .list-enter,
+    .list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .list-leave-to {
+      transform: translateY(-30px);
+    }
+
+    .list-move {
+      transition: transform 1s;
+    }
   }
 </style>

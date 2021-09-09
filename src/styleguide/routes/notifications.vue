@@ -44,6 +44,20 @@
           Error
         </e-button>
 
+        <!-- Static Not expiring Messages -->
+        <h2 :class="b('label')">
+          Static (don't expire) Messages
+        </h2>
+        <e-button @click="getApiResponseMessage('success', '', '', false)">
+          Success
+        </e-button>
+        <e-button @click="getApiResponseMessage('info', '', '', false)">
+          Info
+        </e-button>
+        <e-button @click="getApiResponseMessage('error', '', '', false)">
+          Error
+        </e-button>
+
         <hr>
 
         <!-- Options -->
@@ -88,18 +102,30 @@
     },
     data() {
       return {
+        /**
+         * @type {Boolean} Modal opening state.
+         */
         modalIsOpen: false,
       };
     },
     // computed: {},
     // mounted() {},
     methods: {
-      getApiResponseMessage(type, selector, redirectUrl) {
+      /**
+       * Triggers an API call to get a response message.
+       *
+       * @param {String} type - The message type.
+       * @param {String} [selector] - The optional container selector.
+       * @param {String} [redirectUrl] - The optional redirect url.
+       * @param {Boolean} [expire] - Defines if the message should auto expire.
+       */
+      getApiResponseMessage(type, selector, redirectUrl, expire = true) { // eslint-disable-line max-params
         api.get('/notifications/global', {
           params: {
             type,
             selector,
             redirectUrl,
+            expire,
           },
         });
       },
