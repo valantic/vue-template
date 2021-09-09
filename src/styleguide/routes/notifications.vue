@@ -58,7 +58,7 @@
 
     <hr>
 
-    <div>
+    <div :class="b('second-container')">
       Custom Container:
       <c-notification-container selector="footer" />
     </div>
@@ -115,6 +115,10 @@
     &__label {
       display: block;
       margin: $spacing--15 0 $spacing--5;
+    }
+
+    &__second-container {
+      min-height: 400px;
     }
 
     .e-button:not(:last-of-type) {

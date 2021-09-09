@@ -25,6 +25,7 @@ module.exports = {
   ignore: [
     '**/components/app.vue',
     '**/components/l-default.vue',
+    '**/components/c-notification-container.vue',
   ],
   sections: [
     {

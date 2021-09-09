@@ -6,6 +6,7 @@ import app from '@/styleguide/components/app';
 import AxiosMockAdapter from '@/plugins/styleguide.axios-mock';
 import dummyImages from '@/styleguide/mock-data/initial-data/images';
 import dummyVideos from '@/styleguide/mock-data/initial-data/videos';
+import messages from '@/styleguide/mock-data/data-object/messages';
 import dummyTableData from '@/styleguide/mock-data/initial-data/table';
 import { availableStatus } from '@/plugins/styleguide.status-label';
 import pimcore from '@/plugins/pimcore';
@@ -26,7 +27,8 @@ Vue.mixin({
       mockData: {
         dummyImages,
         dummyVideos,
-        dummyTableData
+        dummyTableData,
+        messages,
       }
     };
   },
