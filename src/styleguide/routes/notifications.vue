@@ -2,9 +2,9 @@
   <l-default>
     <div :class="b()">
       <div>
-        <!-- Global API Response Messages -->
+        <!-- Default API Messages -->
         <h2 :class="b('label')">
-          API Response Messages:
+          Default global Messages:
         </h2>
         <e-button @click="getApiResponseMessage('success')">
           Success
@@ -16,6 +16,7 @@
           Error
         </e-button>
 
+        <!-- Custom Container Messages -->
         <h2 :class="b('label')">
           Custom Container Message
         </h2>
@@ -29,6 +30,7 @@
           Error
         </e-button>
 
+        <!-- Redirect handling -->
         <h2 :class="b('label')">
           Redirect
         </h2>
