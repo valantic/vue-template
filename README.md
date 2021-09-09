@@ -460,6 +460,10 @@ export default defineComponent({
 To prevent random Typescript errors in your component, make sure, to always type your computed return types and method 
 signatures!
 
+#### Misc
+
+- Component specific Properties: Use `Ref<InstanceType<typeof yourComponent>` to access a property of a ref being a component
+
 ## Vuex
 
 [Vuex](https://vuex.vuejs.org/en/) is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
