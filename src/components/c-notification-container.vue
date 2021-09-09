@@ -1,11 +1,9 @@
 <template>
   <div :class="b()">
-    <div :class="b('inner')">
-      <c-notification v-for="notification in getNotifications"
-                      :key="notification.id"
-                      :notification="notification"
-      />
-    </div>
+    <c-notification v-for="notification in filteredNotifications"
+                    :key="notification.id"
+                    :notification="notification"
+    />
   </div>
 </template>
 
@@ -25,7 +23,21 @@
     },
     // mixins: [],
 
-    // props: {},
+    props: {
+      /**
+       * Defines which notifications should get displayed in the container.
+       */
+      selector: {
+        type: String,
+        default: 'default',
+        validator(value) {
+          return [
+            'default',
+            'footer',
+          ].includes(value);
+        }
+      }
+    },
     // data() {
     //   return {};
     // },
@@ -34,6 +46,19 @@
       ...mapGetters('notification', [
         'getNotifications',
       ]),
+
+      /**
+       * Gets the filtered notifications depending on the selector.
+       *
+       * @returns {Array.<Object>}
+       */
+      filteredNotifications() {
+        if (this.selector !== 'default') {
+          return this.getNotifications.filter(notification => notification.selector === this.selector);
+        }
+
+        return this.getNotifications.filter(notification => !notification.selector);
+      },
     },
     // watch: {},
 
@@ -55,63 +80,6 @@
 
 <style lang="scss">
   .c-notification-container {
-    @include z-index(globalNotification);
-
-    &--display-type-global {
-      position: absolute;
-      width: 100%;
-      margin-top: -$spacing--20;
-
-      @include media(xs) {
-        margin-top: -$spacing--5;
-      }
-    }
-
-    &--display-type-add-to-cart {
-      position: absolute;
-      width: 100%;
-      right: $spacing--0;
-      display: none;
-
-      @include media(xs) {
-        width: 385px;
-      }
-
-      @include media(md) {
-        display: block;
-      }
-
-      &.c-notification-container--state-full {
-        margin-top: -$spacing--5;
-      }
-
-      &.c-notification-container--state-reduced {
-        margin-top: -$spacing--15;
-      }
-    }
-
-    &--modal-open {
-      display: none;
-    }
-
-    &--display-type-global &__inner {
-      position: fixed;
-      width: 100%;
-      padding: $spacing--10;
-
-      @include media(xs) {
-        padding: $spacing--0;
-        width: 385px;
-      }
-    }
-
-    &--display-type-add-to-cart &__inner {
-      position: fixed;
-      width: 100%;
-
-      @include media(xs) {
-        width: 385px;
-      }
-    }
+    // Add custom styling.
   }
 </style>

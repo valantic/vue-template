@@ -16,6 +16,34 @@
           Error
         </e-button>
 
+        <h2 :class="b('label')">
+          Custom Container Message
+        </h2>
+        <e-button @click="getApiResponseMessage('success', 'footer')">
+          Success
+        </e-button>
+        <e-button @click="getApiResponseMessage('info', 'footer')">
+          Info
+        </e-button>
+        <e-button @click="getApiResponseMessage('error', 'footer')">
+          Error
+        </e-button>
+
+        <h2 :class="b('label')">
+          Redirect
+        </h2>
+        <e-button @click="getApiResponseMessage('success', '', '/styleguide/sandbox/layout')">
+          Success
+        </e-button>
+        <e-button @click="getApiResponseMessage('info', '', '/styleguide/sandbox/layout')">
+          Info
+        </e-button>
+        <e-button @click="getApiResponseMessage('error', '', '/styleguide/sandbox/layout')">
+          Error
+        </e-button>
+
+        <hr>
+
         <!-- Options -->
         <h2 :class="b('label')">
           Options
@@ -24,6 +52,13 @@
           Open Modal
         </e-button>
       </div>
+    </div>
+
+    <hr>
+
+    <div>
+      Custom Container:
+      <c-notification-container selector="footer" />
     </div>
 
     <!-- Modal -->
@@ -40,10 +75,12 @@
   import api from '@/helpers/api';
   import lDefault from '@/components/l-default';
   import cModal from '@/components/c-modal';
+  import cNotificationContainer from '@/components/c-notification-container';
 
   export default {
     name: 'notifications',
     components: {
+      cNotificationContainer,
       lDefault,
       cModal,
     },
@@ -55,8 +92,14 @@
     // computed: {},
     // mounted() {},
     methods: {
-      getApiResponseMessage(type) {
-        api.post(`/notifications/global/${type}`);
+      getApiResponseMessage(type, selector, redirectUrl) {
+        api.get('/notifications/global', {
+          params: {
+            type,
+            selector,
+            redirectUrl,
+          },
+        });
       },
     }
   };

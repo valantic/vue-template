@@ -4,6 +4,7 @@ import { axios } from '@/plugins/axios';
 
 // Import mocks
 import notifications from '@/styleguide/mock-data/api-response/notifications';
+import messages from '@/styleguide/mock-data/data-object/messages';
 
 /**
  * By default returns a 500 'no route defined' error.
@@ -48,12 +49,12 @@ export default {
     // See https://github.com/ctimmerm/axios-mock-adapter
     mock
       // EXAMPLE => .onPost('api-url').reply(200, mockDataResponse)
-      .onPost('/notifications/global/success').reply(200, notifications.success)
-      .onPost('/notifications/global/error').reply(500, notifications.error)
-      .onPost('/notifications/global/info').reply(200, notifications.info)
-      // .onPost('/notifications/global/warning').reply(200, notification.warning)
-      // .onPost('/notifications/field/error').reply(500, notification.fieldError)
-      // .onPost('/notifications/selector/info1').reply(200, notification.selectorInfo1)
+      .onGet('/notifications/global').reply((config) => {
+        const { selector, type, redirectUrl } = config.params || {};
+        const message = messages.createMessage(type, '', true, selector, redirectUrl);
+
+        return [200, notifications.createApiResponse(message)];
+      })
 
       // Global
       .onAny(/\/?static|assets|passtrough/).passThrough()

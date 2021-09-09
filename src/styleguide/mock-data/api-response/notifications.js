@@ -1,4 +1,4 @@
-import notifications from '@/styleguide/mock-data/data-object/notifications';
+import messages from '@/styleguide/mock-data/data-object/messages';
 
 /**
  * Creates an empty API response with a notification.
@@ -15,7 +15,8 @@ function createApiResponse(notification) {
 }
 
 export default {
-  success: createApiResponse(notifications.success),
-  info: createApiResponse(notifications.info),
-  error: createApiResponse(notifications.error),
+  success: createApiResponse(messages.success),
+  info: createApiResponse(messages.info),
+  error: createApiResponse(messages.error),
+  createApiResponse,
 };

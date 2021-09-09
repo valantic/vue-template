@@ -1,4 +1,4 @@
-import { NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
+import { NOTIFICATION_UNKNOWN_ERROR, IS_STORAGE_AVAILABLE } from '@/setup/globals';
 
 export default {
   namespaced: true,
@@ -9,6 +9,13 @@ export default {
     notifications: [],
   },
   getters: {
+    /**
+     * Gets the current list of notifications.
+     *
+     * @param {Object} state - The current module state.
+     *
+     * @returns {Array.<Object>}
+     */
     getNotifications: state => state.notifications,
   },
   mutations: {
@@ -20,6 +27,20 @@ export default {
      */
     pushNotification(state, notification) {
       if (!notification) {
+        return;
+      }
+
+      const { redirectUrl } = notification || {};
+
+      // Redirect Handler
+      if (redirectUrl && IS_STORAGE_AVAILABLE) {
+        localStorage.setItem('notification', JSON.stringify({
+          ...notification,
+          redirectUrl: null,
+        }));
+
+        window.location = redirectUrl;
+
         return;
       }
 
@@ -38,15 +59,6 @@ export default {
     popNotification(state, id) {
       state.notifications = state.notifications.filter(notification => notification.id !== id);
     },
-
-    /**
-     * Flushes field notifications.
-     *
-     * @param {Object} state - The current module state.
-     */
-    resetNotifications(state) {
-      state.notifications = [];
-    },
   },
   actions: {
     /**
@@ -61,8 +73,8 @@ export default {
         throw Error("The payload data given to 'notification/data' is not of type Array.");
       }
 
-      payload.forEach((message) => {
-        commit('pushNotification', { message, delay: 6 });
+      payload.forEach((notification) => {
+        commit('pushNotification', notification);
       });
     },
 

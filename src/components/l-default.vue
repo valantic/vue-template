@@ -90,6 +90,8 @@
     }
 
     .c-notification-container {
+      @include z-index(globalNotification);
+
       position: absolute;
     }
   }
