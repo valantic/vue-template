@@ -152,7 +152,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > jest
 - [ts-loader](https://www.npmjs.com/package/ts-loader) - This package allows showing typescript Errors and transpiling Typescript files to Javascript files using typescript and webpack.
   > webpack
-- [typescript](https://www.typescriptlang.org/) - Basic Package to write Code as Typescript.
+- [typescript](https://www.typescriptlang.org/) - Basic Package to write Code in Typescript.
   > webpack
 - [vue-jest](https://www.npmjs.com/package/vue-jest) - Jest Vue transformer with source map support.
   > test environment

@@ -172,7 +172,7 @@
         svg.setAttribute('tabindex', this.tabindex);
         svg.setAttribute('role', 'img');
         svg.setAttribute('aria-label', this.icon);
-        svg.setAttribute('focusable', this.focusable ? 'true' : 'false');
+        svg.setAttribute('focusable', `${this.focusable}`);
       },
 
       /**

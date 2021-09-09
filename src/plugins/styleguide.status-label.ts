@@ -14,7 +14,7 @@ interface ILabels {
 }
 
 interface IStatusTimeouts {
-  [key: string]: any;
+  [key: string]: ReturnType<typeof setTimeout>;
 }
 
 export const availableStatus: IAvailabilityStatusConfig = {

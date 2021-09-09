@@ -6,15 +6,13 @@
 </template>
 
 <script lang="ts">
-
   import { defineComponent } from 'vue';
   import scrollbarWidth from '@/helpers/scrollbar-width';
 
   interface IData {
     scrollbarWidth: number;
     resizeObserver: ResizeObserver;
-    // eslint-disable-next-line no-undef
-    resizeTimeout: NodeJS.Timeout | null;
+    resizeTimeout: ReturnType<typeof setTimeout> | null;
   }
 
   /**
@@ -39,7 +37,7 @@
          * The resize event was only triggered, when the user manually changes the screen size.
          */
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth as any),
+        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth),
 
         /**
          * Holds the ID of the currently running resize timeout.
@@ -80,7 +78,7 @@
       }
     },
     mounted() {
-      if (!this.resizeObserver) { // IE11 fallback.
+      if (!this.resizeObserver) {
         this.updateScrollbarWidth();
       }
     },
@@ -91,7 +89,7 @@
     beforeUnmount() {
       if (this.resizeObserver) {
         this.resizeObserver.unobserve(window.document.body);
-      } else { // IE11 fallback.
+      } else {
         window.removeEventListener('resizeend', this.updateScrollbarWidth);
       }
     },

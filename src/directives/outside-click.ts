@@ -46,6 +46,7 @@ export default {
       // We check to see if the clicked element is not the dialog element and not excluded.
       if (!el.contains(event.target as Node) && handler) {
         const clickedOnExcludedElement = !!exclude.find((refName: string) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const excludedElement: any = binding.instance?.$refs[refName];
 
           if (Array.isArray(excludedElement)) {

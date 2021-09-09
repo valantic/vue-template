@@ -12,6 +12,14 @@ interface IProductData {
   measurementUnitName: string;
 }
 
+interface IProductImpression {
+  id: string;
+  name: string;
+  dimension1: string;
+  list: string | null;
+  position: number;
+}
+
 export interface IGtm {
   push: (payload: object) => void;
   pushProductImpressions: (products: IProductData[], eventPath: string, startIndex: number) => void;
@@ -22,10 +30,11 @@ export interface IGtm {
   debug: (enable: boolean) => void;
 }
 
-type MapProductCallbackFunction = (productData: IProductData, index: number) => any | never;
+type MapProductCallbackFunction = (productData: IProductData, index: number) => IProductImpression;
 
 declare global {
-  interface Window { dataLayer: any[]; }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  interface Window { dataLayer: Record<string, any>[]; }
 }
 
 /**
