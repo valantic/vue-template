@@ -88,5 +88,9 @@
       box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
       max-width: #{map-get($breakpoints, xl) - 20px};
     }
+
+    .c-notification-container {
+      position: absolute;
+    }
   }
 </style>

@@ -72,7 +72,7 @@
 
     &--state-error {
       background-image: url('../assets/icons/i-error--negative.svg');
-      background-color: $color-status--danger;
+      background-color: $color-status--error;
     }
 
     &--state-info {

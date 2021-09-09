@@ -262,17 +262,17 @@
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       .e-textarea__icon-splitter {
-        border-color: $color-status--danger;
+        border-color: $color-status--error;
       }
     }
 
     &--state-error &__field:hover,
     &--state-error &__field {
-      border-color: $color-status--danger;
+      border-color: $color-status--error;
     }
 
     &--state-error &__field:focus {
-      border-color: $color-status--danger;
+      border-color: $color-status--error;
     }
 
     &--state-info {

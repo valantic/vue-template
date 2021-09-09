@@ -499,19 +499,19 @@
     }
 
     &--state-error:not(.e-input--border-0) &__field {
-      border-color: $color-status--danger;
+      border-color: $color-status--error;
     }
 
     &--state-error .e-input__icon-splitter {
-      border-color: $color-status--danger;
+      border-color: $color-status--error;
     }
 
     &--state-error:not(.e-input--border-0) &__field:hover {
-      border: 1px solid $color-status--danger;
+      border: 1px solid $color-status--error;
     }
 
     &--state-error:not(.e-input--border-0) &__field:focus {
-      border: 1px solid $color-status--danger;
+      border: 1px solid $color-status--error;
     }
 
     &--state-info {

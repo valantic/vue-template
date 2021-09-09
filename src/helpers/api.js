@@ -34,18 +34,14 @@ if (process.env.NODE_ENV !== 'production') {
  * Pushes an array of messages to the notification handler.
  *
  * @param {Array} messages - An array of messages.
- * @param {Object} options - Display options for the notifications.
  */
-function showNotifications(messages, options) {
+function showNotifications(messages) {
   if (!Array.isArray(messages)) {
     return;
   }
 
   messages.forEach((message) => {
-    store.commit('notification/pushNotification', {
-      ...options,
-      message,
-    });
+    store.commit('notification/pushNotification', message);
   });
 }
 
@@ -53,15 +49,14 @@ function showNotifications(messages, options) {
  * Handles successful ajax requests.
  *
  * @param {Object} response - Response object.
- * @param {Object} options - Display options for notification.
  *
  * @returns {Object}
  */
-function handleSuccess(response, options) {
+function handleSuccess(response) {
   const { messages } = response?.data || {};
 
   if (messages) {
-    showNotifications(messages, options);
+    showNotifications(messages);
   }
 
   return response || {};
@@ -118,15 +113,14 @@ export default {
    *
    * @param {String} url - Url to get.
    * @param {Object} config - Url parameters which will be attached to the url.
-   * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  get(url, config, notificationOptions) {
+  get(url, config) {
     return axios
       .get(url, config)
-      .then(response => handleSuccess(response, notificationOptions))
-      .catch(error => handleError(error, notificationOptions));
+      .then(response => handleSuccess(response))
+      .catch(error => handleError(error));
   },
 
   /**
@@ -135,15 +129,14 @@ export default {
    * @param {String} url - Url to post to.
    * @param {Object} data - Post payload which will be attached to the request.
    * @param {Object} config - Axios request configuration.
-   * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  post(url, data, config, notificationOptions) { // eslint-disable-line max-params
+  post(url, data, config) { // eslint-disable-line max-params
     return axios
       .post(url, data, config)
-      .then(response => handleSuccess(response, notificationOptions))
-      .catch(error => handleError(error, notificationOptions));
+      .then(response => handleSuccess(response))
+      .catch(error => handleError(error));
   },
 
   /**
@@ -152,15 +145,14 @@ export default {
    * @param {String} url - Url to patch to.
    * @param {Object} data - Patch payload which will be attached to the request.
    * @param {Object} config - Axios request configuration.
-   * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  patch(url, data, config, notificationOptions) { // eslint-disable-line max-params
+  patch(url, data, config) { // eslint-disable-line max-params
     return axios
       .patch(url, data, config)
-      .then(response => handleSuccess(response, notificationOptions))
-      .catch(error => handleError(error, notificationOptions));
+      .then(response => handleSuccess(response))
+      .catch(error => handleError(error));
   },
 
   /**
@@ -168,14 +160,13 @@ export default {
    *
    * @param {String} url - Url to send the delete to.
    * @param {Object} config - Axios request configuration.
-   * @param {Object} notificationOptions - Display options for notification.
    *
    * @returns {Promise} Promise with response data or error.
    */
-  delete(url, config, notificationOptions) { // eslint-disable-line max-params
+  delete(url, config) { // eslint-disable-line max-params
     return axios
       .delete(url, config)
-      .then(response => handleSuccess(response, notificationOptions))
-      .catch(error => handleError(error, notificationOptions));
+      .then(response => handleSuccess(response))
+      .catch(error => handleError(error));
   },
 };

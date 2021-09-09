@@ -175,7 +175,7 @@
     }
 
     &--state-error {
-      color: $color-status--danger;
+      color: $color-status--error;
     }
   }
 </style>

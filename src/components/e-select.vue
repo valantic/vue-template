@@ -205,20 +205,20 @@
       #{$this}__select {
         @include form-state-icon('error');
 
-        border-color: $color-status--danger;
+        border-color: $color-status--error;
       }
 
       #{$this}__icon-splitter {
-        border-color: $color-status--danger;
+        border-color: $color-status--error;
       }
     }
 
     &--state-error &__select:hover {
-      border-color: $color-status--danger;
+      border-color: $color-status--error;
     }
 
     &--state-error &__select:focus {
-      border: 1px solid $color-status--danger;
+      border: 1px solid $color-status--error;
     }
 
     &--state-success {

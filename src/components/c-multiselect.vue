@@ -593,7 +593,7 @@
     }
 
     &--error &__title {
-      color: $color-status--danger;
+      color: $color-status--error;
     }
 
     // output
@@ -611,7 +611,7 @@
     }
 
     &--error &__output {
-      border-color: $color-status--danger;
+      border-color: $color-status--error;
     }
 
     // placeholder and value
@@ -654,7 +654,7 @@
       right: 30px;
       height: calc(100% - 4px);
       top: $spacing--2;
-      border-left: 1px solid $color-status--danger;
+      border-left: 1px solid $color-status--error;
     }
 
     &__items-wrapper {
@@ -715,7 +715,7 @@
       justify-content: space-between;
       align-items: center;
       padding: $spacing--5;
-      background-color: $color-status--danger;
+      background-color: $color-status--error;
     }
 
     &__error-msg {

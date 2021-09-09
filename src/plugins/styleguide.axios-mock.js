@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-e
 import { axios } from '@/plugins/axios';
 
 // Import mocks
-import notification from '@/styleguide/mock-data/api-response/notifications';
+import notifications from '@/styleguide/mock-data/api-response/notifications';
 
 /**
  * By default returns a 500 'no route defined' error.
@@ -42,18 +42,18 @@ export default {
    */
   install(/* Vue, options */) {
     const mock = new MockAdapter(axios, {
-      delayResponse: 2000,
+      delayResponse: 500,
     });
 
     // See https://github.com/ctimmerm/axios-mock-adapter
     mock
       // EXAMPLE => .onPost('api-url').reply(200, mockDataResponse)
-      .onPost('/notifications/global/success').reply(200, notification.success)
-      .onPost('/notifications/global/warning').reply(200, notification.warning)
-      .onPost('/notifications/global/error').reply(500, notification.error)
-      .onPost('/notifications/global/info').reply(200, notification.info)
-      .onPost('/notifications/field/error').reply(500, notification.fieldError)
-      .onPost('/notifications/selector/info1').reply(200, notification.selectorInfo1)
+      .onPost('/notifications/global/success').reply(200, notifications.success)
+      .onPost('/notifications/global/error').reply(500, notifications.error)
+      .onPost('/notifications/global/info').reply(200, notifications.info)
+      // .onPost('/notifications/global/warning').reply(200, notification.warning)
+      // .onPost('/notifications/field/error').reply(500, notification.fieldError)
+      // .onPost('/notifications/selector/info1').reply(200, notification.selectorInfo1)
 
       // Global
       .onAny(/\/?static|assets|passtrough/).passThrough()

@@ -59,8 +59,8 @@
     padding: $spacing--30;
 
     &__warning {
-      border: 1px solid $color-status--danger;
-      background: rgba($color-status--danger--rgb, 0.5);
+      border: 1px solid $color-status--error;
+      background: rgba($color-status--error--rgb, 0.5);
       text-align: center;
       padding: $spacing--10;
     }
