@@ -224,8 +224,6 @@
     }
 
     &__navigation {
-      @extend %list-reset;
-
       min-width: 200px;
       max-height: 100vh;
       overflow: auto;

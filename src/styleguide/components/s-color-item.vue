@@ -84,8 +84,6 @@
 <style lang="scss">
   .s-color-item {
     &__grid {
-      @extend %list-reset;
-
       display: flex;
       flex-wrap: wrap;
       margin: $spacing--0 (-$spacing--5);

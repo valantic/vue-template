@@ -71,8 +71,6 @@
 
 <style lang="scss">
   .s-navigation-block {
-    @extend %list-reset;
-
     min-width: 200px;
     overflow: auto;
 

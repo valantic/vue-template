@@ -61,10 +61,6 @@
 
     color: $color-grayscale--400;
 
-    &__list {
-      @extend %list-reset;
-    }
-
     &__item {
       display: inline-block;
 

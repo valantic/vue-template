@@ -251,19 +251,18 @@
     }
     ul {
       padding-left: 30px;
-      li > :first-child {
-        margin-top: 0;
+      list-style: disc;
+
+      li + li {
+        margin-top: $spacing--10;
       }
     }
     ol {
       padding-left: 30px;
-      li {
-        ul:first-of-type {
-          margin-top: 0;
-        }
-        > :first-child {
-          margin-top: 0;
-        }
+      list-style: decimal;
+
+      li + li {
+        margin-top: $spacing--10;
       }
     }
     hr {

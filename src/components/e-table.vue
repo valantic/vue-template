@@ -256,8 +256,6 @@
   }
 
   &__button-sort {
-    @extend %button-reset;
-
     display: inline-block;
     height: 0;
     width: 0;

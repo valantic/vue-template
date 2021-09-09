@@ -67,7 +67,11 @@
 
 <style lang="scss">
   .s-demo-settings {
-    @extend %list-reset;
+    margin-top: $spacing--10;
+
+    .s-toggle + .s-toggle {
+      margin-top: $spacing--5;
+    }
   }
 </style>
 

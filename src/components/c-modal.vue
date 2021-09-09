@@ -365,8 +365,6 @@
     }
 
     &__header-close {
-      @extend %button-reset;
-
       cursor: pointer;
       margin-right: $spacing--20;
 
