@@ -1,5 +1,10 @@
 {
   "dest": "src/assets/",
+  "shape": {
+    "spacing": {
+      "box": "icon"
+    }
+  },
   "mode": {
     "stack": {
       "sprite": "icons.svg",
