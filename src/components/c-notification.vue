@@ -437,7 +437,7 @@
 
     &--type-success &__icon,
     &--type-add-to-cart &__icon {
-      @include icon(check, $size: 15px);
+      @include icon(check, 15px);
 
       margin-left: -28px;
       margin-right: 13px;
@@ -459,7 +459,7 @@
     }
 
     &--type-warning &__icon {
-      @include icon(warning, $size: 15px);
+      @include icon(warning, 15px);
 
       margin-left: -29px;
       margin-right: 14px;
@@ -481,7 +481,7 @@
     }
 
     &--type-error &__icon {
-      @include icon(error, $size: 15px);
+      @include icon(error, 15px);
 
       margin-left: -29px;
       margin-right: 14px;
@@ -503,7 +503,7 @@
     }
 
     &--type-info &__icon {
-      @include icon(info, $size: 15px);
+      @include icon(info, 15px);
 
       margin-left: -29px;
       margin-right: 14px;

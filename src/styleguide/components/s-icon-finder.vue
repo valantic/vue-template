@@ -228,18 +228,6 @@
         width: 0;
         padding-top: 100%;
       }
-
-      .s-icon {
-        display: block;
-        width: 50%;
-        height: 50%;
-        margin: auto;
-      }
-
-      .s-icon__icon {
-        width: 100%;
-        height: 100%;
-      }
     }
 
     &__grid-item--negative {
@@ -258,6 +246,7 @@
     div#{&}__icon {
       width: 80px;
       height: 80px;
+      background: no-repeat center center;
 
       &--variant-mask {
         background: currentColor;
