@@ -250,7 +250,7 @@
 
       &--variant-mask {
         background: currentColor;
-        mask: no-repeat center center / cover;
+        mask: no-repeat center center / 80px 80px;
       }
     }
 
