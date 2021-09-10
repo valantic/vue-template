@@ -9,6 +9,8 @@
   import { defineComponent } from 'vue';
   import scrollbarWidth from '@/helpers/scrollbar-width';
 
+  type ResizeObserverCallback = () => void;
+
   interface IData {
     scrollbarWidth: number;
     resizeObserver: ResizeObserver;
@@ -36,8 +38,7 @@
          * will also be triggered, if the height of the page changes, and the scrollbar becomes visible.
          * The resize event was only triggered, when the user manually changes the screen size.
          */
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth),
+        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth as ResizeObserverCallback),
 
         /**
          * Holds the ID of the currently running resize timeout.
