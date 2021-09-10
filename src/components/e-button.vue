@@ -127,6 +127,14 @@
         type: Boolean,
         default: false,
       },
+
+      /**
+       * Overwrites the element of the button component.
+       */
+      element: {
+        type: String,
+        default: null,
+      },
     },
 
     data() {
@@ -145,11 +153,6 @@
          * @type {Boolean} Internal flag to determine focus state.
          */
         hasFocus: this.focus,
-
-        /**
-         * Sets the element type for the component.
-         */
-        type: this.$attrs.href ? 'a' : 'button',
 
         /**
          * Determines if the current device uses touch.
@@ -201,7 +204,16 @@
         return this.progress && this.width !== 'full'
           ? this.getElementDimensions()
           : null;
-      }
+      },
+
+      /**
+       * Gets the type of the component (DOM element).
+       *
+       * @returns {String}
+       */
+      type() {
+        return this.element || (this.$attrs.href ? 'a' : 'button');
+      },
     },
     // watch: {},
 

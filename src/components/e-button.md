@@ -135,3 +135,9 @@ Creates a button like link.
 ```vue
 <e-button @click="onStyleguideClick">A button<br />with wrapping<br />text</e-button>
 ```
+
+#### Custom element
+
+```vue
+<e-button element="span" @click="onStyleguideClick">Custom element button</e-button>
+```
