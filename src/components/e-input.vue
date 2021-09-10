@@ -87,7 +87,7 @@
        */
       value: {
         default: null,
-        type: [String, Number],
+        type: String,
       },
 
       /**
