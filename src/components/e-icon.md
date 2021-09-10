@@ -103,14 +103,14 @@ When you use the CSS mask, to place a colored SVG sprite image, the whole elemen
 
 #### Sprite format
 
-There are different formats, to which a sprite may be created. Unfortunately all of them have some up- and downsides. Some of this formats can also be combined (e.g. `view` and `symbol`).
+There are different formats, to which a sprite may be created. Unfortunately all of them have some up- and downsides. Some of these formats can also be combined (e.g. `view` and `symbol`).
 
-Format | CSS support | Use support | Stack visible | Notes
---- | --- | --- | --- | ---
-Symbol | (X) | X | - | Only works with CSS if also `view` elements are added.
-SVG | (X) | X | X | Using `viewBox` on the root element will result in invalid sizes when used in CSS.
-view | X | - | X |
-def | - | X | - | 
+Format | CSS support | Use support | Stack visible | Individual size (as src) | Notes
+--- | --- | --- | --- | --- | ---
+symbol | (X) | X | - | ? | Only works with CSS if also `view` elements are added.
+stack | (X) | X | X | - | Using `viewBox` on the root element will result in invalid sizes when used in CSS. The width and height of the stack is determined by the biggest icon.
+view | X | - | X | X |
+def | - | X | - | ? | 
 
 ##### Symbol
 
@@ -127,7 +127,7 @@ Every svg icon becomes a `symbol` in the sprite file. The single slices are visi
 </svg>
 ```
 
-##### SVG stack
+##### stack (of SVG)
 
 Creates a sprite containing `svg` definitions.
 
