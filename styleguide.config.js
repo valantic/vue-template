@@ -79,16 +79,16 @@ module.exports = {
         },
       ],
     },
-    // {
-    //   name: 'Plugins',
-    //   content: '',
-    //   sections: [
-    //     {
-    //       name: 'Vuetify',
-    //       content: 'src/styleguide/pages/plugins/....md',
-    //     },
-    //   ],
-    // },
+    {
+      name: 'Plugins',
+      content: '',
+      sections: [
+        {
+          name: 'Confirmation',
+          content: 'src/styleguide/pages/plugins/confirmation.md',
+        },
+      ]
+    },
     {
       name: 'Elements',
       components: 'src/components/**/e-*.vue',

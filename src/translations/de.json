@@ -18,6 +18,10 @@
   "c-breadcrumb": {
     "linkTitle": "Gehe zu {name}"
   },
+  "c-confirmation-modal": {
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen"
+  },
   "c-notification": {
     "confirm": "OK",
     "decline": "Abbrechen",
