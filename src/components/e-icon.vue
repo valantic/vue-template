@@ -232,6 +232,8 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/variables';
+
   .e-icon {
     display: inline-block;
 
@@ -241,15 +243,15 @@
     }
 
     &--color-gray svg path {
-      fill: $color-grayscale--400;
+      fill: variables.$color-grayscale--400;
     }
 
     &--color-lightgray svg path {
-      fill: $color-grayscale--600;
+      fill: variables.$color-grayscale--600;
     }
 
     &--color-white svg path {
-      fill: $color-grayscale--1000;
+      fill: variables.$color-grayscale--1000;
     }
   }
 </style>

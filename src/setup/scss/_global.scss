@@ -1,11 +1,20 @@
+@use './variables';
+@use './mixins';
+@use './extends';
+// TODO replace @extend by mixin
+// stylelint-disable-next-line no-invalid-position-at-import-rule
+@import '../../setup/scss/extends/headings';
+
 html,
 body {
   height: 100%;
-  font-family: $font-family--primary;
+  font-family: variables.$font-family--primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $color-grayscale--1000;
+  background-color: variables.$color-grayscale--1000;
 }
+
+// TODO check if we can stop using @extend
 
 h1 { // TODO: update definition for project.
   @extend %heading-h1;
@@ -32,7 +41,7 @@ h6 { // TODO: update definition for project.
 }
 
 p { // TODO: update definition for project.
-  @include font($font-size--14);
+  @include mixins.font(variables.$font-size--14);
 }
 
 /* stylelint-disable selector-class-pattern, selector-max-id */

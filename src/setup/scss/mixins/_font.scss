@@ -1,3 +1,7 @@
+@use './font-size';
+@use './line-height';
+@use '../config';
+
 ////
 // Calculate font-size, line-height and font-weight by given px values
 //
@@ -7,11 +11,11 @@
 //
 // returns  {font-size|line-height|font-weight}   Returns font-size and optional line-height and font-weight
 ////
-@mixin font($font-size: $_config--font-size, $line-height: null, $font-weight: null) {
-  @include font-size($font-size);
+@mixin font($font-size: config.$config--font-size, $line-height: null, $font-weight: null) {
+  @include font-size.font-size($font-size);
 
   @if $line-height != null {
-    @include line-height($line-height, $font-size);
+    @include line-height.line-height($line-height, $font-size);
   }
 
   @if $font-weight != null {

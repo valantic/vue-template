@@ -56,33 +56,36 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-form-notification {
-    @include font($font-size--14, 18px);
+    @include mixins.font(variables.$font-size--14, 18px);
 
     display: block;
-    padding: $spacing--10 35px $spacing--10 $spacing--5;
+    padding: variables.$spacing--10 35px variables.$spacing--10 variables.$spacing--5;
     background-size: 20px;
     background-position-x: calc(100% - 5px);
-    background-position-y: calc(#{$font-size--18} / 2 - 2px);
+    background-position-y: calc(#{variables.$font-size--18} / 2 - 2px);
     background-repeat: no-repeat;
-    border-bottom-left-radius: $border-radius--500;
-    border-bottom-right-radius: $border-radius--500;
-    color: $color-grayscale--1000;
-    box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
+    border-bottom-left-radius: variables.$border-radius--500;
+    border-bottom-right-radius: variables.$border-radius--500;
+    color: variables.$color-grayscale--1000;
+    box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
 
     &--state-error {
       background-image: url('../assets/icons/i-error--negative.svg');
-      background-color: $color-status--danger;
+      background-color: variables.$color-status--danger;
     }
 
     &--state-info {
       background-image: url('../assets/icons/i-info--negative.svg');
-      background-color: $color-status--info;
+      background-color: variables.$color-status--info;
     }
 
     &--state-success {
       background-image: url('../assets/icons/i-check--negative.svg');
-      background-color: $color-status--success;
+      background-color: variables.$color-status--success;
     }
   }
 </style>

@@ -104,8 +104,11 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/mixins';
+  @use '../../setup/scss/variables';
+
   .s-icon-finder {
-    font-family: $font-family--primary;
+    font-family: variables.$font-family--primary;
 
     &__filter-input {
       display: block;
@@ -147,7 +150,7 @@
     }
 
     &__grid-item--negative {
-      background-color: $color-grayscale--500;
+      background-color: variables.$color-grayscale--500;
     }
 
     &__icon-wrapper {
@@ -159,7 +162,7 @@
     }
 
     &__icon-label {
-      @include font(10);
+      @include mixins.font(10);
 
       text-align: center;
     }
@@ -173,11 +176,11 @@
       position: fixed;
       top: 0;
       left: 0;
-      background-color: $color-status--success;
+      background-color: variables.$color-status--success;
       width: 100%;
       text-align: center;
       z-index: 999;
-      padding: $spacing--10;
+      padding: variables.$spacing--10;
     }
   }
 </style>

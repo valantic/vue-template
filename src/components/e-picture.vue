@@ -279,6 +279,7 @@
 
 <style lang="scss">
   @use 'sass:math';
+  @use '../setup/scss/variables';
 
   .e-picture { // Can be <picture> or <img>!
     display: block;
@@ -293,7 +294,7 @@
 
       &[loading='lazy'] {
         opacity: 0;
-        transition: opacity $transition-duration-200;
+        transition: opacity variables.$transition-duration-200;
       }
     }
 
@@ -330,7 +331,7 @@
     }
 
     &--placeholder {
-      background-color: $color-grayscale--500;
+      background-color: variables.$color-grayscale--500;
     }
   }
 </style>

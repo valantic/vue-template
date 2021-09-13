@@ -56,8 +56,11 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/variables/font';
+  @use '../setup/scss/mixins/font';
+
   .c-breadcrumb {
-    @include font($font-size--12, 20px);
+    @include font(font.$font-size--12, 20px);
 
     color: $color-grayscale--400;
 

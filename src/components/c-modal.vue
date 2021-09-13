@@ -295,14 +295,20 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+  // TODO replace @extend by mixin
+  // stylelint-disable-next-line no-invalid-position-at-import-rule
+  @import '../setup/scss/extends/button-reset';
+
   /* stylelint-disable selector-class-pattern */
   .c-modal {
-    background-color: $color-grayscale--1000;
+    background-color: variables.$color-grayscale--1000;
     text-align: left;
-    box-shadow: 0 0 15px 0 $color-grayscale--500;
+    box-shadow: 0 0 15px 0 variables.$color-grayscale--500;
     padding: 0;
 
-    @include media($down: xs) {
+    @include mixins.media($down: xs) {
       /* stylelint-disable declaration-no-important */
       // Important rules are needed to overwrite the inline styles of the plugin
       width: 100% !important;
@@ -319,20 +325,20 @@
       }
 
       &--spacing-500 {
-        padding: $spacing--20;
+        padding: variables.$spacing--20;
 
-        @include media(sm) {
-          padding: $spacing--20 $spacing--50;
+        @include mixins.media(sm) {
+          padding: variables.$spacing--20 variables.$spacing--50;
         }
       }
     }
 
     &__header {
       position: relative;
-      border-top: 2px solid $color-primary--1;
-      border-bottom: 2px solid $color-grayscale--600;
+      border-top: 2px solid variables.$color-primary--1;
+      border-bottom: 2px solid variables.$color-grayscale--600;
 
-      @include media(sm) {
+      @include mixins.media(sm) {
         border-top: 0;
         border-bottom: 0;
       }
@@ -344,12 +350,12 @@
       width: 100%;
       padding: 0;
 
-      @include media(sm) {
+      @include mixins.media(sm) {
         margin-bottom: 0;
       }
 
       &--mobile {
-        padding: 0 $spacing--20;
+        padding: 0 variables.$spacing--20;
       }
     }
 
@@ -358,9 +364,9 @@
     }
 
     &__title {
-      @include media($down: sm) {
+      @include mixins.media($down: sm) {
         margin-bottom: 0;
-        font-weight: $font-weight--bold;
+        font-weight: variables.$font-weight--bold;
       }
     }
 
@@ -368,14 +374,14 @@
       @extend %button-reset;
 
       cursor: pointer;
-      margin-right: $spacing--20;
+      margin-right: variables.$spacing--20;
 
-      @include media($down: xs) {
+      @include mixins.media($down: xs) {
         display: none;
       }
 
       path {
-        fill: $color-primary--1;
+        fill: variables.$color-primary--1;
       }
 
       &--mobile {
@@ -385,7 +391,7 @@
         bottom: 0;
         left: 0;
 
-        @include media(sm) {
+        @include mixins.media(sm) {
           display: none;
         }
       }
@@ -394,7 +400,7 @@
 
   .v--modal-overlay {
     // stylelint-disable-next-line declaration-no-important
-    background: rgba($color-grayscale--700, 0.9) !important;
+    background: rgba(variables.$color-grayscale--700, 0.9) !important;
 
     .v--modal-background-click {
       width: 100%;
@@ -404,9 +410,9 @@
       min-height: 100% !important;
       // stylelint-enable declaration-no-important
 
-      @include media(sm) {
+      @include mixins.media(sm) {
         // stylelint-disable-next-line declaration-no-important
-        padding: $spacing--100 0 !important;
+        padding: variables.$spacing--100 0 !important;
       }
     }
   }
@@ -414,19 +420,19 @@
   .v--modal-overlay.scrollable .v--modal-box {
     // stylelint-disable-next-line declaration-no-important
     margin-bottom: 0 !important;
-    padding-bottom: $spacing--100;
+    padding-bottom: variables.$spacing--100;
 
-    @include media(sm) {
+    @include mixins.media(sm) {
       padding-bottom: 0;
     }
   }
 
   .slide-enter-active {
-    transition: all $transition-duration-300 ease;
+    transition: all variables.$transition-duration-300 ease;
   }
 
   .slide-leave-active {
-    transition: all $transition-duration-300 ease;
+    transition: all variables.$transition-duration-300 ease;
   }
 
   .slide-enter,

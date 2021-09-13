@@ -105,12 +105,14 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .forms {
-    padding: $spacing--50;
+    padding: variables.$spacing--50;
     max-width: 400px;
 
     &__part {
-      margin-bottom: $spacing--15;
+      margin-bottom: variables.$spacing--15;
     }
   }
 </style>

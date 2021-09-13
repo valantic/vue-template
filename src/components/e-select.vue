@@ -143,6 +143,9 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   $e-select-height: 30px;
 
   .e-select {
@@ -152,12 +155,12 @@
 
     &__select {
       background: url('../assets/icons/i-arrow--down--info.svg') no-repeat right 5px center;
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--500;
       border-radius: 3px;
       width: 100%;
       appearance: none;
       outline: none;
-      padding: $spacing--0 $spacing--30 $spacing--0 $spacing--10;
+      padding: variables.$spacing--0 variables.$spacing--30 variables.$spacing--0 variables.$spacing--10;
       height: $e-select-height;
 
       &::-ms-expand {
@@ -177,23 +180,23 @@
     // hover
     &__select:hover,
     &--hover &__select {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--500;
     }
 
     // focus
     &__select:focus,
     &--focus &__select {
       outline: none;
-      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
-      border: 1px solid $color-grayscale--500;
+      box-shadow: 0 2px 5px 0 rgba(variables.$color-grayscale--400, 0.5);
+      border: 1px solid variables.$color-grayscale--500;
     }
 
     // disabled
     &__select:disabled,
     &--disabled &__select,
     &--disabled &__select:hover {
-      border-color: $color-grayscale--600;
-      color: $color-grayscale--600;
+      border-color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--600;
       background-image: url('../assets/icons/i-arrow--down--disabled.svg');
     }
 
@@ -203,27 +206,27 @@
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       #{$this}__select {
-        @include form-state-icon('error');
+        @include mixins.form-state-icon('error');
 
-        border-color: $color-status--danger;
+        border-color: variables.$color-status--danger;
       }
 
       #{$this}__icon-splitter {
-        border-color: $color-status--danger;
+        border-color: variables.$color-status--danger;
       }
     }
 
     &--state-error &__select:hover {
-      border-color: $color-status--danger;
+      border-color: variables.$color-status--danger;
     }
 
     &--state-error &__select:focus {
-      border: 1px solid $color-status--danger;
+      border: 1px solid variables.$color-status--danger;
     }
 
     &--state-success {
       #{$this}__select {
-        @include form-state-icon('success');
+        @include mixins.form-state-icon('success');
       }
 
       #{$this}__icon-splitter {
