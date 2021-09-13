@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <input v-if="uncontrolled"
            ref="input"
            :autocomplete="autocomplete"
@@ -47,7 +47,7 @@
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
     </div>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -341,6 +341,7 @@
     $this: &;
 
     position: relative;
+    display: block;
 
     &--border-0 &__field {
       border: 1px solid transparent;
