@@ -56,13 +56,16 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables/font';
-  @use '../setup/scss/mixins/font';
+  @use '../setup/scss/variables';
+  @use '../setup/scss/mixins';
+  // TODO replace @extend my mixin
+  // stylelint-disable-next-line no-invalid-position-at-import-rule
+  @import '../setup/scss/extends/list-reset';
 
   .c-breadcrumb {
-    @include font(font.$font-size--12, 20px);
+    @include mixins.font(variables.$font-size--12, 20px);
 
-    color: $color-grayscale--400;
+    color: variables.$color-grayscale--400;
 
     &__list {
       @extend %list-reset;
@@ -73,12 +76,12 @@
 
       &::after {
         content: '|';
-        padding: 0 $spacing--5;
+        padding: 0 variables.$spacing--5;
       }
     }
 
     &__item:last-child {
-      color: $color-grayscale--200;
+      color: variables.$color-grayscale--200;
 
       &::after {
         content: '';
@@ -93,7 +96,7 @@
     }
 
     &__link:hover {
-      color: $color-secondary--1;
+      color: variables.$color-secondary--1;
     }
   }
 </style>
