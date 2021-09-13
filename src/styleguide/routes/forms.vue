@@ -1,105 +1,130 @@
 <template>
   <div :class="b()">
-    <h1>
-      Newsletter Registration
-    </h1>
-    <form action="#form-url" method="POST">
-      <!-- Section 1 -->
-      <e-fieldset legend="Contact information">
-        <e-label name="Name">
-          <e-input v-model="form.name"
-                   name="name"
-                   placeholder="Your Name"
-          />
-        </e-label>
-        <e-label name="E-Mail" required>
-          <e-input v-model="form.email"
-                   type="email"
-                   name="email"
-                   placeholder="Your E-Mail"
-          />
-        </e-label>
-        <e-label name="Language" required>
-          <e-select v-model="form.language"
-                    :options="mock.languages"
-                    name="language"
-          />
-        </e-label>
-        <e-label name="Notes">
-          <e-textarea v-model="form.notes"
-                      name="notes"
-                      placeholder="Your Notes"
-          />
-        </e-label>
-      </e-fieldset>
+    <!-- Rendered form -->
+    <section :class="b('form')">
+      <h1>
+        Newsletter Registration
+      </h1>
+      <form ref="form"
+            action="#form-url"
+            method="POST"
+            @submit.prevent="onSubmit"
+      >
+        <!-- Section 1 -->
+        <e-fieldset legend="Contact information">
+          <e-label name="Name">
+            <e-input v-model="form.name"
+                     name="name"
+                     placeholder="Your Name"
+            />
+          </e-label>
+          <e-label name="E-Mail" required>
+            <e-input v-model="form.email"
+                     :state="$v.form.email.$error ? 'error' : 'default'"
+                     :notification="$v.form.email.$error ? 'No valid email address' : ''"
+                     type="email"
+                     name="email"
+                     placeholder="Your E-Mail"
+                     @blur="$v.form.email.$touch()"
+            />
+          </e-label>
+          <e-label name="Language" required>
+            <e-select v-model="form.language"
+                      :options="mock.languages"
+                      :state="$v.form.language.$error ? 'error' : 'default'"
+                      :notification="$v.form.language.$error ? 'Required field' : ''"
+                      name="language"
+                      @blur="$v.form.language.$touch()"
+            />
+          </e-label>
+          <e-label name="Notes">
+            <e-textarea v-model="form.notes"
+                        name="notes"
+                        placeholder="Your Notes"
+            />
+          </e-label>
+        </e-fieldset>
 
-      <!-- Section 2 -->
-      <e-fieldset legend="Personal interests">
-        <e-label name="Topics" tag="div" required>
-          <e-checkbox v-model="form.topics"
-                      value="food"
-                      name="topics">
-            Food
-          </e-checkbox>
-          <e-checkbox v-model="form.topics"
-                      value="technics"
-                      name="topics">
-            Technics
-          </e-checkbox>
-          <e-checkbox v-model="form.topics"
-                      value="celebrities"
-                      name="topics">
-            Celebrities
-          </e-checkbox>
-          <e-checkbox v-model="form.topics"
-                      value="garden"
-                      name="topics">
-            Garden
-          </e-checkbox>
-          <e-checkbox v-model="form.topics"
-                      value="architecture"
-                      name="topics">
-            Architecture
-          </e-checkbox>
-        </e-label>
+        <!-- Section 2 -->
+        <e-fieldset legend="Personal interests">
+          <e-label name="Topics" tag="div">
+            <e-checkbox v-model="form.topics"
+                        value="food"
+                        name="topics">
+              Food
+            </e-checkbox>
+            <e-checkbox v-model="form.topics"
+                        value="technics"
+                        name="topics">
+              Technics
+            </e-checkbox>
+            <e-checkbox v-model="form.topics"
+                        value="celebrities"
+                        name="topics">
+              Celebrities
+            </e-checkbox>
+            <e-checkbox v-model="form.topics"
+                        value="garden"
+                        name="topics">
+              Garden
+            </e-checkbox>
+            <e-checkbox v-model="form.topics"
+                        value="architecture"
+                        name="topics">
+              Architecture
+            </e-checkbox>
+          </e-label>
 
-        <e-label name="Frequency of Mailing" tag="div" required>
-          <e-radio v-model="form.frequency"
-                   value="onceAWeek"
-                   name="frequency">
-            Once a week
-          </e-radio>
-          <e-radio v-model="form.frequency"
-                   value="twiceAWeek"
-                   name="frequency">
-            Twice a week
-          </e-radio>
-          <e-radio v-model="form.frequency"
-                   value="onceAMonth"
-                   name="frequency">
-            Once a month
-          </e-radio>
-          <e-radio v-model="form.frequency"
-                   value="twiceAMonth"
-                   name="frequency">
-            Twice a month
-          </e-radio>
-        </e-label>
-      </e-fieldset>
+          <e-label name="Frequency of Mailing" tag="div">
+            <e-radio v-model="form.frequency"
+                     value="onceAWeek"
+                     name="frequency">
+              Once a week
+            </e-radio>
+            <e-radio v-model="form.frequency"
+                     value="twiceAWeek"
+                     name="frequency">
+              Twice a week
+            </e-radio>
+            <e-radio v-model="form.frequency"
+                     value="onceAMonth"
+                     name="frequency">
+              Once a month
+            </e-radio>
+            <e-radio v-model="form.frequency"
+                     value="twiceAMonth"
+                     name="frequency">
+              Twice a month
+            </e-radio>
+          </e-label>
+        </e-fieldset>
 
-      <e-button type="submit">
-        Submit
-      </e-button>
-    </form>
-    <hr style="margin-top: 50px;">
-    <h3>Data:</h3>
-    <small>
-      <pre>{{ form }}</pre>
-    </small>
+        <e-button type="submit" primary>
+          Submit
+        </e-button>
+      </form>
+    </section>
+
+    <!-- Data object -->
+    <section :class="b('data')">
+      <h1>Data:</h1>
+      <small>
+        <pre>{{ form }}</pre>
+      </small>
+    </section>
+
+    <!-- Vuelidate object -->
+    <section :class="b('validation')">
+      <h1>Validation:</h1>
+      <small>
+        <pre>{{ $v.form }}</pre>
+      </small>
+    </section>
   </div>
 </template>
 <script>
   import eFieldset from '@/components/e-fieldset';
+  import { required, email } from 'vuelidate/lib/validators';
 
   export default {
     name: 'forms',
@@ -135,13 +160,54 @@
         }
       };
     },
+
+    /**
+     * Vueldate validation config.
+     */
+    validations: {
+      form: {
+        email: {
+          required,
+          email,
+        },
+        language: {
+          required,
+        },
+      }
+    },
+
+    methods: {
+      /**
+       * Submit form event handler.
+       */
+      onSubmit() {
+        this.$v.$touch();
+
+        if (this.$v.$pending || this.$v.$error) {
+          return;
+        }
+
+        const { form } = this.$refs;
+
+        if (form) {
+          form.submit();
+        }
+      },
+    }
   };
 </script>
 
 <style lang="scss">
   .forms {
-    padding: $spacing--50;
-    max-width: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    &__form,
+    &__data,
+    &__validation {
+      padding: $spacing--50;
+      border: 1px dotted $color-grayscale--500;
+    }
 
     .e-fieldset {
       margin-bottom: $spacing--50;

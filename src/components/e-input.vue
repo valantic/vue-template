@@ -43,10 +43,10 @@
               :icon="stateIcon"
               inline />
     </span>
-    <div v-if="showNotification" :class="b('notification')">
+    <span v-if="showNotification" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
-    </div>
+    </span>
   </span>
 </template>
 
@@ -424,6 +424,7 @@
     &__notification {
       @include z-index(form-notification);
 
+      display: block;
       position: absolute;
       width: 100%;
       top: calc(#{$e-input-height} - 1px);
