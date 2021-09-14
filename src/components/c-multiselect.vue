@@ -544,9 +544,6 @@
 <style lang="scss">
   @use '../setup/scss/mixins';
   @use '../setup/scss/variables';
-  // TODO replace @extend by mixin
-  // stylelint-disable-next-line no-invalid-position-at-import-rule
-  @import '../setup/scss/extends/hyphens';
 
   .c-multiselect {
     position: relative;
@@ -582,7 +579,7 @@
     }
 
     &__title {
-      @extend %hyphens;
+      @include mixins.hyphens();
       @include mixins.font(variables.$font-size--16, variables.$spacing--20);
 
       color: variables.$color-grayscale--400;
@@ -664,7 +661,7 @@
     }
 
     &__items-wrapper {
-      @extend %hyphens;
+      @include mixins.hyphens();
 
       display: none;
       padding: variables.$spacing--5 0;

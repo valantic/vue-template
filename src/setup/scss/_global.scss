@@ -1,9 +1,6 @@
 @use './variables';
 @use './mixins';
 @use './extends';
-// TODO replace @extend by mixin
-// stylelint-disable-next-line no-invalid-position-at-import-rule
-@import '../../setup/scss/extends/headings';
 
 html,
 body {
@@ -17,27 +14,27 @@ body {
 // TODO check if we can stop using @extend
 
 h1 { // TODO: update definition for project.
-  @extend %heading-h1;
+  @include mixins.heading-h1();
 }
 
 h2 { // TODO: update definition for project.
-  @extend %heading-h2;
+  @include mixins.heading-h2();
 }
 
 h3 { // TODO: update definition for project.
-  @extend %heading-h3;
+  @include mixins.heading-h3();
 }
 
 h4 { // TODO: update definition for project.
-  @extend %heading-h4;
+  @include mixins.heading-h4();
 }
 
 h5 { // TODO: update definition for project.
-  @extend %heading-h5;
+  @include mixins.heading-h5();
 }
 
 h6 { // TODO: update definition for project.
-  @extend %heading-h6;
+  @include mixins.heading-h6();
 }
 
 p { // TODO: update definition for project.
