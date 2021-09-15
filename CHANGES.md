@@ -24,6 +24,10 @@
    - stylus: was removed because not required anymore 
    - vue-js-modal because version 2.0 is not ready
    - uglifyjs-webpack-plugin: was replaced with terser-webpack-plugin because deprecated
+ - (Change) Issue 159: Replace SCSS slash division
+   - Updates the sass plugin to version 1.39.2 which makes it possible to use the @use "math:div" function.
+   - Replaces the SCSS divisions by "slash" with the math.div() Sass function
+   - Activates the `hoistUseStatements` option in the sass-loader plugin
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.

@@ -534,6 +534,8 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
+
   .c-multiselect {
     position: relative;
 
@@ -626,7 +628,7 @@
     }
 
     &__icon-wrapper {
-      height: percentage(4 / 5); // for positioning the icon
+      height: percentage(math.div(4, 5)); // for positioning the icon
       padding: 0 $spacing--5 0;
       align-self: flex-end;
       width: $spacing--30;
