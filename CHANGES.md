@@ -1,7 +1,4 @@
 ### Next
- - (Breaking) Updates to Vue 3
- - (Breaking) Changes from JavaScript to Typescript
- - (Breaking) Removes Components Collapse, Modal, removes EventBus
  - (Feature) Adds styleguide build information to the index page.
  - (Feature) Adds support for local webpack dist (Pimcore).
  - (Feature) Adds auto-reload for scss file changes.
@@ -31,6 +28,17 @@
    - Updates the sass plugin to version 1.39.2 which makes it possible to use the @use "math:div" function.
    - Replaces the SCSS divisions by "slash" with the math.div() Sass function
    - Activates the `hoistUseStatements` option in the sass-loader plugin
+ - (Breaking) Issue 159: Updates to Vue 3 and Typescript
+   - Changes all JS files and Vue SFC files to be written in Typescript
+   - Adjusts Store Modules Syntax to be benefit from typings
+   - Adjusts custom V-Model Syntax as it is not supported in Vue 3 anymore
+   - Replace Mixins by Compositions to benefit from typings
+   - Updates Directive Hooks to work with Vue 3
+   - Removes IE11 Polyfills as Vue 3 does not support IE11 anymore
+   - Removes Spryker related code
+   - Removes Components Collapse, CollapseGroup, Modal, ModalStack
+   - Removes EventBus as it is not supported anymore in Vue 3
+   - Removes Pimcore Directives
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
