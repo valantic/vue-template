@@ -23,6 +23,7 @@
    - stylus: was removed because not required anymore 
    - vue-js-modal because version 2.0 is not ready
    - uglifyjs-webpack-plugin: was replaced with terser-webpack-plugin because deprecated
+ - (Change) Issue 163: Replaces Reboot Styles with Reset npm package, removes some default spacing styles
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
