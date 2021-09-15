@@ -23,7 +23,7 @@
    - stylus: was removed because not required anymore 
    - vue-js-modal because version 2.0 is not ready
    - uglifyjs-webpack-plugin: was replaced with terser-webpack-plugin because deprecated
- - (Breaking) Issue 159: Updates to Vue 3 and Typescript
+ - (Breaking) Issue 157: Updates to Vue 3 and Typescript
    - Changes all JS files and Vue SFC files to be written in Typescript
    - Adjusts Store Modules Syntax to be benefit from typings
    - Adjusts custom V-Model Syntax as it is not supported in Vue 3 anymore
