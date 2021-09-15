@@ -1,14 +1,14 @@
 <template>
-  <div :class="b(componentModifiers)">
-    <div :class="b('inner')">
-      <div :class="b('bubble')"></div>
-      <div :class="b('bubble')"></div>
-      <div :class="b('bubble')"></div>
-    </div>
+  <span :class="b(componentModifiers)">
+    <span :class="b('inner')">
+      <span :class="b('bubble')"></span>
+      <span :class="b('bubble')"></span>
+      <span :class="b('bubble')"></span>
+    </span>
     <span class="invisible">
       {{ loadingMessage }}
     </span>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -123,6 +123,7 @@
     }
 
     &__inner {
+      display: block;
       position: relative;
       width: calc(1em * 4);
       height: 1em;
@@ -130,6 +131,7 @@
     }
 
     &__bubble {
+      display: block;
       height: 0.6em;
       width: 0.6em;
       left: 50%;

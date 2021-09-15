@@ -2,7 +2,8 @@
   <span :class="b()">
     <!-- Field -->
     <button ref="fieldWrapper"
-            :class="b('field-wrapper', { open: isOpen })"
+            :class="b('field-wrapper', { open: isOpen, disabled: isDisabled })"
+            :disabled="isDisabled"
             type="button"
             @click="isOpen = !isOpen"
     >
@@ -14,6 +15,9 @@
               height="15"
               inline
       />
+      <span :class="b('progress-wrapper')">
+        <e-progress v-if="progress" />
+      </span>
     </button>
 
     <!-- Content -->
@@ -105,7 +109,6 @@
       /**
        * Defines if the component should be in disabled mode.
        */
-      // eslint-disable-next-line vue/no-unused-properties
       disabled: {
         type: Boolean,
         default: false,
@@ -114,7 +117,6 @@
       /**
        * Shows a progress loader in the component.
        */
-      // eslint-disable-next-line vue/no-unused-properties
       progress: {
         type: Boolean,
         default: false,
@@ -184,6 +186,15 @@
 
         return '';
       },
+
+      /**
+       * Shows if the disabled state of the component should be active.
+       *
+       * @returns {Boolean}
+       */
+      isDisabled() {
+        return this.disabled || this.progress;
+      },
     },
     // watch: {},
 
@@ -203,6 +214,10 @@
        * Close options event handler.
        */
       close() {
+        if (this.disabled) {
+          return;
+        }
+
         this.isOpen = false;
 
         /**
@@ -248,6 +263,11 @@
       }
     }
 
+    &__field-wrapper--disabled {
+      pointer-events: none;
+      color: $color-grayscale--500;
+    }
+
     &__output-value {
       flex-grow: 1;
       flex-shrink: 0;
@@ -279,6 +299,17 @@
 
     &__options-item {
       padding: $spacing--2 $spacing--5;
+    }
+
+    &__progress-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
     // Transition
