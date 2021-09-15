@@ -16,7 +16,7 @@
 <template>
   <div class="demo">
     <div style="max-width: 400px;">
-      <c-swiper-gallery :images="mockData.dummyImages" :videos="mockData.dummyVideos" />
+      <c-swiper-gallery :images="mockData.dummyImages.slice(0, 1)" :videos="mockData.dummyVideos" />
     </div>
   </div>
 </template>

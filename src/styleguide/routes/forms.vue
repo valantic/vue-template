@@ -1,88 +1,131 @@
 <template>
   <div :class="b()">
-    <h1>
-      Example form
-    </h1>
-    <form action="#form-url" method="POST">
-      <!-- e-input -->
-      <div :class="b('part')">
-        <e-label name="Firstname" position="top">
-          <e-input v-model="demo.firstName" name="firstName" placeholder="Firstname..." />
-        </e-label>
-      </div>
+    <!-- Rendered form -->
+    <section :class="b('form')">
+      <h1>
+        Newsletter Registration
+      </h1>
+      <form ref="form"
+            action="#form-url"
+            method="POST"
+            @submit.prevent="onSubmit"
+      >
+        <!-- Section 1 -->
+        <e-fieldset legend="Contact information">
+          <e-label name="Name">
+            <e-input v-model="form.name"
+                     name="name"
+                     placeholder="Your Name"
+            />
+          </e-label>
+          <e-label name="E-Mail" required>
+            <e-input v-model="form.email"
+                     :state="$v.form.email.$error ? 'error' : 'default'"
+                     :notification="$v.form.email.$error ? 'No valid email address' : ''"
+                     type="email"
+                     name="email"
+                     placeholder="Your E-Mail"
+                     @blur="$v.form.email.$touch()"
+            />
+          </e-label>
+          <e-label name="Language" required>
+            <e-select v-model="form.language"
+                      :options="mock.languages"
+                      :state="$v.form.language.$error ? 'error' : 'default'"
+                      :notification="$v.form.language.$error ? 'Required field' : ''"
+                      name="language"
+                      @blur="$v.form.language.$touch()"
+            />
+          </e-label>
+          <e-label name="Notes">
+            <e-textarea v-model="form.notes"
+                        name="notes"
+                        placeholder="Your Notes"
+            />
+          </e-label>
+        </e-fieldset>
 
-      <!-- e-textarea -->
-      <div :class="b('part')">
-        <e-label name="Message" position="top">
-          <e-textarea v-model="demo.message" name="message" placeholder="Message..." />
-        </e-label>
-      </div>
+        <!-- Section 2 -->
+        <e-fieldset legend="Personal interests">
+          <e-label name="Topics" tag="div">
+            <e-checkbox v-model="form.topics"
+                        value="food"
+                        name="topics">
+              Food
+            </e-checkbox>
+            <e-checkbox v-model="form.topics"
+                        value="technics"
+                        name="topics">
+              Technics
+            </e-checkbox>
+            <e-checkbox v-model="form.topics"
+                        value="celebrities"
+                        name="topics">
+              Celebrities
+            </e-checkbox>
+            <e-checkbox v-model="form.topics"
+                        value="garden"
+                        name="topics">
+              Garden
+            </e-checkbox>
+            <e-checkbox v-model="form.topics"
+                        value="architecture"
+                        name="topics">
+              Architecture
+            </e-checkbox>
+          </e-label>
 
-      <!-- e-checkbox -->
-      <div :class="b('part')">
-        <e-label name="Meal" position="top">
-          <e-checkbox v-model="demo.meal" value="pizza" name="meal">
-            Pizza
-          </e-checkbox>
-          <e-checkbox v-model="demo.meal" value="spaghetti" name="meal">
-            Spaghetti
-          </e-checkbox>
-          <e-checkbox v-model="demo.meal" value="lasagne" name="meal">
-            Lasagne
-          </e-checkbox>
-        </e-label>
-      </div>
+          <e-label name="Frequency of Mailing" tag="div">
+            <e-radio v-model="form.frequency"
+                     value="onceAWeek"
+                     name="frequency">
+              Once a week
+            </e-radio>
+            <e-radio v-model="form.frequency"
+                     value="twiceAWeek"
+                     name="frequency">
+              Twice a week
+            </e-radio>
+            <e-radio v-model="form.frequency"
+                     value="onceAMonth"
+                     name="frequency">
+              Once a month
+            </e-radio>
+            <e-radio v-model="form.frequency"
+                     value="twiceAMonth"
+                     name="frequency">
+              Twice a month
+            </e-radio>
+          </e-label>
+        </e-fieldset>
 
-      <!-- e-radio -->
-      <div :class="b('part')">
-        <e-label name="Drink" position="top">
-          <e-radio v-model="demo.drink" value="cola" name="drink">
-            Cola
-          </e-radio>
-          <e-radio v-model="demo.drink" value="fanta" name="drink">
-            Fanta
-          </e-radio>
-          <e-radio v-model="demo.drink" value="sprite" name="drink">
-            Sprite
-          </e-radio>
-        </e-label>
-      </div>
-
-      <!-- e-select -->
-      <div :class="b('part')">
-        <e-label name="Language" position="top">
-          <e-select v-model="demo.language" :options="mock.selects" name="language" />
-        </e-label>
-      </div>
-
-      <div :class="b('part')">
-        <c-multiselect :active-value="demo.meal"
-                       :items="mock.mealValues"
-                       title="Multiselect"
-                       placeholder="Lorem ipsum"
-                       facet-name="foo"
-                       @update="onMultiselectUpdate"
-        />
-      </div>
-
-      <!-- e-button -->
-      <div :class="b('part')">
-        <e-button type="submit">
+        <e-button type="submit" primary>
           Submit
         </e-button>
-      </div>
-    </form>
-    <hr style="margin-top: 50px;">
-    <h3>Data:</h3>
-    <small>
-      <pre>{{ demo }}</pre>
-    </small>
+      </form>
+    </section>
+
+    <!-- Data object -->
+    <section :class="b('data')">
+      <h1>Data:</h1>
+      <small>
+        <pre>{{ form }}</pre>
+      </small>
+    </section>
+
+    <!-- Vuelidate object -->
+    <section :class="b('validation')">
+      <h1>Validation:</h1>
+      <small>
+        <pre>{{ $v.form }}</pre>
+      </small>
+    </section>
   </div>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import eLabel from '@/components/e-label.vue';
-  import cMultiselect from '@/components/c-multiselect.vue';
+  import eFieldset from '@/components/e-fieldset';
+  import { required, email } from 'vuelidate/lib/validators';
 
   interface ISelectItem {
     label: string;
@@ -111,20 +154,20 @@
   export default defineComponent({
     name: 'forms',
     components: {
-      cMultiselect,
-      eLabel
+      eFieldset
     },
     data(): IData {
       return {
-        demo: {
-          firstName: '',
-          message: '',
-          meal: [],
-          drink: '',
+        form: {
+          name: '',
+          email: '',
+          notes: '',
           language: '',
+          topics: [],
+          frequency: '',
         },
         mock: {
-          selects: [
+          languages: [
             {
               label: 'German',
               value: 'german',
@@ -149,21 +192,61 @@
         }
       };
     },
-    methods: {
-      onMultiselectUpdate(component: InstanceType<typeof cMultiselect>) {
-        this.demo.meal = Object.values(component.checkedItems);
+
+    /**
+     * Vueldate validation config.
+     */
+    validations: {
+      form: {
+        email: {
+          required,
+          email,
+        },
+        language: {
+          required,
+        },
       }
+    },
+
+    methods: {
+      /**
+       * Submit form event handler.
+       */
+      onSubmit() {
+        this.$v.$touch();
+
+        if (this.$v.$pending || this.$v.$error) {
+          return;
+        }
+
+        const { form } = this.$refs;
+
+        if (form) {
+          form.submit();
+        }
+      },
     }
-  });
+  };
 </script>
 
 <style lang="scss">
   .forms {
-    padding: $spacing--50;
-    max-width: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 
-    &__part {
-      margin-bottom: $spacing--15;
+    &__form,
+    &__data,
+    &__validation {
+      padding: $spacing--50;
+      border: 1px dotted $color-grayscale--500;
+    }
+
+    .e-fieldset {
+      margin-bottom: $spacing--50;
+    }
+
+    .e-label:not(:last-of-type) {
+      margin-bottom: $spacing--10;
     }
   }
 </style>

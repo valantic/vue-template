@@ -12,7 +12,6 @@
       :name="name"
       type="checkbox"
       @blur="onBlur"
-      @change="onChange"
       @focus="onFocus">
     <span :class="b('label')">
       <slot></slot>

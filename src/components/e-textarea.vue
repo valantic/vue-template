@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <textarea :class="b('field', fieldModifiers)"
               :name="name"
               :disabled="disabled"
@@ -13,14 +13,13 @@
     <span v-if="!hasDefaultState && !focus" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
-              :icon="stateIcon"
-              inline />
+              :icon="stateIcon" />
     </span>
     <div v-if="notification && focus" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
     </div>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
@@ -172,6 +171,7 @@
 
 <style lang="scss">
   .e-textarea {
+    display: block;
     position: relative;
 
     &__field {

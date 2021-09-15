@@ -1,10 +1,39 @@
 <template>
-  <div :class="b()">
+  <div :class="b()" :style="{ '--s-icon-finder--color': color }">
     <div :class="b('filter')">
-      <input v-model="filter"
-             :class="b('filter-input')"
-             placeholder="Search …"
-      >
+      <label :class="b('label')">
+        Search:
+        <input v-model="filter"
+               :class="b('filter-input')"
+               placeholder="Search …"
+        >
+      </label>
+      <label :class="b('label')">
+        Color:
+        <input v-model="color"
+               :class="b('filter-input')"
+               type="color"
+        >
+      </label>
+      <label :class="b('label', { variant: true })">
+        Variant:
+        <select v-model="variant"
+                :class="b('filter-input')"
+        >
+          <option value="inline">
+            inline (colorable)
+          </option>
+          <option value="image">
+            image
+          </option>
+          <option value="css">
+            css
+          </option>
+          <option value="mask">
+            css mask (colorable)
+          </option>
+        </select>
+      </label>
     </div>
     <div :class="b('grid')">
       <div v-for="(icon, index) in filteredIcons"
@@ -14,7 +43,15 @@
            @click="copyToClipboard(icon)"
       >
         <div :class="b('icon-wrapper')">
-          <e-icon :key="icon.name" :icon="icon.name" width="50" />
+          <div v-if="['mask', 'css'].includes(variant)"
+               :class="b('icon', { variant })"
+               :style="{ [variant === 'css' ? 'backgroundImage' : 'maskImage']: `url(${spritePath}#${icon.name})` }"
+          ></div>
+          <e-icon v-else
+                  :key="icon.name"
+                  :icon="icon.name"
+                  :inline="variant === 'inline'"
+                  size="80" />
         </div>
         <div :class="b('icon-label')">
           {{ icon.name }}
@@ -45,6 +82,10 @@
     name: string;
   }
 
+  const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
+  const icons = require.context('@/assets/icons/', false, /\.svg/).keys();
+
+
   export default defineComponent({
     name: 's-icon-finder',
 
@@ -59,13 +100,31 @@
     },
 
     data(): IData {
-      const icons = require.context('../../assets/icons/', false, /\.svg/).keys();
-
       return {
+        /**
+         * @type {Array} An array of available icons.
+         */
         // @ts-ignore
         icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
+
+        /**
+         * @type {String} The currently applied query filter.
+         */
         filter: '',
-        notification: ''
+
+        /**
+         * @type {String} Clipboard notification.
+         */
+        notification: '',
+
+        /**
+         * @type {String} The currently selected color.
+         */
+        color: '#000000',
+
+        variant: 'inline',
+
+        spritePath,
       };
     },
 
@@ -82,7 +141,7 @@
         return list.map((icon: string) => { // eslint-disable-line arrow-body-style
           return {
             name: icon,
-            negative: Boolean(icon.match(/negative/))
+            negative: Boolean(icon.match(/negative/)),
           };
         });
       },
@@ -91,15 +150,37 @@
       /**
        * Event handler for copy to clipboard button.
        */
-      copyToClipboard(icon: IIcon) {
-        const value = `<e-icon icon="${icon.name}"/>`;
+      copyToClipboard(icon) {
         const hiddenInput = this.input as HTMLInputElement;
+        let template;
 
-        hiddenInput.value = value;
+        switch (this.variant) {
+          case 'mask':
+            template = `@include icon(${icon.name});`;
+            break;
+
+          case 'css':
+            template = `background-image: url('../assets/icons.svg#${icon.name}');`;
+            break;
+
+          case 'image':
+            template = `<e-icon icon="${icon.name}" :inline="false" />`;
+            break;
+
+          default:
+            template = `<e-icon icon="${icon.name}"/>`;
+        }
+
+        hiddenInput.value = template;
         hiddenInput.select();
+
         document.execCommand('Copy');
-        this.setNotification(`copied! - ${value}`);
-        setTimeout(() => { this.setNotification(''); }, 2000);
+
+        this.setNotification(`copied! - ${template}`);
+
+        setTimeout(() => {
+          this.setNotification('');
+        }, 2000);
       },
 
       /**
@@ -107,8 +188,8 @@
        */
       setNotification(message: string) {
         this.notification = message;
-      }
-    }
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -128,8 +209,24 @@
   .s-icon-finder {
     font-family: $font-family--primary;
 
+    &__filter {
+      display: flex;
+      margin-bottom: $spacing--35;
+    }
+
+    &__label {
+      display: flex;
+      align-items: center;
+      margin: 0 $spacing--10 $spacing--10 0;
+
+      &--variant {
+        margin: 0 0 0 auto;
+      }
+    }
+
     &__filter-input {
       display: block;
+      margin-left: $spacing--5;
     }
 
     &__grid {
@@ -139,31 +236,19 @@
     }
 
     &__grid-item {
+      flex: 0 1 10%;
       overflow: hidden;
       border: 1px solid #000000;
       margin: 5px;
-      flex: 0 1 10%;
       cursor: pointer;
       min-width: 100px;
 
       &::before {
         display: block;
-        content: "";
+        content: '';
         float: left;
         width: 0;
         padding-top: 100%;
-      }
-
-      .s-icon {
-        display: block;
-        width: 50%;
-        height: 50%;
-        margin: auto;
-      }
-
-      .s-icon__icon {
-        width: 100%;
-        height: 100%;
       }
     }
 
@@ -177,6 +262,18 @@
       align-items: center;
       min-width: 100%;
       height: 80%;
+      color: var(--s-icon-finder--color);
+    }
+
+    div#{&}__icon {
+      width: 80px;
+      height: 80px;
+      background: no-repeat center center;
+
+      &--variant-mask {
+        background: currentColor;
+        mask: no-repeat center center / 80px 80px;
+      }
     }
 
     &__icon-label {
@@ -192,13 +289,17 @@
 
     &__notification {
       position: fixed;
-      top: 0;
+      bottom: 0;
       left: 0;
       background-color: $color-status--success;
       width: 100%;
       text-align: center;
       z-index: 999;
       padding: $spacing--10;
+    }
+
+    &__grid-item:hover &__icon-wrapper {
+      color: $color-primary--1;
     }
   }
 </style>

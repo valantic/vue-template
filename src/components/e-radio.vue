@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <label :class="b('label')"
            @mouseenter="hover = true"
            @mouseleave="hover = false">
@@ -17,7 +17,7 @@
         <slot></slot>
       </span>
     </label>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
@@ -148,6 +148,7 @@
   .e-radio {
     @include font($font-size--14, 18px);
 
+    display: block;
     position: relative;
 
     &__field {

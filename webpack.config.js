@@ -291,6 +291,7 @@ module.exports = (env, args = {}) => {
           loader: 'sass-resources-loader',
           options: {
             resources: scssResources.map(file => scssResourcesFolder + file),
+            hoistUseStatements: true,
           },
         },
       ],

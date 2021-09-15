@@ -94,6 +94,8 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
+
   $_e-progress__animation-duration: 2000ms;
   $_e-progress--padding: $spacing--5;
 
@@ -139,15 +141,15 @@
       animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;
 
       &:nth-child(1) {
-        animation-delay: $_e-progress__animation-duration / 3 * -1;
+        animation-delay: math.div($_e-progress__animation-duration, 3 * -1);
       }
 
       &:nth-child(2) {
-        animation-delay: $_e-progress__animation-duration / 3 * -2;
+        animation-delay: math.div($_e-progress__animation-duration, 3 * -2);
       }
 
       &:nth-child(3) {
-        animation-delay: $_e-progress__animation-duration / 3 * -3;
+        animation-delay: math.div($_e-progress__animation-duration, 3 * -3);
       }
     }
   }

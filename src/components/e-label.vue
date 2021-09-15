@@ -1,11 +1,18 @@
 <template>
-  <label :class="b(modifiers)">
-    <span :class="b('name', { invisible })">{{ name }}</span>
-    <div v-if="$slots.default" :class="b('inner')">
+  <component :is="tag" :class="b(modifiers)">
+    <span :class="b('name', { invisible })">
+      <template v-if="$slots.name">
+        <slot name="name"></slot>
+      </template>
+      <template v-else>
+        {{ name }}{{ required ? '*' : '' }}
+      </template>
+    </span>
+    <span v-if="$slots.default" :class="b('inner')">
       <!-- @slot Label content -->
       <slot></slot>
-    </div>
-  </label>
+    </span>
+  </component>
 </template>
 
 <script lang="ts">
@@ -26,6 +33,14 @@
     // components: {},
 
     props: {
+      /**
+       * Displayed tag.
+       */
+      tag: {
+        type: String,
+        default: 'label'
+      },
+
       /**
        * Displayed name of the label
        */
@@ -52,6 +67,14 @@
        * Hides the label-text for the normal user (only available for screen readers).
        */
       invisible: {
+        type: Boolean,
+        default: false,
+      },
+
+      /**
+       * Adds an optional required marker "*".
+       */
+      required: {
         type: Boolean,
         default: false,
       },
