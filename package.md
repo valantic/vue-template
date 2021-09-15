@@ -65,6 +65,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > c-modal
 - [vuex](https://www.npmjs.com/package/vuex) - Centralized State Management for Vue.js.
   > core
+- [vuelidate](https://github.com/vuelidate/vuelidate) - Simple, lightweight model-based validation for Vue.js.
+  > core
 
 
 ## Dev-Dependencies

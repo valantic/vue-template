@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <textarea :class="b('field', fieldModifiers)"
               :name="name"
               :disabled="disabled"
@@ -19,7 +19,7 @@
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
     </div>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -161,6 +161,7 @@
 
 <style lang="scss">
   .e-textarea {
+    display: block;
     position: relative;
 
     &__field {

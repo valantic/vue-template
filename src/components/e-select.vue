@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(stateModifiers)">
+  <span :class="b(stateModifiers)">
     <select :value="value"
             :class="b('select')"
             :disabled="disabled || progress"
@@ -23,7 +23,7 @@
     <div v-if="progress" :class="b('progress-container')">
       <e-progress />
     </div>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -147,6 +147,7 @@
     $this: &;
     $height: 30px;
 
+    display: block;
     position: relative;
 
     &__select {

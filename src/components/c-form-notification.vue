@@ -1,8 +1,8 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <!-- @slot Slot is used for the notification content (message) -->
     <slot></slot>
-  </div>
+  </span>
 </template>
 
 <script>
