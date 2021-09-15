@@ -15,6 +15,9 @@
   "e-progress": {
     "loading": "Lade …"
   },
+  "e-multiselect": {
+    "defaultPlaceholder": "Bitte wählen"
+  },
   "c-breadcrumb": {
     "linkTitle": "Gehe zu {name}"
   },
