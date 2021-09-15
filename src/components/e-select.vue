@@ -143,22 +143,22 @@
 </script>
 
 <style lang="scss">
-  $e-select-height: 30px;
-
   .e-select {
     $this: &;
+    $height: 30px;
 
     position: relative;
 
     &__select {
-      background: url('../assets/icons/i-arrow--down--info.svg') no-repeat right 5px center;
+      @include icon(arrow--down, 22px, right 5px center, $mask: false); // FF does not support mask on <select>.
+
       border: 1px solid $color-grayscale--500;
       border-radius: 3px;
       width: 100%;
       appearance: none;
       outline: none;
       padding: $spacing--0 $spacing--30 $spacing--0 $spacing--10;
-      height: $e-select-height;
+      height: $height;
 
       &::-ms-expand {
         display: none;
@@ -194,7 +194,6 @@
     &--disabled &__select:hover {
       border-color: $color-grayscale--600;
       color: $color-grayscale--600;
-      background-image: url('../assets/icons/i-arrow--down--disabled.svg');
     }
 
     /**
@@ -203,7 +202,7 @@
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       #{$this}__select {
-        @include form-state-icon('error');
+        @include icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
         border-color: $color-status--danger;
       }
@@ -223,7 +222,7 @@
 
     &--state-success {
       #{$this}__select {
-        @include form-state-icon('success');
+        @include icon(check, 22px, right 5px center, false); // FF does not support mask on <select>.
       }
 
       #{$this}__icon-splitter {

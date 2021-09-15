@@ -2,6 +2,7 @@ const path = require('path');
 const { theme, styles } = require('./src/setup/styleguide.styles');
 
 module.exports = {
+  assetsDir: 'src',
   renderRootJsx: path.join(__dirname, 'src/setup/styleguidist/root.js'),
   defaultExample: 'src/setup/styleguide.fallback.md',
   components: 'src/components/**/*.vue',

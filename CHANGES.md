@@ -5,6 +5,7 @@
  - (Breaking) Refactors e-checkbox, so the styling of the states does not need to rely on JS anymore.
  - (Breaking) Removes e-with-root component.
    - The same behaviour can be achieved with :is=""
+ - (Breaking) Sprite support for e-icon.
  - (Breaking) Removes touch-device mixin
  - (Breaking) Removes c-panel  
  - (Breaking) Refactors e-picture (inverts sizes definition, adds additional options)  
