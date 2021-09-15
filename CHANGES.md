@@ -28,6 +28,11 @@
    - Updates the sass plugin to version 1.39.2 which makes it possible to use the @use "math:div" function.
    - Replaces the SCSS divisions by "slash" with the math.div() Sass function
    - Activates the `hoistUseStatements` option in the sass-loader plugin
+ - (Breaking) Issue 168 Replace multiselect
+   - Replaces the old c-multiselect component with a new e-multiselect component
+   - Refactoring and remove project specific features
+   - Makes the component simpler and more generic usable
+   - Adds v-model handling
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
