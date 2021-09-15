@@ -298,8 +298,6 @@
 </script>
 
 <style lang="scss">
-  @use 'sass:math';
-
   .e-picture { // Can be <picture> or <img>!
     display: block;
     max-width: 100%;
@@ -340,7 +338,7 @@
       }
 
       @supports (aspect-ratio: initial) {
-        aspect-ratio: math.div(var(--aspect-ratio), 1);
+        aspect-ratio: var(--aspect-ratio) / 1;
 
         &::before,
         &::after {

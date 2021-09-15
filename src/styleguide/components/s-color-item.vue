@@ -82,8 +82,6 @@
 </script>
 
 <style lang="scss">
-  @use 'sass:math';
-
   .s-color-item {
     &__grid {
       @extend %list-reset;
@@ -95,15 +93,15 @@
 
     &__grid-item {
       padding: $spacing--5;
-      flex: 0 1 percentage(math.div(6, 12));
+      flex: 0 1 percentage(6 / 12);
       max-width: 200px;
 
       @include media(sm) {
-        flex-basis: percentage(math.div(4, 12));
+        flex-basis: percentage(4 / 12);
       }
 
       @include media(md) {
-        flex-basis: percentage(math.div(2, 12));
+        flex-basis: percentage(2 / 12);
       }
     }
 

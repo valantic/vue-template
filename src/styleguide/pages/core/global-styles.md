@@ -8,7 +8,7 @@ To hide this span we use a global style class ".invisible".
 ```html
 <a href="#">
   <span class="invisible">Schliessen von Element XY</span>
-  <e-icon icon="close" />
+  <e-icon icon="i-close" />
 </a>
 ```
 

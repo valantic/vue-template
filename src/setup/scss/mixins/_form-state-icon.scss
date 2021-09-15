@@ -1,0 +1,24 @@
+////
+// Adds the state icon as a background-image
+//
+// @param  {String}   State the icon
+//
+////
+
+@mixin form-state-icon($state: 'error') {
+  @if $state == 'error' {
+    background-image: url('../assets/icons/i-error.svg');
+  } @else if $state == 'info' {
+    background-image: url('../assets/icons/i-info.svg');
+  } @else if $state == 'success' {
+    background-image: url('../assets/icons/i-check.svg');
+  } @else if $state == 'search' {
+    background-image: url('../assets/icons/i-search.svg');
+  }
+
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position-x: calc(100% - 5px);
+  background-position-y: center;
+  padding-right: 35px;
+}

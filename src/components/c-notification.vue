@@ -31,12 +31,13 @@
     </div>
     <button v-if="!notification.confirm"
             :class="b('close')"
-            :area-label="$t('c-notification.close')"
             @click="close">
       <e-icon
-        icon="close"
-        size="15"
-      />
+        icon="i-close"
+        width="15"
+        height="15"
+        inline
+      />&nbsp;
     </button>
   </div>
 </template>
@@ -414,7 +415,10 @@
       border: none;
       padding: $spacing--0;
       cursor: pointer;
-      color: $color-grayscale--1000;
+
+      path {
+        fill: $color-grayscale--1000;
+      }
 
       .e-icon {
         display: block;
@@ -443,12 +447,10 @@
 
     &--type-success &__icon,
     &--type-add-to-cart &__icon {
-      @include icon(check, 15px);
-
       margin-left: -28px;
       margin-right: 13px;
       margin-top: 1px;
-      color: $color-grayscale--1000;
+      background-image: url('../assets/icons/i-check--negative.svg');
     }
 
     &--type-warning {
@@ -465,12 +467,11 @@
     }
 
     &--type-warning &__icon {
-      @include icon(warning, 15px);
-
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      color: $color-grayscale--1000;
+      background-image: url('../assets/icons/i-warning--negative.svg');
+      background-size: 10px;
     }
 
     &--type-error {
@@ -487,12 +488,10 @@
     }
 
     &--type-error &__icon {
-      @include icon(error, 15px);
-
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      color: $color-grayscale--1000;
+      background-image: url('../assets/icons/i-error--negative.svg');
     }
 
     &--type-info {
@@ -509,12 +508,10 @@
     }
 
     &--type-info &__icon {
-      @include icon(info, 15px);
-
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      color: $color-grayscale--1000;
+      background-image: url('../assets/icons/i-info--negative.svg');
     }
 
     &--display-type-modal {

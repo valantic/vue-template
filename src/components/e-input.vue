@@ -1,5 +1,5 @@
 <template>
-  <span :class="b(modifiers)">
+  <div :class="b(modifiers)">
     <input v-if="uncontrolled"
            ref="input"
            :autocomplete="autocomplete"
@@ -40,13 +40,14 @@
       <span v-if="!hasDefaultState && !focus" :class="b('icon-splitter')"></span>
       <e-icon v-if="!hasDefaultState && !focus"
               :class="b('state-icon')"
-              :icon="stateIcon" />
+              :icon="stateIcon"
+              inline />
     </span>
-    <span v-if="showNotification" :class="b('notification')">
+    <div v-if="showNotification" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
-    </span>
-  </span>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -357,7 +358,6 @@
     $this: &;
 
     position: relative;
-    display: block;
 
     &--border-0 &__field {
       border: 1px solid transparent;
@@ -440,7 +440,6 @@
     &__notification {
       @include z-index(form-notification);
 
-      display: block;
       position: absolute;
       width: 100%;
       top: calc(#{$e-input-height} - 1px);

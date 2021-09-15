@@ -67,7 +67,11 @@
     }
 
     &__fields {
-      padding: $spacing--5 0;
+      padding: $spacing--25 0 $spacing--20;
+
+      @include media(xs) {
+        padding: $spacing--30 0;
+      }
     }
   }
 </style>
