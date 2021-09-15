@@ -143,7 +143,6 @@
         this.hasFocus = true;
 
         this.$emit('focus');
-        this.$parent.$emit('focus');
       },
 
       /**
@@ -154,7 +153,6 @@
         this.hasFocus = false;
 
         this.$emit('blur');
-        this.$parent.$emit('blur');
       },
     },
     // render() {},

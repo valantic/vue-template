@@ -266,7 +266,6 @@
          * @event focus
          */
         this.$emit('focus');
-        this.$parent.$emit('focus');
       },
 
       /**
@@ -282,7 +281,6 @@
          * @event blur
          */
         this.$emit('blur');
-        this.$parent.$emit('blur');
       },
 
       /**
@@ -295,7 +293,6 @@
          * @event enter
          */
         this.$emit('enter');
-        this.$parent.$emit('enter');
       },
 
       /**

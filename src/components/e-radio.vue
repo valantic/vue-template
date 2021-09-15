@@ -144,7 +144,7 @@
          * @event change
          * @type {String}
          */
-        this.$parent.$emit('change', event.target.value);
+        this.$emit('change', event.target.value);
       },
     },
     // render() {},

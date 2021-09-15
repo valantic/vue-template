@@ -12,7 +12,6 @@
       :name="name"
       type="checkbox"
       @blur="onBlur"
-      @change="onChange"
       @focus="onFocus">
     <span :class="b('label')">
       <slot></slot>
@@ -84,6 +83,8 @@
           return this.checked;
         },
         set(value) {
+          this.isChecked = value;
+
           /**
            * Emits checkbox value e.g. true/false or value
            *
@@ -108,24 +109,6 @@
     // destroyed() {},
 
     methods: {
-      /**
-       * Emits state to parent and wrapper component.
-       * Update "isChecked" state.
-       *
-       * @param   {Boolean}  event   Field input
-       */
-      onChange(event) {
-        this.isChecked = event.target.checked;
-
-        /**
-         * Change event
-         *
-         * @event change
-         * @type {String}
-         */
-        this.$parent.$emit('change');
-      },
-
       /**
        * Updates the checked state of the checkbox.
        *
@@ -153,7 +136,6 @@
          * @type {String}
          */
         this.$emit('focus');
-        this.$parent.$emit('focus');
       },
 
       /**
@@ -170,7 +152,6 @@
          * @type {String}
          */
         this.$emit('blur');
-        this.$parent.$emit('blur');
       },
     },
     // render() {},
