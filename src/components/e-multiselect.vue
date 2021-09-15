@@ -172,6 +172,12 @@
           return this.value;
         },
         set(value) {
+          /**
+           * Emits the change event to the parent.
+           *
+           * @event change
+           * @type {Array.<String>}
+           */
           this.$emit('change', value);
         },
       },
