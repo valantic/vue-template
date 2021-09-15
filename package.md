@@ -138,6 +138,10 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > webpack
 - [postcss-loader](https://www.npmjs.com/package/postcss-loader) - Loader for webpack to process CSS with PostCSS.
   > webpack, scss
+- [react](https://www.npmjs.com/package/react) - **Required to fix a bug** with vue-styleguidist. Can be removed when https://github.com/vue-styleguidist/vue-styleguidist/issues/1158 is resolved.
+  > styleguidist
+- [react-dom](https://www.npmjs.com/package/react-dom) - **Required to fix a bug** with vue-styleguidist. Can be removed when https://github.com/vue-styleguidist/vue-styleguidist/issues/1158 is resolved.
+  > styleguidist
 - [sass](https://www.npmjs.com/package/sass) - Node.js bindings to libsass.
   > webpack, scss
 - [sass-loader](https://www.npmjs.com/package/sass-loader) - Loads a Sass/SCSS file and compiles it to CSS.

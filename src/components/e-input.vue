@@ -40,8 +40,7 @@
       <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
       <e-icon v-if="!hasDefaultState && !hasFocus"
               :class="b('state-icon')"
-              :icon="stateIcon"
-              inline />
+              :icon="stateIcon" />
     </span>
     <span v-if="showNotification" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
@@ -267,7 +266,6 @@
          * @event focus
          */
         this.$emit('focus');
-        this.$parent.$emit('focus');
       },
 
       /**
@@ -283,7 +281,6 @@
          * @event blur
          */
         this.$emit('blur');
-        this.$parent.$emit('blur');
       },
 
       /**
@@ -296,7 +293,6 @@
          * @event enter
          */
         this.$emit('enter');
-        this.$parent.$emit('enter');
       },
 
       /**

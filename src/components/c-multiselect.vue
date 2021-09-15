@@ -18,23 +18,18 @@
 
           <div v-show="isError" :class="b('icon-wrapper')">
             <span :class="b('icon-splitter')"></span>
-            <e-icon inline
-                    icon="i-error"
-                    width="20px"
-                    height="20px"
+            <e-icon icon="error"
+                    size="20"
             />
           </div>
           <div v-show="!isError" :class="b('icon-wrapper')">
             <e-icon v-show="isSuccess"
-                    inline
-                    icon="i-check"
+                    icon="check"
             />
             <e-icon v-show="!isSuccess"
                     :color="disabled ? 'lightgray' : 'default'"
-                    inline
-                    icon="i-arrow--down--info"
-                    width="18px"
-                    height="18px"
+                    icon="arrow--down"
+                    size="18"
             />
           </div>
         </div>
@@ -54,8 +49,7 @@
                    @input="onSearchInput"
           >
             <e-icon :class="b('icon')"
-                    icon="i-search"
-                    inline />
+                    icon="search" />
           </e-input>
         </div>
         <div :class="b('items-wrapper')">
@@ -94,11 +88,9 @@
             {{ errorMessage }}
           </span>
           <div :class="b('error-icon-wrapper')">
-            <e-icon inline
-                    icon="i-error"
+            <e-icon icon="error"
                     color="white"
-                    width="20px"
-                    height="20px"
+                    size="20"
             />
           </div>
         </div>
@@ -542,6 +534,8 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
+
   .c-multiselect {
     position: relative;
 
@@ -634,7 +628,7 @@
     }
 
     &__icon-wrapper {
-      height: percentage(4 / 5); // for positioning the icon
+      height: percentage(math.div(4, 5)); // for positioning the icon
       padding: 0 $spacing--5 0;
       align-self: flex-end;
       width: $spacing--30;

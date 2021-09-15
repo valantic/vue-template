@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '@/store/index';
-import apiUrls from '@/setup/apiUrls';
+import apiUrls from '@/setup/api-urls.json';
 
 // Enable tracking of requests in development environment.
 if (process.env.NODE_ENV !== 'production') {

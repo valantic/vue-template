@@ -54,10 +54,8 @@
         mobile-transition="fade"
         @close="modalClose">
         <div :class="b('modal-close-icon')" @click="modalOpen = false">
-          <e-icon icon="i-close"
-                  width="25"
-                  height="25"
-                  inline />
+          <e-icon icon="close"
+                  size="25" />
         </div>
         <c-swiper-modal :images="pictures"
                         :initial-slide="swiper.activeIndex"
@@ -401,10 +399,6 @@
       top: $spacing--15;
       right: $spacing--15;
       cursor: pointer;
-
-      path {
-        fill: $color-primary--1;
-      }
     }
 
     &__img-counter,
@@ -419,15 +413,13 @@
     }
 
     &__video-thumbnail-overlay {
+      @include icon(play, 50px, $mask: false);
+
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url('../assets/icons/i-play.svg');
-      background-size: 50px 50px;
-      background-position: center center;
-      background-repeat: no-repeat;
     }
 
     &__video-thumbnail {

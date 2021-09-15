@@ -35,9 +35,8 @@
                     @click="closeModal"
             >
               <e-icon
-                icon="i-arrow--left--info"
-                width="18"
-                height="18"
+                icon="arrow--left"
+                size="18"
               />
             </button>
             <div :class="b('title-wrapper')">
@@ -51,10 +50,8 @@
                     @click="closeModal"
             >
               <e-icon
-                icon="i-close"
-                width="25"
-                height="25"
-                inline
+                icon="close"
+                size="25"
               />
             </button>
           </div>
@@ -372,10 +369,6 @@
 
       @include media($down: xs) {
         display: none;
-      }
-
-      path {
-        fill: $color-primary--1;
       }
 
       &--mobile {
