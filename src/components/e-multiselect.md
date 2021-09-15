@@ -6,6 +6,10 @@
     <e-checkbox v-model="hasSearch" name="hasSearch" value="true">hasSearch</e-checkbox>
     <e-checkbox v-model="disabled" name="disabled" value="true">disabled</e-checkbox>
     <e-checkbox v-model="progress" name="progress" value="true">progress</e-checkbox>
+    <label>
+      Amount of entries
+      <e-input v-model="amount" name="amount" type="number" />
+    </label>
     <hr style="margin: 50px 0;">
     <div style="max-width: 300px;">
       <e-multiselect v-model="selection" 
@@ -35,12 +39,17 @@
         hasSearch: false,
         disabled: false,
         progress: false,
-        multiSelectOptions: new Array(10).fill(null).map(() => ({
-          value: random.uuid(),
-          label: lorem.words(4),
-        })),
+        amount: 10,
       };
     },
+    computed: {
+      multiSelectOptions() {
+        return new Array(parseInt(this.amount, 10)).fill(null).map(() => ({
+          value: random.uuid(),
+          label: lorem.words(4),
+        }));
+      },
+    }
   }
 </script>
 ```
