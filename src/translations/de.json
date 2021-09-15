@@ -16,7 +16,8 @@
     "loading": "Lade …"
   },
   "e-multiselect": {
-    "defaultPlaceholder": "Bitte wählen"
+    "defaultPlaceholder": "Bitte wählen",
+    "searchFieldPlaceholder": "Suche"
   },
   "c-breadcrumb": {
     "linkTitle": "Gehe zu {name}"

@@ -1,7 +1,17 @@
 <template>
   <span :class="b()">
-    <!-- Field -->
-    <button ref="fieldWrapper"
+    <!-- Search field -->
+    <input v-if="isOpen && hasSearch"
+           v-model="searchTerm"
+           ref="searchField"
+           :placeholder="$t('e-multiselect.searchFieldPlaceholder')"
+           :class="b('search-field')"
+           type="text"
+    >
+
+    <!-- Trigger Button -->
+    <button v-else
+            ref="fieldWrapper"
             :class="b('field-wrapper', { open: isOpen, disabled: isDisabled })"
             :disabled="isDisabled"
             type="button"
@@ -23,11 +33,11 @@
     <!-- Content -->
     <transition name="top-slide">
       <span v-show="isOpen"
-            v-outside-click="{ exclude: ['fieldWrapper'], handler: close }"
+            v-outside-click="{ exclude: ['fieldWrapper', 'searchField'], handler: close }"
             :class="b('options-wrapper')"
       >
         <ul :class="b('options-list')">
-          <li v-for="option in options"
+          <li v-for="option in filteredOptions"
               :key="option[valueField]"
               :class="b('options-item')"
           >
@@ -100,7 +110,6 @@
       /**
        * Defines if the component should have a search field.
        */
-      // eslint-disable-next-line vue/no-unused-properties
       hasSearch: {
         type: Boolean,
         default: false,
@@ -144,6 +153,11 @@
          * @type {Boolean} Holds the internal opening state of the options.
          */
         isOpen: false,
+
+        /**
+         * @type {String} Holds the value fo the search input field.
+         */
+        searchTerm: '',
       };
     },
 
@@ -195,8 +209,34 @@
       isDisabled() {
         return this.disabled || this.progress;
       },
+
+      /**
+       * Gets the filtered options if the user used the search.
+       *
+       * @returns {Array.<Object>}
+       */
+      filteredOptions() {
+        if (this.hasSearch && this.searchTerm) {
+          return this.options.filter(option => option[this.labelField].includes(this.searchTerm));
+        }
+
+        return this.options;
+      },
     },
-    // watch: {},
+    watch: {
+      /**
+       * Observes the "isOpen" property and sets the focus on the search field if it's available.
+       *
+       * @param {Boolean} open - The open state.
+       */
+      isOpen(open) {
+        if (this.hasSearch && open) {
+          this.$nextTick(() => {
+            this.$refs.searchField.focus();
+          });
+        }
+      },
+    },
 
     // beforeCreate() {},
     // created() {},
@@ -219,6 +259,7 @@
         }
 
         this.isOpen = false;
+        this.searchTerm = '';
 
         /**
          * Emits the closing event to the parent.
@@ -310,6 +351,14 @@
       position: absolute;
       top: 0;
       left: 0;
+    }
+
+    &__search-field {
+      width: 100%;
+      min-height: $e-multiselect-height;
+      border: 1px solid $color-grayscale--500;
+      outline: none;
+      padding: 0 $spacing--5;
     }
 
     // Transition
