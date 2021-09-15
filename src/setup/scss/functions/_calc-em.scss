@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 ////
 // Calculate em for given pixel $values based on $context font-size
 //
@@ -10,7 +12,7 @@
   $result: ();
 
   @each $value in $values {
-    $result: append($result, 1em * ($value / $context));
+    $result: append($result, 1em * (math.div($value, $context)));
   }
 
   @return $result;
