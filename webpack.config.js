@@ -303,6 +303,7 @@ module.exports = (env, args = {}) => {
         {
           loader: 'image-webpack-loader', // @see https://github.com/tcoopman/image-webpack-loader
           options: {
+            disable: !isProduction, // Skip image optimization in non production mode.
             svgo: {
               plugins: svgoPlugins
             },
