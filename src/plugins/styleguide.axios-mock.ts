@@ -37,7 +37,7 @@ const plugin: Plugin = {
   /**
    * Defines API mocks for development and styleguide build.
    */
-  install(/* Vue, options */) {
+  install(/* app */) {
     const mock = new MockAdapter(axios, {
       delayResponse: 2000,
     });

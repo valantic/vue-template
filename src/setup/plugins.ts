@@ -1,5 +1,4 @@
 /* eslint-disable import/first */
-import Vuex from 'vuex'; // MUST come before the store because of build order.
 import VueAxios from '@/plugins/axios';
 import VueBemCn from '@/plugins/vue-bem-cn';
 import resizeEnd from '@/plugins/resize-end';
@@ -12,7 +11,6 @@ import components from '@/setup/components';
 // import VueFocus from '@/plugins/v-focus';
 
 export default [
-  [Vuex],
   [i18n],
   [resizeEnd],
   [VueAxios],
