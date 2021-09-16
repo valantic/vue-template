@@ -1,8 +1,8 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <!-- @slot Slot is used for the notification content (message) -->
     <slot></slot>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -74,18 +74,15 @@
     box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
 
     &--state-error {
-      background-image: url('../assets/icons/i-error--negative.svg');
-      background-color: variables.$color-status--danger;
+      background-color: $color-status--danger;
     }
 
     &--state-info {
-      background-image: url('../assets/icons/i-info--negative.svg');
-      background-color: variables.$color-status--info;
+      background-color: $color-status--info;
     }
 
     &--state-success {
-      background-image: url('../assets/icons/i-check--negative.svg');
-      background-color: variables.$color-status--success;
+      background-color: $color-status--success;
     }
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <label :class="b('label')"
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false">
@@ -17,7 +17,7 @@
         <slot></slot>
       </span>
     </label>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -144,7 +144,7 @@
          * @event change
          * @type {String}
          */
-        this.$parent.$emit('change', event.target.value);
+        this.$emit('change', event.target.value);
       },
     },
     // render() {},
@@ -158,6 +158,7 @@
   .e-radio {
     @include mixins.font(variables.$font-size--14, 18px);
 
+    display: block;
     position: relative;
 
     &__field {

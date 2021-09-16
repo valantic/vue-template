@@ -1,3 +1,4 @@
+@forward './mixins/icon';
 @forward './mixins/font';
 @forward './mixins/font-size';
 @forward './mixins/headings';
@@ -6,5 +7,4 @@
 @forward './mixins/line-height';
 @forward './mixins/media';
 @forward './mixins/spacings';
-@forward './mixins/form-state-icon';
 @forward './mixins/z-index';

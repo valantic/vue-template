@@ -70,11 +70,7 @@
     }
 
     &__fields {
-      padding: variables.$spacing--25 0 variables.$spacing--20;
-
-      @include mixins.media(xs) {
-        padding: variables.$spacing--30 0;
-      }
+      padding: variables.$spacing--5 0;
     }
   }
 </style>

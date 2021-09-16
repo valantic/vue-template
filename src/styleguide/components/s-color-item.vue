@@ -82,6 +82,7 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
   @use '../../setup/scss/variables';
   @use '../../setup/scss/mixins';
   // TODO replace @extend my mixin
@@ -99,15 +100,15 @@
 
     &__grid-item {
       padding: variables.$spacing--5;
-      flex: 0 1 percentage(6 / 12);
+      flex: 0 1 percentage(math.div(6, 12));
       max-width: 200px;
 
       @include mixins.media(sm) {
-        flex-basis: percentage(4 / 12);
+        flex-basis: percentage(math.div(4, 12));
       }
 
       @include mixins.media(md) {
-        flex-basis: percentage(2 / 12);
+        flex-basis: percentage(math.div(2, 12));
       }
     }
 

@@ -1,10 +1,8 @@
 <template>
   <div :class="b(modifiers)">
     <a :class="b('toggle')" href="#" @click="toggleState">
-      <e-icon icon="i-plus"
-              width="12"
-              height="12"
-              inline />
+      <e-icon icon="plus"
+              size="12" />
       {{ title }}
     </a>
 
@@ -302,10 +300,6 @@
       top: 50%;
       transform: translateY(-50%);
       transform-origin: center;
-
-      path {
-        fill: variables.$color-grayscale--400;
-      }
     }
 
     &--expanded &__toggle .e-icon {

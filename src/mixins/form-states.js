@@ -126,13 +126,13 @@ export default {
     stateIcon() {
       switch (this.state) {
         case 'error':
-          return 'i-error';
+          return 'error';
 
         case 'success':
-          return 'i-check';
+          return 'check';
 
         case 'info':
-          return 'i-info';
+          return 'info';
 
         default:
           return '';
