@@ -1,13 +1,14 @@
 import { Plugin } from 'vue';
 
 // Form elements
-import eLabel from '@/components/e-label.vue';
-import eInput from '@/components/e-input.vue';
-import eSelect from '@/components/e-select.vue';
-import eRadio from '@/components/e-radio.vue';
-import eCheckbox from '@/components/e-checkbox.vue';
-import eTextarea from '@/components/e-textarea.vue';
 import eButton from '@/components/e-button.vue';
+import eCheckbox from '@/components/e-checkbox.vue';
+import eFieldset from '@/components/e-fieldset.vue';
+import eInput from '@/components/e-input.vue';
+import eLabel from '@/components/e-label.vue';
+import eRadio from '@/components/e-radio.vue';
+import eSelect from '@/components/e-select.vue';
+import eTextarea from '@/components/e-textarea.vue';
 
 // Elements
 import eIcon from '@/components/e-icon.vue';
@@ -26,16 +27,17 @@ const plugin: Plugin = {
   install(app) {
     const components = [
       // Elements
+      eButton,
+      eCheckbox,
+      eFieldset,
       eLabel,
       eInput,
-      eSelect,
-      eRadio,
-      eCheckbox,
-      eTextarea,
-      eButton,
       eIcon,
       ePicture,
       eProgress,
+      eRadio,
+      eSelect,
+      eTextarea,
 
       // SSR related
       lDefault,
