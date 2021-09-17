@@ -6,6 +6,9 @@ export interface ITheme {
 }
 
 export default (customTheme?: string): ITheme => {
+  /**
+   * Holds the current theme name.
+   */
   const theme: ComputedRef<string> = computed(() => customTheme || store.getters.session.getTheme);
 
   return {

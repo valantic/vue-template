@@ -1,14 +1,14 @@
 import { Plugin } from 'vue';
 
+const directives = process.env.NODE_ENV === 'production'
+  ? require.context('../directives/', true, /\.(ts)$/i)
+  : require.context('../directives/', true, /^(?!dev\.).*?\.(ts)$/i);
+
 const plugin: Plugin = {
   install(app) {
-    // Vue.directive(directive.name, directive);
-
-    if (process.env.NODE_ENV !== 'production') {
-      const isObserved = require('@/directives/dev.is-observed'); // eslint-disable-line global-require
-
-      app.directive(isObserved.default.name, isObserved.default);
-    }
+    directives
+      .keys()
+      .forEach(key => app.directive(directives(key).default.name, directives(key).default));
   }
 };
 

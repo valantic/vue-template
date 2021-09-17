@@ -97,7 +97,7 @@ const api: IApi = {
   /**
    * Gets the url for the given 'urlKey'. The method also accepts an Object of interpolation values.
    */
-  getUrl(urlKey: keyof typeof apiUrls, values: IUrlKeyValues): string {
+  getUrl(urlKey, values) {
     let url = apiUrls[urlKey];
 
     if (!url) {
@@ -116,8 +116,7 @@ const api: IApi = {
   /**
    * Runs a get request with given url with given url params.
    */
-  // eslint-disable-next-line max-len,@typescript-eslint/no-explicit-any
-  get(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> {
+  get(url, config, notificationOptions) {
     return axios
       .get(url, config)
       .then(response => handleSuccess(response, notificationOptions))
@@ -127,8 +126,8 @@ const api: IApi = {
   /**
    * Runs a post request with a given url and payload.
    */
-  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-  post(url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
+  // eslint-disable-next-line max-params
+  post(url, data, config, notificationOptions) {
     return axios
       .post(url, data, config)
       .then(response => handleSuccess(response, notificationOptions))
@@ -138,8 +137,8 @@ const api: IApi = {
   /**
    * Runs a patch request with a given url and payload.
    */
-  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-  patch(url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
+  // eslint-disable-next-line max-params
+  patch(url, data, config, notificationOptions) {
     return axios
       .patch(url, data, config)
       .then(response => handleSuccess(response, notificationOptions))
@@ -149,8 +148,8 @@ const api: IApi = {
   /**
    * Runs a delete request with a given url and payload.
    */
-  // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-  delete(url: string, config: AxiosRequestConfig, notificationOptions: INotification): Promise<AxiosResponse<any> | AxiosError<any>> { // eslint-disable-line max-params
+  // eslint-disable-next-line max-params
+  delete(url, config, notificationOptions) {
     return axios
       .delete(url, config)
       .then(response => handleSuccess(response, notificationOptions))

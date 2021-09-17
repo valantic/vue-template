@@ -70,7 +70,7 @@
       navPosition: {
         type: String,
         default: 'top-right',
-        validator: (value: string): boolean => [
+        validator: (value: string) => [
           'top-left',
           'top-right',
           'bottom-right',

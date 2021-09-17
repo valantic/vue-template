@@ -31,7 +31,6 @@
     xs: number,
     xxs: number,
     [key: number]: number;
-    [key: string]: number;
   }
 
   interface ISizePerBreakpoint {
@@ -127,7 +126,7 @@
       loading: {
         type: String,
         default: 'lazy',
-        validator: (value: string): boolean => [
+        validator: (value: string) => [
           'lazy',
           'eager',
           'auto',
@@ -142,7 +141,7 @@
       decoding: {
         type: String,
         default: 'async',
-        validator: (value: string): boolean => [
+        validator: (value: string) => [
           'sync',
           'async',
           'auto',
@@ -240,9 +239,9 @@
             // check if the provided size key exists as breakpoint key
             // if yes, take the corresponding breakpoint value,
             // otherwise take the size key (which is a number in that case)
-            const breakpointValue = BREAKPOINTS_MAX[breakpoint] ? BREAKPOINTS_MAX[breakpoint] : size as number;
+            const breakpointValue = BREAKPOINTS_MAX[breakpoint] || size as number;
 
-            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size];
+            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size as keyof ISizes];
 
             return breakpointValue;
           })

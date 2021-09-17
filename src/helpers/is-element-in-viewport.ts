@@ -5,10 +5,17 @@ interface IViewportSpacing {
   left: number;
 }
 
+const spacingFallback = {
+  top: 10,
+  right: 0,
+  bottom: 10,
+  left: 0
+};
+
 /**
  * Calculates if the given DOM element is visible in the viewport.
  */
-export default function isElementInViewport(element: HTMLElement, viewportSpacing: IViewportSpacing = { top: 10, right: 0, bottom: 10, left: 0 }): boolean { // eslint-disable-line object-curly-newline, max-len
+export default function isElementInViewport(element: HTMLElement, viewportSpacing: IViewportSpacing = spacingFallback): boolean {
   const elementRect = element.getBoundingClientRect();
 
   return elementRect.top >= (viewportSpacing.top || 0)

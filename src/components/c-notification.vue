@@ -73,7 +73,7 @@
       displayType: {
         type: String,
         default: 'global',
-        validator: (value: string): boolean => [
+        validator: (value: string) => [
           'global',
           'modal',
           'field',
