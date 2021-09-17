@@ -34,7 +34,7 @@ export interface IFormStates {
 /**
  * Defines the reactive properties which can be used for form elements
  */
-const formStates = (test?: FieldStates): IFormStates => {
+const formStates = (): IFormStates => {
   const inputState = ref<FieldStates>(FieldStates.Default);
   const active = ref<boolean>(false);
   const disabled = ref<boolean>(false);
