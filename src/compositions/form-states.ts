@@ -31,13 +31,19 @@ export interface IFormStates {
   hasDefaultState: ComputedRef<boolean>;
 }
 
-export default (defaultValue: string = ''): IFormStates => {
+/**
+ * Defines the reactive properties which can be used for form elements
+ */
+const formStates = (test?: FieldStates): IFormStates => {
   const inputState = ref<FieldStates>(FieldStates.Default);
   const active = ref<boolean>(false);
   const disabled = ref<boolean>(false);
   const focus = ref<boolean>(false);
   const hover = ref<boolean>(false);
 
+  /**
+   * Holds an object with several modifiers of the form element.
+   */
   const stateModifiers: ComputedRef<IStateModifiers> = computed(() => ({
       state: inputState.value,
       active: active.value,
@@ -46,8 +52,14 @@ export default (defaultValue: string = ''): IFormStates => {
       hover: hover.value,
     }));
 
+  /**
+   * Holds a boolean if the form element has default state.
+   */
   const hasDefaultState: ComputedRef<boolean> = computed(() => inputState.value === FieldStates.Default);
 
+  /**
+   * Holds a string containing the icon name matching the current form element state.
+   */
   const stateIcon: ComputedRef<string> = computed(() => {
     switch (inputState.value) {
       case FieldStates.Error:
@@ -78,3 +90,5 @@ export default (defaultValue: string = ''): IFormStates => {
     hasDefaultState,
   };
 };
+
+export default formStates;
