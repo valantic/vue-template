@@ -7,13 +7,13 @@ export default function avoidContentResizing(state = true): void {
   const scrollBar = scrollbarWidth();
   const lDefault = document.getElementsByClassName('l-default')[0] as HTMLElement;
   const cHeader = document.getElementsByClassName('c-header')[0] as HTMLElement;
-  const maxWidth = scrollBar > 0 && state ? `${window.innerWidth - scrollBar}px` : null;
+  const maxWidth = scrollBar > 0 && state ? `${window.innerWidth - scrollBar}px` : '';
 
   if (lDefault) {
-    lDefault.style.maxWidth = maxWidth || '';
+    lDefault.style.maxWidth = maxWidth;
   }
 
   if (cHeader) {
-    cHeader.style.maxWidth = maxWidth || '';
+    cHeader.style.maxWidth = maxWidth;
   }
 }

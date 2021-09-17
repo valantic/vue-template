@@ -1,4 +1,5 @@
 import { DirectiveBinding } from '@vue/runtime-core';
+import { ComponentPublicInstance } from 'vue';
 
 const outsideClickEventConfig = { passive: true, capture: true };
 
@@ -16,6 +17,11 @@ interface ICustomElement extends HTMLElement {
  *   excludeIds: [],
  *   handler: () => {},
  * }"></div>
+ *
+ * Options:
+ * - exclude: array of strings with ref names being initialized in the setup method of the component
+ * - excludeIds: array of strings with node id's
+ * - handler: handler function to execute
  */
 export default {
   name: 'outside-click',
@@ -44,22 +50,25 @@ export default {
       const { handler, exclude = [], excludeIds = [] } = binding.value;
 
       // We check to see if the clicked element is not the dialog element and not excluded.
-      if (!el.contains(event.target as Node) && handler) {
+      const eventTarget = event.target as Node;
+
+      if (!el.contains(eventTarget) && handler) {
         const clickedOnExcludedElement = !!exclude.find((refName: string) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const excludedElement: any = binding.instance?.$refs[refName];
+          const componentInstance = binding.instance as ComponentPublicInstance;
+          // @ts-ignore
+          const excludedElement: HTMLElement = componentInstance[refName];
 
           if (Array.isArray(excludedElement)) {
-            return excludedElement.some(component => component.$el.contains(event.target));
+            return excludedElement.some(component => component.$el.contains(eventTarget));
           }
 
-          return excludedElement ? excludedElement.contains(event.target) : false;
+          return excludedElement ? excludedElement.contains(eventTarget) : false;
         });
 
         const clickedOnExcludedId = excludeIds.some((id: string) => {
           const element = document.querySelector(id);
 
-          return element && element.contains(event.target as Node);
+          return element && element.contains(eventTarget);
         });
 
         if (!clickedOnExcludedElement && !clickedOnExcludedId) {
