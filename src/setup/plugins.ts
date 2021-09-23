@@ -16,12 +16,11 @@ export default [
   [VueAxios],
   [viewport],
   [api],
-  [VueBemCn, {
+  [VueBemCn, { // please note: if you change the VueBemCn methodName, adjust the global definition in shims-plugins.d.ts
     hyphenate: true,
   }],
   [directives],
   [components],
-  // please note: if you change the VueBemCn methodName, adjust the global definition in shims-plugins.d.ts
 
   // [VueFocus],
   // [dayjs]

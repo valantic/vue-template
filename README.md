@@ -1,6 +1,6 @@
 # vue-template
 
-This is a custom Vue template written in Typescript which is based on the idea of using BEM, CriticalCSS and a living 
+This is a custom Vue template written in TypeScript which is based on the idea of using BEM, CriticalCSS and a living 
 styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
 
 ## Introduction
@@ -27,7 +27,7 @@ You **MUST** also be familiar with the following tools:
 * [BEM](http://getbem.com/)
 * [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
-* [Typescript](https://www.typescriptlang.org/)
+* [TypeScript](https://www.typescriptlang.org/)
 * [Git](https://git-scm.com/)
 * [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Jest](https://facebook.github.io/jest/)
@@ -53,7 +53,7 @@ You **MUST** install the following tools globally, before you can use this templ
 
 Please make sure your IDE is configured to apply 
 - [ESLint](https://eslint.org/docs/user-guide/integrations)
-- [Typescript](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
+- [TypeScript](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
 - [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins)
 - [.editorconfig](https://editorconfig.org/#download) linting/settings.
 
@@ -358,7 +358,7 @@ We build Vue components as [single file components](https://vuejs.org/v2/guide/s
 * Naming follows BEM block convention.
 * Naming MUST always be singular.
 
-### Vue and Typescript
+### Vue and TypeScript
 
 To have the types working for Vue SFC, they need to be defined as
 
@@ -376,7 +376,7 @@ To fully benefit from the power of TypeScript, define the types according to the
 
 #### Props
 
-For Primitive Types, Typescript is able to detect the type based on the Vue Prop Type definition:
+For Primitive Types, TypeScript is able to detect the type based on the Vue Prop Type definition:
 
 ```ts
 myProp: {
@@ -385,7 +385,7 @@ myProp: {
 },
 ```
 
-When using arrays or objects without further typings, Typescript treats a prop as `any[]` or `any`. To have proper
+When using arrays or objects without further typings, TypeScript treats a prop as `any[]` or `any`. To have proper
 typing, you can define your array / object props like this:
 
 ```ts
@@ -440,7 +440,7 @@ export default defineComponent({
 
 #### Data
 
-To fully benefit from Typescript, please define your Data function with an Interface like this:
+To fully benefit from TypeScript, please define your Data function with an Interface like this:
 
 ```ts
 interface IData {
@@ -457,12 +457,13 @@ export default defineComponent({
 
 #### Computed / Methods
 
-To prevent random Typescript errors in your component, make sure, to always type your computed return types and method 
+To prevent random TypeScript errors in your component, make sure, to always type your computed return types and method 
 signatures!
 
 #### Misc
 
-- Component specific Properties: Use `Ref<InstanceType<typeof yourComponent>` to access a property of a ref being a component
+- Component general Instance: Use `ComponentPublicInstance` as Type if you don't know the type of the component
+- Component specific Instance: Use `Ref<InstanceType<typeof yourComponent>` to access a property of a ref being a component
 
 ## Vuex
 
@@ -661,7 +662,7 @@ If you need to use translations outside of a component or Vue instance, where th
 ```javascript
 import { i18n } from '@/setup/i18n';
  
-const translation = i18n.t('c-add-to-cart.notLoggedInTitle');
+const translation = i18n.global.t('c-add-to-cart.notLoggedInTitle');
 ```
 
 ## Blueprints
@@ -734,9 +735,9 @@ Webpack supports to use an [alias](https://webpack.js.org/loaders/css-loader/#al
 
 ## Build chain
 
-The build chain uses a combined solution of Typescript and Babel:
+The build chain uses a combined solution of TypeScript and Babel:
 
-1. The webpack ts-loader shows TS errors and compiles the Typescript to Javascript files
+1. The webpack ts-loader shows TS errors and compiles the TypeScript to Javascript files
 2. The webpack babel-loader compiles the Javascript files to the final outpu based on the babel-preset and browserlist
 
 The reasons why we choose this setup are:
@@ -746,7 +747,7 @@ The reasons why we choose this setup are:
 
 ### tsconfig Target
 
-At the moment, we are using `es2019` as Typescript build target. The reason is, that `esNext` / `es2020` are not transpiling
+At the moment, we are using `es2019` as TypeScript build target. The reason is, that `esNext` / `es2020` are not transpiling
 `optional-chaining` and `nullish-coalescing` and webpack 4 cannot handle them
 
 ## Node.js and NPM
@@ -789,7 +790,7 @@ Stylelint setup for the current project.
 
 ### tsconfig.json
 
-Typescript configuration for the current project.
+TypeScript configuration for the current project.
 
 ## Known issues
 
