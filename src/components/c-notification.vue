@@ -440,12 +440,12 @@
 
     &--type-success &__icon,
     &--type-add-to-cart &__icon {
-      @include icon(check, 15px);
+      @include mixins.icon(check, 15px);
 
       margin-left: -28px;
       margin-right: 13px;
       margin-top: 1px;
-      color: $color-grayscale--1000;
+      color: variables.$color-grayscale--1000;
     }
 
     &--type-warning {
@@ -462,12 +462,12 @@
     }
 
     &--type-warning &__icon {
-      @include icon(warning, 15px);
+      @include mixins.icon(warning, 15px);
 
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      color: $color-grayscale--1000;
+      color: variables.$color-grayscale--1000;
     }
 
     &--type-error {
@@ -484,12 +484,12 @@
     }
 
     &--type-error &__icon {
-      @include icon(error, 15px);
+      @include mixins.icon(error, 15px);
 
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      color: $color-grayscale--1000;
+      color: variables.$color-grayscale--1000;
     }
 
     &--type-info {
@@ -506,12 +506,12 @@
     }
 
     &--type-info &__icon {
-      @include icon(info, 15px);
+      @include mixins.icon(info, 15px);
 
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      color: $color-grayscale--1000;
+      color: variables.$color-grayscale--1000;
     }
 
     &--display-type-modal {

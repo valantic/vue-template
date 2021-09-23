@@ -74,15 +74,15 @@
     box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
 
     &--state-error {
-      background-color: $color-status--danger;
+      background-color: variables.$color-status--danger;
     }
 
     &--state-info {
-      background-color: $color-status--info;
+      background-color: variables.$color-status--info;
     }
 
     &--state-success {
-      background-color: $color-status--success;
+      background-color: variables.$color-status--success;
     }
   }
 </style>

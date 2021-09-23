@@ -192,13 +192,13 @@
 
     &__filter {
       display: flex;
-      margin-bottom: $spacing--35;
+      margin-bottom: variables.$spacing--35;
     }
 
     &__label {
       display: flex;
       align-items: center;
-      margin: 0 $spacing--10 $spacing--10 0;
+      margin: 0 variables.$spacing--10 variables.$spacing--10 0;
 
       &--variant {
         margin: 0 0 0 auto;
@@ -207,7 +207,7 @@
 
     &__filter-input {
       display: block;
-      margin-left: $spacing--5;
+      margin-left: variables.$spacing--5;
     }
 
     &__grid {
@@ -280,7 +280,7 @@
     }
 
     &__grid-item:hover &__icon-wrapper {
-      color: $color-primary--1;
+      color: variables.$color-primary--1;
     }
   }
 </style>
