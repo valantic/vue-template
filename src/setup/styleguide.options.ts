@@ -1,5 +1,4 @@
 /* eslint-disable vue/no-unused-properties */
-import './styleguide.polyfills';
 import { createRouter, createWebHistory } from 'vue-router';
 import app from '@/styleguide/components/app.vue';
 import AxiosMockAdapter from '@/plugins/styleguide.axios-mock';
