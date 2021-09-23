@@ -15,18 +15,9 @@ export interface IStore {
   modules: IModules;
 }
 
-interface IAction {
-  data: object;
-  messages: {
-    INFO: [];
-    ERROR: [];
-    SUCCESS: [];
-  };
-  assetsPath: string;
-}
-
 interface IInitialData {
-  [key: string]: IAction;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 declare global {
@@ -34,7 +25,7 @@ declare global {
 }
 
 const data: IInitialData = window.initialData || {};
-let initialDataMessages: IMessage[] = [];
+const initialDataMessages: IMessage[] = [];
 
 const {
   store,
@@ -54,15 +45,12 @@ const {
 Object.keys(data).forEach((action) => {
   const { messages } = data[action] || {};
 
-  const storeModule = action.split('/')[0] as keyof IModules;
-  const moduleAction = action.split('/')[1];
-
   // NOTE: We moved away from JSON again, since it was too picky about special characters in the to be parsed string.
-  // @ts-ignore
-  store.dispatch[storeModule][moduleAction](data[action]);
+  // we use the traditional store dispatch as actions could be nested in multiple level of modules and we cannot easily detect that
+  store.original.dispatch(action, data[action]);
 
   if (Array.isArray(messages)) {
-    initialDataMessages = initialDataMessages.concat(messages);
+    initialDataMessages.push(...messages);
   }
 });
 
