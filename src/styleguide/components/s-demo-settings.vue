@@ -66,14 +66,13 @@
 </script>
 
 <style lang="scss">
-  // TODO replace @extend by mixin
-  @import '../../setup/scss/extends/list-reset';
+  @use '../../setup/scss/variables';
 
   .s-demo-settings {
-    margin-top: $spacing--10;
+    margin-top: variables.$spacing--10;
 
     .s-toggle + .s-toggle {
-      margin-top: $spacing--5;
+      margin-top: variables.$spacing--5;
     }
   }
 </style>

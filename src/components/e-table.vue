@@ -220,9 +220,6 @@
 <style lang="scss">
   @use '../setup/scss/mixins';
   @use '../setup/scss/variables';
-  // TODO replace @extend by mixin
-  // stylelint-disable-next-line no-invalid-position-at-import-rule
-  @import '../setup/scss/extends/button-reset';
 
   .e-table {
     $this: &;
@@ -261,13 +258,13 @@
       }
     }
 
-  &__button-sort {
-    display: inline-block;
-    height: 0;
-    width: 0;
-    opacity: 0.3;
-    border: 10px solid transparent;
-    border-bottom-color: variables.$color-grayscale--0;
+    &__button-sort {
+      display: inline-block;
+      height: 0;
+      width: 0;
+      opacity: 0.3;
+      border: 10px solid transparent;
+      border-bottom-color: variables.$color-grayscale--0;
 
       &--desc {
         border-bottom-color: transparent;

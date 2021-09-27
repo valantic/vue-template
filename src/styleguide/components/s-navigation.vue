@@ -116,9 +116,6 @@
 
 <style lang="scss">
   @use '../../setup/scss/variables';
-  // TODO replace @extend by mixin
-  // stylelint-disable-next-line no-invalid-position-at-import-rule
-  @import '../../setup/scss/extends/list-reset';
 
   .s-navigation {
     $this: &;

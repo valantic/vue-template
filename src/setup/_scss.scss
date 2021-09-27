@@ -5,10 +5,10 @@
 /* critical:start */
 
 // Style resets
-@import "scss/reset";
+@use 'scss/reset';
 
 // Global styles
-// @import 'scss/spacings'; // Only enable spacing classes if needed!
+// @use 'scss/spacings'; // Only enable spacing classes if needed!
 @use 'scss/global';
 
 /* critical:end */

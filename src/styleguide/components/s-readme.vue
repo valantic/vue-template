@@ -43,6 +43,7 @@
 <!-- eslint-disable -->
 <style lang="scss">
   @use '../../setup/scss/mixins';
+  @use '../../setup/scss/variables';
 
   /* stylelint-disable */
 
@@ -256,7 +257,7 @@
       list-style: disc;
 
       li + li {
-        margin-top: $spacing--10;
+        margin-top: variables.$spacing--10;
       }
     }
     ol {
@@ -264,7 +265,7 @@
       list-style: decimal;
 
       li + li {
-        margin-top: $spacing--10;
+        margin-top: variables.$spacing--10;
       }
     }
     hr {
