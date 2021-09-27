@@ -1,5 +1,5 @@
-@use '../variables/z-index';
+@use '../variables';
 
 @mixin z-index($key) {
-  z-index: map-get(z-index.$z-index, $key);
+  z-index: map-get(variables.$z-index, $key);
 }

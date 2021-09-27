@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use '../functions/strip-unit';
+@use '../functions/strip-unit' as *;
 @use '../config';
 
 ////
@@ -12,5 +12,5 @@
 @mixin font-size($size-value: config.$config--font-size) {
   $browser-default: 16px;
 
-  font-size: (math.div(strip-unit.strip-unit($size-value), strip-unit.strip-unit($browser-default))) + rem;
+  font-size: (math.div(strip-unit($size-value), strip-unit($browser-default))) + rem;
 }

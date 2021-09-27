@@ -1,4 +1,4 @@
-@use '../functions/strip-unit';
+@use '../functions/strip-unit' as *;
 
 ////
 /// Line clampin' (Truncating multiple line text)
@@ -12,7 +12,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: $clamp;
-  max-height: $clamp * (strip-unit.strip-unit($line-height) * 1em);
+  max-height: $clamp * (strip-unit($line-height) * 1em);
   overflow: hidden;
-  line-height: strip-unit.strip-unit($line-height);
+  line-height: strip-unit($line-height);
 }

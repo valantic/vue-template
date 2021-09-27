@@ -1,4 +1,4 @@
-@use '../variables/breakpoints';
+@use '../variables';
 
 ///
 /// Creates a media query
@@ -7,7 +7,7 @@
 /// @param   {string|number}   [$down]         Either a breakpoint identifier (xxs, xs, ...) or an absolute value (with unit)
 /// @param   {string}          [$media=all]    The targeted media
 ///
-@mixin media($up: null, $down: null, $media: all, $breakpoints: breakpoints.$breakpoints) {
+@mixin media($up: null, $down: null, $media: all, $breakpoints: variables.$breakpoints) {
   $query: if($media == all, "all", "only #{$media}");
   $indexOfUpBreakpoint: index(map-keys($breakpoints), $up);
   $indexOfDownBreakpoint: index(map-keys($breakpoints), $down);
