@@ -66,6 +66,9 @@
 </script>
 
 <style lang="scss">
+  // TODO replace @extend by mixin
+  @import '../../setup/scss/extends/list-reset';
+
   .s-demo-settings {
     margin-top: $spacing--10;
 

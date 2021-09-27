@@ -57,9 +57,12 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .e-fieldset {
     &__legend {
-      @include font($font-size--18, 22px, $font-weight--regular);
+      @include mixins.font(variables.$font-size--18, 22px, variables.$font-weight--regular);
     }
 
     &__inner {
@@ -67,11 +70,7 @@
     }
 
     &__fields {
-      padding: $spacing--25 0 $spacing--20;
-
-      @include media(xs) {
-        padding: $spacing--30 0;
-      }
+      padding: variables.$spacing--5 0;
     }
   }
 </style>

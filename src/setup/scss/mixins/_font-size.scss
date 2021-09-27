@@ -1,4 +1,6 @@
-// @import "../functions/strip-unit";
+@use 'sass:math';
+@use '../functions/strip-unit' as *;
+@use '../config';
 
 ////
 // Calculate rem font-size for given pixel value based on base font-size
@@ -7,8 +9,8 @@
 //
 // @returns {font-size}   font-size property with rem value
 ////
-@mixin font-size($size-value: $_config--font-size) {
+@mixin font-size($size-value: config.$config--font-size) {
   $browser-default: 16px;
 
-  font-size: ( strip-unit($size-value) / strip-unit($browser-default) ) + rem;
+  font-size: (math.div(strip-unit($size-value), strip-unit($browser-default))) + rem;
 }

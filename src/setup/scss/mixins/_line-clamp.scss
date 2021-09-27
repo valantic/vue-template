@@ -1,3 +1,5 @@
+@use '../functions/strip-unit' as *;
+
 ////
 /// Line clampin' (Truncating multiple line text)
 /// @see https://css-tricks.com/line-clampin/

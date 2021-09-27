@@ -31,13 +31,12 @@
     </div>
     <button v-if="!notification.confirm"
             :class="b('close')"
+            :area-label="$t('c-notification.close')"
             @click="close">
       <e-icon
-        icon="i-close"
-        width="15"
-        height="15"
-        inline
-      />&nbsp;
+        icon="close"
+        size="15"
+      />
     </button>
   </div>
 </template>
@@ -245,6 +244,9 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   @keyframes c-notification-animation-in {
     0% {
       opacity: 0;
@@ -274,15 +276,15 @@
     100% {
       opacity: 0;
       max-height: 0;
-      margin-bottom: $spacing--0;
+      margin-bottom: variables.$spacing--0;
       border: none;
     }
   }
 
   .c-notification {
     display: none;
-    background-color: rgba($color-grayscale--1000, 0.95);
-    margin-bottom: $spacing--10;
+    background-color: rgba(variables.$color-grayscale--1000, 0.95);
+    margin-bottom: variables.$spacing--10;
     overflow-y: hidden;
     width: 100%;
     max-height: 200px;
@@ -323,80 +325,80 @@
     }
 
     &__inner {
-      @include font($font-size--14, 18px);
+      @include mixins.font(variables.$font-size--14, 18px);
 
       flex: 1 1 auto;
-      color: $color-grayscale--400;
-      padding: $spacing--10 0 $spacing--20 0;
+      color: variables.$color-grayscale--400;
+      padding: variables.$spacing--10 0 variables.$spacing--20 0;
 
       &--is-product-tile {
-        padding: $spacing--10 0;
-        margin-left: -$spacing--5;
+        padding: variables.$spacing--10 0;
+        margin-left: -(variables.$spacing--5);
       }
     }
 
     &__title {
-      @include font($font-size--14, 18px, $font-weight--bold);
+      @include mixins.font(variables.$font-size--14, 18px, variables.$font-weight--bold);
     }
 
     &__heading {
-      @include font($font-size--12, 15px);
+      @include mixins.font(variables.$font-size--12, 15px);
     }
 
     &__heading-label {
-      color: $color-grayscale--200;
+      color: variables.$color-grayscale--200;
     }
 
     &__image-wrapper {
       height: 77px;
       width: 77px;
       min-width: 77px;
-      padding: $spacing--10;
-      border: 1px solid $color-grayscale--600;
+      padding: variables.$spacing--10;
+      border: 1px solid variables.$color-grayscale--600;
       overflow: hidden;
-      background-color: $color-grayscale--1000;
+      background-color: variables.$color-grayscale--1000;
     }
 
     &__content-wrapper {
-      padding-left: $spacing--10;
+      padding-left: variables.$spacing--10;
       flex: 3;
     }
 
     &__product-title-wrapper {
-      padding-top: $spacing--5;
+      padding-top: variables.$spacing--5;
       width: 80%;
     }
 
     &__product-title {
-      @include font($font-size--14, 18px);
+      @include mixins.font(variables.$font-size--14, 18px);
 
-      color: $color-secondary--1;
+      color: variables.$color-secondary--1;
 
       &:hover {
         text-decoration: none;
-        color: $color-secondary--1;
+        color: variables.$color-secondary--1;
       }
     }
 
     &__checkout-link-wrapper {
       position: absolute;
-      top: $spacing--5;
+      top: variables.$spacing--5;
       right: 0;
     }
 
     &__checkout-link {
-      @include font($font-size--12, 15px);
+      @include mixins.font(variables.$font-size--12, 15px);
     }
 
     &__actions {
       display: flex;
       flex: 0 0 auto;
       align-self: center;
-      margin-left: $spacing--5;
+      margin-left: variables.$spacing--5;
     }
 
     &__action + &__action {
-      margin-left: $spacing--5;
+      margin-left: variables.$spacing--5;
     }
 
     &__close {
@@ -407,12 +409,9 @@
       height: 30px;
       background: none;
       border: none;
-      padding: $spacing--0;
+      padding: variables.$spacing--0;
       cursor: pointer;
-
-      path {
-        fill: $color-grayscale--1000;
-      }
+      color: variables.$color-grayscale--1000;
 
       .e-icon {
         display: block;
@@ -427,85 +426,92 @@
 
     &--type-success,
     &--type-add-to-cart {
-      border: 1px solid $color-status--success;
-      border-bottom: 2px solid $color-status--success;
+      border: 1px solid variables.$color-status--success;
+      border-bottom: 2px solid variables.$color-status--success;
 
       &::before {
-        border-left: 30px solid $color-status--success;
+        border-left: 30px solid variables.$color-status--success;
       }
 
       &::after {
-        border-right: 30px solid $color-status--success;
+        border-right: 30px solid variables.$color-status--success;
       }
     }
 
     &--type-success &__icon,
     &--type-add-to-cart &__icon {
+      @include mixins.icon(check, 15px);
+
       margin-left: -28px;
       margin-right: 13px;
       margin-top: 1px;
-      background-image: url('../assets/icons/i-check--negative.svg');
+      color: variables.$color-grayscale--1000;
     }
 
     &--type-warning {
-      border: 1px solid $color-status--warning;
-      border-bottom: 2px solid $color-status--warning;
+      border: 1px solid variables.$color-status--warning;
+      border-bottom: 2px solid variables.$color-status--warning;
 
       &::before {
-        border-left: 30px solid $color-status--warning;
+        border-left: 30px solid variables.$color-status--warning;
       }
 
       &::after {
-        border-right: 30px solid $color-status--warning;
+        border-right: 30px solid variables.$color-status--warning;
       }
     }
 
     &--type-warning &__icon {
+      @include mixins.icon(warning, 15px);
+
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/i-warning--negative.svg');
-      background-size: 10px;
+      color: variables.$color-grayscale--1000;
     }
 
     &--type-error {
-      border: 1px solid $color-status--danger;
-      border-bottom: 2px solid $color-status--danger;
+      border: 1px solid variables.$color-status--danger;
+      border-bottom: 2px solid variables.$color-status--danger;
 
       &::before {
-        border-left: 30px solid $color-status--danger;
+        border-left: 30px solid variables.$color-status--danger;
       }
 
       &::after {
-        border-right: 30px solid $color-status--danger;
+        border-right: 30px solid variables.$color-status--danger;
       }
     }
 
     &--type-error &__icon {
+      @include mixins.icon(error, 15px);
+
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/i-error--negative.svg');
+      color: variables.$color-grayscale--1000;
     }
 
     &--type-info {
-      border: 1px solid $color-status--info;
-      border-bottom: 2px solid $color-status--info;
+      border: 1px solid variables.$color-status--info;
+      border-bottom: 2px solid variables.$color-status--info;
 
       &::before {
-        border-left: 30px solid $color-status--info;
+        border-left: 30px solid variables.$color-status--info;
       }
 
       &::after {
-        border-right: 30px solid $color-status--info;
+        border-right: 30px solid variables.$color-status--info;
       }
     }
 
     &--type-info &__icon {
+      @include mixins.icon(info, 15px);
+
       margin-left: -29px;
       margin-right: 14px;
       margin-top: 2px;
-      background-image: url('../assets/icons/i-info--negative.svg');
+      color: variables.$color-grayscale--1000;
     }
 
     &--display-type-modal {
