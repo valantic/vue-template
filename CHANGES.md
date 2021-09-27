@@ -1,4 +1,5 @@
 ### Next
+ - (Breaking) Replaces usage of sass @imports with @use and @forward, replaces @extends with @mixins, adds local imports
  - (Feature) Adds styleguide build information to the index page.
  - (Feature) Adds support for local webpack dist (Pimcore).
  - (Feature) Adds auto-reload for scss file changes.
@@ -11,7 +12,7 @@
  - (Breaking) Refactors e-picture (inverts sizes definition, adds additional options)  
  - (Change) Fixes invalid greyscale order.
  - (Change) Replaces deprecated webpack-manifest-plugin with webpack-assets-manifest.
- - (Change) Simplyfies s-readme styles, so they align more with the current project.
+ - (Change) Simplifies s-readme styles, so they align more with the current project.
  - (Change) Updates browser support table.
  - (Change) Makes form mixin imports absolute to prevent ESLint errors.
  - (Change) Removes deprecated prop from e-checkbox demos.

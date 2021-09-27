@@ -184,18 +184,21 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/mixins';
+  @use '../../setup/scss/variables';
+
   .s-icon-finder {
-    font-family: $font-family--primary;
+    font-family: variables.$font-family--primary;
 
     &__filter {
       display: flex;
-      margin-bottom: $spacing--35;
+      margin-bottom: variables.$spacing--35;
     }
 
     &__label {
       display: flex;
       align-items: center;
-      margin: 0 $spacing--10 $spacing--10 0;
+      margin: 0 variables.$spacing--10 variables.$spacing--10 0;
 
       &--variant {
         margin: 0 0 0 auto;
@@ -204,7 +207,7 @@
 
     &__filter-input {
       display: block;
-      margin-left: $spacing--5;
+      margin-left: variables.$spacing--5;
     }
 
     &__grid {
@@ -231,7 +234,7 @@
     }
 
     &__grid-item--negative {
-      background-color: $color-grayscale--500;
+      background-color: variables.$color-grayscale--500;
     }
 
     &__icon-wrapper {
@@ -255,7 +258,7 @@
     }
 
     &__icon-label {
-      @include font(10);
+      @include mixins.font(10);
 
       text-align: center;
     }
@@ -269,15 +272,15 @@
       position: fixed;
       bottom: 0;
       left: 0;
-      background-color: $color-status--success;
+      background-color: variables.$color-status--success;
       width: 100%;
       text-align: center;
       z-index: 999;
-      padding: $spacing--10;
+      padding: variables.$spacing--10;
     }
 
     &__grid-item:hover &__icon-wrapper {
-      color: $color-primary--1;
+      color: variables.$color-primary--1;
     }
   }
 </style>

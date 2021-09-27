@@ -218,45 +218,48 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-collapse {
-    border-top: 1px solid $color-grayscale--600;
+    border-top: 1px solid variables.$color-grayscale--600;
 
     &:last-child {
-      border-bottom: 1px solid $color-grayscale--600;
+      border-bottom: 1px solid variables.$color-grayscale--600;
     }
 
     &__toggle {
-      @include font($font-size--16, 40px);
+      @include mixins.font(variables.$font-size--16, 40px);
 
       display: block;
-      color: $color-grayscale--400;
+      color: variables.$color-grayscale--400;
       cursor: pointer;
       height: 40px;
       overflow: hidden;
-      padding: 0 $spacing--10 0 $spacing--30;
+      padding: 0 variables.$spacing--10 0 variables.$spacing--30;
       position: relative;
       text-overflow: ellipsis;
-      transition: color $transition-duration-100;
+      transition: color variables.$transition-duration-100;
       white-space: nowrap;
       border-bottom: 0;
 
       &::after {
-        border-bottom: 1px solid $color-primary--1;
+        border-bottom: 1px solid variables.$color-primary--1;
         bottom: 0;
         left: 0;
         content: "";
         position: absolute;
-        transition: width $transition-duration-300 ease;
+        transition: width variables.$transition-duration-300 ease;
         width: 0;
       }
 
       &:hover {
-        color: $color-secondary--1;
+        color: variables.$color-secondary--1;
         text-decoration: none;
       }
 
       .c-collapse--expanded & {
-        transition: color $transition-duration-300;
+        transition: color variables.$transition-duration-300;
 
         &::after {
           width: 100%;
@@ -265,11 +268,11 @@
     }
 
     &__content {
-      @include font($font-size--14, 18px);
+      @include mixins.font(variables.$font-size--14, 18px);
 
       max-height: 0;
       overflow: hidden;
-      transition: max-height $transition-duration-200 ease-in-out;
+      transition: max-height variables.$transition-duration-200 ease-in-out;
 
       .c-collapse--open & {
         max-height: none;
@@ -282,18 +285,18 @@
       }
 
       .c-collapse--padding-300 & {
-        padding: $spacing--10 0 $spacing--10 0;
+        padding: variables.$spacing--10 0 variables.$spacing--10 0;
       }
 
       .c-collapse--padding-500 & {
-        padding: $spacing--10 $spacing--10 $spacing--10 $spacing--30;
+        padding: variables.$spacing--10 variables.$spacing--10 variables.$spacing--10 variables.$spacing--30;
       }
     }
 
     &__toggle .e-icon {
-      left: $spacing--10;
+      left: variables.$spacing--10;
       position: absolute;
-      transition: transform $transition-duration-200 ease;
+      transition: transform variables.$transition-duration-200 ease;
       top: 50%;
       transform: translateY(-50%);
       transform-origin: center;

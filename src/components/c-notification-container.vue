@@ -131,39 +131,42 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-notification-container {
-    @include z-index(globalNotification);
+    @include mixins.z-index(globalNotification);
 
     &--display-type-global {
       position: absolute;
       width: 100%;
-      margin-top: -$spacing--20;
+      margin-top: -(variables.$spacing--20);
 
-      @include media(xs) {
-        margin-top: -$spacing--5;
+      @include mixins.media(xs) {
+        margin-top: -(variables.$spacing--5);
       }
     }
 
     &--display-type-add-to-cart {
       position: absolute;
       width: 100%;
-      right: $spacing--0;
+      right: variables.$spacing--0;
       display: none;
 
-      @include media(xs) {
+      @include mixins.media(xs) {
         width: 385px;
       }
 
-      @include media(md) {
+      @include mixins.media(md) {
         display: block;
       }
 
       &.c-notification-container--state-full {
-        margin-top: -$spacing--5;
+        margin-top: -(variables.$spacing--5);
       }
 
       &.c-notification-container--state-reduced {
-        margin-top: -$spacing--15;
+        margin-top: -(variables.$spacing--15);
       }
     }
 
@@ -174,10 +177,10 @@
     &--display-type-global &__inner {
       position: fixed;
       width: 100%;
-      padding: $spacing--10;
+      padding: variables.$spacing--10;
 
-      @include media(xs) {
-        padding: $spacing--0;
+      @include mixins.media(xs) {
+        padding: variables.$spacing--0;
         width: 385px;
       }
     }
@@ -186,7 +189,7 @@
       position: fixed;
       width: 100%;
 
-      @include media(xs) {
+      @include mixins.media(xs) {
         width: 385px;
       }
     }

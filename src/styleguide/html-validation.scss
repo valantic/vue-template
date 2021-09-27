@@ -1,3 +1,5 @@
+@use '../setup/scss/variables';
+
 // stylelint-disable
 
 .html-validation {
@@ -12,7 +14,7 @@
       position: absolute;
       z-index: 1000;
       border: 1px solid $red;
-      padding: 2px $spacing--5;
+      padding: 2px variables.$spacing--5;
       background: lighten($red, 40%);
       color: $black;
       max-width: 200px;

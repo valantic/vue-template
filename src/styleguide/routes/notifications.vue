@@ -253,21 +253,24 @@
 </script>
 
 <style lang="scss">
-  .notifications {
-    padding: $spacing--50;
+  @use '../../setup/scss/mixins';
+  @use '../../setup/scss/variables';
 
-    @include media(sm) {
+  .notifications {
+    padding: variables.$spacing--50;
+
+    @include mixins.media(sm) {
       margin-left: 400px;
     }
 
     .e-label,
     .e-button {
-      margin-bottom: $spacing--10;
-      margin-right: $spacing--10;
+      margin-bottom: variables.$spacing--10;
+      margin-right: variables.$spacing--10;
     }
 
     &__selector {
-      margin-bottom: $spacing--10;
+      margin-bottom: variables.$spacing--10;
     }
   }
 </style>

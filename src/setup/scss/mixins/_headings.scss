@@ -1,0 +1,26 @@
+@use '../variables/font' as fontVariables;
+@use './font' as fontMixins;
+
+@mixin heading-h1 { // TODO: update definition for project.
+  @include fontMixins.font(fontVariables.$font-size--18);
+}
+
+@mixin heading-h2 { // TODO: update definition for project.
+  @include fontMixins.font(fontVariables.$font-size--16);
+}
+
+@mixin heading-h3 { // TODO: update definition for project.
+  @include fontMixins.font(fontVariables.$font-size--14);
+}
+
+@mixin heading-h4 { // TODO: update definition for project.
+  @include fontMixins.font(fontVariables.$font-size--14);
+}
+
+@mixin heading-h5 { // TODO: update definition for project.
+  @include fontMixins.font(fontVariables.$font-size--14);
+}
+
+@mixin heading-h6 { // TODO: update definition for project.
+  @include fontMixins.font(fontVariables.$font-size--14);
+}

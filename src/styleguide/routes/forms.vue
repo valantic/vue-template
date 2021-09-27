@@ -198,6 +198,8 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .forms {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -205,16 +207,16 @@
     &__form,
     &__data,
     &__validation {
-      padding: $spacing--50;
-      border: 1px dotted $color-grayscale--500;
+      padding: variables.$spacing--50;
+      border: 1px dotted variables.$color-grayscale--500;
     }
 
     .e-fieldset {
-      margin-bottom: $spacing--50;
+      margin-bottom: variables.$spacing--50;
     }
 
     .e-label:not(:last-of-type) {
-      margin-bottom: $spacing--10;
+      margin-bottom: variables.$spacing--10;
     }
   }
 </style>

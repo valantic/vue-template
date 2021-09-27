@@ -1,3 +1,8 @@
+@use '../variables/spacing';
+@use '../variables/breakpoints';
+@use '../functions/strip-unit';
+@use './media';
+
 ///
 /// Creates a set of spacings for the given class
 ///
@@ -6,9 +11,9 @@
 /// @param   {list}      [$spacings=$spacings]               The CSS property to which the spacing value should be assigned
 /// @param   {list}      [$breakpoints=$breakpoints]         The CSS property to which the spacing value should be assigned
 ///
-@mixin spacings($class, $property, $spacings: $spacings, $breakpoints: $breakpoints) {
+@mixin spacings($class, $property, $spacings: spacing.$spacings, $breakpoints: breakpoints.$breakpoints) {
   @each $spacing in $spacings {
-    .#{$class}-#{strip-unit($spacing)} {
+    .#{$class}-#{strip-unit.strip-unit($spacing)} {
       #{$property}: #{$spacing};
     }
   }
@@ -17,13 +22,13 @@
   @for $breakpointIndex from 2 through length($breakpoints) { // NOTE: skipped index 1 (xxs) because it creates invalid query selector.
     $breakpoint: nth(map-keys($breakpoints), $breakpointIndex);
 
-    @include media($breakpoint) { // Wrapping spacing loop in media() reduces output size
+    @include media.media($breakpoint) { // Wrapping spacing loop in media() reduces output size
       @for $spacingIndex from 1 through length($spacings) {
         $spacing: nth($spacings, $spacingIndex);
 
         @if $breakpointIndex != 1 and $spacingIndex != 1 { // Don't create a breakpoint related spacing if 0 $spacing and 0 $breakpoint
           // stylelint-disable-next-line max-nesting-depth
-          .#{$class}-#{$breakpoint}-#{strip-unit($spacing)} {
+          .#{$class}-#{$breakpoint}-#{strip-unit.strip-unit($spacing)} {
             #{$property}: #{$spacing};
           }
         }
