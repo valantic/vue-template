@@ -1,5 +1,4 @@
 ### Next
- - (Breaking) Replaces usage of sass @imports with @use and @forward, replaces @extends with @mixins, adds local imports
  - (Feature) Adds styleguide build information to the index page.
  - (Feature) Adds support for local webpack dist (Pimcore).
  - (Feature) Adds auto-reload for scss file changes.
@@ -30,6 +29,11 @@
    - Updates the sass plugin to version 1.39.2 which makes it possible to use the @use "math:div" function.
    - Replaces the SCSS divisions by "slash" with the math.div() Sass function
    - Activates the `hoistUseStatements` option in the sass-loader plugin
+-  (Change) Issue 144 / 166:
+   - Removes global scss imports
+   - Replaces usages of `@import` with `@use` and `@forward`
+   - Replaces usages of `@extends` with `@mixins` as extends is not supported by scss namespaces
+   - Uses local imports for scss mixins, functions and variables
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
