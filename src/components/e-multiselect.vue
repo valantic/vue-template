@@ -281,6 +281,8 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/variables';
+
   .e-multiselect {
     $e-multiselect-height: 30px;
 
@@ -288,19 +290,17 @@
     position: relative;
 
     &__field-wrapper {
-      @extend %button-reset;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--500;
       min-height: $e-multiselect-height;
-      padding: 0 $spacing--5;
+      padding: 0 variables.$spacing--5;
       cursor: pointer;
 
       .e-icon {
-        transition: transform $transition-duration-200 linear;
+        transition: transform variables.$transition-duration-200 linear;
       }
     }
 
@@ -312,7 +312,7 @@
 
     &__field-wrapper--disabled {
       pointer-events: none;
-      color: $color-grayscale--500;
+      color: variables.$color-grayscale--500;
     }
 
     &__output-value {
@@ -328,24 +328,20 @@
 
     &__options-wrapper {
       display: block;
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--500;
       border-top: 0;
       position: absolute;
       width: 100%;
       top: 100%;
       left: 0;
-      background-color: $color-grayscale--1000;
+      background-color: variables.$color-grayscale--1000;
       max-height: 300px;
       overflow: auto;
       transform-origin: top;
     }
 
-    &__options-list {
-      @extend %list-reset;
-    }
-
     &__options-item {
-      padding: $spacing--2 $spacing--5;
+      padding: variables.$spacing--2 variables.$spacing--5;
     }
 
     &__progress-wrapper {
@@ -362,15 +358,15 @@
     &__search-field {
       width: 100%;
       min-height: $e-multiselect-height;
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--500;
       outline: none;
-      padding: 0 $spacing--5;
+      padding: 0 variables.$spacing--5;
     }
 
     // Transition
     .top-slide-enter-active,
     .top-slide-leave-active {
-      transition: all $transition-duration-200 ease-in-out;
+      transition: all variables.$transition-duration-200 ease-in-out;
     }
 
     .top-slide-enter,
