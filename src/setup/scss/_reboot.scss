@@ -1,3 +1,5 @@
+@use './variables';
+
 // stylelint-disable at-rule-no-vendor-prefix, declaration-no-important, selector-no-qualifying-type, property-no-vendor-prefix, no-descending-specificity
 
 // Reboot
@@ -59,9 +61,9 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: $color-grayscale--0;
+  color: variables.$color-grayscale--0;
   text-align: left; // 3
-  background-color: $color-grayscale--1000; // 2
+  background-color: variables.$color-grayscale--1000; // 2
 }
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
@@ -192,13 +194,13 @@ sup { top: -0.5em; }
 //
 
 a {
-  color: $color-secondary--1;
+  color: variables.$color-secondary--1;
   text-decoration: none;
   background-color: transparent; // Remove the gray background on active links in IE 10.
   -webkit-text-decoration-skip: objects; // Remove gaps in links underline in iOS 8+ and Safari 8+.
 
   &:hover {
-    color: $color-grayscale--0;
+    color: variables.$color-grayscale--0;
     text-decoration: none;
   }
 }
@@ -283,7 +285,7 @@ table {
 caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  color: $color-grayscale--0;
+  color: variables.$color-grayscale--0;
   text-align: left;
   caption-side: bottom;
 }

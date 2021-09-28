@@ -255,7 +255,7 @@ module.exports = (env, args = {}) => {
       },
     },
     {
-      test: /\.scss$/,
+      test: /\.s?css$/,
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
@@ -278,13 +278,6 @@ module.exports = (env, args = {}) => {
             sourceMap: false
           }
         },
-        {
-          loader: 'sass-resources-loader',
-          options: {
-            resources: scssResources.map(file => scssResourcesFolder + file),
-            hoistUseStatements: true,
-          },
-        },
       ],
     },
     {
@@ -303,6 +296,7 @@ module.exports = (env, args = {}) => {
         {
           loader: 'image-webpack-loader', // @see https://github.com/tcoopman/image-webpack-loader
           options: {
+            disable: !isProduction, // Skip image optimization in non production mode.
             svgo: {
               plugins: svgoPlugins
             },

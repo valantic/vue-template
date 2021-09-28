@@ -70,6 +70,11 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+  // TODO replace @extend by mixin
+  // stylelint-disable-next-line no-invalid-position-at-import-rule
+  @import '../../setup/scss/extends/list-reset';
+
   .s-navigation-block {
     @extend %list-reset;
 
@@ -81,7 +86,7 @@
     }
 
     &__navigation-link {
-      padding: $spacing--5 $spacing--20;
+      padding: variables.$spacing--5 variables.$spacing--20;
       text-decoration: none;
       display: block;
 

@@ -20,12 +20,14 @@ Use the media-mixin for media queries. See app/setup/scss/mixins/_media.scss
 Use media-mixin within selectors, not the other way around
 
 ```scss
+@use '<path/to>/setup/scss/mixins';
+
 .foo {
-  @include media(xxs, $media: screen) {
+  @include mixins.media(xxs, $media: screen) {
     display: block;
   }
   
-  @include media(sm, md, screen) {
+  @include mixins.media(sm, md, screen) {
     display: inline;
   }
 }
