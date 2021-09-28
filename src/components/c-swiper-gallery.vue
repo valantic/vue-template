@@ -416,7 +416,7 @@
     }
 
     &__video-thumbnail-overlay {
-      @include icon(play, 50px, $mask: false);
+      @include mixins.icon(play, 50px, $mask: false);
 
       position: absolute;
       top: 0;

@@ -132,7 +132,7 @@
 
         switch (this.variant) {
           case 'mask':
-            template = `@include icon(${icon.name});`;
+            template = `@include mixins.icon(${icon.name});`;
             break;
 
           case 'css':

@@ -75,7 +75,9 @@ Use as
 
 ```scss
 .icon {
-  @include icon(icon);
+  @use '../setup/scss/mixins';
+  
+  @include mixins.icon(icon);
 }
 ```
 
