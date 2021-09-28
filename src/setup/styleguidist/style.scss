@@ -1,7 +1,10 @@
+@use '../../setup/scss/variables';
+@use '../../setup/scss/functions';
+
 // Use styleguide.styles.js to customize styles by default. Only define new styles here if the JS approach does not work.
 
 article[class^='rsg'] {
-  margin-bottom: $spacing--100;
+  margin-bottom: variables.$spacing--100;
 }
 
 // Default CSS Variable definition is needed for component styleguide
@@ -24,6 +27,6 @@ $theme-default: (
 :root {
   @each $name, $color in $theme-default {
     --theme-#{$name}: #{$color};
-    --theme-#{$name}--rgb: #{calc-rgb($color)};
+    --theme-#{$name}--rgb: #{functions.calc-rgb($color)};
   }
 }

@@ -18,23 +18,18 @@
 
           <div v-show="isError" :class="b('icon-wrapper')">
             <span :class="b('icon-splitter')"></span>
-            <e-icon inline
-                    icon="i-error"
-                    width="20px"
-                    height="20px"
+            <e-icon icon="error"
+                    size="20"
             />
           </div>
           <div v-show="!isError" :class="b('icon-wrapper')">
             <e-icon v-show="isSuccess"
-                    inline
-                    icon="i-check"
+                    icon="check"
             />
             <e-icon v-show="!isSuccess"
                     :color="disabled ? 'lightgray' : 'default'"
-                    inline
-                    icon="i-arrow--down--info"
-                    width="18px"
-                    height="18px"
+                    icon="arrow--down"
+                    size="18"
             />
           </div>
         </div>
@@ -54,8 +49,7 @@
                    @input="onSearchInput"
           >
             <e-icon :class="b('icon')"
-                    icon="i-search"
-                    inline />
+                    icon="search" />
           </e-input>
         </div>
         <div :class="b('items-wrapper')">
@@ -94,11 +88,9 @@
             {{ errorMessage }}
           </span>
           <div :class="b('error-icon-wrapper')">
-            <e-icon inline
-                    icon="i-error"
+            <e-icon icon="error"
                     color="white"
-                    width="20px"
-                    height="20px"
+                    size="20"
             />
           </div>
         </div>
@@ -542,6 +534,10 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-multiselect {
     position: relative;
 
@@ -558,16 +554,16 @@
 
     &__content {
       width: 100%;
-      transition: box-shadow $transition-duration-200 ease-in-out;
+      transition: box-shadow variables.$transition-duration-200 ease-in-out;
     }
 
     &--active &__content {
-      @include z-index(dropdown);
+      @include mixins.z-index(dropdown);
 
       position: absolute;
-      border: 1px solid $color-grayscale--500;
-      border-radius: $border-radius--500;
-      box-shadow: 0 2px 5px 0 rgba($color-grayscale--500, 0.5);
+      border: 1px solid variables.$color-grayscale--500;
+      border-radius: variables.$border-radius--500;
+      box-shadow: 0 2px 5px 0 rgba(variables.$color-grayscale--500, 0.5);
       top: calc(100% - 30px);
     }
 
@@ -576,51 +572,51 @@
     }
 
     &__title {
-      @extend %hyphens;
-      @include font($font-size--16, $spacing--20);
+      @include mixins.hyphens();
+      @include mixins.font(variables.$font-size--16, variables.$spacing--20);
 
-      color: $color-grayscale--400;
-      margin-bottom: $spacing--5;
+      color: variables.$color-grayscale--400;
+      margin-bottom: variables.$spacing--5;
     }
 
     &--active &__title,
     &--focus &__title {
-      color: $color-secondary--1;
+      color: variables.$color-secondary--1;
     }
 
     &--disabled &__title {
-      color: $color-grayscale--300;
+      color: variables.$color-grayscale--300;
     }
 
     &--error &__title {
-      color: $color-status--error;
+      color: variables.$color-status--error;
     }
 
     // output
     &__output {
-      height: $spacing--30;
+      height: variables.$spacing--30;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1px solid $color-grayscale--500;
-      border-radius: $border-radius--500;
+      border: 1px solid variables.$color-grayscale--500;
+      border-radius: variables.$border-radius--500;
     }
 
     &--hover &__output {
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     &--error &__output {
-      border-color: $color-status--error;
+      border-color: variables.$color-status--error;
     }
 
     // placeholder and value
     &__placeholder,
     &__value {
-      @include font-size($font-size--14);
+      @include mixins.font-size(variables.$font-size--14);
 
-      padding: 0 $spacing--10;
-      color: $color-grayscale--400;
+      padding: 0 variables.$spacing--10;
+      color: variables.$color-grayscale--400;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -629,15 +625,15 @@
     &--disabled &__placeholder,
     &--disabled &__value,
     &--disabled &__output {
-      color: $color-grayscale--300;
-      border-color: $color-grayscale--600;
+      color: variables.$color-grayscale--300;
+      border-color: variables.$color-grayscale--600;
     }
 
     &__icon-wrapper {
-      height: percentage(4 / 5); // for positioning the icon
-      padding: 0 $spacing--5 0;
+      height: percentage(math.div(4, 5)); // for positioning the icon
+      padding: 0 variables.$spacing--5 0;
       align-self: flex-end;
-      width: $spacing--30;
+      width: variables.$spacing--30;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -653,18 +649,18 @@
       position: absolute;
       right: 30px;
       height: calc(100% - 4px);
-      top: $spacing--2;
-      border-left: 1px solid $color-status--error;
+      top: variables.$spacing--2;
+      border-left: 1px solid variables.$color-status--error;
     }
 
     &__items-wrapper {
-      @extend %hyphens;
+      @include mixins.hyphens();
 
       display: none;
-      padding: $spacing--5 0;
-      background-color: $color-grayscale--700;
-      border-top: 1px solid $color-grayscale--500;
-      border-bottom: 1px solid $color-grayscale--500;
+      padding: variables.$spacing--5 0;
+      background-color: variables.$color-grayscale--700;
+      border-top: 1px solid variables.$color-grayscale--500;
+      border-bottom: 1px solid variables.$color-grayscale--500;
       overflow-y: auto;
       max-height: 165px;
     }
@@ -674,21 +670,21 @@
     }
 
     &__item-wrapper {
-      padding: $spacing--5;
+      padding: variables.$spacing--5;
     }
 
     &__list-empty {
-      @include font($font-size--14, 18px);
+      @include mixins.font(variables.$font-size--14, 18px);
 
       display: block;
-      padding: $spacing--5;
-      color: $color-grayscale--400;
+      padding: variables.$spacing--5;
+      color: variables.$color-grayscale--400;
     }
 
     &__search-button {
       border: 0;
       background: transparent;
-      padding: $spacing--5 0 0;
+      padding: variables.$spacing--5 0 0;
       margin: 0;
 
       &:focus {
@@ -698,12 +694,12 @@
 
     &__button-wrapper {
       display: none;
-      padding: $spacing--10;
+      padding: variables.$spacing--10;
     }
 
     &--active &__button-wrapper {
       display: block;
-      background-color: $color-grayscale--1000;
+      background-color: variables.$color-grayscale--1000;
 
       .e-button { // if not applied, the button can overflow the multiselect component.
         min-width: auto;
@@ -714,14 +710,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: $spacing--5;
-      background-color: $color-status--error;
+      padding: variables.$spacing--5;
+      background-color: variables.$color-status--error;
     }
 
     &__error-msg {
-      @include font-size($font-size--14);
+      @include mixins.font-size(variables.$font-size--14);
 
-      color: $color-grayscale--1000;
+      color: variables.$color-grayscale--1000;
     }
   }
 </style>

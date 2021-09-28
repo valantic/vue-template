@@ -1,3 +1,7 @@
+@use 'sass:math';
+@use '../functions/strip-unit' as *;
+@use '../config';
+
 ////
 // Calculate unit less line height by given $line-height px value and $font-size px value
 //
@@ -6,6 +10,6 @@
 //
 // @returns   {line-height}   line-height property with unit less value
 ////
-@mixin line-height($line-height: $_config--line-height, $font-size: $_config--font-size) {
-  line-height: strip-unit($line-height) / strip-unit($font-size);
+@mixin line-height($line-height: config.$config--line-height, $font-size: config.$config--font-size) {
+  line-height: math.div(strip-unit($line-height), strip-unit($font-size));
 }

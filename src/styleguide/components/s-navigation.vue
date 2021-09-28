@@ -115,19 +115,24 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+  // TODO replace @extend by mixin
+  // stylelint-disable-next-line no-invalid-position-at-import-rule
+  @import '../../setup/scss/extends/list-reset';
+
   .s-navigation {
     $this: &;
-    $border: $spacing--10 solid $color-grayscale--400;
+    $border: variables.$spacing--10 solid variables.$color-grayscale--400;
     $trigger-size: 40px;
 
     z-index: 1;
 
     &__navigation-wrapper {
-      font-family: $font-family--primary;
+      font-family: variables.$font-family--primary;
       margin: auto;
       position: fixed;
-      min-width: $spacing--40;
-      background-color: $color-grayscale--1000;
+      min-width: variables.$spacing--40;
+      background-color: variables.$color-grayscale--1000;
       height: 100%;
 
       &::after { // Toggle
@@ -136,9 +141,9 @@
         position: absolute;
         width: $trigger-size;
         height: $trigger-size;
-        background-color: $color-grayscale--1000;
-        border-top: 1px solid $color-grayscale--400;
-        border-left: 1px solid $color-grayscale--400;
+        background-color: variables.$color-grayscale--1000;
+        border-top: 1px solid variables.$color-grayscale--400;
+        border-left: 1px solid variables.$color-grayscale--400;
         background-image: url('../assets/menu-button.svg');
         background-repeat: no-repeat;
         background-size: $trigger-size - 15px;
@@ -214,12 +219,12 @@
       position: absolute;
       left: 0;
       transform: translateX(-100%);
-      padding-right: $spacing--10;
-      text-shadow: 1px 1px 5px $color-grayscale--0;
-      color: $color-grayscale--1000;
+      padding-right: variables.$spacing--10;
+      text-shadow: 1px 1px 5px variables.$color-grayscale--0;
+      color: variables.$color-grayscale--1000;
 
       #{$this}__navigation-wrapper--open & {
-        padding-right: $spacing--20;
+        padding-right: variables.$spacing--20;
       }
     }
 
@@ -233,14 +238,14 @@
 
     &__navigation-item {
       &--components {
-        border-top: 1px solid $color-grayscale--400;
+        border-top: 1px solid variables.$color-grayscale--400;
       }
 
       &--language,
       &--theme,
       &--settings {
-        padding: $spacing--10 $spacing--20;
-        border-bottom: 1px solid $color-grayscale--400;
+        padding: variables.$spacing--10 variables.$spacing--20;
+        border-bottom: 1px solid variables.$color-grayscale--400;
       }
 
       &--active,
@@ -250,7 +255,7 @@
     }
 
     &__navigation-link {
-      padding: $spacing--10 $spacing--20;
+      padding: variables.$spacing--10 variables.$spacing--20;
       text-decoration: none;
       display: block;
 
@@ -260,15 +265,15 @@
     }
 
     &__navigation-item--logo {
-      border-bottom: 1px solid $color-grayscale--400;
-      padding: 0 $spacing--15;
+      border-bottom: 1px solid variables.$color-grayscale--400;
+      padding: 0 variables.$spacing--15;
 
       img {
         max-width: 150px;
       }
 
       .s-navigation__navigation-link {
-        padding: $spacing--10 $spacing--5;
+        padding: variables.$spacing--10 variables.$spacing--5;
       }
     }
   }

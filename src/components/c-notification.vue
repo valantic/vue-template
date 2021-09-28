@@ -4,11 +4,7 @@
       {{ notification.message }}
     </div>
     <button :class="b('close-button')" @click="close">
-      <e-icon icon="i-close"
-              width="20"
-              height="20"
-              inline
-      />
+      <e-icon icon="i-close" size="20" />
     </button>
   </div>
 </template>
@@ -101,39 +97,40 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-notification {
     min-width: 400px;
     max-width: 100%;
     min-height: 60px;
     position: relative;
-    padding: $spacing--5;
+    padding: variables.$spacing--5;
 
     &--type-success {
-      background-color: $color-status--success;
-      color: $color-grayscale--1000;
+      background-color: variables.$color-status--success;
+      color: variables.$color-grayscale--1000;
     }
 
     &--type-info {
-      background-color: $color-status--info;
-      color: $color-grayscale--0;
+      background-color: variables.$color-status--info;
+      color: variables.$color-grayscale--0;
     }
 
     &--type-error {
-      background-color: $color-status--error;
-      color: $color-grayscale--1000;
+      background-color: variables.$color-status--error;
+      color: variables.$color-grayscale--1000;
     }
 
     &__message {
       width: 100%;
-      padding-right: $spacing--30;
+      padding-right: variables.$spacing--30;
     }
 
     &__close-button {
-      @extend %button-reset;
-
       position: absolute;
-      top: $spacing--5;
-      right: $spacing--5;
+      top: variables.$spacing--5;
+      right: variables.$spacing--5;
       color: inherit;
     }
   }

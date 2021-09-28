@@ -54,10 +54,8 @@
         mobile-transition="fade"
         @close="modalClose">
         <div :class="b('modal-close-icon')" @click="modalOpen = false">
-          <e-icon icon="i-close"
-                  width="25"
-                  height="25"
-                  inline />
+          <e-icon icon="close"
+                  size="25" />
         </div>
         <c-swiper-modal :images="pictures"
                         :initial-slide="swiper.activeIndex"
@@ -290,6 +288,9 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-swiper-gallery {
     $this: &;
 
@@ -307,31 +308,31 @@
 
     // arrow navigation
     &__button {
-      @include z-index(front);
+      @include mixins.z-index(front);
 
       display: none;
       position: absolute;
       top: 50%;
       opacity: 0;
       transform: translateY(-50%);
-      transition: opacity $transition-duration-200 linear;
-      transition-delay: $transition-duration-100;
+      transition: opacity variables.$transition-duration-200 linear;
+      transition-delay: variables.$transition-duration-100;
       outline: none;
       border: 20px solid transparent;
       cursor: pointer;
 
-      @include media(xs) {
+      @include mixins.media(xs) {
         display: block;
       }
 
       &--previous {
         left: 0;
-        border-right-color: $color-grayscale--200;
+        border-right-color: variables.$color-grayscale--200;
       }
 
       &--next {
         right: 0;
-        border-left-color: $color-grayscale--200;
+        border-left-color: variables.$color-grayscale--200;
       }
     }
 
@@ -339,29 +340,29 @@
     &:hover {
       #{$this}__button--previous:not(.swiper-button-disabled),
       #{$this}__button--next:not(.swiper-button-disabled) {
-        @include media(xs) {
+        @include mixins.media(xs) {
           opacity: 1;
-          transition-delay: $transition-duration-200;
+          transition-delay: variables.$transition-duration-200;
         }
       }
     }
 
     &__counter {
-      @include font(14px, 18px);
+      @include mixins.font(14px, 18px);
 
       display: flex;
-      color: $color-grayscale--400;
-      bottom: $spacing--10;
+      color: variables.$color-grayscale--400;
+      bottom: variables.$spacing--10;
       position: absolute;
       right: 0;
 
-      @include media(sm) {
-        bottom: $spacing--5;
+      @include mixins.media(sm) {
+        bottom: variables.$spacing--5;
       }
     }
 
     &__counter-detail:nth-child(2) {
-      margin-left: $spacing--5;
+      margin-left: variables.$spacing--5;
 
       &::before {
         content: '|';
@@ -381,8 +382,8 @@
       cursor: pointer;
       background: transparent;
 
-      @include media(md) {
-        margin: $spacing--50;
+      @include mixins.media(md) {
+        margin: variables.$spacing--50;
       }
     }
 
@@ -395,21 +396,17 @@
     }
 
     &__modal-close-icon {
-      @include z-index(navigation);
+      @include mixins.z-index(navigation);
 
       position: absolute;
-      top: $spacing--15;
-      right: $spacing--15;
+      top: variables.$spacing--15;
+      right: variables.$spacing--15;
       cursor: pointer;
-
-      path {
-        fill: $color-primary--1;
-      }
     }
 
     &__img-counter,
     &__video-counter {
-      @include z-index(front);
+      @include mixins.z-index(front);
 
       position: relative;
     }
@@ -419,15 +416,13 @@
     }
 
     &__video-thumbnail-overlay {
+      @include mixins.icon(play, 50px, $mask: false);
+
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url('../assets/icons/i-play.svg');
-      background-size: 50px 50px;
-      background-position: center center;
-      background-repeat: no-repeat;
     }
 
     &__video-thumbnail {
@@ -438,18 +433,18 @@
     // dots navigation
     .swiper-container-horizontal {
       .swiper-pagination-bullets {
-        @include z-index(front);
+        @include mixins.z-index(front);
 
         position: relative;
-        bottom: $spacing--15;
+        bottom: variables.$spacing--15;
         width: 100% !important; /* stylelint-disable-line declaration-no-important */
         margin: auto;
-        padding-top: $spacing--20;
+        padding-top: variables.$spacing--20;
         white-space: nowrap;
         text-align: center;
         font-size: 0;
 
-        @include media(xs) {
+        @include mixins.media(xs) {
           padding-top: 0;
         }
 
@@ -465,16 +460,16 @@
         height: 5px;
         width: 20px;
         margin: 0 3px;
-        background: $color-grayscale--600;
+        background: variables.$color-grayscale--600;
         border-radius: 2.5px;
         transform: scale(1);
         outline: none;
         cursor: pointer;
-        transition: width $transition-duration-200 linear;
+        transition: width variables.$transition-duration-200 linear;
 
         &-active {
-          background-color: $color-primary--1;
-          box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
+          background-color: variables.$color-primary--1;
+          box-shadow: inset 0 1px 3px 0 rgba(variables.$color-grayscale--0, 0.5);
         }
       }
 

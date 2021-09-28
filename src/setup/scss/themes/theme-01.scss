@@ -1,3 +1,5 @@
+@use '../functions';
+
 ////
 // Theme id:    01
 // Theme name:  Example name
@@ -21,6 +23,6 @@ $theme-01: (
 :root {
   @each $name, $color in $theme-01 {
     --theme-#{$name}: #{$color};
-    --theme-#{$name}--rgb: #{calc-rgb($color)};
+    --theme-#{$name}--rgb: #{functions.calc-rgb($color)};
   }
 }

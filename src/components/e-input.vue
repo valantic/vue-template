@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <input v-if="uncontrolled"
            ref="input"
            :autocomplete="autocomplete"
@@ -40,14 +40,13 @@
       <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
       <e-icon v-if="!hasDefaultState && !hasFocus"
               :class="b('state-icon')"
-              :icon="stateIcon"
-              inline />
+              :icon="stateIcon" />
     </span>
-    <div v-if="showNotification" :class="b('notification')">
+    <span v-if="showNotification" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
-    </div>
-  </div>
+    </span>
+  </span>
 </template>
 
 <script>
@@ -267,7 +266,6 @@
          * @event focus
          */
         this.$emit('focus');
-        this.$parent.$emit('focus');
       },
 
       /**
@@ -283,7 +281,6 @@
          * @event blur
          */
         this.$emit('blur');
-        this.$parent.$emit('blur');
       },
 
       /**
@@ -296,7 +293,6 @@
          * @event enter
          */
         this.$emit('enter');
-        this.$parent.$emit('enter');
       },
 
       /**
@@ -332,6 +328,8 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
   // stylelint-disable no-descending-specificity
   // TODO: refactor style to get rid of no-descending-specificity
 
@@ -341,6 +339,7 @@
     $this: &;
 
     position: relative;
+    display: block;
 
     &--border-0 &__field {
       border: 1px solid transparent;
@@ -348,17 +347,17 @@
 
     // input
     &__field {
-      @include font($font-size--14, 18px);
+      @include mixins.font(variables.$font-size--14, 18px);
 
-      border: 1px solid $color-grayscale--500;
-      border-radius: $border-radius--500;
-      color: $color-secondary--1;
-      font-family: $font-family--primary;
+      border: 1px solid variables.$color-grayscale--500;
+      border-radius: variables.$border-radius--500;
+      color: variables.$color-secondary--1;
+      font-family: variables.$font-family--primary;
       height: $e-input-height;
       position: relative;
-      transition: box-shadow $transition-duration-200 ease-in-out;
+      transition: box-shadow variables.$transition-duration-200 ease-in-out;
       width: 100%;
-      padding: $spacing--5 $spacing--10;
+      padding: variables.$spacing--5 variables.$spacing--10;
 
       // disable iPhone styling
       -webkit-appearance: none;
@@ -385,31 +384,31 @@
 
     // placeholder (has to be split in seperate blocks to work on each browser)
     &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
-      color: $color-grayscale--400;
+      color: variables.$color-grayscale--400;
       opacity: 1;
     }
 
     &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
-      color: $color-grayscale--400;
+      color: variables.$color-grayscale--400;
       opacity: 1;
     }
 
     &__field::placeholder { // Most modern browsers support this now
-      color: $color-grayscale--400;
+      color: variables.$color-grayscale--400;
       opacity: 1;
     }
 
     &__field:-ms-input-placeholder { // IE 11
-      color: $color-grayscale--400;
+      color: variables.$color-grayscale--400;
       opacity: 1;
     }
 
     &__fixed-label {
-      @include font($font-size--14, 18px);
+      @include mixins.font(variables.$font-size--14, 18px);
 
-      color: $color-grayscale--400;
+      color: variables.$color-grayscale--400;
       position: absolute;
-      left: $spacing--5;
+      left: variables.$spacing--5;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
@@ -417,12 +416,13 @@
 
     &__icon-splitter {
       border-left: 1px solid;
-      margin: 0 $spacing--5;
+      margin: 0 variables.$spacing--5;
     }
 
     &__notification {
-      @include z-index(form-notification);
+      @include mixins.z-index(form-notification);
 
+      display: block;
       position: absolute;
       width: 100%;
       top: calc(#{$e-input-height} - 1px);
@@ -430,24 +430,24 @@
 
     &__slot-wrapper {
       position: absolute;
-      right: $spacing--5;
+      right: variables.$spacing--5;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
     }
 
     &__slot {
-      @include font($font-size--14);
+      @include mixins.font(variables.$font-size--14);
 
       display: flex;
       line-height: $e-input-height;
-      color: $color-grayscale--400;
+      color: variables.$color-grayscale--400;
     }
 
     // active
     &:not(&--border-0) &__field:active,
     &--active:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     // focus
@@ -458,13 +458,13 @@
 
     &:not(&--border-0) &__field:focus,
     &--focus:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     // hover
     &:not(&--border-0) &__field:hover,
     &--hover:not(&--border-0) &__field {
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     // disabled
@@ -474,18 +474,18 @@
     &--disabled:not(&--border-0) &__field,
     &--disabled &__field:hover,
     &--disabled:not(&--border-0) &__field:hover {
-      background-color: $color-grayscale--1000;
-      border-color: $color-grayscale--600;
-      color: $color-grayscale--300;
+      background-color: variables.$color-grayscale--1000;
+      border-color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--300;
 
       &::placeholder {
-        color: $color-grayscale--300;
+        color: variables.$color-grayscale--300;
       }
     }
 
     &--disabled {
       #{$this}__slot {
-        color: $color-grayscale--300;
+        color: variables.$color-grayscale--300;
       }
     }
 
@@ -494,29 +494,29 @@
     **/
     &--state-default {
       .e-input__slot-wrapper {
-        right: $spacing--5;
+        right: variables.$spacing--5;
       }
     }
 
     &--state-error:not(.e-input--border-0) &__field {
-      border-color: $color-status--error;
+      border-color: variables.$color-status--error;
     }
 
     &--state-error .e-input__icon-splitter {
-      border-color: $color-status--error;
+      border-color: variables.$color-status--error;
     }
 
     &--state-error:not(.e-input--border-0) &__field:hover {
-      border: 1px solid $color-status--error;
+      border: 1px solid variables.$color-status--error;
     }
 
     &--state-error:not(.e-input--border-0) &__field:focus {
-      border: 1px solid $color-status--error;
+      border: 1px solid variables.$color-status--error;
     }
 
     &--state-info {
       .e-input__icon-splitter {
-        border-color: $color-grayscale--500;
+        border-color: variables.$color-grayscale--500;
       }
     }
 
@@ -531,7 +531,7 @@
      */
     &--notification {
       .e-input__field {
-        padding: $spacing--5 $spacing--10;
+        padding: variables.$spacing--5 variables.$spacing--10;
         background: none;
       }
     }

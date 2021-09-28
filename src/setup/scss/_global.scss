@@ -1,38 +1,44 @@
+@use './variables';
+@use './mixins';
+@use './extends';
+
 html,
 body {
   height: 100%;
-  font-family: $font-family--primary;
+  font-family: variables.$font-family--primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $color-grayscale--1000;
+  background-color: variables.$color-grayscale--1000;
 }
 
+// TODO check if we can stop using @extend
+
 h1 { // TODO: update definition for project.
-  @extend %heading-h1;
+  @include mixins.heading-h1();
 }
 
 h2 { // TODO: update definition for project.
-  @extend %heading-h2;
+  @include mixins.heading-h2();
 }
 
 h3 { // TODO: update definition for project.
-  @extend %heading-h3;
+  @include mixins.heading-h3();
 }
 
 h4 { // TODO: update definition for project.
-  @extend %heading-h4;
+  @include mixins.heading-h4();
 }
 
 h5 { // TODO: update definition for project.
-  @extend %heading-h5;
+  @include mixins.heading-h5();
 }
 
 h6 { // TODO: update definition for project.
-  @extend %heading-h6;
+  @include mixins.heading-h6();
 }
 
 p { // TODO: update definition for project.
-  @include font($font-size--14);
+  @include mixins.font(variables.$font-size--14);
 }
 
 /* stylelint-disable selector-class-pattern, selector-max-id */

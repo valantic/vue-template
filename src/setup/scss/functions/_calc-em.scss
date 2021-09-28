@@ -1,3 +1,6 @@
+@use 'sass:math';
+@use '../config';
+
 ////
 // Calculate em for given pixel $values based on $context font-size
 //
@@ -6,11 +9,11 @@
 //
 // @returns {List}    Converted pixel values
 ////
-@function calc-em($values, $context: $_config--font-size) {
+@function calc-em($values, $context: config.$config--font-size) {
   $result: ();
 
   @each $value in $values {
-    $result: append($result, 1em * ($value / $context));
+    $result: append($result, 1em * (math.div($value, $context)));
   }
 
   @return $result;

@@ -134,13 +134,16 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/mixins';
+  @use '../../setup/scss/variables';
+
   .notifications {
     display: flex;
     justify-content: flex-end;
 
     &__label {
       display: block;
-      margin: $spacing--15 0 $spacing--5;
+      margin: variables.$spacing--15 0 variables.$spacing--5;
     }
 
     &__second-container {
@@ -148,7 +151,7 @@
     }
 
     .e-button:not(:last-of-type) {
-      margin-right: $spacing--20;
+      margin-right: variables.$spacing--20;
     }
   }
 </style>
