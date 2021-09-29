@@ -1,10 +1,12 @@
 <template>
-  <span :class="b(stateModifiers)">
+  <span :class="b(modifiers)">
     <select :value="value"
             :class="b('select')"
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
+            @mouseenter="hasHover = true"
+            @mouseleave="hasHover = false"
     >
       <option v-if="placeholder"
               :disabled="!hasSelectablePlaceholder"
@@ -20,9 +22,9 @@
       </option>
     </select>
     <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
-    <div v-if="progress" :class="b('progress-container')">
+    <span v-if="progress" :class="b('progress-container')">
       <e-progress />
-    </div>
+    </span>
   </span>
 </template>
 
@@ -108,7 +110,18 @@
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      /**
+       * Defines state modifier classes.
+       *
+       * @returns  {Object}   BEM classes
+       */
+      modifiers() {
+        return {
+          ...this.stateModifiers,
+        };
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -165,6 +178,7 @@
       outline: none;
       padding: variables.$spacing--0 variables.$spacing--30 variables.$spacing--0 variables.$spacing--10;
       height: $height;
+      cursor: pointer;
 
       &::-ms-expand {
         display: none;
@@ -183,15 +197,13 @@
     // hover
     &__select:hover,
     &--hover &__select {
-      border: 1px solid variables.$color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     // focus
     &__select:focus,
     &--focus &__select {
       outline: none;
-      box-shadow: 0 2px 5px 0 rgba(variables.$color-grayscale--400, 0.5);
-      border: 1px solid variables.$color-grayscale--500;
     }
 
     // disabled

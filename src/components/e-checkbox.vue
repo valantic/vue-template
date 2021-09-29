@@ -1,5 +1,5 @@
 <template>
-  <label :class="b(stateModifiers)"
+  <label :class="b(modifiers)"
          @mouseenter="hasHover = true"
          @mouseleave="hasHover = false">
     <input
@@ -74,6 +74,18 @@
 
     computed: {
       /**
+       * Returns a configuration Object for modifier classes.
+       *
+       * @returns {Object}
+       */
+      modifiers() {
+        return {
+          ...this.stateModifiers,
+          selected: this.internalValue === this.value,
+        };
+      },
+
+      /**
        * Sets value of component model to parent model
        *
        * @returns  {Boolean|Array}   Status of the checkbox
@@ -109,19 +121,6 @@
     // destroyed() {},
 
     methods: {
-      /**
-       * Updates the checked state of the checkbox.
-       *
-       * @public Used by c-multiselect.
-       */
-      updateCheckedState() {
-        if (typeof this.value === 'string') {
-          this.isChecked = this.checked.indexOf(this.value.trim()) > -1;
-        } else if (typeof this.value === 'number') {
-          this.isChecked = this.checked.indexOf(this.value) > -1;
-        }
-      },
-
       /**
        * Emits focus to parent and wrapper component.
        * Update "hasFocus" state.
@@ -163,10 +162,9 @@
   @use '../setup/scss/variables';
 
   .e-checkbox {
-    $this: &;
-    $label-size: 17px;
+    $label-size: 16px;
 
-    @include mixins.font(variables.$font-size--16);
+    @include mixins.font(variables.$font-size--16, 22px);
 
     position: relative;
     display: block;
@@ -183,6 +181,14 @@
       padding-left: variables.$spacing--25;
       margin: 0;
 
+      &:hover {
+        color: variables.$color-grayscale--0;
+
+        &::before {
+          border-color: variables.$color-grayscale--0;
+        }
+      }
+
       &::before,
       &::after {
         position: absolute;
@@ -194,10 +200,11 @@
       }
 
       &::before {
-        border: 1px solid variables.$color-grayscale--0;
+        border: 1px solid variables.$color-grayscale--400;
       }
 
       &::after {
+        transition: transform 0.1s ease-in-out;
         background: variables.$color-grayscale--0;
         opacity: 0;
         transform: scale(0);
@@ -205,7 +212,7 @@
     }
 
     &__field:checked + &__label {
-      color: variables.$color-primary--1;
+      color: variables.$color-grayscale--0;
 
       &::after {
         opacity: 1;
@@ -216,6 +223,14 @@
     &__field:disabled + &__label {
       color: variables.$color-grayscale--500;
       cursor: default;
+
+      &:hover {
+        color: variables.$color-grayscale--500;
+
+        &::before {
+          border-color: variables.$color-grayscale--500;
+        }
+      }
 
       &::before {
         border-color: variables.$color-grayscale--500;
