@@ -9,7 +9,9 @@ See `app/setup/scss/mixins/_z-index.scss` for valid variables or to extend
 #### Example
 
 ```scss
+@use '<path/to>/setup/scss/mixins';
+
 .foo {
-  @include z-index(modal);
+  @include mixins.z-index(modal);
 }
 ```

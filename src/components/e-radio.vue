@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(modifiers)">
+  <span :class="b(modifiers)">
     <label :class="b('label')"
            @mouseenter="hasHover = true"
            @mouseleave="hasHover = false">
@@ -17,7 +17,7 @@
         <slot></slot>
       </span>
     </label>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -144,7 +144,7 @@
          * @event change
          * @type {String}
          */
-        this.$parent.$emit('change', event.target.value);
+        this.$emit('change', event.target.value);
       },
     },
     // render() {},
@@ -152,9 +152,13 @@
 </script>
 
 <style lang="scss">
-  .e-radio {
-    @include font($font-size--14, 18px);
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
 
+  .e-radio {
+    @include mixins.font(variables.$font-size--14, 18px);
+
+    display: block;
     position: relative;
 
     &__field {
@@ -170,8 +174,8 @@
 
     &__fake-button {
       -webkit-appearance: none;
-      background-color: $color-grayscale--1000;
-      border: 1px solid $color-grayscale--500;
+      background-color: variables.$color-grayscale--1000;
+      border: 1px solid variables.$color-grayscale--500;
       border-radius: 10px;
       display: inline-block;
       position: absolute;
@@ -184,17 +188,17 @@
 
     &__label-name {
       cursor: pointer;
-      color: $color-grayscale--400;
+      color: variables.$color-grayscale--400;
     }
 
     &__label {
       cursor: pointer;
       margin-bottom: 0;
-      padding-left: $spacing--25;
+      padding-left: variables.$spacing--25;
     }
 
     &__field:checked ~ &__fake-button::after {
-      background-color: $color-secondary--2;
+      background-color: variables.$color-secondary--2;
       border-radius: 25px;
       content: '';
       display: block;
@@ -205,11 +209,11 @@
     }
 
     &__field:checked ~ &__fake-button {
-      border: 1px solid $color-primary--1;
+      border: 1px solid variables.$color-primary--1;
     }
 
     &__field:checked ~ &__label-name {
-      color: $color-secondary--1;
+      color: variables.$color-secondary--1;
     }
 
     /* stylelint-disable no-descending-specificity */
@@ -217,25 +221,25 @@
     // hover
     &--hover &__fake-button,
     &__field:hover ~ &__fake-button {
-      border: 1px solid $color-primary--1;
+      border: 1px solid variables.$color-primary--1;
     }
 
     // disabled
     &--disabled &__field ~ &__fake-button,
     &__field:disabled ~ &__fake-button {
-      border-color: $color-grayscale--600;
+      border-color: variables.$color-grayscale--600;
       cursor: default;
     }
 
     &--disabled &__field:checked ~ &__fake-button::after,
     &__field:disabled:checked ~ &__fake-button::after {
-      background-color: $color-grayscale--300;
+      background-color: variables.$color-grayscale--300;
     }
 
     &--disabled &__field ~ &__label-name,
     &__field:disabled ~ &__label-name {
       cursor: default;
-      color: $color-grayscale--300;
+      color: variables.$color-grayscale--300;
     }
 
     &--disabled &__label {

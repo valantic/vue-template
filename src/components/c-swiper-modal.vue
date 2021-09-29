@@ -253,6 +253,9 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-swiper-modal {
     $this: &;
 
@@ -260,31 +263,31 @@
 
     // arrow navigation
     &__button {
-      @include z-index(front);
+      @include mixins.z-index(front);
 
       display: none;
       position: absolute;
       top: 50%;
       opacity: 0;
       transform: translateY(-50%);
-      transition: opacity $transition-duration-200 linear;
-      transition-delay: $transition-duration-100;
+      transition: opacity variables.$transition-duration-200 linear;
+      transition-delay: variables.$transition-duration-100;
       outline: none;
       border: 20px solid transparent;
       cursor: pointer;
 
-      @include media(xs) {
+      @include mixins.media(xs) {
         display: block;
       }
 
       &--previous {
         left: 0;
-        border-right-color: $color-grayscale--200;
+        border-right-color: variables.$color-grayscale--200;
       }
 
       &--next {
         right: 0;
-        border-left-color: $color-grayscale--200;
+        border-left-color: variables.$color-grayscale--200;
       }
     }
 
@@ -292,27 +295,27 @@
     &:hover {
       #{$this}__button--previous:not(.swiper-button-disabled),
       #{$this}__button--next:not(.swiper-button-disabled) {
-        @include media(xs) {
+        @include mixins.media(xs) {
           opacity: 1;
-          transition-delay: $transition-duration-200;
+          transition-delay: variables.$transition-duration-200;
         }
       }
     }
 
     .gallery-top {
       width: 100%;
-      border-bottom: 2px solid $color-primary--1;
+      border-bottom: 2px solid variables.$color-primary--1;
     }
 
     .gallery-top .swiper-slide {
-      padding: $spacing--10 $spacing--30 $spacing--60 $spacing--30;
+      padding: variables.$spacing--10 variables.$spacing--30 variables.$spacing--60 variables.$spacing--30;
     }
 
     .gallery-top .swiper-slide .e-picture,
     .gallery-top .swiper-slide .e-picture img {
       max-height: 350px;
 
-      @include media(sm) {
+      @include mixins.media(sm) {
         max-height: 450px;
       }
     }
@@ -323,25 +326,25 @@
 
     .gallery-thumbs {
       box-sizing: border-box;
-      margin-top: -$spacing--15;
+      margin-top: -(variables.$spacing--15);
     }
 
     .gallery-thumbs .swiper-slide {
       width: 20%;
       height: 100%;
-      padding: 0 $spacing--10;
+      padding: 0 variables.$spacing--10;
     }
 
     .gallery-thumbs .swiper-slide .e-picture {
-      margin-top: $spacing--30;
-      margin-bottom: $spacing--15;
+      margin-top: variables.$spacing--30;
+      margin-bottom: variables.$spacing--15;
     }
 
     .gallery-thumbs .swiper-slide .e-picture,
     .gallery-thumbs .swiper-slide .e-picture img {
       max-height: 75px;
 
-      @include media(sm) {
+      @include mixins.media(sm) {
         max-height: 85px;
       }
     }
@@ -351,7 +354,7 @@
     }
 
     .gallery-thumbs .swiper-slide-active::before {
-      @include z-index(modal);
+      @include mixins.z-index(modal);
 
       content: '';
       display: block;
@@ -360,16 +363,16 @@
       margin-left: -11px;
       border-left: 11px solid transparent;
       border-right: 11px solid transparent;
-      border-bottom: 15px solid $color-primary--1;
+      border-bottom: 15px solid variables.$color-primary--1;
     }
 
     &:hover {
       .swiper-button-prev:not(.swiper-button-disabled),
       .swiper-button-next:not(.swiper-button-disabled) {
-        @include media(xs) {
+        @include mixins.media(xs) {
           opacity: 1;
-          transition: all $transition-duration-200 linear;
-          transition-delay: $transition-duration-200;
+          transition: all variables.$transition-duration-200 linear;
+          transition-delay: variables.$transition-duration-200;
           visibility: visible;
         }
       }
@@ -381,12 +384,12 @@
     }
 
     &__video-wrapper {
-      padding-top: $spacing--50;
+      padding-top: variables.$spacing--50;
       flex: 1 0 100%;
       max-width: 700px;
 
-      @include media(sm) {
-        padding: $spacing--50;
+      @include mixins.media(sm) {
+        padding: variables.$spacing--50;
       }
     }
 
@@ -409,8 +412,8 @@
 
     &__video-preview-wrapper {
       position: relative;
-      margin-top: $spacing--30;
-      margin-bottom: $spacing--15;
+      margin-top: variables.$spacing--30;
+      margin-bottom: variables.$spacing--15;
       max-height: 85px;
       height: 85px;
       max-width: 128px;
@@ -422,15 +425,13 @@
     }
 
     &__video-thumbnail-overlay {
+      @include mixins.icon(play, 50px, $mask: false);
+
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url('../assets/icons/i-play.svg');
-      background-size: 50px 50px;
-      background-position: center center;
-      background-repeat: no-repeat;
     }
   }
 

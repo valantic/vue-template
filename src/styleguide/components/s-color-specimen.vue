@@ -99,8 +99,10 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .s-color-specimen {
-    border: 1px solid $color-secondary--1;
+    border: 1px solid variables.$color-secondary--1;
 
     &__color {
       padding-top: 100%;
