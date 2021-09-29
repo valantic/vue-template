@@ -381,6 +381,10 @@
       z-index: 1;
     }
 
+    &__options-list {
+      overflow: hidden;
+    }
+
     &__options-item {
       padding: variables.$spacing--2 variables.$spacing--5;
     }
