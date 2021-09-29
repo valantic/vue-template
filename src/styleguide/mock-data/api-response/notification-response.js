@@ -10,7 +10,7 @@ import notification from '@/styleguide/mock-data/data-object/notification';
 function createApiResponse(data) {
   return {
     data: {},
-    notifications: [data],
+    notifications: [data], // TODO: Check if the Backend System provides the notifications Array like it's done here.
   };
 }
 
