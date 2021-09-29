@@ -21,8 +21,7 @@
         {{ outputValue }}
       </span>
       <e-icon icon="arrow--down"
-              width="22"
-              height="22"
+              size="22"
               inline
       />
       <span :class="b('progress-wrapper')">
