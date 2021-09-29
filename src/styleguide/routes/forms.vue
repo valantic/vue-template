@@ -37,6 +37,13 @@
                       @blur="$v.form.language.$touch()"
             />
           </e-label>
+          <e-label name="Business fields" required>
+            <e-multiselect v-model="form.businessFields"
+                           :options="mock.businessFields"
+                           :state="$v.form.businessFields.$error ? 'error' : 'default'"
+                           :notification="$v.form.businessFields.$error ? 'Required field' : ''"
+            />
+          </e-label>
           <e-label name="Notes">
             <e-textarea v-model="form.notes"
                         name="notes"
@@ -124,12 +131,14 @@
 </template>
 <script>
   import eFieldset from '@/components/e-fieldset';
+  import eMultiselect from '@/components/e-multiselect';
   import { required, email } from 'vuelidate/lib/validators';
 
   export default {
     name: 'forms',
     components: {
       eFieldset,
+      eMultiselect,
     },
     // components: {},
     data() {
@@ -141,6 +150,7 @@
           language: '',
           topics: [],
           frequency: '',
+          businessFields: [],
         },
         mock: {
           languages: [
@@ -156,6 +166,24 @@
               label: 'French',
               value: 'french',
             }
+          ],
+          businessFields: [
+            {
+              label: 'Production',
+              value: 'production',
+            },
+            {
+              label: 'Sales',
+              value: 'sales',
+            },
+            {
+              label: 'HR',
+              value: 'hr',
+            },
+            {
+              label: 'Finance',
+              value: 'finance',
+            },
           ],
         }
       };
@@ -173,6 +201,9 @@
         language: {
           required,
         },
+        businessFields: {
+          required,
+        }
       }
     },
 
@@ -216,7 +247,12 @@
     }
 
     .e-label:not(:last-of-type) {
-      margin-bottom: variables.$spacing--10;
+      margin-bottom: variables.$spacing--20;
+    }
+
+    .e-checkbox + .e-checkbox,
+    .e-radio + .e-radio {
+      margin-top: variables.$spacing--5;
     }
   }
 </style>
