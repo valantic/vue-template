@@ -40,7 +40,6 @@
           <e-label name="Business fields" required>
             <e-multiselect v-model="form.businessFields"
                            :options="mock.businessFields"
-                           has-search
             />
           </e-label>
           <e-label name="Notes">
@@ -243,7 +242,12 @@
     }
 
     .e-label:not(:last-of-type) {
-      margin-bottom: variables.$spacing--10;
+      margin-bottom: variables.$spacing--20;
+    }
+
+    .e-checkbox + .e-checkbox,
+    .e-radio + .e-radio {
+      margin-top: variables.$spacing--5;
     }
   }
 </style>

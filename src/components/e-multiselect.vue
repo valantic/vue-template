@@ -1,5 +1,5 @@
 <template>
-  <span :class="b()">
+  <span :class="b(modifiers)">
     <!-- Search field -->
     <input v-if="isOpen && hasSearch"
            v-model="searchTerm"
@@ -7,6 +7,8 @@
            :placeholder="$t('e-multiselect.searchFieldPlaceholder')"
            :class="b('search-field')"
            type="text"
+           @mouseenter="hasHover = true"
+           @mouseleave="hasHover = false"
     >
 
     <!-- Trigger Button -->
@@ -16,6 +18,8 @@
             :disabled="isDisabled"
             type="button"
             @click="isOpen = !isOpen"
+            @mouseenter="hasHover = true"
+            @mouseleave="hasHover = false"
     >
       <span :class="b('output-value')">
         {{ outputValue }}
@@ -56,6 +60,7 @@
 <script>
   import { i18n } from '@/setup/i18n';
   import uuid from '@/mixins/uuid';
+  import formStates from '@/mixins/form-states';
 
   /**
    * This renders a multi-select component.
@@ -65,6 +70,7 @@
     // components: {},
     mixins: [
       uuid,
+      formStates
     ],
 
     /**
@@ -161,6 +167,17 @@
     },
 
     computed: {
+      /**
+       * Defines state modifier classes.
+       *
+       * @returns  {Object}   BEM classes
+       */
+      modifiers() {
+        return {
+          ...this.stateModifiers,
+        };
+      },
+
       /**
        * V-model handler for the checkboxes (options).
        *
@@ -283,6 +300,7 @@
   @use '../setup/scss/variables';
 
   .e-multiselect {
+    $this: &;
     $e-multiselect-height: 30px;
 
     display: block;
@@ -309,9 +327,23 @@
       }
     }
 
+    // hover
+    &__field-wrapper:hover,
+    &--hover &__field-wrapper {
+      border-color: variables.$color-grayscale--400;
+    }
+
     &__field-wrapper--open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-color: variables.$color-grayscale--400;
+
       .e-icon {
         transform: rotate(180deg);
+      }
+
+      + #{$this}__options-wrapper {
+        border-color: variables.$color-grayscale--400;
       }
     }
 
@@ -365,6 +397,8 @@
       width: 100%;
       min-height: $e-multiselect-height;
       border: 1px solid variables.$color-grayscale--500;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
       outline: none;
       padding: 0 variables.$spacing--5;
     }

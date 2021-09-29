@@ -127,8 +127,9 @@
   @use '../setup/scss/variables';
 
   .e-label {
-    color: variables.$color-grayscale--400;
+    color: variables.$color-grayscale--200;
     display: block;
+    cursor: pointer;
 
     &__inner {
       width: 100%;
