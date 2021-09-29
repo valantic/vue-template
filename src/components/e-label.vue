@@ -142,7 +142,7 @@
     }
 
     &__name--invisible {
-      @extend %invisible;
+      @include mixins.invisible();
     }
 
     &--position-top {

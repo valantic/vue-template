@@ -47,7 +47,7 @@ p { // TODO: update definition for project.
 }
 
 .invisible {
-  @extend %invisible;
+  @include mixins.invisible();
 }
 /* stylelint-enable */
 
