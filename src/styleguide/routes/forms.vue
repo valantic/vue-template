@@ -40,6 +40,8 @@
           <e-label name="Business fields" required>
             <e-multiselect v-model="form.businessFields"
                            :options="mock.businessFields"
+                           :state="$v.form.businessFields.$error ? 'error' : 'default'"
+                           :notification="$v.form.businessFields.$error ? 'Required field' : ''"
             />
           </e-label>
           <e-label name="Notes">
@@ -199,6 +201,9 @@
         language: {
           required,
         },
+        businessFields: {
+          required,
+        }
       }
     },
 

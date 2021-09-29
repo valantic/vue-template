@@ -24,10 +24,12 @@
       <span :class="b('output-value')">
         {{ outputValue }}
       </span>
-      <e-icon icon="arrow--down"
+      <e-icon v-if="hasDefaultState"
+              icon="arrow--down"
               size="22"
               inline
       />
+      <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
       <span :class="b('progress-wrapper')">
         <e-progress v-if="progress" />
       </span>
@@ -298,6 +300,7 @@
 
 <style lang="scss">
   @use '../setup/scss/variables';
+  @use '../setup/scss/mixins';
 
   .e-multiselect {
     $this: &;
@@ -401,6 +404,46 @@
       border-top-right-radius: 3px;
       outline: none;
       padding: 0 variables.$spacing--5;
+    }
+
+    // separator for state icons
+    &__icon-splitter {
+      position: absolute;
+      right: 30px;
+      height: calc(100% - 4px);
+      top: 2px;
+      border-left: 1px solid;
+    }
+
+    // States
+    &--state-error {
+      #{$this}__field-wrapper {
+        @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
+
+        border-color: variables.$color-status--danger;
+
+        &:hover {
+          border-color: variables.$color-status--danger;
+        }
+
+        &:focus {
+          border: 1px solid variables.$color-status--danger;
+        }
+      }
+
+      #{$this}__icon-splitter {
+        border-color: variables.$color-status--danger;
+      }
+    }
+
+    &--state-success {
+      #{$this}__field-wrapper {
+        @include mixins.icon(check, 22px, right 5px center, false); // FF does not support mask on <select>.
+      }
+
+      #{$this}__icon-splitter {
+        display: none;
+      }
     }
 
     // Transition
