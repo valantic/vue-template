@@ -283,9 +283,6 @@
 <style lang="scss">
   @use '../setup/scss/variables';
 
-  // stylelint-disable-next-line no-invalid-position-at-import-rule
-  @import '../setup/scss/extends/list-reset';
-
   .e-multiselect {
     $e-multiselect-height: 30px;
 
@@ -348,10 +345,6 @@
       overflow: auto;
       transform-origin: top;
       z-index: 1;
-    }
-
-    &__options-list {
-      @extend %list-reset;
     }
 
     &__options-item {
