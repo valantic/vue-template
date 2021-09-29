@@ -85,14 +85,9 @@
   @use 'sass:math';
   @use '../../setup/scss/variables';
   @use '../../setup/scss/mixins';
-  // TODO replace @extend my mixin
-  // stylelint-disable-next-line no-invalid-position-at-import-rule
-  @import '../../setup/scss/extends/list-reset';
 
   .s-color-item {
     &__grid {
-      @extend %list-reset;
-
       display: flex;
       flex-wrap: wrap;
       margin: variables.$spacing--0 (-(variables.$spacing--5));

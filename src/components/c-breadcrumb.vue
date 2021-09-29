@@ -58,19 +58,11 @@
 <style lang="scss">
   @use '../setup/scss/variables';
   @use '../setup/scss/mixins';
-  @use '../setup/scss/extends';
-  // TODO replace @extend my mixin
-  // stylelint-disable-next-line no-invalid-position-at-import-rule
-  @import '../setup/scss/extends/list-reset';
 
   .c-breadcrumb {
     @include mixins.font(variables.$font-size--12, 20px);
 
     color: variables.$color-grayscale--400;
-
-    &__list {
-      @extend %list-reset;
-    }
 
     &__item {
       display: inline-block;

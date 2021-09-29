@@ -278,7 +278,7 @@
 </script>
 
 <style lang="scss">
-  @use 'sass:math';
+  @use 'sass:list';
   @use '../setup/scss/variables';
 
   .e-picture { // Can be <picture> or <img>!
@@ -321,7 +321,7 @@
       }
 
       @supports (aspect-ratio: initial) {
-        aspect-ratio: math.div(var(--aspect-ratio), 1);
+        aspect-ratio: list.slash(var(--aspect-ratio), 1);
 
         &::before,
         &::after {

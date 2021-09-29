@@ -294,9 +294,6 @@
 <style lang="scss">
   @use '../setup/scss/mixins';
   @use '../setup/scss/variables';
-  // TODO replace @extend by mixin
-  // stylelint-disable-next-line no-invalid-position-at-import-rule
-  @import '../setup/scss/extends/button-reset';
 
   /* stylelint-disable selector-class-pattern */
   .c-modal {
@@ -368,8 +365,6 @@
     }
 
     &__header-close {
-      @extend %button-reset;
-
       cursor: pointer;
       margin-right: variables.$spacing--20;
 
