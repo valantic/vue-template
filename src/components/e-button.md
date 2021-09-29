@@ -137,6 +137,8 @@ Creates a button like link.
 ```
 
 #### Custom element
+This option to overwrite the default "anchor" or "button" tag should get only used for edge cases where 
+a button has to be inside another anchor tag or similar.
 
 ```vue
 <e-button element="span" @click="onStyleguideClick">Custom element button</e-button>

@@ -130,6 +130,8 @@
 
       /**
        * Overwrites the element of the button component.
+       * This option to overwrite the default "anchor" or "button" tag should get only used for edge cases where
+       * a button has to be inside another anchor tag or similar.
        */
       element: {
         type: String,
