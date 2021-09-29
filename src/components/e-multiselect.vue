@@ -21,8 +21,8 @@
         {{ outputValue }}
       </span>
       <e-icon icon="arrow--down"
-              width="15"
-              height="15"
+              width="22"
+              height="22"
               inline
       />
       <span :class="b('progress-wrapper')">
@@ -283,6 +283,9 @@
 <style lang="scss">
   @use '../setup/scss/variables';
 
+  // stylelint-disable-next-line no-invalid-position-at-import-rule
+  @import '../setup/scss/extends/list-reset';
+
   .e-multiselect {
     $e-multiselect-height: 30px;
 
@@ -296,8 +299,14 @@
       width: 100%;
       border: 1px solid variables.$color-grayscale--500;
       min-height: $e-multiselect-height;
-      padding: 0 variables.$spacing--5;
+      padding: 0 variables.$spacing--5 0 variables.$spacing--10;
       cursor: pointer;
+      background-color: variables.$color-grayscale--1000;
+      border-radius: 3px;
+
+      &:focus {
+        outline: none;
+      }
 
       .e-icon {
         transition: transform variables.$transition-duration-200 linear;
@@ -338,6 +347,11 @@
       max-height: 300px;
       overflow: auto;
       transform-origin: top;
+      z-index: 1;
+    }
+
+    &__options-list {
+      @extend %list-reset;
     }
 
     &__options-item {

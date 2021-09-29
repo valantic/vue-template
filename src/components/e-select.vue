@@ -190,8 +190,6 @@
     &__select:focus,
     &--focus &__select {
       outline: none;
-      box-shadow: 0 2px 5px 0 rgba(variables.$color-grayscale--400, 0.5);
-      border: 1px solid variables.$color-grayscale--500;
     }
 
     // disabled

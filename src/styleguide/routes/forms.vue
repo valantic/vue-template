@@ -37,6 +37,12 @@
                       @blur="$v.form.language.$touch()"
             />
           </e-label>
+          <e-label name="Business fields" required>
+            <e-multiselect v-model="form.businessFields"
+                           :options="mock.businessFields"
+                           has-search
+            />
+          </e-label>
           <e-label name="Notes">
             <e-textarea v-model="form.notes"
                         name="notes"
@@ -124,12 +130,14 @@
 </template>
 <script>
   import eFieldset from '@/components/e-fieldset';
+  import eMultiselect from '@/components/e-multiselect';
   import { required, email } from 'vuelidate/lib/validators';
 
   export default {
     name: 'forms',
     components: {
       eFieldset,
+      eMultiselect,
     },
     // components: {},
     data() {
@@ -141,6 +149,7 @@
           language: '',
           topics: [],
           frequency: '',
+          businessFields: [],
         },
         mock: {
           languages: [
@@ -156,6 +165,24 @@
               label: 'French',
               value: 'french',
             }
+          ],
+          businessFields: [
+            {
+              label: 'Production',
+              value: 'production',
+            },
+            {
+              label: 'Sales',
+              value: 'sales',
+            },
+            {
+              label: 'HR',
+              value: 'hr',
+            },
+            {
+              label: 'Finance',
+              value: 'finance',
+            },
           ],
         }
       };
