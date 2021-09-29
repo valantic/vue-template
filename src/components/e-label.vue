@@ -127,8 +127,9 @@
   @use '../setup/scss/variables';
 
   .e-label {
-    color: variables.$color-grayscale--400;
+    color: variables.$color-grayscale--200;
     display: block;
+    cursor: pointer;
 
     &__inner {
       width: 100%;
@@ -142,11 +143,7 @@
     }
 
     &__name--invisible {
-      position: absolute;
-      overflow: hidden;
-      height: 0;
-      width: 0;
-      top: 0;
+      @include mixins.invisible();
     }
 
     &--position-top {

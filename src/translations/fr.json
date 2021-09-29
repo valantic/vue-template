@@ -15,6 +15,10 @@
   "e-progress": {
     "loading": "Charge …"
   },
+  "e-multiselect": {
+    "defaultPlaceholder": "SVP Sélectionner",
+    "searchFieldPlaceholder": "Rechercher"
+  },
   "c-breadcrumb": {
     "linkTitle": "Allez vers {name}"
   },
