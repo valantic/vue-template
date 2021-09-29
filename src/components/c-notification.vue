@@ -4,7 +4,7 @@
       {{ notification.message }}
     </div>
     <button :class="b('close-button')" @click="close">
-      <e-icon icon="i-close" size="20" />
+      <e-icon icon="close" size="20" />
     </button>
   </div>
 </template>

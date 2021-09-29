@@ -33,15 +33,15 @@ if (process.env.NODE_ENV !== 'production') {
 /**
  * Pushes an array of messages to the notification handler.
  *
- * @param {Array} messages - An array of messages.
+ * @param {Array.<Object>} notifications - An array of messages.
  */
-function showNotifications(messages) {
-  if (!Array.isArray(messages)) {
+function showNotifications(notifications) {
+  if (!Array.isArray(notifications)) {
     return;
   }
 
-  messages.forEach((message) => {
-    store.commit('notification/pushNotification', message);
+  notifications.forEach((notification) => {
+    store.commit('notification/pushNotification', notification);
   });
 }
 
@@ -53,10 +53,10 @@ function showNotifications(messages) {
  * @returns {Object}
  */
 function handleSuccess(response) {
-  const { messages } = response?.data || {};
+  const { notifications } = response?.data || {};
 
-  if (messages) {
-    showNotifications(messages);
+  if (notifications) {
+    showNotifications(notifications);
   }
 
   return response || {};
@@ -72,10 +72,10 @@ function handleSuccess(response) {
  * @returns {Promise<never>}
  */
 function handleError(error, options) {
-  const { messages } = error?.response?.data || {};
+  const { notifications } = error?.response?.data || {};
 
-  if (messages) {
-    showNotifications(messages, options);
+  if (notifications) {
+    showNotifications(notifications, options);
   } else {
     store.dispatch('notification/showUnknownError');
   }

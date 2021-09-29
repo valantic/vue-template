@@ -10,7 +10,7 @@ import notification from '@/styleguide/mock-data/data-object/notification';
 function createApiResponse(data) {
   return {
     data: {},
-    messages: [data],
+    notifications: [data],
   };
 }
 

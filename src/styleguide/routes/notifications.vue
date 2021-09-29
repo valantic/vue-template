@@ -6,13 +6,13 @@
         <h2 :class="b('label')">
           Default global Messages:
         </h2>
-        <e-button @click="getApiResponseMessage('success')">
+        <e-button @click="getApiNotificationResponse('success')">
           Success
         </e-button>
-        <e-button @click="getApiResponseMessage('info')">
+        <e-button @click="getApiNotificationResponse('info')">
           Info
         </e-button>
-        <e-button @click="getApiResponseMessage('error')">
+        <e-button @click="getApiNotificationResponse('error')">
           Error
         </e-button>
 
@@ -20,13 +20,13 @@
         <h2 :class="b('label')">
           Custom Container Message
         </h2>
-        <e-button @click="getApiResponseMessage('success', 'footer')">
+        <e-button @click="getApiNotificationResponse('success', 'footer')">
           Success
         </e-button>
-        <e-button @click="getApiResponseMessage('info', 'footer')">
+        <e-button @click="getApiNotificationResponse('info', 'footer')">
           Info
         </e-button>
-        <e-button @click="getApiResponseMessage('error', 'footer')">
+        <e-button @click="getApiNotificationResponse('error', 'footer')">
           Error
         </e-button>
 
@@ -34,13 +34,13 @@
         <h2 :class="b('label')">
           Redirect
         </h2>
-        <e-button @click="getApiResponseMessage('success', '', '/styleguide/sandbox/layout')">
+        <e-button @click="getApiNotificationResponse('success', '', '/styleguide/sandbox/layout')">
           Success
         </e-button>
-        <e-button @click="getApiResponseMessage('info', '', '/styleguide/sandbox/layout')">
+        <e-button @click="getApiNotificationResponse('info', '', '/styleguide/sandbox/layout')">
           Info
         </e-button>
-        <e-button @click="getApiResponseMessage('error', '', '/styleguide/sandbox/layout')">
+        <e-button @click="getApiNotificationResponse('error', '', '/styleguide/sandbox/layout')">
           Error
         </e-button>
 
@@ -48,13 +48,13 @@
         <h2 :class="b('label')">
           Static (don't expire) Messages
         </h2>
-        <e-button @click="getApiResponseMessage('success', '', '', false)">
+        <e-button @click="getApiNotificationResponse('success', '', '', false)">
           Success
         </e-button>
-        <e-button @click="getApiResponseMessage('info', '', '', false)">
+        <e-button @click="getApiNotificationResponse('info', '', '', false)">
           Info
         </e-button>
-        <e-button @click="getApiResponseMessage('error', '', '', false)">
+        <e-button @click="getApiNotificationResponse('error', '', '', false)">
           Error
         </e-button>
 
@@ -119,7 +119,7 @@
        * @param {String} [redirectUrl] - The optional redirect url.
        * @param {Boolean} [expire] - Defines if the message should auto expire.
        */
-      getApiResponseMessage(type, selector, redirectUrl, expire = true) { // eslint-disable-line max-params
+      getApiNotificationResponse(type, selector, redirectUrl, expire = true) { // eslint-disable-line max-params
         api.get('/notifications/global', {
           params: {
             type,

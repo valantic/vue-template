@@ -56,14 +56,14 @@ export default {
           redirectUrl,
           expire,
         } = config.params || {};
-        const message = notification.createNotification({
+        const notificationItem = notification.createNotification({
           type,
           selector,
           redirectUrl,
           expire,
         });
 
-        return [200, notificationResponse.createApiResponse(message)];
+        return [200, notificationResponse.createApiResponse(notificationItem)];
       })
 
       // Global
