@@ -382,7 +382,7 @@
     }
 
     &__options-list {
-      overflow: hidden;
+      overflow: hidden; // needed to fix weird dropdown height issue
     }
 
     &__options-item {
