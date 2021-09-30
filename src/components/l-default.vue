@@ -72,6 +72,7 @@
 
 <style lang="scss">
   @use '../setup/scss/variables';
+  @use '../setup/scss/mixins';
 
   .l-default {
     display: flex;
@@ -89,6 +90,13 @@
       background: variables.$color-grayscale--1000;
       box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
       max-width: #{map-get(variables.$breakpoints, xl) - 20px};
+      margin: 0 auto;
+    }
+
+    .c-notification-container {
+      @include mixins.z-index(globalNotification);
+
+      position: absolute;
     }
   }
 </style>

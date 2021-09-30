@@ -424,19 +424,19 @@
       #{$this}__field-wrapper {
         @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
-        border-color: variables.$color-status--danger;
+        border-color: variables.$color-status--error;
 
         &:hover {
-          border-color: variables.$color-status--danger;
+          border-color: variables.$color-status--error;
         }
 
         &:focus {
-          border: 1px solid variables.$color-status--danger;
+          border: 1px solid variables.$color-status--error;
         }
       }
 
       #{$this}__icon-splitter {
-        border-color: variables.$color-status--danger;
+        border-color: variables.$color-status--error;
       }
     }
 

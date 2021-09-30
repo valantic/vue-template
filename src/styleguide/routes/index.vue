@@ -62,8 +62,8 @@
     padding: variables.$spacing--30;
 
     &__warning {
-      border: 1px solid variables.$color-status--danger;
-      background: rgba(variables.$color-status--danger--rgb, 0.5);
+      border: 1px solid variables.$color-status--error;
+      background: rgba(variables.$color-status--error--rgb, 0.5);
       text-align: center;
       padding: variables.$spacing--10;
     }

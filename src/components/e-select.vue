@@ -222,20 +222,20 @@
       #{$this}__select {
         @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
-        border-color: variables.$color-status--danger;
+        border-color: variables.$color-status--error;
       }
 
       #{$this}__icon-splitter {
-        border-color: variables.$color-status--danger;
+        border-color: variables.$color-status--error;
       }
     }
 
     &--state-error &__select:hover {
-      border-color: variables.$color-status--danger;
+      border-color: variables.$color-status--error;
     }
 
     &--state-error &__select:focus {
-      border: 1px solid variables.$color-status--danger;
+      border: 1px solid variables.$color-status--error;
     }
 
     &--state-success {

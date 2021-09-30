@@ -86,13 +86,8 @@ label {
   display: inline-block;
 }
 
-// Work around a Firefox/IE bug where the transparent `button` background
-// results in a loss of the default `button` focus styles.
-//
-// Credit: https://github.com/suitcss/base/
 button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
+  outline: none;
 }
 
 // Disables shifting of button content in IE11
@@ -108,6 +103,7 @@ input {
 button,
 select {
   text-transform: none; // Remove the inheritance of text transform in Firefox
+  cursor: pointer;
 }
 
 // 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
@@ -117,6 +113,9 @@ button,
 html [type="button"], // 1
 [type="reset"],
 [type="submit"] {
+  background: transparent;
+  border: 0;
+  padding: 0;
   -webkit-appearance: button; // 2
 }
 

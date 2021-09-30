@@ -499,19 +499,19 @@
     }
 
     &--state-error:not(.e-input--border-0) &__field {
-      border-color: variables.$color-status--danger;
+      border-color: variables.$color-status--error;
     }
 
     &--state-error .e-input__icon-splitter {
-      border-color: variables.$color-status--danger;
+      border-color: variables.$color-status--error;
     }
 
     &--state-error:not(.e-input--border-0) &__field:hover {
-      border: 1px solid variables.$color-status--danger;
+      border: 1px solid variables.$color-status--error;
     }
 
     &--state-error:not(.e-input--border-0) &__field:focus {
-      border: 1px solid variables.$color-status--danger;
+      border: 1px solid variables.$color-status--error;
     }
 
     &--state-info {

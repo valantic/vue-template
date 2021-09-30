@@ -74,7 +74,7 @@
     box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
 
     &--state-error {
-      background-color: variables.$color-status--danger;
+      background-color: variables.$color-status--error;
     }
 
     &--state-info {

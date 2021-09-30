@@ -198,7 +198,7 @@
     }
 
     &--state-error {
-      color: variables.$color-status--danger;
+      color: variables.$color-status--error;
     }
   }
 </style>
