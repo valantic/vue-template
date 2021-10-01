@@ -8,16 +8,18 @@ To hide this span we use a global style class ".invisible".
 ```html
 <a href="#">
   <span class="invisible">Schliessen von Element XY</span>
-  <e-icon icon="i-close" />
+  <e-icon icon="close" />
 </a>
 ```
 
 ```scss
 .invisible {
-  position: absolute;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
   overflow: hidden;
-  height: 0;
-  width: 0;
-  top: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 ```

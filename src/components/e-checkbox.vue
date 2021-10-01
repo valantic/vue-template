@@ -1,5 +1,5 @@
 <template>
-  <label :class="b(stateModifiers)"
+  <label :class="b(modifiers)"
          @mouseenter="hasHover = true"
          @mouseleave="hasHover = false">
     <input
@@ -12,7 +12,6 @@
       :name="name"
       type="checkbox"
       @blur="onBlur"
-      @change="onChange"
       @focus="onFocus">
     <span :class="b('label')">
       <slot></slot>
@@ -75,6 +74,18 @@
 
     computed: {
       /**
+       * Returns a configuration Object for modifier classes.
+       *
+       * @returns {Object}
+       */
+      modifiers() {
+        return {
+          ...this.stateModifiers,
+          selected: this.internalValue === this.value,
+        };
+      },
+
+      /**
        * Sets value of component model to parent model
        *
        * @returns  {Boolean|Array}   Status of the checkbox
@@ -84,6 +95,8 @@
           return this.checked;
         },
         set(value) {
+          this.isChecked = value;
+
           /**
            * Emits checkbox value e.g. true/false or value
            *
@@ -109,37 +122,6 @@
 
     methods: {
       /**
-       * Emits state to parent and wrapper component.
-       * Update "isChecked" state.
-       *
-       * @param   {Boolean}  event   Field input
-       */
-      onChange(event) {
-        this.isChecked = event.target.checked;
-
-        /**
-         * Change event
-         *
-         * @event change
-         * @type {String}
-         */
-        this.$parent.$emit('change');
-      },
-
-      /**
-       * Updates the checked state of the checkbox.
-       *
-       * @public Used by c-multiselect.
-       */
-      updateCheckedState() {
-        if (typeof this.value === 'string') {
-          this.isChecked = this.checked.indexOf(this.value.trim()) > -1;
-        } else if (typeof this.value === 'number') {
-          this.isChecked = this.checked.indexOf(this.value) > -1;
-        }
-      },
-
-      /**
        * Emits focus to parent and wrapper component.
        * Update "hasFocus" state.
        */
@@ -153,7 +135,6 @@
          * @type {String}
          */
         this.$emit('focus');
-        this.$parent.$emit('focus');
       },
 
       /**
@@ -170,7 +151,6 @@
          * @type {String}
          */
         this.$emit('blur');
-        this.$parent.$emit('blur');
       },
     },
     // render() {},
@@ -178,70 +158,89 @@
 </script>
 
 <style lang="scss">
-.e-checkbox {
-  $this: &;
-  $label-size: 17px;
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
 
-  @include font($font-size--16);
+  .e-checkbox {
+    $label-size: 16px;
 
-  position: relative;
-  display: block;
-  cursor: pointer;
+    @include mixins.font(variables.$font-size--16, 22px);
 
-  &__field {
-    position: absolute;
-    left: -200vw;
-    -webkit-appearance: none;
-  }
-
-  &__label {
+    position: relative;
     display: block;
-    padding-left: $spacing--25;
-    margin: 0;
+    cursor: pointer;
 
-    &::before,
-    &::after {
+    &__field {
       position: absolute;
-      content: '';
-      top: 3px;
-      left: 0;
-      width: $label-size;
-      height: $label-size;
+      left: -200vw;
+      -webkit-appearance: none;
     }
 
-    &::before {
-      border: 1px solid $color-grayscale--0;
+    &__label {
+      display: block;
+      padding-left: variables.$spacing--25;
+      margin: 0;
+
+      &:hover {
+        color: variables.$color-grayscale--0;
+
+        &::before {
+          border-color: variables.$color-grayscale--0;
+        }
+      }
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: '';
+        top: 3px;
+        left: 0;
+        width: $label-size;
+        height: $label-size;
+      }
+
+      &::before {
+        border: 1px solid variables.$color-grayscale--400;
+      }
+
+      &::after {
+        transition: transform 0.1s ease-in-out;
+        background: variables.$color-grayscale--0;
+        opacity: 0;
+        transform: scale(0);
+      }
     }
 
-    &::after {
-      background: $color-grayscale--0;
-      opacity: 0;
-      transform: scale(0);
+    &__field:checked + &__label {
+      color: variables.$color-grayscale--0;
+
+      &::after {
+        opacity: 1;
+        transform: scale(0.6);
+      }
+    }
+
+    &__field:disabled + &__label {
+      color: variables.$color-grayscale--500;
+      cursor: default;
+
+      &:hover {
+        color: variables.$color-grayscale--500;
+
+        &::before {
+          border-color: variables.$color-grayscale--500;
+        }
+      }
+
+      &::before {
+        border-color: variables.$color-grayscale--500;
+      }
+    }
+
+    &__field:checked:disabled + &__label {
+      &::after {
+        background: variables.$color-grayscale--500;
+      }
     }
   }
-
-  &__field:checked + &__label {
-    color: $color-primary--1;
-
-    &::after {
-      opacity: 1;
-      transform: scale(0.6);
-    }
-  }
-
-  &__field:disabled + &__label {
-    color: $color-grayscale--500;
-    cursor: default;
-
-    &::before {
-      border-color: $color-grayscale--500;
-    }
-  }
-
-  &__field:checked:disabled + &__label {
-    &::after {
-      background: $color-grayscale--500;
-    }
-  }
-}
 </style>

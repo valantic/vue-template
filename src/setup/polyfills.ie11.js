@@ -8,6 +8,7 @@
  * Makes sure you test extensively.
  */
 import 'picturefill';
+import svg4everybody from 'svg4everybody';
 import cssVars from 'css-vars-ponyfill';
 
 /*
@@ -16,3 +17,5 @@ import cssVars from 'css-vars-ponyfill';
 cssVars({
   silent: process.env.NODE_ENV === 'production'
 });
+
+svg4everybody();

@@ -1,2 +1,3 @@
-@include spacings("spacing--bottom", "margin-bottom");
-@include spacings("spacing--top", "margin-top");
+@use './mixins';
+@include mixins.spacings('spacing--bottom', 'margin-bottom');
+@include mixins.spacings('spacing--top', 'margin-top');

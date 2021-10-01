@@ -1,24 +1,43 @@
 <template>
-  <span :class="b(componentModifiers)">
-    <!-- <span> needed for inline usage. -->
-    <img v-if="!inline"
-         :class="b('icon')"
-         :src="src"
-         :alt="alt"
-         :width="width"
-         :height="height"
-         :title="title"
-    >
-  </span>
+  <svg v-if="inline"
+       :class="b({ [icon]: true })"
+       :width="viewBox.width"
+       :height="viewBox.height"
+       :aria-hidden="!alt"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       focusable="false"
+       tabindex="-1"
+  >
+    <title v-if="alt">
+      {{ alt }}
+    </title>
+    <use :xlink:href="`${spritePath}#${icon}`" />
+  </svg>
+  <img v-else
+       :src="`${spritePath}#${icon}`"
+       :alt="alt"
+       :width="viewBox.width"
+       :height="viewBox.height"
+  >
 </template>
 
 <script>
-  const cache = {};
-  const nodeCache = {};
+  const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
+  const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
+  const sizeLookup = {
+    play: [1024, 721],
+  };
 
+  /**
+   * Places an svg sprite icon.
+   */
   export default {
     name: 'e-icon',
-    status: 0, // TODO: remove when component was prepared for current project.
+    status: 0,
+
+    // components: {},
+    // mixins: [],
 
     props: {
       /**
@@ -30,226 +49,84 @@
       },
 
       /**
-       * Flag to determine if icon should be used inline or as img tag
+       * Sets the width and height of the svg icon.
+       */
+      size: {
+        type: String,
+        default: null,
+      },
+
+      /**
+       * Switches between inline and image use of the icon.
        */
       inline: {
         type: Boolean,
-        default: false,
+        default: true,
       },
 
       /**
-       * Custom width value
-       */
-      width: {
-        type: [String, Number],
-        default: null,
-      },
-
-      /**
-       * Custom height value
-       */
-      height: {
-        type: [String, Number],
-        default: null,
-      },
-
-      /**
-       * Color of the icon, if it is rendered inline
-       */
-      color: {
-        type: String,
-        default: 'default',
-        validator(value) {
-          return [
-            'default',
-            'gray',
-            'lightgray',
-            'white',
-          ].includes(value);
-        },
-      },
-
-      /**
-       * Title attribute for <img> usage
-       */
-      title: {
-        type: String,
-        default: null,
-      },
-
-      /**
-       * Alternative text for image usage. This will not be added in case of inline usage as alt attribute is not
-       * allowed on svg elements.
+       * Allows to set an alt tag to the image.
        */
       alt: {
         type: String,
-        default: '', // A11y 1.1.1
-      },
-
-      /**
-       * IE will focus inline svg. Therefore by default `focusable` on the `<svg>` element is set to `false`.
-       * Use this prop to change the value.
-       */
-      focusable: {
-        type: Boolean,
-        default: false,
-      },
-
-      /**
-       * Native tabindex attribute for the svg-element (inline usage).
-       */
-      tabindex: {
-        type: String,
-        default: '-1',
+        default: null,
       },
     },
+
+    data() {
+      return {
+        /**
+         * The local path to the svg sprite.
+         */
+        spritePath,
+      };
+    },
+
     computed: {
       /**
-       * Returns the source path for the given icon.
-       *
-       * @returns {String}
-       */
-      src() {
-        try {
-          return require.context('../assets/icons/', false, /\.svg/)(`./${this.icon}.svg`) || null;
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.warn(`e-icon was unable to find icon "${this.icon}"`);
-
-          return null;
-        }
-      },
-
-      /**
-       * Returns all modifiers for the component main class.
+       * Returns a viewBox definition object.
        *
        * @returns {Object}
        */
-      componentModifiers() {
+      viewBox() {
+        const { icon } = this;
+        const lookup = sizeLookup[icon];
+        const size = this.size?.split(' ') || [defaultSize];
+
+        // Auto map height for non square icons.
+        if (size.length === 1 && lookup) {
+          size[1] = (size[0] / lookup[0]) * lookup[1];
+        }
+
         return {
-          color: this.color,
-          [this.icon]: true,
+          width: size[0],
+          height: size[1] || size[0],
         };
       },
     },
+    // watch: {},
 
-    watch: {
-      icon: {
-        immediate: true,
-        handler() {
-          this.loadIcon();
-        },
-      },
-    },
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeDestroy() {},
+    // destroyed() {},
 
-    methods: {
-      /**
-       * Sets the attributes for the icon.
-       *
-       * @param {Node} svg - Element for which the attributes should be set.
-       */
-      setAttributes(svg) {
-        if (this.width || this.height) {
-          svg.removeAttribute('width');
-          svg.removeAttribute('height');
-
-          if (this.width) {
-            svg.setAttribute('width', this.width);
-          }
-
-          if (this.height) {
-            svg.setAttribute('height', this.height);
-          }
-        }
-
-        svg.setAttribute('tabindex', this.tabindex);
-        svg.setAttribute('role', 'img');
-        svg.setAttribute('aria-label', this.icon);
-        svg.setAttribute('focusable', this.focusable);
-      },
-
-      /**
-       * Creates a new SVG element if not already in cache.
-       *
-       * @param {String} content - The SVG content as string.
-       *
-       * @returns {Node}
-       */
-      createSvgElement(content) {
-        if (!nodeCache[this.icon]) {
-          const container = document.createElement('div');
-
-          container.innerHTML = content;
-
-          nodeCache[this.icon] = container;
-        }
-
-        return nodeCache[this.icon].cloneNode(true).children[0];
-      },
-
-      /**
-       * Gets an SVG element for the given content.
-       *
-       * @param {String} content - The SVG content as string.
-       *
-       * @returns {Node}
-       */
-      getSvgElement(content) {
-        const svg = this.createSvgElement(content);
-
-        this.setAttributes(svg);
-
-        return svg;
-      },
-
-      /**
-       * Load the icon.
-       */
-      loadIcon() {
-        if (!this.inline || !this.src) {
-          return;
-        }
-
-        if (!cache[this.icon]) {
-          cache[this.icon] = this.$axios
-            .get(this.src)
-            .then(response => response.data);
-        }
-
-        cache[this.icon].then((svg) => {
-          const { $el } = this;
-
-          // remove previous icon
-          while ($el.firstChild) {
-            $el.removeChild($el.firstChild);
-          }
-
-          $el.appendChild(this.getSvgElement(svg));
-        });
-      },
-    },
+    // methods: {},
+    // render() {},
   };
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/variables';
+
   .e-icon {
-    display: inline-block;
-
-    svg {
-      display: block; // Removes additional letter spacing around element.
-      pointer-events: none; // Prevents IE11 from swallowing events.
-    }
-
-    &--color-gray svg path {
-      fill: $color-grayscale--400;
-    }
-
-    &--color-lightgray svg path {
-      fill: $color-grayscale--600;
-    }
-
-    &--color-white svg path {
-      fill: $color-grayscale--1000;
-    }
+    display: block;
+    pointer-events: none; // Prevents IE11 from swallowing events.
   }
 </style>

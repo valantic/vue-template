@@ -127,6 +127,16 @@
         type: Boolean,
         default: false,
       },
+
+      /**
+       * Overwrites the element of the button component.
+       * This option to overwrite the default "anchor" or "button" tag should get only used for edge cases where
+       * a button has to be inside another anchor tag or similar.
+       */
+      element: {
+        type: String,
+        default: null,
+      },
     },
 
     data() {
@@ -145,11 +155,6 @@
          * @type {Boolean} Internal flag to determine focus state.
          */
         hasFocus: this.focus,
-
-        /**
-         * Sets the element type for the component.
-         */
-        type: this.$attrs.href ? 'a' : 'button',
 
         /**
          * Determines if the current device uses touch.
@@ -201,7 +206,16 @@
         return this.progress && this.width !== 'full'
           ? this.getElementDimensions()
           : null;
-      }
+      },
+
+      /**
+       * Gets the type of the component (DOM element).
+       *
+       * @returns {String}
+       */
+      type() {
+        return this.element || (this.$attrs.href ? 'a' : 'button');
+      },
     },
     // watch: {},
 
@@ -296,17 +310,20 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   $_e-button__radius: 3px;
 
   .e-button {
-    @include font(14, 18, $font-weight--semi-bold);
+    @include mixins.font(14, 18, variables.$font-weight--semi-bold);
 
     position: relative;
     display: inline-block;
     background: transparent;
-    padding: 6px $spacing--10;
-    border: 1px solid $color-grayscale--500;
-    color: $color-grayscale--400;
+    padding: 6px variables.$spacing--10;
+    border: 1px solid variables.$color-grayscale--500;
+    color: variables.$color-grayscale--400;
     border-radius: $_e-button__radius;
     outline: none;
     min-width: 165px;
@@ -319,30 +336,30 @@
 
     &--focus,
     &:focus {
-      color: $color-primary--3;
-      background-color: $color-grayscale--500;
+      color: variables.$color-primary--3;
+      background-color: variables.$color-grayscale--500;
       outline: none;
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--500;
     }
 
     &:active:not([disabled]),
     &--active:not([disabled]) {
-      color: $color-primary--3;
-      background-color: $color-grayscale--400;
+      color: variables.$color-primary--3;
+      background-color: variables.$color-grayscale--400;
       position: relative;
     }
 
     &--hover:not(&--touch),
     &:hover:not(&--touch) {
-      color: $color-primary--3;
-      background-color: $color-grayscale--500;
+      color: variables.$color-primary--3;
+      background-color: variables.$color-grayscale--500;
     }
 
     &--focus path,
     &--hover:not(&--touch) path,
     &:focus path,
     &:hover:not(&--touch) path {
-      fill: $color-primary--3;
+      fill: variables.$color-primary--3;
     }
 
     &[disabled],
@@ -350,8 +367,8 @@
     &[disabled]:hover,
     &--disabled:hover {
       background-color: transparent;
-      border-color: $color-grayscale--600;
-      color: $color-grayscale--300;
+      border-color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--300;
       cursor: default;
       pointer-events: none;
     }
@@ -366,8 +383,8 @@
     }
 
     &--negative {
-      background: $color-primary--2;
-      color: $color-primary--3;
+      background: variables.$color-primary--2;
+      color: variables.$color-primary--3;
     }
 
     &--spacing-0 {
@@ -380,7 +397,7 @@
     &--progress[disabled]:focus,
     &--progress:hover,
     &--progress:focus {
-      background-color: $color-grayscale--400;
+      background-color: variables.$color-grayscale--400;
       overflow: hidden; // Prevents overflow of animation
     }
 
@@ -398,24 +415,24 @@
 
   .e-button--primary {
     &:not([disabled]) {
-      color: $color-secondary--2;
+      color: variables.$color-secondary--2;
 
       &.e-button:focus,
       &.e-button--focus {
-        color: $color-primary--3;
-        background-color: $color-primary--1;
+        color: variables.$color-primary--3;
+        background-color: variables.$color-primary--1;
       }
 
       &.e-button:hover:not(.e-button--touch),
       &.e-button--hover:not(.e-button--touch) {
-        color: $color-primary--3;
-        background-color: $color-primary--1;
+        color: variables.$color-primary--3;
+        background-color: variables.$color-primary--1;
       }
 
       &.e-button:active:not([disabled]),
       &.e-button--active:not([disabled]) {
-        color: $color-primary--3;
-        background-color: $color-secondary--2;
+        color: variables.$color-primary--3;
+        background-color: variables.$color-secondary--2;
       }
     }
 
@@ -425,7 +442,7 @@
     &.e-button--progress[disabled]:focus,
     &.e-button--progress:hover,
     &.e-button--progress:focus {
-      background-color: $color-secondary--2;
+      background-color: variables.$color-secondary--2;
     }
   }
 </style>

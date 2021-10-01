@@ -82,26 +82,28 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
+  @use '../../setup/scss/variables';
+  @use '../../setup/scss/mixins';
+
   .s-color-item {
     &__grid {
-      @extend %list-reset;
-
       display: flex;
       flex-wrap: wrap;
-      margin: $spacing--0 (-$spacing--5);
+      margin: variables.$spacing--0 (-(variables.$spacing--5));
     }
 
     &__grid-item {
-      padding: $spacing--5;
-      flex: 0 1 percentage(6 / 12);
+      padding: variables.$spacing--5;
+      flex: 0 1 percentage(math.div(6, 12));
       max-width: 200px;
 
-      @include media(sm) {
-        flex-basis: percentage(4 / 12);
+      @include mixins.media(sm) {
+        flex-basis: percentage(math.div(4, 12));
       }
 
-      @include media(md) {
-        flex-basis: percentage(2 / 12);
+      @include mixins.media(md) {
+        flex-basis: percentage(math.div(2, 12));
       }
     }
 

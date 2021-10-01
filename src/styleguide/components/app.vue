@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
+  import { mapMutations } from 'vuex';
   import sNavigation from '@/styleguide/components/s-navigation';
   import styleguideRoutes from '@/setup/styleguide.routes';
 
@@ -38,7 +40,9 @@
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      this.getNotificationFromStorage();
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -48,7 +52,26 @@
     // beforeDestroy() {},
     // destroyed() {},
 
-    // methods: {},
+    methods: {
+      ...mapMutations('notification', [
+        'pushNotification',
+      ]),
+
+      /**
+       * Gets localStorage messages and pushes them in the notification store to display.
+       */
+      getNotificationFromStorage() {
+        const notification = IS_STORAGE_AVAILABLE && localStorage.getItem('notification');
+        const parsedNotification = notification ? JSON.parse(notification) : null;
+
+        if (parsedNotification) {
+          this.pushNotification(parsedNotification);
+
+          // Clears the localStorage notifications.
+          localStorage.removeItem('notification');
+        }
+      },
+    },
     // render() {},
   };
 </script>

@@ -1,14 +1,14 @@
 <template>
-  <div :class="b(componentModifiers)">
-    <div :class="b('inner')">
-      <div :class="b('bubble')"></div>
-      <div :class="b('bubble')"></div>
-      <div :class="b('bubble')"></div>
-    </div>
+  <span :class="b(componentModifiers)">
+    <span :class="b('inner')">
+      <span :class="b('bubble')"></span>
+      <span :class="b('bubble')"></span>
+      <span :class="b('bubble')"></span>
+    </span>
     <span class="invisible">
       {{ loadingMessage }}
     </span>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -93,8 +93,11 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
+  @use '../setup/scss/variables';
+
   $_e-progress__animation-duration: 2000ms;
-  $_e-progress--padding: $spacing--5;
+  $_e-progress--padding: variables.$spacing--5;
 
   @keyframes e-progress-rotation-animation {
     0% {
@@ -121,6 +124,7 @@
     }
 
     &__inner {
+      display: block;
       position: relative;
       width: calc(1em * 4);
       height: 1em;
@@ -128,32 +132,33 @@
     }
 
     &__bubble {
+      display: block;
       height: 0.6em;
       width: 0.6em;
       left: 50%;
-      background-color: $color-secondary--1;
+      background-color: variables.$color-secondary--1;
       position: absolute;
-      margin: $spacing--5 auto 0;
+      margin: variables.$spacing--5 auto 0;
       border-radius: 50%;
       animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;
 
       &:nth-child(1) {
-        animation-delay: $_e-progress__animation-duration / 3 * -1;
+        animation-delay: math.div($_e-progress__animation-duration, 3 * -1);
       }
 
       &:nth-child(2) {
-        animation-delay: $_e-progress__animation-duration / 3 * -2;
+        animation-delay: math.div($_e-progress__animation-duration, 3 * -2);
       }
 
       &:nth-child(3) {
-        animation-delay: $_e-progress__animation-duration / 3 * -3;
+        animation-delay: math.div($_e-progress__animation-duration, 3 * -3);
       }
     }
   }
 
   .e-progress--negative {
     .e-progress__bubble {
-      background-color: $color-primary--3;
+      background-color: variables.$color-primary--3;
     }
   }
 </style>

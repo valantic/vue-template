@@ -2,6 +2,7 @@ const path = require('path');
 const { theme, styles } = require('./src/setup/styleguide.styles');
 
 module.exports = {
+  assetsDir: 'src',
   renderRootJsx: path.join(__dirname, 'src/setup/styleguidist/root.js'),
   defaultExample: 'src/setup/styleguide.fallback.md',
   components: 'src/components/**/*.vue',
@@ -25,6 +26,7 @@ module.exports = {
   ignore: [
     '**/components/app.vue',
     '**/components/l-default.vue',
+    '**/components/c-notification-container.vue',
   ],
   sections: [
     {
@@ -83,6 +85,10 @@ module.exports = {
       name: 'Plugins',
       content: '',
       sections: [
+        {
+          name: 'Vuelidate',
+          content: 'src/styleguide/pages/plugins/vuelidate.md',
+        },
         {
           name: 'Confirmation',
           content: 'src/styleguide/pages/plugins/confirmation.md',

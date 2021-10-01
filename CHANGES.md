@@ -5,24 +5,40 @@
  - (Breaking) Refactors e-checkbox, so the styling of the states does not need to rely on JS anymore.
  - (Breaking) Removes e-with-root component.
    - The same behaviour can be achieved with :is=""
+ - (Breaking) Sprite support for e-icon.
  - (Breaking) Removes touch-device mixin
  - (Breaking) Removes c-panel  
  - (Breaking) Refactors e-picture (inverts sizes definition, adds additional options)  
+ - (Breaking) Issue 168 Replace multiselect
+   - Replaces the old c-multiselect component with a new e-multiselect component
+   - Refactoring and remove project specific features
+   - Makes the component simpler and more generic usable
+   - Adds v-model handling
  - (Change) Fixes invalid greyscale order.
  - (Change) Replaces deprecated webpack-manifest-plugin with webpack-assets-manifest.
- - (Change) Simplyfies s-readme styles, so they align more with the current project.
+ - (Change) Simplifies s-readme styles, so they align more with the current project.
  - (Change) Updates browser support table.
  - (Change) Makes form mixin imports absolute to prevent ESLint errors.
  - (Change) Removes deprecated prop from e-checkbox demos.
  - (Change) Adds multi line demo for e-checkbox.
  - (Change) Adds translation best practices to readme.
  - (Change) Enables console errors for HTML inside of translations
- - (Bug) Fixes broken styleguide build.
  - (Update) Updates all NPM packages to the current version. Except:
    - stylus-loader: was removed, because not required anymore
    - stylus: was removed because not required anymore 
    - vue-js-modal because version 2.0 is not ready
    - uglifyjs-webpack-plugin: was replaced with terser-webpack-plugin because deprecated
+ - (Change) Issue 163: Replaces Reboot Styles with Reset npm package, removes some default spacing styles
+ - (Change) Issue 159: Replace SCSS slash division
+   - Updates the sass plugin to version 1.39.2 which makes it possible to use the @use "math:div" function.
+   - Replaces the SCSS divisions by "slash" with the math.div() Sass function
+   - Activates the `hoistUseStatements` option in the sass-loader plugin
+ - (Change) Issue 144 / 166:
+    - Removes global scss imports
+    - Replaces usages of `@import` with `@use` and `@forward`
+    - Replaces usages of `@extends` with `@mixins` as extends is not supported by scss namespaces
+    - Uses local imports for scss mixins, functions and variables
+ - (Bug) Fixes broken styleguide build.
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.

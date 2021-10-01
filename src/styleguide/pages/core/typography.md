@@ -3,28 +3,33 @@
 
 Font. See app/setup/scss/mixins/_font.scss
 ```scss
-@mixin font($font-size: $_config--font-size, $line-height: null, $font-weight: null);
+@use '<path/to>/setup/scss/mixins';
+@mixin mixins.font($font-size: $_config--font-size, $line-height: null, $font-weight: null);
 ```
 
 Font-size. See app/setup/scss/mixins/_font-size.scss
 ```scss
-@mixin font-size($size-value: $_config--font-size);
+@use '<path/to>/setup/scss/mixins';
+@mixin mixins.font-size($size-value: $_config--font-size);
 ```
 
 Line-height. See app/setup/scss/mixins/_line-height.scss
 ```scss
-@mixin line-height($line-height: $_config--line-height, $font-size: $_config--font-size);
+@use '<path/to>/setup/scss/mixins';
+@mixin mixins.line-height($line-height: $_config--line-height, $font-size: $_config--font-size);
 ```
 
 Please make sure that you use the defined SCSS mixins for font, font-size and line-height.  This way we can make sure that all of the font units are relative (rem/em). Use mixins within styles, not the other way around
 
 ```scss
+@use '<path/to>/setup/scss/mixins';
+
 .foo {
-  @include media(xxs, $media: screen) {
+  @include mixins.media(xxs, $media: screen) {
     display: block;
   }
   
-  @include font-size(1em) {
+  @include mixins.font-size(1em) {
     color: #ff0000;
   }
 }

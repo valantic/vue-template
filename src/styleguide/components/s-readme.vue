@@ -42,6 +42,9 @@
 
 <!-- eslint-disable -->
 <style lang="scss">
+  @use '../../setup/scss/mixins';
+  @use '../../setup/scss/variables';
+
   /* stylelint-disable */
 
   /*
@@ -99,7 +102,7 @@
         }
       }
       &.footnote {
-        @include font(14);
+        @include mixins.font(14);
 
         height: 0;
         line-height: 1;
@@ -108,7 +111,7 @@
       }
     }
     h1 {
-      @include font(38);
+      @include mixins.font(38);
 
       cursor: text;
       position: relative;
@@ -121,7 +124,7 @@
       }
     }
     h2 {
-      @include font(30);
+      @include mixins.font(30);
 
       cursor: text;
       position: relative;
@@ -134,7 +137,7 @@
       }
     }
     h3 {
-      @include font(22);
+      @include mixins.font(22);
 
       cursor: text;
       position: relative;
@@ -146,7 +149,7 @@
       }
     }
     h4 {
-      @include font(18);
+      @include mixins.font(18);
 
       cursor: text;
       position: relative;
@@ -158,7 +161,7 @@
       }
     }
     h5 {
-      @include font(16);
+      @include mixins.font(16);
 
       cursor: text;
       position: relative;
@@ -171,7 +174,7 @@
     }
 
     h6 {
-      @include font(14);
+      @include mixins.font(14);
 
       cursor: text;
       position: relative;
@@ -198,7 +201,7 @@
       }
     }
     table {
-      @include font(14);
+      @include mixins.font(14);
 
       margin: 15px 0;
       border-collapse: collapse;
@@ -223,7 +226,7 @@
       }
     }
     pre {
-      @include font(14);
+      @include mixins.font(14);
 
       background-color: #f8f8f8;
       border: 1px solid #ccc;
@@ -251,19 +254,18 @@
     }
     ul {
       padding-left: 30px;
-      li > :first-child {
-        margin-top: 0;
+      list-style: disc;
+
+      li + li {
+        margin-top: variables.$spacing--10;
       }
     }
     ol {
       padding-left: 30px;
-      li {
-        ul:first-of-type {
-          margin-top: 0;
-        }
-        > :first-child {
-          margin-top: 0;
-        }
+      list-style: decimal;
+
+      li + li {
+        margin-top: variables.$spacing--10;
       }
     }
     hr {
@@ -307,7 +309,7 @@
     dl {
       padding: 0;
       dt {
-        @include font(14);
+        @include mixins.font(14);
 
         font-weight: bold;
         font-style: italic;
@@ -355,7 +357,7 @@
     }
 
     tt {
-      @include font(12);
+      @include mixins.font(12);
 
       margin: 0 2px;
       padding: 0 5px;
@@ -370,7 +372,7 @@
 
     .highlight {
       pre {
-        @include font(13);
+        @include mixins.font(13);
 
         background-color: #f8f8f8;
         border: 1px solid #ccc;
@@ -582,7 +584,7 @@
       }
     }
     sup {
-      @include font(14);
+      @include mixins.font(14);
 
       height: 0;
       line-height: 1;
@@ -590,7 +592,7 @@
       position: relative;
     }
     sub {
-      @include font(14);
+      @include mixins.font(14);
 
       height: 0;
       line-height: 1;
