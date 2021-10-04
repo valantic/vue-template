@@ -355,7 +355,6 @@
       font-family: variables.$font-family--primary;
       height: $e-input-height;
       position: relative;
-      transition: box-shadow variables.$transition-duration-200 ease-in-out;
       width: 100%;
       padding: variables.$spacing--5 variables.$spacing--10;
 
@@ -384,21 +383,19 @@
 
     // placeholder (has to be split in seperate blocks to work on each browser)
     &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
+      font-family: variables.$font-family--primary;
       color: variables.$color-grayscale--400;
       opacity: 1;
     }
 
     &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
+      font-family: variables.$font-family--primary;
       color: variables.$color-grayscale--400;
       opacity: 1;
     }
 
     &__field::placeholder { // Most modern browsers support this now
-      color: variables.$color-grayscale--400;
-      opacity: 1;
-    }
-
-    &__field:-ms-input-placeholder { // IE 11
+      font-family: variables.$font-family--primary;
       color: variables.$color-grayscale--400;
       opacity: 1;
     }

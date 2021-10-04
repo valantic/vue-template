@@ -188,7 +188,21 @@
     }
 
     // placeholder
-    &__field::placeholder {
+    // placeholder (has to be split in seperate blocks to work on each browser)
+    &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
+      font-family: variables.$font-family--primary;
+      color: variables.$color-grayscale--400;
+      opacity: 1;
+    }
+
+    &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
+      font-family: variables.$font-family--primary;
+      color: variables.$color-grayscale--400;
+      opacity: 1;
+    }
+
+    &__field::placeholder { // Most modern browsers support this now
+      font-family: variables.$font-family--primary;
       color: variables.$color-grayscale--400;
       opacity: 1;
     }
@@ -234,7 +248,6 @@
     &__field:focus,
     &--focus &__field {
       outline: none;
-      box-shadow: 0 2px 5px 0 rgba(variables.$color-grayscale--400, 0.5);
       border: 1px solid variables.$color-grayscale--400;
     }
 
