@@ -1,27 +1,11 @@
 <template>
   <span :class="b(modifiers)">
-    <input v-if="uncontrolled"
+    <input v-model="internalValue"
            ref="input"
            :autocomplete="autocomplete"
            :class="b('field')"
            :disabled="disabled"
            :name="name"
-           :title="title"
-           v-bind="$attrs"
-           @blur="onBlur"
-           @focus="onFocus"
-           @input="onInput"
-           @keyup.enter="onEnterKeyUp"
-           @mouseenter="hover = true"
-           @mouseleave="hover = false"
-    >
-    <input v-else
-           ref="input"
-           :autocomplete="autocomplete"
-           :class="b('field')"
-           :disabled="disabled"
-           :name="name"
-           :value="standalone ? internalValue : value"
            :title="title"
            v-bind="$attrs"
            @blur="onBlur"
@@ -50,10 +34,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, Ref } from 'vue';
+  import {
+    Ref,
+    defineComponent,
+    ref,
+    toRefs
+  } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification.vue';
-  import useFormStates, { IFormStates } from '@/compositions/form-states';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {
@@ -62,7 +51,7 @@
   }
 
   interface IData {
-    internalValue: string | number;
+    internalValue: string;
   }
 
   /**
@@ -80,11 +69,12 @@
     inheritAttrs: false,
 
     props: {
+      ...withProps(),
 
       /**
        * Value passed by v-model
        */
-      value: {
+      modelValue: {
         default: null,
         type: String,
       },
@@ -116,7 +106,7 @@
       },
 
       /**
-       * Defines the notification content in a state container bellow the input field
+       * Defines the notification content in a state container below the input field
        */
       notification: {
         type: String,
@@ -151,34 +141,14 @@
         type: Boolean,
         default: false,
       },
-
-      /**
-       * Allows to use the input as standalone.
-       *
-       * If 'true', $props.value will be used to set initial value.
-       * the component is not reactive to $props.value changes.
-       */
-      standalone: {
-        type: Boolean,
-        default: false
-      },
-
-      /**
-       * Lets input handle value itself. This is used as in some cases the IE11 couldn't handle new input values
-       * (e.g. skipped random keystrokes in searchSuggestion field).
-       */
-      uncontrolled: {
-        type: Boolean,
-        default: false
-      },
     },
 
-    setup(): ISetup {
+    setup(props): ISetup {
       const input = ref();
       const slot = ref();
 
       return {
-        ...useFormStates(),
+        ...useFormStates(toRefs(props).state),
         input,
         slot,
       };
@@ -186,7 +156,7 @@
 
     data(): IData {
       return {
-        internalValue: this.value
+        internalValue: this.modelValue
       };
     },
     computed: {
@@ -232,10 +202,6 @@
       setTimeout(this.setSlotSpacings, 200);
 
       window.addEventListener('resizeend', this.setSlotSpacings);
-
-      if (this.uncontrolled && this.input) {
-        this.input.value = this.standalone ? this.internalValue.toString() : this.value.toString();
-      }
     },
     // beforeUpdate() {},
     updated() {
@@ -259,10 +225,8 @@
 
         /**
          * input event fires on input
-         *
-         * @event input
          */
-        this.$emit('input', target.value);
+        this.$emit('update:modelValue', target.value);
       },
 
       /**
@@ -328,14 +292,14 @@
        * Selects the value of the input field.
        */
       selectValue() {
-        if (this.value) {
+        if (this.modelValue) {
           // Needed to select a number value on Chrome.
           this.input?.select();
 
           // Timeout is needed that it works on all browsers (without there are problems on Safari, Edge, iOS)
           if ('ontouchstart' in window) {
             setTimeout(() => {
-              const selectionRange = typeof this.value === 'string' ? this.value.length : this.value;
+              const selectionRange = typeof this.modelValue === 'string' ? this.modelValue.length : this.modelValue;
 
               this.input?.setSelectionRange(0, selectionRange);
             });

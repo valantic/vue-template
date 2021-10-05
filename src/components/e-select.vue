@@ -1,6 +1,6 @@
 <template>
   <span :class="b(modifiers)">
-    <select :value="value"
+    <select :value="internalValue"
             :class="b('select')"
             :disabled="disabled || progress"
             v-bind="$attrs"
@@ -17,7 +17,7 @@
       <option v-for="option in options"
               :key="`${option[valueField]}`"
               :value="option[valueField]"
-              :selected="option[valueField] === value">
+              :selected="option[valueField] === internalValue">
         {{ option[labelField] }}
       </option>
     </select>
@@ -29,11 +29,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, toRefs } from 'vue';
   import i18n from '@/setup/i18n';
-  import useFormStates, { IFormStates } from '@/compositions/form-states';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
 
   interface ISetup extends IFormStates {}
+
+  interface IData {
+    internalValue: string;
+  }
 
   /**
    * Renders a styled select element. Options can be passed with the `options` property.
@@ -46,12 +50,14 @@
     inheritAttrs: false,
 
     props: {
+      ...withProps(),
+
       /**
-       * Value for vue model binding.
+       * Value passed by v-model
        */
-      value: {
+      modelValue: {
         default: null,
-        type: [String, Number],
+        type: String,
       },
 
       /**
@@ -71,7 +77,7 @@
       placeholder: {
         type: [String, Boolean],
         default: i18n.global.t('e-select.chooseOption'),
-        validator: (value: string) => typeof value === 'string' || value === false,
+        validator: (value: string | boolean) => typeof value === 'string' || !value,
       },
 
       /**
@@ -107,15 +113,17 @@
       },
     },
 
-    setup(): ISetup {
+    setup(props): ISetup {
       return {
-        ...useFormStates(),
+        ...useFormStates(toRefs(props).state),
       };
     },
 
-    // data() {
-    //   return {};
-    // },
+    data(): IData {
+      return {
+        internalValue: this.modelValue
+      };
+    },
 
     computed: {
       /**
@@ -149,10 +157,12 @@
       onChange(event: Event) {
         const select = event.currentTarget as HTMLSelectElement;
 
+        this.internalValue = select.value;
+
         /**
-         * Input event for v-model.
+         * input event fires on input
          */
-        this.$emit('input', select.value);
+        this.$emit('update:modelValue', select.value);
       },
     },
     // render() {},

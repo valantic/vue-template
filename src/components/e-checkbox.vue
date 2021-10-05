@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
-  import useFormStates, { IFormStates } from '@/compositions/form-states';
+  import { defineComponent, PropType, toRefs } from 'vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
 
   interface ISetup extends IFormStates {}
 
@@ -36,6 +36,8 @@
     inheritAttrs: false,
 
     props: {
+      ...withProps(),
+
       /**
        * The model value to be used for v-model.
        */
@@ -61,9 +63,9 @@
       },
     },
 
-    setup(): ISetup {
+    setup(props): ISetup {
       return {
-        ...useFormStates(),
+        ...useFormStates(toRefs(props).state),
       };
     },
 
@@ -111,7 +113,7 @@
         return Array.isArray(this.value)
           ? this.value.includes(this.modelValue)
           : this.value;
-      }
+      },
     },
     // watch: {},
 

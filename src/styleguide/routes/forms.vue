@@ -5,7 +5,7 @@
       <h1>
         Newsletter Registration
       </h1>
-      <form ref="formElement"
+      <form ref="formRef"
             action="#form-url"
             method="POST"
             @submit.prevent="onSubmit"
@@ -142,7 +142,7 @@
 
   interface ISetup {
     v$: Ref<Validation>;
-    formElement: Ref<HTMLFormElement | null>;
+    formRef: Ref<HTMLFormElement | null>;
   }
 
   interface IData {
@@ -167,12 +167,12 @@
     // components: {},
 
     setup(): ISetup {
-      const formElement = ref();
+      const formRef = ref();
 
       return {
         // eslint-disable-next-line id-length
         v$: useVuelidate(),
-        formElement,
+        formRef,
       };
     },
 
@@ -253,8 +253,8 @@
           return;
         }
 
-        if (this.formElement) {
-          this.formElement.submit();
+        if (this.formRef) {
+          this.formRef.submit();
         }
       },
     }

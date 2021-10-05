@@ -23,9 +23,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, toRefs } from 'vue';
   import cFormNotification from '@/components/c-form-notification.vue';
-  import useFormStates, { IFormStates } from '@/compositions/form-states';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
@@ -46,6 +46,8 @@
     inheritAttrs: false,
 
     props: {
+      ...withProps(),
+
       /**
        * Value passed by v-model
        */
@@ -87,9 +89,9 @@
       }
     },
 
-    setup(): ISetup {
+    setup(props): ISetup {
       return {
-        ...useFormStates(),
+        ...useFormStates(toRefs(props).state),
       };
     },
 
@@ -107,7 +109,7 @@
       modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-          notification: this.notification && this.focus,
+          notification: !!(this.notification && this.focus),
         };
       },
 

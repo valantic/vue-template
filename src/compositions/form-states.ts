@@ -1,6 +1,6 @@
 import {
   computed,
-  ComputedRef, Ref,
+  ComputedRef, PropType, Ref,
   ref,
 } from 'vue';
 
@@ -25,17 +25,32 @@ export interface IFormStates {
   disabled: Ref<boolean>;
   focus: Ref<boolean>;
   hover: Ref<boolean>;
-  state: Ref<FieldStates>;
   stateModifiers: ComputedRef<IStateModifiers>;
   stateIcon: ComputedRef<string>;
   hasDefaultState: ComputedRef<boolean>;
 }
 
+export const withProps = () => ({
+  /**
+   * Form states for class names (default, error, success, warning, info)
+   */
+  state: {
+    type: String as PropType<FieldStates>,
+    default: 'default',
+    validator: (value: string) => [
+      'error',
+      'success',
+      'warning',
+      'info',
+      'default'
+    ].includes(value)
+  },
+});
+
 /**
  * Defines the reactive properties which can be used for form elements
  */
-const formStates = (): IFormStates => {
-  const inputState = ref<FieldStates>(FieldStates.Default);
+const formStates = (inputState: Ref<FieldStates>): IFormStates => {
   const active = ref<boolean>(false);
   const disabled = ref<boolean>(false);
   const focus = ref<boolean>(false);
@@ -82,7 +97,6 @@ const formStates = (): IFormStates => {
     disabled,
     focus,
     hover,
-    state: inputState,
 
     // computed
     stateModifiers,

@@ -6,8 +6,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import useFormStates, { IFormStates } from '@/compositions/form-states';
+  import { defineComponent, toRefs } from 'vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
@@ -21,11 +21,13 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // props: {},
+    props: {
+      ...withProps(),
+    },
 
-    setup(): ISetup {
+    setup(props): ISetup {
       return {
-        ...useFormStates(),
+        ...useFormStates(toRefs(props).state),
       };
     },
 
