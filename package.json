@@ -86,7 +86,7 @@
     "@typescript-eslint/eslint-plugin": "~4.29.3",
     "@typescript-eslint/parser": "~4.31.0",
     "@vue/eslint-config-typescript": "~7.0.0",
-    "@vue/test-utils": "next",
+    "@vue/test-utils": "~2.0.0-rc.15",
     "autoprefixer": "~10.2.5",
     "axios-mock-adapter": "~1.19.0",
     "babel-core": "~7.0.0-bridge.0",
