@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import store from '@/store/index';
 import apiUrls from '@/setup/api-urls.json';
-import { IMessage, INotification } from '@/types/c-notification';
+import { INotification } from '@/types/c-notification';
 
 interface IUrlKeyValues {
   [key: string]: string;
@@ -10,13 +10,13 @@ interface IUrlKeyValues {
 export interface IApi {
   getUrl: (urlKey: keyof typeof apiUrls, values: IUrlKeyValues) => string;
   // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-  get: (url: string, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  get: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse<any> | AxiosError<any>>;
   // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-  post: (url: string, data?: object, config?: AxiosRequestConfig, notificationOptions?: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  post: (url: string, data?: object, config?: AxiosRequestConfig) => Promise<AxiosResponse<any> | AxiosError<any>>;
   // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-  patch: (url: string, data: object, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  patch: (url: string, data: object, config: AxiosRequestConfig) => Promise<AxiosResponse<any> | AxiosError<any>>;
   // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-  delete: (url: string, config: AxiosRequestConfig, notificationOptions: INotification) => Promise<AxiosResponse<any> | AxiosError<any>>;
+  delete: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse<any> | AxiosError<any>>;
 }
 
 // Enable tracking of requests in development environment.
@@ -50,16 +50,13 @@ if (process.env.NODE_ENV !== 'production') {
 /**
  * Pushes an array of messages to the notification handler.
  */
-function showNotifications(messages: IMessage[], options?: INotification): void {
-  if (!Array.isArray(messages)) {
+function showNotifications(notifications: INotification[]): void {
+  if (!Array.isArray(notifications)) {
     return;
   }
 
-  messages.forEach((message) => {
-    store.commit.notification.pushNotification({
-      ...options,
-      message,
-    });
+  notifications.forEach((notification) => {
+    store.commit.notification.pushNotification(notification);
   });
 }
 
@@ -68,11 +65,11 @@ function showNotifications(messages: IMessage[], options?: INotification): void 
  *
  * @returns {Object}
  */
-function handleSuccess(response: AxiosResponse, options?: INotification): AxiosResponse {
-  const { messages } = response?.data || {};
+function handleSuccess(response: AxiosResponse): AxiosResponse {
+  const { notifications } = response?.data || {};
 
-  if (messages) {
-    showNotifications(messages, options);
+  if (notifications) {
+    showNotifications(notifications);
   }
 
   return response || {};
@@ -81,11 +78,11 @@ function handleSuccess(response: AxiosResponse, options?: INotification): AxiosR
 /**
  * Handles axios error responses.
  */
-function handleError(error: AxiosError, options?: INotification): Promise<AxiosError> {
-  const { messages } = error?.response?.data || {};
+function handleError(error: AxiosError): Promise<AxiosError> {
+  const { notifications } = error?.response?.data || {};
 
-  if (messages) {
-    showNotifications(messages, options);
+  if (notifications) {
+    showNotifications(notifications);
   } else {
     store.dispatch.notification.showUnknownError();
   }
@@ -116,44 +113,44 @@ const api: IApi = {
   /**
    * Runs a get request with given url with given url params.
    */
-  get(url, config, notificationOptions) {
+  get(url, config) {
     return axios
       .get(url, config)
-      .then(response => handleSuccess(response, notificationOptions))
-      .catch(error => handleError(error, notificationOptions));
+      .then(response => handleSuccess(response))
+      .catch(error => handleError(error));
   },
 
   /**
    * Runs a post request with a given url and payload.
    */
   // eslint-disable-next-line max-params
-  post(url, data, config, notificationOptions) {
+  post(url, data, config) {
     return axios
       .post(url, data, config)
-      .then(response => handleSuccess(response, notificationOptions))
-      .catch(error => handleError(error, notificationOptions));
+      .then(response => handleSuccess(response))
+      .catch(error => handleError(error));
   },
 
   /**
    * Runs a patch request with a given url and payload.
    */
   // eslint-disable-next-line max-params
-  patch(url, data, config, notificationOptions) {
+  patch(url, data, config) {
     return axios
       .patch(url, data, config)
-      .then(response => handleSuccess(response, notificationOptions))
-      .catch(error => handleError(error, notificationOptions));
+      .then(response => handleSuccess(response))
+      .catch(error => handleError(error));
   },
 
   /**
    * Runs a delete request with a given url and payload.
    */
   // eslint-disable-next-line max-params
-  delete(url, config, notificationOptions) {
+  delete(url, config) {
     return axios
       .delete(url, config)
-      .then(response => handleSuccess(response, notificationOptions))
-      .catch(error => handleError(error, notificationOptions));
+      .then(response => handleSuccess(response))
+      .catch(error => handleError(error));
   },
 };
 

@@ -46,7 +46,7 @@
               :key="option[valueField]"
               :class="b('options-item')"
           >
-            <e-checkbox v-model="dynamicValue"
+            <e-checkbox v-model="internalValue"
                         :value="option[valueField]"
                         :name="`e-multiselect--${uuid}`"
             >
@@ -59,37 +59,50 @@
   </span>
 </template>
 
-<script>
-  import { i18n } from '@/setup/i18n';
-  import uuid from '@/mixins/uuid';
-  import formStates from '@/mixins/form-states';
+<script lang="ts">
+  import {
+    defineComponent,
+    PropType,
+    ref,
+    Ref, toRefs
+  } from 'vue';
+  import i18n from '@/setup/i18n';
+  import useUuid, { IUuid } from '@/compositions/uuid';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface IOption {
+    value: string;
+    label: string;
+    [key: string]: string;
+  }
+
+  interface ISetup extends IFormStates, IUuid {
+    searchField: Ref<HTMLInputElement | null>;
+    fieldWrapper: Ref<HTMLButtonElement | null>;
+  }
+
+  interface IData {
+    isOpen: boolean;
+    searchTerm: string;
+  }
 
   /**
    * This renders a multi-select component.
    */
-  export default {
+  export default defineComponent({
     name: 'e-multiselect',
     // components: {},
-    mixins: [
-      uuid,
-      formStates
-    ],
-
-    /**
-     * V-model definitions.
-     */
-    model: {
-      prop: 'value',
-      event: 'change',
-    },
 
     props: {
+      ...withProps(),
+
       /**
-       * Value for vue model binding.
+       * Value passed by v-model
        */
-      value: {
+      modelValue: {
         default: () => [],
-        type: Array,
+        type: Array as PropType<string[]>,
       },
 
       /**
@@ -99,7 +112,7 @@
        */
       options: {
         required: true,
-        type: Array,
+        type: Array as PropType<IOption[]>,
       },
 
       /**
@@ -108,10 +121,8 @@
        */
       placeholder: {
         type: [String, Boolean],
-        default: i18n.t('e-multiselect.defaultPlaceholder'),
-        validator(value) {
-          return typeof value === 'string' || value === false;
-        },
+        default: i18n.global.t('e-multiselect.defaultPlaceholder'),
+        validator: (value: string | boolean) => typeof value === 'string' || !value,
       },
 
       /**
@@ -154,7 +165,24 @@
         default: 'label',
       },
     },
-    data() {
+
+    setup(props): ISetup {
+      const searchField = ref();
+      const fieldWrapper = ref();
+
+      const { increaseUuid } = useUuid();
+
+      increaseUuid();
+
+      return {
+        ...useFormStates(toRefs(props).state),
+        ...useUuid(),
+        searchField,
+        fieldWrapper,
+      };
+    },
+
+    data(): IData {
       return {
         /**
          * @type {Boolean} Holds the internal opening state of the options.
@@ -174,7 +202,7 @@
        *
        * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
         };
@@ -182,31 +210,24 @@
 
       /**
        * V-model handler for the checkboxes (options).
-       *
-       * @returns {Array.<String>}
        */
-      dynamicValue: {
-        get() {
-          return this.value;
+      internalValue: {
+        get(): string[] {
+          return this.modelValue;
         },
-        set(value) {
+        set(value: string[]) {
           /**
-           * Emits the change event to the parent.
-           *
-           * @event change
-           * @type {Array.<String>}
+           * Emits checkbox value e.g. true/false or value
            */
-          this.$emit('change', value);
+          this.$emit('update:modelValue', value);
         },
       },
 
       /**
        * Gets the current output value which is either the selected options or a placeholder text if available.
-       *
-       * @returns {String}
        */
-      outputValue() {
-        return this.selectionAsString || this.placeholder || '';
+      outputValue(): string {
+        return this.selectionAsString || (typeof this.placeholder === 'string' ? this.placeholder : '');
       },
 
       /**
@@ -214,10 +235,10 @@
        *
        * @returns {String}
        */
-      selectionAsString() {
-        if (this.dynamicValue.length) {
+      selectionAsString(): string {
+        if (this.internalValue.length) {
           return this.options
-            .filter(option => this.dynamicValue.includes(option[this.valueField]))
+            .filter(option => this.internalValue.includes(option[this.valueField]))
             .map(option => option[this.labelField])
             .join(', ');
         }
@@ -239,7 +260,7 @@
        *
        * @returns {Array.<Object>}
        */
-      filteredOptions() {
+      filteredOptions(): IOption[] {
         if (this.hasSearch && this.searchTerm) {
           return this.options.filter(option => option[this.labelField].includes(this.searchTerm));
         }
@@ -256,7 +277,7 @@
       isOpen(open) {
         if (this.hasSearch && open) {
           this.$nextTick(() => {
-            this.$refs.searchField.focus();
+            this.searchField?.focus();
           });
         }
       },
@@ -291,11 +312,11 @@
          * @event close
          * @type {Array.<String>}
          */
-        this.$emit('close', this.dynamicValue);
+        this.$emit('close', this.internalValue);
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

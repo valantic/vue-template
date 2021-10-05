@@ -45,7 +45,6 @@
     hasHover: boolean;
     isActive: boolean;
     hasFocus: boolean;
-    type: 'a' | 'button';
     hasTouch: boolean;
   }
 
@@ -204,8 +203,6 @@
 
       /**
        * Returns an Object of attributes.
-       *
-       * @returns {Object}
        */
       attributes(): IAttributes {
         return {
@@ -217,8 +214,6 @@
 
       /**
        * Returns inline styles to keep dimensions during progress state.
-       *
-       * @returns {Object}
        */
       style(): IElementDimensions | null {
         return this.progress && this.width !== 'full'
@@ -228,10 +223,8 @@
 
       /**
        * Gets the type of the component (DOM element).
-       *
-       * @returns {String}
        */
-      type() {
+      type(): string {
         return this.element || (this.$attrs.href ? 'a' : 'button');
       },
     },

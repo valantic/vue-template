@@ -1,11 +1,12 @@
 /* eslint-disable newline-per-chained-call */
 import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-extraneous-dependencies
+import { Plugin } from 'vue';
+import { AxiosRequestConfig } from 'axios';
 import { axios } from '@/plugins/axios';
 
 // Import mocks
 import notificationResponse from '@/styleguide/mock-data/api-response/notification-response';
 import notification from '@/styleguide/mock-data/data-object/notification';
-import { Plugin } from 'vue';
 
 /**
  * By default returns a 500 'no route defined' error.

@@ -4,6 +4,7 @@ import { Plugin } from 'vue';
 import eButton from '@/components/e-button.vue';
 import eCheckbox from '@/components/e-checkbox.vue';
 import eFieldset from '@/components/e-fieldset.vue';
+import eMultiselect from '@/components/e-multiselect.vue';
 import eInput from '@/components/e-input.vue';
 import eLabel from '@/components/e-label.vue';
 import eRadio from '@/components/e-radio.vue';
@@ -30,9 +31,10 @@ const plugin: Plugin = {
       eButton,
       eCheckbox,
       eFieldset,
-      eLabel,
       eInput,
       eIcon,
+      eLabel,
+      eMultiselect,
       ePicture,
       eProgress,
       eRadio,
@@ -52,16 +54,18 @@ const plugin: Plugin = {
       });
     } else {
       // Elements
-      app.component(eLabel.name, eLabel);
-      app.component(eInput.name, eInput);
-      app.component(eSelect.name, eSelect);
-      app.component(eRadio.name, eRadio);
-      app.component(eCheckbox.name, eCheckbox);
-      app.component(eTextarea.name, eTextarea);
       app.component(eButton.name, eButton);
+      app.component(eCheckbox.name, eCheckbox);
+      app.component(eFieldset.name, eFieldset);
+      app.component(eInput.name, eInput);
       app.component(eIcon.name, eIcon);
+      app.component(eLabel.name, eLabel);
+      app.component(eMultiselect.name, eMultiselect);
       app.component(ePicture.name, ePicture);
       app.component(eProgress.name, eProgress);
+      app.component(eRadio.name, eRadio);
+      app.component(eSelect.name, eSelect);
+      app.component(eTextarea.name, eTextarea);
 
       // SSR related
       app.component(lDefault.name, lDefault);

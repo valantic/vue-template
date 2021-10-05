@@ -84,7 +84,7 @@
        * Removes current notification from stack.
        */
       close() {
-        this.popNotification(this.notification.id);
+        store.commit.notification.popNotification(this.notification.id);
       },
     },
     // render() {},

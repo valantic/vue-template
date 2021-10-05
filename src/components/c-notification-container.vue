@@ -44,19 +44,15 @@
     // },
 
     computed: {
-      ...mapGetters('notification', [
-        'getNotifications',
-      ]),
-
       /**
        * Gets the filtered notifications depending on the selector.
        */
       filteredNotifications(): INotification[] {
         if (this.selector !== 'default') {
-          return this.getNotifications.filter(notification => notification.selector === this.selector);
+          return store.getters.notification.getNotifications.filter(notification => notification.selector === this.selector);
         }
 
-        return this.getNotifications.filter(notification => !notification.selector);
+        return store.getters.notification.getNotifications.filter(notification => !notification.selector);
       },
     },
     // watch: {},

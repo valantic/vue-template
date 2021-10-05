@@ -40,8 +40,9 @@
           <e-label name="Business fields" required>
             <e-multiselect v-model="form.businessFields"
                            :options="mock.businessFields"
-                           :state="$v.form.businessFields.$error ? 'error' : 'default'"
-                           :notification="$v.form.businessFields.$error ? 'Required field' : ''"
+                           :state="v$.form.businessFields.$error ? 'error' : 'default'"
+                           :notification="v$.form.businessFields.$error ? 'Required field' : ''"
+                           @blur="v$.form.businessFields.$touch()"
             />
           </e-label>
           <e-label name="Notes">
@@ -133,9 +134,6 @@
   import { defineComponent, ref, Ref } from 'vue';
   import useVuelidate, { Validation } from '@vuelidate/core';
   import { required, email } from '@vuelidate/validators';
-  import eFieldset from '@/components/e-fieldset';
-  import eMultiselect from '@/components/e-multiselect';
-  import { required, email } from 'vuelidate/lib/validators';
 
   interface ISelectItem {
     label: string;
@@ -155,8 +153,10 @@
       language: string;
       topics: string[];
       frequency: string;
+      businessFields: string[]
     },
     mock: {
+      businessFields: ISelectItem[];
       languages: ISelectItem[];
     }
   }
@@ -164,10 +164,7 @@
   export default defineComponent({
     name: 'forms',
 
-    components: {
-      eFieldset,
-      eMultiselect,
-    },
+    // components: {},
 
     setup(): ISetup {
       const formElement = ref();

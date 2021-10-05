@@ -10,9 +10,9 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
-  import { mapMutations } from 'vuex';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
   import styleguideRoutes, { IRoute } from '@/setup/styleguide.routes';
+  import store from '@/store';
 
   export default defineComponent({
     name: 'app',
@@ -53,10 +53,6 @@
     // unmounted() {},
 
     methods: {
-      ...mapMutations('notification', [
-        'pushNotification',
-      ]),
-
       /**
        * Gets localStorage messages and pushes them in the notification store to display.
        */
@@ -65,7 +61,7 @@
         const parsedNotification = notification ? JSON.parse(notification) : null;
 
         if (parsedNotification) {
-          this.pushNotification(parsedNotification);
+          store.commit.notification.pushNotification(parsedNotification);
 
           // Clears the localStorage notifications.
           localStorage.removeItem('notification');

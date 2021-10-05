@@ -1,9 +1,9 @@
 import { createDirectStore, ModulesImpl } from 'direct-vuex';
 import getUrlParameter from '@/helpers/get-url-parameter';
-import { IMessage } from '@/types/c-notification';
-import session from './modules/session';
-import notification from './modules/notification';
-import breadcrumb from './modules/breadcrumb';
+import { INotification } from '@/types/c-notification';
+import sessionModule from './modules/session';
+import notificationModule from './modules/notification';
+import breadcrumbModule from './modules/breadcrumb';
 
 interface IModules {
   session: ModulesImpl;
@@ -25,7 +25,7 @@ declare global {
 }
 
 const data: IInitialData = window.initialData || {};
-const initialDataMessages: IMessage[] = [];
+let initialDataNotifications: INotification[] = [];
 
 const {
   store,
@@ -35,29 +35,29 @@ const {
   moduleGetterContext
 } = createDirectStore({
   modules: {
-    session,
-    notification,
-    breadcrumb,
+    session: sessionModule,
+    notification: notificationModule,
+    breadcrumb: breadcrumbModule,
   }
 });
 
 // Set initial data
 Object.keys(data).forEach((action) => {
-  const { messages } = data[action] || {};
+  const { notifications } = data[action] || {};
 
   // NOTE: We moved away from JSON again, since it was too picky about special characters in the to be parsed string.
   // we use the traditional store dispatch as actions could be nested in multiple level of modules and we cannot easily detect that
   store.original.dispatch(action, data[action]);
 
-  if (Array.isArray(messages)) {
-    initialDataMessages.push(...messages);
+  if (Array.isArray(notifications)) {
+    initialDataNotifications = initialDataNotifications.concat(notifications);
   }
 });
 
-if (initialDataMessages.length) {
+if (initialDataNotifications.length) {
   setTimeout(() => { // Make sure all general imports did run before.
-    initialDataMessages.forEach((message) => {
-      store.commit.notification.pushNotification({ message });
+    initialDataNotifications.forEach((notification) => {
+      store.commit.notification.pushNotification(notification);
     });
   });
 }

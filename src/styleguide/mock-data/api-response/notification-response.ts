@@ -1,22 +1,24 @@
-import notification from '@/styleguide/mock-data/data-object/notification';
+import { INotification } from '@/types/c-notification';
+import mockNotifications from '@/styleguide/mock-data/data-object/notification';
+
+interface INotificationResponse {
+  data: object,
+  notifications: INotification[]
+}
 
 /**
  * Creates an empty API response with a notification.
- *
- * @param {Object} data - The notification object.
- *
- * @returns {Object}
  */
-function createApiResponse(data) {
+function createApiResponse(notification: INotification): INotificationResponse {
   return {
     data: {},
-    notifications: [data], // TODO: Check if the Backend System provides the notifications Array like it's done here.
+    notifications: [notification], // TODO: Check if the Backend System provides the notifications Array like it's done here.
   };
 }
 
 export default {
-  success: createApiResponse(notification.success),
-  info: createApiResponse(notification.info),
-  error: createApiResponse(notification.error),
+  success: createApiResponse(mockNotifications.success),
+  info: createApiResponse(mockNotifications.info),
+  error: createApiResponse(mockNotifications.error),
   createApiResponse,
 };

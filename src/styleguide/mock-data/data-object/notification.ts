@@ -1,14 +1,14 @@
+import { INotification } from '@/types/c-notification';
+
+interface IMockNotifications {
+  success: INotification;
+  info: INotification;
+  error: INotification;
+  createNotification: (notificationOptions: object) => INotification;
+}
+
 /**
  * Creates a notification object with the given params.
- *
- * @param {Object} payload - The config payload.
- * @param {String} [payload.type] - The message type.
- * @param {String} [payload.message] - The message to display.
- * @param {Boolean} [payload.expire] - Defines if the message should expire or stay.
- * @param {String|null} [payload.selector] - Defines an optional container selector.
- * @param {String|null} [payload.redirectUrl] - Defines the optional redirect URL.
- *
- * @returns {Object}
  */
 function createNotification({
   type,
@@ -16,8 +16,15 @@ function createNotification({
   expire,
   selector,
   redirectUrl,
-}) {
+}: {
+  type?: string,
+  message?: string,
+  expire?: boolean,
+  selector?: string,
+  redirectUrl?: string,
+}): INotification {
   return {
+    id: 0,
     type: type || 'success',
     message: message || `This is an example ${type} message.`,
     expire: typeof expire === 'boolean' ? expire : true,
@@ -26,9 +33,11 @@ function createNotification({
   };
 }
 
-export default {
+const mockNotifications: IMockNotifications = {
   success: createNotification({ type: 'success' }),
   info: createNotification({ type: 'info' }),
   error: createNotification({ type: 'error' }),
   createNotification,
 };
+
+export default mockNotifications;
