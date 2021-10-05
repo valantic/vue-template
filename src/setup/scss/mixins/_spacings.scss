@@ -1,3 +1,7 @@
+@use '../variables';
+@use '../functions/strip-unit' as *;
+@use './media' as *;
+
 ///
 /// Creates a set of spacings for the given class
 ///
@@ -6,7 +10,7 @@
 /// @param   {list}      [$spacings=$spacings]               The CSS property to which the spacing value should be assigned
 /// @param   {list}      [$breakpoints=$breakpoints]         The CSS property to which the spacing value should be assigned
 ///
-@mixin spacings($class, $property, $spacings: $spacings, $breakpoints: $breakpoints) {
+@mixin spacings($class, $property, $spacings: variables.$spacings, $breakpoints: variables.$breakpoints) {
   @each $spacing in $spacings {
     .#{$class}-#{strip-unit($spacing)} {
       #{$property}: #{$spacing};

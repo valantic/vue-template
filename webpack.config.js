@@ -264,7 +264,7 @@ module.exports = (env, args = {}) => {
       },
     },
     {
-      test: /\.scss$/,
+      test: /\.s?css$/,
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
@@ -286,13 +286,6 @@ module.exports = (env, args = {}) => {
           options: {
             sourceMap: false
           }
-        },
-        {
-          loader: 'sass-resources-loader',
-          options: {
-            resources: scssResources.map(file => scssResourcesFolder + file),
-            hoistUseStatements: true,
-          },
         },
       ],
     },

@@ -117,32 +117,32 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .e-label {
-    color: $color-grayscale--400;
+    color: variables.$color-grayscale--200;
     display: block;
+    cursor: pointer;
 
     &__inner {
       width: 100%;
     }
 
     &__name {
-      @include font($font-size--16, $spacing--20);
+      @include mixins.font(variables.$font-size--16, variables.$spacing--20);
 
       color: inherit;
       display: block;
     }
 
     &__name--invisible {
-      position: absolute;
-      overflow: hidden;
-      height: 0;
-      width: 0;
-      top: 0;
+      @include mixins.invisible();
     }
 
     &--position-top {
       .e-label__name {
-        margin-bottom: $spacing--5;
+        margin-bottom: variables.$spacing--5;
       }
     }
 
@@ -151,7 +151,7 @@
       flex-direction: column-reverse;
 
       .e-label__name {
-        margin-top: $spacing--5;
+        margin-top: variables.$spacing--5;
       }
 
       .e-label__inner {
@@ -166,7 +166,7 @@
         flex: 1 0 auto;
         display: flex;
         align-items: center;
-        margin-right: $spacing--15;
+        margin-right: variables.$spacing--15;
       }
     }
 
@@ -178,21 +178,21 @@
         flex: 1 0 auto;
         display: flex;
         align-items: center;
-        margin-left: $spacing--15;
+        margin-left: variables.$spacing--15;
       }
     }
 
     &--active,
     &--focus {
-      color: $color-secondary--1;
+      color: variables.$color-secondary--1;
     }
 
     &--disabled {
-      color: $color-grayscale--300;
+      color: variables.$color-grayscale--300;
     }
 
     &--state-error {
-      color: $color-status--danger;
+      color: variables.$color-status--error;
     }
   }
 </style>

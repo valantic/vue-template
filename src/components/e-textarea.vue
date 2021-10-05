@@ -170,16 +170,19 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .e-textarea {
     display: block;
     position: relative;
 
     &__field {
-      padding: $spacing--5 $spacing--10;
+      padding: variables.$spacing--5 variables.$spacing--10;
       resize: none;
       width: 100%;
       border-radius: 3px;
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--500;
       display: block;
       position: relative;
 
@@ -195,8 +198,22 @@
     }
 
     // placeholder
-    &__field::placeholder {
-      color: $color-grayscale--400;
+    // placeholder (has to be split in seperate blocks to work on each browser)
+    &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
+      font-family: variables.$font-family--primary;
+      color: variables.$color-grayscale--400;
+      opacity: 1;
+    }
+
+    &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
+      font-family: variables.$font-family--primary;
+      color: variables.$color-grayscale--400;
+      opacity: 1;
+    }
+
+    &__field::placeholder { // Most modern browsers support this now
+      font-family: variables.$font-family--primary;
+      color: variables.$color-grayscale--400;
       opacity: 1;
     }
 
@@ -211,7 +228,7 @@
 
     // notification below field
     &__notification {
-      @include z-index(form-notification);
+      @include mixins.z-index(form-notification);
 
       position: absolute;
       width: 100%;
@@ -220,7 +237,7 @@
 
     &__icon-wrapper {
       position: absolute;
-      right: $spacing--5;
+      right: variables.$spacing--5;
       top: 50%;
       height: 100%;
       transform: translateY(-50%);
@@ -234,33 +251,32 @@
     // active
     &__field:active,
     &--active &__field {
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     // focus
     &__field:focus,
     &--focus &__field {
       outline: none;
-      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     // hover
     &__field:hover,
     &--hover &__field {
-      border: 1px solid $color-grayscale--400;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     // disabled
     &__field:disabled,
     &--disabled &__field,
     &--disabled &__field:hover {
-      background-color: $color-grayscale--1000;
-      border-color: $color-grayscale--600;
-      color: $color-grayscale--600;
+      background-color: variables.$color-grayscale--1000;
+      border-color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--600;
 
       &::placeholder {
-        color: $color-grayscale--600;
+        color: variables.$color-grayscale--600;
       }
     }
 
@@ -270,22 +286,22 @@
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       .e-textarea__icon-splitter {
-        border-color: $color-status--danger;
+        border-color: variables.$color-status--error;
       }
     }
 
     &--state-error &__field:hover,
     &--state-error &__field {
-      border-color: $color-status--danger;
+      border-color: variables.$color-status--error;
     }
 
     &--state-error &__field:focus {
-      border-color: $color-status--danger;
+      border-color: variables.$color-status--error;
     }
 
     &--state-info {
       .e-textarea__icon-splitter {
-        border-color: $color-grayscale--500;
+        border-color: variables.$color-grayscale--500;
       }
     }
 
@@ -297,7 +313,7 @@
 
     &--state-success &__field:hover,
     &--state-success &__field {
-      border-color: $color-status--success;
+      border-color: variables.$color-status--success;
     }
 
     /*
@@ -305,7 +321,7 @@
      */
     &--notification {
       .e-textarea__field {
-        padding: $spacing--5 $spacing--10;
+        padding: variables.$spacing--5 variables.$spacing--10;
         background: none;
       }
     }

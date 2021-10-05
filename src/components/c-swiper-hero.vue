@@ -235,6 +235,9 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-swiper-hero {
     $this: &;
 
@@ -267,18 +270,18 @@
     // dots navigation
     .swiper-container-horizontal {
       .swiper-pagination-bullets {
-        @include z-index(front);
+        @include mixins.z-index(front);
 
         position: relative;
-        bottom: $spacing--15;
+        bottom: variables.$spacing--15;
         width: 100% !important; /* stylelint-disable-line declaration-no-important */
         margin: auto;
-        padding-top: $spacing--20;
+        padding-top: variables.$spacing--20;
         white-space: nowrap;
         text-align: center;
         font-size: 0;
 
-        @include media(xs) {
+        @include mixins.media(xs) {
           padding-top: 0;
         }
 
@@ -294,16 +297,16 @@
         height: 5px;
         width: 20px;
         margin: 0 3px;
-        background: $color-grayscale--600;
+        background: variables.$color-grayscale--600;
         border-radius: 2.5px;
         transform: scale(1);
         outline: none;
         cursor: pointer;
-        transition: width $transition-duration-200 linear;
+        transition: width variables.$transition-duration-200 linear;
 
         &-active {
-          background-color: $color-primary--1;
-          box-shadow: inset 0 1px 3px 0 rgba($color-grayscale--0, 0.5);
+          background-color: variables.$color-primary--1;
+          box-shadow: inset 0 1px 3px 0 rgba(variables.$color-grayscale--0, 0.5);
         }
       }
 
@@ -325,31 +328,31 @@
 
     // arrow navigation
     &__button {
-      @include z-index(front);
+      @include mixins.z-index(front);
 
       display: none;
       position: absolute;
       top: 50%;
       opacity: 0;
       transform: translateY(-50%);
-      transition: opacity $transition-duration-200 linear;
-      transition-delay: $transition-duration-100;
+      transition: opacity variables.$transition-duration-200 linear;
+      transition-delay: variables.$transition-duration-100;
       outline: none;
       border: 20px solid transparent;
       cursor: pointer;
 
-      @include media(xs) {
+      @include mixins.media(xs) {
         display: block;
       }
 
       &--previous {
         left: 0;
-        border-right-color: $color-grayscale--200;
+        border-right-color: variables.$color-grayscale--200;
       }
 
       &--next {
         right: 0;
-        border-left-color: $color-grayscale--200;
+        border-left-color: variables.$color-grayscale--200;
       }
     }
 
@@ -357,9 +360,9 @@
     &:hover {
       #{$this}__button--previous:not(.swiper-button-disabled),
       #{$this}__button--next:not(.swiper-button-disabled) {
-        @include media(xs) {
+        @include mixins.media(xs) {
           opacity: 1;
-          transition-delay: $transition-duration-200;
+          transition-delay: variables.$transition-duration-200;
         }
       }
     }

@@ -76,8 +76,14 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .s-demo-settings {
-    @extend %list-reset;
+    margin-top: variables.$spacing--10;
+
+    .s-toggle + .s-toggle {
+      margin-top: variables.$spacing--5;
+    }
   }
 </style>
 

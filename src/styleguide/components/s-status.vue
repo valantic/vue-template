@@ -72,29 +72,32 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/mixins';
+  @use '../../setup/scss/variables';
+
   .s-status { // NOTE: this style is also used by the vue-styleguidist plugin!
     /* stylelint-disable color-hex-length, color-named */
 
-    @include font(12);
+    @include mixins.font(12);
 
     top: 30px;
     z-index: 1;
-    padding-right: $spacing--30;
+    padding-right: variables.$spacing--30;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 
     &__inner {
       display: inline-block;
       align-self: flex-end;
-      color: $color-grayscale--1000;
+      color: variables.$color-grayscale--1000;
       border-radius: 3px;
-      padding: 0 $spacing--10 0 0;
+      padding: 0 variables.$spacing--10 0 0;
       background: crimson;
       font-weight: bold;
 
       &::before {
         content: 'Status ';
         display: inline-block;
-        padding: $spacing--5 $spacing--10;
+        padding: variables.$spacing--5 variables.$spacing--10;
         background: #333;
         border-radius: 3px 0 0 3px;
         margin-right: 10px;

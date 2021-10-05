@@ -297,7 +297,8 @@
 </script>
 
 <style lang="scss">
-  @use 'sass:math';
+  @use 'sass:list';
+  @use '../setup/scss/variables';
 
   .e-picture { // Can be <picture> or <img>!
     display: block;
@@ -312,7 +313,7 @@
 
       &[loading='lazy'] {
         opacity: 0;
-        transition: opacity $transition-duration-200;
+        transition: opacity variables.$transition-duration-200;
       }
     }
 
@@ -339,7 +340,7 @@
       }
 
       @supports (aspect-ratio: initial) {
-        aspect-ratio: math.div(var(--aspect-ratio), 1);
+        aspect-ratio: list.slash(var(--aspect-ratio), 1);
 
         &::before,
         &::after {
@@ -349,7 +350,7 @@
     }
 
     &--placeholder {
-      background-color: $color-grayscale--500;
+      background-color: variables.$color-grayscale--500;
     }
   }
 </style>

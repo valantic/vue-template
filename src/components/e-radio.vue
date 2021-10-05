@@ -1,23 +1,21 @@
 <template>
-  <span :class="b(modifiers)">
-    <label :class="b('label')"
-           @mouseenter="hover = true"
-           @mouseleave="hover = false">
-      <input v-model="internalValue"
-             v-bind="$attrs"
-             :class="b('field', fieldModifiers)"
-             :disabled="disabled"
-             :value="value"
-             :name="name"
-             type="radio"
-             @change="onChange"
-      >
-      <span :class="b('fake-button')"></span>
-      <span :class="b('label-name')">
-        <slot></slot>
-      </span>
-    </label>
-  </span>
+  <label :class="b(modifiers)"
+         @mouseenter="hover = true"
+         @mouseleave="hover = false"
+  >
+    <input v-model="internalValue"
+           v-bind="$attrs"
+           :class="b('field', fieldModifiers)"
+           :disabled="disabled"
+           :value="value"
+           :name="name"
+           type="radio"
+           @change="onChange"
+    >
+    <span :class="b('label')">
+      <slot></slot>
+    </span>
+  </label>
 </template>
 
 <script lang="ts">
@@ -145,95 +143,91 @@
 </script>
 
 <style lang="scss">
-  .e-radio {
-    @include font($font-size--14, 18px);
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
 
-    display: block;
+  .e-radio {
+    $this: &;
+    $label-size: 16px;
+
+    @include mixins.font(variables.$font-size--16, 20px);
+
     position: relative;
+    display: block;
+    cursor: pointer;
 
     &__field {
-      opacity: 0;
       position: absolute;
-      left: -9999px;
-    }
-
-    &__fake-button::after {
-      position: relative;
-      content: '';
-    }
-
-    &__fake-button {
+      left: -200vw;
       -webkit-appearance: none;
-      background-color: $color-grayscale--1000;
-      border: 1px solid $color-grayscale--500;
-      border-radius: 10px;
-      display: inline-block;
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      top: 0;
-      left: 0;
-      cursor: pointer;
-    }
-
-    &__label-name {
-      cursor: pointer;
-      color: $color-grayscale--400;
     }
 
     &__label {
-      cursor: pointer;
-      margin-bottom: 0;
-      padding-left: $spacing--25;
-    }
-
-    &__field:checked ~ &__fake-button::after {
-      background-color: $color-secondary--2;
-      border-radius: 25px;
-      content: '';
       display: block;
-      height: 10px;
-      width: 10px;
-      left: 2px;
-      top: 2px;
+      padding-left: variables.$spacing--25;
+      margin: 0;
+
+      &:hover {
+        color: variables.$color-grayscale--0;
+
+        &::before {
+          border-color: variables.$color-grayscale--0;
+        }
+      }
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: '';
+        top: 3px;
+        left: 0;
+        width: $label-size;
+        height: $label-size;
+        border-radius: 50%;
+      }
+
+      &::before {
+        border: 1px solid variables.$color-grayscale--400;
+      }
+
+      &::after {
+        transition: transform 0.1s ease-in-out;
+        background: variables.$color-grayscale--0;
+        opacity: 0;
+        transform: scale(0);
+      }
     }
 
-    &__field:checked ~ &__fake-button {
-      border: 1px solid $color-primary--1;
+    &__field:checked + &__label {
+      color: variables.$color-grayscale--0;
+
+      &::after {
+        opacity: 1;
+        transform: scale(0.6);
+      }
     }
 
-    &__field:checked ~ &__label-name {
-      color: $color-secondary--1;
-    }
-
-    /* stylelint-disable no-descending-specificity */
-
-    // hover
-    &--hover &__fake-button,
-    &__field:hover ~ &__fake-button {
-      border: 1px solid $color-primary--1;
-    }
-
-    // disabled
-    &--disabled &__field ~ &__fake-button,
-    &__field:disabled ~ &__fake-button {
-      border-color: $color-grayscale--600;
+    &__field:disabled + &__label {
+      color: variables.$color-grayscale--500;
       cursor: default;
+
+      &:hover {
+        color: variables.$color-grayscale--500;
+
+        &::before {
+          border-color: variables.$color-grayscale--500;
+        }
+      }
+
+      &::before {
+        border-color: variables.$color-grayscale--500;
+      }
     }
 
-    &--disabled &__field:checked ~ &__fake-button::after,
-    &__field:disabled:checked ~ &__fake-button::after {
-      background-color: $color-grayscale--300;
-    }
-
-    &--disabled &__field ~ &__label-name,
-    &__field:disabled ~ &__label-name {
-      cursor: default;
-      color: $color-grayscale--300;
-    }
-
-    &--disabled &__label {
-      cursor: default;
+    &__field:checked:disabled + &__label {
+      &::after {
+        background: variables.$color-grayscale--500;
+      }
     }
   }
 </style>

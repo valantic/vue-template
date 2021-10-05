@@ -887,7 +887,6 @@ package.json:
 * [ ] Make styleguideist work again, as soon as Vue 3 is supported, 
   see https://github.com/vue-styleguidist/vue-styleguidist/issues/997
 * [ ] Implement dual build (ES5/ES2015+)
-* [ ] Element styles should be moved to reboot.
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
 * [ ] Extend eslint-plugin-vue rules for Vue 3.

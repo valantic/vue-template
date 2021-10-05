@@ -70,6 +70,8 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   $_s-slider__size: 1.2em;
 
   .s-toggle {
@@ -85,8 +87,8 @@
       height: $_s-slider__size;
       align-self: flex-end;
       border-radius: $_s-slider__size;
-      background-color: $color-grayscale--600;
-      transition: $transition-duration-300;
+      background-color: variables.$color-grayscale--600;
+      transition: variables.$transition-duration-300;
 
       &::before {
         position: absolute;
@@ -96,8 +98,8 @@
         left: 0.1 * $_s-slider__size;
         top: 0.1 * $_s-slider__size;
         border-radius: 50%;
-        background-color: $color-primary--3;
-        transition: $transition-duration-300;
+        background-color: variables.$color-primary--3;
+        transition: variables.$transition-duration-300;
       }
     }
 
@@ -105,7 +107,7 @@
       display: none;
 
       &:checked + #{$this}__slider {
-        background-color: $color-primary--1;
+        background-color: variables.$color-primary--1;
       }
 
       &:checked + #{$this}__slider::before {

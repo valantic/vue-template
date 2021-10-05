@@ -133,6 +133,8 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/variables';
+
   .e-icon {
     display: block;
     pointer-events: none; // Prevents IE11 from swallowing events.

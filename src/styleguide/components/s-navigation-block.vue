@@ -86,9 +86,9 @@
 </script>
 
 <style lang="scss">
-  .s-navigation-block {
-    @extend %list-reset;
+  @use '../../setup/scss/variables';
 
+  .s-navigation-block {
     min-width: 200px;
     overflow: auto;
 
@@ -97,7 +97,7 @@
     }
 
     &__navigation-link {
-      padding: $spacing--5 $spacing--20;
+      padding: variables.$spacing--5 variables.$spacing--20;
       text-decoration: none;
       display: block;
 

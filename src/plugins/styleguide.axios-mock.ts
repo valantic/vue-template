@@ -3,8 +3,8 @@ import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-e
 import { axios } from '@/plugins/axios';
 
 // Import mocks
-import notification from '@/styleguide/mock-data/api-response/notifications';
-import { AxiosRequestConfig } from 'axios';
+import notificationResponse from '@/styleguide/mock-data/api-response/notification-response';
+import notification from '@/styleguide/mock-data/data-object/notification';
 import { Plugin } from 'vue';
 
 /**
@@ -39,18 +39,28 @@ const plugin: Plugin = {
    */
   install(/* app */) {
     const mock = new MockAdapter(axios, {
-      delayResponse: 2000,
+      delayResponse: 500,
     });
 
     // See https://github.com/ctimmerm/axios-mock-adapter
     mock
       // EXAMPLE => .onPost('api-url').reply(200, mockDataResponse)
-      .onPost('/notifications/global/success').reply(200, notification.success)
-      .onPost('/notifications/global/warning').reply(200, notification.warning)
-      .onPost('/notifications/global/error').reply(500, notification.error)
-      .onPost('/notifications/global/info').reply(200, notification.info)
-      .onPost('/notifications/field/error').reply(500, notification.fieldError)
-      .onPost('/notifications/selector/info1').reply(200, notification.selectorInfo1)
+      .onGet('/notifications/global').reply((config) => {
+        const {
+          selector,
+          type,
+          redirectUrl,
+          expire,
+        } = config.params || {};
+        const notificationItem = notification.createNotification({
+          type,
+          selector,
+          redirectUrl,
+          expire,
+        });
+
+        return [200, notificationResponse.createApiResponse(notificationItem)];
+      })
 
       // Global
       .onAny(/\/?static|assets|passtrough/).passThrough()

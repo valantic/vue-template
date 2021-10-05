@@ -1,10 +1,12 @@
 <template>
-  <span :class="b(stateModifiers)">
+  <span :class="b(modifiers)">
     <select :value="value"
             :class="b('select')"
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
+            @mouseenter="hasHover = true"
+            @mouseleave="hasHover = false"
     >
       <option v-if="placeholder"
               :disabled="!hasSelectablePlaceholder"
@@ -20,9 +22,9 @@
       </option>
     </select>
     <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
-    <div v-if="progress" :class="b('progress-container')">
+    <span v-if="progress" :class="b('progress-container')">
       <e-progress />
-    </div>
+    </span>
   </span>
 </template>
 
@@ -115,7 +117,18 @@
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      /**
+       * Defines state modifier classes.
+       *
+       * @returns  {Object}   BEM classes
+       */
+      modifiers() {
+        return {
+          ...this.stateModifiers,
+        };
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -147,6 +160,11 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
+  $e-select-height: 30px;
+
   .e-select {
     $this: &;
     $height: 30px;
@@ -155,15 +173,16 @@
     position: relative;
 
     &__select {
-      @include icon(arrow--down, 22px, right 5px center, $mask: false); // FF does not support mask on <select>.
+      @include mixins.icon(arrow--down, 22px, right 5px center, $mask: false); // FF does not support mask on <select>.
 
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--500;
       border-radius: 3px;
       width: 100%;
       appearance: none;
       outline: none;
-      padding: $spacing--0 $spacing--30 $spacing--0 $spacing--10;
+      padding: variables.$spacing--0 variables.$spacing--30 variables.$spacing--0 variables.$spacing--10;
       height: $height;
+      cursor: pointer;
 
       &::-ms-expand {
         display: none;
@@ -182,23 +201,21 @@
     // hover
     &__select:hover,
     &--hover &__select {
-      border: 1px solid $color-grayscale--500;
+      border: 1px solid variables.$color-grayscale--400;
     }
 
     // focus
     &__select:focus,
     &--focus &__select {
       outline: none;
-      box-shadow: 0 2px 5px 0 rgba($color-grayscale--400, 0.5);
-      border: 1px solid $color-grayscale--500;
     }
 
     // disabled
     &__select:disabled,
     &--disabled &__select,
     &--disabled &__select:hover {
-      border-color: $color-grayscale--600;
-      color: $color-grayscale--600;
+      border-color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--600;
     }
 
     /**
@@ -207,27 +224,27 @@
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       #{$this}__select {
-        @include icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
+        @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
-        border-color: $color-status--danger;
+        border-color: variables.$color-status--error;
       }
 
       #{$this}__icon-splitter {
-        border-color: $color-status--danger;
+        border-color: variables.$color-status--error;
       }
     }
 
     &--state-error &__select:hover {
-      border-color: $color-status--danger;
+      border-color: variables.$color-status--error;
     }
 
     &--state-error &__select:focus {
-      border: 1px solid $color-status--danger;
+      border: 1px solid variables.$color-status--error;
     }
 
     &--state-success {
       #{$this}__select {
-        @include icon(check, 22px, right 5px center, false); // FF does not support mask on <select>.
+        @include mixins.icon(check, 22px, right 5px center, false); // FF does not support mask on <select>.
       }
 
       #{$this}__icon-splitter {

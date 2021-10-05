@@ -37,6 +37,13 @@
                       @blur="v$.form.language.$touch()"
             />
           </e-label>
+          <e-label name="Business fields" required>
+            <e-multiselect v-model="form.businessFields"
+                           :options="mock.businessFields"
+                           :state="$v.form.businessFields.$error ? 'error' : 'default'"
+                           :notification="$v.form.businessFields.$error ? 'Required field' : ''"
+            />
+          </e-label>
           <e-label name="Notes">
             <e-textarea v-model="form.notes"
                         name="notes"
@@ -127,7 +134,8 @@
   import useVuelidate, { Validation } from '@vuelidate/core';
   import { required, email } from '@vuelidate/validators';
   import eFieldset from '@/components/e-fieldset';
-  // import { required, email } from 'vuelidate/lib/validators';
+  import eMultiselect from '@/components/e-multiselect';
+  import { required, email } from 'vuelidate/lib/validators';
 
   interface ISelectItem {
     label: string;
@@ -157,7 +165,8 @@
     name: 'forms',
 
     components: {
-      eFieldset
+      eFieldset,
+      eMultiselect,
     },
 
     setup(): ISetup {
@@ -179,6 +188,7 @@
           language: '',
           topics: [],
           frequency: '',
+          businessFields: [],
         },
         mock: {
           languages: [
@@ -194,6 +204,24 @@
               label: 'French',
               value: 'french',
             }
+          ],
+          businessFields: [
+            {
+              label: 'Production',
+              value: 'production',
+            },
+            {
+              label: 'Sales',
+              value: 'sales',
+            },
+            {
+              label: 'HR',
+              value: 'hr',
+            },
+            {
+              label: 'Finance',
+              value: 'finance',
+            },
           ],
         }
       };
@@ -211,6 +239,9 @@
         language: {
           required,
         },
+        businessFields: {
+          required,
+        }
       }
     },
 
@@ -234,6 +265,8 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .forms {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -241,16 +274,21 @@
     &__form,
     &__data,
     &__validation {
-      padding: $spacing--50;
-      border: 1px dotted $color-grayscale--500;
+      padding: variables.$spacing--50;
+      border: 1px dotted variables.$color-grayscale--500;
     }
 
     .e-fieldset {
-      margin-bottom: $spacing--50;
+      margin-bottom: variables.$spacing--50;
     }
 
     .e-label:not(:last-of-type) {
-      margin-bottom: $spacing--10;
+      margin-bottom: variables.$spacing--20;
+    }
+
+    .e-checkbox + .e-checkbox,
+    .e-radio + .e-radio {
+      margin-top: variables.$spacing--5;
     }
   }
 </style>

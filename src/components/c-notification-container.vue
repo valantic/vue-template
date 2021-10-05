@@ -1,13 +1,11 @@
 <template>
-  <div :class="b({ state, displayType })">
-    <div :class="b('inner')">
-      <c-notification
-        v-for="notification in notifications"
-        :key="notification.id"
-        :selector="selector"
-        :notification="notification"
-        :display-type="displayType" />
-    </div>
+  <div :class="b()">
+    <transition-group name="list" tag="div">
+      <c-notification v-for="notification in filteredNotifications"
+                      :key="notification.id"
+                      :notification="notification"
+      />
+    </transition-group>
   </div>
 </template>
 
@@ -30,74 +28,36 @@
 
     props: {
       /**
-       * Sets the display type which defines how the notifications are being rendered.
-       *
-       * Valid values: `[global, modal, field, add-to-cart, selector]`
-       */
-      displayType: {
-        type: String,
-        default: 'global',
-        validator: (value: string) => [
-          'global',
-          'modal',
-          'field',
-          'add-to-cart',
-          'selector'
-        ].includes(value)
-      },
-
-      /**
-       * Sets the display state of the container.
-       *
-       * Valid values: `[full, reduced]`.
-       */
-      state: {
-        type: String,
-        default: 'full',
-        validator: (value: string) => [
-          'full',
-          'reduced'
-        ].includes(value)
-      },
-
-      /**
-       * If the selector is set, this container will only render notifications
-       * which have the same message.source.selector in the response message.
+       * Defines which notifications should get displayed in the container.
        */
       selector: {
         type: String,
-        default: null,
-      },
+        default: 'default',
+        validator: (value: string) => [
+          'default',
+          'footer',
+        ].includes(value)
+      }
     },
     // data() {
     //   return {};
     // },
 
     computed: {
+      ...mapGetters('notification', [
+        'getNotifications',
+      ]),
+
       /**
-       * Returns an Array of notifications, which should be displayed by this container.
+       * Gets the filtered notifications depending on the selector.
        */
-      notifications(): readonly INotification[] {
-        switch (this.displayType) {
-          case 'global':
-            return store.getters.notification.getGlobalNotifications;
-
-          case 'modal':
-            return store.getters.notification.getNonSelectorNotifications;
-
-          case 'add-to-cart':
-            return store.getters.notification.getAddToCartNotifications;
-
-          case 'selector':
-            return store.getters.notification.getSelectorNotifications;
-
-          case 'field':
-            return store.getters.notification.getFieldNotifications;
-
-          default:
-            return [];
+      filteredNotifications(): INotification[] {
+        if (this.selector !== 'default') {
+          return this.getNotifications.filter(notification => notification.selector === this.selector);
         }
-      }
+
+        return this.getNotifications.filter(notification => !notification.selector);
+      },
     },
     // watch: {},
 
@@ -118,64 +78,32 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+
   .c-notification-container {
-    @include z-index(globalNotification);
+    /* VUE Animation styles */
+    .list-enter-active,
+    .list-leave-active {
+      transition: all variables.$transition-duration-300;
+    }
 
-    &--display-type-global {
+    .list-leave-active {
       position: absolute;
-      width: 100%;
-      margin-top: -$spacing--20;
-
-      @include media(xs) {
-        margin-top: -$spacing--5;
-      }
     }
 
-    &--display-type-add-to-cart {
-      position: absolute;
-      width: 100%;
-      right: $spacing--0;
-      display: none;
-
-      @include media(xs) {
-        width: 385px;
-      }
-
-      @include media(md) {
-        display: block;
-      }
-
-      &.c-notification-container--state-full {
-        margin-top: -$spacing--5;
-      }
-
-      &.c-notification-container--state-reduced {
-        margin-top: -$spacing--15;
-      }
+    .list-enter,
+    .list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
     }
 
-    &--modal-open {
-      display: none;
+    .list-leave-to {
+      transform: translateY(-30px);
     }
 
-    &--display-type-global &__inner {
-      position: fixed;
-      width: 100%;
-      padding: $spacing--10;
-
-      @include media(xs) {
-        padding: $spacing--0;
-        width: 385px;
-      }
-    }
-
-    &--display-type-add-to-cart &__inner {
-      position: fixed;
-      width: 100%;
-
-      @include media(xs) {
-        width: 385px;
-      }
+    .list-move {
+      transition: transform 1s;
     }
   }
 </style>

@@ -65,7 +65,9 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .s-color {
-    font-family: $font-family--primary;
+    font-family: variables.$font-family--primary;
   }
 </style>

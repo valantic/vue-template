@@ -1,23 +1,26 @@
+@use '../setup/scss/mixins';
+@use '../setup/scss/variables';
+
 .c-form {
   &__field + &__field {
-    margin-top: $spacing--20;
+    margin-top: variables.$spacing--20;
   }
 
   &__actions {
-    margin-top: $spacing--60;
+    margin-top: variables.$spacing--60;
 
     .e-button {
-      @include media(sm) {
+      @include mixins.media(sm) {
         display: inline-block;
         width: auto;
       }
     }
 
     .e-button + .e-button {
-      margin-top: $spacing--20;
+      margin-top: variables.$spacing--20;
 
-      @include media(sm) {
-        margin: 0 0 0 $spacing--20;
+      @include mixins.media(sm) {
+        margin: 0 0 0 variables.$spacing--20;
       }
     }
   }

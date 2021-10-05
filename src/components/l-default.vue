@@ -71,22 +71,32 @@
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/variables';
+  @use '../setup/scss/mixins';
+
   .l-default {
     display: flex;
     flex-direction: column;
     height: 100vh;
 
     &__content {
-      background: $color-grayscale--600;
+      background: variables.$color-grayscale--600;
       flex: 1 0 auto;
       min-height: 1px; // Fixes a content shifting issue with IE11 if a child element has hover
     }
 
     &__inner {
       position: relative;
-      background: $color-grayscale--1000;
-      box-shadow: 0 4px 10px 1px rgba($color-grayscale--400, 0.3);
-      max-width: #{map-get($breakpoints, xl) - 20px};
+      background: variables.$color-grayscale--1000;
+      box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
+      max-width: #{map-get(variables.$breakpoints, xl) - 20px};
+      margin: 0 auto;
+    }
+
+    .c-notification-container {
+      @include mixins.z-index(globalNotification);
+
+      position: absolute;
     }
   }
 </style>

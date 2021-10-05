@@ -228,87 +228,88 @@
 </script>
 
 <style lang="scss">
-.e-table {
-  $this: &;
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
 
-  width: 100%;
+  .e-table {
+    $this: &;
 
-  &__header-row {
-    border-bottom: 2px solid $color-grayscale--0;
-  }
+    width: 100%;
 
-  &__header-cell {
-    @include font($font-size--14);
-
-    padding-bottom: $spacing--10;
-    color: $color-grayscale--0;
-  }
-
-  &__header-cell--text-center {
-    text-align: center;
-  }
-
-  &__header-cell--text-right {
-    text-align: right;
-  }
-
-  &__data-row {
-    border-bottom: 1px solid $color-grayscale--0;
-
-    &--disabled {
-      position: relative;
-      pointer-events: none;
-
-      #{$this}__data-cell {
-        opacity: 0.5;
-      }
-    }
-  }
-
-  &__button-sort {
-    @extend %button-reset;
-
-    display: inline-block;
-    height: 0;
-    width: 0;
-    opacity: 0.3;
-    border: 10px solid transparent;
-    border-bottom-color: $color-grayscale--0;
-
-    &--desc {
-      border-bottom-color: transparent;
-      border-top-color: $color-grayscale--0;
+    &__header-row {
+      border-bottom: 2px solid variables.$color-grayscale--0;
     }
 
-    &--active {
-      opacity: 1;
+    &__header-cell {
+      @include mixins.font(variables.$font-size--14);
+
+      padding-bottom: variables.$spacing--10;
+      color: variables.$color-grayscale--0;
     }
-  }
 
-  &__data-cell {
-    @include font($font-size--14);
-
-    position: relative;
-    color: $color-secondary--1;
-    padding: $spacing--10 0;
-
-    &--text-center {
+    &__header-cell--text-center {
       text-align: center;
     }
 
-    &--text-right {
+    &__header-cell--text-right {
       text-align: right;
     }
 
-    &--has-event {
-      cursor: pointer;
+    &__data-row {
+      border-bottom: 1px solid variables.$color-grayscale--0;
+
+      &--disabled {
+        position: relative;
+        pointer-events: none;
+
+        #{$this}__data-cell {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    &__button-sort {
+      display: inline-block;
+      height: 0;
+      width: 0;
+      opacity: 0.3;
+      border: 10px solid transparent;
+      border-bottom-color: variables.$color-grayscale--0;
+
+      &--desc {
+        border-bottom-color: transparent;
+        border-top-color: variables.$color-grayscale--0;
+      }
+
+      &--active {
+        opacity: 1;
+      }
+    }
+
+    &__data-cell {
+      @include mixins.font(variables.$font-size--14);
+
+      position: relative;
+      color: variables.$color-secondary--1;
+      padding: variables.$spacing--10 0;
+
+      &--text-center {
+        text-align: center;
+      }
+
+      &--text-right {
+        text-align: right;
+      }
+
+      &--has-event {
+        cursor: pointer;
+      }
+    }
+
+    &__no-results {
+      font-size: variables.$font-size--14;
+      padding-top: variables.$spacing--15;
+      padding-bottom: variables.$spacing--15;
     }
   }
-
-  &__no-results {
-    font-size: $font-size--14;
-    padding-top: $spacing--15;
-    padding-bottom: $spacing--15;
-  }
-}
 </style>

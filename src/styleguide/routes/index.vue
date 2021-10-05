@@ -51,30 +51,33 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/mixins';
+  @use '../../setup/scss/variables';
+
   /* stylelint-disable selector-class-pattern */
   .index {
-    max-width: map-get($breakpoints, xl);
+    max-width: map-get(variables.$breakpoints, xl);
     margin: 0 auto;
-    padding: $spacing--30;
+    padding: variables.$spacing--30;
 
     &__warning {
-      border: 1px solid $color-status--danger;
-      background: rgba($color-status--danger--rgb, 0.5);
+      border: 1px solid variables.$color-status--error;
+      background: rgba(variables.$color-status--error--rgb, 0.5);
       text-align: center;
-      padding: $spacing--10;
+      padding: variables.$spacing--10;
     }
 
     &__code {
       display: inline-block;
-      border: 1px solid $color-grayscale--400;
-      background: rgba($color-primary--2--rgb, 0.5);
-      color: $color-primary--3;
+      border: 1px solid variables.$color-grayscale--400;
+      background: rgba(variables.$color-primary--2--rgb, 0.5);
+      color: variables.$color-primary--3;
     }
 
     &__build-info {
-      @include font-size($font-size--14);
+      @include mixins.font-size(variables.$font-size--14);
 
-      margin-left: $spacing--5;
+      margin-left: variables.$spacing--5;
     }
   }
 </style>
