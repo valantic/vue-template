@@ -156,6 +156,8 @@
       },
     },
 
+    emits: ['click'],
+
     data(): IData {
       return {
         /**
