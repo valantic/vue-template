@@ -13,8 +13,8 @@ const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const { webpack: config } = require('./package.json');
 const chokidar = require('chokidar');
@@ -104,11 +104,27 @@ module.exports = (env, args = {}) => {
   ];
 
   const plugins = [
-    new ESLintPlugin({
-      extensions: ['vue', 'js', 'ts'],
-      failOnError: isProduction,
-      emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
-      cache: !isProduction, // Improves linting performance
+    // Webpack plugin that runs typescript type checker and eslint on a separate process.
+    new ForkTsCheckerWebpackPlugin({
+      // don't block webpack's emit to wait for type checker in development mode, errors only visible inside CLI
+      async: !isProduction,
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+        extensions: {
+          vue: {
+            enabled: true,
+            compiler: '@vue/compiler-sfc'
+          }
+        },
+        // Set the tsconfig.json path
+        configFile: './tsconfig.json',
+      },
+      eslint: {
+        files: './src/**/*.{ts,js}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+      },
     }),
     new webpack.DefinePlugin(globalVariables), // Set node variables.
     new CopyWebpackPlugin([
@@ -250,6 +266,8 @@ module.exports = (env, args = {}) => {
       loader: 'ts-loader',
       exclude: /node_modules/,
       options: {
+        // disable type checker - we will use it in fork plugin
+        transpileOnly: true,
         appendTsSuffixTo: [/\.vue$/],
       }
     },
