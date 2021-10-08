@@ -412,7 +412,7 @@ color: {
 
 #### Setup
 
-When Using Code from another File (Composition based) or accessing Component Elements via ref, the code it needs to be 
+When Using Code from another File (Composition based) or accessing Component Elements via ref, the code needs to be 
 defined in the Setup Method. The setup Method needs to have a proper Return Type by defining an Interface:
 
 ```ts
@@ -425,12 +425,12 @@ interface ISetup extends IFormStates {
 }
 
 export default defineComponent({
-  setup(): ISetup {
+  setup(props): ISetup {
     const input = ref();
     const slot = ref();
 
     return {
-      ...useFormStates(),
+      ...useFormStates(toRefs(props).state),
       input,
       slot,
     };
