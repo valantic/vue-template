@@ -205,6 +205,7 @@
       &::after {
         transition: transform 0.1s ease-in-out;
         background: variables.$color-grayscale--0;
+        border: 1px solid transparent;
         opacity: 0;
         transform: scale(0);
       }
