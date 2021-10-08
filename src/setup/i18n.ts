@@ -43,7 +43,7 @@ export default i18n;
 /**
  * Load messages for given locale if not already loaded.
  */
-export const i18nLoadMessages = function(locale: string) {
+export const i18nLoadMessages = (locale: string): Promise<string> => {
   if (!Object.keys(i18n.global.messages).includes(locale)) {
     return import(/* webpackChunkName: 'lang-[request]' */`../translations/${locale}`)
       .then(({ default: localeMessages }) => {
@@ -71,7 +71,7 @@ export const i18nLoadMessages = function(locale: string) {
  * Sets the application locale to the given value.
  * Loads locale messages if needed.
  */
-export const i18nSetLocale = function(locale: string) { // eslint-disable-line no-param-reassign
+export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disable-line no-param-reassign
   if (!I18N_LOCALES.includes(locale)) {
     locale = I18N_FALLBACK;
   }
@@ -82,7 +82,7 @@ export const i18nSetLocale = function(locale: string) { // eslint-disable-line n
     });
   }
 
-  return Promise.resolve(locale);
+  return Promise.resolve();
 };
 
-i18nSetLocale(pageLang);
+i18nSetLocale(pageLang || I18N_FALLBACK);

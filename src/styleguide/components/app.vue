@@ -30,8 +30,6 @@
     computed: {
       /**
        * An Array of available routes.
-       *
-       * @returns {Array.<Object>}
        */
       routes(): IRoute[] {
         return styleguideRoutes;

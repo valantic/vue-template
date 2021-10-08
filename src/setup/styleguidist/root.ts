@@ -1,10 +1,12 @@
+/* eslint-disable */
+// TODO remove eslint-disable when styleguideist is working again
+import { ComponentPublicInstance } from 'vue';
+
 /**
  * Root component setup for styleguidist.
  */
-// @ts-ignore
-export default previewComponent => ({
-  // @ts-ignore
-  render(createElement) {
+export default (previewComponent: ComponentPublicInstance) => ({
+  render(createElement: any) {
     return createElement(previewComponent);
   }
 });

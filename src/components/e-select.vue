@@ -32,6 +32,7 @@
   import { defineComponent, toRefs } from 'vue';
   import i18n from '@/setup/i18n';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
 
@@ -128,10 +129,8 @@
     computed: {
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
         };

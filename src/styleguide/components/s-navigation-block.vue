@@ -62,8 +62,6 @@
     computed: {
       /**
        * Returns all modifiers for the component main class.
-       *
-       * @returns {Object}
        */
       componentModifiers(): IModifiers {
         return {
@@ -73,8 +71,6 @@
 
       /**
        * Returns an array of routes, that should be visible on the navigation.
-       *
-       * @returns {Array.<Object>}
        */
       filteredRoutes(): object[] {
         return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide);

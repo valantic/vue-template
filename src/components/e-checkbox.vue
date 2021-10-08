@@ -22,6 +22,7 @@
 <script lang="ts">
   import { defineComponent, PropType, toRefs } from 'vue';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
 
@@ -76,10 +77,8 @@
     computed: {
       /**
        * Returns a configuration Object for modifier classes.
-       *
-       * @returns {Object}
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
@@ -88,8 +87,6 @@
 
       /**
        * Sets value of component model to parent model
-       *
-       * @returns  {Boolean|Array}   Status of the checkbox
        */
       internalValue: {
         get(): boolean | string[] {

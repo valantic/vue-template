@@ -185,8 +185,6 @@
     computed: {
       /**
        * Returns an Object of class modifiers.
-       *
-       * @returns {Object}
        */
       modifiers(): IModifiers {
         return {
@@ -302,8 +300,6 @@
 
       /**
        * Returns the current width and height of the button.
-       *
-       * @returns {Object}
        */
       getElementDimensions(): IElementDimensions | null {
         const element = this.$el;

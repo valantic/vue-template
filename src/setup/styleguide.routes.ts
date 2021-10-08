@@ -10,7 +10,7 @@ import notifications from '@/styleguide/routes/notifications.vue';
 export interface IRoute {
   path: string;
   name?: string;
-  component?: ComponentPublicInstance | object;
+  component?: ComponentPublicInstance | Record<string, unknown>;
   meta?: {
     title: string;
   };

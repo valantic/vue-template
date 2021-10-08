@@ -62,8 +62,6 @@ function showNotifications(notifications: INotification[]): void {
 
 /**
  * Handles successful ajax requests.
- *
- * @returns {Object}
  */
 function handleSuccess(response: AxiosResponse): AxiosResponse {
   const { notifications } = response?.data || {};

@@ -1,6 +1,5 @@
 import { defineModule } from 'direct-vuex';
 import { moduleActionContext } from '@/store';
-import { ActionContext } from 'vuex';
 
 export interface IBreadcrumbItem {
   name: string;

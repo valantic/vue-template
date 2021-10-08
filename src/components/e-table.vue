@@ -143,8 +143,6 @@
     computed: {
       /**
        * Returns a sorted copy of the table-items.
-       *
-       * @returns {Array.<Object>}
        */
       itemsSortedBy(): IItem[] {
         const items = this.items.slice();
@@ -162,8 +160,6 @@
 
       /**
        * Reverts the sort direction if required.
-       *
-       * @returns {Array.<Object>}
        */
       itemsSorted(): IItem[] {
         if (!this.sortAscending) {

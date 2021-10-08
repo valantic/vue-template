@@ -29,7 +29,7 @@ export default {
   /**
    * Binding method of the directive.
    */
-  beforeMount(el: ICustomElement, binding: DirectiveBinding) {
+  beforeMount(el: ICustomElement, binding: DirectiveBinding): void {
     let userIsScrolling = false;
 
     // Click / Touchstart handler.
@@ -82,7 +82,7 @@ export default {
     document.addEventListener('scroll', el.outsideClickHandler, outsideClickEventConfig);
   },
 
-  unmounted(el: ICustomElement) {
+  unmounted(el: ICustomElement): void {
     document.removeEventListener('click', el.outsideClickHandler, outsideClickEventConfig);
     document.removeEventListener('touchend', el.outsideClickHandler, outsideClickEventConfig);
     document.removeEventListener('scroll', el.outsideClickHandler, outsideClickEventConfig);

@@ -56,8 +56,6 @@
     computed: {
       /**
        * Returns a readable loading message.
-       *
-       * @returns {String}
        */
       loadingMessage(): string {
         return this.message || this.$t('e-progress.loading');
@@ -65,8 +63,6 @@
 
       /**
        * Returns all modifiers for the component main class.
-       *
-       * @returns {Object}
        */
       componentModifiers(): IModifiers {
         return {

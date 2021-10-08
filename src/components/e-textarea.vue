@@ -103,8 +103,6 @@
 
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
       modifiers(): IModifiers {
         return {
@@ -115,8 +113,6 @@
 
       /**
        * Returns all modifiers for the field class.
-       *
-       * @returns {Object}
        */
       fieldModifiers(): IModifiers {
         return {

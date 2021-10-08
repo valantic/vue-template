@@ -62,8 +62,6 @@
 
       /**
        * Loops the themes and mark the selected by the global theme.
-       *
-       * @returns {Array} list of themes
        */
       themes(): ITheme[] {
         const list = this.defaultThemes;
