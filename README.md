@@ -465,6 +465,60 @@ signatures!
 - Component general Instance: Use `ComponentPublicInstance` as Type if you don't know the type of the component
 - Component specific Instance: Use `Ref<InstanceType<typeof yourComponent>` to access a property of a ref being a component
 
+#### IDE Support
+
+To see Type errors in your editor, make sure to enable TypeScript Language Support in your IDE. For PHP Storm, you
+can follow [this Instructions](https://www.jetbrains.com/help/phpstorm/using-tslint-code-quality-tool.html).
+
+#### Vue-2 to Vue-3
+
+With the update to Vue-3 and TypeScript, some basic things have changed. The most notable are listed here:
+
+1. Use `export default defineComponent({ ... })` to define your component
+2. Global Component properties need to be defiend in the `shims-xxx` files
+3. Mixins have been replaced by Composition API Code
+4. Ref Access needs to be done via Setup Method
+   [read more](https://v3.vuejs.org/guide/composition-api-template-refs.html#template-refs)
+5. Event emit does only work to the direct parent, otherwise you need to use an emitting plugin
+   [read more](https://v3.vuejs.org/guide/migration/events-api.html#events-api)
+6. Emitting events with the same same as a native event need to be defined in `emits` property
+   [read more](https://v3.vuejs.org/guide/migration/emits-option.html#emits-option)
+7. The directive lifecycle hooks have been adjusted
+   [read more](https://v3.vuejs.org/guide/migration/custom-directives.html#custom-directives)
+8. The way how `v-model` works, has been changed
+   [read more](https://v3.vuejs.org/guide/migration/v-model.html#v-model)
+9. The way how the `is` attribute works, has changed
+   [read more](https://v3.vuejs.org/api/special-attributes.html#is)
+10. As the current Vuex 4 is not really working well with TypeScript (a lot of boilerplate code is needed) and Vuex 5 will come
+    with a lot of changes, we decided to use a store wrapper until Vuex 5 is released
+    [read more](https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3)
+
+For more information about the migration, read the [migration page](https://v3.vuejs.org/guide/migration/introduction.html#introduction)
+
+####  Decisions and Issues
+
+During switching to Vue-3 and TypeScript, the following decisions had to be made:
+
+1. Build Chain: For typescript, one can either use `ts-loader` and output browser ready js directly or just use the `ts-loader`
+   to compile TypeScript to JavaScript and then continue with e.g. `babel-loader`. Although the latter uses two loaders and
+   is potentially slower, we decided to use it, to have browser list support for the end result
+2. Code Linting: We use ESLint with some additional rules needed for typescript. 
+   Our `.eslintrc` extends `@vue/typescript`, which is a vue optimized ESLint config
+   [read more](https://www.npmjs.com/package/@vue/eslint-config-typescript)
+   The alternative would be to use `plugin:@typescript-eslint/recommended`, which is stricter
+
+The following issues arisen during the switch and are still open:
+
+1. Styleguideist does not support Vue-3, see https://github.com/vue-styleguidist/vue-styleguidist/issues/997
+2. Some dependencies are only available in next / alpha version
+2. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good 
+   tools to do that at the moment, [read more](https://github.com/vuejs/vue-cli/issues/2950)
+   - Using native `tsc --noEmit` does not work for TypeScript code in Vue `sfc` files
+   - The following 3rd Party tools where tested but where not working well
+     - https://github.com/zhanba/vue-tslint => Works only with Vue-2
+     - https://github.com/johnsoncodehk/vue-tsc => Does not seem to respect the tsconfig from the project
+     - https://github.com/Yuyz0112/vue-type-check => Does not recognize component properties
+
 ## Vuex
 
 [Vuex](https://vuex.vuejs.org/en/) is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
