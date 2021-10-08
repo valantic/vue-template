@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import colors from '../../setup/js/color';
+  import colors, { IColors } from '../../setup/js/color';
   import sColorItem from './s-color-item.vue';
 
   export default defineComponent({
@@ -30,19 +30,15 @@
     computed: {
       /**
        * Returns an Object of color lists.
-       *
-       * @returns {Object}
        */
-      colors() {
+      colors(): IColors {
         return colors;
       },
 
       /**
        * Returns an Array of color palette names.
-       *
-       * @returns {Array.<String>}
        */
-      palettes() {
+      palettes(): string[] {
         return Object.keys(colors);
       }
     },

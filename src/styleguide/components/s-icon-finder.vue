@@ -73,8 +73,6 @@
     computed: {
       /**
        * Returns an array of query filtered icons.
-       *
-       * @returns {Array.<Object>}
        */
       filteredIcons(): object[] {
         const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);

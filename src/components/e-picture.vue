@@ -189,8 +189,6 @@
     computed: {
       /**
        * Returns an object of BEM modifiers.
-       *
-       * @returns {Object}
        */
       modifiers(): IModifiers {
         return {
@@ -203,8 +201,6 @@
 
       /**
        * Calculates root element styles.
-       *
-       * @returns {Object}
        */
       style(): object | null {
         const { ratio } = this;
@@ -216,8 +212,6 @@
 
       /**
        * Converts sizes object to string.
-       *
-       * @returns {String|null}
        */
       mappedSizes(): string | null {
         if (!this.sizes) {

@@ -279,8 +279,6 @@
     computed: {
       /**
        * Returns active values as array.
-       *
-       * @returns {Array}
        */
       activeValuesArray(): string | string[] | number | number[] | null {
         switch (typeof this.activeValue) {
@@ -304,8 +302,6 @@
 
       /**
        * Defines state modifier classes.
-       *
-       * @returns {Object}
        */
       modifiers(): IModifiers {
         return {

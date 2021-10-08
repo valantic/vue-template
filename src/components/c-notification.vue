@@ -129,8 +129,6 @@
 
       /**
        * Returns all modifiers for the component main class.
-       *
-       * @returns {Object}
        */
       componentModifiers(): IModifiers {
         return {
@@ -144,8 +142,6 @@
 
       /**
        * Returns all modifiers for the component inner class.
-       *
-       * @returns {Object}
        */
       innerModifiers(): IModifiers {
         return {

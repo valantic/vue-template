@@ -1,5 +1,5 @@
 <template>
-  <label :class="b(stateModifiers)"
+  <label :class="b(modifiers)"
          @mouseenter="hover = true"
          @mouseleave="hover = false">
     <input
@@ -23,6 +23,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import useFormStates, { IFormStates } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
 
@@ -74,9 +75,16 @@
 
     computed: {
       /**
+       * Defines state modifier classes.
+       */
+      modifiers(): IModifiers {
+        return {
+          ...this.stateModifiers
+        };
+      },
+
+      /**
        * Sets value of component model to parent model
-       *
-       * @returns  {Boolean|Array}   Status of the checkbox
        */
       internalValue: {
         get(): boolean | string[] {

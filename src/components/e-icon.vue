@@ -115,8 +115,6 @@
     computed: {
       /**
        * Returns the source path for the given icon.
-       *
-       * @returns {String}
        */
       src(): string | null {
         try {
@@ -131,8 +129,6 @@
 
       /**
        * Returns all modifiers for the component main class.
-       *
-       * @returns {Object}
        */
       componentModifiers(): IModifiers {
         return {

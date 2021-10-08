@@ -200,8 +200,6 @@
 
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
       modifiers(): IModifiers {
         const {

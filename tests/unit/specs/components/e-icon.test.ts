@@ -6,7 +6,7 @@ import { mount } from '@vue/test-utils';
 import VueBemCn from '@/plugins/vue-bem-cn';
 import component from '@/components/e-icon.vue';
 
-describe('component | e-button', () => {
+describe('component | e-icon', () => {
   it('has name property', () => {
     expect(component.name).toBeTruthy();
   });

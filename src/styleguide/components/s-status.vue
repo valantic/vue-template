@@ -39,8 +39,6 @@
     computed: {
       /**
        * Returns a configuration Object for modifier classes.
-       *
-       * @returns {Object}
        */
       modifiers(): IModifiers {
         const modifier = availableStatus[this.modifier];

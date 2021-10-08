@@ -151,8 +151,6 @@
     computed: {
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
       modifiers(): IModifiers {
         return {
@@ -162,8 +160,6 @@
 
       /**
        * Merges default with custom component options.
-       *
-       * @returns  {Object}  optionsMerged    Combination of default and custom options.
        */
       optionsMerged(): SwiperOptions {
         return {

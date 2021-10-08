@@ -56,8 +56,6 @@
     computed: {
       /**
        * Get's the correct logo depending on the theme value from the vuex store.
-       *
-       * @returns {Object} logo-name
        */
       logo(): ILogo {
         const title = this.$t('e-logo.linkTitle');

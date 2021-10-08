@@ -35,8 +35,6 @@
     computed: {
       /**
        * The current language.
-       *
-       * @returns {String}
        */
       language() {
         return i18n.global.locale;

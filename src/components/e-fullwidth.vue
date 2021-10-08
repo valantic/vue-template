@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, StyleValue } from 'vue';
   import scrollbarWidth from '@/helpers/scrollbar-width';
 
   type ResizeObserverCallback = () => void;
@@ -50,10 +50,8 @@
     computed: {
       /**
        * Calculates a dynamic width style, since the scrollbar needs to be taken into account.
-       *
-       * @returns {Object}
        */
-      style(): object | null {
+      style(): StyleValue | undefined {
         if (this.scrollbarWidth) {
           const margin = `calc((50vw - ${this.scrollbarWidth / 2}px) * -1)`;
 
@@ -64,7 +62,8 @@
           };
         }
 
-        return null;
+        // eslint-disable-next-line no-undefined
+        return undefined;
       },
     },
     // watch: {},

@@ -1,5 +1,5 @@
 <template>
-  <div :class="b(stateModifiers)">
+  <div :class="b(modifiers)">
     <select :value="value"
             :class="b('select')"
             :disabled="disabled || progress"
@@ -30,6 +30,7 @@
   import { defineComponent } from 'vue';
   import i18n from '@/setup/i18n';
   import useFormStates, { IFormStates } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface ISetup extends IFormStates {}
 
@@ -115,7 +116,16 @@
     //   return {};
     // },
 
-    // computed: {},
+    computed: {
+      /**
+       * Defines state modifier classes.
+       */
+      modifiers(): IModifiers {
+        return {
+          ...this.stateModifiers
+        };
+      }
+    },
     // watch: {},
 
     // beforeCreate() {},

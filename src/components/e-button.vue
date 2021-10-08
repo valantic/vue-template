@@ -179,8 +179,6 @@
     computed: {
       /**
        * Returns an Object of class modifiers.
-       *
-       * @returns {Object}
        */
       modifiers(): IModifiers {
         return {
@@ -199,8 +197,6 @@
 
       /**
        * Returns an Object of attributes.
-       *
-       * @returns {Object}
        */
       attributes(): IAttributes {
         return {
@@ -212,8 +208,6 @@
 
       /**
        * Returns inline styles to keep dimensions during progress state.
-       *
-       * @returns {Object}
        */
       style(): IElementDimensions | null {
         return this.progress && this.width !== 'full'
@@ -293,8 +287,6 @@
 
       /**
        * Returns the current width and height of the button.
-       *
-       * @returns {Object}
        */
       getElementDimensions(): IElementDimensions | null {
         const element = this.$el;

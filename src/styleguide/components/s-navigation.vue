@@ -85,9 +85,7 @@
     },
     computed: {
       /**
-       * Returns the styleguidest url, based on the current environment.
-       *
-       * @returns {String}
+       * Returns the styleguideist url, based on the current environment.
        */
       styleguidistUrl(): string {
         return process.env.IS_STYLEGUIDE_BUILD
@@ -97,8 +95,6 @@
 
       /**
        * Returns all modifiers for the wrapper class.
-       *
-       * @returns {Object}
        */
       wrapperModifiers(): IModifiers {
         return {

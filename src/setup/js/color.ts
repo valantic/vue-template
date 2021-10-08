@@ -1,5 +1,21 @@
 // Keep in sync with src/setup/scss/_color.scss
-export default {
+
+import exp from 'constants';
+
+interface IColorType {
+  name: string;
+  value: string[];
+}
+
+export interface IColors {
+  primary: IColorType[];
+  secondary: IColorType[];
+  grayscale: IColorType[];
+  gradient: IColorType[];
+  status: IColorType[];
+}
+
+const colors: IColors = {
   primary: [
     { name: '$color-primary--1', value: ['#ff4b4b'] },
     { name: '$color-primary--2', value: ['#000000'] },
@@ -29,3 +45,5 @@ export default {
     { name: '$color-status--info', value: ['#75b4e0'] },
   ],
 };
+
+export default colors;

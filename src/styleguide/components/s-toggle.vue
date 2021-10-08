@@ -36,8 +36,6 @@
     computed: {
       /**
        * Sets/gets value of component model and parent model.
-       *
-       * @returns  {Boolean}   Status of the checkbox
        */
       internalValue: {
         get(): boolean {

@@ -93,8 +93,6 @@
 
       /**
        * Returns a configuration Object for modifier classes.
-       *
-       * @returns {Object}
        */
       modifiers(): IModifiers {
         return {
@@ -105,8 +103,6 @@
 
       /**
        * Returns all modifiers for the field class.
-       *
-       * @returns {Object}
        */
       fieldModifiers(): IModifiers {
         return {

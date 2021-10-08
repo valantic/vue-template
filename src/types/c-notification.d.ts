@@ -1,7 +1,7 @@
 interface IMeta {
   id: string;
   confirmationType: string;
-  product: object;
+  product: Record<string, unknown>;
 }
 
 interface ISource {
