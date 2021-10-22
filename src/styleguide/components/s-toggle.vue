@@ -29,6 +29,9 @@
         default: false
       }
     },
+
+    emits: ['update:modelValue'],
+
     // data() {
     //   return {};
     // },

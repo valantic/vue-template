@@ -481,7 +481,7 @@ With the update to Vue-3 and TypeScript, some basic things have changed. The mos
    [read more](https://v3.vuejs.org/guide/composition-api-template-refs.html#template-refs)
 5. Event emit does only work to the direct parent, otherwise you need to use an emitting plugin
    [read more](https://v3.vuejs.org/guide/migration/events-api.html#events-api)
-6. Emitting events with the same same as a native event need to be defined in `emits` property
+6. Emitting events with the same as a native event need to be defined in `emits` property
    [read more](https://v3.vuejs.org/guide/migration/emits-option.html#emits-option)
 7. The directive lifecycle hooks have been adjusted
    [read more](https://v3.vuejs.org/guide/migration/custom-directives.html#custom-directives)

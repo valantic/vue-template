@@ -166,6 +166,8 @@
       },
     },
 
+    emits: ['update:modelValue', 'close'],
+
     setup(props): ISetup {
       const searchField = ref();
       const fieldWrapper = ref();

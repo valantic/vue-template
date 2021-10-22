@@ -114,6 +114,8 @@
       },
     },
 
+    emits: ['update:modelValue'],
+
     setup(props): ISetup {
       return {
         ...useFormStates(toRefs(props).state),

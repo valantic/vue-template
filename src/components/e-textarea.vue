@@ -89,6 +89,8 @@
       }
     },
 
+    emits: ['input', 'focus', 'blur'],
+
     setup(props): ISetup {
       return {
         ...useFormStates(toRefs(props).state),

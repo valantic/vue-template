@@ -66,6 +66,7 @@
     components: {
       cFormNotification
     },
+
     inheritAttrs: false,
 
     props: {
@@ -142,6 +143,8 @@
         default: false,
       },
     },
+
+    emits: ['update:modelValue', 'focus', 'blur', 'enter'],
 
     setup(props): ISetup {
       const input = ref();
