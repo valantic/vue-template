@@ -115,7 +115,7 @@
     "stylelint": "~13.13.0",
     "stylelint-config-valantic": "~6.4.0",
     "stylelint-webpack-plugin": "~2.1.1",
-    "svg-sprite": "~1.5.2",
+    "svg-sprite": "~1.5.3",
     "svg4everybody": "~2.1.9",
     "terser-webpack-plugin": "~4.2.3",
     "vue-jest": "~3.0.7",
