@@ -8,7 +8,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "month"
+      interval: "monthly"
     commit-message:
       prefix: "[AUTO] NPM updates"
     target-branch: "develop"
