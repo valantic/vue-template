@@ -10,5 +10,5 @@ updates:
     schedule:
       interval: "monthly"
     commit-message:
-      prefix: "[AUTO] NPM updates"
+      prefix: "[NPM]"
     target-branch: "develop"
