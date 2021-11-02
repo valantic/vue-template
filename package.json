@@ -8,7 +8,7 @@
     "dev:s": "npm run styleguide",
     "jest": "jest tests --config jest.config.js --silent",
     "jest:debug": "node --inspect-brk node_modules/jest/bin/jest.js --runInBand tests/unit/specs/<path-to-your-test-file>.ts",
-    "lint": "tsc --project ./tsconfig.json --noEmit && vue-tsc --noEmit && eslint --ext .ts,.js,.vue src tests/unit/specs && stylelint 'src/**/*.?(vue|scss)'; exit 0;",
+    "lint": "tsc --project ./tsconfig.json --noEmit && eslint --ext .ts,.js,.vue src tests/unit/specs && stylelint 'src/**/*.?(vue|scss)'; exit 0;",
     "test": "npm run lint && npm run jest; exit 0;",
     "styleguide": "vue-styleguidist server",
     "build": "NODE_ENV=production webpack --mode production --progress",
@@ -36,7 +36,7 @@
     "devPort": 9090
   },
   "lint-staged": {
-    "*.{js,vue}": [
+    "*.{js,ts,vue}": [
       "eslint"
     ],
     "*.{css,vue,scss}": [
