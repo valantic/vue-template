@@ -17,8 +17,8 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
-const { webpack: config, lastDependencyUpdate } = require('./package.json');
 const DependencyHint = require('webpack-dependency-hint');
+const { webpack: config, lastDependencyUpdate } = require('./package.json');
 
 /**
  * A note about [hash]: Using the hash in query could cause troubles with caching proxies. Therefore
