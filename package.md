@@ -174,5 +174,7 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > webpack
 - [webpack-dev-serve](https://www.npmjs.com/package/webpack-dev-server) - Use webpack with a development server that provides live reloading.
   > webpack, development environment
+- [webpack-dependency-hint](https://www.npmjs.com/package/webpack-dependency-hint) - A Webpack plugin that delivers a console output when a dependency check is recommended.
+  > webpack, development environment
 - [webpack-manifest-plugin](https://www.npmjs.com/package/webpack-manifest-plugin) - Creates a manifest.json to map webpack input with output.
   > webpack
