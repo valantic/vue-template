@@ -2,6 +2,7 @@
   "name": "vue-template",
   "version": "7.0.0",
   "description": "A customized Vue.js project template",
+  "lastDependencyUpdate": "01.02.2021",
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "webpack-dev-server --mode development",
@@ -85,6 +86,7 @@
     "babel-eslint": "~10.0.3",
     "babel-jest": "~26.3.0",
     "babel-loader": "~8.1.0",
+    "chalk": "~4.1.2",
     "clean-webpack-plugin": "~3.0.0",
     "css-loader": "~4.3.0",
     "cssnano": "~4.1.10",
@@ -126,6 +128,7 @@
     "webpack": "~4.44.2",
     "webpack-bundle-analyzer": "~3.9.0",
     "webpack-cli": "~3.3.12",
+    "webpack-dependency-hint": "git+https://github.com/valantic/webpack-dependency-hint.git",
     "webpack-dev-server": "~3.11.0",
     "webpack-manifest-plugin": "~2.2.0"
   },
