@@ -88,7 +88,7 @@ module.exports = (env, args = {}) => {
   };
 
   const plugins = [
-    new webpack.ProgressPlugin({ percentBy: 'entries' }),
+    new webpack.ProgressPlugin({ percentBy: 'entries', /*profile: true*/ }),
 
     new ESLintPlugin({
       extensions: ['vue', 'js'],
@@ -99,15 +99,17 @@ module.exports = (env, args = {}) => {
 
     new webpack.DefinePlugin(globalVariables), // Set node variables.
 
-    new CopyWebpackPlugin([
-      {
-        from: '**/*',
-        context: path.resolve(__dirname, 'static'),
-        globOptions: isProduction
-          ? { dot: true, ignore: ['**/mockdata/**'] }
-          : isStyleguideBuild ? { dot: true } : undefined,
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: '**/*',
+          context: path.resolve(__dirname, 'static'),
+          globOptions: isProduction
+            ? { dot: true, ignore: ['**/mockdata/**'] }
+            : isStyleguideBuild ? { dot: true } : undefined,
+        },
+      ]
+    }),
 
     new VueLoaderPlugin(), // *.vue file parser.
 
