@@ -104,6 +104,7 @@ module.exports = (env, args = {}) => {
         {
           from: '**/*',
           context: path.resolve(__dirname, 'static'),
+          noErrorOnMissing: true,
           globOptions: isProduction
             ? { dot: true, ignore: ['**/mockdata/**'] }
             : isStyleguideBuild ? { dot: true } : undefined,
