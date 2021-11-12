@@ -1,8 +1,8 @@
+import { defineModule } from 'direct-vuex';
 import { NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 import api from '@/helpers/api';
 import { IMessage, INotification } from '@/types/c-notification';
-import { defineModule } from 'direct-vuex';
 import { moduleActionContext } from '@/store';
 
 interface IModNotificationState {

@@ -58,6 +58,7 @@ describe('Hyphenate', () => {
 
   Object.keys(hyphenate).forEach((item) => {
     test(item, () => {
+      // ts-ignore needed as TypeScript cannot detect if object key exists
       // @ts-ignore
       expect(b(hyphenate[item].mods || hyphenate[item].el)).toBe(item);
     });
