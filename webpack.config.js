@@ -15,7 +15,6 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const pkg = require('./package.json');
-const chokidar = require('chokidar');
 const TerserPlugin = require('terser-webpack-plugin');
 
 /**
@@ -209,15 +208,6 @@ module.exports = (env, args = {}) => {
       progress: true,
       overlay: true,
     }
-
-    devServer['onBeforeSetupMiddleware'] = function (devServer) {
-      // Refresh browser on non js/vue file changes
-      chokidar.watch([
-        './src/**/*.scss'
-      ]).on('all', function() {
-        devServer.sendMessage(devServer.webSocketServer.clients, 'content-changed');
-      });
-    }
   }
 
   const rules = [
@@ -275,6 +265,8 @@ module.exports = (env, args = {}) => {
       test: /\.(gif|png|jpe?g)$/i,
       type: 'asset/resource',
       generator: {
+        // if you need the asset sub dir structure in your dist folder, use [path] as workaround
+        // see https://github.com/webpack/webpack/issues/14717
         filename: `${outputAssetsFolder}img/[name][contenthash][ext]`,
       },
     },
@@ -282,7 +274,9 @@ module.exports = (env, args = {}) => {
       test: /\.(svg)$/i,
       type: 'asset/resource',
       generator: {
-        filename: `${outputAssetsFolder}img/[name][contenthash][ext]`,
+        // if you need the asset sub dir structure in your dist folder, use [path] as workaround
+        // see https://github.com/webpack/webpack/issues/14717
+        filename: `${outputAssetsFolder}[name][contenthash][ext]`,
       },
       use: [
         {
@@ -299,7 +293,6 @@ module.exports = (env, args = {}) => {
       type: 'asset/resource',
       generator: {
         filename: `${outputAssetsFolder}fonts/[name][contenthash][ext]`,
-        // publicPath: `${publicPath}${outputAssetsFolder}fonts/`
       },
     },
     {
@@ -337,11 +330,19 @@ module.exports = (env, args = {}) => {
     assets: true, // Show list of created files
     assetsSort: '!size', // Order list of created files by ...
     errors: true, // Show errors
-    excludeAssets: /assets\/(img|fonts)/,
+    excludeAssets: /(assets\/(img|fonts|static)|mock)/,
     hash: true, // Show build hash
     performance: true, // Show warnings for big files
     timings: true, // Show timing information
     warnings: true, // Show warnings
+    assetsSpace: Number.MAX_SAFE_INTEGER, // Number of assets which should be shown in stats
+    entrypoints: true, // Show entrypoints
+    chunks: false,
+    moduleAssets: false,
+    groupAssetsByChunk: false,
+    groupAssetsByEmitStatus: false,
+    groupAssetsByInfo: false,
+    groupModulesByAttributes: false,
   };
 
   return {
