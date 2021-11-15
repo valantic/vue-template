@@ -15,9 +15,9 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { webpack } from '@/../package.json';
+  import pkg from '@/../package.json';
 
-  const themePath = `/${webpack.outputAssetsFolder}css/${webpack.filePrefix}theme-`;
+  const themePath = `/${pkg.webpack.outputAssetsFolder}css/${pkg.webpack.filePrefix}theme-`;
 
   export default {
     name: 's-theme-selector',

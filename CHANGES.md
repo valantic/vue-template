@@ -39,6 +39,7 @@
     - Replaces usages of `@extends` with `@mixins` as extends is not supported by scss namespaces
     - Uses local imports for scss mixins, functions and variables
  - (Bug) Fixes broken styleguide build.
+ - (Change) Issue 171: Updates to Webpack 5
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
