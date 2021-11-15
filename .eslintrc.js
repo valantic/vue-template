@@ -1,11 +1,12 @@
 // https://eslint.org/docs/user-guide/configuring
 const vueRules = require('eslint-config-valantic/plugins/vue');
+const tsRules = require('eslint-config-valantic/plugins/typescript');
 
 module.exports = {
   root: true,
   parserOptions: {
     requireConfigFile: false, // Fixes an exception on sub folder eslintrc.js files
-    parser: '@babel/eslint-parser', // Don't use on upper scope as documented by ESLint. The Vue plugin already defines itself as parser.
+    parser: '@typescript-eslint/parser', // Don't use on upper scope as documented by ESLint. The Vue plugin already defines itself as parser.
     sourceType: 'module',
   },
   env: {
@@ -14,6 +15,7 @@ module.exports = {
   extends: [
     'valantic',
     'plugin:vue/recommended',
+    '@vue/typescript',
   ],
   // required to lint *.vue files
   plugins: [
@@ -27,6 +29,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     ...vueRules,
+    ...tsRules,
   },
   globals: {},
 };

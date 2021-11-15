@@ -1,5 +1,6 @@
 /dist/
 /*.js
+/*.ts
 /test/unit/coverage/
 /node_modules/
 /blueprints

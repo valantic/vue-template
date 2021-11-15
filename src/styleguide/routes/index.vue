@@ -20,11 +20,12 @@
   </div>
 </template>
 
-<script>
-  import sReadme from '@/styleguide/components/s-readme';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import sReadme from '@/styleguide/components/s-readme.vue';
   import dayjs from 'dayjs';
 
-  export default {
+  export default defineComponent({
     name: 'index',
     components: { sReadme },
 
@@ -41,14 +42,12 @@
     computed: {
       /**
        * Checks, if production mode is active.
-       *
-       * @returns {Boolean}
        */
-      isProduction() {
+      isProduction(): boolean {
         return process.env.NODE_ENV === 'production';
       },
     },
-  };
+  });
 </script>
 
 <style lang="scss">

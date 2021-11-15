@@ -4,17 +4,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  // @ts-ignore
   import readme from '../../../README.md';
 
-  export default {
+  export default defineComponent({
     name: 's-readme',
     status: 1,
 
     components: {
       readme,
     },
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -32,12 +33,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <!-- eslint-disable -->

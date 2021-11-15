@@ -1,5 +1,6 @@
 .focus-item {
   @include z-index(focusItem);
 
+  position: relative;
   background-color: $color-grayscale--1000;
 }

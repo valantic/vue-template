@@ -9,12 +9,12 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const openInEditor = require('launch-editor-middleware');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const { webpack: config } = require('./package.json');
 const chokidar = require('chokidar');
@@ -42,11 +42,17 @@ module.exports = (env, args = {}) => {
   const showProfile = args.profile || false;
   const globalVariables = {
     'process.env': {
-      NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
-      IS_STYLEGUIDE_BUILD: JSON.stringify(isStyleguideBuild),
-      HAS_WATCHER: hasWatcher,
-      BUILD_TIMESTAMP: new Date().getTime(),
+      'NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
+      'IS_STYLEGUIDE_BUILD': JSON.stringify(isStyleguideBuild),
+      'HAS_WATCHER': hasWatcher,
+      'BUILD_TIMESTAMP': new Date().getTime(),
     },
+    // @see https://github.com/vuejs/vue-next/tree/master/packages/vue#bundler-build-feature-flags
+    '__VUE_OPTIONS_API__': true,
+    '__VUE_PROD_DEVTOOLS__': true, // TODO: make false by default.
+    '__VUE_I18N_FULL_INSTALL__': true,
+    '__VUE_I18N_LEGACY_API__': true,
+    '__INTLIFY_PROD_DEVTOOLS__': true,
   };
 
   // Project variables
@@ -83,10 +89,10 @@ module.exports = (env, args = {}) => {
 
   // webpack configuration variables
   const prefix = filePrefix ? `${filePrefix}.` : '';
-  const extensions = ['.js', '.vue', '.json'];
+  const extensions = ['.js', '.vue', '.json', '.ts'];
   const alias = {
     '@': path.resolve(__dirname, './src'),
-    'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
+    'vue$': 'vue/dist/vue.esm-bundler.js', // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
   };
 
   const scssResourcesFolder = './src/setup/scss/';
@@ -99,11 +105,27 @@ module.exports = (env, args = {}) => {
   ];
 
   const plugins = [
-    new ESLintPlugin({
-      extensions: ['vue', 'js'],
-      failOnError: isProduction,
-      emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
-      cache: !isProduction, // Improves linting performance
+    // Webpack plugin that runs typescript type checker and eslint on a separate process.
+    new ForkTsCheckerWebpackPlugin({
+      // don't block webpack's emit to wait for type checker in development mode, errors only visible inside CLI
+      async: !isProduction,
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+        extensions: {
+          vue: {
+            enabled: true,
+            compiler: '@vue/compiler-sfc'
+          }
+        },
+        // Set the tsconfig.json path
+        configFile: './tsconfig.json',
+      },
+      eslint: {
+        files: './src/**/*.{ts,js}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+      },
     }),
     new webpack.DefinePlugin(globalVariables), // Set node variables.
     new CopyWebpackPlugin([
@@ -231,26 +253,32 @@ module.exports = (env, args = {}) => {
 
   const rules = [
     {
-      test: /\.js$/,
-      exclude: /core-js/,
-      use: {
-        loader: 'babel-loader',
-      },
-    },
-    {
       test: /\.vue$/,
       loader: 'vue-loader',
       options: {
         hotReload,
-        compilerOptions: { // @see https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#options
+        compilerOptions: { // @see https://vue-loader.vuejs.org/options.html
           whitespace: 'condense',
-          directives: {
-            // Remove the Pimcore directive from production.
-            'pimcore': () => !isProduction,
-            'pimcore-areabrick': () => !isProduction,
-            'pimcore-snippet': () => !isProduction,
-            'pimcore-template': () => !isProduction,
-          }
+        }
+      },
+    },
+    {
+      test: /\.tsx?$/,
+      loader: 'ts-loader',
+      exclude: /node_modules/,
+      options: {
+        // disable type checking - it is done via ForkTsCheckerWebpackPlugin to increase speed
+        transpileOnly: true,
+        appendTsSuffixTo: [/\.vue$/],
+      }
+    },
+    {
+      test: /\.js$/,
+      exclude: /core-js/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env'],
         }
       },
     },
@@ -340,10 +368,10 @@ module.exports = (env, args = {}) => {
     ],
     splitChunks: {
       cacheGroups: {
-        vendor: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
-          chunks: chunk => !['polyfills.ie11', 'polyfills'].includes(chunk.name), // Excludes node modules which are required by IE11 polyfills
+          chunks: 'initial',
         },
       }
     },
@@ -366,10 +394,8 @@ module.exports = (env, args = {}) => {
     mode: isProduction ? 'production' : 'development',
     entry: {
       ...themes,
-      'polyfills': path.resolve(__dirname, 'src/setup/polyfills.js'), // If code still fails, you may need to add regenerator as well. See https://babeljs.io/docs/en/babel-polyfill
-      'polyfills.ie11': path.resolve(__dirname, 'src/setup/polyfills.ie11.js'),
       'app': [
-        path.resolve(__dirname, 'src/main.js'),
+        path.resolve(__dirname, 'src/main.ts'),
       ],
     },
     resolve: {

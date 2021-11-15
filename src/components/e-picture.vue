@@ -18,18 +18,38 @@
   </picture>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent, PropType } from 'vue';
   import { BREAKPOINTS_MAX } from '@/setup/globals';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISizes {
+    fallback: number;
+    lg: number,
+    md: number,
+    sm: number,
+    xs: number,
+    xxs: number,
+    [key: number]: number;
+  }
+
+  interface ISizePerBreakpoint {
+    [key: number]: number
+  }
+
+  interface IData {
+    loaded: boolean;
+    fallbackHeight: number;
+  }
 
   /**
    * Renders a picture element with srcset or sources, depending on provided data.
    */
-  export default {
+  export default defineComponent({
     name: 'e-picture',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -86,7 +106,7 @@
        * `{ <breakpoint (px value|short name)>: <minWidth>, ... }`
        */
       sizes: {
-        type: Object,
+        type: Object as PropType<ISizes>,
         default: null,
       },
 
@@ -106,13 +126,11 @@
       loading: {
         type: String,
         default: 'lazy',
-        validator(value) {
-          return [
-            'lazy',
-            'eager',
-            'auto',
-          ].includes(value);
-        },
+        validator: (value: string) => [
+          'lazy',
+          'eager',
+          'auto',
+        ].includes(value),
       },
 
       /**
@@ -123,13 +141,11 @@
       decoding: {
         type: String,
         default: 'async',
-        validator(value) {
-          return [
-            'sync',
-            'async',
-            'auto',
-          ].includes(value);
-        },
+        validator: (value: string) => [
+          'sync',
+          'async',
+          'auto',
+        ].includes(value)
       },
 
       /**
@@ -156,15 +172,15 @@
         default: true,
       },
     },
-    data() {
+    data(): IData {
       return {
         /**
-         * @type {Boolean} - Becomes true if the image is loaded.
+         * Becomes true if the image is loaded.
          */
         loaded: false,
 
         /**
-         * @type {Number} Holds a fallback width in case only the ratio is defined.
+         * Holds a fallback width in case only the ratio is defined.
          */
         fallbackHeight: 400,
       };
@@ -173,10 +189,8 @@
     computed: {
       /**
        * Returns an object of BEM modifiers.
-       *
-       * @returns {Object}
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           inline: this.inline,
           ratio: !!this.ratio,
@@ -187,10 +201,8 @@
 
       /**
        * Calculates root element styles.
-       *
-       * @returns {Object}
        */
-      style() {
+      style(): object | null {
         const { ratio } = this;
 
         return ratio
@@ -200,38 +212,39 @@
 
       /**
        * Converts sizes object to string.
-       *
-       * @returns {String|null}
        */
-      mappedSizes() {
-        const { sizes } = this;
-
-        if (!sizes) {
+      mappedSizes(): string | null {
+        if (!this.sizes) {
           return null;
         }
 
-        const mappedSizesBreakpoints = {};
-        const fallback = sizes.fallback ? `,${sizes.fallback}px` : ',100vw';
+        const mappedSizesPerBreakpoints: ISizePerBreakpoint = {};
+        const fallback = this.sizes.fallback ? `,${this.sizes.fallback}px` : ',100vw';
 
         return Object
-          .keys(sizes)
-          .map((breakpoint) => {
-            if (breakpoint === 'fallback') {
+          .keys(this.sizes)
+          .map((size: string | number) => {
+            if (size === 'fallback') {
               return null;
             }
 
-            const key = Number.isNaN(BREAKPOINTS_MAX[breakpoint]) // The viewport could be 0, so we need to test the type.
-              ? breakpoint
-              : BREAKPOINTS_MAX[breakpoint];
+            const breakpoint = size as keyof typeof BREAKPOINTS_MAX;
 
-            mappedSizesBreakpoints[key] = sizes[breakpoint];
+            // check if the provided size key exists as breakpoint key
+            // if yes, take the corresponding breakpoint value,
+            // otherwise take the size key (which is a number in that case)
+            const breakpointValue = BREAKPOINTS_MAX[breakpoint] || size as number;
 
-            return key;
+            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size as keyof ISizes];
+
+            return breakpointValue;
           })
-          .filter(Boolean)
+          .filter(breakpointValue => breakpointValue)
+          // @ts-ignore
           .sort((a, b) => (a > b ? 1 : -1))
           .map((breakpoint) => {
-            const viewWidth = Math.floor((mappedSizesBreakpoints[breakpoint] / breakpoint) * 100);
+            // @ts-ignore
+            const viewWidth = Math.floor((mappedSizesPerBreakpoints[breakpoint] / breakpoint) * 100);
 
             return `(max-width: ${breakpoint}px) ${viewWidth}vw`;
           })
@@ -262,8 +275,8 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
@@ -274,7 +287,7 @@
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

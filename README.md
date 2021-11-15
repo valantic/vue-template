@@ -1,6 +1,7 @@
 # vue-template
 
-This is a custom Vue template which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
+This is a custom Vue template written in TypeScript which is based on the idea of using BEM, CriticalCSS and a living 
+styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
 
 ## Introduction
 
@@ -26,6 +27,7 @@ You **MUST** also be familiar with the following tools:
 * [BEM](http://getbem.com/)
 * [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
+* [TypeScript](https://www.typescriptlang.org/)
 * [Git](https://git-scm.com/)
 * [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Jest](https://facebook.github.io/jest/)
@@ -49,7 +51,11 @@ You **MUST** install the following tools globally, before you can use this templ
 
 ### Prepare your IDE
 
-Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
+Please make sure your IDE is configured to apply 
+- [ESLint](https://eslint.org/docs/user-guide/integrations)
+- [TypeScript](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
+- [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins)
+- [.editorconfig](https://editorconfig.org/#download) linting/settings.
 
 **This template supports ES2020+. Please make sure your IDE is configured accordingly.**
 
@@ -343,7 +349,7 @@ For information about best practices read the following guides:
 * This project uses always `kebab-case` for [Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended), [Component name casing in JS/JSX](https://vuejs.org/v2/style-guide/#Component-name-casing-in-JS-JSX-strongly-recommended) and [Component name casing in templates ](https://vuejs.org/v2/style-guide/#Component-name-casing-in-templates-strongly-recommended).
 * We use BEM namespace `e-` for [base component names](Bhttps://vuejs.org/v2/style-guide/#Base-component-names-strongly-recommended).
 
-### Single file components
+### Single file components (SFC)
 
 We build Vue components as [single file components](https://vuejs.org/v2/guide/single-file-components.html). All production components are placed within `/app/components` (styleguide only components in `/app/styleguide/components`).
 
@@ -351,6 +357,167 @@ We build Vue components as [single file components](https://vuejs.org/v2/guide/s
 
 * Naming follows BEM block convention.
 * Naming MUST always be singular.
+
+### Vue and TypeScript
+
+To have the types working for Vue SFC, they need to be defined as
+
+```vue
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    
+  });
+</script>
+```
+
+To fully benefit from the power of TypeScript, define the types according to the following examples:
+
+#### Props
+
+For Primitive Types, TypeScript is able to detect the type based on the Vue Prop Type definition:
+
+```ts
+myProp: {
+  type: String,
+  required: true,
+},
+```
+
+When using arrays or objects without further typings, TypeScript treats a prop as `any[]` or `any`. To have proper
+typing, you can define your array / object props like this:
+
+```ts
+myArrayProp: {
+  type: Array as PropType<string[]>,
+  default: () => [],
+},
+```
+
+When defining a Prop with a validator, it's important to use the arrow function style to prevent random typescript errors:
+
+```ts
+color: {
+  type: String,
+  default: 'yellow',
+  validator: (value: string) => [
+    'red',
+    'yellow',
+    'blue',
+    'white',
+  ].includes(value),
+},
+```
+
+#### Setup
+
+When Using Code from another File (Composition based) or accessing Component Elements via ref, the code needs to be 
+defined in the Setup Method. The setup Method needs to have a proper Return Type by defining an Interface:
+
+```ts
+import { defineComponent, ref, Ref } from 'vue';
+import useFormStates, { IFormStates } from '@/compositions/form-states';
+
+interface ISetup extends IFormStates {
+  input: Ref<HTMLInputElement | null>;
+  slot: Ref<HTMLSpanElement | null>;
+}
+
+export default defineComponent({
+  setup(props): ISetup {
+    const input = ref();
+    const slot = ref();
+
+    return {
+      ...useFormStates(toRefs(props).state),
+      input,
+      slot,
+    };
+  },
+});
+```
+
+#### Data
+
+To fully benefit from TypeScript, please define your Data function with an Interface like this:
+
+```ts
+interface IData {
+  myDataProperty: string;
+}
+export default defineComponent({
+  data(): IData {
+	  return {
+      myDataProperty: 'Hello World',
+	  }
+  }
+});
+```
+
+#### Computed / Methods
+
+To prevent random TypeScript errors in your component, make sure, to always type your computed return types and method 
+signatures!
+
+#### Misc
+
+- Component general Instance: Use `ComponentPublicInstance` as Type if you don't know the type of the component
+- Component specific Instance: Use `Ref<InstanceType<typeof yourComponent>` to access a property of a ref being a component
+
+#### IDE Support
+
+To see Type errors in your editor, make sure to enable TypeScript Language Support in your IDE. For PHP Storm, you
+can follow [this Instructions](https://www.jetbrains.com/help/phpstorm/using-tslint-code-quality-tool.html).
+
+#### Vue-2 to Vue-3
+
+With the update to Vue-3 and TypeScript, some basic things have changed. The most notable are listed here:
+
+1. Use `export default defineComponent({ ... })` to define your component
+2. Global Component properties need to be defiend in the `shims-xxx` files
+3. Mixins have been replaced by Composition API Code
+4. Ref Access needs to be done via Setup Method
+   [read more](https://v3.vuejs.org/guide/composition-api-template-refs.html#template-refs)
+5. Event emit does only work to the direct parent, otherwise you need to use an emitting plugin
+   [read more](https://v3.vuejs.org/guide/migration/events-api.html#events-api)
+6. Emitting events with the same as a native event need to be defined in `emits` property
+   [read more](https://v3.vuejs.org/guide/migration/emits-option.html#emits-option)
+7. The directive lifecycle hooks have been adjusted
+   [read more](https://v3.vuejs.org/guide/migration/custom-directives.html#custom-directives)
+8. The way how `v-model` works, has been changed
+   [read more](https://v3.vuejs.org/guide/migration/v-model.html#v-model)
+9. The way how the `is` attribute works, has changed
+   [read more](https://v3.vuejs.org/api/special-attributes.html#is)
+10. As the current Vuex 4 is not really working well with TypeScript (a lot of boilerplate code is needed) and Vuex 5 will come
+    with a lot of changes, we decided to use a store wrapper until Vuex 5 is released
+    [read more](https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3)
+
+For more information about the migration, read the [migration page](https://v3.vuejs.org/guide/migration/introduction.html#introduction)
+
+####  Decisions and Issues
+
+During switching to Vue-3 and TypeScript, the following decisions had to be made:
+
+1. Build Chain: For typescript, one can either use `ts-loader` and output browser ready js directly or just use the `ts-loader`
+   to compile TypeScript to JavaScript and then continue with e.g. `babel-loader`. Although the latter uses two loaders and
+   is potentially slower, we decided to use it, to have browser list support for the end result
+2. Code Linting: We use ESLint with some additional rules needed for typescript. 
+   Our `.eslintrc` extends `@vue/typescript`, which is a vue optimized ESLint config
+   [read more](https://www.npmjs.com/package/@vue/eslint-config-typescript)
+   The alternative would be to use `plugin:@typescript-eslint/recommended`, which is stricter
+
+The following issues arisen during the switch and are still open:
+
+1. Styleguideist does not support Vue-3, see https://github.com/vue-styleguidist/vue-styleguidist/issues/997
+2. Some dependencies are only available in next / alpha version
+2. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good 
+   tools to do that at the moment, [read more](https://github.com/vuejs/vue-cli/issues/2950)
+   - Using native `tsc --noEmit` does not work for TypeScript code in Vue `sfc` files
+   - The following 3rd Party tools where tested but where not working well
+     - https://github.com/zhanba/vue-tslint => Works only with Vue-2
+     - https://github.com/johnsoncodehk/vue-tsc => Does not seem to respect the tsconfig from the project
+     - https://github.com/Yuyz0112/vue-type-check => Does not recognize component properties
 
 ## Vuex
 
@@ -380,13 +547,13 @@ By default, actions, mutations and getters inside modules are still registered u
 ```javascript
 // store/modules/cart/index.js
 
-export default {
+export default defineComponent({
   namespaced: true,
   state: {},
   getters: {}, // e.g. -> getters['cart/product']
   mutations: {},
   actions: {},
-};
+});
 ```
 
 As the application grows it's possible to even split the module again e.g. into a structure like this:
@@ -549,7 +716,7 @@ If you need to use translations outside of a component or Vue instance, where th
 ```javascript
 import { i18n } from '@/setup/i18n';
  
-const translation = i18n.t('c-add-to-cart.notLoggedInTitle');
+const translation = i18n.global.t('c-add-to-cart.notLoggedInTitle');
 ```
 
 ## Blueprints
@@ -578,7 +745,7 @@ In webpack this separate parts of the application are called `chunks`. You can f
 
 ### Critical CSS
 
-Delivering critical CSS to the browser trough the HTML head can drastically decrease the time until first render. As long as the HTML file itself is gziped still below 14kb. Therefore we decided to ad a manual possibility to define critical CSS styles, which will be extracted in a separate `*.critical.css` file during the build.
+Delivering critical CSS to the browser trough the HTML head can drastically decrease the time until first render. As long as the HTML file itself is gziped still below 14kb. Therefore we decided to add a manual possibility to define critical CSS styles, which will be extracted in a separate `*.critical.css` file during the build.
 
 You can read more about critical CSS [here](https://css-tricks.com/annotating-critical-css/) and the tool we're using [here](https://github.com/mrnocreativity/postcss-critical-split)
 
@@ -595,7 +762,7 @@ Theme styles are delivered seperatly in a *.css file. In this files are the glob
 
 Usage example:
 ```scss
-  .class {
+  .c-class {
     color: $color-primary--1;
     background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
     background-color: rgba($color-primary--1--rgb, 0.5);
@@ -619,6 +786,23 @@ You can share the mock data from the demo pages with the vue-styleguidist by imp
 ### Path alias
 
 Webpack supports to use an [alias](https://webpack.js.org/loaders/css-loader/#alias) for paths. Thanks to this feature, you don't need to define relative paths when importing one JavaScript file into an other. The `@` alias stands for the application root (`/app`). So for example you can just write `import options from '@/setup/options'` in any file to import the `options.js` file from the `setup` folder without caring about relative path resolving.
+
+## Build chain
+
+The build chain uses a combined solution of TypeScript and Babel:
+
+1. The webpack ts-loader shows TS errors and compiles the TypeScript to Javascript files
+2. The webpack babel-loader compiles the Javascript files to the final outpu based on the babel-preset and browserlist
+
+The reasons why we choose this setup are:
+
+1. Using just the `ts-loader` can only use an esXXXX Target, but not a browser / feature depending solution like browserlist
+2. Using just the `babel-loader` with the `@babel/preset-typescript`, one does not get typescript errors in the command line without starting a second `tsc` command
+
+### tsconfig Target
+
+At the moment, we are using `es2019` as TypeScript build target. The reason is, that `esNext` / `es2020` are not transpiling
+`optional-chaining` and `nullish-coalescing` and webpack 4 cannot handle them
 
 ## Node.js and NPM
 
@@ -657,6 +841,10 @@ PostCSS configuration. PostCSS is used for **browser prefixing**, **minification
 ### .stylelintrc.js
 
 Stylelint setup for the current project.
+
+### tsconfig.json
+
+TypeScript configuration for the current project.
 
 ## Known issues
 
@@ -741,18 +929,22 @@ Be sure that you add "cross-env" at the start of the script like:
 
 package.json:
 ```json
-"scripts": {
-    "build": "cross-env NODE_ENV=production webpack --mode production --progress",
-  },
+{
+  "scripts": {
+      "build": "cross-env NODE_ENV=production webpack --mode production --progress"
+    }
+}
 ```
 
 ## Roadmap
 
+* [ ] Make styleguideist work again, as soon as Vue 3 is supported, 
+  see https://github.com/vue-styleguidist/vue-styleguidist/issues/997
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
 * [ ] Extend eslint-plugin-vue rules for Vue 3.
-
+  
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)

@@ -4,19 +4,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
   /**
-   * TODO: add description for component styleguide.
-   */
-  export default {
+ * TODO: add description for component styleguide.
+ */
+
+  import { defineComponent } from 'vue';
+
+  // interface IData {
+    // TODO add properties or remove
+  // }
+
+  export default defineComponent({
     name: 'c-component', // TODO: update name according to filename
 
     // components: {},
-    // mixins: [],
 
     // props: {},
-    // data() {
+    // data(): IData {
     //   return {};
     // },
 
@@ -31,12 +37,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -1,26 +1,26 @@
 <template>
   <div id="app">
-    <header is="c-header" />
+    <header is="vue:c-header" />
     <router-view />
-    <footer is="c-footer" />
+    <footer is="vue:c-footer" />
     <s-navigation :routes="routes" nav-position="bottom-right" />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
-  import { mapMutations } from 'vuex';
-  import sNavigation from '@/styleguide/components/s-navigation';
-  import styleguideRoutes from '@/setup/styleguide.routes';
+  import sNavigation from '@/styleguide/components/s-navigation.vue';
+  import styleguideRoutes, { IRoute } from '@/setup/styleguide.routes';
+  import store from '@/store';
 
-  export default {
+  export default defineComponent({
     name: 'app',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sNavigation,
     },
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -30,10 +30,8 @@
     computed: {
       /**
        * An Array of available routes.
-       *
-       * @returns {Array.<Object>}
        */
-      routes() {
+      routes(): IRoute[] {
         return styleguideRoutes;
       }
     },
@@ -49,14 +47,10 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
-      ...mapMutations('notification', [
-        'pushNotification',
-      ]),
-
       /**
        * Gets localStorage messages and pushes them in the notification store to display.
        */
@@ -65,7 +59,7 @@
         const parsedNotification = notification ? JSON.parse(notification) : null;
 
         if (parsedNotification) {
-          this.pushNotification(parsedNotification);
+          store.commit.notification.pushNotification(parsedNotification);
 
           // Clears the localStorage notifications.
           localStorage.removeItem('notification');
@@ -73,7 +67,7 @@
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

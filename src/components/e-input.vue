@@ -1,6 +1,6 @@
 <template>
   <span :class="b(modifiers)">
-    <input v-if="uncontrolled"
+    <input v-model="internalValue"
            ref="input"
            :autocomplete="autocomplete"
            :class="b('field')"
@@ -12,24 +12,8 @@
            @focus="onFocus"
            @input="onInput"
            @keyup.enter="onEnterKeyUp"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
-    >
-    <input v-else
-           ref="input"
-           :autocomplete="autocomplete"
-           :class="b('field')"
-           :disabled="disabled"
-           :name="name"
-           :value="standalone ? internalValue : value"
-           :title="title"
-           v-bind="$attrs"
-           @blur="onBlur"
-           @focus="onFocus"
-           @input="onInput"
-           @keyup.enter="onEnterKeyUp"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
+           @mouseenter="hover = true"
+           @mouseleave="hover = false"
     >
 
     <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
@@ -37,8 +21,8 @@
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
       </span>
-      <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
-      <e-icon v-if="!hasDefaultState && !hasFocus"
+      <span v-if="!hasDefaultState && !focus" :class="b('icon-splitter')"></span>
+      <e-icon v-if="!hasDefaultState && !focus"
               :class="b('state-icon')"
               :icon="stateIcon" />
     </span>
@@ -49,34 +33,51 @@
   </span>
 </template>
 
-<script>
+<script lang="ts">
+  import {
+    Ref,
+    defineComponent,
+    ref,
+    toRefs
+  } from 'vue';
   import propScale from '@/helpers/prop.scale';
-  import cFormNotification from '@/components/c-form-notification';
-  import formStates from '@/mixins/form-states';
+  import cFormNotification from '@/components/c-form-notification.vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {
+    input: Ref<HTMLInputElement | null>;
+    slot: Ref<HTMLSpanElement | null>;
+  }
+
+  interface IData {
+    internalValue: string;
+  }
 
   /**
    * Input form component
    *
    * **WARNING: uses 'v-html' for the 'notification'. Make sure, that the source for this data is trustworthy.**
    */
-  export default {
+  export default defineComponent({
     name: 'e-input',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cFormNotification
     },
-    mixins: [formStates],
+
     inheritAttrs: false,
 
     props: {
+      ...withProps(),
 
       /**
        * Value passed by v-model
        */
-      value: {
+      modelValue: {
         default: null,
-        type: [String, Number],
+        type: String,
       },
 
       /**
@@ -106,7 +107,7 @@
       },
 
       /**
-       * Defines the notification content in a state container bellow the input field
+       * Defines the notification content in a state container below the input field
        */
       notification: {
         type: String,
@@ -141,50 +142,38 @@
         type: Boolean,
         default: false,
       },
-
-      /**
-       * Allows to use the input as standalone.
-       *
-       * If 'true'
-       * - $props.value will be used to set initial value.
-       * - the component is not reactive to $props.value changes.
-       */
-      standalone: {
-        type: Boolean,
-        default: false
-      },
-
-      /**
-       * Lets input handle value itself. This is used as in some cases the IE11 couldn't handle new input values
-       * (e.g. skipped random keystrokes in searchSuggestion field).
-       */
-      uncontrolled: {
-        type: Boolean,
-        default: false
-      },
     },
 
-    data() {
+    emits: ['update:modelValue', 'focus', 'blur', 'enter'],
+
+    setup(props): ISetup {
+      const input = ref();
+      const slot = ref();
+
       return {
-        internalValue: this.value
+        ...useFormStates(toRefs(props).state),
+        input,
+        slot,
+      };
+    },
+
+    data(): IData {
+      return {
+        internalValue: this.modelValue
       };
     },
     computed: {
       /**
        * Returns a flag, if field notifications should be displayed.
-       *
-       * @returns {Boolean}
        */
-      showNotification() {
-        return this.state && this.state !== 'default' && this.notification && this.hasFocus;
+      showNotification(): boolean {
+        return !!(this.state && this.state !== 'default' && this.notification && this.focus);
       },
 
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): IModifiers {
         const {
           border,
           noNativeControl,
@@ -193,8 +182,8 @@
 
         return {
           ...this.stateModifiers,
-          notification: notification && this.hasFocus,
-          type: this.$attrs.type || 'text',
+          notification: notification && this.focus,
+          type: this.$attrs.type !== null || 'text',
           border,
           noNativeControl,
         };
@@ -214,10 +203,6 @@
       setTimeout(this.setSlotSpacings, 200);
 
       window.addEventListener('resizeend', this.setSlotSpacings);
-
-      if (this.uncontrolled && this.$refs.input) {
-        this.$refs.input.value = this.standalone ? this.internalValue : this.value;
-      }
     },
     // beforeUpdate() {},
     updated() {
@@ -225,39 +210,35 @@
     },
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    destroyed() {
+    // beforeUnmount() {},
+    unmounted() {
       window.removeEventListener('resizeend', this.setSlotSpacings);
     },
 
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
-      onInput(event) {
-        this.internalValue = event.target.value;
+      onInput(event: Event) {
+        const target = event.target as HTMLInputElement;
+
+        this.internalValue = target.value;
 
         /**
          * input event fires on input
-         *
-         * @event input
          */
-        this.$emit('input', event.target.value);
+        this.$emit('update:modelValue', target.value);
       },
 
       /**
        * Emits focus to parent and wrapper component.
-       * Update "hasFocus" state.
-       *
-       * @param {Event} event - The DOM event.
+       * Update "focus" state.
        */
-      onFocus(event) {
-        this.hasFocus = true;
+      onFocus() {
+        this.focus = true;
 
         if (this.selectOnFocus) {
-          this.selectValue(event);
+          this.selectValue();
         }
 
         /**
@@ -270,10 +251,10 @@
 
       /**
        * Emits blur to parent and wrapper component.
-       * Update "hasFocus" state.
+       * Update "focus" state.
        */
       onBlur() {
-        this.hasFocus = false;
+        this.focus = false;
 
         /**
          * blur event fires on blur
@@ -299,10 +280,12 @@
        * Calculates the width of the slot content and sets it as a padding-right to the input-field.
        */
       setSlotSpacings() {
-        if (this.$refs.slot) {
-          const slotWidth = this.$refs.slot.clientWidth;
+        if (this.slot) {
+          const slotWidth = this.slot.clientWidth;
 
-          this.$refs.input.style.paddingRight = `${slotWidth + 10}px`;
+          if (this.input) {
+            this.input.style.paddingRight = `${slotWidth + 10}px`;
+          }
         }
       },
 
@@ -310,21 +293,23 @@
        * Selects the value of the input field.
        */
       selectValue() {
-        if (this.$props.value) {
+        if (this.modelValue) {
           // Needed to select a number value on Chrome.
-          this.$refs.input.select();
+          this.input?.select();
 
           // Timeout is needed that it works on all browsers (without there are problems on Safari, Edge, iOS)
           if ('ontouchstart' in window) {
             setTimeout(() => {
-              this.$refs.input.setSelectionRange(0, this.$props.value.length);
+              const selectionRange = typeof this.modelValue === 'string' ? this.modelValue.length : this.modelValue;
+
+              this.input?.setSelectionRange(0, selectionRange);
             });
           }
         }
       },
     }
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

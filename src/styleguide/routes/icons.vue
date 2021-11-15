@@ -4,15 +4,15 @@
   </l-default>
 </template>
 
-<script>
-  import sIconFinder from '@/styleguide/components/s-icon-finder';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import sIconFinder from '@/styleguide/components/s-icon-finder.vue';
 
-  export default {
+  export default defineComponent({
     name: 'icons',
     components: {
       sIconFinder
     },
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -30,12 +30,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

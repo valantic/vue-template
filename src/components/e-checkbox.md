@@ -16,11 +16,11 @@ Always use **v-model** to bind value to form elements!
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       checked: false,
     })
-  };
+  });
 </script>
 ```
 
@@ -48,7 +48,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       // The list of items we need to do operation on
       items: [
@@ -60,7 +60,7 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
       // The list of IDs of checked items
       checked: ['checkbox2']
     })
-  };
+  });
 </script>
 ```
 
@@ -75,11 +75,11 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       checked: true,
     })
-  };
+  });
 </script>
 ```
 
@@ -93,12 +93,12 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       checked: true,
       unchecked: false,
     })
-  };
+  });
 </script>
 ```
 
@@ -112,10 +112,10 @@ Use Array instead of Boolean for multiple checkboxes, which share the same v-mod
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     data: () => ({
       checked: true,
     })
-  };
+  });
 </script>
 ```

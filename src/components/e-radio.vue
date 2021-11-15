@@ -1,7 +1,7 @@
 <template>
   <label :class="b(modifiers)"
-         @mouseenter="hasHover = true"
-         @mouseleave="hasHover = false"
+         @mouseenter="hover = true"
+         @mouseleave="hover = false"
   >
     <input v-model="internalValue"
            v-bind="$attrs"
@@ -18,36 +18,32 @@
   </label>
 </template>
 
-<script>
-  import formStates from '@/mixins/form-states';
+<script lang="ts">
+  import { defineComponent, toRefs } from 'vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
    *
    * The displayed name can either be provided by the property `displayName` or as a slot.
    */
-  export default {
+  export default defineComponent({
     name: 'e-radio',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
     inheritAttrs: false,
 
-    model: {
-      /**
-       * Changes v-model behavior and use 'selected' instead of 'value' as prop.
-       * Avoids conflict with default value attribute.
-       */
-      prop: 'selected',
-      event: 'change',
-    },
-
     props: {
+      ...withProps(),
+
       /**
-       * Adds value attribute.
+       * The model value to be used for v-model.
        */
-      value: {
+      modelValue: {
         required: true,
         type: [String, Number],
       },
@@ -61,13 +57,22 @@
       },
 
       /**
-       * Adds selected attribute to be used by v-model.
+       * Adds value attribute.
        */
-      selected: {
-        default: '',
-        type: [String, Number],
-      }
+      value: {
+        type: [String, Number, Boolean],
+        required: true,
+      },
     },
+
+    emits: ['update:modelValue', 'change'],
+
+    setup(props): ISetup {
+      return {
+        ...useFormStates(toRefs(props).state),
+      };
+    },
+
     // data() {
     //   return {};
     // },
@@ -75,30 +80,23 @@
     computed: {
       /**
        * Getter/setter for the internal value.
-       *
-       * @returns {Boolean}
        */
       internalValue: {
-        get() {
-          return this.selected;
+        get(): string | number {
+          return this.modelValue;
         },
-        set(value) {
+        set(value: string): void {
           /**
            * Fired on select of radio button.
-           *
-           * @event change
-           * @type {String}
            */
-          this.$emit('change', value);
+          this.$emit('update:modelValue', value);
         }
       },
 
       /**
        * Returns a configuration Object for modifier classes.
-       *
-       * @returns {Object}
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
@@ -107,10 +105,8 @@
 
       /**
        * Returns all modifiers for the field class.
-       *
-       * @returns {Object}
        */
-      fieldModifiers() {
+      fieldModifiers(): IModifiers {
         return {
           selected: this.internalValue === this.value,
         };
@@ -126,27 +122,24 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
-      onChange(event) {
+      onChange(event: Event) {
+        const radioButton = event.currentTarget as HTMLSelectElement;
+
         /**
          * Emits change event.
-         *
-         * @event change
-         * @type {String}
          */
-        this.$emit('change', event.target.value);
+        this.$emit('change', radioButton.value);
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
@@ -200,6 +193,7 @@
       &::after {
         transition: transform 0.1s ease-in-out;
         background: variables.$color-grayscale--0;
+        border: 1px solid transparent;
         opacity: 0;
         transform: scale(0);
       }

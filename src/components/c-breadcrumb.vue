@@ -14,18 +14,19 @@
   </div>
 </template>
 
-<script>
-  import { mapGetters } from 'vuex';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import store from '@/store';
+  import { IBreadcrumbItem } from '@/store/modules/breadcrumb';
 
   /**
    * Renders a list of breadcrumbs items from the store module.
    */
-  export default {
+  export default defineComponent({
     name: 'c-breadcrumb',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -33,9 +34,12 @@
     // },
 
     computed: {
-      ...mapGetters('breadcrumb', [
-        'getItems',
-      ]),
+      /**
+       * Returns an Array of breadcrumb items.
+       */
+      getItems(): readonly IBreadcrumbItem[] {
+        return store.getters.breadcrumb.getItems;
+      },
     },
     // watch: {},
 
@@ -47,12 +51,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -1,7 +1,7 @@
 <template>
   <label :class="b(modifiers)"
-         @mouseenter="hasHover = true"
-         @mouseleave="hasHover = false">
+         @mouseenter="hover = true"
+         @mouseleave="hover = false">
     <input
       v-model="internalValue"
       v-bind="$attrs"
@@ -19,40 +19,36 @@
   </label>
 </template>
 
-<script>
-  import formStates from '@/mixins/form-states';
+<script lang="ts">
+  import { defineComponent, PropType, toRefs } from 'vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Checkbox component for form elements.
    * Can be used as single element with a Boolean value or multiple checkboxes with an Array.
    */
-  export default {
+  export default defineComponent({
     name: 'e-checkbox',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    mixins: [formStates],
     inheritAttrs: false,
 
-    model: {
-      /**
-       * Changes v-model behavior and use 'checked' instead of 'value' as prop.
-       * Avoids conflict with default value attribute.
-       */
-      prop: 'checked',
-      event: 'change',
-    },
-
     props: {
+      ...withProps(),
+
       /**
-       * Adds checked attribute to prevent type error
+       * The model value to be used for v-model.
        */
-      checked: {
-        type: [Boolean, Array],
+      modelValue: {
+        type: [Boolean, Array] as PropType<boolean | string[]>,
         required: true,
       },
 
       /**
-       * Adds name attribute
+       * Adds name attribute.
        */
       name: {
         type: String,
@@ -60,12 +56,20 @@
       },
 
       /**
-       * Adds value attribute
+       * Adds value attribute.
        */
       value: {
         type: [String, Number, Boolean],
         required: true,
       },
+    },
+
+    emits: ['update:modelValue', 'change', 'focus', 'blur'],
+
+    setup(props): ISetup {
+      return {
+        ...useFormStates(toRefs(props).state),
+      };
     },
 
     // data() {
@@ -75,10 +79,8 @@
     computed: {
       /**
        * Returns a configuration Object for modifier classes.
-       *
-       * @returns {Object}
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
@@ -87,24 +89,29 @@
 
       /**
        * Sets value of component model to parent model
-       *
-       * @returns  {Boolean|Array}   Status of the checkbox
        */
       internalValue: {
-        get() {
-          return this.checked;
+        get(): boolean | string[] {
+          return this.modelValue;
         },
-        set(value) {
-          this.isChecked = value;
-
+        set(value: boolean | string[]) {
           /**
            * Emits checkbox value e.g. true/false or value
-           *
-           * @event change
-           * @type {Boolean|Array}
            */
+          this.$emit('update:modelValue', value);
+
+          // event needed for the multiselect
           this.$emit('change', value);
         },
+      },
+
+      /**
+       * Evaluates if the checkbox is currently selected.
+       */
+      isChecked() {
+        return Array.isArray(this.value)
+          ? this.value.includes(this.modelValue)
+          : this.value;
       },
     },
     // watch: {},
@@ -117,8 +124,8 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
@@ -126,13 +133,10 @@
        * Update "hasFocus" state.
        */
       onFocus() {
-        this.hasFocus = true;
+        this.focus = true;
 
         /**
          * Focus event
-         *
-         * @event focus
-         * @type {String}
          */
         this.$emit('focus');
       },
@@ -142,19 +146,16 @@
        * Update "hasFocus" state.
        */
       onBlur() {
-        this.hasFocus = false;
+        this.focus = false;
 
         /**
          * Blur event.
-         *
-         * @event blur
-         * @type {String}
          */
         this.$emit('blur');
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
@@ -206,6 +207,7 @@
       &::after {
         transition: transform 0.1s ease-in-out;
         background: variables.$color-grayscale--0;
+        border: 1px solid transparent;
         opacity: 0;
         transform: scale(0);
       }

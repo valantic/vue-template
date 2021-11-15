@@ -3,7 +3,7 @@ The styleguide will automatically create a status label for each component entry
 ### Component status example
 
 ```javascript
-export default {
+export default defineComponent({
   name: 'c-component',
   status: 1,
   // ...

@@ -10,17 +10,18 @@
   </div>
 </template>
 
-<script>
-  import cNotificationContainer from '@/components/c-notification-container';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import cNotificationContainer from '@/components/c-notification-container.vue';
+  import store from '@/store';
 
-  export default {
+  export default defineComponent({
     name: 'l-default',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cNotificationContainer,
     },
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -40,11 +41,10 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
-
       /**
        * Gets localStorage messages and pushes them in the notification store to display.
        */
@@ -55,7 +55,7 @@
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
             messagesParsed.forEach((message) => {
-              this.pushNotification({ message });
+              store.commit.notification.pushNotification({ message });
             });
 
             // Clears the localStorage notifications.
@@ -67,7 +67,7 @@
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

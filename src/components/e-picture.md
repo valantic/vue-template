@@ -13,7 +13,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       fallback: 'https://via.placeholder.com/180x150',
@@ -24,7 +24,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
         '(min-width: 480px)': ['https://via.placeholder.com/180x150/000000 1x', 'https://via.placeholder.com/360x300/000000 2x'],
       },
     })
-  };
+  });
 </script>
 ```
 
@@ -45,7 +45,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
 <script>
   import image from '@/styleguide/mock-data/data-object/srcset-image';
   
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       image,
@@ -56,7 +56,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
         md: 800,
       },
     })
-  };
+  });
 </script>
 ```
 
@@ -86,7 +86,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       fallback: 'https://via.placeholder.com/180x150/0000ff',
@@ -94,7 +94,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
         '(min-width: 1440px)': ['https://via.placeholder.com/200 1x', 'https://via.placeholder.com/400 2x'],
       },
     })
-  };
+  });
 </script>
 ```
 
@@ -114,7 +114,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
 <script>
   import image from '@/styleguide/mock-data/data-object/srcset-image';
 
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       image,
@@ -124,7 +124,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
         md: 500,
       },
     })
-  };
+  });
 </script>
 ```
 
@@ -146,7 +146,7 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
 <script>
   import image from '@/styleguide/mock-data/data-object/srcset-image';
 
-  export default {
+  export default defineComponent({
     name: 'example',
     data: () => ({
       image,
@@ -156,6 +156,6 @@ Use `(min-width: ??px)` in descending order as key. `srcset` can be String or Ar
           md: 500,
         },
     })
-  };
+  });
 </script>
 ```

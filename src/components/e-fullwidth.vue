@@ -5,35 +5,43 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent, StyleValue } from 'vue';
   import scrollbarWidth from '@/helpers/scrollbar-width';
+
+  type ResizeObserverCallback = () => void;
+
+  interface IData {
+    scrollbarWidth: number;
+    resizeObserver: ResizeObserver;
+    resizeTimeout: ReturnType<typeof setTimeout> | null;
+  }
 
   /**
    * Allows to display a full width element inside a container with limited width.
    */
-  export default {
+  export default defineComponent({
     name: 'e-fullwidth',
 
     // components: {},
-    // mixins: [],
 
     // props: {},
-    data() {
+    data(): IData {
       return {
         /**
-         * @type {Number} Holds the width of the page scrollbar.
+         * Holds the width of the page scrollbar.
          */
         scrollbarWidth: scrollbarWidth(),
 
         /**
-         * @type {Object} If available initializes a resize observer. Compared to the resize event, the observer
+         * If available initializes a resize observer. Compared to the resize event, the observer
          * will also be triggered, if the height of the page changes, and the scrollbar becomes visible.
          * The resize event was only triggered, when the user manually changes the screen size.
          */
-        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth),
+        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth as ResizeObserverCallback),
 
         /**
-         * @type {Number} Holds the ID of the currently running resize timeout.
+         * Holds the ID of the currently running resize timeout.
          */
         resizeTimeout: null,
       };
@@ -42,10 +50,8 @@
     computed: {
       /**
        * Calculates a dynamic width style, since the scrollbar needs to be taken into account.
-       *
-       * @returns {Object}
        */
-      style() {
+      style(): StyleValue | undefined {
         if (this.scrollbarWidth) {
           const margin = `calc((50vw - ${this.scrollbarWidth / 2}px) * -1)`;
 
@@ -56,7 +62,8 @@
           };
         }
 
-        return null;
+        // eslint-disable-next-line no-undefined
+        return undefined;
       },
     },
     // watch: {},
@@ -71,7 +78,7 @@
       }
     },
     mounted() {
-      if (!this.resizeObserver) { // IE11 fallback.
+      if (!this.resizeObserver) {
         this.updateScrollbarWidth();
       }
     },
@@ -79,21 +86,23 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.resizeObserver) {
         this.resizeObserver.unobserve(window.document.body);
-      } else { // IE11 fallback.
+      } else {
         window.removeEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
-    // destroyed() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Recalculates the scrollbar width.
        */
       updateScrollbarWidth() {
-        clearTimeout(this.resizeTimeout);
+        if (this.resizeTimeout) {
+          clearTimeout(this.resizeTimeout);
+        }
 
         this.resizeTimeout = setTimeout(() => {
           this.scrollbarWidth = scrollbarWidth();
@@ -102,7 +111,7 @@
     },
 
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

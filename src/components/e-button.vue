@@ -24,9 +24,29 @@
   </component>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
-  import eProgress from './e-progress';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eProgress from './e-progress.vue';
+
+  interface IAttributes {
+    role: string | null;
+    disabled: boolean;
+    [key: string]: string | boolean | null;
+  }
+
+  interface IElementDimensions {
+    width: string;
+    height: string;
+  }
+
+  interface IData {
+    hasHover: boolean;
+    isActive: boolean;
+    hasFocus: boolean;
+    hasTouch: boolean;
+  }
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
@@ -36,14 +56,13 @@
    *
    * [You can also define inherited attributes for `<a>`](https://developer.mozilla.org/de/docs/Web/HTML/Element/a#Attribute)
    */
-  export default {
+  export default defineComponent({
     name: 'e-button',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       eProgress
     },
-    // mixins: [],
 
     props: {
       /**
@@ -54,12 +73,10 @@
       width: {
         type: String,
         default: null,
-        validator(value) {
-          return [
-            'full',
-            'auto',
-          ].includes(value);
-        },
+        validator: (value: string) => [
+          'full',
+          'auto',
+        ].includes(value),
       },
 
       /**
@@ -139,20 +156,22 @@
       },
     },
 
-    data() {
+    emits: ['click'],
+
+    data(): IData {
       return {
         /**
-         * @type {Boolean} Internal flag to determine hover state.
+         * Internal flag to determine hover state.
          */
         hasHover: this.hover,
 
         /**
-         * @type {Boolean} Internal flag to determine active state.
+         * Internal flag to determine active state.
          */
         isActive: this.active,
 
         /**
-         * @type {Boolean} Internal flag to determine focus state.
+         * Internal flag to determine focus state.
          */
         hasFocus: this.focus,
 
@@ -166,10 +185,8 @@
     computed: {
       /**
        * Returns an Object of class modifiers.
-       *
-       * @returns {Object}
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           width: this.width,
           spacing: this.spacing,
@@ -186,10 +203,8 @@
 
       /**
        * Returns an Object of attributes.
-       *
-       * @returns {Object}
        */
-      attributes() {
+      attributes(): IAttributes {
         return {
           role: this.$attrs.href ? 'button' : null, // Fallback
           ...this.$attrs,
@@ -199,10 +214,8 @@
 
       /**
        * Returns inline styles to keep dimensions during progress state.
-       *
-       * @returns {Object}
        */
-      style() {
+      style(): IElementDimensions | null {
         return this.progress && this.width !== 'full'
           ? this.getElementDimensions()
           : null;
@@ -210,10 +223,8 @@
 
       /**
        * Gets the type of the component (DOM element).
-       *
-       * @returns {String}
        */
-      type() {
+      type(): string {
         return this.element || (this.$attrs.href ? 'a' : 'button');
       },
     },
@@ -227,8 +238,8 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
@@ -277,28 +288,20 @@
 
       /**
        * Click event handler.
-       *
-       * @param {Event} event - The click event instance.
        */
-      onClick(event) {
+      onClick(event: Event): void {
         this.$el.blur();
 
         /**
          * Click event
-         *
-         * @event click
-         *
-         * @property {Event} event - The original DOM event.
          */
         this.$emit('click', event);
       },
 
       /**
        * Returns the current width and height of the button.
-       *
-       * @returns {Object}
        */
-      getElementDimensions() {
+      getElementDimensions(): IElementDimensions | null {
         const element = this.$el;
 
         return element
@@ -306,7 +309,7 @@
           : null;
       },
     },
-  };
+  });
 </script>
 
 <style lang="scss">

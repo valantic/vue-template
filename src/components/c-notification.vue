@@ -9,39 +9,40 @@
   </div>
 </template>
 
-<script>
-  import { mapMutations } from 'vuex';
+<script lang="ts">
+  import { defineComponent, PropType } from 'vue';
+  import { INotification } from '@/types/c-notification';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import store from '@/store';
+
+  interface IData {
+    expireDelay: number;
+  }
 
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
    */
-  export default {
+  export default defineComponent({
     name: 'c-notification',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
     // components: {},
-    // mixins: [],
 
     props: {
       /**
        * The notification object consisting of the following properties:
-       *
-       * @param {String} notification.message - The message to display.
-       * @param {String} notification.type - Type of the notification.
-       * @param {Number} notification.id - Unique id of the notification.
-       * @param {Boolean} notification.expire - Defines if the notification should auto expire.
-       *
        */
       notification: {
-        type: Object,
+        type: Object as PropType<INotification>,
         required: true,
       },
     },
-    data() {
+
+    data(): IData {
       return {
         /**
-         * @type {Number} Defines the delay a notification expires in Milliseconds.
+         * Defines the delay a notification expires in Milliseconds.
          */
         expireDelay: 3000,
       };
@@ -50,10 +51,8 @@
     computed: {
       /**
        * Returns all modifiers for the component main class.
-       *
-       * @returns {Object}
        */
-      componentModifiers() {
+      componentModifiers(): IModifiers {
         return {
           type: this.notification.type,
         };
@@ -77,23 +76,19 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
-      ...mapMutations('notification', [
-        'popNotification',
-      ]),
-
       /**
        * Removes current notification from stack.
        */
       close() {
-        this.popNotification(this.notification.id);
+        store.commit.notification.popNotification(this.notification.id);
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

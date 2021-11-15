@@ -9,19 +9,19 @@
   </fieldset>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
 
   /**
    *
    * Component to render a fieldset with or without legend.
    *
    */
-  export default {
+  export default defineComponent({
     name: 'e-fieldset',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -48,12 +48,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

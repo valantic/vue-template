@@ -10,21 +10,25 @@
               @blur="onBlur"
               @input="onInput">
     </textarea>
-    <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-wrapper')">
+    <span v-if="!hasDefaultState && !focus" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
               :icon="stateIcon" />
     </span>
-    <div v-if="notification && hasFocus" :class="b('notification')">
+    <div v-if="notification && focus" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
     </div>
   </span>
 </template>
 
-<script>
-  import cFormNotification from '@/components/c-form-notification';
-  import formStates from '@/mixins/form-states';
+<script lang="ts">
+  import { defineComponent, toRefs } from 'vue';
+  import cFormNotification from '@/components/c-form-notification.vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -32,17 +36,18 @@
    *
    * **WARNING: uses 'v-html' for the 'notification'. Make sure, that the source for this data is trustworthy.**
    */
-  export default {
+  export default defineComponent({
     name: 'e-textarea',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cFormNotification,
     },
-    mixins: [formStates],
     inheritAttrs: false,
 
     props: {
+      ...withProps(),
+
       /**
        * Value passed by v-model
        */
@@ -83,6 +88,15 @@
         default: false,
       }
     },
+
+    emits: ['input', 'focus', 'blur'],
+
+    setup(props): ISetup {
+      return {
+        ...useFormStates(toRefs(props).state),
+      };
+    },
+
     // data() {
     //   return {};
     // },
@@ -91,22 +105,18 @@
 
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-          notification: Boolean(this.$props.notification && this.hasFocus),
+          notification: !!(this.notification && this.focus),
         };
       },
 
       /**
        * Returns all modifiers for the field class.
-       *
-       * @returns {Object}
        */
-      fieldModifiers() {
+      fieldModifiers(): IModifiers {
         return {
           isResizable: this.isResizable,
         };
@@ -122,17 +132,17 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
-      onInput(event) {
-        this.$emit('input', event.target.value);
+      onInput(event: Event) {
+        const textArea = event.currentTarget as HTMLTextAreaElement;
+
+        this.$emit('input', textArea.value);
       },
 
       /**
@@ -140,7 +150,7 @@
        * Updates "hasFocus" state.
        */
       onFocus() {
-        this.hasFocus = true;
+        this.focus = true;
 
         this.$emit('focus');
       },
@@ -150,13 +160,13 @@
        * Updates "hasFocus" state.
        */
       onBlur() {
-        this.hasFocus = false;
+        this.focus = false;
 
         this.$emit('blur');
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

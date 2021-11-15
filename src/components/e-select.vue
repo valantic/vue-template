@@ -1,6 +1,6 @@
 <template>
   <span :class="b(modifiers)">
-    <select :value="value"
+    <select :value="internalValue"
             :class="b('select')"
             :disabled="disabled || progress"
             v-bind="$attrs"
@@ -17,7 +17,7 @@
       <option v-for="option in options"
               :key="`${option[valueField]}`"
               :value="option[valueField]"
-              :selected="option[valueField] === value">
+              :selected="option[valueField] === internalValue">
         {{ option[labelField] }}
       </option>
     </select>
@@ -28,28 +28,37 @@
   </span>
 </template>
 
-<script>
-  import { i18n } from '@/setup/i18n';
-  import formStates from '@/mixins/form-states';
+<script lang="ts">
+  import { defineComponent, toRefs } from 'vue';
+  import i18n from '@/setup/i18n';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
+
+  interface IData {
+    internalValue: string;
+  }
 
   /**
    * Renders a styled select element. Options can be passed with the `options` property.
    */
-  export default {
+  export default defineComponent({
     name: 'e-select',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
     inheritAttrs: false,
 
     props: {
+      ...withProps(),
+
       /**
-       * Value for vue model binding.
+       * Value passed by v-model
        */
-      value: {
+      modelValue: {
         default: null,
-        type: [String, Number],
+        type: String,
       },
 
       /**
@@ -68,10 +77,8 @@
        */
       placeholder: {
         type: [String, Boolean],
-        default: i18n.t('e-select.chooseOption'),
-        validator(value) {
-          return typeof value === 'string' || value === false;
-        },
+        default: i18n.global.t('e-select.chooseOption'),
+        validator: (value: string | boolean) => typeof value === 'string' || !value,
       },
 
       /**
@@ -106,17 +113,26 @@
         default: 'label',
       },
     },
-    // data() {
-    //   return {};
-    // },
+
+    emits: ['update:modelValue'],
+
+    setup(props): ISetup {
+      return {
+        ...useFormStates(toRefs(props).state),
+      };
+    },
+
+    data(): IData {
+      return {
+        internalValue: this.modelValue
+      };
+    },
 
     computed: {
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
         };
@@ -132,27 +148,26 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Emits input event for v-model.
-       *
-       * @param   {Object}  event   Event object by onchange
        */
-      onChange(event) {
+      onChange(event: Event) {
+        const select = event.currentTarget as HTMLSelectElement;
+
+        this.internalValue = select.value;
+
         /**
-         * Input event for v-model.
-         *
-         * @event input
-         * @type {String}
+         * input event fires on input
          */
-        this.$emit('input', event.currentTarget.value);
+        this.$emit('update:modelValue', select.value);
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

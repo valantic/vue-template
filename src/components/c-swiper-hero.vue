@@ -9,26 +9,19 @@
       <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
-        <div v-for="picture in pictures"
-             :key="picture.id"
+        <div v-for="(slide, index) in slides"
+             :key="slide.id"
              :class="b('slide')"
              class="swiper-slide">
-          <a v-if="picture.href"
-             :class="b('link')"
-             :href="picture.href">
-            <e-picture
-              :sizes="sizes"
-              :srcset="picture.srcset"
-              :fallback="picture.fallback"
-              :alt="picture.alt" />
-          </a>
-
-          <e-picture
-            v-else
-            :sizes="sizes"
-            :srcset="picture.srcset"
-            :fallback="picture.fallback"
-            :alt="picture.alt" /> <!-- Todo: Replace as soon as @mathias-obers 'with-root' component is merged. -->
+          <e-picture v-if="slide[imageProperty]"
+                     :sizes="sizes"
+                     :srcset="slide[imageProperty].srcset"
+                     :fallback="slide[imageProperty].fallback"
+                     :alt="slide[imageProperty].alt"
+                     :ratio="ratio"
+                     :loading="index > 0 && index < slides.length - 1 ? 'lazy' : 'auto'"
+          />
+          <!-- Lazy loading for images is not possible with the loop option for the first and last image. -->
         </div>
       </div>
 
@@ -42,35 +35,51 @@
   </div>
 </template>
 
-<script>
-  import Swiper, { Navigation, Pagination } from 'swiper';
-  import { BREAKPOINTS } from '@/setup/globals';
-  import mapHeroImages from '@/helpers/map-hero-images';
-  import uuid from '../mixins/uuid';
+<script lang="ts">
+  import {
+    defineComponent,
+    ref,
+    Ref
+  } from 'vue';
+  import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useUuid, { IUuid } from '@/compositions/uuid';
+  import { NavigationOptions } from 'swiper/types/components/navigation';
+  import { PaginationOptions } from 'swiper/types/components/pagination';
 
-  const swiperInstances = {};
+  interface ISwiperInstances {
+    [key: string]: Swiper;
+  }
+
+  interface ISetup extends IUuid {
+    container: Ref<HTMLDivElement | null>;
+    previous: Ref<HTMLDivElement | null>;
+    next: Ref<HTMLDivElement | null>;
+    pagination: Ref<HTMLDivElement | null>;
+  }
+
+  interface IData {
+    optionsDefault: SwiperOptions;
+    hasHover: boolean;
+  }
+
+  const swiperInstances: ISwiperInstances = {};
 
   /**
    * Touch enabled slider component based on
    * [swiper](https://idangero.us/swiper/).
    */
-  export default {
+  export default defineComponent({
     name: 'c-swiper-hero',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [uuid],
 
     props: {
       /**
-       * Gallery object passed to swiper including image (imageUrl) and url (href).
-       *
-       * @type {Array.Object} images
-       * @property {String} images.imageUrl - The image related source url.
-       * @property {String} images.fallback - The image related fallback source url.
-       * @property {String} [images.href] - The image related link href.
+       * The list of slides.
        */
-      images: {
+      slides: {
         type: Array,
         required: true,
       },
@@ -82,8 +91,59 @@
         type: Object,
         default: () => ({}),
       },
+
+      /**
+       * Defines the sizes of the images.
+       */
+      sizes: {
+        type: Object,
+        default: () => ({
+          xxs: 480,
+          xs: 768,
+          sm: 1024,
+          md: 1200,
+          lg: 1440,
+          xl: 2560,
+        }),
+      },
+
+      /**
+       * Defines the ratio of the images.
+       */
+      ratio: {
+        type: Number,
+        default: 24 / 11
+      },
+
+      /**
+       * Defines the property inside a slide which contains the image.
+       */
+      imageProperty: {
+        type: String,
+        default: 'image',
+      },
     },
-    data() {
+
+    setup(): ISetup {
+      const container = ref();
+      const previous = ref();
+      const next = ref();
+      const pagination = ref();
+
+      const { increaseUuid } = useUuid();
+
+      increaseUuid();
+
+      return {
+        ...useUuid(),
+        container,
+        previous,
+        next,
+        pagination,
+      };
+    },
+
+    data(): IData {
       return {
         optionsDefault: {
           autoplay: {
@@ -105,24 +165,20 @@
             el: null, // $ref is not available on init
             type: 'bullets',
             clickable: true,
-            dynamicBullets: this.$props.data
-              ? this.$props.data.images.length > 7 || false
-              : this.images.length > 7 || false,
+
+            dynamicBullets: this.images.length > 7 || false,
             dynamicMainBullets: 5,
           },
         },
         hasHover: false,
-        sizes: BREAKPOINTS, // todo add as prop
       };
     },
 
     computed: {
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           hover: this.hasHover,
         };
@@ -130,32 +186,22 @@
 
       /**
        * Merges default with custom component options.
-       *
-       * @returns  {Object}  optionsMerged    Combination of default and custom options.
        */
-      optionsMerged() {
+      optionsMerged(): SwiperOptions {
         return {
           ...this.optionsDefault,
           navigation: {
-            ...this.optionsDefault.navigation,
-            nextEl: this.$refs.next,
-            prevEl: this.$refs.previous,
+            ...this.optionsDefault.navigation as NavigationOptions,
+            nextEl: this.next,
+            prevEl: this.previous,
           },
+          // @ts-ignore
           pagination: {
-            ...this.optionsDefault.pagination,
-            el: this.$refs.pagination,
+            ...this.optionsDefault.pagination as PaginationOptions,
+            el: this.pagination,
           },
           ...this.options,
         };
-      },
-
-      /**
-       * Maps image data object and prepares it for e-picture component.
-       *
-       * @returns  {Object}  image   Image including fallback
-       */
-      pictures() {
-        return mapHeroImages(this.images);
       },
     },
     // watch: {},
@@ -166,20 +212,22 @@
     mounted() {
       Swiper.use([Navigation, Pagination]);
 
-      swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
+      if (this.container) {
+        swiperInstances[this.uuid] = new Swiper(this.container, this.optionsMerged);
+      }
     },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
-    beforeDestroy() {
+    beforeUnmount() {
       swiperInstances[this.uuid].destroy();
     },
-    // destroyed() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
