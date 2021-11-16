@@ -213,6 +213,18 @@ module.exports = (env, args = {}) => {
     }
   }
 
+  const assetModulesFileName = function (pathData, assetType) {
+    let subDirPath = '';
+
+    // pathData.module.context contains the absolute path to the module
+    if (pathData.module.context.includes('src/assets/')) {
+      const contextArray = pathData.module.context.split('src/assets/');
+      subDirPath = contextArray.length > 1 ? `${contextArray[1]}/` : ''
+    }
+
+    return `${outputAssetsFolder}${assetType}${subDirPath}[name][contenthash][ext]`;
+  }
+
   const rules = [
     {
       test: /\.js$/,
@@ -268,18 +280,14 @@ module.exports = (env, args = {}) => {
       test: /\.(gif|png|jpe?g)$/i,
       type: 'asset/resource',
       generator: {
-        // if you need the asset sub dir structure in your dist folder, use [path] as workaround
-        // see https://github.com/webpack/webpack/issues/14717
-        filename: `${outputAssetsFolder}img/[name][contenthash][ext]`,
+        filename: ((pathData) => assetModulesFileName(pathData, 'img/')),
       },
     },
     {
       test: /\.(svg)$/i,
       type: 'asset/resource',
       generator: {
-        // if you need the asset sub dir structure in your dist folder, use [path] as workaround
-        // see https://github.com/webpack/webpack/issues/14717
-        filename: `${outputAssetsFolder}[name][contenthash][ext]`,
+        filename: ((pathData) => assetModulesFileName(pathData, 'img/')),
       },
       use: [
         {
@@ -295,7 +303,7 @@ module.exports = (env, args = {}) => {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
       type: 'asset/resource',
       generator: {
-        filename: `${outputAssetsFolder}fonts/[name][contenthash][ext]`,
+        filename: ((pathData) => assetModulesFileName(pathData, 'fonts/')),
       },
     },
     {
