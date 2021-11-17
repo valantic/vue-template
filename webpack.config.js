@@ -16,6 +16,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const pkg = require('./package.json');
 const TerserPlugin = require('terser-webpack-plugin');
+const DependencyHint = require('@valantic/webpack-dependency-hint');
 
 /**
  * A note about [contenthash]: Using the hash in query could cause troubles with caching proxies. Therefore
@@ -136,6 +137,10 @@ module.exports = (env, args = {}) => {
         '**/*.scss',
       ],
     }),
+
+    new DependencyHint({
+      lastUpdate: pkg.lastDependencyUpdate,
+    })
   ];
 
   if (showProfile) {
