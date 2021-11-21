@@ -47,6 +47,6 @@
 
 <style lang="scss">
   .c-component { // TODO: update selector according to filename
-    // ...
+    // @use '../setup/scss/variables';
   }
 </style>
