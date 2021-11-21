@@ -44,7 +44,9 @@
 </script>
 
 <style lang="scss">
+  // @use '../setup/scss/variables';
+
   .c-component { // TODO: update selector according to filename
-    // @use '../setup/scss/variables';
+    // ...
   }
 </style>
