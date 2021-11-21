@@ -1,8 +1,10 @@
 <template>
-  <header is="vue:c-header" />
-  <router-view />
-  <footer is="vue:c-footer" />
-  <s-navigation :routes="routes" nav-position="bottom-right" />
+  <div id="app">
+    <header is="vue:c-header" />
+    <router-view />
+    <footer is="vue:c-footer" />
+    <s-navigation :routes="routes" nav-position="bottom-right" />
+  </div>
 </template>
 
 <script lang="ts">
