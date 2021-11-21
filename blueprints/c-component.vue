@@ -5,17 +5,15 @@
 </template>
 
 <script lang="ts">
-
-  /**
- * TODO: add description for component styleguide.
- */
-
   import { defineComponent } from 'vue';
 
   // interface IData {
     // TODO add properties or remove
   // }
 
+  /**
+   * TODO: add component description.
+   */
   export default defineComponent({
     name: 'c-component', // TODO: update name according to filename
 
