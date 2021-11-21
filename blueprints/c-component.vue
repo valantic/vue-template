@@ -7,9 +7,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
-  // interface IData {
-    // TODO add properties or remove
-  // }
+  // interface IData {}
 
   /**
    * TODO: add component description.
