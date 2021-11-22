@@ -14,8 +14,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { webpack } from '@/../package.json';
+  import { mapGetters } from 'vuex';
+  import pkg from '@/../package.json';
+
   import store from '@/store';
 
   interface ITheme {
@@ -28,7 +29,7 @@
     defaultThemes: ITheme[];
   }
 
-  const themePath = `/${webpack.outputAssetsFolder}css/${webpack.filePrefix}theme-`;
+  const themePath = `/${pkg.webpack.outputAssetsFolder}css/${pkg.webpack.filePrefix}theme-`;
 
   export default defineComponent({
     name: 's-theme-selector',

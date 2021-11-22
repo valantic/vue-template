@@ -50,6 +50,7 @@
    - Removes Components Collapse, CollapseGroup, Modal, ModalStack
    - Removes EventBus as it is not supported anymore in Vue 3
    - Removes Pimcore Directives
+ - (Change) Issue 171: Updates to Webpack 5
 
 ### v7.0.0 (2020-09-29)
  - (Breaking) Changes the query hash in the webpack config to a file hash by default to prevent proxy caching.
