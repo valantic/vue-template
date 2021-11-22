@@ -109,6 +109,13 @@ module.exports = (env, args = {}) => {
     new ForkTsCheckerWebpackPlugin({
       // don't block webpack's emit to wait for type checker in development mode, errors only visible inside CLI
       async: !isProduction,
+      formatter: {
+        type: 'codeframe',
+        options: {
+          linesAbove: 2,
+          linesBelow: 0.
+        }
+      },
       typescript: {
         diagnosticOptions: {
           semantic: true,
