@@ -116,6 +116,11 @@ module.exports = (env, args = {}) => {
           linesBelow: 0.
         }
       },
+      logger: {
+        infrastructure: 'silent',
+        issues: 'console',
+        devServer: false,
+      },
       typescript: {
         diagnosticOptions: {
           semantic: true,
