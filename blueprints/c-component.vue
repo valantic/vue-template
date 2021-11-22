@@ -18,6 +18,9 @@
     // components: {},
 
     // props: {},
+    // emits: {},
+
+    // setup() {},
     // data(): IData {
     //   return {};
     // },
