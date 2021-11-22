@@ -475,8 +475,8 @@ can follow [this Instructions](https://www.jetbrains.com/help/phpstorm/using-tsl
 With the update to Vue-3 and TypeScript, some basic things have changed. The most notable are listed here:
 
 1. Use `export default defineComponent({ ... })` to define your component
-2. Global Component properties need to be defiend in the `shims-xxx` files
-3. Mixins have been replaced by Composition API Code
+2. Global Vue Component properties need to be defiend in the `shims-xxx` files
+3. Mixins have been replaced by Composables (Composition API)
 4. Ref Access needs to be done via Setup Method
    [read more](https://v3.vuejs.org/guide/composition-api-template-refs.html#template-refs)
 5. Event emit does only work to the direct parent, otherwise you need to use an emitting plugin
@@ -490,7 +490,7 @@ With the update to Vue-3 and TypeScript, some basic things have changed. The mos
 9. The way how the `is` attribute works, has changed
    [read more](https://v3.vuejs.org/api/special-attributes.html#is)
 10. As the current Vuex 4 is not really working well with TypeScript (a lot of boilerplate code is needed) and Vuex 5 will come
-    with a lot of changes, we decided to use a store wrapper until Vuex 5 is released
+    with a lot of changes, we decided to temporary use a store wrapper until Vuex 5 is released
     [read more](https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3)
 
 For more information about the migration, read the [migration page](https://v3.vuejs.org/guide/migration/introduction.html#introduction)
@@ -509,7 +509,9 @@ During switching to Vue-3 and TypeScript, the following decisions had to be made
 
 The following issues arisen during the switch and are still open:
 
-1. Styleguideist does not support Vue-3, see https://github.com/vue-styleguidist/vue-styleguidist/issues/997
+1. Styleguideist does not support Vue-3 / Webpack 5, see
+    - https://github.com/vue-styleguidist/vue-styleguidist/issues/997
+    - https://github.com/styleguidist/react-styleguidist/issues/1703
 2. Some dependencies are only available in next / alpha version
 2. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good 
    tools to do that at the moment, [read more](https://github.com/vuejs/vue-cli/issues/2950)
