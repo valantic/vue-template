@@ -124,7 +124,7 @@ module.exports = (env, args = {}) => {
         configFile: './tsconfig.json',
       },
       eslint: {
-        files: './src/**/*.{ts,js}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+        files: './src/**/*.{ts,js,vue}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
       },
     }),
     new webpack.DefinePlugin(globalVariables), // Set node variables.
