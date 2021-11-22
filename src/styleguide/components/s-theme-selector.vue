@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-  import { mapGetters } from 'vuex';
+  import { defineComponent } from 'vue';
   import pkg from '@/../package.json';
 
   import store from '@/store';

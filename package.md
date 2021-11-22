@@ -110,8 +110,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > eslint
 - [eslint-plugin-vue](https://www.npmjs.com/package/eslint-plugin-vue) - Official ESLint plugin for Vue.js
   > eslint
-- [eslint-webpack-plugin](https://www.npmjs.com/package/eslint-webpack-plugin) - A ESLint plugin for webpack.
-  > webpack, eslint
 - [faker](https://www.npmjs.com/package/faker) - Generate massive amounts of fake data in the browser and node.js.
   > development environment, mock data
 - [file-loader](https://www.npmjs.com/package/file-loader) - The file-loader resolves import/require() on a file into a url and emits the file into the output directory.
