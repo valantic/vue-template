@@ -116,7 +116,6 @@
     "svg-sprite": "~1.5.3",
     "svg4everybody": "~2.1.9",
     "svgo-loader": "~3.0.0",
-    "terser-webpack-plugin": "~5.2.5",
     "vue-jest": "~3.0.7",
     "vue-loader": "~15.9.8",
     "vue-markdown-loader": "~2.5.0",
