@@ -59,7 +59,7 @@ const plugin: Plugin = {
     /**
      * Checks if current viewport is mobile (<= md).
      */
-    const isMobile: ComputedRef<boolean> = computed(() => !isSm);
+    const isMobile: ComputedRef<boolean> = computed(() => !isSm.value);
 
     /**
      * Returns the short name of the current viewport (e.g. 'md').

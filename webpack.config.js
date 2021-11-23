@@ -100,6 +100,18 @@ module.exports = (env, args = {}) => {
     new ForkTsCheckerWebpackPlugin({
       // don't block webpack's emit to wait for type checker in development mode, errors only visible inside CLI
       async: !isProduction,
+      formatter: {
+        type: 'codeframe',
+        options: {
+          linesAbove: 2,
+          linesBelow: 0.
+        }
+      },
+      logger: {
+        infrastructure: 'silent',
+        issues: 'console',
+        devServer: false,
+      },
       typescript: {
         diagnosticOptions: {
           semantic: true,
@@ -115,7 +127,7 @@ module.exports = (env, args = {}) => {
         configFile: './tsconfig.json',
       },
       eslint: {
-        files: './src/**/*.{ts,js}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+        files: './src/**/*.{ts,js,vue}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
       },
     }),
 

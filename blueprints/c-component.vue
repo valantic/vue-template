@@ -5,23 +5,22 @@
 </template>
 
 <script lang="ts">
-
-  /**
- * TODO: add description for component styleguide.
- */
-
   import { defineComponent } from 'vue';
 
-  // interface IData {
-    // TODO add properties or remove
-  // }
+  // interface IData {}
 
+  /**
+   * TODO: add component description.
+   */
   export default defineComponent({
     name: 'c-component', // TODO: update name according to filename
 
     // components: {},
 
     // props: {},
+    // emits: {},
+
+    // setup() {},
     // data(): IData {
     //   return {};
     // },
@@ -46,6 +45,8 @@
 </script>
 
 <style lang="scss">
+  // @use '../setup/scss/variables';
+
   .c-component { // TODO: update selector according to filename
     // ...
   }

@@ -13,19 +13,15 @@
 // Content grouping
 //
 // 1. Add the correct box sizing in Firefox.
-// 2. Show the overflow in Edge and IE.
-
 hr {
   box-sizing: content-box; // 1
   height: 0; // 1
-  overflow: visible; // 2
 }
 
 //
 // Prevent `sub` and `sup` elements from affecting the line height in
 // all browsers.
 //
-
 sub,
 sup {
   position: relative;
@@ -40,37 +36,23 @@ sup { top: -0.5em; }
 //
 // Code
 //
-
-// stylelint-disable font-family-no-duplicate-names
 pre,
 code,
 kbd,
 samp {
+  // stylelint-disable-next-line font-family-no-duplicate-names
   font-family: monospace, monospace; // Correct the inheritance and scaling of font size in all browsers.
   font-size: 1em; // Correct the odd `em` font sizing in all browsers.
 }
-// stylelint-enable font-family-no-duplicate-names
 
 pre {
   // Don't allow content to break outside
   overflow: auto;
-  // We have @viewport set which causes scrollbars to overlap content in IE11 and Edge, so
-  // we force a non-overlapping, non-auto-hiding scrollbar to counteract.
-  -ms-overflow-style: scrollbar;
-}
-
-svg:not(:root) {
-  overflow: hidden; // Hide the overflow in IE
 }
 
 //
 // Tables
 //
-
-table {
-  border-collapse: collapse; // Prevent double borders
-}
-
 th {
   // Matches default `<td>` alignment by inheriting from the `<body>`, or the
   // closest parent with a set `text-align`.
@@ -80,19 +62,8 @@ th {
 //
 // Forms
 //
-
 label {
-  // Allow labels to use `margin` for spacing.
-  display: inline-block;
-}
-
-button:focus {
-  outline: none;
-}
-
-// Disables shifting of button content in IE11
-button > * {
-  position: relative;
+  display: block;
 }
 
 button,
@@ -131,12 +102,6 @@ button::-moz-focus-inner,
   border-style: none;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
-  box-sizing: border-box; // 1. Add the correct box sizing in IE 10-
-  padding: 0; // 2. Remove the padding in IE 10-
-}
-
 input[type="date"],
 input[type="time"],
 input[type="datetime-local"],
@@ -150,7 +115,6 @@ input[type="month"] {
 }
 
 textarea {
-  overflow: auto; // Remove the default vertical scrollbar in IE.
   // Textareas should really only resize vertically so they don't break their (horizontal) containers.
   resize: vertical;
 }
@@ -164,16 +128,11 @@ fieldset {
   min-width: 0;
 }
 
-// 1. Correct the text wrapping in Edge and IE.
-// 2. Correct the color inheritance from `fieldset` elements in IE.
 legend {
   display: block;
   width: 100%;
-  max-width: 100%; // 1
   font-size: 1.5rem;
   line-height: inherit;
-  color: inherit; // 2
-  white-space: normal; // 1
 }
 
 progress {
@@ -217,23 +176,19 @@ progress {
 //
 // Correct element displays
 //
+img {
+  display: block;
+}
 
 output {
   display: inline-block;
 }
 
+picture {
+  display: block;
+}
+
 summary {
   display: list-item; // Add the correct display in all browsers
   cursor: pointer;
-}
-
-template {
-  display: none; // Add the correct display in IE
-}
-
-// Always hide an element with the `hidden` HTML attribute (from PureCSS).
-// Needed for proper display in IE 10-.
-[hidden] {
-  /* stylelint-disable-next-line declaration-no-important */
-  display: none !important;
 }

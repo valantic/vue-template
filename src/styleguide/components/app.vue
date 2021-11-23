@@ -3,7 +3,7 @@
     <header is="vue:c-header" />
     <router-view />
     <footer is="vue:c-footer" />
-    <s-navigation :routes="routes" nav-position="bottom-right" />
+    <s-navigation nav-position="bottom-right" />
   </div>
 </template>
 
@@ -11,7 +11,6 @@
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
-  import styleguideRoutes, { IRoute } from '@/setup/styleguide.routes';
   import store from '@/store';
 
   export default defineComponent({
@@ -27,14 +26,7 @@
     //   return {};
     // },
 
-    computed: {
-      /**
-       * An Array of available routes.
-       */
-      routes(): IRoute[] {
-        return styleguideRoutes;
-      }
-    },
+    // computed: {},
     // watch: {},
 
     // beforeCreate() {},
