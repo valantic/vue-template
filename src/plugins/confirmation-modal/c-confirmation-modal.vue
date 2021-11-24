@@ -8,8 +8,9 @@
              @close="onClose"
     >
       <!-- Content -->
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <div v-html="text" :class="b('content')"></div>
+      <div :class="b('content')">
+        {{ text }}
+      </div>
 
       <!-- Buttons -->
       <div :class="b('footer')">
@@ -38,8 +39,6 @@
 
   /**
    * Confirmation modal component is used to show the confirmation dialog in a modal.
-   *
-   * <strong>Warning: sanitizing is disable for htmlText. Make sure the value for this field comes from a secure source!</strong>
    */
   export default {
     name: 'c-confirmation-modal',
