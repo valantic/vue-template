@@ -22,6 +22,10 @@
   "c-breadcrumb": {
     "linkTitle": "Allez vers {name}"
   },
+  "c-confirmation-modal": {
+    "confirm": "Confirmer",
+    "cancel": "Annuler"
+  },
   "c-notification": {
     "confirm": "OK",
     "decline": "Annuler",
