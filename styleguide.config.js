@@ -20,6 +20,7 @@ module.exports = {
     return require('./webpack.config')({
       mode: env,
     }, {
+      styleguide: env === 'development',
       styleguideBuild: env === 'production', // In 'development' we always expect the styleguide.
     });
   },

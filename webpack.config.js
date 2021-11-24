@@ -7,21 +7,18 @@ const webpack = require('webpack');
 // Development & build
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const openInEditor = require('launch-editor-middleware');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Script tag injector
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // Nicer CLI interface
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
-const { webpack: config } = require('./package.json');
-const chokidar = require('chokidar');
+const pkg = require('./package.json');
 const TerserPlugin = require('terser-webpack-plugin');
 
 /**
- * A note about [hash]: Using the hash in query could cause troubles with caching proxies. Therefore
+ * A note about [contenthash]: Using the hash in query could cause troubles with caching proxies. Therefore
  * it is recommended to use build hashes only on file names, not as an url query!
  */
 
@@ -35,6 +32,7 @@ const TerserPlugin = require('terser-webpack-plugin');
  */
 module.exports = (env, args = {}) => {
   // Instance variables
+  const isStyleguide = !!args.styleguide;
   const isStyleguideBuild = !!args.styleguideBuild;
   const isProduction = process.env.NODE_ENV === 'production' && !isStyleguideBuild;
   const hasWatcher = args.watch || false;
@@ -62,7 +60,7 @@ module.exports = (env, args = {}) => {
     themeSource,
     themeFiles,
     devPort,
-  } = config;
+  } = pkg.webpack;
 
   const publicPath = isProduction // Base path which is used in production to load modules via http.
     ? productionPath
@@ -89,37 +87,37 @@ module.exports = (env, args = {}) => {
     'vue$': 'vue/dist/vue.esm.js', // Use 'vue.esm' when importing from 'vue' because 'runtime' build only works for SPA
   };
 
-  const scssResourcesFolder = './src/setup/scss/';
-  const scssResources = [
-    '_variables.scss',
-    '_config.scss',
-    '_functions.scss',
-    '_mixins.scss',
-    '_extends.scss',
-  ];
-
   const plugins = [
+    new webpack.ProgressPlugin({ percentBy: 'entries', /*profile: true*/ }),
+
     new ESLintPlugin({
       extensions: ['vue', 'js'],
       failOnError: isProduction,
       emitWarning: !isProduction, // Keeps overlay from showing during development, because it's annoying
       cache: !isProduction, // Improves linting performance
     }),
+
     new webpack.DefinePlugin(globalVariables), // Set node variables.
-    new CopyWebpackPlugin([
-      {
-        from: '**/*',
-        context: path.resolve(__dirname, 'static'),
-        globOptions: isProduction
-          ? { dot: true, ignore: ['**/mockdata/**'] }
-          : isStyleguideBuild ? { dot: true } : undefined,
-      },
-    ]),
+
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: '**/*',
+          context: path.resolve(__dirname, 'static'),
+          noErrorOnMissing: true,
+          globOptions: isProduction
+            ? { dot: true, ignore: ['**/mockdata/**'] }
+            : isStyleguideBuild ? { dot: true } : undefined,
+        },
+      ]
+    }),
 
     new VueLoaderPlugin(), // *.vue file parser.
+
     new MiniCssExtractPlugin({ // Extract CSS code
       filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction || isStyleguideBuild ? '.[chunkhash]' : ''}.css`,
     }),
+
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
       template: 'index.html',
@@ -127,6 +125,7 @@ module.exports = (env, args = {}) => {
         ? Object.keys(themes).slice(1)
         : Object.keys(themes),
     }),
+
     new StyleLintPlugin({
       emitErrors: isProduction,
       emitWarning: !isProduction,
@@ -154,80 +153,77 @@ module.exports = (env, args = {}) => {
     );
   }
 
-  if (!isProduction || hasWatcher) {
-    plugins.push(new FriendlyErrorsPlugin({
-      compilationSuccessInfo: {
-        messages: !isStyleguideBuild
-          ? [`Your application is running on http://${host === '0.0.0.0' ? 'localhost' : host}:${devPort}.`]
-          : null,
-      },
-    }));
-  }
-
   const svgoPlugins = [
-    // { cleanupAttrs: false, },
-    // { removeDoctype: false, },
-    // { removeXMLProcInst: false, },
-    // { removeComments: false, },
-    // { removeMetadata: false, },
-    // { removeTitle: false, },
-    // { removeDesc: false, },
-    { removeUselessDefs: false },
-    // { removeEditorsNSData: false, },
-    // { removeEmptyAttrs: false, },
-    // { removeHiddenElems: false, },
-    // { removeEmptyText: false, },
-    // { removeEmptyContainers: false, },
-    { removeViewBox: false, },
-    // { cleanUpEnableBackground: true, },
-    // { convertStyleToAttrs: true, },
-    // { convertColors: true, },
-    // { convertPathData: true, },
-    // { convertTransform: true, },
-    // { removeUnknownsAndDefaults: true, },
-    // { removeNonInheritableGroupAttrs: true, },
-    // { removeUselessStrokeAndFill: true, },
-    // { removeUnusedNS: true, },
-    { cleanupIDs: false },
-    // { cleanupNumericValues: false, },
-    // { moveElemsAttrsToGroup: true, },
-    // { moveGroupAttrsToElems: true, },
-    // { collapseGroups: false, },
-    // { removeRasterImages: false, },
-    // { mergePaths: true, },
-    // { convertShapeToPath: true, },
-    // { sortAttrs: true, },
-    // { transformsWithOnePath: false, },
-    // { removeDimensions: true, }
+    //{ name: 'cleanupAttrs', active: false, },
+    //{ name: 'removeDoctype', active: false, },
+    //{ name: 'removeXMLProcInst', active: false, },
+    //{ name: 'removeComments', active: false, },
+    //{ name: 'removeMetadata', active: false, },
+    //{ name: 'removeTitle', active: false, },
+    //{ name: 'removeDesc', active: false, },
+    { name: 'removeUselessDefs', active: false },
+    //{ name: 'removeEditorsNSData', active: false, },
+    //{ name: 'removeEmptyAttrs', active: false, },
+    //{ name: 'removeHiddenElems', active: false, },
+    //{ name: 'removeEmptyText', active: false, },
+    //{ name: 'removeEmptyContainers', active: false, },
+    { name: 'removeViewBox', active: false },
+    //{ name: 'cleanUpEnableBackground', active: true, },
+    //{ name: 'convertStyleToAttrs', active: true, },
+    //{ name: 'convertColors', active: true, },
+    //{ name: 'convertPathData', active: true, },
+    //{ name: 'convertTransform', active: true, },
+    //{ name: 'removeUnknownsAndDefaults', active: true, },
+    //{ name: 'removeNonInheritableGroupAttrs', active: true, },
+    //{ name: 'removeUselessStrokeAndFill', active: true, },
+    //{ name: 'removeUnusedNS', active: true, },
+    { name: 'cleanupIDs', active: false },
+    //{ name: 'cleanupNumericValues', active: false, },
+    //{ name: 'moveElemsAttrsToGroup', active: true, },
+    //{ name: 'moveGroupAttrsToElems', active: true, },
+    //{ name: 'collapseGroups', active: false, },
+    //{ name: 'removeRasterImages', active: false, },
+    //{ name: 'mergePaths', active: true, },
+    //{ name: 'convertShapeToPath', active: true, },
+    //{ name: 'sortAttrs', active: true, },
+    //{ name: 'transformsWithOnePath', active: false, },
+    //{ name: 'removeDimensions', active: true, }
   ];
 
   const devServer = {
-    clientLogLevel: 'error', // Removes ESLint warnings from browser console
     historyApiFallback: true, // Enables routing support
     host,
     port: devPort,
     hot: hotReload,
     compress: true,
-    overlay: true,
-    quiet: true, // Handled by FriendlyErrorsPlugin
-    inline: true,
-    progress: true,
-    before(app, server) {
-      if (!isStyleguideBuild) {
-        console.clear();
-        console.log('\x1b[34m%s\x1b[0m', 'Starting development server...');
-      }
-
-      // Refresh browser on non js/vue file changes
-      chokidar.watch([
-        './src/**/*.scss'
-      ]).on('all', function() {
-        server.sockWrite(server.sockets, 'content-changed');
-      });
-
-      app.use('/__open-in-editor', openInEditor()); // Adds 'open in editor' support for Vue Inspector
-    },
   };
+
+  // different options needed tue to https://github.com/vue-styleguidist/vue-styleguidist/issues/1074
+  if (isStyleguide || isStyleguideBuild) {
+    // styleguideist does not need any watcher, because it already contains one out of the box
+    devServer['clientLogLevel'] = 'error'; // Removes ESLint warnings from browser console
+    devServer['progress'] = true;
+    devServer['overlay'] = true;
+  } else {
+    // this block can be used as default when above issue has been fixed
+    devServer['client'] = {
+      logging: 'error', // Removes ESLint warnings from console
+      progress: true,
+      overlay: true,
+    }
+  }
+
+  const assetModulesFileName = function (pathData, assetType) {
+    let subDirPath = '';
+
+    // pathData.module.context contains the absolute path to the module
+    if (pathData.module.context.includes('src/assets/')) {
+      const contextArray = pathData.module.context.split('src/assets/');
+      subDirPath = contextArray.length > 1 ? `${contextArray[1]}/` : ''
+    }
+
+    return `${outputAssetsFolder}${assetType}${subDirPath}[name][contenthash][ext]`;
+  }
 
   const rules = [
     {
@@ -281,54 +277,45 @@ module.exports = (env, args = {}) => {
       ],
     },
     {
-      test: /\.(gif|png|jpe?g|svg)$/i,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            esModule: false,
-            context: 'src/assets/',
-            name: '[path][name].[hash].[ext]',
-            outputPath: `${outputAssetsFolder}img/`,
-            publicPath: `${publicPath}${outputAssetsFolder}img/`
-          },
-        },
-        {
-          loader: 'image-webpack-loader', // @see https://github.com/tcoopman/image-webpack-loader
-          options: {
-            disable: !isProduction, // Skip image optimization in non production mode.
-            svgo: {
-              plugins: svgoPlugins
-            },
-          },
-        },
-      ],
+      test: /\.(gif|png|jpe?g)$/i,
+      type: 'asset/resource',
+      generator: {
+        filename: ((pathData) => assetModulesFileName(pathData, 'img/')),
+      },
     },
     {
-      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      test: /\.(svg)$/i,
+      type: 'asset/resource',
+      generator: {
+        filename: ((pathData) => assetModulesFileName(pathData, 'img/')),
+      },
       use: [
         {
-          loader: 'file-loader',
+          loader: 'svgo-loader',
           options: {
-            esModule: false,
-            context: 'src/assets/fonts',
-            name: `[path][name].[hash].[ext]`,
-            outputPath: `${outputAssetsFolder}fonts/`,
-            publicPath: `${publicPath}${outputAssetsFolder}fonts/`
+            disable: !isProduction,
+            plugins: svgoPlugins,
           },
-        }
+        },
       ]
     },
     {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      type: 'asset/resource',
+      generator: {
+        filename: ((pathData) => assetModulesFileName(pathData, 'fonts/')),
+      },
+    },
+    {
       test: /\.md$/, // Required by styleguide.
-      loader: [
+      use: [
         'vue-loader',
         {
           loader: 'vue-markdown-loader/lib/markdown-compiler',
           options: {
-            raw: true
-          }
-        }
+            raw: true,
+          },
+        },
       ],
     },
   ];
@@ -340,9 +327,9 @@ module.exports = (env, args = {}) => {
     ],
     splitChunks: {
       cacheGroups: {
-        vendor: {
+        defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
+          name: 'vendors',
           chunks: chunk => !['polyfills.ie11', 'polyfills'].includes(chunk.name), // Excludes node modules which are required by IE11 polyfills
         },
       }
@@ -354,16 +341,25 @@ module.exports = (env, args = {}) => {
     assets: true, // Show list of created files
     assetsSort: '!size', // Order list of created files by ...
     errors: true, // Show errors
-    excludeAssets: /assets\/(img|fonts)/,
+    excludeAssets: /(assets\/(img|fonts|static)|mock)/,
     hash: true, // Show build hash
     performance: true, // Show warnings for big files
     timings: true, // Show timing information
     warnings: true, // Show warnings
+    assetsSpace: Number.MAX_SAFE_INTEGER, // Number of assets which should be shown in stats
+    entrypoints: true, // Show entrypoints
+    chunks: false,
+    moduleAssets: false,
+    groupAssetsByChunk: false,
+    groupAssetsByEmitStatus: false,
+    groupAssetsByInfo: false,
+    groupModulesByAttributes: false,
   };
 
   return {
     watch: hasWatcher,
     mode: isProduction ? 'production' : 'development',
+    target: 'browserslist',
     entry: {
       ...themes,
       'polyfills': path.resolve(__dirname, 'src/setup/polyfills.js'), // If code still fails, you may need to add regenerator as well. See https://babeljs.io/docs/en/babel-polyfill
@@ -379,7 +375,7 @@ module.exports = (env, args = {}) => {
     module: {
       rules,
     },
-    stats: !isProduction || hasWatcher ? { all: false } : stats,
+    stats: !isProduction || hasWatcher ? 'errors-warnings' : stats,
     performance: { // Warn about performance issues
       hints: !isProduction || hasWatcher ? false : 'warning',
       maxEntrypointSize: 500000, // 500kb

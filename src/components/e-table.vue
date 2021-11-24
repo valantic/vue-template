@@ -11,7 +11,7 @@
         <th
           v-for="column in columns"
           :key="column.key"
-          :class="b('header-cell', { 'text': column.align || 'left' })"
+          :class="b('header-cell', { 'text': column.align || 'left', col: column.key })"
         >
           <!-- Adding the support for functions was needed, to change visibility state dynamically (improved a11y) -->
           <span :class="isHeaderLabelVisible(column) ? 'invisible' : null">
@@ -35,7 +35,7 @@
       <td
         v-for="(column, columnIndex) in columns"
         :key="columnIndex"
-        :class="b('data-cell', { text: column.align || 'left', hasEvent: !!column.onClick })"
+        :class="b('data-cell', { text: column.align || 'left', hasEvent: !!column.onClick, col: column.key })"
         @click="column.onClick ? column.onClick(item, column) : null"
       >
         <!-- @slot Use this dynamic slot to add custom templates to the cells -->
