@@ -190,33 +190,36 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+  @use '../../setup/scss/mixins';
+
   .c-confirmation-modal {
     &__content {
-      @include font($font-size--18);
+      @include mixins.font(variables.$font-size--18);
 
-      margin: $spacing--30 0 $spacing--50;
+      margin: variables.$spacing--30 0 variables.$spacing--50;
     }
 
     &__footer {
-      @include media(sm) {
+      @include mixins.media(sm) {
         display: flex;
         justify-content: space-between;
       }
 
       .e-button {
-        margin-bottom: $spacing--15;
+        margin-bottom: variables.$spacing--15;
 
-        @include media(sm) {
+        @include mixins.media(sm) {
           flex-grow: 1;
           flex-shrink: 0;
-          flex-basis: calc(50% - #{$spacing--10});
-          max-width: calc(50% - #{$spacing--10});
+          flex-basis: calc(50% - #{variables.$spacing--10});
+          max-width: calc(50% - #{variables.$spacing--10});
           margin-bottom: 0;
         }
       }
 
       .e-button:first-of-type {
-        @include media(sm) {
+        @include mixins.media(sm) {
           order: 2;
         }
       }
