@@ -9,7 +9,7 @@
   import sIconFinder from '@/styleguide/components/s-icon-finder.vue';
 
   export default defineComponent({
-    name: 'icons',
+    name: 'r-icons',
     components: {
       sIconFinder
     },
@@ -39,7 +39,7 @@
 </script>
 
 <style lang="scss">
-  .icons {
+  .r-icons {
     &__icon-finder {
       max-width: 90%; // Prevent viewport overflow
     }
