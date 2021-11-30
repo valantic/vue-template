@@ -3,9 +3,7 @@
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container"
-         :class="b('container')"
-         class="swiper-container">
+    <div ref="container" :class="b('container swiper')">
       <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
@@ -47,8 +45,7 @@
     ref
   } from 'vue';
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
-  import { NavigationOptions } from 'swiper/types/components/navigation';
-  import { PaginationOptions } from 'swiper/types/components/pagination';
+  import { NavigationOptions, PaginationOptions } from 'swiper/types';
   import { BREAKPOINTS } from '@/setup/globals';
   import useUuid, { IUuid } from '@/compositions/uuid';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
@@ -126,6 +123,7 @@
     data(): IData {
       return {
         optionsDefault: {
+          modules: [Navigation, Pagination],
           watchOverflow: true,
           keyboard: {
             enabled: true,
@@ -184,8 +182,6 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      Swiper.use([Navigation, Pagination]);
-
       if (this.container) {
         swiperInstances[this.uuid] = new Swiper(this.container, this.optionsMerged);
       }

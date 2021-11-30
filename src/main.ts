@@ -4,6 +4,9 @@ import 'core-js/stable';
 // NOTE: this is not working for styleguidist. There you need to add style imports to the required configuration
 import './setup/_scss.scss';
 
+// vendor styles
+import 'swiper/css';
+
 import { createApp } from 'vue';
 import store from '@/store';
 import options from './setup/options';
