@@ -11,7 +11,7 @@
   import { defineComponent } from 'vue';
 
   export default defineComponent({
-    name: 'sandbox',
+    name: 'r-sandbox',
     // components: {},
 
     // props: {},
@@ -39,7 +39,7 @@
 </script>
 
 <style lang="scss">
-  .sandbox {
+  .r-sandbox {
     // Add specific styles.
   }
 </style>

@@ -75,7 +75,7 @@
   import cNotificationContainer from '@/components/c-notification-container.vue';
 
   export default defineComponent({
-    name: 'notifications',
+    name: 'r-notifications',
     components: {
       cNotificationContainer,
     },
@@ -105,7 +105,7 @@
   @use '../../setup/scss/mixins';
   @use '../../setup/scss/variables';
 
-  .notifications {
+  .r-notifications {
     display: flex;
     justify-content: flex-end;
 
