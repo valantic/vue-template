@@ -18,14 +18,16 @@
   }
 
   // Loop media queries
-  @for $breakpointIndex from 2 through length($breakpoints) { // NOTE: skipped index 1 (xxs) because it creates invalid query selector.
+  // NOTE: skipped index 1 (xxs) because it creates invalid query selector.
+  @for $breakpointIndex from 2 through length($breakpoints) {
     $breakpoint: nth(map-keys($breakpoints), $breakpointIndex);
 
     @include media($breakpoint) { // Wrapping spacing loop in media() reduces output size
       @for $spacingIndex from 1 through length($spacings) {
         $spacing: nth($spacings, $spacingIndex);
 
-        @if $breakpointIndex != 1 and $spacingIndex != 1 { // Don't create a breakpoint related spacing if 0 $spacing and 0 $breakpoint
+        // Don't create a breakpoint related spacing if 0 $spacing and 0 $breakpoint
+        @if $breakpointIndex != 1 and $spacingIndex != 1 {
           // stylelint-disable-next-line max-nesting-depth
           .#{$class}-#{$breakpoint}-#{strip-unit($spacing)} {
             #{$property}: #{$spacing};

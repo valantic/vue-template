@@ -379,9 +379,7 @@
     }
 
     &__output-value {
-      flex-grow: 1;
-      flex-shrink: 0;
-      flex-basis: calc(100% - 20px);
+      flex: 1 0 calc(100% - 20px);
       max-width: calc(100% - 20px);
       white-space: nowrap;
       overflow: hidden;
