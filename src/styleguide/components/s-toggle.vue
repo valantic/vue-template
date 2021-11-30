@@ -93,7 +93,7 @@
 
       &::before {
         position: absolute;
-        content: "";
+        content: '';
         height: 0.8 * $_s-slider__size;
         width: 0.8 * $_s-slider__size;
         left: 0.1 * $_s-slider__size;

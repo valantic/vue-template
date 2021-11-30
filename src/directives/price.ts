@@ -1,5 +1,5 @@
-import formatPrice from '@/helpers/format-price';
 import { DirectiveBinding } from '@vue/runtime-core';
+import formatPrice from '@/helpers/format-price';
 
 /**
  * Formats the html content of the provided element as price.

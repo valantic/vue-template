@@ -42,10 +42,10 @@
     Ref
   } from 'vue';
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import useUuid, { IUuid } from '@/compositions/uuid';
   import { NavigationOptions } from 'swiper/types/components/navigation';
   import { PaginationOptions } from 'swiper/types/components/pagination';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useUuid, { IUuid } from '@/compositions/uuid';
 
   interface ISwiperInstances {
     [key: string]: Swiper;
@@ -309,7 +309,7 @@
       .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
         display: none;
 
-        &[class*="swiper-pagination-bullet-active"] {
+        &[class*='swiper-pagination-bullet-active'] {
           display: inline-block;
         }
 

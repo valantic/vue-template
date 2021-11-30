@@ -81,7 +81,7 @@
     top: 30px;
     z-index: 1;
     padding-right: variables.$spacing--30;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 50%);
 
     &__inner {
       display: inline-block;
