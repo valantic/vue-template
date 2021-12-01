@@ -3,7 +3,7 @@
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container" :class="b('container swiper')">
+    <div ref="container" :class="[b('container'), 'swiper']">
       <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
