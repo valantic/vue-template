@@ -222,7 +222,7 @@ module.exports = (env, args = {}) => {
       subDirPath = contextArray.length > 1 ? `${contextArray[1]}/` : ''
     }
 
-    return `${outputAssetsFolder}${assetType}${subDirPath}[name][contenthash][ext]`;
+    return `${outputAssetsFolder}${assetType}${subDirPath}[name].[contenthash][ext]`;
   }
 
   const rules = [
