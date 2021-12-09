@@ -37,7 +37,7 @@
 <style lang="scss">
   .c-header {
     &::before { // TODO: remove
-      content: "Header";
+      content: 'Header';
     }
   }
 </style>

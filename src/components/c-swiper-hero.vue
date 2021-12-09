@@ -3,9 +3,7 @@
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container"
-         :class="b('container swiper-container')"
-         class="swiper-container">
+    <div ref="container" :class="[b('container'), 'swiper']">
       <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
@@ -42,10 +40,9 @@
     Ref
   } from 'vue';
   import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
+  import { NavigationOptions, PaginationOptions } from 'swiper/types';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import useUuid, { IUuid } from '@/compositions/uuid';
-  import { NavigationOptions } from 'swiper/types/components/navigation';
-  import { PaginationOptions } from 'swiper/types/components/pagination';
 
   interface ISwiperInstances {
     [key: string]: Swiper;
@@ -146,6 +143,7 @@
     data(): IData {
       return {
         optionsDefault: {
+          modules: [Navigation, Pagination],
           autoplay: {
             delay: 3000,
           },
@@ -210,8 +208,6 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      Swiper.use([Navigation, Pagination]);
-
       if (this.container) {
         swiperInstances[this.uuid] = new Swiper(this.container, this.optionsMerged);
       }
@@ -309,7 +305,7 @@
       .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
         display: none;
 
-        &[class*="swiper-pagination-bullet-active"] {
+        &[class*='swiper-pagination-bullet-active'] {
           display: inline-block;
         }
 

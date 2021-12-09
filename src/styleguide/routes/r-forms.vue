@@ -162,7 +162,7 @@
   }
 
   export default defineComponent({
-    name: 'forms',
+    name: 'r-forms',
 
     // components: {},
 
@@ -264,7 +264,7 @@
 <style lang="scss">
   @use '../../setup/scss/variables';
 
-  .forms {
+  .r-forms {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 

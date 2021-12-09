@@ -1,11 +1,11 @@
 import { ComponentPublicInstance } from 'vue';
 import lDefault from '@/components/l-default.vue';
 
-import index from '@/styleguide/routes/index.vue';
-import sandbox from '@/styleguide/routes/sandbox.vue';
-import icons from '@/styleguide/routes/icons.vue';
-import forms from '@/styleguide/routes/forms.vue';
-import notifications from '@/styleguide/routes/notifications.vue';
+import index from '@/styleguide/routes/r-index.vue';
+import sandbox from '@/styleguide/routes/r-sandbox.vue';
+import icons from '@/styleguide/routes/r-icons.vue';
+import forms from '@/styleguide/routes/r-forms.vue';
+import notifications from '@/styleguide/routes/r-notifications.vue';
 
 export interface IRoute {
   path: string;

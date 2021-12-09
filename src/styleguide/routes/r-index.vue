@@ -22,11 +22,11 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import sReadme from '@/styleguide/components/s-readme.vue';
   import dayjs from 'dayjs';
+  import sReadme from '@/styleguide/components/s-readme.vue';
 
   export default defineComponent({
-    name: 'index',
+    name: 'r-index',
     components: { sReadme },
 
     data() {
@@ -54,8 +54,7 @@
   @use '../../setup/scss/mixins';
   @use '../../setup/scss/variables';
 
-  /* stylelint-disable selector-class-pattern */
-  .index {
+  .r-index {
     max-width: map-get(variables.$breakpoints, xl);
     margin: 0 auto;
     padding: variables.$spacing--30;

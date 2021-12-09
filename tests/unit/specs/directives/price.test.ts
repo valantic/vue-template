@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 
+import { createApp } from 'vue';
 import { mount } from '@vue/test-utils';
 import price from '@/directives/price';
-import { createApp } from 'vue';
 
 const testCases = {
   '10.00': 'v-price="1000"',

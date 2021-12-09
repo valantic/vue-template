@@ -37,7 +37,7 @@
 <style lang="scss">
   .c-footer {
     &::before { // TODO: remove
-      content: "Footer";
+      content: 'Footer';
     }
   }
 </style>
