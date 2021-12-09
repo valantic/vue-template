@@ -209,11 +209,15 @@ module.exports = (env, args = {}) => {
     devServer['client'] = {
       logging: 'error', // Removes ESLint warnings from console
       progress: true,
-      overlay: true,
+      overlay: {
+        warnings: false,
+        errors: true,
+      },
     }
   }
 
   const assetModulesFileName = function (pathData, assetType) {
+    const hash = isProduction || isStyleguideBuild ? '.[contenthash]' : '';
     let subDirPath = '';
 
     // pathData.module.context contains the absolute path to the module
@@ -222,7 +226,7 @@ module.exports = (env, args = {}) => {
       subDirPath = contextArray.length > 1 ? `${contextArray[1]}/` : ''
     }
 
-    return `${outputAssetsFolder}${assetType}${subDirPath}[name].[contenthash][ext]`;
+    return `${outputAssetsFolder}${assetType}${subDirPath}[name]${hash}[ext]`;
   }
 
   const rules = [
@@ -256,7 +260,7 @@ module.exports = (env, args = {}) => {
         {
           loader: MiniCssExtractPlugin.loader,
           options: {
-            publicPath: '/', // This was required to prevent invalid asset urls in development
+            publicPath: isProduction || isStyleguideBuild ? productionPath : '/',
             esModule: false, // Should be removed in the future but was required as of 2021-04-23.
           },
         },
@@ -277,24 +281,19 @@ module.exports = (env, args = {}) => {
       ],
     },
     {
-      test: /\.(gif|png|jpe?g)$/i,
-      type: 'asset/resource',
-      generator: {
-        filename: ((pathData) => assetModulesFileName(pathData, 'img/')),
-      },
-    },
-    {
-      test: /\.(svg)$/i,
+      test: /\.(gif|png|jpe?g|svg)$/i,
       type: 'asset/resource',
       generator: {
         filename: ((pathData) => assetModulesFileName(pathData, 'img/')),
       },
       use: [
         {
-          loader: 'svgo-loader',
+          loader: 'image-webpack-loader',
           options: {
             disable: !isProduction,
-            plugins: svgoPlugins,
+            svgo: {
+              plugins: svgoPlugins,
+            }
           },
         },
       ]
