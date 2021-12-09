@@ -90,6 +90,10 @@ module.exports = {
           name: 'Vuelidate',
           content: 'src/styleguide/pages/plugins/vuelidate.md',
         },
+        {
+          name: 'Confirmation',
+          content: 'src/styleguide/pages/plugins/confirmation.md',
+        },
       ]
     },
     {
