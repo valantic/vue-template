@@ -111,6 +111,7 @@
     "fork-ts-checker-webpack-plugin": "~6.4.1",
     "html-webpack-plugin": "~5.5.0",
     "husky": "~7.0.4",
+    "image-webpack-loader": "~8.0.1",
     "jest": "~27.3.1",
     "jest-transform-stub": "~2.0.0",
     "lint-staged": "~12.1.2",
