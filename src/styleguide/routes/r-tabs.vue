@@ -1,7 +1,7 @@
 <!-- eslint-disable max-len -->
 <template>
   <div :class="b()">
-    <c-tabs :tabs="tabs">
+    <c-tabs :tabs="tabs" @change="onChange">
       <template #tab1>
         Content of Tab 1
       </template>
@@ -12,12 +12,19 @@
         Content of Tab 3
       </template>
     </c-tabs>
+    <c-tabs :tabs="tabs" @change="onChange">
+      Tab without panels.
+    </c-tabs>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import CTabs from '@/components/c-tabs.vue';
+  import CTabs, { ITab } from '@/components/c-tabs.vue';
+
+  interface IData {
+    tabs: ITab[]
+  }
 
   export default defineComponent({
     name: 'r-tabs',
@@ -25,7 +32,7 @@
       CTabs
     },
 
-    data() {
+    data(): IData {
       return {
         tabs:  [
           { title: 'Tab 1', id: 'tab1', active: false },
@@ -34,14 +41,25 @@
         ]
       };
     },
+
+    methods: {
+      /**
+       * Handles the change event of the tab component.
+       */
+      onChange(tab: ITab) {
+        console.log("change", tab); // eslint-disable-line
+      }
+    }
   });
 </script>
 
 <style lang="scss">
   // @use '../../setup/scss/mixins';
-  // @use '../../setup/scss/variables';
+  @use '../../setup/scss/variables';
 
   .r-tabs {
-    // content
+    .c-tabs {
+      margin-bottom: variables.$spacing--50;
+    }
   }
 </style>

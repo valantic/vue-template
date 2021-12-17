@@ -9,26 +9,30 @@
           :class="b('tab-item')"
       >
         <button :id="`c-tabs-${uuid}--tab-${tab.id}`"
-                :class="b('tab')"
+                :class="b('tab', { [tab.id]: true, active: tab === activeTab })"
                 :aria-selected="tab === activeTab"
                 :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
                 role="tab"
-                @click="activeTab = tab"
+                @click="onTabClick(tab)"
         >
           {{ tab.title }}
         </button>
       </li>
     </ul>
-    <div v-for="tab in tabs"
-         :id="`c-tabs-${uuid}--panel-${tab.id}`"
-         :key="tab.id"
-         :class="b('panel', { [`${tab.id}`]: true, visible: tab === activeTab })"
-         :aria-labelledby="`c-tabs-${uuid}--tab-${tab.id}`"
-         :tabindex="tab === activeTab ? 0 : -1"
-         role="tabpanel"
-    >
-      <slot :name="`${tab.id}`"></slot>
-    </div>
+    <!-- @slot default - allows to use the component without panels. -->
+    <slot>
+      <div v-for="tab in tabs"
+           :id="`c-tabs-${uuid}--panel-${tab.id}`"
+           :key="tab.id"
+           :class="b('panel', { [tab.id]: true, visible: tab === activeTab })"
+           :aria-labelledby="`c-tabs-${uuid}--tab-${tab.id}`"
+           :tabindex="tab === activeTab ? 0 : -1"
+           role="tabpanel"
+      >
+        <!-- @slot [tab.id] - Renders the panel content for the current tab. -->
+        <slot :name="`${tab.id}`"></slot>
+      </div>
+    </slot>
   </div>
 </template>
 
@@ -61,6 +65,9 @@
     // components: {},
 
     props: {
+      /**
+       * Expects a list of tab definitinos.
+       */
       tabs: {
         type: Array as PropType<ITab[]>,
         required: true,
@@ -72,9 +79,11 @@
       ariaLabel: {
         type: String,
         default: null,
-      }
+      },
     },
-    // emits: {},
+    emits: [
+      'change',
+    ],
 
     setup(): ISetup {
       return {
@@ -101,7 +110,16 @@
     // beforeUnmount() {},
     // unmounted() {},
 
-    // methods: {},
+    methods: {
+      /**
+       * Handles the click event of tabs.
+       */
+      onTabClick(tab: ITab) {
+        this.activeTab = tab;
+
+        this.$emit('change', tab);
+      }
+    },
     // render() {},
   });
 </script>
@@ -126,6 +144,11 @@
 
     &__tab {
       padding: variables.$spacing--5 variables.$spacing--10;
+
+      &--active {
+        background: variables.$color-grayscale--0;
+        color: variables.$color-grayscale--1000;
+      }
     }
 
     &__panel {
