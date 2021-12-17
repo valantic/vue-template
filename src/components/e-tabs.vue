@@ -30,7 +30,7 @@
            role="tabpanel"
       >
         <!-- @slot [tab.id] - Renders the panel content for the current tab. -->
-        <slot :name="`${tab.id}`"></slot>
+        <slot :name="tab.id"></slot>
       </div>
     </slot>
   </div>
