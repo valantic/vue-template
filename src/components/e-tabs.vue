@@ -8,10 +8,10 @@
           :key="tab.id"
           :class="b('tab-item')"
       >
-        <button :id="`c-tabs-${uuid}--tab-${tab.id}`"
+        <button :id="`e-tabs-${uuid}--tab-${tab.id}`"
                 :class="b('tab', { [tab.id]: true, active: tab === activeTab })"
                 :aria-selected="tab === activeTab"
-                :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
+                :aria-controls="`e-tabs-${uuid}--panel-${tab.id}`"
                 role="tab"
                 @click="onTabClick(tab)"
         >
@@ -22,10 +22,10 @@
     <!-- @slot default - allows to use the component without panels. -->
     <slot>
       <div v-for="tab in tabs"
-           :id="`c-tabs-${uuid}--panel-${tab.id}`"
+           :id="`e-tabs-${uuid}--panel-${tab.id}`"
            :key="tab.id"
            :class="b('panel', { [tab.id]: true, visible: tab === activeTab })"
-           :aria-labelledby="`c-tabs-${uuid}--tab-${tab.id}`"
+           :aria-labelledby="`e-tabs-${uuid}--tab-${tab.id}`"
            :tabindex="tab === activeTab ? 0 : -1"
            role="tabpanel"
       >
@@ -60,7 +60,7 @@
    * - http://web-accessibility.carnegiemuseums.org/code/tabs/
    */
   export default defineComponent({
-    name: 'c-tabs',
+    name: 'e-tabs',
 
     // components: {},
 
@@ -127,7 +127,7 @@
 <style lang="scss">
   @use '../setup/scss/variables';
 
-  .c-tabs {
+  .e-tabs {
     &__tab-list {
       display: flex;
       border-bottom: 1px solid variables.$color-grayscale--0;

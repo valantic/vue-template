@@ -1,7 +1,7 @@
 <!-- eslint-disable max-len -->
 <template>
   <div :class="b()">
-    <c-tabs :tabs="tabs" @change="onChange">
+    <e-tabs :tabs="tabs" @change="onChange">
       <template #tab1>
         Content of Tab 1
       </template>
@@ -11,16 +11,16 @@
       <template #tab3>
         Content of Tab 3
       </template>
-    </c-tabs>
-    <c-tabs :tabs="tabs" @change="onChange">
+    </e-tabs>
+    <e-tabs :tabs="tabs" @change="onChange">
       Tab without panels.
-    </c-tabs>
+    </e-tabs>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import CTabs, { ITab } from '@/components/c-tabs.vue';
+  import ETabs, { ITab } from '@/components/e-tabs.vue';
 
   interface IData {
     tabs: ITab[]
@@ -29,7 +29,7 @@
   export default defineComponent({
     name: 'r-tabs',
     components: {
-      CTabs
+      ETabs
     },
 
     data(): IData {
@@ -58,7 +58,7 @@
   @use '../../setup/scss/variables';
 
   .r-tabs {
-    .c-tabs {
+    .e-tabs {
       margin-bottom: variables.$spacing--50;
     }
   }
