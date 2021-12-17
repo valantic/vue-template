@@ -172,10 +172,6 @@
       const searchField = ref();
       const fieldWrapper = ref();
 
-      const { increaseUuid } = useUuid();
-
-      increaseUuid();
-
       return {
         ...useFormStates(toRefs(props).state),
         ...useUuid(),

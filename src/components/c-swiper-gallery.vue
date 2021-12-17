@@ -107,10 +107,6 @@
       const next = ref();
       const pagination = ref();
 
-      const { increaseUuid } = useUuid();
-
-      increaseUuid();
-
       return {
         ...useUuid(),
         container,
