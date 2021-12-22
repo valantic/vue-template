@@ -154,6 +154,10 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > stylelint
 - [stylelint-webpack-plugin](https://www.npmjs.com/package/stylelint-webpack-plugin) - A Stylelint plugin for webpack
   > webpack, stylelint
+- [svg-sprite](https://www.npmjs.com/package/svg-sprite) - IOs a low-level Node.js module that takes a bunch of SVG files, optimizes them and bakes them into SVG sprites of several types.
+  > svg icon sprite
+- [svg4everybody](https://www.npmjs.com/package/svg4everybody) - SVG for Everybody adds SVG External Content support to all browsers.
+  > svg icon sprite
 - [terser-webpack-plugin](https://www.npmjs.com/package/terser-webpack-plugin) - This plugin uses terser to minify your JavaScript.
   > webpack
 - [vue-jest](https://www.npmjs.com/package/vue-jest) - Jest Vue transformer with source map support.
