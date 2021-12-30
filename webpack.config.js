@@ -149,6 +149,7 @@ module.exports = (env, args = {}) => {
     new VueLoaderPlugin(), // *.vue file parser.
 
     new MiniCssExtractPlugin({ // Extract CSS code
+      chunkFilename: `${outputAssetsFolder}css/${prefix}[name].[id].[chunkhash].css`,
       filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction || isStyleguideBuild ? '.[chunkhash]' : ''}.css`,
     }),
 
