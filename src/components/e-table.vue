@@ -1,5 +1,9 @@
 <template>
-  <table :class="b()">
+  <table :class="b({ enableRowLinks })"
+         @contextmenu.capture="onContextMenu"
+         @mousedown.capture="onMouseDown"
+         @mouseup="onMouseUp"
+  >
     <!-- @slot Allows to display a customized header row. -->
     <slot
       :columns="columns"
@@ -38,6 +42,7 @@
         :class="b('data-cell', { text: column.align || 'left', hasEvent: !!column.onClick, col: column.key })"
         @click="column.onClick ? column.onClick(item, column) : null"
       >
+        <a :class="b('cell-link')" href="https://www.google.ch"></a>
         <!-- @slot Use this dynamic slot to add custom templates to the cells -->
         <slot
           :name="column.slotName"
@@ -117,6 +122,16 @@
          * @type {Boolean} Holds to sort direction in case a 'sortBy' is active.
          */
         sortAscending: true,
+
+        /**
+         * @type {Boolean} Holds a flag if row links should be enabled.
+         */
+        enableRowLinks: false,
+
+        /**
+         * @type {Boolean} Holds a flag if there is currently a text selection inside the component.
+         */
+        hasSelection: false,
       };
     },
 
@@ -211,7 +226,40 @@
           active,
           desc: active && !this.sortAscending
         };
-      }
+      },
+
+      /**
+       * Callback for the tables contextmenu event.
+       */
+      onContextMenu() { // Chromium, webkit: mousedown, contextmenu
+        if (!this.hasSelection) {
+          this.enableRowLinks = true;
+
+          setTimeout(() => {
+            this.enableRowLinks = false;
+          }, 100);
+        }
+      },
+
+      /**
+       * Callback for the tables mousedown event.
+       */
+      onMouseDown() { // All browsers
+        this.hasSelection = !!window.getSelection()?.toString();
+      },
+
+      /**
+       * Callback for the tables mouseup event.
+       */
+      onMouseUp() { // FF: mousedown, mouseup, contextmenu
+        if (!this.enableRowLinks && !this.hasSelection) {
+          this.enableRowLinks = true;
+
+          setTimeout(() => {
+            this.enableRowLinks = false;
+          }, 100);
+        }
+      },
     },
     // render() {},
   };
@@ -293,6 +341,20 @@
 
       &--has-event {
         cursor: pointer;
+      }
+    }
+
+    &__cell-link {
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+
+      #{$this}--enable-row-links & {
+        pointer-events: auto;
       }
     }
 
