@@ -17,7 +17,7 @@
 
   background: url('../assets/icons.svg##{$icon}') no-repeat $backgroundPosition / $calculatedSize; // Legacy support. No color applied.
 
-  @if mask == true {
+  @if $mask == true {
     @supports (mask: no-repeat) {
       background: $color;
       mask: url('../assets/icons.svg##{$icon}') no-repeat $backgroundPosition / $calculatedSize;
