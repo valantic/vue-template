@@ -1,10 +1,8 @@
 import { createDirectStore, ModulesImpl } from 'direct-vuex';
 import { INotification } from '@/types/c-notification';
 import notificationModule from './modules/notification';
-import breadcrumbModule from './modules/breadcrumb';
 
 interface IModules {
-  breadcrumb: ModulesImpl;
   notification: ModulesImpl;
 }
 
@@ -33,7 +31,6 @@ const {
 } = createDirectStore({
   modules: {
     notification: notificationModule,
-    breadcrumb: breadcrumbModule,
   }
 });
 
