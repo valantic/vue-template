@@ -8,6 +8,7 @@ import './setup/_scss.scss';
 import 'swiper/css';
 
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import store from '@/store';
 import options from './setup/options';
 import plugins from './setup/plugins';
@@ -27,5 +28,7 @@ vuePlugins.forEach(([plugin, pluginOptions]) => {
 });
 
 app.use(store.original);
+
+app.use(createPinia());
 
 app.mount('#app');

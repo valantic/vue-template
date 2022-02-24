@@ -535,8 +535,6 @@ store
   | |- index.js
   |- navigation
   | |- index.js
-  |- session
-  | |- index.js
 ````
 
 All `index.js` files from `app/store/modules` will be auto imported, and the file name will be converted to a camelCased module name.

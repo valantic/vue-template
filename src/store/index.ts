@@ -1,12 +1,9 @@
 import { createDirectStore, ModulesImpl } from 'direct-vuex';
-import getUrlParameter from '@/helpers/get-url-parameter';
 import { INotification } from '@/types/c-notification';
-import sessionModule from './modules/session';
 import notificationModule from './modules/notification';
 import breadcrumbModule from './modules/breadcrumb';
 
 interface IModules {
-  session: ModulesImpl;
   breadcrumb: ModulesImpl;
   notification: ModulesImpl;
 }
@@ -35,7 +32,6 @@ const {
   moduleGetterContext
 } = createDirectStore({
   modules: {
-    session: sessionModule,
     notification: notificationModule,
     breadcrumb: breadcrumbModule,
   }
@@ -60,15 +56,6 @@ if (initialDataNotifications.length) {
       store.commit.notification.pushNotification(notification);
     });
   });
-}
-
-// Set theme according to url in development. e.g. ?theme=01
-if (process.env.NODE_ENV !== 'production') {
-  const themeId = getUrlParameter('theme');
-
-  if (themeId) {
-    store.commit.session.setTheme(themeId);
-  }
 }
 
 window.initialData = {};

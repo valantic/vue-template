@@ -14,10 +14,10 @@
 </template>
 
 <script lang="ts">
+  import { mapStores } from 'pinia';
   import { defineComponent } from 'vue';
   import pkg from '@/../package.json';
-
-  import store from '@/store';
+  import { useSessionStore } from '@/stores/session';
 
   interface ITheme {
     name: string;
@@ -38,6 +38,7 @@
     // components: {},
 
     // props: {},
+
     data(): IData {
       return {
         defaultThemes: [
@@ -54,11 +55,13 @@
     },
 
     computed: {
+      ...mapStores(useSessionStore),
+
       /**
        * Returns the currently active theme.
        */
       getTheme(): string {
-        return store.getters.session.getTheme;
+        return this.sessionStore.getTheme;
       },
 
       /**
@@ -122,7 +125,7 @@
       onChange(event: Event) {
         const element = event.target as HTMLSelectElement;
 
-        store.commit.session.setTheme(element.value);
+        this.sessionStore.setTheme(element.value);
       },
 
       /**

@@ -1,37 +1,30 @@
-import { defineModule } from 'direct-vuex';
+import { defineStore } from 'pinia';
 
 export interface IModSessionState {
   theme: string;
 }
 
-const sessionModule = defineModule({
-  namespaced: true,
-  state: (): IModSessionState => ({
+export const useSessionStore = defineStore('session', {
+  state: () => ({
     /**
      * Stores the theme id.
      */
-    theme: '01'
+    theme: '01',
   }),
-
   getters: {
     /**
      * Gets the current theme id.
      */
     getTheme(state: IModSessionState): string {
       return state.theme;
-    }
+    },
   },
-
-  mutations: {
+  actions: {
     /**
      * Sets the global theme id.
      */
-    setTheme(state, id: string): void {
-      state.theme = id;
-    }
+    setTheme(id: string): void {
+      this.theme = id;
+    },
   },
-
-  // actions: {}
 });
-
-export default sessionModule;
