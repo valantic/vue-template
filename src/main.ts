@@ -12,6 +12,7 @@ import { createPinia } from 'pinia';
 import store from '@/store';
 import options from './setup/options';
 import plugins from './setup/plugins';
+import api from '@/plugins/pinia/api';
 
 const vueOptions = process.env.NODE_ENV !== 'production'
   ? { ...options, ...require('./setup/styleguide.options').options } // eslint-disable-line global-require
@@ -22,6 +23,9 @@ const vuePlugins = process.env.NODE_ENV !== 'production'
   : plugins;
 
 const app = createApp(vueOptions);
+const pinia = createPinia();
+
+pinia.use(api);
 
 vuePlugins.forEach(([plugin, pluginOptions]) => {
   app.use(plugin, pluginOptions);
@@ -29,6 +33,6 @@ vuePlugins.forEach(([plugin, pluginOptions]) => {
 
 app.use(store.original);
 
-app.use(createPinia());
+app.use(pinia);
 
 app.mount('#app');
