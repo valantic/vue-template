@@ -13,7 +13,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import store from '@/store';
+  import { useNotificationStore, INotificationItem } from '@/stores/notification';
 
   export default defineComponent({
     name: 'l-default',
@@ -24,6 +24,13 @@
     },
 
     // props: {},
+
+    setup() {
+      return {
+        notificationStore: useNotificationStore(),
+      };
+    },
+
     // data() {
     //   return {};
     // },
@@ -54,8 +61,8 @@
           const messagesParsed = messages ? JSON.parse(messages) : null;
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
-            messagesParsed.forEach((message) => {
-              store.commit.notification.pushNotification({ message });
+            messagesParsed.forEach((message: INotificationItem) => {
+              this.notificationStore.pushNotification(message);
             });
 
             // Clears the localStorage notifications.

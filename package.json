@@ -70,12 +70,10 @@
     "axios": "~0.24.0",
     "core-js": "~3.19.1",
     "dayjs": "~1.10.7",
-    "direct-vuex": "next",
     "reset-css": "~5.0.1",
     "swiper": "~7.3.1",
     "vue": "3.2.4",
-    "vue-i18n": "~9.1.7",
-    "vuex": "~4.0.2"
+    "vue-i18n": "~9.1.7"
   },
   "devDependencies": {
     "@babel/core": "~7.16.0",

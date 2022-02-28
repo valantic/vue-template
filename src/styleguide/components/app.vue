@@ -11,7 +11,7 @@
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
-  import store from '@/store';
+  import { useNotificationStore } from '@/stores/notification';
 
   export default defineComponent({
     name: 'app',
@@ -25,6 +25,11 @@
     // data() {
     //   return {};
     // },
+    setup() {
+      return {
+        notificationStore: useNotificationStore(),
+      };
+    },
 
     // computed: {},
     // watch: {},
@@ -51,7 +56,7 @@
         const parsedNotification = notification ? JSON.parse(notification) : null;
 
         if (parsedNotification) {
-          store.commit.notification.pushNotification(parsedNotification);
+          this.notificationStore.pushNotification(parsedNotification);
 
           // Clears the localStorage notifications.
           localStorage.removeItem('notification');
