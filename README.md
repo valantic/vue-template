@@ -612,11 +612,11 @@ To inject initial data into the Vuex store, we decided to prepare actions (since
 <html>
 <body>
   <script>
-    window.initialData = {};
+    // window.initialData = {};
   </script>
   ...
   <script>
-    window.initialData['<storeModule>/<propertySetter>'] = { /* ... */ };
+    // window.initialData['<storeModule>/<propertySetter>'] = { /* ... */ };
   </script>
   <script src="vue-app.js"></script>
 </body>

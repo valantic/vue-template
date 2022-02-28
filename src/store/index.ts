@@ -55,7 +55,7 @@ if (initialDataNotifications.length) {
   });
 }
 
-window.initialData = {};
+// window.initialData = {};
 
 // Export the direct-store instead of the classic Vuex store.
 export default store;

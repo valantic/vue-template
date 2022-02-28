@@ -1,12 +1,20 @@
 import { defineStore } from 'pinia';
-import { INotification } from '@/types/c-notification';
 import { IS_STORAGE_AVAILABLE, NOTIFICATION_UNKNOWN_ERROR } from '@/setup/globals';
 
-interface INotificationState {
-  notifications: INotification[];
+export interface INotificationItem {
+  id: number;
+  type?: string;
+  message?: string;
+  expire?: boolean;
+  selector?: string | null;
+  redirectUrl?: string;
 }
 
-function handleRedirect(notification: INotification) {
+export interface INotificationState {
+  notifications: INotificationItem[];
+}
+
+function handleRedirect(notification: INotificationItem) {
   const { redirectUrl } = notification || {};
 
   // Redirect Handler
@@ -20,15 +28,22 @@ function handleRedirect(notification: INotification) {
   }
 }
 
-const storeName = 'notification';
-let lastId = 1;
+/**
+ * Holds the name of the store.
+ */
+const storeName: string = 'notification';
 
-export default defineStore(storeName, {
+/**
+ * Holds the number of the most recently added notification.
+ */
+let currentId: number = 1;
+
+export const useNotificationStore = defineStore(storeName, {
   state: (): INotificationState => {
     const initialData = window.initialData?.[storeName] || {};
     const { notifications } = initialData || {};
 
-    const state = {
+    const state: INotificationState = {
       /**
        * Stores notifications.
        */
@@ -36,10 +51,10 @@ export default defineStore(storeName, {
     };
 
     if (Array.isArray(notifications) && notifications.length) {
-      notifications.map((notification: INotification) => {
+      state.notifications = notifications.map((notification: INotificationItem) => {
         handleRedirect(notification);
 
-        lastId += 1;
+        currentId += 1;
 
         return notification;
       });
@@ -51,7 +66,7 @@ export default defineStore(storeName, {
     /**
      * Gets the current list of notifications.
      */
-    getNotifications(): INotification[] {
+    getNotifications(): INotificationItem[] {
       return this.notifications;
     },
   },
@@ -59,7 +74,7 @@ export default defineStore(storeName, {
     /**
      * Adds a notification.
      */
-    pushNotification(notification: INotification) {
+    pushNotification(notification: INotificationItem) {
       handleRedirect(notification);
 
       this.notifications.push(notification);
@@ -69,7 +84,7 @@ export default defineStore(storeName, {
      * Removes a notification.
      */
     popNotification(id: number) {
-      this.notifications = this.notifications.filter((notification: INotification) => notification.id !== id);
+      this.notifications = this.notifications.filter((notification: INotificationItem) => notification.id !== id);
     },
 
     /**

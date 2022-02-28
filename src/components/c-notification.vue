@@ -11,9 +11,8 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import { INotification } from '@/types/c-notification';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import store from '@/store';
+  import { useNotificationStore, INotificationItem } from '@/stores/notification';
 
   interface IData {
     expireDelay: number;
@@ -34,9 +33,15 @@
        * The notification object consisting of the following properties:
        */
       notification: {
-        type: Object as PropType<INotification>,
+        type: Object as PropType<INotificationItem>,
         required: true,
       },
+    },
+
+    setup() {
+      return {
+        notificationStore: useNotificationStore(),
+      };
     },
 
     data(): IData {
@@ -84,7 +89,7 @@
        * Removes current notification from stack.
        */
       close() {
-        store.commit.notification.popNotification(this.notification.id);
+        this.notificationStore.popNotification(this.notification.id);
       },
     },
     // render() {},
