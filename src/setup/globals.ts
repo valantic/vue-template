@@ -37,10 +37,8 @@ export const RESIZE_DEBOUNCE = 100;
  * @type {Object} The default 'unknown error' notification message.
  */
 export const NOTIFICATION_UNKNOWN_ERROR = {
-  message: {
-    type: 'error',
-    message: i18n.global.t('globalMessages.unknownApiError'),
-  }
+  type: 'error',
+  message: i18n.global.t('globalMessages.unknownApiError'),
 };
 
 /**

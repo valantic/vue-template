@@ -5,7 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Vue template</title>
   <script>
-    window.initialData = {};
+    window.initialData = {
+      breadcrumb: {},
+      notification: {},
+    };
+    window.initialData.breadcrumb.items = [
+      {
+        name: 'hello',
+        url: '#',
+      }
+    ];
+    window.initialData.notification.notifications = [
+      {
+        id: Date.now(),
+        type: 'success',
+        message: 'Example Message',
+        expire: null,
+        selector: null,
+        redirectUrl: '',
+      }
+    ]
   </script>
 </head>
 <body>

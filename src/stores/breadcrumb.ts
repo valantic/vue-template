@@ -13,7 +13,7 @@ const storeName = 'breadcrumb';
 
 export const useBreadcrumbStore = defineStore(storeName, {
   state: (): IBreadcrumbState => {
-    const initialData = window.initialData?.breadcrumb || {};
+    const initialData = window.initialData?.[storeName] || {};
 
     const state = {
       items: [],
