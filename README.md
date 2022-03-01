@@ -546,7 +546,7 @@ Add the `get` prefix to all getters. This way it's clear in the component, that 
 
 #### set*
 
-Add the `set` prefix to all setters. This way it is easier to identify setters from Pinia inside components.
+Add the `set` prefix to all setters. This way it is easier to identify setter actions from Pinia inside components.
 
 #### api*
 
