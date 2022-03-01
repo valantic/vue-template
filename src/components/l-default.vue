@@ -6,7 +6,6 @@
         <slot></slot>
       </div>
     </div>
-    <portal-target name="modal-container" multiple />
   </div>
 </template>
 

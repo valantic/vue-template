@@ -212,7 +212,7 @@ git subtree pull --prefix assets/vue https://github.com/valantic/vue-template.gi
 .  |- mixins            Vue mixins
 .  |- plugins           Self maintained plugins
 .  |- setup             Configuration and setup of the application
-.  |- store             Vuex store and modules
+.  |- stores            Pinia stores
 .  |- styleguide        Assets, components, mock data and routes for the stylguide 
 .  |- translations      Translations for the application
 |- blueprints           File blueprints
@@ -475,7 +475,7 @@ can follow [this Instructions](https://www.jetbrains.com/help/phpstorm/using-tsl
 With the update to Vue-3 and TypeScript, some basic things have changed. The most notable are listed here:
 
 1. Use `export default defineComponent({ ... })` to define your component
-2. Global Vue Component properties need to be defiend in the `shims-xxx` files
+2. Global Vue Component properties need to be defined in the `shims-xxx` files
 3. Mixins have been replaced by Composables (Composition API)
 4. Ref Access needs to be done via Setup Method
    [read more](https://v3.vuejs.org/guide/composition-api-template-refs.html#template-refs)
@@ -489,9 +489,8 @@ With the update to Vue-3 and TypeScript, some basic things have changed. The mos
    [read more](https://v3.vuejs.org/guide/migration/v-model.html#v-model)
 9. The way how the `is` attribute works, has changed
    [read more](https://v3.vuejs.org/api/special-attributes.html#is)
-10. As the current Vuex 4 is not really working well with TypeScript (a lot of boilerplate code is needed) and Vuex 5 will come
-    with a lot of changes, we decided to temporary use a store wrapper until Vuex 5 is released
-    [read more](https://itnext.io/use-a-vuex-store-with-typing-in-typescript-without-decorators-or-boilerplate-57732d175ff3)
+10. As the successor of vuex we use Pinia store which supports Vue 3 and is also Type Safe.
+    [read more](https://pinia.vuejs.org/)
 
 For more information about the migration, read the [migration page](https://v3.vuejs.org/guide/migration/introduction.html#introduction)
 
@@ -521,74 +520,33 @@ The following issues arisen during the switch and are still open:
      - https://github.com/johnsoncodehk/vue-tsc => Does not seem to respect the tsconfig from the project
      - https://github.com/Yuyz0112/vue-type-check => Does not recognize component properties
 
-## Vuex
+## Pinia
 
-[Vuex](https://vuex.vuejs.org/en/) is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
-
-Vuex allows us to divide our store into modules and make it more scalable. In this case each module (index.js) contains its own state, mutations, actions and getters. For this project the following setup will be used:
+[Pinia](https://pinia.vuejs.org/) is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
 
 ### Modularity 
-```
-store
-  |- index.js
-  |- cart
-  | |- index.js
-  |- navigation
-  | |- index.js
-````
+Pinia is modular by design and let us divide our project into multiple stores.
 
-All `index.js` files from `app/store/modules` will be auto imported, and the file name will be converted to a camelCased module name.
+```
+stores
+  |- session.ts
+  |- notification.ts
+  |- breadcrumb.ts
+````
 
 **Note: the module name MUST be written in singular.**
 
-### Namespacing
-By default, actions, mutations and getters inside modules are still registered under the global namespace. To make sure all modules are more self-contained and reusable, we make use of the 'namespace' option, which automatically adds a prefix for the specific module.
-
-```javascript
-// store/modules/cart/index.js
-
-export default defineComponent({
-  namespaced: true,
-  state: {},
-  getters: {}, // e.g. -> getters['cart/product']
-  mutations: {},
-  actions: {},
-});
-```
-
-As the application grows it's possible to even split the module again e.g. into a structure like this:
-
-```
-store
-  |- index.js
-  |- cart
-  | |- index.js
-  | |- getters.js
-  | |- mutations.js
-  | |- actions.js
-  |- navigation
-  | |- index.js
-  | |- getters.js
-  | |- mutations.js
-  | |- actions.js
-  |- session
-  | |- index.js
-  | |- getters.js
-  | |- mutations.js
-  | |- actions.js
-```
-
 ### Prefixing
 
-We defined several prefixes you should use on Vuex getters, mutations and actions, so they can be better distinguished when used in the components.
+We defined several prefixes you should use on Pinia getters and actions, so they can be better distinguished when used in the components.
 
 #### get*
 
-Add the `get` prefix to all getters. This way it's clear in the component, that the used value is comming from Vuex.
+Add the `get` prefix to all getters. This way it's clear in the component, that the used value is comming from Pinia.
 
 #### set*
 
-Add the `set` prefix to all setters. This way it is easier to identify setters from Vuex inside components.
+Add the `set` prefix to all setters. This way it is easier to identify setters from Pinia inside components.
 
 #### api*
 
@@ -600,7 +558,7 @@ Add this prefix to actions, that handle initial data. See next section.
 
 ### Initial data
 
-To inject initial data into the Vuex store, we decided to prepare actions (since mutations are limited in regards of store actions), which handle an initial payload.
+To inject initial data into the Pinia store, we decided to prepare actions (since mutations are limited in regards of store actions), which handle an initial payload.
  
  The data is exchanged via a global JS object.
  
@@ -612,11 +570,13 @@ To inject initial data into the Vuex store, we decided to prepare actions (since
 <html>
 <body>
   <script>
-    // window.initialData = {};
+    // window.initialData = {
+    //   breadcrumb: {}
+    // };
   </script>
   ...
   <script>
-    // window.initialData['<storeModule>/<propertySetter>'] = { /* ... */ };
+    // window.initialData.breadcrumb.items = { /* ... */ };
   </script>
   <script src="vue-app.js"></script>
 </body>
