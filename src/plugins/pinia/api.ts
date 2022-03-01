@@ -58,9 +58,7 @@ export default function api():IPluginApi {
       return;
     }
 
-    notifications.forEach((notification) => {
-      notificationStore.showNotification(notification);
-    });
+    notifications.forEach(notificationStore.showNotification);
   }
 
   /**
