@@ -15,6 +15,9 @@ export interface INotificationState {
   notifications: INotificationItem[];
 }
 
+/**
+ * Default unknown error notification template.
+ */
 const NOTIFICATION_UNKNOWN_ERROR = {
   id: 0,
   type: 'error',
@@ -86,12 +89,16 @@ export const useNotificationStore = defineStore(storeName, {
   },
   actions: {
     /**
-     * Adds a notification.
+     * Shows the given notification and returns its instance.
      */
-    pushNotification(notification: INotificationItem): void {
+    showNotification(notification: INotificationItem): INotificationItem {
       handleRedirect(notification);
 
-      this.notifications.push(mapNotification(notification));
+      const mappedNotification: INotificationItem = mapNotification(notification);
+
+      this.notifications.push(mappedNotification);
+
+      return mappedNotification;
     },
 
     /**
@@ -105,7 +112,7 @@ export const useNotificationStore = defineStore(storeName, {
      * Adds an "unknown error" to the notification stack.
      */
     showUnknownError() {
-      this.pushNotification(NOTIFICATION_UNKNOWN_ERROR);
+      this.showNotification(NOTIFICATION_UNKNOWN_ERROR);
     }
   },
 });

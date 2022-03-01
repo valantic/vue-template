@@ -57,7 +57,7 @@
         const parsedNotification = notification ? JSON.parse(notification) : null;
 
         if (parsedNotification) {
-          this.notificationStore.pushNotification(parsedNotification);
+          this.notificationStore.showNotification(parsedNotification);
 
           // Clears the localStorage notifications.
           localStorage.removeItem('notification');

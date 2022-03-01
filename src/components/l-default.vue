@@ -60,7 +60,7 @@
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
             messagesParsed.forEach((message: INotificationItem) => {
-              this.notificationStore.pushNotification(message);
+              this.notificationStore.showNotification(message);
             });
 
             // Clears the localStorage notifications.

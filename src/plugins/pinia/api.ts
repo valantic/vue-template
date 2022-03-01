@@ -15,7 +15,7 @@ export interface IApi {
   delete: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
 }
 
-export interface IPluginApi {
+interface IPluginApi {
   $api: IApi,
 }
 
@@ -65,7 +65,7 @@ export default function api():IPluginApi {
     }
 
     notifications.forEach((notification) => {
-      notificationStore.pushNotification(notification);
+      notificationStore.showNotification(notification);
     });
   }
 
