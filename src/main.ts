@@ -14,7 +14,6 @@ import options from '@/setup/options';
 import plugins from '@/setup/plugins';
 
 const vueOptions = process.env.NODE_ENV !== 'production'
-
   ? { ...options, ...require('./setup/styleguide.options').options } // eslint-disable-line global-require
   : options;
 

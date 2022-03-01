@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import 'pinia';
 import { useNotificationStore, INotificationItem } from '@/stores/notification';
 
 export interface IApi {
@@ -104,7 +103,6 @@ export default function api():IPluginApi {
       /**
        * Runs a post request with a given url and payload.
        */
-      // eslint-disable-next-line max-params
       post(url, data, config) {
         return axios
           .post(url, data, config)
@@ -115,7 +113,6 @@ export default function api():IPluginApi {
       /**
        * Runs a patch request with a given url and payload.
        */
-      // eslint-disable-next-line max-params
       patch(url, data, config) {
         return axios
           .patch(url, data, config)
@@ -126,7 +123,6 @@ export default function api():IPluginApi {
       /**
        * Runs a delete request with a given url and payload.
        */
-      // eslint-disable-next-line max-params
       delete(url, config) {
         return axios
           .delete(url, config)

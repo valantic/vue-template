@@ -12,7 +12,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import { useNotificationStore, INotificationItem } from '@/stores/notification';
+  import { useNotificationStore } from '@/stores/notification';
 
   export default defineComponent({
     name: 'l-default',
