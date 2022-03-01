@@ -59,9 +59,7 @@
           const messagesParsed = messages ? JSON.parse(messages) : null;
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
-            messagesParsed.forEach((message: INotificationItem) => {
-              this.notificationStore.showNotification(message);
-            });
+            messagesParsed.forEach(this.notificationStore.showNotification);
 
             // Clears the localStorage notifications.
             window.localStorage.removeItem('notifications');
