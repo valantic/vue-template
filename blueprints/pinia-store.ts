@@ -10,7 +10,7 @@ export interface IStoreState { // TODO: update <Store>.
  */
 const storeName: string = 'Store'; // TODO: update <Store>.
 
-export const useCarStore = defineStore(storeName, {
+export default defineStore(storeName, {
   state: (): IModXxxState => { // TODO: update Interface.
     const initialData = window.initialData?.[storeName] || {};
     const { myProperty, myArray } = initialData || {};
