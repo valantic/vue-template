@@ -558,7 +558,7 @@ Add this prefix to actions, that handle initial data. See next section.
 
 ### Initial data
 
-To inject initial data into the Pinia store, we decided to prepare actions (since mutations are limited in regards of store actions), which handle an initial payload.
+To inject initial data into the Pinia store, we decided to use the setup method which is available on each Pinia store.
  
  The data is exchanged via a global JS object.
  
