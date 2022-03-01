@@ -8,7 +8,7 @@ export interface IStoreState { // TODO: update <Store>.
 /**
  * Holds the name of the store.
  */
-const storeName: string = 'car';
+const storeName: string = 'Store'; // TODO: update <Store>.
 
 export const useCarStore = defineStore(storeName, {
   state: (): IModXxxState => {
