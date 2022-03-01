@@ -1,14 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import 'pinia';
-import apiUrls from '@/setup/api-urls.json';
 import { useNotificationStore, INotificationItem } from '@/stores/notification';
 
-interface IUrlKeyValues {
-  [key: string]: string;
-}
-
 export interface IApi {
-  getUrl: (urlKey: keyof typeof apiUrls, values: IUrlKeyValues) => string;
   get: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
   post: (url: string, data?: object, config?: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
   patch: (url: string, data: object, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
@@ -99,25 +93,6 @@ export default function api():IPluginApi {
 
   return {
     $api: {
-      /**
-       * Gets the url for the given 'urlKey'. The method also accepts an Object of interpolation values.
-       */
-      getUrl(urlKey, values) {
-        let url = apiUrls[urlKey];
-
-        if (!url) {
-          throw new Error(`Unable to find an API url with the identifier ${urlKey}.`);
-        }
-
-        if (values) {
-          Object.entries(values).forEach(([key, value]) => {
-            url = url.replace(`{${key}}`, value);
-          });
-        }
-
-        return url;
-      },
-
       /**
        * Runs a get request with given url with given url params.
        */
