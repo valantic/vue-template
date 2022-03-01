@@ -1,11 +1,16 @@
 import { defineStore } from 'pinia';
 
-export interface IModSessionState {
+export interface ISessionState {
   theme: string;
 }
 
-export const useSessionStore = defineStore('session', {
-  state: () => ({
+/**
+ * Holds the name of the store.
+ */
+const storeName: string = 'session';
+
+export const useSessionStore = defineStore(storeName, {
+  state: (): ISessionState => ({
     /**
      * Stores the theme id.
      */
@@ -15,7 +20,7 @@ export const useSessionStore = defineStore('session', {
     /**
      * Gets the current theme id.
      */
-    getTheme(state: IModSessionState): string {
+    getTheme(state: ISessionState): string {
       return state.theme;
     },
   },

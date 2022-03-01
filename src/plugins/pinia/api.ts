@@ -1,8 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import 'pinia';
 import apiUrls from '@/setup/api-urls.json';
-import { INotification } from '@/types/c-notification';
-import { useNotificationStore } from '@/stores/notification';
+import { useNotificationStore, INotificationItem } from '@/stores/notification';
 
 interface IUrlKeyValues {
   [key: string]: string;
@@ -60,7 +59,7 @@ export default function api():IPluginApi {
   /**
    * Pushes an array of messages to the notification handler.
    */
-  function showNotifications(notifications: INotification[]): void {
+  function showNotifications(notifications: INotificationItem[]): void {
     if (!Array.isArray(notifications)) {
       return;
     }

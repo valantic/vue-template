@@ -9,7 +9,10 @@ export interface IBreadcrumbState {
   items: IBreadcrumbItem[];
 }
 
-const storeName = 'breadcrumb';
+/**
+ * Holds the name of the store.
+ */
+const storeName: string = 'breadcrumb';
 
 export const useBreadcrumbStore = defineStore(storeName, {
   state: (): IBreadcrumbState => {
@@ -25,6 +28,7 @@ export const useBreadcrumbStore = defineStore(storeName, {
 
     if (Array.isArray(initialData.items)) {
       state.items = initialData.items;
+      delete initialData.items;
     }
 
     return state;
@@ -33,15 +37,15 @@ export const useBreadcrumbStore = defineStore(storeName, {
     /**
      * Gets the list of current breadcrumb items.
      */
-    getItems(): IBreadcrumbItem[] {
-      return this.items;
+    getItems(state: IBreadcrumbState): IBreadcrumbItem[] {
+      return state.items;
     },
   },
   actions: {
     /**
      * Sets the list of breadcrumbs in the state.
      */
-    setItems(data: IBreadcrumbItem[]) {
+    setItems(data: IBreadcrumbItem[]): void {
       this.items = data || null;
     },
   },
