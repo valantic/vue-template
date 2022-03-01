@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-export interface IModXxxState {
+export interface IStoreState { // TODO: update <Store>.
   myProperty: string;
   myArray: string[];
 }
