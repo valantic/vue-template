@@ -43,7 +43,6 @@
         notificationStore: useNotificationStore(),
       };
     },
-
     data(): IData {
       return {
         /**

@@ -16,7 +16,6 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { mapStores } from 'pinia';
   import { useBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb';
 
   /**
@@ -29,13 +28,18 @@
     // components: {},
 
     // props: {},
+    // emits: {},
+
+    setup() {
+      return {
+        breadcrumbStore: useBreadcrumbStore(),
+      };
+    },
     // data() {
     //   return {};
     // },
 
     computed: {
-      ...mapStores(useBreadcrumbStore),
-
       /**
        * Returns an Array of breadcrumb items.
        */

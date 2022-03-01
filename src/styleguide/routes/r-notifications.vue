@@ -79,13 +79,13 @@
     components: {
       cNotificationContainer,
     },
-    // data() {},
 
     setup() {
       return {
         notificationStore: useNotificationStore(),
       };
     },
+    // data() {},
 
     // computed: {},
     // mounted() {},

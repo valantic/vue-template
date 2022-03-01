@@ -44,7 +44,6 @@
         notificationStore: useNotificationStore(),
       };
     },
-
     // data() {
     //   return {};
     // },
@@ -56,7 +55,7 @@
       filteredNotifications(): readonly INotificationItem[] {
         if (this.selector !== 'default') {
           return this.notificationStore.getNotifications
-            .filter((notification: INotificationItem) => notification.selector === this.selector);
+            .filter(notification => notification.selector === this.selector);
         }
 
         return this.notificationStore.getNotifications.filter((notification: INotificationItem) => !notification.selector);

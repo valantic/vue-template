@@ -22,14 +22,15 @@
     },
 
     // props: {},
-    // data() {
-    //   return {};
-    // },
+
     setup() {
       return {
         notificationStore: useNotificationStore(),
       };
     },
+    // data() {
+    //   return {};
+    // },
 
     // computed: {},
     // watch: {},

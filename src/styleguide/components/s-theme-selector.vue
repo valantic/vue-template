@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts">
-  import { mapStores } from 'pinia';
   import { defineComponent } from 'vue';
   import pkg from '@/../package.json';
   import { useSessionStore } from '@/stores/session';
@@ -39,6 +38,11 @@
 
     // props: {},
 
+    setup() {
+      return {
+        sessionStore: useSessionStore()
+      };
+    },
     data(): IData {
       return {
         defaultThemes: [
@@ -55,8 +59,6 @@
     },
 
     computed: {
-      ...mapStores(useSessionStore),
-
       /**
        * Returns the currently active theme.
        */
