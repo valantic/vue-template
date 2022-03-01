@@ -9,7 +9,7 @@ import 'swiper/css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import api from '@/plugins/pinia/api';
+import api from '@/stores/plugins/api';
 import options from '@/setup/options';
 import plugins from '@/setup/plugins';
 
