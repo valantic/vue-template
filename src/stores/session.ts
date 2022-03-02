@@ -1,6 +1,10 @@
 import { defineStore } from 'pinia';
 
 export interface ISessionState {
+
+  /**
+   * Stores the theme id.
+   */
   theme: string;
 }
 
@@ -10,12 +14,13 @@ export interface ISessionState {
 const storeName: string = 'session';
 
 export default defineStore(storeName, {
-  state: (): ISessionState => ({
-    /**
-     * Stores the theme id.
-     */
-    theme: '01',
-  }),
+  state: (): ISessionState => {
+    const state: ISessionState = {
+      theme: '01',
+    };
+
+    return state;
+  },
   getters: {
     /**
      * Gets the current theme id.

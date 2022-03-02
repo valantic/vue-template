@@ -6,24 +6,33 @@ export interface IBreadcrumbItem {
 }
 
 export interface IBreadcrumbState {
+
+  /**
+   * Holds the breadcrumb items.
+   */
   items: IBreadcrumbItem[];
 }
 
-/**
- * Holds the name of the store.
- */
+interface IInitialStoreDate {
+
+  /**
+   * Holds the initial breadcrumb items.
+   */
+  items?: IBreadcrumbItem[];
+}
+
 const storeName: string = 'breadcrumb';
 
 export default defineStore(storeName, {
   state: (): IBreadcrumbState => {
-    const initialData = window.initialData?.[storeName] || {};
+    const initialData: IInitialStoreDate = window.initialData?.[storeName] || {};
 
-    const state = {
+    const state: IBreadcrumbState = {
       items: [],
     };
 
     if (process.env.NODE_ENV !== 'production') {
-      state.items = require('../styleguide/mock-data/initial-data/breadcrumbs').default; // eslint-disable-line global-require
+      state.items = require('../styleguide/mock-data/initial-data/breadcrumbs').default;
     }
 
     if (Array.isArray(initialData.items)) {
@@ -37,7 +46,7 @@ export default defineStore(storeName, {
     /**
      * Gets the list of current breadcrumb items.
      */
-    getItems(state: IBreadcrumbState): IBreadcrumbItem[] {
+    getItems(state): IBreadcrumbItem[] {
       return state.items;
     },
   },

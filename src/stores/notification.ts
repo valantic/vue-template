@@ -12,26 +12,32 @@ export interface INotificationItem {
 }
 
 export interface INotificationState {
+
+  /**
+   * Holds the notification items.
+   */
   notifications: INotificationItem[];
+}
+
+interface IInitialStoreDate {
+
+  /**
+   * Holds the initial notification items.
+   */
+  notifications?: INotificationItem[];
 }
 
 /**
  * Default unknown error notification template.
  */
-const NOTIFICATION_UNKNOWN_ERROR = {
+const NOTIFICATION_UNKNOWN_ERROR: INotificationItem = {
   id: 0,
   type: 'error',
   message: i18n.global.t('globalMessages.unknownApiError'),
 };
 
-/**
- * Holds the name of the store.
- */
 const storeName: string = 'notification';
 
-/**
- * Holds the number of the most recently added notification.
- */
 let currentId: number = 1;
 
 /**
@@ -64,17 +70,14 @@ function addId(notification: INotificationItem): INotificationItem {
 
 export default defineStore(storeName, {
   state: (): INotificationState => {
-    const initialData = window.initialData?.[storeName] || {};
+    const initialData: IInitialStoreDate = window.initialData?.[storeName] || {};
 
     const state: INotificationState = {
-      /**
-       * Stores notifications.
-       */
       notifications: [],
     };
 
     if (Array.isArray(initialData.notifications) && initialData.notifications.length) {
-      state.notifications = initialData.notifications.map((notification: INotificationItem) => {
+      state.notifications = initialData.notifications.map((notification) => {
         handleRedirect(notification);
 
         return addId(notification);
@@ -100,7 +103,7 @@ export default defineStore(storeName, {
     showNotification(notification: INotificationItem): INotificationItem {
       handleRedirect(notification);
 
-      const mappedNotification: INotificationItem = addId(notification);
+      const mappedNotification = addId(notification);
 
       this.notifications.push(mappedNotification);
 

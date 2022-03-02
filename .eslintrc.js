@@ -30,6 +30,7 @@ module.exports = {
   rules: {
     ...vueRules,
     ...tsRules,
+    'global-require': 'off',
   },
   globals: {},
 };
