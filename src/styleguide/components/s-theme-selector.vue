@@ -16,7 +16,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import pkg from '@/../package.json';
-  import { useSessionStore } from '@/stores/session';
+  import sessionStore from '@/stores/session';
 
   interface ITheme {
     name: string;
@@ -40,7 +40,7 @@
 
     setup() {
       return {
-        sessionStore: useSessionStore()
+        sessionStore: sessionStore()
       };
     },
     data(): IData {

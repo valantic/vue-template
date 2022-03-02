@@ -9,7 +9,7 @@ export interface ISessionState {
  */
 const storeName: string = 'session';
 
-export const useSessionStore = defineStore(storeName, {
+export default defineStore(storeName, {
   state: (): ISessionState => ({
     /**
      * Stores the theme id.

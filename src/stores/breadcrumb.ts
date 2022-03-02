@@ -14,7 +14,7 @@ export interface IBreadcrumbState {
  */
 const storeName: string = 'breadcrumb';
 
-export const useBreadcrumbStore = defineStore(storeName, {
+export default defineStore(storeName, {
   state: (): IBreadcrumbState => {
     const initialData = window.initialData?.[storeName] || {};
 

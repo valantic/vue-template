@@ -16,7 +16,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { useBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb';
+  import breadcrumb, { IBreadcrumbItem } from '@/stores/breadcrumb';
 
   /**
    * Renders a list of breadcrumbs items from the store module.
@@ -32,7 +32,7 @@
 
     setup() {
       return {
-        breadcrumbStore: useBreadcrumbStore(),
+        breadcrumbStore: breadcrumb(),
       };
     },
     // data() {

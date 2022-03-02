@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { useNotificationStore, INotificationItem } from '@/stores/notification';
+import notificationStore, { INotificationItem } from '@/stores/notification';
 
 export interface IApi {
   get: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
@@ -47,7 +47,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default function api():IPluginApi {
-  const notificationStore = useNotificationStore();
+  const notificationStoreInstance = notificationStore();
 
   /**
    * Pushes an array of messages to the notification handler.
@@ -57,7 +57,7 @@ export default function api():IPluginApi {
       return;
     }
 
-    notifications.forEach(notificationStore.showNotification);
+    notifications.forEach(notificationStoreInstance.showNotification);
   }
 
   /**
@@ -82,7 +82,7 @@ export default function api():IPluginApi {
     if (notifications) {
       showNotifications(notifications);
     } else {
-      notificationStore.showUnknownError();
+      notificationStoreInstance.showUnknownError();
     }
 
     return Promise.reject(error);

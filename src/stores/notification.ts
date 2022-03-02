@@ -56,7 +56,7 @@ function mapNotification(notification: INotificationItem): INotificationItem {
   };
 }
 
-export const useNotificationStore = defineStore(storeName, {
+export default defineStore(storeName, {
   state: (): INotificationState => {
     const initialData = window.initialData?.[storeName] || {};
 

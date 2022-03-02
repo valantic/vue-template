@@ -12,7 +12,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotification from '@/components/c-notification.vue';
-  import { useNotificationStore, INotificationItem } from '@/stores/notification';
+  import notificationStore, { INotificationItem } from '@/stores/notification';
 
   /**
    * Container for rendering notifications. See /styleguide/notifications for demo.
@@ -41,7 +41,7 @@
 
     setup() {
       return {
-        notificationStore: useNotificationStore(),
+        notificationStore: notificationStore(),
       };
     },
     // data() {
@@ -58,7 +58,7 @@
             .filter(notification => notification.selector === this.selector);
         }
 
-        return this.notificationStore.getNotifications.filter((notification: INotificationItem) => !notification.selector);
+        return this.notificationStore.getNotifications.filter(notification => !notification.selector);
       },
     },
     // watch: {},

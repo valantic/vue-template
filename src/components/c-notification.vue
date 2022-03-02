@@ -12,7 +12,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import { useNotificationStore, INotificationItem } from '@/stores/notification';
+  import notificationStore, { INotificationItem } from '@/stores/notification';
 
   interface IData {
     expireDelay: number;
@@ -40,7 +40,7 @@
 
     setup() {
       return {
-        notificationStore: useNotificationStore(),
+        notificationStore: notificationStore(),
       };
     },
     data(): IData {
