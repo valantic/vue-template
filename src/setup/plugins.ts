@@ -1,5 +1,4 @@
 /* eslint-disable import/first */
-import VueAxios from '@/plugins/axios';
 import VueBemCn from '@/plugins/vue-bem-cn';
 import resizeEnd from '@/plugins/resize-end';
 import viewport from '@/plugins/viewport';
@@ -12,7 +11,6 @@ import components from '@/setup/components';
 export default [
   [i18n],
   [resizeEnd],
-  [VueAxios],
   [viewport],
   [VueBemCn, { // please note: if you change the VueBemCn methodName, adjust the global definition in shims-plugins.d.ts
     hyphenate: true,

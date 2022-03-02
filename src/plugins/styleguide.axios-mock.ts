@@ -1,8 +1,7 @@
 /* eslint-disable newline-per-chained-call */
 import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-extraneous-dependencies
 import { Plugin } from 'vue';
-import { AxiosRequestConfig } from 'axios';
-import { axios } from '@/plugins/axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 // Import mocks
 import notificationResponse from '@/styleguide/mock-data/api-response/notification-response';
