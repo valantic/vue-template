@@ -34,6 +34,9 @@ const storeName: string = 'notification';
  */
 let currentId: number = 1;
 
+/**
+ * Handles notification redirects.
+ */
 function handleRedirect(notification: INotificationItem): void {
   const { redirectUrl } = notification || {};
 
@@ -47,7 +50,10 @@ function handleRedirect(notification: INotificationItem): void {
   }
 }
 
-function mapNotification(notification: INotificationItem): INotificationItem {
+/**
+ * Adds a unique ID to a notification.
+ */
+function addId(notification: INotificationItem): INotificationItem {
   currentId += 1;
 
   return {
@@ -71,7 +77,7 @@ export default defineStore(storeName, {
       state.notifications = initialData.notifications.map((notification: INotificationItem) => {
         handleRedirect(notification);
 
-        return mapNotification(notification);
+        return addId(notification);
       });
 
       delete initialData.notifications;
@@ -83,7 +89,7 @@ export default defineStore(storeName, {
     /**
      * Gets the current list of notifications.
      */
-    getNotifications(state: INotificationState): INotificationItem[] {
+    getNotifications(state): INotificationItem[] {
       return state.notifications;
     },
   },
@@ -94,7 +100,7 @@ export default defineStore(storeName, {
     showNotification(notification: INotificationItem): INotificationItem {
       handleRedirect(notification);
 
-      const mappedNotification: INotificationItem = mapNotification(notification);
+      const mappedNotification: INotificationItem = addId(notification);
 
       this.notifications.push(mappedNotification);
 
@@ -105,7 +111,7 @@ export default defineStore(storeName, {
      * Removes a notification.
      */
     popNotification(id: number): void {
-      this.notifications = this.notifications.filter((notification: INotificationItem) => notification.id !== id);
+      this.notifications = this.notifications.filter(notification => notification.id !== id);
     },
 
     /**

@@ -2,9 +2,25 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import notificationStore, { INotificationItem } from '@/stores/notification';
 
 export interface IApi {
+
+  /**
+   * Runs a get request with given url with given url params.
+   */
   get: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
+
+  /**
+   * Runs a post request with a given url and payload.
+   */
   post: (url: string, data?: object, config?: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
+
+  /**
+   * Runs a patch request with a given url and payload.
+   */
   patch: (url: string, data: object, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
+
+  /**
+   * Runs a delete request with a given url and payload.
+   */
   delete: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
 }
 
@@ -90,9 +106,6 @@ export default function api():IPluginApi {
 
   return {
     $api: {
-      /**
-       * Runs a get request with given url with given url params.
-       */
       get(url, config) {
         return axios
           .get(url, config)
@@ -100,9 +113,6 @@ export default function api():IPluginApi {
           .catch(error => handleError(error));
       },
 
-      /**
-       * Runs a post request with a given url and payload.
-       */
       post(url, data, config) {
         return axios
           .post(url, data, config)
@@ -110,9 +120,6 @@ export default function api():IPluginApi {
           .catch(error => handleError(error));
       },
 
-      /**
-       * Runs a patch request with a given url and payload.
-       */
       patch(url, data, config) {
         return axios
           .patch(url, data, config)
@@ -120,9 +127,6 @@ export default function api():IPluginApi {
           .catch(error => handleError(error));
       },
 
-      /**
-       * Runs a delete request with a given url and payload.
-       */
       delete(url, config) {
         return axios
           .delete(url, config)
