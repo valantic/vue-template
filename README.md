@@ -542,7 +542,7 @@ We defined several prefixes you should use on Pinia getters and actions, so they
 
 #### get*
 
-Add the `get` prefix to all getters. This way it's clear in the component, that the used value is comming from Pinia.
+Add the `get` prefix to all getters. This way it's clear in the component, that the used value is coming from Pinia.
 
 #### set*
 
@@ -566,35 +566,21 @@ To inject initial data into the Pinia store, we decided to use the setup method 
  
  See also `/index.html` as an example.
 
-```html
+```
 <html>
 <body>
   <script>
-    // window.initialData = {
-    //   breadcrumb: {}
-    // };
+    window.initialData = {
+      breadcrumb: {}
+    };
   </script>
   ...
   <script>
-    // window.initialData.breadcrumb.items = { /* ... */ };
+    window.initialData.breadcrumb.items = { /* ... */ };
   </script>
   <script src="vue-app.js"></script>
 </body>
 </html>
-```
-
-```javascript
-// @/store/index.js
-
-const data = window.initialData || {};
-
-// ...
-
-Object.keys(data).forEach((action) => {
-  store.dispatch(action, data[action]);
-});
-
-window.initialData = {};
 ```
 
 #### Props
