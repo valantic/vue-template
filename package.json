@@ -2,6 +2,7 @@
   "name": "vue-template",
   "version": "7.0.0",
   "description": "A customized Vue.js project template",
+  "lastDependencyUpdate": "17.11.2021",
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "webpack-dev-server --mode development",
@@ -86,6 +87,7 @@
     "@types/webpack-env": "~1.16.0",
     "@typescript-eslint/eslint-plugin": "~5.4.0",
     "@typescript-eslint/parser": "~5.4.0",
+    "@valantic/webpack-dependency-hint": "~1.0.2",
     "@vue/eslint-config-typescript": "~9.1.0",
     "@vue/test-utils": "~2.0.0-rc.15",
     "@vue/vue3-jest": "~27.0.0-alpha.3",

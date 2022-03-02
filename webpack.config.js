@@ -16,6 +16,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const pkg = require('./package.json');
 const TerserPlugin = require('terser-webpack-plugin');
+const WebpackDependencyHint = require('@valantic/webpack-dependency-hint');
 
 /**
  * A note about [contenthash]: Using the hash in query could cause troubles with caching proxies. Therefore
@@ -86,6 +87,7 @@ module.exports = (env, args = {}) => {
       : buildPath;
 
   // webpack configuration variables
+  const isBuild = isProduction || isStyleguideBuild;
   const prefix = filePrefix ? `${filePrefix}.` : '';
   const extensions = ['.js', '.vue', '.json', '.ts'];
   const alias = {
@@ -149,8 +151,8 @@ module.exports = (env, args = {}) => {
     new VueLoaderPlugin(), // *.vue file parser.
 
     new MiniCssExtractPlugin({ // Extract CSS code
-      chunkFilename: `${outputAssetsFolder}css/${prefix}[name].[id].[chunkhash].css`,
-      filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction || isStyleguideBuild ? '.[chunkhash]' : ''}.css`,
+      chunkFilename: `${outputAssetsFolder}css/${prefix}[name].[id]${isBuild ? '.[chunkhash]' : ''}.css`, // Using chunkhash in dev mode will cause trouble with hot-reload.
+      filename: `${outputAssetsFolder}css/${prefix}[name]${isBuild ? '.[chunkhash]' : ''}.css`,
     }),
 
     new HtmlWebpackPlugin({ // Script and style tag injection.
@@ -171,13 +173,17 @@ module.exports = (env, args = {}) => {
         '**/*.scss',
       ],
     }),
+
+    new WebpackDependencyHint({
+      lastUpdate: pkg.lastDependencyUpdate,
+    })
   ];
 
   if (showProfile) {
     plugins.push(new BundleAnalyzerPlugin());
   }
 
-  if (isProduction || isStyleguideBuild) {
+  if (isBuild) {
     plugins.push(
       new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
         cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
@@ -252,7 +258,7 @@ module.exports = (env, args = {}) => {
   }
 
   const assetModulesFileName = function (pathData, assetType) {
-    const hash = isProduction || isStyleguideBuild ? '.[contenthash]' : '';
+    const hash = isBuild ? '.[contenthash]' : '';
     let subDirPath = '';
 
     // pathData.module.context contains the absolute path to the module
@@ -301,7 +307,7 @@ module.exports = (env, args = {}) => {
         {
           loader: MiniCssExtractPlugin.loader,
           options: {
-            publicPath: isProduction || isStyleguideBuild ? productionPath : '/',
+            publicPath: isBuild ? productionPath : '/',
             esModule: false, // Should be removed in the future but was required as of 2021-04-23.
           },
         },
@@ -421,7 +427,7 @@ module.exports = (env, args = {}) => {
     },
     output: {
       path: path.resolve(__dirname, outputPath),
-      filename: isProduction || isStyleguideBuild ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
+      filename: isBuild ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js`,
       publicPath,
     },
