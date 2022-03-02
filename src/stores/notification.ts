@@ -1,4 +1,9 @@
-import { defineStore } from 'pinia';
+import {
+  _GettersTree,
+  defineStore,
+  StateTree,
+  Store
+} from 'pinia';
 import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 
@@ -11,7 +16,7 @@ export interface INotificationItem {
   redirectUrl?: string;
 }
 
-export interface INotificationState {
+export interface INotificationState extends StateTree {
 
   /**
    * Holds the notification items.
@@ -19,7 +24,19 @@ export interface INotificationState {
   notifications: INotificationItem[];
 }
 
-interface IInitialStoreDate {
+export interface INotificationGetters extends _GettersTree<INotificationState> {
+  getNotifications: (state: INotificationState) => INotificationItem[];
+}
+
+export interface INotificationActions {
+  showNotification: (notificationItem: INotificationItem) => INotificationItem;
+  popNotification: (id: number) => void;
+  showUnknownError: () => void;
+}
+
+export type TNotificationStore = Store<string, INotificationState, INotificationGetters, INotificationActions>;
+
+interface IInitialStoreData {
 
   /**
    * Holds the initial notification items.
@@ -68,9 +85,10 @@ function addId(notification: INotificationItem): INotificationItem {
   };
 }
 
-export default defineStore(storeName, {
+// eslint-disable-next-line max-len
+export const useNotificationStore = defineStore<typeof storeName, INotificationState, INotificationGetters, INotificationActions>(storeName, {
   state: (): INotificationState => {
-    const initialData: IInitialStoreDate = window.initialData?.[storeName] || {};
+    const initialData: IInitialStoreData = window.initialData?.[storeName] || {};
 
     const state: INotificationState = {
       notifications: [],

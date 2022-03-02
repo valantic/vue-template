@@ -11,7 +11,11 @@
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
-  import notificationStore from '@/stores/notification';
+  import { TNotificationStore, useNotificationStore } from '@/stores/notification';
+
+  interface ISetup {
+    notificationStore: TNotificationStore
+  }
 
   export default defineComponent({
     name: 'app',
@@ -23,9 +27,9 @@
 
     // props: {},
 
-    setup() {
+    setup(): ISetup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     // data() {

@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import notificationStore, { INotificationItem } from '@/stores/notification';
+import { INotificationItem, useNotificationStore } from '@/stores/notification';
 
 export interface IApi {
 
@@ -63,7 +63,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default function api():IPluginApi {
-  const notificationStoreInstance = notificationStore();
+  const notificationStoreInstance = useNotificationStore();
 
   /**
    * Pushes an array of messages to the notification handler.

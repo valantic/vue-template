@@ -72,7 +72,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import notificationStore from '@/stores/notification';
+  import { TNotificationStore, useNotificationStore } from '@/stores/notification';
+
+  interface ISetup {
+    notificationStore: TNotificationStore
+  }
 
   export default defineComponent({
     name: 'r-notifications',
@@ -80,9 +84,9 @@
       cNotificationContainer,
     },
 
-    setup() {
+    setup(): ISetup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     // data() {},
