@@ -10,7 +10,7 @@ export interface IBreadcrumbItem {
   url: string;
 }
 
-export interface IBreadcrumbState extends StateTree {
+interface IBreadcrumbState extends StateTree {
 
   /**
    * Holds the breadcrumb items.

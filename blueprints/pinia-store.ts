@@ -1,11 +1,28 @@
-import { defineStore } from 'pinia';
+import {
+  Store,
+  defineStore,
+  StateTree,
+  _GettersTree,
+} from 'pinia';
 
-export interface IStoreState {} // TODO: update <Store>.
+interface IMyStoreState extends StateTree { // TODO: update <MyStore>.
+  // Add types for the state.
+}
 
-const storeName: string = 'Store'; // TODO: update <Store>.
+interface IMyStoreGetters extends _GettersTree<IMyStoreState> { // TODO: update <MyStore>.
+  // Add types for the store getters.
+}
 
-export default defineStore(storeName, {
-  state: (): IStoreState => ({}),
+interface IMyStoreActions { // TODO: update <MyStore>.
+  // Add types for the store actions.
+}
+
+export interface IMyStore {} // TODO: update <MyStore>.
+
+const storeName: string = 'MyStore'; // TODO: update <MyStore>.
+
+export default defineStore<typeof storeName, IMyStoreState, IMyStoreGetters, IMyStoreActions>(storeName, {
+  state: (): IMyStoreState => ({}),
   getters: {},
   actions: {},
 });

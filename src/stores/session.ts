@@ -5,7 +5,7 @@ import {
   _GettersTree,
 } from 'pinia';
 
-export interface ISessionState extends StateTree {
+interface ISessionState extends StateTree {
 
   /**
    * Stores the theme id.
