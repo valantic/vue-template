@@ -12,7 +12,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotification from '@/components/c-notification.vue';
-  import { INotificationItem, TNotificationStore, useNotificationStore } from '@/stores/notification';
+  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -45,7 +45,7 @@
 
     setup(): ISetup {
       return {
-        notificationStore: useNotificationStore(),
+        notificationStore: notificationStore(),
       };
     },
     // data() {

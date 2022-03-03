@@ -1,6 +1,11 @@
-import { defineStore } from 'pinia';
+import {
+  Store,
+  defineStore,
+  StateTree,
+  _GettersTree,
+} from 'pinia';
 
-export interface ISessionState {
+export interface ISessionState extends StateTree {
 
   /**
    * Stores the theme id.
@@ -8,12 +13,27 @@ export interface ISessionState {
   theme: string;
 }
 
-/**
- * Holds the name of the store.
- */
+interface ISessionGetters extends _GettersTree<ISessionState> {
+
+  /**
+   * Gets the current theme id.
+   */
+  getTheme: (state: ISessionState) => string,
+}
+
+interface ISessionActions {
+
+  /**
+   * Removes a notification.
+   */
+  setTheme: (id: string) => void;
+}
+
+export type TSessionStore = Store<string, ISessionState, ISessionGetters, ISessionActions>;
+
 const storeName: string = 'session';
 
-export default defineStore(storeName, {
+export default defineStore<typeof storeName, ISessionState, ISessionGetters, ISessionActions>(storeName, {
   state: (): ISessionState => {
     const state: ISessionState = {
       theme: '01',
@@ -22,18 +42,12 @@ export default defineStore(storeName, {
     return state;
   },
   getters: {
-    /**
-     * Gets the current theme id.
-     */
-    getTheme(state: ISessionState): string {
+    getTheme(state): string {
       return state.theme;
     },
   },
   actions: {
-    /**
-     * Sets the global theme id.
-     */
-    setTheme(id: string): void {
+    setTheme(id) {
       this.theme = id;
     },
   },

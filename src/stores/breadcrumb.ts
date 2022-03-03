@@ -1,17 +1,40 @@
-import { defineStore } from 'pinia';
+import {
+  Store,
+  defineStore,
+  StateTree,
+  _GettersTree,
+} from 'pinia';
 
 export interface IBreadcrumbItem {
   name: string;
   url: string;
 }
 
-export interface IBreadcrumbState {
+export interface IBreadcrumbState extends StateTree {
 
   /**
    * Holds the breadcrumb items.
    */
   items: IBreadcrumbItem[];
 }
+
+interface IBreadcrumbGetters extends _GettersTree<IBreadcrumbState> {
+
+  /**
+   * Gets the list of current breadcrumb items.
+   */
+  getItems: (state: IBreadcrumbState) => IBreadcrumbItem[];
+}
+
+interface IBreadcrumbActions {
+
+  /**
+   * Sets the list of breadcrumbs in the state.
+   */
+  setItems: (data: IBreadcrumbItem[]) => void;
+}
+
+export type TBreadcrumbStore = Store<string, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>;
 
 interface IInitialStoreDate {
 
@@ -23,7 +46,7 @@ interface IInitialStoreDate {
 
 const storeName: string = 'breadcrumb';
 
-export default defineStore(storeName, {
+export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>(storeName, {
   state: (): IBreadcrumbState => {
     const initialData: IInitialStoreDate = window.initialData?.[storeName] || {};
 
@@ -43,18 +66,12 @@ export default defineStore(storeName, {
     return state;
   },
   getters: {
-    /**
-     * Gets the list of current breadcrumb items.
-     */
-    getItems(state): IBreadcrumbItem[] {
+    getItems(state) {
       return state.items;
     },
   },
   actions: {
-    /**
-     * Sets the list of breadcrumbs in the state.
-     */
-    setItems(data: IBreadcrumbItem[]): void {
+    setItems(data): void {
       this.items = data || null;
     },
   },

@@ -16,7 +16,11 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import breadcrumb, { IBreadcrumbItem } from '@/stores/breadcrumb';
+  import breadcrumb, { TBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb';
+
+  interface ISetup {
+    breadcrumbStore: TBreadcrumbStore
+  }
 
   /**
    * Renders a list of breadcrumbs items from the store module.
@@ -30,7 +34,7 @@
     // props: {},
     // emits: {},
 
-    setup() {
+    setup(): ISetup {
       return {
         breadcrumbStore: breadcrumb(),
       };

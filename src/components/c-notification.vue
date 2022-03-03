@@ -12,7 +12,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import { INotificationItem, TNotificationStore, useNotificationStore } from '@/stores/notification';
+  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -44,7 +44,7 @@
 
     setup(): ISetup {
       return {
-        notificationStore: useNotificationStore(),
+        notificationStore: notificationStore(),
       };
     },
     data(): IData {

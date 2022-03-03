@@ -1,8 +1,8 @@
 import {
-  _GettersTree,
+  Store,
   defineStore,
   StateTree,
-  Store
+  _GettersTree,
 } from 'pinia';
 import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
 import i18n from '@/setup/i18n';
@@ -16,7 +16,7 @@ export interface INotificationItem {
   redirectUrl?: string;
 }
 
-export interface INotificationState extends StateTree {
+interface INotificationState extends StateTree {
 
   /**
    * Holds the notification items.
@@ -24,13 +24,29 @@ export interface INotificationState extends StateTree {
   notifications: INotificationItem[];
 }
 
-export interface INotificationGetters extends _GettersTree<INotificationState> {
+interface INotificationGetters extends _GettersTree<INotificationState> {
+
+  /**
+   * Gets the current list of notifications.
+   */
   getNotifications: (state: INotificationState) => INotificationItem[];
 }
 
-export interface INotificationActions {
+interface INotificationActions {
+
+  /**
+   * Shows the given notification and returns its instance.
+   */
   showNotification: (notificationItem: INotificationItem) => INotificationItem;
+
+  /**
+   * Removes a notification.
+   */
   popNotification: (id: number) => void;
+
+  /**
+   * Adds an "unknown error" to the notification stack.
+   */
   showUnknownError: () => void;
 }
 
@@ -85,8 +101,7 @@ function addId(notification: INotificationItem): INotificationItem {
   };
 }
 
-// eslint-disable-next-line max-len
-export const useNotificationStore = defineStore<typeof storeName, INotificationState, INotificationGetters, INotificationActions>(storeName, {
+export default defineStore<typeof storeName, INotificationState, INotificationGetters, INotificationActions>(storeName, {
   state: (): INotificationState => {
     const initialData: IInitialStoreData = window.initialData?.[storeName] || {};
 
@@ -107,18 +122,12 @@ export const useNotificationStore = defineStore<typeof storeName, INotificationS
     return state;
   },
   getters: {
-    /**
-     * Gets the current list of notifications.
-     */
-    getNotifications(state): INotificationItem[] {
+    getNotifications(state) {
       return state.notifications;
     },
   },
   actions: {
-    /**
-     * Shows the given notification and returns its instance.
-     */
-    showNotification(notification: INotificationItem): INotificationItem {
+    showNotification(notification) {
       handleRedirect(notification);
 
       const mappedNotification = addId(notification);
@@ -128,18 +137,12 @@ export const useNotificationStore = defineStore<typeof storeName, INotificationS
       return mappedNotification;
     },
 
-    /**
-     * Removes a notification.
-     */
-    popNotification(id: number): void {
+    popNotification(id) {
       this.notifications = this.notifications.filter(notification => notification.id !== id);
     },
 
-    /**
-     * Adds an "unknown error" to the notification stack.
-     */
     showUnknownError() {
       this.showNotification(NOTIFICATION_UNKNOWN_ERROR);
-    }
+    },
   },
 });

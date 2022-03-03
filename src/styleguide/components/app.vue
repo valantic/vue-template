@@ -11,7 +11,7 @@
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
-  import { TNotificationStore, useNotificationStore } from '@/stores/notification';
+  import notificationStore, { TNotificationStore } from '@/stores/notification';
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -29,7 +29,7 @@
 
     setup(): ISetup {
       return {
-        notificationStore: useNotificationStore(),
+        notificationStore: notificationStore(),
       };
     },
     // data() {

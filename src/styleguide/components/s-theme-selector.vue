@@ -16,7 +16,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import pkg from '@/../package.json';
-  import sessionStore from '@/stores/session';
+  import sessionStore, { TSessionStore } from '@/stores/session';
 
   interface ITheme {
     name: string;
@@ -26,6 +26,10 @@
 
   interface IData {
     defaultThemes: ITheme[];
+  }
+
+  interface ISetup {
+    sessionStore: TSessionStore
   }
 
   const themePath = `/${pkg.webpack.outputAssetsFolder}css/${pkg.webpack.filePrefix}theme-`;
@@ -38,7 +42,7 @@
 
     // props: {},
 
-    setup() {
+    setup(): ISetup {
       return {
         sessionStore: sessionStore()
       };
