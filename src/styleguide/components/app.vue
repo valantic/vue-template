@@ -57,14 +57,14 @@
        * Gets localStorage messages and pushes them in the notification store to display.
        */
       getNotificationFromStorage() {
-        const notification = IS_STORAGE_AVAILABLE && localStorage.getItem('notification');
+        const notification = IS_STORAGE_AVAILABLE && localStorage.getItem('vueNotification');
         const parsedNotification = notification ? JSON.parse(notification) : null;
 
         if (parsedNotification) {
           this.notificationStore.showNotification(parsedNotification);
 
           // Clears the localStorage notifications.
-          localStorage.removeItem('notification');
+          localStorage.removeItem('vueNotification');
         }
       },
     },

@@ -59,14 +59,14 @@
        */
       getNotificationsFromStorage() {
         try {
-          const messages = window.localStorage.getItem('notifications');
+          const messages = window.localStorage.getItem('vueNotification');
           const messagesParsed = messages ? JSON.parse(messages) : null;
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
             messagesParsed.forEach(this.notificationStore.showNotification);
 
             // Clears the localStorage notifications.
-            window.localStorage.removeItem('notifications');
+            window.localStorage.removeItem('vueNotification');
           }
         } catch (error) {
           throw new Error('An error occurred why retrieving messages from the localStorage.');
