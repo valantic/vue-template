@@ -6,18 +6,19 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
   import { availableStatus } from '@/plugins/styleguide.status-label';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Creates a status label which can be used to document component development status.
    */
-  export default {
+  export default defineComponent({
     name: 's-status',
     status: 1,
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -26,11 +27,9 @@
        * Valid values: `[0, 1]`
        */
       modifier: {
-        type: [String, Number],
+        type: [Number],
         default: null,
-        validator(value) {
-          return !!availableStatus[value];
-        }
+        validator: (value: number) => !!availableStatus[value]
       }
     },
     // data() {
@@ -40,12 +39,10 @@
     computed: {
       /**
        * Returns a configuration Object for modifier classes.
-       *
-       * @returns {Object}
        */
-      modifiers() {
+      modifiers(): IModifiers {
         const modifier = availableStatus[this.modifier];
-        const modifiers = {};
+        const modifiers: IModifiers = {};
 
         if (modifier) {
           modifiers[modifier.modifier] = true;
@@ -64,12 +61,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
@@ -84,7 +81,7 @@
     top: 30px;
     z-index: 1;
     padding-right: variables.$spacing--30;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 50%);
 
     &__inner {
       display: inline-block;

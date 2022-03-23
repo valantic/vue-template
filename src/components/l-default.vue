@@ -6,23 +6,33 @@
         <slot></slot>
       </div>
     </div>
-    <portal-target name="modal-container" multiple />
   </div>
 </template>
 
-<script>
-  import cNotificationContainer from '@/components/c-notification-container';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import cNotificationContainer from '@/components/c-notification-container.vue';
+  import notificationStore, { TNotificationStore } from '@/stores/notification';
 
-  export default {
+  interface ISetup {
+    notificationStore: TNotificationStore
+  }
+
+  export default defineComponent({
     name: 'l-default',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cNotificationContainer,
     },
-    // mixins: [],
 
     // props: {},
+
+    setup(): ISetup {
+      return {
+        notificationStore: notificationStore(),
+      };
+    },
     // data() {
     //   return {};
     // },
@@ -40,26 +50,23 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
-
       /**
        * Gets localStorage messages and pushes them in the notification store to display.
        */
       getNotificationsFromStorage() {
         try {
-          const messages = window.localStorage.getItem('notifications');
+          const messages = window.localStorage.getItem('vueNotification');
           const messagesParsed = messages ? JSON.parse(messages) : null;
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
-            messagesParsed.forEach((message) => {
-              this.pushNotification({ message });
-            });
+            messagesParsed.forEach(this.notificationStore.showNotification);
 
             // Clears the localStorage notifications.
-            window.localStorage.removeItem('notifications');
+            window.localStorage.removeItem('vueNotification');
           }
         } catch (error) {
           throw new Error('An error occurred why retrieving messages from the localStorage.');
@@ -67,7 +74,7 @@
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

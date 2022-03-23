@@ -47,23 +47,15 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core
 - [core-js](https://www.npmjs.com/package/core-js) - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.
   > core, polyfill
-- [css-vars-ponyfill](https://www.npmjs.com/package/css-vars-ponyfill) - A ponyfill that provides client-side support for CSS custom properties (aka "CSS variables") in legacy and modern browsers.
-  > core, polyfill, ie11
 - [dayjs](https://www.npmjs.com/package/dayjs) - Fast 2kB alternative to Moment.js with the same modern API.
   > c-date-picker-input, c-date-picker-range
-- [picturefill](https://www.npmjs.com/package/picturefill) - A responsive image polyfill.
-  > core, polyfill, ie11
-- [portal-vue](https://www.npmjs.com/package/portal-vue) - A Portal Component for Vuejs, to render DOM outside of a component, anywhere in the document.
-  > c-modal
 - [swiper](https://www.npmjs.com/package/swiper) - Swiper is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.
   > c-swiper-modal, c-swiper-gallery, c-swiper-hero
 - [vue](https://www.npmjs.com/package/vue) - Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
   > core
 - [vue-i18n](https://www.npmjs.com/package/vue-i18n) - Internationalization plugin for Vue.js
   > core
-- [vue-js-modal](https://www.npmjs.com/package/vue-js-modal) - https://github.com/euvl/vue-js-modal
-  > c-modal
-- [vuex](https://www.npmjs.com/package/vuex) - Centralized State Management for Vue.js.
+- [pinia](https://www.npmjs.com/package/pinia) - Centralized State Management for Vue.js.
   > core
 - [vuelidate](https://github.com/vuelidate/vuelidate) - Simple, lightweight model-based validation for Vue.js.
   > core
@@ -76,12 +68,16 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 ### Template
 - [@babel/core](https://www.npmjs.com/package/@babel/core) - JS compiler to create ES5 code from ES2015+.
   > webpack
-- [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser) - babel-eslint allows you to lint ALL valid Babel code with the fantastic ESLint.
-  > eslint
 - [@babel/plugin-syntax-dynamic-import](https://www.npmjs.com/package/@babel/plugin-syntax-dynamic-import) - Makes @babel/core understand the not yet standardized import() syntax.
   > webpack
 - [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env) - Transform preset, which will transform the input code according to browserlist settings in package.json
   > webpack
+- [@typescript-eslint/eslint-plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin) - An ESLint plugin which provides lint rules for TypeScript codebases.
+  > eslint
+- [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser) - An ESLint parser which leverages TypeScript ESTree to allow for ESLint to lint TypeScript source code.
+  > eslint
+- [@vue/eslint-config-typescript](https://www.npmjs.com/package/@vue/eslint-config-typescript) - This ruleset is the base configuration for Vue-TypeScript projects.
+  > eslint
 - [@vue/test-utils](https://www.npmjs.com/package/@vue/test-utils) - The official test library for Vue.js.
   > test environment
 - [autoprefixer](https://www.npmjs.com/package/autoprefixer) - PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from caniuse.com.
@@ -94,6 +90,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > test environment
 - [babel-loader](https://www.npmjs.com/package/babel-loader) - This package allows transpiling JavaScript files using Babel and webpack.
   > webpack
+- [babel-plugin-transform-require-context](https://www.npmjs.com/package/babel-plugin-transform-require-context) - A Babel plugin that transforms webpack-specific require.context() into dummy function calls so that the code can run safely outside of the webpack environment
+  > jest
 - [clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin) - A webpack plugin to remove/clean your build folder(s).
   > webpack
 - [css-loader](https://www.npmjs.com/package/css-loader) - The css-loader interprets @import and url() like import/require() and will resolve them.
@@ -112,8 +110,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > eslint
 - [eslint-plugin-vue](https://www.npmjs.com/package/eslint-plugin-vue) - Official ESLint plugin for Vue.js
   > eslint
-- [eslint-webpack-plugin](https://www.npmjs.com/package/eslint-webpack-plugin) - A ESLint plugin for webpack.
-  > webpack, eslint
 - [faker](https://www.npmjs.com/package/faker) - Generate massive amounts of fake data in the browser and node.js.
   > development environment, mock data
 - [file-loader](https://www.npmjs.com/package/file-loader) - The file-loader resolves import/require() on a file into a url and emits the file into the output directory.
@@ -159,6 +155,12 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 - [svg4everybody](https://www.npmjs.com/package/svg4everybody) - SVG for Everybody adds SVG External Content support to all browsers.
   > svg icon sprite
 - [terser-webpack-plugin](https://www.npmjs.com/package/terser-webpack-plugin) - This plugin uses terser to minify your JavaScript.
+  > webpack
+- [ts-jest](https://www.npmjs.com/package/ts-jest) - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript.
+  > jest
+- [ts-loader](https://www.npmjs.com/package/ts-loader) - This package allows showing typescript Errors and transpiling Typescript files to Javascript files using typescript and webpack.
+  > webpack
+- [typescript](https://www.typescriptlang.org/) - Basic Package to write Code in Typescript.
   > webpack
 - [vue-jest](https://www.npmjs.com/package/vue-jest) - Jest Vue transformer with source map support.
   > test environment

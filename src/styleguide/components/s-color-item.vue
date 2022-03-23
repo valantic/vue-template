@@ -17,17 +17,17 @@
   </div>
 </template>
 
-<script>
-  import sColorSpecimen from './s-color-specimen';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import sColorSpecimen from './s-color-specimen.vue';
 
-  export default {
+  export default defineComponent({
     name: 's-color-item',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sColorSpecimen
     },
-    // mixins: [],
 
     props: {
 
@@ -56,10 +56,8 @@
     computed: {
       /**
        * Returns the headline for the component.
-       *
-       * @returns {String}
        */
-      headline() {
+      headline(): string {
         return `${this.palette} colors`;
       }
     },
@@ -73,12 +71,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

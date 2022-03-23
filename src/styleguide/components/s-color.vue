@@ -9,18 +9,18 @@
   </div>
 </template>
 
-<script>
-  import colors from '../../setup/js/color';
-  import sColorItem from './s-color-item';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import colors, { IColors } from '../../setup/js/color';
+  import sColorItem from './s-color-item.vue';
 
-  export default {
+  export default defineComponent({
     name: 's-color',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sColorItem
     },
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -30,19 +30,15 @@
     computed: {
       /**
        * Returns an Object of color lists.
-       *
-       * @returns {Object}
        */
-      colors() {
+      colors(): IColors {
         return colors;
       },
 
       /**
        * Returns an Array of color palette names.
-       *
-       * @returns {Array.<String>}
        */
-      palettes() {
+      palettes(): string[] {
         return Object.keys(colors);
       }
     },
@@ -56,13 +52,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
-
+  });
 </script>
 
 <style lang="scss">

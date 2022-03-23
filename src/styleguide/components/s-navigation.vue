@@ -41,13 +41,19 @@
   </div>
 </template>
 
-<script>
-  import sLanguage from './s-language';
-  import sThemeSelector from './s-theme-selector';
-  import sDemoSettings from './s-demo-settings';
-  import sNavigationBlock from './s-navigation-block';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import sLanguage from './s-language.vue';
+  import sThemeSelector from './s-theme-selector.vue';
+  import sDemoSettings from './s-demo-settings.vue';
+  import sNavigationBlock from './s-navigation-block.vue';
 
-  export default {
+  interface IData {
+    isOpen: boolean;
+  }
+
+  export default defineComponent({
     name: 's-navigation',
     status: 0, // TODO: remove when component was prepared for current project.
 
@@ -64,28 +70,24 @@
       navPosition: {
         type: String,
         default: 'top-right',
-        validator(value) {
-          return [
-            'top-left',
-            'top-right',
-            'bottom-right',
-            'bottom-left',
-          ].includes(value);
-        },
+        validator: (value: string) => [
+          'top-left',
+          'top-right',
+          'bottom-right',
+          'bottom-left',
+        ].includes(value),
       },
     },
-    data() {
+    data(): IData {
       return {
         isOpen: false,
       };
     },
     computed: {
       /**
-       * Returns the styleguidest url, based on the current environment.
-       *
-       * @returns {String}
+       * Returns the styleguideist url, based on the current environment.
        */
-      styleguidistUrl() {
+      styleguidistUrl(): string {
         return process.env.IS_STYLEGUIDE_BUILD
           ? '/styleguidist'
           : '//localhost:6060';
@@ -93,10 +95,8 @@
 
       /**
        * Returns all modifiers for the wrapper class.
-       *
-       * @returns {Object}
        */
-      wrapperModifiers() {
+      wrapperModifiers(): IModifiers {
         return {
           position: this.navPosition,
           open: this.isOpen,
@@ -111,7 +111,7 @@
         this.isOpen = !this.isOpen;
       }
     }
-  };
+  });
 </script>
 
 <style lang="scss">

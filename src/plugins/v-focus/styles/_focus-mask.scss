@@ -4,7 +4,7 @@
   &::before {
     @include z-index(focusOverlay);
 
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     top: 0;

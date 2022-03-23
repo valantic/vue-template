@@ -9,21 +9,25 @@
   </div>
 </template>
 
-<script>
-  import { mapGetters } from 'vuex';
-  import cNotification from '@/components/c-notification';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import cNotification from '@/components/c-notification.vue';
+  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
+
+  interface ISetup {
+    notificationStore: TNotificationStore
+  }
 
   /**
    * Container for rendering notifications. See /styleguide/notifications for demo.
    */
-  export default {
+  export default defineComponent({
     name: 'c-notification-container',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cNotification,
     },
-    // mixins: [],
 
     props: {
       /**
@@ -32,34 +36,33 @@
       selector: {
         type: String,
         default: 'default',
-        validator(value) {
-          return [
-            'default',
-            'footer',
-          ].includes(value);
-        }
+        validator: (value: string) => [
+          'default',
+          'footer',
+        ].includes(value)
       }
+    },
+
+    setup(): ISetup {
+      return {
+        notificationStore: notificationStore(),
+      };
     },
     // data() {
     //   return {};
     // },
 
     computed: {
-      ...mapGetters('notification', [
-        'getNotifications',
-      ]),
-
       /**
        * Gets the filtered notifications depending on the selector.
-       *
-       * @returns {Array.<Object>}
        */
-      filteredNotifications() {
+      filteredNotifications(): readonly INotificationItem[] {
         if (this.selector !== 'default') {
-          return this.getNotifications.filter(notification => notification.selector === this.selector);
+          return this.notificationStore.getNotifications
+            .filter(notification => notification.selector === this.selector);
         }
 
-        return this.getNotifications.filter(notification => !notification.selector);
+        return this.notificationStore.getNotifications.filter(notification => !notification.selector);
       },
     },
     // watch: {},
@@ -72,12 +75,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

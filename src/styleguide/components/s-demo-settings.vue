@@ -4,34 +4,44 @@
       <s-toggle v-model="htmlValidation">
         HTML validation
       </s-toggle>
-      <s-toggle checked>
+      <s-toggle v-model="loggedIn">
         Logged in
       </s-toggle>
     </li>
   </ul>
 </template>
 
-<script>
-  import sToggle from './s-toggle';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import sToggle from './s-toggle.vue';
+
+  interface IData {
+    htmlValidation: boolean;
+    loggedIn: boolean;
+  }
 
   const showHtmlValidationClass = 'html-validation';
 
-  export default {
+  export default defineComponent({
     name: 's-demo-settings',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sToggle,
     },
-    // mixins: [],
 
     // props: {},
-    data() {
+    data(): IData {
       return {
         /**
-         * @type {Boolean} Determines if the HTML validation styles should be applied.
+         * Determines if the HTML validation styles should be applied.
          */
         htmlValidation: true,
+
+        /**
+         * Determines if the user is logged in.
+         */
+        loggedIn: true,
       };
     },
 
@@ -57,12 +67,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

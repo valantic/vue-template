@@ -3,38 +3,21 @@
        @mouseenter="hasHover = true"
        @mouseleave="hasHover = false">
     <!-- 'swiper' classes needed for the swiper plugin. -->
-    <div ref="container"
-         :class="b('container')"
-         class="swiper-container">
+    <div ref="container" :class="[b('container'), 'swiper']">
       <div :class="b('wrapper')"
            class="swiper-wrapper">
         <!-- Slides -->
-        <div v-for="picture in pictures"
+        <div v-for="(picture, index) in images"
              :key="picture.id"
              :class="b('slide')"
              class="swiper-slide">
-          <button :class="b('trigger')"
-                  type="button"
-                  @click.prevent="modalOpen = true">
-            <span :class="b('image-wrapper-inner')">
-              <div v-if="picture.isVideo" :class="b('video-preview-wrapper')">
-                <img :class="b('video-thumbnail')"
-                     :src="picture.thumbSrc"
-                     alt="">
-                <span :class="b('video-thumbnail-overlay')"></span>
-              </div>
-              <e-picture
-                v-else
-                :sizes="sizes"
-                :srcset="picture.srcset"
-                :fallback="picture.fallback"
-                :alt="picture.alt" />
-            </span>
-
-            <span class="invisible">
-              {{ $t('c-swiper.zoom') }}
-            </span>
-          </button>
+          <e-picture :sizes="sizes"
+                     :srcset="picture.srcset"
+                     :fallback="picture.fallback"
+                     :alt="picture.alt"
+                     :ratio="2 / 1"
+                     :loading="index > 0 && index < images.length - 1 ? 'lazy' : 'auto'"
+          />
         </div>
       </div>
 
@@ -44,75 +27,61 @@
 
       <!-- navigation -->
       <div ref="pagination" :class="b('pagination')"></div>
-
-      <!-- modal -->
-      <c-modal
-        :open="modalOpen"
-        :header-component="null"
-        size="600"
-        inner-spacing="0"
-        mobile-transition="fade"
-        @close="modalClose">
-        <div :class="b('modal-close-icon')" @click="modalOpen = false">
-          <e-icon icon="close"
-                  size="25" />
-        </div>
-        <c-swiper-modal :images="pictures"
-                        :initial-slide="swiper.activeIndex"
-                        @change="onModalSlideChanged" />
-      </c-modal>
     </div>
 
     <!-- counter -->
-    <div v-if="pictures.length > 1" :class="b('counter')">
+    <div v-if="images.length > 1" :class="b('counter')">
       <div :class="b('counter-detail', { image: true })">
         {{ $tc('c-swiper.images', images.length, {count: images.length}) }}
-      </div>
-      <div v-if="videos && videos.length > 1" :class="b('counter-detail', { video: true })">
-        {{ $tc('c-swiper.videos', videos.length, {count: videos.length}) }}
       </div>
     </div>
   </div>
 </template>
 
-<script>
-  import Swiper, { Navigation, Pagination } from 'swiper';
+<script lang="ts">
+  import {
+    defineComponent,
+    Ref,
+    ref
+  } from 'vue';
+  import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
+  import { NavigationOptions, PaginationOptions } from 'swiper/types';
   import { BREAKPOINTS } from '@/setup/globals';
-  import cSwiperModal from '@/components/c-swiper-modal';
-  import mapImages from '@/helpers/map-images';
-  import uuid from '@/mixins/uuid';
-  import cModal from '@/components/c-modal';
+  import useUuid, { IUuid } from '@/compositions/uuid';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  const swiperInstances = {};
+  interface ISwiperInstances {
+    [key: string]: Swiper;
+  }
+
+  interface ISetup extends IUuid {
+    previous: Ref<HTMLDivElement | null>;
+    next: Ref<HTMLDivElement | null>;
+    pagination: Ref<HTMLDivElement | null>;
+    container: Ref<HTMLDivElement | null>;
+  }
+
+  interface IData {
+    optionsDefault: SwiperOptions;
+    hasHover: boolean;
+  }
+
+  const swiperInstances: ISwiperInstances = {};
 
   /**
    * Touch enabled slider component based on [swiper](https://idangero.us/swiper/).
    */
-  export default {
+  export default defineComponent({
     name: 'c-swiper-gallery',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    components: {
-      cModal,
-      cSwiperModal,
-    },
-    mixins: [uuid],
-
     props: {
       /**
-       * Gallery images passed to swiper.
+       * The list of slides.
        */
       images: {
         type: Array,
         required: true,
-      },
-
-      /**
-       * A list of youtube video objects.
-       */
-      videos: {
-        type: Array,
-        default: null,
       },
 
       /**
@@ -123,10 +92,38 @@
         default: () => ({}),
       },
 
+      /**
+       * Defines the sizes of the images.
+       */
+      sizes: {
+        type: Object,
+        default: () => BREAKPOINTS,
+      },
     },
-    data() {
+
+    setup(): ISetup {
+      const container = ref();
+      const previous = ref();
+      const next = ref();
+      const pagination = ref();
+
+      const { increaseUuid } = useUuid();
+
+      increaseUuid();
+
+      return {
+        ...useUuid(),
+        container,
+        previous,
+        next,
+        pagination,
+      };
+    },
+
+    data(): IData {
       return {
         optionsDefault: {
+          modules: [Navigation, Pagination],
           watchOverflow: true,
           keyboard: {
             enabled: true,
@@ -144,89 +141,39 @@
             dynamicBullets: this.images.length > 7 || false,
             dynamicMainBullets: 3,
           },
-          on: {
-            slideChange: function() {
-              this.swiper.activeIndex = this.$refs.container.swiper.activeIndex;
-            }.bind(this),
-          },
-        },
-        // this.images.length > this.dynamicBullets
-        swiper: {
-          activeIndex: 0,
         },
         hasHover: false,
-        modalOpen: false,
-        sizes: BREAKPOINTS, // todo add as prop
       };
     },
 
     computed: {
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           hover: this.hasHover,
-          modalOpen: this.modalOpen,
         };
       },
 
       /**
        * Merges default with custom component options.
-       *
-       * @returns  {Object}  optionsMerged    Combination of default and custom options.
        */
-      optionsMerged() {
+      optionsMerged(): SwiperOptions {
         return {
           ...this.optionsDefault,
           navigation: {
-            ...this.optionsDefault.navigation,
-            nextEl: this.$refs.next,
-            prevEl: this.$refs.previous,
+            ...this.optionsDefault.navigation as NavigationOptions,
+            nextEl: this.next,
+            prevEl: this.previous,
           },
+          // @ts-ignore
           pagination: {
-            ...this.optionsDefault.pagination,
-            el: this.$refs.pagination,
+            ...this.optionsDefault.pagination as PaginationOptions,
+            el: this.pagination,
           },
           ...this.options,
         };
-      },
-
-      /**
-       * Gets the mapped videos.
-       *
-       * @returns {Array} The list of mapped videos.
-       */
-      mappedVideos() {
-        if (Array.isArray(this.videos)) {
-          return this.videos.map((video, index) => {
-            const youtubeId = this.getYoutubeId(video.youtubeUrl);
-
-            return {
-              id: `${youtubeId}-${index}`,
-              url: video.youtubeUrl,
-              youtubeId,
-              thumbSrc: `https://img.youtube.com/vi/${youtubeId}/0.jpg`,
-              isVideo: true,
-            };
-          });
-        }
-
-        return [];
-      },
-
-      /**
-       * Maps image data object and prepares it for e-picture component.
-       *
-       * @returns  {Object}  image   Image including fallback
-       */
-      pictures() {
-        return [
-          ...mapImages(this.images),
-          ...this.mappedVideos,
-        ];
       },
     },
     // watch: {},
@@ -235,56 +182,22 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      Swiper.use([Navigation, Pagination]);
-
-      swiperInstances[this.uuid] = new Swiper(this.$refs.container, this.optionsMerged);
+      if (this.container) {
+        swiperInstances[this.uuid] = new Swiper(this.container, this.optionsMerged);
+      }
     },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
-    beforeDestroy() {
+    beforeUnmount() {
       swiperInstances[this.uuid].destroy();
     },
-    // destroyed() {},
+    // unmounted() {},
 
-    methods: {
-      /**
-       * Close modal box.
-       */
-      modalClose() {
-        this.modalOpen = false;
-      },
-
-      /**
-       * Change event when the slider in the modal changes.
-       *
-       * @param {Number} index - The index of the swiper.
-       */
-      onModalSlideChanged(index) {
-        this.$refs.container.swiper.slideTo(index);
-      },
-
-      /**
-       * Gets the youtube id of a given youtube URL.
-       *
-       * @param {String} url - The given youtube url.
-       *
-       * @returns {String}
-       */
-      getYoutubeId(url) {
-        const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-        const match = url.match(regExp);
-
-        if (match?.[2]?.length === 11) {
-          return match[2];
-        }
-
-        return '';
-      },
-    },
+    // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
@@ -395,39 +308,10 @@
       }
     }
 
-    &__modal-close-icon {
-      @include mixins.z-index(navigation);
-
-      position: absolute;
-      top: variables.$spacing--15;
-      right: variables.$spacing--15;
-      cursor: pointer;
-    }
-
-    &__img-counter,
-    &__video-counter {
+    &__img-counter {
       @include mixins.z-index(front);
 
       position: relative;
-    }
-
-    &__video-preview-wrapper {
-      position: relative;
-    }
-
-    &__video-thumbnail-overlay {
-      @include mixins.icon(play, 50px, $mask: false);
-
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-
-    &__video-thumbnail {
-      max-width: 100%;
-      width: 100%;
     }
 
     // dots navigation
@@ -476,7 +360,7 @@
       .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
         display: none;
 
-        &[class*="swiper-pagination-bullet-active"] {
+        &[class*='swiper-pagination-bullet-active'] {
           display: inline-block;
         }
 

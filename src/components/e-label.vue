@@ -10,25 +10,30 @@
     </span>
     <span v-if="$slots.default" :class="b('inner')">
       <!-- @slot Label content -->
-      <slot></slot>
+      <slot @focus="focus = true" @blur="focus = false"></slot>
     </span>
   </component>
 </template>
 
-<script>
-  import formStates from '@/mixins/form-states';
+<script lang="ts">
+  import { defineComponent, toRefs } from 'vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Label component for form elements, can be used with a slot or a for attribute
    */
-  export default {
+  export default defineComponent({
     name: 'e-label',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
 
     props: {
+      ...withProps(),
+
       /**
        * Displayed tag.
        */
@@ -51,14 +56,12 @@
       position: {
         type: String,
         default: 'top',
-        validator(value) {
-          return [
-            'top',
-            'right',
-            'bottom',
-            'left',
-          ].includes(value);
-        }
+        validator: (value: string) => [
+          'top',
+          'right',
+          'bottom',
+          'left',
+        ].includes(value)
       },
 
       /**
@@ -78,13 +81,17 @@
       },
     },
 
+    setup(props): ISetup {
+      return {
+        ...useFormStates(toRefs(props).state),
+      };
+    },
+
     computed: {
       /**
        * Defines state modifier classes.
-       *
-       * @returns  {Object}   BEM classes
        */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
           position: this.position,
@@ -95,31 +102,17 @@
 
     // beforeCreate() {},
     // created() {},
-    beforeMount() {
-      /**
-       * Setup event handler for "focus" event, which will be sent from the input in the slot
-       */
-      this.$on('focus', () => {
-        this.hasFocus = true;
-      });
-
-      /**
-       * Setup event handler for "blur" event, which will be sent from the input in the slot
-       */
-      this.$on('blur', () => {
-        this.hasFocus = false;
-      });
-    },
+    // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
     // methods: {}
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

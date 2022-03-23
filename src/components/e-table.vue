@@ -61,7 +61,28 @@
   </table>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent, PropType } from 'vue';
+
+  interface IColumn {
+    title: string | (() => string);
+    key: string;
+    titleHidden: boolean | (() => boolean);
+    slotName: string;
+    align: 'left' | 'center' | 'right';
+    sortable: boolean;
+    sort: () => number;
+    onClick: () => void;
+  }
+
+  interface IItem {
+    [key: string]: string;
+  }
+
+  interface IData {
+    sortBy: null | IColumn;
+    sortAscending: boolean;
+  }
 
   /**
    * This component renders a table based on a given column setup and an array of row items.
@@ -70,12 +91,11 @@
    * Custom cell templates can be defined by defining a 'slotName' for a column and give a custom template
    * by using an identical named slot binding ('v-slot:\<slotName\>') to the component.
    */
-  export default {
+  export default defineComponent({
     name: 'e-table',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -84,7 +104,7 @@
        * @property {Boolean} [disabled = false] - Disables the interaction with the current row.
        */
       items: {
-        type: Array,
+        type: Array as PropType<IItem[]>,
         required: true,
       },
 
@@ -102,19 +122,19 @@
        *
        */
       columns: {
-        type: Array,
+        type: Array as PropType<IColumn[]>,
         required: true,
       },
     },
-    data() {
+    data(): IData {
       return {
         /**
-         * @type {Object} The currently selected 'column' to be sorted.
+         * the currently selected 'column' to be sorted.
          */
         sortBy: null,
 
         /**
-         * @type {Boolean} Holds to sort direction in case a 'sortBy' is active.
+         * Holds to sort direction in case a 'sortBy' is active.
          */
         sortAscending: true,
       };
@@ -123,16 +143,14 @@
     computed: {
       /**
        * Returns a sorted copy of the table-items.
-       *
-       * @returns {Array.<Object>}
        */
-      itemsSortedBy() {
+      itemsSortedBy(): IItem[] {
         const items = this.items.slice();
 
         if (this.sortBy) {
           const sort = typeof this.sortBy.sort === 'function'
             ? this.sortBy.sort
-            : (a, b) => a[this.sortBy.key].localeCompare(b[this.sortBy.key]);
+            : (a: IItem, b: IItem) => (this.sortBy ? a[this.sortBy.key].localeCompare(b[this.sortBy.key]) : -1);
 
           items.sort(sort);
         }
@@ -142,10 +160,8 @@
 
       /**
        * Reverts the sort direction if required.
-       *
-       * @returns {Array.<Object>}
        */
-      itemsSorted() {
+      itemsSorted(): IItem[] {
         if (!this.sortAscending) {
           return this.itemsSortedBy.slice().reverse();
         }
@@ -162,17 +178,15 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Will set the sort-parameters.
-       *
-       * @param {Object} column - Object which holds the information about the current column.
        */
-      onClickSort(column) {
-        if (this.sortBy === column) {
+      onClickSort(column: IColumn) {
+        if (this.sortBy && this.sortBy === column) {
           const asc = this.sortAscending;
 
           if (!asc) {
@@ -188,24 +202,16 @@
 
       /**
        * Checks if the given column should display the header label.
-       *
-       * @param {Object} column - A column definition object.
-       *
-       * @returns {Boolean}
        */
-      isHeaderLabelVisible(column) {
+      isHeaderLabelVisible(column: IColumn) {
         return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden);
       },
 
       /**
        * Calculates a sort button modifier object.
-       *
-       * @param {Object} column - A column definition object.
-       *
-       * @returns {Object}
        */
-      getSortButtonModifiers(column) {
-        const active = this.sortBy === column;
+      getSortButtonModifiers(column: IColumn) {
+        const active = this.sortBy && this.sortBy === column;
 
         return {
           active,
@@ -214,7 +220,7 @@
       }
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

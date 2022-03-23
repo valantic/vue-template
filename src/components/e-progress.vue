@@ -11,15 +11,16 @@
   </span>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  export default {
+  export default defineComponent({
     name: 'e-progress',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     props: {
       /**
@@ -55,19 +56,15 @@
     computed: {
       /**
        * Returns a readable loading message.
-       *
-       * @returns {String}
        */
-      loadingMessage() {
-        return this.message || this.$i18n.t('e-progress.loading');
+      loadingMessage(): string {
+        return this.message || this.$t('e-progress.loading');
       },
 
       /**
        * Returns all modifiers for the component main class.
-       *
-       * @returns {Object}
        */
-      componentModifiers() {
+      componentModifiers(): IModifiers {
         return {
           negative: this.negative,
           spacing: this.spacing,
@@ -84,12 +81,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

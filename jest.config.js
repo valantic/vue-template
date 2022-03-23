@@ -1,14 +1,19 @@
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
+  preset: 'ts-jest',
   testEnvironment: 'jsdom',
   moduleFileExtensions: [
+    'ts',
+    'tsx',
     'js',
     'jsx',
     'json',
     'vue'
   ],
   transform: {
-    '^.+\\.vue$': 'vue-jest',
+    '^.+\\.vue$': '@vue/vue3-jest',
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    '^.+\\.tsx?$': 'ts-jest',
     '^.+\\.jsx?$': 'babel-jest',
   },
   transformIgnorePatterns: [

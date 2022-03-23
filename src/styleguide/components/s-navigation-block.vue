@@ -21,8 +21,24 @@
   </ul>
 </template>
 
-<script>
-  export default {
+<script lang="ts">
+  import { ComponentPublicInstance, defineComponent, PropType } from 'vue';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface IRoute {
+    path: string;
+    alias: string;
+    name: string;
+    redirect: string;
+    component: ComponentPublicInstance;
+    meta: {
+      title: string;
+      hideInStyleguide: boolean;
+    }
+    children: IRoute[]
+  }
+
+  export default defineComponent({
     name: 's-navigation-block',
     // components: {},
     props: {
@@ -30,7 +46,7 @@
        * An array of styleguide routes.
        */
       routes: {
-        type: Array,
+        type: Array as PropType<IRoute[]>,
         default: () => [],
       },
 
@@ -46,10 +62,8 @@
     computed: {
       /**
        * Returns all modifiers for the component main class.
-       *
-       * @returns {Object}
        */
-      componentModifiers() {
+      componentModifiers(): IModifiers {
         return {
           hasIndent: this.hasIndent,
         };
@@ -57,16 +71,14 @@
 
       /**
        * Returns an array of routes, that should be visible on the navigation.
-       *
-       * @returns {Array.<Object>}
        */
-      filteredRoutes() {
+      filteredRoutes(): object[] {
         return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide);
       },
     },
     // methods: {},
     // created() {}
-  };
+  });
 </script>
 
 <style lang="scss">

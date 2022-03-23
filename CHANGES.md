@@ -34,11 +34,22 @@
    - Replaces the SCSS divisions by "slash" with the math.div() Sass function
    - Activates the `hoistUseStatements` option in the sass-loader plugin
  - (Change) Issue 144 / 166:
-    - Removes global scss imports
-    - Replaces usages of `@import` with `@use` and `@forward`
-    - Replaces usages of `@extends` with `@mixins` as extends is not supported by scss namespaces
-    - Uses local imports for scss mixins, functions and variables
+   - Removes global scss imports
+   - Replaces usages of `@import` with `@use` and `@forward`
+   - Replaces usages of `@extends` with `@mixins` as extends is not supported by scss namespaces
+   - Uses local imports for scss mixins, functions and variables
  - (Bug) Fixes broken styleguide build.
+ - (Breaking) Issue 157: Updates to Vue 3 and Typescript
+   - Changes all JS files and Vue SFC files to be written in Typescript
+   - Adjusts Store Modules Syntax to be benefit from typings
+   - Adjusts custom V-Model Syntax as it is not supported in Vue 3 anymore
+   - Replace Mixins by Compositions to benefit from typings
+   - Updates Directive Hooks to work with Vue 3
+   - Removes IE11 Polyfills as Vue 3 does not support IE11 anymore
+   - Removes Spryker related code
+   - Removes Components Collapse, CollapseGroup, Modal, ModalStack
+   - Removes EventBus as it is not supported anymore in Vue 3
+   - Removes Pimcore Directives
  - (Change) Issue 171: Updates to Webpack 5
 
 ### v7.0.0 (2020-09-29)

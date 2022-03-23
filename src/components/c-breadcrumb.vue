@@ -14,28 +14,42 @@
   </div>
 </template>
 
-<script>
-  import { mapGetters } from 'vuex';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import breadcrumb, { TBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb';
+
+  interface ISetup {
+    breadcrumbStore: TBreadcrumbStore
+  }
 
   /**
    * Renders a list of breadcrumbs items from the store module.
    */
-  export default {
+  export default defineComponent({
     name: 'c-breadcrumb',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     // props: {},
+    // emits: {},
+
+    setup(): ISetup {
+      return {
+        breadcrumbStore: breadcrumb(),
+      };
+    },
     // data() {
     //   return {};
     // },
 
     computed: {
-      ...mapGetters('breadcrumb', [
-        'getItems',
-      ]),
+      /**
+       * Returns an Array of breadcrumb items.
+       */
+      getItems(): readonly IBreadcrumbItem[] {
+        return this.breadcrumbStore.getItems;
+      },
     },
     // watch: {},
 
@@ -47,12 +61,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

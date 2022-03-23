@@ -11,39 +11,51 @@
   </label>
 </template>
 
-<script>
-  import i18nMixin from '../../mixins/i18n';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
-  export default {
+  interface IData {
+    i18nLocales: string[];
+  }
+
+  export default defineComponent({
     name: 's-language',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    mixins: [i18nMixin],
-
     // props: {},
 
-    // data() {},
+    data(): IData {
+      return {
+        i18nLocales: I18N_LOCALES,
+      };
+    },
 
     // components: {},
     computed: {
       /**
        * The current language.
-       *
-       * @returns {String}
        */
       language() {
-        return this.$i18n.locale;
+        return i18n.global.locale;
       },
     },
     methods: {
       /**
        * Event handler for the change event of the language selector.
-       *
-       * @param {Event} event - The related DOM event.
        */
-      onChange(event) {
-        this.i18nSetLocale(event.target.value);
+      onChange(event: Event): void {
+        const target = event.target as HTMLSelectElement;
+
+        this.setLocale(target.value);
       },
+
+      /**
+       * Sets the locale within the i18n.
+       */
+      setLocale(value: string) {
+        i18nSetLocale(value);
+      }
     },
     // watch: {},
 
@@ -55,9 +67,9 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
-  };
+    // beforeUnmount() {},
+    // unmounted() {},
+  });
 </script>
 
 <style lang="scss">

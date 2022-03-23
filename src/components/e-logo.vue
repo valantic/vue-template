@@ -17,20 +17,28 @@
   </div>
 </template>
 
-<script>
-  import themes from '../mixins/themes';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import useTheme, { ITheme } from '@/compositions/themes';
+
+  interface ILogo {
+    icon: string;
+    alt: string;
+    title: string;
+  }
+
+  interface ISetup extends ITheme {}
 
   /**
-   * e-logo renders the company logo depending on the current theme (from the vuex store)
+   * e-logo renders the company logo depending on the current theme (from the store)
    *
    * Native link attributes can be used
    */
-  export default {
+  export default defineComponent({
     name: 'e-logo',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [themes],
 
     inheritAttrs: false,
 
@@ -39,19 +47,22 @@
     //   return {};
     // },
 
+    setup(): ISetup {
+      return {
+        ...useTheme(),
+      };
+    },
+
     computed: {
       /**
-       * Get's the correct logo depending on the theme value from the vuex store.
-       *
-       * @returns {Object} logo-name
+       * Get's the correct logo depending on the theme value from the store.
        */
-      logo() {
-        const { theme } = this;
+      logo(): ILogo {
         const title = this.$t('e-logo.linkTitle');
         let icon = '';
         let alt = '';
 
-        switch (theme) {
+        switch (this.theme) {
           case '01':
             icon = 'styleguide-heart';
             alt = 'example logo default';
@@ -99,12 +110,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

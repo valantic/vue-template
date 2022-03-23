@@ -11,33 +11,27 @@
   </label>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
 
-  /**
-   * Renders a checkbox as toggle element.
-   */
-  export default {
+  export default defineComponent({
     name: 's-toggle',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
-
-    model: {
-      /**
-       * Changes v-model behavior and use 'checked' instead of 'value' as prop.
-       * Avoids conflict with default value attribute.
-       */
-      prop: 'checked',
-      event: 'change',
-    },
 
     props: {
-      checked: {
+      /**
+       * The model value to be used for v-model.
+       */
+      modelValue: {
         type: Boolean,
-        required: true
+        default: false
       }
     },
+
+    emits: ['update:modelValue'],
+
     // data() {
     //   return {};
     // },
@@ -45,21 +39,16 @@
     computed: {
       /**
        * Sets/gets value of component model and parent model.
-       *
-       * @returns  {Boolean}   Status of the checkbox
        */
       internalValue: {
-        get() {
-          return this.checked;
+        get(): boolean {
+          return this.modelValue;
         },
-        set(value) {
+        set(value: boolean) {
           /**
            * Emits checkbox value e.g. true/false or value
-           *
-           * @event change
-           * @type {Boolean|Array}
            */
-          this.$emit('change', value);
+          this.$emit('update:modelValue', value);
         }
       }
     },
@@ -73,12 +62,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
@@ -104,7 +93,7 @@
 
       &::before {
         position: absolute;
-        content: "";
+        content: '';
         height: 0.8 * $_s-slider__size;
         width: 0.8 * $_s-slider__size;
         left: 0.1 * $_s-slider__size;

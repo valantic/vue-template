@@ -5,33 +5,41 @@
   </span>
 </template>
 
-<script>
-  import formStates from '@/mixins/form-states';
+<script lang="ts">
+  import { defineComponent, toRefs } from 'vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  interface ISetup extends IFormStates {}
 
   /**
    * Component is used to display a notification (status message) directly in the form field.
    * It needs a content and a state
    */
-  export default {
+  export default defineComponent({
     name: 'c-form-notification',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
+    props: {
+      ...withProps(),
+    },
 
-    // props: {},
+    setup(props): ISetup {
+      return {
+        ...useFormStates(toRefs(props).state),
+      };
+    },
+
     // data() {
     //   return {};
     // },
 
     computed: {
-
       /**
       * Defines state modifier classes.
-      *
-      * @returns  {Object}   BEM classes
       */
-      modifiers() {
+      modifiers(): IModifiers {
         return {
           ...this.stateModifiers
         };
@@ -47,12 +55,12 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

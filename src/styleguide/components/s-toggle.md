@@ -8,12 +8,12 @@
 </template>
 
 <script>
-  export default {
+  export default defineComponent({
       data() {
           return {
               checked: true,
           }
       }
-  };
+  });
 </script>
 ```

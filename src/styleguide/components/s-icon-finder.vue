@@ -65,39 +65,78 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent, Ref, ref } from 'vue';
+
+  interface ISetup {
+    input: Ref<HTMLInputElement | null>;
+  }
+
+  interface IFilteredIcon {
+    name: string;
+    negative: boolean;
+  }
+
+  interface IData {
+    icons: string[];
+    filter: string;
+    notification: string;
+    color: string;
+    variant: 'inline' | 'image' | 'css' | 'mask';
+    spritePath: string;
+  }
+
+  interface IIcon {
+    name: string;
+  }
+
   const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const icons = require.context('@/assets/icons/', false, /\.svg/).keys();
 
-  export default {
+  export default defineComponent({
     name: 's-icon-finder',
 
     // props: {},
 
-    data() {
+    setup(): ISetup {
+      const input = ref();
+
+      return {
+        input,
+      };
+    },
+
+    data(): IData {
       return {
         /**
-         * @type {Array} An array of available icons.
+         * An array of available icons.
          */
+        // @ts-ignore
         icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
 
         /**
-         * @type {String} The currently applied query filter.
+         * The currently applied query filter.
          */
         filter: '',
 
         /**
-         * @type {String} Clipboard notification.
+         * Clipboard notification.
          */
         notification: '',
 
         /**
-         * @type {String} The currently selected color.
+         * The currently selected color.
          */
         color: '#000000',
 
+        /**
+         * The currently selected variant.
+         */
         variant: 'inline',
 
+        /**
+         * The sprite path to use.
+         */
         spritePath,
       };
     },
@@ -106,13 +145,11 @@
     computed: {
       /**
        * Returns an array of query filtered icons.
-       *
-       * @returns {Array.<Object>}
        */
-      filteredIcons() {
-        const list = this.icons.filter(icon => icon.indexOf(this.filter) > -1);
+      filteredIcons(): IFilteredIcon[] {
+        const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);
 
-        return list.map((icon) => { // eslint-disable-line arrow-body-style
+        return list.map((icon: string) => { // eslint-disable-line arrow-body-style
           return {
             name: icon,
             negative: Boolean(icon.match(/negative/)),
@@ -123,11 +160,9 @@
     methods: {
       /**
        * Event handler for copy to clipboard button.
-       *
-       * @param {Object} icon - The icon instance for which the example code should be copied.
        */
-      copyToClipboard(icon) {
-        const hiddenInput = this.$refs.input;
+      copyToClipboard(icon: IIcon) {
+        const hiddenInput = this.input as HTMLInputElement;
         let template;
 
         switch (this.variant) {
@@ -161,10 +196,8 @@
 
       /**
        * Shows the given notification.
-       *
-       * @param {String} message - The to be shown message.
        */
-      setNotification(message) {
+      setNotification(message: string) {
         this.notification = message;
       },
     },
@@ -178,9 +211,9 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
-  };
+    // beforeUnmount() {},
+    // unmounted() {},
+  });
 </script>
 
 <style lang="scss">

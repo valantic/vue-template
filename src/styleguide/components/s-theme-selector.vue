@@ -13,21 +13,41 @@
   </label>
 </template>
 
-<script>
-  import { mapGetters } from 'vuex';
+<script lang="ts">
+  import { defineComponent } from 'vue';
   import pkg from '@/../package.json';
+  import sessionStore, { TSessionStore } from '@/stores/session';
+
+  interface ITheme {
+    name: string;
+    id: string;
+    selected?: boolean;
+  }
+
+  interface IData {
+    defaultThemes: ITheme[];
+  }
+
+  interface ISetup {
+    sessionStore: TSessionStore
+  }
 
   const themePath = `/${pkg.webpack.outputAssetsFolder}css/${pkg.webpack.filePrefix}theme-`;
 
-  export default {
+  export default defineComponent({
     name: 's-theme-selector',
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     // props: {},
-    data() {
+
+    setup(): ISetup {
+      return {
+        sessionStore: sessionStore()
+      };
+    },
+    data(): IData {
       return {
         defaultThemes: [
           {
@@ -43,16 +63,17 @@
     },
 
     computed: {
-      ...mapGetters('session', [
-        'getTheme',
-      ]),
+      /**
+       * Returns the currently active theme.
+       */
+      getTheme(): string {
+        return this.sessionStore.getTheme;
+      },
 
       /**
        * Loops the themes and mark the selected by the global theme.
-       *
-       * @returns {Array} list of themes
        */
-      themes() {
+      themes(): ITheme[] {
         const list = this.defaultThemes;
         const activeId = this.getTheme;
 
@@ -81,7 +102,7 @@
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
-          const link = document.getElementById(cssId);
+          const link = document.getElementById(cssId) as HTMLLinkElement;
           const theme = this.getTheme;
 
           if (!link) {
@@ -100,26 +121,23 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Event handler for the change event of the theme selector.
-       *
-       * @param {Event} event - The related DOM event.
        */
-      onChange(event) {
-        this.$store.commit('session/setTheme', event.target.value);
+      onChange(event: Event) {
+        const element = event.target as HTMLSelectElement;
+
+        this.sessionStore.setTheme(element.value);
       },
 
       /**
        * Creates a new style link element.
-       *
-       * @param {String} themeId - The name of the desired theme.
-       * @param {String} cssId - The unique ID for the link element.
        */
-      createStyleElement(themeId, cssId) {
+      createStyleElement(themeId: string, cssId: string) {
         const head = document.getElementsByTagName('head')[0];
         const link = document.createElement('link');
 
@@ -133,5 +151,5 @@
       }
     },
     // render() {},
-  };
+  });
 </script>
