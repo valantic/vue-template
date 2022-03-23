@@ -13,6 +13,7 @@ out
 gen
 /node_modules/
 /dist/
+/dist-storybook/
 /tests/unit/coverage/
 
 # Visual Studio Code

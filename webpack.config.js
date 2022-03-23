@@ -239,22 +239,14 @@ module.exports = (env, args = {}) => {
     compress: true,
   };
 
-  // different options needed tue to https://github.com/vue-styleguidist/vue-styleguidist/issues/1074
-  if (isStyleguide || isStyleguideBuild) {
-    // styleguideist does not need any watcher, because it already contains one out of the box
-    devServer['clientLogLevel'] = 'error'; // Removes ESLint warnings from browser console
-    devServer['progress'] = true;
-    devServer['overlay'] = true;
-  } else {
-    // this block can be used as default when above issue has been fixed
-    devServer['client'] = {
-      logging: 'error', // Removes ESLint warnings from console
-      progress: true,
-      overlay: {
-        warnings: false,
-        errors: true,
-      },
-    }
+  // this block can be used as default when above issue has been fixed
+  devServer['client'] = {
+    logging: 'error', // Removes ESLint warnings from console
+    progress: true,
+    overlay: {
+      warnings: false,
+      errors: true,
+    },
   }
 
   const assetModulesFileName = function (pathData, assetType) {

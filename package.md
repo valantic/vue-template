@@ -16,10 +16,6 @@ Creates the production build of the current code and moves it to the `/dist` fol
 
 Starts the development-environment with styleguide example pages. Please note, that for performance reasons no minification, uglyfication and CSS extraction is performed.
 
-#### `npm run dev:s` or `npm run styleguide`
-
-Starts [Vue-Styleguidist](https://github.com/vue-styleguidist/vue-styleguidist) in a separate webpack and localhost instance.
-
 #### `npm run test`
 
 This will test the current state of CSS and JS code. Tests **MUST** be executed before creating a build.
@@ -72,6 +68,20 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > webpack
 - [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env) - Transform preset, which will transform the input code according to browserlist settings in package.json
   > webpack
+- [@storybook/addon-actions](https://www.npmjs.com/package/@storybook/addon-actions) - Storybook Addon Actions can be used to display data received by event handlers in Storybook.
+  > storybook
+- [@storybook/addon-essentials](https://www.npmjs.com/package/@storybook/addon-essentials) - Storybook Essentials is a curated collection of addons to bring out the best of Storybook.
+  > storybook
+- [@storybook/addon-links](https://www.npmjs.com/package/@storybook/addon-links) - The Storybook Links addon can be used to create links that navigate between stories in Storybook .
+  > storybook
+- [@storybook/builder-webpack5](https://www.npmjs.com/package/@storybook/builder-webpack5) - Builder implemented with webpack5 and webpack5-compatible loaders/plugins/config, used by @storybook/core-server to build the preview iframe.
+  > storybook
+- [@storybook/manager-webpack5](https://www.npmjs.com/package/@storybook/manager-webpack5) - Builder implemented with webpack5 and webpack5-compatible loaders/plugins/config, used by @storybook/core-server to build the manager UI.
+  > storybook
+- [@storybook/preset-scss](https://www.npmjs.com/package/@storybook/preset-scss) - One-line SCSS configuration for storybook.
+  > storybook
+- [@storybook/vue3](https://www.npmjs.com/package/@storybook/vue3) - Storybook for Vue 3 is a UI development environment for your Vue 3 components.
+  > storybook
 - [@typescript-eslint/eslint-plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin) - An ESLint plugin which provides lint rules for TypeScript codebases.
   > eslint
 - [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser) - An ESLint parser which leverages TypeScript ESTree to allow for ESLint to lint TypeScript source code.
@@ -134,16 +144,12 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > webpack
 - [postcss-loader](https://www.npmjs.com/package/postcss-loader) - Loader for webpack to process CSS with PostCSS.
   > webpack, scss
-- [react](https://www.npmjs.com/package/react) - **Required to fix a bug** with vue-styleguidist. Can be removed when https://github.com/vue-styleguidist/vue-styleguidist/issues/1158 is resolved.
-  > styleguidist
-- [react-dom](https://www.npmjs.com/package/react-dom) - **Required to fix a bug** with vue-styleguidist. Can be removed when https://github.com/vue-styleguidist/vue-styleguidist/issues/1158 is resolved.
-  > styleguidist
 - [sass](https://www.npmjs.com/package/sass) - Node.js bindings to libsass.
   > webpack, scss
 - [sass-loader](https://www.npmjs.com/package/sass-loader) - Loads a Sass/SCSS file and compiles it to CSS.
   > webpack, scss
-- [sass-resources-loader](https://www.npmjs.com/package/sass-resources-loader) - This loader will @import your SASS resources into every required SASS module.
-  > webpack, scss
+- [style-loader](https://www.npmjs.com/package/style-loader) - Inject CSS into the DOM.
+  > storybook
 - [stylelint](https://www.npmjs.com/package/stylelint) - A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.
   > stylelint
 - [stylelint-config-valantic](https://www.npmjs.com/package/stylelint-config-valantic) - Default valantic configuration for stylelint.
@@ -170,8 +176,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > development environment
 - [vue-router](https://www.npmjs.com/package/vue-router) - The official router for Vue.js.
   > core
-- [vue-styleguidist](https://www.npmjs.com/package/vue-styleguidist) - Isolated Vue component development environment with a living style guide.
-  > development environment
 - [webpack](https://www.npmjs.com/package/webpack) - webpack is a module bundler.
   > webpack
 - [webpack-assets-manifest](https://www.npmjs.com/package/webpack-assets-manifest) - Creates a manifest.json to map webpack input with output.

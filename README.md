@@ -171,17 +171,9 @@ $ npm run dev
 
 The app should now run on [http://localhost:8080](http://localhost:8080)
 
-#### Styleguidist
+### Integrate vue-template into another repository
 
-If you prefer to develop inside the component styleguide run the following script instead or in a new tab:
-
-```
-$ npm run dev:s
-```
-
-### Integrate vue-template into an other repository
-
-If you need to integrate this repository into an other project (e.g. a backend repository) we recommend to use `git subtree`. This will create a copy of a certain branch and allow updates later on while not changing the other projects git setup. For more information see [Atlassian Blog](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree) and [Git subtree](https://git-scm.com/book/de/v1/Git-Tools-Subtree-Merging).
+If you need to integrate this repository into another project (e.g. a backend repository) we recommend to use `git subtree`. This will create a copy of a certain branch and allow updates later on while not changing the other projects git setup. For more information see [Atlassian Blog](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree) and [Git subtree](https://git-scm.com/book/de/v1/Git-Tools-Subtree-Merging).
 
 WARNING: Please don't commit anything from inside the parent repository into the vue-template repository!
 
@@ -501,18 +493,15 @@ During switching to Vue-3 and TypeScript, the following decisions had to be made
 1. Build Chain: For typescript, one can either use `ts-loader` and output browser ready js directly or just use the `ts-loader`
    to compile TypeScript to JavaScript and then continue with e.g. `babel-loader`. Although the latter uses two loaders and
    is potentially slower, we decided to use it, to have browser list support for the end result
-2. Code Linting: We use ESLint with some additional rules needed for typescript. 
+1. Code Linting: We use ESLint with some additional rules needed for typescript. 
    Our `.eslintrc` extends `@vue/typescript`, which is a vue optimized ESLint config
    [read more](https://www.npmjs.com/package/@vue/eslint-config-typescript)
    The alternative would be to use `plugin:@typescript-eslint/recommended`, which is stricter
 
 The following issues arisen during the switch and are still open:
 
-1. Styleguideist does not support Vue-3 / Webpack 5, see
-    - https://github.com/vue-styleguidist/vue-styleguidist/issues/997
-    - https://github.com/styleguidist/react-styleguidist/issues/1703
-2. Some dependencies are only available in next / alpha version
-2. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good 
+1. Some dependencies are only available in next / alpha version
+1. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good 
    tools to do that at the moment, [read more](https://github.com/vuejs/vue-cli/issues/2950)
    - Using native `tsc --noEmit` does not work for TypeScript code in Vue `sfc` files
    - The following 3rd Party tools where tested but where not working well
@@ -723,10 +712,6 @@ The living styleguide is defined in two parts: one is documenting all available 
 
 Please note, that the living styleguide has its on section in `/app/styleguide` where you can find `components`, `routes` and anything else, which is only related to the living styleguide. This makes it more easy to identify and split out unneeded code during the build.
 
-### Mock data
-
-You can share the mock data from the demo pages with the vue-styleguidist by importing them into the global mixin which is defined inside `app/setup/styleguide.options.js`. They will be merged with the `data()` object of each component which is displayed inside the component styleguide. Access the data with `mockData.<yourKey>` (e.g. `<c-cms-wrapper :components="mockData.cCmsWrapperMockData" />`).
-
 ## Webpack
 
 ### Path alias
@@ -884,8 +869,6 @@ package.json:
 
 ## Roadmap
 
-* [ ] Make styleguideist work again, as soon as Vue 3 is supported, 
-  see https://github.com/vue-styleguidist/vue-styleguidist/issues/997
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.
