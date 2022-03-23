@@ -6,14 +6,17 @@
         <slot></slot>
       </div>
     </div>
-    <portal-target name="modal-container" multiple />
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import store from '@/store';
+  import notificationStore, { TNotificationStore } from '@/stores/notification';
+
+  interface ISetup {
+    notificationStore: TNotificationStore
+  }
 
   export default defineComponent({
     name: 'l-default',
@@ -24,6 +27,12 @@
     },
 
     // props: {},
+
+    setup(): ISetup {
+      return {
+        notificationStore: notificationStore(),
+      };
+    },
     // data() {
     //   return {};
     // },
@@ -50,16 +59,14 @@
        */
       getNotificationsFromStorage() {
         try {
-          const messages = window.localStorage.getItem('notifications');
+          const messages = window.localStorage.getItem('vueNotification');
           const messagesParsed = messages ? JSON.parse(messages) : null;
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
-            messagesParsed.forEach((message) => {
-              store.commit.notification.pushNotification({ message });
-            });
+            messagesParsed.forEach(this.notificationStore.showNotification);
 
             // Clears the localStorage notifications.
-            window.localStorage.removeItem('notifications');
+            window.localStorage.removeItem('vueNotification');
           }
         } catch (error) {
           throw new Error('An error occurred why retrieving messages from the localStorage.');

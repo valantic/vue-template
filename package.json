@@ -2,6 +2,7 @@
   "name": "vue-template",
   "version": "7.0.0",
   "description": "A customized Vue.js project template",
+  "lastDependencyUpdate": "17.11.2021",
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "webpack-dev-server --mode development",
@@ -70,12 +71,10 @@
     "axios": "~0.24.0",
     "core-js": "~3.19.1",
     "dayjs": "~1.10.7",
-    "direct-vuex": "next",
     "reset-css": "~5.0.1",
     "swiper": "~7.3.1",
     "vue": "3.2.4",
-    "vue-i18n": "~9.1.7",
-    "vuex": "~4.0.2"
+    "vue-i18n": "~9.1.7"
   },
   "devDependencies": {
     "@babel/core": "~7.16.0",
@@ -88,6 +87,7 @@
     "@types/webpack-env": "~1.16.0",
     "@typescript-eslint/eslint-plugin": "~5.4.0",
     "@typescript-eslint/parser": "~5.4.0",
+    "@valantic/webpack-dependency-hint": "~1.0.2",
     "@vue/eslint-config-typescript": "~9.1.0",
     "@vue/test-utils": "~2.0.0-rc.15",
     "@vue/vue3-jest": "~27.0.0-alpha.3",
@@ -116,6 +116,7 @@
     "jest-transform-stub": "~2.0.0",
     "lint-staged": "~12.1.2",
     "mini-css-extract-plugin": "~2.4.5",
+    "pinia": "~2.0.11",
     "postcss-html": "~1.2.0",
     "postcss-loader": "~6.2.0",
     "postcss-scss": "~4.0.2",
@@ -126,9 +127,9 @@
     "stylelint": "~14.1.0",
     "stylelint-config-valantic": "6.5.1",
     "stylelint-webpack-plugin": "~3.1.0",
-    "terser-webpack-plugin": "~5.3.0",
     "svg-sprite": "~1.5.3",
     "svg4everybody": "~2.1.9",
+    "terser-webpack-plugin": "~5.3.0",
     "ts-jest": "~27.0.7",
     "ts-loader": "~9.2.6",
     "typescript": "~4.5.2",

@@ -34,16 +34,6 @@ export type BreakPointType = keyof typeof BREAKPOINTS;
 export const RESIZE_DEBOUNCE = 100;
 
 /**
- * @type {Object} The default 'unknown error' notification message.
- */
-export const NOTIFICATION_UNKNOWN_ERROR = {
-  message: {
-    type: 'error',
-    message: i18n.global.t('globalMessages.unknownApiError'),
-  }
-};
-
-/**
  * @type {Boolean} Holds a flag if local and session storage are available.
  * They can lead to exceptions if cookies are disabled on the client.
  */

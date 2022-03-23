@@ -8,9 +8,10 @@ import './setup/_scss.scss';
 import 'swiper/css';
 
 import { createApp } from 'vue';
-import store from '@/store';
-import options from './setup/options';
-import plugins from './setup/plugins';
+import { createPinia } from 'pinia';
+import api from '@/stores/plugins/api';
+import options from '@/setup/options';
+import plugins from '@/setup/plugins';
 
 const vueOptions = process.env.NODE_ENV !== 'production'
   ? { ...options, ...require('./setup/styleguide.options').options } // eslint-disable-line global-require
@@ -21,11 +22,14 @@ const vuePlugins = process.env.NODE_ENV !== 'production'
   : plugins;
 
 const app = createApp(vueOptions);
+const pinia = createPinia();
+
+pinia.use(api);
 
 vuePlugins.forEach(([plugin, pluginOptions]) => {
   app.use(plugin, pluginOptions);
 });
 
-app.use(store.original);
+app.use(pinia);
 
 app.mount('#app');

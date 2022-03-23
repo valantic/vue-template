@@ -1,15 +1,15 @@
-import { INotification } from '@/types/c-notification';
+import { INotificationItem } from '@/stores/notification';
 import mockNotifications from '@/styleguide/mock-data/data-object/notification';
 
 interface INotificationResponse {
   data: object,
-  notifications: INotification[]
+  notifications: INotificationItem[]
 }
 
 /**
  * Creates an empty API response with a notification.
  */
-function createApiResponse(notification: INotification): INotificationResponse {
+function createApiResponse(notification: INotificationItem): INotificationResponse {
   return {
     data: {},
     notifications: [notification], // TODO: Check if the Backend System provides the notifications Array like it's done here.

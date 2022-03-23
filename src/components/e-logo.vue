@@ -30,7 +30,7 @@
   interface ISetup extends ITheme {}
 
   /**
-   * e-logo renders the company logo depending on the current theme (from the vuex store)
+   * e-logo renders the company logo depending on the current theme (from the store)
    *
    * Native link attributes can be used
    */
@@ -55,7 +55,7 @@
 
     computed: {
       /**
-       * Get's the correct logo depending on the theme value from the vuex store.
+       * Get's the correct logo depending on the theme value from the store.
        */
       logo(): ILogo {
         const title = this.$t('e-logo.linkTitle');

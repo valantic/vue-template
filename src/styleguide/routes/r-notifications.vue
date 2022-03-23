@@ -71,15 +71,26 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import api from '@/helpers/api';
   import cNotificationContainer from '@/components/c-notification-container.vue';
+  import notificationStore, { TNotificationStore } from '@/stores/notification';
+
+  interface ISetup {
+    notificationStore: TNotificationStore
+  }
 
   export default defineComponent({
     name: 'r-notifications',
     components: {
       cNotificationContainer,
     },
+
+    setup(): ISetup {
+      return {
+        notificationStore: notificationStore(),
+      };
+    },
     // data() {},
+
     // computed: {},
     // mounted() {},
     methods: {
@@ -88,7 +99,7 @@
        */
       // eslint-disable-next-line max-params
       getApiResponseMessage(type: string, selector?: string, redirectUrl?: string, expire?: boolean): void {
-        api.get('/notifications/global', {
+        this.notificationStore.$api.get('/notifications/global', {
           params: {
             type,
             selector,
