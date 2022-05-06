@@ -494,10 +494,12 @@ In cases where HTML is pre-rendered by twig, slots can be used to give the HTML 
 <html>
 <body>
   <l-content-25-75>
-    <ul slot="sidebar">
-      <li>Foo</li>
-      <li>Baa</li>
-    </ul>
+    <template #slot>
+      <ul>
+        <li>Foo</li>
+        <li>Baa</li>
+      </ul>
+    </template>
 
     {% if data.children is empty %}
       <h1>No items</h1>
