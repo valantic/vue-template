@@ -291,7 +291,7 @@ module.exports = (env, args = {}) => {
       test: /\.(gif|png|jpe?g|svg)$/i,
       type: 'asset/resource',
       generator: {
-        filename: ((pathData) => assetModulesFileName(pathData, 'img/')),
+        filename: (pathData) => assetModulesFileName(pathData, 'img/'),
       },
       use: [
         {
@@ -309,7 +309,7 @@ module.exports = (env, args = {}) => {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
       type: 'asset/resource',
       generator: {
-        filename: ((pathData) => assetModulesFileName(pathData, 'fonts/')),
+        filename: (pathData) => assetModulesFileName(pathData, 'fonts/'),
       },
     },
     {
