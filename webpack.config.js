@@ -419,7 +419,9 @@ module.exports = (env, args = {}) => {
     module: {
       rules,
     },
-    stats: !isProduction || hasWatcher ? 'errors-warnings' : stats,
+    stats: showProfile
+      ? undefined
+      : !isProduction || hasWatcher ? 'errors-warnings' : stats,
     performance: { // Warn about performance issues
       hints: !isProduction || hasWatcher ? false : 'warning',
       maxEntrypointSize: 500000, // 500kb
