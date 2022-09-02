@@ -315,8 +315,8 @@
       top: 50%;
       opacity: 0;
       transform: translateY(-50%);
-      transition: opacity variables.$transition-duration-200 linear;
-      transition-delay: variables.$transition-duration-100;
+      transition: opacity variables.$transition-duration--200 linear;
+      transition-delay: variables.$transition-duration--100;
       outline: none;
       border: 20px solid transparent;
       cursor: pointer;
@@ -342,7 +342,7 @@
       #{$this}__button--next:not(.swiper-button-disabled) {
         @include mixins.media(xs) {
           opacity: 1;
-          transition-delay: variables.$transition-duration-200;
+          transition-delay: variables.$transition-duration--200;
         }
       }
     }
@@ -465,7 +465,7 @@
         transform: scale(1);
         outline: none;
         cursor: pointer;
-        transition: width variables.$transition-duration-200 linear;
+        transition: width variables.$transition-duration--200 linear;
 
         &-active {
           background-color: variables.$color-primary--1;

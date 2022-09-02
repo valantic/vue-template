@@ -416,11 +416,11 @@
   }
 
   .slide-enter-active {
-    transition: all variables.$transition-duration-300 ease;
+    transition: all variables.$transition-duration--300 ease;
   }
 
   .slide-leave-active {
-    transition: all variables.$transition-duration-300 ease;
+    transition: all variables.$transition-duration--300 ease;
   }
 
   .slide-enter,

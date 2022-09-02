@@ -239,7 +239,7 @@
       padding: 0 variables.$spacing--10 0 variables.$spacing--30;
       position: relative;
       text-overflow: ellipsis;
-      transition: color variables.$transition-duration-100;
+      transition: color variables.$transition-duration--100;
       white-space: nowrap;
       border-bottom: 0;
 
@@ -249,7 +249,7 @@
         left: 0;
         content: "";
         position: absolute;
-        transition: width variables.$transition-duration-300 ease;
+        transition: width variables.$transition-duration--300 ease;
         width: 0;
       }
 
@@ -259,7 +259,7 @@
       }
 
       .c-collapse--expanded & {
-        transition: color variables.$transition-duration-300;
+        transition: color variables.$transition-duration--300;
 
         &::after {
           width: 100%;
@@ -272,7 +272,7 @@
 
       max-height: 0;
       overflow: hidden;
-      transition: max-height variables.$transition-duration-200 ease-in-out;
+      transition: max-height variables.$transition-duration--200 ease-in-out;
 
       .c-collapse--open & {
         max-height: none;
@@ -296,7 +296,7 @@
     &__toggle .e-icon {
       left: variables.$spacing--10;
       position: absolute;
-      transition: transform variables.$transition-duration-200 ease;
+      transition: transform variables.$transition-duration--200 ease;
       top: 50%;
       transform: translateY(-50%);
       transform-origin: center;
