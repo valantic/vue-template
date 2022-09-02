@@ -307,7 +307,7 @@
 
       &[loading='lazy'] {
         opacity: 0;
-        transition: opacity variables.$transition-duration-200;
+        transition: opacity variables.$transition-duration--200;
       }
     }
 

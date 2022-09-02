@@ -349,7 +349,7 @@
       }
 
       .e-icon {
-        transition: transform variables.$transition-duration-200 linear;
+        transition: transform variables.$transition-duration--200 linear;
       }
     }
 
@@ -474,7 +474,7 @@
     // Transition
     .top-slide-enter-active,
     .top-slide-leave-active {
-      transition: all variables.$transition-duration-200 ease-in-out;
+      transition: all variables.$transition-duration--200 ease-in-out;
     }
 
     .top-slide-enter,

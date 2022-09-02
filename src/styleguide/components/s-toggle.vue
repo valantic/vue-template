@@ -89,7 +89,7 @@
       align-self: flex-end;
       border-radius: $_s-slider__size;
       background-color: variables.$color-grayscale--600;
-      transition: variables.$transition-duration-300;
+      transition: variables.$transition-duration--300;
 
       &::before {
         position: absolute;
@@ -100,7 +100,7 @@
         top: 0.1 * $_s-slider__size;
         border-radius: 50%;
         background-color: variables.$color-primary--3;
-        transition: variables.$transition-duration-300;
+        transition: variables.$transition-duration--300;
       }
     }
 

@@ -91,7 +91,7 @@
     /* VUE Animation styles */
     .list-enter-active,
     .list-leave-active {
-      transition: all variables.$transition-duration-300;
+      transition: all variables.$transition-duration--300;
     }
 
     .list-leave-active {
