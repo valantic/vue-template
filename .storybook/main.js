@@ -1,15 +1,31 @@
+const webpackConfig = require('../webpack.config')();
+
 module.exports = {
-  "stories": [
-    "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
+  stories: [ // @see https://storybook.js.org/docs/react/configure/overview#configure-story-loading
+    '../src/**/*.stories.mdx',
+    {
+      directory: '../src/stories/components/',
+      titlePrefix: 'Components/',
+      files: '*.stories.js',
+    },
   ],
-  "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions"
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/preset-scss',
   ],
-  "framework": "@storybook/vue3",
-  "core": {
-    "builder": "@storybook/builder-webpack5"
+  framework: '@storybook/vue3',
+  core: {
+    'builder': 'webpack5'
+  },
+  staticDirs: ['../static'],
+
+  webpackFinal: async (config) => {
+    config.resolve.alias = { // Add alias from projects webpack config
+      ...config.resolve.alias,
+      ...webpackConfig.resolve.alias,
+    };
+
+    return config;
   }
 }
