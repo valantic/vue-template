@@ -3,7 +3,10 @@
     <div :class="b('message')">
       {{ notification.message }}
     </div>
-    <button :class="b('close-button')" @click="close">
+    <button :class="b('close-button')"
+            type="button"
+            @click="close"
+    >
       <e-icon icon="close" size="20" />
     </button>
   </div>

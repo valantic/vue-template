@@ -1,7 +1,4 @@
 // https://eslint.org/docs/user-guide/configuring
-const vueRules = require('eslint-config-valantic/plugins/vue');
-const tsRules = require('eslint-config-valantic/plugins/typescript');
-
 module.exports = {
   root: true,
   parserOptions: {
@@ -13,14 +10,7 @@ module.exports = {
     browser: true,
   },
   extends: [
-    'valantic',
-    'plugin:vue/vue3-recommended',
-    '@vue/typescript',
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'vue',
-    // 'html' // eslint-plugin-html
+    'valantic/vue3',
   ],
   // Uses eslint-import-resolver-webpack
   settings: {
@@ -28,9 +18,30 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
-    ...vueRules,
-    ...tsRules,
+    'vue/no-unsupported-features': ['error', {
+      version: ">= 3.2",
+    }],
+
+    // Fix and enable again
     'global-require': 'off',
+    'indent': 'off',
+    'vue/html-closing-bracket-newline': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off', // TODO: check if it is ok to disable this one
+    'vue/component-options-name-casing': 'off',
+    'import/extensions': 'off',
+    'vue/require-emit-validator': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    'vue/prefer-import-from-vue': 'off',
+    'vue/no-v-text-v-html-on-component': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
   },
-  globals: {},
+  overrides: [
+    {
+      'files': ['tests/**/*.*'],
+      'rules': {
+        'vue/require-name-property': 'off'
+      }
+    }
+  ]
 };

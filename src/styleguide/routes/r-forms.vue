@@ -130,6 +130,7 @@
     </section>
   </div>
 </template>
+
 <script lang="ts">
   import { defineComponent, ref, Ref } from 'vue';
   import useVuelidate, { Validation } from '@vuelidate/core';

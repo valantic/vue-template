@@ -3,8 +3,8 @@
     <!-- @slot Allows to display a customized header row. -->
     <slot
       :columns="columns"
-      :sortBy="sortBy"
-      :sortAscending="sortAscending"
+      :sort-by="sortBy"
+      :sort-ascending="sortAscending"
       name="header"
     >
       <tr :class="b('header-row')">
@@ -22,6 +22,7 @@
             v-if="column.sortable"
             :class="b('button-sort', getSortButtonModifiers(column))"
             :aria-label="$t('e-table.sort', { name: column.title })"
+            type="button"
             @click="onClickSort(column)"
           ></button>
         </th>
@@ -52,10 +53,11 @@
     <slot v-if="!itemsSorted.length" name="noResults">
       <tr>
         <td
-          v-text="$t('e-table.noResults')"
           :colspan="columns.length"
           :class="b('no-results')"
-        ></td>
+        >
+          {{ $t('e-table.noResults') }}
+        </td>
       </tr>
     </slot>
   </table>

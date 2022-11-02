@@ -1,6 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-import i18n from './i18n';
-
 /**
  * @type {Object} Lookup table of available breakpoints.
  *

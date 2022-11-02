@@ -45,9 +45,6 @@ const plugin: Plugin = {
    * Install method of the Google Tag Manager plugin.
    */
   install(app, options: IOptions = {}) {
-    const {
-      dataLayer = 'dataLayer',
-    } = options;
     let { debug } = options;
 
     /**
