@@ -113,6 +113,7 @@
     "jest-transform-stub": "~2.0.0",
     "lint-staged": "~12.1.2",
     "mini-css-extract-plugin": "~2.6.1",
+    "msw": "~0.47.4",
     "pinia": "~2.0.23",
     "postcss-html": "~1.5.0",
     "postcss-loader": "~7.0.1",
@@ -144,5 +145,8 @@
     "not ie > 0",
     "not ie_mob > 0",
     "not dead"
-  ]
+  ],
+  "msw": {
+    "workerDirectory": "public"
+  }
 }
