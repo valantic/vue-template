@@ -5,7 +5,6 @@ import 'core-js/stable';
 import './setup/_scss.scss';
 
 // vendor styles
-import 'swiper/css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';

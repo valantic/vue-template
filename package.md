@@ -43,8 +43,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core, polyfill
 - [dayjs](https://www.npmjs.com/package/dayjs) - Fast 2kB alternative to Moment.js with the same modern API.
   > c-date-picker-input, c-date-picker-range
-- [swiper](https://www.npmjs.com/package/swiper) - Swiper is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.
-  > c-swiper-modal, c-swiper-gallery, c-swiper-hero
 - [vue](https://www.npmjs.com/package/vue) - Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
   > core
 - [vue-i18n](https://www.npmjs.com/package/vue-i18n) - Internationalization plugin for Vue.js
