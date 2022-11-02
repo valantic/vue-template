@@ -16,10 +16,6 @@ Creates the production build of the current code and moves it to the `/dist` fol
 
 Starts the development-environment with styleguide example pages. Please note, that for performance reasons no minification, uglyfication and CSS extraction is performed.
 
-#### `npm run dev:s` or `npm run styleguide`
-
-Starts [Vue-Styleguidist](https://github.com/vue-styleguidist/vue-styleguidist) in a separate webpack and localhost instance.
-
 #### `npm run test`
 
 This will test the current state of CSS and JS code. Tests **MUST** be executed before creating a build.
