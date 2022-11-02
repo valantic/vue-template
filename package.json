@@ -49,8 +49,8 @@
     "url": "git+https://github.com/valantic/vue-template.git"
   },
   "engines": {
-    "node": ">=16 <17",
-    "npm": ">=7.10"
+    "node": ">=18 <19",
+    "npm": ">=8.19"
   },
   "keywords": [
     "vue",
