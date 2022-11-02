@@ -10,6 +10,7 @@
     "jest": "jest tests --config jest.config.js --silent",
     "jest:debug": "node --inspect-brk node_modules/jest/bin/jest.js --runInBand tests/unit/specs/<path-to-your-test-file>.ts",
     "fix:eslint": "npm run lint:eslint -- --config .eslintrc.fix.js --cache=false --fix",
+    "fix:stylelint": "npm run lint:stylelint -- --cache=false --config .stylelintrc.fix.js --fix",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:stylelint": "stylelint 'src/**/*.?(vue|scss)'",
     "lint:eslint": "eslint --ext .ts,.js,.vue src tests/unit/specs",
@@ -44,7 +45,7 @@
       "eslint --config .eslintrc.fix.js --fix"
     ],
     "*.{css,vue,scss}": [
-      "stylelint"
+      "stylelint --config .stylelintrc.fix.js --fix"
     ]
   },
   "repository": {
@@ -131,9 +132,9 @@
     "postcss-scss": "~4.0.5",
     "sass": "~1.55.0",
     "sass-loader": "~13.1.0",
-    "stylelint": "~14.1.0",
-    "stylelint-config-valantic": "6.5.1",
-    "stylelint-webpack-plugin": "~3.1.0",
+    "stylelint": "~14.14.0",
+    "stylelint-config-valantic": "~7.1.4",
+    "stylelint-webpack-plugin": "~3.3.0",
     "svg-sprite": "~2.0.1",
     "svg4everybody": "~2.1.9",
     "terser-webpack-plugin": "~5.3.6",
