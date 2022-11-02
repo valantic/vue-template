@@ -1,4 +1,4 @@
-import { createI18n } from 'vue-i18n';
+import { createI18n, IntlDateTimeFormat } from 'vue-i18n';
 import fallbackMessages from '../translations/de.json';
 import numberFormats from './localization.json';
 
@@ -7,6 +7,15 @@ const pageLang = document?.documentElement?.lang;
 export const I18N_FALLBACK = 'de';
 export const I18N_FALLBACK_MESSAGES = fallbackMessages;
 export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
+
+const datetimeFormats: IntlDateTimeFormat = {
+  month: {
+    month: 'long',
+  },
+  weekday: { // Monday, Tuesday, Wednesday, ...
+    weekday: 'long',
+  },
+};
 
 // Add styleguide only translations
 if (process.env.NODE_ENV !== 'production') {
@@ -24,6 +33,11 @@ const i18n = createI18n({
   legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
+  datetimeFormats: {
+    [I18N_FALLBACK]: datetimeFormats,
+    [pageLang]: datetimeFormats
+  },
+
   warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
 
   /**
