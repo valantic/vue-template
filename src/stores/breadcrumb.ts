@@ -44,7 +44,7 @@ interface IInitialStoreDate {
   items?: IBreadcrumbItem[];
 }
 
-const storeName: string = 'breadcrumb';
+const storeName = 'breadcrumb';
 
 export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>(storeName, {
   state: (): IBreadcrumbState => {
@@ -55,7 +55,7 @@ export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetter
     };
 
     if (process.env.NODE_ENV !== 'production') {
-      state.items = require('../styleguide/mock-data/initial-data/breadcrumbs').default;
+      state.items = require('../styleguide/mock-data/initial-data/breadcrumbs').default; // eslint-disable-line global-require, @typescript-eslint/no-var-requires
     }
 
     if (Array.isArray(initialData.items)) {

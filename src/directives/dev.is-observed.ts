@@ -1,4 +1,4 @@
-import { DirectiveBinding } from '@vue/runtime-core';
+import { DirectiveBinding } from 'vue';
 
 /**
  * Tests if the given directive value is an observed Object or Array and makes a console log of the result.

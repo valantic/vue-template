@@ -24,11 +24,14 @@
       <span v-if="!hasDefaultState && !focus" :class="b('icon-splitter')"></span>
       <e-icon v-if="!hasDefaultState && !focus"
               :class="b('state-icon')"
-              :icon="stateIcon" />
+              :icon="stateIcon"
+      />
     </span>
     <span v-if="showNotification" :class="b('notification')">
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <c-form-notification v-html="notification" :state="state" />
+      <c-form-notification :state="state">
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <span v-html="notification"></span>
+      </c-form-notification>
     </span>
   </span>
 </template>
@@ -38,7 +41,7 @@
     Ref,
     defineComponent,
     ref,
-    toRefs
+    toRefs,
   } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification.vue';
@@ -57,14 +60,13 @@
   /**
    * Input form component
    *
-   * **WARNING: uses 'v-html' for the 'notification'. Make sure, that the source for this data is trustworthy.**
    */
   export default defineComponent({
     name: 'e-input',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
-      cFormNotification
+      cFormNotification,
     },
 
     inheritAttrs: false,
@@ -93,7 +95,7 @@
        */
       title: {
         default: null,
-        type: String
+        type: String,
       },
 
       /**
@@ -111,7 +113,7 @@
        */
       notification: {
         type: String,
-        default: null
+        default: null,
       },
 
       /**
@@ -130,7 +132,7 @@
        */
       selectOnFocus: {
         type: Boolean,
-        default: false
+        default: false,
       },
 
       /**
@@ -159,7 +161,7 @@
 
     data(): IData {
       return {
-        internalValue: this.modelValue
+        internalValue: this.modelValue,
       };
     },
     computed: {
@@ -177,7 +179,7 @@
         const {
           border,
           noNativeControl,
-          notification
+          notification,
         } = this;
 
         return {
@@ -307,7 +309,7 @@
           }
         }
       },
-    }
+    },
     // render() {},
   });
 </script>
@@ -334,14 +336,14 @@
     &__field {
       @include mixins.font(variables.$font-size--14, 18px);
 
+      position: relative;
+      width: 100%;
+      height: $e-input-height;
+      padding: variables.$spacing--5 variables.$spacing--10;
       border: 1px solid variables.$color-grayscale--500;
       border-radius: variables.$border-radius--500;
       color: variables.$color-secondary--1;
       font-family: variables.$font-family--primary;
-      height: $e-input-height;
-      position: relative;
-      width: 100%;
-      padding: variables.$spacing--5 variables.$spacing--10;
 
       // disable iPhone styling
       -webkit-appearance: none;
@@ -353,77 +355,77 @@
     // remove x on in put field within IE
     &__field::-ms-clear {
       display: none;
-      height: 0;
       width: 0;
+      height: 0;
     }
 
     // Hide autofill Safari icon
     // noinspection CssInvalidPseudoSelector
     &__field::-webkit-contacts-auto-fill-button {
-      visibility: hidden;
-      pointer-events: none;
       position: absolute;
       right: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
     // placeholder (has to be split in seperate blocks to work on each browser)
     &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
-      font-family: variables.$font-family--primary;
-      color: variables.$color-grayscale--400;
       opacity: 1;
+      color: variables.$color-grayscale--400;
+      font-family: variables.$font-family--primary;
     }
 
     &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
-      font-family: variables.$font-family--primary;
-      color: variables.$color-grayscale--400;
       opacity: 1;
+      color: variables.$color-grayscale--400;
+      font-family: variables.$font-family--primary;
     }
 
     &__field::placeholder { // Most modern browsers support this now
-      font-family: variables.$font-family--primary;
-      color: variables.$color-grayscale--400;
       opacity: 1;
+      color: variables.$color-grayscale--400;
+      font-family: variables.$font-family--primary;
     }
 
     &__fixed-label {
       @include mixins.font(variables.$font-size--14, 18px);
 
-      color: variables.$color-grayscale--400;
       position: absolute;
-      left: variables.$spacing--5;
       top: 50%;
-      transform: translateY(-50%);
+      left: variables.$spacing--5;
       display: flex;
+      transform: translateY(-50%);
+      color: variables.$color-grayscale--400;
     }
 
     &__icon-splitter {
-      border-left: 1px solid;
       margin: 0 variables.$spacing--5;
+      border-left: 1px solid;
     }
 
     &__notification {
       @include mixins.z-index(form-notification);
 
-      display: block;
       position: absolute;
-      width: 100%;
       top: calc(#{$e-input-height} - 1px);
+      display: block;
+      width: 100%;
     }
 
     &__slot-wrapper {
       position: absolute;
-      right: variables.$spacing--5;
       top: 50%;
-      transform: translateY(-50%);
+      right: variables.$spacing--5;
       display: flex;
+      transform: translateY(-50%);
     }
 
     &__slot {
       @include mixins.font(variables.$font-size--14);
 
       display: flex;
-      line-height: $e-input-height;
       color: variables.$color-grayscale--400;
+      line-height: $e-input-height;
     }
 
     // active
@@ -456,8 +458,8 @@
     &--disabled:not(&--border-0) &__field,
     &--disabled &__field:hover,
     &--disabled:not(&--border-0) &__field:hover {
-      background-color: variables.$color-grayscale--1000;
       border-color: variables.$color-grayscale--600;
+      background-color: variables.$color-grayscale--1000;
       color: variables.$color-grayscale--300;
 
       &::placeholder {
@@ -537,14 +539,14 @@
 
       &::-webkit-inner-spin-button,
       &::-webkit-outer-spin-button {
-        -webkit-appearance: none;
         margin: 0;
+        -webkit-appearance: none;
       }
     }
 
     .e-input__field::-webkit-inner-spin-button {
-      -webkit-appearance: none;
       margin: 0;
+      -webkit-appearance: none;
     }
   }
 </style>

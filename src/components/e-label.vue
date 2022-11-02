@@ -20,8 +20,6 @@
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface ISetup extends IFormStates {}
-
   /**
    * Label component for form elements, can be used with a slot or a for attribute
    */
@@ -39,7 +37,7 @@
        */
       tag: {
         type: String,
-        default: 'label'
+        default: 'label',
       },
 
       /**
@@ -47,7 +45,7 @@
        */
       name: {
         type: String,
-        required: true
+        required: true,
       },
 
       /**
@@ -61,7 +59,7 @@
           'right',
           'bottom',
           'left',
-        ].includes(value)
+        ].includes(value),
       },
 
       /**
@@ -81,7 +79,7 @@
       },
     },
 
-    setup(props): ISetup {
+    setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -96,7 +94,7 @@
           ...this.stateModifiers,
           position: this.position,
         };
-      }
+      },
     },
     // watch: {},
 
@@ -120,9 +118,9 @@
   @use '../setup/scss/variables';
 
   .e-label {
-    color: variables.$color-grayscale--200;
     display: block;
     cursor: pointer;
+    color: variables.$color-grayscale--200;
 
     &__inner {
       width: 100%;
@@ -131,8 +129,8 @@
     &__name {
       @include mixins.font(variables.$font-size--16, variables.$spacing--20);
 
-      color: inherit;
       display: block;
+      color: inherit;
     }
 
     &__name--invisible {
@@ -162,8 +160,8 @@
       display: flex;
 
       .e-label__name {
-        flex: 1 0 auto;
         display: flex;
+        flex: 1 0 auto;
         align-items: center;
         margin-right: variables.$spacing--15;
       }
@@ -174,8 +172,8 @@
       flex-direction: row-reverse;
 
       .e-label__name {
-        flex: 1 0 auto;
         display: flex;
+        flex: 1 0 auto;
         align-items: center;
         margin-left: variables.$spacing--15;
       }

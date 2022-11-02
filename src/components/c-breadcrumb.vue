@@ -3,10 +3,12 @@
     <ul :class="b('list')">
       <li v-for="(item, index) in getItems"
           :key="`breadcrumb--${index}`"
-          :class="b('item')">
+          :class="b('item')"
+      >
         <a :class="b('link')"
            :href="item.url"
-           :title="$t('c-breadcrumb.linkTitle', { name: item.name })">
+           :title="$t('c-breadcrumb.linkTitle', { name: item.name })"
+        >
           {{ item.name }}
         </a>
       </li>

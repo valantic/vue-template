@@ -31,7 +31,7 @@ interface ISessionActions {
 
 export type TSessionStore = Store<string, ISessionState, ISessionGetters, ISessionActions>;
 
-const storeName: string = 'session';
+const storeName = 'session';
 
 export default defineStore<typeof storeName, ISessionState, ISessionGetters, ISessionActions>(storeName, {
   state: (): ISessionState => {

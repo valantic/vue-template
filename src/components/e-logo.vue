@@ -4,7 +4,8 @@
        :class="b('link')"
        :title="logo.title"
        v-bind="$attrs"
-       tabindex="-1">
+       tabindex="-1"
+    >
       <!-- TODO: Check if e-icon is the best way to render the logo -->
       <e-icon :icon="logo.icon"
               :alt="logo.alt"
@@ -27,8 +28,6 @@
     title: string;
   }
 
-  interface ISetup extends ITheme {}
-
   /**
    * e-logo renders the company logo depending on the current theme (from the store)
    *
@@ -47,7 +46,7 @@
     //   return {};
     // },
 
-    setup(): ISetup {
+    setup(): ITheme {
       return {
         ...useTheme(),
       };
@@ -96,9 +95,9 @@
         return {
           icon,
           alt,
-          title
+          title,
         };
-      }
+      },
     },
     // watch: {},
 
@@ -125,9 +124,9 @@
     &__link:focus {
       display: inline-block;
       width: 100%;
-      text-decoration: none;
-      border-bottom: 0;
       padding: 0;
+      border-bottom: 0;
+      text-decoration: none;
     }
   }
 </style>

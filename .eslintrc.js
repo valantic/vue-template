@@ -23,18 +23,10 @@ module.exports = {
     }],
 
     // Fix and enable again
-    'global-require': 'off',
     'indent': 'off',
-    'vue/html-closing-bracket-newline': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off', // TODO: check if it is ok to disable this one
-    'vue/component-options-name-casing': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off', // TODO: check if it is ok to disable this one,
     'import/extensions': 'off',
     'vue/require-emit-validator': 'off',
-    '@typescript-eslint/no-inferrable-types': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    'vue/prefer-import-from-vue': 'off',
-    'vue/no-v-text-v-html-on-component': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
   },
   overrides: [
     {

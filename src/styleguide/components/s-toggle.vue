@@ -6,7 +6,8 @@
     </span>
     <input v-model="internalValue"
            :class="b('input')"
-           type="checkbox">
+           type="checkbox"
+    >
     <span :class="b('slider')"></span>
   </label>
 </template>
@@ -26,8 +27,8 @@
        */
       modelValue: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
 
     emits: ['update:modelValue'],
@@ -49,8 +50,8 @@
            * Emits checkbox value e.g. true/false or value
            */
           this.$emit('update:modelValue', value);
-        }
-      }
+        },
+      },
     },
     // watch: {},
 
@@ -83,21 +84,21 @@
 
     &__slider {
       position: relative;
-      cursor: pointer;
+      align-self: flex-end;
       width: 2 * $_s-slider__size;
       height: $_s-slider__size;
-      align-self: flex-end;
       border-radius: $_s-slider__size;
       background-color: variables.$color-grayscale--600;
+      cursor: pointer;
       transition: variables.$transition-duration--300;
 
       &::before {
         position: absolute;
-        content: '';
-        height: 0.8 * $_s-slider__size;
-        width: 0.8 * $_s-slider__size;
-        left: 0.1 * $_s-slider__size;
         top: 0.1 * $_s-slider__size;
+        left: 0.1 * $_s-slider__size;
+        content: '';
+        width: 0.8 * $_s-slider__size;
+        height: 0.8 * $_s-slider__size;
         border-radius: 50%;
         background-color: variables.$color-primary--3;
         transition: variables.$transition-duration--300;

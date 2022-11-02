@@ -6,28 +6,29 @@ import './setup/_scss.scss';
 
 // vendor styles
 
-import { createApp } from 'vue';
+import { createApp, Plugin } from 'vue';
 import { createPinia } from 'pinia';
 import api from '@/stores/plugins/api';
 import options from '@/setup/options';
 import plugins from '@/setup/plugins';
+import { options as styleguideOptions, router } from './setup/styleguide.options';
 
 const vueOptions = process.env.NODE_ENV !== 'production'
-  ? { ...options, ...require('./setup/styleguide.options').options } // eslint-disable-line global-require
+  ? { ...options, ...styleguideOptions }
   : options;
-
-const vuePlugins = process.env.NODE_ENV !== 'production'
-  ? [...plugins, ...require('./setup/styleguide.options').plugins] // eslint-disable-line global-require
-  : plugins;
 
 const app = createApp(vueOptions);
 const pinia = createPinia();
 
 pinia.use(api);
 
-vuePlugins.forEach(([plugin, pluginOptions]) => {
-  app.use(plugin, pluginOptions);
+plugins.forEach(([plugin, pluginOptions]) => {
+  app.use(plugin as Plugin, pluginOptions);
 });
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(router);
+}
 
 app.use(pinia);
 

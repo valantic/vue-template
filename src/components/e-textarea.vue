@@ -8,16 +8,20 @@
               v-bind="$attrs"
               @focus="onFocus"
               @blur="onBlur"
-              @input="onInput">
+              @input="onInput"
+    >
     </textarea>
     <span v-if="!hasDefaultState && !focus" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
-              :icon="stateIcon" />
+              :icon="stateIcon"
+      />
     </span>
     <div v-if="notification && focus" :class="b('notification')">
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <c-form-notification v-html="notification" :state="state" />
+      <c-form-notification :state="state">
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <span v-html="notification"></span>
+      </c-form-notification>
     </div>
   </span>
 </template>
@@ -27,8 +31,6 @@
   import cFormNotification from '@/components/c-form-notification.vue';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-
-  interface ISetup extends IFormStates {}
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -91,7 +93,7 @@
 
     emits: ['input', 'focus', 'blur'],
 
-    setup(props): ISetup {
+    setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -174,20 +176,20 @@
   @use '../setup/scss/variables';
 
   .e-textarea {
-    display: block;
     position: relative;
+    display: block;
 
     &__field {
-      padding: variables.$spacing--5 variables.$spacing--10;
-      resize: none;
-      width: 100%;
-      border-radius: 3px;
-      border: 1px solid variables.$color-grayscale--500;
-      display: block;
       position: relative;
+      display: block;
+      width: 100%;
+      padding: variables.$spacing--5 variables.$spacing--10;
+      border: 1px solid variables.$color-grayscale--500;
+      border-radius: 3px;
 
       // disable iPhone styling
       -webkit-appearance: none;
+      resize: none;
 
       // sets proper input color for safari
       -webkit-text-fill-color: initial;
@@ -200,29 +202,29 @@
     // placeholder
     // placeholder (has to be split in seperate blocks to work on each browser)
     &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
-      font-family: variables.$font-family--primary;
-      color: variables.$color-grayscale--400;
       opacity: 1;
+      color: variables.$color-grayscale--400;
+      font-family: variables.$font-family--primary;
     }
 
     &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
-      font-family: variables.$font-family--primary;
-      color: variables.$color-grayscale--400;
       opacity: 1;
+      color: variables.$color-grayscale--400;
+      font-family: variables.$font-family--primary;
     }
 
     &__field::placeholder { // Most modern browsers support this now
-      font-family: variables.$font-family--primary;
-      color: variables.$color-grayscale--400;
       opacity: 1;
+      color: variables.$color-grayscale--400;
+      font-family: variables.$font-family--primary;
     }
 
     // separator for state icons
     &__icon-splitter {
       position: absolute;
+      top: 2px;
       right: 25px;
       height: calc(100% - 4px);
-      top: 2px;
       border-left: 1px solid;
     }
 
@@ -237,11 +239,11 @@
 
     &__icon-wrapper {
       position: absolute;
-      right: variables.$spacing--5;
       top: 50%;
+      right: variables.$spacing--5;
+      display: flex;
       height: 100%;
       transform: translateY(-50%);
-      display: flex;
 
       .e-icon {
         align-self: center;
@@ -271,8 +273,8 @@
     &__field:disabled,
     &--disabled &__field,
     &--disabled &__field:hover {
-      background-color: variables.$color-grayscale--1000;
       border-color: variables.$color-grayscale--600;
+      background-color: variables.$color-grayscale--1000;
       color: variables.$color-grayscale--600;
 
       &::placeholder {

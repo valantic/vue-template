@@ -19,7 +19,7 @@ const datetimeFormats: IntlDateTimeFormat = {
 
 // Add styleguide only translations
 if (process.env.NODE_ENV !== 'production') {
-  const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require
+  const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
@@ -35,7 +35,7 @@ const i18n = createI18n({
   fallbackLocale: I18N_FALLBACK,
   datetimeFormats: {
     [I18N_FALLBACK]: datetimeFormats,
-    [pageLang]: datetimeFormats
+    [pageLang]: datetimeFormats,
   },
 
   warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
@@ -63,7 +63,7 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
       .then(({ default: localeMessages }) => {
         // Add styleguide only translations
         if (process.env.NODE_ENV !== 'production') {
-          const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require
+          const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
 
           if (styleguideTranslations[locale]) {
             Object.entries(styleguideTranslations[locale]).forEach(([key, value]) => {

@@ -21,7 +21,7 @@
           <e-label name="E-Mail" required>
             <e-input v-model="form.email"
                      :state="v$.form.email.$error ? 'error' : 'default'"
-                     :notification="v$.form.email.$error ? 'No valid email address' : ''"
+                     :notification="v$.form.email.$error ? '<b>No valid email address</b>' : ''"
                      type="email"
                      name="email"
                      placeholder="Your E-Mail"
@@ -58,27 +58,32 @@
           <e-label name="Topics" tag="div">
             <e-checkbox v-model="form.topics"
                         value="food"
-                        name="topics">
+                        name="topics"
+            >
               Food
             </e-checkbox>
             <e-checkbox v-model="form.topics"
                         value="technics"
-                        name="topics">
+                        name="topics"
+            >
               Technics
             </e-checkbox>
             <e-checkbox v-model="form.topics"
                         value="celebrities"
-                        name="topics">
+                        name="topics"
+            >
               Celebrities
             </e-checkbox>
             <e-checkbox v-model="form.topics"
                         value="garden"
-                        name="topics">
+                        name="topics"
+            >
               Garden
             </e-checkbox>
             <e-checkbox v-model="form.topics"
                         value="architecture"
-                        name="topics">
+                        name="topics"
+            >
               Architecture
             </e-checkbox>
           </e-label>
@@ -86,22 +91,26 @@
           <e-label name="Frequency of Mailing" tag="div">
             <e-radio v-model="form.frequency"
                      value="onceAWeek"
-                     name="frequency">
+                     name="frequency"
+            >
               Once a week
             </e-radio>
             <e-radio v-model="form.frequency"
                      value="twiceAWeek"
-                     name="frequency">
+                     name="frequency"
+            >
               Twice a week
             </e-radio>
             <e-radio v-model="form.frequency"
                      value="onceAMonth"
-                     name="frequency">
+                     name="frequency"
+            >
               Once a month
             </e-radio>
             <e-radio v-model="form.frequency"
                      value="twiceAMonth"
-                     name="frequency">
+                     name="frequency"
+            >
               Twice a month
             </e-radio>
           </e-label>
@@ -201,7 +210,7 @@
             {
               label: 'French',
               value: 'french',
-            }
+            },
           ],
           businessFields: [
             {
@@ -221,7 +230,7 @@
               value: 'finance',
             },
           ],
-        }
+        },
       };
     },
 
@@ -239,8 +248,8 @@
         },
         businessFields: {
           required,
-        }
-      }
+        },
+      },
     },
 
     methods: {
@@ -258,7 +267,7 @@
           this.formRef.submit();
         }
       },
-    }
+    },
   });
 </script>
 

@@ -23,8 +23,6 @@
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface ISetup extends IFormStates {}
-
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
    *
@@ -67,7 +65,7 @@
 
     emits: ['update:modelValue', 'change'],
 
-    setup(props): ISetup {
+    setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -90,7 +88,7 @@
            * Fired on select of radio button.
            */
           this.$emit('update:modelValue', value);
-        }
+        },
       },
 
       /**
@@ -164,8 +162,8 @@
 
     &__label {
       display: block;
-      padding-left: variables.$spacing--25;
       margin: 0;
+      padding-left: variables.$spacing--25;
 
       &:hover {
         color: variables.$color-grayscale--0;
@@ -178,9 +176,9 @@
       &::before,
       &::after {
         position: absolute;
-        content: '';
         top: 3px;
         left: 0;
+        content: '';
         width: $label-size;
         height: $label-size;
         border-radius: 50%;
@@ -191,11 +189,11 @@
       }
 
       &::after {
-        transition: transform 0.1s ease-in-out;
-        background: variables.$color-grayscale--0;
-        border: 1px solid transparent;
         opacity: 0;
+        border: 1px solid transparent;
+        background: variables.$color-grayscale--0;
         transform: scale(0);
+        transition: transform 0.1s ease-in-out;
       }
     }
 
@@ -209,8 +207,8 @@
     }
 
     &__field:disabled + &__label {
-      color: variables.$color-grayscale--500;
       cursor: default;
+      color: variables.$color-grayscale--500;
 
       &:hover {
         color: variables.$color-grayscale--500;

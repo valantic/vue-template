@@ -1,5 +1,4 @@
-import { DirectiveBinding } from '@vue/runtime-core';
-import { ComponentPublicInstance } from 'vue';
+import { DirectiveBinding, ComponentPublicInstance } from 'vue';
 
 const outsideClickEventConfig = { passive: true, capture: true };
 
@@ -86,5 +85,5 @@ export default {
     document.removeEventListener('click', el.outsideClickHandler, outsideClickEventConfig);
     document.removeEventListener('touchend', el.outsideClickHandler, outsideClickEventConfig);
     document.removeEventListener('scroll', el.outsideClickHandler, outsideClickEventConfig);
-  }
+  },
 };
