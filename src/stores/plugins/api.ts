@@ -92,7 +92,7 @@ export default function api():IPluginApi {
   /**
    * Handles axios error responses.
    */
-  function handleError(error: AxiosError): Promise<AxiosError> {
+  function handleError(error: AxiosError<any>): Promise<AxiosError> { // eslint-disable-line @typescript-eslint/no-explicit-any
     const { notifications } = error?.response?.data || {};
 
     if (notifications) {
