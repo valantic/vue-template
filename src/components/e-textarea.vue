@@ -86,7 +86,7 @@
       isResizable: {
         type: Boolean,
         default: false,
-      }
+      },
     },
 
     emits: ['input', 'focus', 'blur'],
@@ -120,7 +120,7 @@
         return {
           isResizable: this.isResizable,
         };
-      }
+      },
     },
     // watch: {},
 
