@@ -30,11 +30,9 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * `npm run dev` - See above.
 * `npm run dev:s` - See above.
 * `npm run jest` - Executes Jest tests.
-* `npm run styleguide` - See above.
 * `npm run test` - See above.
 * `npm run build` - See above.
 * `npm run build:profile` - Runs a build and shows a package content overview
-* `npm run build:styleguide` - Creates a standalone build of the development and component styleguide.
 * `npm run build:watch` - Allows to develop with a continuous productive build.
 
 ## Dependencies

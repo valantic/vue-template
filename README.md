@@ -508,10 +508,7 @@ During switching to Vue-3 and TypeScript, the following decisions had to be made
 
 The following issues arisen during the switch and are still open:
 
-1. Styleguideist does not support Vue-3 / Webpack 5, see
-    - https://github.com/vue-styleguidist/vue-styleguidist/issues/997
-    - https://github.com/styleguidist/react-styleguidist/issues/1703
-2. Some dependencies are only available in next / alpha version
+1. Some dependencies are only available in next / alpha version
 2. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good 
    tools to do that at the moment, [read more](https://github.com/vuejs/vue-cli/issues/2950)
    - Using native `tsc --noEmit` does not work for TypeScript code in Vue `sfc` files
@@ -883,9 +880,6 @@ package.json:
 ```
 
 ## Roadmap
-
-* [ ] Make styleguideist work again, as soon as Vue 3 is supported, 
-  see https://github.com/vue-styleguidist/vue-styleguidist/issues/997
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
 * [ ] Add custom elements option to the "initial data" section.

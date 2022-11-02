@@ -33,16 +33,13 @@ const WebpackDependencyHint = require('@valantic/webpack-dependency-hint');
  */
 module.exports = (env, args = {}) => {
   // Instance variables
-  const isStyleguide = !!args.styleguide;
-  const isStyleguideBuild = !!args.styleguideBuild;
-  const isProduction = process.env.NODE_ENV === 'production' && !isStyleguideBuild;
+  const isProduction = process.env.NODE_ENV === 'production';
   const hasWatcher = args.watch || false;
   const hotReload = !hasWatcher || !isProduction;
   const showProfile = args.profile || false;
   const globalVariables = {
     'process.env': {
       'NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
-      'IS_STYLEGUIDE_BUILD': JSON.stringify(isStyleguideBuild),
       'HAS_WATCHER': hasWatcher,
       'BUILD_TIMESTAMP': new Date().getTime(),
     },
@@ -59,8 +56,6 @@ module.exports = (env, args = {}) => {
     buildPath,
     productionPath,
     localDist,
-    styleguideBuildPath,
-    styleguidePath,
     developmentPath,
     outputAssetsFolder,
     filePrefix,
@@ -71,7 +66,7 @@ module.exports = (env, args = {}) => {
 
   const publicPath = isProduction // Base path which is used in production to load modules via http.
     ? productionPath
-    : isStyleguideBuild ? styleguidePath : developmentPath;
+    : developmentPath;
   const themes = themeFiles.reduce((accumulator, theme) => {
     accumulator[theme] = path.resolve(__dirname, `${themeSource}${theme}.scss`);
 
@@ -82,12 +77,10 @@ module.exports = (env, args = {}) => {
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
   const outputPath = process.env.WEBPACK_LOCAL_DIST
     ? localDist
-    : isStyleguideBuild
-      ? styleguideBuildPath
-      : buildPath;
+    : buildPath;
 
   // webpack configuration variables
-  const isBuild = isProduction || isStyleguideBuild;
+  const isBuild = isProduction;
   const prefix = filePrefix ? `${filePrefix}.` : '';
   const extensions = ['.js', '.vue', '.json', '.ts'];
   const alias = {
@@ -143,7 +136,7 @@ module.exports = (env, args = {}) => {
           noErrorOnMissing: true,
           globOptions: isProduction
             ? { dot: true, ignore: ['**/mockdata/**'] }
-            : isStyleguideBuild ? { dot: true } : undefined,
+            : undefined,
         },
       ]
     }),
@@ -158,9 +151,7 @@ module.exports = (env, args = {}) => {
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
       template: 'index.html',
-      excludeChunks: isStyleguideBuild
-        ? Object.keys(themes).slice(1)
-        : Object.keys(themes),
+      excludeChunks: Object.keys(themes),
     }),
 
     new StyleLintPlugin({
@@ -239,22 +230,14 @@ module.exports = (env, args = {}) => {
     compress: true,
   };
 
-  // different options needed tue to https://github.com/vue-styleguidist/vue-styleguidist/issues/1074
-  if (isStyleguide || isStyleguideBuild) {
-    // styleguideist does not need any watcher, because it already contains one out of the box
-    devServer['clientLogLevel'] = 'error'; // Removes ESLint warnings from browser console
-    devServer['progress'] = true;
-    devServer['overlay'] = true;
-  } else {
-    // this block can be used as default when above issue has been fixed
-    devServer['client'] = {
-      logging: 'error', // Removes ESLint warnings from console
-      progress: true,
-      overlay: {
-        warnings: false,
-        errors: true,
-      },
-    }
+  // this block can be used as default when above issue has been fixed
+  devServer['client'] = {
+    logging: 'error', // Removes ESLint warnings from console
+    progress: true,
+    overlay: {
+      warnings: false,
+      errors: true,
+    },
   }
 
   const assetModulesFileName = function (pathData, assetType) {
