@@ -30,6 +30,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * `npm run build` - See above.
 * `npm run build:profile` - Runs a build and shows a package content overview
 * `npm run build:watch` - Allows to develop with a continuous productive build.
+* `npm run storybook` - Runs storybook server.
+* `npm run build-storybook` - Creates storybook build.
 
 ## Dependencies
 
