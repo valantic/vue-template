@@ -2,7 +2,7 @@
   "name": "vue-template",
   "version": "7.0.0",
   "description": "A customized Vue.js project template",
-  "lastDependencyUpdate": "17.11.2021",
+  "lastDependencyUpdate": "03.11.2022",
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "webpack-dev-server --mode development",
