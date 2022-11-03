@@ -11,6 +11,7 @@ module.exports = {
   },
   extends: [
     'valantic/vue3',
+    '@vue/typescript'
   ],
   // Uses eslint-import-resolver-webpack
   settings: {
@@ -23,7 +24,6 @@ module.exports = {
     }],
 
     // Fix and enable again
-    'indent': 'off',
     '@typescript-eslint/ban-ts-comment': 'off', // TODO: check if it is ok to disable this one,
     'import/extensions': 'off',
     'vue/require-emit-validator': 'off',
