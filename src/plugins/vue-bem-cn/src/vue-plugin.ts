@@ -27,8 +27,7 @@ const plugin: Plugin = {
         const nsBlock = cfg.delimiters.ns + block;
         const generator = bemCn(cfg.hyphenate ? hyphenate(nsBlock) : nsBlock, cfg);
 
-        // @ts-ignore
-        this[cfg.methodName] = (...args: any[]) => generator(...args);
+        this[cfg.methodName] = (...args: any[]) => generator(...args as [string]);
       },
     });
   },

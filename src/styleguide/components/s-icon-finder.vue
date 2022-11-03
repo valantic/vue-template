@@ -112,8 +112,7 @@
         /**
          * An array of available icons.
          */
-        // @ts-ignore
-        icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
+        icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)?.[1] || ''),
 
         /**
          * The currently applied query filter.

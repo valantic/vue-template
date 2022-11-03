@@ -1,4 +1,3 @@
-// @ts-ignore
 import { faker } from '@faker-js/faker/locale/en';
 import breadcrumb from '../data-object/breadcrumb';
 

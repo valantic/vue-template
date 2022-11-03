@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
-      // @ts-ignore
+      // @ts-ignore Needed because typescript cannot assign index.
       I18N_FALLBACK_MESSAGES[key] = value;
     });
   }

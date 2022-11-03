@@ -24,7 +24,6 @@ module.exports = {
     }],
 
     // Fix and enable again
-    '@typescript-eslint/ban-ts-comment': 'off', // TODO: check if it is ok to disable this one,
     'import/extensions': 'off',
     'vue/require-emit-validator': 'off',
   },
