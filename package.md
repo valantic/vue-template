@@ -50,6 +50,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core, polyfill
 - [dayjs](https://www.npmjs.com/package/dayjs) - Fast 2kB alternative to Moment.js with the same modern API.
   > c-date-picker-input, c-date-picker-range
+- [the-new-css-reset](https://www.npmjs.com/package/the-new-css-reset) - This new CSS reset is using the new CSS features
+  > css
 - [vue](https://www.npmjs.com/package/vue) - Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
   > core
 - [vue-i18n](https://www.npmjs.com/package/vue-i18n) - Internationalization plugin for Vue.js
