@@ -31,15 +31,13 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 * `npm run build:profile` - Runs a build and shows a package content overview
 * `npm run build:watch` - Allows to develop with a continuous productive build.
 * `npm run storybook` - Runs storybook server.
-* `npm run build-storybook` - Creates storybook build.
+* `npm run build:storybook` - Creates storybook build.
 
 ## Dependencies
 
 ### Project
 
 ### Template
-- [@storybook/preset-scss](https://www.npmjs.com/package/@storybook/preset-scss) - One-line SCSS configuration for storybook.
-  > storybook
 - [@vuelidate/core](https://www.npmjs.com/package/@vuelidate/core) - Simple, lightweight model-based validation for Vue.js 2.x & 3.0
   > vuelidate, validation
 - [@vuelidate/validators](https://www.npmjs.com/package/@vuelidate/validators) - This is the standalone validators package for Vuelidate.
@@ -79,6 +77,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 - [@storybook/builder-webpack5](https://www.npmjs.com/package/@storybook/builder-webpack5) - Builder implemented with webpack5 and webpack5-compatible loaders/plugins/config, used by @storybook/core-server to build the preview iframe.
   > storybook
 - [@storybook/manager-webpack5](https://www.npmjs.com/package/@storybook/manager-webpack5) - Builder implemented with webpack5 and webpack5-compatible loaders/plugins/config, used by @storybook/core-server to build the manager UI.
+  > storybook
+- [@storybook/preset-scss](https://www.npmjs.com/package/@storybook/preset-scss) - One-line SCSS configuration for storybook.
   > storybook
 - [@storybook/testing-library](https://www.npmjs.com/package/@storybook/testing-library) - Storybook integration for Testing Library, instrumented for use with the Interactions addon.
   > storybook
