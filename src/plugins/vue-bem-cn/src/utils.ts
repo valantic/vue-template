@@ -8,7 +8,12 @@ export const isString = (value: any): boolean => value && typeof value === 'stri
  * Checks if the given value is a native JS Object with values.
  */
 // eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-export const isPObject = (value: any): boolean => !!(value && typeof value === 'object' && value.constructor === Object && Object.keys(value).length);
+export const isPObject = (value: any): boolean => !!(
+  value
+  && typeof value === 'object'
+  && value.constructor === Object
+  && Object.keys(value).length
+);
 
 /**
  * Checks if the given value is a finite number.

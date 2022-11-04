@@ -10,8 +10,6 @@
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface ISetup extends IFormStates {}
-
   /**
    * Component is used to display a notification (status message) directly in the form field.
    * It needs a content and a state
@@ -25,7 +23,7 @@
       ...withProps(),
     },
 
-    setup(props): ISetup {
+    setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -41,10 +39,10 @@
       */
       modifiers(): IModifiers {
         return {
-          ...this.stateModifiers
+          ...this.stateModifiers,
         };
-      }
-    }
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -72,14 +70,14 @@
 
     display: block;
     padding: variables.$spacing--10 35px variables.$spacing--10 variables.$spacing--5;
-    background-size: 20px;
+    border-bottom-right-radius: variables.$border-radius--500;
+    border-bottom-left-radius: variables.$border-radius--500;
+    background-repeat: no-repeat;
     background-position-x: calc(100% - 5px);
     background-position-y: calc(#{variables.$font-size--18} / 2 - 2px);
-    background-repeat: no-repeat;
-    border-bottom-left-radius: variables.$border-radius--500;
-    border-bottom-right-radius: variables.$border-radius--500;
-    color: variables.$color-grayscale--1000;
+    background-size: 20px;
     box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
+    color: variables.$color-grayscale--1000;
 
     &--state-error {
       background-color: variables.$color-status--error;

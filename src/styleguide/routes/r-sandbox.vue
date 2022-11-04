@@ -12,14 +12,14 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import ELogo from '@/components/e-logo.vue';
-  import CBreadcrumb from '@/components/c-breadcrumb.vue';
+  import eLogo from '@/components/e-logo.vue';
+  import cBreadcrumb from '@/components/c-breadcrumb.vue';
 
   export default defineComponent({
     name: 'r-sandbox',
     components: {
-      CBreadcrumb,
-      ELogo,
+      cBreadcrumb,
+      eLogo,
     },
 
     // props: {},

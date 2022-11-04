@@ -1,7 +1,5 @@
 // Keep in sync with src/setup/scss/_color.scss
 
-import exp from 'constants';
-
 interface IColorType {
   name: string;
   value: string[];

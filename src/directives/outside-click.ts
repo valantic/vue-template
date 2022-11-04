@@ -1,5 +1,4 @@
-import { DirectiveBinding } from '@vue/runtime-core';
-import { ComponentPublicInstance } from 'vue';
+import { DirectiveBinding, ComponentPublicInstance } from 'vue';
 
 const outsideClickEventConfig = { passive: true, capture: true };
 
@@ -55,7 +54,7 @@ export default {
       if (!el.contains(eventTarget) && handler) {
         const clickedOnExcludedElement = !!exclude.find((refName: string) => {
           const componentInstance = binding.instance as ComponentPublicInstance;
-          // @ts-ignore
+          // @ts-ignore Needed because typescript cannot assign index.
           const excludedElement: HTMLElement = componentInstance[refName];
 
           if (Array.isArray(excludedElement)) {
@@ -86,5 +85,5 @@ export default {
     document.removeEventListener('click', el.outsideClickHandler, outsideClickEventConfig);
     document.removeEventListener('touchend', el.outsideClickHandler, outsideClickEventConfig);
     document.removeEventListener('scroll', el.outsideClickHandler, outsideClickEventConfig);
-  }
+  },
 };

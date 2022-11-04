@@ -1,4 +1,4 @@
-import { DirectiveBinding } from '@vue/runtime-core';
+import { DirectiveBinding } from 'vue';
 import state from '../state';
 
 /**

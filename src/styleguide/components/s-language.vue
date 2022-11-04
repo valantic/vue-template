@@ -4,7 +4,8 @@
     <select :class="b()" :value="language" @change="onChange">
       <option v-for="locale in i18nLocales"
               :key="locale"
-              :value="locale">
+              :value="locale"
+      >
         {{ $t(`s-language.${locale}`) }}
       </option>
     </select>
@@ -55,7 +56,7 @@
        */
       setLocale(value: string) {
         i18nSetLocale(value);
-      }
+      },
     },
     // watch: {},
 

@@ -4,8 +4,8 @@
 /// Line clampin' (Truncating multiple line text)
 /// @see https://css-tricks.com/line-clampin/
 ///
-/// @param {Number} $clamp - Number of lines after text gets cut off.
-/// @param {Number} [$line-height = 1] - Desired line height.
+/// @param {number} $clamp - Number of lines after text gets cut off.
+/// @param {number} [$line-height = 1] - Desired line height.
 ///
 ////
 @mixin line-clamp($clamp, $line-height: 1) {

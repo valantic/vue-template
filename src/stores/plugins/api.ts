@@ -36,7 +36,7 @@ declare module 'pinia' {
 
 // Enable tracking of requests in development environment.
 if (process.env.NODE_ENV !== 'production') {
-  const clone = require('@/helpers/clone.ts').default; // eslint-disable-line global-require
+  const clone = require('@/helpers/clone.ts').default; // eslint-disable-line global-require, @typescript-eslint/no-var-requires
   const exclude = [
     /assets\//,
   ];
@@ -92,7 +92,7 @@ export default function api():IPluginApi {
   /**
    * Handles axios error responses.
    */
-  function handleError(error: AxiosError): Promise<AxiosError> {
+  function handleError(error: AxiosError<any>): Promise<AxiosError> { // eslint-disable-line @typescript-eslint/no-explicit-any
     const { notifications } = error?.response?.data || {};
 
     if (notifications) {
@@ -133,6 +133,6 @@ export default function api():IPluginApi {
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
-    }
+    },
   };
 }

@@ -27,15 +27,6 @@
         <li :class="b('navigation-item')">
           <s-navigation-block :routes="$router.options.routes" />
         </li>
-        <li :class="b('navigation-item', { components: true })">
-          <a :class="b('navigation-link')"
-             :href="styleguidistUrl"
-             target="_blank"
-             rel="noopener noreferrer"
-          >
-            Components
-          </a>
-        </li>
       </ul>
     </div>
   </div>
@@ -84,15 +75,6 @@
       };
     },
     computed: {
-      /**
-       * Returns the styleguideist url, based on the current environment.
-       */
-      styleguidistUrl(): string {
-        return process.env.IS_STYLEGUIDE_BUILD
-          ? '/styleguidist'
-          : '//localhost:6060';
-      },
-
       /**
        * Returns all modifiers for the wrapper class.
        */

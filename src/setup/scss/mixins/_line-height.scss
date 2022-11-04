@@ -5,8 +5,8 @@
 ////
 // Calculate unit less line height by given $line-height px value and $font-size px value
 //
-// @param  {Number}    [$line-height = $_config--line-height]    Pixel value for desired line height
-// @param  {Number}    [$font-size = $_config--font-size]        Pixel value of desired font size
+// @param  {number}    [$line-height = $_config--line-height]    Pixel value for desired line height
+// @param  {number}    [$font-size = $_config--font-size]        Pixel value of desired font size
 //
 // @returns   {line-height}   line-height property with unit less value
 ////

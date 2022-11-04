@@ -1,4 +1,4 @@
-@import '~reset-css/reset.css';
+@use '~the-new-css-reset/css/reset';
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
 // This prevents an unwanted focus outline from appearing around elements that
@@ -73,14 +73,14 @@ input {
 
 button,
 select {
-  text-transform: none; // Remove the inheritance of text transform in Firefox
   cursor: pointer;
+  text-transform: none; // Remove the inheritance of text transform in Firefox
 }
 
 button {
-  background: transparent;
-  border: 0;
   padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 // 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`

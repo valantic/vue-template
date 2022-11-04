@@ -69,9 +69,9 @@ const NOTIFICATION_UNKNOWN_ERROR: INotificationItem = {
   message: i18n.global.t('globalMessages.unknownApiError'),
 };
 
-const storeName: string = 'notification';
+const storeName = 'notification';
 
-let currentId: number = 1;
+let currentId = 1;
 
 /**
  * Handles notification redirects.
@@ -97,7 +97,7 @@ function addId(notification: INotificationItem): INotificationItem {
 
   return {
     ...notification,
-    id: currentId
+    id: currentId,
   };
 }
 

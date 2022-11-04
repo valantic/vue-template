@@ -4,10 +4,10 @@
 ////
 // Calculate em for given pixel $values based on $context font-size
 //
-// @param   {List}    $values       To be converted pixel values
-// @param   {Number}  [$context]    Font-size for em calculation
+// @param   {list}    $values       To be converted pixel values
+// @param   {number}  [$context]    Font-size for em calculation
 //
-// @returns {List}    Converted pixel values
+// @returns {list}    Converted pixel values
 ////
 @function calc-em($values, $context: config.$config--font-size) {
   $result: ();

@@ -51,7 +51,8 @@
                   :key="icon.name"
                   :icon="icon.name"
                   :inline="variant === 'inline'"
-                  size="80" />
+                  size="80"
+          />
         </div>
         <div :class="b('icon-label')">
           {{ icon.name }}
@@ -111,8 +112,7 @@
         /**
          * An array of available icons.
          */
-        // @ts-ignore
-        icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)[1]),
+        icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)?.[1] || ''),
 
         /**
          * The currently applied query filter.
@@ -251,11 +251,11 @@
 
     &__grid-item {
       flex: 0 1 10%;
+      min-width: 100px;
+      margin: 5px;
       overflow: hidden;
       border: 1px solid #000000;
-      margin: 5px;
       cursor: pointer;
-      min-width: 100px;
 
       &::before {
         display: block;
@@ -305,11 +305,11 @@
       position: fixed;
       bottom: 0;
       left: 0;
-      background-color: variables.$color-status--success;
-      width: 100%;
-      text-align: center;
       z-index: 999;
+      width: 100%;
       padding: variables.$spacing--10;
+      background-color: variables.$color-status--success;
+      text-align: center;
     }
 
     &__grid-item:hover &__icon-wrapper {

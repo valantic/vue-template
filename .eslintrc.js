@@ -1,7 +1,4 @@
 // https://eslint.org/docs/user-guide/configuring
-const vueRules = require('eslint-config-valantic/plugins/vue');
-const tsRules = require('eslint-config-valantic/plugins/typescript');
-
 module.exports = {
   root: true,
   parserOptions: {
@@ -13,14 +10,8 @@ module.exports = {
     browser: true,
   },
   extends: [
-    'valantic',
-    'plugin:vue/vue3-recommended',
-    '@vue/typescript',
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'vue',
-    // 'html' // eslint-plugin-html
+    'valantic/vue3',
+    '@vue/typescript'
   ],
   // Uses eslint-import-resolver-webpack
   settings: {
@@ -28,9 +19,20 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
-    ...vueRules,
-    ...tsRules,
-    'global-require': 'off',
+    'vue/no-unsupported-features': ['error', {
+      version: ">= 3.2",
+    }],
+
+    // Fix and enable again
+    'import/extensions': 'off',
+    'vue/require-emit-validator': 'off',
   },
-  globals: {},
+  overrides: [
+    {
+      'files': ['tests/**/*.*'],
+      'rules': {
+        'vue/require-name-property': 'off'
+      }
+    }
+  ]
 };

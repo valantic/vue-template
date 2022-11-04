@@ -45,15 +45,12 @@ const plugin: Plugin = {
    * Install method of the Google Tag Manager plugin.
    */
   install(app, options: IOptions = {}) {
-    const {
-      dataLayer = 'dataLayer',
-    } = options;
     let { debug } = options;
 
     /**
      * Closure for product mapper method.
      */
-    function mapProduct(eventPath: string, startIndex: number = 1): MapProductCallbackFunction {
+    function mapProduct(eventPath: string, startIndex = 1): MapProductCallbackFunction {
       /**
        * Mapper function to convert product data to Google Tag Manager impression data.
        *
@@ -105,8 +102,8 @@ const plugin: Plugin = {
           event: 'productImpression',
           ecommerce: {
             currencyCode: 'CHF',
-            impressions
-          }
+            impressions,
+          },
         });
       },
 
@@ -117,7 +114,7 @@ const plugin: Plugin = {
         push({
           event: 'VirtualPageview',
           virtualPageURL: window.location.href,
-          virtualPageTitle: `Virtual page for "${window.document.title}"`
+          virtualPageTitle: `Virtual page for "${window.document.title}"`,
         });
       },
 
@@ -130,7 +127,7 @@ const plugin: Plugin = {
           ecommerce: {
             click: {
               actionField: {
-                list: eventPath
+                list: eventPath,
               },
               products: [
                 {
@@ -139,9 +136,9 @@ const plugin: Plugin = {
                   dimension1: sku,
                   list: eventPath || null,
                   position,
-                }
-              ]
-            }
+                },
+              ],
+            },
           },
         });
       },
@@ -154,7 +151,7 @@ const plugin: Plugin = {
           name,
           sku,
           eNumber,
-          measurementUnitName
+          measurementUnitName,
         } = product;
 
         push({
@@ -169,11 +166,11 @@ const plugin: Plugin = {
                   dimension1: sku,
                   dimension2: measurementUnitName || null,
                   list: eventPath || null,
-                  quantity
-                }
-              ]
-            }
-          }
+                  quantity,
+                },
+              ],
+            },
+          },
         });
       },
 
@@ -211,9 +208,9 @@ const plugin: Plugin = {
        */
       debug(enable: boolean) {
         debug = enable !== false;
-      }
+      },
     };
-  }
+  },
 };
 
 export default plugin;

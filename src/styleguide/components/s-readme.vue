@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  // @ts-ignore
+  // @ts-ignore Needed because typescript cannot resolve `.md` files.
   import readme from '../../../README.md';
 
   export default defineComponent({

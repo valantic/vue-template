@@ -28,7 +28,9 @@ module.exports = {
   testMatch: [
     '**/tests/unit/**/*.test.(js|jsx|ts|tsx)',
   ],
-  testURL: 'http://localhost/',
+  testEnvironmentOptions: {
+    customExportConditions: ['node', 'node-addons'],
+  },
   // watchPlugins: [
   //   'jest-watch-typeahead/filename',
   //   'jest-watch-typeahead/testname',
