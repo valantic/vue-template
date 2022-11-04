@@ -6,7 +6,6 @@
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "webpack-dev-server --mode development",
-    "dev:s": "npm run styleguide",
     "jest": "jest tests --config jest.config.js --silent",
     "jest:debug": "node --inspect-brk node_modules/jest/bin/jest.js --runInBand tests/unit/specs/<path-to-your-test-file>.ts",
     "fix:eslint": "npm run lint:eslint -- --config .eslintrc.fix.js --cache=false --fix",
