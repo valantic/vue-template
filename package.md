@@ -46,6 +46,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core
 - [core-js](https://www.npmjs.com/package/core-js) - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.
   > core, polyfill
+- [pinia](https://www.npmjs.com/package/pinia) - Centralized State Management for Vue.js.
+  > core
 - [dayjs](https://www.npmjs.com/package/dayjs) - Fast 2kB alternative to Moment.js with the same modern API.
   > c-date-picker-input, c-date-picker-range
 - [the-new-css-reset](https://www.npmjs.com/package/the-new-css-reset) - This new CSS reset is using the new CSS features
@@ -152,8 +154,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > webpack
 - [msw](https://www.npmjs.com/package/msw) - Tock Service Worker (MSW) is a seamless REST/GraphQL API mocking library for browser and Node.js.
   > development environment, mock data
-- [pinia](https://www.npmjs.com/package/pinia) - Centralized State Management for Vue.js.
-  > core
 - [postcss](https://www.npmjs.com/package/postcss) - PostCSS is a tool for transforming styles with JS plugins.
   > webpack, scss
 - [postcss-html](https://www.npmjs.com/package/postcss-html) - PostCSS syntax for parsing HTML (and HTML-like).
