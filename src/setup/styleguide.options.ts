@@ -8,10 +8,14 @@ import '@/styleguide/mock-data/api/browser';
 
 // NOTE: replace if you use router in your application by default!
 // See https://router.vuejs.org/en/
-export const router = createRouter({
+const router = createRouter({
   routes: styleguideRoutes,
   history: createWebHistory(),
 });
+
+export const plugins = [
+  [router],
+];
 
 export const options = {
   template: '<app />',
