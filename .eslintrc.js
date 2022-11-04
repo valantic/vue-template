@@ -28,5 +28,15 @@ module.exports = {
   rules: {
     ...vueRules,
   },
-  globals: {},
+  overrides: [
+    {
+      files: ['src/styleguide/**/*.*'],
+      rules: {
+        'max-len': 'off',
+        'vue/no-bare-strings-in-template': 'off',
+        'vue/multi-word-component-names': 'off',
+        'vue/match-component-file-name': 'off',
+      }
+    }
+  ],
 };
