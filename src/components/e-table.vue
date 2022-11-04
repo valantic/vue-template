@@ -113,11 +113,11 @@
       /**
        * Array of column definition objects.
        *
-       * @property {String} title - Column title.
-       * @property {String} [key] - Column identifier on the rows.
-       * @property {String} [titleHidden = false] - Title visibility state.
-       * @property {String} [slotName] - Dynamic slot name for optional cell templates.
-       * @property {String} [align = 'left'] - A flag to set the column alignment (default: 'left', options: 'center', 'right').
+       * @property {string} title - Column title.
+       * @property {string} [key] - Column identifier on the rows.
+       * @property {string} [titleHidden = false] - Title visibility state.
+       * @property {string} [slotName] - Dynamic slot name for optional cell templates.
+       * @property {string} [align = 'left'] - A flag to set the column alignment (default: 'left', options: 'center', 'right').
        * @property {Boolean} [sortable = false] - A flag that specifies whether the column is sortable or not.
        * @property {Function} [sort = (a, b) => a > b] - A custom sort function that might be passed for each column.
        * @property {Function} [onClick] - Allows to define a click handler for each cell.
@@ -217,9 +217,9 @@
 
         return {
           active,
-          desc: active && !this.sortAscending
+          desc: active && !this.sortAscending,
         };
-      }
+      },
     },
     // render() {},
   });
@@ -268,15 +268,15 @@
 
     &__button-sort {
       display: inline-block;
-      height: 0;
       width: 0;
+      height: 0;
       opacity: 0.3;
       border: 10px solid transparent;
       border-bottom-color: variables.$color-grayscale--0;
 
       &--desc {
-        border-bottom-color: transparent;
         border-top-color: variables.$color-grayscale--0;
+        border-bottom-color: transparent;
       }
 
       &--active {
@@ -288,8 +288,8 @@
       @include mixins.font(variables.$font-size--14);
 
       position: relative;
-      color: variables.$color-secondary--1;
       padding: variables.$spacing--10 0;
+      color: variables.$color-secondary--1;
 
       &--text-center {
         text-align: center;
@@ -305,9 +305,9 @@
     }
 
     &__no-results {
-      font-size: variables.$font-size--14;
       padding-top: variables.$spacing--15;
       padding-bottom: variables.$spacing--15;
+      font-size: variables.$font-size--14;
     }
   }
 </style>

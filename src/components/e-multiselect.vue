@@ -64,7 +64,7 @@
     defineComponent,
     PropType,
     ref,
-    Ref, toRefs
+    Ref, toRefs,
   } from 'vue';
   import i18n from '@/setup/i18n';
   import useUuid, { IUuid } from '@/compositions/uuid';
@@ -187,12 +187,12 @@
     data(): IData {
       return {
         /**
-         * @type {Boolean} Holds the internal opening state of the options.
+         * @type {boolean} Holds the internal opening state of the options.
          */
         isOpen: false,
 
         /**
-         * @type {String} Holds the value fo the search input field.
+         * @type {string} Holds the value fo the search input field.
          */
         searchTerm: '',
       };
@@ -202,7 +202,7 @@
       /**
        * Defines state modifier classes.
        *
-       * @returns  {Object}   BEM classes
+       * @returns  {object}   BEM classes
        */
       modifiers(): IModifiers {
         return {
@@ -235,7 +235,7 @@
       /**
        * Gets a combined string of all the currently selected labels.
        *
-       * @returns {String}
+       * @returns {string}
        */
       selectionAsString(): string {
         if (this.internalValue.length) {
@@ -251,7 +251,7 @@
       /**
        * Shows if the disabled state of the component should be active.
        *
-       * @returns {Boolean}
+       * @returns {boolean}
        */
       isDisabled() {
         return this.disabled || this.progress;
@@ -260,7 +260,7 @@
       /**
        * Gets the filtered options if the user used the search.
        *
-       * @returns {Array.<Object>}
+       * @returns {array.<object>}
        */
       filteredOptions(): IOption[] {
         if (this.hasSearch && this.searchTerm) {
@@ -274,7 +274,7 @@
       /**
        * Observes the "isOpen" property and sets the focus on the search field if it's available.
        *
-       * @param {Boolean} open - The open state.
+       * @param {boolean} open - The open state.
        */
       isOpen(open) {
         if (this.hasSearch && open) {
@@ -312,7 +312,7 @@
          * Emits the closing event to the parent.
          *
          * @event close
-         * @type {Array.<String>}
+         * @type {array.<string>}
          */
         this.$emit('close', this.internalValue);
       },
@@ -329,20 +329,20 @@
     $this: &;
     $e-multiselect-height: 30px;
 
-    display: block;
     position: relative;
+    display: block;
 
     &__field-wrapper {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       width: 100%;
-      border: 1px solid variables.$color-grayscale--500;
       min-height: $e-multiselect-height;
       padding: 0 variables.$spacing--5 0 variables.$spacing--10;
-      cursor: pointer;
-      background-color: variables.$color-grayscale--1000;
+      border: 1px solid variables.$color-grayscale--500;
       border-radius: 3px;
+      background-color: variables.$color-grayscale--1000;
+      cursor: pointer;
 
       &:focus {
         outline: none;
@@ -360,9 +360,9 @@
     }
 
     &__field-wrapper--open {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
       border-color: variables.$color-grayscale--400;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
 
       .e-icon {
         transform: rotate(180deg);
@@ -374,32 +374,32 @@
     }
 
     &__field-wrapper--disabled {
-      pointer-events: none;
       color: variables.$color-grayscale--500;
+      pointer-events: none;
     }
 
     &__output-value {
       flex: 1 0 calc(100% - 20px);
       max-width: calc(100% - 20px);
-      white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
       text-align: left;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     &__options-wrapper {
-      display: block;
-      border: 1px solid variables.$color-grayscale--500;
-      border-top: 0;
       position: absolute;
-      width: 100%;
       top: 100%;
       left: 0;
-      background-color: variables.$color-grayscale--1000;
+      z-index: 1;
+      display: block;
+      width: 100%;
       max-height: 300px;
       overflow: auto;
+      border: 1px solid variables.$color-grayscale--500;
+      border-top: 0;
+      background-color: variables.$color-grayscale--1000;
       transform-origin: top;
-      z-index: 1;
     }
 
     &__options-list {
@@ -411,32 +411,32 @@
     }
 
     &__progress-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
     }
 
     &__search-field {
       width: 100%;
       min-height: $e-multiselect-height;
+      padding: 0 variables.$spacing--5;
+      outline: none;
       border: 1px solid variables.$color-grayscale--500;
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
-      outline: none;
-      padding: 0 variables.$spacing--5;
     }
 
     // separator for state icons
     &__icon-splitter {
       position: absolute;
+      top: 2px;
       right: 30px;
       height: calc(100% - 4px);
-      top: 2px;
       border-left: 1px solid;
     }
 

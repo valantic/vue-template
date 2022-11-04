@@ -26,10 +26,10 @@ const WebpackDependencyHint = require('@valantic/webpack-dependency-hint');
 /**
  * Creates a webpack configuration based on the current environment and arguments.
  *
- * @param {String|Object} env - The currently active environment.
- * @param {Object} args - An Object of additional arguments.
+ * @param {string|object} env - The currently active environment.
+ * @param {object} args - An Object of additional arguments.
  *
- * @returns {Object}
+ * @returns {object}
  */
 module.exports = (env, args = {}) => {
   // Instance variables

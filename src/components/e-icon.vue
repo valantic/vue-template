@@ -96,7 +96,7 @@
       /**
        * Returns a viewBox definition object.
        *
-       * @returns {Object}
+       * @returns {object}
        */
       viewBox(): ISize {
         const { icon } = this;

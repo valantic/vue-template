@@ -1,5 +1,5 @@
 /**
- * @type {Object} Lookup table of available breakpoints.
+ * @type {object} Lookup table of available breakpoints.
  *
  * Keep in sync with SCSS variables!
  */
@@ -9,11 +9,11 @@ export const BREAKPOINTS = { // Keep in sync with SCSS variables!
   sm: 768,
   md: 1024,
   lg: 1200,
-  xl: 1440
+  xl: 1440,
 };
 
 /**
- * @type {Object} Lookup table of available breakpoints max values.
+ * @type {object} Lookup table of available breakpoints max values.
  */
 export const BREAKPOINTS_MAX = {
   xxs: BREAKPOINTS.xs - 1,
@@ -26,12 +26,12 @@ export const BREAKPOINTS_MAX = {
 export type BreakPointType = keyof typeof BREAKPOINTS;
 
 /**
- * @type {Number} Global resize debounce value.
+ * @type {number} Global resize debounce value.
  */
 export const RESIZE_DEBOUNCE = 100;
 
 /**
- * @type {Boolean} Holds a flag if local and session storage are available.
+ * @type {boolean} Holds a flag if local and session storage are available.
  * They can lead to exceptions if cookies are disabled on the client.
  */
 export const IS_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
