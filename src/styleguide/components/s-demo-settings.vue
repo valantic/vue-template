@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import sToggle from './s-toggle.vue';
+  import sToggle from '@/styleguide/components/s-toggle.vue';
   import sHtmlValidation from '@/styleguide/components/s-html-validation.vue';
 
   interface IData {

@@ -1,0 +1,21 @@
+/* stylelint-disable selector-class-pattern, selector-max-id */
+// This file is supposed to only hold styles, that are scoped by a globally used class.
+@use './mixins';
+@use './variables';
+
+#app {
+  min-height: 100%;
+}
+
+.invisible {
+  @include mixins.invisible();
+}
+
+.wysiwyg {
+  table {
+    th,
+    td {
+      border: 1px solid variables.$color-grayscale--0;
+    }
+  }
+}

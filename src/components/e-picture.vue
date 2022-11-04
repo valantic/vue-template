@@ -297,13 +297,10 @@
   .e-picture { // Can be <picture> or <img>!
     display: block;
     max-width: 100%;
-    height: auto;
 
     img {
       display: block;
       width: 100%;
-      max-width: 100%;
-      height: auto;
 
       &[loading='lazy'] {
         opacity: 0;

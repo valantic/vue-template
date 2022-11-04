@@ -6,6 +6,7 @@ import sandbox from '@/styleguide/routes/r-sandbox.vue';
 import icons from '@/styleguide/routes/r-icons.vue';
 import forms from '@/styleguide/routes/r-forms.vue';
 import notifications from '@/styleguide/routes/r-notifications.vue';
+import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue';
 
 export interface IRoute {
   path: string;
@@ -19,7 +20,7 @@ export interface IRoute {
 
 const root = '/styleguide';
 const categoryWrapper = {
-  template: '<router-view />'
+  template: '<router-view />',
 };
 
 /**
@@ -32,7 +33,7 @@ export default [
     component: index,
     meta: {
       title: 'Welcome',
-    }
+    },
   },
   {
     path: `${root}/sandbox`,
@@ -65,7 +66,15 @@ export default [
         component: lDefault,
         meta: {
           title: 'Layout',
-        }
+        },
+      },
+      {
+        path: 'wysiwyg',
+        name: 'wysiwyg',
+        component: wysiwyg,
+        meta: {
+          title: 'WYSIWYG',
+        },
       },
       {
         path: 'forms',
@@ -83,7 +92,7 @@ export default [
           title: 'Notifications',
         },
       },
-    ]
+    ],
   },
   {
     path: '/:pathMatch(.*)*',
