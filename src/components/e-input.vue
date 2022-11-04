@@ -60,6 +60,7 @@
   /**
    * Input form component
    *
+   * **WARNING: uses 'v-html' for the 'notification'. Make sure, that the source for this data is trustworthy.**
    */
   export default defineComponent({
     name: 'e-input',

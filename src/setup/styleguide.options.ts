@@ -2,7 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import app from '@/styleguide/components/app.vue';
 import styleguideRoutes from './styleguide.routes';
-import '@/styleguide/mock-data/api/browser';
+import '@/styleguide/api/browser';
 
 // In development and on styleguide build, include router and example pages
 

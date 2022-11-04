@@ -9,7 +9,7 @@ export const I18N_FALLBACK_MESSAGES = fallbackMessages;
 export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 
 const datetimeFormats: IntlDateTimeFormat = {
-  month: {
+  month: { // January, February, March, ...
     month: 'long',
   },
   weekday: { // Monday, Tuesday, Wednesday, ...

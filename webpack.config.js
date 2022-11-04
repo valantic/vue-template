@@ -80,7 +80,6 @@ module.exports = (env, args = {}) => {
     : buildPath;
 
   // webpack configuration variables
-  const isBuild = isProduction;
   const prefix = filePrefix ? `${filePrefix}.` : '';
   const extensions = ['.js', '.vue', '.json', '.ts'];
   const alias = {
@@ -144,8 +143,8 @@ module.exports = (env, args = {}) => {
     new VueLoaderPlugin(), // *.vue file parser.
 
     new MiniCssExtractPlugin({ // Extract CSS code
-      chunkFilename: `${outputAssetsFolder}css/${prefix}[name].[id]${isBuild ? '.[chunkhash]' : ''}.css`, // Using chunkhash in dev mode will cause trouble with hot-reload.
-      filename: `${outputAssetsFolder}css/${prefix}[name]${isBuild ? '.[chunkhash]' : ''}.css`,
+      chunkFilename: `${outputAssetsFolder}css/${prefix}[name].[id]${isProduction ? '.[chunkhash]' : ''}.css`, // Using chunkhash in dev mode will cause trouble with hot-reload.
+      filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction ? '.[chunkhash]' : ''}.css`,
     }),
 
     new HtmlWebpackPlugin({ // Script and style tag injection.
@@ -174,7 +173,7 @@ module.exports = (env, args = {}) => {
     plugins.push(new BundleAnalyzerPlugin());
   }
 
-  if (isBuild) {
+  if (isProduction) {
     plugins.push(
       new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
         cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
@@ -241,7 +240,7 @@ module.exports = (env, args = {}) => {
   }
 
   const assetModulesFileName = function (pathData, assetType) {
-    const hash = isBuild ? '.[contenthash]' : '';
+    const hash = isProduction ? '.[contenthash]' : '';
     let subDirPath = '';
 
     // pathData.module.context contains the absolute path to the module
@@ -290,7 +289,7 @@ module.exports = (env, args = {}) => {
         {
           loader: MiniCssExtractPlugin.loader,
           options: {
-            publicPath: isBuild ? productionPath : '/',
+            publicPath: isProduction ? productionPath : '/',
             esModule: false, // Should be removed in the future but was required as of 2021-04-23.
           },
         },
@@ -412,7 +411,7 @@ module.exports = (env, args = {}) => {
     },
     output: {
       path: path.resolve(__dirname, outputPath),
-      filename: isBuild ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
+      filename: isProduction ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js`,
       publicPath,
     },
