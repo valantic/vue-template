@@ -869,7 +869,8 @@ package.json:
 
 ## Roadmap
 * [ ] Implement dual build (ES5/ES2015+)
-* [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
+* [ ] Add 'dangerous' flag for components that use v-html in Storybook.
+* [ ] Add 'development' flag for components in Storybook.
 * [ ] Add custom elements option to the "initial data" section.
   
 ## License
