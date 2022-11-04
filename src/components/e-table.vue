@@ -103,7 +103,7 @@
       /**
        * Array of data objects to render in table.
        *
-       * @property {Boolean} [disabled = false] - Disables the interaction with the current row.
+       * @property {boolean} [disabled = false] - Disables the interaction with the current row.
        */
       items: {
         type: Array as PropType<IItem[]>,
@@ -118,9 +118,9 @@
        * @property {string} [titleHidden = false] - Title visibility state.
        * @property {string} [slotName] - Dynamic slot name for optional cell templates.
        * @property {string} [align = 'left'] - A flag to set the column alignment (default: 'left', options: 'center', 'right').
-       * @property {Boolean} [sortable = false] - A flag that specifies whether the column is sortable or not.
-       * @property {Function} [sort = (a, b) => a > b] - A custom sort function that might be passed for each column.
-       * @property {Function} [onClick] - Allows to define a click handler for each cell.
+       * @property {boolean} [sortable = false] - A flag that specifies whether the column is sortable or not.
+       * @property {function} [sort = (a, b) => a > b] - A custom sort function that might be passed for each column.
+       * @property {function} [onClick] - Allows to define a click handler for each cell.
        *
        */
       columns: {
