@@ -171,14 +171,6 @@ $ npm run dev
 
 The app should now run on [http://localhost:8080](http://localhost:8080)
 
-#### Styleguidist
-
-If you prefer to develop inside the component styleguide run the following script instead or in a new tab:
-
-```
-$ npm run dev:s
-```
-
 ### Integrate vue-template into an other repository
 
 If you need to integrate this repository into an other project (e.g. a backend repository) we recommend to use `git subtree`. This will create a copy of a certain branch and allow updates later on while not changing the other projects git setup. For more information see [Atlassian Blog](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree) and [Git subtree](https://git-scm.com/book/de/v1/Git-Tools-Subtree-Merging).
@@ -719,10 +711,6 @@ The living styleguide is defined in two parts: one is documenting all available 
 ### File system
 
 Please note, that the living styleguide has its on section in `/app/styleguide` where you can find `components`, `routes` and anything else, which is only related to the living styleguide. This makes it more easy to identify and split out unneeded code during the build.
-
-### Mock data
-
-You can share the mock data from the demo pages with the vue-styleguidist by importing them into the global mixin which is defined inside `app/setup/styleguide.options.js`. They will be merged with the `data()` object of each component which is displayed inside the component styleguide. Access the data with `mockData.<yourKey>` (e.g. `<c-cms-wrapper :components="mockData.cCmsWrapperMockData" />`).
 
 ## Webpack
 

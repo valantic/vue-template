@@ -8,8 +8,8 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { availableStatus } from '@/plugins/styleguide.status-label';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { availableStatus } from '@/plugins/styleguide.status-label';
 
   /**
    * Creates a status label which can be used to document component development status.
@@ -29,8 +29,8 @@
       modifier: {
         type: [Number],
         default: null,
-        validator: (value: number) => !!availableStatus[value]
-      }
+        validator: (value: number) => !!availableStatus[value],
+      },
     },
     // data() {
     //   return {};
@@ -49,7 +49,7 @@
         }
 
         return modifiers;
-      }
+      },
     },
     // watch: {},
 
@@ -73,7 +73,7 @@
   @use '../../setup/scss/mixins';
   @use '../../setup/scss/variables';
 
-  .s-status { // NOTE: this style is also used by the vue-styleguidist plugin!
+  .s-status {
     /* stylelint-disable color-hex-length, color-named */
 
     @include mixins.font(12);
@@ -86,19 +86,19 @@
     &__inner {
       display: inline-block;
       align-self: flex-end;
-      color: variables.$color-grayscale--1000;
-      border-radius: 3px;
       padding: 0 variables.$spacing--10 0 0;
+      border-radius: 3px;
       background: crimson;
+      color: variables.$color-grayscale--1000;
       font-weight: bold;
 
       &::before {
-        content: 'Status ';
         display: inline-block;
-        padding: variables.$spacing--5 variables.$spacing--10;
-        background: #333;
-        border-radius: 3px 0 0 3px;
+        content: 'Status ';
         margin-right: 10px;
+        padding: variables.$spacing--5 variables.$spacing--10;
+        border-radius: 3px 0 0 3px;
+        background: #333;
       }
     }
 
