@@ -1,7 +1,6 @@
 import 'core-js/stable';
 
 // It's mandatory that common styles are imported before the application. Else they will come last in the CSS build
-// NOTE: this is not working for styleguidist. There you need to add style imports to the required configuration
 import './setup/styles.scss';
 
 // vendor styles
