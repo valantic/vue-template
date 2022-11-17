@@ -156,6 +156,7 @@ module.exports = (env, args = {}) => {
     new StyleLintPlugin({
       emitErrors: isProduction,
       emitWarning: !isProduction,
+      failOnError: isProduction,
       lintDirtyModulesOnly: !isProduction,
       context: 'src',
       files: [

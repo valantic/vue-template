@@ -1,5 +1,5 @@
 import '../src/setup/scss/themes/theme-01.scss';
-import '../src/setup/_scss.scss'
+import '@/setup/styles.scss'
 import { app } from '@storybook/vue3';
 import vuePlugins from '../src/setup/plugins';
 
