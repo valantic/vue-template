@@ -77,12 +77,14 @@
             <e-checkbox v-model="form.topics"
                         value="garden"
                         name="topics"
+                        variant="toggle"
             >
               Garden
             </e-checkbox>
             <e-checkbox v-model="form.topics"
                         value="architecture"
                         name="topics"
+                        variant="toggle"
             >
               Architecture
             </e-checkbox>
