@@ -15,7 +15,8 @@
       @blur="onBlur"
       @focus="onFocus"
     >
-    <span :class="b('label')">
+    <span :class="b('indicator')"></span>
+    <span :class="b('label-text')">
       <slot></slot>
     </span>
   </label>
@@ -62,6 +63,18 @@
         type: [String, Number, Boolean],
         required: true,
       },
+
+      /**
+       * Allows to set the desired layout variant.
+       */
+      variant: {
+        type: String,
+        default: 'default',
+        validator: (value: string) => [
+          'default',
+          'toggle',
+        ].includes(value),
+      },
     },
 
     emits: ['update:modelValue', 'change', 'focus', 'blur'],
@@ -84,6 +97,7 @@
         return {
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
+          variant: this.variant,
         };
       },
 
@@ -159,10 +173,12 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
   @use '../setup/scss/mixins';
   @use '../setup/scss/variables';
 
   .e-checkbox {
+    $this: &;
     $label-size: 16px;
 
     @include mixins.font(variables.$font-size--16, 22px);
@@ -177,10 +193,91 @@
       -webkit-appearance: none;
     }
 
-    &__label {
+    &--variant-default {
+      display: flex;
+      align-items: center;
+
+      #{$this}__indicator {
+        position: relative;
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        width: $label-size;
+        height: $label-size;
+        border: 1px solid variables.$color-grayscale--400;
+        border-radius: 3px;
+        background: variables.$color-grayscale--1000;
+
+        &::before {
+          content: '';
+          width: $label-size;
+          height: $label-size;
+          opacity: 0;
+          border: 1px solid transparent;
+          border-radius: 3px;
+          background: variables.$color-grayscale--0;
+          transform: scale(0);
+          transition-timing-function: ease-in-out;
+          transition-duration: 100ms;
+          transition-property: opacity, transform;
+          inset: 0;
+        }
+      }
+
+      #{$this}__field:checked {
+        ~ #{$this}__indicator::before {
+          opacity: 1;
+          transform: scale(0.6);
+        }
+      }
+    }
+
+    &--variant-toggle {
+      $toggle--size: 1rem;
+
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      #{$this}__indicator {
+        position: relative;
+        width: 1.5 * $toggle--size;
+        height: math.div($toggle--size, 3) * 2;
+        margin: 0 math.div($toggle--size, 2);
+        border-radius: $toggle--size;
+        background-color: variables.$color-grayscale--500;
+        transition: background-color variables.$transition-duration--300;
+
+        &::before {
+          position: absolute;
+          top: 50%;
+          left: math.div($toggle--size, -2);
+          content: '';
+          width: $toggle--size;
+          height: $toggle--size;
+          border-radius: 50%;
+          background-color: variables.$color-grayscale--1000;
+          box-shadow: 0 1px 2px 1px rgba(variables.$color-grayscale--0, 0.2);
+          transform: translateY(-50%);
+          transition: left variables.$transition-duration--300;
+        }
+      }
+
+      #{$this}__field {
+        &:checked ~ #{$this}__indicator {
+          &::before {
+            left: calc(100% - (#{$toggle--size} / 2));
+            background-color: variables.$color-grayscale--0;
+            transform: translateY(-50%);
+          }
+        }
+      }
+    }
+
+    &__label-text {
       display: block;
       margin: 0;
-      padding-left: variables.$spacing--25;
+      padding-left: variables.$spacing--10;
 
       &:hover {
         color: variables.$color-grayscale--0;
@@ -189,40 +286,15 @@
           border-color: variables.$color-grayscale--0;
         }
       }
+    }
 
-      &::before,
-      &::after {
-        position: absolute;
-        top: 3px;
-        left: 0;
-        content: '';
-        width: $label-size;
-        height: $label-size;
-      }
-
-      &::before {
-        border: 1px solid variables.$color-grayscale--400;
-      }
-
-      &::after {
-        opacity: 0;
-        border: 1px solid transparent;
-        background: variables.$color-grayscale--0;
-        transform: scale(0);
-        transition: transform 0.1s ease-in-out;
+    &__field:checked {
+      ~ #{$this}__label-text {
+        color: variables.$color-grayscale--0;
       }
     }
 
-    &__field:checked + &__label {
-      color: variables.$color-grayscale--0;
-
-      &::after {
-        opacity: 1;
-        transform: scale(0.6);
-      }
-    }
-
-    &__field:disabled + &__label {
+    &__field:disabled + &__label-text {
       cursor: default;
       color: variables.$color-grayscale--500;
 
@@ -239,7 +311,7 @@
       }
     }
 
-    &__field:checked:disabled + &__label {
+    &__field:checked:disabled + &__label-text {
       &::after {
         background: variables.$color-grayscale--500;
       }
