@@ -25,7 +25,7 @@
         {{ outputValue }}
       </span>
       <e-icon v-if="hasDefaultState"
-              icon="arrow--down"
+              icon="i-arrow--down"
               size="22"
               inline
       />
