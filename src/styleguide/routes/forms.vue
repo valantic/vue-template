@@ -130,8 +130,8 @@
   </div>
 </template>
 <script>
-  import eFieldset from '@/components/e-fieldset';
-  import eMultiselect from '@/components/e-multiselect';
+  import eFieldset from '@/elements/e-fieldset.vue';
+  import eMultiselect from '@/elements/e-multiselect.vue';
   import { required, email } from 'vuelidate/lib/validators';
 
   export default {

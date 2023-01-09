@@ -51,7 +51,7 @@
 
 <script>
   import propScale from '@/helpers/prop.scale';
-  import cFormNotification from '@/components/c-form-notification';
+  import cFormNotification from '@/components/c-form-notification.vue';
   import formStates from '@/mixins/form-states';
 
   /**

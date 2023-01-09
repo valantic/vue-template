@@ -89,7 +89,7 @@
 
 <script>
   import api from '@/helpers/api';
-  import lDefault from '@/components/l-default';
+  import lDefault from '@/layouts/l-default.vue';
   import cModal from '@/components/c-modal';
   import cNotificationContainer from '@/components/c-notification-container';
 

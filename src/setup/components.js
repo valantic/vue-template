@@ -1,19 +1,19 @@
 // Form elements
-import eLabel from '@/components/e-label';
-import eInput from '@/components/e-input';
-import eSelect from '@/components/e-select';
-import eRadio from '@/components/e-radio';
-import eCheckbox from '@/components/e-checkbox';
-import eTextarea from '@/components/e-textarea';
-import eButton from '@/components/e-button';
+import eLabel from '@/elements/e-label.vue';
+import eInput from '@/elements/e-input.vue';
+import eSelect from '@/elements/e-select.vue';
+import eRadio from '@/elements/e-radio.vue';
+import eCheckbox from '@/elements/e-checkbox.vue';
+import eTextarea from '@/elements/e-textarea.vue';
+import eButton from '@/elements/e-button.vue';
 
 // Elements
-import eIcon from '@/components/e-icon';
-import ePicture from '@/components/e-picture';
-import eProgress from '@/components/e-progress';
+import eIcon from '@/elements/e-icon.vue';
+import ePicture from '@/elements/e-picture.vue';
+import eProgress from '@/elements/e-progress.vue';
 
 // SSR related
-import lDefault from '@/components/l-default';
+import lDefault from '@/layouts/l-default.vue';
 import cHeader from '@/components/c-header';
 import cFooter from '@/components/c-footer';
 

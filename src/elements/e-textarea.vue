@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import cFormNotification from '@/components/c-form-notification';
+  import cFormNotification from '@/components/c-form-notification.vue';
   import formStates from '@/mixins/form-states';
 
   /**

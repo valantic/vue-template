@@ -26,7 +26,7 @@
 
 <script>
   import propScale from '@/helpers/prop.scale';
-  import eProgress from './e-progress';
+  import eProgress from './e-progress.vue';
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
