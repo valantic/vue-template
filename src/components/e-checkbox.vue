@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import mixinFormStates from '@/mixins/form-states';
 
   /**
    * Checkbox component for form elements.
@@ -30,7 +30,7 @@
     name: 'e-checkbox',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    mixins: [formStates],
+    mixins: [mixinFormStates],
     inheritAttrs: false,
 
     model: {

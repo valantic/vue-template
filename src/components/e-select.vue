@@ -30,7 +30,7 @@
 
 <script>
   import { i18n } from '@/setup/i18n';
-  import formStates from '@/mixins/form-states';
+  import mixinFormStates from '@/mixins/form-states';
 
   /**
    * Renders a styled select element. Options can be passed with the `options` property.
@@ -40,7 +40,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
+    mixins: [mixinFormStates],
     inheritAttrs: false,
 
     props: {

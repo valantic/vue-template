@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import mixinFormStates from '@/mixins/form-states';
 
   /**
    * Label component for form elements, can be used with a slot or a for attribute
@@ -26,7 +26,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
+    mixins: [mixinFormStates],
 
     props: {
       /**

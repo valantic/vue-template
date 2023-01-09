@@ -24,7 +24,7 @@
 
 <script>
   import cFormNotification from '@/components/c-form-notification';
-  import formStates from '@/mixins/form-states';
+  import mixinFormStates from '@/mixins/form-states';
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -39,7 +39,7 @@
     components: {
       cFormNotification,
     },
-    mixins: [formStates],
+    mixins: [mixinFormStates],
     inheritAttrs: false,
 
     props: {

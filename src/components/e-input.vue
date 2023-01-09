@@ -52,7 +52,7 @@
 <script>
   import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification';
-  import formStates from '@/mixins/form-states';
+  import mixinFormStates from '@/mixins/form-states';
 
   /**
    * Input form component
@@ -66,7 +66,7 @@
     components: {
       cFormNotification
     },
-    mixins: [formStates],
+    mixins: [mixinFormStates],
     inheritAttrs: false,
 
     props: {
