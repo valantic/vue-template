@@ -14,8 +14,8 @@ import eProgress from '@/elements/e-progress.vue';
 
 // SSR related
 import lDefault from '@/layouts/l-default.vue';
-import cHeader from '@/components/c-header';
-import cFooter from '@/components/c-footer';
+import cHeader from '@/components/c-header.vue';
+import cFooter from '@/components/c-footer.vue';
 
 // Import style only 'components'.
 require.context('@/components', false, /\.scss/);
