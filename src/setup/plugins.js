@@ -11,7 +11,7 @@ import viewport from '@/plugins/viewport';
 import modal from '@/plugins/modalStack';
 import api from '@/plugins/api';
 import confirmation from '@/plugins/confirmation-modal/confirmation';
-// import dayjs from '@/plugins/dayjs';
+import dayjs from '@/plugins/dayjs';
 
 // Self executing
 
@@ -28,4 +28,4 @@ Vue.use(PortalVue);
 Vue.use(VModal);
 Vue.use(Vuelidate);
 Vue.use(confirmation);
-// Vue.use(dayjs);
+Vue.use(dayjs);

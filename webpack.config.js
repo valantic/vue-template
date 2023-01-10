@@ -239,7 +239,7 @@ module.exports = (env, args = {}) => {
   const rules = [
     {
       test: /\.js$/,
-      exclude: /core-js/,
+      exclude: /core-js|moment|pikaday/,
       use: {
         loader: 'babel-loader',
       },
@@ -401,5 +401,8 @@ module.exports = (env, args = {}) => {
     plugins,
     optimization: isProduction ? optimization : {},
     devServer,
+    ignoreWarnings: [
+      /pikaday/
+    ],
   };
 };
