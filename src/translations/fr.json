@@ -19,6 +19,9 @@
     "defaultPlaceholder": "SVP Sélectionner",
     "searchFieldPlaceholder": "Rechercher"
   },
+  "e-date": {
+    "defaultLabel": "Veuillez choisir"
+  },
   "c-breadcrumb": {
     "linkTitle": "Allez vers {name}"
   },
@@ -44,5 +47,8 @@
     "images": "0 image | 1 Image | {count} Images",
     "zoom": "Agrandir l'image",
     "videos": "0 Videos | 1 Video | {count} Videos"
+  },
+  "c-date-picker": {
+    "inputName": "Veuillez choisir"
   }
 }
