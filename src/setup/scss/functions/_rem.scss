@@ -1,0 +1,25 @@
+@use 'sass:math';
+@use '../variables' as *;
+@use '../config' as *;
+@use 'strip-unit' as *;
+
+////
+// Convert the given value(s) to 'rem' based on the defined base.
+//
+// @param {List} $values - A list of values, that should be converted.
+//
+// @returns {List}
+////
+@function rem($values, $base: $config--font-size) {
+  $result: ();
+
+  @each $value in $values {
+    @if (type-of($value) == 'number' and not unitless($value)) {
+      $result: append($result, 1rem * math.div(strip-unit($value), strip-unit($base)));
+    } @else { // Allow to use values like 'auto' or 'calc'.
+      $result: append($result, $value);
+    }
+  }
+
+  @return $result;
+}
