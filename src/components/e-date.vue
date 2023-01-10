@@ -260,7 +260,7 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables' ;
+  @use '../setup/scss/variables';
   @use '../setup/scss/mixins';
   @use '../setup/scss/extends';
   @use '../setup/scss/functions';
@@ -288,7 +288,7 @@
 
     &__input,
     &__input-spacer {
-      margin: rem(0 variables.$spacing--5);
+      margin: 0 variables.$spacing--5;
       color: variables.$color-grayscale--200;
     }
 
