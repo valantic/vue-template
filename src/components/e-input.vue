@@ -12,8 +12,8 @@
            @focus="onFocus"
            @input="onInput"
            @keyup.enter="onEnterKeyUp"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
+           @mouseenter="mixinHasHover = true"
+           @mouseleave="mixinHasHover = false"
     >
     <input v-else
            ref="input"
@@ -28,19 +28,19 @@
            @focus="onFocus"
            @input="onInput"
            @keyup.enter="onEnterKeyUp"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
+           @mouseenter="mixinHasHover = true"
+           @mouseleave="mixinHasHover = false"
     >
 
-    <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
+    <span v-if="$slots.default || !mixinHasDefaultState" ref="slot" :class="b('slot-wrapper')">
       <span v-if="$slots.default" :class="b('slot')">
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
       </span>
-      <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-splitter')"></span>
-      <e-icon v-if="!hasDefaultState && !hasFocus"
+      <span v-if="!mixinHasDefaultState && !mixinHasFocus" :class="b('icon-splitter')"></span>
+      <e-icon v-if="!mixinHasDefaultState && !mixinHasFocus"
               :class="b('state-icon')"
-              :icon="stateIcon" />
+              :icon="mixinStateIcon" />
     </span>
     <span v-if="showNotification" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->

@@ -2,7 +2,7 @@
   <label>
     <span class="invisible">Language</span>
     <select :class="b()" :value="language" @change="onChange">
-      <option v-for="locale in i18nLocales"
+      <option v-for="locale in mixinI18nLocales"
               :key="locale"
               :value="locale">
         {{ $t(`s-language.${locale}`) }}

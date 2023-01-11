@@ -10,12 +10,12 @@
               @blur="onBlur"
               @input="onInput">
     </textarea>
-    <span v-if="!hasDefaultState && !hasFocus" :class="b('icon-wrapper')">
+    <span v-if="!mixinHasDefaultState && !mixinHasFocus" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
-              :icon="stateIcon" />
+              :icon="mixinStateIcon" />
     </span>
-    <div v-if="notification && hasFocus" :class="b('notification')">
+    <div v-if="notification && mixinHasFocus" :class="b('notification')">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <c-form-notification v-html="notification" :state="state" />
     </div>

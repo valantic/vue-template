@@ -31,7 +31,7 @@ vm.$mount('#app');
 
 // Set theme according to url in development. e.g. ?theme=01
 if (process.env.NODE_ENV !== 'production') {
-  const themeId = getUrlParameter('theme');
+  const themeId = getUrlParameter('mixinTheme');
 
   if (themeId) {
     vm.$store.commit('session/setTheme', themeId);

@@ -6,7 +6,7 @@
       v-model="internalValue"
       v-bind="$attrs"
       :class="b('field')"
-      :aria-checked="isChecked ? 'true' : 'false'"
+      :aria-checked="mixinIsChecked ? 'true' : 'false'"
       :disabled="disabled"
       :value="value"
       :name="name"

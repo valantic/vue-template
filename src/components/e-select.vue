@@ -5,8 +5,8 @@
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
-            @mouseenter="hasHover = true"
-            @mouseleave="hasHover = false"
+            @mouseenter="mixinHasHover = true"
+            @mouseleave="mixinHasHover = false"
     >
       <option v-if="placeholder"
               :disabled="!hasSelectablePlaceholder"
@@ -21,7 +21,7 @@
         {{ option[labelField] }}
       </option>
     </select>
-    <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
+    <span v-if="!mixinHasDefaultState" :class="b('icon-splitter')"></span>
     <span v-if="progress" :class="b('progress-container')">
       <e-progress />
     </span>

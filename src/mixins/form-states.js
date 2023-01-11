@@ -72,19 +72,19 @@ export default {
    */
   data() {
     return {
-      isActive: this.active,
-      hasFocus: this.focus,
-      hasHover: this.hover,
+      mixinIsActive: this.active,
+      mixinHasFocus: this.focus,
+      mixinHasHover: this.hover,
     };
   },
 
   computed: {
     /**
-     * Sets the isChecked state for the stateModifiers.
+     * Sets the mixinIsChecked state for the stateModifiers.
      *
      * @returns {Boolean}
      */
-    isChecked: {
+    mixinIsChecked: {
       get() {
         return Array.isArray(this.checked) ? this.checked.includes(this.value) : this.checked;
       },
@@ -98,7 +98,7 @@ export default {
      *
      * @returns {{state: *, active: *, disabled: *, focus: *, hover: *, checked: *}}
      */
-    stateModifiers() {
+    mixinStateModifiers() {
       return {
         state: this.state,
         active: this.isActive,
@@ -114,7 +114,7 @@ export default {
      *
      * @returns {Boolean}
      */
-    hasDefaultState() {
+    mixinHasDefaultState() {
       return this.state === 'default';
     },
 
@@ -123,7 +123,7 @@ export default {
      *
      * @returns {String}
      */
-    stateIcon() {
+    mixinStateIcon() {
       switch (this.state) {
         case 'error':
           return 'error';
