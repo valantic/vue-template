@@ -313,9 +313,9 @@
   @use '../setup/scss/mixins';
   @use '../setup/scss/variables';
 
-  $_e-button__radius: 3px;
-
   .e-button {
+    $border-radius: 3px;
+
     @include mixins.font(14, 18, variables.$font-weight--semi-bold);
 
     position: relative;
@@ -324,7 +324,7 @@
     padding: 6px variables.$spacing--10;
     border: 1px solid variables.$color-grayscale--500;
     color: variables.$color-grayscale--400;
-    border-radius: $_e-button__radius;
+    border-radius: $border-radius;
     outline: none;
     min-width: 165px;
     text-align: center;
