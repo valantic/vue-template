@@ -80,7 +80,7 @@
   import { BREAKPOINTS } from '@/setup/globals';
   import cSwiperModal from '@/components/c-swiper-modal';
   import mapImages from '@/helpers/map-images';
-  import uuid from '@/mixins/uuid';
+  import mixinUuid from '@/mixins/uuid';
   import cModal from '@/components/c-modal';
 
   const swiperInstances = {};
@@ -96,7 +96,7 @@
       cModal,
       cSwiperModal,
     },
-    mixins: [uuid],
+    mixins: [mixinUuid],
 
     props: {
       /**

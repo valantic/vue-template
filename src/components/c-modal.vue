@@ -69,7 +69,7 @@
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
   import propScale from '@/helpers/prop.scale';
-  import uuid from '@/mixins/uuid';
+  import mixinUuid from '@/mixins/uuid';
   import cNotificationContainer from '@/components/c-notification-container';
 
   /**
@@ -85,7 +85,7 @@
       cNotificationContainer,
     },
     mixins: [
-      uuid,
+      mixinUuid,
     ],
 
     props: {

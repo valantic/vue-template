@@ -46,7 +46,7 @@
   import Swiper, { Navigation, Pagination } from 'swiper';
   import { BREAKPOINTS } from '@/setup/globals';
   import mapHeroImages from '@/helpers/map-hero-images';
-  import uuid from '../mixins/uuid';
+  import mixinUuid from '../mixins/uuid';
 
   const swiperInstances = {};
 
@@ -59,7 +59,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [uuid],
+    mixins: [mixinUuid],
 
     props: {
       /**
