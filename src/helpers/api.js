@@ -1,11 +1,15 @@
 import axios from 'axios';
 import store from '@/store/index';
 import apiUrls from '@/setup/api-urls.json';
-import { i18n } from '@/setup/i18n';
+import { PAGE_LANG } from '@/setup/i18n';
 
 // DRY: Define axios instance with custom config applied to all requests.
 export const axiosInstance = axios.create({
-  locale: i18n.locale,
+  headers: {
+    common: {
+      locale: PAGE_LANG
+    }
+  }
 });
 
 // Enable tracking of requests in development environment.
