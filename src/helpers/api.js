@@ -1,6 +1,16 @@
 import axios from 'axios';
 import store from '@/store/index';
 import apiUrls from '@/setup/api-urls.json';
+import { PAGE_LANG } from '@/setup/i18n';
+
+// Creating an Axios instance to set general header properties (for each request)
+export const axiosInstance = axios.create({
+  headers: {
+    common: {
+      locale: PAGE_LANG
+    }
+  }
+});
 
 // Enable tracking of requests in development environment.
 if (process.env.NODE_ENV !== 'production') {
@@ -9,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
     /assets\//,
   ];
 
-  axios.interceptors.request.use((config) => {
+  axiosInstance.interceptors.request.use((config) => {
     if (!exclude.find(pattern => pattern.test(config.url))) {
       console.groupCollapsed(`=> ${config.method.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
       console.dir(clone(config)); // eslint-disable-line no-console
@@ -19,7 +29,7 @@ if (process.env.NODE_ENV !== 'production') {
     return config;
   });
 
-  axios.interceptors.response.use((response) => {
+  axiosInstance.interceptors.response.use((response) => {
     if (!exclude.find(pattern => pattern.test(response.config.url))) {
       console.groupCollapsed(`<= ${response.config.method.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
       console.dir(clone(response)); // eslint-disable-line no-console
@@ -39,7 +49,6 @@ function showNotifications(notifications) {
   if (!Array.isArray(notifications)) {
     return;
   }
-
   notifications.forEach((notification) => {
     store.commit('notification/pushNotification', notification);
   });
@@ -92,6 +101,7 @@ export default {
    *
    * @returns {String}
    */
+
   getUrl(urlKey, values) {
     let url = apiUrls[urlKey];
 
@@ -116,8 +126,9 @@ export default {
    *
    * @returns {Promise} Promise with response data or error.
    */
+
   get(url, config) {
-    return axios
+    return axiosInstance
       .get(url, config)
       .then(response => handleSuccess(response))
       .catch(error => handleError(error));
@@ -133,7 +144,7 @@ export default {
    * @returns {Promise} Promise with response data or error.
    */
   post(url, data, config) { // eslint-disable-line max-params
-    return axios
+    return axiosInstance
       .post(url, data, config)
       .then(response => handleSuccess(response))
       .catch(error => handleError(error));
@@ -149,7 +160,7 @@ export default {
    * @returns {Promise} Promise with response data or error.
    */
   patch(url, data, config) { // eslint-disable-line max-params
-    return axios
+    return axiosInstance
       .patch(url, data, config)
       .then(response => handleSuccess(response))
       .catch(error => handleError(error));
@@ -164,7 +175,7 @@ export default {
    * @returns {Promise} Promise with response data or error.
    */
   delete(url, config) { // eslint-disable-line max-params
-    return axios
+    return axiosInstance
       .delete(url, config)
       .then(response => handleSuccess(response))
       .catch(error => handleError(error));
