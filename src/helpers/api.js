@@ -3,7 +3,7 @@ import store from '@/store/index';
 import apiUrls from '@/setup/api-urls.json';
 import { PAGE_LANG } from '@/setup/i18n';
 
-// DRY: Define axios instance with custom config applied to all requests.
+// Creating an Axios instance to set general header properties (for each request)
 export const axiosInstance = axios.create({
   headers: {
     common: {
