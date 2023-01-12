@@ -28,7 +28,7 @@ export default {
      *
      * @returns {String}   active theme id for BEM class name
      */
-    mixinTheme() {
+    theme() {
       return this.customTheme ? this.customTheme : this.getTheme;
     },
   }
