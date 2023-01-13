@@ -14,7 +14,7 @@ require.context('@/components', false, /\.scss/);
 export default {
   install(Vue) {
     const components = [
-      // Element
+      // Elements
       eIcon,
       ePicture,
       eProgress,
