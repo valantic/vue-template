@@ -1,12 +1,3 @@
-// Form elements
-import eLabel from '@/elements/e-label.vue';
-import eInput from '@/elements/e-input.vue';
-import eSelect from '@/elements/e-select.vue';
-import eRadio from '@/elements/e-radio.vue';
-import eCheckbox from '@/elements/e-checkbox.vue';
-import eTextarea from '@/elements/e-textarea.vue';
-import eButton from '@/elements/e-button.vue';
-
 // Elements
 import eIcon from '@/elements/e-icon.vue';
 import ePicture from '@/elements/e-picture.vue';
@@ -23,14 +14,7 @@ require.context('@/components', false, /\.scss/);
 export default {
   install(Vue) {
     const components = [
-      // Elements
-      eLabel,
-      eInput,
-      eSelect,
-      eRadio,
-      eCheckbox,
-      eTextarea,
-      eButton,
+      // Element
       eIcon,
       ePicture,
       eProgress,
@@ -48,13 +32,6 @@ export default {
       });
     } else {
       // Elements
-      Vue.component(eLabel.name, eLabel);
-      Vue.component(eInput.name, eInput);
-      Vue.component(eSelect.name, eSelect);
-      Vue.component(eRadio.name, eRadio);
-      Vue.component(eCheckbox.name, eCheckbox);
-      Vue.component(eTextarea.name, eTextarea);
-      Vue.component(eButton.name, eButton);
       Vue.component(eIcon.name, eIcon);
       Vue.component(ePicture.name, ePicture);
       Vue.component(eProgress.name, eProgress);
