@@ -24,10 +24,15 @@
       <span :class="b('output-value')">
         {{ outputValue }}
       </span>
-      <e-icon v-if="hasDefaultState"
+      <e-icon v-if="hasDefaultState && !focus"
+              :class="b('arrow-icon')"
               icon="i-arrow--down"
               size="22"
               inline
+      />
+      <e-icon v-else
+              :class="b('state-icon')"
+              :icon="stateIcon"
       />
       <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
       <span :class="b('progress-wrapper')">
@@ -365,7 +370,7 @@
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
 
-      .e-icon {
+      #{$this}__arrow-icon {
         transform: rotate(180deg);
       }
 
@@ -447,6 +452,7 @@
         @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
         border-color: variables.$color-status--error;
+        color: variables.$color-status--error;
 
         &:hover {
           border-color: variables.$color-status--error;
