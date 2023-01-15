@@ -107,15 +107,15 @@
   @use '../setup/scss/variables';
 
   .c-notification {
+    position: relative;
     min-width: 400px;
     max-width: 100%;
     min-height: 60px;
-    position: relative;
     padding: variables.$spacing--5;
 
     &--type-success {
       background-color: variables.$color-status--success;
-      color: variables.$color-grayscale--1000;
+      color: variables.$color-grayscale--0;
     }
 
     &--type-info {
@@ -125,7 +125,7 @@
 
     &--type-error {
       background-color: variables.$color-status--error;
-      color: variables.$color-grayscale--1000;
+      color: variables.$color-grayscale--0;
     }
 
     &__message {

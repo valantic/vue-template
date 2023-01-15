@@ -2,19 +2,23 @@
   <ul :class="b()">
     <li :class="b('item')">
       <s-html-validation />
-      <s-toggle v-model="loggedIn">
+      <e-checkbox v-model="loggedIn" variant="toggle">
         Logged in
-      </s-toggle>
+      </e-checkbox>
     </li>
   </ul>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import sToggle from '@/styleguide/components/s-toggle.vue';
   import sHtmlValidation from '@/styleguide/components/s-html-validation.vue';
+  import eCheckbox from '@/components/e-checkbox.vue';
 
   interface IData {
+
+    /**
+     * Determines if the user is logged in.
+     */
     loggedIn: boolean;
   }
 
@@ -23,16 +27,13 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eCheckbox,
       sHtmlValidation,
-      sToggle,
     },
 
     // props: {},
     data(): IData {
       return {
-        /**
-         * Determines if the user is logged in.
-         */
         loggedIn: true,
       };
     },

@@ -1,13 +1,12 @@
 <template>
-  <s-toggle v-model="enabled">
+  <e-checkbox v-model="enabled" variant="toggle">
     HTML validation
-  </s-toggle>
+  </e-checkbox>
 </template>
 
 <script lang="ts">
-  /* eslint-disable max-len -- required for <style> */
   import { defineComponent } from 'vue';
-  import sToggle from './s-toggle.vue';
+  import eCheckbox from '@/components/e-checkbox.vue';
 
   interface IData {
 
@@ -24,7 +23,7 @@
     name: 's-html-validation',
 
     components: {
-      sToggle,
+      eCheckbox,
     },
     // mixins: [],
 
@@ -74,14 +73,14 @@
       outline: 5px solid $red;
 
       &::before {
-        content: $message;
         position: absolute;
         z-index: 1000;
-        border: 1px solid $red;
+        content: $message;
+        max-width: 200px;
         padding: 2px variables.$spacing--5;
+        border: 1px solid $red;
         background: lighten($red, 40%);
         color: $black;
-        max-width: 200px;
         font-size: 0.8rem;
       }
     }

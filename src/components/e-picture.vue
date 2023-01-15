@@ -259,7 +259,7 @@
     mounted() {
       const hasSrcSet = !!this.srcset;
 
-      if (process.env.NODE_ENV === 'production') {
+      if (import.meta.env.MODE === 'production') {
         if (!hasSrcSet && !this.sources && !this.fallback) {
           console.error("Neither 'srcset' nor 'sources' or 'fallback' where defined.", this.$el); // eslint-disable-line no-console
         } else if (hasSrcSet && !this.sizes) {

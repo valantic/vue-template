@@ -3,20 +3,22 @@ import 'core-js/stable';
 // It's mandatory that common styles are imported before the application. Else they will come last in the CSS build
 import './setup/styles.scss';
 
-// vendor styles
-
-import { createApp, Plugin } from 'vue';
+import { createApp, Plugin } from 'vue/dist/vue.esm-bundler';
 import { createPinia } from 'pinia';
 import api from '@/stores/plugins/api';
 import options from '@/setup/options';
 import plugins from '@/setup/plugins';
 
-const vueOptions = process.env.NODE_ENV !== 'production'
-  ? { ...options, ...require('./setup/styleguide.options').options } // eslint-disable-line global-require, @typescript-eslint/no-var-requires
+const styleguideOptions = import.meta.env.MODE !== 'production'
+  ? import.meta.glob('@/setup/styleguide.options.ts', { eager: true })['/src/setup/styleguide.options.ts']
+  : null;
+
+const vueOptions = import.meta.env.MODE !== 'production'
+  ? { ...options, ...styleguideOptions.options }
   : options;
 
-const vuePlugins = process.env.NODE_ENV !== 'production'
-  ? [...plugins, ...require('./setup/styleguide.options').plugins] // eslint-disable-line global-require, @typescript-eslint/no-var-requires
+const vuePlugins = import.meta.env.MODE !== 'production'
+  ? [...plugins, ...styleguideOptions.plugins]
   : plugins;
 
 const app = createApp(vueOptions);

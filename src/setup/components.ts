@@ -21,8 +21,12 @@ import lDefault from '@/components/l-default.vue';
 import cHeader from '@/components/c-header.vue';
 import cFooter from '@/components/c-footer.vue';
 
-// Import style only 'components'.
-require.context('@/components', false, /\.scss/);
+// Imports style only components.
+import.meta.glob([
+  '@/elements/*.scss',
+  '@/components/*.scss',
+  '@/layouts/*.scss',
+], { eager: true });
 
 const plugin: Plugin = {
   install(app) {
@@ -48,7 +52,7 @@ const plugin: Plugin = {
     ];
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.MODE === 'production') {
       components.forEach((component) => {
         app.component(component.name, component);
       });

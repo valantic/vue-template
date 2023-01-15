@@ -24,6 +24,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import spritePath from '@/assets/icons.svg';
 
   interface ISizeLookup {
     [key: string]: number[];
@@ -34,7 +35,6 @@
     height: number;
   }
 
-  const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
   const sizeLookup: ISizeLookup = {
     play: [1024, 721],

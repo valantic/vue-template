@@ -54,7 +54,7 @@ export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetter
       items: [],
     };
 
-    if (process.env.NODE_ENV !== 'production') {
+    if (import.meta.env.MODE !== 'production') {
       state.items = require('../styleguide/mock-data/initial-data/breadcrumbs').default; // eslint-disable-line global-require, @typescript-eslint/no-var-requires
     }
 

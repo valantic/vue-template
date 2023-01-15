@@ -26,6 +26,13 @@ module.exports = {
     // Fix and enable again
     'import/extensions': 'off',
     'vue/require-emit-validator': 'off',
+
+    // TODO: move to eslint-config-valantic
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
   },
   overrides: [
     {

@@ -10,10 +10,10 @@ interface IPropConfig {
 export default function(defaultValue: number, validNumbers: number[]) {
   const propConfig: IPropConfig = {
     type: [Number, String],
-    default: defaultValue
+    default: defaultValue,
   };
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (import.meta.env.MODE !== 'production') {
     if (!Array.isArray(validNumbers)) {
       throw new Error("'validNumbers' is not an array.");
     }

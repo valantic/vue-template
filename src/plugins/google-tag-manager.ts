@@ -85,7 +85,7 @@ const plugin: Plugin = {
         window.dataLayer.push(payload);
 
         // Log if debug and development mode are active
-        if (process.env.NODE_ENV !== 'production') {
+        if (import.meta.env.MODE !== 'production') {
           if (debug) {
             console.group('GTM debug'); // eslint-disable-line no-console
             console.log('payload', payload); // eslint-disable-line no-console

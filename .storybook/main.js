@@ -1,4 +1,4 @@
-const webpackConfig = require('../webpack.config')();
+const webpackConfig = require('../bak.webpack.config')();
 
 module.exports = {
   stories: [ // @see https://storybook.js.org/docs/react/configure/overview#configure-story-loading

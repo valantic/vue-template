@@ -18,8 +18,9 @@ const datetimeFormats: IntlDateTimeFormat = {
 };
 
 // Add styleguide only translations
-if (process.env.NODE_ENV !== 'production') {
-  const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
+if (import.meta.env.MODE !== 'production') {
+  const styleguideTranslations = import.meta
+    .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'];
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
@@ -38,7 +39,7 @@ const i18n = createI18n({
     [pageLang]: datetimeFormats,
   },
 
-  warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
+  warnHtmlInMessage: import.meta.env.MODE !== 'production' ? 'error' : 'off',
 
   /**
    * Callback for the 'missing' event, during translation lookup.
@@ -59,11 +60,12 @@ export default i18n;
  */
 export const i18nLoadMessages = (locale: string): Promise<string> => {
   if (!Object.keys(i18n.global.messages).includes(locale)) {
-    return import(/* webpackChunkName: 'lang-[request]' */`../translations/${locale}`)
+    return import(`../translations/${locale}.json`)
       .then(({ default: localeMessages }) => {
         // Add styleguide only translations
-        if (process.env.NODE_ENV !== 'production') {
-          const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
+        if (import.meta.env.MODE !== 'production') {
+          const styleguideTranslations = import.meta
+            .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'];
 
           if (styleguideTranslations[locale]) {
             Object.entries(styleguideTranslations[locale]).forEach(([key, value]) => {
@@ -92,7 +94,7 @@ export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disa
 
   if (i18n.global.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
-      i18n.global.locale = newLocale;
+      i18n.global.locale.value = newLocale;
     });
   }
 

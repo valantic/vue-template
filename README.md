@@ -867,6 +867,17 @@ package.json:
 }
 ```
 
+## Vite integration todos
+* [ ] Check again, why we need to use `.value` on some vue-i18n properties (e.g. i18n.global.locale.value). Source: https://vue-i18n.intlify.dev/guide/advanced/lazy.html#lazy-loading
+* [ ] Update storybook to use vite config.
+* [ ] Check if "style only components" from `src/setup/components.ts` works as expected.
+* [ ] Try to add README content to styleguide index page again.
+* [ ] Apply new ESLint rules to valantic config.
+* [ ] Remove webpack scripts from package.json.
+* [ ] Remove webpack config.
+* [ ] Should there be basic styles for form elements (if no class applied)?
+* [ ] cmd + click in PhpStorm leads to Interface instead of implementation.
+
 ## Roadmap
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Add 'dangerous' flag for components that use v-html in Storybook.
