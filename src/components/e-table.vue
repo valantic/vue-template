@@ -31,15 +31,31 @@
       v-for="(item, itemIndex) in itemsSorted"
       :key="itemIndex"
       :class="b('data-row', { disabled: item.disabled })"
+      :role="rowRole || 'row'"
     >
       <td
         v-for="(column, columnIndex) in columns"
         :key="columnIndex"
-        :class="b('data-cell', { text: column.align || 'left', hasEvent: !!column.onClick, col: column.key })"
+        :class="b('data-cell')"
         @click="column.onClick ? column.onClick(item, column) : null"
       >
+
+        <!-- ================== -->
+
+        <!-- @slot The default 'date' cell formatting for the project. Can still be overwritten by a locale <template #date> -->
+        <slot v-if="column.slotName === 'birthDate'"
+              :item="item"
+              :column="column"
+              name="birthDate"
+        >
+          {{ dayjs(item[column.key]).format('DD.MM.YYYY') }}
+        </slot>
+
+        <!-- ================== -->
+
         <!-- @slot Use this dynamic slot to add custom templates to the cells -->
         <slot
+          v-else
           :name="column.slotName"
           :item="item"
           :column="column"
@@ -62,6 +78,7 @@
 </template>
 
 <script>
+  import dayjs from 'dayjs';
 
   /**
    * This component renders a table based on a given column setup and an array of row items.
@@ -93,7 +110,7 @@
        *
        * @property {String} title - Column title.
        * @property {String} [key] - Column identifier on the rows.
-       * @property {String} [titleHidden = false] - Title visibility state.
+       * @property {Boolean} [titleHidden = false] - Title visibility state.
        * @property {String} [slotName] - Dynamic slot name for optional cell templates.
        * @property {String} [align = 'left'] - A flag to set the column alignment (default: 'left', options: 'center', 'right').
        * @property {Boolean} [sortable = false] - A flag that specifies whether the column is sortable or not.
@@ -112,6 +129,7 @@
          * @type {Object} The currently selected 'column' to be sorted.
          */
         sortBy: null,
+        dayjs,
 
         /**
          * @type {Boolean} Holds to sort direction in case a 'sortBy' is active.
