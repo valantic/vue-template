@@ -42,8 +42,8 @@ export const withProps = () => ({
       'success',
       'warning',
       'info',
-      'default'
-    ].includes(value)
+      'default',
+    ].includes(value),
   },
 });
 
@@ -78,13 +78,13 @@ const formStates = (inputState: Ref<FieldStates>): IFormStates => {
   const stateIcon: ComputedRef<string> = computed(() => {
     switch (inputState.value) {
       case FieldStates.Error:
-        return 'error';
+        return 'i-error';
 
       case FieldStates.Success:
-        return 'check';
+        return 'i-check';
 
       case FieldStates.Info:
-        return 'info';
+        return 'i-info';
 
       default:
         return '';

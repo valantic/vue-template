@@ -7,7 +7,7 @@
             type="button"
             @click="close"
     >
-      <e-icon icon="close" size="20" />
+      <e-icon icon="i-close" size="20" />
     </button>
   </div>
 </template>
@@ -107,10 +107,10 @@
   @use '../setup/scss/variables';
 
   .c-notification {
+    position: relative;
     min-width: 400px;
     max-width: 100%;
     min-height: 60px;
-    position: relative;
     padding: variables.$spacing--5;
 
     &--type-success {
