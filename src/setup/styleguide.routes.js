@@ -5,6 +5,7 @@ import sandbox from '@/styleguide/routes/sandbox';
 import icons from '@/styleguide/routes/icons';
 import forms from '@/styleguide/routes/forms';
 import notifications from '@/styleguide/routes/notifications';
+import tooltips from '@/styleguide/routes/tooltips';
 
 const root = '/styleguide';
 const categoryWrapper = {
@@ -70,6 +71,14 @@ export default [
         component: notifications,
         meta: {
           title: 'Notifications',
+        },
+      },
+      {
+        path: 'tooltips',
+        name: 'Tooltips',
+        component: tooltips,
+        meta: {
+          title: 'Tooltips',
         },
       },
     ]
