@@ -6,9 +6,16 @@
  * @returns {String}    param value if it's available
  */
 export default function getUrlParameter(name) {
-  name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
-  const regex = new RegExp(`[\\\\?&]${name}=([^&#]*)`);
-  const results = regex.exec(window.location.search);
+  if (!name) {
+    console.error('There is no param set in the URL');
 
-  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    return null;
+  }
+
+  name = name.replace(/[[]/, '\\[')
+    .replace(/[\]]/, '\\]');
+
+  const urlParam = new URLSearchParams(window.location.search);
+
+  return urlParam.get(name);
 }
