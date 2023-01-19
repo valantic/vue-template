@@ -76,7 +76,7 @@ function handleSuccess(response) {
  *
  * @param {Object} error - An axios error object.
  * @param {Object} error.response - The response data.
- * @param {Object} options - Additional request options.
+ * @param {Object} [options] - Additional request options.
  *
  * @returns {Promise<never>}
  */
@@ -122,7 +122,7 @@ export default {
    * Runs a get request with given url with given url params.
    *
    * @param {String} url - Url to get.
-   * @param {Object} config - Url parameters which will be attached to the url.
+   * @param {Object} [config] - Url parameters which will be attached to the url.
    *
    * @returns {Promise} Promise with response data or error.
    */
@@ -138,8 +138,8 @@ export default {
    * Runs a post request with a given url and payload.
    *
    * @param {String} url - Url to post to.
-   * @param {Object} data - Post payload which will be attached to the request.
-   * @param {Object} config - Axios request configuration.
+   * @param {Object} [data] - Post payload which will be attached to the request.
+   * @param {Object} [config] - Axios request configuration.
    *
    * @returns {Promise} Promise with response data or error.
    */
@@ -154,8 +154,8 @@ export default {
    * Runs a patch request with a given url and payload.
    *
    * @param {String} url - Url to patch to.
-   * @param {Object} data - Patch payload which will be attached to the request.
-   * @param {Object} config - Axios request configuration.
+   * @param {Object} [data] - Patch payload which will be attached to the request.
+   * @param {Object} [config] - Axios request configuration.
    *
    * @returns {Promise} Promise with response data or error.
    */
