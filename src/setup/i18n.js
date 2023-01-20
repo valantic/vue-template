@@ -23,6 +23,12 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const dateTimeFormats = { // @see https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#parameter
+  weekday: { // Monday, Tuesday, Wednesday, ...
+    weekday: 'long',
+  },
+  weekdayNarrow: { // M, T, W, ...
+    weekday: 'narrow',
+  },
   month: { // January, February, March, ...
     month: 'long',
   },
