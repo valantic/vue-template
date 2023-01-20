@@ -108,8 +108,11 @@
         </e-fieldset>
 
         <e-fieldset legend="Date Pickers">
-          <eDate v-model="form.date" name="date" />
-          <cDatePicker :start.sync="form.date" name="date-picker" @change="onDatePickerChange" />
+          <eDate v-model="form.date"  name="date" />
+          <cDatePicker :start.sync="form.startDate"
+                       :end.sync="form.endDate"
+                       range
+                       name="date-picker" />
         </e-fieldset>
 
         <e-button type="submit" primary>
@@ -161,7 +164,8 @@
           topics: [],
           frequency: '',
           businessFields: [],
-          date: new Date(),
+          startDate: new Date(),
+          endDate: new Date()
         },
         mock: {
           languages: [
