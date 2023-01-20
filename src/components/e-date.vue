@@ -10,15 +10,15 @@
       :class="b('input')"
       :maxlength="format.length"
       :name="name"
-      @keypress.enter="onEnter"
+      @keypress.enter.prevent
+      @keypress="onEnter"
       @focus="onFocus"
       @blur="onBlur"
     >
     <e-icon
       :class="b('icon')"
       icon="i-date-picker"
-      width="22"
-      height="22"
+      size="20"
     />
   </label>
 </template>
@@ -37,14 +37,21 @@
 
     model: {
       /**
-       * Changes v-model behavior and use 'change' instead of 'value' as prop.
-       * Avoids conflict with default value attribute.
+       * Changes v-model behavior and use 'change' instead of 'input' as event.
        */
       prop: 'value',
       event: 'change',
     },
 
     props: {
+      /**
+       * The `name` value for the field.
+       */
+      name: {
+        type: String,
+        required: true,
+      },
+
       /**
        * Allows to set the accepted input format.
        */
@@ -70,22 +77,13 @@
       },
 
       /**
-       * The label and placeholder value of the field.
-       * The placeholder attribute is required to make floating labels work with native CSS (ex. IE11).
+       * The `label` text for the field.
        */
       label: {
         type: String,
         default() {
           return this.$t('e-date.defaultLabel');
         },
-      },
-
-      /**
-       * Adds name attribute
-       */
-      name: {
-        type: String,
-        required: true,
       },
     },
     data() {
@@ -219,7 +217,6 @@
        * @param {Event} event - The original DOM event.
        */
       onEnter(event) {
-        event.preventDefault(); // Prevents auto submit of form.
         event.target.blur(); // Triggers update.
       },
 
@@ -266,19 +263,15 @@
   @use '../setup/scss/functions';
 
   .e-date {
-    $height: 48px;
+    $height: 30px;
     $border: 1px;
 
     display: flex;
     align-items: center;
-    padding: rem(0 variables.$spacing--25); // Equalizes vertical centering
+    padding: 0 variables.$spacing--25; // Equalizes vertical centering
     border: $border solid transparent;
-    border-radius: 99999px; // Force half circles.
-    background: variables.$color-grayscale--600;
-
-    @include mixins.media(lg) {
-      @include mixins.font(variables.$font-size--14, 18px);
-    }
+    background: variables.$color-grayscale--800;
+    border-radius: variables.$border-radius--500;
 
     &__label-text {
       grid-area: label;
@@ -297,12 +290,8 @@
 
       grid-area: input;
       width: 14ch; // 8 letters + 2 dividers + some, because IE11 does not count outer spacing of 0
-      height: rem($height - (2 * $border) - 1px);
+      height: $height - (2 * $border) - 1px;
       margin-bottom: 1px; // Improves vertical centering.
-
-      @supports (display: inline-grid) {
-        width: var(--e-date-format-length, 10ch);
-      }
     }
 
     &__icon {
@@ -310,8 +299,8 @@
       margin-left: auto;
 
       img {
-        width: rem(22px);
-        height: rem(22px);
+        width: 22px;
+        height: 22px;
       }
     }
 

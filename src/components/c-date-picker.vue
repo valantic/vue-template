@@ -42,8 +42,7 @@
         >
           <e-icon
             icon="i-close"
-            width="20"
-            height="20"
+            size="20"
           />
         </button>
       </div>
@@ -76,7 +75,7 @@
 
     props: {
       /**
-       * The initial start date.
+       * The initial start date. Provides `.sync` support.
        */
       start: {
         type: Date,
@@ -84,7 +83,7 @@
       },
 
       /**
-       * The initial end date.
+       * The initial end date. Provides `.sync` support.
        */
       end: {
         type: Date,
@@ -118,7 +117,7 @@
       },
 
       /**
-       * Allows to overwrite the default start input name.
+       * Allows to overwrite the default start input field name.
        */
       startName: {
         type: String,
@@ -126,7 +125,7 @@
       },
 
       /**
-       * Allows to overwrite the default end input name.
+       * Allows to overwrite the default end input field name.
        */
       endName: {
         type: String,
@@ -142,7 +141,7 @@
       },
 
       /**
-       * Allows to justify the min date.
+       * Allows to set a min date.
        */
       minDate: {
         type: Date,
@@ -150,7 +149,7 @@
       },
 
       /**
-       * Allows to justify the max date.
+       * Allows to set a min date.
        */
       maxDate: {
         type: Date,
@@ -199,13 +198,13 @@
     // computed: {},
     watch: {
       start(value, oldValue) {
-        if (value.getTime() !== oldValue.getTime()) {
+        if (value?.getTime() !== oldValue?.getTime()) {
           this.startDate = value;
         }
       },
 
       end(value, oldValue) {
-        if (value.getTime() !== oldValue.getTime()) {
+        if (value?.getTime() !== oldValue?.getTime()) {
           this.endDate = value;
         }
       },
@@ -215,16 +214,17 @@
           return;
         }
 
-        if (this.$dayjs(value).format() !== this.$dayjs(oldValue).format()) {
-          if (this.range) {
-            this.calendarInstance.setStartRange(value);
-            this.calendarInstance.draw();
-          } else {
-            this.close();
-          }
-
-          this.onChange();
+        if (this.$dayjs(value).format() === this.$dayjs(oldValue).format()) {
+          return;
         }
+
+        if (this.range) {
+          this.calendarInstance.setStartRange(value);
+          this.calendarInstance.draw();
+        } else {
+          this.close();
+        }
+        this.onChange();
       },
 
       endDate(value, oldValue) {
@@ -404,7 +404,7 @@
         };
         const elementInFocus = document.querySelector(':focus');
 
-        // Remove focus on child elements to allow instant re-opening when clicking the elment again.
+        // Remove focus on child elements to allow instant re-opening when clicking the element again.
         if (elementInFocus && (elementInFocus === this.$el || this.$el.contains(elementInFocus))) {
           elementInFocus.blur();
         }
@@ -511,23 +511,24 @@
   .c-date-picker {
     $this: &;
 
+    padding-top: variables.$spacing--20;
     position: relative;
 
     &__calendar-wrapper {
       position: absolute;
       min-width: 100%; // Width of anchor.
-      margin-top: rem(variables.$spacing--10);
+      margin-top: variables.$spacing--10;
       background: variables.$color-grayscale--1000;
 
       @include mixins.media(sm) {
-        width: rem(500px);
-        margin-top: rem(variables.$spacing--15);
+        width: 500px;
+        margin-top: variables.$spacing--15;
       }
     }
 
     &__calendar-header {
       position: relative;
-      padding: rem(variables.$spacing--15 variables.$spacing--55);
+      padding: variables.$spacing--15 variables.$spacing--55;
       border-bottom: 1px solid variables.$color-grayscale--600;
       text-align: center;
     }
@@ -546,14 +547,17 @@
       transform: translateY(-50%);
 
       .e-icon img {
-        width: rem(20px);
-        height: rem(20px);
+        width: 20px;
+        height: 20px;
       }
     }
 
     &__calendar {
+      display: flex;
+      justify-content: center;
+
       @include mixins.media(sm) {
-        padding: rem(0 variables.$spacing--60 variables.$spacing--25);
+        padding: 0 variables.$spacing--60 variables.$spacing--25;
       }
     }
 
@@ -574,13 +578,13 @@
         grid-template-areas: 'start' 'end';
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
-        row-gap: rem(variables.$spacing--10);
+        row-gap: variables.$spacing--10;
 
         @include mixins.media(sm) {
           grid-template-areas: 'start end';
           grid-template-columns: 1fr 1fr;
           grid-template-rows: auto;
-          column-gap: rem(variables.$spacing--25);
+          column-gap: variables.$spacing--25;
         }
       }
 
