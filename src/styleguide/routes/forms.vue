@@ -108,7 +108,7 @@
         </e-fieldset>
 
         <e-fieldset legend="Date Pickers">
-          <eDate v-model="form.date"  name="date" />
+          <eDate v-model="form.date" name="date" />
           <cDatePicker :start.sync="form.startDate"
                        :end.sync="form.endDate"
                        range
