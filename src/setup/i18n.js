@@ -22,10 +22,20 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
+const dateTimeFormats = { // @see https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#parameter
+  month: { // January, February, March, ...
+    month: 'long',
+  },
+};
+
 export const i18n = new VueI18n({
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
   warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
+  dateTimeFormats: {
+    [I18N_FALLBACK]: dateTimeFormats,
+    [pageLang]: dateTimeFormats,
+  },
 
   /**
    * Callback for the 'missing' event, during translation lookup.
@@ -89,6 +99,7 @@ export const i18nSetLocale = function(locale) { // eslint-disable-line no-param-
   if (i18n.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
       i18n.locale = newLocale;
+      i18n.setDateTimeFormat(locale, dateTimeFormats);
     });
   }
 
