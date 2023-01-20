@@ -7,8 +7,8 @@
            :placeholder="$t('e-multiselect.searchFieldPlaceholder')"
            :class="b('search-field')"
            type="text"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
+           @mouseenter="mixinHasHover = true"
+           @mouseleave="mixinHasHover = false"
     >
 
     <!-- Trigger Button -->
@@ -18,18 +18,18 @@
             :disabled="isDisabled"
             type="button"
             @click="isOpen = !isOpen"
-            @mouseenter="hasHover = true"
-            @mouseleave="hasHover = false"
+            @mouseenter="mixinHasHover = true"
+            @mouseleave="mixinHasHover = false"
     >
       <span :class="b('output-value')">
         {{ outputValue }}
       </span>
-      <e-icon v-if="hasDefaultState"
+      <e-icon v-if="mixinHasDefaultState"
               icon="arrow--down"
               size="22"
               inline
       />
-      <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
+      <span v-if="!mixinHasDefaultState" :class="b('icon-splitter')"></span>
       <span :class="b('progress-wrapper')">
         <e-progress v-if="progress" />
       </span>
@@ -61,8 +61,8 @@
 
 <script>
   import { i18n } from '@/setup/i18n';
-  import uuid from '@/mixins/uuid';
-  import formStates from '@/mixins/form-states';
+  import mixinUuid from '@/mixins/uuid';
+  import mixinFormStates from '@/mixins/form-states';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eIcon from '@/elements/e-icon.vue';
 
@@ -76,8 +76,8 @@
       eIcon
     },
     mixins: [
-      uuid,
-      formStates,
+      mixinUuid,
+      mixinFormStates,
     ],
 
     /**

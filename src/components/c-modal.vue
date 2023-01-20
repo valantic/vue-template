@@ -69,8 +69,9 @@
   import { BREAKPOINTS } from '@/setup/globals';
   import avoidContentResizing from '@/helpers/avoid-content-resizing';
   import propScale from '@/helpers/prop.scale';
-  import uuid from '@/mixins/uuid';
+  import mixinUuid from '@/mixins/uuid';
   import cNotificationContainer from '@/components/c-notification-container';
+  import eIcon from '@/elements/e-icon';
 
   /**
    * Components wraps the plugin https://github.com/euvl/vue-js-modal, it's output is rendered through vue-portal.
@@ -82,10 +83,11 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eIcon,
       cNotificationContainer,
     },
     mixins: [
-      uuid,
+      mixinUuid,
     ],
 
     props: {

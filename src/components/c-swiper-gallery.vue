@@ -80,8 +80,9 @@
   import { BREAKPOINTS } from '@/setup/globals';
   import cSwiperModal from '@/components/c-swiper-modal';
   import mapImages from '@/helpers/map-images';
-  import uuid from '@/mixins/uuid';
+  import mixinUuid from '@/mixins/uuid';
   import cModal from '@/components/c-modal';
+  import eIcon from '@/elements/e-icon';
 
   const swiperInstances = {};
 
@@ -93,10 +94,11 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eIcon,
       cModal,
       cSwiperModal,
     },
-    mixins: [uuid],
+    mixins: [mixinUuid],
 
     props: {
       /**

@@ -2,7 +2,7 @@
   <label>
     <span class="invisible">Language</span>
     <select :class="b()" :value="language" @change="onChange">
-      <option v-for="locale in i18nLocales"
+      <option v-for="locale in mixinI18nLocales"
               :key="locale"
               :value="locale">
         {{ $t(`s-language.${locale}`) }}
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-  import i18nMixin from '../../mixins/i18n';
+  import mixinI18n from '../../mixins/i18n';
 
   export default {
     name: 's-language',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    mixins: [i18nMixin],
+    mixins: [mixinI18n],
 
     // props: {},
 

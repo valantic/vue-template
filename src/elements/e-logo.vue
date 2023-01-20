@@ -18,7 +18,8 @@
 </template>
 
 <script>
-  import themes from '../mixins/themes';
+  import mixinThemes from '@/mixins/themes';
+  import eIcon from '@/elements/e-icon';
 
   /**
    * e-logo renders the company logo depending on the current theme (from the vuex store)
@@ -29,8 +30,10 @@
     name: 'e-logo',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    // components: {},
-    mixins: [themes],
+    components: {
+      eIcon
+    },
+    mixins: [mixinThemes],
 
     inheritAttrs: false,
 

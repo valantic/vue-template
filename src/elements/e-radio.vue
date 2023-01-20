@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import formStates from '@/mixins/form-states';
+  import mixinFormStates from '@/mixins/form-states';
 
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
@@ -31,7 +31,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    mixins: [formStates],
+    mixins: [mixinFormStates],
     inheritAttrs: false,
 
     model: {
