@@ -1,5 +1,4 @@
 import lDefault from '@/layouts/l-default.vue';
-
 import index from '@/styleguide/routes/index.vue';
 import sandbox from '@/styleguide/routes/sandbox.vue';
 import icons from '@/styleguide/routes/icons.vue';
