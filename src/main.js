@@ -5,7 +5,7 @@ import './setup/_scss.scss';
 import Vue from 'vue'; // eslint-disable-line import/first
 import options from './setup/options';
 import directives from './setup/directives';
-import components from './setup/components-global';
+import components from './setup/ssr-components.js';
 
 import './setup/plugins';
 import getUrlParameter from './helpers/get-url-parameter';
