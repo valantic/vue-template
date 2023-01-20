@@ -92,6 +92,7 @@
   import lDefault from '@/layouts/l-default.vue';
   import cModal from '@/components/c-modal';
   import cNotificationContainer from '@/components/c-notification-container';
+  import eButton from '@/elements/e-button.vue';
 
   export default {
     name: 'notifications',
@@ -99,6 +100,7 @@
       cNotificationContainer,
       lDefault,
       cModal,
+      eButton
     },
     data() {
       return {

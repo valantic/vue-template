@@ -139,6 +139,7 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eTextarea from '@/elements/e-textarea.vue';
   import eButton from '@/elements/e-button.vue';
+
   import { required, email } from 'vuelidate/lib/validators';
 
   export default {
@@ -152,7 +153,7 @@
       eRadio,
       eCheckbox,
       eTextarea,
-      eButton,
+      eButton
     },
     // components: {},
     data() {
