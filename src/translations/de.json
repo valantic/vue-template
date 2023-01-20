@@ -49,6 +49,12 @@
     "videos": "0 Videos | 1 Video | {count} Videos"
   },
   "c-date-picker": {
-    "inputName": "Bitte wählen"
+    "inputName": "Bitte wählen",
+    "calendarTitle" : "Titel",
+    "close" : "Schliessen",
+    "inputStartName" : "Start",
+    "inputEndName" : "Ende",
+    "previousMonth" : "Vorheriger Monat",
+    "nextMonth" : "Nächster Monat"
   }
 }
