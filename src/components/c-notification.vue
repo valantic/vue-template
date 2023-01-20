@@ -11,6 +11,7 @@
 
 <script>
   import { mapMutations } from 'vuex';
+  import eIcon from '@/elements/e-icon';
 
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.
@@ -19,8 +20,9 @@
     name: 'c-notification',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    // components: {},
-    // components: {},
+    components: {
+      eIcon
+    },
     // mixins: [],
 
     props: {

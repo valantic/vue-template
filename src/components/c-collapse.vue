@@ -17,6 +17,7 @@
 
 <script>
   import propScale from '@/helpers/prop.scale';
+  import eIcon from '@/elements/e-icon';
 
   /**
    * Displays collapsible content panels. Use **c-collapse-group** as a wrapper for multiple items
@@ -26,7 +27,9 @@
     name: 'c-collapse',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    // components: {},
+    components: {
+      eIcon
+    },
     // mixins: [],
 
     props: {

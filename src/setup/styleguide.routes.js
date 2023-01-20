@@ -1,10 +1,9 @@
-import lDefault from '@/components/l-default';
-
-import index from '@/styleguide/routes/index';
-import sandbox from '@/styleguide/routes/sandbox';
-import icons from '@/styleguide/routes/icons';
-import forms from '@/styleguide/routes/forms';
-import notifications from '@/styleguide/routes/notifications';
+import lDefault from '@/layouts/l-default.vue';
+import index from '@/styleguide/routes/index.vue';
+import sandbox from '@/styleguide/routes/sandbox.vue';
+import icons from '@/styleguide/routes/icons.vue';
+import forms from '@/styleguide/routes/forms.vue';
+import notifications from '@/styleguide/routes/notifications.vue';
 
 const root = '/styleguide';
 const categoryWrapper = {
