@@ -64,6 +64,7 @@
   import uuid from '@/mixins/uuid';
   import formStates from '@/mixins/form-states';
   import eCheckbox from '@/elements/e-checkbox.vue';
+  import eIcon from '@/elements/e-icon.vue';
 
   /**
    * This renders a multi-select component.
@@ -71,7 +72,8 @@
   export default {
     name: 'e-multiselect',
     components: {
-      eCheckbox
+      eCheckbox,
+      eIcon
     },
     mixins: [
       uuid,
