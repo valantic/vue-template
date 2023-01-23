@@ -1,6 +1,6 @@
 <template>
   <l-default>
-    <c-google-map :locations="locations" theme="gray" :class="b('google-map')" />
+    <c-google-map theme="gray" :locations="locations" :class="b('google-map')" />
   </l-default>
 </template>
 
