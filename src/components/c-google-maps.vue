@@ -63,7 +63,7 @@
        * @see https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngBounds
        */
       bounds: {
-        type: [Object, Boolean],
+        type: [Boolean, Object],
         default: true,
       },
 
@@ -162,20 +162,19 @@
         throw new Error('No Google Maps API key provided.');
       }
 
-      const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-
       /**
        * Callback for the load event of the map script.
        */
-      const callback = () => {
+      window.initMap = () => {
         geocoder = new window.google.maps.Geocoder();
-
         this.$nextTick(() => {
           this.createMapInstance();
         });
       };
 
-      loadScript(url, callback, { async: true });
+      const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
+
+      loadScript(url, { async: true });
     },
     // created() {},
     // beforeMount() {},
@@ -206,8 +205,7 @@
        */
       createMapInstance() {
         if (!this.mappedLocations?.length && !this.center) {
-          const errorMsg = 'Neither locations nor a center coordinate was given.'
-            + ' At least one of them is needed to create a Google Maps.'; // eslint-disable-line vue/max-len
+          const errorMsg = 'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.';
 
           throw new Error(errorMsg);
         }
