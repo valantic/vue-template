@@ -42,7 +42,6 @@ export const NOTIFICATION_UNKNOWN_ERROR = {
 };
 
 export const GOOGLE_MAPS_THEME_GRAY = [ // @see https://snazzymaps.com/style/15/subtle-grayscale
-                                        // Style
   {
     featureType: 'administrative',
     elementType: 'all',
