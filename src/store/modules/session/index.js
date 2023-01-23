@@ -10,7 +10,7 @@ export default {
      * @type {String} Holds the Google Maps API key for the current instance.
      */
     googleMapsApiKey: process.env.NODE_ENV !== 'production'
-      ? 'AIzaSyB0cX-gJYJaVFWnLYLo4WT_BftC7-Yy4Vc'
+      ? process.env.GOOGLE_MAPS_API_KEY
       : null,
 
   },

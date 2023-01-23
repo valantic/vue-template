@@ -3,6 +3,7 @@
 // Basics
 const path = require('path'); // Cross platform path resolver
 const webpack = require('webpack');
+require('dotenv').config({ path: './.env' });
 
 // Development & build
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -99,7 +100,10 @@ module.exports = (env, args = {}) => {
       cache: !isProduction, // Improves linting performance
     }),
 
-    new webpack.DefinePlugin(globalVariables), // Set node variables.
+    new webpack.DefinePlugin({
+      globalVariables, // Set node variables
+      "process.env": JSON.stringify(process.env),
+    }),
 
     new CopyWebpackPlugin({
       patterns: [
