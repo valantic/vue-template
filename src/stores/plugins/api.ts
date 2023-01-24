@@ -1,5 +1,8 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, {
+ AxiosError, AxiosRequestConfig, AxiosResponse, AxiosInstance,
+} from 'axios';
 import notificationStore, { INotificationItem } from '@/stores/notification';
+import { PAGE_LANG } from '@/setup/i18n';
 
 export interface IApi {
 
@@ -24,6 +27,15 @@ export interface IApi {
   delete: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
 }
 
+// Creating an Axios instance to set general header properties (for each request)
+export const axiosInstance: AxiosInstance = axios.create({
+  headers: {
+    common: {
+      locale: PAGE_LANG,
+    },
+  },
+});
+
 interface IPluginApi {
   $api: IApi,
 }
@@ -32,34 +44,6 @@ declare module 'pinia' {
   export interface PiniaCustomProperties {
     $api: IApi
   }
-}
-
-// Enable tracking of requests in development environment.
-if (process.env.NODE_ENV !== 'production') {
-  const clone = require('@/helpers/clone.ts').default; // eslint-disable-line global-require, @typescript-eslint/no-var-requires
-  const exclude = [
-    /assets\//,
-  ];
-
-  axios.interceptors.request.use((config: AxiosRequestConfig) => {
-    if (!exclude.find(pattern => pattern.test(config.url || ''))) {
-      console.groupCollapsed(`=> ${config.method?.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
-      console.dir(clone(config)); // eslint-disable-line no-console
-      console.groupEnd(); // eslint-disable-line no-console
-    }
-
-    return config;
-  });
-
-  axios.interceptors.response.use((response: AxiosResponse) => {
-    if (!exclude.find(pattern => pattern.test(response.config.url || ''))) {
-      console.groupCollapsed(`<= ${response.config.method?.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
-      console.dir(clone(response)); // eslint-disable-line no-console
-      console.groupEnd(); // eslint-disable-line no-console
-    }
-
-    return response;
-  });
 }
 
 export default function api():IPluginApi {
@@ -107,28 +91,28 @@ export default function api():IPluginApi {
   return {
     $api: {
       get(url, config) {
-        return axios
+        return axiosInstance
           .get(url, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
       post(url, data, config) {
-        return axios
+        return axiosInstance
           .post(url, data, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
       patch(url, data, config) {
-        return axios
+        return axiosInstance
           .patch(url, data, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
       delete(url, config) {
-        return axios
+        return axiosInstance
           .delete(url, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
