@@ -216,11 +216,11 @@
       open() {
         if (this.open) {
           this.scrollPositionY = window.scrollY;
-          enableBodyScroll(document.body);
+          disableBodyScroll(document.body, { reserveScrollBarGap: true, });
           this.$modal.show(this.uuid);
           this.$modalStack.add(this.uuid);
         } else {
-          disableBodyScroll(document.body);
+          enableBodyScroll(document.body);
           this.$modal.hide(this.uuid);
         }
       }
@@ -236,7 +236,6 @@
     // deactivated() {},
     beforeDestroy() {
       this.$modalStack.remove(this.uuid);
-      enableBodyScroll(document.body);
     },
     // destroyed() {},
 
@@ -286,8 +285,6 @@
           modal.stop();
           document.body.classList.add('v--modal-block-scroll');
         }
-
-        disableBodyScroll(document.body);
       },
     },
     // render() {},
