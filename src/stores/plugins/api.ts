@@ -46,34 +46,6 @@ declare module 'pinia' {
   }
 }
 
-// Enable tracking of requests in development environment.
-if (process.env.NODE_ENV !== 'production') {
-  const clone = require('@/helpers/clone.ts').default; // eslint-disable-line global-require, @typescript-eslint/no-var-requires
-  const exclude = [
-    /assets\//,
-  ];
-
-  axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-    if (!exclude.find(pattern => pattern.test(config.url || ''))) {
-      console.groupCollapsed(`=> ${config.method?.toUpperCase()} ${config.url}`); // eslint-disable-line no-console
-      console.dir(clone(config)); // eslint-disable-line no-console
-      console.groupEnd(); // eslint-disable-line no-console
-    }
-
-    return config;
-  });
-
-  axiosInstance.interceptors.response.use((response: AxiosResponse) => {
-    if (!exclude.find(pattern => pattern.test(response.config.url || ''))) {
-      console.groupCollapsed(`<= ${response.config.method?.toUpperCase()} ${response.config.url}`); // eslint-disable-line no-console
-      console.dir(clone(response)); // eslint-disable-line no-console
-      console.groupEnd(); // eslint-disable-line no-console
-    }
-
-    return response;
-  });
-}
-
 export default function api():IPluginApi {
   const notificationStoreInstance = notificationStore();
 
