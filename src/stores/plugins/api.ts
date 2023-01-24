@@ -6,7 +6,7 @@ export interface IApi {
   /**
    * Runs a get request with given url with given url params.
    */
-  get: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
+  get: (url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
 
   /**
    * Runs a post request with a given url and payload.
@@ -16,7 +16,7 @@ export interface IApi {
   /**
    * Runs a patch request with a given url and payload.
    */
-  patch: (url: string, data: object, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
+  patch: (url: string, data?: object, config?: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
 
   /**
    * Runs a delete request with a given url and payload.
