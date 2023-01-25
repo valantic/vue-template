@@ -1,6 +1,6 @@
+import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 import cTabs from '@/components/c-tabs';
 import eIcon from '@/components/e-icon';
-import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 
 export default {
   component: cTabs,
@@ -15,11 +15,6 @@ export default {
       { title: 'Link tab', id: 'tab4', meta: { href: '#tab4-link' } },
     ],
   },
-  parameters: {
-    actions: {
-      handles: Object.keys(cTabs.emits),
-    },
-  },
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
@@ -31,15 +26,15 @@ const Template = (args, { story }) => {
     },
 
     setup() {
-      return { ...args };
+      return { args };
     },
 
     template: `
-      <c-tabs :tabs="tabs" @change="onChange">
+      <c-tabs v-bind="args">
         <template #tab1__tab>
           <e-icon icon="i-styleguide-heart"></e-icon>
         </template>
-        <template v-for="tab in tabs" :key="tab.id" #[tab.id]>
+        <template v-for="tab in args.tabs" :key="tab.id" #[tab.id]>
           Content of '{{ tab.id }}'
         </template>
       </c-tabs>
@@ -48,7 +43,7 @@ const Template = (args, { story }) => {
 
   if (story === 'No Content') {
     demo.template = `
-      <c-tabs :tabs="tabs" @change="onChange">
+      <c-tabs v-bind="args">
         <template #tab1__tab>
           <e-icon icon="i-styleguide-heart"></e-icon>
         </template>

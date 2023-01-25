@@ -154,7 +154,11 @@
       },
     },
 
-    emits: ['click'],
+    emits: {
+      click(payload: Event) {
+        return typeof payload === 'object';
+      },
+    },
 
     data(): IData {
       return {
