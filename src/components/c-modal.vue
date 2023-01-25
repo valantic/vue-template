@@ -67,10 +67,11 @@
 
 <script>
   import { BREAKPOINTS } from '@/setup/globals';
-  import avoidContentResizing from '@/helpers/avoid-content-resizing';
+  import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
   import propScale from '@/helpers/prop.scale';
-  import uuid from '@/mixins/uuid';
+  import mixinUuid from '@/mixins/uuid';
   import cNotificationContainer from '@/components/c-notification-container';
+  import eIcon from '@/elements/e-icon';
 
   /**
    * Components wraps the plugin https://github.com/euvl/vue-js-modal, it's output is rendered through vue-portal.
@@ -82,10 +83,11 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eIcon,
       cNotificationContainer,
     },
     mixins: [
-      uuid,
+      mixinUuid,
     ],
 
     props: {
@@ -216,10 +218,11 @@
       open() {
         if (this.open) {
           this.scrollPositionY = window.scrollY;
-          avoidContentResizing(true);
+          disableBodyScroll(document.body, { reserveScrollBarGap: true, });
           this.$modal.show(this.uuid);
           this.$modalStack.add(this.uuid);
         } else {
+          enableBodyScroll(document.body);
           this.$modal.hide(this.uuid);
         }
       }
@@ -235,6 +238,7 @@
     // deactivated() {},
     beforeDestroy() {
       this.$modalStack.remove(this.uuid);
+      enableBodyScroll(document.body);
     },
     // destroyed() {},
 
@@ -282,9 +286,8 @@
       onModalBeforeClose(modal) {
         if (!this.closeable) {
           modal.stop();
+          document.body.classList.add('v--modal-block-scroll');
         }
-
-        avoidContentResizing(false);
       },
     },
     // render() {},

@@ -1,6 +1,6 @@
 /* eslint-disable newline-per-chained-call */
 import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-extraneous-dependencies
-import { axios } from '@/plugins/axios';
+import { axiosInstance } from '@/helpers/api';
 
 // Import mocks
 import notificationResponse from '@/styleguide/mock-data/api-response/notification-response';
@@ -42,7 +42,7 @@ export default {
    * Defines API mocks for development and styleguide build.
    */
   install(/* Vue, options */) {
-    const mock = new MockAdapter(axios, {
+    const mock = new MockAdapter(axiosInstance, {
       delayResponse: 500,
     });
 

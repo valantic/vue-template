@@ -3,7 +3,7 @@ import Vue from 'vue'; // Default language
 import fallbackMessages from '../translations/de';
 import numberFormats from './localization';
 
-const pageLang = document?.documentElement?.lang;
+export const PAGE_LANG = document?.documentElement?.lang;
 
 Vue.use(VueI18n);
 
@@ -88,6 +88,10 @@ export const i18nSetLocale = function(locale) { // eslint-disable-line no-param-
 
   if (i18n.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
+      import('../helpers/api').then((module) => {
+        module.axiosInstance.defaults.headers.common.locale = newLocale;
+      });
+
       i18n.locale = newLocale;
     });
   }
@@ -95,4 +99,4 @@ export const i18nSetLocale = function(locale) { // eslint-disable-line no-param-
   return Promise.resolve(locale);
 };
 
-i18nSetLocale(pageLang);
+i18nSetLocale(PAGE_LANG);

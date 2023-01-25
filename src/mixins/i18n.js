@@ -6,7 +6,7 @@ export default {
       /**
        * An array of supported locale identifiers
        */
-      i18nLocales: I18N_LOCALES,
+      mixinI18nLocales: I18N_LOCALES,
     };
   },
   methods: {
