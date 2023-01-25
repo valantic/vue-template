@@ -1,5 +1,9 @@
 <template>
-  <table :class="b()">
+  <table :class="b({ enableRowLinks, hasRowLinks: !!rowHref })"
+         @contextmenu.capture="onContextMenu"
+         @mousedown.capture="onMouseDown"
+         @mouseup="onMouseUp($event)"
+  >
     <!-- @slot Allows to display a customized header row. -->
     <slot
       :columns="columns"
@@ -37,22 +41,23 @@
         v-for="(column, columnIndex) in columns"
         :key="columnIndex"
         :class="b('data-cell')"
-        @click="column.onClick ? column.onClick(item, column) : null"
+        @click="column.onClick || rowHref ? onCellClick(item, column, $event) : null"
       >
-
-        <!-- ================== -->
+        <a v-if="!column.onClick && typeof rowHref === 'function'"
+           :class="b('cell-link')"
+           :href="rowHref(item) || '#'"
+           :title="rowTitle(item)"
+           tabindex="-1"
+        ></a>
 
         <!-- @slot The default 'date' cell formatting for the project. Can still be overwritten by a locale <template #date> -->
-        <slot v-if="column.slotName === 'birthDate'"
+        <slot v-if="column.slotName === 'date'"
               :item="item"
               :column="column"
-              name="birthDate"
+              name="date"
         >
           {{ dayjs(item[column.key]).format('DD.MM.YYYY') }}
         </slot>
-
-        <!-- ================== -->
-
         <!-- @slot Use this dynamic slot to add custom templates to the cells -->
         <slot
           v-else
@@ -116,11 +121,25 @@
        * @property {Boolean} [sortable = false] - A flag that specifies whether the column is sortable or not.
        * @property {Function} [sort = (a, b) => a > b] - A custom sort function that might be passed for each column.
        * @property {Function} [onClick] - Allows to define a click handler for each cell.
-       *
        */
       columns: {
         type: Array,
         required: true,
+      },
+
+      /**
+       * Accepts a method to generate a link for each row (except for columns with 'onClick' callback).
+       *
+       * @param {Object} rowLink - A definition for the row link.
+       * @param {Object} rowLink.href - The link for the row link element.
+       * @param {Object} rowLink.title - The title for the row link element.
+       */
+      rowLink: {
+        type: Object,
+        default: null,
+        validator(rowLink) {
+          return rowLink.href && rowLink.title;
+        }
       },
     },
     data() {
@@ -135,10 +154,29 @@
          * @type {Boolean} Holds to sort direction in case a 'sortBy' is active.
          */
         sortAscending: true,
+
+        /**
+         * @type {Boolean} Holds a flag if row links should be enabled.
+         */
+        enableRowLinks: false,
+
+        /**
+         * @type {Boolean} Holds a flag if there is currently a text selection inside the component.
+         */
+        hasSelection: false,
       };
     },
 
     computed: {
+      /**
+       * Returns the href generator method of the rowLink.
+       *
+       * @returns {Function}
+       */
+      rowHref() {
+        return this.rowLink?.href;
+      },
+
       /**
        * Returns a sorted copy of the table-items.
        *
@@ -172,6 +210,7 @@
       },
     },
     // watch: {},
+
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
@@ -184,6 +223,28 @@
     // destroyed() {},
 
     methods: {
+      /**
+       * Returns a title for the row link, based on the type of the definition.
+       *
+       * @param {Object} item - The rows related data object.
+       *
+       * @returns {String|null}
+       */
+      rowTitle(item) {
+        const { rowLink } = this;
+
+        switch (typeof rowLink?.title) {
+          case 'string':
+            return rowLink.title;
+
+          case 'function':
+            return rowLink.title(item) || null;
+
+          default:
+            return null;
+        }
+      },
+
       /**
        * Will set the sort-parameters.
        *
@@ -229,6 +290,76 @@
           active,
           desc: active && !this.sortAscending
         };
+      },
+
+      /**
+       * Enables the row link for a few ms to allow link specific context menus (even IE11).
+       */
+      enableRowLink() {
+        if (this.rowHref && !this.hasSelection) { // It was not possible to test for rowHref when binding the event in the template.
+          this.enableRowLinks = true;
+
+          setTimeout(() => {
+            this.enableRowLinks = false;
+          }, 100);
+        }
+      },
+
+      /**
+       * Callback for the tables mousedown event.
+       */
+      onMouseDown() { // All browsers
+        this.hasSelection = !!window.getSelection()?.toString();
+      },
+
+      /**
+       * Callback for the tables contextmenu event.
+       */
+      onContextMenu() { // Chromium, webkit: mousedown, contextmenu
+        this.enableRowLink();
+
+        setTimeout(() => {
+          window.getSelection().removeAllRanges(); // Safari marks words on right click by default, which would cause trouble on next context event.
+        });
+      },
+
+      /**
+       * Callback for the tables mouseup event.
+       *
+       * @param {PointerEvent} event - The related DOM event.
+       */
+      onMouseUp(event) { // FF: mousedown, mouseup, contextmenu
+        if (!this.enableRowLinks) {
+          // Firefox marks a cells content when holding ctrl/meta while clicking it.
+          this.hasSelection = !(event.ctrlKey || event.metaKey) && !!window.getSelection()?.toString();
+
+          this.enableRowLink();
+        }
+      },
+
+      /**
+       * Callback for clicks within a row.
+       *
+       * @param {Object} item - The item related to the cell.
+       * @param {Object} column - The column definition related to the cell.
+       * @param {PointerEvent} event - The DOM related event.
+       */
+      onCellClick(item, column, event) {
+        if (this.hasSelection) { // Cancel cell action if a text selection is active.
+          return;
+        }
+
+        if (column.onClick) {
+          column?.onClick?.(item, column, event);
+        } else {
+          const url = this.rowHref(item, column);
+
+          if (event.ctrlKey || event.metaKey) {
+            window.open(url, '_blank');
+          } else {
+            window.location = url;
+          }
+        }
       }
     },
     // render() {},
@@ -314,10 +445,32 @@
       }
     }
 
+    &__cell-link {
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
     &__no-results {
       font-size: variables.$font-size--14;
       padding-top: variables.$spacing--15;
       padding-bottom: variables.$spacing--15;
+    }
+
+    &--has-row-links {
+      #{$this}__data-row {
+        cursor: pointer;
+      }
+    }
+
+    &--enable-row-links {
+      #{$this}__cell-link {
+        pointer-events: auto;
+      }
     }
   }
 </style>
