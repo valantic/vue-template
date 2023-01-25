@@ -8,11 +8,12 @@
           :key="tab.id"
           :class="b('tab-item')"
       >
-        <button :id="`e-tabs-${uuid}--tab-${tab.id}`"
+        <button :id="`c-tabs-${uuid}--tab-${tab.id}`"
                 :class="b('tab', { [tab.id]: true, active: tab === activeTab })"
                 :aria-selected="tab === activeTab"
-                :aria-controls="`e-tabs-${uuid}--panel-${tab.id}`"
+                :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
                 role="tab"
+                type="button"
                 @click="onTabClick(tab)"
         >
           {{ tab.title }}
@@ -22,10 +23,10 @@
     <!-- @slot default - allows to use the component without panels. -->
     <slot>
       <div v-for="tab in tabs"
-           :id="`e-tabs-${uuid}--panel-${tab.id}`"
+           :id="`c-tabs-${uuid}--panel-${tab.id}`"
            :key="tab.id"
            :class="b('panel', { [tab.id]: true, visible: tab === activeTab })"
-           :aria-labelledby="`e-tabs-${uuid}--tab-${tab.id}`"
+           :aria-labelledby="`c-tabs-${uuid}--tab-${tab.id}`"
            :tabindex="tab === activeTab ? 0 : -1"
            role="tabpanel"
       >
@@ -43,12 +44,28 @@
   interface ISetup extends IUuid {}
 
   export interface ITab {
+
+    /**
+     * The text title for the current tab.
+     */
     title: string,
+
+    /**
+     * A unique id for the current tab.
+     */
     id: string,
-    active: boolean
+
+    /**
+     * Determines if the given tab should be initially active.
+     */
+    active?: boolean
   }
 
   interface IData {
+
+    /**
+     * Holds the currently active tab defintion.
+     */
     activeTab: ITab|null
   }
 
@@ -60,7 +77,7 @@
    * - http://web-accessibility.carnegiemuseums.org/code/tabs/
    */
   export default defineComponent({
-    name: 'e-tabs',
+    name: 'c-tabs',
 
     // components: {},
 
@@ -81,9 +98,11 @@
         default: null,
       },
     },
-    emits: [
-      'change',
-    ],
+    emits: {
+      change(payload: ITab) {
+        return typeof payload === 'object';
+      },
+    },
 
     setup(): ISetup {
       return {
@@ -118,7 +137,7 @@
         this.activeTab = tab;
 
         this.$emit('change', tab);
-      }
+      },
     },
     // render() {},
   });
@@ -127,7 +146,7 @@
 <style lang="scss">
   @use '../setup/scss/variables';
 
-  .e-tabs {
+  .c-tabs {
     &__tab-list {
       display: flex;
       border-bottom: 1px solid variables.$color-grayscale--0;
@@ -153,9 +172,9 @@
 
     &__panel {
       display: none;
+      padding: variables.$spacing--5 variables.$spacing--10;
       border: 1px solid variables.$color-grayscale--0;
       border-top: 0;
-      padding: variables.$spacing--5 variables.$spacing--10;
 
       &--visible {
         display: block;
