@@ -3,7 +3,7 @@ import {
   ComputedRef,
   Plugin,
   reactive,
-  ref
+  ref,
 } from 'vue';
 import { BREAKPOINTS, BreakPointType } from '@/setup/globals';
 
@@ -64,11 +64,9 @@ const plugin: Plugin = {
     /**
      * Returns the short name of the current viewport (e.g. 'md').
      */
-    // @ts-ignore
-    const currentViewport: ComputedRef<string> = computed(() => Object.entries(BREAKPOINTS)
-        .reverse()
-        // @ts-ignore
-        .find(breakpoint => viewport.value >= breakpoint[1])[0]);
+    const currentViewport: ComputedRef<string> = computed(
+      () => Object.entries(BREAKPOINTS)?.reverse()?.find(breakpoint => viewport.value >= breakpoint[1])?.[0] || ''
+    );
 
     window.addEventListener('resizeend', () => {
       viewport.value = window.innerWidth;
@@ -82,9 +80,9 @@ const plugin: Plugin = {
       isLg,
       isXl,
       isMobile,
-      currentViewport
+      currentViewport,
     });
-  }
+  },
 };
 
 export default plugin;

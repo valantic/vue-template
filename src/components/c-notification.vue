@@ -3,17 +3,23 @@
     <div :class="b('message')">
       {{ notification.message }}
     </div>
-    <button :class="b('close-button')" @click="close">
-      <e-icon icon="close" size="20" />
+    <button :class="b('close-button')"
+            type="button"
+            @click="close"
+    >
+      <e-icon icon="i-close" size="20" />
     </button>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import { INotification } from '@/types/c-notification';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import store from '@/store';
+  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
+
+  interface ISetup {
+    notificationStore: TNotificationStore
+  }
 
   interface IData {
     expireDelay: number;
@@ -34,11 +40,16 @@
        * The notification object consisting of the following properties:
        */
       notification: {
-        type: Object as PropType<INotification>,
+        type: Object as PropType<INotificationItem>,
         required: true,
       },
     },
 
+    setup(): ISetup {
+      return {
+        notificationStore: notificationStore(),
+      };
+    },
     data(): IData {
       return {
         /**
@@ -84,7 +95,7 @@
        * Removes current notification from stack.
        */
       close() {
-        store.commit.notification.popNotification(this.notification.id);
+        this.notificationStore.popNotification(this.notification.id);
       },
     },
     // render() {},
@@ -96,10 +107,10 @@
   @use '../setup/scss/variables';
 
   .c-notification {
+    position: relative;
     min-width: 400px;
     max-width: 100%;
     min-height: 60px;
-    position: relative;
     padding: variables.$spacing--5;
 
     &--type-success {

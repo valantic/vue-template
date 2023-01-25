@@ -5,7 +5,7 @@
 //
 // Hint: use 'color' on the element instead of an explicit color for the icon when ever possible.
 //
-// @param  {String}   State the icon
+// @param  {string}   State the icon
 //
 ////
 
@@ -20,7 +20,7 @@
   // Legacy support. No color applied.
   background: url('../assets/icons.svg##{$icon}') no-repeat $backgroundPosition / $calculatedSize;
 
-  @if mask == true {
+  @if $mask == true {
     @supports (mask: no-repeat) {
       background: $color;
       mask: url('../assets/icons.svg##{$icon}') no-repeat $backgroundPosition / $calculatedSize;

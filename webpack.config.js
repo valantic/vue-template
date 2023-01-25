@@ -16,6 +16,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const pkg = require('./package.json');
 const TerserPlugin = require('terser-webpack-plugin');
+const WebpackDependencyHint = require('@valantic/webpack-dependency-hint');
 
 /**
  * A note about [contenthash]: Using the hash in query could cause troubles with caching proxies. Therefore
@@ -25,23 +26,20 @@ const TerserPlugin = require('terser-webpack-plugin');
 /**
  * Creates a webpack configuration based on the current environment and arguments.
  *
- * @param {String|Object} env - The currently active environment.
- * @param {Object} args - An Object of additional arguments.
+ * @param {string|object} env - The currently active environment.
+ * @param {object} args - An Object of additional arguments.
  *
- * @returns {Object}
+ * @returns {object}
  */
 module.exports = (env, args = {}) => {
   // Instance variables
-  const isStyleguide = !!args.styleguide;
-  const isStyleguideBuild = !!args.styleguideBuild;
-  const isProduction = process.env.NODE_ENV === 'production' && !isStyleguideBuild;
+  const isProduction = process.env.NODE_ENV === 'production';
   const hasWatcher = args.watch || false;
   const hotReload = !hasWatcher || !isProduction;
   const showProfile = args.profile || false;
   const globalVariables = {
     'process.env': {
       'NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
-      'IS_STYLEGUIDE_BUILD': JSON.stringify(isStyleguideBuild),
       'HAS_WATCHER': hasWatcher,
       'BUILD_TIMESTAMP': new Date().getTime(),
     },
@@ -58,8 +56,6 @@ module.exports = (env, args = {}) => {
     buildPath,
     productionPath,
     localDist,
-    styleguideBuildPath,
-    styleguidePath,
     developmentPath,
     outputAssetsFolder,
     filePrefix,
@@ -70,7 +66,7 @@ module.exports = (env, args = {}) => {
 
   const publicPath = isProduction // Base path which is used in production to load modules via http.
     ? productionPath
-    : isStyleguideBuild ? styleguidePath : developmentPath;
+    : developmentPath;
   const themes = themeFiles.reduce((accumulator, theme) => {
     accumulator[theme] = path.resolve(__dirname, `${themeSource}${theme}.scss`);
 
@@ -81,9 +77,7 @@ module.exports = (env, args = {}) => {
     : '0.0.0.0'; // 0.0.0.0 is needed to allow remote access for testing
   const outputPath = process.env.WEBPACK_LOCAL_DIST
     ? localDist
-    : isStyleguideBuild
-      ? styleguideBuildPath
-      : buildPath;
+    : buildPath;
 
   // webpack configuration variables
   const prefix = filePrefix ? `${filePrefix}.` : '';
@@ -141,7 +135,7 @@ module.exports = (env, args = {}) => {
           noErrorOnMissing: true,
           globOptions: isProduction
             ? { dot: true, ignore: ['**/mockdata/**'] }
-            : isStyleguideBuild ? { dot: true } : undefined,
+            : undefined,
         },
       ]
     }),
@@ -149,20 +143,20 @@ module.exports = (env, args = {}) => {
     new VueLoaderPlugin(), // *.vue file parser.
 
     new MiniCssExtractPlugin({ // Extract CSS code
-      filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction || isStyleguideBuild ? '.[chunkhash]' : ''}.css`,
+      chunkFilename: `${outputAssetsFolder}css/${prefix}[name].[id]${isProduction ? '.[chunkhash]' : ''}.css`, // Using chunkhash in dev mode will cause trouble with hot-reload.
+      filename: `${outputAssetsFolder}css/${prefix}[name]${isProduction ? '.[chunkhash]' : ''}.css`,
     }),
 
     new HtmlWebpackPlugin({ // Script and style tag injection.
       inject: true,
       template: 'index.html',
-      excludeChunks: isStyleguideBuild
-        ? Object.keys(themes).slice(1)
-        : Object.keys(themes),
+      excludeChunks: Object.keys(themes),
     }),
 
     new StyleLintPlugin({
       emitErrors: isProduction,
       emitWarning: !isProduction,
+      failOnError: isProduction,
       lintDirtyModulesOnly: !isProduction,
       context: 'src',
       files: [
@@ -170,13 +164,17 @@ module.exports = (env, args = {}) => {
         '**/*.scss',
       ],
     }),
+
+    new WebpackDependencyHint({
+      lastUpdate: pkg.lastDependencyUpdate,
+    })
   ];
 
   if (showProfile) {
     plugins.push(new BundleAnalyzerPlugin());
   }
 
-  if (isProduction || isStyleguideBuild) {
+  if (isProduction) {
     plugins.push(
       new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
         cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
@@ -232,26 +230,18 @@ module.exports = (env, args = {}) => {
     compress: true,
   };
 
-  // different options needed tue to https://github.com/vue-styleguidist/vue-styleguidist/issues/1074
-  if (isStyleguide || isStyleguideBuild) {
-    // styleguideist does not need any watcher, because it already contains one out of the box
-    devServer['clientLogLevel'] = 'error'; // Removes ESLint warnings from browser console
-    devServer['progress'] = true;
-    devServer['overlay'] = true;
-  } else {
-    // this block can be used as default when above issue has been fixed
-    devServer['client'] = {
-      logging: 'error', // Removes ESLint warnings from console
-      progress: true,
-      overlay: {
-        warnings: false,
-        errors: true,
-      },
-    }
+  // this block can be used as default when above issue has been fixed
+  devServer['client'] = {
+    logging: 'error', // Removes ESLint warnings from console
+    progress: true,
+    overlay: {
+      warnings: false,
+      errors: true,
+    },
   }
 
   const assetModulesFileName = function (pathData, assetType) {
-    const hash = isProduction || isStyleguideBuild ? '.[contenthash]' : '';
+    const hash = isProduction ? '.[contenthash]' : '';
     let subDirPath = '';
 
     // pathData.module.context contains the absolute path to the module
@@ -300,7 +290,7 @@ module.exports = (env, args = {}) => {
         {
           loader: MiniCssExtractPlugin.loader,
           options: {
-            publicPath: isProduction || isStyleguideBuild ? productionPath : '/',
+            publicPath: isProduction ? productionPath : '/',
             esModule: false, // Should be removed in the future but was required as of 2021-04-23.
           },
         },
@@ -412,7 +402,9 @@ module.exports = (env, args = {}) => {
     module: {
       rules,
     },
-    stats: !isProduction || hasWatcher ? 'errors-warnings' : stats,
+    stats: showProfile
+      ? undefined
+      : !isProduction || hasWatcher ? 'errors-warnings' : stats,
     performance: { // Warn about performance issues
       hints: !isProduction || hasWatcher ? false : 'warning',
       maxEntrypointSize: 500000, // 500kb
@@ -420,7 +412,7 @@ module.exports = (env, args = {}) => {
     },
     output: {
       path: path.resolve(__dirname, outputPath),
-      filename: isProduction || isStyleguideBuild ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
+      filename: isProduction ? `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js` : '[name].js',
       chunkFilename: `${outputAssetsFolder}js/${prefix}[name].[chunkhash].js`,
       publicPath,
     },

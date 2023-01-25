@@ -145,7 +145,7 @@
           'sync',
           'async',
           'auto',
-        ].includes(value)
+        ].includes(value),
       },
 
       /**
@@ -240,10 +240,10 @@
             return breakpointValue;
           })
           .filter(breakpointValue => breakpointValue)
-          // @ts-ignore
+          // @ts-ignore Needed because typescript cannot detect if a/b is not null.
           .sort((a, b) => (a > b ? 1 : -1))
           .map((breakpoint) => {
-            // @ts-ignore
+            // @ts-ignore Needed because typescript cannot assign index.
             const viewWidth = Math.floor((mappedSizesPerBreakpoints[breakpoint] / breakpoint) * 100);
 
             return `(max-width: ${breakpoint}px) ${viewWidth}vw`;
@@ -297,17 +297,14 @@
   .e-picture { // Can be <picture> or <img>!
     display: block;
     max-width: 100%;
-    height: auto;
 
     img {
       display: block;
-      max-width: 100%;
       width: 100%;
-      height: auto;
 
       &[loading='lazy'] {
         opacity: 0;
-        transition: opacity variables.$transition-duration-200;
+        transition: opacity variables.$transition-duration--200;
       }
     }
 

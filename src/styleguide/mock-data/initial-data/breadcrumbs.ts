@@ -1,18 +1,17 @@
-// @ts-ignore
-import { commerce } from 'faker/locale/en';
+import { faker } from '@faker-js/faker/locale/en';
 import breadcrumb from '../data-object/breadcrumb';
 
 export default [
   {
     ...breadcrumb,
-    name: commerce.productName(),
+    name: faker.commerce.productName(),
   },
   {
     ...breadcrumb,
-    name: commerce.productName(),
+    name: faker.commerce.productName(),
   },
   {
     ...breadcrumb,
-    name: commerce.productName(),
+    name: faker.commerce.productName(),
   },
 ];

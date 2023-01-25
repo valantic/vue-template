@@ -1,18 +1,26 @@
 <template>
   <div :class="b()">
     <h1>Sandbox</h1>
-    <div>
-      <!-- Add any content here -->
-    </div>
+    <h2>E-Logo</h2>
+    <e-logo custom-theme="01" />
+    <h2>
+      C-Breadbrumb
+    </h2>
+    <c-breadcrumb />
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import eLogo from '@/components/e-logo.vue';
+  import cBreadcrumb from '@/components/c-breadcrumb.vue';
 
   export default defineComponent({
     name: 'r-sandbox',
-    // components: {},
+    components: {
+      cBreadcrumb,
+      eLogo,
+    },
 
     // props: {},
     // data() {

@@ -16,8 +16,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import pkg from '@/../package.json';
-
-  import store from '@/store';
+  import sessionStore, { TSessionStore } from '@/stores/session';
 
   interface ITheme {
     name: string;
@@ -29,6 +28,10 @@
     defaultThemes: ITheme[];
   }
 
+  interface ISetup {
+    sessionStore: TSessionStore
+  }
+
   const themePath = `/${pkg.webpack.outputAssetsFolder}css/${pkg.webpack.filePrefix}theme-`;
 
   export default defineComponent({
@@ -38,17 +41,23 @@
     // components: {},
 
     // props: {},
+
+    setup(): ISetup {
+      return {
+        sessionStore: sessionStore(),
+      };
+    },
     data(): IData {
       return {
         defaultThemes: [
           {
             name: 'Theme 01',
-            id: '01'
+            id: '01',
           },
           {
             name: 'Theme 02',
-            id: '02'
-          }
+            id: '02',
+          },
         ],
       };
     },
@@ -58,7 +67,7 @@
        * Returns the currently active theme.
        */
       getTheme(): string {
-        return store.getters.session.getTheme;
+        return this.sessionStore.getTheme;
       },
 
       /**
@@ -78,10 +87,10 @@
           return {
             name: theme.name,
             id: theme.id,
-            selected
+            selected,
           };
         });
-      }
+      },
     },
 
     watch: {
@@ -101,8 +110,8 @@
           } else {
             link.href = `${themePath}${theme}.css`;
           }
-        }
-      }
+        },
+      },
     },
 
     // created() {},
@@ -122,7 +131,7 @@
       onChange(event: Event) {
         const element = event.target as HTMLSelectElement;
 
-        store.commit.session.setTheme(element.value);
+        this.sessionStore.setTheme(element.value);
       },
 
       /**
@@ -139,7 +148,7 @@
         link.media = 'all';
 
         head.appendChild(link);
-      }
+      },
     },
     // render() {},
   });

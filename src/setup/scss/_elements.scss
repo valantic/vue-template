@@ -1,0 +1,53 @@
+// This file is supposed to set the basic HTML element styles required for the current project.
+// Styles to unify behaviours across browsers should be defined in '_basics.scss'.
+// Styles that can be applied by classes on the element or its parent should be defined in '_globals.scss'.
+@use './variables';
+@use './mixins';
+
+html,
+body {
+  height: 100%;
+  background-color: variables.$color-grayscale--1000;
+  font-family: variables.$font-family--primary;
+}
+
+// TODO check if we can stop using @extend
+
+h1 { // TODO: update definition for project.
+  @include mixins.heading-h1();
+}
+
+h2 { // TODO: update definition for project.
+  @include mixins.heading-h2();
+}
+
+h3 { // TODO: update definition for project.
+  @include mixins.heading-h3();
+}
+
+h4 { // TODO: update definition for project.
+  @include mixins.heading-h4();
+}
+
+h5 { // TODO: update definition for project.
+  @include mixins.heading-h5();
+}
+
+h6 { // TODO: update definition for project.
+  @include mixins.heading-h6();
+}
+
+p { // TODO: update definition for project.
+  @include mixins.font(variables.$font-size--14);
+}
+
+// TODO: update definition for project.
+a {
+  color: variables.$color-secondary--1;
+  text-decoration: none;
+
+  &:hover {
+    color: variables.$color-grayscale--0;
+    text-decoration: none;
+  }
+}

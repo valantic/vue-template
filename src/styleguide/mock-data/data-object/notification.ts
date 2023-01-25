@@ -1,10 +1,10 @@
-import { INotification } from '@/types/c-notification';
+import { INotificationItem } from '@/stores/notification';
 
 interface IMockNotifications {
-  success: INotification;
-  info: INotification;
-  error: INotification;
-  createNotification: (notificationOptions: object) => INotification;
+  success: INotificationItem;
+  info: INotificationItem;
+  error: INotificationItem;
+  createNotification: (notificationOptions: object) => INotificationItem;
 }
 
 /**
@@ -22,7 +22,7 @@ function createNotification({
   expire?: boolean,
   selector?: string,
   redirectUrl?: string,
-}): INotification {
+}): INotificationItem {
   return {
     id: 0,
     type: type || 'success',

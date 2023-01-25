@@ -17,13 +17,20 @@
       <option v-for="option in options"
               :key="`${option[valueField]}`"
               :value="option[valueField]"
-              :selected="option[valueField] === internalValue">
+              :selected="option[valueField] === internalValue"
+      >
         {{ option[labelField] }}
       </option>
     </select>
-    <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
-    <span v-if="progress" :class="b('progress-container')">
-      <e-progress />
+    <span :class="b('icon-wrapper')">
+      <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
+      <e-icon v-if="!hasDefaultState && !focus"
+              :class="b('state-icon')"
+              :icon="stateIcon"
+      />
+      <span v-if="progress" :class="b('progress-container')">
+        <e-progress />
+      </span>
     </span>
   </span>
 </template>
@@ -33,8 +40,6 @@
   import i18n from '@/setup/i18n';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-
-  interface ISetup extends IFormStates {}
 
   interface IData {
     internalValue: string;
@@ -116,7 +121,7 @@
 
     emits: ['update:modelValue'],
 
-    setup(props): ISetup {
+    setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -124,7 +129,7 @@
 
     data(): IData {
       return {
-        internalValue: this.modelValue
+        internalValue: this.modelValue,
       };
     },
 
@@ -180,32 +185,45 @@
     $this: &;
     $height: 30px;
 
-    display: block;
     position: relative;
+    display: block;
 
     &__select {
       @include mixins.icon(arrow--down, 22px, right 5px center, $mask: false); // FF does not support mask on <select>.
 
+      width: 100%;
+      height: $height;
+      padding: variables.$spacing--5 variables.$spacing--30 variables.$spacing--0 variables.$spacing--10;
+      outline: none;
       border: 1px solid variables.$color-grayscale--500;
       border-radius: 3px;
-      width: 100%;
-      appearance: none;
-      outline: none;
-      padding: variables.$spacing--0 variables.$spacing--30 variables.$spacing--0 variables.$spacing--10;
-      height: $height;
       cursor: pointer;
+      appearance: none;
 
       &::-ms-expand {
         display: none;
       }
     }
 
+    .e-icon {
+      display: flex;
+      margin: auto;
+    }
+
     // separator for state icons
+    &__icon-wrapper {
+      position: absolute;
+      top: 50%;
+      right: variables.$spacing--5;
+      display: flex;
+      transform: translateY(-50%);
+    }
+
     &__icon-splitter {
       position: absolute;
+      top: 2px;
       right: 30px;
       height: calc(100% - 4px);
-      top: 2px;
       border-left: 1px solid;
     }
 
@@ -234,6 +252,8 @@
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
+      color: variables.$color-status--error;
+
       #{$this}__select {
         @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 

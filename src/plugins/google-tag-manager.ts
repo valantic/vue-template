@@ -1,36 +1,66 @@
-import { ComponentPublicInstance, Plugin } from 'vue';
+import { Plugin } from 'vue';
+
+export enum GA_LIST_NAMES {
+  CATALOG = 'Catalog',
+  SEARCH_RESULTS = 'Search results',
+  // .. Add additional lists
+}
 
 interface IOptions {
   debug?: boolean;
-  dataLayer?: string;
 }
 
-interface IProductData {
-  name: string;
-  sku: string;
-  eNumber: string;
-  measurementUnitName: string;
+interface IListItem {
+  item_id: string;
+  item_name: string;
+  currency?: string | null;
+  index?: number | null;
+  price?: number | null;
+  quantity?: number | null;
+  item_category?: string | null;
+  item_list_name?: string;
 }
 
-interface IProductImpression {
-  id: string;
-  name: string;
-  dimension1: string;
-  list: string | null;
-  position: number;
+interface IPurchasePayload {
+  currency: string;
+  value: number;
+  shipping: number | null;
+  tax: number | null;
+  items: IListItem[];
+}
+
+interface IAddPaymentInfoPayload {
+  currency: string;
+  value: number;
+  paymentType: string;
+  items: IListItem[];
+}
+
+interface IAddShippingInfoPayload {
+  currency: string;
+  value: number;
+  shippingTier: string;
+  items: IListItem[];
 }
 
 export interface IGtm {
   push: (payload: object) => void;
-  pushProductImpressions: (products: IProductData[], eventPath: string, startIndex: number) => void;
-  pushVirtualPage: () => void;
-  pushProductClick: ({ name, sku, eNumber }: IProductData, position: number, eventPath: string) => void;
-  pushAddToCart: (product: IProductData, quantity: number, eventPath: string) => void;
-  getEventPath: (component: ComponentPublicInstance, append: string) => string;
+  pushAddToCart: (item: IListItem, list: GA_LIST_NAMES) => void;
+  pushLogin: () => void,
+  pushSignUp: () => void,
+  pushSearch: (searchTerm: string) => void,
+  pushViewItemList: (items: IListItem[], list: GA_LIST_NAMES) => void,
+  pushViewItem: (item: IListItem) => void,
+  pushViewCart: (items: IListItem[], value: number, currency: string) => void,
+  pushRemoveFromCart: (items: IListItem[]) => void,
+  pushAddToWishlist: (item: IListItem) => void,
+  pushBeginCheckout: (items: IListItem[], value: number, currency: string) => void,
+  pushSelectItem: (item: IListItem, list: GA_LIST_NAMES) => void,
+  pushPurchase: (payload: IPurchasePayload) => void,
+  pushAddPaymentInfo: (payload: IAddPaymentInfoPayload) => void,
+  pushAddShippingInfo: (payload: IAddShippingInfoPayload) => void,
   debug: (enable: boolean) => void;
 }
-
-type MapProductCallbackFunction = (productData: IProductData, index: number) => IProductImpression;
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,31 +75,7 @@ const plugin: Plugin = {
    * Install method of the Google Tag Manager plugin.
    */
   install(app, options: IOptions = {}) {
-    const {
-      dataLayer = 'dataLayer',
-    } = options;
     let { debug } = options;
-
-    /**
-     * Closure for product mapper method.
-     */
-    function mapProduct(eventPath: string, startIndex: number = 1): MapProductCallbackFunction {
-      /**
-       * Mapper function to convert product data to Google Tag Manager impression data.
-       *
-       * @see https://developers.google.com/tag-manager/enhanced-ecommerce#product-impressions
-       */
-      return ({ name, sku, eNumber }: IProductData, index) => ({
-        id: eNumber,
-        name,
-        dimension1: sku,
-        list: eventPath || null,
-        position: index + startIndex,
-        // brand: null,
-        // category: null, // Is defined on dataLayer initialization.
-        // variant: null,
-      });
-    }
 
     /**
      * Push a new event to the dataLayer.
@@ -96,114 +102,191 @@ const plugin: Plugin = {
       push,
 
       /**
-       * Pushes an Array of lists as Product Impressions to the dataLayer.
+       * Pushes `purchase`-event to the dataLayer.
        */
-      pushProductImpressions(products: IProductData[], eventPath: string, startIndex: number) {
-        const impressions = products.map(mapProduct(eventPath, startIndex));
-
+      pushPurchase(payload: IPurchasePayload) {
         push({
-          event: 'productImpression',
+          event: 'purchase',
           ecommerce: {
-            currencyCode: 'CHF',
-            impressions
-          }
-        });
-      },
-
-      /**
-       * Pushes the current url and page title as a virtual page to the dataLayer.
-       */
-      pushVirtualPage() {
-        push({
-          event: 'VirtualPageview',
-          virtualPageURL: window.location.href,
-          virtualPageTitle: `Virtual page for "${window.document.title}"`
-        });
-      },
-
-      /**
-       * Pushes a clicked product item to the Google Tag Manager dataLayer.
-       */
-      pushProductClick({ name, sku, eNumber }: IProductData, position: number, eventPath: string) {
-        push({
-          event: 'productClick',
-          ecommerce: {
-            click: {
-              actionField: {
-                list: eventPath
-              },
-              products: [
-                {
-                  id: eNumber,
-                  name,
-                  dimension1: sku,
-                  list: eventPath || null,
-                  position,
-                }
-              ]
-            }
+            ...payload,
           },
         });
       },
 
       /**
-       * Pushes an add to cart notification to the Google Tag Manager dataLayer.
+       * Pushes `add_payment_info`-event to the dataLayer.
        */
-      pushAddToCart(product: IProductData, quantity: number, eventPath: string) {
-        const {
-          name,
-          sku,
-          eNumber,
-          measurementUnitName
-        } = product;
-
+      pushAddPaymentInfo(payload: IAddPaymentInfoPayload) {
         push({
-          event: 'addToCart',
+          event: 'add_payment_info',
           ecommerce: {
-            currencyCode: 'CHF',
-            add: {
-              products: [
-                {
-                  id: eNumber,
-                  name,
-                  dimension1: sku,
-                  dimension2: measurementUnitName || null,
-                  list: eventPath || null,
-                  quantity
-                }
-              ]
-            }
-          }
+            ...payload,
+          },
         });
       },
 
       /**
-       * Gets the event path by traveling up the Vue component tree and collecting gtmIdentifier props.
-       * If defined, the gtmIdentifier of the root component will also be used.
+       * Pushes `add_shipping_info`-event to the dataLayer.
        */
-      getEventPath(component: ComponentPublicInstance, append: string): string {
-        const path = [];
-        let parent = component.$parent;
+      pushAddShippingInfo(payload: IAddShippingInfoPayload) {
+        push({
+          event: 'add_shipping_info',
+          ecommerce: {
+            ...payload,
+          },
+        });
+      },
 
-        if (component.gtmIdentifier) {
-          path.push(component.gtmIdentifier);
-        }
+      /**
+       * Pushes `add_to_wishlist`-event to the dataLayer.
+       */
+      pushAddToWishlist(item: IListItem) {
+        push({
+          event: 'add_to_wishlist',
+          ecommerce: {
+            items: [item],
+            value: item.price,
+            currency: item.currency,
+          },
+        });
+      },
 
-        while (parent) {
-          const identifier = parent.gtmIdentifier;
+      /**
+       * Pushes `remove_from_cart`-event to the dataLayer.
+       */
+      pushRemoveFromCart(item: IListItem) {
+        push({
+          event: 'remove_from_cart',
+          ecommerce: {
+            items: [item],
+            value: item.price,
+            currency: item.currency,
+          },
+        });
+      },
 
-          if (identifier) {
-            path.push(identifier);
-          }
+      /**
+       * Pushes `view_cart`-event to the dataLayer.
+       */
+      pushViewCart(items: IListItem[], value: number, currency: string) {
+        push({
+          event: 'view_cart',
+          ecommerce: {
+            items: items.map((item, index) => ({
+              ...item,
+              index: index + 1,
+            })),
+            value,
+            currency,
+          },
+        });
+      },
 
-          parent = parent.$parent;
-        }
+      /**
+       * Pushes `begin_checkout`-event to the dataLayer.
+       */
+      pushBeginCheckout(items: IListItem[], value: number, currency: string) {
+        push({
+          event: 'begin_checkout',
+          ecommerce: {
+            items: items.map((item, index) => ({
+              ...item,
+              index: index + 1,
+            })),
+            value,
+            currency,
+          },
+        });
+      },
 
-        if (append) {
-          path.unshift(append);
-        }
+      /**
+       * Pushes `view_item`-event to the dataLayer.
+       */
+      pushViewItem(item: IListItem) {
+        push({
+          event: 'view_item',
+          ecommerce: {
+            items: [item],
+            value: item.price,
+            currency: item.currency,
+          },
+        });
+      },
 
-        return path.reverse().join('.');
+      /**
+       * Pushes `view_item_list`-event to the dataLayer.
+       */
+      pushViewItemList(items: IListItem[], list: GA_LIST_NAMES) {
+        push({
+          event: 'view_item_list',
+          ecommerce: {
+            item_list_name: list,
+            items: items.map((item, index) => ({
+              ...item,
+              list,
+              index: index + 1,
+            })),
+          },
+        });
+      },
+
+      /**
+       * Pushes `select_item`-event to the dataLayer.
+       */
+      pushSelectItem(item: IListItem, list: GA_LIST_NAMES) {
+        push({
+          event: 'select_item',
+          ecommerce: {
+            item_list_name: list,
+            items: [item],
+          },
+        });
+      },
+
+      /**
+       * Pushes `login`-event to the dataLayer.
+       */
+      pushLogin() {
+        push({
+          event: 'login',
+        });
+      },
+
+      /**
+       * Pushes `sign_up`-event to the dataLayer.
+       */
+      pushSignUp() {
+        push({
+          event: 'sign_up',
+        });
+      },
+
+      /**
+       * Pushes `search`-event to the dataLayer.
+       */
+      pushSearch(searchTerm: string) {
+        push({
+          event: 'search',
+          ecommerce: {
+            searchTerm,
+          },
+        });
+      },
+
+      /**
+       * Pushes `add_to_cart`-event to the dataLayer.
+       */
+      pushAddToCart(item: IListItem, list: GA_LIST_NAMES) {
+        push({
+          event: 'add_to_cart',
+          ecommerce: {
+            currency: item.currency,
+            items: [{
+              ...item,
+              item_list_name: list,
+            }],
+          },
+        });
       },
 
       /**
@@ -211,9 +294,9 @@ const plugin: Plugin = {
        */
       debug(enable: boolean) {
         debug = enable !== false;
-      }
+      },
     };
-  }
+  },
 };
 
 export default plugin;

@@ -1,20 +1,29 @@
-import { createI18n } from 'vue-i18n';
+import { createI18n, IntlDateTimeFormat } from 'vue-i18n';
 import fallbackMessages from '../translations/de.json';
 import numberFormats from './localization.json';
 
-const pageLang = document?.documentElement?.lang;
+export const PAGE_LANG = document?.documentElement?.lang;
 
 export const I18N_FALLBACK = 'de';
 export const I18N_FALLBACK_MESSAGES = fallbackMessages;
 export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 
+const datetimeFormats: IntlDateTimeFormat = {
+  month: { // January, February, March, ...
+    month: 'long',
+  },
+  weekday: { // Monday, Tuesday, Wednesday, ...
+    weekday: 'long',
+  },
+};
+
 // Add styleguide only translations
 if (process.env.NODE_ENV !== 'production') {
-  const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require
+  const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
-      // @ts-ignore
+      // @ts-ignore Needed because typescript cannot assign index.
       I18N_FALLBACK_MESSAGES[key] = value;
     });
   }
@@ -24,6 +33,11 @@ const i18n = createI18n({
   legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
+  datetimeFormats: {
+    [I18N_FALLBACK]: datetimeFormats,
+    [PAGE_LANG]: datetimeFormats,
+  },
+
   warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
 
   /**
@@ -49,7 +63,7 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
       .then(({ default: localeMessages }) => {
         // Add styleguide only translations
         if (process.env.NODE_ENV !== 'production') {
-          const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require
+          const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
 
           if (styleguideTranslations[locale]) {
             Object.entries(styleguideTranslations[locale]).forEach(([key, value]) => {
@@ -78,6 +92,10 @@ export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disa
 
   if (i18n.global.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
+      import('../stores/plugins/api').then((module) => {
+        module.axiosInstance.defaults.headers.common.locale = newLocale;
+      });
+
       i18n.global.locale = newLocale;
     });
   }
@@ -85,4 +103,4 @@ export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disa
   return Promise.resolve();
 };
 
-i18nSetLocale(pageLang || I18N_FALLBACK);
+i18nSetLocale(PAGE_LANG || I18N_FALLBACK);
