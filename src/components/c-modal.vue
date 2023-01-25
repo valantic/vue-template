@@ -236,6 +236,7 @@
     // deactivated() {},
     beforeDestroy() {
       this.$modalStack.remove(this.uuid);
+      enableBodyScroll(document.body);
     },
     // destroyed() {},
 
