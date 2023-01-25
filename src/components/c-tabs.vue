@@ -8,19 +8,21 @@
           :key="tab.id"
           :class="b('tab-item')"
       >
-        <button :id="`c-tabs-${uuid}--tab-${tab.id}`"
-                :class="b('tab', { [tab.id]: true, active: tab.id === activeTab.id })"
-                :aria-selected="tab.id === activeTab.id"
-                :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
-                role="tab"
-                type="button"
-                @click="onTabClick(tab)"
+        <a :id="`c-tabs-${uuid}--tab-${tab.id}`"
+           :class="b('tab', { [tab.id]: true, active: tab.id === activeTab.id })"
+           :aria-selected="tab.id === activeTab.id"
+           :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
+           :href="tab.link?.href || `#${tab.id}`"
+           :target="tab.link?.target || LINK_TARGET.SELF"
+           :rel="tab.link?.target === LINK_TARGET.BLANK && 'noopener noreferrer'"
+           role="tab"
+           @click="onTabClick(tab)"
         >
           <!-- @slot ${tab.id}__tab - Allows to overwrite the tab content. -->
           <slot :name="`${tab.id}__tab`">
             {{ tab.title }}
           </slot>
-        </button>
+        </a>
       </li>
     </ul>
     <!-- @slot default - Allows to use the component without panels. -->
@@ -43,6 +45,8 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import useUuid, { IUuid } from '@/compositions/uuid';
+  import { LINK_TARGET } from '@/setup/globals';
+  import { ILink } from '@/types/link';
 
   interface ISetup extends IUuid {}
 
@@ -66,17 +70,16 @@
     /**
      * Allows to track additional information for a tab. e.g. a link.
      */
-    meta?: {
-      [key: string]: unknown,
-    }
+    link?: ILink,
   }
 
   interface IData {
+    LINK_TARGET: typeof LINK_TARGET,
 
     /**
      * Holds the currently active tab defintion.
      */
-    activeTab: ITab|null
+    activeTab: ITab|null,
   }
 
   /**
@@ -121,6 +124,7 @@
     },
     data(): IData {
       return {
+        LINK_TARGET,
         activeTab: this.tabs.find(tab => tab.active) || null,
       };
     },
