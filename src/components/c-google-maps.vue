@@ -15,6 +15,44 @@
 
   let geocoder;
 
+  let isMapsAPILoaded = false;
+
+  const callbackStack = [];
+
+  window.cGoogleMapsInitMap = () => {
+    isMapsAPILoaded = true;
+
+    callbackStack.forEach(callback => callback());
+
+    callbackStack.length = 0;
+  };
+
+  /**
+   * This function checks whether the Map API has already been loaded once.
+   *
+   * @param {Function} callback - Callback method that is called when the Map API has already been loaded successfully.
+   */
+  const loadMapsAPI = (callback) => {
+    const apiKey = store.getters['session/getGoogleMapsApiKey'];
+
+    if (!apiKey) {
+      throw new Error('No Google Maps API key provided.');
+    }
+
+    if (isMapsAPILoaded) {
+      callback();
+    } else {
+      const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=cGoogleMapsInitMap`;
+
+      callbackStack.push(callback);
+
+      loadScript(url, null, {
+        defer: true,
+        async: true
+      });
+    }
+  };
+
   /**
    * Renders a Google Map.
    */
@@ -114,6 +152,7 @@
          * @type {Boolean} Determines if the component is allowed to auto update the bounding.
          */
         allowAutoUpdates: true,
+
       };
     },
 
@@ -156,25 +195,11 @@
     // watch: {},
 
     beforeCreate() {
-      const apiKey = store.getters['session/getGoogleMapsApiKey'];
-
-      if (!apiKey) {
-        throw new Error('No Google Maps API key provided.');
-      }
-
-      /**
-       * Callback for the load event of the map script.
-       */
-      window.initMap = () => {
-        geocoder = new window.google.maps.Geocoder();
+      loadMapsAPI(() => {
         this.$nextTick(() => {
           this.createMapInstance();
         });
-      };
-
-      const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
-
-      loadScript(url, { async: true });
+      });
     },
     // created() {},
     // beforeMount() {},
