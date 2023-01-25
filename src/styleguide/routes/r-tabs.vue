@@ -2,6 +2,9 @@
 <template>
   <div :class="b()">
     <c-tabs :tabs="tabs" @change="onChange">
+      <template #tab1__tab>
+        <e-icon icon="i-styleguide-heart" />
+      </template>
       <template #tab1>
         Content of Tab 1
       </template>
@@ -21,6 +24,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cTabs, { ITab } from '@/components/c-tabs.vue';
+  import eIcon from '@/components/e-icon.vue';
 
   interface IData {
 
@@ -33,15 +37,17 @@
   export default defineComponent({
     name: 'r-tabs',
     components: {
+      eIcon,
       cTabs,
     },
 
     data(): IData {
       return {
         tabs:  [
-          { title: 'Tab 1', id: 'tab1', active: false },
+          { title: 'Tab 1', id: 'tab1' },
           { title: 'Tab 2', id: 'tab2', active: true },
-          { title: 'Tab 3', id: 'tab3', active: false },
+          { title: 'Tab 3', id: 'tab3' },
+          { title: 'Link tab', id: 'tab4', meta: { href: '#tab4-link' } },
         ],
       };
     },
@@ -52,6 +58,10 @@
        */
       onChange(tab: ITab) {
         console.log("change", tab); // eslint-disable-line
+
+        if (tab.meta?.href) {
+          window.location.assign(tab.meta.href as string);
+        }
       },
     },
   });

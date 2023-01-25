@@ -16,7 +16,10 @@
                 type="button"
                 @click="onTabClick(tab)"
         >
-          {{ tab.title }}
+          <!-- @slot ${tab.id}__tab - allows to overwrite the tab content -->
+          <slot :name="`${tab.id}__tab`">
+            {{ tab.title }}
+          </slot>
         </button>
       </li>
     </ul>
@@ -58,7 +61,14 @@
     /**
      * Determines if the given tab should be initially active.
      */
-    active?: boolean
+    active?: boolean,
+
+    /**
+     * Allows to track additional information for a tab. e.g. a link.
+     */
+    meta?: {
+      [key: string]: unknown,
+    }
   }
 
   interface IData {
@@ -149,10 +159,13 @@
   .c-tabs {
     &__tab-list {
       display: flex;
+      align-items: stretch;
       border-bottom: 1px solid variables.$color-grayscale--0;
     }
 
     &__tab-item {
+      display: flex;
+      align-items: stretch;
       border: 1px solid variables.$color-grayscale--0;
       border-bottom: 0;
 
@@ -163,6 +176,7 @@
 
     &__tab {
       padding: variables.$spacing--5 variables.$spacing--10;
+      cursor: pointer;
 
       &--active {
         background: variables.$color-grayscale--0;
