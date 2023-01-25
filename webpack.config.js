@@ -3,7 +3,7 @@
 // Basics
 const path = require('path'); // Cross platform path resolver
 const webpack = require('webpack');
-require('dotenv').config({ path: './.env' });
+const envVariables = require('dotenv').config({ path: './.env' }).parsed;
 
 // Development & build
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -42,6 +42,7 @@ module.exports = (env, args = {}) => {
   const showProfile = args.profile || false;
   const globalVariables = {
     'process.env': {
+      ...envVariables,
       NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
       IS_STYLEGUIDE_BUILD: JSON.stringify(isStyleguideBuild),
       HAS_WATCHER: hasWatcher,
