@@ -1,6 +1,5 @@
 <template>
   <div :class="b()">
-    <!-- Rendered form -->
     <section :class="b('table')">
       <h1>
         Table
