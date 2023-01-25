@@ -35,7 +35,6 @@
       v-for="(item, itemIndex) in itemsSorted"
       :key="itemIndex"
       :class="b('data-row', { disabled: item.disabled })"
-      :role="rowRole || 'row'"
     >
       <td
         v-for="(column, columnIndex) in columns"
