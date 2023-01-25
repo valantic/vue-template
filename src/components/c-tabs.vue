@@ -9,31 +9,31 @@
           :class="b('tab-item')"
       >
         <button :id="`c-tabs-${uuid}--tab-${tab.id}`"
-                :class="b('tab', { [tab.id]: true, active: tab === activeTab })"
-                :aria-selected="tab === activeTab"
+                :class="b('tab', { [tab.id]: true, active: tab.id === activeTab.id })"
+                :aria-selected="tab.id === activeTab.id"
                 :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
                 role="tab"
                 type="button"
                 @click="onTabClick(tab)"
         >
-          <!-- @slot ${tab.id}__tab - allows to overwrite the tab content -->
+          <!-- @slot ${tab.id}__tab - Allows to overwrite the tab content. -->
           <slot :name="`${tab.id}__tab`">
             {{ tab.title }}
           </slot>
         </button>
       </li>
     </ul>
-    <!-- @slot default - allows to use the component without panels. -->
+    <!-- @slot default - Allows to use the component without panels. -->
     <slot>
       <div v-for="tab in tabs"
            :id="`c-tabs-${uuid}--panel-${tab.id}`"
            :key="tab.id"
-           :class="b('panel', { [tab.id]: true, visible: tab === activeTab })"
+           :class="b('panel', { [tab.id]: true, visible: tab.id === activeTab.id })"
            :aria-labelledby="`c-tabs-${uuid}--tab-${tab.id}`"
-           :tabindex="tab === activeTab ? 0 : -1"
+           :tabindex="tab.id === activeTab.id ? 0 : -1"
            role="tabpanel"
       >
-        <!-- @slot [tab.id] - Renders the panel content for the current tab. -->
+        <!-- @slot ${tab.id} - Renders the panel content for the current tab. -->
         <slot :name="tab.id"></slot>
       </div>
     </slot>
