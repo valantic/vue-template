@@ -26,7 +26,8 @@
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook",
-    "profile": "rollup-plugin-visualizer"
+    "profile": "rollup-plugin-visualizer",
+    "tsc": "tsc --noEmit"
   },
   "webpack": {
     "buildPath": "dist",

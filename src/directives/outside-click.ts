@@ -1,4 +1,5 @@
 import { DirectiveBinding, ComponentPublicInstance } from 'vue';
+import { ICustomDirective } from '@/types/custom-directive';
 
 const outsideClickEventConfig = { passive: true, capture: true };
 
@@ -6,25 +7,7 @@ interface ICustomElement extends HTMLElement {
   outsideClickHandler: (event: Event) => void;
 }
 
-/**
- * Directive to handle an outside click for a specific DOM element.
- *
- * Examples:
- *
- * <div v-outside-click="{
- *   exclude: [],
- *   excludeIds: [],
- *   handler: () => {},
- * }"></div>
- *
- * Options:
- * - exclude: array of strings with ref names being initialized in the setup method of the component
- * - excludeIds: array of strings with node id's
- * - handler: handler function to execute
- */
-export default {
-  name: 'outside-click',
-
+const directive = {
   /**
    * Binding method of the directive.
    */
@@ -87,3 +70,24 @@ export default {
     document.removeEventListener('scroll', el.outsideClickHandler, outsideClickEventConfig);
   },
 };
+
+/**
+ * Directive to handle an outside click for a specific DOM element.
+ *
+ * Examples:
+ *
+ * <div v-outside-click="{
+ *   exclude: [],
+ *   excludeIds: [],
+ *   handler: () => {},
+ * }"></div>
+ *
+ * Options:
+ * - exclude: array of strings with ref names being initialized in the setup method of the component
+ * - excludeIds: array of strings with node id's
+ * - handler: handler function to execute
+ */
+export default {
+  name: 'outside-click',
+  directive,
+} as ICustomDirective;
