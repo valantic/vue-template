@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '@/setup/polyfills.ie11';
-import components from '@/setup/components';
+import components from '@/setup/ssr-components';
 import directives from '@/setup/directives';
 import statusLabel from '@/plugins/styleguide.status-label';
 

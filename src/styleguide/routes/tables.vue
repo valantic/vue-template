@@ -4,13 +4,21 @@
       <h1>
         Table
       </h1>
-      <e-table :items="mockData.dummyTableData"
-               :columns="columnsDefinition" />
+      <e-table v-model="selectedItems"
+               :items="mockData.dummyTableData"
+               :columns="columnsDefinition"
+               selectable
+               has-detail-rows
+      >
+        <template #detailRow="{ item }">
+          Detail row for {{ item.id }}.
+        </template>
+      </e-table>
     </section>
   </div>
 </template>
 <script>
-  import eTable from '@/components/e-table';
+  import eTable from '@/elements/e-table';
 
   export default {
     name: 'tables',
@@ -20,20 +28,21 @@
     // components: {},
     data() {
       return {
+        selectedItems: [],
         columnsDefinition: [
           {
             title: 'City',
             key: 'city',
             align: 'left',
             slotName: 'city',
-            sortable: false
+            sortable: true
           },
           {
             title: 'Firstname',
             key: 'firstName',
             align: 'left',
             slotName: 'firstname',
-            sortable: false
+            sortable: true
           },
           {
             title: 'Lastname',
@@ -48,7 +57,7 @@
             key: 'birthDate',
             align: 'left',
             slotName: 'birthDate',
-            sortable: false
+            sortable: true
           },
           {
             title: 'Company',
