@@ -13,12 +13,15 @@
   import loadScript from '@/helpers/load-script';
   import { GOOGLE_MAPS_THEME_GRAY } from '@/setup/globals';
 
+  const callbackStack = [];
   let geocoder;
-
   let isMapsAPILoaded = false;
 
-  const callbackStack = [];
-
+  /**
+   * Set isMapsAPILoaded to true, call the callback, then remove all callbacks in callbackStack Array.
+   *
+   * @param {Function} callback - Callback method that is called when the Map API has been initialized successfully.
+   */
   window.cGoogleMapsInitMap = () => {
     isMapsAPILoaded = true;
 
@@ -30,9 +33,9 @@
   /**
    * This function checks whether the Map API has already been loaded once.
    *
-   * @param {Function} callback - Callback method that is called when the Map API has already been loaded successfully.
+   * @param {Function} callback - Callback method that is called when the Map API has been initialized successfully.
    */
-  const loadMapsAPI = (callback) => {
+  function loadMapsAPI(callback) {
     const apiKey = store.getters['session/getGoogleMapsApiKey'];
 
     if (!apiKey) {
@@ -46,12 +49,9 @@
 
       callbackStack.push(callback);
 
-      loadScript(url, null, {
-        defer: true,
-        async: true
-      });
+      loadScript(url, null);
     }
-  };
+  }
 
   /**
    * Renders a Google Map.
@@ -152,7 +152,6 @@
          * @type {Boolean} Determines if the component is allowed to auto update the bounding.
          */
         allowAutoUpdates: true,
-
       };
     },
 
