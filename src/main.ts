@@ -3,7 +3,7 @@ import 'core-js/stable';
 // It's mandatory that common styles are imported before the application. Else they will come last in the CSS build
 import './setup/styles.scss';
 
-import { createApp, Plugin } from 'vue/dist/vue.esm-bundler';
+import { createApp, Plugin } from 'vue';
 import { createPinia } from 'pinia';
 import api from '@/stores/plugins/api';
 import options from '@/setup/options';
@@ -14,7 +14,7 @@ const pinia = createPinia();
 let vueOptions = options;
 
 if (import.meta.env.DEV) {
-  const styleguideOptions = await import('@/setup/styleguide.ts');
+  const styleguideOptions = await import('@/setup/styleguide');
 
   vueOptions = {
     ...vueOptions,

@@ -16,7 +16,7 @@ const testCases = {
 describe('directive | v-price', () => {
   const app = createApp({});
 
-  app.directive(price.name, price);
+  app.directive(price.name, price.directive);
 
   it('has name property', () => {
     expect(price.name).toBeTruthy();
@@ -33,7 +33,7 @@ describe('directive | v-price', () => {
       const global = {
         directives: {
           Price: price,
-        }
+        },
       };
 
       const wrapper = mount(App, { global });

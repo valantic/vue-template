@@ -2,6 +2,8 @@ import { createI18n, IntlDateTimeFormat } from 'vue-i18n';
 import fallbackMessages from '../translations/de.json';
 import numberFormats from './localization.json';
 
+type MessagesSchema = typeof fallbackMessages;
+
 const pageLang = document?.documentElement?.lang;
 
 export const I18N_FALLBACK = 'de';
@@ -20,7 +22,7 @@ const datetimeFormats: IntlDateTimeFormat = {
 // Add styleguide only translations
 if (import.meta.env.MODE !== 'production') {
   const styleguideTranslations = import.meta
-    .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'];
+    .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
@@ -30,7 +32,7 @@ if (import.meta.env.MODE !== 'production') {
   }
 }
 
-const i18n = createI18n({
+const i18n = createI18n<[MessagesSchema], 'de'>({
   legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
@@ -65,7 +67,7 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
         // Add styleguide only translations
         if (import.meta.env.MODE !== 'production') {
           const styleguideTranslations = import.meta
-            .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'];
+            .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
 
           if (styleguideTranslations[locale]) {
             Object.entries(styleguideTranslations[locale]).forEach(([key, value]) => {

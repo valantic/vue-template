@@ -1,11 +1,11 @@
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { defineConfig, splitVendorChunkPlugin, UserConfigExport } from 'vite';
 import vue from '@vitejs/plugin-vue'
 import path from 'path';
 import { webpack } from './package.json'; // TODO: rename config property in package.json.
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig(({ command, mode }) => {
-  const config = {
+  const config: UserConfigExport = {
     plugins: [
       vue(),
       splitVendorChunkPlugin(),
@@ -21,7 +21,7 @@ export default defineConfig(({ command, mode }) => {
       __VUE_I18N_FULL_INSTALL__: true,
       __VUE_I18N_LEGACY_API__: false,
     },
-  }
+  };
 
   switch(command) {
     case 'build': // @see https://vitejs.dev/config/build-options.html
@@ -37,7 +37,7 @@ export default defineConfig(({ command, mode }) => {
         rollupOptions: {
           output: {
             assetFileNames: (assetInfo) => {
-              const extType = assetInfo.name.split('.').at(1);
+              const extType = assetInfo?.name?.split('.').at(1) || '';
               let path = 'assets'
 
               if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
@@ -55,6 +55,10 @@ export default defineConfig(({ command, mode }) => {
       }
 
       if (mode === 'profile') {
+        if (!Array.isArray(config.plugins)) {
+          config.plugins = [];
+        }
+
         config.plugins.push(
           visualizer({ // NOTE: the sizes reported by this plugin relate to the source, not build size... @see https://github.com/btd/rollup-plugin-visualizer/issues/96
             filename: "./stats/index.html",
