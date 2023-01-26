@@ -5,7 +5,7 @@
         :class="b('navigation-item')"
     >
       <router-link
-        :to="{ name: route.name, params: route.meta.params, query: route.meta.query }"
+        :to="{ name: route.name, params: route.meta.params, query: { ...route.meta.query, theme: getTheme } }"
         :class="b('navigation-link')"
         :active-class="b('navigation-link', { activePath: true })"
         :exact-active-class="b('navigation-link', { active: true })"
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     name: 's-navigation-block',
     // components: {},
@@ -42,8 +44,13 @@
         default: false,
       },
     },
+
     // data() {},
     computed: {
+      ...mapGetters('session', [
+        'getTheme'
+      ]),
+
       /**
        * Returns all modifiers for the component main class.
        *
@@ -64,9 +71,11 @@
         return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide);
       },
     },
+
     // methods: {},
     // created() {}
   };
+
 </script>
 
 <style lang="scss">
