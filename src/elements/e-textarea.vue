@@ -23,8 +23,9 @@
 </template>
 
 <script>
-  import cFormNotification from '@/components/c-form-notification';
+  import cFormNotification from '@/components/c-form-notification.vue';
   import mixinFormStates from '@/mixins/form-states';
+  import eIcon from '@/elements/e-icon';
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -37,6 +38,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eIcon,
       cFormNotification,
     },
     mixins: [mixinFormStates],
