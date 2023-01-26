@@ -18,7 +18,7 @@
            role="tab"
            @click="onTabClick(tab)"
         >
-          <!-- @slot ${tab.id}__tab - Allows to overwrite the tab content. -->
+          <!-- @slot ${tab.id}__tab - Allows to overwrite the tab title. -->
           <slot :name="`${tab.id}__tab`">
             {{ tab.title }}
           </slot>
@@ -55,22 +55,22 @@
     /**
      * The text title for the current tab.
      */
-    title: string,
+    title: string;
 
     /**
      * A unique id for the current tab.
      */
-    id: string,
+    id: string;
 
     /**
      * Determines if the given tab should be initially active.
      */
-    active?: boolean,
+    active?: boolean;
 
     /**
      * Allows to track additional information for a tab. e.g. a link.
      */
-    link?: ILink,
+    link?: ILink;
   }
 
   interface IData {
@@ -79,7 +79,7 @@
     /**
      * Holds the currently active tab defintion.
      */
-    activeTab: ITab|null,
+    activeTab: ITab | null,
   }
 
   /**
@@ -112,7 +112,7 @@
       },
     },
     emits: {
-      change(payload: ITab) {
+      change(payload: ITab): boolean {
         return typeof payload === 'object';
       },
     },
@@ -147,7 +147,7 @@
       /**
        * Handles the click event of tabs.
        */
-      onTabClick(tab: ITab) {
+      onTabClick(tab: ITab): void {
         this.activeTab = tab;
 
         this.$emit('change', tab);

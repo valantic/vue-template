@@ -14,11 +14,11 @@ export default function mapComponentEventsToStorybookActions(component: DefineCo
     return null;
   }
 
-  return Object.keys(component.emits).reduce((accumulator, event) => {
+  return Object.keys(component.emits).reduce((accumulator: IStorybookActions, event) => {
     accumulator[`on${event.charAt(0).toUpperCase() + event.slice(1)}`] = {
       action: event,
     };
 
     return accumulator;
-  }, {} as IStorybookActions);
+  }, {});
 }

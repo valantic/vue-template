@@ -155,7 +155,7 @@
     },
 
     emits: {
-      click(payload: Event) {
+      click(payload: Event): boolean {
         return typeof payload === 'object';
       },
     },
