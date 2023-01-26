@@ -16,14 +16,13 @@
           :class="b('toggle-row')"
       >
         <th :colspan="colspan">
-          <div :id="`button--${uuid}`"
-               ref="toggleButton"
-               :class="b('toggle')"
-               role="button"
-               @click.prevent="toggleSortingOptions"
+          <button ref="toggleButton"
+                  :class="b('toggle')"
+                  type="button"
+                  @click.prevent="toggleSortingOptions"
           >
             {{ $t('e-table.toggleSortingOptions') }}
-          </div>
+          </button>
         </th>
       </tr>
       <tr :class="b('header-row')">
@@ -38,11 +37,9 @@
                         @change="toggleAll"
             >
 
-              <!-- eslint-disable-next-line vue/attributes-order -->
               <span v-if="!!selectedInternal.length" :class="{ invisible : !showSortingOptions || !isMobile}">
                 {{ $t('e-table.deselectAll') }}
               </span>
-              <!-- eslint-disable-next-line vue/attributes-order -->
               <span v-else :class="{ invisible : !showSortingOptions || !isMobile }">
                 {{ $t('e-table.selectAll') }}
               </span>
@@ -261,8 +258,8 @@
        * Accepts a method to generate a link for each row (except for columns with 'onClick' callback).
        *
        * @param {Object} rowLink - A definition for the row link.
-       * @param {Object} rowLink.href - The link for the row link element.
-       * @param {Object} rowLink.title - The title for the row link element.
+       * @param {Function} rowLink.href - A href generator function, that returns a href for the given item.
+       * @param {String|Function} rowLink.title - The title or title generator function for the row link element.
        */
       rowLink: {
         type: Object,
@@ -364,14 +361,14 @@
       /**
        * Returns the href generator method of the rowLink.
        *
-       * @returns {Function}
+       * @returns {Function|null}
        */
       rowHref() {
-        return this.rowLink?.href;
+        return this.rowLink?.href || null;
       },
 
       /**
-       * Manages changes for the select prop.
+       * Manages changes for the 'select' prop.
        */
       selectedInternal: {
         get() {
@@ -511,7 +508,7 @@
        * Get the height of the sorting list toggle button.
        */
       updateToggleButtonHeight() {
-        this.toggleButtonHeight = this.$refs.toggleButton.clientHeight;
+        this.toggleButtonHeight = this.$refs.toggleButton?.clientHeight || 0;
       },
 
       /**
@@ -737,16 +734,18 @@
       onDetailToggleClick(item) {
         const id = item[this.itemIdentifier];
 
-        if (id) {
-          const expandedRows = this.expandedRowsComputed.slice();
+        if (!id) {
+          return;
+        }
 
-          if (expandedRows.includes(id)) {
-            this.expandedRowsComputed = expandedRows.filter(itemId => itemId !== id);
-          } else {
-            expandedRows.push(id);
+        const expandedRows = this.expandedRowsComputed.slice();
 
-            this.expandedRowsComputed = expandedRows;
-          }
+        if (expandedRows.includes(id)) {
+          this.expandedRowsComputed = expandedRows.filter(itemId => itemId !== id);
+        } else {
+          expandedRows.push(id);
+
+          this.expandedRowsComputed = expandedRows;
         }
       },
     },
