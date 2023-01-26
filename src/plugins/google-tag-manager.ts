@@ -64,7 +64,7 @@ export interface IGtm {
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  interface Window { dataLayer: Record<string, any>[]; }
+  interface Window { dataLayer: Record<string, unknown>[]; }
 }
 
 /**
@@ -80,7 +80,7 @@ const plugin: Plugin = {
     /**
      * Push a new event to the dataLayer.
      */
-    function push(payload: object) {
+    function push(payload: Record<string, unknown>) {
       if (window.dataLayer && window.dataLayer.push) {
         window.dataLayer.push(payload);
 

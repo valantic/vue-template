@@ -2,7 +2,11 @@
   <ul :class="b()">
     <li :class="b('item')">
       <s-html-validation />
-      <e-checkbox v-model="loggedIn" variant="toggle">
+      <e-checkbox v-model="loggedIn"
+                  variant="toggle"
+                  name="logged-in"
+                  value
+      >
         Logged in
       </e-checkbox>
     </li>

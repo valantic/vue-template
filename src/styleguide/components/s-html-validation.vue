@@ -1,5 +1,9 @@
 <template>
-  <e-checkbox v-model="enabled" variant="toggle">
+  <e-checkbox v-model="enabled"
+              variant="toggle"
+              name="html-validation"
+              value
+  >
     HTML validation
   </e-checkbox>
 </template>

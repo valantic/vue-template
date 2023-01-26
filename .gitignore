@@ -5,6 +5,7 @@
 .eslintcache
 .stylelintcache
 report.*.json
+/stats/
 
 # IntelliJ project files
 .idea

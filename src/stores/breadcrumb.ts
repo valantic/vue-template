@@ -54,8 +54,11 @@ export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetter
       items: [],
     };
 
-    if (import.meta.env.MODE !== 'production') {
-      state.items = require('../styleguide/mock-data/initial-data/breadcrumbs').default; // eslint-disable-line global-require, @typescript-eslint/no-var-requires
+    if (import.meta.env.DEV) {
+      const breadcrumbsModule = import.meta
+        .glob('@/styleguide/mock-data/initial-data/breadcrumbs', { eager: true });
+
+      state.items = breadcrumbsModule['@/styleguide/mock-data/initial-data/breadcrumbs'] as IBreadcrumbItem[];
     }
 
     if (Array.isArray(initialData.items)) {

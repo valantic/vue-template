@@ -9,20 +9,22 @@ import api from '@/stores/plugins/api';
 import options from '@/setup/options';
 import plugins from '@/setup/plugins';
 
-const styleguideOptions = import.meta.env.MODE !== 'production'
-  ? import.meta.glob('@/setup/styleguide.options.ts', { eager: true })['/src/setup/styleguide.options.ts']
-  : null;
+const vuePlugins = plugins;
+const pinia = createPinia();
+let vueOptions = options;
 
-const vueOptions = import.meta.env.MODE !== 'production'
-  ? { ...options, ...styleguideOptions.options }
-  : options;
+if (import.meta.env.DEV) {
+  const styleguideOptions = await import('@/setup/styleguide.ts');
 
-const vuePlugins = import.meta.env.MODE !== 'production'
-  ? [...plugins, ...styleguideOptions.plugins]
-  : plugins;
+  vueOptions = {
+    ...vueOptions,
+    ...styleguideOptions.options,
+  };
+
+  vuePlugins.push(...styleguideOptions.plugins);
+}
 
 const app = createApp(vueOptions);
-const pinia = createPinia();
 
 pinia.use(api);
 
