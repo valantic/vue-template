@@ -1,4 +1,4 @@
-import lDefault from '@/components/l-default';
+import lDefault from '@/layouts/l-default';
 import index from '@/styleguide/routes/index';
 import sandbox from '@/styleguide/routes/sandbox';
 import icons from '@/styleguide/routes/icons';
