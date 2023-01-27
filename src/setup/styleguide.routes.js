@@ -79,6 +79,8 @@ export default [
         component: tooltips,
         meta: {
           title: 'Tooltips',
+        },
+      },
       {
         path: 'map',
         name: 'Google Map',
