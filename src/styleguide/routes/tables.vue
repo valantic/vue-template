@@ -1,0 +1,98 @@
+<template>
+  <div :class="b()">
+    <section :class="b('table')">
+      <h1>
+        Table
+      </h1>
+      <e-table v-model="selectedItems"
+               :items="mockData.dummyTableData"
+               :columns="columnsDefinition"
+               selectable
+               has-detail-rows
+      >
+        <template #detailRow="{ item }">
+          Detail row for {{ item.id }}.
+        </template>
+      </e-table>
+    </section>
+  </div>
+</template>
+<script>
+  import eTable from '@/elements/e-table';
+
+  export default {
+    name: 'tables',
+    components: {
+      eTable,
+    },
+    // components: {},
+    data() {
+      return {
+        selectedItems: [],
+        columnsDefinition: [
+          {
+            title: 'City',
+            key: 'city',
+            align: 'left',
+            slotName: 'city',
+            sortable: true
+          },
+          {
+            title: 'Firstname',
+            key: 'firstName',
+            align: 'left',
+            slotName: 'firstname',
+            sortable: true
+          },
+          {
+            title: 'Lastname',
+            key: 'lastName',
+            align: 'left',
+            titleHidden: true,
+            slotName: 'lastname',
+            sortable: false
+          },
+          {
+            title: 'Birthdate',
+            key: 'birthDate',
+            align: 'left',
+            slotName: 'birthDate',
+            sortable: true
+          },
+          {
+            title: 'Company',
+            key: 'company',
+            align: 'left',
+            slotName: 'company',
+            sortable: false
+          },
+          {
+            title: 'Children',
+            key: 'children',
+            align: 'left',
+            slotName: 'children',
+            sortable: false
+          },
+
+        ]
+      };
+    },
+    // methods: {}
+    // components: {},
+    // watch: {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeDestroy() {},
+    // destroyed() {},
+  };
+</script>
+
+<style lang="scss">
+  @use '../../setup/scss/variables';
+</style>

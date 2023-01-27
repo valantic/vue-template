@@ -4,6 +4,7 @@ import sandbox from '@/styleguide/routes/sandbox.vue';
 import icons from '@/styleguide/routes/icons.vue';
 import forms from '@/styleguide/routes/forms.vue';
 import notifications from '@/styleguide/routes/notifications.vue';
+import tables from '@/styleguide/routes/tables.vue';
 
 const root = '/styleguide';
 const categoryWrapper = {
@@ -69,6 +70,14 @@ export default [
         component: notifications,
         meta: {
           title: 'Notifications',
+        },
+      },
+      {
+        path: 'tables',
+        name: 'Tables',
+        component: tables,
+        meta: {
+          title: 'Tables',
         },
       },
     ]
