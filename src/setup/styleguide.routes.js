@@ -4,6 +4,7 @@ import sandbox from '@/styleguide/routes/sandbox';
 import icons from '@/styleguide/routes/icons';
 import forms from '@/styleguide/routes/forms';
 import notifications from '@/styleguide/routes/notifications';
+import tooltips from '@/styleguide/routes/tooltips';
 import map from '@/styleguide/routes/map';
 
 const root = '/styleguide';
@@ -72,7 +73,15 @@ export default [
           title: 'Notifications',
         },
       },
-{
+      {
+        path: 'tooltips',
+        name: 'Tooltips',
+        component: tooltips,
+        meta: {
+          title: 'Tooltips',
+        },
+      },
+      {
         path: 'map',
         name: 'Google Map',
         component: map,

@@ -62,6 +62,7 @@
   },
   "homepage": "https://github.com/valantic/vue-template",
   "dependencies": {
+    "@popperjs/core": "~2.11.2",
     "axios": "~0.24.0",
     "core-js": "~3.19.1",
     "css-vars-ponyfill": "~2.4.7",
