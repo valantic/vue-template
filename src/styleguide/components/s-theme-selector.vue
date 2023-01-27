@@ -110,7 +110,14 @@
        * @param {Event} event - The related DOM event.
        */
       onChange(event) {
-        this.$store.commit('session/setTheme', event.target.value);
+        const themeId = event.target.value;
+        const urlParam = new URLSearchParams(window.location.search);
+
+        this.$store.commit('session/setTheme', themeId);
+
+        urlParam.set('theme', themeId);
+
+        window.history.pushState({}, '', `?${urlParam}`);
       },
 
       /**
