@@ -1,5 +1,5 @@
 <template>
-  <Transition name="c-modal--fade-animation">
+  <Transition name="c-modal--fade-animation" @after-leave="onAfterLeave">
     <dialog v-show="isOpen"
             :class="b(modifiers)"
     >
@@ -51,9 +51,9 @@
   }
 
   /**
-   * Renders a modal.
+   * Renders a modal dialog.
    *
-   * Based on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+   * Based on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog.
    */
   export default defineComponent({
     name: 'c-modal',
@@ -202,19 +202,10 @@
        * Closes the modal.
        */
       close(): void {
-        if (this.container) {
-          enableBodyScroll(this.container as HTMLElement);
+        if (this.isOpen) {
+          this.$emit('update:isOpen', false);
         }
 
-        if (!this.isClosable || !this.isOpen) {
-          return;
-        }
-
-        document.removeEventListener('keydown', this.onKeyDown);
-
-        this.$el.close();
-
-        this.$emit('update:isOpen', false);
         this.$emit('close');
       },
 
@@ -234,6 +225,12 @@
         if (this.closeOnOutsideClick && this.isOpen) {
           this.close();
         }
+      },
+
+      onAfterLeave() {
+        this.$el.close();
+        enableBodyScroll(this.container as HTMLElement);
+        document.removeEventListener('keydown', this.onKeyDown);
       },
     },
     // render() {},
@@ -350,6 +347,7 @@
       top: 50%;
       right: 0;
       transform: translateY(-50%);
+      cursor: pointer;
     }
 
     &--has-close-button &__header-inner {
@@ -387,11 +385,17 @@
 
   .c-modal--fade-animation-enter-active,
   .c-modal--fade-animation-leave-active {
-    transition: opacity variables.$transition-duration--300 ease-in-out;
+    &,
+    &::backdrop {
+      transition: opacity 200ms ease-in-out;
+    }
   }
 
   .c-modal--fade-animation-enter-from,
   .c-modal--fade-animation-leave-to {
-    opacity: 0;
+    &,
+    &::backdrop {
+      opacity: 0;
+    }
   }
 </style>
