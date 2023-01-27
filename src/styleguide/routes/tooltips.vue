@@ -1,10 +1,14 @@
 <template>
   <div :class="b()">
-    <h1>Sandbox</h1>
+    <h1>Tooltip</h1>
 
     <portal-target name="tooltip" multiple />
 
-    <div style="padding: 10vh 0; width: max-content; margin: auto;">
+    <div style="padding: 10vh 0; width: max-content; margin: auto; text-align: center;">
+      <h2 style="font-weight: bold; padding-bottom: 30px;">
+        Disable/Enable Tooltip
+      </h2>
+
       <div :class="b('link')">
         <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
       </div>
@@ -15,8 +19,22 @@
       </div>
     </div>
 
-    <div style="padding: 10vh 0; width: max-content; margin: auto;">
-      <ul style="display: flex; list-style: none; padding: 0 0 30px 0; margin: 0;">
+    <div style="padding: 10vh 0; width: max-content; margin: auto; text-align: center;">
+      <h2 style="font-weight: bold; padding-bottom: 30px;">
+        Select Tooltip Position
+      </h2>
+
+      <div>
+        <c-tooltip :popper-options="popperOptions">
+          Hover me to see the tooltip.
+
+          <template #tooltip>
+            This is the content for the tooltip
+          </template>
+        </c-tooltip>
+      </div>
+
+      <ul style="display: flex; list-style: none; padding: 10px 0 30px 0; margin: 0; justify-content: center;">
         <li>
           <e-select v-model="placement"
                     :options="placementOptions"
@@ -25,16 +43,6 @@
           />
         </li>
       </ul>
-      <div>
-        <c-tooltip :popper-options="popperOptions">
-          Tooltip toggle
-
-          <template #tooltip>
-            This is the content for the tooltip
-          </template>
-        </c-tooltip>
-      </div>
-
     </div>
   </div>
 </template>
