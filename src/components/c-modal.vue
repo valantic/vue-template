@@ -1,33 +1,38 @@
 <template>
-  <Transition name="modal-fade">
-    <dialog v-show="isOpen" :class="b(modifiers)" :style="{ '--c-modal__footer-height': `${footerHeight}px` }">
+  <Transition name="c-modal--fade-animation">
+    <dialog v-show="isOpen"
+            :class="b(modifiers)"
+    >
       <div ref="container" :class="b('container')">
-        <div ref="inner" :class="b('inner')">
+        <div v-outside-click="{ handler: () => onOutsideClick(), }"
+             ref="inner"
+             :class="b('inner')"
+        >
           <div v-if="$slots.head || title || hasCloseButton" :class="b('header')">
             <div :class="b('header-inner')">
-              <slot name="head">
+              <slot name="head" :close="close">
                 <h2 v-if="title" :class="b('title')">
                   {{ title }}
                 </h2>
+                <button v-if="isClosable && hasCloseButton"
+                        :aria-title="$t('c-modal.buttonClose')"
+                        :class="b('button-close')"
+                        type="button"
+                        @click="close"
+                >
+                  <e-icon icon="i-close" size="30" />
+                </button>
               </slot>
-              <button v-if="isClosable && hasCloseButton"
-                      :aria-title="$t('c-modal.buttonClose')"
-                      :class="b('button-close')"
-                      type="button"
-                      @click="close"
-              >
-                <e-icon icon="i-close" size="30" />
-              </button>
             </div>
           </div>
           <div :class="b('content')">
             <slot></slot>
           </div>
-          <div v-if="$slots.footer"
-               ref="footer"
-               :class="b('footer')"
+          <div v-if="$slots.stickyFooter"
+               ref="stickyFooter"
+               :class="b('sticky-footer')"
           >
-            <slot name="footer"></slot>
+            <slot name="stickyFooter"></slot>
           </div>
         </div>
       </div>
@@ -36,16 +41,13 @@
 </template>
 
 <script lang="ts">
+  import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
   import { defineComponent, ref, Ref } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface IData {
-    footerHeight: number;
-  }
   interface ISetup {
     container: Ref<HTMLDivElement>;
-    inner: Ref<HTMLDivElement>;
   }
 
   /**
@@ -129,18 +131,14 @@
 
     setup(): ISetup {
       const container = ref();
-      const inner = ref();
 
       return {
         container,
-        inner,
       };
     },
-    data(): IData {
-      return {
-        footerHeight: 0,
-      };
-    },
+    // data(): IData {
+    //   return {};
+    // },
 
     computed: {
       /**
@@ -156,6 +154,9 @@
     },
     watch: {
       isOpen: {
+        /**
+         * Triggers opening/closing modal.
+         */
         handler(state): void {
           if (state) {
             this.open();
@@ -169,7 +170,11 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() {},
+    mounted() {
+      if (this.isOpen) {
+        this.open();
+      }
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -182,21 +187,13 @@
        * Opens the modal.
        */
       open(): void {
-        const dialog = this.$el as HTMLDialogElement;
-
-        if (!dialog) {
-          return;
-        }
-
+        this.$el.showModal(); // Native function of `HTMLDialogElement`
         this.$emit('update:isOpen', true);
 
-        dialog.showModal(); // Native function of `HTMLDialogElement`
-
-        this.bindEventListener();
+        document.addEventListener('keydown', this.onKeyDown);
 
         this.$nextTick(() => {
-          this.$bodyscroll.disable(this.container as HTMLElement);
-          this.updateFooterHeight();
+          disableBodyScroll(this.container as HTMLElement, { reserveScrollBarGap: true });
           this.$emit('open');
         });
       },
@@ -206,49 +203,19 @@
        */
       close(): void {
         if (this.container) {
-          this.$bodyscroll.enable(this.container as HTMLElement);
+          enableBodyScroll(this.container as HTMLElement);
         }
 
         if (!this.isClosable || !this.isOpen) {
           return;
         }
 
-        const dialog = this.$el as HTMLDialogElement;
+        document.removeEventListener('keydown', this.onKeyDown);
+
+        this.$el.close();
 
         this.$emit('update:isOpen', false);
-        this.bindEventListener(false);
         this.$emit('close');
-        dialog.close();
-      },
-
-      /**
-       * Updates footer height.
-       */
-      updateFooterHeight(): void {
-        const { footer } = this.$refs;
-
-        if (footer) {
-          const { offsetHeight } = footer as HTMLElement || {};
-
-          this.footerHeight = offsetHeight || 0;
-        }
-      },
-
-      /**
-       * Binds/unbinds event listeners.
-       */
-      bindEventListener(bind = true): void {
-        if (bind) {
-          window.addEventListener('resizeend', this.updateFooterHeight);
-          document.addEventListener('mousedown', this.onClick);
-          document.addEventListener('keydown', this.onKeyDown);
-
-          return;
-        }
-
-        window.removeEventListener('resizeend', this.updateFooterHeight);
-        document.removeEventListener('mousedown', this.onClick);
-        document.removeEventListener('keydown', this.onKeyDown);
       },
 
       /**
@@ -261,16 +228,10 @@
       },
 
       /**
-       * Handler for click events.
+       * Handler for outside click event.
        */
-      onClick(event: Event): void {
-        const { inner } = this;
-
-        if (!this.closeOnOutsideClick || !this.isOpen || !inner) {
-          return;
-        }
-
-        if (!inner.contains(event.target as Node)) {
+      onOutsideClick(): void {
+        if (this.closeOnOutsideClick && this.isOpen) {
           this.close();
         }
       },
@@ -320,11 +281,14 @@
     }
 
     &__inner {
+      display: flex;
+      flex-direction: column;
       width: 100%;
       background-color: variables.$color-grayscale--1000;
       justify-self: center;
 
       @include media(md) {
+        display: block;
         align-self: center;
         max-width: 75vw;
       }
@@ -339,7 +303,7 @@
     }
 
     &__header,
-    &__footer {
+    &__sticky-footer {
       padding: variables.$spacing--25;
       border-bottom: 1px solid variables.$color-grayscale--600;
 
@@ -357,24 +321,19 @@
     }
 
     &__content, {
+      flex: 1 0 auto;
       padding: variables.$spacing--25;
 
       @include media(md) {
         padding: variables.$spacing--50;
       }
-
-      &::after {
-        display: block;
-        content: '';
-        padding-bottom: var(--c-modal__footer-height);
-      }
     }
 
-    &__footer {
+    &__sticky-footer {
       border-top: 1px solid variables.$color-grayscale--600;
 
       @include media($down: sm) {
-        position: fixed;
+        position: sticky;
         bottom: 0;
         left: 0;
         width: 100%;
@@ -426,13 +385,13 @@
     }
   }
 
-  .modal-fade-enter-active,
-  .modal-fade-leave-active {
+  .c-modal--fade-animation-enter-active,
+  .c-modal--fade-animation-leave-active {
     transition: opacity variables.$transition-duration--300 ease-in-out;
   }
 
-  .modal-fade-enter-from,
-  .modal-fade-leave-to {
+  .c-modal--fade-animation-enter-from,
+  .c-modal--fade-animation-leave-to {
     opacity: 0;
   }
 </style>
