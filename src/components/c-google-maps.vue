@@ -18,9 +18,7 @@
   let isMapsAPILoaded = false;
 
   /**
-   * Set isMapsAPILoaded to true, call the callback, then remove all callbacks in callbackStack Array.
-   *
-   * @param {Function} callback - Callback method that is called when the Map API has been initialized successfully.
+   * Set isMapsAPILoaded to true, call the callback, then remove all callbacks in callbackStack array.
    */
   window.cGoogleMapsInitMap = () => {
     isMapsAPILoaded = true;
@@ -49,7 +47,7 @@
 
       callbackStack.push(callback);
 
-      loadScript(url, null);
+      loadScript(url);
     }
   }
 
