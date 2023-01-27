@@ -48,6 +48,7 @@
 </template>
 
 <script>
+  import eSelect from '@/elements/e-select.vue';
   import tooltip from '../../plugins/tooltip/directive';
   import cTooltip from '../../plugins/tooltip/component';
 
@@ -57,7 +58,8 @@
       tooltip,
     },
     components: {
-      cTooltip
+      cTooltip,
+      eSelect
     },
     data() {
       return {
