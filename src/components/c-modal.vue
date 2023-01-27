@@ -351,8 +351,8 @@
       cursor: pointer;
     }
 
-    &--has-close-button &__header-inner {
-      padding-right: variables.$spacing--50;
+    &--has-close-button &__title {
+      padding-right: variables.$spacing--40;
     }
 
     &--size-600 &__inner {

@@ -52,8 +52,13 @@ const Template = args => ({
              :size="args.size"
              :spacing="args.spacing"
     >
+      <template v-if="args.headerSlot" #head>
+        <div style="border: 1px solid blue;">
+          A custom header content
+        </div>
+      </template>
       {{ args.content }}
-      <template v-if="args.stickyFooter" #stickyFooter>
+      <template v-if="args.stickyFooterSlot" #stickyFooter>
         <e-button width="full" @click="isOpen = false">
           Close
         </e-button>
@@ -68,7 +73,12 @@ const Template = args => ({
 export const Default = Template.bind({});
 Default.args = {};
 
-export const StickyFooter = Template.bind({});
-StickyFooter.args = {
-  stickyFooter: true,
+export const HeaderSlot = Template.bind({});
+HeaderSlot.args = {
+  headerSlot: true,
+};
+
+export const StickyFooterSlot = Template.bind({});
+StickyFooterSlot.args = {
+  stickyFooterSlot: true,
 };
