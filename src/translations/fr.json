@@ -9,8 +9,13 @@
     "chooseOption": "SVP Sélectionner"
   },
   "e-table": {
+    "deselectAll": "Annuler la sélection",
+    "selectAll": "Sélectionner tout",
+    "selectItem": "Sélectionner",
+    "showDetailsHeader": "Afficher les détails",
     "sort": "Trier par {name}",
-    "noResults": "Aucun résultat pour la sélection actuelle."
+    "noResults": "Aucun résultat pour la sélection actuelle.",
+    "toggleSortingOptions": "Triage"
   },
   "e-progress": {
     "loading": "Charge …"

@@ -66,11 +66,17 @@
 </template>
 
 <script>
+  import eIcon from '@/elements/e-icon';
+
   const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
   const icons = require.context('@/assets/icons/', false, /\.svg/).keys();
 
   export default {
     name: 's-icon-finder',
+
+    components: {
+      eIcon
+    },
 
     // props: {},
 

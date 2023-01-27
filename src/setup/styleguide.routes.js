@@ -1,11 +1,11 @@
-import lDefault from '@/components/l-default';
-
+import lDefault from '@/layouts/l-default';
 import index from '@/styleguide/routes/index';
 import sandbox from '@/styleguide/routes/sandbox';
 import icons from '@/styleguide/routes/icons';
 import forms from '@/styleguide/routes/forms';
 import notifications from '@/styleguide/routes/notifications';
 import tooltips from '@/styleguide/routes/tooltips';
+import map from '@/styleguide/routes/map';
 
 const root = '/styleguide';
 const categoryWrapper = {
@@ -79,6 +79,12 @@ export default [
         component: tooltips,
         meta: {
           title: 'Tooltips',
+      {
+        path: 'map',
+        name: 'Google Map',
+        component: map,
+        meta: {
+          title: 'Google Map',
         },
       },
     ]

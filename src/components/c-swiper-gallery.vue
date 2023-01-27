@@ -82,6 +82,7 @@
   import mapImages from '@/helpers/map-images';
   import mixinUuid from '@/mixins/uuid';
   import cModal from '@/components/c-modal';
+  import eIcon from '@/elements/e-icon';
 
   const swiperInstances = {};
 
@@ -93,6 +94,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eIcon,
       cModal,
       cSwiperModal,
     },
