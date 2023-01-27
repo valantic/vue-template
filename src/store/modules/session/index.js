@@ -5,6 +5,14 @@ export default {
      * @type {String} Stores the theme id.
      */
     theme: '01',
+
+    /**
+     * @type {String} Holds the Google Maps API key for the current instance.
+     */
+    googleMapsApiKey: process.env.NODE_ENV !== 'production'
+      ? process.env.GOOGLE_MAPS_API_KEY
+      : null,
+
   },
   getters: {
     /**
@@ -17,6 +25,16 @@ export default {
     getTheme(state) {
       return state.theme;
     },
+
+    /**
+     * Returns the Google Maps API key for the current instance.
+     *
+     * @param {Object} state - The current module state.
+     *
+     * @returns {String}
+     */
+    getGoogleMapsApiKey: state => state.googleMapsApiKey,
+
   },
   mutations: {
     /**
@@ -28,6 +46,17 @@ export default {
     setTheme(state, id) {
       state.theme = id;
     },
+
+    /**
+     * Updates the Google Maps API key.
+     *
+     * @param {Object} state - The current module state.
+     * @param {String} key - The Goole Maps API Key for the current instance.
+     */
+    setGoogleMapsApiKey(state, key) {
+      state.googleMapsApiKey = key;
+    },
+
   },
   // actions: {},
 };

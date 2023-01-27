@@ -1,10 +1,10 @@
-import lDefault from '@/layouts/l-default.vue';
-import index from '@/styleguide/routes/index.vue';
-import sandbox from '@/styleguide/routes/sandbox.vue';
-import icons from '@/styleguide/routes/icons.vue';
-import forms from '@/styleguide/routes/forms.vue';
-import notifications from '@/styleguide/routes/notifications.vue';
-import tables from '@/styleguide/routes/tables.vue';
+import lDefault from '@/layouts/l-default';
+import index from '@/styleguide/routes/index';
+import sandbox from '@/styleguide/routes/sandbox';
+import icons from '@/styleguide/routes/icons';
+import forms from '@/styleguide/routes/forms';
+import notifications from '@/styleguide/routes/notifications';
+import map from '@/styleguide/routes/map';
 
 const root = '/styleguide';
 const categoryWrapper = {
@@ -72,12 +72,12 @@ export default [
           title: 'Notifications',
         },
       },
-      {
-        path: 'tables',
-        name: 'Tables',
-        component: tables,
+{
+        path: 'map',
+        name: 'Google Map',
+        component: map,
         meta: {
-          title: 'Tables',
+          title: 'Google Map',
         },
       },
     ]
