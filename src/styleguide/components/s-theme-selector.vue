@@ -115,13 +115,9 @@
 
         this.$store.commit('session/setTheme', themeId);
 
-        if (urlParam.has('theme')) {
-          urlParam.delete('theme');
-        }
+        urlParam.set('theme', themeId);
 
-        urlParam.append('theme', themeId);
-
-        window.history.pushState({}, '', `${window.location.pathname}?${urlParam}`);
+        window.history.pushState({}, '', `${urlParam}`);
       },
 
       /**
