@@ -273,7 +273,7 @@
       overflow-y: auto;
 
       @include media(md) {
-        padding: 5vh 0;
+        padding: 10vh 0;
       }
     }
 
@@ -288,6 +288,7 @@
         display: block;
         align-self: center;
         max-width: 75vw;
+        transform: translateY(-7.5vh);
       }
 
       @include media(lg) {
