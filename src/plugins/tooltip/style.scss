@@ -43,7 +43,6 @@
     &[data-popper-placement*='right'],
     &[data-popper-placement*='left'] {
       padding: 0 $wrapper-padding;
-      background: $color-grayscale--500;
     }
 
     &[data-popper-placement*='top'],
