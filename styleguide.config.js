@@ -98,11 +98,11 @@ module.exports = {
     },
     {
       name: 'Elements',
-      components: 'src/components/**/e-*.vue',
+      components: 'src/elements/**/*.vue',
     },
     {
       name: 'Components',
-      components: 'src/components/**/c-*.vue',
+      components: 'src/components/**/*.vue',
     },
   ],
 };

@@ -51,8 +51,9 @@
 
 <script>
   import propScale from '@/helpers/prop.scale';
-  import cFormNotification from '@/components/c-form-notification';
+  import cFormNotification from '@/components/c-form-notification.vue';
   import mixinFormStates from '@/mixins/form-states';
+  import eIcon from '@/elements/e-icon';
 
   /**
    * Input form component
@@ -64,6 +65,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eIcon,
       cFormNotification
     },
     mixins: [mixinFormStates],

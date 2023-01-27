@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import cNotificationContainer from '@/components/c-notification-container';
+  import cNotificationContainer from '@/components/c-notification-container.vue';
 
   export default {
     name: 'l-default',

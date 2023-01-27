@@ -130,8 +130,16 @@
   </div>
 </template>
 <script>
-  import eFieldset from '@/components/e-fieldset';
-  import eMultiselect from '@/components/e-multiselect';
+  import eFieldset from '@/elements/e-fieldset.vue';
+  import eMultiselect from '@/elements/e-multiselect.vue';
+  import eLabel from '@/elements/e-label.vue';
+  import eInput from '@/elements/e-input.vue';
+  import eSelect from '@/elements/e-select.vue';
+  import eRadio from '@/elements/e-radio.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eTextarea from '@/elements/e-textarea.vue';
+  import eButton from '@/elements/e-button.vue';
+
   import { required, email } from 'vuelidate/lib/validators';
 
   export default {
@@ -139,6 +147,13 @@
     components: {
       eFieldset,
       eMultiselect,
+      eLabel,
+      eInput,
+      eSelect,
+      eRadio,
+      eCheckbox,
+      eTextarea,
+      eButton
     },
     // components: {},
     data() {
