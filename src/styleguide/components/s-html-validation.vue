@@ -74,14 +74,14 @@
       outline: 5px solid $red;
 
       &::before {
-        content: $message;
         position: absolute;
         z-index: 1000;
-        border: 1px solid $red;
+        content: $message;
+        max-width: 200px;
         padding: 2px variables.$spacing--5;
+        border: 1px solid $red;
         background: lighten($red, 40%);
         color: $black;
-        max-width: 200px;
         font-size: 0.8rem;
       }
     }
