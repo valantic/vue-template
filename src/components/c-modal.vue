@@ -1,5 +1,8 @@
 <template>
-  <Transition name="c-modal--fade-animation" @after-leave="onAfterLeave">
+  <Transition name="c-modal--fade-animation"
+              @after-enter="onAfterEnter"
+              @after-leave="onAfterLeave"
+  >
     <dialog v-show="isOpen"
             :class="b(modifiers)"
     >
@@ -189,13 +192,6 @@
       open(): void {
         this.$el.showModal(); // Native function of `HTMLDialogElement`
         this.$emit('update:isOpen', true);
-
-        document.addEventListener('keydown', this.onKeyDown);
-
-        this.$nextTick(() => {
-          disableBodyScroll(this.container as HTMLElement, { reserveScrollBarGap: true });
-          this.$emit('open');
-        });
       },
 
       /**
@@ -227,7 +223,19 @@
         }
       },
 
-      onAfterLeave() {
+      /**
+       * Handler for when the modal open-animation is completed.
+       */
+      onAfterEnter(): void {
+        disableBodyScroll(this.container as HTMLElement, { reserveScrollBarGap: true });
+        this.$emit('open');
+        document.addEventListener('keydown', this.onKeyDown);
+      },
+
+      /**
+       * Handler for when the modal close-animation is completed.
+       */
+      onAfterLeave(): void {
         this.$el.close();
         enableBodyScroll(this.container as HTMLElement);
         document.removeEventListener('keydown', this.onKeyDown);
