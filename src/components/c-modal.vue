@@ -195,7 +195,7 @@
         this.bindEventListener();
 
         this.$nextTick(() => {
-          // this.$bodyscroll.disable(this.container as HTMLElement);
+          this.$bodyscroll.disable(this.container as HTMLElement);
           this.updateFooterHeight();
           this.$emit('open');
         });
@@ -206,7 +206,7 @@
        */
       close(): void {
         if (this.container) {
-          // this.$bodyscroll.enable(this.container as HTMLElement);
+          this.$bodyscroll.enable(this.container as HTMLElement);
         }
 
         if (!this.isClosable || !this.isOpen) {
