@@ -1,42 +1,38 @@
 <template>
-  <Teleport to="body">
-    <Transition name="modal-fade">
-      <div v-if="isOpen"
-           :class="b(modifiers)"
-           :style="{ '--c-modal__footer-height': `${footerHeight}px` }"
-      >
-        <div ref="container" :class="b('container')">
-          <div ref="inner" :class="b('inner')">
-            <div v-if="$slots.head || title || hasCloseButton" :class="b('header')">
-              <div :class="b('header-inner')">
-                <slot v-if="$slots.head" name="head"></slot>
-                <h2 v-else-if="title" :class="b('title')">
+  <Transition name="modal-fade">
+    <dialog v-show="isOpen" :class="b(modifiers)" :style="{ '--c-modal__footer-height': `${footerHeight}px` }">
+      <div ref="container" :class="b('container')">
+        <div ref="inner" :class="b('inner')">
+          <div v-if="$slots.head || title || hasCloseButton" :class="b('header')">
+            <div :class="b('header-inner')">
+              <slot name="head">
+                <h2 v-if="title" :class="b('title')">
                   {{ title }}
                 </h2>
-                <button v-if="isClosable && hasCloseButton"
-                        :aria-title="$t('c-modal.buttonClose')"
-                        :class="b('button-close')"
-                        type="button"
-                        @click="close"
-                >
-                  <e-icon icon="close" size="30" />
-                </button>
-              </div>
+              </slot>
+              <button v-if="isClosable && hasCloseButton"
+                      :aria-title="$t('c-modal.buttonClose')"
+                      :class="b('button-close')"
+                      type="button"
+                      @click="close"
+              >
+                <e-icon icon="i-close" size="30" />
+              </button>
             </div>
-            <div :class="b('content')">
-              <slot></slot>
-            </div>
-            <div v-if="$slots.footer"
-                 ref="footer"
-                 :class="b('footer')"
-            >
-              <slot name="footer"></slot>
-            </div>
+          </div>
+          <div :class="b('content')">
+            <slot></slot>
+          </div>
+          <div v-if="$slots.footer"
+               ref="footer"
+               :class="b('footer')"
+          >
+            <slot name="footer"></slot>
           </div>
         </div>
       </div>
-    </Transition>
-  </Teleport>
+    </dialog>
+  </Transition>
 </template>
 
 <script lang="ts">
@@ -48,12 +44,14 @@
     footerHeight: number;
   }
   interface ISetup {
-    container: Ref<HTMLDivElement | null | undefined>;
-    inner: Ref<HTMLDivElement | null | undefined>;
+    container: Ref<HTMLDivElement>;
+    inner: Ref<HTMLDivElement>;
   }
 
   /**
    * Renders a modal.
+   *
+   * Based on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
    */
   export default defineComponent({
     name: 'c-modal',
@@ -74,7 +72,7 @@
        */
       title: {
         type: String,
-        default: '',
+        default: null,
       },
 
       /**
@@ -104,7 +102,7 @@
       /**
        * Allows modifying the size of the modal.
        *
-       * Valid values: `[600, 800]`
+       * Valid values: `[600, 700, 800]`
        */
       size: propScale(600, [
         600,
@@ -130,9 +128,12 @@
     ],
 
     setup(): ISetup {
+      const container = ref();
+      const inner = ref();
+
       return {
-        container: ref(),
-        inner: ref(),
+        container,
+        inner,
       };
     },
     data(): IData {
@@ -162,7 +163,6 @@
             this.close();
           }
         },
-        immediate: true,
       },
     },
 
@@ -182,11 +182,17 @@
        * Opens the modal.
        */
       open(): void {
+        const dialog = this.$el as HTMLDialogElement;
+
+        if (!dialog) {
+          return;
+        }
+
         this.$emit('update:isOpen', true);
 
-        setTimeout(() => {
-          this.bindEventListener();
-        }, 100);
+        dialog.showModal(); // Native function of `HTMLDialogElement`
+
+        this.bindEventListener();
 
         this.$nextTick(() => {
           // this.$bodyscroll.disable(this.container as HTMLElement);
@@ -207,9 +213,12 @@
           return;
         }
 
+        const dialog = this.$el as HTMLDialogElement;
+
         this.$emit('update:isOpen', false);
         this.bindEventListener(false);
         this.$emit('close');
+        dialog.close();
       },
 
       /**
@@ -283,7 +292,7 @@
     @include z-index(modal);
 
     &,
-    &::after {
+    &::backdrop {
       position: fixed;
       top: 0;
       left: 0;
@@ -291,12 +300,12 @@
       height: 100vh;
     }
 
-    &::after {
+    &::backdrop {
       @include z-index(back);
 
       content: '';
       opacity: 0.75;
-      background-color: variables.$color-primary--2;
+      background-color: variables.$color-grayscale--0;
     }
 
     &__container {
