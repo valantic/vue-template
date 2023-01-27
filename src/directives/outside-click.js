@@ -30,11 +30,11 @@ export default {
    * @param {Object} vnode - The vue node object.
    */
   bind(el, binding, vnode) {
-    if (!binding.value) {
+    const handler = typeof binding.value === 'function' ? binding.value : binding.value?.handler;
+
+    if (!handler) {
       throw new Error('No event handler defined for v-outside-click.');
     }
-
-    const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler;
     let userIsScrolling = false;
 
     // Click / Touchstart handler.
