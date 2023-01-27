@@ -117,7 +117,7 @@
 
         urlParam.set('theme', themeId);
 
-        window.history.pushState({}, '', `${urlParam}`);
+        window.history.pushState({}, '', `?${urlParam}`);
       },
 
       /**
