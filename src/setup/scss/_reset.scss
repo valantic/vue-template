@@ -97,6 +97,7 @@ button > * {
 
 button,
 input {
+  font-size: inherit;
   overflow: visible; // Show the overflow in Edge
 }
 

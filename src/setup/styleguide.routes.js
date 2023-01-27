@@ -72,7 +72,7 @@ export default [
           title: 'Notifications',
         },
       },
-      {
+{
         path: 'map',
         name: 'Google Map',
         component: map,

@@ -162,8 +162,6 @@
   @use '../setup/scss/variables';
 
   .e-checkbox {
-    $label-size: 16px;
-
     @include mixins.font(variables.$font-size--16, 22px);
 
     position: relative;
@@ -177,8 +175,7 @@
     }
 
     &__label {
-      display: block;
-      padding-left: variables.$spacing--25;
+      display: flex;
       margin: 0;
 
       &:hover {
@@ -191,23 +188,25 @@
 
       &::before,
       &::after {
-        position: absolute;
         content: '';
-        top: 3px;
-        left: 0;
-        width: $label-size;
-        height: $label-size;
+        display: block;
+        width: 1.3em;
+        height: 1.3em;
       }
 
       &::before {
         border: 1px solid variables.$color-grayscale--400;
+        margin-right: variables.$spacing--5;
       }
 
       &::after {
+        position: absolute;
         transition: transform 0.1s ease-in-out;
         background: variables.$color-grayscale--0;
         opacity: 0;
         transform: scale(0);
+        top: 0.1em;
+        left: 0.1em;
       }
     }
 

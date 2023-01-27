@@ -224,3 +224,249 @@ Note: the 'no results' row can be customized with the 'noResults' slot.
     }
 </script>
 ```
+
+#### Row links
+
+```vue
+<template>
+  <div :class="b()">
+    <h1>Sandbox</h1>
+    <div>
+      <e-table :columns="columns" :items="items" :row-link="{ href: rowHref, title: 'The link title' }" />
+    </div>
+  </div>
+</template>
+
+<script>
+  import { commerce, name } from 'faker';
+  import dayjs from 'dayjs';
+  import ETable from '@/elements/e-table';
+
+  export default {
+    name: 'sandbox',
+    components: { ETable },
+
+    data() {
+      return {
+        columns: [
+          {
+            title: 'Entry',
+            key: 'entry',
+            sortable: true,
+            slotName: 'entry',
+          },
+          {
+            title: 'Created by',
+            key: 'createdBy',
+            onClick(item, column) {
+              alert(`You clicked on "${item.createdBy}" in the column "${column.title}".`);
+            }
+          },
+          {
+            title: 'Last change',
+            key: 'lastChange',
+            sortable: true,
+            sort: (a, b) => (dayjs(a.lastChange).isBefore(dayjs(b.lastChange)) ? -1 : 1),
+            slotName: 'lastChange',
+            align: 'right',
+          },
+          {
+            title: 'Action',
+            slotName: 'rowAction',
+            align: 'right',
+          }
+        ]
+      };
+    },
+
+    computed: {
+      items() {
+        return Array(4).fill(null).map((item, index) => {
+          const createdBy = name.findName();
+          const entry = commerce.productName();
+
+          return {
+            id: index,
+            entry,
+            lastChange: dayjs().subtract(index, 'day'),
+            createdBy,
+            searchString: `${createdBy}`,
+            disabled: index === 3
+          };
+        });
+      },
+    },
+    
+    methods: {
+      rowHref(item) {
+        return `#${item.id}`;
+      },
+    }
+  };
+</script>
+
+```
+#### Selectable
+
+```vue
+<template>
+  <div :class="b()">
+    <h1>Sandbox</h1>
+    <div>
+      <e-table
+        v-model="selectedItems"
+        :columns="columns"
+        :items="items"
+        selectable
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+  import { commerce, name } from 'faker';
+  import dayjs from 'dayjs';
+  import ETable from '@/elements/e-table';
+
+  export default {
+    name: 'sandbox',
+    components: { ETable },
+
+    data() {
+      return {
+        selectedItems: [],
+        columns: [
+          {
+            title: 'Entry',
+            key: 'entry',
+            sortable: true,
+            slotName: 'entry',
+          },
+          {
+            title: 'Created by',
+            key: 'createdBy',
+            onClick(item, column) {
+              alert(`You clicked on "${item.createdBy}" in the column "${column.title}".`);
+            }
+          },
+          {
+            title: 'Last change',
+            key: 'lastChange',
+            sortable: true,
+            sort: (a, b) => (dayjs(a.lastChange).isBefore(dayjs(b.lastChange)) ? -1 : 1),
+            slotName: 'lastChange',
+            align: 'right',
+          },
+          {
+            title: 'Action',
+            slotName: 'rowAction',
+            align: 'right',
+          }
+        ]
+      };
+    },
+
+    computed: {
+      items() {
+        return Array(4).fill(null).map((item, index) => {
+          const createdBy = name.findName();
+          const entry = commerce.productName();
+
+          return {
+            id: index,
+            entry,
+            lastChange: dayjs().subtract(index, 'day'),
+            createdBy,
+            searchString: `${createdBy}`,
+            disabled: index === 3
+          };
+        });
+      },
+    },
+  };
+</script>
+```
+
+#### Detail row
+
+```vue
+<template>
+  <div :class="b()">
+    <h1>Sandbox</h1>
+    <div>
+      <e-table
+        :columns="columns"
+        :items="items"
+        has-detail-rows
+      >
+        <template #detailRow="{ item }">
+          Detail row for {{ item.id }}.
+        </template>
+      </e-table>
+    </div>
+  </div>
+</template>
+
+<script>
+  import { commerce, name } from 'faker';
+  import dayjs from 'dayjs';
+  import ETable from '@/elements/e-table';
+
+  export default {
+    name: 'sandbox',
+    components: { ETable },
+
+    data() {
+      return {
+        selectedItems: [],
+        columns: [
+          {
+            title: 'Entry',
+            key: 'entry',
+            sortable: true,
+            slotName: 'entry',
+          },
+          {
+            title: 'Created by',
+            key: 'createdBy',
+            onClick(item, column) {
+              alert(`You clicked on "${item.createdBy}" in the column "${column.title}".`);
+            }
+          },
+          {
+            title: 'Last change',
+            key: 'lastChange',
+            sortable: true,
+            sort: (a, b) => (dayjs(a.lastChange).isBefore(dayjs(b.lastChange)) ? -1 : 1),
+            slotName: 'lastChange',
+            align: 'right',
+          },
+          {
+            title: 'Action',
+            slotName: 'rowAction',
+            align: 'right',
+          }
+        ]
+      };
+    },
+
+    computed: {
+      items() {
+        return Array(4).fill(null).map((item, index) => {
+          const createdBy = name.findName();
+          const entry = commerce.productName();
+
+          return {
+            id: index,
+            entry,
+            lastChange: dayjs().subtract(index, 'day'),
+            createdBy,
+            searchString: `${createdBy}`,
+            disabled: index === 3
+          };
+        });
+      },
+    },
+  };
+</script>
+```
