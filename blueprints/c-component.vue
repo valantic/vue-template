@@ -7,6 +7,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
+  // interface ISetup {}
   // interface IData {}
 
   /**
@@ -20,7 +21,7 @@
     // props: {},
     // emits: {},
 
-    // setup() {},
+    // setup(): ISetup {},
     // data(): IData {
     //   return {};
     // },

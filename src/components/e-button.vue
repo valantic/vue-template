@@ -61,7 +61,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
-      eProgress
+      eProgress,
     },
 
     props: {
@@ -81,8 +81,6 @@
 
       /**
        * Modifies the inner spacing for the button.
-       *
-       * Valid values: `[0, 500]`
        */
       spacing: propScale(500, [
         0,
@@ -156,7 +154,11 @@
       },
     },
 
-    emits: ['click'],
+    emits: {
+      click(payload: Event): boolean {
+        return typeof payload === 'object';
+      },
+    },
 
     data(): IData {
       return {
@@ -323,15 +325,15 @@
 
     position: relative;
     display: inline-block;
-    background: transparent;
-    padding: 6px variables.$spacing--10;
-    border: 1px solid variables.$color-grayscale--500;
-    color: variables.$color-grayscale--400;
-    border-radius: $_e-button__radius;
-    outline: none;
     min-width: 165px;
-    text-align: center;
+    padding: 6px variables.$spacing--10;
+    outline: none;
+    border: 1px solid variables.$color-grayscale--500;
+    border-radius: $_e-button__radius;
+    background: transparent;
     cursor: pointer;
+    color: variables.$color-grayscale--400;
+    text-align: center;
 
     &:hover {
       text-decoration: none;
@@ -339,23 +341,23 @@
 
     &--focus,
     &:focus {
-      color: variables.$color-primary--3;
-      background-color: variables.$color-grayscale--500;
       outline: none;
       border: 1px solid variables.$color-grayscale--500;
+      background-color: variables.$color-grayscale--500;
+      color: variables.$color-primary--3;
     }
 
     &:active:not([disabled]),
     &--active:not([disabled]) {
-      color: variables.$color-primary--3;
-      background-color: variables.$color-grayscale--400;
       position: relative;
+      background-color: variables.$color-grayscale--400;
+      color: variables.$color-primary--3;
     }
 
     &--hover:not(&--touch),
     &:hover:not(&--touch) {
-      color: variables.$color-primary--3;
       background-color: variables.$color-grayscale--500;
+      color: variables.$color-primary--3;
     }
 
     &--focus path,
@@ -369,10 +371,10 @@
     &--disabled,
     &[disabled]:hover,
     &--disabled:hover {
-      background-color: transparent;
       border-color: variables.$color-grayscale--600;
-      color: variables.$color-grayscale--300;
+      background-color: transparent;
       cursor: default;
+      color: variables.$color-grayscale--300;
       pointer-events: none;
     }
 
@@ -400,8 +402,8 @@
     &--progress[disabled]:focus,
     &--progress:hover,
     &--progress:focus {
-      background-color: variables.$color-grayscale--400;
       overflow: hidden; // Prevents overflow of animation
+      background-color: variables.$color-grayscale--400;
     }
 
     &__inner {
@@ -422,20 +424,20 @@
 
       &.e-button:focus,
       &.e-button--focus {
-        color: variables.$color-primary--3;
         background-color: variables.$color-primary--1;
+        color: variables.$color-primary--3;
       }
 
       &.e-button:hover:not(.e-button--touch),
       &.e-button--hover:not(.e-button--touch) {
-        color: variables.$color-primary--3;
         background-color: variables.$color-primary--1;
+        color: variables.$color-primary--3;
       }
 
       &.e-button:active:not([disabled]),
       &.e-button--active:not([disabled]) {
-        color: variables.$color-primary--3;
         background-color: variables.$color-secondary--2;
+        color: variables.$color-primary--3;
       }
     }
 

@@ -26,6 +26,14 @@ module.exports = {
     // Fix and enable again
     'import/extensions': 'off',
     'vue/require-emit-validator': 'off',
+
+    // TODO: move to eslint-config-valantic
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": true,
+      },
+    ],
   },
   overrides: [
     {

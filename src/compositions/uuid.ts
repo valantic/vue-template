@@ -1,10 +1,7 @@
-import { ref, Ref } from 'vue';
-
 let globalUuid = 0;
 
 export interface IUuid {
-  uuid: Ref<number>;
-  increaseUuid: () => void;
+  uuid: number;
 }
 
 /**
@@ -13,14 +10,9 @@ export interface IUuid {
  * @mixin
  */
 export default (): IUuid => {
-  const uuid = ref<number>(globalUuid);
-
-  const increaseUuid = () => {
-    globalUuid += 1;
-  };
+  globalUuid += 1;
 
   return {
-    uuid,
-    increaseUuid,
+    uuid: globalUuid,
   };
 };
