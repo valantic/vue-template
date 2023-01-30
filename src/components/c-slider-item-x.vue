@@ -76,8 +76,8 @@
     }
 
     img {
-      width: auto;
-      height: auto;
+      width: auto; // Only defined for overruling width/height from e-picture, should not be needed for real slider items.
+      height: auto; // Only defined for overruling width/height from e-picture, should not be needed for real slider items.
     }
   }
 </style>
