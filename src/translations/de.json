@@ -39,5 +39,9 @@
     "save": "Speichern",
     "itemsEmpty": "Keine Ergebnisse.",
     "searchTitle": "Suche"
+  },
+  "c-slider":{
+    "buttonPrevious": "Zurück",
+    "buttonNext": "Vorwärts"
   }
 }
