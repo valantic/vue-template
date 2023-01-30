@@ -10,8 +10,7 @@
       :class="b('input')"
       :maxlength="format.length"
       :name="name"
-      @keypress.enter.prevent
-      @keypress="onEnter"
+      @keypress.enter.prevent="onEnter"
       @focus="onFocus"
       @blur="onBlur"
     >
@@ -270,13 +269,13 @@
     align-items: center;
     padding: 0 variables.$spacing--25; // Equalizes vertical centering
     border: $border solid transparent;
-    background: variables.$color-grayscale--800;
+    background: variables.$color-grayscale--600;
     border-radius: variables.$border-radius--500;
 
     &__label-text {
       grid-area: label;
       align-self: center;
-      color: variables.$color-primary--1;
+      color: variables.$color-grayscale--200;
     }
 
     &__input,
@@ -289,7 +288,7 @@
       @extend %input-reset;
 
       grid-area: input;
-      width: 14ch; // 8 letters + 2 dividers + some, because IE11 does not count outer spacing of 0
+      width: var(--e-date-format-length, 10ch); // 8 letters + 2 dividers
       height: $height - (2 * $border) - 1px;
       margin-bottom: 1px; // Improves vertical centering.
     }

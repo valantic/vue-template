@@ -111,8 +111,8 @@
           <eDate v-model="form.date" name="date" />
           <cDatePicker :start.sync="form.startDate"
                        :end.sync="form.endDate"
-                       range
-                       name="date-picker" />
+                       name="date-picker"
+                       range />
         </e-fieldset>
 
         <e-button type="submit" primary>
@@ -164,6 +164,7 @@
           topics: [],
           frequency: '',
           businessFields: [],
+          date: new Date(),
           startDate: new Date(),
           endDate: new Date()
         },

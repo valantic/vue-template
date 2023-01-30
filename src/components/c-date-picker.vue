@@ -149,7 +149,7 @@
       },
 
       /**
-       * Allows to set a min date.
+       * Allows to set a max date.
        */
       maxDate: {
         type: Date,
@@ -224,6 +224,7 @@
         } else {
           this.close();
         }
+
         this.onChange();
       },
 
