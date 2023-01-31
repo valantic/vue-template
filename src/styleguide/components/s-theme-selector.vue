@@ -44,7 +44,7 @@
 
     setup(): ISetup {
       return {
-        sessionStore: sessionStore()
+        sessionStore: sessionStore(),
       };
     },
     data(): IData {
@@ -52,12 +52,12 @@
         defaultThemes: [
           {
             name: 'Theme 01',
-            id: '01'
+            id: '01',
           },
           {
             name: 'Theme 02',
-            id: '02'
-          }
+            id: '02',
+          },
         ],
       };
     },
@@ -87,10 +87,10 @@
           return {
             name: theme.name,
             id: theme.id,
-            selected
+            selected,
           };
         });
-      }
+      },
     },
 
     watch: {
@@ -110,8 +110,8 @@
           } else {
             link.href = `${themePath}${theme}.css`;
           }
-        }
-      }
+        },
+      },
     },
 
     // created() {},
@@ -148,7 +148,7 @@
         link.media = 'all';
 
         head.appendChild(link);
-      }
+      },
     },
     // render() {},
   });

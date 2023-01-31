@@ -48,3 +48,12 @@ export const IS_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
     return false;
   }
 }());
+
+/**
+ * Defines possible link target values.
+ */
+export enum LINK_TARGET {
+  SELF = '_self',
+  BLANK = '_blank',
+  // Only add additional types if required.
+}

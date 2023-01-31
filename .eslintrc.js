@@ -39,6 +39,13 @@ module.exports = {
       skipBlankLines: true,
       skipComments: true,
     }],
+
+    '@typescript-eslint/no-empty-interface': [
+      'error',
+      {
+        allowSingleExtends: true,
+      },
+    ],
   },
   overrides: [
     {

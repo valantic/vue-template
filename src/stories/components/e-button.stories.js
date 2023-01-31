@@ -1,8 +1,10 @@
+import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 import eButton from '@/components/e-button';
 
 export default {
   component: eButton,
   argTypes: {
+    ...mapComponentEventsToStorybookActions(eButton),
     spacing: {
       options: [0, 500],
       control: 'select',
@@ -14,7 +16,7 @@ export default {
     size: {
       options: [300, 500],
       control: 'select',
-    }
+    },
   },
   args: {
     label: 'Click me',

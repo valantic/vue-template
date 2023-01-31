@@ -4,7 +4,7 @@ import numberFormats from './localization.json';
 
 type MessagesSchema = typeof fallbackMessages;
 
-const pageLang = document?.documentElement?.lang;
+export const PAGE_LANG = document?.documentElement?.lang;
 
 export const I18N_FALLBACK = 'de';
 export const I18N_FALLBACK_MESSAGES = fallbackMessages;
@@ -38,7 +38,7 @@ const i18n = createI18n<[MessagesSchema], 'de'>({
   fallbackLocale: I18N_FALLBACK,
   datetimeFormats: {
     [I18N_FALLBACK]: datetimeFormats,
-    [pageLang]: datetimeFormats,
+    [PAGE_LANG]: datetimeFormats,
   },
 
   warnHtmlInMessage: import.meta.env.MODE !== 'production' ? 'error' : 'off',
@@ -96,6 +96,10 @@ export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disa
 
   if (i18n.global.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
+      import('../stores/plugins/api').then((module) => {
+        module.axiosInstance.defaults.headers.common.locale = newLocale;
+      });
+
       i18n.global.locale.value = newLocale;
     });
   }
@@ -103,4 +107,4 @@ export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disa
   return Promise.resolve();
 };
 
-i18nSetLocale(pageLang || I18N_FALLBACK);
+i18nSetLocale(PAGE_LANG || I18N_FALLBACK);

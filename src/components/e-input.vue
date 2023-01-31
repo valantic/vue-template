@@ -505,6 +505,10 @@
       }
     }
 
+    &--state-error {
+      color: variables.$color-status--error;
+    }
+
     &--state-success {
       .e-input__icon-splitter {
         display: none;

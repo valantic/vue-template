@@ -1,12 +1,15 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import notificationStore, { INotificationItem } from '../notification';
+import axios, {
+ AxiosError, AxiosRequestConfig, AxiosResponse, AxiosInstance,
+} from 'axios';
+import notificationStore, { INotificationItem } from '@/stores/notification';
+import { PAGE_LANG } from '@/setup/i18n';
 
 export interface IApi {
 
   /**
    * Runs a get request with given url with given url params.
    */
-  get: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
+  get: (url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
 
   /**
    * Runs a post request with a given url and payload.
@@ -16,13 +19,22 @@ export interface IApi {
   /**
    * Runs a patch request with a given url and payload.
    */
-  patch: (url: string, data: object, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
+  patch: (url: string, data?: object, config?: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
 
   /**
    * Runs a delete request with a given url and payload.
    */
   delete: (url: string, config: AxiosRequestConfig) => Promise<AxiosResponse | AxiosError>;
 }
+
+// Creating an Axios instance to set general header properties (for each request)
+export const axiosInstance: AxiosInstance = axios.create({
+  headers: {
+    common: {
+      locale: PAGE_LANG,
+    },
+  },
+});
 
 interface IPluginApi {
   $api: IApi,
@@ -79,28 +91,28 @@ export default function api():IPluginApi {
   return {
     $api: {
       get(url, config) {
-        return axios
+        return axiosInstance
           .get(url, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
       post(url, data, config) {
-        return axios
+        return axiosInstance
           .post(url, data, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
       patch(url, data, config) {
-        return axios
+        return axiosInstance
           .patch(url, data, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
       delete(url, config) {
-        return axios
+        return axiosInstance
           .delete(url, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));

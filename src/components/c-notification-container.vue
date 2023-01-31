@@ -39,8 +39,8 @@
         validator: (value: string) => [
           'default',
           'footer',
-        ].includes(value)
-      }
+        ].includes(value),
+      },
     },
 
     setup(): ISetup {
