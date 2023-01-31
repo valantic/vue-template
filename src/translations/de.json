@@ -41,7 +41,7 @@
     "searchTitle": "Suche"
   },
   "c-slider":{
-    "buttonPrevious": "Zurück",
-    "buttonNext": "Vorwärts"
+    "navigationPrevious": "Zurück",
+    "navigationNext": "Vorwärts"
   }
 }

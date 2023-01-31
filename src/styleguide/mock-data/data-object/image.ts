@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker/locale/en';
 import { BREAKPOINTS_MAX, DEFAULT_IMAGE_SIZES } from '@/setup/globals';
-import { IImage, IImageMedia } from '@/types/image';
+import { IImageSources, IImageSrcset, IImageMedia } from '@/types/image';
 
 interface IRatios {
   [key: string]: number;
@@ -11,8 +11,8 @@ interface IRatios {
  */
 export function createSrcSetImage(
   heightRatio = 1,
-  sizes: number[] = Object.values(DEFAULT_IMAGE_SIZES),
-): IImage {
+  sizes: number[] = Object.values(DEFAULT_IMAGE_SIZES)
+): IImageSrcset {
   const srcset = sizes.map(width => `${faker.image.imageUrl(
     width,
     Math.ceil(heightRatio * width),
@@ -39,8 +39,8 @@ export function createSourcesImage(
     lg: 1,
     fallback: 1,
   },
-  sizes = DEFAULT_IMAGE_SIZES,
-): IImage {
+  sizes = DEFAULT_IMAGE_SIZES
+): IImageSources {
   const media = Object.entries(BREAKPOINTS_MAX).map(([breakpoint, size]) => {
     const width = sizes[breakpoint as keyof typeof BREAKPOINTS_MAX] as number;
 

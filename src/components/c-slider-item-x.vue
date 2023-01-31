@@ -1,7 +1,7 @@
 <template>
-  <div :class="b()">
+  <li :class="b()">
     <slot></slot>
-  </div>
+  </li>
 </template>
 
 <script lang="ts">
@@ -75,7 +75,7 @@
       flex-basis: percentage(math.div(1, 6));
     }
 
-    img {
+    .e-picture img {
       width: auto; // Only defined for overruling width/height from e-picture, should not be needed for real slider items.
       height: auto; // Only defined for overruling width/height from e-picture, should not be needed for real slider items.
     }

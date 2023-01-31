@@ -1,12 +1,16 @@
-interface IImageMedia {
+export interface IImageMedia {
   [key: string]: string;
 }
 
 export interface IImage {
-  id?: string | number;
   fallback: string;
-  srcset?: string;
-  media?: IImageMedia;
   alt: string;
-  href?: string;
+}
+
+export interface IImageSources extends IImage {
+  media: IImageMedia;
+}
+
+export interface IImageSrcset extends IImage {
+  srcset: string;
 }

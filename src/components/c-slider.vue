@@ -1,23 +1,23 @@
 <template>
-  <div :class="b({ initialized })">
-    <div ref="stage" :class="b('viewport')">
-      <div :class="b('container')">
+  <div :class="b({ initialized: !!emblaInstance })">
+    <div ref="stage" :class="b('stage')">
+      <ul :class="b('stage-inner')">
         <slot></slot>
-      </div>
+      </ul>
     </div>
-    <button :class="b('button', { previous: true })"
-            :aria-label="$t('c-slider.buttonPrevious')"
+    <button :class="b('navigation', { previous: true })"
+            :aria-label="$t('c-slider.navigationPrevious')"
             :disabled="disablePrevious"
             type="button"
-            @click="previous"
+            @click="previousPage"
     >
       <e-icon icon="i-arrow--left" size="30" />
     </button>
-    <button :class="b('button', { next: true })"
-            :aria-label="$t('c-slider.buttonNext')"
+    <button :class="b('navigation', { next: true })"
+            :aria-label="$t('c-slider.navigationNext')"
             :disabled="disableNext"
             type="button"
-            @click="next"
+            @click="nextPage"
     >
       <e-icon icon="i-arrow--right" size="30" />
     </button>
@@ -44,8 +44,6 @@
     activePage: number;
     slidesPerPage: number;
     noOfPages: number;
-    noOfSlides: number;
-    initialized: boolean;
   }
 
   /**
@@ -100,8 +98,6 @@
         activePage: 0,
         slidesPerPage: 0,
         noOfPages: 0,
-        noOfSlides: 0,
-        initialized: false,
       };
     },
 
@@ -142,9 +138,9 @@
         containScroll: 'keepSnaps',
         ...this.options,
       }, plugins);
-      this.emblaInstance.on('select', this.onSelect);
-      this.emblaInstance.on('init', this.onInit);
-      this.emblaInstance.on('resize', this.onResize);
+      this.emblaInstance.on('select', this.onEmblaSelect);
+      this.emblaInstance.on('init', this.onEmblaInit);
+      this.emblaInstance.on('resize', this.onEmblaResize);
     },
     // beforeUpdate() {},
     // updated() {},
@@ -159,16 +155,15 @@
       /**
        * Event handler for the sliders init event.
        */
-      onInit(): void {
+      onEmblaInit(): void {
         this.updateActiveSlide();
         this.updateSlidesPerPage();
-        this.initialized = true;
       },
 
       /**
        * Event handler for the sliders select event.
        */
-      onSelect(): void {
+      onEmblaSelect(): void {
         this.updateActiveSlide();
         this.updateActivePage();
       },
@@ -176,39 +171,41 @@
       /**
        * Event handler for the resize event of the slider instance.
        */
-      onResize(): void {
+      onEmblaResize(): void {
         this.updateSlidesPerPage();
       },
 
       /**
        * Scrolls to next page.
        */
-      next(): void {
-        this.scrollTo(this.activePage + 1);
+      nextPage(): void {
+        this.scrollToPage(this.activePage + 1);
       },
 
       /**
        * Scrolls to previous page.
        */
-      previous(): void {
-        this.scrollTo(this.activePage - 1);
+      previousPage(): void {
+        this.scrollToPage(this.activePage - 1);
       },
 
       /**
        * Scrolls to given page.
        */
-      scrollTo(page: number): void {
-        const pageBySlide = page * this.slidesPerPage;
+      scrollToPage(page: number): void {
+        const slideByPage = page * this.slidesPerPage;
 
-        this.emblaInstance?.scrollTo(pageBySlide);
+        this.emblaInstance?.scrollTo(slideByPage);
       },
 
       /**
        * Recalculates the amount of slides per page.
        */
       updateSlidesPerPage(): void {
+        const totalNumberOfSlides = this.emblaInstance?.slideNodes().length;
+
         this.slidesPerPage = this.emblaInstance?.slidesInView().length || 1;
-        this.noOfPages = this.noOfSlides ? Math.ceil(this.noOfSlides / this.slidesPerPage) : 1;
+        this.noOfPages = totalNumberOfSlides ? Math.ceil(totalNumberOfSlides / this.slidesPerPage) : 1;
       },
 
       /**
@@ -219,11 +216,10 @@
       },
 
       /**
-       * Updates the slides active classes.
+       * Updates active slide state.
        */
       updateActiveSlide(): void {
         this.activeSlide = this.emblaInstance?.selectedScrollSnap() || 0;
-        this.noOfSlides = this.emblaInstance?.slideNodes().length || 0;
       },
     },
     // render() {},
@@ -233,47 +229,47 @@
 <style lang="scss">
   @use '../setup/scss/variables';
   @use '../setup/scss/mixins';
-  // @use '../setup/scss/extends' as *;
-  // @use '../setup/scss/functions' as *;
+  // @use '../setup/scss/extends';
+  // @use '../setup/scss/functions';
 
   .c-slider {
     position: relative;
 
-    &__viewport {
-      overflow: hidden;
+    &__stage {
       width: 100%;
+      overflow: hidden;
     }
 
-    &__container {
+    &__stage-inner {
       display: flex;
     }
 
-    &__button {
+    &__navigation {
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
-      color: variables.$color-grayscale--1000;
-      background-color: variables.$color-primary--2;
       padding: variables.$spacing--5;
-      transition: opacity variables.$transition-duration--100 ease-in-out;
       opacity: 0;
+      background-color: variables.$color-primary--2;
+      transform: translateY(-50%);
       cursor: pointer;
+      color: variables.$color-grayscale--1000;
+      transition: opacity variables.$transition-duration--100 ease-in-out;
+
+      &--next {
+        right: 20px;
+      }
+
+      &--previous {
+        left: 20px;
+      }
+
+      &[disabled] {
+        opacity: 0;
+        cursor: default;
+      }
     }
 
-    &__button[disabled] {
-      opacity: 0;
-      cursor: default;
-    }
-
-    &__button--next {
-      right: 20px;
-    }
-
-    &__button--previous {
-      left: 20px;
-    }
-
-    &--initialized &__button:not([disabled]) {
+    &--initialized &__navigation:not([disabled]) {
       opacity: 1;
     }
   }

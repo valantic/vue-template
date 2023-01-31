@@ -1,4 +1,4 @@
-import { ISizes } from '@/types/sizes';
+import { IImageSizes } from '@/types/sizes';
 
 /**
  * @type {object} Lookup table of available breakpoints.
@@ -63,7 +63,7 @@ export enum LINK_TARGET {
 /**
  * Default responsive image sizes.
  */
-export const DEFAULT_IMAGE_SIZES: ISizes = {
+export const DEFAULT_IMAGE_SIZES: IImageSizes = {
   ...BREAKPOINTS_MAX,
   fallback: 1440,
 };
