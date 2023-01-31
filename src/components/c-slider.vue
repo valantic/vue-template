@@ -71,6 +71,7 @@
         type: Object as PropType<AutoplayOptionsType>,
         default: () => ({
           delay: 4000,
+          stopOnMouseEnter: true,
         }),
       },
 
