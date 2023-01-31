@@ -19,7 +19,6 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import dayjs from 'dayjs';
   import sReadme from '@/styleguide/components/s-readme.vue';
 
   export default defineComponent({

@@ -1,8 +1,8 @@
 import { defineConfig, splitVendorChunkPlugin, UserConfigExport } from 'vite';
-import vue from '@vitejs/plugin-vue'
+import vue from '@vitejs/plugin-vue';
 import path from 'path';
-import { webpack } from './package.json'; // TODO: rename config property in package.json.
 import { visualizer } from 'rollup-plugin-visualizer';
+import { webpack } from './package.json'; // TODO: rename config property in package.json.
 
 export default defineConfig(({ command, mode }) => {
   const config: UserConfigExport = {
@@ -14,7 +14,7 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         '@': path.resolve(__dirname, 'src/'),
         'vue': 'vue/dist/vue.esm-bundler.js', // Was required because inline import of vue.esm-bundler.js resulted in TS issues.
-      }
+      },
     },
     define: {
       // Was required to get rid of esm build warning for Vue-i18n.
@@ -24,7 +24,7 @@ export default defineConfig(({ command, mode }) => {
     },
   };
 
-  switch(command) {
+  switch (command) {
     case 'build': // @see https://vitejs.dev/config/build-options.html
       config.base = webpack.productionPath; // TODO: rename to buildBase.
       config.build = {
@@ -39,21 +39,21 @@ export default defineConfig(({ command, mode }) => {
           output: {
             assetFileNames: (assetInfo) => {
               const extType = assetInfo?.name?.split('.').at(1) || '';
-              let path = 'assets'
+              let assetsPath = 'assets';
 
-              if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-                path += '/img';
-              } else if (/css|sass|scss/i.test(extType)) {
-                path += '/css';
-              } else if (/woff|woff2|eot|ttf|otf/i.test(extType)) {
-                path += '/fonts';
+              if ((/png|jpe?g|svg|gif|tiff|bmp|ico/i).test(extType)) {
+                assetsPath += '/img';
+              } else if ((/css|sass|scss/i).test(extType)) {
+                assetsPath += '/css';
+              } else if ((/woff|woff2|eot|ttf|otf/i).test(extType)) {
+                assetsPath += '/fonts';
               }
 
-              return `${path}/[name][extname]`;
+              return `${assetsPath}/[name][extname]`;
             },
-          }
+          },
         },
-      }
+      };
 
       if (mode === 'profile') {
         if (!Array.isArray(config.plugins)) {
@@ -62,12 +62,14 @@ export default defineConfig(({ command, mode }) => {
 
         config.plugins.push(
           visualizer({ // NOTE: the sizes reported by this plugin relate to the source, not build size... @see https://github.com/btd/rollup-plugin-visualizer/issues/96
-            filename: "./stats/index.html",
+            filename: './stats/index.html',
             open: true,
             template: 'treemap',
           })
-        )
+        );
       }
+
+    // no default
   }
 
   return config;

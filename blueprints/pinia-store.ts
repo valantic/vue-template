@@ -17,9 +17,9 @@ interface IMyStoreActions { // TODO: update <MyStore>.
   // Add types for the store actions.
 }
 
-export interface IMyStore {} // TODO: update <MyStore>.
+export type TMyStoreStore = Store<string, IMyStoreState, IMyStoreGetters, IMyStoreActions>;
 
-const storeName: string = 'MyStore'; // TODO: update <MyStore>.
+const storeName = 'MyStore'; // TODO: update <MyStore>.
 
 export default defineStore<typeof storeName, IMyStoreState, IMyStoreGetters, IMyStoreActions>(storeName, {
   state: (): IMyStoreState => ({}),

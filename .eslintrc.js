@@ -11,7 +11,7 @@ module.exports = {
   },
   extends: [
     'valantic/vue3',
-    '@vue/typescript'
+    '@vue/typescript',
   ],
   // Uses eslint-import-resolver-webpack
   settings: {
@@ -20,7 +20,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'vue/no-unsupported-features': ['error', {
-      version: ">= 3.2",
+      version: '>= 3.2',
     }],
 
     // Fix and enable again
@@ -28,18 +28,45 @@ module.exports = {
     'vue/require-emit-validator': 'off',
 
     // TODO: move to eslint-config-valantic
-    "space-before-function-paren": ["error", {
-      "anonymous": "never",
-      "named": "never",
-      "asyncArrow": "always"
+    'space-before-function-paren': ['error', {
+      anonymous: 'never',
+      named: 'never',
+      asyncArrow: 'always',
+    }],
+
+    'max-lines': ['error', {
+      max: 1000,
+      skipBlankLines: true,
+      skipComments: true,
     }],
   },
   overrides: [
     {
-      'files': ['tests/**/*.*'],
-      'rules': {
-        'vue/require-name-property': 'off'
-      }
-    }
-  ]
+      files: ['tests/**/*.*'],
+      env: {
+        jest: true,
+      },
+      rules: {
+        'vue/require-name-property': 'off',
+      },
+    },
+    {
+      files: ['blueprints/**/*.*'],
+      env: {
+        jest: true, // Is required because of unit test blueprint.
+      },
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off', // Allow unused variables in blueprints.
+        '@typescript-eslint/no-empty-interface': 'off', // Allow empty interfaces in blueprints.
+      },
+    },
+    {
+      files: ['src/styleguide/**/*.*'],
+      rules: {
+        'vue/no-bare-strings-in-template': 'off',
+        'vue/multi-word-component-names': 'off',
+        'vue/match-component-file-name': 'off',
+      },
+    },
+  ],
 };

@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, @typescript-eslint/no-var-requires */
 
 // Basics
 const path = require('path'); // Cross platform path resolver
@@ -14,9 +14,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
-const pkg = require('./package.json');
 const TerserPlugin = require('terser-webpack-plugin');
 const WebpackDependencyHint = require('@valantic/webpack-dependency-hint');
+const pkg = require('./package.json');
 
 /**
  * A note about [contenthash]: Using the hash in query could cause troubles with caching proxies. Therefore
@@ -39,9 +39,9 @@ module.exports = (env, args = {}) => {
   const showProfile = args.profile || false;
   const globalVariables = {
     'process.env': {
-      'NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
-      'HAS_WATCHER': hasWatcher,
-      'BUILD_TIMESTAMP': new Date().getTime(),
+      NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
+      HAS_WATCHER: hasWatcher,
+      BUILD_TIMESTAMP: new Date().getTime(),
     },
     // @see https://github.com/vuejs/vue-next/tree/master/packages/vue#bundler-build-feature-flags
     '__VUE_OPTIONS_API__': true,
@@ -88,7 +88,7 @@ module.exports = (env, args = {}) => {
   };
 
   const plugins = [
-    new webpack.ProgressPlugin({ percentBy: 'entries', /*profile: true*/ }),
+    new webpack.ProgressPlugin({ percentBy: 'entries' /* profile: true */ }),
 
     // Webpack plugin that runs typescript type checker and eslint on a separate process.
     new ForkTsCheckerWebpackPlugin({
@@ -98,8 +98,8 @@ module.exports = (env, args = {}) => {
         type: 'codeframe',
         options: {
           linesAbove: 2,
-          linesBelow: 0.
-        }
+          linesBelow: 0.0,
+        },
       },
       logger: {
         infrastructure: 'silent',
@@ -114,14 +114,14 @@ module.exports = (env, args = {}) => {
         extensions: {
           vue: {
             enabled: true,
-            compiler: '@vue/compiler-sfc'
-          }
+            compiler: '@vue/compiler-sfc',
+          },
         },
         // Set the tsconfig.json path
         configFile: './tsconfig.json',
       },
       eslint: {
-        files: './src/**/*.{ts,js,vue}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+        files: './src/**/*.{ts,js,vue}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
       },
     }),
 
@@ -135,9 +135,9 @@ module.exports = (env, args = {}) => {
           noErrorOnMissing: true,
           globOptions: isProduction
             ? { dot: true, ignore: ['**/mockdata/**'] }
-            : undefined,
+            : undefined, // eslint-disable-line no-undefined
         },
-      ]
+      ],
     }),
 
     new VueLoaderPlugin(), // *.vue file parser.
@@ -167,7 +167,7 @@ module.exports = (env, args = {}) => {
 
     new WebpackDependencyHint({
       lastUpdate: pkg.lastDependencyUpdate,
-    })
+    }),
   ];
 
   if (showProfile) {
@@ -177,7 +177,7 @@ module.exports = (env, args = {}) => {
   if (isProduction) {
     plugins.push(
       new CleanWebpackPlugin({ // Cleans the dist folder before and after the build.
-        cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`)
+        cleanAfterEveryBuildPatterns: Object.keys(themes).map(theme => `./**/*${theme}.js`),
       }),
       new WebpackAssetsManifest({ // Creates a manifest.json for the build
         publicPath: true,
@@ -186,40 +186,40 @@ module.exports = (env, args = {}) => {
   }
 
   const svgoPlugins = [
-    //{ name: 'cleanupAttrs', active: false, },
-    //{ name: 'removeDoctype', active: false, },
-    //{ name: 'removeXMLProcInst', active: false, },
-    //{ name: 'removeComments', active: false, },
-    //{ name: 'removeMetadata', active: false, },
-    //{ name: 'removeTitle', active: false, },
-    //{ name: 'removeDesc', active: false, },
+    // { name: 'cleanupAttrs', active: false, },
+    // { name: 'removeDoctype', active: false, },
+    // { name: 'removeXMLProcInst', active: false, },
+    // { name: 'removeComments', active: false, },
+    // { name: 'removeMetadata', active: false, },
+    // { name: 'removeTitle', active: false, },
+    // { name: 'removeDesc', active: false, },
     { name: 'removeUselessDefs', active: false },
-    //{ name: 'removeEditorsNSData', active: false, },
-    //{ name: 'removeEmptyAttrs', active: false, },
-    //{ name: 'removeHiddenElems', active: false, },
-    //{ name: 'removeEmptyText', active: false, },
-    //{ name: 'removeEmptyContainers', active: false, },
+    // { name: 'removeEditorsNSData', active: false, },
+    // { name: 'removeEmptyAttrs', active: false, },
+    // { name: 'removeHiddenElems', active: false, },
+    // { name: 'removeEmptyText', active: false, },
+    // { name: 'removeEmptyContainers', active: false, },
     { name: 'removeViewBox', active: false },
-    //{ name: 'cleanUpEnableBackground', active: true, },
-    //{ name: 'convertStyleToAttrs', active: true, },
-    //{ name: 'convertColors', active: true, },
-    //{ name: 'convertPathData', active: true, },
-    //{ name: 'convertTransform', active: true, },
-    //{ name: 'removeUnknownsAndDefaults', active: true, },
-    //{ name: 'removeNonInheritableGroupAttrs', active: true, },
-    //{ name: 'removeUselessStrokeAndFill', active: true, },
-    //{ name: 'removeUnusedNS', active: true, },
+    // { name: 'cleanUpEnableBackground', active: true, },
+    // { name: 'convertStyleToAttrs', active: true, },
+    // { name: 'convertColors', active: true, },
+    // { name: 'convertPathData', active: true, },
+    // { name: 'convertTransform', active: true, },
+    // { name: 'removeUnknownsAndDefaults', active: true, },
+    // { name: 'removeNonInheritableGroupAttrs', active: true, },
+    // { name: 'removeUselessStrokeAndFill', active: true, },
+    // { name: 'removeUnusedNS', active: true, },
     { name: 'cleanupIDs', active: false },
-    //{ name: 'cleanupNumericValues', active: false, },
-    //{ name: 'moveElemsAttrsToGroup', active: true, },
-    //{ name: 'moveGroupAttrsToElems', active: true, },
-    //{ name: 'collapseGroups', active: false, },
-    //{ name: 'removeRasterImages', active: false, },
-    //{ name: 'mergePaths', active: true, },
-    //{ name: 'convertShapeToPath', active: true, },
-    //{ name: 'sortAttrs', active: true, },
-    //{ name: 'transformsWithOnePath', active: false, },
-    //{ name: 'removeDimensions', active: true, }
+    // { name: 'cleanupNumericValues', active: false, },
+    // { name: 'moveElemsAttrsToGroup', active: true, },
+    // { name: 'moveGroupAttrsToElems', active: true, },
+    // { name: 'collapseGroups', active: false, },
+    // { name: 'removeRasterImages', active: false, },
+    // { name: 'mergePaths', active: true, },
+    // { name: 'convertShapeToPath', active: true, },
+    // { name: 'sortAttrs', active: true, },
+    // { name: 'transformsWithOnePath', active: false, },
+    // { name: 'removeDimensions', active: true, }
   ];
 
   const devServer = {
@@ -231,27 +231,28 @@ module.exports = (env, args = {}) => {
   };
 
   // this block can be used as default when above issue has been fixed
-  devServer['client'] = {
+  devServer.client = {
     logging: 'error', // Removes ESLint warnings from console
     progress: true,
     overlay: {
       warnings: false,
       errors: true,
     },
-  }
+  };
 
-  const assetModulesFileName = function (pathData, assetType) {
+  const assetModulesFileName = function(pathData, assetType) {
     const hash = isProduction ? '.[contenthash]' : '';
     let subDirPath = '';
 
     // pathData.module.context contains the absolute path to the module
     if (pathData.module.context.includes('src/assets/')) {
       const contextArray = pathData.module.context.split('src/assets/');
-      subDirPath = contextArray.length > 1 ? `${contextArray[1]}/` : ''
+
+      subDirPath = contextArray.length > 1 ? `${contextArray[1]}/` : '';
     }
 
     return `${outputAssetsFolder}${assetType}${subDirPath}[name]${hash}[ext]`;
-  }
+  };
 
   const rules = [
     {
@@ -261,7 +262,7 @@ module.exports = (env, args = {}) => {
         hotReload,
         compilerOptions: { // @see https://vue-loader.vuejs.org/options.html
           whitespace: 'condense',
-        }
+        },
       },
     },
     {
@@ -272,7 +273,7 @@ module.exports = (env, args = {}) => {
         // disable type checking - it is done via ForkTsCheckerWebpackPlugin to increase speed
         transpileOnly: true,
         appendTsSuffixTo: [/\.vue$/],
-      }
+      },
     },
     {
       test: /\.js$/,
@@ -281,7 +282,7 @@ module.exports = (env, args = {}) => {
         loader: 'babel-loader',
         options: {
           presets: ['@babel/preset-env'],
-        }
+        },
       },
     },
     {
@@ -299,14 +300,14 @@ module.exports = (env, args = {}) => {
           options: {
             sourceMap: false,
             importLoaders: 2,
-          }
+          },
         },
         'postcss-loader', // See ./postcss.config.js for configuration.
         {
           loader: 'sass-loader',
           options: {
-            sourceMap: false
-          }
+            sourceMap: false,
+          },
         },
       ],
     },
@@ -314,7 +315,7 @@ module.exports = (env, args = {}) => {
       test: /\.(gif|png|jpe?g|svg)$/i,
       type: 'asset/resource',
       generator: {
-        filename: ((pathData) => assetModulesFileName(pathData, 'img/')),
+        filename: pathData => assetModulesFileName(pathData, 'img/'),
       },
       use: [
         {
@@ -323,16 +324,16 @@ module.exports = (env, args = {}) => {
             disable: !isProduction,
             svgo: {
               plugins: svgoPlugins,
-            }
+            },
           },
         },
-      ]
+      ],
     },
     {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
       type: 'asset/resource',
       generator: {
-        filename: ((pathData) => assetModulesFileName(pathData, 'fonts/')),
+        filename: pathData => assetModulesFileName(pathData, 'fonts/'),
       },
     },
     {
@@ -361,7 +362,7 @@ module.exports = (env, args = {}) => {
           name: 'vendors',
           chunks: 'initial',
         },
-      }
+      },
     },
   };
 
@@ -391,7 +392,7 @@ module.exports = (env, args = {}) => {
     target: 'browserslist',
     entry: {
       ...themes,
-      'app': [
+      app: [
         path.resolve(__dirname, 'src/main.ts'),
       ],
     },
@@ -402,8 +403,8 @@ module.exports = (env, args = {}) => {
     module: {
       rules,
     },
-    stats: showProfile
-      ? undefined
+    stats: showProfile // eslint-disable-line no-nested-ternary
+      ? undefined // eslint-disable-line no-undefined
       : !isProduction || hasWatcher ? 'errors-warnings' : stats,
     performance: { // Warn about performance issues
       hints: !isProduction || hasWatcher ? false : 'warning',
@@ -417,7 +418,7 @@ module.exports = (env, args = {}) => {
       publicPath,
     },
     watchOptions: {
-      ignored: /node_modules/
+      ignored: /node_modules/,
     },
     plugins,
     optimization: isProduction ? optimization : {},

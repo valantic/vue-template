@@ -7,13 +7,10 @@ describe('component | c-component', () => { // TODO: update title
   });
 
   it('renders (has bem block name on wrapper element)', () => {
-
     const wrapper = mount(component, {
       global: {
-        // remove if not needed
-        plugins: [],
-        // remove if not needed
-        props: {}
+        plugins: [], // remove if not needed
+        props: {}, // remove if not needed
       },
     });
 

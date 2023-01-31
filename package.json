@@ -13,7 +13,7 @@
     "fix:stylelint": "npm run lint:stylelint -- --cache=false --config .stylelintrc.fix.js --fix",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:stylelint": "stylelint 'src/**/*.?(vue|scss)'",
-    "lint:eslint": "eslint --ext .ts,.js,.vue src tests/unit/specs",
+    "lint:eslint": "eslint --ext .ts,.js,.vue ./",
     "test": "npm run lint && npm run jest; exit 0;",
     "build": "vite build",
     "build:w": "NODE_ENV=production webpack --mode production",
