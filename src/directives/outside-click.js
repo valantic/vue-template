@@ -5,9 +5,12 @@ const outsideClickEventConfig = { passive: true, capture: true };
  *
  * Examples:
  *
+ * <div v-oustide-click="handler"></div>
+ *
  * <div v-outside-click="{
  *   exclude: [],
  *   excludeIds: [],
+ *   excludeDOM: [],
  *   handler: () => {},
  * }"></div>
  */
@@ -23,9 +26,15 @@ export default {
    * @param {Function} binding.value.handler - The outside click handler function.
    * @param {Array.<String>} binding.value.exclude - The excluded $ref DOM elements.
    * @param {Array.<String>} binding.value.excludeIds - The excluded global DOM id's.
+   * @param {Array.<Element>} binding.value.excludeDOM - The excluded DOM elements.
    * @param {Object} vnode - The vue node object.
    */
   bind(el, binding, vnode) {
+    const handler = typeof binding.value === 'function' ? binding.value : binding.value?.handler;
+
+    if (!handler) {
+      throw new Error('No event handler defined for v-outside-click.');
+    }
     let userIsScrolling = false;
 
     // Click / Touchstart handler.
@@ -43,7 +52,11 @@ export default {
         return;
       }
 
-      const { handler, exclude = [], excludeIds = [] } = binding.value;
+      const {
+        exclude = [],
+        excludeIds = [],
+        excludeDOM = [],
+      } = binding.value; // NOTE: might be a Function.
 
       // We check to see if the clicked element is not the dialog element and not excluded.
       if (!el.contains(event.target) && handler) {
@@ -63,7 +76,9 @@ export default {
           return element && element.contains(event.target);
         });
 
-        if (!clickedOnExcludedElement && !clickedOnExcludedId) {
+        const clickOnExcludedDomElement = excludeDOM.some(element => element.contains(event.target));
+
+        if (!clickedOnExcludedElement && !clickedOnExcludedId && !clickOnExcludedDomElement) {
           handler();
         }
       }
@@ -78,5 +93,5 @@ export default {
     document.removeEventListener('click', el.outsideClickHandler, outsideClickEventConfig);
     document.removeEventListener('touchend', el.outsideClickHandler, outsideClickEventConfig);
     document.removeEventListener('scroll', el.outsideClickHandler, outsideClickEventConfig);
-  }
+  },
 };
