@@ -5,8 +5,9 @@
             :media="mediaQuery"
             :srcset="mediaSrcset"
     >
-    <img :sizes="mappedSizes"
-         :srcset="srcset"
+    <img ref="image"
+         :sizes="mappedSizes"
+         :srcset="src"
          :src="fallback"
          :alt="alt"
          :loading="loading"
@@ -14,6 +15,7 @@
          :height="height || (ratio && fallbackHeight)"
          :decoding="decoding"
          @load="onLoad"
+         @error="handleError"
     >
   </picture>
 </template>
@@ -65,7 +67,7 @@
        */
       fallback: {
         type: String,
-        required: true,
+        default: null,
       },
 
       /**
@@ -164,9 +166,15 @@
         loaded: false,
 
         /**
+         * @type {String} Holds srcset string of comma separated sources with width value.
+         */
+        src: this.srcset,
+
+        /**
          * @type {Number} Holds a fallback width in case only the ratio is defined.
          */
         fallbackHeight: 400,
+
       };
     },
 
@@ -238,8 +246,8 @@
           .join(',') + fallback;
       },
     },
-    // watch: {},
 
+    // watch: {},
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
@@ -272,6 +280,9 @@
       onLoad() {
         this.loaded = true;
       },
+      handleError() {
+        this.src = this.fallback;
+      }
     },
     // render() {},
   };
@@ -331,7 +342,7 @@
     }
 
     &--placeholder {
-      background-color: variables.$color-grayscale--500;
+      background-color: variables.$color-grayscale--200;
     }
   }
 </style>
