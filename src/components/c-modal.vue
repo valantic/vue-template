@@ -388,7 +388,7 @@
 
   .v--modal-overlay {
     // stylelint-disable-next-line declaration-no-important
-    background: rgba(variables.$color-grayscale--700, 0.9) !important;
+    background: rgba(variables.$color-grayscale--600, 0.9) !important;
 
     .v--modal-background-click {
       width: 100%;
