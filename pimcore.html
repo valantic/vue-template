@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Vue template</title>
+
+  <script>
+    // Initial data demo
+    window.initialData = {
+      session: {},
+      breadcrumb: {},
+      notification: {},
+    };
+    /*
+    window.initialData.breadcrumb.items = [
+      {
+        name: 'Home',
+        url: '#',
+      },
+      {
+        name: 'Sandbox',
+        url: '#',
+      }
+    ];
+    window.initialData.notification.notifications = [
+      {
+        id: 0,
+        type: 'success',
+        message: 'Example Message',
+        expire: null,
+        selector: null,
+        redirectUrl: '',
+      }
+    ];
+     */
+  </script>
+</head>
+<body>
+  <div id="app">
+    <header is="vue:c-header"></header>
+    <div is="vue:l-default"></div>
+    <footer is="vue:c-footer"></footer>
+  </div>
+
+  <noscript>
+    <div class="c-no-script">
+      To view this website you need to enable JavaScript.
+    </div>
+  </noscript>
+</body>
+</html>

@@ -1,18 +1,22 @@
-import { defineConfig, splitVendorChunkPlugin, UserConfigExport } from 'vite';
+import { defineConfig, UserConfigExport } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import path from 'path';
+import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { webpack } from './package.json'; // TODO: rename config property in package.json.
+
+/**
+ * Notes:
+ * - Style only components are imported by src/setup/components.ts.
+ */
 
 export default defineConfig(({ command, mode }) => {
   const config: UserConfigExport = {
     plugins: [
       vue(),
-      splitVendorChunkPlugin(),
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src/'),
+        '@': resolve(__dirname, 'src/'),
         'vue': 'vue/dist/vue.esm-bundler.js', // Was required because inline import of vue.esm-bundler.js resulted in TS issues.
       },
     },
@@ -22,34 +26,63 @@ export default defineConfig(({ command, mode }) => {
       __VUE_I18N_FULL_INSTALL__: true,
       __VUE_I18N_LEGACY_API__: false,
     },
+    json: {
+      stringify: true,
+    },
   };
 
   switch (command) {
     case 'build': // @see https://vitejs.dev/config/build-options.html
       config.base = webpack.productionPath; // TODO: rename to buildBase.
       config.build = {
-        outDir: webpack.buildPath, // TODO: rename to 'buildOutDir'
-        assetsDir: webpack.outputAssetsFolder, // TODO: rename to 'buildAssetsDir'.
+        outDir: `${webpack.buildPath}`, // TODO: rename to 'buildOutDir'
         assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
         manifest: true,
         emptyOutDir: true,
         copyPublicDir: true,
+
         // TODO: watch?
         rollupOptions: {
+          input: {
+            'app/index': './src/main.ts',
+            'pimcore/index': './src/pimcore/index.ts',
+          },
           output: {
-            assetFileNames: (assetInfo) => {
-              const extType = assetInfo?.name?.split('.').at(1) || '';
-              let assetsPath = 'assets';
+            entryFileNames: '[name].[hash].js',
+            chunkFileNames: `${webpack.outputAssetsFolder}/[name].[hash].js`,
+            assetFileNames(assetInfo) {
+              const fileName = assetInfo?.name || '';
+              const imageExtensions = /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i;
+              const styleExtensions = /\.(css|sass|scss)$/i;
+              const fontExtensions = /\.(woff|woff2|eot|ttf|otf)$/i;
+              const scriptExtensions = /\.(vue|js|ts)$/i;
+              let name = '[name]';
+              let assetsPath = webpack.outputAssetsFolder;
 
-              if ((/png|jpe?g|svg|gif|tiff|bmp|ico/i).test(extType)) {
+              if (imageExtensions.test(fileName)) {
                 assetsPath += '/img';
-              } else if ((/css|sass|scss/i).test(extType)) {
+              } else if (styleExtensions.test(fileName)) {
                 assetsPath += '/css';
-              } else if ((/woff|woff2|eot|ttf|otf/i).test(extType)) {
+              } else if (fontExtensions.test(fileName)) {
                 assetsPath += '/fonts';
+              } else if (scriptExtensions.test(fileName)) {
+                assetsPath = '';
               }
 
-              return `${assetsPath}/[name][extname]`;
+              switch (fileName) {
+                case 'main.css':
+                  name = webpack.appName;
+
+                // no default
+              }
+
+              return `${assetsPath}/${name}.[hash].[ext]`;
+            },
+            manualChunks(source) { // eslint-disable-line consistent-return -- giving no return value is legit.
+              // Additional tests can be added to create additional splits.
+              if (source.includes('node_modules')) {
+                return 'vendor';
+              }
             },
           },
         },
@@ -68,8 +101,6 @@ export default defineConfig(({ command, mode }) => {
           })
         );
       }
-
-    // no default
   }
 
   return config;

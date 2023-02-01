@@ -16,6 +16,7 @@
     "lint:eslint": "eslint --ext .ts,.js,.vue ./",
     "test": "npm run lint && npm run jest; exit 0;",
     "build": "vite build",
+    "build:pimcore": "npm run build -- --mode='pimcore'",
     "build:w": "NODE_ENV=production webpack --mode production",
     "build:profile": "npm run build -- --mode='profile'",
     "build:profile:w": "NODE_ENV=production webpack --mode production --profile",
@@ -36,7 +37,8 @@
     "styleguideBuildPath": "./dist",
     "styleguidePath": "/",
     "developmentPath": "/",
-    "outputAssetsFolder": "assets/",
+    "outputAssetsFolder": "assets",
+    "appName": "app",
     "filePrefix": "",
     "themeSource": "src/setup/scss/themes/",
     "themeFiles": [
