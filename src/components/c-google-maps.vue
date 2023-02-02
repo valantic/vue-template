@@ -267,6 +267,14 @@
       },
 
       /**
+       * Allows defining the map to be centered.
+       */
+      center: {
+        type: Boolean,
+        default: true,
+      },
+
+      /**
        * Allows passing custom bounds.
        *
        * @see https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngBounds
@@ -393,8 +401,10 @@
        * TODO: note, that Google does not support destroying an instance... @see https://stackoverflow.com/questions/10485582/what-is-the-proper-way-to-destroy-a-map-instance
        */
       createMapInstance(): void {
-        if (!this.mappedLocations?.length) {
-          throw new Error('Found no locations');
+        if (!this.mappedLocations?.length && !this.center) {
+          const errorMsg = 'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.'; // eslint-disable-line vue/max-len
+
+          throw new Error(errorMsg);
         }
 
         this.mapInstance = new window.google.maps.Map(this.container, {
@@ -415,7 +425,7 @@
         // Make sure something is visible.
         if (this.bounds) {
           this.fitBounds();
-        } else if (this.markers[0]) {
+        } else if (!this.center && this.markers[0]) {
           const markerPosition = this.markers[0].getPosition();
 
           if (markerPosition) {
@@ -470,7 +480,7 @@
 
         geocoder?.geocode({ address: location.geocode }, (results, status) => {
           if (status === 'OK') {
-            const fitBounds = this.allowAutoUpdates && this.bounds !== false;
+            const fitBounds = this.allowAutoUpdates && !this.center && this.bounds !== false;
 
             if (!results?.length) {
               return;
