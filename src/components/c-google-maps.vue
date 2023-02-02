@@ -61,6 +61,7 @@
   }
 
   const callbackStack: ICallback[] = [];
+  let geocoder: google.maps.Geocoder | null = null;
   let isMapsAPILoaded = false;
 
   export const GOOGLE_MAPS_THEME_GRAY: google.maps.MapTypeStyle[] = [ // @see https://snazzymaps.com/style/15/subtle-grayscale
@@ -354,6 +355,8 @@
 
     beforeCreate() {
       loadMapsAPI(() => {
+        geocoder = new window.google.maps.Geocoder();
+
         this.$nextTick(() => {
           this.createMapInstance();
         });
@@ -462,7 +465,27 @@
           throw new Error("Unable to geocode a location without 'geocode' information.");
         }
 
-        // Todo: add geocoder.
+        geocoder?.geocode({ address: location.geocode }, (results, status) => {
+          if (status === 'OK') {
+            const fitBounds = this.allowAutoUpdates && this.bounds !== false;
+
+            if (!results?.length) {
+              return;
+            }
+
+            this.createMarker({
+              ...location,
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng(),
+            });
+
+            if (fitBounds) {
+              this.fitBounds();
+            }
+          } else {
+            throw new Error(`Geocode was not successful for the following reason: ${status}`);
+          }
+        });
       },
 
       /**
