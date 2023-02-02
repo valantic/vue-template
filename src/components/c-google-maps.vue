@@ -12,7 +12,7 @@
     defineComponent,
     PropType,
     Ref,
-    ref
+    ref,
   } from 'vue';
   import loadScript from '@/helpers/load-script';
   import sessionStore from '@/stores/session';
@@ -20,6 +20,7 @@
   interface ISetup {
     container: Ref<HTMLDivElement>;
   }
+
   interface IData {
 
     /**
@@ -43,24 +44,24 @@
     allowAutoUpdates: boolean;
   }
 
-  type ICallback = () => unknown;
+  type ICGoogleMapsCallback = () => unknown;
 
-  interface ILocation {
+  interface ICGoogleMapsLocation {
     lat?: string | number | null;
     lng?: string | number | null;
     geocode?: string;
     icon?: string;
     title?: string;
-    referer?: ILocation;
+    referer?: ICGoogleMapsLocation;
   }
 
   declare global {
     interface Window {
-      cGoogleMapsInitMap: ICallback;
+      cGoogleMapsInitMap: ICGoogleMapsCallback;
     }
   }
 
-  const callbackStack: ICallback[] = [];
+  const callbackStack: ICGoogleMapsCallback[] = [];
   let geocoder: google.maps.Geocoder | null = null;
   let isMapsAPILoaded = false;
 
@@ -203,7 +204,7 @@
   /**
    * This function checks whether the Map API has already been loaded once.
    */
-  function loadMapsAPI(callback: ICallback): void {
+  function loadMapsAPI(callback: ICGoogleMapsCallback): void {
     const useSessionStore = sessionStore();
     const apiKey = useSessionStore.googleMapsApiKey;
 
@@ -237,7 +238,7 @@
        * lat/lng OR geocode MUST be defined!
        */
       locations: {
-        type: Array as PropType<ILocation[]>,
+        type: Array as PropType<ICGoogleMapsLocation[]>,
         required: true,
       },
 
@@ -297,11 +298,13 @@
        * @see https://developers.google.com/maps/documentation/javascript/reference/map
        */
       mapsConfig: {
-        type: Object,
+        type: Object as PropType<google.maps.MapOptions>,
         default: null,
       },
     },
-    emits: ['click'],
+    emits: {
+      click: payload => !!payload?.location && !!payload?.maker,
+    },
 
     setup(): ISetup {
       const container = ref();
@@ -323,7 +326,7 @@
       /**
        * Maps the locations to the Google Maps required format.
        */
-      mappedLocations(): ILocation[] {
+      mappedLocations(): ICGoogleMapsLocation[] {
         return this.locations?.map((location) => {
           const { lat, lng } = location;
 
@@ -460,7 +463,7 @@
        * @param {Object} location - A location object.
        * @param {String} location.geocode - An address string, that will be used to calculate the coordinates.
        */
-      createMakerFromAddress(location: ILocation): void {
+      createMakerFromAddress(location: ICGoogleMapsLocation): void {
         if (!location.geocode) {
           throw new Error("Unable to geocode a location without 'geocode' information.");
         }
@@ -493,7 +496,7 @@
        *
        * @returns {Property.Marker}
        */
-      createMarker(location: ILocation): google.maps.Marker {
+      createMarker(location: ICGoogleMapsLocation): google.maps.Marker {
         const marker = new window.google.maps.Marker({
           position: {
             lat: location.lat,
