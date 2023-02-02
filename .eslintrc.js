@@ -17,6 +17,9 @@ module.exports = {
   settings: {
     'import/resolver': 'webpack',
   },
+  globals: {
+    'google': 'readonly'
+  },
   // add your custom rules here
   rules: {
     'vue/no-unsupported-features': ['error', {
