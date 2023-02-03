@@ -219,9 +219,8 @@
         }
 
         const mappedSizesBreakpoints = {};
-        const fallback = sizes.fallback ? `,${sizes.fallback}px` : ',100vw';
-
-        return Object
+        const fallback = sizes.fallback ? `${sizes.fallback}px` : '100vw';
+        const mappedSizes = Object
           .keys(sizes)
           .map((breakpoint) => {
             if (breakpoint === 'fallback') {
@@ -242,8 +241,11 @@
             const viewWidth = Math.floor((mappedSizesBreakpoints[breakpoint] / breakpoint) * 100);
 
             return `(max-width: ${breakpoint}px) ${viewWidth}vw`;
-          })
-          .join(',') + fallback;
+          });
+
+        mappedSizes.push(fallback);
+
+        return mappedSizes.join(',');
       },
     },
 
