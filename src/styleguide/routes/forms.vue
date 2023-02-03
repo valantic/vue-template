@@ -108,11 +108,12 @@
         </e-fieldset>
 
         <e-fieldset legend="Date Pickers">
-          <eDate v-model="form.date" name="date" />
-          <cDatePicker :start.sync="form.startDate"
-                       :end.sync="form.endDate"
-                       name="date-picker"
-                       range />
+          <e-date v-model="form.date" name="date" />
+          <c-date-picker :start.sync="form.startDate" name="start" />
+          <c-date-picker :start.sync="form.startDate"
+                         :end.sync="form.endDate"
+                         name="date-picker"
+                         range />
         </e-fieldset>
 
         <e-button type="submit" primary>

@@ -294,6 +294,7 @@
             weekdaysShort: weekdays.map(date => this.$d(date, 'weekdayNarrow')),
           },
           onDraw: this.onCalendarDraw.bind(this),
+          keyboardInput: false, // Since Pikaday calls `onSelect` on every keyboard input, this is mostly useless for us, since we don't know if the user navigates or selects a date.
         });
 
         if (this.minDate) {
