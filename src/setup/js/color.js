@@ -26,5 +26,7 @@ module.exports = {
     { name: '$color-status--success', value: ['#2fa61c'] },
     { name: '$color-status--info', value: ['#e2951f'] },
     { name: '$color-status--error', value: ['#b50f0f'] },
+    { name: '$color-status--danger', value: ['#FF9600'] },
   ],
+
 };
