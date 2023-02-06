@@ -21,9 +21,15 @@
         {{ option[labelField] }}
       </option>
     </select>
-    <span v-if="!mixinHasDefaultState" :class="b('icon-splitter')"></span>
-    <span v-if="progress" :class="b('progress-container')">
-      <e-progress />
+    <span :class="b('icon-wrapper')">
+      <span v-if="!mixinHasDefaultState" :class="b('icon-splitter')"></span>
+      <e-icon v-if="!mixinHasDefaultState && !focus"
+              :class="b('state-icon')"
+              :icon="mixinStateIcon"
+      />
+      <span v-if="progress" :class="b('progress-container')">
+        <e-progress />
+      </span>
     </span>
   </span>
 </template>
@@ -31,6 +37,8 @@
 <script>
   import { i18n } from '@/setup/i18n';
   import mixinFormStates from '@/mixins/form-states';
+  import eIcon from '@/elements/e-icon.vue';
+  import eProgress from '@/elements/e-progress.vue';
 
   /**
    * Renders a styled select element. Options can be passed with the `options` property.
@@ -39,7 +47,11 @@
     name: 'e-select',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    // components: {},
+    components: {
+      eIcon,
+      eProgress
+    },
+
     mixins: [mixinFormStates],
     inheritAttrs: false,
 
@@ -118,7 +130,7 @@
        */
       modifiers() {
         return {
-          ...this.stateModifiers,
+          ...this.mixinStateModifiers,
         };
       },
     },
@@ -179,10 +191,24 @@
       padding: variables.$spacing--0 variables.$spacing--30 variables.$spacing--0 variables.$spacing--10;
       height: $height;
       cursor: pointer;
+      color: variables.$color-grayscale--200;
 
       &::-ms-expand {
         display: none;
       }
+    }
+
+    .e-icon {
+      display: flex;
+      margin: auto;
+    }
+    // separator for state icons
+    &__icon-wrapper {
+      position: absolute;
+      top: 50%;
+      right: variables.$spacing--5;
+      display: flex;
+      transform: translateY(-50%);
     }
 
     // separator for state icons
@@ -219,9 +245,12 @@
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
+      color: variables.$color-status--error;
+
       #{$this}__select {
         @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
+        color: variables.$color-status--error;
         border-color: variables.$color-status--error;
       }
 
