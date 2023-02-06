@@ -52,6 +52,10 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core
 - [dayjs](https://www.npmjs.com/package/dayjs) - Fast 2kB alternative to Moment.js with the same modern API.
   > c-date-picker-input, c-date-picker-range
+- [embla-carousel](https://www.npmjs.com/package/embla-carousel) - Embla Carousel is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source. Build awesome carousels by extending Embla Carousel with your own CSS and JavaScript.
+  > c-slider
+- [embla-carousel-autoplay](https://www.npmjs.com/package/embla-carousel-autoplay) - An autoplay plugin for Embla Carousel.
+  > c-slider
 - [the-new-css-reset](https://www.npmjs.com/package/the-new-css-reset) - This new CSS reset is using the new CSS features
   > css
 - [vue](https://www.npmjs.com/package/vue) - Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.

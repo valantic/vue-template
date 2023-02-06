@@ -74,6 +74,8 @@
     "body-scroll-lock": "~4.0.0-beta.0",
     "core-js": "~3.26.0",
     "dayjs": "~1.11.6",
+    "embla-carousel": "~7.0.9",
+    "embla-carousel-autoplay": "~7.0.9",
     "pinia": "~2.0.23",
     "the-new-css-reset": "~1.7.3",
     "vue": "~3.2.41",
