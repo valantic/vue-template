@@ -3,7 +3,7 @@
               @after-enter="onAfterEnter"
               @after-leave="onAfterLeave"
   >
-    <dialog v-show="isOpen"
+    <dialog v-if="isOpen"
             :class="b(modifiers)"
     >
       <div ref="container" :class="b('container')">
@@ -11,13 +11,13 @@
              ref="inner"
              :class="b('inner')"
         >
-          <div v-if="$slots.head || title || hasCloseButton" :class="b('header')">
+          <div v-if="$slots.head || title || isClosable" :class="b('header')">
             <div :class="b('header-inner')">
               <slot name="head" :close="close">
                 <h2 v-if="title" :class="b('title')">
                   {{ title }}
                 </h2>
-                <button v-if="isClosable && hasCloseButton"
+                <button v-if="isClosable"
                         :aria-title="$t('c-modal.buttonClose')"
                         :class="b('button-close')"
                         type="button"
@@ -89,14 +89,6 @@
       },
 
       /**
-       * Allows enabling/disabling the close button.
-       */
-      hasCloseButton: {
-        type: Boolean,
-        default: true,
-      },
-
-      /**
        * Allows enabling/disabling close on outside click.
        */
       closeOnOutsideClick: {
@@ -126,11 +118,11 @@
         500,
       ]),
     },
-    emits: [
-      'update:isOpen',
-      'open',
-      'close',
-    ],
+    emits: {
+      'update:isOpen': (state: unknown): boolean => typeof state === 'boolean',
+      'open': null,
+      'close': null,
+    },
 
     setup(): ISetup {
       const container = ref();
@@ -149,24 +141,22 @@
        */
       modifiers(): IModifiers {
         return {
-          hasCloseButton: this.isClosable && this.hasCloseButton,
           size: this.size,
           spacing: this.spacing,
         };
       },
     },
     watch: {
-      isOpen: {
-        /**
-         * Triggers opening/closing modal.
-         */
-        handler(state): void {
-          if (state) {
-            this.open();
-          } else {
-            this.close();
-          }
-        },
+
+      /**
+       * Triggers opening/closing modal.
+       */
+      isOpen(state: boolean): void {
+        if (state) {
+          this.open();
+        } else {
+          this.close();
+        }
       },
     },
 
@@ -190,8 +180,10 @@
        * Opens the modal.
        */
       open(): void {
-        this.$el.showModal(); // Native function of `HTMLDialogElement`
-        this.$emit('update:isOpen', true);
+        this.$nextTick(() => {
+          this.$el.showModal(); // Native function of `HTMLDialogElement`
+          this.$emit('update:isOpen', true);
+        });
       },
 
       /**
@@ -236,7 +228,6 @@
        * Handler for when the modal close-animation is completed.
        */
       onAfterLeave(): void {
-        this.$el.close();
         enableBodyScroll(this.container as HTMLElement);
         document.removeEventListener('keydown', this.onKeyDown);
       },
@@ -255,8 +246,6 @@
   .c-modal {
     $this: &;
 
-    @include z-index(modal);
-
     &,
     &::backdrop {
       position: fixed;
@@ -267,9 +256,6 @@
     }
 
     &::backdrop {
-      @include z-index(back);
-
-      content: '';
       opacity: 0.75;
       background-color: variables.$color-grayscale--0;
     }
@@ -323,7 +309,9 @@
     }
 
     &__header-inner {
-      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     &__content, {
@@ -352,15 +340,8 @@
     }
 
     &__button-close {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
+      padding-left: variables.$spacing--20;
       cursor: pointer;
-    }
-
-    &--has-close-button &__title {
-      padding-right: variables.$spacing--40;
     }
 
     &--size-600 &__inner {

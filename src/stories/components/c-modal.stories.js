@@ -18,7 +18,6 @@ export default {
   args: {
     title: 'My Modal Title',
     isClosable: true,
-    hasCloseButton: true,
     closeOnOutsideClick: false,
     size: 600,
     spacing: 500,
@@ -47,7 +46,6 @@ const Template = args => ({
     <c-modal v-model:is-open="isOpen"
              :title="args.title"
              :is-closable="args.isClosable"
-             :has-close-button="args.hasCloseButton"
              :close-on-outside-click="args.closeOnOutsideClick"
              :size="args.size"
              :spacing="args.spacing"
