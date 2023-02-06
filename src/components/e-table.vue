@@ -30,11 +30,10 @@
           <th v-if="selectable"
               :class="b('header-cell', { selectColumn: true })"
           >
-            <e-checkbox :checked="!!selectedInternal.length"
+            <e-checkbox v-model="toggleAllValue"
                         :disabled="disabled"
                         value="0"
                         name="total"
-                        @change="toggleAll"
             >
               <span v-if="!!selectedInternal.length" :class="{ invisible : !showSortingOptions || !isMobile}">
                 {{ $t('e-table.deselectAll') }}
@@ -371,6 +370,22 @@
 
     computed: {
       /**
+       * Model Value for toggle all checkbox.
+       */
+      toggleAllValue: {
+        get(): boolean {
+          return !!this.selectedInternal.length;
+        },
+        set(): void {
+          if (this.selectedInternal.length) {
+            this.selectedInternal = [];
+          } else {
+            this.selectedInternal = this.items.map(item => item[this.itemIdentifier]);
+          }
+        },
+      },
+
+      /**
        * Checks if current viewport is mobile (<= sm).
        */
       isMobile(): boolean {
@@ -527,17 +542,6 @@
 
           default:
             return null;
-        }
-      },
-
-      /**
-       * Toggles the select all option.
-       */
-      toggleAll(): void {
-        if (this.selectedInternal.length) {
-          this.selectedInternal = [];
-        } else {
-          this.selectedInternal = this.items.map(item => item[this.itemIdentifier]);
         }
       },
 
