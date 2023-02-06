@@ -23,7 +23,7 @@
   import { BREAKPOINTS_MAX } from '@/setup/globals';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface ISizes {
+  interface IImageSizes {
     fallback: number;
     lg: number,
     md: number,
@@ -106,7 +106,7 @@
        * `{ <breakpoint (px value|short name)>: <minWidth>, ... }`
        */
       sizes: {
-        type: Object as PropType<ISizes>,
+        type: Object as PropType<IImageSizes>,
         default: null,
       },
 
@@ -235,7 +235,7 @@
             // otherwise take the size key (which is a number in that case)
             const breakpointValue = BREAKPOINTS_MAX[breakpoint] || size as number;
 
-            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size as keyof ISizes];
+            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size as keyof IImageSizes];
 
             return breakpointValue;
           })
