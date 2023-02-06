@@ -3,7 +3,6 @@
     <h1>
       Table
     </h1>
-    selected items: {{ selectedItems }}
     <e-table v-model:selected="selectedItems"
              :items="items"
              :columns="columnsDefinition"
@@ -20,7 +19,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { faker } from '@faker-js/faker/locale/en';
-  import eTable from '@/components/e-table.vue';
+  import eTable, { IETableColumn, IETableItem } from '@/components/e-table.vue';
+
+  interface ISetup {
+    columnsDefinition: IETableColumn[];
+  }
 
   export default defineComponent({
     name: 'r-table',
@@ -30,7 +33,7 @@
     // props: {},
     // emits: {},
 
-    setup() {
+    setup(): ISetup {
       return {
         columnsDefinition: [
           {
@@ -59,7 +62,7 @@
             title: 'Birthdate',
             key: 'birthDate',
             align: 'left',
-            slotName: 'birthDate',
+            slotName: 'date',
             sortable: true,
           },
           {
@@ -87,7 +90,7 @@
     },
 
     computed: {
-      items() {
+      items(): IETableItem[] {
         return new Array(40)
           .fill(null)
           .map((item, index) => ({

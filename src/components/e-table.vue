@@ -36,7 +36,6 @@
                         name="total"
                         @change="toggleAll"
             >
-
               <span v-if="!!selectedInternal.length" :class="{ invisible : !showSortingOptions || !isMobile}">
                 {{ $t('e-table.deselectAll') }}
               </span>
@@ -62,7 +61,7 @@
                 <!-- Adding the support for functions was needed, to allow the use of translations in the header row -->
                 {{ typeof column.title === 'function' ? column.title() : column.title }}
               </span>
-              <e-icon icon="arrow--down"
+              <e-icon icon="i-arrow--down"
                       width="16"
                       height="16"
                       inline
@@ -202,26 +201,26 @@
   import useUuid, { IUuid } from '@/compositions/uuid';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface IItem {
-    disabled: boolean;
+  export interface IETableItem {
+    disabled?: boolean;
     [key: string]: unknown;
   }
 
-  interface IColumn {
+  export interface IETableColumn {
     title: string | (() => string);
     key: string;
     align: string;
     slotName: string;
     sortable: boolean;
-    nowrap: boolean;
-    titleHidden: boolean | (() => unknown);
-    onClick: (item: IItem, column: IColumn, event?: Event) => unknown;
+    nowrap?: boolean;
+    titleHidden?: boolean | (() => boolean);
+    onClick?: (item: IETableItem, column: IETableColumn, event?: Event) => unknown;
     sort?: (a: unknown, b: unknown) => number;
   }
 
   interface IRowLink {
-    href?: (item: IItem, column?: IColumn, event?: Event) => string;
-    title?: string | ((item?: IItem) => string);
+    href?: (item: IETableItem, column?: IETableColumn, event?: Event) => string;
+    title?: string | ((item?: IETableItem) => string);
   }
 
   interface ISetup extends IUuid {
@@ -238,7 +237,7 @@
     /**
      * The currently selected 'column' to be sorted.
      */
-    sortBy: IColumn | null;
+    sortBy: IETableColumn | null;
 
     /**
      * Holds to sort direction in case a 'sortBy' is active.
@@ -263,7 +262,7 @@
     /**
      * Row items that should be displayed in expanded state.
      */
-    expandedRows: IItem[],
+    expandedRows: IETableItem[],
   }
 
   /**
@@ -286,12 +285,15 @@
        * Array of data objects to render in table.
        */
       items: {
-        type: Array as PropType<IItem[]>,
+        type: Array as PropType<IETableItem[]>,
         required: true,
       },
 
+      /**
+       * Allows to set an Array of selected items.
+       */
       selected: {
-        type: Array as PropType<IItem[]>,
+        type: Array as PropType<IETableItem[]>,
         default: () => [],
       },
 
@@ -299,7 +301,7 @@
        * Array of column definition objects.
        */
       columns: {
-        type: Array as PropType<IColumn[]>,
+        type: Array as PropType<IETableColumn[]>,
         required: true,
       },
 
@@ -343,7 +345,9 @@
         default: 'id',
       },
     },
-    emits: ['update:selected'],
+    emits: {
+      'update:selected': (payload: unknown): boolean => Array.isArray(payload),
+    },
 
     setup(): ISetup {
       const toggleButton = ref();
@@ -378,7 +382,7 @@
        */
       selectedInternal: {
         get(): unknown[] {
-          return this.selected.map((item: IItem): unknown => item[this.itemIdentifier]);
+          return this.selected.map((item: IETableItem): unknown => item[this.itemIdentifier]);
         },
         set(itemIds: unknown[]): void {
           this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier])));
@@ -400,7 +404,7 @@
       /**
        * Returns a sorted copy of the table-items.
        */
-      itemsSortedBy(): IItem[] {
+      itemsSortedBy(): IETableItem[] {
         const { sortBy } = this;
         const items = this.items.slice();
 
@@ -418,7 +422,7 @@
       /**
        * Reverts the sort direction if required.
        */
-      itemsSorted(): IItem[] {
+      itemsSorted(): IETableItem[] {
         if (!this.sortAscending) {
           return this.itemsSortedBy.slice().reverse();
         }
@@ -478,13 +482,13 @@
       /**
        * Returns the title of the actual table column.
        */
-      columnTitle(column: IColumn): string | null {
+      columnTitle(column: IETableColumn): string | null {
         switch (typeof column?.title) {
           case 'string':
             return column.title;
 
           case 'function':
-            return column.title() as string;
+            return column.title();
 
           default:
             return null;
@@ -511,7 +515,7 @@
       /**
        * Returns a title for the row link, based on the type of the definition.
        */
-      rowTitle(item: IItem): string | null | object {
+      rowTitle(item: IETableItem): string | null {
         const { rowLink } = this;
 
         switch (typeof rowLink?.title) {
@@ -540,16 +544,25 @@
       /**
        * Checks if the given column should display the header label.
        */
-      isHeaderLabelVisible(column: IColumn): boolean {
+      isHeaderLabelVisible(column: IETableColumn): boolean {
         // Adding the support for functions was needed, to change visibility state dynamically (improved a11y).
         return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden !== true);
       },
 
       /**
+       * Checks if the table is sorted by a given column.
+       *
+       * Since Vue3 leverages proxies for data properties for reactivity, we can't compare the objects directly.
+       */
+      isSortedBy(column: IETableColumn): boolean {
+        return JSON.stringify(this.sortBy) === JSON.stringify(column);
+      },
+
+      /**
        * Will set the sort-parameters.
        */
-      onClickSort(column: IColumn): void {
-        if (this.sortBy === column) {
+      onClickSort(column: IETableColumn): void {
+        if (this.isSortedBy(column)) {
           const asc = this.sortAscending;
 
           if (!asc) {
@@ -566,9 +579,8 @@
       /**
        * Calculates a sort button modifier object.
        */
-      sortButtonModifiers(column: IColumn): IModifiers {
-        const { sortBy } = this;
-        const active = sortBy ? sortBy === column : false;
+      sortButtonModifiers(column: IETableColumn): IModifiers {
+        const active = this.isSortedBy(column);
 
         return {
           active,
@@ -579,7 +591,7 @@
       /**
        * Returns BEM modifiers for header cells.
        */
-      headerCellModifiers(column: IColumn): IModifiers {
+      headerCellModifiers(column: IETableColumn): IModifiers {
         return {
           align: column.align || 'left',
           col: column.key,
@@ -591,7 +603,7 @@
       /**
        * Returns BEM modifiers for cells.
        */
-      cellModifiers(column: IColumn): IModifiers {
+      cellModifiers(column: IETableColumn): IModifiers {
         return {
           align: column.align || 'left',
           hasEvent: !!column.onClick,
@@ -604,10 +616,10 @@
       /**
        * Returns a sort function which will sort the elements of an Array by the given field.
        */
-      sortByFieldConstructor(field: string): (a: IItem, b: IItem) => number {
+      sortByFieldConstructor(field: string): (a: IETableItem, b: IETableItem) => number {
         return (a, b) => {
-          const aValue = a[field as keyof IItem];
-          const bValue = b[field as keyof IItem];
+          const aValue = a[field as keyof IETableItem];
+          const bValue = b[field as keyof IETableItem];
 
           switch (true) {
             case typeof aValue === 'string':
@@ -631,7 +643,7 @@
       /**
        * Enables the row link for a few ms to allow link specific context menus (even IE11).
        */
-      enableRowLink() {
+      enableRowLink(): void {
         if (this.rowLink?.href && !this.hasSelection) { // It was not possible to test for rowHref when binding the event in the template.
           this.enableRowLinks = true;
 
@@ -662,7 +674,7 @@
       /**
        * Callback for the tables mouseup event.
        */
-      onMouseUp(event: PointerEvent): void { // FF: mousedown, mouseup, contextmenu
+      onMouseUp(event: MouseEvent): void { // FF: mousedown, mouseup, contextmenu
         if (!this.enableRowLinks) {
           // Firefox marks a cells content when holding ctrl/meta while clicking it.
           this.hasSelection = !(event.ctrlKey || event.metaKey) && !!window.getSelection()?.toString();
@@ -674,7 +686,7 @@
       /**
        * Callback for clicks within a row.
        */
-      onCellClick(item: IItem, column: IColumn, event: Event) {
+      onCellClick(item: IETableItem, column: IETableColumn, event: MouseEvent): void {
         if (this.hasSelection) { // Cancel cell action if a text selection is active.
           return;
         }
@@ -684,7 +696,7 @@
         } else {
           const url = this.rowLink?.href?.(item, column);
 
-          if (event instanceof KeyboardEvent && (event.ctrlKey || event.metaKey)) {
+          if (event.ctrlKey || event.metaKey) {
             window.open(url, '_blank');
           } else if (typeof url === 'string') {
             window.location.href = url;
@@ -695,7 +707,7 @@
       /**
        * Click callback for the toggle cell (increases click area on mobile).
        */
-      onDetailToggleClick(item: IItem): void {
+      onDetailToggleClick(item: IETableItem): void {
         const id = item[this.itemIdentifier];
 
         if (!id) {
@@ -834,6 +846,7 @@
     &__sort {
       display: flex;
       align-items: center;
+      cursor: pointer;
 
       .e-icon {
         margin-left: variables.$spacing--5;
