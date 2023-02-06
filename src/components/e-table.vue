@@ -1,5 +1,5 @@
 <template>
-  <table :class="b({ enableRowLinks, hasRowLinks: !!rowHref })"
+  <table :class="b({ enableRowLinks, hasRowLinks: !!rowLink?.href })"
          :style="{ '--e-table--toggle-row-height': `${toggleButtonHeight}px` }"
          @contextmenu.capture="onContextMenu"
          @mousedown.capture="onMouseDown"
@@ -107,11 +107,11 @@
           :key="columnIndex"
           :class="b('data-cell', cellModifiers(column))"
           :data-label="columnTitle(column)"
-          @click="column.onClick || rowHref ? onCellClick(item, column, $event) : null"
+          @click="column.onClick || rowLink?.href ? onCellClick(item, column, $event) : null"
         >
-          <a v-if="!column.onClick && typeof rowHref === 'function'"
+          <a v-if="!column.onClick && typeof rowLink?.href === 'function'"
              :class="b('cell-link')"
-             :href="rowHref(item) || '#'"
+             :href="rowLink.href(item) || '#'"
              :title="rowTitle(item)"
              tabindex="-1"
           ></a>
@@ -148,7 +148,7 @@
                    name="details"
             >
             <e-icon :class="b('detail-toggle-icon')"
-                    icon="arrow--down"
+                    icon="i-arrow--down"
                     :alt="$t('e-table.showDetailsHeader')"
             />
           </label>
@@ -191,7 +191,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import {
+    defineComponent,
+    PropType,
+    Ref,
+    ref,
+  } from 'vue';
   import eIcon from '@/components/e-icon.vue';
   import eCheckbox from '@/components/e-checkbox.vue';
   import useUuid, { IUuid } from '@/compositions/uuid';
@@ -203,7 +208,7 @@
   }
 
   interface IColumn {
-    title: string;
+    title: string | (() => string);
     key: string;
     align: string;
     slotName: string;
@@ -211,14 +216,17 @@
     nowrap: boolean;
     titleHidden: boolean | (() => unknown);
     onClick: (item: IItem, column: IColumn, event?: Event) => unknown;
+    sort?: (a: unknown, b: unknown) => number;
   }
 
   interface IRowLink {
-    href?: (item: IItem, column: IColumn, event?: Event) => string;
-    title?: string | (() => unknown);
+    href?: (item: IItem, column?: IColumn, event?: Event) => string;
+    title?: string | ((item?: IItem) => string);
   }
 
-  interface ISetup extends IUuid {}
+  interface ISetup extends IUuid {
+    toggleButton: Ref<HTMLButtonElement>;
+  }
 
   interface IData {
 
@@ -282,6 +290,11 @@
         required: true,
       },
 
+      selected: {
+        type: Array as PropType<IItem[]>,
+        default: () => [],
+      },
+
       /**
        * Array of column definition objects.
        */
@@ -296,14 +309,6 @@
       rowLink: {
         type: Object as PropType<IRowLink>,
         default: null,
-      },
-
-      /**
-       * Allows to set an Array of selected items.
-       */
-      selected: {
-        type: Array,
-        default: () => [],
       },
 
       /**
@@ -338,48 +343,24 @@
         default: 'id',
       },
     },
-    emits: ['select'],
+    emits: ['update:selected'],
 
     setup(): ISetup {
+      const toggleButton = ref();
+
       return {
         ...useUuid(),
+        toggleButton,
       };
     },
     data(): IData {
       return {
-        /**
-         * @type {Boolean} Holds a flag if sorting options are visible
-         */
         showSortingOptions: true,
-
-        /**
-         * @type {Object} The currently selected 'column' to be sorted.
-         */
         sortBy: null,
-
-        /**
-         * @type {Boolean} Holds to sort direction in case a 'sortBy' is active.
-         */
         sortAscending: true,
-
-        /**
-         * @type {Boolean} Holds a flag if row links should be enabled.
-         */
         enableRowLinks: false,
-
-        /**
-         * @type {Boolean} Holds a flag if there is currently a text selection inside the component.
-         */
         hasSelection: false,
-
-        /**
-         * @type {Number} Holds the height of the sorting list toggle button.
-         */
         toggleButtonHeight: 0,
-
-        /**
-         * Row items that should be displayed in expanded state.
-         */
         expandedRows: [],
       };
     },
@@ -396,11 +377,11 @@
        * Manages changes for the 'select' prop.
        */
       selectedInternal: {
-        get() {
-          return this.selected.map(item => item[this.itemIdentifier]);
+        get(): unknown[] {
+          return this.selected.map((item: IItem): unknown => item[this.itemIdentifier]);
         },
-        set(itemIds) {
-          this.$emit('select', this.items.filter(item => itemIds.includes(item[this.itemIdentifier])));
+        set(itemIds: unknown[]): void {
+          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier])));
         },
       },
 
@@ -408,25 +389,23 @@
        * Handles changes to the 'expandedRows' prop.
        */
       expandedRowsComputed: {
-        get() {
+        get(): unknown[] {
           return this.expandedRows.map(item => item[this.itemIdentifier]);
         },
-        set(itemIds) {
+        set(itemIds: unknown[]) {
           this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier]));
         },
       },
 
       /**
        * Returns a sorted copy of the table-items.
-       *
-       * @returns {Array.<Object>}
        */
-      itemsSortedBy() {
+      itemsSortedBy(): IItem[] {
         const { sortBy } = this;
         const items = this.items.slice();
 
         if (sortBy) {
-          const sort = typeof this.sortBy.sort === 'function'
+          const sort = typeof this.sortBy?.sort === 'function'
             ? sortBy.sort
             : this.sortByFieldConstructor(sortBy.key);
 
@@ -438,10 +417,8 @@
 
       /**
        * Reverts the sort direction if required.
-       *
-       * @returns {Array.<Object>}
        */
-      itemsSorted() {
+      itemsSorted(): IItem[] {
         if (!this.sortAscending) {
           return this.itemsSortedBy.slice().reverse();
         }
@@ -507,7 +484,7 @@
             return column.title;
 
           case 'function':
-            return column.title() || null;
+            return column.title() as string;
 
           default:
             return null;
@@ -517,7 +494,7 @@
       /**
        * Toggle the visibility for the sorting options.
        */
-      toggleSortingOptions() {
+      toggleSortingOptions(): void {
         if (this.isMobile) {
           this.updateToggleButtonHeight();
         }
@@ -528,15 +505,13 @@
        * Get the height of the sorting list toggle button.
        */
       updateToggleButtonHeight(): void {
-        this.toggleButtonHeight = this.$refs.toggleButton?.clientHeight || 0;
+        this.toggleButtonHeight = this.toggleButton?.clientHeight || 0;
       },
 
       /**
        * Returns a title for the row link, based on the type of the definition.
-       *
-       * @returns {String|null}
        */
-      rowTitle(item: IItem): string | null {
+      rowTitle(item: IItem): string | null | object {
         const { rowLink } = this;
 
         switch (typeof rowLink?.title) {
@@ -554,7 +529,7 @@
       /**
        * Toggles the select all option.
        */
-      toggleAll() {
+      toggleAll(): void {
         if (this.selectedInternal.length) {
           this.selectedInternal = [];
         } else {
@@ -573,7 +548,7 @@
       /**
        * Will set the sort-parameters.
        */
-      onClickSort(column: IColumn) {
+      onClickSort(column: IColumn): void {
         if (this.sortBy === column) {
           const asc = this.sortAscending;
 
@@ -592,7 +567,8 @@
        * Calculates a sort button modifier object.
        */
       sortButtonModifiers(column: IColumn): IModifiers {
-        const active = this.sortBy === column;
+        const { sortBy } = this;
+        const active = sortBy ? sortBy === column : false;
 
         return {
           active,
@@ -635,16 +611,16 @@
 
           switch (true) {
             case typeof aValue === 'string':
-              return aValue.localeCompare(bValue, undefined, { numeric: true }); // eslint-disable-line no-undefined
+              return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true }); // eslint-disable-line no-undefined, no-extra-parens
 
             case typeof aValue === 'number':
-              return aValue > bValue ? 1 : -1;
+              return aValue as number > (bValue as number) ? 1 : -1; // eslint-disable-line no-extra-parens
 
             case typeof aValue === 'boolean':
               return !aValue ? 1 : -1;
 
-            // case aValue instanceof Date:
-            // return this.$dayjs(aValue).isAfter(bValue) ? 1 : -1; // TODO: Fix
+            case aValue instanceof Date:
+              return this.$dayjs(aValue).isAfter(bValue as Date) ? 1 : -1;
 
             default:
               return 0;
@@ -719,7 +695,7 @@
       /**
        * Click callback for the toggle cell (increases click area on mobile).
        */
-      onDetailToggleClick(item: IItem) {
+      onDetailToggleClick(item: IItem): void {
         const id = item[this.itemIdentifier];
 
         if (!id) {
@@ -746,283 +722,281 @@
   @use '../setup/scss/mixins';
 
   .e-table {
-    .e-table {
-      $this: &;
+    $this: &;
 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include mixins.media(sm) {
+      display: table;
+    }
+
+    &__toggle-row {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: variables.$color-grayscale--1000;
+    }
+
+    &__toggle {
       position: relative;
+      display: block;
+      padding: variables.$spacing--10 0;
+      overflow: hidden;
+      border-bottom: 0;
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__toggle-icon {
+      position: absolute;
+      top: 50%;
+      left: variables.$spacing--5;
+      transform: translateY(-50%);
+      transition: transform variables.$transition-duration--200 ease;
+
+      &--open {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+
+    &__header-row {
+      position: sticky;
+      top: calc(var(--header-height, 0px) + var(--e-table--toggle-row-height, 0px));
+      z-index: 1;
       display: flex;
       flex-direction: column;
-      width: 100%;
+      border-bottom: 2px solid variables.$color-grayscale--0;
+      background-color: variables.$color-grayscale--1000;
 
       @include mixins.media(sm) {
-        display: table;
+        top: auto;
+        display: table-row;
+        background-color: inherit;
       }
+    }
 
-      &__toggle-row {
-        position: sticky;
-        top: 0;
-        background-color: variables.$color-grayscale--1000;
-        z-index: 1;
-      }
+    &__header-cell {
+      padding-bottom: variables.$spacing--10;
+      color: variables.$color-grayscale--0;
+      vertical-align: bottom;
 
-      &__toggle {
-        border-bottom: 0;
-        cursor: pointer;
-        display: block;
-        padding: variables.$spacing--10 0;
-        position: relative;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      &__toggle-icon {
-        position: absolute;
-        left: variables.$spacing--5;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: transform variables.$transition-duration--200 ease;
-
-        &--open {
-          transform: translateY(-50%) rotate(180deg);
+      &:first-child {
+        @include mixins.media(sm) {
+          padding-left: variables.$spacing--5;
         }
       }
 
-      &__header-row {
-        border-bottom: 2px solid variables.$color-grayscale--0;
-        background-color: variables.$color-grayscale--1000;
-        display: flex;
-        flex-direction: column;
-        position: sticky;
-        top: calc(var(--header-height, 0px) + var(--e-table--toggle-row-height, 0px));
-        z-index: 1;
+      &:last-child:not(&--sortable) {
+        @include mixins.media(sm) {
+          padding-right: variables.$spacing--5;
+        }
+      }
+
+      &--select-column {
+        width: auto;
+        vertical-align: middle;
+
+        @include mixins.media(sm) {
+          width: 1px; // Forces minimal width for checkbox column.
+        }
+      }
+
+      &--text-center {
+        text-align: center;
+      }
+
+      &--text-right {
+        text-align: right;
+      }
+
+      &--hidden {
+        padding: 0;
+      }
+    }
+
+    &__data-row {
+      border-bottom: 1px solid variables.$color-grayscale--0;
+
+      &--disabled {
+        position: relative;
+        pointer-events: none;
+
+        #{$this}__data-cell {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    &__sort {
+      display: flex;
+      align-items: center;
+
+      .e-icon {
+        margin-left: variables.$spacing--5;
+        opacity: 0.3;
+        transform: rotate(180deg);
+      }
+
+      &--desc {
+        .e-icon {
+          transform: none;
+        }
+      }
+
+      &--active {
+        .e-icon {
+          opacity: 1;
+        }
+      }
+    }
+
+    &__sort-label {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__data-cell {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      padding: variables.$spacing--5;
+
+      // This is a hacky solution for a FF issue where the background color overlaps the border.
+      // See: https://bugzilla.mozilla.org/show_bug.cgi?id=688556
+      // https://sonepar-suisse.atlassian.net/browse/WF-5573
+      background-clip: padding-box;
+      text-align: right;
+
+      @include mixins.media(sm) {
+        display: table-cell;
+        padding: variables.$spacing--5 variables.$spacing--20 variables.$spacing--5 0;
+        text-align: inherit;
+      }
+
+      &::before {
+        content: attr(data-label);
+        margin-right: variables.$spacing--10;
+        text-align: left;
+
+        @include mixins.media(sm) {
+          display: none;
+        }
+      }
+
+      &:first-child {
+        @include mixins.media(sm) {
+          padding-left: variables.$spacing--5;
+        }
+      }
+
+      &:last-child {
+        padding-right: variables.$spacing--5;
+      }
+
+      &:nth-child(odd) {
+        background-color: variables.$color-grayscale--700;
 
         @include mixins.media(sm) {
           background-color: inherit;
-          display: table-row;
-          top: auto;
         }
       }
 
-      &__header-cell {
-        padding-bottom: variables.$spacing--10;
-        color: variables.$color-grayscale--0;
-        vertical-align: bottom;
-
-        &:first-child {
-          @include mixins.media(sm) {
-            padding-left: variables.$spacing--5;
-          }
-        }
-
-        &:last-child:not(&--sortable) {
-          @include mixins.media(sm) {
-            padding-right: variables.$spacing--5;
-          }
-        }
-
-        &--select-column {
-          width: auto;
-          vertical-align: middle;
-
-          @include mixins.media(sm) {
-            width: 1px; // Forces minimal width for checkbox column.
-          }
-        }
-
-        &--text-center {
-          text-align: center;
-        }
-
-        &--text-right {
-          text-align: right;
-        }
-
-        &--hidden {
-          padding: 0;
-        }
+      &--align-center {
+        text-align: center;
       }
 
-      &__data-row {
-        border-bottom: 1px solid variables.$color-grayscale--0;
-
-        &--disabled {
-          position: relative;
-          pointer-events: none;
-
-          #{$this}__data-cell {
-            opacity: 0.5;
-          }
-        }
-      }
-
-      &__sort {
-        display: flex;
-        align-items: center;
-
-        .e-icon {
-          opacity: 0.3;
-          transform: rotate(180deg);
-          margin-left: variables.$spacing--5;
-        }
-
-        &--desc {
-          .e-icon {
-            transform: none;
-          }
-        }
-
-        &--active {
-          .e-icon {
-            opacity: 1;
-          }
-        }
-      }
-
-      &__sort-label {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      &__data-cell {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        padding: variables.$spacing--5;
+      &--align-right {
         text-align: right;
-
-        // This is a hacky solution for a FF issue where the background color overlaps the border.
-        // See: https://bugzilla.mozilla.org/show_bug.cgi?id=688556
-        // https://sonepar-suisse.atlassian.net/browse/WF-5573
-        background-clip: padding-box;
-
-        @include mixins.media(sm) {
-          display: table-cell;
-          padding: variables.$spacing--5 variables.$spacing--20 variables.$spacing--5 0;
-          text-align: inherit;
-        }
-
-        &::before {
-          content: attr(data-label);
-          margin-right: variables.$spacing--10;
-          text-align: left;
-
-          @include mixins.media(sm) {
-            display: none;
-          }
-        }
-
-        &:first-child {
-          @include mixins.media(sm) {
-            padding-left: variables.$spacing--5;
-          }
-        }
-
-        &:last-child {
-          padding-right: variables.$spacing--5;
-        }
-
-        &:nth-child(odd) {
-          background-color: variables.$color-grayscale--700;
-
-          @include mixins.media(sm) {
-            background-color: inherit;
-          }
-        }
-
-        &--align-center {
-          text-align: center;
-        }
-
-        &--align-right {
-          text-align: right;
-        }
-
-        &--has-event {
-          cursor: pointer;
-        }
-
-        &--nowrap {
-          white-space: nowrap;
-        }
-
-        &--detail-toggle {
-          padding-right: variables.$spacing--5;
-          text-align: right;
-        }
       }
 
-      &__select-column {
-        margin-left: -(variables.$spacing--10);
-        text-align: left;
-        width: 100%;
-
-        @include mixins.media(sm) {
-          margin-left: 0;
-        }
-      }
-
-      &__footer-row {
-        border-bottom: 3px solid variables.$color-grayscale--500;
-        color: variables.$color-grayscale--200;
-      }
-
-      &__footer-cell {
-        padding: variables.$spacing--15 variables.$spacing--2;
-      }
-
-      &__cell-link {
-        position: absolute;
-        display: block;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        pointer-events: none;
-      }
-
-      &__no-results {
-        padding-top: variables.$spacing--15;
-        padding-bottom: variables.$spacing--15;
-      }
-
-      &--has-row-links {
-        #{$this}__data-row {
-          cursor: pointer;
-        }
-      }
-
-      &--enable-row-links {
-        #{$this}__cell-link {
-          pointer-events: auto;
-        }
-      }
-
-      &__detail-toggle-label {
-        margin: 0;
+      &--has-event {
         cursor: pointer;
       }
 
-      &__detail-toggle-input {
-        position: absolute;
-        visibility: hidden;
-        pointer-events: none;
-        -webkit-appearance: none;
-
-        &:checked ~ #{$this}__detail-toggle-icon {
-          transform: rotate(180deg);
-        }
+      &--nowrap {
+        white-space: nowrap;
       }
 
-      &__detail-toggle-icon {
-        transition: transform variables.$transition-duration--200;
+      &--detail-toggle {
+        padding-right: variables.$spacing--5;
+        text-align: right;
       }
+    }
 
-      &__detail-row {
-        border-bottom: 1px solid variables.$color-grayscale--600;
-        padding: 0 variables.$spacing--10;
+    &__select-column {
+      width: 100%;
+      margin-left: -(variables.$spacing--10);
+      text-align: left;
+
+      @include mixins.media(sm) {
+        margin-left: 0;
       }
+    }
+
+    &__footer-row {
+      border-bottom: 3px solid variables.$color-grayscale--500;
+      color: variables.$color-grayscale--200;
+    }
+
+    &__footer-cell {
+      padding: variables.$spacing--15 variables.$spacing--2;
+    }
+
+    &__cell-link {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      pointer-events: none;
+    }
+
+    &__no-results {
+      padding-top: variables.$spacing--15;
+      padding-bottom: variables.$spacing--15;
+    }
+
+    &--has-row-links {
+      #{$this}__data-row {
+        cursor: pointer;
+      }
+    }
+
+    &--enable-row-links {
+      #{$this}__cell-link {
+        pointer-events: auto;
+      }
+    }
+
+    &__detail-toggle-label {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    &__detail-toggle-input {
+      position: absolute;
+      visibility: hidden;
+      -webkit-appearance: none;
+      pointer-events: none;
+
+      &:checked ~ #{$this}__detail-toggle-icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__detail-toggle-icon {
+      transition: transform variables.$transition-duration--200;
+    }
+
+    &__detail-row {
+      padding: 0 variables.$spacing--10;
+      border-bottom: 1px solid variables.$color-grayscale--600;
     }
   }
 </style>

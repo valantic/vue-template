@@ -45,7 +45,7 @@
        */
       modelValue: {
         type: [Boolean, Array] as PropType<boolean | string[]>,
-        required: true,
+        default: () => [],
       },
 
       /**

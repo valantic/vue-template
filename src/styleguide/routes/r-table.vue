@@ -3,7 +3,8 @@
     <h1>
       Table
     </h1>
-    <e-table v-model="selectedItems"
+    selected items: {{ selectedItems }}
+    <e-table v-model:selected="selectedItems"
              :items="items"
              :columns="columnsDefinition"
              selectable
@@ -31,21 +32,20 @@
 
     setup() {
       return {
-        selectedItems: [],
         columnsDefinition: [
           {
             title: 'City',
             key: 'city',
             align: 'left',
             slotName: 'city',
-            sortable: true
+            sortable: true,
           },
           {
             title: 'Firstname',
             key: 'firstName',
             align: 'left',
             slotName: 'firstname',
-            sortable: true
+            sortable: true,
           },
           {
             title: 'Lastname',
@@ -53,36 +53,38 @@
             align: 'left',
             titleHidden: true,
             slotName: 'lastname',
-            sortable: false
+            sortable: false,
           },
           {
             title: 'Birthdate',
             key: 'birthDate',
             align: 'left',
             slotName: 'birthDate',
-            sortable: true
+            sortable: true,
           },
           {
             title: 'Company',
             key: 'company',
             align: 'left',
             slotName: 'company',
-            sortable: false
+            sortable: false,
           },
           {
             title: 'Children',
             key: 'children',
             align: 'left',
             slotName: 'children',
-            sortable: false
+            sortable: false,
           },
 
-        ]
+        ],
       };
     },
-    // data(): IData {
-    //   return {};
-    // },
+    data() {
+      return {
+        selectedItems: [],
+      };
+    },
 
     computed: {
       items() {
@@ -98,7 +100,7 @@
             company: faker.company.name(),
             children: 3,
           }));
-      }
+      },
     },
     // watch: {},
 
