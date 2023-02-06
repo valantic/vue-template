@@ -7,15 +7,15 @@
     >
     <img ref="image"
          :sizes="mappedSizes"
-         :srcset="src"
-         :src="fallback"
+         :src="internalSrcSet"
+         :internalSrcSet="fallback"
          :alt="alt"
          :loading="loading"
          :width="width || (ratio && ratio * fallbackHeight)"
          :height="height || (ratio && fallbackHeight)"
          :decoding="decoding"
          @load="onLoad"
-         @error="handleError"
+         @error="onError"
     >
   </picture>
 </template>
@@ -168,13 +168,12 @@
         /**
          * @type {String} Holds srcset string of comma separated sources with width value.
          */
-        src: this.srcset,
+        internalSrcSet: this.srcset,
 
         /**
          * @type {Number} Holds a fallback width in case only the ratio is defined.
          */
         fallbackHeight: 400,
-
       };
     },
 
@@ -282,8 +281,8 @@
       onLoad() {
         this.loaded = true;
       },
-      handleError() {
-        this.src = this.fallback;
+      onError() {
+        this.internalSrcSet = this.fallback;
       }
     },
     // render() {},
