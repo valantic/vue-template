@@ -44,7 +44,7 @@
     allowAutoUpdates: boolean;
   }
 
-  type ICGoogleMapsCallback = () => unknown;
+  type TCGoogleMapsCallback = () => unknown;
 
   interface ICGoogleMapsLocation {
     lat?: string | number | null;
@@ -57,11 +57,11 @@
 
   declare global {
     interface Window {
-      cGoogleMapsInitMap: ICGoogleMapsCallback;
+      cGoogleMapsInitMap: TCGoogleMapsCallback;
     }
   }
 
-  const callbackStack: ICGoogleMapsCallback[] = [];
+  const callbackStack: TCGoogleMapsCallback[] = [];
   let geocoder: google.maps.Geocoder | null = null;
   let isMapsAPILoaded = false;
 
@@ -204,7 +204,7 @@
   /**
    * This function checks whether the Map API has already been loaded once.
    */
-  function loadMapsAPI(callback: ICGoogleMapsCallback): void {
+  function loadMapsAPI(callback: TCGoogleMapsCallback): void {
     const useSessionStore = sessionStore();
     const apiKey = useSessionStore.googleMapsApiKey;
 
