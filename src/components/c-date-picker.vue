@@ -61,6 +61,7 @@
 <script>
   import Pikaday from 'pikaday';
   import eDate from '@/components/e-date';
+  import eIcon from '@/elements/e-icon.vue';
 
   /**
    * Renders a date picker element.
@@ -70,6 +71,7 @@
 
     components: {
       eDate,
+      eIcon
     },
     // mixins: [],
 

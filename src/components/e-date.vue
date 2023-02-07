@@ -24,6 +24,7 @@
 
 <script>
   import getLocalizedDateFormat from '@/helpers/get-localized-date-format';
+  import eIcon from '@/elements/e-icon.vue';
 
   /**
    * Renders a date styled input.
@@ -31,7 +32,9 @@
   export default {
     name: 'e-date',
 
-    // components: {},
+    components: {
+      eIcon
+    },
     // mixins: [],
 
     model: {
