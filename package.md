@@ -90,6 +90,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > storybook
 - [@storybook/vue3](https://www.npmjs.com/package/@storybook/vue3) - Storybook for Vue 3 is a UI development environment for your Vue 3 components.
   > storybook
+- [@types/google.maps](https://www.npmjs.com/package/@types/google.maps) - This package contains type definitions for Google Maps JavaScript API
+  > c-google-maps
 - [@types/jest](https://www.npmjs.com/package/@types/jest) - This package contains type definitions for Jest.
   > types jest
 - [@types/resize-observer-browser](https://www.npmjs.com/package/@types/resize-observer-browser) - This package contains type definitions for resize-observer-browser.
