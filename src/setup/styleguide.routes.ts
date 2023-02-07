@@ -7,6 +7,7 @@ import icons from '@/styleguide/routes/r-icons.vue';
 import forms from '@/styleguide/routes/r-forms.vue';
 import notifications from '@/styleguide/routes/r-notifications.vue';
 import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue';
+import tooltips from '@/styleguide/routes/r-tooltips.vue';
 
 export interface IRoute {
   path: string;
@@ -90,6 +91,14 @@ export default [
         component: notifications,
         meta: {
           title: 'Notifications',
+        },
+      },
+      {
+        path: 'tooltips',
+        name: 'tooltips',
+        component: tooltips,
+        meta: {
+          title: 'Tooltips',
         },
       },
     ],

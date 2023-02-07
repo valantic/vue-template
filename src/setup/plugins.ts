@@ -2,6 +2,7 @@
 import VueBemCn from '@/plugins/vue-bem-cn';
 import resizeEnd from '@/plugins/resize-end';
 import viewport from '@/plugins/viewport';
+import tooltip from '@/plugins/tooltip';
 import i18n from '@/setup/i18n'; // MUST come after i18n because of build order.
 import directives from '@/setup/directives';
 import components from '@/setup/components';
@@ -15,6 +16,7 @@ export default [
   [VueBemCn, { // please note: if you change the VueBemCn methodName, adjust the global definition in shims-plugins.d.ts
     hyphenate: true,
   }],
+  [tooltip],
   [directives],
   [components],
 
