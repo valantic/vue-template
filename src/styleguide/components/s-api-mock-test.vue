@@ -4,75 +4,84 @@
       <h2 :class="b('title')">
         Mock API Endpoint Handlers
       </h2>
-      <input v-model="search"
-             type="text"
-             name="search"
-             placeholder="Search"
-      >
+      <div :class="b('header-actions')">
+        <input v-model="search"
+               type="text"
+               name="search"
+               placeholder="Search"
+        >
+        <e-button @click="reset">
+          Reset all
+        </e-button>
+      </div>
     </div>
     <div v-if="!filteredEndpoints.length">
       No handlers found.
     </div>
-    <table v-else :class="b('table')">
-      <thead>
-        <tr>
-          <th>
-            Method
-          </th>
-          <th>
-            Path
-          </th>
-          <th>
-            Debug Mode
-          </th>
-          <th>
-            Status
-          </th>
-          <th v-if="$viewport.isMd">
-            Response body (JSON)
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(endpoint, index) in filteredEndpoints"
-            :key="index"
-            :class="b('row')"
-        >
-          <td>
-            {{ endpoint.method }}
-          </td>
-          <td>
-            {{ endpoint.path }}
-          </td>
-          <td>
-            <e-checkbox v-model="configurations[endpoint.header].enabled"
-                        name="debug-mode-enabled"
-                        value
-            />
-          </td>
-          <td>
-            <e-select v-model="configurations[endpoint.header].status"
-                      :options="statusOptions"
-                      name="status"
-            />
-          </td>
-          <td v-if="$viewport.isMd">
-            <input v-model="configurations[endpoint.header].response"
-                   type="text"
-                   name="response"
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    {{ configurations }}
+    <div v-else :class="b('table-wrapper')">
+      <table :class="b('table')">
+        <thead>
+          <tr>
+            <th>
+              Method
+            </th>
+            <th>
+              Path
+            </th>
+            <th>
+              Debug Mode
+            </th>
+            <th>
+              Status
+            </th>
+            <th style="width: 100%;">
+              Response body (JSON)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(endpoint, index) in filteredEndpoints"
+              :key="index"
+              :class="b('row', { debugMode: configurations[endpoint.header].enabled })"
+          >
+            <td>
+              {{ endpoint.method }}
+            </td>
+            <td>
+              {{ endpoint.path }}
+            </td>
+            <td>
+              <e-checkbox v-model="configurations[endpoint.header].enabled"
+                          name="debug-mode-enabled"
+                          value
+              />
+            </td>
+            <td>
+              <e-select v-model="configurations[endpoint.header].status"
+                        :options="statusOptions"
+                        name="status"
+              />
+            </td>
+            <td>
+              <input v-model="configurations[endpoint.header].response"
+                     type="text"
+                     name="response"
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { RequestHandler, ResponseResolver, rest } from 'msw';
+  import {
+    RequestHandler,
+    ResponseResolver,
+    rest,
+  } from 'msw';
   import mockWorker from '@/styleguide/api/browser';
   import eCheckbox from '@/components/e-checkbox.vue';
   import eSelect from '@/components/e-select.vue';
@@ -85,11 +94,13 @@
   }
 
   interface ISetup {
+    storageKey: string;
     statusOptions: {
       label: string;
       value: string;
     }[]
   }
+
   interface IData {
     search: string;
     handlers: ReadonlyArray<RequestHandler> | null;
@@ -102,7 +113,7 @@
    * Lists all active Mock API Endpoint handlers and allows enabling error mode for them.
    */
   export default defineComponent({
-    name: 's-api-mocks',
+    name: 's-api-mock-test',
     components: { eSelect, eCheckbox },
 
     // props: {},
@@ -112,6 +123,7 @@
 
     setup(): ISetup {
       return {
+        storageKey: 'sApiMockTest',
         statusOptions: [
           {
             label: '200 OK',
@@ -128,8 +140,8 @@
           {
             label: '500 Internal Server Error',
             value: '500',
-          }
-        ]
+          },
+        ],
       };
     },
     data(): IData {
@@ -141,7 +153,10 @@
     },
 
     computed: {
-      filteredEndpoints() {
+      /**
+       * Returns list of endpoints  (filtered by search).
+       */
+      filteredEndpoints(): object[] | null {
         const { search, handlers } = this;
 
         if (!handlers) {
@@ -154,16 +169,20 @@
           return mappedHandlers;
         }
 
-        return mappedHandlers.filter(endpoint => endpoint.header.toLowerCase().includes(search));
-      }
+        return mappedHandlers.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase()));
+      },
     },
     watch: {
       configurations: {
-        handler() {
+        /**
+         * Updates handler and local storage when configuration changed.
+         */
+        handler(configurationsValue: IDebugConfiguration): void {
           this.setupHandlers();
+          window.localStorage.setItem(this.storageKey, JSON.stringify(configurationsValue));
         },
         deep: true,
-      }
+      },
     },
 
     // beforeCreate() {},
@@ -171,19 +190,9 @@
       mockWorker.resetHandlers();
 
       this.handlers = mockWorker.listHandlers();
+      this.setDefaultConfigurations();
 
-      this.handlers.forEach((handler) => {
-        const { header } = handler.info;
-
-        this.configurations[header] = {
-          header,
-          enabled: false,
-          status: '200',
-          response: '',
-        };
-      });
-
-      const configurationsFromStorage = JSON.parse(window.localStorage.getItem('sApiMocksConfigurations') || '{}');
+      const configurationsFromStorage = JSON.parse(window.localStorage.getItem(this.storageKey) || '{}');
 
       if (configurationsFromStorage) {
         this.configurations = {
@@ -200,20 +209,56 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeUnmount() {},
+    beforeUnmount() {
+      mockWorker.resetHandlers();
+    },
     // unmounted() {},
 
     methods: {
       /**
-       * Sets up handlers that are prepended to the mock worker and will have priority over the other handlers.
+       * Sets up the default configurations.
+       */
+      setDefaultConfigurations(): void {
+        this.handlers?.forEach((handler) => {
+          const { header } = handler.info;
+
+          this.configurations[header] = {
+            header,
+            enabled: false,
+            status: '200',
+            response: '',
+          };
+        });
+      },
+
+      /**
+       * Restores the default configurations and resets all handlers.
+       */
+      reset(): void {
+        this.setDefaultConfigurations();
+        mockWorker.resetHandlers();
+      },
+
+      /**
+       * Sets up handlers that are prepended to the mock worker and will have priority over the default handlers.
        */
       setupHandlers(): void {
         const handlers = Object.values(this.configurations)
           .filter(configuration => configuration.enabled)
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
-            const resolver: ResponseResolver = (req, res, ctx) => res(
-              ctx.status(404),
+
+            let response: unknown = null;
+
+            try {
+              response = JSON.parse(configuration.response);
+            } catch (e) {
+              // Do nothing
+            }
+
+            const resolver: ResponseResolver = (req, res, ctx: any) => res( // eslint-disable-line @typescript-eslint/no-explicit-any
+              ctx.status(parseInt(configuration.status, 10)),
+              response ? ctx.json(response) : null
             );
 
             switch (method) {
@@ -250,20 +295,21 @@
   @use '../../setup/scss/variables';
   @use '../../setup/scss/mixins';
 
-  .s-api-mocks {
+  .s-api-mock-test {
     @include mixins.z-index(front);
 
     position: fixed;
+    right: 0;
     bottom: 0;
     left: 0;
-    right: 0;
-    max-height: 500px;
-    border-top: 10px solid variables.$color-grayscale--400;
-    overflow: auto;
     padding: variables.$spacing--10;
+    border-top: 10px solid variables.$color-grayscale--400;
     background-color: variables.$color-grayscale--1000;
 
     @include mixins.media(md) {
+      @include mixins.z-index(back);
+
+      right: 210px;
       padding: variables.$spacing--20;
     }
 
@@ -275,13 +321,31 @@
 
     &__header {
       margin-bottom: variables.$spacing--20;
+      padding-bottom: variables.$spacing--10;
+      border-bottom: 1px solid variables.$color-grayscale--500;
+    }
+
+    &__header-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__table-wrapper {
+      max-height: 400px;
+      overflow: auto;
     }
 
     &__table {
       width: 100%;
 
-      td, th {
+      th {
+        font-weight: variables.$font-weight--bold;
+      }
+
+      td,
+      th, {
         padding: variables.$spacing--10;
+        white-space: nowrap;
 
         &:first-of-type {
           padding-left: 0;
@@ -291,16 +355,21 @@
           padding-right: 0;
         }
       }
+
+      input {
+        width: 100%;
+      }
     }
 
     &__row--debug-mode {
       color: variables.$color-status--error;
     }
 
-    input, select {
+    input,
+    select, {
+      height: 30px;
       border: 1px solid variables.$color-grayscale--0;
       border-radius: 0;
-      height: 30px;
     }
 
     select {

@@ -6,18 +6,18 @@
         Logged in
       </s-toggle>
       <s-toggle v-model="showApiHandlerConfiguration">
-        API
+        API Mock Test
       </s-toggle>
     </li>
   </ul>
-  <s-api-mocks v-if="showApiHandlerConfiguration" @click.stop @close="showApiHandlerConfiguration = false" />
+  <s-api-mock-test v-if="showApiHandlerConfiguration" @click.stop @close="showApiHandlerConfiguration = false" />
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
   import sToggle from '@/styleguide/components/s-toggle.vue';
   import sHtmlValidation from '@/styleguide/components/s-html-validation.vue';
-  import sApiMocks from '@/styleguide/components/s-api-mocks.vue';
+  import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
 
   interface IData {
     loggedIn: boolean;
@@ -29,7 +29,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
-      sApiMocks,
+      sApiMockTest,
       sHtmlValidation,
       sToggle,
     },
