@@ -85,10 +85,11 @@
     },
 
     computed: {
-      position() {
+      position(): string {
         return this.active ? 'top' : 'hidden';
       },
-      popperOptions() {
+
+      popperOptions(): object {
         return {
           placement: this.placement,
         };

@@ -94,7 +94,7 @@ export default {
     /**
      * Shows the tooltip.
      */
-    function show() {
+    function show(): void {
       if (el[storageKey].isHidden) {
         return;
       }
