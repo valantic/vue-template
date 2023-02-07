@@ -227,7 +227,7 @@
        */
       createMapInstance() {
         if (!this.mappedLocations?.length && !this.center) {
-          const errorMsg = 'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.';
+          const errorMsg = 'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.'; // eslint-disable-line max-len
 
           throw new Error(errorMsg);
         }
