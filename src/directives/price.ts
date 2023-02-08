@@ -12,7 +12,7 @@ function format(el: HTMLElement, binding: DirectiveBinding) {
 
   const priceInput = parseFloat(binding.value);
 
-  el.innerHTML = Number.isNaN(priceInput)
+  el.textContent = Number.isNaN(priceInput)
     ? ''
     : formatPrice(parseFloat(binding.value), binding.modifiers.currencyBefore, binding.modifiers.currencyAfter) || '';
 }

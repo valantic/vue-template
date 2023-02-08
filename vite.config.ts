@@ -1,22 +1,40 @@
+/* eslint-disable capitalized-comments, no-case-declarations */
 import { defineConfig, UserConfigExport } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { webpack } from './package.json'; // TODO: rename config property in package.json.
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import viteBuilds from './vite.builds.json';
+
+interface IModes {
+  [key: string]: {
+    input: string[];
+  }
+}
+
+interface IViteBuilds {
+  base: string;
+  outDir: string;
+  assetsDir: string;
+  modes: IModes;
+}
 
 /**
  * Notes:
  * - Style only components are imported by src/setup/components.ts.
  */
-
 export default defineConfig(({ command, mode }) => {
   const config: UserConfigExport = {
     plugins: [
       vue(),
+      ViteImageOptimizer({ // eslint-disable-line new-cap
+        // logStats: false,
+      }),
     ],
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src/'),
+        '@!production': resolve(__dirname, 'src/'), // Workaround so that no assets from conditional styleguide related imports become part of the build.
         'vue': 'vue/dist/vue.esm-bundler.js', // Was required because inline import of vue.esm-bundler.js resulted in TS issues.
       },
     },
@@ -29,13 +47,31 @@ export default defineConfig(({ command, mode }) => {
     json: {
       stringify: true,
     },
+    test: {
+      environment: 'jsdom',
+    },
   };
 
   switch (command) {
     case 'build': // @see https://vitejs.dev/config/build-options.html
-      config.base = webpack.productionPath; // TODO: rename to buildBase.
+      const {
+        base,
+        outDir,
+        assetsDir,
+        modes,
+      } = viteBuilds as IViteBuilds || {};
+
+      if (!modes[mode]) {
+        throw Error(`Given mode '${mode}' is unknown.`);
+      }
+
+      const {
+        input,
+      } = modes[mode];
+
+      config.base = base;
       config.build = {
-        outDir: `${webpack.buildPath}`, // TODO: rename to 'buildOutDir'
+        outDir: `${outDir}/${mode}`,
         assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
         manifest: true,
         emptyOutDir: true,
@@ -43,21 +79,28 @@ export default defineConfig(({ command, mode }) => {
 
         // TODO: watch?
         rollupOptions: {
-          input: {
-            'app/index': './src/main.ts',
-            'pimcore/index': './src/pimcore/index.ts',
-          },
+          external: [
+            /!dev/, // Removes styleguide/dev only assets.
+          ],
+          input,
           output: {
-            entryFileNames: '[name].[hash].js',
-            chunkFileNames: `${webpack.outputAssetsFolder}/[name].[hash].js`,
+            entryFileNames: 'index.[hash].js',
+            chunkFileNames(chunkInfo) {
+              const path = `${assetsDir}/js`;
+
+              if (!chunkInfo.facadeModuleId) {
+                return `${path}/shared.${chunkInfo.moduleIds.length}-[hash].js`;
+              }
+
+              return `${path}/[name].[hash].js`;
+            },
             assetFileNames(assetInfo) {
               const fileName = assetInfo?.name || '';
               const imageExtensions = /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i;
               const styleExtensions = /\.(css|sass|scss)$/i;
               const fontExtensions = /\.(woff|woff2|eot|ttf|otf)$/i;
               const scriptExtensions = /\.(vue|js|ts)$/i;
-              let name = '[name]';
-              let assetsPath = webpack.outputAssetsFolder;
+              let assetsPath = assetsDir;
 
               if (imageExtensions.test(fileName)) {
                 assetsPath += '/img';
@@ -69,21 +112,9 @@ export default defineConfig(({ command, mode }) => {
                 assetsPath = '';
               }
 
-              switch (fileName) {
-                case 'main.css':
-                  name = webpack.appName;
-
-                // no default
-              }
-
-              return `${assetsPath}/${name}.[hash].[ext]`;
+              return `${assetsPath}/[name].[hash].[ext]`;
             },
-            manualChunks(source) { // eslint-disable-line consistent-return -- giving no return value is legit.
-              // Additional tests can be added to create additional splits.
-              if (source.includes('node_modules')) {
-                return 'vendor';
-              }
-            },
+            // manualChunks() {}, // Defining manual chunks is supper tricky, since the context of the single imports is hard to evaluate (if even possible). I eventually decided not to use this method.
           },
         },
       };
@@ -101,6 +132,8 @@ export default defineConfig(({ command, mode }) => {
           })
         );
       }
+
+    // no default
   }
 
   return config;

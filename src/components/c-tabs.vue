@@ -9,12 +9,12 @@
           :class="b('tab-item')"
       >
         <a :id="`c-tabs-${uuid}--tab-${tab.id}`"
-           :class="b('tab', { [tab.id]: true, active: tab.id === activeTab.id })"
-           :aria-selected="tab.id === activeTab.id"
+           :class="b('tab', { [tab.id]: true, active: tab.id === activeTab?.id })"
+           :aria-selected="tab.id === activeTab?.id"
            :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
            :href="tab.link?.href || `#${tab.id}`"
            :target="tab.link?.target || LINK_TARGET.SELF"
-           :rel="tab.link?.target === LINK_TARGET.BLANK && 'noopener noreferrer'"
+           :rel="tab.link?.target === LINK_TARGET.BLANK ? 'noopener noreferrer' : undefined"
            role="tab"
            @click="onTabClick(tab)"
         >
@@ -30,9 +30,9 @@
       <div v-for="tab in tabs"
            :id="`c-tabs-${uuid}--panel-${tab.id}`"
            :key="tab.id"
-           :class="b('panel', { [tab.id]: true, visible: tab.id === activeTab.id })"
+           :class="b('panel', { [tab.id]: true, visible: tab.id === activeTab?.id })"
            :aria-labelledby="`c-tabs-${uuid}--tab-${tab.id}`"
-           :tabindex="tab.id === activeTab.id ? 0 : -1"
+           :tabindex="tab.id === activeTab?.id ? 0 : -1"
            role="tabpanel"
       >
         <!-- @slot ${tab.id} - Renders the panel content for the current tab. -->

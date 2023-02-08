@@ -5,8 +5,8 @@
             :disabled="disabled || progress"
             v-bind="$attrs"
             @change="onChange"
-            @mouseenter="hasHover = true"
-            @mouseleave="hasHover = false"
+            @mouseenter="hover = true"
+            @mouseleave="hover = false"
     >
       <option v-if="placeholder"
               :disabled="!hasSelectablePlaceholder"
@@ -36,13 +36,17 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, toRefs } from 'vue';
+  import { defineComponent, PropType, toRefs } from 'vue';
   import i18n from '@/setup/i18n';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface IData {
     internalValue: string;
+  }
+
+  interface IOptions {
+    [key: string]: string;
   }
 
   /**
@@ -73,7 +77,7 @@
        */
       options: {
         required: true,
-        type: Array,
+        type: Array as PropType<IOptions[]>,
       },
 
       /**

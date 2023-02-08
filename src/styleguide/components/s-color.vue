@@ -14,12 +14,14 @@
   import colors, { IColors } from '../../setup/js/color';
   import sColorItem from './s-color-item.vue';
 
+  type TColors = keyof IColors;
+
   export default defineComponent({
     name: 's-color',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
-      sColorItem
+      sColorItem,
     },
 
     // props: {},
@@ -38,9 +40,9 @@
       /**
        * Returns an Array of color palette names.
        */
-      palettes(): string[] {
-        return Object.keys(colors);
-      }
+      palettes(): TColors[] {
+        return Object.keys(colors) as Array<TColors>;
+      },
     },
     // watch: {},
 

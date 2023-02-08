@@ -66,6 +66,10 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
 
+  interface IItem {
+    [key: string]: string;
+  }
+
   interface IColumn {
     title: string | (() => string);
     key: string;
@@ -74,11 +78,7 @@
     align: 'left' | 'center' | 'right';
     sortable: boolean;
     sort: () => number;
-    onClick: () => void;
-  }
-
-  interface IItem {
-    [key: string]: string;
+    onClick: (item: IItem, column: IColumn) => void;
   }
 
   interface IData {
@@ -213,7 +213,7 @@
        * Calculates a sort button modifier object.
        */
       getSortButtonModifiers(column: IColumn) {
-        const active = this.sortBy && this.sortBy === column;
+        const active = !this.sortBy && this.sortBy === column;
 
         return {
           active,

@@ -2,7 +2,7 @@
   <div :class="b()">
     <div :class="b('navigation-wrapper', wrapperModifiers)" @click="onClick">
       <div :class="b('viewport')">
-        {{ $viewport.currentViewport }}<sup>{{ $viewport.viewport }}</sup>
+        {{ $viewport.currentViewport }}
       </div>
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', { logo: true })">

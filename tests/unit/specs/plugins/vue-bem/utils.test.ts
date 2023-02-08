@@ -1,9 +1,10 @@
 /* eslint-disable no-undefined */
+import { describe, test, expect } from 'vitest';
 import {
   isString,
   isPObject,
   hyphenate,
-  isNumber
+  isNumber,
 } from '@/plugins/vue-bem-cn/src/utils';
 
 describe('isString', () => {

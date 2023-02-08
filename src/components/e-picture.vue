@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import { defineComponent, PropType, StyleValue } from 'vue';
   import { BREAKPOINTS_MAX } from '@/setup/globals';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
@@ -94,7 +94,7 @@
        * e.g. `1` is a ratio of 1:1 (600px x 600px), `0.75` is a ratio of 0.75:1 (600px x 800px)
        */
       ratio: {
-        type: [Number, String],
+        type: Number,
         default: null,
       },
 
@@ -139,7 +139,7 @@
        * For browser support @see https://caniuse.com/mdn-html_elements_img_decoding
        */
       decoding: {
-        type: String,
+        type: String as PropType<'sync' | 'async' | 'auto'>,
         default: 'async',
         validator: (value: string) => [
           'sync',
@@ -152,7 +152,7 @@
        * Allows to set the image width.
        */
       width: {
-        type: [String, Number],
+        type: Number,
         default: null,
       },
 
@@ -160,7 +160,7 @@
        * Allows to set the image height.
        */
       height: {
-        type: [String, Number],
+        type: Number,
         default: null,
       },
 
@@ -202,20 +202,20 @@
       /**
        * Calculates root element styles.
        */
-      style(): object | null {
+      style(): StyleValue | undefined {
         const { ratio } = this;
 
         return ratio
           ? { '--aspect-ratio': ratio }
-          : null;
+          : undefined;
       },
 
       /**
        * Converts sizes object to string.
        */
-      mappedSizes(): string | null {
+      mappedSizes(): string | undefined {
         if (!this.sizes) {
-          return null;
+          return undefined;
         }
 
         const mappedSizesPerBreakpoints: ISizePerBreakpoint = {};

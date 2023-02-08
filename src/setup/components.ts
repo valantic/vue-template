@@ -1,4 +1,4 @@
-import { Plugin } from 'vue';
+import { defineAsyncComponent, Plugin } from 'vue';
 
 // Form elements
 import eButton from '@/components/e-button.vue';
@@ -18,8 +18,6 @@ import eProgress from '@/components/e-progress.vue';
 
 // SSR related
 import lDefault from '@/components/l-default.vue';
-import cHeader from '@/components/c-header.vue';
-import cFooter from '@/components/c-footer.vue';
 
 // Imports style only components.
 import.meta.glob([
@@ -47,9 +45,10 @@ const plugin: Plugin = {
 
       // SSR related
       lDefault,
-      cHeader,
-      cFooter,
     ];
+
+    app.component('c-header', defineAsyncComponent(() => import('@/components/c-header.vue')));
+    app.component('c-footer', defineAsyncComponent(() => import('@/components/c-footer.vue')));
 
     // This improves component usage in PhpStorm, while keeping optimized import in production
     if (import.meta.env.MODE === 'production') {
@@ -73,8 +72,6 @@ const plugin: Plugin = {
 
       // SSR related
       app.component(lDefault.name, lDefault);
-      app.component(cHeader.name, cHeader);
-      app.component(cFooter.name, cFooter);
     }
   },
 };

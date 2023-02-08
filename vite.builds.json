@@ -1,0 +1,19 @@
+{
+  "base":  "/",
+  "outDir":  "dist",
+  "assetsDir": "assets",
+  "modes": {
+    "app": {
+      "input": [
+        "./src/main.ts",
+        "./src/setup/scss/themes/theme-01.scss"
+      ]
+    },
+    "pimcore": {
+      "input": [
+        "./src/pimcore/pimcore.scss",
+        "./src/pimcore/formbuilder.js"
+      ]
+    }
+  }
+}

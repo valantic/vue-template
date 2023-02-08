@@ -1,8 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-
 /* eslint-disable id-length */
+import { describe, test, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import vueBemCn from '@/plugins/vue-bem-cn';
 
@@ -13,7 +10,7 @@ describe('Check installation', () => {
 
   const { vm } = mount(comp, {
     global: {
-      plugins: [vueBemCn]
+      plugins: [vueBemCn],
     },
   });
 
@@ -33,7 +30,7 @@ describe('Check vm.b() method', () => {
   };
   const { vm } = mount(comp, {
     global: {
-      plugins: [vueBemCn]
+      plugins: [vueBemCn],
     },
   });
 
@@ -52,7 +49,7 @@ describe('Check vm.b() method', () => {
     };
     const { vm: vmBlock } = mount(compBlock, {
       global: {
-        plugins: [vueBemCn]
+        plugins: [vueBemCn],
       },
     });
 
@@ -80,7 +77,7 @@ describe('Check custom settings', () => {
 
     const { vm } = mount(comp, {
       global: {
-        plugins: [[vueBemCn, config]]
+        plugins: [[vueBemCn, config]],
       },
     });
 
@@ -100,7 +97,7 @@ describe('Check custom settings', () => {
 
     const { vm } = mount(comp, {
       global: {
-        plugins: [[vueBemCn, config]]
+        plugins: [[vueBemCn, config]],
       },
     });
 
@@ -115,7 +112,7 @@ describe('Check custom settings', () => {
 
     const { vm } = mount(comp, {
       global: {
-        plugins: [[vueBemCn, config]]
+        plugins: [[vueBemCn, config]],
       },
     });
 
@@ -130,7 +127,7 @@ describe('Check custom settings', () => {
 
     const { vm } = mount(comp, {
       global: {
-        plugins: [[vueBemCn, config]]
+        plugins: [[vueBemCn, config]],
       },
     });
 
@@ -145,7 +142,7 @@ describe('Check custom settings', () => {
 
     const { vm } = mount(comp, {
       global: {
-        plugins: [[vueBemCn, config]]
+        plugins: [[vueBemCn, config]],
       },
     });
 

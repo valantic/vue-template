@@ -7,8 +7,8 @@
            :placeholder="$t('e-multiselect.searchFieldPlaceholder')"
            :class="b('search-field')"
            type="text"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
+           @mouseenter="hover = true"
+           @mouseleave="hover = false"
     >
 
     <!-- Trigger Button -->
@@ -18,8 +18,8 @@
             :disabled="isDisabled"
             type="button"
             @click="isOpen = !isOpen"
-            @mouseenter="hasHover = true"
-            @mouseleave="hasHover = false"
+            @mouseenter="hover = true"
+            @mouseleave="hover = false"
     >
       <span :class="b('output-value')">
         {{ outputValue }}

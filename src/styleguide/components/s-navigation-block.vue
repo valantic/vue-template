@@ -5,13 +5,13 @@
         :class="b('navigation-item')"
     >
       <router-link
-        :to="{ name: route.name, params: route.meta.params, query: route.meta.query }"
+        :to="{ name: route.name, params: route.meta?.params, query: route.meta?.query }"
         :class="b('navigation-link')"
         :active-class="b('navigation-link', { activePath: true })"
         :exact-active-class="b('navigation-link', { active: true })"
         exact
       >
-        {{ route.meta.title }}
+        {{ route.meta?.title }}
       </router-link>
       <s-navigation-block v-if="route.children && route.children.length"
                           :routes="route.children"
@@ -22,21 +22,9 @@
 </template>
 
 <script lang="ts">
-  import { ComponentPublicInstance, defineComponent, PropType } from 'vue';
+  import { defineComponent, PropType } from 'vue';
+  import { RouteRecordRaw } from 'vue-router';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-
-  interface IRoute {
-    path: string;
-    alias: string;
-    name: string;
-    redirect: string;
-    component: ComponentPublicInstance;
-    meta: {
-      title: string;
-      hideInStyleguide: boolean;
-    }
-    children: IRoute[]
-  }
 
   export default defineComponent({
     name: 's-navigation-block',
@@ -46,7 +34,7 @@
        * An array of styleguide routes.
        */
       routes: {
-        type: Array as PropType<IRoute[]>,
+        type: Array as PropType<readonly RouteRecordRaw[]>,
         default: () => [],
       },
 
@@ -72,7 +60,7 @@
       /**
        * Returns an array of routes, that should be visible on the navigation.
        */
-      filteredRoutes(): object[] {
+      filteredRoutes(): RouteRecordRaw[] {
         return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide);
       },
     },
@@ -93,9 +81,9 @@
     }
 
     &__navigation-link {
+      display: block;
       padding: variables.$spacing--5 variables.$spacing--20;
       text-decoration: none;
-      display: block;
 
       &:hover {
         text-decoration: underline;

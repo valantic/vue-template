@@ -137,7 +137,7 @@
           .map(path => path
             .split('/')
             .pop()
-            ?.replace('.svg', ''))
+            ?.replace('.svg', '') || '')
           .filter(Boolean),
         filter: '',
         notification: '',

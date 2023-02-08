@@ -8,13 +8,22 @@ import forms from '@/styleguide/routes/r-forms.vue';
 import notifications from '@/styleguide/routes/r-notifications.vue';
 import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue';
 
+declare module 'vue-router' {
+  interface RouteMeta {
+    title: string;
+    params?: {
+      [key: string]: string;
+    };
+    query?: {
+      [key: string]: string;
+    }
+  }
+}
+
 export interface IRoute {
   path: string;
   name?: string;
   component?: ComponentPublicInstance | Record<string, unknown>;
-  meta?: {
-    title: string;
-  };
   children?: IRoute[];
 }
 

@@ -39,9 +39,10 @@
        */
       language: {
         get() {
+          // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
           return i18n.global.locale?.value;
         },
-        set(value) {
+        set(value: string) {
           i18nSetLocale(value);
         },
       },

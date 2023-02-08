@@ -872,8 +872,10 @@ package.json:
 * [ ] `manifest.json` uses a different format than before. Compatible with Pimcore/Java?
 * [ ] Check if module polyfill is required: https://vitejs.dev/config/build-options.html#build-modulepreload
 * [ ] CSS Prefixing
+* [ ] Can we combine multiple chunks in 1
+* [ ] Linter & test still running?
 * [ ] Update storybook to use vite config.
-* [ ] Check if "style only components" from `src/setup/components.ts` works as expected.
+* [x] Check if "style only components" from `src/setup/components.ts` works as expected.
 * [ ] Try to add README content to styleguide index page again.
 * [ ] Apply new ESLint rules to valantic config.
 * [ ] Remove webpack scripts from package.json.

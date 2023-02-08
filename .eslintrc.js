@@ -46,6 +46,8 @@ module.exports = {
         allowSingleExtends: true,
       },
     ],
+
+    'no-undefined': 'off', // Conflicts with 'undefined' fallback of TypeScript definitions.
   },
   overrides: [
     {
