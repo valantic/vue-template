@@ -7,8 +7,8 @@
     >
     <img ref="image"
          :sizes="mappedSizes"
-         :src="internalSrcSet"
-         :internalSrcSet="fallback"
+         :srcset="internalSrcSet"
+         :src="fallback"
          :alt="alt"
          :loading="loading"
          :width="width || (ratio && ratio * fallbackHeight)"
