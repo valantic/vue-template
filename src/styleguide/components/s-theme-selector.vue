@@ -15,7 +15,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import pkg from '@/../package.json';
+  import buildConfig from '@/../vite.builds.json';
   import sessionStore, { TSessionStore } from '@/stores/session';
 
   interface ITheme {
@@ -25,14 +25,12 @@
   }
 
   interface IData {
-    defaultThemes: ITheme[];
+    availableThemes: string[];
   }
 
   interface ISetup {
     sessionStore: TSessionStore
   }
-
-  const themePath = `/${pkg.webpack.outputAssetsFolder}css/${pkg.webpack.filePrefix}theme-`;
 
   export default defineComponent({
     name: 's-theme-selector',
@@ -49,16 +47,7 @@
     },
     data(): IData {
       return {
-        defaultThemes: [
-          {
-            name: 'Theme 01',
-            id: '01',
-          },
-          {
-            name: 'Theme 02',
-            id: '02',
-          },
-        ],
+        availableThemes: buildConfig.themeFiles,
       };
     },
 
@@ -74,22 +63,14 @@
        * Loops the themes and mark the selected by the global theme.
        */
       themes(): ITheme[] {
-        const list = this.defaultThemes;
-        const activeId = this.getTheme;
+        const themes = this.availableThemes;
+        const activeTheme = this.getTheme;
 
-        return list.map((theme) => {
-          let selected = false;
-
-          if (theme.id === activeId) {
-            selected = true;
-          }
-
-          return {
-            name: theme.name,
-            id: theme.id,
-            selected,
-          };
-        });
+        return themes.map(theme => ({
+          name: theme,
+          id: theme,
+          selected: theme === activeTheme,
+        }));
       },
     },
 
@@ -108,7 +89,7 @@
           if (!link) {
             this.createStyleElement(theme, cssId);
           } else {
-            link.href = `${themePath}${theme}.css`;
+            link.href = `/${buildConfig.themeSource}${theme}.scss`;
           }
         },
       },
@@ -137,14 +118,14 @@
       /**
        * Creates a new style link element.
        */
-      createStyleElement(themeId: string, cssId: string) {
+      createStyleElement(theme: string, cssId: string) {
         const head = document.getElementsByTagName('head')[0];
         const link = document.createElement('link');
 
         link.id = cssId;
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = `${themePath}${themeId}.css`;
+        link.href = `/${buildConfig.themeSource}${theme}.scss`;
         link.media = 'all';
 
         head.appendChild(link);

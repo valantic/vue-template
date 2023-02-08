@@ -36,7 +36,7 @@ const storeName = 'session';
 export default defineStore<typeof storeName, ISessionState, ISessionGetters, ISessionActions>(storeName, {
   state: (): ISessionState => {
     const state: ISessionState = {
-      theme: '01',
+      theme: 'theme-01',
     };
 
     return state;

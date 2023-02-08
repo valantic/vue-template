@@ -14,5 +14,10 @@
         "./src/pimcore/pimcore.scss"
       ]
     }
-  }
+  },
+  "themeSource": "src/setup/scss/themes/",
+  "themeFiles": [
+    "theme-01",
+    "theme-02"
+  ]
 }
