@@ -202,6 +202,7 @@
       display: flex;
       margin: auto;
     }
+    
     // separator for state icons
     &__icon-wrapper {
       position: absolute;
