@@ -11,7 +11,7 @@
   export default defineComponent({
     name: 'r-icons',
     components: {
-      sIconFinder
+      sIconFinder,
     },
 
     // props: {},

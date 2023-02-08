@@ -28,7 +28,7 @@
        */
       negative: {
         type: Boolean,
-        default: false
+        default: false,
       },
 
       /**
@@ -38,7 +38,7 @@
        */
       spacing: propScale(500, [
         0,
-        500
+        500,
       ]),
 
       /**
@@ -46,8 +46,8 @@
        */
       message: {
         type: String,
-        default: null // Translation can not be set here because it will not be computed
-      }
+        default: null, // Translation can not be set here because it will not be computed
+      },
     },
     // data() {
     //   return {};
@@ -111,32 +111,32 @@
   }
 
   .e-progress {
-    font-size: 1rem;
-    padding: $_e-progress--padding;
     display: flex;
     align-items: center;
+    padding: $_e-progress--padding;
+    font-size: 1rem;
 
     &--spacing-0 {
       padding: 0;
     }
 
     &__inner {
-      display: block;
       position: relative;
+      display: block;
+      float: left;
       width: calc(1em * 4);
       height: 1em;
-      float: left;
     }
 
     &__bubble {
-      display: block;
-      height: 0.6em;
-      width: 0.6em;
-      left: 50%;
-      background-color: variables.$color-secondary--1;
       position: absolute;
+      left: 50%;
+      display: block;
+      width: 0.6em;
+      height: 0.6em;
       margin: variables.$spacing--5 auto 0;
       border-radius: 50%;
+      background-color: variables.$color-secondary--1;
       animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;
 
       &:nth-child(1) {

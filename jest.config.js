@@ -8,7 +8,7 @@ module.exports = {
     'js',
     'jsx',
     'json',
-    'vue'
+    'vue',
   ],
   transform: {
     '^.+\\.vue$': '@vue/vue3-jest',
@@ -20,7 +20,7 @@ module.exports = {
     '/node_modules/',
   ],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   // snapshotSerializers: [
   //   'jest-serializer-vue',
