@@ -11,8 +11,7 @@
     },
     "pimcore": {
       "input": [
-        "./src/pimcore/pimcore.scss",
-        "./src/pimcore/formbuilder.js"
+        "./src/pimcore/pimcore.scss"
       ]
     }
   }
