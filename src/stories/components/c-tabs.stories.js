@@ -1,6 +1,6 @@
 import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
-import cTabs from '@/components/c-tabs';
-import eIcon from '@/components/e-icon';
+import cTabs from '@/components/c-tabs.vue';
+import eIcon from '@/components/e-icon.vue';
 
 export default {
   component: cTabs,

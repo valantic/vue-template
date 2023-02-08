@@ -885,6 +885,7 @@ package.json:
 * [ ] cmd + click in PhpStorm leads to Interface instead of implementation.
 * [ ] Update README
 * [ ] Check "Vite Inspect"
+* [ ] Refactor storybook stories to TS.
 
 ## Roadmap
 * [ ] Implement dual build (ES5/ES2015+)
