@@ -118,6 +118,16 @@
           </e-label>
         </e-fieldset>
 
+        <e-fieldset legend="Date Pickers">
+          <e-date v-model="form.date" name="date" />
+          <c-date-picker v-model:start="form.startDate" name="start" />
+          <c-date-picker v-model:start="form.startDate"
+                         v-model:end="form.endDate"
+                         name="date-picker"
+                         range
+          />
+        </e-fieldset>
+
         <e-button type="submit" primary>
           Submit
         </e-button>
@@ -146,6 +156,8 @@
   import { defineComponent, ref, Ref } from 'vue';
   import useVuelidate, { Validation } from '@vuelidate/core';
   import { required, email } from '@vuelidate/validators';
+  import eDate from '@/components/_e-date.vue';
+  import cDatePicker from '@/components/_c-date-picker.vue';
 
   interface ISelectItem {
     label: string;
@@ -176,7 +188,10 @@
   export default defineComponent({
     name: 'r-forms',
 
-    // components: {},
+    components: {
+      cDatePicker,
+      eDate,
+    },
 
     setup(): ISetup {
       const formRef = ref();

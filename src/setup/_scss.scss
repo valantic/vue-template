@@ -1,0 +1,19 @@
+// Variables, mixins and functions
+// Font imports
+@use 'scss/font';
+
+/* critical:start */
+
+// Style resets
+@use 'scss/reset';
+
+// Global styles
+// @use 'scss/spacings'; // Only enable spacing classes if needed!
+@use 'scss/global';
+
+/* critical:end */
+
+// Vendor styles
+// - Note: don't add *.css extension to import. Else the style will be moved to top of output file!
+@use '~swiper/swiper.scss';
+@use '~pikaday/css/pikaday';

@@ -8,15 +8,6 @@ export const I18N_FALLBACK = 'de';
 export const I18N_FALLBACK_MESSAGES = fallbackMessages;
 export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 
-const datetimeFormats: IntlDateTimeFormat = {
-  month: { // January, February, March, ...
-    month: 'long',
-  },
-  weekday: { // Monday, Tuesday, Wednesday, ...
-    weekday: 'long',
-  },
-};
-
 // Add styleguide only translations
 if (process.env.NODE_ENV !== 'production') {
   const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
@@ -29,16 +20,32 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
+const dateTimeFormats: IntlDateTimeFormat = {
+  weekday: { // Monday, Tuesday, Wednesday, ...
+    weekday: 'long',
+  },
+  weekdayNarrow: { // M, T, W, ...
+    weekday: 'narrow',
+  },
+  month: { // January, February, March, ...
+    month: 'long',
+  },
+};
+
 const i18n = createI18n({
   legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
   datetimeFormats: {
-    [I18N_FALLBACK]: datetimeFormats,
-    [PAGE_LANG]: datetimeFormats,
+    [I18N_FALLBACK]: dateTimeFormats,
+    [PAGE_LANG]: dateTimeFormats,
   },
 
   warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
+  dateTimeFormats: {
+    [I18N_FALLBACK]: dateTimeFormats,
+    [PAGE_LANG]: dateTimeFormats,
+  },
 
   /**
    * Callback for the 'missing' event, during translation lookup.
@@ -97,6 +104,7 @@ export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disa
       });
 
       i18n.global.locale = newLocale;
+      i18n.global.setDateTimeFormat(locale, dateTimeFormats);
     });
   }
 

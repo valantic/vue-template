@@ -256,6 +256,7 @@ module.exports = (env, args = {}) => {
   const rules = [
     {
       test: /\.vue$/,
+      exclude: /core-js|moment|pikaday/,
       loader: 'vue-loader',
       options: {
         hotReload,
