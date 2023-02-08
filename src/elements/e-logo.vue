@@ -56,7 +56,7 @@
 
         switch (theme) {
           case '01':
-            icon = 'styleguide-heart';
+            icon = 'i-styleguide-heart';
             alt = 'example logo default';
             break;
 
@@ -81,7 +81,7 @@
             break;
 
           default:
-            icon = 'styleguide-heart';
+            icon = 'i-styleguide-heart';
             alt = 'example logo default';
         }
 

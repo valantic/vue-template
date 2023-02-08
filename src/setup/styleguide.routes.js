@@ -6,6 +6,7 @@ import forms from '@/styleguide/routes/forms';
 import notifications from '@/styleguide/routes/notifications';
 import tooltips from '@/styleguide/routes/tooltips';
 import map from '@/styleguide/routes/map';
+import picture from '@/styleguide/routes/picture';
 
 const root = '/styleguide';
 const categoryWrapper = {
@@ -87,6 +88,14 @@ export default [
         component: map,
         meta: {
           title: 'Google Map',
+        },
+      },
+      {
+        path: 'image',
+        name: 'Pictures',
+        component: picture,
+        meta: {
+          title: 'Pictures',
         },
       },
     ]

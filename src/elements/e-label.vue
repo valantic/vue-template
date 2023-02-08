@@ -86,7 +86,7 @@
        */
       modifiers() {
         return {
-          ...this.stateModifiers,
+          ...this.mixinStateModifiers,
           position: this.position,
         };
       }
