@@ -7,7 +7,6 @@ $color-grayscale--300: #8f8f8f;
 $color-grayscale--400: #afafaf;
 $color-grayscale--500: #d8d8d8;
 $color-grayscale--600: #f3f3f3;
-$color-grayscale--700: #fcfcfc;
 $color-grayscale--1000: #ffffff;
 
 $color-gradient--1-0: $color-grayscale--0;
@@ -43,3 +42,5 @@ $color-status--error: var(--theme-color-status-error);
 $color-status--error--rgb: var(--theme-color-status-error--rgb);
 $color-status--info: var(--theme-color-status-info);
 $color-status--info--rgb: var(--theme-color-status-info--rgb);
+$color-status--danger: var(--theme-color-status-danger);
+$color-status--danger--rgb: var(--theme-color-status-danger--rgb);

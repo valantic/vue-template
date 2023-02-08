@@ -24,6 +24,9 @@
     "defaultPlaceholder": "Bitte wählen",
     "searchFieldPlaceholder": "Suche"
   },
+  "e-date": {
+    "defaultLabel": "Bitte wählen"
+  },
   "c-breadcrumb": {
     "linkTitle": "Gehe zu {name}"
   },
@@ -49,5 +52,14 @@
     "images": "0 Bilder | 1 Bild | {count} Bilder",
     "zoom": "Bild vergrössern",
     "videos": "0 Videos | 1 Video | {count} Videos"
+  },
+  "c-date-picker": {
+    "inputName": "Bitte wählen",
+    "calendarTitle" : "Titel",
+    "close" : "Schliessen",
+    "inputStartName" : "Start",
+    "inputEndName" : "Ende",
+    "previousMonth" : "Vorheriger Monat",
+    "nextMonth" : "Nächster Monat"
   }
 }

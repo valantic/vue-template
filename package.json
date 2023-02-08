@@ -68,6 +68,7 @@
     "css-vars-ponyfill": "~2.4.7",
     "dayjs": "~1.10.7",
     "picturefill": "~3.0.3",
+    "pikaday": "~1.8.2",
     "portal-vue": "~2.1.7",
     "reset-css": "~5.0.1",
     "swiper": "~6.5.8",

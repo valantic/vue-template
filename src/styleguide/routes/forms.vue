@@ -10,6 +10,7 @@
             method="POST"
             @submit.prevent="onSubmit"
       >
+
         <!-- Section 1 -->
         <e-fieldset legend="Contact information">
           <e-label name="Name">
@@ -106,6 +107,15 @@
           </e-label>
         </e-fieldset>
 
+        <e-fieldset legend="Date Pickers">
+          <e-date v-model="form.date" name="date" />
+          <c-date-picker :start.sync="form.startDate" name="start" />
+          <c-date-picker :start.sync="form.startDate"
+                         :end.sync="form.endDate"
+                         name="date-picker"
+                         range />
+        </e-fieldset>
+
         <e-button type="submit" primary>
           Submit
         </e-button>
@@ -141,10 +151,14 @@
   import eButton from '@/elements/e-button.vue';
 
   import { required, email } from 'vuelidate/lib/validators';
+  import eDate from '@/components/e-date.vue';
+  import cDatePicker from '@/components/c-date-picker';
 
   export default {
     name: 'forms',
     components: {
+      cDatePicker,
+      eDate,
       eFieldset,
       eMultiselect,
       eLabel,
@@ -166,6 +180,9 @@
           topics: [],
           frequency: '',
           businessFields: [],
+          date: new Date(),
+          startDate: new Date(),
+          endDate: new Date()
         },
         mock: {
           languages: [

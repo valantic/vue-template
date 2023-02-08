@@ -5,8 +5,9 @@
             :media="mediaQuery"
             :srcset="mediaSrcset"
     >
-    <img :sizes="mappedSizes"
-         :srcset="srcset"
+    <img ref="image"
+         :sizes="mappedSizes"
+         :srcset="internalSrcSet"
          :src="fallback"
          :alt="alt"
          :loading="loading"
@@ -14,6 +15,7 @@
          :height="height || (ratio && fallbackHeight)"
          :decoding="decoding"
          @load="onLoad"
+         @error="onError"
     >
   </picture>
 </template>
@@ -65,7 +67,7 @@
        */
       fallback: {
         type: String,
-        required: true,
+        default: null,
       },
 
       /**
@@ -164,6 +166,11 @@
         loaded: false,
 
         /**
+         * @type {String} Holds srcset string of comma separated sources with width value.
+         */
+        internalSrcSet: this.srcset,
+
+        /**
          * @type {Number} Holds a fallback width in case only the ratio is defined.
          */
         fallbackHeight: 400,
@@ -211,9 +218,8 @@
         }
 
         const mappedSizesBreakpoints = {};
-        const fallback = sizes.fallback ? `,${sizes.fallback}px` : ',100vw';
-
-        return Object
+        const fallback = sizes.fallback ? `${sizes.fallback}px` : '100vw';
+        const mappedSizes = Object
           .keys(sizes)
           .map((breakpoint) => {
             if (breakpoint === 'fallback') {
@@ -234,12 +240,15 @@
             const viewWidth = Math.floor((mappedSizesBreakpoints[breakpoint] / breakpoint) * 100);
 
             return `(max-width: ${breakpoint}px) ${viewWidth}vw`;
-          })
-          .join(',') + fallback;
+          });
+
+        mappedSizes.push(fallback);
+
+        return mappedSizes.join(',');
       },
     },
-    // watch: {},
 
+    // watch: {},
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
@@ -272,6 +281,9 @@
       onLoad() {
         this.loaded = true;
       },
+      onError() {
+        this.internalSrcSet = this.fallback;
+      }
     },
     // render() {},
   };
@@ -331,7 +343,7 @@
     }
 
     &--placeholder {
-      background-color: variables.$color-grayscale--500;
+      background-color: variables.$color-grayscale--200;
     }
   }
 </style>
