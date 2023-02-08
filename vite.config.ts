@@ -1,9 +1,10 @@
 /* eslint-disable capitalized-comments, no-case-declarations */
-import { defineConfig, UserConfigExport } from 'vite';
+import { defineConfig, UserConfigExport } from 'vitest/config'; // Vitest instead of Vite was used because of extended Interface.
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import markdown, { Mode } from 'vite-plugin-markdown';
 import viteBuilds from './vite.builds.json';
 
 interface IModes {
@@ -16,7 +17,10 @@ interface IViteBuilds {
   base: string;
   outDir: string;
   assetsDir: string;
+  profileBuild: string;
   modes: IModes;
+  themeSource: string;
+  themeFiles: string[];
 }
 
 export const alias = {
@@ -35,6 +39,9 @@ export default defineConfig(({ command, mode }) => {
       vue(),
       ViteImageOptimizer({ // eslint-disable-line new-cap
         // logStats: false,
+      }),
+      markdown({
+        mode: [Mode.VUE],
       }),
     ],
     resolve: {
@@ -56,20 +63,22 @@ export default defineConfig(({ command, mode }) => {
 
   switch (command) {
     case 'build': // @see https://vitejs.dev/config/build-options.html
+      const isProfileBuild = mode === 'profile';
       const {
         base,
         outDir,
         assetsDir,
         modes,
+        profileBuild,
       } = viteBuilds as IViteBuilds || {};
 
-      if (!modes[mode]) {
+      if (!isProfileBuild && !modes[mode]) {
         throw Error(`Given mode '${mode}' is unknown.`);
       }
 
       const {
         input,
-      } = modes[mode];
+      } = modes[isProfileBuild ? profileBuild : mode];
 
       config.base = base;
       config.build = {

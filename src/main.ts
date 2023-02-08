@@ -1,5 +1,3 @@
-import 'core-js/stable';
-
 // It's mandatory that common styles are imported before the application. Else they will come last in the CSS build
 import './setup/styles.scss';
 

@@ -1,4 +1,4 @@
-import { defineAsyncComponent, Plugin } from 'vue';
+import { Plugin } from 'vue';
 
 // Form elements
 import eButton from '@/components/e-button.vue';
@@ -18,6 +18,8 @@ import eProgress from '@/components/e-progress.vue';
 
 // SSR related
 import lDefault from '@/components/l-default.vue';
+import cHeader from '@/components/c-header.vue';
+import cFooter from '@/components/c-footer.vue';
 
 // Imports style only components.
 import.meta.glob([
@@ -45,34 +47,13 @@ const plugin: Plugin = {
 
       // SSR related
       lDefault,
+      cHeader,
+      cFooter,
     ];
 
-    app.component('c-header', defineAsyncComponent(() => import('@/components/c-header.vue')));
-    app.component('c-footer', defineAsyncComponent(() => import('@/components/c-footer.vue')));
-
-    // This improves component usage in PhpStorm, while keeping optimized import in production
-    if (import.meta.env.MODE === 'production') {
-      components.forEach((component) => {
-        app.component(component.name, component);
-      });
-    } else {
-      // Elements
-      app.component(eButton.name, eButton);
-      app.component(eCheckbox.name, eCheckbox);
-      app.component(eFieldset.name, eFieldset);
-      app.component(eInput.name, eInput);
-      app.component(eIcon.name, eIcon);
-      app.component(eLabel.name, eLabel);
-      app.component(eMultiselect.name, eMultiselect);
-      app.component(ePicture.name, ePicture);
-      app.component(eProgress.name, eProgress);
-      app.component(eRadio.name, eRadio);
-      app.component(eSelect.name, eSelect);
-      app.component(eTextarea.name, eTextarea);
-
-      // SSR related
-      app.component(lDefault.name, lDefault);
-    }
+    components.forEach((component) => {
+      app.component(component.name, component);
+    });
   },
 };
 

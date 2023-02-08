@@ -1,21 +1,27 @@
 <template>
   <div :class="b()">
-    TODO: Can the README.md content again be printed here?
+    <readme />
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  // @ts-ignore Needed because typescript cannot resolve `.md` files.
+  import { VueComponent } from '@/../README.md';
 
   export default defineComponent({
     name: 's-readme',
     status: 1,
 
-    // components: {},
+    components: {
+      readme: VueComponent,
+    },
 
     // props: {},
     // data() {
-    //   return {};
+    //   return {
+    //     content: html,
+    //   };
     // },
 
     // computed: {},
