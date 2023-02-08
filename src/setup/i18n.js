@@ -40,7 +40,7 @@ export const i18n = new VueI18n({
   warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
   dateTimeFormats: {
     [I18N_FALLBACK]: dateTimeFormats,
-    [pageLang]: dateTimeFormats,
+    [PAGE_LANG]: dateTimeFormats,
   },
 
   /**

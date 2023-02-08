@@ -193,6 +193,8 @@
 
     beforeCreate() {
       loadMapsAPI(() => {
+        geocoder = new window.google.maps.Geocoder();
+
         this.$nextTick(() => {
           this.createMapInstance();
         });
