@@ -24,10 +24,15 @@
       <span :class="b('output-value')">
         {{ outputValue }}
       </span>
-      <e-icon v-if="mixinHasDefaultState"
-              icon="arrow--down"
+      <e-icon v-if="mixinHasDefaultState && !focus"
+              :class="b('arrow-icon')"
+              icon="i-arrow--down"
               size="22"
               inline
+      />
+      <e-icon v-else
+              :class="b('state-icon')"
+              :icon="mixinStateIcon"
       />
       <span v-if="!mixinHasDefaultState" :class="b('icon-splitter')"></span>
       <span :class="b('progress-wrapper')">
@@ -65,6 +70,7 @@
   import mixinFormStates from '@/mixins/form-states';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eIcon from '@/elements/e-icon.vue';
+  import eProgress from '@/elements/e-progress.vue';
 
   /**
    * This renders a multi-select component.
@@ -73,7 +79,8 @@
     name: 'e-multiselect',
     components: {
       eCheckbox,
-      eIcon
+      eIcon,
+      eProgress
     },
     mixins: [
       mixinUuid,
@@ -181,7 +188,7 @@
        */
       modifiers() {
         return {
-          ...this.stateModifiers,
+          ...this.mixinStateModifiers,
         };
       },
 
@@ -325,6 +332,7 @@
       cursor: pointer;
       background-color: variables.$color-grayscale--1000;
       border-radius: 3px;
+      color: variables.$color-grayscale--200;
 
       &:focus {
         outline: none;
@@ -346,7 +354,7 @@
       border-bottom-right-radius: 0;
       border-color: variables.$color-grayscale--400;
 
-      .e-icon {
+      #{$this}__arrow-icon {
         transform: rotate(180deg);
       }
 
@@ -430,6 +438,7 @@
         @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
         border-color: variables.$color-status--error;
+        color: variables.$color-status--error;
 
         &:hover {
           border-color: variables.$color-status--error;

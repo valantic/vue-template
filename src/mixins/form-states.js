@@ -19,7 +19,7 @@ export default {
           'success',
           'warning',
           'info',
-          'default'
+          'default',
         ].includes(value);
       }
     },
@@ -126,13 +126,13 @@ export default {
     mixinStateIcon() {
       switch (this.state) {
         case 'error':
-          return 'error';
+          return 'i-error';
 
         case 'success':
-          return 'check';
+          return 'i-check';
 
         case 'info':
-          return 'info';
+          return 'i-info';
 
         default:
           return '';

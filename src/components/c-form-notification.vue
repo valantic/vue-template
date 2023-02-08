@@ -33,7 +33,7 @@
       */
       modifiers() {
         return {
-          ...this.stateModifiers
+          ...this.mixinStateModifiers
         };
       }
     }

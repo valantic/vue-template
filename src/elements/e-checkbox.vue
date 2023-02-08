@@ -80,7 +80,7 @@
        */
       modifiers() {
         return {
-          ...this.stateModifiers,
+          ...this.mixinStateModifiers,
           selected: this.internalValue === this.value,
         };
       },
