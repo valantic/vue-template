@@ -231,7 +231,7 @@
     showSortingOptions: boolean;
 
     /**
-     * The currently selected 'column' to be sorted.
+     * The currently selected 'column' to be sorted by.
      */
     sortBy: IETableColumn | null;
 
