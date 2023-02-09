@@ -421,7 +421,7 @@
         const items = this.items.slice();
 
         if (sortBy) {
-          const sort = typeof this.sortBy?.sort === 'function'
+          const sort = typeof sortBy?.sort === 'function'
             ? sortBy.sort
             : this.sortByFieldConstructor(sortBy.key);
 
