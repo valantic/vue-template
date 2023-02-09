@@ -206,7 +206,9 @@
     // separator for state icons
     &__icon-wrapper {
       position: absolute;
+      top: 50%;
       right: variables.$spacing--5;
+      transform: translateY(-50%);
     }
 
     // separator for state icons
@@ -277,7 +279,9 @@
 
     &__progress-container {
       position: absolute;
-      right: 0;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
     }
   }
 </style>

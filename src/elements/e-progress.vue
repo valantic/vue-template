@@ -127,7 +127,7 @@
       display: block;
       position: relative;
       width: calc(1em * 4);
-      height: 1em;
+      height: 1.1em;
       float: left;
     }
 
