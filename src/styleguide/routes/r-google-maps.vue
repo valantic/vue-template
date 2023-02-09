@@ -31,7 +31,7 @@
           lng: 72.79504659999998,
           geocode: 'Breitfeldstrasse 13, 9015 St.Gallen',
           title: 'Aksa Beach',
-        }] as ICGoogleMapsLocation[],
+        }] satisfies ICGoogleMapsLocation[],
       };
     },
 

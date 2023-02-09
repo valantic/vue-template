@@ -52,6 +52,9 @@
     geocode?: string;
     icon?: string;
     title?: string;
+  }
+
+  interface ICGoogleMapsInternalLocation extends ICGoogleMapsLocation{
     referer: ICGoogleMapsLocation;
   }
 
@@ -341,7 +344,7 @@
       /**
        * Maps the locations to the Google Maps required format.
        */
-      mappedLocations(): ICGoogleMapsLocation[] {
+      mappedLocations(): ICGoogleMapsInternalLocation[] {
         return this.locations?.map((location) => {
           const { lat, lng } = location;
 
@@ -482,7 +485,7 @@
        * @param {Object} location - A location object.
        * @param {String} location.geocode - An address string, that will be used to calculate the coordinates.
        */
-      createMakerFromAddress(location: ICGoogleMapsLocation): void {
+      createMakerFromAddress(location: ICGoogleMapsInternalLocation): void {
         if (!location.geocode) {
           throw new Error("Unable to geocode a location without 'geocode' information.");
         }
@@ -515,7 +518,7 @@
        *
        * @returns {Property.Marker}
        */
-      createMarker(location: ICGoogleMapsLocation): google.maps.Marker {
+      createMarker(location: ICGoogleMapsInternalLocation): google.maps.Marker {
         const marker = new window.google.maps.Marker({
           position: {
             lat: location.lat,
