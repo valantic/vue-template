@@ -37,7 +37,7 @@
     "close": "Schliessen"
   },
   "c-modal": {
-    "closeTitle": "Fenster schliessen"
+    "buttonClose": "Fenster schliessen"
   },
   "c-multiselect": {
     "search": "suchen",

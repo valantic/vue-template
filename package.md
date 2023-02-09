@@ -44,6 +44,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > vuelidate, validation
 - [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js.
   > core
+- [body-scroll-lock](https://www.npmjs.com/package/body-scroll-lock) - Enables body scroll locking (for iOS Mobile and Tablet, Android, desktop Safari/Chrome/Firefox) without breaking scrolling of a target element (eg. modal/lightbox/flyouts/nav-menus).
+  > c-modal
 - [core-js](https://www.npmjs.com/package/core-js) - Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2019: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.
   > core, polyfill
 - [pinia](https://www.npmjs.com/package/pinia) - Centralized State Management for Vue.js.
@@ -60,7 +62,6 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > core
 - [vue-i18n](https://www.npmjs.com/package/vue-i18n) - Internationalization plugin for Vue.js
   > core
-
 ## Dev-Dependencies
 
 ### Project
@@ -90,6 +91,10 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
   > storybook
 - [@storybook/vue3](https://www.npmjs.com/package/@storybook/vue3) - Storybook for Vue 3 is a UI development environment for your Vue 3 components.
   > storybook
+- [@types/google.maps](https://www.npmjs.com/package/@types/google.maps) - This package contains type definitions for Google Maps JavaScript API
+  > c-google-maps
+- [@types/body-scroll-lock](https://www.npmjs.com/package/@types/body-scroll-lock) - This package contains type definitions for body-scroll-lock
+  > types
 - [@types/jest](https://www.npmjs.com/package/@types/jest) - This package contains type definitions for Jest.
   > types jest
 - [@types/resize-observer-browser](https://www.npmjs.com/package/@types/resize-observer-browser) - This package contains type definitions for resize-observer-browser.

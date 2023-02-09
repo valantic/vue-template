@@ -5,17 +5,23 @@
       <s-toggle v-model="loggedIn">
         Logged in
       </s-toggle>
+      <s-toggle v-model="showApiHandlerConfiguration">
+        API Mock Test
+      </s-toggle>
     </li>
   </ul>
+  <s-api-mock-test v-if="showApiHandlerConfiguration" @click.stop @close="showApiHandlerConfiguration = false" />
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
   import sToggle from '@/styleguide/components/s-toggle.vue';
   import sHtmlValidation from '@/styleguide/components/s-html-validation.vue';
+  import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
 
   interface IData {
     loggedIn: boolean;
+    showApiHandlerConfiguration: boolean,
   }
 
   export default defineComponent({
@@ -23,6 +29,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      sApiMockTest,
       sHtmlValidation,
       sToggle,
     },
@@ -34,6 +41,11 @@
          * Determines if the user is logged in.
          */
         loggedIn: true,
+
+        /**
+         * Determines if the api handler configuration is displayed.
+         */
+        showApiHandlerConfiguration: false,
       };
     },
 
