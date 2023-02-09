@@ -106,7 +106,7 @@
     handlers: ReadonlyArray<RequestHandler> | null;
     configurations: {
       [key: string]: IDebugConfiguration;
-    },
+    };
   }
 
   /**
