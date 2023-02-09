@@ -13,11 +13,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import lDefault from '@/components/l-default.vue';
-  import ePicture from '@/components/e-picture.vue';
+  import ePicture, { IImageSizes } from '@/components/e-picture.vue';
 
   // interface ISetup {}
   interface IData {
-    sizes: { [key: number | string]: number};
+    sizes: IImageSizes;
   }
  
   /**

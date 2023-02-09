@@ -24,13 +24,13 @@
   import { BREAKPOINTS_MAX } from '@/setup/globals';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface IImageSizes {
-    fallback: number;
-    lg: number,
-    md: number,
-    sm: number,
-    xs: number,
-    xxs: number,
+  export interface IImageSizes {
+    fallback?: number;
+    lg?: number;
+    md?: number;
+    sm?: number;
+    xs?: number;
+    xxs?: number;
     [key: number]: number;
   }
 
@@ -243,7 +243,7 @@
             // otherwise take the size key (which is a number in that case)
             const breakpointValue = BREAKPOINTS_MAX[breakpoint] || size as number;
 
-            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size as keyof IImageSizes];
+            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size as keyof IImageSizes] as number; // Todo: 'as number' is possible not the best way to tell TS, that the value will always exist.
 
             return breakpointValue;
           })
