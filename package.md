@@ -38,6 +38,8 @@ This will test the current state of CSS and JS code. Tests **MUST** be executed 
 ### Project
 
 ### Template
+- [@popperjs/core](https://www.npmjs.com/package/@popperjs/core) - Tooltip & Popover Positioning Engine
+  > tooltip
 - [@vuelidate/core](https://www.npmjs.com/package/@vuelidate/core) - Simple, lightweight model-based validation for Vue.js 2.x & 3.0
   > vuelidate, validation
 - [@vuelidate/validators](https://www.npmjs.com/package/@vuelidate/validators) - This is the standalone validators package for Vuelidate.

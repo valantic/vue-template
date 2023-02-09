@@ -7,6 +7,7 @@ import directives from '@/setup/directives';
 import components from '@/setup/components';
 import dayjs from '@/plugins/dayjs';
 // import VueFocus from '@/plugins/v-focus';
+// import tooltip from '@/plugins/tooltip';
 
 export default [
   [i18n],
@@ -17,7 +18,7 @@ export default [
   }],
   [directives],
   [components],
-
+  // [tooltip],
   // [VueFocus],
   [dayjs],
 ];
