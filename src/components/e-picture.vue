@@ -25,17 +25,11 @@
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   export interface IImageSizes {
-    fallback?: number;
-    lg?: number;
-    md?: number;
-    sm?: number;
-    xs?: number;
-    xxs?: number;
-    [key: number]: number;
+    [key: keyof typeof BREAKPOINTS_MAX | 'fallback' | string]: number;
   }
 
   interface ISizePerBreakpoint {
-    [key: number]: number
+    [key: string]: number
   }
 
   interface IData {
@@ -231,19 +225,22 @@
 
         return Object
           .keys(this.sizes)
-          .map((size: string | number) => {
+          .map((size: string) => {
             if (size === 'fallback') {
               return null;
             }
 
-            const breakpoint = size as keyof typeof BREAKPOINTS_MAX;
-
             // check if the provided size key exists as breakpoint key
             // if yes, take the corresponding breakpoint value,
-            // otherwise take the size key (which is a number in that case)
-            const breakpointValue = BREAKPOINTS_MAX[breakpoint] || size as number;
+            // otherwise take the size key (which is a pixel value)
+            const breakpointValue = BREAKPOINTS_MAX[size as keyof typeof BREAKPOINTS_MAX] || size;
+            const imageSize = this.sizes[size];
 
-            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size as keyof IImageSizes] as number; // Todo: 'as number' is possible not the best way to tell TS, that the value will always exist.
+            if (!imageSize) {
+              return null;
+            }
+
+            mappedSizesPerBreakpoints[breakpointValue] = imageSize;
 
             return breakpointValue;
           })
@@ -293,7 +290,7 @@
       onLoad(): void {
         this.loaded = true;
       },
-      
+
       /**
        * Load event handler when an error occurs with a image element.
        */
