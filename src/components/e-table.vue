@@ -35,11 +35,8 @@
                         value="0"
                         name="total"
             >
-              <span v-if="!!selectedInternal.length" :class="{ invisible : !showSortingOptions || !isMobile}">
-                {{ $t('e-table.deselectAll') }}
-              </span>
-              <span v-else :class="{ invisible : !showSortingOptions || !isMobile }">
-                {{ $t('e-table.selectAll') }}
+              <span :class="{ invisible : !showSortingOptions || !isMobile}">
+                {{ selectedInternal.length ? $t('e-table.deselectAll') : $t('e-table.selectAll') }}
               </span>
             </e-checkbox>
           </th>
