@@ -518,7 +518,7 @@
       },
 
       /**
-       * Get the height of the sorting list toggle button.
+       * Set the height of the sorting list toggle button.
        */
       updateToggleButtonHeight(): void {
         this.toggleButtonHeight = this.toggleButton?.clientHeight || 0;
