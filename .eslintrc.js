@@ -17,6 +17,9 @@ module.exports = {
   settings: {
     'import/resolver': 'webpack',
   },
+  globals: {
+    'google': 'readonly' // Fixes `no-undef` for `google` namespace. (types are loaded by `@types/google.maps`)
+  },
   // add your custom rules here
   rules: {
     'vue/no-unsupported-features': ['error', {
