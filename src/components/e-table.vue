@@ -197,15 +197,17 @@
   import useUuid, { IUuid } from '@/compositions/uuid';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  type TItemId = string | number;
+
   export interface IETableItem {
     disabled?: boolean;
-    [key: string]: unknown;
+    [key: string]: TItemId | unknown;
   }
 
   export interface IETableColumn {
     title: string | (() => string);
     key: string;
-    align: string;
+    align: 'left' | 'center' | 'right';
     slotName: string;
     sortable: boolean;
     nowrap?: boolean;
@@ -377,7 +379,7 @@
           if (this.selectedInternal.length) {
             this.selectedInternal = [];
           } else {
-            this.selectedInternal = this.items.map(item => item[this.itemIdentifier]);
+            this.selectedInternal = this.items.map(item => item[this.itemIdentifier] as TItemId);
           }
         },
       },
@@ -393,11 +395,11 @@
        * Manages changes for the 'select' prop.
        */
       selectedInternal: {
-        get(): unknown[] {
-          return this.selected.map((item: IETableItem): unknown => item[this.itemIdentifier]);
+        get(): TItemId[] {
+          return this.selected.map(item => item[this.itemIdentifier] as TItemId);
         },
-        set(itemIds: unknown[]): void {
-          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier])));
+        set(itemIds: TItemId[]): void {
+          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId)));
         },
       },
 
@@ -405,11 +407,11 @@
        * Handles changes to the 'expandedRows' prop.
        */
       expandedRowsComputed: {
-        get(): unknown[] {
-          return this.expandedRows.map(item => item[this.itemIdentifier]);
+        get(): TItemId[] {
+          return this.expandedRows.map(item => item[this.itemIdentifier] as TItemId);
         },
-        set(itemIds: unknown[]) {
-          this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier]));
+        set(itemIds: TItemId[]) {
+          this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId));
         },
       },
 
@@ -465,20 +467,20 @@
        */
       isMobile: {
         immediate: true,
-        handler(): void {
+        handler(value: boolean): void {
           this.showSortingOptions = !this.isMobile;
+
+          if (value) {
+            window.addEventListener('resizeend', this.updateToggleButtonHeight);
+          } else {
+            window.removeEventListener('resizeend', this.updateToggleButtonHeight);
+          }
         },
       },
     },
 
     // beforeCreate() {},
-    created() {
-      if (this.isMobile) {
-        window.addEventListener('resizeend', this.updateToggleButtonHeight);
-      } else {
-        window.removeEventListener('resizeend', this.updateToggleButtonHeight);
-      }
-    },
+    // created() {},
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -514,6 +516,7 @@
         if (this.isMobile) {
           this.updateToggleButtonHeight();
         }
+
         this.showSortingOptions = !this.showSortingOptions;
       },
 
@@ -556,7 +559,7 @@
        * Since Vue3 leverages proxies for data properties for reactivity, we can't compare the objects directly.
        */
       isSortedBy(column: IETableColumn): boolean {
-        return JSON.stringify(this.sortBy) === JSON.stringify(column);
+        return this.sortBy?.key === column.key;
       },
 
       /**
@@ -697,6 +700,10 @@
         } else {
           const url = this.rowLink?.href?.(item, column);
 
+          if (!url) {
+            return;
+          }
+
           if (event.ctrlKey || event.metaKey) {
             window.open(url, '_blank');
           } else if (typeof url === 'string') {
@@ -709,7 +716,7 @@
        * Click callback for the toggle cell (increases click area on mobile).
        */
       onDetailToggleClick(item: IETableItem): void {
-        const id = item[this.itemIdentifier];
+        const id = item[this.itemIdentifier] as TItemId;
 
         if (!id) {
           return;
