@@ -10,6 +10,7 @@ import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue';
 import table from '@/styleguide/routes/r-table.vue';
 import tooltips from '@/styleguide/routes/r-tooltips.vue';
 import googleMaps from '@/styleguide/routes/r-google-maps.vue';
+import picture from '@/styleguide/routes/r-picture.vue';
 
 export interface IRoute {
   path: string;
@@ -117,6 +118,14 @@ export default [
         component: googleMaps,
         meta: {
           title: 'Google Maps',
+        },
+      },
+      {
+        path: 'image',
+        name: 'Pictures',
+        component: picture,
+        meta: {
+          title: 'Pictures',
         },
       },
     ],
