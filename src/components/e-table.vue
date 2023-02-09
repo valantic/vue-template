@@ -692,8 +692,8 @@
           return;
         }
 
-        if (column.onClick) {
-          column?.onClick?.(item, column, event);
+        if (typeof column.onClick === 'function') {
+          column.onClick(item, column, event);
         } else {
           const url = this.rowLink?.href?.(item, column);
 
