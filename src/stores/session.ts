@@ -11,6 +11,11 @@ interface ISessionState extends StateTree {
    * Stores the theme id.
    */
   theme: string;
+
+  /**
+   * Stores the Google Maps API key.
+   */
+  googleMapsApiKey: string | null;
 }
 
 interface ISessionGetters extends _GettersTree<ISessionState> {
@@ -37,7 +42,12 @@ export default defineStore<typeof storeName, ISessionState, ISessionGetters, ISe
   state: (): ISessionState => {
     const state: ISessionState = {
       theme: '01',
+      googleMapsApiKey: null,
     };
+
+    if (process.env.NODE_ENV !== 'production') {
+      state.googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY as string;
+    }
 
     return state;
   },
