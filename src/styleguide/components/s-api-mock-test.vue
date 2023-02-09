@@ -98,7 +98,7 @@
     statusOptions: {
       label: string;
       value: string;
-    }[]
+    }[];
   }
 
   interface IData {
