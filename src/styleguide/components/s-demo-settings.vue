@@ -45,7 +45,7 @@
         /**
          * Determines if the api handler configuration is displayed.
          */
-        showApiHandlerConfiguration: true,
+        showApiHandlerConfiguration: false,
       };
     },
 

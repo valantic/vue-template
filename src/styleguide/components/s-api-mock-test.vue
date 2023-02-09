@@ -94,7 +94,6 @@
   }
 
   interface ISetup {
-    storageKey: string;
     statusOptions: {
       label: string;
       value: string;
@@ -108,6 +107,14 @@
       [key: string]: IDebugConfiguration;
     };
   }
+
+  interface IEndpoint {
+    header: string;
+    method: string;
+    path: string;
+  }
+
+  const storageKey = 'sApiMockTest';
 
   /**
    * Lists all active Mock API Endpoint handlers and allows enabling error mode for them.
@@ -123,7 +130,6 @@
 
     setup(): ISetup {
       return {
-        storageKey: 'sApiMockTest',
         statusOptions: [
           {
             label: '200 OK',
@@ -154,32 +160,40 @@
 
     computed: {
       /**
-       * Returns list of endpoints  (filtered by search).
+       * Returns the mapped list of endpoints.
        */
-      filteredEndpoints(): object[] | null {
-        const { search, handlers } = this;
+      mappedEndpoints(): IEndpoint[] | null {
+        const { handlers } = this;
 
         if (!handlers) {
           return null;
         }
 
-        const mappedHandlers = handlers.map(handler => handler.info);
+        return handlers.map(handler => handler.info) as IEndpoint[];
+      },
+
+      /**
+       * Returns the filtered list of endpoints.
+       */
+      filteredEndpoints(): IEndpoint[] | null {
+        const { search, mappedEndpoints } = this;
 
         if (!search) {
-          return mappedHandlers;
+          return mappedEndpoints;
         }
 
-        return mappedHandlers.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase()));
+        return mappedEndpoints
+          ?.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase())) as IEndpoint[] || null;
       },
     },
     watch: {
+      /**
+       * Updates handler and local storage when configuration changed.
+       */
       configurations: {
-        /**
-         * Updates handler and local storage when configuration changed.
-         */
         handler(configurationsValue: IDebugConfiguration): void {
           this.setupHandlers();
-          window.localStorage.setItem(this.storageKey, JSON.stringify(configurationsValue));
+          window.localStorage.setItem(storageKey, JSON.stringify(configurationsValue));
         },
         deep: true,
       },
@@ -192,15 +206,19 @@
       this.handlers = mockWorker.listHandlers();
       this.setDefaultConfigurations();
 
-      const configurationsFromStorage = JSON.parse(window.localStorage.getItem(this.storageKey) || '{}');
+      try {
+        const configurationsFromStorage = JSON.parse(window.localStorage.getItem(storageKey) || '{}');
 
-      if (configurationsFromStorage) {
-        this.configurations = {
-          ...this.configurations,
-          ...configurationsFromStorage,
-        };
+        if (configurationsFromStorage) {
+          this.configurations = {
+            ...this.configurations,
+            ...configurationsFromStorage,
+          };
 
-        this.setupHandlers();
+          this.setupHandlers();
+        }
+      } catch (e) {
+        console.warn('Configuration from storage could not be read'); // eslint-disable-line
       }
     },
     // beforeMount() {},
