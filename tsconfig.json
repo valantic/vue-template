@@ -29,7 +29,7 @@
     "types": [
       "node",
       "vite/client",
-      "jest"
+      "google.maps"
     ]
   },
   "include": [

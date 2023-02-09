@@ -872,7 +872,6 @@ package.json:
 * [ ] Check if module polyfill is required: https://vitejs.dev/config/build-options.html#build-modulepreload
 * [ ] CSS Prefixing
 * [ ] Apply new ESLint rules to valantic config.
-* [ ] Try to remove `core-js/stable` import from main.ts.
 * [ ] Should there be basic styles for form elements (if no class applied)?
 * [ ] cmd + click in PhpStorm leads to Interface instead of implementation.
 * [ ] Update README
