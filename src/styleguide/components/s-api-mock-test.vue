@@ -162,11 +162,11 @@
       /**
        * Returns the mapped list of endpoints.
        */
-      mappedEndpoints(): IEndpoint[] | null {
+      mappedEndpoints(): IEndpoint[] {
         const { handlers } = this;
 
         if (!handlers) {
-          return null;
+          return [];
         }
 
         return handlers.map(handler => handler.info) as IEndpoint[];
@@ -175,15 +175,14 @@
       /**
        * Returns the filtered list of endpoints.
        */
-      filteredEndpoints(): IEndpoint[] | null {
+      filteredEndpoints(): IEndpoint[] {
         const { search, mappedEndpoints } = this;
 
         if (!search) {
           return mappedEndpoints;
         }
 
-        return mappedEndpoints
-          ?.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase())) as IEndpoint[] || null;
+        return mappedEndpoints.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase()));
       },
     },
     watch: {
