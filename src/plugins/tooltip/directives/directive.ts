@@ -12,19 +12,19 @@ import {
   DEFAULT_POPPER_OPTIONS,
 } from '@/plugins/tooltip/shared';
 
+const storageKey = Symbol('Tooltip directive instance');
+
 type TTooltipEvent = {
   [key: string]: EventListener;
 }
 
 interface ITooltipElement extends HTMLElement {
-  [key: symbol]: {
+  [storageKey]: {
     isHidden: boolean;
     popper: Instance;
     events: TTooltipEvent[];
   }
 }
-
-const storageKey = Symbol('Tooltip directive instance');
 
 /**
  * Creates a tooltip element and attaches it to the DOM.

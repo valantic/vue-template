@@ -48,12 +48,17 @@
   import { defineComponent } from 'vue';
   import eSelect from '@/components/e-select.vue';
   import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
+  import tooltipDirective from '@/plugins/tooltip/directives/directive';
 
   export default defineComponent({
     name: 'r-tooltips',
     components: {
       eSelect,
       cTooltip,
+    },
+
+    directives: {
+      tooltip: tooltipDirective,
     },
 
     // props: {},
