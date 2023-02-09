@@ -62,6 +62,8 @@
   }
 
   const callbackStack: TCGoogleMapsCallback[] = [];
+  const callbackFunctionName = 'cGoogleMapsInitMap';
+
   let geocoder: google.maps.Geocoder | null = null;
   let isMapsAPILoaded = false;
 
@@ -195,7 +197,7 @@
   /**
    * Set isMapsAPILoaded to true, call the callback, then remove all callbacks in callbackStack array.
    */
-  window.cGoogleMapsInitMap = () => {
+  window[callbackFunctionName] = () => {
     isMapsAPILoaded = true;
     callbackStack.forEach(callback => callback());
     callbackStack.length = 0;
@@ -215,7 +217,7 @@
     if (isMapsAPILoaded) {
       callback();
     } else {
-      const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=cGoogleMapsInitMap`;
+      const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=${callbackFunctionName}`;
 
       callbackStack.push(callback);
 
@@ -311,7 +313,7 @@
       },
     },
     emits: {
-      click: payload => !!payload?.location && !!payload?.maker,
+      click: payload => !!payload?.location && !!payload?.marker,
     },
 
     setup(): ISetup {
@@ -437,14 +439,16 @@
       /**
        * Maps custom icons for the Google Maps. If no source is given, the default icon will be used.
        */
-      mapIcon(iconSrc: string): object | null {
+      mapIcon(iconSrc: string): google.maps.Icon|google.maps.Symbol | null {
         if (!iconSrc || typeof iconSrc !== 'string') {
           return null;
         }
 
+        const { iconSize } = this;
+
         return {
           url: iconSrc,
-          scaledSize: new window.google.maps.Size(this.iconSize, this.iconSize),
+          scaledSize: iconSize ? new window.google.maps.Size(iconSize, iconSize) : null,
         };
       },
 

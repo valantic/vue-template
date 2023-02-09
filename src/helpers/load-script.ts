@@ -1,23 +1,15 @@
-/**
- * Holds a list of scripts that are still loading.
- */
-let loadingQueue: string[] = [];
-
 interface ICallback {
   id: string;
   callback: () => unknown;
 }
 
-/**
- * Holds a list of callbacks for a given src in case
- * loadScript was called multiple times before the source loaded.
- */
-let callbacks: ICallback[] = [];
-
 interface IAttributes {
   defer: boolean;
   async: boolean;
 }
+
+let scriptLoadingQueue: string[] = [];
+let loadScriptCallbacks: ICallback[] = [];
 
 /**
  * This helper will load the given script source unless it is already present in the DOM.
@@ -33,7 +25,7 @@ export default function loadScript(scriptSrc: string, callback?: () => unknown, 
   if (!existingTag) {
     const script = document.createElement('script');
 
-    loadingQueue.push(scriptSrc);
+    scriptLoadingQueue.push(scriptSrc);
 
     script.type = 'text/javascript';
     script.src = scriptSrc;
@@ -44,7 +36,7 @@ export default function loadScript(scriptSrc: string, callback?: () => unknown, 
       script.onload = () => {
         callback();
 
-        callbacks = callbacks.filter((queueItem) => {
+        loadScriptCallbacks = loadScriptCallbacks.filter((queueItem) => {
           const isCurrentScript = queueItem.id === scriptSrc;
 
           if (isCurrentScript) {
@@ -54,14 +46,14 @@ export default function loadScript(scriptSrc: string, callback?: () => unknown, 
           return isCurrentScript;
         });
 
-        loadingQueue = loadingQueue.filter(loadingScript => loadingScript !== scriptSrc);
+        scriptLoadingQueue = scriptLoadingQueue.filter(loadingScript => loadingScript !== scriptSrc);
       };
     }
 
     document.head.appendChild(script);
   } else if (typeof callback === 'function') {
-    if (loadingQueue.includes(scriptSrc)) {
-      callbacks.push({
+    if (scriptLoadingQueue.includes(scriptSrc)) {
+      loadScriptCallbacks.push({
         id: scriptSrc,
         callback,
       });
