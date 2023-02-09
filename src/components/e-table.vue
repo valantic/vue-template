@@ -193,11 +193,11 @@
     ref,
   } from 'vue';
   import eIcon from '@/components/e-icon.vue';
-  import eCheckbox, { TECheckboxValue } from '@/components/e-checkbox.vue';
+  import eCheckbox from '@/components/e-checkbox.vue';
   import useUuid, { IUuid } from '@/compositions/uuid';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  type TItemId = Extract<TECheckboxValue, number | string>;
+  type TItemId = number | string;
 
   export interface IETableItem {
     disabled?: boolean;
