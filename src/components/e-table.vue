@@ -642,7 +642,7 @@
       },
 
       /**
-       * Enables the row link for a few ms to allow link specific context menus (even IE11).
+       * Enables the row link for a few ms to allow link specific context menus.
        */
       enableRowLink(): void {
         if (this.rowLink?.href && !this.hasSelection) { // It was not possible to test for rowHref when binding the event in the template.
