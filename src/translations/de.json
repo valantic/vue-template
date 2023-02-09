@@ -9,8 +9,13 @@
     "chooseOption": "Bitte wählen"
   },
   "e-table": {
+    "deselectAll": "Auswahl aufheben",
+    "selectAll": "Alle auswählen",
+    "selectItem": "Auswählen",
+    "showDetailsHeader": "Details anzeigen",
     "sort": "Nach {name} sortieren",
-    "noResults": "Keine Ergebnisse für die aktuelle Auswahl."
+    "noResults": "Keine Ergebnisse für die aktuelle Auswahl.",
+    "toggleSortingOptions": "Sortierung"
   },
   "e-progress": {
     "loading": "Lade …"
