@@ -8,6 +8,7 @@ import forms from '@/styleguide/routes/r-forms.vue';
 import notifications from '@/styleguide/routes/r-notifications.vue';
 import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue';
 import googleMaps from '@/styleguide/routes/r-google-maps.vue';
+import picture from '@/styleguide/routes/r-picture.vue';
 
 export interface IRoute {
   path: string;
@@ -99,6 +100,14 @@ export default [
         component: googleMaps,
         meta: {
           title: 'Google Maps',
+        },
+      },
+      {
+        path: 'image',
+        name: 'Pictures',
+        component: picture,
+        meta: {
+          title: 'Pictures',
         },
       },
     ],

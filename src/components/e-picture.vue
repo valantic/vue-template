@@ -6,7 +6,7 @@
             :srcset="mediaSrcset"
     >
     <img :sizes="mappedSizes"
-         :srcset="srcset"
+         :srcset="internalSrcSet"
          :src="fallback"
          :alt="alt"
          :loading="loading"
@@ -14,6 +14,7 @@
          :height="height || (ratio && fallbackHeight)"
          :decoding="decoding"
          @load="onLoad"
+         @error="onError"
     >
   </picture>
 </template>
@@ -40,6 +41,7 @@
   interface IData {
     loaded: boolean;
     fallbackHeight: number;
+    internalSrcSet: string;
   }
 
   /**
@@ -85,7 +87,7 @@
        */
       fallback: {
         type: String,
-        required: true,
+        default: null,
       },
 
       /**
@@ -183,6 +185,12 @@
          * Holds a fallback width in case only the ratio is defined.
          */
         fallbackHeight: 400,
+
+        /**
+         *  Holds srcset string of comma separated sources with width value.
+         */
+        internalSrcSet: this.srcset,
+
       };
     },
 
@@ -285,6 +293,13 @@
       onLoad() {
         this.loaded = true;
       },
+      
+      /**
+       * Load event handler when an error occurs with a image element.
+       */
+      onError() {
+        this.internalSrcSet = this.fallback;
+      },
     },
     // render() {},
   });
@@ -341,7 +356,7 @@
     }
 
     &--placeholder {
-      background-color: variables.$color-grayscale--500;
+      background-color: variables.$color-grayscale--200;
     }
   }
 </style>
