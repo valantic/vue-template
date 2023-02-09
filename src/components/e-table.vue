@@ -468,7 +468,7 @@
       isMobile: {
         immediate: true,
         handler(value: boolean): void {
-          this.showSortingOptions = !this.isMobile;
+          this.showSortingOptions = !value;
 
           if (value) {
             window.addEventListener('resizeend', this.updateToggleButtonHeight);
