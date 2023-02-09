@@ -27,6 +27,8 @@
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  export type TECheckboxValue = boolean | string | number;
+
   /**
    * Checkbox component for form elements.
    * Can be used as single element with a Boolean value or multiple checkboxes with an Array.
@@ -44,7 +46,7 @@
        * The model value to be used for v-model.
        */
       modelValue: {
-        type: [Boolean, Array] as PropType<boolean | string[]>,
+        type: [Boolean, Number, String, Array] as PropType<TECheckboxValue | TECheckboxValue[]>,
         required: true,
       },
 
@@ -105,10 +107,10 @@
        * Sets value of component model to parent model
        */
       internalValue: {
-        get(): boolean | string[] {
+        get(): TECheckboxValue | TECheckboxValue[] {
           return this.modelValue;
         },
-        set(value: boolean | string[]) {
+        set(value: TECheckboxValue) {
           /**
            * Emits checkbox value e.g. true/false or value
            */

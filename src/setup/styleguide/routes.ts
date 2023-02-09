@@ -7,6 +7,8 @@ import icons from '@/styleguide/routes/r-icons.vue';
 import forms from '@/styleguide/routes/r-forms.vue';
 import notifications from '@/styleguide/routes/r-notifications.vue';
 import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue';
+import table from '@/styleguide/routes/r-table.vue';
+import tooltips from '@/styleguide/routes/r-tooltips.vue';
 import googleMaps from '@/styleguide/routes/r-google-maps.vue';
 
 declare module 'vue-router' {
@@ -100,6 +102,22 @@ export default [
         component: notifications,
         meta: {
           title: 'Notifications',
+        },
+      },
+      {
+        path: 'tooltips',
+        name: 'tooltips',
+        component: tooltips,
+        meta: {
+          title: 'Tooltips',
+        },
+      },
+      {
+        path: 'table',
+        name: 'Table',
+        component: table,
+        meta: {
+          title: 'Table',
         },
       },
       {
