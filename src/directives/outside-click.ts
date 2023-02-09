@@ -10,7 +10,7 @@ interface ICustomElement extends HTMLElement {
  * Directive to handle an outside click for a specific DOM element.
  *
  * Examples:
- *
+ * <div v-oustide-click="handler"></div>
  * <div v-outside-click="{
  *   exclude: [],
  *   excludeIds: [],
@@ -33,6 +33,12 @@ export default {
 
     // Click / Touchstart handler.
     el.outsideClickHandler = (event: Event) => {
+      const { handler, exclude = [], excludeIds = [] } = binding.value;
+      
+      if (!handler) {
+        throw new Error('No event handler defined for v-outside-click.');
+      }
+
       // These conditions are needed to detect scrolling on touch devices.
       if (event.type === 'scroll') {
         userIsScrolling = true;
@@ -45,8 +51,6 @@ export default {
 
         return;
       }
-
-      const { handler, exclude = [], excludeIds = [] } = binding.value;
 
       // We check to see if the clicked element is not the dialog element and not excluded.
       const eventTarget = event.target as Node;
