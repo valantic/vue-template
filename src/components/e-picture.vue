@@ -290,14 +290,14 @@
       /**
        * Load event handler for the image element.
        */
-      onLoad() {
+      onLoad(): void {
         this.loaded = true;
       },
       
       /**
        * Load event handler when an error occurs with a image element.
        */
-      onError() {
+      onError(): void {
         this.internalSrcSet = this.fallback;
       },
     },
