@@ -7,6 +7,7 @@ const storageKey = Symbol('Outside click directive instance');
 type TOutsideClickHandlerFunction = (event: Event) => void;
 
 interface IOutsideClickValue {
+  exclude: string[];
   excludeIds: string[];
   excludeDOM: HTMLElement[];
   handler: TOutsideClickHandlerFunction;
@@ -63,9 +64,24 @@ export default {
       if (el !== event.target && !el.contains(eventTarget) && handler) {
         if (typeof binding.value === 'object') {
           const {
+            exclude = [],
             excludeIds = [],
             excludeDOM = [],
           } = binding.value;
+
+          const clickedOnExcludedElement = !!exclude.find((refName) => {
+            const excludedElement = binding.instance?.$refs[refName];
+
+            if (Array.isArray(excludedElement)) {
+              return excludedElement.some(component => component.$el.contains(eventTarget));
+            }
+
+            if (excludedElement instanceof HTMLElement) {
+              return excludedElement.contains(eventTarget);
+            }
+
+            return false;
+          });
 
           const clickedOnExcludedId = excludeIds.some((id) => {
             const element = document.querySelector(id);
@@ -74,7 +90,7 @@ export default {
           });
           const clickOnExcludedDomElement = excludeDOM.some(element => element.contains(eventTarget));
 
-          if (clickedOnExcludedId || clickOnExcludedDomElement) {
+          if (clickedOnExcludedElement || clickedOnExcludedId || clickOnExcludedDomElement) {
             return;
           }
         }
