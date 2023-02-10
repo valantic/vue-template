@@ -7,9 +7,9 @@ const storageKey = Symbol('Outside click directive instance');
 type TOutsideClickHandlerFunction = (event: Event) => void;
 
 interface IOutsideClickValue {
-  exclude: string[];
+  excludeRefs: string[];
   excludeIds: string[];
-  excludeDOM: HTMLElement[];
+  excludeElements: HTMLElement[];
   handler: TOutsideClickHandlerFunction;
 }
 
@@ -22,11 +22,12 @@ interface IOutsideClickElement extends HTMLElement {
 }
 
 /**
- * Directive to handle an outside click for a specific DOM element.
+ * Directive to handle an outside click for a specific DOM element and/or given excludes.
  *
  * Examples:
  * <div v-oustide-click="handler"></div>
  * <div v-outside-click="{
+ *   excludeRefs: [],
  *   excludeIds: [],
  *   excludeDOM: [],
  *   handler: () => {},
@@ -64,12 +65,12 @@ export default {
       if (el !== event.target && !el.contains(eventTarget) && handler) {
         if (typeof binding.value === 'object') {
           const {
-            exclude = [],
+            excludeRefs = [],
             excludeIds = [],
-            excludeDOM = [],
+            excludeElements = [],
           } = binding.value;
 
-          const clickedOnExcludedElement = !!exclude.find((refName) => {
+          const clickedOnExcludedElement = !!excludeRefs.find((refName) => {
             const excludedElement = binding.instance?.$refs[refName];
 
             if (Array.isArray(excludedElement)) {
@@ -88,7 +89,7 @@ export default {
 
             return element && element.contains(eventTarget);
           });
-          const clickOnExcludedDomElement = excludeDOM.some(element => element.contains(eventTarget));
+          const clickOnExcludedDomElement = excludeElements.some(element => element.contains(eventTarget));
 
           if (clickedOnExcludedElement || clickedOnExcludedId || clickOnExcludedDomElement) {
             return;
