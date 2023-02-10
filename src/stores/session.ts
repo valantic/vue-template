@@ -45,10 +45,6 @@ export default defineStore<typeof storeName, ISessionState, ISessionGetters, ISe
       googleMapsApiKey: null,
     };
 
-    if (process.env.NODE_ENV !== 'production') {
-      state.googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY as string;
-    }
-
     return state;
   },
   getters: {

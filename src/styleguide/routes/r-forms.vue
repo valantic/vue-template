@@ -42,6 +42,7 @@
                            :options="mock.businessFields"
                            :state="v$.form.businessFields.$error ? 'error' : 'default'"
                            :notification="v$.form.businessFields.$error ? 'Required field' : ''"
+                           has-search
                            @blur="v$.form.businessFields.$touch()"
             />
           </e-label>

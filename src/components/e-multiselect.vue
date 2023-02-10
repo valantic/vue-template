@@ -43,7 +43,7 @@
     <!-- Content -->
     <transition name="top-slide">
       <span v-show="isOpen"
-            v-outside-click="{ exclude: ['fieldWrapper', 'searchField'], handler: close }"
+            v-outside-click="{ excludeRefs: ['fieldWrapper', 'searchField'], handler: close }"
             :class="b('options-wrapper')"
       >
         <ul :class="b('options-list')">

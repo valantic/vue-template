@@ -40,7 +40,7 @@ module.exports = (env, args = {}) => {
   const showProfile = args.profile || false;
   const globalVariables = {
     'process.env': {
-      ...process.env,
+      // ...process.env,
       'NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'), // Needed by vendor scripts
       'HAS_WATCHER': hasWatcher,
       'BUILD_TIMESTAMP': new Date().getTime(),

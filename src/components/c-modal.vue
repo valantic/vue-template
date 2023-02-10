@@ -7,7 +7,7 @@
             :class="b(modifiers)"
     >
       <div ref="container" :class="b('container')">
-        <div v-outside-click="{ handler: () => onOutsideClick(), }"
+        <div v-outside-click="onOutsideClick"
              ref="inner"
              :class="b('inner')"
         >
