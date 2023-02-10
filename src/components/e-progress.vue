@@ -125,7 +125,7 @@
       display: block;
       float: left;
       width: calc(1em * 4);
-      height: 1em;
+      height: 1.1em;
     }
 
     &__bubble {

@@ -1,21 +1,48 @@
-import { DirectiveBinding, ComponentPublicInstance } from 'vue';
-import { ICustomDirective } from '@/types/custom-directive';
+import { DefineComponent, DirectiveBinding } from 'vue';
 
 const outsideClickEventConfig = { passive: true, capture: true };
 
-interface ICustomElement extends HTMLElement {
-  outsideClickHandler: (event: Event) => void;
+const storageKey = Symbol('Outside click directive instance');
+
+type TOutsideClickHandlerFunction = (event: Event) => void;
+
+interface IOutsideClickValue {
+  excludeRefs: string[];
+  excludeIds: string[];
+  excludeElements: HTMLElement[];
+  handler: TOutsideClickHandlerFunction;
 }
 
-const directive = {
-  /**
-   * Binding method of the directive.
-   */
-  beforeMount(el: ICustomElement, binding: DirectiveBinding): void {
+interface IOutsideClickDirectiveBinding extends DirectiveBinding {
+  value: TOutsideClickHandlerFunction | IOutsideClickValue;
+}
+
+interface IOutsideClickElement extends HTMLElement {
+  [storageKey]: TOutsideClickHandlerFunction;
+}
+
+/**
+ * Directive to handle an outside click for a specific DOM element and/or given excludes.
+ *
+ * Examples:
+ * <div v-oustide-click="TOutsideClickHandlerFunction"></div>
+ * <div v-outside-click="IOutsideClickValue"></div>
+ */
+export default {
+  name: 'outside-click',
+
+  beforeMount(el: IOutsideClickElement, binding: IOutsideClickDirectiveBinding) {
+    const handler: TOutsideClickHandlerFunction = typeof binding.value === 'function' ? binding.value : binding.value?.handler;
+
+    if (!handler) {
+      throw new Error('No event handler defined for v-outside-click.');
+    }
     let userIsScrolling = false;
 
     // Click / Touchstart handler.
-    el.outsideClickHandler = (event: Event) => {
+    el[storageKey] = (event) => {
+      const eventTarget: Node = event.target as Node;
+
       // These conditions are needed to detect scrolling on touch devices.
       if (event.type === 'scroll') {
         userIsScrolling = true;
@@ -29,65 +56,59 @@ const directive = {
         return;
       }
 
-      const { handler, exclude = [], excludeIds = [] } = binding.value;
-
       // We check to see if the clicked element is not the dialog element and not excluded.
-      const eventTarget = event.target as Node;
+      if (el !== event.target && !el.contains(eventTarget) && handler) {
+        if (typeof binding.value === 'object') {
+          const {
+            excludeRefs = [],
+            excludeIds = [],
+            excludeElements = [],
+          } = binding.value;
 
-      if (!el.contains(eventTarget) && handler) {
-        const clickedOnExcludedElement = !!exclude.find((refName: string) => {
-          const componentInstance = binding.instance as ComponentPublicInstance;
-          // @ts-ignore Needed because typescript cannot assign index.
-          const excludedElement: HTMLElement = componentInstance[refName];
+          const clickedOnExcludedElement = !!excludeRefs.find((refName) => {
+            const excludedElement = binding.instance?.$refs[refName];
 
-          if (Array.isArray(excludedElement)) {
-            return excludedElement.some(component => component.$el.contains(eventTarget));
+            if (Array.isArray(excludedElement)) {
+              return excludedElement.some((node: InstanceType<DefineComponent> | HTMLElement) => {
+                if (node instanceof HTMLElement) {
+                  return node.contains(eventTarget);
+                }
+
+                return node.$el.constructor(eventTarget);
+              });
+            }
+
+            if (excludedElement instanceof HTMLElement) {
+              return excludedElement.contains(eventTarget);
+            }
+
+            return false;
+          });
+
+          const clickedOnExcludedId = excludeIds.some((id) => {
+            const element = document.querySelector(id);
+
+            return element && element.contains(eventTarget);
+          });
+          const clickOnExcludedDomElement = excludeElements.some(element => element.contains(eventTarget));
+
+          if (clickedOnExcludedElement || clickedOnExcludedId || clickOnExcludedDomElement) {
+            return;
           }
-
-          return excludedElement ? excludedElement.contains(eventTarget) : false;
-        });
-
-        const clickedOnExcludedId = excludeIds.some((id: string) => {
-          const element = document.querySelector(id);
-
-          return element && element.contains(eventTarget);
-        });
-
-        if (!clickedOnExcludedElement && !clickedOnExcludedId) {
-          handler();
         }
+
+        handler(event);
       }
     };
 
-    document.addEventListener('click', el.outsideClickHandler, outsideClickEventConfig);
-    document.addEventListener('touchend', el.outsideClickHandler, outsideClickEventConfig);
-    document.addEventListener('scroll', el.outsideClickHandler, outsideClickEventConfig);
+    document.addEventListener('click', el[storageKey], outsideClickEventConfig);
+    document.addEventListener('touchend', el[storageKey], outsideClickEventConfig);
+    document.addEventListener('scroll', el[storageKey], outsideClickEventConfig);
   },
 
-  unmounted(el: ICustomElement): void {
-    document.removeEventListener('click', el.outsideClickHandler, outsideClickEventConfig);
-    document.removeEventListener('touchend', el.outsideClickHandler, outsideClickEventConfig);
-    document.removeEventListener('scroll', el.outsideClickHandler, outsideClickEventConfig);
+  beforeUnmount(el: IOutsideClickElement) {
+    document.removeEventListener('click', el[storageKey], outsideClickEventConfig);
+    document.removeEventListener('touchend', el[storageKey], outsideClickEventConfig);
+    document.removeEventListener('scroll', el[storageKey], outsideClickEventConfig);
   },
 };
-
-/**
- * Directive to handle an outside click for a specific DOM element.
- *
- * Examples:
- *
- * <div v-outside-click="{
- *   exclude: [],
- *   excludeIds: [],
- *   handler: () => {},
- * }"></div>
- *
- * Options:
- * - exclude: array of strings with ref names being initialized in the setup method of the component
- * - excludeIds: array of strings with node id's
- * - handler: handler function to execute
- */
-export default {
-  name: 'outside-click',
-  directive,
-} as ICustomDirective;
