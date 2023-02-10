@@ -215,7 +215,6 @@
       position: absolute;
       top: 50%;
       right: variables.$spacing--5;
-      display: flex;
       transform: translateY(-50%);
     }
 
@@ -285,9 +284,9 @@
 
     &__progress-container {
       position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
     }
   }
 </style>

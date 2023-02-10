@@ -1,0 +1,124 @@
+@use '../../../setup/scss/variables' as *;
+@use '../../../setup/scss/mixins' as *;
+@use '../../../setup/scss/functions' as *;
+
+.c-tooltip {
+  $this: &;
+  $pointer-width: 6px;
+  $wrapper-padding: $pointer-width + 6px;
+
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  @at-root {
+    span#{&} {
+      display: inline-block;
+    }
+  }
+
+  &__anchor {
+    cursor: pointer;
+  }
+
+  &__tooltip-wrapper {
+    @include z-index(front); // Was required for IE11.
+
+    position: absolute;
+    display: none;
+    max-width: 80vw;
+    opacity: 0;
+    transition: opacity $transition-duration--100;
+    pointer-events: none;
+
+    @include media(sm) {
+      max-width: 400px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    &[data-popper-placement*='right'],
+    &[data-popper-placement*='left'] {
+      padding: 0 $wrapper-padding;
+    }
+
+    &[data-popper-placement*='top'],
+    &[data-popper-placement*='bottom'] {
+      padding: $wrapper-padding 0;
+    }
+
+    &--active { // Popper not initialized
+      display: block;
+    }
+
+    &--visible { // directive
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  &__tooltip {
+    position: relative;
+    padding: 10px;
+    border-radius: $border-radius--500;
+    background: $color-grayscale--500;
+    box-shadow: 0 0 6px rgba($color-grayscale--0, 0.2);
+    pointer-events: none;
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 0;
+      height: 0;
+      border: $pointer-width solid transparent;
+      border-bottom-color: $color-grayscale--500;
+      border-left-color: $color-grayscale--500;
+      background: $color-grayscale--500;
+
+      // Left center
+      [data-popper-placement='right'] & {
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      // Right center
+      [data-popper-placement='left'] & {
+        top: 50%;
+        right: 0;
+        transform: translate(50%, -50%) rotate(-135deg);
+      }
+
+      // Top center
+      [data-popper-placement*='top'] & {
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 50%) rotate(-45deg);
+      }
+
+      // Top start
+      [data-popper-placement='top-start'] &,
+      [data-popper-placement='bottom-start'] & {
+        left: $wrapper-padding + $spacing--10;
+      }
+
+      // Top center
+      [data-popper-placement*='bottom'] & {
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(135deg);
+      }
+    }
+
+    &::after {
+      @include z-index(back);
+
+      box-shadow: 0 2px 6px rgba($color-grayscale--0, 0.2);
+    }
+  }
+}

@@ -1,5 +1,10 @@
 <template>
-  <table :class="b()">
+  <table :class="b({ enableRowLinks, hasRowLinks: !!rowLink?.href })"
+         :style="{ '--e-table--toggle-row-height': `${toggleButtonHeight}px` }"
+         @contextmenu.capture="onContextMenu"
+         @mousedown.capture="onMouseDown"
+         @mouseup="onMouseUp($event)"
+  >
     <!-- @slot Allows to display a customized header row. -->
     <slot
       :columns="columns"
@@ -7,50 +12,157 @@
       :sort-ascending="sortAscending"
       name="header"
     >
+      <tr v-if="isMobile"
+          :class="b('toggle-row')"
+      >
+        <th :colspan="colspan">
+          <button ref="toggleButton"
+                  :class="b('toggle')"
+                  type="button"
+                  @click.prevent="toggleSortingOptions"
+          >
+            {{ $t('e-table.toggleSortingOptions') }}
+          </button>
+        </th>
+      </tr>
       <tr :class="b('header-row')">
-        <th
-          v-for="column in columns"
-          :key="column.key"
-          :class="b('header-cell', { 'text': column.align || 'left', col: column.key })"
+        <template v-if="showSortingOptions">
+          <th v-if="selectable"
+              :class="b('header-cell', { selectColumn: true })"
+          >
+            <e-checkbox v-model="toggleAllValue"
+                        :disabled="disabled"
+                        value="0"
+                        name="total"
+            >
+              <span :class="{ invisible : !showSortingOptions || !isMobile}">
+                {{ selectedInternal.length ? $t('e-table.deselectAll') : $t('e-table.selectAll') }}
+              </span>
+            </e-checkbox>
+          </th>
+
+          <th
+            v-for="column in columns"
+            :key="column.key"
+            :class="b('header-cell', headerCellModifiers(column))"
+          >
+            <button
+              v-if="column.sortable !== false"
+              :class="b('sort', sortButtonModifiers(column))"
+              :aria-label="$t('e-table.sort', { name: column.title })"
+              type="button"
+              @click="onClickSort(column)"
+            >
+              <span :class="[b('sort-label'), { invisible: !isHeaderLabelVisible(column) }]">
+                <!-- Adding the support for functions was needed, to allow the use of translations in the header row -->
+                {{ typeof column.title === 'function' ? column.title() : column.title }}
+              </span>
+              <e-icon icon="i-arrow--down"
+                      width="16"
+                      height="16"
+                      inline
+              />
+            </button>
+            <span v-else :class="[b('sort-label'), { invisible: !$viewport.isMd || !isHeaderLabelVisible(column) }]">
+              <!-- Adding the support for functions was needed, to allow the use of translations in the header row -->
+              {{ typeof column.title === 'function' ? column.title() : column.title }}
+            </span>
+          </th>
+        </template>
+
+        <th v-if="hasDetailRows"
+            :class="b('header-cell', { hidden: true })"
         >
-          <!-- Adding the support for functions was needed, to change visibility state dynamically (improved a11y) -->
-          <span :class="isHeaderLabelVisible(column) ? 'invisible' : null">
-            <!-- Adding the support for functions was needed, to allow the use of translations in the header row -->
-            {{ typeof column.title === 'function' ? column.title() : column.title }}
+          <span class="invisible">
+            {{ $t('e-table.showDetailsHeader') }}
           </span>
-          <button
-            v-if="column.sortable"
-            :class="b('button-sort', getSortButtonModifiers(column))"
-            :aria-label="$t('e-table.sort', { name: column.title })"
-            type="button"
-            @click="onClickSort(column)"
-          ></button>
         </th>
       </tr>
     </slot>
-    <tr
-      v-for="(item, itemIndex) in itemsSorted"
-      :key="itemIndex"
-      :class="b('data-row', { disabled: item.disabled })"
-    >
-      <td
-        v-for="(column, columnIndex) in columns"
-        :key="columnIndex"
-        :class="b('data-cell', { text: column.align || 'left', hasEvent: !!column.onClick, col: column.key })"
-        @click="column.onClick ? column.onClick(item, column) : null"
-      >
-        <!-- @slot Use this dynamic slot to add custom templates to the cells -->
-        <slot
-          :name="column.slotName"
-          :item="item"
-          :column="column"
+    <template v-for="(item, itemIndex) in itemsSorted" :key="itemIndex">
+
+      <tr :class="b('data-row', { disabled: item.disabled })">
+        <td v-if="selectable"
+            :class="b('data-cell')"
         >
-          {{ item[column.key] }}
-        </slot>
-      </td>
-    </tr>
+          <div :class="b('select-column')">
+            <e-checkbox v-model="selectedInternal"
+                        :value="item[itemIdentifier]"
+                        :name="`e-table__selection--${uuid}`"
+                        :disabled="disabled"
+            >
+              <span :class="{ invisible : !isMobile}">
+                {{ $t('e-table.selectItem') }}
+              </span>
+            </e-checkbox>
+          </div>
+        </td>
+        <td
+          v-for="(column, columnIndex) in columns"
+          :key="columnIndex"
+          :class="b('data-cell', cellModifiers(column))"
+          :data-label="columnTitle(column)"
+          @click="column.onClick || rowLink?.href ? onCellClick(item, column, $event) : null"
+        >
+          <a v-if="!column.onClick && typeof rowLink?.href === 'function'"
+             :class="b('cell-link')"
+             :href="rowLink.href(item) || '#'"
+             :title="rowTitle(item)"
+             tabindex="-1"
+          ></a>
+
+          <!-- @slot The default 'date' cell formatting for the project. Can be overwritten by a locale <template #date> -->
+          <slot v-if="column.slotName === 'date'"
+                :item="item"
+                :column="column"
+                name="date"
+          >
+            {{ $dayjs(item[column.key]).format('DD.MM.YYYY') }}
+          </slot>
+          <!-- @slot Use this dynamic slot to add custom templates to the cells -->
+          <slot
+            v-else
+            :name="column.slotName"
+            :item="item"
+            :column="column"
+          >
+            {{ item[column.key] }}
+          </slot>
+        </td>
+
+        <td v-if="hasDetailRows"
+            :class="b('data-cell', { detailToggle: true })"
+            :data-label="$t('e-table.showDetailsHeader')"
+            @click.self="onDetailToggleClick(item)"
+        >
+          <label :class="b('detail-toggle-label')">
+            <input v-model="expandedRowsComputed"
+                   :class="b('detail-toggle-input')"
+                   :value="item[itemIdentifier]"
+                   type="checkbox"
+                   name="details"
+            >
+            <e-icon :class="b('detail-toggle-icon')"
+                    icon="i-arrow--down"
+                    :alt="$t('e-table.showDetailsHeader')"
+            />
+          </label>
+        </td>
+      </tr>
+      <tr v-if="hasDetailRows && expandedRows.includes(item)"
+          :key="`detail--${itemIndex}`"
+          :class="b('detail-row')"
+      >
+        <td :colspan="colspan">
+          <!-- @slot Slot can be used to show detail information for a row. -->
+          <slot name="detailRow"
+                :item="item"
+          ></slot>
+        </td>
+      </tr>
+    </template>
     <!-- @slot Allows to display a customized 'no results' row. -->
-    <slot v-if="!itemsSorted.length" name="noResults">
+    <slot v-if="!itemsSorted.length" name="noResults" :columns="columns">
       <tr>
         <td
           :colspan="columns.length"
@@ -60,30 +172,95 @@
         </td>
       </tr>
     </slot>
+    <tfoot v-else-if="$slots.footer">
+      <tr :class="b('footer-row')">
+        <td
+          :colspan="colspan"
+          :class="b('footer-cell')"
+        >
+          <slot name="footer" :columns="columns"></slot>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import {
+    defineComponent,
+    PropType,
+    Ref,
+    ref,
+  } from 'vue';
+  import eIcon from '@/components/e-icon.vue';
+  import eCheckbox from '@/components/e-checkbox.vue';
+  import useUuid, { IUuid } from '@/compositions/uuid';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface IColumn {
-    title: string | (() => string);
-    key: string;
-    titleHidden: boolean | (() => boolean);
-    slotName: string;
-    align: 'left' | 'center' | 'right';
-    sortable: boolean;
-    sort: () => number;
-    onClick: () => void;
+  type TItemId = string | number;
+
+  export interface IETableItem {
+    disabled?: boolean;
+    [key: string]: TItemId | unknown;
   }
 
-  interface IItem {
-    [key: string]: string;
+  export interface IETableColumn {
+    title: string | (() => string);
+    key: string;
+    align: 'left' | 'center' | 'right';
+    slotName: string;
+    sortable: boolean;
+    nowrap?: boolean;
+    titleHidden?: boolean | (() => boolean);
+    onClick?: (item: IETableItem, column: IETableColumn, event?: Event) => unknown;
+    sort?: (a: unknown, b: unknown) => number;
+  }
+
+  interface IRowLink {
+    href?: (item: IETableItem, column?: IETableColumn, event?: Event) => string;
+    title?: string | ((item?: IETableItem) => string);
+  }
+
+  interface ISetup extends IUuid {
+    toggleButton: Ref<HTMLButtonElement>;
   }
 
   interface IData {
-    sortBy: null | IColumn;
+
+    /**
+     * Holds a flag if sorting options are visible
+     */
+    showSortingOptions: boolean;
+
+    /**
+     * The currently selected 'column' to be sorted by.
+     */
+    sortBy: IETableColumn | null;
+
+    /**
+     * Holds to sort direction in case a 'sortBy' is active.
+     */
     sortAscending: boolean;
+
+    /**
+     * Holds a flag if row links should be enabled.
+     */
+    enableRowLinks: boolean;
+
+    /**
+     * Holds a flag if there is currently a text selection inside the component.
+     */
+    hasSelection: boolean;
+
+    /**
+     * Holds the height of the sorting list toggle button.
+     */
+    toggleButtonHeight: number;
+
+    /**
+     * Row items that should be displayed in expanded state.
+     */
+    expandedRows: IETableItem[],
   }
 
   /**
@@ -95,64 +272,160 @@
    */
   export default defineComponent({
     name: 'e-table',
-    status: 0, // TODO: remove when component was prepared for current project.
 
-    // components: {},
+    components: {
+      eIcon,
+      eCheckbox,
+    },
 
     props: {
       /**
        * Array of data objects to render in table.
-       *
-       * @property {boolean} [disabled = false] - Disables the interaction with the current row.
        */
       items: {
-        type: Array as PropType<IItem[]>,
+        type: Array as PropType<IETableItem[]>,
         required: true,
       },
 
       /**
+       * Allows to set an Array of selected items.
+       */
+      selected: {
+        type: Array as PropType<IETableItem[]>,
+        default: () => [],
+      },
+
+      /**
        * Array of column definition objects.
-       *
-       * @property {string} title - Column title.
-       * @property {string} [key] - Column identifier on the rows.
-       * @property {string} [titleHidden = false] - Title visibility state.
-       * @property {string} [slotName] - Dynamic slot name for optional cell templates.
-       * @property {string} [align = 'left'] - A flag to set the column alignment (default: 'left', options: 'center', 'right').
-       * @property {boolean} [sortable = false] - A flag that specifies whether the column is sortable or not.
-       * @property {function} [sort = (a, b) => a > b] - A custom sort function that might be passed for each column.
-       * @property {function} [onClick] - Allows to define a click handler for each cell.
-       *
        */
       columns: {
-        type: Array as PropType<IColumn[]>,
+        type: Array as PropType<IETableColumn[]>,
         required: true,
       },
+
+      /**
+       * Accepts a method to generate a link for each row (except for columns with 'onClick' callback).
+       */
+      rowLink: {
+        type: Object as PropType<IRowLink>,
+        default: null,
+      },
+
+      /**
+       * Adds a checkbox to each row to allow selections.
+       */
+      selectable: {
+        type: Boolean,
+        default: false,
+      },
+
+      /**
+       * Disables the tables interaction features.
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
+
+      /**
+       * Determines if the table should show an additional column to toggle row details.
+       */
+      hasDetailRows: {
+        type: Boolean,
+        default: false,
+      },
+
+      /**
+       * Allows to change the identifier property for a row item by which it will be identified internally.
+       */
+      itemIdentifier: {
+        type: String,
+        default: 'id',
+      },
+    },
+    emits: {
+      'update:selected': (payload: unknown): boolean => Array.isArray(payload),
+    },
+
+    setup(): ISetup {
+      const toggleButton = ref();
+
+      return {
+        ...useUuid(),
+        toggleButton,
+      };
     },
     data(): IData {
       return {
-        /**
-         * the currently selected 'column' to be sorted.
-         */
+        showSortingOptions: true,
         sortBy: null,
-
-        /**
-         * Holds to sort direction in case a 'sortBy' is active.
-         */
         sortAscending: true,
+        enableRowLinks: false,
+        hasSelection: false,
+        toggleButtonHeight: 0,
+        expandedRows: [],
       };
     },
 
     computed: {
       /**
+       * Model Value for toggle all checkbox.
+       */
+      toggleAllValue: {
+        get(): boolean {
+          return !!this.selectedInternal.length;
+        },
+        set(): void {
+          if (this.selectedInternal.length) {
+            this.selectedInternal = [];
+          } else {
+            this.selectedInternal = this.items.map(item => item[this.itemIdentifier] as TItemId);
+          }
+        },
+      },
+
+      /**
+       * Checks if current viewport is mobile (<= sm).
+       */
+      isMobile(): boolean {
+        return !this.$viewport.isSm;
+      },
+
+      /**
+       * Manages changes for the 'select' prop.
+       */
+      selectedInternal: {
+        get(): TItemId[] {
+          return this.selected.map(item => item[this.itemIdentifier] as TItemId);
+        },
+        set(itemIds: TItemId[]): void {
+          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId)));
+        },
+      },
+
+      /**
+       * Handles changes to the 'expandedRows' prop.
+       */
+      expandedRowsComputed: {
+        get(): TItemId[] {
+          return this.expandedRows.map(item => item[this.itemIdentifier] as TItemId);
+        },
+        set(itemIds: TItemId[]) {
+          this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId));
+        },
+      },
+
+      /**
        * Returns a sorted copy of the table-items.
        */
-      itemsSortedBy(): IItem[] {
+      itemsSortedBy(): IETableItem[] {
+        const { sortBy } = this;
         const items = this.items.slice();
 
-        if (this.sortBy) {
-          const sort = typeof this.sortBy.sort === 'function'
-            ? this.sortBy.sort
-            : (a: IItem, b: IItem) => (this.sortBy ? a[this.sortBy.key].localeCompare(b[this.sortBy.key]) : -1);
+        if (sortBy) {
+          const sort = typeof sortBy?.sort === 'function'
+            ? sortBy.sort
+            : this.sortByFieldConstructor(sortBy.key);
 
           items.sort(sort);
         }
@@ -163,15 +436,49 @@
       /**
        * Reverts the sort direction if required.
        */
-      itemsSorted(): IItem[] {
+      itemsSorted(): IETableItem[] {
         if (!this.sortAscending) {
           return this.itemsSortedBy.slice().reverse();
         }
 
         return this.itemsSortedBy;
       },
+
+      /**
+       * Counts the amount for columns that the table has.
+       */
+      colspan(): number {
+        let count = this.columns.length;
+
+        if (this.selectable) {
+          count += 1;
+        }
+
+        if (this.hasDetailRows) {
+          count += 1;
+        }
+
+        return count;
+      },
     },
-    // watch: {},
+    watch: {
+      /**
+       * Observes the current viewport and sets flag to show table sorting as a collapsible menu.
+       */
+      isMobile: {
+        immediate: true,
+        handler(value: boolean): void {
+          this.showSortingOptions = !value;
+
+          if (value) {
+            window.addEventListener('resizeend', this.updateToggleButtonHeight);
+          } else {
+            window.removeEventListener('resizeend', this.updateToggleButtonHeight);
+          }
+        },
+      },
+    },
+
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
@@ -180,15 +487,86 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeUnmount() {},
+    beforeUnmount() {
+      window.removeEventListener('resizeend', this.updateToggleButtonHeight);
+    },
     // unmounted() {},
 
     methods: {
       /**
+       * Returns the title of the actual table column.
+       */
+      columnTitle(column: IETableColumn): string | null {
+        switch (typeof column?.title) {
+          case 'string':
+            return column.title;
+
+          case 'function':
+            return column.title();
+
+          default:
+            return null;
+        }
+      },
+
+      /**
+       * Toggle the visibility for the sorting options.
+       */
+      toggleSortingOptions(): void {
+        if (this.isMobile) {
+          this.updateToggleButtonHeight();
+        }
+
+        this.showSortingOptions = !this.showSortingOptions;
+      },
+
+      /**
+       * Set the height of the sorting list toggle button.
+       */
+      updateToggleButtonHeight(): void {
+        this.toggleButtonHeight = this.toggleButton?.clientHeight || 0;
+      },
+
+      /**
+       * Returns a title for the row link, based on the type of the definition.
+       */
+      rowTitle(item: IETableItem): string | null {
+        const { rowLink } = this;
+
+        switch (typeof rowLink?.title) {
+          case 'string':
+            return rowLink.title;
+
+          case 'function':
+            return rowLink.title(item) || null;
+
+          default:
+            return null;
+        }
+      },
+
+      /**
+       * Checks if the given column should display the header label.
+       */
+      isHeaderLabelVisible(column: IETableColumn): boolean {
+        // Adding the support for functions was needed, to change visibility state dynamically (improved a11y).
+        return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden !== true);
+      },
+
+      /**
+       * Checks if the table is sorted by a given column.
+       *
+       * Since Vue3 leverages proxies for data properties for reactivity, we can't compare the objects directly.
+       */
+      isSortedBy(column: IETableColumn): boolean {
+        return this.sortBy?.key === column.key;
+      },
+
+      /**
        * Will set the sort-parameters.
        */
-      onClickSort(column: IColumn) {
-        if (this.sortBy && this.sortBy === column) {
+      onClickSort(column: IETableColumn): void {
+        if (this.isSortedBy(column)) {
           const asc = this.sortAscending;
 
           if (!asc) {
@@ -203,22 +581,156 @@
       },
 
       /**
-       * Checks if the given column should display the header label.
-       */
-      isHeaderLabelVisible(column: IColumn) {
-        return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden);
-      },
-
-      /**
        * Calculates a sort button modifier object.
        */
-      getSortButtonModifiers(column: IColumn) {
-        const active = this.sortBy && this.sortBy === column;
+      sortButtonModifiers(column: IETableColumn): IModifiers {
+        const active = this.isSortedBy(column);
 
         return {
           active,
           desc: active && !this.sortAscending,
         };
+      },
+
+      /**
+       * Returns BEM modifiers for header cells.
+       */
+      headerCellModifiers(column: IETableColumn): IModifiers {
+        return {
+          align: column.align || 'left',
+          col: column.key,
+          hidden: (!this.$viewport.isMd && column.sortable === false) || !this.isHeaderLabelVisible(column),
+          sortable: column.sortable !== false,
+        };
+      },
+
+      /**
+       * Returns BEM modifiers for cells.
+       */
+      cellModifiers(column: IETableColumn): IModifiers {
+        return {
+          align: column.align || 'left',
+          hasEvent: !!column.onClick,
+          col: column.key,
+          sortable: column.sortable !== false,
+          nowrap: column.nowrap,
+        };
+      },
+
+      /**
+       * Returns a sort function which will sort the elements of an Array by the given field.
+       */
+      sortByFieldConstructor(field: string): (a: IETableItem, b: IETableItem) => number {
+        return (a, b) => {
+          const aValue = a[field as keyof IETableItem];
+          const bValue = b[field as keyof IETableItem];
+
+          switch (true) {
+            case typeof aValue === 'string':
+              return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true }); // eslint-disable-line no-undefined, no-extra-parens
+
+            case typeof aValue === 'number':
+              return aValue as number > (bValue as number) ? 1 : -1; // eslint-disable-line no-extra-parens
+
+            case typeof aValue === 'boolean':
+              return !aValue ? 1 : -1;
+
+            case aValue instanceof Date:
+              return this.$dayjs(aValue).isAfter(bValue as Date) ? 1 : -1;
+
+            default:
+              return 0;
+          }
+        };
+      },
+
+      /**
+       * Enables the row link for a few ms to allow link specific context menus.
+       */
+      enableRowLink(): void {
+        if (this.rowLink?.href && !this.hasSelection) { // It was not possible to test for rowHref when binding the event in the template.
+          this.enableRowLinks = true;
+
+          setTimeout(() => {
+            this.enableRowLinks = false;
+          }, 100);
+        }
+      },
+
+      /**
+       * Callback for the tables mousedown event.
+       */
+      onMouseDown() { // All browsers
+        this.hasSelection = !!window.getSelection()?.toString();
+      },
+
+      /**
+       * Callback for the tables contextmenu event.
+       */
+      onContextMenu() { // Chromium, webkit: mousedown, contextmenu
+        this.enableRowLink();
+
+        setTimeout(() => {
+          window?.getSelection()?.removeAllRanges(); // Safari marks words on right click by default, which would cause trouble on next context event.
+        });
+      },
+
+      /**
+       * Callback for the tables mouseup event.
+       */
+      onMouseUp(event: MouseEvent): void { // FF: mousedown, mouseup, contextmenu
+        if (!this.enableRowLinks) {
+          // Firefox marks a cells content when holding ctrl/meta while clicking it.
+          this.hasSelection = !(event.ctrlKey || event.metaKey) && !!window.getSelection()?.toString();
+
+          this.enableRowLink();
+        }
+      },
+
+      /**
+       * Callback for clicks within a row.
+       */
+      onCellClick(item: IETableItem, column: IETableColumn, event: MouseEvent): void {
+        if (this.hasSelection) { // Cancel cell action if a text selection is active.
+          return;
+        }
+
+        if (typeof column.onClick === 'function') {
+          column.onClick(item, column, event);
+        } else {
+          const url = this.rowLink?.href?.(item, column);
+
+          if (!url) {
+            return;
+          }
+
+          if (event.ctrlKey || event.metaKey) {
+            window.open(url, '_blank');
+          } else if (typeof url === 'string') {
+            window.location.href = url;
+          }
+        }
+      },
+
+      /**
+       * Click callback for the toggle cell (increases click area on mobile).
+       */
+      onDetailToggleClick(item: IETableItem): void {
+        const id = item[this.itemIdentifier] as TItemId;
+
+        if (!id) {
+          return;
+        }
+
+        const expandedRows = this.expandedRowsComputed.slice();
+
+        if (expandedRows.includes(id)) {
+          this.expandedRowsComputed = expandedRows.filter(itemId => itemId !== id);
+        } else {
+          expandedRows.push(id);
+
+          this.expandedRowsComputed = expandedRows;
+        }
       },
     },
     // render() {},
@@ -226,31 +738,104 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
   @use '../setup/scss/variables';
+  @use '../setup/scss/mixins';
 
   .e-table {
     $this: &;
 
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
 
+    @include mixins.media(sm) {
+      display: table;
+    }
+
+    &__toggle-row {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: variables.$color-grayscale--1000;
+    }
+
+    &__toggle {
+      position: relative;
+      display: block;
+      padding: variables.$spacing--10 0;
+      overflow: hidden;
+      border-bottom: 0;
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__toggle-icon {
+      position: absolute;
+      top: 50%;
+      left: variables.$spacing--5;
+      transform: translateY(-50%);
+      transition: transform variables.$transition-duration--200 ease;
+
+      &--open {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+
     &__header-row {
+      position: sticky;
+      top: calc(var(--header-height, 0px) + var(--e-table--toggle-row-height, 0px));
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
       border-bottom: 2px solid variables.$color-grayscale--0;
+      background-color: variables.$color-grayscale--1000;
+
+      @include mixins.media(sm) {
+        top: auto;
+        display: table-row;
+        background-color: inherit;
+      }
     }
 
     &__header-cell {
-      @include mixins.font(variables.$font-size--14);
-
       padding-bottom: variables.$spacing--10;
       color: variables.$color-grayscale--0;
-    }
+      vertical-align: bottom;
 
-    &__header-cell--text-center {
-      text-align: center;
-    }
+      &:first-child {
+        @include mixins.media(sm) {
+          padding-left: variables.$spacing--5;
+        }
+      }
 
-    &__header-cell--text-right {
-      text-align: right;
+      &:last-child:not(&--sortable) {
+        @include mixins.media(sm) {
+          padding-right: variables.$spacing--5;
+        }
+      }
+
+      &--select-column {
+        width: auto;
+        vertical-align: middle;
+
+        @include mixins.media(sm) {
+          width: 1px; // Forces minimal width for checkbox column.
+        }
+      }
+
+      &--text-center {
+        text-align: center;
+      }
+
+      &--text-right {
+        text-align: right;
+      }
+
+      &--hidden {
+        padding: 0;
+      }
     }
 
     &__data-row {
@@ -266,48 +851,173 @@
       }
     }
 
-    &__button-sort {
-      display: inline-block;
-      width: 0;
-      height: 0;
-      opacity: 0.3;
-      border: 10px solid transparent;
-      border-bottom-color: variables.$color-grayscale--0;
+    &__sort {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .e-icon {
+        margin-left: variables.$spacing--5;
+        opacity: 0.3;
+        transform: rotate(180deg);
+      }
 
       &--desc {
-        border-top-color: variables.$color-grayscale--0;
-        border-bottom-color: transparent;
+        .e-icon {
+          transform: none;
+        }
       }
 
       &--active {
-        opacity: 1;
+        .e-icon {
+          opacity: 1;
+        }
       }
     }
 
+    &__sort-label {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     &__data-cell {
-      @include mixins.font(variables.$font-size--14);
-
       position: relative;
-      padding: variables.$spacing--10 0;
-      color: variables.$color-secondary--1;
+      display: flex;
+      justify-content: space-between;
+      padding: variables.$spacing--5;
 
-      &--text-center {
+      // This is a hacky solution for a FF issue where the background color overlaps the border.
+      // See: https://bugzilla.mozilla.org/show_bug.cgi?id=688556
+      // https://sonepar-suisse.atlassian.net/browse/WF-5573
+      background-clip: padding-box;
+      text-align: right;
+
+      @include mixins.media(sm) {
+        display: table-cell;
+        padding: variables.$spacing--5 variables.$spacing--20 variables.$spacing--5 0;
+        text-align: inherit;
+      }
+
+      &::before {
+        content: attr(data-label);
+        margin-right: variables.$spacing--10;
+        text-align: left;
+
+        @include mixins.media(sm) {
+          display: none;
+        }
+      }
+
+      &:first-child {
+        @include mixins.media(sm) {
+          padding-left: variables.$spacing--5;
+        }
+      }
+
+      &:last-child {
+        padding-right: variables.$spacing--5;
+      }
+
+      &:nth-child(odd) {
+        background-color: variables.$color-grayscale--700;
+
+        @include mixins.media(sm) {
+          background-color: inherit;
+        }
+      }
+
+      &--align-center {
         text-align: center;
       }
 
-      &--text-right {
+      &--align-right {
         text-align: right;
       }
 
       &--has-event {
         cursor: pointer;
       }
+
+      &--nowrap {
+        white-space: nowrap;
+      }
+
+      &--detail-toggle {
+        padding-right: variables.$spacing--5;
+        text-align: right;
+      }
+    }
+
+    &__select-column {
+      width: 100%;
+      margin-left: -(variables.$spacing--10);
+      text-align: left;
+
+      @include mixins.media(sm) {
+        margin-left: 0;
+      }
+    }
+
+    &__footer-row {
+      border-bottom: 3px solid variables.$color-grayscale--500;
+      color: variables.$color-grayscale--200;
+    }
+
+    &__footer-cell {
+      padding: variables.$spacing--15 variables.$spacing--2;
+    }
+
+    &__cell-link {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      pointer-events: none;
     }
 
     &__no-results {
       padding-top: variables.$spacing--15;
       padding-bottom: variables.$spacing--15;
-      font-size: variables.$font-size--14;
+    }
+
+    &--has-row-links {
+      #{$this}__data-row {
+        cursor: pointer;
+      }
+    }
+
+    &--enable-row-links {
+      #{$this}__cell-link {
+        pointer-events: auto;
+      }
+    }
+
+    &__detail-toggle-label {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    &__detail-toggle-input {
+      position: absolute;
+      visibility: hidden;
+      -webkit-appearance: none;
+      pointer-events: none;
+
+      &:checked ~ #{$this}__detail-toggle-icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__detail-toggle-icon {
+      transition: transform variables.$transition-duration--200;
+    }
+
+    &__detail-row {
+      padding: 0 variables.$spacing--10;
+      border-bottom: 1px solid variables.$color-grayscale--600;
     }
   }
 </style>
