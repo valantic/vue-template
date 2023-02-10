@@ -1,4 +1,4 @@
-import { DirectiveBinding } from 'vue';
+import { DefineComponent, DirectiveBinding } from 'vue';
 
 const outsideClickEventConfig = { passive: true, capture: true };
 
@@ -25,13 +25,8 @@ interface IOutsideClickElement extends HTMLElement {
  * Directive to handle an outside click for a specific DOM element and/or given excludes.
  *
  * Examples:
- * <div v-oustide-click="handler"></div>
- * <div v-outside-click="{
- *   excludeRefs: [],
- *   excludeIds: [],
- *   excludeDOM: [],
- *   handler: () => {},
- * }"></div>
+ * <div v-oustide-click="TOutsideClickHandlerFunction"></div>
+ * <div v-outside-click="IOutsideClickValue"></div>
  */
 export default {
   name: 'outside-click',
@@ -74,7 +69,13 @@ export default {
             const excludedElement = binding.instance?.$refs[refName];
 
             if (Array.isArray(excludedElement)) {
-              return excludedElement.some(component => component.$el.contains(eventTarget));
+              return excludedElement.some((node: InstanceType<DefineComponent> | HTMLElement) => {
+                if (node instanceof HTMLElement) {
+                  return node.contains(eventTarget);
+                }
+
+                return node.$el.constructor(eventTarget);
+              });
             }
 
             if (excludedElement instanceof HTMLElement) {
