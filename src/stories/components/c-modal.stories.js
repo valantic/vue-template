@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker/locale/en';
 
-import cModal from '@/components/c-modal';
-import eButton from '@/components/e-button';
+import cModal from '@/components/c-modal.vue';
+import eButton from '@/components/e-button.vue';
 
 export default {
   component: cModal,
