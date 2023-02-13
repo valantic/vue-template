@@ -47,7 +47,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { Options, Placement } from '@popperjs/core';
-  import eSelect from '@/components/e-select.vue';
+  import eSelect from '@/elements/e-select.vue';
   import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
   import tooltipDirective from '@/plugins/tooltip/directives/directive';
 

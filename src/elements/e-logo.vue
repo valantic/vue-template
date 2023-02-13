@@ -21,6 +21,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import useTheme, { ITheme } from '@/compositions/themes';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ILogo {
     icon: string;
@@ -37,7 +38,9 @@
     name: 'e-logo',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    // components: {},
+    components: {
+      eIcon,
+    },
 
     inheritAttrs: false,
 

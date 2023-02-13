@@ -10,7 +10,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import eCheckbox from '@/components/e-checkbox.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
 
   interface IData {
 

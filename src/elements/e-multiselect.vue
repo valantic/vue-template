@@ -76,6 +76,8 @@
   import useUuid, { IUuid } from '@/compositions/uuid';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface IOption {
     value: string;
@@ -98,7 +100,11 @@
    */
   export default defineComponent({
     name: 'e-multiselect',
-    // components: {},
+    
+    components: {
+      eCheckbox,
+      eIcon
+    },
 
     props: {
       ...withProps(),

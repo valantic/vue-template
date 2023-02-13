@@ -12,8 +12,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import lDefault from '@/components/l-default.vue';
-  import ePicture, { IImageSizes } from '@/components/e-picture.vue';
+  import ePicture, { IImageSizes } from '@/elements/e-picture.vue';
 
   // interface ISetup {}
   interface IData {
@@ -26,7 +25,6 @@
   export default defineComponent({
     name: 'r-pictures',
     components: {
-      lDefault,
       ePicture,
     },
 

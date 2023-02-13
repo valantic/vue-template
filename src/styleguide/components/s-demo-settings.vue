@@ -25,7 +25,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import sHtmlValidation from '@/styleguide/components/s-html-validation.vue';
-  import eCheckbox from '@/components/e-checkbox.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
   import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
 
   interface IData {

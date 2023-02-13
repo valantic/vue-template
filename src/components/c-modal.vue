@@ -48,6 +48,7 @@
   import { defineComponent, ref, Ref } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
     container: Ref<HTMLDivElement>;
@@ -61,7 +62,9 @@
   export default defineComponent({
     name: 'c-modal',
 
-    // components: {},
+    components: {
+      eIcon,
+    },
 
     props: {
       /**
@@ -314,7 +317,7 @@
       align-items: center;
     }
 
-    &__content, {
+    &__content {
       flex: 1 0 auto;
       padding: variables.$spacing--25;
 
