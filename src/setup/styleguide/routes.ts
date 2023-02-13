@@ -1,5 +1,5 @@
 import { ComponentPublicInstance } from 'vue';
-import lDefault from '@/components/l-default.vue';
+import lDefault from '@/layouts/l-default.vue';
 
 import index from '@/styleguide/routes/r-index.vue';
 import sandbox from '@/styleguide/routes/r-sandbox.vue';

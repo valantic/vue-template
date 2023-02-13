@@ -3,9 +3,9 @@ import './setup/styles.scss';
 
 import { createApp, Plugin } from 'vue';
 import { createPinia } from 'pinia';
-import api from '@/stores/plugins/api';
-import options from '@/setup/options';
-import plugins from '@/setup/plugins';
+import api from './stores/plugins/api';
+import options from './setup/options';
+import plugins from './setup/plugins';
 
 const vuePlugins = plugins;
 const pinia = createPinia();

@@ -1,6 +1,6 @@
 import cSlider from '@/components/c-slider.vue';
 import cSliderItemX from '@/components/c-slider-item-x.vue';
-import ePicture from '@/components/e-picture.vue';
+import ePicture from '@/elements/e-picture.vue';
 import { createSrcSetImage } from '@/styleguide/mock-data/data-object/image';
 
 export default {

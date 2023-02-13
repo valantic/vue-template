@@ -19,7 +19,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { faker } from '@faker-js/faker/locale/en';
-  import eTable, { IETableColumn, IETableItem } from '@/components/e-table.vue';
+  import eTable, { IETableColumn, IETableItem } from '@/elements/e-table.vue';
 
   interface ISetup {
     columnsDefinition: IETableColumn[];

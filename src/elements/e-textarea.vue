@@ -31,6 +31,7 @@
   import cFormNotification from '@/components/c-form-notification.vue';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eIcon from '@/elements/e-icon.vue';
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -43,6 +44,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eIcon,
       cFormNotification,
     },
     inheritAttrs: false,

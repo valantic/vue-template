@@ -97,13 +97,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import lDefault from '@/components/l-default.vue';
 
   export default defineComponent({
     name: 'r-wysiwyg',
-    components: {
-      lDefault,
-    },
+
     // components: {},
 
     // props: {},

@@ -48,5 +48,9 @@
   "c-slider":{
     "navigationPrevious": "Zurück",
     "navigationNext": "Vorwärts"
+  },
+  "s-language":{
+    "de": "Deutsch",
+    "fr": "Französisch"
   }
 }

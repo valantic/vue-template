@@ -69,6 +69,7 @@
 <script lang="ts">
   import { defineComponent, Ref, ref } from 'vue';
   import spritePath from '@/assets/icons.svg';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
     input: Ref<HTMLInputElement | null>;
@@ -121,7 +122,10 @@
   export default defineComponent({
     name: 's-icon-finder',
 
-    // props: {},
+    components: {
+      eIcon,
+    },
+    // props: {}, 
 
     setup(): ISetup {
       const input = ref();

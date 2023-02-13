@@ -47,6 +47,7 @@
   import cFormNotification from '@/components/c-form-notification.vue';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup extends IFormStates {
     input: Ref<HTMLInputElement | null>;
@@ -67,6 +68,7 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eIcon,
       cFormNotification,
     },
 

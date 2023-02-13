@@ -40,6 +40,7 @@
   import i18n from '@/setup/i18n';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface IData {
     internalValue: string;
@@ -56,7 +57,9 @@
     name: 'e-select',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    // components: {},
+    components: {
+      eIcon,
+    },
     inheritAttrs: false,
 
     props: {

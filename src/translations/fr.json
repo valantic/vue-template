@@ -35,5 +35,9 @@
     "save": "Enregistrer",
     "itemsEmpty": "Aucun résultat",
     "searchTitle": "Recherche"
+  },
+  "s-language":{
+    "de": "Allemand",
+    "fr": "Français"
   }
 }
