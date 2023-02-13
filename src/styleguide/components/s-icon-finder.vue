@@ -122,8 +122,8 @@
   export default defineComponent({
     name: 's-icon-finder',
 
-    components: { 
-      eIcon, 
+    components: {
+      eIcon,
     },
     // props: {}, 
 
