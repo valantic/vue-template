@@ -877,6 +877,7 @@ package.json:
 * [ ] Update README
 * [ ] Check "Vite Inspect"
 * [ ] Refactor storybook stories to TS.
+* [ ] @typescript-eslint still required?
 * [ ] Update package.md
 
 ## Roadmap
