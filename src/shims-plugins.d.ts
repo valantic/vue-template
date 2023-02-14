@@ -16,3 +16,5 @@ declare module '@vue/runtime-core' {
     bem: IVueBemFunction;
   }
 }
+
+export {};

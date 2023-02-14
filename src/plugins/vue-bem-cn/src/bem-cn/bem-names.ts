@@ -16,7 +16,7 @@ interface IEntities {
 /**
  * Create String from BEM entitys.
  */
-export default function bemNames(entities: IEntities, delimiters: IDelimiters) {
+export default function bemNames(entities: IEntities, delimiters: IDelimiters): string {
   let resultString = entities.block;
 
   if (entities.el) {

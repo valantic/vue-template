@@ -6,7 +6,7 @@ import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from './globals';
 import { hyphenate, isString } from './utils';
 
 export default {
-  install(app: App, config = { delimiters: {} }) {
+  install(app: App, config = { delimiters: {} }): void {
     const cfg = {
       ...DEFAULT_CONFIG,
       ...config,
@@ -27,7 +27,7 @@ export default {
         const nsBlock = cfg.delimiters.ns + block;
         const generator = bemCn(cfg.hyphenate ? hyphenate(nsBlock) : nsBlock, cfg);
 
-        this[cfg.methodName] = (...args: any[]) => generator(...args as [string]);
+        this[cfg.methodName] = (...args: any[]): string => generator(...args as [string]);
       },
     });
   },

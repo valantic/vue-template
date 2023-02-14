@@ -1,6 +1,8 @@
 import {
   computed,
-  ComputedRef, PropType, Ref,
+  ComputedRef,
+  PropType,
+  Ref,
   ref,
 } from 'vue';
 
@@ -30,14 +32,14 @@ export interface IFormStates {
   hasDefaultState: ComputedRef<boolean>;
 }
 
-export const withProps = () => ({
+export const withProps = () => ({ // eslint-disable-line -- TODO: did not know how to fix the return type so it is valid on component side.
   /**
    * Form states for class names (default, error, success, warning, info)
    */
   state: {
     type: String as PropType<FieldStates>,
     default: 'default',
-    validator: (value: string) => [
+    validator: (value: string): boolean => [
       'error',
       'success',
       'warning',

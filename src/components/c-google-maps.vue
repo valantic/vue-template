@@ -44,7 +44,7 @@
     allowAutoUpdates: boolean;
   }
 
-  type TCGoogleMapsCallback = () => unknown;
+  type TCGoogleMapsCallback = () => void;
 
   export interface ICGoogleMapsLocation {
     lat?: string | number | null;
@@ -205,7 +205,7 @@
   /**
    * Set isMapsAPILoaded to true, call the callback, then remove all callbacks in callbackStack array.
    */
-  window[callbackFunctionName] = () => {
+  window[callbackFunctionName] = (): void => {
     isMapsAPILoaded = true;
     callbackStack.forEach(callback => callback());
     callbackStack.length = 0;

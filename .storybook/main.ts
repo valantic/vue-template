@@ -1,5 +1,5 @@
 /* eslint-disable import/no-import-module-exports */
-import { UserConfig, mergeConfig } from 'vite';
+import { UserConfig, mergeConfig, UserConfigExport } from 'vite';
 import { alias } from '../vite.config';
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
     builder: '@storybook/builder-vite',
   },
   staticDirs: ['../static'],
-  async viteFinal(config: UserConfig) {
+  async viteFinal(config: UserConfig): Promise<UserConfigExport> {
     return mergeConfig(config, {
       resolve: {
         alias,

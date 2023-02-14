@@ -5,7 +5,7 @@ import { ICustomDirective } from '@/types/custom-directive';
 /**
  * Formats the html content of the provided element as price.
  */
-function format(el: HTMLElement, binding: DirectiveBinding) {
+function format(el: HTMLElement, binding: DirectiveBinding): void {
   if (!binding.value && binding.value !== 0) {
     return;
   }

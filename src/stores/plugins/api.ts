@@ -90,28 +90,28 @@ export default function api():IPluginApi {
 
   return {
     $api: {
-      get(url, config) {
+      get(url, config): Promise<AxiosResponse | AxiosError> {
         return axiosInstance
           .get(url, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
-      post(url, data, config) {
+      post(url, data, config): Promise<AxiosResponse | AxiosError> {
         return axiosInstance
           .post(url, data, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
-      patch(url, data, config) {
+      patch(url, data, config): Promise<AxiosResponse | AxiosError> {
         return axiosInstance
           .patch(url, data, config)
           .then(response => handleSuccess(response))
           .catch(error => handleError(error));
       },
 
-      delete(url, config) {
+      delete(url, config): Promise<AxiosResponse | AxiosError> {
         return axiosInstance
           .delete(url, config)
           .then(response => handleSuccess(response))

@@ -33,7 +33,7 @@ export default function loadScript(scriptSrc: string, callback?: () => unknown, 
     script.async = async;
 
     if (typeof callback === 'function') {
-      script.onload = () => {
+      script.onload = (): void => {
         callback();
 
         loadScriptCallbacks = loadScriptCallbacks.filter((queueItem) => {

@@ -96,7 +96,7 @@ export default defineConfig(({ command, mode }) => {
           input,
           output: {
             entryFileNames: 'index.[hash].js',
-            chunkFileNames(chunkInfo) {
+            chunkFileNames(chunkInfo): string {
               const path = `${assetsDir}/js`;
 
               if (!chunkInfo.facadeModuleId) {
@@ -105,7 +105,7 @@ export default defineConfig(({ command, mode }) => {
 
               return `${path}/[name].[hash].js`;
             },
-            assetFileNames(assetInfo) {
+            assetFileNames(assetInfo): string {
               const fileName = assetInfo?.name || '';
               const imageExtensions = /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i;
               const styleExtensions = /\.(css|sass|scss)$/i;

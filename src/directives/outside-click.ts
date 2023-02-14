@@ -21,7 +21,7 @@ interface IOutsideClickElement extends HTMLElement {
   [storageKey]: TOutsideClickHandlerFunction;
 }
 
-function isClickOnExcludedRefElement(excludeRefs: string[], eventTarget: Node, binding: IOutsideClickDirectiveBinding) {
+function isClickOnExcludedRefElement(excludeRefs: string[], eventTarget: Node, binding: IOutsideClickDirectiveBinding): boolean {
   return !!excludeRefs.find((refName) => {
     const excludedElement = binding.instance?.$refs[refName];
 
@@ -43,7 +43,7 @@ function isClickOnExcludedRefElement(excludeRefs: string[], eventTarget: Node, b
   });
 }
 
-function isClickOnExcludedIdElement(excludeIds: string[], eventTarget: Node) {
+function isClickOnExcludedIdElement(excludeIds: string[], eventTarget: Node): boolean {
   return excludeIds.some((id) => {
     const element = document.querySelector(id);
 
@@ -51,7 +51,7 @@ function isClickOnExcludedIdElement(excludeIds: string[], eventTarget: Node) {
   });
 }
 
-function isClickOnExcludedElement(excludeElements: Node[], eventTarget: Node) {
+function isClickOnExcludedElement(excludeElements: Node[], eventTarget: Node): boolean {
   return excludeElements.some(element => element.contains(eventTarget));
 }
 
@@ -66,7 +66,7 @@ export default {
   name: 'outside-click',
 
   directive: {
-    beforeMount(el: IOutsideClickElement, binding: IOutsideClickDirectiveBinding) {
+    beforeMount(el: IOutsideClickElement, binding: IOutsideClickDirectiveBinding): void {
       const handler: TOutsideClickHandlerFunction = typeof binding.value === 'function' ? binding.value : binding.value?.handler;
 
       if (!handler) {
@@ -75,7 +75,7 @@ export default {
       let userIsScrolling = false;
 
       // Click / Touchstart handler.
-      el[storageKey] = (event) => {
+      el[storageKey] = (event):void => {
         const eventTarget: Node = event.target as Node;
 
         // These conditions are needed to detect scrolling on touch devices.
@@ -117,7 +117,7 @@ export default {
       document.addEventListener('scroll', el[storageKey], outsideClickEventConfig);
     },
 
-    beforeUnmount(el: IOutsideClickElement) {
+    beforeUnmount(el: IOutsideClickElement): void {
       document.removeEventListener('click', el[storageKey], outsideClickEventConfig);
       document.removeEventListener('touchend', el[storageKey], outsideClickEventConfig);
       document.removeEventListener('scroll', el[storageKey], outsideClickEventConfig);

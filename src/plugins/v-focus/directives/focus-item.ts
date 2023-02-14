@@ -4,7 +4,7 @@ import state from '../state';
 /**
  * Sets or removes a class depending on the current focus state.
  */
-function update(el: HTMLElement, binding: DirectiveBinding) {
+function update(el: HTMLElement, binding: DirectiveBinding): void {
   if (binding.value) {
     el.classList.add('focus-item');
   } else {
@@ -22,7 +22,7 @@ export default {
 
   beforeMount: update,
   updated: update,
-  unmounted() {
+  unmounted(): void {
     state.enabled = false;
   },
 };

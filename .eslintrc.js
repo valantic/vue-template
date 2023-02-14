@@ -50,7 +50,9 @@ module.exports = {
       allowSingleExtends: true,
     }],
     'no-undefined': 'off', // Conflicts with 'undefined' fallback of TypeScript definitions.
-
+    '@typescript-eslint/explicit-function-return-type': ['error', {
+      allowTypedFunctionExpressions: true,
+    }],
   },
   overrides: [{
     files: ['tests/**/*.*'],
@@ -78,6 +80,11 @@ module.exports = {
       'vue/no-bare-strings-in-template': 'off',
       'vue/multi-word-component-names': 'off',
       'vue/match-component-file-name': 'off',
+    },
+  }, {
+    files: ['src/stories/**/*.*'],
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': 'off',
     },
   }],
 };
