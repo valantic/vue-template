@@ -109,6 +109,8 @@ tbd
   > eslint
 - [husky](https://www.npmjs.com/package/husky) - Git hooks made easy.
   > development, husky, eslint
+- [jsdom](https://www.npmjs.com/package/jsdom) - jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG DOM and HTML Standards, for use with Node.js.
+  > vitest
 - [lint-staged](https://www.npmjs.com/package/lint-staged) - Run linters against staged git files and don't let 💩 slip into your code base!
   > development, husky, eslint
 - [msw](https://www.npmjs.com/package/msw) - Tock Service Worker (MSW) is a seamless REST/GraphQL API mocking library for browser and Node.js.
