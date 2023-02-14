@@ -25,7 +25,7 @@ export const BREAKPOINTS_MAX = {
   lg: BREAKPOINTS.xl - 1,
 };
 
-export type BreakPointType = keyof typeof BREAKPOINTS;
+export type TViewportBreakPoint = keyof typeof BREAKPOINTS;
 
 /**
  * @type {number} Global resize debounce value.

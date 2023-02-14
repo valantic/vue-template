@@ -44,7 +44,7 @@ interface IAddShippingInfoPayload {
 }
 
 export interface IGtm {
-  push: (payload: object) => void;
+  push: (payload: Record<string, unknown>) => void;
   pushAddToCart: (item: IListItem, list: GA_LIST_NAMES) => void;
   pushLogin: () => void,
   pushSignUp: () => void,
@@ -52,7 +52,7 @@ export interface IGtm {
   pushViewItemList: (items: IListItem[], list: GA_LIST_NAMES) => void,
   pushViewItem: (item: IListItem) => void,
   pushViewCart: (items: IListItem[], value: number, currency: string) => void,
-  pushRemoveFromCart: (items: IListItem[]) => void,
+  pushRemoveFromCart: (items: IListItem) => void,
   pushAddToWishlist: (item: IListItem) => void,
   pushBeginCheckout: (items: IListItem[], value: number, currency: string) => void,
   pushSelectItem: (item: IListItem, list: GA_LIST_NAMES) => void,

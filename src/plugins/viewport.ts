@@ -1,11 +1,10 @@
 import {
   computed,
-  ComputedRef,
   Plugin,
   reactive,
   ref,
 } from 'vue';
-import { BREAKPOINTS, BreakPointType } from '@/setup/globals';
+import { BREAKPOINTS, TViewportBreakPoint } from '@/setup/globals';
 
 export interface IViewport {
   isXxs: boolean;
@@ -15,7 +14,7 @@ export interface IViewport {
   isLg: boolean;
   isXl: boolean;
   isMobile: boolean;
-  currentViewport: BreakPointType;
+  currentViewport: TViewportBreakPoint | string | null; // TODO: 'string' is a workaround, because I did not know how to use the type TViewportBreakPoint on line 66.
 }
 
 /**
@@ -29,43 +28,46 @@ const plugin: Plugin = {
     /**
      * Returns TRUE if viewport is smaller than XS.
      */
-    const isXxs: ComputedRef<boolean> = computed(() => viewport.value < BREAKPOINTS.xs);
+    const isXxs = computed(() => viewport.value < BREAKPOINTS.xs);
 
     /**
      * Returns TRUE if viewport is at least XS.
      */
-    const isXs: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.xs);
+    const isXs = computed(() => viewport.value >= BREAKPOINTS.xs);
 
     /**
      * Returns TRUE if viewport is at least SM.
      */
-    const isSm: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.sm);
+    const isSm = computed(() => viewport.value >= BREAKPOINTS.sm);
 
     /**
      * Returns TRUE if viewport is at least MD.
      */
-    const isMd: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.md);
+    const isMd = computed(() => viewport.value >= BREAKPOINTS.md);
 
     /**
      * Returns TRUE if viewport is at least LG.
      */
-    const isLg: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.lg);
+    const isLg = computed(() => viewport.value >= BREAKPOINTS.lg);
 
     /**
      * Returns TRUE if viewport is at least XL.
      */
-    const isXl: ComputedRef<boolean> = computed(() => viewport.value >= BREAKPOINTS.xl);
+    const isXl = computed(() => viewport.value >= BREAKPOINTS.xl);
 
     /**
      * Checks if current viewport is mobile (<= md).
      */
-    const isMobile: ComputedRef<boolean> = computed(() => !isSm.value);
+    const isMobile = computed(() => !isSm.value);
 
     /**
      * Returns the short name of the current viewport (e.g. 'md').
      */
-    const currentViewport: ComputedRef<string> = computed(
-      () => Object.entries(BREAKPOINTS)?.reverse()?.find(breakpoint => viewport.value >= breakpoint[1])?.[0] || ''
+    const currentViewport = computed(
+      () => Object
+        .entries(BREAKPOINTS)
+        ?.reverse()
+        ?.find(breakpoint => viewport.value >= breakpoint[1])?.[0] || null
     );
 
     window.addEventListener('resizeend', () => {
