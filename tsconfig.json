@@ -38,6 +38,8 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
     "vite.config.ts"
   ],
   "exclude": [

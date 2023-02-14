@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import styleguideRoutes from './routes';
+import { ICustomPlugin } from '@/setup/plugins';
 
 const router = createRouter({
   routes: styleguideRoutes,
@@ -7,5 +8,5 @@ const router = createRouter({
 });
 
 export default [
-  [router],
-];
+  { plugin: router },
+] satisfies ICustomPlugin[];

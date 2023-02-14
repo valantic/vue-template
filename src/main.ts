@@ -1,7 +1,7 @@
 // It's mandatory that common styles are imported before the application. Else they will come last in the CSS build
 import './setup/styles.scss';
 
-import { createApp, Plugin } from 'vue';
+import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import api from './stores/plugins/api';
 import options from './setup/options';
@@ -26,9 +26,7 @@ const app = createApp(vueOptions);
 
 pinia.use(api);
 
-vuePlugins.forEach(([plugin, pluginOptions]) => {
-  app.use(plugin as Plugin, pluginOptions);
-});
+vuePlugins.forEach(({ plugin, options: pluginOptions }) => app.use(plugin, pluginOptions));
 
 app.use(pinia);
 

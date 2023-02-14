@@ -2,7 +2,7 @@ import { createI18n, IntlDateTimeFormat } from 'vue-i18n';
 import fallbackMessages from '../translations/de.json';
 import numberFormats from './localization.json';
 
-type MessagesSchema = typeof fallbackMessages;
+type TMessagesSchema = typeof fallbackMessages;
 
 export const PAGE_LANG = document?.documentElement?.lang;
 
@@ -32,7 +32,7 @@ if (import.meta.env.MODE !== 'production') {
   }
 }
 
-const i18n = createI18n<[MessagesSchema], 'de'>({
+const i18n = createI18n<[TMessagesSchema], 'de'>({
   legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,

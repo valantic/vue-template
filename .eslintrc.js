@@ -18,7 +18,11 @@ module.exports = {
   ],
   // Uses eslint-import-resolver-webpack
   settings: {
-    'import/resolver': 'webpack',
+    'import/resolver': {
+      vite: {
+        configPath: './vite.config.ts',
+      },
+    },
   },
   globals: {
     google: 'readonly', // Fixes `no-undef` for `google` namespace. (types are loaded by `@types/google.maps`)

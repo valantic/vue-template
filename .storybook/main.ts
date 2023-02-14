@@ -1,7 +1,6 @@
-import { UserConfig } from 'vite';
-
-const { alias } = require('../vite.config.ts');
-const { mergeConfig } = require('vite');
+/* eslint-disable import/no-import-module-exports */
+import { UserConfig, mergeConfig } from 'vite';
+import { alias } from '../vite.config';
 
 module.exports = {
   stories: [ // @see https://storybook.js.org/docs/react/configure/overview#configure-story-loading
@@ -19,7 +18,7 @@ module.exports = {
   ],
   framework: '@storybook/vue3',
   core: {
-    builder: '@storybook/builder-vite'
+    builder: '@storybook/builder-vite',
   },
   staticDirs: ['../static'],
   async viteFinal(config: UserConfig) {
@@ -29,4 +28,4 @@ module.exports = {
       },
     });
   },
-}
+};
