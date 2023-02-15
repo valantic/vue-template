@@ -14,7 +14,7 @@ export interface IViewport {
   isLg: boolean;
   isXl: boolean;
   isMobile: boolean;
-  currentViewport: TViewportBreakPoint | string | null; // TODO: 'string' is a workaround, because I did not know how to use the type TViewportBreakPoint on line 66.
+  currentViewport: TViewportBreakPoint | string; // TODO: 'string' is a workaround, because I did not know how to use the type TViewportBreakPoint on line 66.
 }
 
 /**
@@ -67,7 +67,7 @@ const plugin: Plugin = {
       () => Object
         .entries(BREAKPOINTS)
         ?.reverse()
-        ?.find(breakpoint => viewport.value >= breakpoint[1])?.[0] || null
+        ?.find(breakpoint => viewport.value >= breakpoint[1])?.[0] || ''
     );
 
     window.addEventListener('resizeend', () => {
