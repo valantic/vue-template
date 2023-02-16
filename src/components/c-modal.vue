@@ -6,37 +6,29 @@
     <dialog v-if="isOpen"
             :class="b(modifiers)"
     >
-      <div ref="container" :class="b('container')">
-        <div v-outside-click="onOutsideClick"
-             ref="inner"
-             :class="b('inner')"
-        >
-          <div v-if="$slots.head || title || isClosable" :class="b('header')">
-            <div :class="b('header-inner')">
-              <slot name="head" :close="close">
-                <h2 v-if="title" :class="b('title')">
-                  {{ title }}
-                </h2>
-                <button v-if="isClosable"
-                        :aria-title="$t('c-modal.buttonClose')"
-                        :class="b('button-close')"
-                        type="button"
-                        @click="close"
-                >
-                  <e-icon icon="i-close" size="30" />
-                </button>
-              </slot>
-            </div>
+      <div v-outside-click="onOutsideClick" :class="b('inner')">
+        <div v-if="$slots.head || title || isClosable" :class="b('header')">
+          <div :class="b('header-inner')">
+            <slot name="head" :close="close">
+              <h2 v-if="title" :class="b('title')">
+                {{ title }}
+              </h2>
+              <button v-if="isClosable"
+                      :aria-title="$t('c-modal.buttonClose')"
+                      :class="b('button-close')"
+                      type="button"
+                      @click="close"
+              >
+                <e-icon icon="i-close" size="30" />
+              </button>
+            </slot>
           </div>
-          <div :class="b('content')">
-            <slot></slot>
-          </div>
-          <div v-if="$slots.stickyFooter"
-               ref="stickyFooter"
-               :class="b('sticky-footer')"
-          >
-            <slot name="stickyFooter"></slot>
-          </div>
+        </div>
+        <div :class="b('content')">
+          <slot></slot>
+        </div>
+        <div v-if="$slots.stickyFooter" :class="b('sticky-footer')">
+          <slot name="stickyFooter"></slot>
         </div>
       </div>
     </dialog>
@@ -45,14 +37,12 @@
 
 <script lang="ts">
   import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
-  import { defineComponent, ref, Ref } from 'vue';
+  import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface ISetup {
-    container: Ref<HTMLDivElement>;
-  }
+  // interface ISetup {}
 
   /**
    * Renders a modal dialog.
@@ -127,13 +117,7 @@
       'close': null,
     },
 
-    setup(): ISetup {
-      const container = ref();
-
-      return {
-        container,
-      };
-    },
+    // setup(): ISetup {},
     // data(): IData {
     //   return {};
     // },
@@ -222,7 +206,7 @@
        * Handler for when the modal open-animation is completed.
        */
       onAfterEnter(): void {
-        disableBodyScroll(this.container as HTMLElement, { reserveScrollBarGap: true });
+        disableBodyScroll(this.$el, { reserveScrollBarGap: true });
         this.$emit('open');
         document.addEventListener('keydown', this.onKeyDown);
       },
@@ -231,7 +215,7 @@
        * Handler for when the modal close-animation is completed.
        */
       onAfterLeave(): void {
-        enableBodyScroll(this.container as HTMLElement);
+        enableBodyScroll(this.$el);
         document.removeEventListener('keydown', this.onKeyDown);
       },
     },
@@ -249,13 +233,15 @@
   .c-modal {
     $this: &;
 
-    &,
-    &::backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
+    max-width: 100vw;
+    padding: 0;
+    overflow-x: hidden;
+    border: none;
+    background: none;
+
+    @include media($down: sm) {
       height: 100vh;
+      max-height: none;
     }
 
     &::backdrop {
@@ -263,21 +249,12 @@
       background-color: variables.$color-grayscale--0;
     }
 
-    &__container {
-      display: grid;
-      grid-template-columns: 1fr;
-      height: 100%;
-      overflow-y: auto;
-
-      @include media(md) {
-        padding: 10vh 0;
-      }
-    }
-
     &__inner {
       display: flex;
       flex-direction: column;
       width: 100%;
+      height: 100vh;
+      overflow-y: auto;
       background-color: variables.$color-grayscale--1000;
       justify-self: center;
 
@@ -285,7 +262,8 @@
         display: block;
         align-self: center;
         max-width: 75vw;
-        transform: translateY(-7.5vh);
+        height: auto;
+        overflow-y: hidden;
       }
 
       @include media(lg) {
