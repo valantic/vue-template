@@ -14,7 +14,7 @@
                 {{ title }}
               </h2>
               <button v-if="isClosable"
-                      :aria-title="$t('c-modal.buttonClose')"
+                      :aria-label="$t('c-modal.buttonClose')"
                       :class="b('button-close')"
                       type="button"
                       @click="close"
