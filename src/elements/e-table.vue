@@ -192,12 +192,12 @@
     Ref,
     ref,
   } from 'vue';
-  import eIcon from '@/components/e-icon.vue';
-  import eCheckbox from '@/components/e-checkbox.vue';
+  import eIcon from '@/elements/e-icon.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
   import useUuid, { IUuid } from '@/compositions/uuid';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  type TItemId = string | number;
+  type TItemId = number | string;
 
   export interface IETableItem {
     disabled?: boolean;
@@ -212,7 +212,7 @@
     sortable: boolean;
     nowrap?: boolean;
     titleHidden?: boolean | (() => boolean);
-    onClick?: (item: IETableItem, column: IETableColumn, event?: Event) => unknown;
+    onClick?: (item: IETableItem, column: IETableColumn, event?: Event) => void;
     sort?: (a: unknown, b: unknown) => number;
   }
 
@@ -339,7 +339,7 @@
        * Allows to change the identifier property for a row item by which it will be identified internally.
        */
       itemIdentifier: {
-        type: String,
+        type: String as PropType<TItemId>,
         default: 'id',
       },
     },
@@ -530,7 +530,7 @@
       /**
        * Returns a title for the row link, based on the type of the definition.
        */
-      rowTitle(item: IETableItem): string | null {
+      rowTitle(item: IETableItem): string | undefined {
         const { rowLink } = this;
 
         switch (typeof rowLink?.title) {
@@ -538,10 +538,10 @@
             return rowLink.title;
 
           case 'function':
-            return rowLink.title(item) || null;
+            return rowLink.title(item) || undefined;
 
           default:
-            return null;
+            return undefined;
         }
       },
 

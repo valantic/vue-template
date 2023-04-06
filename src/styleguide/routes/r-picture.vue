@@ -1,10 +1,10 @@
 <template>
   <l-default>
     <e-picture :sizes="sizes"
+               :width="300"
+               :height="1500"
                srcset="https://images.pexels.com/photos/10313905/pexels-photo-10313905.jpeg"
                fallback="https://images.pexels.com/photos/9074921/pexels-photo-9074921.jpeg"
-               width="300"
-               height="1500"
                alt="Image description"
     />
   </l-default>
@@ -12,21 +12,19 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import lDefault from '@/components/l-default.vue';
-  import ePicture, { IImageSizes } from '@/components/e-picture.vue';
+  import ePicture, { IImageSizes } from '@/elements/e-picture.vue';
 
   // interface ISetup {}
   interface IData {
     sizes: IImageSizes;
   }
- 
+
   /**
    * A component that integrates the e-picture for testing its functionality and passing properties.
    */
   export default defineComponent({
     name: 'r-pictures',
     components: {
-      lDefault,
       ePicture,
     },
 

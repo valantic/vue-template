@@ -1,7 +1,7 @@
 <template>
   <label>
     <span class="invisible">Language</span>
-    <select :class="b()" :value="language" @change="onChange">
+    <select v-model="language" :class="b()">
       <option v-for="locale in i18nLocales"
               :key="locale"
               :value="locale"
@@ -37,27 +37,17 @@
       /**
        * The current language.
        */
-      language() {
-        return i18n.global.locale;
+      language: {
+        get() {
+          // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
+          return i18n.global.locale?.value;
+        },
+        set(value: string) {
+          i18nSetLocale(value);
+        },
       },
     },
-    methods: {
-      /**
-       * Event handler for the change event of the language selector.
-       */
-      onChange(event: Event): void {
-        const target = event.target as HTMLSelectElement;
-
-        this.setLocale(target.value);
-      },
-
-      /**
-       * Sets the locale within the i18n.
-       */
-      setLocale(value: string) {
-        i18nSetLocale(value);
-      },
-    },
+    // methods: {},
     // watch: {},
 
     // beforeCreate() {},

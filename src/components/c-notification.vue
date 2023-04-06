@@ -16,6 +16,7 @@
   import { defineComponent, PropType } from 'vue';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -32,8 +33,9 @@
     name: 'c-notification',
     status: 0, // TODO: remove when component was prepared for current project.
 
-    // components: {},
-    // components: {},
+    components: {
+      eIcon,
+    },
 
     props: {
       /**
@@ -115,7 +117,7 @@
 
     &--type-success {
       background-color: variables.$color-status--success;
-      color: variables.$color-grayscale--1000;
+      color: variables.$color-grayscale--0;
     }
 
     &--type-info {
@@ -125,7 +127,7 @@
 
     &--type-error {
       background-color: variables.$color-status--error;
-      color: variables.$color-grayscale--1000;
+      color: variables.$color-grayscale--0;
     }
 
     &__message {

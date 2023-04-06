@@ -2,6 +2,8 @@ import { createI18n, IntlDateTimeFormat } from 'vue-i18n';
 import fallbackMessages from '../translations/de.json';
 import numberFormats from './localization.json';
 
+type TMessagesSchema = typeof fallbackMessages;
+
 export const PAGE_LANG = document?.documentElement?.lang;
 
 export const I18N_FALLBACK = 'de';
@@ -18,8 +20,9 @@ const datetimeFormats: IntlDateTimeFormat = {
 };
 
 // Add styleguide only translations
-if (process.env.NODE_ENV !== 'production') {
-  const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
+if (import.meta.env.MODE !== 'production') {
+  const styleguideTranslations = import.meta
+    .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
@@ -29,7 +32,7 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-const i18n = createI18n({
+const i18n = createI18n<[TMessagesSchema], 'de'>({
   legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
@@ -38,7 +41,7 @@ const i18n = createI18n({
     [PAGE_LANG]: datetimeFormats,
   },
 
-  warnHtmlInMessage: process.env.NODE_ENV !== 'production' ? 'error' : 'off',
+  warnHtmlInMessage: import.meta.env.MODE !== 'production' ? 'error' : 'off',
 
   /**
    * Callback for the 'missing' event, during translation lookup.
@@ -59,11 +62,12 @@ export default i18n;
  */
 export const i18nLoadMessages = (locale: string): Promise<string> => {
   if (!Object.keys(i18n.global.messages).includes(locale)) {
-    return import(/* webpackChunkName: 'lang-[request]' */`../translations/${locale}`)
+    return import(`../translations/${locale}.json`)
       .then(({ default: localeMessages }) => {
         // Add styleguide only translations
-        if (process.env.NODE_ENV !== 'production') {
-          const styleguideTranslations = require('./styleguide.translations.json'); // eslint-disable-line global-require, @typescript-eslint/no-var-requires
+        if (import.meta.env.MODE !== 'production') {
+          const styleguideTranslations = import.meta
+            .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
 
           if (styleguideTranslations[locale]) {
             Object.entries(styleguideTranslations[locale]).forEach(([key, value]) => {
@@ -96,7 +100,8 @@ export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disa
         module.axiosInstance.defaults.headers.common.locale = newLocale;
       });
 
-      i18n.global.locale = newLocale;
+      // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
+      i18n.global.locale.value = newLocale;
     });
   }
 

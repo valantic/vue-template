@@ -7,8 +7,8 @@
            :placeholder="$t('e-multiselect.searchFieldPlaceholder')"
            :class="b('search-field')"
            type="text"
-           @mouseenter="hasHover = true"
-           @mouseleave="hasHover = false"
+           @mouseenter="hover = true"
+           @mouseleave="hover = false"
     >
 
     <!-- Trigger Button -->
@@ -18,8 +18,8 @@
             :disabled="isDisabled"
             type="button"
             @click="isOpen = !isOpen"
-            @mouseenter="hasHover = true"
-            @mouseleave="hasHover = false"
+            @mouseenter="hover = true"
+            @mouseleave="hover = false"
     >
       <span :class="b('output-value')">
         {{ outputValue }}
@@ -76,6 +76,9 @@
   import useUuid, { IUuid } from '@/compositions/uuid';
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eIcon from '@/elements/e-icon.vue';
+  import eProgress from '@/elements/e-progress.vue';
 
   interface IOption {
     value: string;
@@ -98,7 +101,12 @@
    */
   export default defineComponent({
     name: 'e-multiselect',
-    // components: {},
+
+    components: {
+      eCheckbox,
+      eIcon,
+      eProgress,
+    },
 
     props: {
       ...withProps(),

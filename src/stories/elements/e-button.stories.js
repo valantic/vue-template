@@ -1,5 +1,5 @@
 import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
-import eButton from '@/components/e-button';
+import eButton from '@/elements/e-button.vue';
 
 export default {
   component: eButton,

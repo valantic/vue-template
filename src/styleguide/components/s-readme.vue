@@ -7,19 +7,21 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   // @ts-ignore Needed because typescript cannot resolve `.md` files.
-  import readme from '../../../README.md';
+  import { VueComponent } from '@/../README.md';
 
   export default defineComponent({
     name: 's-readme',
     status: 1,
 
     components: {
-      readme,
+      readme: VueComponent,
     },
 
     // props: {},
     // data() {
-    //   return {};
+    //   return {
+    //     content: html,
+    //   };
     // },
 
     // computed: {},

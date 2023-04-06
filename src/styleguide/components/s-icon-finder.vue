@@ -68,6 +68,8 @@
 
 <script lang="ts">
   import { defineComponent, Ref, ref } from 'vue';
+  import spritePath from '@/assets/icons.svg';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
     input: Ref<HTMLInputElement | null>;
@@ -79,11 +81,35 @@
   }
 
   interface IData {
+
+    /**
+     * An array of available icons.
+     */
     icons: string[];
+
+    /**
+     * The currently applied query filter.
+     */
     filter: string;
+
+    /**
+     * Clipboard notification.
+     */
     notification: string;
+
+    /**
+     * The currently selected color.
+     */
     color: string;
+
+    /**
+     * The currently selected variant.
+     */
     variant: 'inline' | 'image' | 'css' | 'mask';
+
+    /**
+     * The sprite path to use.
+     */
     spritePath: string;
   }
 
@@ -91,13 +117,15 @@
     name: string;
   }
 
-  const spritePath = require.context('@/assets/', false, /icons\.svg/)('./icons.svg');
-  const icons = require.context('@/assets/icons/', false, /\.svg/).keys();
+  const icons = import.meta.glob('@/assets/icons/*.svg');
 
   export default defineComponent({
     name: 's-icon-finder',
 
-    // props: {},
+    components: {
+      eIcon,
+    },
+    // props: {}, 
 
     setup(): ISetup {
       const input = ref();
@@ -109,34 +137,16 @@
 
     data(): IData {
       return {
-        /**
-         * An array of available icons.
-         */
-        icons: icons.map(icon => icon.match(/\.\/(.*?)\.svg$/)?.[1] || ''),
-
-        /**
-         * The currently applied query filter.
-         */
+        icons: Object.keys(icons)
+          .map(path => path
+            .split('/')
+            .pop()
+            ?.replace('.svg', '') || '')
+          .filter(Boolean),
         filter: '',
-
-        /**
-         * Clipboard notification.
-         */
         notification: '',
-
-        /**
-         * The currently selected color.
-         */
         color: '#000000',
-
-        /**
-         * The currently selected variant.
-         */
         variant: 'inline',
-
-        /**
-         * The sprite path to use.
-         */
         spritePath,
       };
     },
@@ -171,7 +181,7 @@
             break;
 
           case 'css':
-            template = `background-image: url('../assets/icons.svg#${icon.name}');`;
+            template = `background-image: url('@/assets/icons.svg#${icon.name}');`;
             break;
 
           case 'image':

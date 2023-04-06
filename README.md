@@ -867,10 +867,23 @@ package.json:
 }
 ```
 
+## Vite integration todos
+* [ ] Check again, why we need to use `.value` on some vue-i18n properties (e.g. i18n.global.locale.value). Source: https://vue-i18n.intlify.dev/guide/advanced/lazy.html#lazy-loading
+* [ ] Check if module polyfill is required: https://vitejs.dev/config/build-options.html#build-modulepreload
+* [ ] CSS Prefixing
+* [ ] Apply new ESLint rules to valantic config.
+* [ ] Should there be basic styles for form elements (if no class applied)?
+* [ ] cmd + click in PhpStorm leads to Interface instead of implementation.
+* [ ] Update README
+* [ ] Check "Vite Inspect"
+* [ ] Refactor storybook stories to TS.
+* [ ] @typescript-eslint still required?
+* [ ] Update package.md
+
 ## Roadmap
 * [ ] Implement dual build (ES5/ES2015+)
 * [ ] Add 'dangerous' flag for components that use v-html in Storybook.
-* [ ] Add 'development' flag for components in Storybook.
+* [ ] Add 'development' flag for components in Storybook.
 * [ ] Add custom elements option to the "initial data" section.
   
 ## License

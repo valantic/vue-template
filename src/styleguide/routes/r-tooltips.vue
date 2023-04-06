@@ -46,9 +46,16 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import eSelect from '@/components/e-select.vue';
+  import { Options, Placement } from '@popperjs/core';
+  import eSelect from '@/elements/e-select.vue';
   import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
   import tooltipDirective from '@/plugins/tooltip/directives/directive';
+
+  interface IData {
+    active: boolean;
+    placementOptions: Record<'label' | 'value', string>[],
+    placement: Placement
+  }
 
   export default defineComponent({
     name: 'r-tooltips',
@@ -62,7 +69,7 @@
     },
 
     // props: {},
-    data() {
+    data(): IData {
       return {
         active: true,
         placementOptions: [
@@ -94,7 +101,7 @@
         return this.active ? 'top' : 'hidden';
       },
 
-      popperOptions(): object {
+      popperOptions(): Partial<Options> {
         return {
           placement: this.placement,
         };

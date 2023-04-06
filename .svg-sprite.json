@@ -2,14 +2,15 @@
   "dest": "src/assets/",
   "shape": {
     "spacing": {
-      "box": "icon"
+      "box": "content"
     }
   },
   "mode": {
     "stack": {
       "sprite": "icons.svg",
       "bust": false,
-      "dest": "."
+      "dest": ".",
+      "rootviewbox": false
     }
   }
 }

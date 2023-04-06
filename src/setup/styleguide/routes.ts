@@ -1,5 +1,5 @@
 import { ComponentPublicInstance } from 'vue';
-import lDefault from '@/components/l-default.vue';
+import lDefault from '@/layouts/l-default.vue';
 
 import index from '@/styleguide/routes/r-index.vue';
 import sandbox from '@/styleguide/routes/r-sandbox.vue';
@@ -12,13 +12,22 @@ import tooltips from '@/styleguide/routes/r-tooltips.vue';
 import googleMaps from '@/styleguide/routes/r-google-maps.vue';
 import picture from '@/styleguide/routes/r-picture.vue';
 
+declare module 'vue-router' {
+  interface RouteMeta {
+    title: string;
+    params?: {
+      [key: string]: string;
+    };
+    query?: {
+      [key: string]: string;
+    }
+  }
+}
+
 export interface IRoute {
   path: string;
   name?: string;
   component?: ComponentPublicInstance | Record<string, unknown>;
-  meta?: {
-    title: string;
-  };
   children?: IRoute[];
 }
 

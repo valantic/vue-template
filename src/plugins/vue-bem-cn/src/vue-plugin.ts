@@ -1,12 +1,12 @@
 // this plugin is a copy of https://www.npmjs.com/package/vue-bem-cn with some optimisations applied
 
-import { Plugin } from 'vue';
+import { App, Plugin } from 'vue';
 import bemCn from './bem-cn';
 import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from './globals';
 import { hyphenate, isString } from './utils';
 
-const plugin: Plugin = {
-  install(app, config = { delimiters: {} }) {
+export default {
+  install(app: App, config = { delimiters: {} }): void {
     const cfg = {
       ...DEFAULT_CONFIG,
       ...config,
@@ -27,10 +27,8 @@ const plugin: Plugin = {
         const nsBlock = cfg.delimiters.ns + block;
         const generator = bemCn(cfg.hyphenate ? hyphenate(nsBlock) : nsBlock, cfg);
 
-        this[cfg.methodName] = (...args: any[]) => generator(...args as [string]);
+        this[cfg.methodName] = (...args: any[]): string => generator(...args as [string]);
       },
     });
   },
-};
-
-export default plugin;
+} satisfies Plugin;

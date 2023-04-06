@@ -20,7 +20,7 @@
           </e-label>
           <e-label name="E-Mail" required>
             <e-input v-model="form.email"
-                     :state="v$.form.email.$error ? 'error' : 'default'"
+                     :state="v$.form.email.$error ? FieldStates.Error : FieldStates.Default"
                      :notification="v$.form.email.$error ? '<b>No valid email address</b>' : ''"
                      type="email"
                      name="email"
@@ -31,7 +31,7 @@
           <e-label name="Language" required>
             <e-select v-model="form.language"
                       :options="mock.languages"
-                      :state="v$.form.language.$error ? 'error' : 'default'"
+                      :state="v$.form.language.$error ? FieldStates.Error : FieldStates.Default"
                       :notification="v$.form.language.$error ? 'Required field' : ''"
                       name="language"
                       @blur="v$.form.language.$touch()"
@@ -40,7 +40,7 @@
           <e-label name="Business fields" required>
             <e-multiselect v-model="form.businessFields"
                            :options="mock.businessFields"
-                           :state="v$.form.businessFields.$error ? 'error' : 'default'"
+                           :state="v$.form.businessFields.$error ? FieldStates.Error : FieldStates.Default"
                            :notification="v$.form.businessFields.$error ? 'Required field' : ''"
                            has-search
                            @blur="v$.form.businessFields.$touch()"
@@ -147,6 +147,16 @@
   import { defineComponent, ref, Ref } from 'vue';
   import useVuelidate, { Validation } from '@vuelidate/core';
   import { required, email } from '@vuelidate/validators';
+  import eFieldset from '@/elements/e-fieldset.vue';
+  import eMultiselect from '@/elements/e-multiselect.vue';
+  import eLabel from '@/elements/e-label.vue';
+  import eInput from '@/elements/e-input.vue';
+  import eSelect from '@/elements/e-select.vue';
+  import eRadio from '@/elements/e-radio.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eTextarea from '@/elements/e-textarea.vue';
+  import eButton from '@/elements/e-button.vue';
+  import { FieldStates } from '@/compositions/form-states';
 
   interface ISelectItem {
     label: string;
@@ -156,6 +166,7 @@
   interface ISetup {
     v$: Ref<Validation>;
     formRef: Ref<HTMLFormElement | null>;
+    FieldStates: typeof FieldStates;
   }
 
   interface IData {
@@ -177,7 +188,17 @@
   export default defineComponent({
     name: 'r-forms',
 
-    // components: {},
+    components: {
+      eFieldset,
+      eMultiselect,
+      eLabel,
+      eInput,
+      eSelect,
+      eRadio,
+      eCheckbox,
+      eTextarea,
+      eButton,
+    },
 
     setup(): ISetup {
       const formRef = ref();
@@ -186,6 +207,7 @@
         // eslint-disable-next-line id-length
         v$: useVuelidate(),
         formRef,
+        FieldStates,
       };
     },
 

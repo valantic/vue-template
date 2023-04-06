@@ -15,7 +15,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import cGoogleMaps from '@/components/c-google-maps.vue';
+  import cGoogleMaps, { ICGoogleMapsLocation } from '@/components/c-google-maps.vue';
 
   export default defineComponent({
     name: 'r-google-maps',
@@ -29,10 +29,9 @@
         locations: [{
           lat: 19.1759668,
           lng: 72.79504659999998,
-          geocode: 'https://goo.gl/maps/9Yu9wb6uidAMs1SEA',
+          geocode: 'Breitfeldstrasse 13, 9015 St.Gallen',
           title: 'Aksa Beach',
-          description: 'Aksa Beach is a popular beach and a vacation spot in Aksa village at Malad, Mumbai.',
-        }],
+        }] satisfies ICGoogleMapsLocation[],
       };
     },
 

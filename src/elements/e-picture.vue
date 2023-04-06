@@ -20,22 +20,16 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import { defineComponent, PropType, StyleValue } from 'vue';
   import { BREAKPOINTS_MAX } from '@/setup/globals';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   export interface IImageSizes {
-    fallback?: number;
-    lg?: number;
-    md?: number;
-    sm?: number;
-    xs?: number;
-    xxs?: number;
-    [key: number]: number;
+    [key: keyof typeof BREAKPOINTS_MAX | 'fallback' | string]: number;
   }
 
   interface ISizePerBreakpoint {
-    [key: number]: number
+    [key: string]: number
   }
 
   interface IData {
@@ -96,7 +90,7 @@
        * e.g. `1` is a ratio of 1:1 (600px x 600px), `0.75` is a ratio of 0.75:1 (600px x 800px)
        */
       ratio: {
-        type: [Number, String],
+        type: Number,
         default: null,
       },
 
@@ -141,7 +135,7 @@
        * For browser support @see https://caniuse.com/mdn-html_elements_img_decoding
        */
       decoding: {
-        type: String,
+        type: String as PropType<'sync' | 'async' | 'auto'>,
         default: 'async',
         validator: (value: string) => [
           'sync',
@@ -154,7 +148,7 @@
        * Allows to set the image width.
        */
       width: {
-        type: [String, Number],
+        type: Number,
         default: null,
       },
 
@@ -162,7 +156,7 @@
        * Allows to set the image height.
        */
       height: {
-        type: [String, Number],
+        type: Number,
         default: null,
       },
 
@@ -210,20 +204,20 @@
       /**
        * Calculates root element styles.
        */
-      style(): object | null {
+      style(): StyleValue | undefined {
         const { ratio } = this;
 
         return ratio
           ? { '--aspect-ratio': ratio }
-          : null;
+          : undefined;
       },
 
       /**
        * Converts sizes object to string.
        */
-      mappedSizes(): string | null {
+      mappedSizes(): string | undefined {
         if (!this.sizes) {
-          return null;
+          return undefined;
         }
 
         const mappedSizesPerBreakpoints: ISizePerBreakpoint = {};
@@ -231,19 +225,22 @@
 
         return Object
           .keys(this.sizes)
-          .map((size: string | number) => {
+          .map((size: string) => {
             if (size === 'fallback') {
               return null;
             }
 
-            const breakpoint = size as keyof typeof BREAKPOINTS_MAX;
-
             // check if the provided size key exists as breakpoint key
             // if yes, take the corresponding breakpoint value,
-            // otherwise take the size key (which is a number in that case)
-            const breakpointValue = BREAKPOINTS_MAX[breakpoint] || size as number;
+            // otherwise take the size key (which is a pixel value)
+            const breakpointValue = BREAKPOINTS_MAX[size as keyof typeof BREAKPOINTS_MAX] || size;
+            const imageSize = this.sizes[size];
 
-            mappedSizesPerBreakpoints[breakpointValue] = this.sizes[size as keyof IImageSizes] as number; // Todo: 'as number' is possible not the best way to tell TS, that the value will always exist.
+            if (!imageSize) {
+              return null;
+            }
+
+            mappedSizesPerBreakpoints[breakpointValue] = imageSize;
 
             return breakpointValue;
           })
@@ -267,7 +264,7 @@
     mounted() {
       const hasSrcSet = !!this.srcset;
 
-      if (process.env.NODE_ENV === 'production') {
+      if (import.meta.env.MODE === 'production') {
         if (!hasSrcSet && !this.sources && !this.fallback) {
           console.error("Neither 'srcset' nor 'sources' or 'fallback' where defined.", this.$el); // eslint-disable-line no-console
         } else if (hasSrcSet && !this.sizes) {
@@ -293,7 +290,7 @@
       onLoad(): void {
         this.loaded = true;
       },
-      
+
       /**
        * Load event handler when an error occurs with a image element.
        */

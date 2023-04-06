@@ -83,8 +83,8 @@
     rest,
   } from 'msw';
   import mockWorker from '@/styleguide/api/browser';
-  import eCheckbox from '@/components/e-checkbox.vue';
-  import eSelect from '@/components/e-select.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eSelect from '@/elements/e-select.vue';
 
   interface IDebugConfiguration {
     header: string;

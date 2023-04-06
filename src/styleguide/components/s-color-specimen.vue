@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, PropType, StyleValue } from 'vue';
 
   /**
    * Renders a color specimen tile.
@@ -32,7 +32,7 @@
       name: {
         type: String,
         default: null,
-        required: true
+        required: true,
       },
 
       /**
@@ -40,10 +40,10 @@
        * If 2 values are given it will be treated as gradient.
        */
       value: {
-        type: Array,
+        type: Array as PropType<string[]>,
         default: null,
-        required: true
-      }
+        required: true,
+      },
     },
     // data() {
     //   return {};
@@ -67,14 +67,14 @@
       /**
        * Returns the background style for the color.
        */
-      backgroundColor(): object {
+      backgroundColor(): StyleValue {
         const [color1, color2] = this.value;
 
         return {
-          background: `linear-gradient(to right, ${color1} , ${color2 || color1})`
+          background: `linear-gradient(to right, ${color1} , ${color2 || color1})`,
         };
-      }
-    }
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -104,17 +104,17 @@
     }
 
     &__name {
-      white-space: nowrap;
-      text-align: center;
       font-size: 14px;
-      line-height: 24px;
       font-weight: bold;
+      line-height: 24px;
+      text-align: center;
+      white-space: nowrap;
     }
 
     &__value {
-      text-align: center;
       font-size: 12px;
       line-height: 22px;
+      text-align: center;
     }
   }
 </style>

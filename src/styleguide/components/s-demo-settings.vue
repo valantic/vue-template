@@ -2,12 +2,21 @@
   <ul :class="b()">
     <li :class="b('item')">
       <s-html-validation />
-      <s-toggle v-model="loggedIn">
+      <e-checkbox v-model="loggedIn"
+                  variant="toggle"
+                  name="logged-in"
+                  value
+      >
         Logged in
-      </s-toggle>
-      <s-toggle v-model="showApiHandlerConfiguration">
+      </e-checkbox>
+
+      <e-checkbox v-model="showApiHandlerConfiguration"
+                  variant="toggle"
+                  name="api-mock"
+                  value
+      >
         API Mock Test
-      </s-toggle>
+      </e-checkbox>
     </li>
   </ul>
   <s-api-mock-test v-if="showApiHandlerConfiguration" @click.stop @close="showApiHandlerConfiguration = false" />
@@ -15,12 +24,20 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import sToggle from '@/styleguide/components/s-toggle.vue';
   import sHtmlValidation from '@/styleguide/components/s-html-validation.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
   import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
 
   interface IData {
+
+    /**
+     * Determines if the user is logged in.
+     */
     loggedIn: boolean;
+
+    /**
+     * Determines if the api handler configuration is displayed.
+     */
     showApiHandlerConfiguration: boolean,
   }
 
@@ -29,22 +46,15 @@
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
+      eCheckbox,
       sApiMockTest,
       sHtmlValidation,
-      sToggle,
     },
 
     // props: {},
     data(): IData {
       return {
-        /**
-         * Determines if the user is logged in.
-         */
         loggedIn: true,
-
-        /**
-         * Determines if the api handler configuration is displayed.
-         */
         showApiHandlerConfiguration: false,
       };
     },

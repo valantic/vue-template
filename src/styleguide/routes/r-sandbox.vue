@@ -12,7 +12,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import eLogo from '@/components/e-logo.vue';
+  import eLogo from '@/elements/e-logo.vue';
   import cBreadcrumb from '@/components/c-breadcrumb.vue';
 
   export default defineComponent({

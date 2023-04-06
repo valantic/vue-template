@@ -44,27 +44,27 @@ interface IAddShippingInfoPayload {
 }
 
 export interface IGtm {
-  push: (payload: object) => void;
-  pushAddToCart: (item: IListItem, list: GA_LIST_NAMES) => void;
-  pushLogin: () => void,
-  pushSignUp: () => void,
-  pushSearch: (searchTerm: string) => void,
-  pushViewItemList: (items: IListItem[], list: GA_LIST_NAMES) => void,
-  pushViewItem: (item: IListItem) => void,
-  pushViewCart: (items: IListItem[], value: number, currency: string) => void,
-  pushRemoveFromCart: (items: IListItem[]) => void,
-  pushAddToWishlist: (item: IListItem) => void,
-  pushBeginCheckout: (items: IListItem[], value: number, currency: string) => void,
-  pushSelectItem: (item: IListItem, list: GA_LIST_NAMES) => void,
-  pushPurchase: (payload: IPurchasePayload) => void,
-  pushAddPaymentInfo: (payload: IAddPaymentInfoPayload) => void,
-  pushAddShippingInfo: (payload: IAddShippingInfoPayload) => void,
-  debug: (enable: boolean) => void;
+  push(payload: Record<string, unknown>): void;
+  pushAddToCart(item: IListItem, list: GA_LIST_NAMES): void;
+  pushLogin(): void,
+  pushSignUp(): void,
+  pushSearch(searchTerm: string): void,
+  pushViewItemList(items: IListItem[], list: GA_LIST_NAMES): void,
+  pushViewItem(item: IListItem): void,
+  pushViewCart(items: IListItem[], value: number, currency: string): void,
+  pushRemoveFromCart(items: IListItem): void,
+  pushAddToWishlist(item: IListItem): void,
+  pushBeginCheckout(items: IListItem[], value: number, currency: string): void,
+  pushSelectItem(item: IListItem, list: GA_LIST_NAMES): void,
+  pushPurchase(payload: IPurchasePayload): void,
+  pushAddPaymentInfo(payload: IAddPaymentInfoPayload): void,
+  pushAddShippingInfo(payload: IAddShippingInfoPayload): void,
+  debug(enable: boolean): void;
 }
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  interface Window { dataLayer: Record<string, any>[]; }
+  interface Window { dataLayer: Record<string, unknown>[]; }
 }
 
 /**
@@ -80,12 +80,12 @@ const plugin: Plugin = {
     /**
      * Push a new event to the dataLayer.
      */
-    function push(payload: object) {
+    function push(payload: Record<string, unknown>): void {
       if (window.dataLayer && window.dataLayer.push) {
         window.dataLayer.push(payload);
 
         // Log if debug and development mode are active
-        if (process.env.NODE_ENV !== 'production') {
+        if (import.meta.env.MODE !== 'production') {
           if (debug) {
             console.group('GTM debug'); // eslint-disable-line no-console
             console.log('payload', payload); // eslint-disable-line no-console
@@ -98,7 +98,7 @@ const plugin: Plugin = {
       }
     }
 
-    app.config.globalProperties.$gtm = {
+    const api: IGtm = {
       push,
 
       /**
@@ -296,6 +296,8 @@ const plugin: Plugin = {
         debug = enable !== false;
       },
     };
+
+    app.config.globalProperties.$gtm = api;
   },
 };
 

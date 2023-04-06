@@ -68,7 +68,7 @@ function bindEvents(element: HTMLElement, events: TTooltipEvent[], bind = true):
 export default {
   name: 'tooltip',
 
-  beforeMount(el: ITooltipElement, binding: DirectiveBinding) {
+  beforeMount(el: ITooltipElement, binding: DirectiveBinding): void {
     const isHidden = binding.arg === 'hidden';
     const placement = isHidden ? 'bottom' : binding.arg as Placement;
     const content = binding.value;
@@ -154,7 +154,7 @@ export default {
     };
   },
 
-  updated(el: ITooltipElement, binding: DirectiveBinding) {
+  updated(el: ITooltipElement, binding: DirectiveBinding):void {
     const instance = el[storageKey];
 
     instance.isHidden = binding.arg === 'hidden';
@@ -162,7 +162,7 @@ export default {
     bindEvents(el, instance.events, !instance.isHidden);
   },
 
-  beforeUnmount(el: ITooltipElement) {
+  beforeUnmount(el: ITooltipElement): void {
     const instance = el[storageKey];
 
     bindEvents(el, instance.events, false);

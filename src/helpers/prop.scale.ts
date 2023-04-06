@@ -7,13 +7,13 @@ interface IPropConfig {
 /**
  * Creates a scale validation function for scale value props.
  */
-export default function(defaultValue: number, validNumbers: number[]) {
+export default function(defaultValue: number, validNumbers: number[]): IPropConfig {
   const propConfig: IPropConfig = {
     type: [Number, String],
-    default: defaultValue
+    default: defaultValue,
   };
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (import.meta.env.MODE !== 'production') {
     if (!Array.isArray(validNumbers)) {
       throw new Error("'validNumbers' is not an array.");
     }
@@ -22,7 +22,7 @@ export default function(defaultValue: number, validNumbers: number[]) {
       throw new Error("'defaultValue' is not a Number.");
     }
 
-    propConfig.validator = function(value) { // Note, that validators are not triggered in production mode.
+    propConfig.validator = function(value): boolean { // Note, that validators are not triggered in production mode.
       return validNumbers.includes(parseInt(value, 10));
     };
   }

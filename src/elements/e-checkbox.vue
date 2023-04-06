@@ -44,7 +44,7 @@
        * The model value to be used for v-model.
        */
       modelValue: {
-        type: [Boolean, Array] as PropType<boolean | string[]>,
+        type: [Boolean, Array] as PropType<any>, // eslint-disable-line @typescript-eslint/no-explicit-any -- was not able to find a better solution, since the value is very dynamic
         required: true,
       },
 
@@ -60,7 +60,7 @@
        * Adds value attribute.
        */
       value: {
-        type: [String, Number, Boolean],
+        type: [String, Number, Boolean] as PropType<any>, // eslint-disable-line @typescript-eslint/no-explicit-any -- was not able to find a better solution, since the value is very dynamic
         required: true,
       },
 
@@ -96,7 +96,6 @@
       modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-          selected: this.internalValue === this.value,
           variant: this.variant,
         };
       },
@@ -105,10 +104,10 @@
        * Sets value of component model to parent model
        */
       internalValue: {
-        get(): boolean | string[] {
+        get(): boolean | string[] | number[] {
           return this.modelValue;
         },
-        set(value: boolean | string[]) {
+        set(value: boolean | string[] | number[]) {
           /**
            * Emits checkbox value e.g. true/false or value
            */

@@ -1,5 +1,5 @@
 import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
-import eCheckbox from '@/components/e-checkbox.vue';
+import eCheckbox from '@/elements/e-checkbox.vue';
 
 export default {
   component: eCheckbox,
@@ -28,8 +28,8 @@ const Template = args => ({
   },
 
   template: `
-  <e-checkbox v-model="isChecked" v-bind:bind:checked="args" />
-  
+  <e-checkbox v-model="isChecked" v-bind:bind:checked="args" :value="true" name="demo" />
+
   {{ isChecked }}
 `,
 });

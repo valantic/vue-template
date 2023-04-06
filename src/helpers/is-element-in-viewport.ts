@@ -9,7 +9,7 @@ const spacingFallback = {
   top: 10,
   right: 0,
   bottom: 10,
-  left: 0
+  left: 0,
 };
 
 /**

@@ -25,7 +25,7 @@ export const BREAKPOINTS_MAX = {
   lg: BREAKPOINTS.xl - 1,
 };
 
-export type BreakPointType = keyof typeof BREAKPOINTS;
+export type TViewportBreakPoint = keyof typeof BREAKPOINTS;
 
 /**
  * @type {number} Global resize debounce value.
@@ -67,3 +67,12 @@ export const DEFAULT_IMAGE_SIZES: IImageSizes = {
   ...BREAKPOINTS_MAX,
   fallback: 1440,
 };
+
+/**
+ * Contains list of all Pinia stores.
+ */
+export enum STORE {
+  SESSION = 'session',
+  BREADCRUMBS = 'breadcrumbs',
+  NOTIFICATION = 'notification',
+}

@@ -69,7 +69,7 @@
        * Allows to customize the popper instance.
        */
       popperOptions: {
-        type: Object as PropType<Options>,
+        type: Object as PropType<Partial<Options>>,
         default: null,
       },
 

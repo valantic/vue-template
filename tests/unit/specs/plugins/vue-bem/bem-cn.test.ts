@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest';
 import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from '@/plugins/vue-bem-cn/src/globals';
 import bemCn from '@/plugins/vue-bem-cn/src/bem-cn';
 import {

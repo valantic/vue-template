@@ -1,7 +1,7 @@
 import './styles/styles.scss';
 import { Plugin } from 'vue';
-
-const directives = require.context('./directives/', true, /\.(ts)$/i);
+import itemDirective from './directives/focus-item';
+import maskDirective from './directives/focus-mask';
 
 /**
  * This plugin adds two directives, to apply a "focus" effect to a page/element.
@@ -23,9 +23,7 @@ const directives = require.context('./directives/', true, /\.(ts)$/i);
 const plugin: Plugin = {
   install(app) {
     // Add directives to Vue.
-    directives
-      .keys()
-      .forEach(key => app.directive(directives(key).default.name, directives(key).default));
+    [itemDirective, maskDirective].forEach(directive => app.directive(directive.name, directive));
   },
 };
 

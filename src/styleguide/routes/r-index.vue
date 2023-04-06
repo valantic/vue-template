@@ -3,9 +3,6 @@
   <div :class="b()">
     <h1>
       Styleguide
-      <small :class="b('build-info')">
-        {{ buildDate }}
-      </small>
     </h1>
     <hr>
     <p>Welcome to the styleguide.</p>
@@ -22,29 +19,22 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import dayjs from 'dayjs';
   import sReadme from '@/styleguide/components/s-readme.vue';
 
   export default defineComponent({
     name: 'r-index',
     components: { sReadme },
 
-    data() {
-      const buildDate = process.env.BUILD_TIMESTAMP
-        ? dayjs(process.env.BUILD_TIMESTAMP).format('DD.MM.YYYY HH:mm')
-        : null;
-
-      return {
-        buildDate
-      };
-    },
+    // data() {
+    //   return {};
+    // },
 
     computed: {
       /**
        * Checks, if production mode is active.
        */
       isProduction(): boolean {
-        return process.env.NODE_ENV === 'production';
+        return import.meta.env.MODE === 'production';
       },
     },
   });
@@ -60,10 +50,10 @@
     padding: variables.$spacing--30;
 
     &__warning {
+      padding: variables.$spacing--10;
       border: 1px solid variables.$color-status--error;
       background: rgba(variables.$color-status--error--rgb, 0.5);
       text-align: center;
-      padding: variables.$spacing--10;
     }
 
     &__code {
@@ -71,12 +61,6 @@
       border: 1px solid variables.$color-grayscale--400;
       background: rgba(variables.$color-primary--2--rgb, 0.5);
       color: variables.$color-primary--3;
-    }
-
-    &__build-info {
-      @include mixins.font-size(variables.$font-size--14);
-
-      margin-left: variables.$spacing--5;
     }
   }
 </style>

@@ -1,0 +1,24 @@
+{
+  "base":  "/",
+  "outDir":  "dist",
+  "assetsDir": "assets",
+  "profileBuild": "app",
+  "modes": {
+    "app": {
+      "input": [
+        "./src/main.ts",
+        "./src/setup/scss/themes/theme-01.scss"
+      ]
+    },
+    "pimcore": {
+      "input": [
+        "./src/pimcore/pimcore.scss"
+      ]
+    }
+  },
+  "themeSource": "src/setup/scss/themes/",
+  "themeFiles": [
+    "theme-01",
+    "theme-02"
+  ]
+}

@@ -32,7 +32,7 @@
     Ref,
     ref,
   } from 'vue';
-  import eIcon from '@/components/e-icon.vue';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
     stage: Ref<HTMLDivElement>;

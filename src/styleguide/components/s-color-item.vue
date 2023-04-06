@@ -4,7 +4,7 @@
       {{ headline }}
     </h4>
     <ul :class="b('grid')">
-      <li v-for="(color) in colors"
+      <li v-for="color in colors"
           :key="color.name"
           :class="b('grid-item')"
       >
@@ -18,15 +18,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, PropType } from 'vue';
   import sColorSpecimen from './s-color-specimen.vue';
+
+  interface IColor {
+    name: string;
+    value: string[];
+  }
 
   export default defineComponent({
     name: 's-color-item',
     status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
-      sColorSpecimen
+      sColorSpecimen,
     },
 
     props: {
@@ -37,17 +42,17 @@
       palette: {
         type: String,
         default: null,
-        required: true
+        required: true,
       },
 
       /**
        * Array of color objects to be rendered. See src/setup/js/color.js
        */
       colors: {
-        type: Array,
+        type: Array as PropType<IColor[]>,
         default: null,
-        required: true
-      }
+        required: true,
+      },
     },
     // data() {
     //   return {};
@@ -59,7 +64,7 @@
        */
       headline(): string {
         return `${this.palette} colors`;
-      }
+      },
     },
     // watch: {},
 
@@ -92,9 +97,9 @@
     }
 
     &__grid-item {
-      padding: variables.$spacing--5;
       flex: 0 1 percentage(math.div(6, 12));
       max-width: 200px;
+      padding: variables.$spacing--5;
 
       @include mixins.media(sm) {
         flex-basis: percentage(math.div(4, 12));

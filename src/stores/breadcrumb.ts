@@ -4,6 +4,7 @@ import {
   StateTree,
   _GettersTree,
 } from 'pinia';
+import { STORE } from '@/setup/globals';
 
 export interface IBreadcrumbItem {
   name: string;
@@ -44,7 +45,7 @@ interface IInitialStoreDate {
   items?: IBreadcrumbItem[];
 }
 
-const storeName = 'breadcrumb';
+const storeName = STORE.BREADCRUMBS;
 
 export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>(storeName, {
   state: (): IBreadcrumbState => {
@@ -54,8 +55,11 @@ export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetter
       items: [],
     };
 
-    if (process.env.NODE_ENV !== 'production') {
-      state.items = require('../styleguide/mock-data/initial-data/breadcrumbs').default; // eslint-disable-line global-require, @typescript-eslint/no-var-requires
+    if (import.meta.env.DEV) {
+      const breadcrumbsModule = import.meta
+        .glob('@/styleguide/mock-data/initial-data/breadcrumbs', { eager: true });
+
+      state.items = breadcrumbsModule['@/styleguide/mock-data/initial-data/breadcrumbs'] as IBreadcrumbItem[];
     }
 
     if (Array.isArray(initialData.items)) {

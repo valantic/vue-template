@@ -1,7 +1,8 @@
 /dist/
-/*.js
-/*.ts
-/test/unit/coverage/
+#/*.js
+#/*.ts
+#/test/unit/coverage/
 /node_modules/
-/blueprints
-/src/setup/lib
+#/blueprints
+#/src/setup/lib
+!.storybook
