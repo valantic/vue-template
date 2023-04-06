@@ -41,6 +41,7 @@
   import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
+  import eProgress from '@/elements/e-progress.vue';
 
   interface IData {
     internalValue: string;
@@ -59,6 +60,7 @@
 
     components: {
       eIcon,
+      eProgress,
     },
     inheritAttrs: false,
 

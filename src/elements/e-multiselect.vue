@@ -78,6 +78,7 @@
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eIcon from '@/elements/e-icon.vue';
+  import eProgress from '@/elements/e-progress.vue';
 
   interface IOption {
     value: string;
@@ -100,10 +101,11 @@
    */
   export default defineComponent({
     name: 'e-multiselect',
-    
+
     components: {
       eCheckbox,
       eIcon,
+      eProgress,
     },
 
     props: {
