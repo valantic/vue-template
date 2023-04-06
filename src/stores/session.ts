@@ -4,6 +4,7 @@ import {
   StateTree,
   _GettersTree,
 } from 'pinia';
+import { STORE } from '@/setup/globals';
 
 interface ISessionState extends StateTree {
 
@@ -36,7 +37,7 @@ interface ISessionActions {
 
 export type TSessionStore = Store<string, ISessionState, ISessionGetters, ISessionActions>;
 
-const storeName = 'session';
+const storeName = STORE.SESSION;
 
 export default defineStore<typeof storeName, ISessionState, ISessionGetters, ISessionActions>(storeName, {
   state: (): ISessionState => {

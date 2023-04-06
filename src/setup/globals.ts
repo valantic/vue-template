@@ -67,3 +67,12 @@ export const DEFAULT_IMAGE_SIZES: IImageSizes = {
   ...BREAKPOINTS_MAX,
   fallback: 1440,
 };
+
+/**
+ * Contains list of all Pinia stores.
+ */
+export enum STORE {
+  SESSION = 'session',
+  BREADCRUMBS = 'breadcrumbs',
+  NOTIFICATION = 'notification',
+}

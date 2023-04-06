@@ -4,6 +4,7 @@ import {
   StateTree,
   _GettersTree,
 } from 'pinia';
+import { STORE } from '@/setup/globals';
 
 export interface IBreadcrumbItem {
   name: string;
@@ -44,7 +45,7 @@ interface IInitialStoreDate {
   items?: IBreadcrumbItem[];
 }
 
-const storeName = 'breadcrumb';
+const storeName = STORE.BREADCRUMBS;
 
 export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>(storeName, {
   state: (): IBreadcrumbState => {
