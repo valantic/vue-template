@@ -45,7 +45,7 @@ function isClickOnExcludedRefElement(excludeRefs: string[], eventTarget: Node, b
 
 function isClickOnExcludedIdElement(excludeIds: string[], eventTarget: Node): boolean {
   return excludeIds.some((id) => {
-    const element = document.querySelector(id);
+    const element = document.getElementById(id);
 
     return element && element.contains(eventTarget);
   });
