@@ -16,9 +16,9 @@
       :class="b('iframe')"
       :src="mapSrc"
       :allowfullscreen="allowfullscreen"
-      :frameborder="frameborder"
-      :width="width"
-      :height="height"
+      :frameborder="frameborder.toString()"
+      :width="width.toString()"
+      :height="height.toString()"
     ></iframe>
     <!-- </div> -->
   </div>
@@ -73,8 +73,8 @@
        * Default from iframe is 2
        */
       frameborder: {
-        type: String,
-        default: '2',
+        type: [String, Number],
+        default: 2,
       },
 
       /**
