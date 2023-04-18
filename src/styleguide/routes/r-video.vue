@@ -6,7 +6,7 @@
       video-url="https://www.youtube.com/watch?v=WYs_Y4D3NUs&ab_channel=valantic"
     />
     <!-- youtube example with id -->
-    <e-video source="youtube" video-id="WYs_Y4D3NUs" />
+    <e-video source="youtube" video-id="WYs_Y4D3NUs" responsive />
 
     <!-- vimeo example with url -->
     <e-video source="vimeo" video-url="https://vimeo.com/264037633" />
@@ -25,7 +25,7 @@
    * A component that integrates the e-picture for testing its functionality and passing properties.
    */
   export default defineComponent({
-    name: 'r-pictures',
+    name: 'r-videos',
 
     components: {
       eVideo,
