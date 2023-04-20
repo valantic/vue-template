@@ -4,6 +4,7 @@
     <e-video
       source="youtube"
       video-url="https://www.youtube.com/watch?v=WYs_Y4D3NUs&ab_channel=valantic"
+      allow-fullscreen
     />
     <!-- youtube example with id -->
     <e-video source="youtube"
@@ -16,7 +17,7 @@
     <e-video source="vimeo" video-url="https://vimeo.com/264037633" />
 
     <!-- vimeo example with id -->
-    <e-video source="vimeo" video-id="264037633" />
+    <e-video source="vimeo" video-id="264037633" allow-fullscreen />
   </div>
 </template>
 

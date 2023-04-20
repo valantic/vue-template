@@ -3,7 +3,7 @@
     <iframe
       :class="b('iframe', { responsive: hasFixedSize() })"
       :src="mapSrc"
-      :allowfullscreen="allowfullscreen"
+      :allowfullscreen="allowFullscreen"
       :width="width"
       :height="height"
     ></iframe>
@@ -60,7 +60,7 @@
       /**
        * Allows the user to watch the video in fullscreen.
        */
-      allowfullscreen: {
+      allowFullscreen: {
         type: Boolean,
         default: false,
       },
@@ -124,11 +124,12 @@
           if (this.source === 'youtube') {
             /**
              * Extract id from youtube video url.
+             * This has to be done in 2 Steps:
+             * 1. extract search string from url
+             * 2. extract query parameter from search string
              */
-            console.log('map url', this.videoUrl);
-            const id = this.videoUrl.substring(
-              this.videoUrl.indexOf('v=') + 2,
-              this.videoUrl.indexOf('&')
+            const id = new URLSearchParams(new URL(this.videoUrl).search).get(
+              'v'
             );
 
             return `${playerBaseUrl}${id}`;
@@ -136,12 +137,9 @@
 
           /**
            * Extract id from vimeo video url.
+           * slice(1) to remove the leading /.
            */
-          const id = this.videoUrl.substring(
-            this.videoUrl.indexOf(VideoUrlSource[this.source])
-              + VideoUrlSource[this.source].length,
-            this.videoUrl.length
-          );
+          const id = new URL(this.videoUrl).pathname.slice(1);
 
           return `${playerBaseUrl}${id}`;
         }
@@ -164,9 +162,11 @@
        */
       $props: {
         immediate: true,
+        deep: true,
         handler() {
           if (this.width || this.height) {
             if (!this.height && !this.width) {
+              // eslint-disable-next-line no-console
               console.error('Both, width and height need to be specified');
             }
           }
