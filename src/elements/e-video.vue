@@ -1,44 +1,43 @@
 <template>
-  <div :class="b()">
-    <div :class="responsive ? b('responsive') : null">
-      <iframe
-        :class="responsive ? b('iframe', { responsive }) : b('iframe')"
-        :src="mapSrc"
-        :allowfullscreen="allowfullscreen"
-        :frameborder="frameborder.toString()"
-        :width="width.toString()"
-        :height="height.toString()"
-      ></iframe>
-    </div>
+  <div :class="b({ responsive: hasFixedSize() })">
+    <iframe
+      :class="b('iframe', { responsive: hasFixedSize() })"
+      :src="mapSrc"
+      :allowfullscreen="allowfullscreen"
+      :frameborder="frameborder"
+      :width="width"
+      :height="height"
+    ></iframe>
   </div>
 </template>
 
 <script lang="ts">
-
-/**
- * CONFIG
- *  baseUrl:
- *    - vimeo: "https://player.vimeo.com/video/
- *    - youtube: "https://www.youtube.com/embed/"
- *  controls:
- *    - youtube disables in src with ?controls=0
- *    - vimeo not able to disable controls
- *  size:
- *    - width & height can either be responsive or hard coded
- *    - youtube standard -> width="560", height="315"
- */
   import { PropType, defineComponent } from 'vue';
 
-  const videoUrlSources = {
-    youtube: 'https://www.youtube.com',
-    vimeo: 'https://vimeo.com/',
-  };
+  enum VideoSource {
+    youtube = 'youtube',
+    vimeo = 'vimeo'
+  }
 
-  const playerUrlSources = {
-    youtube: 'https://www.youtube.com/embed/',
-    vimeo: 'https://player.vimeo.com/video/',
-  };
+  /**
+   * Specifies the allowed video base url.
+   */
+  enum VideoUrlSource {
+    youtube = 'https://www.youtube.com',
+    vimeo = 'https://vimeo.com/'
+  }
 
+  /**
+   * Specifies the embedded video player base url.
+   */
+  enum PlayerUrlSource {
+    youtube = 'https://www.youtube.com/embed/',
+    vimeo = 'https://player.vimeo.com/video/'
+  }
+
+  /**
+   * Renders a video element as iframe for a given youtube or vimeo video url or id.
+   */
   export default defineComponent({
     name: 'e-video',
     status: 0, // TODO: remove when component was prepared for current project.
@@ -47,7 +46,20 @@
 
     props: {
       /**
-       * Allows the user to watch the video in fullscreen
+       * Specifies the source of the video.
+       *
+       * We can decide between youtube and vimeo.
+       */
+      source: {
+        type: String as PropType<keyof typeof VideoSource>,
+        required: true,
+        validator(value: string) {
+          return Object.values(VideoSource).includes(value as VideoSource);
+        },
+      },
+
+      /**
+       * Allows the user to watch the video in fullscreen.
        */
       allowfullscreen: {
         type: Boolean,
@@ -55,32 +67,19 @@
       },
 
       /**
-       * Specifies the source of the video
+       * Allows to add/remove the border around the player.
        *
-       * We can decide between youtube and vimeo
-       */
-      source: {
-        type: String as PropType<'youtube' | 'vimeo'>,
-        required: true,
-        validator(value: string) {
-          return Object.keys(playerUrlSources).includes(value);
-        },
-      },
-
-      /**
-       * Allows to add/remoe the border around the player
+       * When set to 0 the border is completely removed.
        *
-       * When set to 0 the border is completely removed
-       *
-       * Default from iframe is 2
+       * Default from iframe is 2.
        */
       frameborder: {
-        type: [String, Number],
-        default: 2,
+        type: String,
+        default: '2',
       },
 
       /**
-       * Accepts a valid url from a youtube or vimeo video
+       * Accepts a valid url from a youtube or vimeo video.
        */
       videoUrl: {
         type: String,
@@ -88,7 +87,7 @@
       },
 
       /**
-       * Accepts an ID from a youtube or vimeo video
+       * Accepts an ID from a youtube or vimeo video.
        */
       videoId: {
         type: String,
@@ -97,26 +96,22 @@
 
       /**
        * Allows to set the video player width.
+       * width can either be responsive or hard coded.
+       * youtube standard -> width="560".
        */
       width: {
-        type: [String, Number],
-        default: 560,
+        type: String,
+        default: null,
       },
 
       /**
        * Allows to set the video player height.
+       * height can either be responsive or hard coded.
+       * youtube standard -> height="315".
        */
       height: {
-        type: [String, Number],
-        default: 315,
-      },
-
-      /**
-       * Defines the players size to be responsive 100% width to the parent container
-       */
-      responsive: {
-        type: Boolean,
-        default: false,
+        type: String,
+        default: null,
       },
     },
 
@@ -125,9 +120,9 @@
 
     computed: {
       mapSrc(): string | undefined {
-        const playerBaseUrl = playerUrlSources[this.source];
+        const playerBaseUrl = PlayerUrlSource[this.source];
 
-        if (!(this.videoId || this.videoUrl)) {
+        if (!this.videoId && !this.videoUrl) {
           // eslint-disable-next-line no-console
           console.error("Neither 'videoId' or 'videoUrl' were defined", this.$el);
 
@@ -141,8 +136,9 @@
 
           if (this.source === 'youtube') {
             /**
-             * Extract id from video url
+             * Extract id from youtube video url.
              */
+            console.log('map url', this.videoUrl);
             const id = this.videoUrl.substring(
               this.videoUrl.indexOf('v=') + 2,
               this.videoUrl.indexOf('&')
@@ -151,16 +147,19 @@
             return `${playerBaseUrl}${id}`;
           }
 
+          /**
+           * Extract id from vimeo video url.
+           */
           const id = this.videoUrl.substring(
-            this.videoUrl.indexOf(videoUrlSources[this.source])
-              + videoUrlSources[this.source].length,
+            this.videoUrl.indexOf(VideoUrlSource[this.source])
+              + VideoUrlSource[this.source].length,
             this.videoUrl.length
           );
 
           return `${playerBaseUrl}${id}`;
         }
 
-        if (this.videoId.includes(videoUrlSources[this.source])) {
+        if (this.videoId.includes(VideoUrlSource[this.source])) {
           // eslint-disable-next-line no-console
           console.error('video-id can not be part of a URL');
 
@@ -174,25 +173,16 @@
     // computed: {},
     watch: {
       /**
-       * This should check whether responsive or height + width are specified
+       * This should check whether responsive or height + width are specified.
        */
       $props: {
         immediate: true,
         handler() {
-          if (this.responsive && (this.width || this.height)) {
-            console.error('Either use responsive or height and width');
-          } else if (
-            (this.width && !this.height)
-            || (!this.width && this.height)
-          ) {
-            console.error('width and height both need to be specified');
+          if (this.width || this.height) {
+            if (!this.height && !this.width) {
+              console.error('Both, width and height need to be specified');
+            }
           }
-        },
-      },
-      videoUrl: {
-        immediate: true,
-        handler() {
-          this.validateUrl();
         },
       },
     },
@@ -210,12 +200,12 @@
 
     methods: {
       /**
-       * This is a helper function to validate the videoUrl property
+       * This is a helper function to validate the videoUrl property.
        */
       validateUrl(): boolean {
         if (
           this.videoUrl
-          && !this.videoUrl.includes(videoUrlSources[this.source])
+          && !this.videoUrl.startsWith(VideoUrlSource[this.source])
         ) {
           console.error('Invalid video url');
 
@@ -223,6 +213,9 @@
         }
 
         return true;
+      },
+      hasFixedSize(): boolean {
+        return !this.width && !this.height;
       },
     },
   // render() {},
@@ -233,19 +226,13 @@
 @use '../setup/scss/variables';
 
 .e-video {
-  &__responsive {
-    position: relative;
-    padding: 56.25% 0 0;
+  &--responsive {
+    aspect-ratio: 16/9;
   }
 
   &__iframe {
-    display: flex;
-    margin: variables.$spacing--20 auto;
-
     &--responsive {
-      position: absolute;
-      top: 0;
-      left: 0;
+      aspect-ratio: 16/9;
       width: 100%;
       height: 100%;
     }

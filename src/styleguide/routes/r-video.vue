@@ -6,7 +6,11 @@
       video-url="https://www.youtube.com/watch?v=WYs_Y4D3NUs&ab_channel=valantic"
     />
     <!-- youtube example with id -->
-    <e-video source="youtube" video-id="WYs_Y4D3NUs" responsive />
+    <e-video source="youtube"
+             video-id="WYs_Y4D3NUs"
+             width="560"
+             height="315"
+    />
 
     <!-- vimeo example with url -->
     <e-video source="vimeo" video-url="https://vimeo.com/264037633" />
@@ -60,11 +64,6 @@
 .r-video {
   &__form {
     display: flex;
-  }
-
-  .e-input {
-    flex-grow: 1;
-    margin-right: variables.$spacing--20;
   }
 }
 </style>
