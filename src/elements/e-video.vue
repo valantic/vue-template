@@ -4,7 +4,6 @@
       :class="b('iframe', { responsive: hasFixedSize() })"
       :src="mapSrc"
       :allowfullscreen="allowfullscreen"
-      :frameborder="frameborder"
       :width="width"
       :height="height"
     ></iframe>
@@ -64,18 +63,6 @@
       allowfullscreen: {
         type: Boolean,
         default: false,
-      },
-
-      /**
-       * Allows to add/remove the border around the player.
-       *
-       * When set to 0 the border is completely removed.
-       *
-       * Default from iframe is 2.
-       */
-      frameborder: {
-        type: String,
-        default: '2',
       },
 
       /**
