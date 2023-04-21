@@ -13,29 +13,32 @@
 <script lang="ts">
   import { PropType, defineComponent } from 'vue';
 
-  enum VideoSource {
-    youtube = 'youtube',
-    vimeo = 'vimeo'
+  export enum VideoSource {
+    Vimeo = 'vimeo',
+    Youtube = 'youtube'
   }
 
   /**
    * Specifies the allowed video base url.
    */
-  enum VideoUrlSource {
-    youtube = 'https://www.youtube.com',
-    vimeo = 'https://vimeo.com/'
-  }
+  const VideoUrlSource: { [key: string]: string | string[] } = {
+    [VideoSource.Youtube]: ['https://www.youtube.com', 'https://youtu.be'],
+    [VideoSource.Vimeo]: 'https://vimeo.com/',
+  };
 
   /**
    * Specifies the embedded video player base url.
    */
-  enum PlayerUrlSource {
-    youtube = 'https://www.youtube.com/embed/',
-    vimeo = 'https://player.vimeo.com/video/'
-  }
+  const PlayerUrlSource = {
+    [VideoSource.Vimeo]: 'https://player.vimeo.com/video/{videoId}',
+    [VideoSource.Youtube]: 'https://www.youtube.com/embed/{videoId}',
+  };
 
   /**
    * Renders a video element as iframe for a given youtube or vimeo video url or id.
+   * Size of the video player can be managed by an outer container.
+   * It works just fine when the outer container has a fixed width.
+   * However it does not when the outer container has only a fixed height.
    */
   export default defineComponent({
     name: 'e-video',
@@ -50,7 +53,7 @@
        * We can decide between youtube and vimeo.
        */
       source: {
-        type: String as PropType<keyof typeof VideoSource>,
+        type: String as PropType<VideoSource>,
         required: true,
         validator(value: string) {
           return Object.values(VideoSource).includes(value as VideoSource);
@@ -121,61 +124,50 @@
             return undefined;
           }
 
-          if (this.source === 'youtube') {
-            /**
-             * Extract id from youtube video url.
-             * This has to be done in 2 Steps:
-             * 1. extract search string from url
-             * 2. extract query parameter from search string
-             */
-            const id = new URLSearchParams(new URL(this.videoUrl).search).get(
-              'v'
-            );
+          let id: string | null;
 
-            return `${playerBaseUrl}${id}`;
+          switch (this.source) {
+            case VideoSource.Youtube:
+              id = new URLSearchParams(new URL(this.videoUrl).search).get('v');
+
+              return this.replaceIdInUrl(playerBaseUrl, id);
+
+            case VideoSource.Vimeo:
+              id = new URL(this.videoUrl).pathname.slice(1);
+
+              return this.replaceIdInUrl(playerBaseUrl, id);
+
+            default:
+              return undefined;
           }
-
-          /**
-           * Extract id from vimeo video url.
-           * slice(1) to remove the leading /.
-           */
-          const id = new URL(this.videoUrl).pathname.slice(1);
-
-          return `${playerBaseUrl}${id}`;
         }
 
-        if (this.videoId.includes(VideoUrlSource[this.source])) {
+        /**
+         * The videoId can consist of lowercase/uppercase letters, numbers, dashes and underscore
+         */
+        if ((/[a-zA-Z0-9-_]/).test(this.videoId) === false) {
           // eslint-disable-next-line no-console
           console.error('video-id can not be part of a URL');
 
           return undefined;
         }
 
-        return `${playerBaseUrl}${this.videoId}`;
+        return this.replaceIdInUrl(playerBaseUrl, this.videoId);
       },
     },
 
     // computed: {},
-    watch: {
-      /**
-       * This should check whether responsive or height + width are specified.
-       */
-      $props: {
-        immediate: true,
-        deep: true,
-        handler() {
-          if (this.width || this.height) {
-            if (!this.height && !this.width) {
-              // eslint-disable-next-line no-console
-              console.error('Both, width and height need to be specified');
-            }
-          }
-        },
-      },
-    },
+    // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      if (this.width || this.height) {
+        if (!this.height && !this.width) {
+          // eslint-disable-next-line no-console
+          console.error('Both, width and height need to be specified');
+        }
+      }
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
@@ -187,22 +179,72 @@
 
     methods: {
       /**
-       * This is a helper function to validate the videoUrl property.
+       * Helper function to validate the videoUrl property.
        */
       validateUrl(): boolean {
-        if (
-          this.videoUrl
-          && !this.videoUrl.startsWith(VideoUrlSource[this.source])
-        ) {
-          console.error('Invalid video url');
+        if (this.videoUrl) {
+          /**
+           * This is for sources with multiple urls.
+           * e.g. youtube
+           */
+          if (Array.isArray(VideoUrlSource[this.source])) {
+            const videoSources = VideoUrlSource[this.source] as string[];
 
-          return false;
+            return this.arrayHasString(videoSources, this.videoUrl);
+          }
+
+          if (!this.videoUrl.startsWith(VideoUrlSource[this.source] as string)) {
+            // eslint-disable-next-line no-console
+            console.error('Invalid video url', this.$el);
+
+            return false;
+          }
+
+          return true;
         }
 
         return true;
       },
+
+      /**
+       * Helper function to determine if both, height and width are specified
+       */
       hasFixedSize(): boolean {
         return !this.width && !this.height;
+      },
+
+      /**
+       * This is a helper for replacing part of a string
+       * @param original string
+       * @param replace string | null
+       */
+      replaceIdInUrl(
+        original: string,
+        replace: string | null
+      ): string | undefined {
+        if (!replace) {
+          return undefined;
+        }
+
+        return original.replace('{videoId}', replace);
+      },
+
+      /**
+       * Helper to check wether a string matches with entries in an array
+       * @param arr string[]
+       * @param searchString string
+       */
+      arrayHasString(arr: string[], searchString: string): boolean {
+        return arr.some((videoSource) => {
+          if (!searchString.startsWith(videoSource)) {
+            // eslint-disable-next-line no-console
+            console.error('Invalid video url', this.$el);
+
+            return false;
+          }
+
+          return true;
+        });
       },
     },
   // render() {},
@@ -210,8 +252,6 @@
 </script>
 
 <style lang="scss">
-@use '../setup/scss/variables';
-
 .e-video {
   &--responsive {
     aspect-ratio: 16/9;
