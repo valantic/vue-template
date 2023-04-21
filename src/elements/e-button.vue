@@ -1,23 +1,21 @@
 <template>
-  <component :is="type"
-             :class="b(modifiers)"
-             :style="style"
-             v-bind="attributes"
-             @touchstart="hasTouch = true"
-             @mouseenter="onMouseEnter"
-             @mouseleave="onMouseLeave"
-             @mousedown="onMouseDown"
-             @mouseup="onMouseUp"
-             @focus="onFocus"
-             @blur="onBlur"
-             @click="onClick"
+  <component
+    :is="type"
+    :class="b(modifiers)"
+    :style="style"
+    v-bind="attributes"
+    @touchstart="hasTouch = true"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+    @mousedown="onMouseDown"
+    @mouseup="onMouseUp"
+    @focus="onFocus"
+    @blur="onBlur"
+    @click="onClick"
   >
     <!-- span is required to prevent content shifting in IE11. -->
     <span :class="b('inner')">
-      <e-progress v-if="progress"
-                  :spacing="0"
-                  negative
-      />
+      <e-progress v-if="progress" :spacing="0" negative />
       <!-- @slot Button content. -->
       <slot v-else></slot>
     </span>
@@ -58,7 +56,6 @@
    */
   export default defineComponent({
     name: 'e-button',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       eProgress,
@@ -73,19 +70,13 @@
       width: {
         type: String,
         default: null,
-        validator: (value: string) => [
-          'full',
-          'auto',
-        ].includes(value),
+        validator: (value: string) => ['full', 'auto'].includes(value),
       },
 
       /**
        * Modifies the inner spacing for the button.
        */
-      spacing: propScale(500, [
-        0,
-        500,
-      ]),
+      spacing: propScale(500, [0, 500]),
 
       /**
        * If `true` the button gets the negative style
@@ -307,7 +298,10 @@
         const element = this.$el;
 
         return element
-          ? { width: `${element.offsetWidth}px`, height: `${element.offsetHeight}px` }
+          ? {
+            width: `${element.offsetWidth}px`,
+            height: `${element.offsetHeight}px`,
+          }
           : null;
       },
     },
@@ -315,139 +309,139 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+@use '../setup/scss/mixins';
+@use '../setup/scss/variables';
 
-  .e-button {
-    $border-radius: 3px;
+.e-button {
+  $border-radius: 3px;
 
-    @include mixins.font(14, 18, variables.$font-weight--semi-bold);
+  @include mixins.font(14, 18, variables.$font-weight--semi-bold);
 
-    position: relative;
-    display: inline-block;
-    min-width: 165px;
-    padding: 6px variables.$spacing--10;
+  position: relative;
+  display: inline-block;
+  min-width: 165px;
+  padding: 6px variables.$spacing--10;
+  outline: none;
+  border: 1px solid variables.$color-grayscale--500;
+  border-radius: $border-radius;
+  background: transparent;
+  cursor: pointer;
+  color: variables.$color-grayscale--400;
+  text-align: center;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &--focus,
+  &:focus {
     outline: none;
     border: 1px solid variables.$color-grayscale--500;
-    border-radius: $border-radius;
-    background: transparent;
-    cursor: pointer;
-    color: variables.$color-grayscale--400;
-    text-align: center;
-
-    &:hover {
-      text-decoration: none;
-    }
-
-    &--focus,
-    &:focus {
-      outline: none;
-      border: 1px solid variables.$color-grayscale--500;
-      background-color: variables.$color-grayscale--500;
-      color: variables.$color-primary--3;
-    }
-
-    &:active:not([disabled]),
-    &--active:not([disabled]) {
-      position: relative;
-      background-color: variables.$color-grayscale--400;
-      color: variables.$color-primary--3;
-    }
-
-    &--hover:not(&--touch),
-    &:hover:not(&--touch) {
-      background-color: variables.$color-grayscale--500;
-      color: variables.$color-primary--3;
-    }
-
-    &--focus path,
-    &--hover:not(&--touch) path,
-    &:focus path,
-    &:hover:not(&--touch) path {
-      fill: variables.$color-primary--3;
-    }
-
-    &[disabled],
-    &--disabled,
-    &[disabled]:hover,
-    &--disabled:hover {
-      border-color: variables.$color-grayscale--600;
-      background-color: transparent;
-      cursor: default;
-      color: variables.$color-grayscale--300;
-      pointer-events: none;
-    }
-
-    &--width-full {
-      display: block;
-      width: 100%;
-    }
-
-    &--width-auto {
-      min-width: 0;
-    }
-
-    &--negative {
-      background: variables.$color-primary--2;
-      color: variables.$color-primary--3;
-    }
-
-    &--spacing-0 {
-      padding: 0;
-    }
-
-    &--progress,
-    &--progress[disabled],
-    &--progress[disabled]:hover,
-    &--progress[disabled]:focus,
-    &--progress:hover,
-    &--progress:focus {
-      overflow: hidden; // Prevents overflow of animation
-      background-color: variables.$color-grayscale--400;
-    }
-
-    &__inner {
-      position: relative;
-      display: inline-block;
-      vertical-align: baseline;
-    }
-
-    .e-progress {
-      margin-top: -2px; // Creates unified height for text/progress button
-      margin-bottom: -1px;
-    }
+    background-color: variables.$color-grayscale--500;
+    color: variables.$color-primary--3;
   }
 
-  .e-button--primary {
-    &:not([disabled]) {
-      color: variables.$color-secondary--2;
+  &:active:not([disabled]),
+  &--active:not([disabled]) {
+    position: relative;
+    background-color: variables.$color-grayscale--400;
+    color: variables.$color-primary--3;
+  }
 
-      &.e-button:focus,
-      &.e-button--focus {
-        background-color: variables.$color-primary--1;
-        color: variables.$color-primary--3;
-      }
+  &--hover:not(&--touch),
+  &:hover:not(&--touch) {
+    background-color: variables.$color-grayscale--500;
+    color: variables.$color-primary--3;
+  }
 
-      &.e-button:hover:not(.e-button--touch),
-      &.e-button--hover:not(.e-button--touch) {
-        background-color: variables.$color-primary--1;
-        color: variables.$color-primary--3;
-      }
+  &--focus path,
+  &--hover:not(&--touch) path,
+  &:focus path,
+  &:hover:not(&--touch) path {
+    fill: variables.$color-primary--3;
+  }
 
-      &.e-button:active:not([disabled]),
-      &.e-button--active:not([disabled]) {
-        background-color: variables.$color-secondary--2;
-        color: variables.$color-primary--3;
-      }
+  &[disabled],
+  &--disabled,
+  &[disabled]:hover,
+  &--disabled:hover {
+    border-color: variables.$color-grayscale--600;
+    background-color: transparent;
+    cursor: default;
+    color: variables.$color-grayscale--300;
+    pointer-events: none;
+  }
+
+  &--width-full {
+    display: block;
+    width: 100%;
+  }
+
+  &--width-auto {
+    min-width: 0;
+  }
+
+  &--negative {
+    background: variables.$color-primary--2;
+    color: variables.$color-primary--3;
+  }
+
+  &--spacing-0 {
+    padding: 0;
+  }
+
+  &--progress,
+  &--progress[disabled],
+  &--progress[disabled]:hover,
+  &--progress[disabled]:focus,
+  &--progress:hover,
+  &--progress:focus {
+    overflow: hidden; // Prevents overflow of animation
+    background-color: variables.$color-grayscale--400;
+  }
+
+  &__inner {
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
+  .e-progress {
+    margin-top: -2px; // Creates unified height for text/progress button
+    margin-bottom: -1px;
+  }
+}
+
+.e-button--primary {
+  &:not([disabled]) {
+    color: variables.$color-secondary--2;
+
+    &.e-button:focus,
+    &.e-button--focus {
+      background-color: variables.$color-primary--1;
+      color: variables.$color-primary--3;
     }
 
-    &.e-button--progress,
-    &.e-button--progress[disabled],
-    &.e-button--progress[disabled]:hover,
-    &.e-button--progress[disabled]:focus,
-    &.e-button--progress:hover,
-    &.e-button--progress:focus {
+    &.e-button:hover:not(.e-button--touch),
+    &.e-button--hover:not(.e-button--touch) {
+      background-color: variables.$color-primary--1;
+      color: variables.$color-primary--3;
+    }
+
+    &.e-button:active:not([disabled]),
+    &.e-button--active:not([disabled]) {
       background-color: variables.$color-secondary--2;
+      color: variables.$color-primary--3;
     }
   }
+
+  &.e-button--progress,
+  &.e-button--progress[disabled],
+  &.e-button--progress[disabled]:hover,
+  &.e-button--progress[disabled]:focus,
+  &.e-button--progress:hover,
+  &.e-button--progress:focus {
+    background-color: variables.$color-secondary--2;
+  }
+}
 </style>

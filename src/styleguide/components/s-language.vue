@@ -2,10 +2,7 @@
   <label>
     <span class="invisible">Language</span>
     <select v-model="language" :class="b()">
-      <option v-for="locale in i18nLocales"
-              :key="locale"
-              :value="locale"
-      >
+      <option v-for="locale in i18nLocales" :key="locale" :value="locale">
         {{ $t(`s-language.${locale}`) }}
       </option>
     </select>
@@ -22,7 +19,6 @@
 
   export default defineComponent({
     name: 's-language',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // props: {},
 
@@ -47,22 +43,22 @@
         },
       },
     },
-    // methods: {},
-    // watch: {},
+  // methods: {},
+  // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+  // beforeCreate() {},
+  // created() {},
+  // beforeMount() {},
+  // mounted() {},
+  // beforeUpdate() {},
+  // updated() {},
+  // activated() {},
+  // deactivated() {},
+  // beforeUnmount() {},
+  // unmounted() {},
   });
 </script>
 
 <style lang="scss">
-  // .s-language {}
+// .s-language {}
 </style>

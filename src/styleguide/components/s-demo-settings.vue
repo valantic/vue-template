@@ -10,16 +10,21 @@
         Logged in
       </e-checkbox>
 
-      <e-checkbox v-model="showApiHandlerConfiguration"
-                  variant="toggle"
-                  name="api-mock"
-                  value
+      <e-checkbox
+        v-model="showApiHandlerConfiguration"
+        variant="toggle"
+        name="api-mock"
+        value
       >
         API Mock Test
       </e-checkbox>
     </li>
   </ul>
-  <s-api-mock-test v-if="showApiHandlerConfiguration" @click.stop @close="showApiHandlerConfiguration = false" />
+  <s-api-mock-test
+    v-if="showApiHandlerConfiguration"
+    @click.stop
+    @close="showApiHandlerConfiguration = false"
+  />
 </template>
 
 <script lang="ts">
@@ -38,12 +43,11 @@
     /**
      * Determines if the api handler configuration is displayed.
      */
-    showApiHandlerConfiguration: boolean,
+    showApiHandlerConfiguration: boolean;
   }
 
   export default defineComponent({
     name: 's-demo-settings',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       eCheckbox,
@@ -59,33 +63,33 @@
       };
     },
 
-    // computed: {},
-    // watch: {},
+  // computed: {},
+  // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+  // beforeCreate() {},
+  // created() {},
+  // beforeMount() {},
+  // mounted() {},
+  // beforeUpdate() {},
+  // updated() {},
+  // activated() {},
+  // deactivated() {},
+  // beforeUnmount() {},
+  // unmounted() {},
 
-    // methods: {},
-    // render() {},
+  // methods: {},
+  // render() {},
   });
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+@use '../../setup/scss/variables';
 
-  .s-demo-settings {
-    margin-top: variables.$spacing--10;
+.s-demo-settings {
+  margin-top: variables.$spacing--10;
 
-    .s-toggle + .s-toggle {
-      margin-top: variables.$spacing--5;
-    }
+  .s-toggle + .s-toggle {
+    margin-top: variables.$spacing--5;
   }
+}
 </style>

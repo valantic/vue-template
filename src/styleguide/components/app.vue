@@ -14,12 +14,11 @@
   import notificationStore, { TNotificationStore } from '@/stores/notification';
 
   interface ISetup {
-    notificationStore: TNotificationStore
+    notificationStore: TNotificationStore;
   }
 
   export default defineComponent({
     name: 'app',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sNavigation,
@@ -57,7 +56,8 @@
        * Gets localStorage messages and pushes them in the notification store to display.
        */
       getNotificationFromStorage() {
-        const notification = IS_STORAGE_AVAILABLE && localStorage.getItem('vueNotification');
+        const notification
+          = IS_STORAGE_AVAILABLE && localStorage.getItem('vueNotification');
         const parsedNotification = notification ? JSON.parse(notification) : null;
 
         if (parsedNotification) {
@@ -68,10 +68,10 @@
         }
       },
     },
-    // render() {},
+  // render() {},
   });
 </script>
 
 <style lang="scss">
-  // Define #app styles in @/setup/scss/_globals.scss
+// Define #app styles in @/setup/scss/_globals.scss
 </style>

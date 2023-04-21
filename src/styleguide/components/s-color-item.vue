@@ -4,14 +4,8 @@
       {{ headline }}
     </h4>
     <ul :class="b('grid')">
-      <li v-for="color in colors"
-          :key="color.name"
-          :class="b('grid-item')"
-      >
-        <s-color-specimen
-          :name="color.name"
-          :value="color.value"
-        />
+      <li v-for="color in colors" :key="color.name" :class="b('grid-item')">
+        <s-color-specimen :name="color.name" :value="color.value" />
       </li>
     </ul>
   </div>
@@ -28,14 +22,11 @@
 
   export default defineComponent({
     name: 's-color-item',
-    status: 0, // TODO: remove when component was prepared for current project.
-
     components: {
       sColorSpecimen,
     },
 
     props: {
-
       /**
        * Palette name to be rendered. See keys in src/setup/js/color.js
        */
@@ -66,52 +57,52 @@
         return `${this.palette} colors`;
       },
     },
-    // watch: {},
+  // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+  // beforeCreate() {},
+  // created() {},
+  // beforeMount() {},
+  // mounted() {},
+  // beforeUpdate() {},
+  // updated() {},
+  // activated() {},
+  // deactivated() {},
+  // beforeUnmount() {},
+  // unmounted() {},
 
-    // methods: {},
-    // render() {},
+  // methods: {},
+  // render() {},
   });
 </script>
 
 <style lang="scss">
-  @use 'sass:math';
-  @use '../../setup/scss/variables';
-  @use '../../setup/scss/mixins';
+@use 'sass:math';
+@use '../../setup/scss/variables';
+@use '../../setup/scss/mixins';
 
-  .s-color-item {
-    &__grid {
-      display: flex;
-      flex-wrap: wrap;
-      margin: variables.$spacing--0 (-(variables.$spacing--5));
+.s-color-item {
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: variables.$spacing--0 (-(variables.$spacing--5));
+  }
+
+  &__grid-item {
+    flex: 0 1 percentage(math.div(6, 12));
+    max-width: 200px;
+    padding: variables.$spacing--5;
+
+    @include mixins.media(sm) {
+      flex-basis: percentage(math.div(4, 12));
     }
 
-    &__grid-item {
-      flex: 0 1 percentage(math.div(6, 12));
-      max-width: 200px;
-      padding: variables.$spacing--5;
-
-      @include mixins.media(sm) {
-        flex-basis: percentage(math.div(4, 12));
-      }
-
-      @include mixins.media(md) {
-        flex-basis: percentage(math.div(2, 12));
-      }
-    }
-
-    &__headline {
-      text-transform: capitalize;
+    @include mixins.media(md) {
+      flex-basis: percentage(math.div(2, 12));
     }
   }
+
+  &__headline {
+    text-transform: capitalize;
+  }
+}
 </style>

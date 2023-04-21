@@ -4,10 +4,7 @@
       <!-- @slot renders its content as element label -->
       <slot></slot>
     </span>
-    <input v-model="internalValue"
-           :class="b('input')"
-           type="checkbox"
-    >
+    <input v-model="internalValue" :class="b('input')" type="checkbox">
     <span :class="b('slider')"></span>
   </label>
 </template>
@@ -17,7 +14,6 @@
 
   export default defineComponent({
     name: 's-toggle',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
 
@@ -53,68 +49,68 @@
         },
       },
     },
-    // watch: {},
+  // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+  // beforeCreate() {},
+  // created() {},
+  // beforeMount() {},
+  // mounted() {},
+  // beforeUpdate() {},
+  // updated() {},
+  // activated() {},
+  // deactivated() {},
+  // beforeUnmount() {},
+  // unmounted() {},
 
-    // methods: {},
-    // render() {},
+  // methods: {},
+  // render() {},
   });
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+@use '../../setup/scss/variables';
 
-  $_s-slider__size: 1.2em;
+$_s-slider__size: 1.2em;
 
-  .s-toggle {
-    $this: &;
+.s-toggle {
+  $this: &;
 
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    &__slider {
-      position: relative;
-      align-self: flex-end;
-      width: 2 * $_s-slider__size;
-      height: $_s-slider__size;
-      border-radius: $_s-slider__size;
-      background-color: variables.$color-grayscale--600;
-      cursor: pointer;
+  &__slider {
+    position: relative;
+    align-self: flex-end;
+    width: 2 * $_s-slider__size;
+    height: $_s-slider__size;
+    border-radius: $_s-slider__size;
+    background-color: variables.$color-grayscale--600;
+    cursor: pointer;
+    transition: variables.$transition-duration--300;
+
+    &::before {
+      position: absolute;
+      top: 0.1 * $_s-slider__size;
+      left: 0.1 * $_s-slider__size;
+      content: '';
+      width: 0.8 * $_s-slider__size;
+      height: 0.8 * $_s-slider__size;
+      border-radius: 50%;
+      background-color: variables.$color-primary--3;
       transition: variables.$transition-duration--300;
-
-      &::before {
-        position: absolute;
-        top: 0.1 * $_s-slider__size;
-        left: 0.1 * $_s-slider__size;
-        content: '';
-        width: 0.8 * $_s-slider__size;
-        height: 0.8 * $_s-slider__size;
-        border-radius: 50%;
-        background-color: variables.$color-primary--3;
-        transition: variables.$transition-duration--300;
-      }
-    }
-
-    &__input {
-      display: none;
-
-      &:checked + #{$this}__slider {
-        background-color: variables.$color-primary--1;
-      }
-
-      &:checked + #{$this}__slider::before {
-        transform: translateX($_s-slider__size);
-      }
     }
   }
+
+  &__input {
+    display: none;
+
+    &:checked + #{$this}__slider {
+      background-color: variables.$color-primary--1;
+    }
+
+    &:checked + #{$this}__slider::before {
+      transform: translateX($_s-slider__size);
+    }
+  }
+}
 </style>

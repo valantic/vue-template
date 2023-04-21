@@ -3,10 +3,7 @@
     <div :class="b('message')">
       {{ notification.message }}
     </div>
-    <button :class="b('close-button')"
-            type="button"
-            @click="close"
-    >
+    <button :class="b('close-button')" type="button" @click="close">
       <e-icon icon="i-close" size="20" />
     </button>
   </div>
@@ -15,11 +12,14 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
+  import notificationStore, {
+    INotificationItem,
+    TNotificationStore,
+  } from '@/stores/notification';
   import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
-    notificationStore: TNotificationStore
+    notificationStore: TNotificationStore;
   }
 
   interface IData {
@@ -31,7 +31,6 @@
    */
   export default defineComponent({
     name: 'c-notification',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       eIcon,
@@ -100,46 +99,46 @@
         this.notificationStore.popNotification(this.notification.id);
       },
     },
-    // render() {},
+  // render() {},
   });
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+@use '../setup/scss/mixins';
+@use '../setup/scss/variables';
 
-  .c-notification {
-    position: relative;
-    min-width: 400px;
-    max-width: 100%;
-    min-height: 60px;
-    padding: variables.$spacing--5;
+.c-notification {
+  position: relative;
+  min-width: 400px;
+  max-width: 100%;
+  min-height: 60px;
+  padding: variables.$spacing--5;
 
-    &--type-success {
-      background-color: variables.$color-status--success;
-      color: variables.$color-grayscale--0;
-    }
-
-    &--type-info {
-      background-color: variables.$color-status--info;
-      color: variables.$color-grayscale--0;
-    }
-
-    &--type-error {
-      background-color: variables.$color-status--error;
-      color: variables.$color-grayscale--0;
-    }
-
-    &__message {
-      width: 100%;
-      padding-right: variables.$spacing--30;
-    }
-
-    &__close-button {
-      position: absolute;
-      top: variables.$spacing--5;
-      right: variables.$spacing--5;
-      color: inherit;
-    }
+  &--type-success {
+    background-color: variables.$color-status--success;
+    color: variables.$color-grayscale--0;
   }
+
+  &--type-info {
+    background-color: variables.$color-status--info;
+    color: variables.$color-grayscale--0;
+  }
+
+  &--type-error {
+    background-color: variables.$color-status--error;
+    color: variables.$color-grayscale--0;
+  }
+
+  &__message {
+    width: 100%;
+    padding-right: variables.$spacing--30;
+  }
+
+  &__close-button {
+    position: absolute;
+    top: variables.$spacing--5;
+    right: variables.$spacing--5;
+    color: inherit;
+  }
+}
 </style>

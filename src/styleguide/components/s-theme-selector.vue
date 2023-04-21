@@ -2,10 +2,11 @@
   <label>
     <span class="invisible">Theme</span>
     <select :class="b()" @change="onChange">
-      <option v-for="theme in themes"
-              :key="theme.id"
-              :value="theme.id"
-              :selected="theme.selected"
+      <option
+        v-for="theme in themes"
+        :key="theme.id"
+        :value="theme.id"
+        :selected="theme.selected"
       >
         {{ theme.name }}
       </option>
@@ -29,12 +30,11 @@
   }
 
   interface ISetup {
-    sessionStore: TSessionStore
+    sessionStore: TSessionStore;
   }
 
   export default defineComponent({
     name: 's-theme-selector',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
 
@@ -131,6 +131,6 @@
         head.appendChild(link);
       },
     },
-    // render() {},
+  // render() {},
   });
 </script>

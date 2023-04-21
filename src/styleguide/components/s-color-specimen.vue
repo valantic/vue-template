@@ -20,12 +20,10 @@
 
   export default defineComponent({
     name: 's-color-specimen',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
 
     props: {
-
       /**
        * Human readable name of the color
        */
@@ -75,46 +73,46 @@
         };
       },
     },
-    // watch: {},
+  // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+  // beforeCreate() {},
+  // created() {},
+  // beforeMount() {},
+  // mounted() {},
+  // beforeUpdate() {},
+  // updated() {},
+  // activated() {},
+  // deactivated() {},
+  // beforeUnmount() {},
+  // unmounted() {},
 
-    // methods: {},
-    // render() {},
+  // methods: {},
+  // render() {},
   });
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+@use '../../setup/scss/variables';
 
-  .s-color-specimen {
-    border: 1px solid variables.$color-secondary--1;
+.s-color-specimen {
+  border: 1px solid variables.$color-secondary--1;
 
-    &__color {
-      padding-top: 100%;
-    }
-
-    &__name {
-      font-size: 14px;
-      font-weight: bold;
-      line-height: 24px;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    &__value {
-      font-size: 12px;
-      line-height: 22px;
-      text-align: center;
-    }
+  &__color {
+    padding-top: 100%;
   }
+
+  &__name {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__value {
+    font-size: 12px;
+    line-height: 22px;
+    text-align: center;
+  }
+}
 </style>

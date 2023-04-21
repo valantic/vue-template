@@ -18,7 +18,6 @@
 
   export default defineComponent({
     name: 's-color',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sColorItem,
@@ -44,28 +43,28 @@
         return Object.keys(colors) as Array<TColors>;
       },
     },
-    // watch: {},
+  // watch: {},
 
-    // beforeCreate() {},
-    // created() {},
-    // beforeMount() {},
-    // mounted() {},
-    // beforeUpdate() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeUnmount() {},
-    // unmounted() {},
+  // beforeCreate() {},
+  // created() {},
+  // beforeMount() {},
+  // mounted() {},
+  // beforeUpdate() {},
+  // updated() {},
+  // activated() {},
+  // deactivated() {},
+  // beforeUnmount() {},
+  // unmounted() {},
 
-    // methods: {},
-    // render() {},
+  // methods: {},
+  // render() {},
   });
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+@use '../../setup/scss/variables';
 
-  .s-color {
-    font-family: variables.$font-family--primary;
-  }
+.s-color {
+  font-family: variables.$font-family--primary;
+}
 </style>

@@ -1,16 +1,18 @@
 <template>
-  <label :class="b(modifiers)"
-         @mouseenter="hover = true"
-         @mouseleave="hover = false"
+  <label
+    :class="b(modifiers)"
+    @mouseenter="hover = true"
+    @mouseleave="hover = false"
   >
-    <input v-model="internalValue"
-           v-bind="$attrs"
-           :class="b('field', fieldModifiers)"
-           :disabled="disabled"
-           :value="value"
-           :name="name"
-           type="radio"
-           @change="onChange"
+    <input
+      v-model="internalValue"
+      v-bind="$attrs"
+      :class="b('field', fieldModifiers)"
+      :disabled="disabled"
+      :value="value"
+      :name="name"
+      type="radio"
+      @change="onChange"
     >
     <span :class="b('label')">
       <slot></slot>
@@ -20,7 +22,10 @@
 
 <script lang="ts">
   import { defineComponent, toRefs } from 'vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import useFormStates, {
+    IFormStates,
+    withProps,
+  } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
@@ -30,7 +35,6 @@
    */
   export default defineComponent({
     name: 'e-radio',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
     inheritAttrs: false,
@@ -136,97 +140,97 @@
         this.$emit('change', radioButton.value);
       },
     },
-    // render() {},
+  // render() {},
   });
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+@use '../setup/scss/mixins';
+@use '../setup/scss/variables';
 
-  .e-radio {
-    $this: &;
-    $label-size: 16px;
+.e-radio {
+  $this: &;
+  $label-size: 16px;
 
-    @include mixins.font(variables.$font-size--16, 20px);
+  @include mixins.font(variables.$font-size--16, 20px);
 
-    position: relative;
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  &__field {
+    position: absolute;
+    left: -200vw;
+    -webkit-appearance: none;
+  }
+
+  &__label {
     display: block;
-    cursor: pointer;
+    margin: 0;
+    padding-left: variables.$spacing--25;
 
-    &__field {
-      position: absolute;
-      left: -200vw;
-      -webkit-appearance: none;
-    }
-
-    &__label {
-      display: block;
-      margin: 0;
-      padding-left: variables.$spacing--25;
-
-      &:hover {
-        color: variables.$color-grayscale--0;
-
-        &::before {
-          border-color: variables.$color-grayscale--0;
-        }
-      }
-
-      &::before,
-      &::after {
-        position: absolute;
-        top: 3px;
-        left: 0;
-        content: '';
-        width: $label-size;
-        height: $label-size;
-        border-radius: 50%;
-      }
-
-      &::before {
-        border: 1px solid variables.$color-grayscale--400;
-      }
-
-      &::after {
-        opacity: 0;
-        border: 1px solid transparent;
-        background: variables.$color-grayscale--0;
-        transform: scale(0);
-        transition: transform 0.1s ease-in-out;
-      }
-    }
-
-    &__field:checked + &__label {
+    &:hover {
       color: variables.$color-grayscale--0;
 
-      &::after {
-        opacity: 1;
-        transform: scale(0.6);
+      &::before {
+        border-color: variables.$color-grayscale--0;
       }
     }
 
-    &__field:disabled + &__label {
-      cursor: default;
+    &::before,
+    &::after {
+      position: absolute;
+      top: 3px;
+      left: 0;
+      content: '';
+      width: $label-size;
+      height: $label-size;
+      border-radius: 50%;
+    }
+
+    &::before {
+      border: 1px solid variables.$color-grayscale--400;
+    }
+
+    &::after {
+      opacity: 0;
+      border: 1px solid transparent;
+      background: variables.$color-grayscale--0;
+      transform: scale(0);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__field:checked + &__label {
+    color: variables.$color-grayscale--0;
+
+    &::after {
+      opacity: 1;
+      transform: scale(0.6);
+    }
+  }
+
+  &__field:disabled + &__label {
+    cursor: default;
+    color: variables.$color-grayscale--500;
+
+    &:hover {
       color: variables.$color-grayscale--500;
-
-      &:hover {
-        color: variables.$color-grayscale--500;
-
-        &::before {
-          border-color: variables.$color-grayscale--500;
-        }
-      }
 
       &::before {
         border-color: variables.$color-grayscale--500;
       }
     }
 
-    &__field:checked:disabled + &__label {
-      &::after {
-        background: variables.$color-grayscale--500;
-      }
+    &::before {
+      border-color: variables.$color-grayscale--500;
     }
   }
+
+  &__field:checked:disabled + &__label {
+    &::after {
+      background: variables.$color-grayscale--500;
+    }
+  }
+}
 </style>
