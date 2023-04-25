@@ -1,7 +1,7 @@
 <template>
-  <div :class="b({ responsive: hasFixedSize() })">
+  <div :class="b({ responsive: hasFixedSize })">
     <iframe
-      :class="b('iframe', { responsive: hasFixedSize() })"
+      :class="b('iframe', { responsive: hasFixedSize })"
       :src="mapSrc"
       :allowfullscreen="allowFullscreen"
       :width="width"
@@ -108,6 +108,37 @@
     // setup(): Setup {},
 
     computed: {
+      /**
+       * Returns a validity check for the video url.
+       */
+      validateUrl(): boolean {
+        if (this.videoUrl) {
+          /**
+           * This is for sources with multiple allowed urls.
+           * e.g. youtube (standard, short)
+           */
+          if (Array.isArray(VideoUrlSource[this.source])) {
+            const videoSources = VideoUrlSource[this.source] as string[];
+
+            return this.arrayHasString(videoSources, this.videoUrl);
+          }
+
+          if (!this.videoUrl.startsWith(VideoUrlSource[this.source] as string)) {
+            // eslint-disable-next-line no-console
+            console.error('Invalid video url', this.$el);
+
+            return false;
+          }
+
+          return true;
+        }
+
+        return true;
+      },
+
+      /**
+       * Returns the validated and adapted video source.
+       */
       mapSrc(): string | undefined {
         const playerBaseUrl = PlayerUrlSource[this.source];
 
@@ -119,7 +150,7 @@
         }
 
         if (this.videoUrl && !this.videoId) {
-          if (!this.validateUrl()) {
+          if (!this.validateUrl) {
             return undefined;
           }
 
@@ -142,7 +173,7 @@
         }
 
         /**
-         * The videoId can consist of lowercase/uppercase letters, numbers, dashes and underscore
+         * The videoId can consist of lowercase/uppercase letters, numbers, dashes and underscores.
          */
         if ((/[a-zA-Z0-9-_]/).test(this.videoId) === false) {
           // eslint-disable-next-line no-console
@@ -152,6 +183,13 @@
         }
 
         return this.replaceIdInUrl(playerBaseUrl, this.videoId);
+      },
+
+      /**
+       * Returns
+       */
+      hasFixedSize(): boolean {
+        return !this.width && !this.height;
       },
     },
 
@@ -178,42 +216,7 @@
 
     methods: {
       /**
-       * Helper function to validate the videoUrl property.
-       */
-      validateUrl(): boolean {
-        if (this.videoUrl) {
-          /**
-           * This is for sources with multiple urls.
-           * e.g. youtube
-           */
-          if (Array.isArray(VideoUrlSource[this.source])) {
-            const videoSources = VideoUrlSource[this.source] as string[];
-
-            return this.arrayHasString(videoSources, this.videoUrl);
-          }
-
-          if (!this.videoUrl.startsWith(VideoUrlSource[this.source] as string)) {
-            // eslint-disable-next-line no-console
-            console.error('Invalid video url', this.$el);
-
-            return false;
-          }
-
-          return true;
-        }
-
-        return true;
-      },
-
-      /**
-       * Helper function to determine if both, height and width are specified
-       */
-      hasFixedSize(): boolean {
-        return !this.width && !this.height;
-      },
-
-      /**
-       * This is a helper for replacing part of a string
+       * This is a helper for replacing part of a string.
        * @param original string
        * @param replace string | null
        */
@@ -229,7 +232,7 @@
       },
 
       /**
-       * Helper to check wether a string matches with entries in an array
+       * Helper to check wether a string matches with entries in an array.
        * @param arr string[]
        * @param searchString string
        */
