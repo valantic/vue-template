@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import sReadme from '@/styleguide/components/s-readme.vue';
+  import { defineComponent } from 'vue'
+  import sReadme from '@/styleguide/components/s-readme.vue'
 
   export default defineComponent({
     name: 'r-index',
@@ -34,10 +34,10 @@
        * Checks, if production mode is active.
        */
       isProduction(): boolean {
-        return import.meta.env.MODE === 'production';
+        return import.meta.env.MODE === 'production'
       },
     },
-  });
+  })
 </script>
 
 <style lang="scss">

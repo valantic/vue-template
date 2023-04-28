@@ -3,8 +3,8 @@ import {
   Plugin,
   reactive,
   ref,
-} from 'vue';
-import { BREAKPOINTS, TViewportBreakPoint } from '@/setup/globals';
+} from 'vue'
+import { BREAKPOINTS, TViewportBreakPoint } from '@/setup/globals'
 
 export interface IViewport {
   isXxs: boolean;
@@ -23,42 +23,42 @@ export interface IViewport {
 const plugin: Plugin = {
   install(app) {
     // sets initial viewport width
-    const viewport = ref<number>(window.innerWidth);
+    const viewport = ref<number>(window.innerWidth)
 
     /**
      * Returns TRUE if viewport is smaller than XS.
      */
-    const isXxs = computed(() => viewport.value < BREAKPOINTS.xs);
+    const isXxs = computed(() => viewport.value < BREAKPOINTS.xs)
 
     /**
      * Returns TRUE if viewport is at least XS.
      */
-    const isXs = computed(() => viewport.value >= BREAKPOINTS.xs);
+    const isXs = computed(() => viewport.value >= BREAKPOINTS.xs)
 
     /**
      * Returns TRUE if viewport is at least SM.
      */
-    const isSm = computed(() => viewport.value >= BREAKPOINTS.sm);
+    const isSm = computed(() => viewport.value >= BREAKPOINTS.sm)
 
     /**
      * Returns TRUE if viewport is at least MD.
      */
-    const isMd = computed(() => viewport.value >= BREAKPOINTS.md);
+    const isMd = computed(() => viewport.value >= BREAKPOINTS.md)
 
     /**
      * Returns TRUE if viewport is at least LG.
      */
-    const isLg = computed(() => viewport.value >= BREAKPOINTS.lg);
+    const isLg = computed(() => viewport.value >= BREAKPOINTS.lg)
 
     /**
      * Returns TRUE if viewport is at least XL.
      */
-    const isXl = computed(() => viewport.value >= BREAKPOINTS.xl);
+    const isXl = computed(() => viewport.value >= BREAKPOINTS.xl)
 
     /**
      * Checks if current viewport is mobile (<= md).
      */
-    const isMobile = computed(() => !isSm.value);
+    const isMobile = computed(() => !isSm.value)
 
     /**
      * Returns the short name of the current viewport (e.g. 'md').
@@ -68,11 +68,11 @@ const plugin: Plugin = {
         .entries(BREAKPOINTS)
         ?.reverse()
         ?.find(breakpoint => viewport.value >= breakpoint[1])?.[0] || ''
-    );
+    )
 
     window.addEventListener('resizeend', () => {
-      viewport.value = window.innerWidth;
-    });
+      viewport.value = window.innerWidth
+    })
 
     app.config.globalProperties.$viewport = reactive({
       isXxs,
@@ -83,8 +83,8 @@ const plugin: Plugin = {
       isXl,
       isMobile,
       currentViewport,
-    });
+    })
   },
-};
+}
 
-export default plugin;
+export default plugin

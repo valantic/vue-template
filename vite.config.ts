@@ -1,11 +1,11 @@
 /* eslint-disable capitalized-comments, no-case-declarations */
-import { defineConfig, UserConfigExport } from 'vitest/config'; // Vitest instead of Vite was used because of extended Interface.
-import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
-import { visualizer } from 'rollup-plugin-visualizer';
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
-import markdown, { Mode } from 'vite-plugin-markdown';
-import viteBuilds from './vite.builds.json';
+import { defineConfig, UserConfigExport } from 'vitest/config' // Vitest instead of Vite was used because of extended Interface.
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
+import markdown, { Mode } from 'vite-plugin-markdown'
+import viteBuilds from './vite.builds.json'
 
 interface IModes {
   [key: string]: {
@@ -27,7 +27,7 @@ export const alias = {
   '@': resolve(__dirname, 'src/'),
   '@!production': resolve(__dirname, 'src/'), // Workaround so that no assets from conditional styleguide related imports become part of the build.
   'vue': 'vue/dist/vue.esm-bundler.js', // Was required because inline import of vue.esm-bundler.js resulted in TS issues.
-};
+}
 
 /**
  * Notes:
@@ -59,28 +59,28 @@ export default defineConfig(({ command, mode }) => {
     test: {
       environment: 'jsdom',
     },
-  };
+  }
 
   switch (command) {
     case 'build': // @see https://vitejs.dev/config/build-options.html
-      const isProfileBuild = mode === 'profile';
+      const isProfileBuild = mode === 'profile'
       const {
         base,
         outDir,
         assetsDir,
         modes,
         profileBuild,
-      } = viteBuilds as IViteBuilds || {};
+      } = viteBuilds as IViteBuilds || {}
 
       if (!isProfileBuild && !modes[mode]) {
-        throw Error(`Given mode '${mode}' is unknown.`);
+        throw Error(`Given mode '${mode}' is unknown.`)
       }
 
       const {
         input,
-      } = modes[isProfileBuild ? profileBuild : mode];
+      } = modes[isProfileBuild ? profileBuild : mode]
 
-      config.base = base;
+      config.base = base
       config.build = {
         outDir: `${outDir}/${mode}`,
         assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
@@ -97,42 +97,42 @@ export default defineConfig(({ command, mode }) => {
           output: {
             entryFileNames: 'index.[hash].js',
             chunkFileNames(chunkInfo): string {
-              const path = `${assetsDir}/js`;
+              const path = `${assetsDir}/js`
 
               if (!chunkInfo.facadeModuleId) {
-                return `${path}/shared.${chunkInfo.moduleIds.length}-[hash].js`;
+                return `${path}/shared.${chunkInfo.moduleIds.length}-[hash].js`
               }
 
-              return `${path}/[name].[hash].js`;
+              return `${path}/[name].[hash].js`
             },
             assetFileNames(assetInfo): string {
-              const fileName = assetInfo?.name || '';
-              const imageExtensions = /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i;
-              const styleExtensions = /\.(css|sass|scss)$/i;
-              const fontExtensions = /\.(woff|woff2|eot|ttf|otf)$/i;
-              const scriptExtensions = /\.(vue|js|ts)$/i;
-              let assetsPath = assetsDir;
+              const fileName = assetInfo?.name || ''
+              const imageExtensions = /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i
+              const styleExtensions = /\.(css|sass|scss)$/i
+              const fontExtensions = /\.(woff|woff2|eot|ttf|otf)$/i
+              const scriptExtensions = /\.(vue|js|ts)$/i
+              let assetsPath = assetsDir
 
               if (imageExtensions.test(fileName)) {
-                assetsPath += '/img';
+                assetsPath += '/img'
               } else if (styleExtensions.test(fileName)) {
-                assetsPath += '/css';
+                assetsPath += '/css'
               } else if (fontExtensions.test(fileName)) {
-                assetsPath += '/fonts';
+                assetsPath += '/fonts'
               } else if (scriptExtensions.test(fileName)) {
-                assetsPath = '';
+                assetsPath = ''
               }
 
-              return `${assetsPath}/[name].[hash].[ext]`;
+              return `${assetsPath}/[name].[hash].[ext]`
             },
             // manualChunks() {}, // Defining manual chunks is supper tricky, since the context of the single imports is hard to evaluate (if even possible). I eventually decided not to use this method.
           },
         },
-      };
+      }
 
       if (mode === 'profile') {
         if (!Array.isArray(config.plugins)) {
-          config.plugins = [];
+          config.plugins = []
         }
 
         config.plugins.push(
@@ -141,11 +141,11 @@ export default defineConfig(({ command, mode }) => {
             open: true,
             template: 'treemap',
           })
-        );
+        )
       }
 
     // no default
   }
 
-  return config;
-});
+  return config
+})

@@ -42,12 +42,12 @@
     defineComponent,
     ref,
     toRefs,
-  } from 'vue';
-  import propScale from '@/helpers/prop.scale';
-  import cFormNotification from '@/components/c-form-notification.vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import eIcon from '@/elements/e-icon.vue';
+  } from 'vue'
+  import propScale from '@/helpers/prop.scale'
+  import cFormNotification from '@/components/c-form-notification.vue'
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import eIcon from '@/elements/e-icon.vue'
 
   interface ISetup extends IFormStates {
     input: Ref<HTMLInputElement | null>;
@@ -152,27 +152,27 @@
     emits: ['update:modelValue', 'focus', 'blur', 'enter'],
 
     setup(props): ISetup {
-      const input = ref();
-      const slot = ref();
+      const input = ref()
+      const slot = ref()
 
       return {
         ...useFormStates(toRefs(props).state),
         input,
         slot,
-      };
+      }
     },
 
     data(): IData {
       return {
         internalValue: this.modelValue,
-      };
+      }
     },
     computed: {
       /**
        * Returns a flag, if field notifications should be displayed.
        */
       showNotification(): boolean {
-        return !!(this.state && this.state !== 'default' && this.notification && this.focus);
+        return !!(this.state && this.state !== 'default' && this.notification && this.focus)
       },
 
       /**
@@ -183,7 +183,7 @@
           border,
           noNativeControl,
           notification,
-        } = this;
+        } = this
 
         return {
           ...this.stateModifiers,
@@ -191,7 +191,7 @@
           type: this.$attrs.type !== null || 'text',
           border,
           noNativeControl,
-        };
+        }
       },
     },
     // watch: {},
@@ -204,20 +204,20 @@
        * Calls the "setSlotSpacings" in a timeout function with a delay of 200ms because without
        * it's not working on iOS
        */
-      this.setSlotSpacings();
-      setTimeout(this.setSlotSpacings, 200);
+      this.setSlotSpacings()
+      setTimeout(this.setSlotSpacings, 200)
 
-      window.addEventListener('resizeend', this.setSlotSpacings);
+      window.addEventListener('resizeend', this.setSlotSpacings)
     },
     // beforeUpdate() {},
     updated() {
-      setTimeout(this.setSlotSpacings);
+      setTimeout(this.setSlotSpacings)
     },
     // activated() {},
     // deactivated() {},
     // beforeUnmount() {},
     unmounted() {
-      window.removeEventListener('resizeend', this.setSlotSpacings);
+      window.removeEventListener('resizeend', this.setSlotSpacings)
     },
 
     methods: {
@@ -225,14 +225,14 @@
        * Emits input to parent component.
        */
       onInput(event: Event) {
-        const target = event.target as HTMLInputElement;
+        const target = event.target as HTMLInputElement
 
-        this.internalValue = target.value;
+        this.internalValue = target.value
 
         /**
          * input event fires on input
          */
-        this.$emit('update:modelValue', target.value);
+        this.$emit('update:modelValue', target.value)
       },
 
       /**
@@ -240,10 +240,10 @@
        * Update "focus" state.
        */
       onFocus() {
-        this.focus = true;
+        this.focus = true
 
         if (this.selectOnFocus) {
-          this.selectValue();
+          this.selectValue()
         }
 
         /**
@@ -251,7 +251,7 @@
          *
          * @event focus
          */
-        this.$emit('focus');
+        this.$emit('focus')
       },
 
       /**
@@ -259,14 +259,14 @@
        * Update "focus" state.
        */
       onBlur() {
-        this.focus = false;
+        this.focus = false
 
         /**
          * blur event fires on blur
          *
          * @event blur
          */
-        this.$emit('blur');
+        this.$emit('blur')
       },
 
       /**
@@ -278,7 +278,7 @@
          *
          * @event enter
          */
-        this.$emit('enter');
+        this.$emit('enter')
       },
 
       /**
@@ -286,10 +286,10 @@
        */
       setSlotSpacings() {
         if (this.slot) {
-          const slotWidth = this.slot.clientWidth;
+          const slotWidth = this.slot.clientWidth
 
           if (this.input) {
-            this.input.style.paddingRight = `${slotWidth + 10}px`;
+            this.input.style.paddingRight = `${slotWidth + 10}px`
           }
         }
       },
@@ -300,21 +300,21 @@
       selectValue() {
         if (this.modelValue) {
           // Needed to select a number value on Chrome.
-          this.input?.select();
+          this.input?.select()
 
           // Timeout is needed that it works on all browsers (without there are problems on Safari, Edge, iOS)
           if ('ontouchstart' in window) {
             setTimeout(() => {
-              const selectionRange = typeof this.modelValue === 'string' ? this.modelValue.length : this.modelValue;
+              const selectionRange = typeof this.modelValue === 'string' ? this.modelValue.length : this.modelValue
 
-              this.input?.setSelectionRange(0, selectionRange);
-            });
+              this.input?.setSelectionRange(0, selectionRange)
+            })
           }
         }
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

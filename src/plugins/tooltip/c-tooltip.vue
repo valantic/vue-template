@@ -30,14 +30,14 @@
     PropType,
     Ref,
     ref,
-  } from 'vue';
-  import { createPopper, Instance, Options } from '@popperjs/core';
+  } from 'vue'
+  import { createPopper, Instance, Options } from '@popperjs/core'
   import {
     CLASS_TOOLTIP_WRAPPER_ACTIVE,
     CLASS_TOOLTIP_WRAPPER_VISIBLE,
     DEBOUNCE_CLOSE,
     DEFAULT_POPPER_OPTIONS,
-  } from '@/plugins/tooltip/shared';
+  } from '@/plugins/tooltip/shared'
 
   interface ISetup {
     tooltip: Ref<HTMLDivElement>;
@@ -84,17 +84,17 @@
     // emits: {},
 
     setup(): ISetup {
-      const tooltip = ref();
+      const tooltip = ref()
 
       return {
         tooltip,
-      };
+      }
     },
     data(): IData {
       return {
         popperInstance: null,
         mouseLeaveDebounce: null,
-      };
+      }
     },
 
     computed: {
@@ -105,7 +105,7 @@
         return {
           ...DEFAULT_POPPER_OPTIONS,
           ...this.popperOptions,
-        };
+        }
       },
     },
     watch: {
@@ -113,7 +113,7 @@
        * Watches the popperOptions prop to update internal popper instance.
        */
       popperOptions(): void {
-        this.popperInstance?.setOptions(this.mergedPopperOptions);
+        this.popperInstance?.setOptions(this.mergedPopperOptions)
       },
     },
 
@@ -122,19 +122,19 @@
     // beforeMount() {},
     mounted() {
       setTimeout(() => { // Delay popper create, since it won't be visible initially anyway.
-        this.createPopperInstance();
-      }, 500);
+        this.createPopperInstance()
+      }, 500)
     },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
     beforeUnmount() {
-      const { tooltip } = this;
+      const { tooltip } = this
 
-      tooltip?.removeEventListener('mouseenter', this.clearDebounce);
-      tooltip?.removeEventListener('mouseleave', this.onMouseLeave);
-      this.popperInstance?.destroy();
+      tooltip?.removeEventListener('mouseenter', this.clearDebounce)
+      tooltip?.removeEventListener('mouseleave', this.onMouseLeave)
+      this.popperInstance?.destroy()
     },
     // unmounted() {},
 
@@ -143,16 +143,16 @@
        * Creates a new popper instance for the current component instance.
        */
       createPopperInstance(): void {
-        const { tooltip } = this;
+        const { tooltip } = this
 
         if (!tooltip) {
-          return;
+          return
         }
 
-        tooltip.addEventListener('mouseenter', this.clearDebounce);
-        tooltip.addEventListener('mouseleave', this.onMouseLeave);
+        tooltip.addEventListener('mouseenter', this.clearDebounce)
+        tooltip.addEventListener('mouseleave', this.onMouseLeave)
 
-        this.popperInstance = createPopper(this.$el, this.tooltip, this.mergedPopperOptions);
+        this.popperInstance = createPopper(this.$el, this.tooltip, this.mergedPopperOptions)
       },
 
       /**
@@ -160,7 +160,7 @@
        */
       clearDebounce(): void {
         if (this.mouseLeaveDebounce) {
-          clearTimeout(this.mouseLeaveDebounce);
+          clearTimeout(this.mouseLeaveDebounce)
         }
       },
 
@@ -174,53 +174,53 @@
             ...options.modifiers || [],
             { name: 'eventListeners', enabled },
           ],
-        }));
+        }))
       },
 
       /**
        * Handles the mouseenter event of the toggle.
        */
       onMouseEnter(): void {
-        const { tooltip } = this;
+        const { tooltip } = this
 
-        this.clearDebounce();
-        this.enableEventListeners();
-        this.popperInstance?.update();
-        tooltip?.classList.add(CLASS_TOOLTIP_WRAPPER_ACTIVE);
+        this.clearDebounce()
+        this.enableEventListeners()
+        this.popperInstance?.update()
+        tooltip?.classList.add(CLASS_TOOLTIP_WRAPPER_ACTIVE)
 
         this.$nextTick(() => {
-          tooltip?.classList.add(CLASS_TOOLTIP_WRAPPER_VISIBLE);
-        });
+          tooltip?.classList.add(CLASS_TOOLTIP_WRAPPER_VISIBLE)
+        })
       },
 
       /**
        * Handles the mouseleave event of the toggle.
        */
       onMouseLeave(): void {
-        this.clearDebounce();
+        this.clearDebounce()
 
         this.mouseLeaveDebounce = setTimeout(() => {
-          const { tooltip } = this;
+          const { tooltip } = this
 
           tooltip.addEventListener('transitionend', () => {
-            tooltip?.classList.remove(CLASS_TOOLTIP_WRAPPER_ACTIVE);
-          }, { once: true });
+            tooltip?.classList.remove(CLASS_TOOLTIP_WRAPPER_ACTIVE)
+          }, { once: true })
 
-          tooltip?.classList.remove(CLASS_TOOLTIP_WRAPPER_VISIBLE);
+          tooltip?.classList.remove(CLASS_TOOLTIP_WRAPPER_VISIBLE)
 
-          this.enableEventListeners(false);
-        }, DEBOUNCE_CLOSE);
+          this.enableEventListeners(false)
+        }, DEBOUNCE_CLOSE)
       },
 
       /**
        * Refreshes the popper if images did load inside of it.
        */
       onLoad(): void {
-        this.popperInstance?.update();
+        this.popperInstance?.update()
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss" src="./styles/styles.scss"></style>

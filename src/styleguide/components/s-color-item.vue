@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
-  import sColorSpecimen from './s-color-specimen.vue';
+  import { defineComponent, PropType } from 'vue'
+  import sColorSpecimen from './s-color-specimen.vue'
 
   interface IColor {
     name: string;
@@ -63,7 +63,7 @@
        * Returns the headline for the component.
        */
       headline(): string {
-        return `${this.palette} colors`;
+        return `${this.palette} colors`
       },
     },
     // watch: {},
@@ -81,7 +81,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

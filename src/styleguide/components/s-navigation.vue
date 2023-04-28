@@ -33,12 +33,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import sLanguage from './s-language.vue';
-  import sThemeSelector from './s-theme-selector.vue';
-  import sDemoSettings from './s-demo-settings.vue';
-  import sNavigationBlock from './s-navigation-block.vue';
+  import { defineComponent } from 'vue'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import sLanguage from './s-language.vue'
+  import sThemeSelector from './s-theme-selector.vue'
+  import sDemoSettings from './s-demo-settings.vue'
+  import sNavigationBlock from './s-navigation-block.vue'
 
   interface IData {
     isOpen: boolean;
@@ -72,7 +72,7 @@
     data(): IData {
       return {
         isOpen: false,
-      };
+      }
     },
     computed: {
       /**
@@ -82,7 +82,7 @@
         return {
           position: this.navPosition,
           open: this.isOpen,
-        };
+        }
       },
     },
     methods: {
@@ -90,10 +90,10 @@
        * Click handler for the open button.
        */
       onClick() {
-        this.isOpen = !this.isOpen;
+        this.isOpen = !this.isOpen
       },
     },
-  });
+  })
 </script>
 
 <style lang="scss">

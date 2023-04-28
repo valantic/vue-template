@@ -1,4 +1,4 @@
-import { STORE } from '@/setup/globals';
+import { STORE } from '@/setup/globals'
 
 export interface IInitialData {
   [STORE.SESSION]: unknown; // TODO: define Interface.

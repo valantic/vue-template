@@ -1,9 +1,9 @@
-import { Plugin } from 'vue';
+import { Plugin } from 'vue'
 
 const plugin: Plugin = {
   install(app, options) {
     // Add custom logic
   },
-};
+}
 
-export default plugin;
+export default plugin

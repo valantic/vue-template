@@ -1,5 +1,5 @@
-import { INotificationItem } from '@/stores/notification';
-import mockNotifications from '@/styleguide/mock-data/data-object/notification';
+import { INotificationItem } from '@/stores/notification'
+import mockNotifications from '@/styleguide/mock-data/data-object/notification'
 
 interface INotificationResponse {
   data: object,
@@ -13,7 +13,7 @@ function createApiResponse(notification: INotificationItem): INotificationRespon
   return {
     data: {},
     notifications: [notification], // TODO: Check if the Backend System provides the notifications Array like it's done here.
-  };
+  }
 }
 
 export default {
@@ -21,4 +21,4 @@ export default {
   info: createApiResponse(mockNotifications.info),
   error: createApiResponse(mockNotifications.error),
   createApiResponse,
-};
+}

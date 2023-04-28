@@ -1,5 +1,5 @@
-import { faker } from '@faker-js/faker/locale/en';
-import breadcrumb from '../data-object/breadcrumb';
+import { faker } from '@faker-js/faker/locale/en'
+import breadcrumb from '../data-object/breadcrumb'
 
 export default [
   {
@@ -14,4 +14,4 @@ export default [
     ...breadcrumb,
     name: faker.commerce.productName(),
   },
-];
+]

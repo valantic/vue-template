@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
-  import sNavigation from '@/styleguide/components/s-navigation.vue';
-  import notificationStore, { TNotificationStore } from '@/stores/notification';
+  import { defineComponent } from 'vue'
+  import { IS_STORAGE_AVAILABLE } from '@/setup/globals'
+  import sNavigation from '@/styleguide/components/s-navigation.vue'
+  import notificationStore, { TNotificationStore } from '@/stores/notification'
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -30,7 +30,7 @@
     setup(): ISetup {
       return {
         notificationStore: notificationStore(),
-      };
+      }
     },
     // data() {
     //   return {};
@@ -41,7 +41,7 @@
 
     // beforeCreate() {},
     created() {
-      this.getNotificationFromStorage();
+      this.getNotificationFromStorage()
     },
     // beforeMount() {},
     // mounted() {},
@@ -57,19 +57,19 @@
        * Gets localStorage messages and pushes them in the notification store to display.
        */
       getNotificationFromStorage() {
-        const notification = IS_STORAGE_AVAILABLE && localStorage.getItem('vueNotification');
-        const parsedNotification = notification ? JSON.parse(notification) : null;
+        const notification = IS_STORAGE_AVAILABLE && localStorage.getItem('vueNotification')
+        const parsedNotification = notification ? JSON.parse(notification) : null
 
         if (parsedNotification) {
-          this.notificationStore.showNotification(parsedNotification);
+          this.notificationStore.showNotification(parsedNotification)
 
           // Clears the localStorage notifications.
-          localStorage.removeItem('vueNotification');
+          localStorage.removeItem('vueNotification')
         }
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

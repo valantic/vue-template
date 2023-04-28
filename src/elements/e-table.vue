@@ -191,11 +191,11 @@
     PropType,
     Ref,
     ref,
-  } from 'vue';
-  import eIcon from '@/elements/e-icon.vue';
-  import eCheckbox from '@/elements/e-checkbox.vue';
-  import useUuid, { IUuid } from '@/compositions/uuid';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  } from 'vue'
+  import eIcon from '@/elements/e-icon.vue'
+  import eCheckbox from '@/elements/e-checkbox.vue'
+  import useUuid, { IUuid } from '@/compositions/uuid'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
 
   type TItemId = number | string;
 
@@ -348,12 +348,12 @@
     },
 
     setup(): ISetup {
-      const toggleButton = ref();
+      const toggleButton = ref()
 
       return {
         ...useUuid(),
         toggleButton,
-      };
+      }
     },
     data(): IData {
       return {
@@ -364,7 +364,7 @@
         hasSelection: false,
         toggleButtonHeight: 0,
         expandedRows: [],
-      };
+      }
     },
 
     computed: {
@@ -373,13 +373,13 @@
        */
       toggleAllValue: {
         get(): boolean {
-          return !!this.selectedInternal.length;
+          return !!this.selectedInternal.length
         },
         set(): void {
           if (this.selectedInternal.length) {
-            this.selectedInternal = [];
+            this.selectedInternal = []
           } else {
-            this.selectedInternal = this.items.map(item => item[this.itemIdentifier] as TItemId);
+            this.selectedInternal = this.items.map(item => item[this.itemIdentifier] as TItemId)
           }
         },
       },
@@ -388,7 +388,7 @@
        * Checks if current viewport is mobile (<= sm).
        */
       isMobile(): boolean {
-        return !this.$viewport.isSm;
+        return !this.$viewport.isSm
       },
 
       /**
@@ -396,10 +396,10 @@
        */
       selectedInternal: {
         get(): TItemId[] {
-          return this.selected.map(item => item[this.itemIdentifier] as TItemId);
+          return this.selected.map(item => item[this.itemIdentifier] as TItemId)
         },
         set(itemIds: TItemId[]): void {
-          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId)));
+          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId)))
         },
       },
 
@@ -408,10 +408,10 @@
        */
       expandedRowsComputed: {
         get(): TItemId[] {
-          return this.expandedRows.map(item => item[this.itemIdentifier] as TItemId);
+          return this.expandedRows.map(item => item[this.itemIdentifier] as TItemId)
         },
         set(itemIds: TItemId[]) {
-          this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId));
+          this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId))
         },
       },
 
@@ -419,18 +419,18 @@
        * Returns a sorted copy of the table-items.
        */
       itemsSortedBy(): IETableItem[] {
-        const { sortBy } = this;
-        const items = this.items.slice();
+        const { sortBy } = this
+        const items = this.items.slice()
 
         if (sortBy) {
           const sort = typeof sortBy?.sort === 'function'
             ? sortBy.sort
-            : this.sortByFieldConstructor(sortBy.key);
+            : this.sortByFieldConstructor(sortBy.key)
 
-          items.sort(sort);
+          items.sort(sort)
         }
 
-        return items;
+        return items
       },
 
       /**
@@ -438,27 +438,27 @@
        */
       itemsSorted(): IETableItem[] {
         if (!this.sortAscending) {
-          return this.itemsSortedBy.slice().reverse();
+          return this.itemsSortedBy.slice().reverse()
         }
 
-        return this.itemsSortedBy;
+        return this.itemsSortedBy
       },
 
       /**
        * Counts the amount for columns that the table has.
        */
       colspan(): number {
-        let count = this.columns.length;
+        let count = this.columns.length
 
         if (this.selectable) {
-          count += 1;
+          count += 1
         }
 
         if (this.hasDetailRows) {
-          count += 1;
+          count += 1
         }
 
-        return count;
+        return count
       },
     },
     watch: {
@@ -468,12 +468,12 @@
       isMobile: {
         immediate: true,
         handler(value: boolean): void {
-          this.showSortingOptions = !value;
+          this.showSortingOptions = !value
 
           if (value) {
-            window.addEventListener('resizeend', this.updateToggleButtonHeight);
+            window.addEventListener('resizeend', this.updateToggleButtonHeight)
           } else {
-            window.removeEventListener('resizeend', this.updateToggleButtonHeight);
+            window.removeEventListener('resizeend', this.updateToggleButtonHeight)
           }
         },
       },
@@ -488,7 +488,7 @@
     // activated() {},
     // deactivated() {},
     beforeUnmount() {
-      window.removeEventListener('resizeend', this.updateToggleButtonHeight);
+      window.removeEventListener('resizeend', this.updateToggleButtonHeight)
     },
     // unmounted() {},
 
@@ -499,13 +499,13 @@
       columnTitle(column: IETableColumn): string | null {
         switch (typeof column?.title) {
           case 'string':
-            return column.title;
+            return column.title
 
           case 'function':
-            return column.title();
+            return column.title()
 
           default:
-            return null;
+            return null
         }
       },
 
@@ -514,34 +514,34 @@
        */
       toggleSortingOptions(): void {
         if (this.isMobile) {
-          this.updateToggleButtonHeight();
+          this.updateToggleButtonHeight()
         }
 
-        this.showSortingOptions = !this.showSortingOptions;
+        this.showSortingOptions = !this.showSortingOptions
       },
 
       /**
        * Set the height of the sorting list toggle button.
        */
       updateToggleButtonHeight(): void {
-        this.toggleButtonHeight = this.toggleButton?.clientHeight || 0;
+        this.toggleButtonHeight = this.toggleButton?.clientHeight || 0
       },
 
       /**
        * Returns a title for the row link, based on the type of the definition.
        */
       rowTitle(item: IETableItem): string | undefined {
-        const { rowLink } = this;
+        const { rowLink } = this
 
         switch (typeof rowLink?.title) {
           case 'string':
-            return rowLink.title;
+            return rowLink.title
 
           case 'function':
-            return rowLink.title(item) || undefined;
+            return rowLink.title(item) || undefined
 
           default:
-            return undefined;
+            return undefined
         }
       },
 
@@ -550,7 +550,7 @@
        */
       isHeaderLabelVisible(column: IETableColumn): boolean {
         // Adding the support for functions was needed, to change visibility state dynamically (improved a11y).
-        return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden !== true);
+        return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden !== true)
       },
 
       /**
@@ -559,7 +559,7 @@
        * Since Vue3 leverages proxies for data properties for reactivity, we can't compare the objects directly.
        */
       isSortedBy(column: IETableColumn): boolean {
-        return this.sortBy?.key === column.key;
+        return this.sortBy?.key === column.key
       },
 
       /**
@@ -567,16 +567,16 @@
        */
       onClickSort(column: IETableColumn): void {
         if (this.isSortedBy(column)) {
-          const asc = this.sortAscending;
+          const asc = this.sortAscending
 
           if (!asc) {
-            this.sortBy = null;
+            this.sortBy = null
           }
 
-          this.sortAscending = !asc;
+          this.sortAscending = !asc
         } else {
-          this.sortBy = column;
-          this.sortAscending = true;
+          this.sortBy = column
+          this.sortAscending = true
         }
       },
 
@@ -584,12 +584,12 @@
        * Calculates a sort button modifier object.
        */
       sortButtonModifiers(column: IETableColumn): IModifiers {
-        const active = this.isSortedBy(column);
+        const active = this.isSortedBy(column)
 
         return {
           active,
           desc: active && !this.sortAscending,
-        };
+        }
       },
 
       /**
@@ -601,7 +601,7 @@
           col: column.key,
           hidden: (!this.$viewport.isMd && column.sortable === false) || !this.isHeaderLabelVisible(column),
           sortable: column.sortable !== false,
-        };
+        }
       },
 
       /**
@@ -614,7 +614,7 @@
           col: column.key,
           sortable: column.sortable !== false,
           nowrap: column.nowrap,
-        };
+        }
       },
 
       /**
@@ -622,26 +622,26 @@
        */
       sortByFieldConstructor(field: string): (a: IETableItem, b: IETableItem) => number {
         return (a, b) => {
-          const aValue = a[field as keyof IETableItem];
-          const bValue = b[field as keyof IETableItem];
+          const aValue = a[field as keyof IETableItem]
+          const bValue = b[field as keyof IETableItem]
 
           switch (true) {
             case typeof aValue === 'string':
-              return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true }); // eslint-disable-line no-undefined, no-extra-parens
+              return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true }) // eslint-disable-line no-undefined, no-extra-parens
 
             case typeof aValue === 'number':
-              return aValue as number > (bValue as number) ? 1 : -1; // eslint-disable-line no-extra-parens
+              return aValue as number > (bValue as number) ? 1 : -1 // eslint-disable-line no-extra-parens
 
             case typeof aValue === 'boolean':
-              return !aValue ? 1 : -1;
+              return !aValue ? 1 : -1
 
             case aValue instanceof Date:
-              return this.$dayjs(aValue).isAfter(bValue as Date) ? 1 : -1;
+              return this.$dayjs(aValue).isAfter(bValue as Date) ? 1 : -1
 
             default:
-              return 0;
+              return 0
           }
-        };
+        }
       },
 
       /**
@@ -649,11 +649,11 @@
        */
       enableRowLink(): void {
         if (this.rowLink?.href && !this.hasSelection) { // It was not possible to test for rowHref when binding the event in the template.
-          this.enableRowLinks = true;
+          this.enableRowLinks = true
 
           setTimeout(() => {
-            this.enableRowLinks = false;
-          }, 100);
+            this.enableRowLinks = false
+          }, 100)
         }
       },
 
@@ -661,18 +661,18 @@
        * Callback for the tables mousedown event.
        */
       onMouseDown() { // All browsers
-        this.hasSelection = !!window.getSelection()?.toString();
+        this.hasSelection = !!window.getSelection()?.toString()
       },
 
       /**
        * Callback for the tables contextmenu event.
        */
       onContextMenu() { // Chromium, webkit: mousedown, contextmenu
-        this.enableRowLink();
+        this.enableRowLink()
 
         setTimeout(() => {
-          window?.getSelection()?.removeAllRanges(); // Safari marks words on right click by default, which would cause trouble on next context event.
-        });
+          window?.getSelection()?.removeAllRanges() // Safari marks words on right click by default, which would cause trouble on next context event.
+        })
       },
 
       /**
@@ -681,9 +681,9 @@
       onMouseUp(event: MouseEvent): void { // FF: mousedown, mouseup, contextmenu
         if (!this.enableRowLinks) {
           // Firefox marks a cells content when holding ctrl/meta while clicking it.
-          this.hasSelection = !(event.ctrlKey || event.metaKey) && !!window.getSelection()?.toString();
+          this.hasSelection = !(event.ctrlKey || event.metaKey) && !!window.getSelection()?.toString()
 
-          this.enableRowLink();
+          this.enableRowLink()
         }
       },
 
@@ -692,22 +692,22 @@
        */
       onCellClick(item: IETableItem, column: IETableColumn, event: MouseEvent): void {
         if (this.hasSelection) { // Cancel cell action if a text selection is active.
-          return;
+          return
         }
 
         if (typeof column.onClick === 'function') {
-          column.onClick(item, column, event);
+          column.onClick(item, column, event)
         } else {
-          const url = this.rowLink?.href?.(item, column);
+          const url = this.rowLink?.href?.(item, column)
 
           if (!url) {
-            return;
+            return
           }
 
           if (event.ctrlKey || event.metaKey) {
-            window.open(url, '_blank');
+            window.open(url, '_blank')
           } else if (typeof url === 'string') {
-            window.location.href = url;
+            window.location.href = url
           }
         }
       },
@@ -716,25 +716,25 @@
        * Click callback for the toggle cell (increases click area on mobile).
        */
       onDetailToggleClick(item: IETableItem): void {
-        const id = item[this.itemIdentifier] as TItemId;
+        const id = item[this.itemIdentifier] as TItemId
 
         if (!id) {
-          return;
+          return
         }
 
-        const expandedRows = this.expandedRowsComputed.slice();
+        const expandedRows = this.expandedRowsComputed.slice()
 
         if (expandedRows.includes(id)) {
-          this.expandedRowsComputed = expandedRows.filter(itemId => itemId !== id);
+          this.expandedRowsComputed = expandedRows.filter(itemId => itemId !== id)
         } else {
-          expandedRows.push(id);
+          expandedRows.push(id)
 
-          this.expandedRowsComputed = expandedRows;
+          this.expandedRowsComputed = expandedRows
         }
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

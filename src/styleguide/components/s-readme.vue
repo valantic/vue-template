@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue'
   // @ts-ignore Needed because typescript cannot resolve `.md` files.
-  import { VueComponent } from '@/../README.md';
+  import { VueComponent } from '@/../README.md'
 
   export default defineComponent({
     name: 's-readme',
@@ -40,7 +40,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <!-- eslint-disable -->

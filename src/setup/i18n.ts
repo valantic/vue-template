@@ -1,14 +1,14 @@
-import { createI18n, IntlDateTimeFormat } from 'vue-i18n';
-import fallbackMessages from '../translations/de.json';
-import numberFormats from './localization.json';
+import { createI18n, IntlDateTimeFormat } from 'vue-i18n'
+import fallbackMessages from '../translations/de.json'
+import numberFormats from './localization.json'
 
 type TMessagesSchema = typeof fallbackMessages;
 
-export const PAGE_LANG = document?.documentElement?.lang;
+export const PAGE_LANG = document?.documentElement?.lang
 
-export const I18N_FALLBACK = 'de';
-export const I18N_FALLBACK_MESSAGES = fallbackMessages;
-export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
+export const I18N_FALLBACK = 'de'
+export const I18N_FALLBACK_MESSAGES = fallbackMessages
+export const I18N_LOCALES = [I18N_FALLBACK, 'fr']
 
 const datetimeFormats: IntlDateTimeFormat = {
   month: { // January, February, March, ...
@@ -17,18 +17,18 @@ const datetimeFormats: IntlDateTimeFormat = {
   weekday: { // Monday, Tuesday, Wednesday, ...
     weekday: 'long',
   },
-};
+}
 
 // Add styleguide only translations
 if (import.meta.env.MODE !== 'production') {
   const styleguideTranslations = import.meta
-    .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
+    .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
       // @ts-ignore Needed because typescript cannot assign index.
-      I18N_FALLBACK_MESSAGES[key] = value;
-    });
+      I18N_FALLBACK_MESSAGES[key] = value
+    })
   }
 }
 
@@ -47,15 +47,15 @@ const i18n = createI18n<[TMessagesSchema], 'de'>({
    * Callback for the 'missing' event, during translation lookup.
    */
   missing(locale, messageKey) {
-    console.error(`No '${locale}' translations found for '${messageKey}'`); // eslint-disable-line no-console
+    console.error(`No '${locale}' translations found for '${messageKey}'`) // eslint-disable-line no-console
   },
   messages: {
     [I18N_FALLBACK]: I18N_FALLBACK_MESSAGES,
   },
   numberFormats,
-});
+})
 
-export default i18n;
+export default i18n
 
 /**
  * Load messages for given locale if not already loaded.
@@ -67,23 +67,23 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
         // Add styleguide only translations
         if (import.meta.env.MODE !== 'production') {
           const styleguideTranslations = import.meta
-            .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
+            .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>
 
           if (styleguideTranslations[locale]) {
             Object.entries(styleguideTranslations[locale]).forEach(([key, value]) => {
-              localeMessages[key] = value;
-            });
+              localeMessages[key] = value
+            })
           }
         }
 
-        i18n.global.setLocaleMessage(locale, localeMessages);
+        i18n.global.setLocaleMessage(locale, localeMessages)
 
-        return locale;
-      }); // eslint-disable-line vue/script-indent
+        return locale
+      }) // eslint-disable-line vue/script-indent
   }
 
-  return Promise.resolve(locale);
-};
+  return Promise.resolve(locale)
+}
 
 /**
  * Sets the application locale to the given value.
@@ -91,21 +91,21 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
  */
 export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disable-line no-param-reassign
   if (!I18N_LOCALES.includes(locale)) {
-    locale = I18N_FALLBACK;
+    locale = I18N_FALLBACK
   }
 
   if (i18n.global.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
       import('../stores/plugins/api').then((module) => {
-        module.axiosInstance.defaults.headers.common.locale = newLocale;
-      });
+        module.axiosInstance.defaults.headers.common.locale = newLocale
+      })
 
       // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
-      i18n.global.locale.value = newLocale;
-    });
+      i18n.global.locale.value = newLocale
+    })
   }
 
-  return Promise.resolve();
-};
+  return Promise.resolve()
+}
 
-i18nSetLocale(PAGE_LANG || I18N_FALLBACK);
+i18nSetLocale(PAGE_LANG || I18N_FALLBACK)

@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import propScale from '@/helpers/prop.scale';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { defineComponent } from 'vue'
+  import propScale from '@/helpers/prop.scale'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
 
   export default defineComponent({
     name: 'e-progress',
@@ -58,7 +58,7 @@
        * Returns a readable loading message.
        */
       loadingMessage(): string {
-        return this.message || this.$t('e-progress.loading');
+        return this.message || this.$t('e-progress.loading')
       },
 
       /**
@@ -68,7 +68,7 @@
         return {
           negative: this.negative,
           spacing: this.spacing,
-        };
+        }
       },
     },
     // watch: {},
@@ -86,7 +86,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

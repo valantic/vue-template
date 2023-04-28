@@ -12,12 +12,12 @@ export const DEFAULT_DELIMITERS: IDelimiters = {
   el: '__',
   mod: '--',
   modVal: '-',
-};
+}
 
 export const DEFAULT_CONFIG = {
   hyphenate: false,
   methodName: 'b',
-};
+}
 
 export interface IModifiers {
   [key: string]: boolean | string | number | undefined;

@@ -1,7 +1,7 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker/locale/en'
 
-import cModal from '@/components/c-modal.vue';
-import eButton from '@/elements/e-button.vue';
+import cModal from '@/components/c-modal.vue'
+import eButton from '@/elements/e-button.vue'
 
 export default {
   component: cModal,
@@ -24,7 +24,7 @@ export default {
     stickyFooter: false,
     content: faker.lorem.paragraphs(),
   },
-};
+}
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = args => ({
@@ -34,12 +34,12 @@ const Template = args => ({
   },
 
   setup() {
-    return { args };
+    return { args }
   },
   data() {
     return {
       isOpen: false,
-    };
+    }
   },
 
   template: `
@@ -66,17 +66,17 @@ const Template = args => ({
       Open
     </e-button>
   `,
-});
+})
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = Template.bind({})
+Default.args = {}
 
-export const HeaderSlot = Template.bind({});
+export const HeaderSlot = Template.bind({})
 HeaderSlot.args = {
   headerSlot: true,
-};
+}
 
-export const StickyFooterSlot = Template.bind({});
+export const StickyFooterSlot = Template.bind({})
 StickyFooterSlot.args = {
   stickyFooterSlot: true,
-};
+}

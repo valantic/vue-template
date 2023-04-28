@@ -70,10 +70,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import cNotificationContainer from '@/components/c-notification-container.vue';
-  import notificationStore, { TNotificationStore } from '@/stores/notification';
-  import eButton from '@/elements/e-button.vue';
+  import { defineComponent } from 'vue'
+  import cNotificationContainer from '@/components/c-notification-container.vue'
+  import notificationStore, { TNotificationStore } from '@/stores/notification'
+  import eButton from '@/elements/e-button.vue'
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -89,7 +89,7 @@
     setup(): ISetup {
       return {
         notificationStore: notificationStore(),
-      };
+      }
     },
     // data() {},
 
@@ -108,10 +108,10 @@
             redirectUrl,
             expire,
           },
-        });
+        })
       },
     },
-  });
+  })
 </script>
 
 <style lang="scss">

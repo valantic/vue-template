@@ -45,11 +45,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { Options, Placement } from '@popperjs/core';
-  import eSelect from '@/elements/e-select.vue';
-  import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
-  import tooltipDirective from '@/plugins/tooltip/directives/directive';
+  import { defineComponent } from 'vue'
+  import { Options, Placement } from '@popperjs/core'
+  import eSelect from '@/elements/e-select.vue'
+  import cTooltip from '@/plugins/tooltip/c-tooltip.vue'
+  import tooltipDirective from '@/plugins/tooltip/directives/directive'
 
   interface IData {
     active: boolean;
@@ -93,18 +93,18 @@
 
         placement: 'bottom',
 
-      };
+      }
     },
 
     computed: {
       position(): string {
-        return this.active ? 'top' : 'hidden';
+        return this.active ? 'top' : 'hidden'
       },
 
       popperOptions(): Partial<Options> {
         return {
           placement: this.placement,
-        };
+        }
       },
     },
     // watch: {},
@@ -122,7 +122,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

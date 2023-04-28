@@ -10,9 +10,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import cNotificationContainer from '@/components/c-notification-container.vue';
-  import notificationStore, { TNotificationStore } from '@/stores/notification';
+  import { defineComponent } from 'vue'
+  import cNotificationContainer from '@/components/c-notification-container.vue'
+  import notificationStore, { TNotificationStore } from '@/stores/notification'
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -31,7 +31,7 @@
     setup(): ISetup {
       return {
         notificationStore: notificationStore(),
-      };
+      }
     },
     // data() {
     //   return {};
@@ -44,7 +44,7 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      this.getNotificationsFromStorage();
+      this.getNotificationsFromStorage()
     },
     // beforeUpdate() {},
     // updated() {},
@@ -59,22 +59,22 @@
        */
       getNotificationsFromStorage() {
         try {
-          const messages = window.localStorage.getItem('vueNotification');
-          const messagesParsed = messages ? JSON.parse(messages) : null;
+          const messages = window.localStorage.getItem('vueNotification')
+          const messagesParsed = messages ? JSON.parse(messages) : null
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
-            messagesParsed.forEach(this.notificationStore.showNotification);
+            messagesParsed.forEach(this.notificationStore.showNotification)
 
             // Clears the localStorage notifications.
-            window.localStorage.removeItem('vueNotification');
+            window.localStorage.removeItem('vueNotification')
           }
         } catch (error) {
-          throw new Error('An error occurred why retrieving messages from the localStorage.');
+          throw new Error('An error occurred why retrieving messages from the localStorage.')
         }
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

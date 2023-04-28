@@ -36,12 +36,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, toRefs } from 'vue';
-  import i18n from '@/setup/i18n';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import eIcon from '@/elements/e-icon.vue';
-  import eProgress from '@/elements/e-progress.vue';
+  import { defineComponent, PropType, toRefs } from 'vue'
+  import i18n from '@/setup/i18n'
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import eIcon from '@/elements/e-icon.vue'
+  import eProgress from '@/elements/e-progress.vue'
 
   interface IData {
     internalValue: string;
@@ -133,13 +133,13 @@
     setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
-      };
+      }
     },
 
     data(): IData {
       return {
         internalValue: this.modelValue,
-      };
+      }
     },
 
     computed: {
@@ -149,7 +149,7 @@
       modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-        };
+        }
       },
     },
     // watch: {},
@@ -170,18 +170,18 @@
        * Emits input event for v-model.
        */
       onChange(event: Event) {
-        const select = event.currentTarget as HTMLSelectElement;
+        const select = event.currentTarget as HTMLSelectElement
 
-        this.internalValue = select.value;
+        this.internalValue = select.value
 
         /**
          * input event fires on input
          */
-        this.$emit('update:modelValue', select.value);
+        this.$emit('update:modelValue', select.value)
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

@@ -13,9 +13,9 @@
     PropType,
     Ref,
     ref,
-  } from 'vue';
-  import loadScript from '@/helpers/load-script';
-  import sessionStore from '@/stores/session';
+  } from 'vue'
+  import loadScript from '@/helpers/load-script'
+  import sessionStore from '@/stores/session'
 
   interface ISetup {
     container: Ref<HTMLDivElement>;
@@ -69,11 +69,11 @@
     }
   }
 
-  const callbackStack: TCGoogleMapsCallback[] = [];
-  const callbackFunctionName = 'cGoogleMapsInitMap';
+  const callbackStack: TCGoogleMapsCallback[] = []
+  const callbackFunctionName = 'cGoogleMapsInitMap'
 
-  let geocoder: google.maps.Geocoder | null = null;
-  let isMapsAPILoaded = false;
+  let geocoder: google.maps.Geocoder | null = null
+  let isMapsAPILoaded = false
 
   export const GOOGLE_MAPS_THEME_GRAY: google.maps.MapTypeStyle[] = [ // @see https://snazzymaps.com/style/15/subtle-grayscale
     {
@@ -200,36 +200,36 @@
         },
       ],
     },
-  ];
+  ]
 
   /**
    * Set isMapsAPILoaded to true, call the callback, then remove all callbacks in callbackStack array.
    */
   window[callbackFunctionName] = (): void => {
-    isMapsAPILoaded = true;
-    callbackStack.forEach(callback => callback());
-    callbackStack.length = 0;
-  };
+    isMapsAPILoaded = true
+    callbackStack.forEach(callback => callback())
+    callbackStack.length = 0
+  }
 
   /**
    * This function checks whether the Map API has already been loaded once.
    */
   function loadMapsAPI(callback: TCGoogleMapsCallback): void {
-    const useSessionStore = sessionStore();
-    const apiKey = useSessionStore.googleMapsApiKey;
+    const useSessionStore = sessionStore()
+    const apiKey = useSessionStore.googleMapsApiKey
 
     if (!apiKey) {
-      throw new Error('No Google Maps API key provided.');
+      throw new Error('No Google Maps API key provided.')
     }
 
     if (isMapsAPILoaded) {
-      callback();
+      callback()
     } else {
-      const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=${callbackFunctionName}`;
+      const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=${callbackFunctionName}`
 
-      callbackStack.push(callback);
+      callbackStack.push(callback)
 
-      loadScript(url);
+      loadScript(url)
     }
   }
 
@@ -264,7 +264,7 @@
           return [
             'default',
             'gray',
-          ].includes(value);
+          ].includes(value)
         },
       },
 
@@ -325,11 +325,11 @@
     },
 
     setup(): ISetup {
-      const container = ref();
+      const container = ref()
 
       return {
         container,
-      };
+      }
     },
     data(): IData {
       return {
@@ -337,7 +337,7 @@
         markers: [],
         boundingTimeout: null,
         allowAutoUpdates: true,
-      };
+      }
     },
 
     computed: {
@@ -346,7 +346,7 @@
        */
       mappedLocations(): ICGoogleMapsInternalLocation[] {
         return this.locations?.map((location) => {
-          const { lat, lng } = location;
+          const { lat, lng } = location
 
           return {
             lat: lat ? parseFloat(`${lat}`) : null,
@@ -355,8 +355,8 @@
             geocode: location.geocode,
             title: location.title,
             referer: location, // Keep a reference to the original for event payloads.
-          };
-        }) || [];
+          }
+        }) || []
       },
 
       /**
@@ -365,10 +365,10 @@
       mapStyles(): google.maps.MapTypeStyle[] {
         switch (this.theme) {
           case 'gray':
-            return [...GOOGLE_MAPS_THEME_GRAY, ...this.styles];
+            return [...GOOGLE_MAPS_THEME_GRAY, ...this.styles]
 
           default:
-            return this.styles;
+            return this.styles
         }
       },
     },
@@ -376,24 +376,24 @@
 
     beforeCreate() {
       loadMapsAPI(() => {
-        geocoder = new window.google.maps.Geocoder();
+        geocoder = new window.google.maps.Geocoder()
 
         this.$nextTick(() => {
-          this.createMapInstance();
-        });
-      });
+          this.createMapInstance()
+        })
+      })
     },
     // created() {},
     // beforeMount() {},
     mounted() {
-      this.$el.addEventListener('mousedown', this.disableAutoUpdates, { once: true, passive: true });
+      this.$el.addEventListener('mousedown', this.disableAutoUpdates, { once: true, passive: true })
     },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
     beforeUnmount() {
-      this.$el.removeEventListener('mousedown', this.disableAutoUpdates);
+      this.$el.removeEventListener('mousedown', this.disableAutoUpdates)
     },
     // unmounted() {},
 
@@ -402,7 +402,7 @@
        * Updates the 'allowAutoUpdates' flag.
        */
       disableAutoUpdates(): void {
-        this.allowAutoUpdates = false;
+        this.allowAutoUpdates = false
       },
 
       /**
@@ -412,9 +412,9 @@
        */
       createMapInstance(): void {
         if (!this.mappedLocations?.length && !this.center) {
-          const errorMsg = 'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.'; // eslint-disable-line vue/max-len
+          const errorMsg = 'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.' // eslint-disable-line vue/max-len
 
-          throw new Error(errorMsg);
+          throw new Error(errorMsg)
         }
 
         this.mapInstance = new window.google.maps.Map(this.container, {
@@ -428,18 +428,18 @@
           // Static
           center: this.mapsConfig?.center || { lat: 0, lng: 0 },
           styles: this.mapStyles,
-        });
+        })
 
-        this.createMarkersForLocations();
+        this.createMarkersForLocations()
 
         // Make sure something is visible.
         if (this.bounds) {
-          this.fitBounds();
+          this.fitBounds()
         } else if (!this.center && this.markers[0]) {
-          const markerPosition = this.markers[0].getPosition();
+          const markerPosition = this.markers[0].getPosition()
 
           if (markerPosition) {
-            this.mapInstance?.setCenter(markerPosition);
+            this.mapInstance?.setCenter(markerPosition)
           }
         }
       },
@@ -449,15 +449,15 @@
        */
       mapIcon(iconSrc: string): google.maps.Icon|google.maps.Symbol | null {
         if (!iconSrc || typeof iconSrc !== 'string') {
-          return null;
+          return null
         }
 
-        const { iconSize } = this;
+        const { iconSize } = this
 
         return {
           url: iconSrc,
           scaledSize: iconSize ? new window.google.maps.Size(iconSize, iconSize) : null,
-        };
+        }
       },
 
       /**
@@ -466,16 +466,16 @@
       createMarkersForLocations(): void {
         this.mappedLocations.forEach((location) => {
           if (!location.lat || !location.lng) {
-            this.createMakerFromAddress(location);
+            this.createMakerFromAddress(location)
 
-            return;
+            return
           }
 
-          this.createMarker(location);
-        });
+          this.createMarker(location)
+        })
 
         if (this.bounds && this.markers.length) {
-          this.fitBounds();
+          this.fitBounds()
         }
       },
 
@@ -487,30 +487,30 @@
        */
       createMakerFromAddress(location: ICGoogleMapsInternalLocation): void {
         if (!location.geocode) {
-          throw new Error("Unable to geocode a location without 'geocode' information.");
+          throw new Error("Unable to geocode a location without 'geocode' information.")
         }
 
         geocoder?.geocode({ address: location.geocode }, (results, status) => {
           if (status === 'OK') {
-            const fitBounds = this.allowAutoUpdates && !this.center && this.bounds !== false;
+            const fitBounds = this.allowAutoUpdates && !this.center && this.bounds !== false
 
             if (!results?.length) {
-              return;
+              return
             }
 
             this.createMarker({
               ...location,
               lat: results[0].geometry.location.lat(),
               lng: results[0].geometry.location.lng(),
-            });
+            })
 
             if (fitBounds) {
-              this.fitBounds();
+              this.fitBounds()
             }
           } else {
-            throw new Error(`Geocode was not successful for the following reason: ${status}`);
+            throw new Error(`Geocode was not successful for the following reason: ${status}`)
           }
-        });
+        })
       },
 
       /**
@@ -527,15 +527,15 @@
           map: this.mapInstance,
           icon: location.icon ? this.mapIcon(location.icon) : null,
           title: location.title,
-        } as google.maps.MarkerOptions);
+        } as google.maps.MarkerOptions)
 
         marker.addListener('click', () => {
-          this.$emit('click', { location: location.referer, marker });
-        });
+          this.$emit('click', { location: location.referer, marker })
+        })
 
-        this.markers.push(marker);
+        this.markers.push(marker)
 
-        return marker;
+        return marker
       },
 
       /**
@@ -543,29 +543,29 @@
        */
       fitBounds(): void {
         if (this.boundingTimeout) {
-          clearTimeout(this.boundingTimeout);
+          clearTimeout(this.boundingTimeout)
         }
 
         this.boundingTimeout = setTimeout(() => {
-          const { customBounds } = this;
+          const { customBounds } = this
 
           if (!this.mapInstance) {
-            return;
+            return
           }
 
           if (customBounds) {
-            this.mapInstance.fitBounds(customBounds);
+            this.mapInstance.fitBounds(customBounds)
           } else {
-            const locationsBounds = new window.google.maps.LatLngBounds();
+            const locationsBounds = new window.google.maps.LatLngBounds()
 
-            this.markers.forEach(marker => locationsBounds.extend(marker.getPosition() as google.maps.LatLng));
-            this.mapInstance.fitBounds(locationsBounds);
+            this.markers.forEach(marker => locationsBounds.extend(marker.getPosition() as google.maps.LatLng))
+            this.mapInstance.fitBounds(locationsBounds)
           }
-        }, 200);
+        }, 200)
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

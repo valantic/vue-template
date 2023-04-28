@@ -96,7 +96,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'r-wysiwyg',
@@ -124,7 +124,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

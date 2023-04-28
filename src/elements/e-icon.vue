@@ -23,8 +23,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import spritePath from '@/assets/icons.svg';
+  import { defineComponent } from 'vue'
+  import spritePath from '@/assets/icons.svg'
 
   interface ISizeLookup {
     [key: string]: number[];
@@ -35,10 +35,10 @@
     height: number;
   }
 
-  const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
+  const defaultSize = 24 // Keep size in sync with SCSS 'icon' mixin.
   const sizeLookup: ISizeLookup = {
     play: [1024, 721],
-  };
+  }
 
   /**
    * Places an svg sprite icon.
@@ -89,7 +89,7 @@
          * The local path to the svg sprite.
          */
         spritePath,
-      };
+      }
     },
 
     computed: {
@@ -99,19 +99,19 @@
        * @returns {object}
        */
       viewBox(): ISize {
-        const { icon } = this;
-        const lookup = sizeLookup[icon];
-        const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize];
+        const { icon } = this
+        const lookup = sizeLookup[icon]
+        const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize]
 
         // Auto map height for non square icons.
         if (size.length === 1 && lookup) {
-          size[1] = (size[0] / lookup[0]) * lookup[1];
+          size[1] = (size[0] / lookup[0]) * lookup[1]
         }
 
         return {
           width: size[0],
           height: size[1] || size[0],
-        };
+        }
       },
     },
     // watch: {},
@@ -129,7 +129,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

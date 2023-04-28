@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, StyleValue } from 'vue';
+  import { defineComponent, PropType, StyleValue } from 'vue'
 
   /**
    * Renders a color specimen tile.
@@ -54,25 +54,25 @@
        * Returns the name HTML of the color.
        */
       displayName(): string {
-        return this.name.split(' - ').join('<br />');
+        return this.name.split(' - ').join('<br />')
       },
 
       /**
        * Returns the value HTML of the color.
        */
       displayValue(): string {
-        return this.value.join(' - ');
+        return this.value.join(' - ')
       },
 
       /**
        * Returns the background style for the color.
        */
       backgroundColor(): StyleValue {
-        const [color1, color2] = this.value;
+        const [color1, color2] = this.value
 
         return {
           background: `linear-gradient(to right, ${color1} , ${color2 || color1})`,
-        };
+        }
       },
     },
     // watch: {},
@@ -90,7 +90,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

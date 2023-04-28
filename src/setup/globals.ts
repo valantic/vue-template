@@ -1,4 +1,4 @@
-import { IImageSizes } from '@/types/sizes';
+import { IImageSizes } from '@/types/sizes'
 
 /**
  * @type {object} Lookup table of available breakpoints.
@@ -12,7 +12,7 @@ export const BREAKPOINTS = { // Keep in sync with SCSS variables!
   md: 1024,
   lg: 1200,
   xl: 1440,
-};
+}
 
 /**
  * @type {object} Lookup table of available breakpoints max values.
@@ -23,33 +23,33 @@ export const BREAKPOINTS_MAX = {
   sm: BREAKPOINTS.md - 1,
   md: BREAKPOINTS.lg - 1,
   lg: BREAKPOINTS.xl - 1,
-};
+}
 
 export type TViewportBreakPoint = keyof typeof BREAKPOINTS;
 
 /**
  * @type {number} Global resize debounce value.
  */
-export const RESIZE_DEBOUNCE = 100;
+export const RESIZE_DEBOUNCE = 100
 
 /**
  * @type {boolean} Holds a flag if local and session storage are available.
  * They can lead to exceptions if cookies are disabled on the client.
  */
 export const IS_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
-  const keyValue = '__storage_test__';
+  const keyValue = '__storage_test__'
 
   try {
-    const storage = window.localStorage;
+    const storage = window.localStorage
 
-    storage.setItem(keyValue, keyValue);
-    storage.removeItem(keyValue);
+    storage.setItem(keyValue, keyValue)
+    storage.removeItem(keyValue)
 
-    return true;
+    return true
   } catch (error) {
-    return false;
+    return false
   }
-}());
+}())
 
 /**
  * Defines possible link target values.
@@ -66,7 +66,7 @@ export enum LINK_TARGET {
 export const DEFAULT_IMAGE_SIZES: IImageSizes = {
   ...BREAKPOINTS_MAX,
   fallback: 1440,
-};
+}
 
 /**
  * Contains list of all Pinia stores.

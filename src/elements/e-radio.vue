@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, toRefs } from 'vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { defineComponent, toRefs } from 'vue'
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
 
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
@@ -68,7 +68,7 @@
     setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
-      };
+      }
     },
 
     // data() {
@@ -81,13 +81,13 @@
        */
       internalValue: {
         get(): string | number {
-          return this.modelValue;
+          return this.modelValue
         },
         set(value: string): void {
           /**
            * Fired on select of radio button.
            */
-          this.$emit('update:modelValue', value);
+          this.$emit('update:modelValue', value)
         },
       },
 
@@ -98,7 +98,7 @@
         return {
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
-        };
+        }
       },
 
       /**
@@ -107,7 +107,7 @@
       fieldModifiers(): IModifiers {
         return {
           selected: this.internalValue === this.value,
-        };
+        }
       },
     },
     // watch: {},
@@ -128,16 +128,16 @@
        * Emits input to parent component.
        */
       onChange(event: Event) {
-        const radioButton = event.currentTarget as HTMLSelectElement;
+        const radioButton = event.currentTarget as HTMLSelectElement
 
         /**
          * Emits change event.
          */
-        this.$emit('change', radioButton.value);
+        this.$emit('change', radioButton.value)
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

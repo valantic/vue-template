@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import eCheckbox from '@/elements/e-checkbox.vue';
+  import { defineComponent } from 'vue'
+  import eCheckbox from '@/elements/e-checkbox.vue'
 
   interface IData {
 
@@ -35,7 +35,7 @@
     data(): IData {
       return {
         enabled: true,
-      };
+      }
     },
 
     // computed: {},
@@ -43,7 +43,7 @@
       enabled: {
         immediate: true,
         handler(enabled: boolean) {
-          document.body.classList.toggle('s-html-validation--enabled', enabled);
+          document.body.classList.toggle('s-html-validation--enabled', enabled)
         },
       },
     },
@@ -61,7 +61,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

@@ -27,11 +27,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, toRefs } from 'vue';
-  import cFormNotification from '@/components/c-form-notification.vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import eIcon from '@/elements/e-icon.vue';
+  import { defineComponent, toRefs } from 'vue'
+  import cFormNotification from '@/components/c-form-notification.vue'
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import eIcon from '@/elements/e-icon.vue'
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -98,7 +98,7 @@
     setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
-      };
+      }
     },
 
     // data() {
@@ -114,7 +114,7 @@
         return {
           ...this.stateModifiers,
           notification: !!(this.notification && this.focus),
-        };
+        }
       },
 
       /**
@@ -123,7 +123,7 @@
       fieldModifiers(): IModifiers {
         return {
           isResizable: this.isResizable,
-        };
+        }
       },
     },
     // watch: {},
@@ -144,9 +144,9 @@
        * Emits input to parent component.
        */
       onInput(event: Event) {
-        const textArea = event.currentTarget as HTMLTextAreaElement;
+        const textArea = event.currentTarget as HTMLTextAreaElement
 
-        this.$emit('input', textArea.value);
+        this.$emit('input', textArea.value)
       },
 
       /**
@@ -154,9 +154,9 @@
        * Updates "hasFocus" state.
        */
       onFocus() {
-        this.focus = true;
+        this.focus = true
 
-        this.$emit('focus');
+        this.$emit('focus')
       },
 
       /**
@@ -164,13 +164,13 @@
        * Updates "hasFocus" state.
        */
       onBlur() {
-        this.focus = false;
+        this.focus = false
 
-        this.$emit('blur');
+        this.$emit('blur')
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

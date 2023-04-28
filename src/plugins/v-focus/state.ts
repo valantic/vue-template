@@ -1,4 +1,4 @@
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 
 export default reactive({
   /**
@@ -7,4 +7,4 @@ export default reactive({
    * @public
     */
   enabled: false,
-});
+})

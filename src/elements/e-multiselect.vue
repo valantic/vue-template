@@ -71,14 +71,14 @@
     ref,
     Ref,
     toRefs,
-  } from 'vue';
-  import i18n from '@/setup/i18n';
-  import useUuid, { IUuid } from '@/compositions/uuid';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import eCheckbox from '@/elements/e-checkbox.vue';
-  import eIcon from '@/elements/e-icon.vue';
-  import eProgress from '@/elements/e-progress.vue';
+  } from 'vue'
+  import i18n from '@/setup/i18n'
+  import useUuid, { IUuid } from '@/compositions/uuid'
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import eCheckbox from '@/elements/e-checkbox.vue'
+  import eIcon from '@/elements/e-icon.vue'
+  import eProgress from '@/elements/e-progress.vue'
 
   interface IOption {
     value: string;
@@ -183,15 +183,15 @@
     emits: ['update:modelValue', 'close'],
 
     setup(props): ISetup {
-      const searchField = ref();
-      const fieldWrapper = ref();
+      const searchField = ref()
+      const fieldWrapper = ref()
 
       return {
         ...useFormStates(toRefs(props).state),
         ...useUuid(),
         searchField,
         fieldWrapper,
-      };
+      }
     },
 
     data(): IData {
@@ -205,7 +205,7 @@
          * @type {string} Holds the value fo the search input field.
          */
         searchTerm: '',
-      };
+      }
     },
 
     computed: {
@@ -217,7 +217,7 @@
       modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-        };
+        }
       },
 
       /**
@@ -225,13 +225,13 @@
        */
       internalValue: {
         get(): string[] {
-          return this.modelValue;
+          return this.modelValue
         },
         set(value: string[]) {
           /**
            * Emits checkbox value e.g. true/false or value
            */
-          this.$emit('update:modelValue', value);
+          this.$emit('update:modelValue', value)
         },
       },
 
@@ -239,7 +239,7 @@
        * Gets the current output value which is either the selected options or a placeholder text if available.
        */
       outputValue(): string {
-        return this.selectionAsString || (typeof this.placeholder === 'string' ? this.placeholder : '');
+        return this.selectionAsString || (typeof this.placeholder === 'string' ? this.placeholder : '')
       },
 
       /**
@@ -252,10 +252,10 @@
           return this.options
             .filter(option => this.internalValue.includes(option[this.valueField]))
             .map(option => option[this.labelField])
-            .join(', ');
+            .join(', ')
         }
 
-        return '';
+        return ''
       },
 
       /**
@@ -264,7 +264,7 @@
        * @returns {boolean}
        */
       isDisabled() {
-        return this.disabled || this.progress;
+        return this.disabled || this.progress
       },
 
       /**
@@ -274,10 +274,10 @@
        */
       filteredOptions(): IOption[] {
         if (this.hasSearch && this.searchTerm) {
-          return this.options.filter(option => option[this.labelField].includes(this.searchTerm));
+          return this.options.filter(option => option[this.labelField].includes(this.searchTerm))
         }
 
-        return this.options;
+        return this.options
       },
     },
     watch: {
@@ -289,8 +289,8 @@
       isOpen(open) {
         if (this.hasSearch && open) {
           this.$nextTick(() => {
-            this.searchField?.focus();
-          });
+            this.searchField?.focus()
+          })
         }
       },
     },
@@ -312,11 +312,11 @@
        */
       close() {
         if (this.disabled) {
-          return;
+          return
         }
 
-        this.isOpen = false;
-        this.searchTerm = '';
+        this.isOpen = false
+        this.searchTerm = ''
 
         /**
          * Emits the closing event to the parent.
@@ -324,11 +324,11 @@
          * @event close
          * @type {array.<string>}
          */
-        this.$emit('close', this.internalValue);
+        this.$emit('close', this.internalValue)
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

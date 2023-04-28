@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     name: 's-toggle',
@@ -43,13 +43,13 @@
        */
       internalValue: {
         get(): boolean {
-          return this.modelValue;
+          return this.modelValue
         },
         set(value: boolean) {
           /**
            * Emits checkbox value e.g. true/false or value
            */
-          this.$emit('update:modelValue', value);
+          this.$emit('update:modelValue', value)
         },
       },
     },
@@ -68,7 +68,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

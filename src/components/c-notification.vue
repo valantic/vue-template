@@ -13,10 +13,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
-  import eIcon from '@/elements/e-icon.vue';
+  import { defineComponent, PropType } from 'vue'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification'
+  import eIcon from '@/elements/e-icon.vue'
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -50,7 +50,7 @@
     setup(): ISetup {
       return {
         notificationStore: notificationStore(),
-      };
+      }
     },
     data(): IData {
       return {
@@ -58,7 +58,7 @@
          * Defines the delay a notification expires in Milliseconds.
          */
         expireDelay: 3000,
-      };
+      }
     },
 
     computed: {
@@ -68,7 +68,7 @@
       componentModifiers(): IModifiers {
         return {
           type: this.notification.type,
-        };
+        }
       },
     },
     // watch: {},
@@ -77,12 +77,12 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      const { expire } = this.notification || {};
+      const { expire } = this.notification || {}
 
       if (expire) {
         setTimeout(() => {
-          this.close();
-        }, this.expireDelay);
+          this.close()
+        }, this.expireDelay)
       }
     },
     // beforeUpdate() {},
@@ -97,11 +97,11 @@
        * Removes current notification from stack.
        */
       close() {
-        this.notificationStore.popNotification(this.notification.id);
+        this.notificationStore.popNotification(this.notification.id)
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

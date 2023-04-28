@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import cGoogleMaps, { ICGoogleMapsLocation } from '@/components/c-google-maps.vue';
+  import { defineComponent } from 'vue'
+  import cGoogleMaps, { ICGoogleMapsLocation } from '@/components/c-google-maps.vue'
 
   export default defineComponent({
     name: 'r-google-maps',
@@ -32,7 +32,7 @@
           geocode: 'Breitfeldstrasse 13, 9015 St.Gallen',
           title: 'Aksa Beach',
         }] satisfies ICGoogleMapsLocation[],
-      };
+      }
     },
 
     // computed: {},
@@ -51,7 +51,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

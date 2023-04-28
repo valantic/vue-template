@@ -1,4 +1,4 @@
-let globalUuid = 0;
+let globalUuid = 0
 
 export interface IUuid {
   uuid: number;
@@ -10,9 +10,9 @@ export interface IUuid {
  * @mixin
  */
 export default (): IUuid => {
-  globalUuid += 1;
+  globalUuid += 1
 
   return {
     uuid: globalUuid,
-  };
-};
+  }
+}

@@ -41,6 +41,6 @@ const colors: IColors = {
     { name: '$color-status--info', value: ['#e2951f'] },
     { name: '$color-status--error', value: ['#b50f0f'] },
   ],
-};
+}
 
-export default colors;
+export default colors

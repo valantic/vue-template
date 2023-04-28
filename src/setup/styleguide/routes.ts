@@ -1,17 +1,17 @@
-import { ComponentPublicInstance } from 'vue';
-import lDefault from '@/layouts/l-default.vue';
+import { ComponentPublicInstance } from 'vue'
+import lDefault from '@/layouts/l-default.vue'
 
-import index from '@/styleguide/routes/r-index.vue';
-import sandbox from '@/styleguide/routes/r-sandbox.vue';
-import icons from '@/styleguide/routes/r-icons.vue';
-import forms from '@/styleguide/routes/r-forms.vue';
-import notifications from '@/styleguide/routes/r-notifications.vue';
-import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue';
-import table from '@/styleguide/routes/r-table.vue';
-import tooltips from '@/styleguide/routes/r-tooltips.vue';
-import googleMaps from '@/styleguide/routes/r-google-maps.vue';
-import picture from '@/styleguide/routes/r-picture.vue';
-import video from '@/styleguide/routes/r-video.vue';
+import index from '@/styleguide/routes/r-index.vue'
+import sandbox from '@/styleguide/routes/r-sandbox.vue'
+import icons from '@/styleguide/routes/r-icons.vue'
+import forms from '@/styleguide/routes/r-forms.vue'
+import notifications from '@/styleguide/routes/r-notifications.vue'
+import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue'
+import table from '@/styleguide/routes/r-table.vue'
+import tooltips from '@/styleguide/routes/r-tooltips.vue'
+import googleMaps from '@/styleguide/routes/r-google-maps.vue'
+import picture from '@/styleguide/routes/r-picture.vue'
+import video from '@/styleguide/routes/r-video.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -32,10 +32,10 @@ export interface IRoute {
   children?: IRoute[];
 }
 
-const root = '/styleguide';
+const root = '/styleguide'
 const categoryWrapper = {
   template: '<router-view />',
-};
+}
 
 /**
  * This file is only meant for style-example routes
@@ -152,4 +152,4 @@ export default [
     path: '/:pathMatch(.*)*',
     redirect: root,
   },
-];
+]

@@ -10,9 +10,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import cNotification from '@/components/c-notification.vue';
-  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
+  import { defineComponent } from 'vue'
+  import cNotification from '@/components/c-notification.vue'
+  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification'
 
   interface ISetup {
     notificationStore: TNotificationStore
@@ -46,7 +46,7 @@
     setup(): ISetup {
       return {
         notificationStore: notificationStore(),
-      };
+      }
     },
     // data() {
     //   return {};
@@ -59,10 +59,10 @@
       filteredNotifications(): readonly INotificationItem[] {
         if (this.selector !== 'default') {
           return this.notificationStore.getNotifications
-            .filter(notification => notification.selector === this.selector);
+            .filter(notification => notification.selector === this.selector)
         }
 
-        return this.notificationStore.getNotifications.filter(notification => !notification.selector);
+        return this.notificationStore.getNotifications.filter(notification => !notification.selector)
       },
     },
     // watch: {},
@@ -80,7 +80,7 @@
 
     // methods: {},
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">

@@ -1,4 +1,4 @@
-import { INotificationItem } from '@/stores/notification';
+import { INotificationItem } from '@/stores/notification'
 
 interface IMockNotifications {
   success: INotificationItem;
@@ -30,7 +30,7 @@ function createNotification({
     expire: typeof expire === 'boolean' ? expire : true,
     selector: selector || null,
     redirectUrl: redirectUrl || '',
-  };
+  }
 }
 
 const mockNotifications: IMockNotifications = {
@@ -38,6 +38,6 @@ const mockNotifications: IMockNotifications = {
   info: createNotification({ type: 'info' }),
   error: createNotification({ type: 'error' }),
   createNotification,
-};
+}
 
-export default mockNotifications;
+export default mockNotifications

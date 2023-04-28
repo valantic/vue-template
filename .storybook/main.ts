@@ -1,6 +1,6 @@
 /* eslint-disable import/no-import-module-exports */
-import { UserConfig, mergeConfig, UserConfigExport } from 'vite';
-import { alias } from '../vite.config';
+import { UserConfig, mergeConfig, UserConfigExport } from 'vite'
+import { alias } from '../vite.config'
 
 module.exports = {
   stories: [ // @see https://storybook.js.org/docs/react/configure/overview#configure-story-loading
@@ -31,6 +31,6 @@ module.exports = {
       resolve: {
         alias,
       },
-    });
+    })
   },
-};
+}

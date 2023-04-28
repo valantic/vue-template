@@ -36,11 +36,11 @@
 </template>
 
 <script lang="ts">
-  import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
-  import { defineComponent } from 'vue';
-  import propScale from '@/helpers/prop.scale';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import eIcon from '@/elements/e-icon.vue';
+  import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock'
+  import { defineComponent } from 'vue'
+  import propScale from '@/helpers/prop.scale'
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import eIcon from '@/elements/e-icon.vue'
 
   // interface ISetup {}
 
@@ -130,7 +130,7 @@
         return {
           size: this.size,
           spacing: this.spacing,
-        };
+        }
       },
     },
     watch: {
@@ -140,9 +140,9 @@
        */
       isOpen(state: boolean): void {
         if (state) {
-          this.open();
+          this.open()
         } else {
-          this.close();
+          this.close()
         }
       },
     },
@@ -152,7 +152,7 @@
     // beforeMount() {},
     mounted() {
       if (this.isOpen) {
-        this.open();
+        this.open()
       }
     },
     // beforeUpdate() {},
@@ -168,9 +168,9 @@
        */
       open(): void {
         this.$nextTick(() => {
-          this.$el.showModal(); // Native function of `HTMLDialogElement`
-          this.$emit('update:isOpen', true);
-        });
+          this.$el.showModal() // Native function of `HTMLDialogElement`
+          this.$emit('update:isOpen', true)
+        })
       },
 
       /**
@@ -178,10 +178,10 @@
        */
       close(): void {
         if (this.isOpen) {
-          this.$emit('update:isOpen', false);
+          this.$emit('update:isOpen', false)
         }
 
-        this.$emit('close');
+        this.$emit('close')
       },
 
       /**
@@ -189,7 +189,7 @@
        */
       onKeyDown(event: KeyboardEvent): void {
         if (this.isOpen && event.code === 'Escape') {
-          this.close();
+          this.close()
         }
       },
 
@@ -198,7 +198,7 @@
        */
       onOutsideClick(): void {
         if (this.closeOnOutsideClick && this.isOpen) {
-          this.close();
+          this.close()
         }
       },
 
@@ -206,21 +206,21 @@
        * Handler for when the modal open-animation is completed.
        */
       onAfterEnter(): void {
-        disableBodyScroll(this.$el, { reserveScrollBarGap: true });
-        this.$emit('open');
-        document.addEventListener('keydown', this.onKeyDown);
+        disableBodyScroll(this.$el, { reserveScrollBarGap: true })
+        this.$emit('open')
+        document.addEventListener('keydown', this.onKeyDown)
       },
 
       /**
        * Handler for when the modal close-animation is completed.
        */
       onAfterLeave(): void {
-        enableBodyScroll(this.$el);
-        document.removeEventListener('keydown', this.onKeyDown);
+        enableBodyScroll(this.$el)
+        document.removeEventListener('keydown', this.onKeyDown)
       },
     },
     // render() {},
-  });
+  })
 </script>
 
 <style lang="scss">
