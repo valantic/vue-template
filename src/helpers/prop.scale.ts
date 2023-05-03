@@ -1,14 +1,14 @@
-interface IPropConfig {
+interface PropConfig {
   type: (NumberConstructor | StringConstructor)[];
   default: number;
-  validator?: (value: string) => boolean;
+  validator?(value: string): boolean;
 }
 
 /**
  * Creates a scale validation function for scale value props.
  */
-export default function(defaultValue: number, validNumbers: number[]): IPropConfig {
-  const propConfig: IPropConfig = {
+export default function(defaultValue: number, validNumbers: number[]): PropConfig {
+  const propConfig: PropConfig = {
     type: [Number, String],
     default: defaultValue,
   };

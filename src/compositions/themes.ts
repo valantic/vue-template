@@ -1,11 +1,11 @@
 import { computed, ComputedRef } from 'vue';
 import sessionStore from '@/stores/session';
 
-export interface ITheme {
+export interface Theme {
   theme: ComputedRef<string>;
 }
 
-export default (customTheme?: string): ITheme => {
+export default (customTheme?: string): Theme => {
   /**
    * Holds the current theme name.
    */

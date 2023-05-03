@@ -45,16 +45,16 @@
   } from 'vue';
   import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification.vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface ISetup extends IFormStates {
+  interface Setup extends FormStates {
     input: Ref<HTMLInputElement | null>;
     slot: Ref<HTMLSpanElement | null>;
   }
 
-  interface IData {
+  interface Data {
     internalValue: string;
   }
 
@@ -65,7 +65,7 @@
    */
   export default defineComponent({
     name: 'e-input',
-    status: 0, // TODO: remove when component was prepared for current project.
+    status: 0, // ODO: remove when component was prepared for current project.
 
     components: {
       eIcon,
@@ -151,7 +151,7 @@
 
     emits: ['update:modelValue', 'focus', 'blur', 'enter'],
 
-    setup(props): ISetup {
+    setup(props): Setup {
       const input = ref();
       const slot = ref();
 
@@ -162,7 +162,7 @@
       };
     },
 
-    data(): IData {
+    data(): Data {
       return {
         internalValue: this.modelValue,
       };
@@ -178,7 +178,7 @@
       /**
        * Defines state modifier classes.
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         const {
           border,
           noNativeControl,
@@ -321,7 +321,7 @@
   @use '../setup/scss/mixins';
   @use '../setup/scss/variables';
   // stylelint-disable no-descending-specificity
-  // TODO: refactor style to get rid of no-descending-specificity
+  // ODO: refactor style to get rid of no-descending-specificity
 
   $e-input-height: 30px;
 

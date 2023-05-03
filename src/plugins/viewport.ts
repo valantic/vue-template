@@ -4,9 +4,9 @@ import {
   reactive,
   ref,
 } from 'vue';
-import { BREAKPOINTS, TViewportBreakPoint } from '@/setup/globals';
+import { BREAKPOINTS, ViewportBreakPoint } from '@/setup/globals';
 
-export interface IViewport {
+export interface Viewport {
   isXxs: boolean;
   isXs: boolean;
   isSm: boolean;
@@ -14,7 +14,7 @@ export interface IViewport {
   isLg: boolean;
   isXl: boolean;
   isMobile: boolean;
-  currentViewport: TViewportBreakPoint | string; // TODO: 'string' is a workaround, because I did not know how to use the type TViewportBreakPoint on line 66.
+  currentViewport: ViewportBreakPoint | string; // ODO: 'string' is a workaround, because I did not know how to use the type ViewportBreakPoint on line 66.
 }
 
 /**
@@ -26,32 +26,32 @@ const plugin: Plugin = {
     const viewport = ref<number>(window.innerWidth);
 
     /**
-     * Returns TRUE if viewport is smaller than XS.
+     * Returns RUE if viewport is smaller than XS.
      */
     const isXxs = computed(() => viewport.value < BREAKPOINTS.xs);
 
     /**
-     * Returns TRUE if viewport is at least XS.
+     * Returns RUE if viewport is at least XS.
      */
     const isXs = computed(() => viewport.value >= BREAKPOINTS.xs);
 
     /**
-     * Returns TRUE if viewport is at least SM.
+     * Returns RUE if viewport is at least SM.
      */
     const isSm = computed(() => viewport.value >= BREAKPOINTS.sm);
 
     /**
-     * Returns TRUE if viewport is at least MD.
+     * Returns RUE if viewport is at least MD.
      */
     const isMd = computed(() => viewport.value >= BREAKPOINTS.md);
 
     /**
-     * Returns TRUE if viewport is at least LG.
+     * Returns RUE if viewport is at least LG.
      */
     const isLg = computed(() => viewport.value >= BREAKPOINTS.lg);
 
     /**
-     * Returns TRUE if viewport is at least XL.
+     * Returns RUE if viewport is at least XL.
      */
     const isXl = computed(() => viewport.value >= BREAKPOINTS.xl);
 

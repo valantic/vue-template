@@ -7,18 +7,18 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import markdown, { Mode } from 'vite-plugin-markdown';
 import viteBuilds from './vite.builds.json';
 
-interface IModes {
+interface Modes {
   [key: string]: {
     input: string[];
   }
 }
 
-interface IViteBuilds {
+interface ViteBuilds {
   base: string;
   outDir: string;
   assetsDir: string;
   profileBuild: string;
-  modes: IModes;
+  modes: Modes;
   themeSource: string;
   themeFiles: string[];
 }
@@ -70,7 +70,7 @@ export default defineConfig(({ command, mode }) => {
         assetsDir,
         modes,
         profileBuild,
-      } = viteBuilds as IViteBuilds || {};
+      } = viteBuilds as ViteBuilds || {};
 
       if (!isProfileBuild && !modes[mode]) {
         throw Error(`Given mode '${mode}' is unknown.`);
@@ -83,12 +83,12 @@ export default defineConfig(({ command, mode }) => {
       config.base = base;
       config.build = {
         outDir: `${outDir}/${mode}`,
-        assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
+        assetsInlineLimit: 0, // ODO: check if it makes sense to increase this value.
         manifest: true,
         emptyOutDir: true,
         copyPublicDir: true,
 
-        // TODO: watch?
+        // ODO: watch?
         rollupOptions: {
           external: [
             /!dev/, // Removes styleguide/dev only assets.

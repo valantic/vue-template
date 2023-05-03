@@ -12,7 +12,7 @@
   import { defineComponent } from 'vue';
   import eCheckbox from '@/elements/e-checkbox.vue';
 
-  interface IData {
+  interface Data {
 
     /**
      * Determines if the HTML validation styles should be applied.
@@ -32,7 +32,7 @@
     // mixins: [],
 
     // props: {},
-    data(): IData {
+    data(): Data {
       return {
         enabled: true,
       };

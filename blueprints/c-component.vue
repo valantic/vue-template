@@ -7,22 +7,22 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
-  // interface ISetup {}
-  // interface IData {}
+  // interface Setup {}
+  // interface Data {}
 
   /**
-   * TODO: add component description.
+   * ODO: add component description.
    */
   export default defineComponent({
-    name: 'c-component', // TODO: update name according to filename
+    name: 'c-component', // ODO: update name according to filename
 
     // components: {},
 
     // props: {},
     // emits: {},
 
-    // setup(): ISetup {},
-    // data(): IData {
+    // setup(): Setup {},
+    // data(): Data {
     //   return {};
     // },
 
@@ -48,7 +48,7 @@
 <style lang="scss">
   // @use '../setup/scss/variables';
 
-  .c-component { // TODO: update selector according to filename
+  .c-component { // ODO: update selector according to filename
     // ...
   }
 </style>

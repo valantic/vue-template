@@ -17,7 +17,7 @@
 
   export default defineComponent({
     name: 's-toggle',
-    status: 0, // TODO: remove when component was prepared for current project.
+    status: 0, // ODO: remove when component was prepared for current project.
 
     // components: {},
 

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import plugin from '@/plugins/plugin'; // TODO: update source
+import plugin from '@/plugins/plugin'; // ODO: update source
 
-describe('plugin | plugin', () => { // TODO: update title
+describe('plugin | plugin', () => { // ODO: update title
   it('should have an "install" method', () => {
     expect(plugin.install).toBeTruthy();
   });

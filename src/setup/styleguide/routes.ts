@@ -24,11 +24,11 @@ declare module 'vue-router' {
   }
 }
 
-export interface IRoute {
+export interface Route {
   path: string;
   name?: string;
   component?: ComponentPublicInstance | Record<string, unknown>;
-  children?: IRoute[];
+  children?: Route[];
 }
 
 const root = '/styleguide';

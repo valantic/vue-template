@@ -12,7 +12,7 @@
              @blur="onBlur"
              @click="onClick"
   >
-    <!-- span is required to prevent content shifting in IE11. -->
+    <!-- span is required to prevent content shifting in E11. -->
     <span :class="b('inner')">
       <e-progress v-if="progress"
                   :spacing="0"
@@ -27,21 +27,21 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eProgress from './e-progress.vue';
 
-  interface IAttributes {
+  interface Attributes {
     role: string | null;
     disabled: boolean;
     [key: string]: string | boolean | null;
   }
 
-  interface IElementDimensions {
+  interface ElementDimensions {
     width: string;
     height: string;
   }
 
-  interface IData {
+  interface Data {
     hasHover: boolean;
     isActive: boolean;
     hasFocus: boolean;
@@ -58,7 +58,7 @@
    */
   export default defineComponent({
     name: 'e-button',
-    status: 0, // TODO: remove when component was prepared for current project.
+    status: 0, // ODO: remove when component was prepared for current project.
 
     components: {
       eProgress,
@@ -160,7 +160,7 @@
       },
     },
 
-    data(): IData {
+    data(): Data {
       return {
         /**
          * Internal flag to determine hover state.
@@ -188,7 +188,7 @@
       /**
        * Returns an Object of class modifiers.
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         return {
           width: this.width,
           spacing: this.spacing,
@@ -206,7 +206,7 @@
       /**
        * Returns an Object of attributes.
        */
-      attributes(): IAttributes {
+      attributes(): Attributes {
         return {
           role: this.$attrs.href ? 'button' : null, // Fallback
           ...this.$attrs,
@@ -217,7 +217,7 @@
       /**
        * Returns inline styles to keep dimensions during progress state.
        */
-      style(): IElementDimensions | null {
+      style(): ElementDimensions | null {
         return this.progress && this.width !== 'full'
           ? this.getElementDimensions()
           : null;
@@ -303,7 +303,7 @@
       /**
        * Returns the current width and height of the button.
        */
-      getElementDimensions(): IElementDimensions | null {
+      getElementDimensions(): ElementDimensions | null {
         const element = this.$el;
 
         return element

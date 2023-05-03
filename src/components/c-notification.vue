@@ -14,15 +14,15 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import notificationStore, { NotificationItem, NotificationStore } from '@/stores/notification';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface ISetup {
-    notificationStore: TNotificationStore
+  interface Setup {
+    notificationStore: NotificationStore
   }
 
-  interface IData {
+  interface Data {
     expireDelay: number;
   }
 
@@ -31,7 +31,7 @@
    */
   export default defineComponent({
     name: 'c-notification',
-    status: 0, // TODO: remove when component was prepared for current project.
+    status: 0, // ODO: remove when component was prepared for current project.
 
     components: {
       eIcon,
@@ -42,17 +42,17 @@
        * The notification object consisting of the following properties:
        */
       notification: {
-        type: Object as PropType<INotificationItem>,
+        type: Object as PropType<NotificationItem>,
         required: true,
       },
     },
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         notificationStore: notificationStore(),
       };
     },
-    data(): IData {
+    data(): Data {
       return {
         /**
          * Defines the delay a notification expires in Milliseconds.
@@ -65,7 +65,7 @@
       /**
        * Returns all modifiers for the component main class.
        */
-      componentModifiers(): IModifiers {
+      componentModifiers(): Modifiers {
         return {
           type: this.notification.type,
         };

@@ -14,7 +14,7 @@ export enum FieldStates {
   Error = 'error',
 }
 
-interface IStateModifiers {
+interface StateModifiers {
   state: FieldStates;
   active: boolean;
   disabled: boolean;
@@ -22,17 +22,17 @@ interface IStateModifiers {
   hover: boolean;
 }
 
-export interface IFormStates {
+export interface FormStates {
   active: Ref<boolean>;
   disabled: Ref<boolean>;
   focus: Ref<boolean>;
   hover: Ref<boolean>;
-  stateModifiers: ComputedRef<IStateModifiers>;
+  stateModifiers: ComputedRef<StateModifiers>;
   stateIcon: ComputedRef<string>;
   hasDefaultState: ComputedRef<boolean>;
 }
 
-export const withProps = () => ({ // eslint-disable-line -- TODO: did not know how to fix the return type so it is valid on component side.
+export const withProps = () => ({ // eslint-disable-line -- ODO: did not know how to fix the return type so it is valid on component side.
   /**
    * Form states for class names (default, error, success, warning, info)
    */
@@ -52,7 +52,7 @@ export const withProps = () => ({ // eslint-disable-line -- TODO: did not know h
 /**
  * Defines the reactive properties which can be used for form elements
  */
-const formStates = (inputState: Ref<FieldStates>): IFormStates => {
+const formStates = (inputState: Ref<FieldStates>): FormStates => {
   const active = ref<boolean>(false);
   const disabled = ref<boolean>(false);
   const focus = ref<boolean>(false);
@@ -61,7 +61,7 @@ const formStates = (inputState: Ref<FieldStates>): IFormStates => {
   /**
    * Holds an object with several modifiers of the form element.
    */
-  const stateModifiers: ComputedRef<IStateModifiers> = computed(() => ({
+  const stateModifiers: ComputedRef<StateModifiers> = computed(() => ({
       state: inputState.value,
       active: active.value,
       disabled: disabled.value,

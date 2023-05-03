@@ -4,9 +4,9 @@ import {
   StateTree,
   _GettersTree,
 } from 'pinia';
-import { STORE } from '@/setup/globals';
+import { BaseStore } from '@/setup/globals';
 
-interface ISessionState extends StateTree {
+interface SessionState extends StateTree {
 
   /**
    * Stores the theme id.
@@ -19,29 +19,29 @@ interface ISessionState extends StateTree {
   googleMapsApiKey: string | null;
 }
 
-interface ISessionGetters extends _GettersTree<ISessionState> {
+interface SessionGetters extends _GettersTree<SessionState> {
 
   /**
    * Gets the current theme id.
    */
-  getTheme: (state: ISessionState) => string,
+  getTheme(state: SessionState): string,
 }
 
-interface ISessionActions {
+interface SessionActions {
 
   /**
    * Removes a notification.
    */
-  setTheme: (id: string) => void;
+  setTheme(id: string): void;
 }
 
-export type TSessionStore = Store<string, ISessionState, ISessionGetters, ISessionActions>;
+export type SessionStore = Store<string, SessionState, SessionGetters, SessionActions>;
 
-const storeName = STORE.SESSION;
+const storeName = BaseStore.SESSION;
 
-export default defineStore<typeof storeName, ISessionState, ISessionGetters, ISessionActions>(storeName, {
-  state: (): ISessionState => {
-    const state: ISessionState = {
+export default defineStore<typeof storeName, SessionState, SessionGetters, SessionActions>(storeName, {
+  state: (): SessionState => {
+    const state: SessionState = {
       theme: 'theme-01',
       googleMapsApiKey: null,
     };

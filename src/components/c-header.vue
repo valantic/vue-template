@@ -36,7 +36,7 @@
 
 <style lang="scss">
   .c-header {
-    &::before { // TODO: remove
+    &::before { // ODO: remove
       content: 'Header';
     }
   }

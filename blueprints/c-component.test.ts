@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import component from '@/components/c-component'; // TODO: Update source
+import component from '@/components/c-component'; // ODO: Update source
 
-describe('component | c-component', () => { // TODO: update title
+describe('component | c-component', () => { // ODO: update title
   it('has name property', () => {
     expect(component.name).toBeTruthy();
   });

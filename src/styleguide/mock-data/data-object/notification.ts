@@ -1,10 +1,10 @@
-import { INotificationItem } from '@/stores/notification';
+import { NotificationItem } from '@/stores/notification';
 
-interface IMockNotifications {
-  success: INotificationItem;
-  info: INotificationItem;
-  error: INotificationItem;
-  createNotification: (notificationOptions: object) => INotificationItem;
+interface MockNotifications {
+  success: NotificationItem;
+  info: NotificationItem;
+  error: NotificationItem;
+  createNotification(notificationOptions: object): NotificationItem;
 }
 
 /**
@@ -22,7 +22,7 @@ function createNotification({
   expire?: boolean,
   selector?: string,
   redirectUrl?: string,
-}): INotificationItem {
+}): NotificationItem {
   return {
     id: 0,
     type: type || 'success',
@@ -33,7 +33,7 @@ function createNotification({
   };
 }
 
-const mockNotifications: IMockNotifications = {
+const mockNotifications: MockNotifications = {
   success: createNotification({ type: 'success' }),
   info: createNotification({ type: 'info' }),
   error: createNotification({ type: 'error' }),

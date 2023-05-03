@@ -6,7 +6,7 @@
        v-bind="$attrs"
        tabindex="-1"
     >
-      <!-- TODO: Check if e-icon is the best way to render the logo -->
+      <!-- ODO: Check if e-icon is the best way to render the logo -->
       <e-icon :icon="logo.icon"
               :alt="logo.alt"
       />
@@ -20,10 +20,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import useTheme, { ITheme } from '@/compositions/themes';
+  import useTheme, { Theme } from '@/compositions/themes';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface ILogo {
+  interface Logo {
     icon: string;
     alt: string;
     title: string;
@@ -36,7 +36,7 @@
    */
   export default defineComponent({
     name: 'e-logo',
-    status: 0, // TODO: remove when component was prepared for current project.
+    status: 0, // ODO: remove when component was prepared for current project.
 
     components: {
       eIcon,
@@ -49,7 +49,7 @@
     //   return {};
     // },
 
-    setup(): ITheme {
+    setup(): Theme {
       return {
         ...useTheme(),
       };
@@ -59,7 +59,7 @@
       /**
        * Get's the correct logo depending on the theme value from the store.
        */
-      logo(): ILogo {
+      logo(): Logo {
         const title = this.$t('e-logo.linkTitle');
         let icon = '';
         let alt = '';

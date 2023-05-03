@@ -12,10 +12,10 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotification from '@/components/c-notification.vue';
-  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
+  import notificationStore, { NotificationItem, NotificationStore } from '@/stores/notification';
 
-  interface ISetup {
-    notificationStore: TNotificationStore
+  interface Setup {
+    notificationStore: NotificationStore
   }
 
   /**
@@ -23,7 +23,7 @@
    */
   export default defineComponent({
     name: 'c-notification-container',
-    status: 0, // TODO: remove when component was prepared for current project.
+    status: 0, // ODO: remove when component was prepared for current project.
 
     components: {
       cNotification,
@@ -43,7 +43,7 @@
       },
     },
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         notificationStore: notificationStore(),
       };
@@ -56,7 +56,7 @@
       /**
        * Gets the filtered notifications depending on the selector.
        */
-      filteredNotifications(): readonly INotificationItem[] {
+      filteredNotifications(): readonly NotificationItem[] {
         if (this.selector !== 'default') {
           return this.notificationStore.getNotifications
             .filter(notification => notification.selector === this.selector);

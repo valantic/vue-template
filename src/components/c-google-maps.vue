@@ -17,11 +17,11 @@
   import loadScript from '@/helpers/load-script';
   import sessionStore from '@/stores/session';
 
-  interface ISetup {
+  interface Setup {
     container: Ref<HTMLDivElement>;
   }
 
-  interface IData {
+  interface Data {
 
     /**
      * Holds the related Google Maps instance.
@@ -44,9 +44,9 @@
     allowAutoUpdates: boolean;
   }
 
-  type TCGoogleMapsCallback = () => void;
+  type GoogleMapsCallback = () => void;
 
-  export interface ICGoogleMapsLocation {
+  export interface GoogleMapsLocation {
     lat?: string | number | null;
     lng?: string | number | null;
     geocode?: string;
@@ -54,23 +54,23 @@
     title?: string;
   }
 
-  interface ICGoogleMapsInternalLocation extends ICGoogleMapsLocation{
-    referer: ICGoogleMapsLocation;
+  interface GoogleMapsInternalLocation extends GoogleMapsLocation{
+    referer: GoogleMapsLocation;
   }
 
-  interface IEventClick {
-    location: ICGoogleMapsLocation;
+  interface EventClick {
+    location: GoogleMapsLocation;
     marker: google.maps.Marker;
   }
 
   declare global {
     interface Window {
-      cGoogleMapsInitMap: TCGoogleMapsCallback;
+      GoogleMapsInitMap: GoogleMapsCallback;
     }
   }
 
-  const callbackStack: TCGoogleMapsCallback[] = [];
-  const callbackFunctionName = 'cGoogleMapsInitMap';
+  const callbackStack: GoogleMapsCallback[] = [];
+  const callbackFunctionName = 'GoogleMapsInitMap';
 
   let geocoder: google.maps.Geocoder | null = null;
   let isMapsAPILoaded = false;
@@ -214,7 +214,7 @@
   /**
    * This function checks whether the Map API has already been loaded once.
    */
-  function loadMapsAPI(callback: TCGoogleMapsCallback): void {
+  function loadMapsAPI(callback: GoogleMapsCallback): void {
     const useSessionStore = sessionStore();
     const apiKey = useSessionStore.googleMapsApiKey;
 
@@ -248,7 +248,7 @@
        * lat/lng OR geocode MUST be defined!
        */
       locations: {
-        type: Array as PropType<ICGoogleMapsLocation[]>,
+        type: Array as PropType<GoogleMapsLocation[]>,
         required: true,
       },
 
@@ -321,17 +321,17 @@
       },
     },
     emits: {
-      click: (payload: IEventClick) => !!(payload?.location && payload?.marker),
+      click: (payload: EventClick) => !!(payload?.location && payload?.marker),
     },
 
-    setup(): ISetup {
+    setup(): Setup {
       const container = ref();
 
       return {
         container,
       };
     },
-    data(): IData {
+    data(): Data {
       return {
         mapInstance: null,
         markers: [],
@@ -344,7 +344,7 @@
       /**
        * Maps the locations to the Google Maps required format.
        */
-      mappedLocations(): ICGoogleMapsInternalLocation[] {
+      mappedLocations(): GoogleMapsInternalLocation[] {
         return this.locations?.map((location) => {
           const { lat, lng } = location;
 
@@ -408,7 +408,7 @@
       /**
        * Initialize the google maps with the default values.
        *
-       * TODO: note, that Google does not support destroying an instance... @see https://stackoverflow.com/questions/10485582/what-is-the-proper-way-to-destroy-a-map-instance
+       * ODO: note, that Google does not support destroying an instance... @see https://stackoverflow.com/questions/10485582/what-is-the-proper-way-to-destroy-a-map-instance
        */
       createMapInstance(): void {
         if (!this.mappedLocations?.length && !this.center) {
@@ -485,7 +485,7 @@
        * @param {Object} location - A location object.
        * @param {String} location.geocode - An address string, that will be used to calculate the coordinates.
        */
-      createMakerFromAddress(location: ICGoogleMapsInternalLocation): void {
+      createMakerFromAddress(location: GoogleMapsInternalLocation): void {
         if (!location.geocode) {
           throw new Error("Unable to geocode a location without 'geocode' information.");
         }
@@ -518,7 +518,7 @@
        *
        * @returns {Property.Marker}
        */
-      createMarker(location: ICGoogleMapsInternalLocation): google.maps.Marker {
+      createMarker(location: GoogleMapsInternalLocation): google.maps.Marker {
         const marker = new window.google.maps.Marker({
           position: {
             lat: location.lat,

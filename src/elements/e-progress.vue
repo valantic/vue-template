@@ -14,11 +14,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   export default defineComponent({
     name: 'e-progress',
-    status: 0, // TODO: remove when component was prepared for current project.
+    status: 0, // ODO: remove when component was prepared for current project.
 
     // components: {},
 
@@ -64,7 +64,7 @@
       /**
        * Returns all modifiers for the component main class.
        */
-      componentModifiers(): IModifiers {
+      componentModifiers(): Modifiers {
         return {
           negative: this.negative,
           spacing: this.spacing,

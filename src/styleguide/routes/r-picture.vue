@@ -12,11 +12,11 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import ePicture, { IImageSizes } from '@/elements/e-picture.vue';
+  import ePicture, { ImageSizes } from '@/elements/e-picture.vue';
 
-  // interface ISetup {}
-  interface IData {
-    sizes: IImageSizes;
+  // interface Setup {}
+  interface Data {
+    sizes: ImageSizes;
   }
 
   /**
@@ -31,8 +31,8 @@
     // props: {},
     // emits: {},
 
-    // setup(): ISetup {},
-    data(): IData {
+    // setup(): Setup {},
+    data(): Data {
       return {
         sizes: {
           1440: 1400,

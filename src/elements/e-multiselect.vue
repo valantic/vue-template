@@ -73,25 +73,25 @@
     toRefs,
   } from 'vue';
   import i18n from '@/setup/i18n';
-  import useUuid, { IUuid } from '@/compositions/uuid';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useUuid, { Uuid } from '@/compositions/uuid';
+  import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
 
-  interface IOption {
+  interface Option {
     value: string;
     label: string;
     [key: string]: string;
   }
 
-  interface ISetup extends IFormStates, IUuid {
+  interface Setup extends FormStates, Uuid {
     searchField: Ref<HTMLInputElement | null>;
     fieldWrapper: Ref<HTMLButtonElement | null>;
   }
 
-  interface IData {
+  interface Data {
     isOpen: boolean;
     searchTerm: string;
   }
@@ -126,7 +126,7 @@
        */
       options: {
         required: true,
-        type: Array as PropType<IOption[]>,
+        type: Array as PropType<Option[]>,
       },
 
       /**
@@ -182,7 +182,7 @@
 
     emits: ['update:modelValue', 'close'],
 
-    setup(props): ISetup {
+    setup(props): Setup {
       const searchField = ref();
       const fieldWrapper = ref();
 
@@ -194,7 +194,7 @@
       };
     },
 
-    data(): IData {
+    data(): Data {
       return {
         /**
          * @type {boolean} Holds the internal opening state of the options.
@@ -214,7 +214,7 @@
        *
        * @returns  {object}   BEM classes
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         return {
           ...this.stateModifiers,
         };
@@ -272,7 +272,7 @@
        *
        * @returns {array.<object>}
        */
-      filteredOptions(): IOption[] {
+      filteredOptions(): Option[] {
         if (this.hasSearch && this.searchTerm) {
           return this.options.filter(option => option[this.labelField].includes(this.searchTerm));
         }

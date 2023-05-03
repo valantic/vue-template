@@ -1,13 +1,13 @@
 /* eslint-disable id-length */
 
-export interface IDelimiters {
+export interface Delimiters {
   ns: string
   el: string;
   mod: string;
   modVal: string;
 }
 
-export const DEFAULT_DELIMITERS: IDelimiters = {
+export const DEFAULT_DELIMITERS: Delimiters = {
   ns: '',
   el: '__',
   mod: '--',
@@ -19,8 +19,8 @@ export const DEFAULT_CONFIG = {
   methodName: 'b',
 };
 
-export interface IModifiers {
+export interface Modifiers {
   [key: string]: boolean | string | number | undefined;
 }
 
-export type IVueBemFunction = (elementOrModifiers?: string | IModifiers, modifiers?: IModifiers) => string;
+export type VueBemFunction = (elementOrModifiers?: string | Modifiers, modifiers?: Modifiers) => string;

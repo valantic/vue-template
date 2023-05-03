@@ -1,18 +1,18 @@
-import { INotificationItem } from '@/stores/notification';
+import { NotificationItem } from '@/stores/notification';
 import mockNotifications from '@/styleguide/mock-data/data-object/notification';
 
-interface INotificationResponse {
+interface NotificationResponse {
   data: object,
-  notifications: INotificationItem[]
+  notifications: NotificationItem[]
 }
 
 /**
  * Creates an empty API response with a notification.
  */
-function createApiResponse(notification: INotificationItem): INotificationResponse {
+function createApiResponse(notification: NotificationItem): NotificationResponse {
   return {
     data: {},
-    notifications: [notification], // TODO: Check if the Backend System provides the notifications Array like it's done here.
+    notifications: [notification], // ODO: Check if the Backend System provides the notifications Array like it's done here.
   };
 }
 
