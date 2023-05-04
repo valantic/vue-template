@@ -14,6 +14,10 @@ export default defineStore(storeName, {
   state: (): State => {
     const initialData = window.initialData?.[storeName];
 
+    if (!initialData) {
+      throw new Error(`Initial data for ${storeName} store missing`);
+    }
+
     return {};
   },
   getters: {},
