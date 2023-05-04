@@ -12,7 +12,7 @@ const storeName = 'myStore'; // TODO: update store name.
 
 export default defineStore(storeName, {
   state: (): State => {
-    const initialData: InitialData = window.initialData?.[storeName] || {};
+    const initialData = window.initialData?.[storeName];
 
     return {};
   },
