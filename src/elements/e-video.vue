@@ -218,13 +218,7 @@
        * Helper to check wether a string matches with entries in an array.
        */
       arrayHasString(arr: string[], searchString: string): boolean {
-        return arr.some((videoSource) => {
-          if (!searchString.startsWith(videoSource)) {
-            return false;
-          }
-
-          return true;
-        });
+        return arr.some(videoSource => searchString.startsWith(videoSource));
       },
     },
   // render() {},
