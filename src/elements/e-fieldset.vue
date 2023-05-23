@@ -61,11 +61,7 @@
 
   .e-fieldset {
     &__legend {
-      @include mixins.font(
-          variables.$font-size--18,
-          22px,
-          variables.$font-weight--regular
-      );
+      @include mixins.font(variables.$font-size--18, 22px, variables.$font-weight--regular);
     }
 
     &__inner {

@@ -16,10 +16,7 @@
            @mouseleave="hover = false"
     >
 
-    <span v-if="$slots.default || !hasDefaultState"
-          ref="slot"
-          :class="b('slot-wrapper')"
-    >
+    <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
       <span v-if="$slots.default" :class="b('slot')">
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
@@ -374,22 +371,19 @@
     }
 
     // placeholder (has to be split in seperate blocks to work on each browser)
-    &__field::-webkit-input-placeholder {
-      // WebKit, Blink, Edge
+    &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
     }
 
-    &__field:-moz-placeholder {
-      // Mozilla Firefox 4 to 18
+    &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
     }
 
-    &__field::placeholder {
-      // Most modern browsers support this now
+    &__field::placeholder { // Most modern browsers support this now
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
@@ -522,9 +516,9 @@
       }
     }
 
-    /*
-       * Notification is visible
-       */
+    /**
+     * Notification is visible
+     */
     &--notification {
       .e-input__field {
         padding: variables.$spacing--5 variables.$spacing--10;

@@ -201,22 +201,19 @@
 
     // placeholder
     // placeholder (has to be split in seperate blocks to work on each browser)
-    &__field::-webkit-input-placeholder {
-      // WebKit, Blink, Edge
+    &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
     }
 
-    &__field:-moz-placeholder {
-      // Mozilla Firefox 4 to 18
+    &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
     }
 
-    &__field::placeholder {
-      // Most modern browsers support this now
+    &__field::placeholder { // Most modern browsers support this now
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
@@ -286,8 +283,8 @@
     }
 
     /**
-       * states
-       */
+     * states
+     */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       .e-textarea__icon-splitter {
@@ -322,8 +319,8 @@
     }
 
     /*
-       * Remove icon in background if notification is visible
-       */
+     * Remove icon in background if notification is visible
+     */
     &--notification {
       .e-textarea__field {
         padding: variables.$spacing--5 variables.$spacing--10;

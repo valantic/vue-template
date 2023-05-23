@@ -8,7 +8,10 @@
             @mouseenter="hover = true"
             @mouseleave="hover = false"
     >
-      <option v-if="placeholder" :disabled="!hasSelectablePlaceholder" value="">
+      <option v-if="placeholder"
+              :disabled="!hasSelectablePlaceholder"
+              value=""
+      >
         {{ placeholder }}
       </option>
       <option v-for="option in options"
@@ -194,12 +197,7 @@
     display: block;
 
     &__select {
-      @include mixins.icon(
-          arrow--down,
-          22px,
-          right 5px center,
-        $mask: false
-      ); // FF does not support mask on <select>.
+      @include mixins.icon(arrow--down, 22px, right 5px center, $mask: false); // FF does not support mask on <select>.
 
       width: 100%;
       height: $height;
@@ -257,19 +255,14 @@
     }
 
     /**
-       * states
-       */
+     * states
+     */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       color: variables.$color-status--error;
 
       #{$this}__select {
-        @include mixins.icon(
-            error,
-            22px,
-            right 5px center,
-            false
-        ); // FF does not support mask on <select>.
+        @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
         border-color: variables.$color-status--error;
       }

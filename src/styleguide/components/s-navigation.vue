@@ -113,8 +113,7 @@
       background-color: variables.$color-grayscale--1000;
       font-family: variables.$font-family--primary;
 
-      &::after {
-        // Toggle
+      &::after { // Toggle
         position: absolute;
         content: '';
         width: $trigger-size;

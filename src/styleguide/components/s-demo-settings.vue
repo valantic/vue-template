@@ -19,10 +19,7 @@
       </e-checkbox>
     </li>
   </ul>
-  <s-api-mock-test v-if="showApiHandlerConfiguration"
-                   @click.stop
-                   @close="showApiHandlerConfiguration = false"
-  />
+  <s-api-mock-test v-if="showApiHandlerConfiguration" @click.stop @close="showApiHandlerConfiguration = false" />
 </template>
 
 <script lang="ts">

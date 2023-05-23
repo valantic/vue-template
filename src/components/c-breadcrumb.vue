@@ -18,10 +18,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import breadcrumb, {
-    TBreadcrumbStore,
-    IBreadcrumbItem,
-  } from '@/stores/breadcrumb';
+  import breadcrumb, { TBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb';
 
   interface ISetup {
     breadcrumbStore: TBreadcrumbStore;
