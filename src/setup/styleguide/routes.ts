@@ -11,6 +11,7 @@ import table from '@/styleguide/routes/r-table.vue';
 import tooltips from '@/styleguide/routes/r-tooltips.vue';
 import googleMaps from '@/styleguide/routes/r-google-maps.vue';
 import picture from '@/styleguide/routes/r-picture.vue';
+import video from '@/styleguide/routes/r-video.vue';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -20,7 +21,7 @@ declare module 'vue-router' {
     };
     query?: {
       [key: string]: string;
-    }
+    };
   }
 }
 
@@ -135,6 +136,14 @@ export default [
         component: picture,
         meta: {
           title: 'Pictures',
+        },
+      },
+      {
+        path: 'video',
+        name: 'Video',
+        component: video,
+        meta: {
+          title: 'Videos',
         },
       },
     ],
