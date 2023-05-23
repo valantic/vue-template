@@ -1,26 +1,24 @@
 <template>
-  <svg
-    v-if="inline"
-    :class="b({ [icon]: true })"
-    :width="viewBox.width"
-    :height="viewBox.height"
-    :aria-hidden="!alt"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    focusable="false"
-    tabindex="-1"
+  <svg v-if="inline"
+       :class="b({ [icon]: true })"
+       :width="viewBox.width"
+       :height="viewBox.height"
+       :aria-hidden="!alt"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       focusable="false"
+       tabindex="-1"
   >
     <title v-if="alt">
       {{ alt }}
     </title>
     <use :xlink:href="`${spritePath}#${icon}`" />
   </svg>
-  <img
-    v-else
-    :src="`${spritePath}#${icon}`"
-    :alt="alt"
-    :width="viewBox.width"
-    :height="viewBox.height"
+  <img v-else
+       :src="`${spritePath}#${icon}`"
+       :alt="alt"
+       :width="viewBox.width"
+       :height="viewBox.height"
   >
 </template>
 
@@ -102,9 +100,7 @@
       viewBox(): ISize {
         const { icon } = this;
         const lookup = sizeLookup[icon];
-        const size = this.size
-          ?.split(' ')
-          .map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize];
+        const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize];
 
         // Auto map height for non square icons.
         if (size.length === 1 && lookup) {
@@ -117,29 +113,29 @@
         };
       },
     },
-  // watch: {},
+    // watch: {},
 
-  // beforeCreate() {},
-  // created() {},
-  // beforeMount() {},
-  // mounted() {},
-  // beforeUpdate() {},
-  // updated() {},
-  // activated() {},
-  // deactivated() {},
-  // beforeDestroy() {},
-  // destroyed() {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeDestroy() {},
+    // destroyed() {},
 
-  // methods: {},
-  // render() {},
+    // methods: {},
+    // render() {},
   });
 </script>
 
 <style lang="scss">
-@use '../setup/scss/variables';
+  @use '../setup/scss/variables';
 
-.e-icon {
-  display: block;
-  pointer-events: none; // Prevents IE11 from swallowing events.
-}
+  .e-icon {
+    display: block;
+    pointer-events: none; // Prevents IE11 from swallowing events.
+  }
 </style>

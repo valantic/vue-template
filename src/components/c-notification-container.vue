@@ -1,10 +1,9 @@
 <template>
   <div :class="b()">
     <transition-group name="list" tag="div">
-      <c-notification
-        v-for="notification in filteredNotifications"
-        :key="notification.id"
-        :notification="notification"
+      <c-notification v-for="notification in filteredNotifications"
+                      :key="notification.id"
+                      :notification="notification"
       />
     </transition-group>
   </div>
@@ -13,13 +12,10 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotification from '@/components/c-notification.vue';
-  import notificationStore, {
-    INotificationItem,
-    TNotificationStore,
-  } from '@/stores/notification';
+  import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
 
   interface ISetup {
-    notificationStore: TNotificationStore;
+    notificationStore: TNotificationStore
   }
 
   /**
@@ -39,7 +35,10 @@
       selector: {
         type: String,
         default: 'default',
-        validator: (value: string) => ['default', 'footer'].includes(value),
+        validator: (value: string) => [
+          'default',
+          'footer',
+        ].includes(value),
       },
     },
 
@@ -58,61 +57,58 @@
        */
       filteredNotifications(): readonly INotificationItem[] {
         if (this.selector !== 'default') {
-          return this.notificationStore.getNotifications.filter(
-            notification => notification.selector === this.selector
-          );
+          return this.notificationStore.getNotifications
+            .filter(notification => notification.selector === this.selector);
         }
 
-        return this.notificationStore.getNotifications.filter(
-          notification => !notification.selector
-        );
+        return this.notificationStore.getNotifications.filter(notification => !notification.selector);
       },
     },
-  // watch: {},
+    // watch: {},
 
-  // beforeCreate() {},
-  // created() {},
-  // beforeMount() {},
-  // mounted() {},
-  // beforeUpdate() {},
-  // updated() {},
-  // activated() {},
-  // deactivated() {},
-  // beforeUnmount() {},
-  // unmounted() {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
-  // methods: {},
-  // render() {},
+    // methods: {},
+    // render() {},
   });
 </script>
 
 <style lang="scss">
-@use '../setup/scss/mixins';
-@use '../setup/scss/variables';
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
 
-.c-notification-container {
-  /* VUE Animation styles */
-  .list-enter-active,
-  .list-leave-active {
-    transition: all variables.$transition-duration--300;
-  }
+  .c-notification-container {
+    /* VUE Animation styles */
+    .list-enter-active,
+    .list-leave-active {
+      transition: all variables.$transition-duration--300;
+    }
 
-  .list-leave-active {
-    position: absolute;
-  }
+    .list-leave-active {
+      position: absolute;
+    }
 
-  .list-enter,
-  .list-leave-to {
-    opacity: 0;
-    transform: translateY(30px);
-  }
+    .list-enter,
+    .list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
 
-  .list-leave-to {
-    transform: translateY(-30px);
-  }
+    .list-leave-to {
+      transform: translateY(-30px);
+    }
 
-  .list-move {
-    transition: transform 1s;
+    .list-move {
+      transition: transform 1s;
+    }
   }
-}
 </style>

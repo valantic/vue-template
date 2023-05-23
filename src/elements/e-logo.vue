@@ -1,16 +1,20 @@
 <template>
   <div :class="b()">
-    <a
-      v-if="$attrs.href"
-      :class="b('link')"
-      :title="logo.title"
-      v-bind="$attrs"
-      tabindex="-1"
+    <a v-if="$attrs.href"
+       :class="b('link')"
+       :title="logo.title"
+       v-bind="$attrs"
+       tabindex="-1"
     >
       <!-- TODO: Check if e-icon is the best way to render the logo -->
-      <e-icon :icon="logo.icon" :alt="logo.alt" />
+      <e-icon :icon="logo.icon"
+              :alt="logo.alt"
+      />
     </a>
-    <e-icon v-else :icon="logo.icon" :alt="logo.alt" />
+    <e-icon v-else
+            :icon="logo.icon"
+            :alt="logo.alt"
+    />
   </div>
 </template>
 
@@ -97,34 +101,34 @@
         };
       },
     },
-  // watch: {},
+    // watch: {},
 
-  // beforeCreate() {},
-  // created() {},
-  // beforeMount() {},
-  // mounted() {},
-  // beforeUpdate() {},
-  // updated() {},
-  // activated() {},
-  // deactivated() {},
-  // beforeUnmount() {},
-  // unmounted() {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
-  // methods: {},
-  // render() {},
+    // methods: {},
+    // render() {},
   });
 </script>
 
 <style lang="scss">
-.e-logo {
-  &__link,
-  &__link:hover,
-  &__link:focus {
-    display: inline-block;
-    width: 100%;
-    padding: 0;
-    border-bottom: 0;
-    text-decoration: none;
+  .e-logo {
+    &__link,
+    &__link:hover,
+    &__link:focus {
+      display: inline-block;
+      width: 100%;
+      padding: 0;
+      border-bottom: 0;
+      text-decoration: none;
+    }
   }
-}
 </style>

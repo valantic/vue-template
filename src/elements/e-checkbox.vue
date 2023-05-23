@@ -1,20 +1,18 @@
 <template>
-  <label
-    :class="b(modifiers)"
-    @mouseenter="hover = true"
-    @mouseleave="hover = false"
+  <label :class="b(modifiers)"
+         @mouseenter="hover = true"
+         @mouseleave="hover = false"
   >
-    <input
-      v-model="internalValue"
-      v-bind="$attrs"
-      :class="b('field')"
-      :aria-checked="isChecked ? 'true' : 'false'"
-      :disabled="disabled"
-      :value="value"
-      :name="name"
-      type="checkbox"
-      @blur="onBlur"
-      @focus="onFocus"
+    <input v-model="internalValue"
+           v-bind="$attrs"
+           :class="b('field')"
+           :aria-checked="isChecked ? 'true' : 'false'"
+           :disabled="disabled"
+           :value="value"
+           :name="name"
+           type="checkbox"
+           @blur="onBlur"
+           @focus="onFocus"
     >
     <span :class="b('indicator')"></span>
     <span :class="b('label-text')">
@@ -25,10 +23,7 @@
 
 <script lang="ts">
   import { defineComponent, PropType, toRefs } from 'vue';
-  import useFormStates, {
-    IFormStates,
-    withProps,
-  } from '@/compositions/form-states';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
   import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
@@ -73,7 +68,10 @@
       variant: {
         type: String,
         default: 'default',
-        validator: (value: string) => ['default', 'toggle'].includes(value),
+        validator: (value: string) => [
+          'default',
+          'toggle',
+        ].includes(value),
       },
     },
 
@@ -167,153 +165,153 @@
         this.$emit('blur');
       },
     },
-  // render() {},
+    // render() {},
   });
 </script>
 
 <style lang="scss">
-@use 'sass:math';
-@use '../setup/scss/mixins';
-@use '../setup/scss/variables';
+  @use 'sass:math';
+  @use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
 
-.e-checkbox {
-  $this: &;
-  $label-size: 16px;
+  .e-checkbox {
+    $this: &;
+    $label-size: 16px;
 
-  @include mixins.font(variables.$font-size--16, 22px);
+    @include mixins.font(variables.$font-size--16, 22px);
 
-  position: relative;
-  display: block;
-  cursor: pointer;
-
-  &__field {
-    position: absolute;
-    left: -200vw;
-    -webkit-appearance: none;
-  }
-
-  &--variant-default {
-    display: flex;
-    align-items: center;
-
-    #{$this}__indicator {
-      position: relative;
-      display: flex;
-      flex: 0 0 auto;
-      align-items: center;
-      width: $label-size;
-      height: $label-size;
-      border: 1px solid variables.$color-grayscale--400;
-      border-radius: 3px;
-      background: variables.$color-grayscale--1000;
-
-      &::before {
-        content: '';
-        width: $label-size;
-        height: $label-size;
-        opacity: 0;
-        border: 1px solid transparent;
-        border-radius: 3px;
-        background: variables.$color-grayscale--0;
-        transform: scale(0);
-        transition-timing-function: ease-in-out;
-        transition-duration: 100ms;
-        transition-property: opacity, transform;
-        inset: 0;
-      }
-    }
-
-    #{$this}__field:checked {
-      ~ #{$this}__indicator::before {
-        opacity: 1;
-        transform: scale(0.6);
-      }
-    }
-  }
-
-  &--variant-toggle {
-    $toggle--size: 1rem;
-
-    display: flex;
-    align-items: center;
+    position: relative;
+    display: block;
     cursor: pointer;
 
-    #{$this}__indicator {
-      position: relative;
-      width: 1.5 * $toggle--size;
-      height: math.div($toggle--size, 3) * 2;
-      margin: 0 math.div($toggle--size, 2);
-      border-radius: $toggle--size;
-      background-color: variables.$color-grayscale--500;
-      transition: background-color variables.$transition-duration--300;
-
-      &::before {
-        position: absolute;
-        top: 50%;
-        left: math.div($toggle--size, -2);
-        content: '';
-        width: $toggle--size;
-        height: $toggle--size;
-        border-radius: 50%;
-        background-color: variables.$color-grayscale--1000;
-        box-shadow: 0 1px 2px 1px rgba(variables.$color-grayscale--0, 0.2);
-        transform: translateY(-50%);
-        transition: left variables.$transition-duration--300;
-      }
+    &__field {
+      position: absolute;
+      left: -200vw;
+      -webkit-appearance: none;
     }
 
-    #{$this}__field {
-      &:checked ~ #{$this}__indicator {
+    &--variant-default {
+      display: flex;
+      align-items: center;
+
+      #{$this}__indicator {
+        position: relative;
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        width: $label-size;
+        height: $label-size;
+        border: 1px solid variables.$color-grayscale--400;
+        border-radius: 3px;
+        background: variables.$color-grayscale--1000;
+
         &::before {
-          left: calc(100% - (#{$toggle--size} / 2));
-          background-color: variables.$color-grayscale--0;
-          transform: translateY(-50%);
+          content: '';
+          width: $label-size;
+          height: $label-size;
+          opacity: 0;
+          border: 1px solid transparent;
+          border-radius: 3px;
+          background: variables.$color-grayscale--0;
+          transform: scale(0);
+          transition-timing-function: ease-in-out;
+          transition-duration: 100ms;
+          transition-property: opacity, transform;
+          inset: 0;
+        }
+      }
+
+      #{$this}__field:checked {
+        ~ #{$this}__indicator::before {
+          opacity: 1;
+          transform: scale(0.6);
         }
       }
     }
-  }
 
-  &__label-text {
-    display: block;
-    margin: 0;
-    padding-left: variables.$spacing--10;
+    &--variant-toggle {
+      $toggle--size: 1rem;
 
-    &:hover {
-      color: variables.$color-grayscale--0;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
 
-      &::before {
-        border-color: variables.$color-grayscale--0;
+      #{$this}__indicator {
+        position: relative;
+        width: 1.5 * $toggle--size;
+        height: math.div($toggle--size, 3) * 2;
+        margin: 0 math.div($toggle--size, 2);
+        border-radius: $toggle--size;
+        background-color: variables.$color-grayscale--500;
+        transition: background-color variables.$transition-duration--300;
+
+        &::before {
+          position: absolute;
+          top: 50%;
+          left: math.div($toggle--size, -2);
+          content: '';
+          width: $toggle--size;
+          height: $toggle--size;
+          border-radius: 50%;
+          background-color: variables.$color-grayscale--1000;
+          box-shadow: 0 1px 2px 1px rgba(variables.$color-grayscale--0, 0.2);
+          transform: translateY(-50%);
+          transition: left variables.$transition-duration--300;
+        }
+      }
+
+      #{$this}__field {
+        &:checked ~ #{$this}__indicator {
+          &::before {
+            left: calc(100% - (#{$toggle--size} / 2));
+            background-color: variables.$color-grayscale--0;
+            transform: translateY(-50%);
+          }
+        }
       }
     }
-  }
 
-  &__field:checked {
-    ~ #{$this}__label-text {
-      color: variables.$color-grayscale--0;
+    &__label-text {
+      display: block;
+      margin: 0;
+      padding-left: variables.$spacing--10;
+
+      &:hover {
+        color: variables.$color-grayscale--0;
+
+        &::before {
+          border-color: variables.$color-grayscale--0;
+        }
+      }
     }
-  }
 
-  &__field:disabled + &__label-text {
-    cursor: default;
-    color: variables.$color-grayscale--500;
+    &__field:checked {
+      ~ #{$this}__label-text {
+        color: variables.$color-grayscale--0;
+      }
+    }
 
-    &:hover {
+    &__field:disabled + &__label-text {
+      cursor: default;
       color: variables.$color-grayscale--500;
+
+      &:hover {
+        color: variables.$color-grayscale--500;
+
+        &::before {
+          border-color: variables.$color-grayscale--500;
+        }
+      }
 
       &::before {
         border-color: variables.$color-grayscale--500;
       }
     }
 
-    &::before {
-      border-color: variables.$color-grayscale--500;
+    &__field:checked:disabled + &__label-text {
+      &::after {
+        background: variables.$color-grayscale--500;
+      }
     }
   }
-
-  &__field:checked:disabled + &__label-text {
-    &::after {
-      background: variables.$color-grayscale--500;
-    }
-  }
-}
 </style>

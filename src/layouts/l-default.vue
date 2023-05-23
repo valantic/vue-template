@@ -15,7 +15,7 @@
   import notificationStore, { TNotificationStore } from '@/stores/notification';
 
   interface ISetup {
-    notificationStore: TNotificationStore;
+    notificationStore: TNotificationStore
   }
 
   export default defineComponent({
@@ -68,42 +68,40 @@
             window.localStorage.removeItem('vueNotification');
           }
         } catch (error) {
-          throw new Error(
-            'An error occurred why retrieving messages from the localStorage.'
-          );
+          throw new Error('An error occurred why retrieving messages from the localStorage.');
         }
       },
     },
-  // render() {},
+    // render() {},
   });
 </script>
 
 <style lang="scss">
-@use '../setup/scss/variables';
-@use '../setup/scss/mixins';
+  @use '../setup/scss/variables';
+  @use '../setup/scss/mixins';
 
-.l-default {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  .l-default {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 
-  &__content {
-    flex: 1 0 auto;
-    background: variables.$color-grayscale--600;
+    &__content {
+      flex: 1 0 auto;
+      background: variables.$color-grayscale--600;
+    }
+
+    &__inner {
+      position: relative;
+      max-width: #{map-get(variables.$breakpoints, xl) - 20px};
+      margin: 0 auto;
+      background: variables.$color-grayscale--1000;
+      box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
+    }
+
+    .c-notification-container {
+      @include mixins.z-index(globalNotification);
+
+      position: absolute;
+    }
   }
-
-  &__inner {
-    position: relative;
-    max-width: #{map-get(variables.$breakpoints, xl) - 20px};
-    margin: 0 auto;
-    background: variables.$color-grayscale--1000;
-    box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
-  }
-
-  .c-notification-container {
-    @include mixins.z-index(globalNotification);
-
-    position: absolute;
-  }
-}
 </style>
