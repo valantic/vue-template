@@ -12,7 +12,7 @@
            :class="b('tab', { [tab.id]: true, active: tab.id === activeTab?.id })"
            :aria-selected="tab.id === activeTab?.id"
            :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
-           :href="tab.link?.href || `#${tab.id}`"
+           :href="tab.link?.href || `#c-tabs-${uuid}--panel-${tab.id}`"
            :target="tab.link?.target || LINK_TARGET.SELF"
            :rel="tab.link?.target === LINK_TARGET.BLANK ? 'noopener noreferrer' : undefined"
            role="tab"
