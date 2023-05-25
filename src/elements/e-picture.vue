@@ -29,7 +29,7 @@
   }
 
   interface ISizePerBreakpoint {
-    [key: string]: number
+    [key: string]: number;
   }
 
   interface IData {

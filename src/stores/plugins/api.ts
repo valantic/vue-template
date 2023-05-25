@@ -46,12 +46,12 @@ export const axiosInstance: AxiosInstance = axios.create({
 });
 
 interface IPluginApi {
-  $api: IApi,
+  $api: IApi;
 }
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
-    $api: IApi
+    $api: IApi;
   }
 }
 

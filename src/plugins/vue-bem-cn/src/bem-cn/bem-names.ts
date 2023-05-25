@@ -3,7 +3,7 @@ import { isString, isNumber } from '../utils';
 
 interface IModifiers {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
+  [key: string]: any;
 }
 
 interface IEntities {

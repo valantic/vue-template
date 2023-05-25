@@ -7,5 +7,5 @@ export interface IInitialData {
 }
 
 declare global {
-  interface Window { initialData: IInitialData; }
+  interface Window { initialData: IInitialData }
 }

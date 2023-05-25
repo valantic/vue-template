@@ -46,25 +46,25 @@ interface IAddShippingInfoPayload {
 export interface IGtm {
   push(payload: Record<string, unknown>): void;
   pushAddToCart(item: IListItem, list: GA_LIST_NAMES): void;
-  pushLogin(): void,
-  pushSignUp(): void,
-  pushSearch(searchTerm: string): void,
-  pushViewItemList(items: IListItem[], list: GA_LIST_NAMES): void,
-  pushViewItem(item: IListItem): void,
-  pushViewCart(items: IListItem[], value: number, currency: string): void,
-  pushRemoveFromCart(items: IListItem): void,
-  pushAddToWishlist(item: IListItem): void,
-  pushBeginCheckout(items: IListItem[], value: number, currency: string): void,
-  pushSelectItem(item: IListItem, list: GA_LIST_NAMES): void,
-  pushPurchase(payload: IPurchasePayload): void,
-  pushAddPaymentInfo(payload: IAddPaymentInfoPayload): void,
-  pushAddShippingInfo(payload: IAddShippingInfoPayload): void,
+  pushLogin(): void;
+  pushSignUp(): void;
+  pushSearch(searchTerm: string): void;
+  pushViewItemList(items: IListItem[], list: GA_LIST_NAMES): void;
+  pushViewItem(item: IListItem): void;
+  pushViewCart(items: IListItem[], value: number, currency: string): void;
+  pushRemoveFromCart(items: IListItem): void;
+  pushAddToWishlist(item: IListItem): void;
+  pushBeginCheckout(items: IListItem[], value: number, currency: string): void;
+  pushSelectItem(item: IListItem, list: GA_LIST_NAMES): void;
+  pushPurchase(payload: IPurchasePayload): void;
+  pushAddPaymentInfo(payload: IAddPaymentInfoPayload): void;
+  pushAddShippingInfo(payload: IAddShippingInfoPayload): void;
   debug(enable: boolean): void;
 }
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  interface Window { dataLayer: Record<string, unknown>[]; }
+  interface Window { dataLayer: Record<string, unknown>[] }
 }
 
 /**
