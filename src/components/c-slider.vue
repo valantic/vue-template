@@ -25,14 +25,14 @@
 </template>
 
 <script lang="ts">
-  import EmblaCarousel, { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
-  import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay'
+  import EmblaCarousel, { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
+  import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay';
   import {
     defineComponent, PropType,
     Ref,
     ref,
-  } from 'vue'
-  import eIcon from '@/elements/e-icon.vue'
+  } from 'vue';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
     stage: Ref<HTMLDivElement>;
@@ -86,11 +86,11 @@
     // emits: {},
 
     setup(): ISetup {
-      const stage = ref()
+      const stage = ref();
 
       return {
         stage,
-      }
+      };
     },
     data(): IData {
       return {
@@ -99,7 +99,7 @@
         activePage: 0,
         slidesPerPage: 0,
         noOfPages: 0,
-      }
+      };
     },
 
     computed: {
@@ -109,7 +109,7 @@
        * @returns {Boolean}
        */
       disablePrevious(): boolean {
-        return !this.options?.loop && this.activeSlide === 0
+        return !this.options?.loop && this.activeSlide === 0;
       },
 
       /**
@@ -118,7 +118,7 @@
        * @returns {Boolean}
        */
       disableNext(): boolean {
-        return !this.options?.loop && this.activePage === this.noOfPages - 1
+        return !this.options?.loop && this.activePage === this.noOfPages - 1;
       },
     },
     // watch: {},
@@ -127,10 +127,10 @@
     // created() {},
     // beforeMount() {},
     mounted() {
-      const plugins: EmblaPluginType[] = []
+      const plugins: EmblaPluginType[] = [];
 
       if (this.autoPlay) {
-        plugins.push(Autoplay(this.autoPlayOptions)) // eslint-disable-line new-cap
+        plugins.push(Autoplay(this.autoPlayOptions)); // eslint-disable-line new-cap
       }
 
       this.emblaInstance = EmblaCarousel(this.stage as HTMLElement, { // eslint-disable-line new-cap
@@ -138,17 +138,17 @@
         skipSnaps: true,
         containScroll: 'keepSnaps',
         ...this.options,
-      }, plugins)
-      this.emblaInstance.on('select', this.onEmblaSelect)
-      this.emblaInstance.on('init', this.onEmblaInit)
-      this.emblaInstance.on('resize', this.onEmblaResize)
+      }, plugins);
+      this.emblaInstance.on('select', this.onEmblaSelect);
+      this.emblaInstance.on('init', this.onEmblaInit);
+      this.emblaInstance.on('resize', this.onEmblaResize);
     },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
     beforeUnmount() {
-      this.emblaInstance?.destroy()
+      this.emblaInstance?.destroy();
     },
     // unmounted() {},
 
@@ -157,74 +157,74 @@
        * Event handler for the sliders init event.
        */
       onEmblaInit(): void {
-        this.updateActiveSlide()
-        this.updateSlidesPerPage()
+        this.updateActiveSlide();
+        this.updateSlidesPerPage();
       },
 
       /**
        * Event handler for the sliders select event.
        */
       onEmblaSelect(): void {
-        this.updateActiveSlide()
-        this.updateActivePage()
+        this.updateActiveSlide();
+        this.updateActivePage();
       },
 
       /**
        * Event handler for the resize event of the slider instance.
        */
       onEmblaResize(): void {
-        this.updateSlidesPerPage()
+        this.updateSlidesPerPage();
       },
 
       /**
        * Scrolls to next page.
        */
       nextPage(): void {
-        this.scrollToPage(this.activePage + 1)
+        this.scrollToPage(this.activePage + 1);
       },
 
       /**
        * Scrolls to previous page.
        */
       previousPage(): void {
-        this.scrollToPage(this.activePage - 1)
+        this.scrollToPage(this.activePage - 1);
       },
 
       /**
        * Scrolls to given page.
        */
       scrollToPage(page: number): void {
-        const slideByPage = page * this.slidesPerPage
+        const slideByPage = page * this.slidesPerPage;
 
-        this.emblaInstance?.scrollTo(slideByPage)
+        this.emblaInstance?.scrollTo(slideByPage);
       },
 
       /**
        * Recalculates the amount of slides per page.
        */
       updateSlidesPerPage(): void {
-        const totalNumberOfSlides = this.emblaInstance?.slideNodes().length
+        const totalNumberOfSlides = this.emblaInstance?.slideNodes().length;
 
-        this.slidesPerPage = this.emblaInstance?.slidesInView().length || 1
-        this.noOfPages = totalNumberOfSlides ? Math.ceil(totalNumberOfSlides / this.slidesPerPage) : 1
+        this.slidesPerPage = this.emblaInstance?.slidesInView().length || 1;
+        this.noOfPages = totalNumberOfSlides ? Math.ceil(totalNumberOfSlides / this.slidesPerPage) : 1;
       },
 
       /**
        * Updates the active page.
        */
       updateActivePage(): void {
-        this.activePage = Math.floor((this.emblaInstance?.selectedScrollSnap() || 0) / this.slidesPerPage)
+        this.activePage = Math.floor((this.emblaInstance?.selectedScrollSnap() || 0) / this.slidesPerPage);
       },
 
       /**
        * Updates active slide state.
        */
       updateActiveSlide(): void {
-        this.activeSlide = this.emblaInstance?.selectedScrollSnap() || 0
+        this.activeSlide = this.emblaInstance?.selectedScrollSnap() || 0;
       },
     },
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

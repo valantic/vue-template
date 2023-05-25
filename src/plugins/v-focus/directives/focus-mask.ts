@@ -1,13 +1,13 @@
-import state from '../state'
+import state from '../state';
 
 /**
  * Adds or removes a focus class to the given element based on the current focus state.
  */
 function update(el: HTMLElement): void {
   if (state.enabled) { // This will also make the directive reactive to the observable.
-    el.classList.add('focus-mask')
+    el.classList.add('focus-mask');
   } else {
-    el.classList.remove('focus-mask')
+    el.classList.remove('focus-mask');
   }
 }
 
@@ -19,4 +19,4 @@ export default {
 
   beforeMount: update,
   updated: update,
-}
+};

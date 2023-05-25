@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import breadcrumb, { TBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb'
+  import { defineComponent } from 'vue';
+  import breadcrumb, { TBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb';
 
   interface ISetup {
     breadcrumbStore: TBreadcrumbStore
@@ -39,7 +39,7 @@
     setup(): ISetup {
       return {
         breadcrumbStore: breadcrumb(),
-      }
+      };
     },
     // data() {
     //   return {};
@@ -50,7 +50,7 @@
        * Returns an Array of breadcrumb items.
        */
       getItems(): readonly IBreadcrumbItem[] {
-        return this.breadcrumbStore.getItems
+        return this.breadcrumbStore.getItems;
       },
     },
     // watch: {},
@@ -68,7 +68,7 @@
 
     // methods: {},
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

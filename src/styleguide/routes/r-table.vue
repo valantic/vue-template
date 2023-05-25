@@ -17,9 +17,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { faker } from '@faker-js/faker/locale/en'
-  import eTable, { IETableColumn, IETableItem } from '@/elements/e-table.vue'
+  import { defineComponent } from 'vue';
+  import { faker } from '@faker-js/faker/locale/en';
+  import eTable, { IETableColumn, IETableItem } from '@/elements/e-table.vue';
 
   interface ISetup {
     columnsDefinition: IETableColumn[];
@@ -81,12 +81,12 @@
           },
 
         ],
-      }
+      };
     },
     data() {
       return {
         selectedItems: [],
-      }
+      };
     },
 
     computed: {
@@ -102,7 +102,7 @@
             city: faker.address.city(),
             company: faker.company.name(),
             children: 3,
-          }))
+          }));
       },
     },
     // watch: {},
@@ -120,7 +120,7 @@
 
     // methods: {},
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

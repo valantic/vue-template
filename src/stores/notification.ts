@@ -3,9 +3,9 @@ import {
   defineStore,
   StateTree,
   _GettersTree,
-} from 'pinia'
-import { IS_STORAGE_AVAILABLE, STORE } from '@/setup/globals'
-import i18n from '@/setup/i18n'
+} from 'pinia';
+import { IS_STORAGE_AVAILABLE, STORE } from '@/setup/globals';
+import i18n from '@/setup/i18n';
 
 export interface INotificationItem {
   id: number;
@@ -67,25 +67,25 @@ const NOTIFICATION_UNKNOWN_ERROR: INotificationItem = {
   id: 0,
   type: 'error',
   message: i18n.global.t('globalMessages.unknownApiError'),
-}
+};
 
-const storeName = STORE.NOTIFICATION
+const storeName = STORE.NOTIFICATION;
 
-let currentId = 1
+let currentId = 1;
 
 /**
  * Handles notification redirects.
  */
 function handleRedirect(notification: INotificationItem): void {
-  const { redirectUrl } = notification || {}
+  const { redirectUrl } = notification || {};
 
   if (redirectUrl && IS_STORAGE_AVAILABLE) {
     localStorage.setItem('notification', JSON.stringify({
       ...notification,
       redirectUrl: null,
-    }))
+    }));
 
-    window.location.href = redirectUrl
+    window.location.href = redirectUrl;
   }
 }
 
@@ -93,56 +93,56 @@ function handleRedirect(notification: INotificationItem): void {
  * Adds a unique ID to a notification.
  */
 function addId(notification: INotificationItem): INotificationItem {
-  currentId += 1
+  currentId += 1;
 
   return {
     ...notification,
     id: currentId,
-  }
+  };
 }
 
 export default defineStore<typeof storeName, INotificationState, INotificationGetters, INotificationActions>(storeName, {
   state: (): INotificationState => {
-    const initialData: IInitialStoreData = window.initialData?.[storeName] || {}
+    const initialData: IInitialStoreData = window.initialData?.[storeName] || {};
 
     const state: INotificationState = {
       notifications: [],
-    }
+    };
 
     if (Array.isArray(initialData.notifications) && initialData.notifications.length) {
       state.notifications = initialData.notifications.map((notification) => {
-        handleRedirect(notification)
+        handleRedirect(notification);
 
-        return addId(notification)
-      })
+        return addId(notification);
+      });
 
-      delete initialData.notifications
+      delete initialData.notifications;
     }
 
-    return state
+    return state;
   },
   getters: {
     getNotifications(state) {
-      return state.notifications
+      return state.notifications;
     },
   },
   actions: {
     showNotification(notification) {
-      handleRedirect(notification)
+      handleRedirect(notification);
 
-      const mappedNotification = addId(notification)
+      const mappedNotification = addId(notification);
 
-      this.notifications.push(mappedNotification)
+      this.notifications.push(mappedNotification);
 
-      return mappedNotification
+      return mappedNotification;
     },
 
     popNotification(id) {
-      this.notifications = this.notifications.filter(notification => notification.id !== id)
+      this.notifications = this.notifications.filter(notification => notification.id !== id);
     },
 
     showUnknownError() {
-      this.showNotification(NOTIFICATION_UNKNOWN_ERROR)
+      this.showNotification(NOTIFICATION_UNKNOWN_ERROR);
     },
   },
-})
+});

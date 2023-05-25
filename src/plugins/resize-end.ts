@@ -1,5 +1,5 @@
-import { Plugin } from 'vue'
-import { RESIZE_DEBOUNCE } from '@/setup/globals'
+import { Plugin } from 'vue';
+import { RESIZE_DEBOUNCE } from '@/setup/globals';
 
 /**
  * Defines a custom 'resizeend' event which debounces the native
@@ -9,19 +9,19 @@ import { RESIZE_DEBOUNCE } from '@/setup/globals'
  */
 const plugin: Plugin = {
   install(/* app */) {
-    const event = document.createEvent('CustomEvent')
-    let debounce: ReturnType<typeof setTimeout>
+    const event = document.createEvent('CustomEvent');
+    let debounce: ReturnType<typeof setTimeout>;
 
-    event.initCustomEvent('resizeend', true, true, {})
+    event.initCustomEvent('resizeend', true, true, {});
 
     window.addEventListener('resize', () => {
-      clearTimeout(debounce)
+      clearTimeout(debounce);
 
       debounce = setTimeout(() => {
-        window.dispatchEvent(event)
-      }, RESIZE_DEBOUNCE)
-    })
+        window.dispatchEvent(event);
+      }, RESIZE_DEBOUNCE);
+    });
   },
-}
+};
 
-export default plugin
+export default plugin;

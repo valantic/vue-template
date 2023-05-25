@@ -23,9 +23,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, toRefs } from 'vue'
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states'
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import { defineComponent, PropType, toRefs } from 'vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Checkbox component for form elements.
@@ -82,7 +82,7 @@
     setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
-      }
+      };
     },
 
     // data() {
@@ -97,7 +97,7 @@
         return {
           ...this.stateModifiers,
           variant: this.variant,
-        }
+        };
       },
 
       /**
@@ -105,16 +105,16 @@
        */
       internalValue: {
         get(): boolean | string[] | number[] {
-          return this.modelValue
+          return this.modelValue;
         },
         set(value: boolean | string[] | number[]) {
           /**
            * Emits checkbox value e.g. true/false or value
            */
-          this.$emit('update:modelValue', value)
+          this.$emit('update:modelValue', value);
 
           // event needed for the multiselect
-          this.$emit('change', value)
+          this.$emit('change', value);
         },
       },
 
@@ -124,7 +124,7 @@
       isChecked() {
         return Array.isArray(this.value)
           ? this.value.includes(this.modelValue)
-          : this.value
+          : this.value;
       },
     },
     // watch: {},
@@ -146,12 +146,12 @@
        * Update "hasFocus" state.
        */
       onFocus() {
-        this.focus = true
+        this.focus = true;
 
         /**
          * Focus event
          */
-        this.$emit('focus')
+        this.$emit('focus');
       },
 
       /**
@@ -159,16 +159,16 @@
        * Update "hasFocus" state.
        */
       onBlur() {
-        this.focus = false
+        this.focus = false;
 
         /**
          * Blur event.
          */
-        this.$emit('blur')
+        this.$emit('blur');
       },
     },
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

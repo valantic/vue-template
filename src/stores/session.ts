@@ -3,8 +3,8 @@ import {
   defineStore,
   StateTree,
   _GettersTree,
-} from 'pinia'
-import { STORE } from '@/setup/globals'
+} from 'pinia';
+import { STORE } from '@/setup/globals';
 
 interface ISessionState extends StateTree {
 
@@ -37,29 +37,29 @@ interface ISessionActions {
 
 export type TSessionStore = Store<string, ISessionState, ISessionGetters, ISessionActions>;
 
-const storeName = STORE.SESSION
+const storeName = STORE.SESSION;
 
 export default defineStore<typeof storeName, ISessionState, ISessionGetters, ISessionActions>(storeName, {
   state: (): ISessionState => {
     const state: ISessionState = {
       theme: 'theme-01',
       googleMapsApiKey: null,
-    }
+    };
 
     if (import.meta.env.DEV) {
-      state.googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string
+      state.googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;
     }
 
-    return state
+    return state;
   },
   getters: {
     getTheme(state): string {
-      return state.theme
+      return state.theme;
     },
   },
   actions: {
     setTheme(id) {
-      this.theme = id
+      this.theme = id;
     },
   },
-})
+});

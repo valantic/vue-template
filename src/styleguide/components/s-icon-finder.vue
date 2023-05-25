@@ -67,9 +67,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, Ref, ref } from 'vue'
-  import spritePath from '@/assets/icons.svg'
-  import eIcon from '@/elements/e-icon.vue'
+  import { defineComponent, Ref, ref } from 'vue';
+  import spritePath from '@/assets/icons.svg';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
     input: Ref<HTMLInputElement | null>;
@@ -117,7 +117,7 @@
     name: string;
   }
 
-  const icons = import.meta.glob('@/assets/icons/*.svg')
+  const icons = import.meta.glob('@/assets/icons/*.svg');
 
   export default defineComponent({
     name: 's-icon-finder',
@@ -128,11 +128,11 @@
     // props: {}, 
 
     setup(): ISetup {
-      const input = ref()
+      const input = ref();
 
       return {
         input,
-      }
+      };
     },
 
     data(): IData {
@@ -148,7 +148,7 @@
         color: '#000000',
         variant: 'inline',
         spritePath,
-      }
+      };
     },
 
     // components: {},
@@ -157,14 +157,14 @@
        * Returns an array of query filtered icons.
        */
       filteredIcons(): IFilteredIcon[] {
-        const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1)
+        const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);
 
         return list.map((icon: string) => { // eslint-disable-line arrow-body-style
           return {
             name: icon,
             negative: Boolean(icon.match(/negative/)),
-          }
-        })
+          };
+        });
       },
     },
     methods: {
@@ -172,43 +172,43 @@
        * Event handler for copy to clipboard button.
        */
       copyToClipboard(icon: IIcon) {
-        const hiddenInput = this.input as HTMLInputElement
-        let template
+        const hiddenInput = this.input as HTMLInputElement;
+        let template;
 
         switch (this.variant) {
           case 'mask':
-            template = `@include mixins.icon(${icon.name});`
-            break
+            template = `@include mixins.icon(${icon.name});`;
+            break;
 
           case 'css':
-            template = `background-image: url('@/assets/icons.svg#${icon.name}');`
-            break
+            template = `background-image: url('@/assets/icons.svg#${icon.name}');`;
+            break;
 
           case 'image':
-            template = `<e-icon icon="${icon.name}" :inline="false" />`
-            break
+            template = `<e-icon icon="${icon.name}" :inline="false" />`;
+            break;
 
           default:
-            template = `<e-icon icon="${icon.name}"/>`
+            template = `<e-icon icon="${icon.name}"/>`;
         }
 
-        hiddenInput.value = template
-        hiddenInput.select()
+        hiddenInput.value = template;
+        hiddenInput.select();
 
-        document.execCommand('Copy')
+        document.execCommand('Copy');
 
-        this.setNotification(`copied! - ${template}`)
+        this.setNotification(`copied! - ${template}`);
 
         setTimeout(() => {
-          this.setNotification('')
-        }, 2000)
+          this.setNotification('');
+        }, 2000);
       },
 
       /**
        * Shows the given notification.
        */
       setNotification(message: string) {
-        this.notification = message
+        this.notification = message;
       },
     },
     // watch: {},
@@ -223,7 +223,7 @@
     // deactivated() {},
     // beforeUnmount() {},
     // unmounted() {},
-  })
+  });
 </script>
 
 <style lang="scss">

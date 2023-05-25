@@ -25,10 +25,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import propScale from '@/helpers/prop.scale'
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
-  import eProgress from './e-progress.vue'
+  import { defineComponent } from 'vue';
+  import propScale from '@/helpers/prop.scale';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eProgress from './e-progress.vue';
 
   interface IAttributes {
     role: string | null;
@@ -156,7 +156,7 @@
 
     emits: {
       click(payload: Event): boolean {
-        return typeof payload === 'object'
+        return typeof payload === 'object';
       },
     },
 
@@ -181,7 +181,7 @@
          * Determines if the current device uses touch.
          */
         hasTouch: false,
-      }
+      };
     },
 
     computed: {
@@ -200,7 +200,7 @@
           focus: this.focus || this.hasFocus,
           active: this.active || this.isActive,
           touch: this.hasTouch,
-        }
+        };
       },
 
       /**
@@ -211,7 +211,7 @@
           role: this.$attrs.href ? 'button' : null, // Fallback
           ...this.$attrs,
           disabled: this.disabled || this.progress,
-        }
+        };
       },
 
       /**
@@ -220,14 +220,14 @@
       style(): IElementDimensions | null {
         return this.progress && this.width !== 'full'
           ? this.getElementDimensions()
-          : null
+          : null;
       },
 
       /**
        * Gets the type of the component (DOM element).
        */
       type(): string {
-        return this.element || (this.$attrs.href ? 'a' : 'button')
+        return this.element || (this.$attrs.href ? 'a' : 'button');
       },
     },
     // watch: {},
@@ -248,70 +248,70 @@
        * Mouseenter event handler.
        */
       onMouseEnter() {
-        this.hasHover = true
+        this.hasHover = true;
       },
 
       /**
        * Mouseleave event handler.
        */
       onMouseLeave() {
-        this.hasHover = false
-        this.isActive = false
+        this.hasHover = false;
+        this.isActive = false;
       },
 
       /**
        * Mousedown event handler.
        */
       onMouseDown() {
-        this.isActive = true
+        this.isActive = true;
       },
 
       /**
        * Mouseup event handler.
        */
       onMouseUp() {
-        this.isActive = false
+        this.isActive = false;
       },
 
       /**
        * Focus event handler.
        */
       onFocus() {
-        this.hasFocus = true
+        this.hasFocus = true;
       },
 
       /**
        * Blur event handler.
        */
       onBlur() {
-        this.hasHover = false
-        this.hasFocus = false
+        this.hasHover = false;
+        this.hasFocus = false;
       },
 
       /**
        * Click event handler.
        */
       onClick(event: Event): void {
-        this.$el.blur()
+        this.$el.blur();
 
         /**
          * Click event
          */
-        this.$emit('click', event)
+        this.$emit('click', event);
       },
 
       /**
        * Returns the current width and height of the button.
        */
       getElementDimensions(): IElementDimensions | null {
-        const element = this.$el
+        const element = this.$el;
 
         return element
           ? { width: `${element.offsetWidth}px`, height: `${element.offsetHeight}px` }
-          : null
+          : null;
       },
     },
-  })
+  });
 </script>
 
 <style lang="scss">

@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import ePicture, { IImageSizes } from '@/elements/e-picture.vue'
+  import { defineComponent } from 'vue';
+  import ePicture, { IImageSizes } from '@/elements/e-picture.vue';
 
   // interface ISetup {}
   interface IData {
@@ -40,7 +40,7 @@
           sm: 400,
           md: 800,
         },
-      }
+      };
     },
 
     // computed: {},
@@ -59,5 +59,5 @@
 
     // methods: {},
     // render() {},
-  })
+  });
 </script>

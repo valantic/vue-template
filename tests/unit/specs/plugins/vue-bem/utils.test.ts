@@ -1,83 +1,83 @@
 /* eslint-disable no-undefined */
-import { describe, test, expect } from 'vitest'
+import { describe, test, expect } from 'vitest';
 import {
   isString,
   isPObject,
   hyphenate,
   isNumber,
-} from '@/plugins/vue-bem-cn/src/utils'
+} from '@/plugins/vue-bem-cn/src/utils';
 
 describe('isString', () => {
   test('Expected false for undefined', () => {
-    expect(isString(undefined)).not.toBeTruthy()
-  })
+    expect(isString(undefined)).not.toBeTruthy();
+  });
 
   test('Expected false for numbers', () => {
-    expect(isString(123)).not.toBeTruthy()
-  })
+    expect(isString(123)).not.toBeTruthy();
+  });
 
   test('Expected false for Object', () => {
-    expect(isString({})).not.toBeTruthy()
-  })
+    expect(isString({})).not.toBeTruthy();
+  });
 
   test('Expected false for bool', () => {
-    expect(isNumber(false)).not.toBeTruthy()
-  })
+    expect(isNumber(false)).not.toBeTruthy();
+  });
 
   test('Expected true for string', () => {
-    expect(isString('Hello!')).toBeTruthy()
-  })
-})
+    expect(isString('Hello!')).toBeTruthy();
+  });
+});
 
 describe('isNumber', () => {
   test('Expected false for NaN', () => {
-    expect(isNumber(NaN)).not.toBeTruthy()
-  })
+    expect(isNumber(NaN)).not.toBeTruthy();
+  });
 
   test('Expected false for undefined', () => {
-    expect(isString(undefined)).not.toBeTruthy()
-  })
+    expect(isString(undefined)).not.toBeTruthy();
+  });
 
   test('Expected false for string', () => {
-    expect(isNumber('qwerty')).not.toBeTruthy()
-  })
+    expect(isNumber('qwerty')).not.toBeTruthy();
+  });
 
   test('Expected false for Object', () => {
-    expect(isString({})).not.toBeTruthy()
-  })
+    expect(isString({})).not.toBeTruthy();
+  });
 
   test('Expected false for bool', () => {
-    expect(isNumber(false)).not.toBeTruthy()
-  })
+    expect(isNumber(false)).not.toBeTruthy();
+  });
 
   test('Expected true for number', () => {
-    expect(isNumber(123)).toBeTruthy()
-  })
-})
+    expect(isNumber(123)).toBeTruthy();
+  });
+});
 
 describe('isPObject', () => {
   test('Expected false for empty object', () => {
-    expect(isPObject({})).not.toBeTruthy()
-  })
+    expect(isPObject({})).not.toBeTruthy();
+  });
 
   test('Expected false for null', () => {
-    expect(isPObject(null)).not.toBeTruthy()
-  })
+    expect(isPObject(null)).not.toBeTruthy();
+  });
 
   test('Expected false for arrays', () => {
-    expect(isPObject([])).not.toBeTruthy()
-  })
+    expect(isPObject([])).not.toBeTruthy();
+  });
 
   test('Expected true for object', () => {
-    expect(isPObject({ foo: 'bar' })).toBeTruthy()
-  })
-})
+    expect(isPObject({ foo: 'bar' })).toBeTruthy();
+  });
+});
 
 describe('hyphenate', () => {
   test('Expected equal "has-focus" for "has-focus" ', () => {
-    expect(hyphenate('has-focus')).toBe('has-focus')
-  })
+    expect(hyphenate('has-focus')).toBe('has-focus');
+  });
   test('Expected equal "hasFocus" for "has-focus" ', () => {
-    expect(hyphenate('hasFocus')).toBe('has-focus')
-  })
-})
+    expect(hyphenate('hasFocus')).toBe('has-focus');
+  });
+});

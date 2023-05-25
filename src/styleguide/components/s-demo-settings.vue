@@ -23,10 +23,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import sHtmlValidation from '@/styleguide/components/s-html-validation.vue'
-  import eCheckbox from '@/elements/e-checkbox.vue'
-  import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue'
+  import { defineComponent } from 'vue';
+  import sHtmlValidation from '@/styleguide/components/s-html-validation.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
 
   interface IData {
 
@@ -56,7 +56,7 @@
       return {
         loggedIn: true,
         showApiHandlerConfiguration: false,
-      }
+      };
     },
 
     // computed: {},
@@ -75,7 +75,7 @@
 
     // methods: {},
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

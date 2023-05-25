@@ -6,9 +6,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, toRefs } from 'vue'
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states'
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import { defineComponent, toRefs } from 'vue';
+  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Component is used to display a notification (status message) directly in the form field.
@@ -26,7 +26,7 @@
     setup(props): IFormStates {
       return {
         ...useFormStates(toRefs(props).state),
-      }
+      };
     },
 
     // data() {
@@ -40,7 +40,7 @@
       modifiers(): IModifiers {
         return {
           ...this.stateModifiers,
-        }
+        };
       },
     },
     // watch: {},
@@ -58,7 +58,7 @@
 
     // methods: {},
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

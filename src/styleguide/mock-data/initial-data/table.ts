@@ -7,9 +7,9 @@ const row = {
   company: 'Valantic CEC Schweiz AG',
   children: 3,
   isComplete: false,
-}
+};
 
-const list = []
+const list = [];
 
 for (let i = 0; i < 40; i += 1) {
   list.push({
@@ -17,7 +17,7 @@ for (let i = 0; i < 40; i += 1) {
     firstName: `Max-${i}`,
     id: i,
     isComplete: i === 5,
-  })
+  });
 }
 
-export default list
+export default list;

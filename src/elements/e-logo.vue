@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import useTheme, { ITheme } from '@/compositions/themes'
-  import eIcon from '@/elements/e-icon.vue'
+  import { defineComponent } from 'vue';
+  import useTheme, { ITheme } from '@/compositions/themes';
+  import eIcon from '@/elements/e-icon.vue';
 
   interface ILogo {
     icon: string;
@@ -52,7 +52,7 @@
     setup(): ITheme {
       return {
         ...useTheme(),
-      }
+      };
     },
 
     computed: {
@@ -60,46 +60,46 @@
        * Get's the correct logo depending on the theme value from the store.
        */
       logo(): ILogo {
-        const title = this.$t('e-logo.linkTitle')
-        let icon = ''
-        let alt = ''
+        const title = this.$t('e-logo.linkTitle');
+        let icon = '';
+        let alt = '';
 
         switch (this.theme) {
           case '01':
-            icon = 'i-styleguide-heart'
-            alt = 'example logo default'
-            break
+            icon = 'i-styleguide-heart';
+            alt = 'example logo default';
+            break;
 
           case '02':
-            icon = 'svg-logo-name-02'
-            alt = 'example logo 02'
-            break
+            icon = 'svg-logo-name-02';
+            alt = 'example logo 02';
+            break;
 
           case '03':
-            icon = 'svg-logo-name-03'
-            alt = 'example logo 03'
-            break
+            icon = 'svg-logo-name-03';
+            alt = 'example logo 03';
+            break;
 
           case '04':
-            icon = 'svg-logo-name-04'
-            alt = 'example logo 04'
-            break
+            icon = 'svg-logo-name-04';
+            alt = 'example logo 04';
+            break;
 
           case '05':
-            icon = 'svg-logo-name-05'
-            alt = 'example logo 05'
-            break
+            icon = 'svg-logo-name-05';
+            alt = 'example logo 05';
+            break;
 
           default:
-            icon = 'i-styleguide-heart'
-            alt = 'example logo default'
+            icon = 'i-styleguide-heart';
+            alt = 'example logo default';
         }
 
         return {
           icon,
           alt,
           title,
-        }
+        };
       },
     },
     // watch: {},
@@ -117,7 +117,7 @@
 
     // methods: {},
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

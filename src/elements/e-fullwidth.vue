@@ -6,8 +6,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, StyleValue } from 'vue'
-  import scrollbarWidth from '@/helpers/scrollbar-width'
+  import { defineComponent, StyleValue } from 'vue';
+  import scrollbarWidth from '@/helpers/scrollbar-width';
 
   type ResizeObserverCallback = () => void;
 
@@ -44,7 +44,7 @@
          * Holds the ID of the currently running resize timeout.
          */
         resizeTimeout: null,
-      }
+      };
     },
 
     computed: {
@@ -53,17 +53,17 @@
        */
       style(): StyleValue | undefined {
         if (this.scrollbarWidth) {
-          const margin = `calc((50vw - ${this.scrollbarWidth / 2}px) * -1)`
+          const margin = `calc((50vw - ${this.scrollbarWidth / 2}px) * -1)`;
 
           return {
             width: `calc(100vw - ${this.scrollbarWidth}px)`,
             marginLeft: margin,
             marginRight: margin,
-          }
+          };
         }
 
         // eslint-disable-next-line no-undefined
-        return undefined
+        return undefined;
       },
     },
     // watch: {},
@@ -72,14 +72,14 @@
     // created() {},
     beforeMount() {
       if (this.resizeObserver) {
-        this.resizeObserver.observe(window.document.body)
+        this.resizeObserver.observe(window.document.body);
       } else { // Fallback for browsers without ResizeObserver support.
-        window.addEventListener('resizeend', this.updateScrollbarWidth)
+        window.addEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
     mounted() {
       if (!this.resizeObserver) {
-        this.updateScrollbarWidth()
+        this.updateScrollbarWidth();
       }
     },
     // beforeUpdate() {},
@@ -88,9 +88,9 @@
     // deactivated() {},
     beforeUnmount() {
       if (this.resizeObserver) {
-        this.resizeObserver.unobserve(window.document.body)
+        this.resizeObserver.unobserve(window.document.body);
       } else {
-        window.removeEventListener('resizeend', this.updateScrollbarWidth)
+        window.removeEventListener('resizeend', this.updateScrollbarWidth);
       }
     },
     // unmounted() {},
@@ -101,17 +101,17 @@
        */
       updateScrollbarWidth() {
         if (this.resizeTimeout) {
-          clearTimeout(this.resizeTimeout)
+          clearTimeout(this.resizeTimeout);
         }
 
         this.resizeTimeout = setTimeout(() => {
-          this.scrollbarWidth = scrollbarWidth()
-        }, 100)
+          this.scrollbarWidth = scrollbarWidth();
+        }, 100);
       },
     },
 
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

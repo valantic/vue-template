@@ -10,9 +10,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import colors, { IColors } from '../../setup/js/color'
-  import sColorItem from './s-color-item.vue'
+  import { defineComponent } from 'vue';
+  import colors, { IColors } from '../../setup/js/color';
+  import sColorItem from './s-color-item.vue';
 
   type TColors = keyof IColors;
 
@@ -34,14 +34,14 @@
        * Returns an Object of color lists.
        */
       colors(): IColors {
-        return colors
+        return colors;
       },
 
       /**
        * Returns an Array of color palette names.
        */
       palettes(): TColors[] {
-        return Object.keys(colors) as Array<TColors>
+        return Object.keys(colors) as Array<TColors>;
       },
     },
     // watch: {},
@@ -59,7 +59,7 @@
 
     // methods: {},
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

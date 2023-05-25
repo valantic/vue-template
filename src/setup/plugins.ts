@@ -1,12 +1,12 @@
 /* eslint-disable import/first */
-import { Plugin } from 'vue'
-import VueBemCn from '@/plugins/vue-bem-cn'
-import resizeEnd from '@/plugins/resize-end'
-import viewport from '@/plugins/viewport'
-import i18n from '@/setup/i18n' // MUST come after i18n because of build order.
-import directives from '@/setup/directives'
-import components from '@/setup/ssr-components'
-import dayjs from '@/plugins/dayjs'
+import { Plugin } from 'vue';
+import VueBemCn from '@/plugins/vue-bem-cn';
+import resizeEnd from '@/plugins/resize-end';
+import viewport from '@/plugins/viewport';
+import i18n from '@/setup/i18n'; // MUST come after i18n because of build order.
+import directives from '@/setup/directives';
+import components from '@/setup/ssr-components';
+import dayjs from '@/plugins/dayjs';
 // import VueFocus from '@/plugins/v-focus';
 // import tooltip from '@/plugins/tooltip';
 
@@ -30,4 +30,4 @@ export default [
   // { plugin: tooltip},
   // { plugin: VueFocus},
   { plugin: dayjs },
-] satisfies ICustomPlugin[]
+] satisfies ICustomPlugin[];

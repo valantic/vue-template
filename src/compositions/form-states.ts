@@ -4,7 +4,7 @@ import {
   PropType,
   Ref,
   ref,
-} from 'vue'
+} from 'vue';
 
 export enum FieldStates {
   Default = 'default',
@@ -47,16 +47,16 @@ export const withProps = () => ({ // eslint-disable-line -- TODO: did not know h
       'default',
     ].includes(value),
   },
-})
+});
 
 /**
  * Defines the reactive properties which can be used for form elements
  */
 const formStates = (inputState: Ref<FieldStates>): IFormStates => {
-  const active = ref<boolean>(false)
-  const disabled = ref<boolean>(false)
-  const focus = ref<boolean>(false)
-  const hover = ref<boolean>(false)
+  const active = ref<boolean>(false);
+  const disabled = ref<boolean>(false);
+  const focus = ref<boolean>(false);
+  const hover = ref<boolean>(false);
 
   /**
    * Holds an object with several modifiers of the form element.
@@ -67,12 +67,12 @@ const formStates = (inputState: Ref<FieldStates>): IFormStates => {
       disabled: disabled.value,
       focus: focus.value,
       hover: hover.value,
-    }))
+    }));
 
   /**
    * Holds a boolean if the form element has default state.
    */
-  const hasDefaultState: ComputedRef<boolean> = computed(() => inputState.value === FieldStates.Default)
+  const hasDefaultState: ComputedRef<boolean> = computed(() => inputState.value === FieldStates.Default);
 
   /**
    * Holds a string containing the icon name matching the current form element state.
@@ -80,18 +80,18 @@ const formStates = (inputState: Ref<FieldStates>): IFormStates => {
   const stateIcon: ComputedRef<string> = computed(() => {
     switch (inputState.value) {
       case FieldStates.Error:
-        return 'i-error'
+        return 'i-error';
 
       case FieldStates.Success:
-        return 'i-check'
+        return 'i-check';
 
       case FieldStates.Info:
-        return 'i-info'
+        return 'i-info';
 
       default:
-        return ''
+        return '';
     }
-  })
+  });
 
   return {
     // data
@@ -104,7 +104,7 @@ const formStates = (inputState: Ref<FieldStates>): IFormStates => {
     stateModifiers,
     stateIcon,
     hasDefaultState,
-  }
-}
+  };
+};
 
-export default formStates
+export default formStates;

@@ -1,5 +1,5 @@
-import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions'
-import eCheckbox from '@/elements/e-checkbox.vue'
+import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
+import eCheckbox from '@/elements/e-checkbox.vue';
 
 export default {
   component: eCheckbox,
@@ -9,7 +9,7 @@ export default {
   args: {
     checked: false,
   },
-}
+};
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = args => ({
@@ -18,13 +18,13 @@ const Template = args => ({
   },
 
   setup() {
-    return { args }
+    return { args };
   },
 
   data() {
     return {
       isChecked: args.checked,
-    }
+    };
   },
 
   template: `
@@ -32,8 +32,8 @@ const Template = args => ({
 
   {{ isChecked }}
 `,
-})
+});
 
-export const Default = Template.bind({})
-Default.args = {}
+export const Default = Template.bind({});
+Default.args = {};
 

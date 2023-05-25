@@ -76,15 +76,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent } from 'vue';
   import {
     RequestHandler,
     ResponseResolver,
     rest,
-  } from 'msw'
-  import mockWorker from '@/styleguide/api/browser'
-  import eCheckbox from '@/elements/e-checkbox.vue'
-  import eSelect from '@/elements/e-select.vue'
+  } from 'msw';
+  import mockWorker from '@/styleguide/api/browser';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eSelect from '@/elements/e-select.vue';
 
   interface IDebugConfiguration {
     header: string;
@@ -114,7 +114,7 @@
     path: string;
   }
 
-  const storageKey = 'sApiMockTest'
+  const storageKey = 'sApiMockTest';
 
   /**
    * Lists all active Mock API Endpoint handlers and allows enabling error mode for them.
@@ -148,14 +148,14 @@
             value: '500',
           },
         ],
-      }
+      };
     },
     data(): IData {
       return {
         search: '',
         handlers: null,
         configurations: {},
-      }
+      };
     },
 
     computed: {
@@ -163,26 +163,26 @@
        * Returns the mapped list of endpoints.
        */
       mappedEndpoints(): IEndpoint[] {
-        const { handlers } = this
+        const { handlers } = this;
 
         if (!handlers) {
-          return []
+          return [];
         }
 
-        return handlers.map(handler => handler.info) as IEndpoint[]
+        return handlers.map(handler => handler.info) as IEndpoint[];
       },
 
       /**
        * Returns the filtered list of endpoints.
        */
       filteredEndpoints(): IEndpoint[] {
-        const { search, mappedEndpoints } = this
+        const { search, mappedEndpoints } = this;
 
         if (!search) {
-          return mappedEndpoints
+          return mappedEndpoints;
         }
 
-        return mappedEndpoints.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase()))
+        return mappedEndpoints.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase()));
       },
     },
     watch: {
@@ -191,8 +191,8 @@
        */
       configurations: {
         handler(configurationsValue: IDebugConfiguration): void {
-          this.setupHandlers()
-          window.localStorage.setItem(storageKey, JSON.stringify(configurationsValue))
+          this.setupHandlers();
+          window.localStorage.setItem(storageKey, JSON.stringify(configurationsValue));
         },
         deep: true,
       },
@@ -200,21 +200,21 @@
 
     // beforeCreate() {},
     created() {
-      mockWorker.resetHandlers()
+      mockWorker.resetHandlers();
 
-      this.handlers = mockWorker.listHandlers()
-      this.setDefaultConfigurations()
+      this.handlers = mockWorker.listHandlers();
+      this.setDefaultConfigurations();
 
       try {
-        const configurationsFromStorage = JSON.parse(window.localStorage.getItem(storageKey) || '{}')
+        const configurationsFromStorage = JSON.parse(window.localStorage.getItem(storageKey) || '{}');
 
         if (configurationsFromStorage) {
           this.configurations = {
             ...this.configurations,
             ...configurationsFromStorage,
-          }
+          };
 
-          this.setupHandlers()
+          this.setupHandlers();
         }
       } catch (e) {
         console.warn('Configuration from storage could not be read'); // eslint-disable-line
@@ -227,7 +227,7 @@
     // activated() {},
     // deactivated() {},
     beforeUnmount() {
-      mockWorker.resetHandlers()
+      mockWorker.resetHandlers();
     },
     // unmounted() {},
 
@@ -237,23 +237,23 @@
        */
       setDefaultConfigurations(): void {
         this.handlers?.forEach((handler) => {
-          const { header } = handler.info
+          const { header } = handler.info;
 
           this.configurations[header] = {
             header,
             enabled: false,
             status: '200',
             response: '',
-          }
-        })
+          };
+        });
       },
 
       /**
        * Restores the default configurations and resets all handlers.
        */
       reset(): void {
-        this.setDefaultConfigurations()
-        mockWorker.resetHandlers()
+        this.setDefaultConfigurations();
+        mockWorker.resetHandlers();
       },
 
       /**
@@ -263,12 +263,12 @@
         const handlers = Object.values(this.configurations)
           .filter(configuration => configuration.enabled)
           .map((configuration) => {
-            const [method, path] = configuration.header.split(' ')
+            const [method, path] = configuration.header.split(' ');
 
-            let response: unknown = null
+            let response: unknown = null;
 
             try {
-              response = JSON.parse(configuration.response)
+              response = JSON.parse(configuration.response);
             } catch (e) {
               // Do nothing
             }
@@ -276,36 +276,36 @@
             const resolver: ResponseResolver = (req, res, ctx: any) => res( // eslint-disable-line @typescript-eslint/no-explicit-any
               ctx.status(parseInt(configuration.status, 10)),
               response ? ctx.json(response) : null
-            )
+            );
 
             switch (method) {
               case 'GET':
-                return rest.get(path, resolver) as RequestHandler
+                return rest.get(path, resolver) as RequestHandler;
 
               case 'POST':
-                return rest.post(path, resolver) as RequestHandler
+                return rest.post(path, resolver) as RequestHandler;
 
               case 'PUT':
-                return rest.put(path, resolver) as RequestHandler
+                return rest.put(path, resolver) as RequestHandler;
 
               case 'PATCH':
-                return rest.patch(path, resolver) as RequestHandler
+                return rest.patch(path, resolver) as RequestHandler;
 
               case 'DELETE':
-                return rest.delete(path, resolver) as RequestHandler
+                return rest.delete(path, resolver) as RequestHandler;
 
               // no default
             }
 
-            return null
-          }).filter(Boolean) as RequestHandler[]
+            return null;
+          }).filter(Boolean) as RequestHandler[];
 
-        mockWorker.resetHandlers()
-        mockWorker.use(...handlers)
+        mockWorker.resetHandlers();
+        mockWorker.use(...handlers);
       },
     },
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

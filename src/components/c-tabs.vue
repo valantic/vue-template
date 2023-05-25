@@ -43,10 +43,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue'
-  import useUuid, { IUuid } from '@/compositions/uuid'
-  import { LINK_TARGET } from '@/setup/globals'
-  import { ILink } from '@/types/link'
+  import { defineComponent, PropType } from 'vue';
+  import useUuid, { IUuid } from '@/compositions/uuid';
+  import { LINK_TARGET } from '@/setup/globals';
+  import { ILink } from '@/types/link';
 
   interface ISetup extends IUuid {}
 
@@ -113,20 +113,20 @@
     },
     emits: {
       change(payload: ITab): boolean {
-        return typeof payload === 'object'
+        return typeof payload === 'object';
       },
     },
 
     setup(): ISetup {
       return {
         ...useUuid(),
-      }
+      };
     },
     data(): IData {
       return {
         LINK_TARGET,
         activeTab: this.tabs.find(tab => tab.active) || null,
-      }
+      };
     },
 
     // computed: {},
@@ -148,13 +148,13 @@
        * Handles the click event of tabs.
        */
       onTabClick(tab: ITab): void {
-        this.activeTab = tab
+        this.activeTab = tab;
 
-        this.$emit('change', tab)
+        this.$emit('change', tab);
       },
     },
     // render() {},
-  })
+  });
 </script>
 
 <style lang="scss">

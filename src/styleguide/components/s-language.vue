@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n'
+  import { defineComponent } from 'vue';
+  import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
   interface IData {
     i18nLocales: string[];
@@ -29,7 +29,7 @@
     data(): IData {
       return {
         i18nLocales: I18N_LOCALES,
-      }
+      };
     },
 
     // components: {},
@@ -40,10 +40,10 @@
       language: {
         get() {
           // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
-          return i18n.global.locale?.value
+          return i18n.global.locale?.value;
         },
         set(value: string) {
-          i18nSetLocale(value)
+          i18nSetLocale(value);
         },
       },
     },
@@ -60,7 +60,7 @@
     // deactivated() {},
     // beforeUnmount() {},
     // unmounted() {},
-  })
+  });
 </script>
 
 <style lang="scss">

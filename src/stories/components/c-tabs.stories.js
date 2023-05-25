@@ -1,6 +1,6 @@
-import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions'
-import cTabs from '@/components/c-tabs.vue'
-import eIcon from '@/elements/e-icon.vue'
+import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
+import cTabs from '@/components/c-tabs.vue';
+import eIcon from '@/elements/e-icon.vue';
 
 export default {
   component: cTabs,
@@ -15,7 +15,7 @@ export default {
       { title: 'Link tab', id: 'tab4', meta: { href: '#tab4-link' } },
     ],
   },
-}
+};
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = (args, { story }) => {
@@ -26,7 +26,7 @@ const Template = (args, { story }) => {
     },
 
     setup() {
-      return { args }
+      return { args };
     },
 
     template: `
@@ -39,7 +39,7 @@ const Template = (args, { story }) => {
         </template>
       </c-tabs>
     `,
-  }
+  };
 
   if (story === 'No Content') {
     demo.template = `
@@ -51,13 +51,13 @@ const Template = (args, { story }) => {
           <!-- Removes the tab content -->
         </template>
       </c-tabs>
-    `
+    `;
   }
 
-  return demo
-}
+  return demo;
+};
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 
-export const NoContent = Template.bind({})
+export const NoContent = Template.bind({});
 

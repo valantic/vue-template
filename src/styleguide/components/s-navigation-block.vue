@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue'
-  import { RouteRecordRaw } from 'vue-router'
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals'
+  import { defineComponent, PropType } from 'vue';
+  import { RouteRecordRaw } from 'vue-router';
+  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   export default defineComponent({
     name: 's-navigation-block',
@@ -54,19 +54,19 @@
       componentModifiers(): IModifiers {
         return {
           hasIndent: this.hasIndent,
-        }
+        };
       },
 
       /**
        * Returns an array of routes, that should be visible on the navigation.
        */
       filteredRoutes(): RouteRecordRaw[] {
-        return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide)
+        return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide);
       },
     },
     // methods: {},
     // created() {}
-  })
+  });
 </script>
 
 <style lang="scss">

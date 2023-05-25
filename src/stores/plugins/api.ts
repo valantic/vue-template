@@ -4,9 +4,9 @@ import axios, {
   AxiosResponse,
   AxiosInstance,
   AxiosPromise,
-} from 'axios'
-import notificationStore, { INotificationItem } from '@/stores/notification'
-import { PAGE_LANG } from '@/setup/i18n'
+} from 'axios';
+import notificationStore, { INotificationItem } from '@/stores/notification';
+import { PAGE_LANG } from '@/setup/i18n';
 
 export interface IApi {
 
@@ -43,7 +43,7 @@ export const axiosInstance: AxiosInstance = axios.create({
       locale: PAGE_LANG,
     },
   },
-})
+});
 
 interface IPluginApi {
   $api: IApi,
@@ -56,45 +56,45 @@ declare module 'pinia' {
 }
 
 export default function api():IPluginApi {
-  const notificationStoreInstance = notificationStore()
+  const notificationStoreInstance = notificationStore();
 
   /**
    * Pushes an array of messages to the notification handler.
    */
   function showNotifications(notifications: INotificationItem[]): void {
     if (!Array.isArray(notifications)) {
-      return
+      return;
     }
 
-    notifications.forEach(notificationStoreInstance.showNotification)
+    notifications.forEach(notificationStoreInstance.showNotification);
   }
 
   /**
    * Handles successful ajax requests.
    */
   function handleSuccess(response: AxiosResponse): AxiosResponse {
-    const { notifications } = response?.data || {}
+    const { notifications } = response?.data || {};
 
     if (notifications) {
-      showNotifications(notifications)
+      showNotifications(notifications);
     }
 
-    return response || {}
+    return response || {};
   }
 
   /**
    * Handles axios error responses.
    */
   function handleError(error: AxiosError<any>): AxiosPromise<AxiosError> { // eslint-disable-line @typescript-eslint/no-explicit-any
-    const { notifications } = error?.response?.data || {}
+    const { notifications } = error?.response?.data || {};
 
     if (notifications) {
-      showNotifications(notifications)
+      showNotifications(notifications);
     } else {
-      notificationStoreInstance.showUnknownError()
+      notificationStoreInstance.showUnknownError();
     }
 
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
 
   return {
@@ -103,36 +103,36 @@ export default function api():IPluginApi {
         return axiosInstance
           .get(url, config)
           .then(response => handleSuccess(response))
-          .catch(error => handleError(error))
+          .catch(error => handleError(error));
       },
 
       post(url, data, config): AxiosPromise {
         return axiosInstance
           .post(url, data, config)
           .then(response => handleSuccess(response))
-          .catch(error => handleError(error))
+          .catch(error => handleError(error));
       },
 
       put(url, data, config): AxiosPromise {
         return axiosInstance
           .post(url, data, config)
           .then(response => handleSuccess(response))
-          .catch(error => handleError(error))
+          .catch(error => handleError(error));
       },
 
       patch(url, data, config): AxiosPromise {
         return axiosInstance
           .patch(url, data, config)
           .then(response => handleSuccess(response))
-          .catch(error => handleError(error))
+          .catch(error => handleError(error));
       },
 
       delete(url, config): AxiosPromise {
         return axiosInstance
           .delete(url, config)
           .then(response => handleSuccess(response))
-          .catch(error => handleError(error))
+          .catch(error => handleError(error));
       },
     },
-  }
+  };
 }

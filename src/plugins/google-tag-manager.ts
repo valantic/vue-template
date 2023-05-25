@@ -1,4 +1,4 @@
-import { Plugin } from 'vue'
+import { Plugin } from 'vue';
 
 export enum GA_LIST_NAMES {
   CATALOG = 'Catalog',
@@ -75,26 +75,26 @@ const plugin: Plugin = {
    * Install method of the Google Tag Manager plugin.
    */
   install(app, options: IOptions = {}) {
-    let { debug } = options
+    let { debug } = options;
 
     /**
      * Push a new event to the dataLayer.
      */
     function push(payload: Record<string, unknown>): void {
       if (window.dataLayer && window.dataLayer.push) {
-        window.dataLayer.push(payload)
+        window.dataLayer.push(payload);
 
         // Log if debug and development mode are active
         if (import.meta.env.MODE !== 'production') {
           if (debug) {
-            console.group('GTM debug') // eslint-disable-line no-console
-            console.log('payload', payload) // eslint-disable-line no-console
-            console.log('dataLayer', window.dataLayer) // eslint-disable-line no-console
-            console.groupEnd() // eslint-disable-line no-console
+            console.group('GTM debug'); // eslint-disable-line no-console
+            console.log('payload', payload); // eslint-disable-line no-console
+            console.log('dataLayer', window.dataLayer); // eslint-disable-line no-console
+            console.groupEnd(); // eslint-disable-line no-console
           }
         }
       } else {
-        throw new Error('Google Tag Manager dataLayer is not available!')
+        throw new Error('Google Tag Manager dataLayer is not available!');
       }
     }
 
@@ -110,7 +110,7 @@ const plugin: Plugin = {
           ecommerce: {
             ...payload,
           },
-        })
+        });
       },
 
       /**
@@ -122,7 +122,7 @@ const plugin: Plugin = {
           ecommerce: {
             ...payload,
           },
-        })
+        });
       },
 
       /**
@@ -134,7 +134,7 @@ const plugin: Plugin = {
           ecommerce: {
             ...payload,
           },
-        })
+        });
       },
 
       /**
@@ -148,7 +148,7 @@ const plugin: Plugin = {
             value: item.price,
             currency: item.currency,
           },
-        })
+        });
       },
 
       /**
@@ -162,7 +162,7 @@ const plugin: Plugin = {
             value: item.price,
             currency: item.currency,
           },
-        })
+        });
       },
 
       /**
@@ -179,7 +179,7 @@ const plugin: Plugin = {
             value,
             currency,
           },
-        })
+        });
       },
 
       /**
@@ -196,7 +196,7 @@ const plugin: Plugin = {
             value,
             currency,
           },
-        })
+        });
       },
 
       /**
@@ -210,7 +210,7 @@ const plugin: Plugin = {
             value: item.price,
             currency: item.currency,
           },
-        })
+        });
       },
 
       /**
@@ -227,7 +227,7 @@ const plugin: Plugin = {
               index: index + 1,
             })),
           },
-        })
+        });
       },
 
       /**
@@ -240,7 +240,7 @@ const plugin: Plugin = {
             item_list_name: list,
             items: [item],
           },
-        })
+        });
       },
 
       /**
@@ -249,7 +249,7 @@ const plugin: Plugin = {
       pushLogin() {
         push({
           event: 'login',
-        })
+        });
       },
 
       /**
@@ -258,7 +258,7 @@ const plugin: Plugin = {
       pushSignUp() {
         push({
           event: 'sign_up',
-        })
+        });
       },
 
       /**
@@ -270,7 +270,7 @@ const plugin: Plugin = {
           ecommerce: {
             searchTerm,
           },
-        })
+        });
       },
 
       /**
@@ -286,19 +286,19 @@ const plugin: Plugin = {
               item_list_name: list,
             }],
           },
-        })
+        });
       },
 
       /**
        * Enable/disable debugging.
        */
       debug(enable: boolean) {
-        debug = enable !== false
+        debug = enable !== false;
       },
-    }
+    };
 
-    app.config.globalProperties.$gtm = api
+    app.config.globalProperties.$gtm = api;
   },
-}
+};
 
-export default plugin
+export default plugin;

@@ -1,12 +1,12 @@
 /* eslint-disable quote-props, id-length */
-export const block = 'BlockName'
-export const el = 'elementName'
+export const block = 'BlockName';
+export const el = 'elementName';
 export const delimiters = {
   ns: 'ns**',
   el: '++',
   mod: '==',
   modVal: '~',
-}
+};
 
 export const blocks = {
   [block]: { block },
@@ -23,7 +23,7 @@ export const blocks = {
   },
   [`${block} mix`]: { block, mixin: 'mix' },
   [`${block} ${block}--mod mix`]: { block, mods: { mod: true }, mixin: 'mix' },
-}
+};
 
 export const elements = {
   [`${block}__${el}`]: { block, el },
@@ -46,7 +46,7 @@ export const elements = {
     mods: { mod: 'val' },
     mixin: 'mix',
   },
-}
+};
 
 export const delimitersTest = {
   [`ns**${block}++${el} ns**${block}++${el}==mod~val ns**${block}++${el}==modbool`]: {
@@ -58,10 +58,10 @@ export const delimitersTest = {
       'some-mode': false,
     },
   },
-}
+};
 
 export const hyphenate = {
   'block-name': { block },
   'block-name block-name--has-mod': { block, mods: { hasMod: true } },
   'block-name__element-name': { block, el },
-}
+};

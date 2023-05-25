@@ -14,4 +14,4 @@ module.exports = { // @see https://webpack.js.org/loaders/postcss-loader/#exampl
       ],
     }),
   ],
-}
+};

@@ -1,10 +1,10 @@
-import video from '../data-object/video'
+import video from '../data-object/video';
 
-const amount = 2
-const dynamicList = []
+const amount = 2;
+const dynamicList = [];
 
 for (let index = 1; index <= amount; index += 1) {
-  dynamicList.push(video)
+  dynamicList.push(video);
 }
 
-export default dynamicList
+export default dynamicList;

@@ -3,8 +3,8 @@ import {
   defineStore,
   StateTree,
   _GettersTree,
-} from 'pinia'
-import { STORE } from '@/setup/globals'
+} from 'pinia';
+import { STORE } from '@/setup/globals';
 
 export interface IBreadcrumbItem {
   name: string;
@@ -45,38 +45,38 @@ interface IInitialStoreDate {
   items?: IBreadcrumbItem[];
 }
 
-const storeName = STORE.BREADCRUMBS
+const storeName = STORE.BREADCRUMBS;
 
 export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>(storeName, {
   state: (): IBreadcrumbState => {
-    const initialData: IInitialStoreDate = window.initialData?.[storeName] || {}
+    const initialData: IInitialStoreDate = window.initialData?.[storeName] || {};
 
     const state: IBreadcrumbState = {
       items: [],
-    }
+    };
 
     if (import.meta.env.DEV) {
       const breadcrumbsModule = import.meta
-        .glob('@/styleguide/mock-data/initial-data/breadcrumbs', { eager: true })
+        .glob('@/styleguide/mock-data/initial-data/breadcrumbs', { eager: true });
 
-      state.items = breadcrumbsModule['@/styleguide/mock-data/initial-data/breadcrumbs'] as IBreadcrumbItem[]
+      state.items = breadcrumbsModule['@/styleguide/mock-data/initial-data/breadcrumbs'] as IBreadcrumbItem[];
     }
 
     if (Array.isArray(initialData.items)) {
-      state.items = initialData.items
-      delete initialData.items
+      state.items = initialData.items;
+      delete initialData.items;
     }
 
-    return state
+    return state;
   },
   getters: {
     getItems(state) {
-      return state.items
+      return state.items;
     },
   },
   actions: {
     setItems(data): void {
-      this.items = data || null
+      this.items = data || null;
     },
   },
-})
+});

@@ -1,6 +1,6 @@
-import { faker } from '@faker-js/faker/locale/en'
-import { BREAKPOINTS_MAX, DEFAULT_IMAGE_SIZES } from '@/setup/globals'
-import { IImageSources, IImageSrcset, IImageMedia } from '@/types/image'
+import { faker } from '@faker-js/faker/locale/en';
+import { BREAKPOINTS_MAX, DEFAULT_IMAGE_SIZES } from '@/setup/globals';
+import { IImageSources, IImageSrcset, IImageMedia } from '@/types/image';
 
 interface IRatios {
   [key: string]: number;
@@ -18,13 +18,13 @@ export function createSrcSetImage(
     Math.ceil(heightRatio * width),
     'abstract',
     true
-  )} ${width}w`)
+  )} ${width}w`);
 
   return {
     srcset: srcset.join(', '),
     fallback: srcset[srcset.length - 1],
     alt: faker.lorem.word(),
-  }
+  };
 }
 
 /**
@@ -42,22 +42,22 @@ export function createSourcesImage(
   sizes = DEFAULT_IMAGE_SIZES
 ): IImageSources {
   const media = Object.entries(BREAKPOINTS_MAX).map(([breakpoint, size]) => {
-    const width = sizes[breakpoint as keyof typeof BREAKPOINTS_MAX] as number
+    const width = sizes[breakpoint as keyof typeof BREAKPOINTS_MAX] as number;
 
     return {
       media: `(max-width: ${size}px)`,
       srcset:  faker.image.imageUrl(width, Math.round(width / ratios[breakpoint]), 'abstract', true),
-    }
+    };
   }).reduce((accumulator: IImageMedia, item) => {
-    accumulator[item.media] = item.srcset
+    accumulator[item.media] = item.srcset;
 
-    return accumulator
-  }, {})
+    return accumulator;
+  }, {});
 
   return {
     media,
     alt: faker.lorem.word(),
     fallback: faker.image.imageUrl(sizes.fallback, Math.round((sizes.fallback || 1) / ratios.fallback), 'abstract', true),
-  }
+  };
 }
 

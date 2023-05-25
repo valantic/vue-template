@@ -144,19 +144,19 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, Ref } from 'vue'
-  import useVuelidate, { Validation } from '@vuelidate/core'
-  import { required, email } from '@vuelidate/validators'
-  import eFieldset from '@/elements/e-fieldset.vue'
-  import eMultiselect from '@/elements/e-multiselect.vue'
-  import eLabel from '@/elements/e-label.vue'
-  import eInput from '@/elements/e-input.vue'
-  import eSelect from '@/elements/e-select.vue'
-  import eRadio from '@/elements/e-radio.vue'
-  import eCheckbox from '@/elements/e-checkbox.vue'
-  import eTextarea from '@/elements/e-textarea.vue'
-  import eButton from '@/elements/e-button.vue'
-  import { FieldStates } from '@/compositions/form-states'
+  import { defineComponent, ref, Ref } from 'vue';
+  import useVuelidate, { Validation } from '@vuelidate/core';
+  import { required, email } from '@vuelidate/validators';
+  import eFieldset from '@/elements/e-fieldset.vue';
+  import eMultiselect from '@/elements/e-multiselect.vue';
+  import eLabel from '@/elements/e-label.vue';
+  import eInput from '@/elements/e-input.vue';
+  import eSelect from '@/elements/e-select.vue';
+  import eRadio from '@/elements/e-radio.vue';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eTextarea from '@/elements/e-textarea.vue';
+  import eButton from '@/elements/e-button.vue';
+  import { FieldStates } from '@/compositions/form-states';
 
   interface ISelectItem {
     label: string;
@@ -201,14 +201,14 @@
     },
 
     setup(): ISetup {
-      const formRef = ref()
+      const formRef = ref();
 
       return {
         // eslint-disable-next-line id-length
         v$: useVuelidate(),
         formRef,
         FieldStates,
-      }
+      };
     },
 
     data(): IData {
@@ -256,7 +256,7 @@
             },
           ],
         },
-      }
+      };
     },
 
     /**
@@ -282,18 +282,18 @@
        * Submit form event handler.
        */
       onSubmit() {
-        this.v$.$touch()
+        this.v$.$touch();
 
         if (this.v$.$pending || this.v$.$error) {
-          return
+          return;
         }
 
         if (this.formRef) {
-          this.formRef.submit()
+          this.formRef.submit();
         }
       },
     },
-  })
+  });
 </script>
 
 <style lang="scss">

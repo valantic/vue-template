@@ -53,7 +53,6 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': ['error', {
       allowTypedFunctionExpressions: true,
     }],
-    'semi': ['error', 'never'],
   },
   overrides: [{
     files: ['tests/**/*.*'],
@@ -89,4 +88,4 @@ module.exports = {
       '@typescript-eslint/explicit-function-return-type': 'off',
     },
   }],
-}
+};
