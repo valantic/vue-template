@@ -4,7 +4,7 @@ import {
   StateTree,
   _GettersTree,
 } from 'pinia';
-import { IS_STORAGE_AVAILABLE, STORE } from '@/setup/globals';
+import { IS_STORAGE_AVAILABLE, GlobalStore } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 
 export interface INotificationItem {
@@ -69,7 +69,7 @@ const NOTIFICATION_UNKNOWN_ERROR: INotificationItem = {
   message: i18n.global.t('globalMessages.unknownApiError'),
 };
 
-const storeName = STORE.NOTIFICATION;
+const storeName = GlobalStore.NOTIFICATION;
 
 let currentId = 1;
 

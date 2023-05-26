@@ -13,8 +13,8 @@
            :aria-selected="tab.id === activeTab?.id"
            :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
            :href="tab.link?.href || `#c-tabs-${uuid}--panel-${tab.id}`"
-           :target="tab.link?.target || LINK_TARGET.SELF"
-           :rel="tab.link?.target === LINK_TARGET.BLANK ? 'noopener noreferrer' : undefined"
+           :target="tab.link?.target || LinkTarget.SELF"
+           :rel="tab.link?.target === LinkTarget.BLANK ? 'noopener noreferrer' : undefined"
            role="tab"
            @click="onTabClick(tab)"
         >
@@ -45,7 +45,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import useUuid, { IUuid } from '@/compositions/uuid';
-  import { LINK_TARGET } from '@/setup/globals';
+  import { LinkTarget } from '@/setup/globals';
   import { ILink } from '@/types/link';
 
   interface ISetup extends IUuid {}
@@ -74,7 +74,7 @@
   }
 
   interface IData {
-    LINK_TARGET: typeof LINK_TARGET,
+    LinkTarget: typeof LinkTarget,
 
     /**
      * Holds the currently active tab defintion.
@@ -124,7 +124,7 @@
     },
     data(): IData {
       return {
-        LINK_TARGET,
+        LinkTarget: LinkTarget,
         activeTab: this.tabs.find(tab => tab.active) || null,
       };
     },

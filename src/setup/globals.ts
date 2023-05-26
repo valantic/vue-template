@@ -54,7 +54,7 @@ export const IS_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
 /**
  * Defines possible link target values.
  */
-export enum LINK_TARGET {
+export enum LinkTarget {
   SELF = '_self',
   BLANK = '_blank',
   // Only add additional types if required.
@@ -71,7 +71,7 @@ export const DEFAULT_IMAGE_SIZES: IImageSizes = {
 /**
  * Contains list of all Pinia stores.
  */
-export enum STORE {
+export enum GlobalStore {
   SESSION = 'session',
   BREADCRUMBS = 'breadcrumbs',
   NOTIFICATION = 'notification',

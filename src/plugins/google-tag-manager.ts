@@ -1,6 +1,6 @@
 import { Plugin } from 'vue';
 
-export enum GA_LIST_NAMES {
+enum GaListNames {
   CATALOG = 'Catalog',
   SEARCH_RESULTS = 'Search results',
   // .. Add additional lists
@@ -45,17 +45,17 @@ interface IAddShippingInfoPayload {
 
 export interface IGtm {
   push(payload: Record<string, unknown>): void;
-  pushAddToCart(item: IListItem, list: GA_LIST_NAMES): void;
+  pushAddToCart(item: IListItem, list: GaListNames): void;
   pushLogin(): void,
   pushSignUp(): void,
   pushSearch(searchTerm: string): void,
-  pushViewItemList(items: IListItem[], list: GA_LIST_NAMES): void,
+  pushViewItemList(items: IListItem[], list: GaListNames): void,
   pushViewItem(item: IListItem): void,
   pushViewCart(items: IListItem[], value: number, currency: string): void,
   pushRemoveFromCart(items: IListItem): void,
   pushAddToWishlist(item: IListItem): void,
   pushBeginCheckout(items: IListItem[], value: number, currency: string): void,
-  pushSelectItem(item: IListItem, list: GA_LIST_NAMES): void,
+  pushSelectItem(item: IListItem, list: GaListNames): void,
   pushPurchase(payload: IPurchasePayload): void,
   pushAddPaymentInfo(payload: IAddPaymentInfoPayload): void,
   pushAddShippingInfo(payload: IAddShippingInfoPayload): void,
@@ -216,7 +216,7 @@ const plugin: Plugin = {
       /**
        * Pushes `view_item_list`-event to the dataLayer.
        */
-      pushViewItemList(items: IListItem[], list: GA_LIST_NAMES) {
+      pushViewItemList(items: IListItem[], list: GaListNames) {
         push({
           event: 'view_item_list',
           ecommerce: {
@@ -233,7 +233,7 @@ const plugin: Plugin = {
       /**
        * Pushes `select_item`-event to the dataLayer.
        */
-      pushSelectItem(item: IListItem, list: GA_LIST_NAMES) {
+      pushSelectItem(item: IListItem, list: GaListNames) {
         push({
           event: 'select_item',
           ecommerce: {
@@ -276,7 +276,7 @@ const plugin: Plugin = {
       /**
        * Pushes `add_to_cart`-event to the dataLayer.
        */
-      pushAddToCart(item: IListItem, list: GA_LIST_NAMES) {
+      pushAddToCart(item: IListItem, list: GaListNames) {
         push({
           event: 'add_to_cart',
           ecommerce: {
