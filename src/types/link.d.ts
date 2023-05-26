@@ -1,6 +1,6 @@
 import { LinkTarget } from '@/setup/globals';
 
-export interface ILink {
+export interface Link {
   href: string,
   target?: LinkTarget,
 }

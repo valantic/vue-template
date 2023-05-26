@@ -1,4 +1,4 @@
-export interface IImageSizes {
+export interface ImageSizes {
   fallback?: number;
   lg?: number,
   md?: number,

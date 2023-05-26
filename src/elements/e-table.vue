@@ -194,17 +194,17 @@
   } from 'vue';
   import eIcon from '@/elements/e-icon.vue';
   import eCheckbox from '@/elements/e-checkbox.vue';
-  import useUuid, { IUuid } from '@/compositions/uuid';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useUuid, { Uuid } from '@/compositions/uuid';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  type TItemId = number | string;
+  type ItemId = number | string;
 
-  export interface IETableItem {
+  export interface ETableItem {
     disabled?: boolean;
-    [key: string]: TItemId | unknown;
+    [key: string]: ItemId | unknown;
   }
 
-  export interface IETableColumn {
+  export interface ETableColumn {
     title: string | (() => string);
     key: string;
     align: 'left' | 'center' | 'right';
@@ -212,20 +212,20 @@
     sortable: boolean;
     nowrap?: boolean;
     titleHidden?: boolean | (() => boolean);
-    onClick?(item: IETableItem, column: IETableColumn, event?: Event): void;
+    onClick?(item: ETableItem, column: ETableColumn, event?: Event): void;
     sort?(a: unknown, b: unknown): number;
   }
 
-  interface IRowLink {
-    href?(item: IETableItem, column?: IETableColumn, event?: Event): string;
-    title?: string | ((item?: IETableItem) => string);
+  interface RowLink {
+    href?(item: ETableItem, column?: ETableColumn, event?: Event): string;
+    title?: string | ((item?: ETableItem) => string);
   }
 
-  interface ISetup extends IUuid {
+  interface Setup extends Uuid {
     toggleButton: Ref<HTMLButtonElement>;
   }
 
-  interface IData {
+  interface Data {
 
     /**
      * Holds a flag if sorting options are visible
@@ -235,7 +235,7 @@
     /**
      * The currently selected 'column' to be sorted by.
      */
-    sortBy: IETableColumn | null;
+    sortBy: ETableColumn | null;
 
     /**
      * Holds to sort direction in case a 'sortBy' is active.
@@ -260,7 +260,7 @@
     /**
      * Row items that should be displayed in expanded state.
      */
-    expandedRows: IETableItem[],
+    expandedRows: ETableItem[],
   }
 
   /**
@@ -283,7 +283,7 @@
        * Array of data objects to render in table.
        */
       items: {
-        type: Array as PropType<IETableItem[]>,
+        type: Array as PropType<ETableItem[]>,
         required: true,
       },
 
@@ -291,7 +291,7 @@
        * Allows to set an Array of selected items.
        */
       selected: {
-        type: Array as PropType<IETableItem[]>,
+        type: Array as PropType<ETableItem[]>,
         default: () => [],
       },
 
@@ -299,7 +299,7 @@
        * Array of column definition objects.
        */
       columns: {
-        type: Array as PropType<IETableColumn[]>,
+        type: Array as PropType<ETableColumn[]>,
         required: true,
       },
 
@@ -307,7 +307,7 @@
        * Accepts a method to generate a link for each row (except for columns with 'onClick' callback).
        */
       rowLink: {
-        type: Object as PropType<IRowLink>,
+        type: Object as PropType<RowLink>,
         default: null,
       },
 
@@ -339,7 +339,7 @@
        * Allows to change the identifier property for a row item by which it will be identified internally.
        */
       itemIdentifier: {
-        type: String as PropType<TItemId>,
+        type: String as PropType<ItemId>,
         default: 'id',
       },
     },
@@ -347,7 +347,7 @@
       'update:selected': (payload: unknown): boolean => Array.isArray(payload),
     },
 
-    setup(): ISetup {
+    setup(): Setup {
       const toggleButton = ref();
 
       return {
@@ -355,7 +355,7 @@
         toggleButton,
       };
     },
-    data(): IData {
+    data(): Data {
       return {
         showSortingOptions: true,
         sortBy: null,
@@ -379,7 +379,7 @@
           if (this.selectedInternal.length) {
             this.selectedInternal = [];
           } else {
-            this.selectedInternal = this.items.map(item => item[this.itemIdentifier] as TItemId);
+            this.selectedInternal = this.items.map(item => item[this.itemIdentifier] as ItemId);
           }
         },
       },
@@ -395,11 +395,11 @@
        * Manages changes for the 'select' prop.
        */
       selectedInternal: {
-        get(): TItemId[] {
-          return this.selected.map(item => item[this.itemIdentifier] as TItemId);
+        get(): ItemId[] {
+          return this.selected.map(item => item[this.itemIdentifier] as ItemId);
         },
-        set(itemIds: TItemId[]): void {
-          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId)));
+        set(itemIds: ItemId[]): void {
+          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as ItemId)));
         },
       },
 
@@ -407,18 +407,18 @@
        * Handles changes to the 'expandedRows' prop.
        */
       expandedRowsComputed: {
-        get(): TItemId[] {
-          return this.expandedRows.map(item => item[this.itemIdentifier] as TItemId);
+        get(): ItemId[] {
+          return this.expandedRows.map(item => item[this.itemIdentifier] as ItemId);
         },
-        set(itemIds: TItemId[]) {
-          this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as TItemId));
+        set(itemIds: ItemId[]) {
+          this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as ItemId));
         },
       },
 
       /**
        * Returns a sorted copy of the table-items.
        */
-      itemsSortedBy(): IETableItem[] {
+      itemsSortedBy(): ETableItem[] {
         const { sortBy } = this;
         const items = this.items.slice();
 
@@ -436,7 +436,7 @@
       /**
        * Reverts the sort direction if required.
        */
-      itemsSorted(): IETableItem[] {
+      itemsSorted(): ETableItem[] {
         if (!this.sortAscending) {
           return this.itemsSortedBy.slice().reverse();
         }
@@ -496,7 +496,7 @@
       /**
        * Returns the title of the actual table column.
        */
-      columnTitle(column: IETableColumn): string | null {
+      columnTitle(column: ETableColumn): string | null {
         switch (typeof column?.title) {
           case 'string':
             return column.title;
@@ -530,7 +530,7 @@
       /**
        * Returns a title for the row link, based on the type of the definition.
        */
-      rowTitle(item: IETableItem): string | undefined {
+      rowTitle(item: ETableItem): string | undefined {
         const { rowLink } = this;
 
         switch (typeof rowLink?.title) {
@@ -548,7 +548,7 @@
       /**
        * Checks if the given column should display the header label.
        */
-      isHeaderLabelVisible(column: IETableColumn): boolean {
+      isHeaderLabelVisible(column: ETableColumn): boolean {
         // Adding the support for functions was needed, to change visibility state dynamically (improved a11y).
         return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden !== true);
       },
@@ -558,14 +558,14 @@
        *
        * Since Vue3 leverages proxies for data properties for reactivity, we can't compare the objects directly.
        */
-      isSortedBy(column: IETableColumn): boolean {
+      isSortedBy(column: ETableColumn): boolean {
         return this.sortBy?.key === column.key;
       },
 
       /**
        * Will set the sort-parameters.
        */
-      onClickSort(column: IETableColumn): void {
+      onClickSort(column: ETableColumn): void {
         if (this.isSortedBy(column)) {
           const asc = this.sortAscending;
 
@@ -583,7 +583,7 @@
       /**
        * Calculates a sort button modifier object.
        */
-      sortButtonModifiers(column: IETableColumn): IModifiers {
+      sortButtonModifiers(column: ETableColumn): Modifiers {
         const active = this.isSortedBy(column);
 
         return {
@@ -595,7 +595,7 @@
       /**
        * Returns BEM modifiers for header cells.
        */
-      headerCellModifiers(column: IETableColumn): IModifiers {
+      headerCellModifiers(column: ETableColumn): Modifiers {
         return {
           align: column.align || 'left',
           col: column.key,
@@ -607,7 +607,7 @@
       /**
        * Returns BEM modifiers for cells.
        */
-      cellModifiers(column: IETableColumn): IModifiers {
+      cellModifiers(column: ETableColumn): Modifiers {
         return {
           align: column.align || 'left',
           hasEvent: !!column.onClick,
@@ -620,10 +620,10 @@
       /**
        * Returns a sort function which will sort the elements of an Array by the given field.
        */
-      sortByFieldConstructor(field: string): (a: IETableItem, b: IETableItem) => number {
+      sortByFieldConstructor(field: string): (a: ETableItem, b: ETableItem) => number {
         return (a, b) => {
-          const aValue = a[field as keyof IETableItem];
-          const bValue = b[field as keyof IETableItem];
+          const aValue = a[field as keyof ETableItem];
+          const bValue = b[field as keyof ETableItem];
 
           switch (true) {
             case typeof aValue === 'string':
@@ -690,7 +690,7 @@
       /**
        * Callback for clicks within a row.
        */
-      onCellClick(item: IETableItem, column: IETableColumn, event: MouseEvent): void {
+      onCellClick(item: ETableItem, column: ETableColumn, event: MouseEvent): void {
         if (this.hasSelection) { // Cancel cell action if a text selection is active.
           return;
         }
@@ -715,8 +715,8 @@
       /**
        * Click callback for the toggle cell (increases click area on mobile).
        */
-      onDetailToggleClick(item: IETableItem): void {
-        const id = item[this.itemIdentifier] as TItemId;
+      onDetailToggleClick(item: ETableItem): void {
+        const id = item[this.itemIdentifier] as ItemId;
 
         if (!id) {
           return;

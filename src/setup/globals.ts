@@ -1,4 +1,4 @@
-import { IImageSizes } from '@/types/sizes';
+import { ImageSizes } from '@/types/sizes';
 
 /**
  * @type {object} Lookup table of available breakpoints.
@@ -25,7 +25,7 @@ export const BREAKPOINTS_MAX = {
   lg: BREAKPOINTS.xl - 1,
 };
 
-export type TViewportBreakPoint = keyof typeof BREAKPOINTS;
+export type ViewportBreakPoint = keyof typeof BREAKPOINTS;
 
 /**
  * @type {number} Global resize debounce value.
@@ -36,7 +36,7 @@ export const RESIZE_DEBOUNCE = 100;
  * @type {boolean} Holds a flag if local and session storage are available.
  * They can lead to exceptions if cookies are disabled on the client.
  */
-export const IS_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
+export const S_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
   const keyValue = '__storage_test__';
 
   try {
@@ -63,7 +63,7 @@ export enum LinkTarget {
 /**
  * Default responsive image sizes.
  */
-export const DEFAULT_IMAGE_SIZES: IImageSizes = {
+export const DEFAULT_IMAGE_SIZES: ImageSizes = {
   ...BREAKPOINTS_MAX,
   fallback: 1440,
 };

@@ -4,10 +4,10 @@ import {
   StateTree,
   _GettersTree,
 } from 'pinia';
-import { IS_STORAGE_AVAILABLE, GlobalStore } from '@/setup/globals';
+import { S_STORAGE_AVAILABLE, GlobalStore } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 
-export interface INotificationItem {
+export interface NotificationItem {
   id: number;
   type?: string;
   message?: string;
@@ -16,28 +16,28 @@ export interface INotificationItem {
   redirectUrl?: string;
 }
 
-interface INotificationState extends StateTree {
+interface NotificationState extends StateTree {
 
   /**
    * Holds the notification items.
    */
-  notifications: INotificationItem[];
+  notifications: NotificationItem[];
 }
 
-interface INotificationGetters extends _GettersTree<INotificationState> {
+interface NotificationGetters extends _GettersTree<NotificationState> {
 
   /**
    * Gets the current list of notifications.
    */
-  getNotifications(state: INotificationState): INotificationItem[];
+  getNotifications(state: NotificationState): NotificationItem[];
 }
 
-interface INotificationActions {
+interface NotificationActions {
 
   /**
    * Shows the given notification and returns its instance.
    */
-  showNotification(notificationItem: INotificationItem): INotificationItem;
+  showNotification(notificationItem: NotificationItem): NotificationItem;
 
   /**
    * Removes a notification.
@@ -50,20 +50,20 @@ interface INotificationActions {
   showUnknownError(): void;
 }
 
-export type TNotificationStore = Store<string, INotificationState, INotificationGetters, INotificationActions>;
+export type NotificationStore = Store<string, NotificationState, NotificationGetters, NotificationActions>;
 
-interface IInitialStoreData {
+interface InitialStoreData {
 
   /**
    * Holds the initial notification items.
    */
-  notifications?: INotificationItem[];
+  notifications?: NotificationItem[];
 }
 
 /**
  * Default unknown error notification template.
  */
-const NOTIFICATION_UNKNOWN_ERROR: INotificationItem = {
+const NOTIFICATION_UNKNOWN_ERROR: NotificationItem = {
   id: 0,
   type: 'error',
   message: i18n.global.t('globalMessages.unknownApiError'),
@@ -76,10 +76,10 @@ let currentId = 1;
 /**
  * Handles notification redirects.
  */
-function handleRedirect(notification: INotificationItem): void {
+function handleRedirect(notification: NotificationItem): void {
   const { redirectUrl } = notification || {};
 
-  if (redirectUrl && IS_STORAGE_AVAILABLE) {
+  if (redirectUrl && S_STORAGE_AVAILABLE) {
     localStorage.setItem('notification', JSON.stringify({
       ...notification,
       redirectUrl: null,
@@ -92,7 +92,7 @@ function handleRedirect(notification: INotificationItem): void {
 /**
  * Adds a unique ID to a notification.
  */
-function addId(notification: INotificationItem): INotificationItem {
+function addId(notification: NotificationItem): NotificationItem {
   currentId += 1;
 
   return {
@@ -101,11 +101,11 @@ function addId(notification: INotificationItem): INotificationItem {
   };
 }
 
-export default defineStore<typeof storeName, INotificationState, INotificationGetters, INotificationActions>(storeName, {
-  state: (): INotificationState => {
-    const initialData: IInitialStoreData = window.initialData?.[storeName] || {};
+export default defineStore<typeof storeName, NotificationState, NotificationGetters, NotificationActions>(storeName, {
+  state: (): NotificationState => {
+    const initialData: InitialStoreData = window.initialData?.[storeName] || {};
 
-    const state: INotificationState = {
+    const state: NotificationState = {
       notifications: [],
     };
 

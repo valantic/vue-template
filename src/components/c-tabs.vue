@@ -44,13 +44,13 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import useUuid, { IUuid } from '@/compositions/uuid';
+  import useUuid, { Uuid } from '@/compositions/uuid';
   import { LinkTarget } from '@/setup/globals';
-  import { ILink } from '@/types/link';
+  import { Link } from '@/types/link';
 
-  interface ISetup extends IUuid {}
+  interface Setup extends Uuid {}
 
-  export interface ITab {
+  export interface Tab {
 
     /**
      * The text title for the current tab.
@@ -70,16 +70,16 @@
     /**
      * Allows to track additional information for a tab. e.g. a link.
      */
-    link?: ILink;
+    link?: Link;
   }
 
-  interface IData {
+  interface Data {
     LinkTarget: typeof LinkTarget,
 
     /**
      * Holds the currently active tab defintion.
      */
-    activeTab: ITab | null,
+    activeTab: Tab | null,
   }
 
   /**
@@ -99,7 +99,7 @@
        * Expects a list of tab definitinos.
        */
       tabs: {
-        type: Array as PropType<ITab[]>,
+        type: Array as PropType<Tab[]>,
         required: true,
       },
 
@@ -112,17 +112,17 @@
       },
     },
     emits: {
-      change(payload: ITab): boolean {
+      change(payload: Tab): boolean {
         return typeof payload === 'object';
       },
     },
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         ...useUuid(),
       };
     },
-    data(): IData {
+    data(): Data {
       return {
         LinkTarget,
         activeTab: this.tabs.find(tab => tab.active) || null,
@@ -147,7 +147,7 @@
       /**
        * Handles the click event of tabs.
        */
-      onTabClick(tab: ITab): void {
+      onTabClick(tab: Tab): void {
         this.activeTab = tab;
 
         this.$emit('change', tab);

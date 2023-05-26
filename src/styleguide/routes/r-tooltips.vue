@@ -51,7 +51,7 @@
   import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
   import tooltipDirective from '@/plugins/tooltip/directives/directive';
 
-  interface IData {
+  interface Data {
     active: boolean;
     placementOptions: Record<'label' | 'value', string>[],
     placement: Placement
@@ -69,7 +69,7 @@
     },
 
     // props: {},
-    data(): IData {
+    data(): Data {
       return {
         active: true,
         placementOptions: [

@@ -1,21 +1,21 @@
-interface ICallback {
+interface Callback {
   id: string;
   callback(): unknown;
 }
 
-interface IAttributes {
+interface Attributes {
   defer: boolean;
   async: boolean;
 }
 
 let scriptLoadingQueue: string[] = [];
-let loadScriptCallbacks: ICallback[] = [];
+let loadScriptCallbacks: Callback[] = [];
 
 /**
  * This helper will load the given script source unless it is already present in the DOM.
  * The callback is called after the script has been loaded.
  */
-export default function loadScript(scriptSrc: string, callback?: () => unknown, attributes?: IAttributes): void {
+export default function loadScript(scriptSrc: string, callback?: () => unknown, attributes?: Attributes): void {
   const existingTag = document.querySelector(`script[src="${scriptSrc}"]`);
   const {
     defer = true,

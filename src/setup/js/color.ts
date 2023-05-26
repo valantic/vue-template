@@ -1,19 +1,19 @@
 // Keep in sync with src/setup/scss/_color.scss
 
-interface IColorType {
+interface ColorType {
   name: string;
   value: string[];
 }
 
-export interface IColors {
-  primary: IColorType[];
-  secondary: IColorType[];
-  grayscale: IColorType[];
-  gradient: IColorType[];
-  status: IColorType[];
+export interface Colors {
+  primary: ColorType[];
+  secondary: ColorType[];
+  grayscale: ColorType[];
+  gradient: ColorType[];
+  status: ColorType[];
 }
 
-const colors: IColors = {
+const colors: Colors = {
   primary: [
     { name: '$color-primary--1', value: ['#ff4b4b'] },
     { name: '$color-primary--2', value: ['#000000'] },
