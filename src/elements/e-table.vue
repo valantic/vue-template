@@ -35,7 +35,7 @@
                         value="0"
                         name="total"
             >
-              <span :class="{ invisible : !showSortingOptions || !isMobile}">
+              <span :class="{ invisible : !showSortingOptions || !isMobile }">
                 {{ selectedInternal.length ? $t('e-table.deselectAll') : $t('e-table.selectAll') }}
               </span>
             </e-checkbox>
@@ -91,7 +91,7 @@
                         :name="`e-table__selection--${uuid}`"
                         :disabled="disabled"
             >
-              <span :class="{ invisible : !isMobile}">
+              <span :class="{ invisible : !isMobile }">
                 {{ $t('e-table.selectItem') }}
               </span>
             </e-checkbox>
@@ -212,12 +212,12 @@
     sortable: boolean;
     nowrap?: boolean;
     titleHidden?: boolean | (() => boolean);
-    onClick?: (item: IETableItem, column: IETableColumn, event?: Event) => void;
-    sort?: (a: unknown, b: unknown) => number;
+    onClick?(item: IETableItem, column: IETableColumn, event?: Event): void;
+    sort?(a: unknown, b: unknown): number;
   }
 
   interface IRowLink {
-    href?: (item: IETableItem, column?: IETableColumn, event?: Event) => string;
+    href?(item: IETableItem, column?: IETableColumn, event?: Event): string;
     title?: string | ((item?: IETableItem) => string);
   }
 

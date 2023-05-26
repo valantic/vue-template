@@ -1,6 +1,6 @@
 interface ICallback {
   id: string;
-  callback: () => unknown;
+  callback(): unknown;
 }
 
 interface IAttributes {

@@ -29,7 +29,7 @@ interface INotificationGetters extends _GettersTree<INotificationState> {
   /**
    * Gets the current list of notifications.
    */
-  getNotifications: (state: INotificationState) => INotificationItem[];
+  getNotifications(state: INotificationState): INotificationItem[];
 }
 
 interface INotificationActions {
@@ -37,17 +37,17 @@ interface INotificationActions {
   /**
    * Shows the given notification and returns its instance.
    */
-  showNotification: (notificationItem: INotificationItem) => INotificationItem;
+  showNotification(notificationItem: INotificationItem): INotificationItem;
 
   /**
    * Removes a notification.
    */
-  popNotification: (id: number) => void;
+  popNotification(id: number): void;
 
   /**
    * Adds an "unknown error" to the notification stack.
    */
-  showUnknownError: () => void;
+  showUnknownError(): void;
 }
 
 export type TNotificationStore = Store<string, INotificationState, INotificationGetters, INotificationActions>;

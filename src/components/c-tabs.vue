@@ -124,7 +124,7 @@
     },
     data(): IData {
       return {
-        LinkTarget: LinkTarget,
+        LinkTarget,
         activeTab: this.tabs.find(tab => tab.active) || null,
       };
     },

@@ -4,7 +4,7 @@ interface IMockNotifications {
   success: INotificationItem;
   info: INotificationItem;
   error: INotificationItem;
-  createNotification: (notificationOptions: object) => INotificationItem;
+  createNotification(notificationOptions: object): INotificationItem;
 }
 
 /**

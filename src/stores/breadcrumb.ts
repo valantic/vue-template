@@ -24,7 +24,7 @@ interface IBreadcrumbGetters extends _GettersTree<IBreadcrumbState> {
   /**
    * Gets the list of current breadcrumb items.
    */
-  getItems: (state: IBreadcrumbState) => IBreadcrumbItem[];
+  getItems(state: IBreadcrumbState): IBreadcrumbItem[];
 }
 
 interface IBreadcrumbActions {
@@ -32,7 +32,7 @@ interface IBreadcrumbActions {
   /**
    * Sets the list of breadcrumbs in the state.
    */
-  setItems: (data: IBreadcrumbItem[]) => void;
+  setItems(data: IBreadcrumbItem[]): void;
 }
 
 export type TBreadcrumbStore = Store<string, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>;

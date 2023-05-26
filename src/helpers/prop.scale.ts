@@ -1,7 +1,7 @@
 interface IPropConfig {
   type: (NumberConstructor | StringConstructor)[];
   default: number;
-  validator?: (value: string) => boolean;
+  validator?(value: string): boolean;
 }
 
 /**
