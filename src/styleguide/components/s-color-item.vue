@@ -41,7 +41,6 @@
        */
       palette: {
         type: String,
-        default: null,
         required: true,
       },
 
@@ -50,7 +49,6 @@
        */
       colors: {
         type: Array as PropType<Color[]>,
-        default: null,
         required: true,
       },
     },

@@ -44,9 +44,9 @@
     allowAutoUpdates: boolean;
   }
 
-  type CGoogleMapsCallback = () => void;
+  type GoogleMapsCallback = () => void;
 
-  export interface CGoogleMapsLocation {
+  export interface GoogleMapsLocation {
     lat?: string | number | null;
     lng?: string | number | null;
     geocode?: string;
@@ -54,22 +54,22 @@
     title?: string;
   }
 
-  interface CGoogleMapsInternalLocation extends CGoogleMapsLocation{
-    referer: CGoogleMapsLocation;
+  interface GoogleMapsInternalLocation extends GoogleMapsLocation{
+    referer: GoogleMapsLocation;
   }
 
   interface EventClick {
-    location: CGoogleMapsLocation;
+    location: GoogleMapsLocation;
     marker: google.maps.Marker;
   }
 
   declare global {
     interface Window {
-      cGoogleMapsInitMap: CGoogleMapsCallback;
+      cGoogleMapsInitMap: GoogleMapsCallback;
     }
   }
 
-  const callbackStack: CGoogleMapsCallback[] = [];
+  const callbackStack: GoogleMapsCallback[] = [];
   const callbackFunctionName = 'cGoogleMapsInitMap';
 
   let geocoder: google.maps.Geocoder | null = null;
@@ -214,7 +214,7 @@
   /**
    * This function checks whether the Map API has already been loaded once.
    */
-  function loadMapsAPI(callback: CGoogleMapsCallback): void {
+  function loadMapsAPI(callback: GoogleMapsCallback): void {
     const useSessionStore = sessionStore();
     const apiKey = useSessionStore.googleMapsApiKey;
 
@@ -248,7 +248,7 @@
        * lat/lng OR geocode MUST be defined!
        */
       locations: {
-        type: Array as PropType<CGoogleMapsLocation[]>,
+        type: Array as PropType<GoogleMapsLocation[]>,
         required: true,
       },
 
@@ -344,7 +344,7 @@
       /**
        * Maps the locations to the Google Maps required format.
        */
-      mappedLocations(): CGoogleMapsInternalLocation[] {
+      mappedLocations(): GoogleMapsInternalLocation[] {
         return this.locations?.map((location) => {
           const { lat, lng } = location;
 
@@ -485,7 +485,7 @@
        * @param {Object} location - A location object.
        * @param {String} location.geocode - An address string, that will be used to calculate the coordinates.
        */
-      createMakerFromAddress(location: CGoogleMapsInternalLocation): void {
+      createMakerFromAddress(location: GoogleMapsInternalLocation): void {
         if (!location.geocode) {
           throw new Error("Unable to geocode a location without 'geocode' information.");
         }
@@ -518,7 +518,7 @@
        *
        * @returns {Property.Marker}
        */
-      createMarker(location: CGoogleMapsInternalLocation): google.maps.Marker {
+      createMarker(location: GoogleMapsInternalLocation): google.maps.Marker {
         const marker = new window.google.maps.Marker({
           position: {
             lat: location.lat,

@@ -199,12 +199,12 @@
 
   type ItemId = number | string;
 
-  export interface ETableItem {
+  export interface TableItem {
     disabled?: boolean;
     [key: string]: ItemId | unknown;
   }
 
-  export interface ETableColumn {
+  export interface TableColumn {
     title: string | (() => string);
     key: string;
     align: 'left' | 'center' | 'right';
@@ -212,13 +212,13 @@
     sortable: boolean;
     nowrap?: boolean;
     titleHidden?: boolean | (() => boolean);
-    onClick?(item: ETableItem, column: ETableColumn, event?: Event): void;
+    onClick?(item: TableItem, column: TableColumn, event?: Event): void;
     sort?(a: unknown, b: unknown): number;
   }
 
   interface RowLink {
-    href?(item: ETableItem, column?: ETableColumn, event?: Event): string;
-    title?: string | ((item?: ETableItem) => string);
+    href?(item: TableItem, column?: TableColumn, event?: Event): string;
+    title?: string | ((item?: TableItem) => string);
   }
 
   interface Setup extends Uuid {
@@ -235,7 +235,7 @@
     /**
      * The currently selected 'column' to be sorted by.
      */
-    sortBy: ETableColumn | null;
+    sortBy: TableColumn | null;
 
     /**
      * Holds to sort direction in case a 'sortBy' is active.
@@ -260,7 +260,7 @@
     /**
      * Row items that should be displayed in expanded state.
      */
-    expandedRows: ETableItem[],
+    expandedRows: TableItem[],
   }
 
   /**
@@ -283,7 +283,7 @@
        * Array of data objects to render in table.
        */
       items: {
-        type: Array as PropType<ETableItem[]>,
+        type: Array as PropType<TableItem[]>,
         required: true,
       },
 
@@ -291,7 +291,7 @@
        * Allows to set an Array of selected items.
        */
       selected: {
-        type: Array as PropType<ETableItem[]>,
+        type: Array as PropType<TableItem[]>,
         default: () => [],
       },
 
@@ -299,7 +299,7 @@
        * Array of column definition objects.
        */
       columns: {
-        type: Array as PropType<ETableColumn[]>,
+        type: Array as PropType<TableColumn[]>,
         required: true,
       },
 
@@ -418,7 +418,7 @@
       /**
        * Returns a sorted copy of the table-items.
        */
-      itemsSortedBy(): ETableItem[] {
+      itemsSortedBy(): TableItem[] {
         const { sortBy } = this;
         const items = this.items.slice();
 
@@ -436,7 +436,7 @@
       /**
        * Reverts the sort direction if required.
        */
-      itemsSorted(): ETableItem[] {
+      itemsSorted(): TableItem[] {
         if (!this.sortAscending) {
           return this.itemsSortedBy.slice().reverse();
         }
@@ -496,7 +496,7 @@
       /**
        * Returns the title of the actual table column.
        */
-      columnTitle(column: ETableColumn): string | null {
+      columnTitle(column: TableColumn): string | null {
         switch (typeof column?.title) {
           case 'string':
             return column.title;
@@ -530,7 +530,7 @@
       /**
        * Returns a title for the row link, based on the type of the definition.
        */
-      rowTitle(item: ETableItem): string | undefined {
+      rowTitle(item: TableItem): string | undefined {
         const { rowLink } = this;
 
         switch (typeof rowLink?.title) {
@@ -548,7 +548,7 @@
       /**
        * Checks if the given column should display the header label.
        */
-      isHeaderLabelVisible(column: ETableColumn): boolean {
+      isHeaderLabelVisible(column: TableColumn): boolean {
         // Adding the support for functions was needed, to change visibility state dynamically (improved a11y).
         return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden !== true);
       },
@@ -558,14 +558,14 @@
        *
        * Since Vue3 leverages proxies for data properties for reactivity, we can't compare the objects directly.
        */
-      isSortedBy(column: ETableColumn): boolean {
+      isSortedBy(column: TableColumn): boolean {
         return this.sortBy?.key === column.key;
       },
 
       /**
        * Will set the sort-parameters.
        */
-      onClickSort(column: ETableColumn): void {
+      onClickSort(column: TableColumn): void {
         if (this.isSortedBy(column)) {
           const asc = this.sortAscending;
 
@@ -583,7 +583,7 @@
       /**
        * Calculates a sort button modifier object.
        */
-      sortButtonModifiers(column: ETableColumn): Modifiers {
+      sortButtonModifiers(column: TableColumn): Modifiers {
         const active = this.isSortedBy(column);
 
         return {
@@ -595,7 +595,7 @@
       /**
        * Returns BEM modifiers for header cells.
        */
-      headerCellModifiers(column: ETableColumn): Modifiers {
+      headerCellModifiers(column: TableColumn): Modifiers {
         return {
           align: column.align || 'left',
           col: column.key,
@@ -607,7 +607,7 @@
       /**
        * Returns BEM modifiers for cells.
        */
-      cellModifiers(column: ETableColumn): Modifiers {
+      cellModifiers(column: TableColumn): Modifiers {
         return {
           align: column.align || 'left',
           hasEvent: !!column.onClick,
@@ -620,10 +620,10 @@
       /**
        * Returns a sort function which will sort the elements of an Array by the given field.
        */
-      sortByFieldConstructor(field: string): (a: ETableItem, b: ETableItem) => number {
+      sortByFieldConstructor(field: string): (a: TableItem, b: TableItem) => number {
         return (a, b) => {
-          const aValue = a[field as keyof ETableItem];
-          const bValue = b[field as keyof ETableItem];
+          const aValue = a[field as keyof TableItem];
+          const bValue = b[field as keyof TableItem];
 
           switch (true) {
             case typeof aValue === 'string':
@@ -690,7 +690,7 @@
       /**
        * Callback for clicks within a row.
        */
-      onCellClick(item: ETableItem, column: ETableColumn, event: MouseEvent): void {
+      onCellClick(item: TableItem, column: TableColumn, event: MouseEvent): void {
         if (this.hasSelection) { // Cancel cell action if a text selection is active.
           return;
         }
@@ -715,7 +715,7 @@
       /**
        * Click callback for the toggle cell (increases click area on mobile).
        */
-      onDetailToggleClick(item: ETableItem): void {
+      onDetailToggleClick(item: TableItem): void {
         const id = item[this.itemIdentifier] as ItemId;
 
         if (!id) {

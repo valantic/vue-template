@@ -14,7 +14,7 @@
   import colors, { Colors } from '../../setup/js/color';
   import sColorItem from './s-color-item.vue';
 
-  type Colors = keyof Colors;
+  type ColorVariants = keyof Colors;
 
   export default defineComponent({
     name: 's-color',
@@ -39,9 +39,10 @@
 
       /**
        * Returns an Array of color palette names.
+       * @returns {ColorVariants[]}
        */
-      palettes(): Colors[] {
-        return Object.keys(colors) as Array<Colors>;
+      palettes(): ColorVariants[] {
+        return Object.keys(colors) as Array<ColorVariants>;
       },
     },
     // watch: {},

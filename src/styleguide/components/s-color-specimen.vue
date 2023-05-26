@@ -31,7 +31,6 @@
        */
       name: {
         type: String,
-        default: null,
         required: true,
       },
 
@@ -41,7 +40,6 @@
        */
       value: {
         type: Array as PropType<string[]>,
-        default: null,
         required: true,
       },
     },
