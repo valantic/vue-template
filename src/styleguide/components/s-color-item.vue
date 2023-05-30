@@ -28,14 +28,11 @@
 
   export default defineComponent({
     name: 's-color-item',
-    status: 0, // TODO: remove when component was prepared for current project.
-
     components: {
       sColorSpecimen,
     },
 
     props: {
-
       /**
        * Palette name to be rendered. See keys in src/setup/js/color.js
        */

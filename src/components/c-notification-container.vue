@@ -23,7 +23,6 @@
    */
   export default defineComponent({
     name: 'c-notification-container',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cNotification,

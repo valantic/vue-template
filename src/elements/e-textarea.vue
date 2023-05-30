@@ -41,7 +41,6 @@
    */
   export default defineComponent({
     name: 'e-textarea',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       eIcon,
@@ -106,7 +105,6 @@
     // },
 
     computed: {
-
       /**
        * Defines state modifier classes.
        */

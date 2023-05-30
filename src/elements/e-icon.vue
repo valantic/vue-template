@@ -45,7 +45,6 @@
    */
   export default defineComponent({
     name: 'e-icon',
-    status: 0,
 
     // components: {},
 

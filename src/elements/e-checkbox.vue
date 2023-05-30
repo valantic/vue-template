@@ -3,17 +3,16 @@
          @mouseenter="hover = true"
          @mouseleave="hover = false"
   >
-    <input
-      v-model="internalValue"
-      v-bind="$attrs"
-      :class="b('field')"
-      :aria-checked="isChecked ? 'true' : 'false'"
-      :disabled="disabled"
-      :value="value"
-      :name="name"
-      type="checkbox"
-      @blur="onBlur"
-      @focus="onFocus"
+    <input v-model="internalValue"
+           v-bind="$attrs"
+           :class="b('field')"
+           :aria-checked="isChecked ? 'true' : 'false'"
+           :disabled="disabled"
+           :value="value"
+           :name="name"
+           type="checkbox"
+           @blur="onBlur"
+           @focus="onFocus"
     >
     <span :class="b('indicator')"></span>
     <span :class="b('label-text')">
@@ -33,7 +32,6 @@
    */
   export default defineComponent({
     name: 'e-checkbox',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     inheritAttrs: false,
 

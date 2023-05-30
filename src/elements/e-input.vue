@@ -65,7 +65,6 @@
    */
   export default defineComponent({
     name: 'e-input',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       eIcon,
@@ -477,8 +476,8 @@
     }
 
     /**
-    * states
-    **/
+      * states
+      **/
     &--state-default {
       .e-input__slot-wrapper {
         right: variables.$spacing--5;
@@ -517,7 +516,7 @@
       }
     }
 
-    /*
+    /**
      * Notification is visible
      */
     &--notification {

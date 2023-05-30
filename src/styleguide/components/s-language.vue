@@ -22,7 +22,6 @@
 
   export default defineComponent({
     name: 's-language',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // props: {},
 

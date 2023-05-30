@@ -29,7 +29,6 @@
    */
   export default defineComponent({
     name: 'c-breadcrumb',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
 

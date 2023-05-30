@@ -56,7 +56,6 @@
    */
   export default defineComponent({
     name: 'e-select',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       eIcon,
@@ -283,7 +282,12 @@
 
     &--state-success {
       #{$this}__select {
-        @include mixins.icon(check, 22px, right 5px center, false); // FF does not support mask on <select>.
+        @include mixins.icon(
+            check,
+            22px,
+            right 5px center,
+            false
+        ); // FF does not support mask on <select>.
       }
 
       #{$this}__icon-splitter {

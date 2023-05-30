@@ -30,7 +30,6 @@
    */
   export default defineComponent({
     name: 'e-radio',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
     inheritAttrs: false,

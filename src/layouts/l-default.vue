@@ -20,7 +20,6 @@
 
   export default defineComponent({
     name: 'l-default',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cNotificationContainer,

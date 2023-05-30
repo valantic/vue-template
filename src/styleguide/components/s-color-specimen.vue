@@ -20,12 +20,10 @@
 
   export default defineComponent({
     name: 's-color-specimen',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
 
     props: {
-
       /**
        * Human readable name of the color
        */

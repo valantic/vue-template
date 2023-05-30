@@ -25,7 +25,6 @@
    */
   export default defineComponent({
     name: 'e-label',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
 
