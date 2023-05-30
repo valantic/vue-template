@@ -17,7 +17,7 @@
     /**
      * Determines if the HTML validation styles should be applied.
      */
-    enabled: boolean
+    enabled: boolean;
   }
 
   /**

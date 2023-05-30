@@ -177,12 +177,12 @@
       language: string;
       topics: string[];
       frequency: string;
-      businessFields: string[]
-    },
+      businessFields: string[];
+    };
     mock: {
       businessFields: ISelectItem[];
       languages: ISelectItem[];
-    }
+    };
   }
 
   export default defineComponent({

@@ -21,7 +21,7 @@
   import breadcrumb, { TBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb';
 
   interface ISetup {
-    breadcrumbStore: TBreadcrumbStore
+    breadcrumbStore: TBreadcrumbStore;
   }
 
   /**

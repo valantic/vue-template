@@ -29,7 +29,7 @@
   }
 
   interface ISetup {
-    sessionStore: TSessionStore
+    sessionStore: TSessionStore;
   }
 
   export default defineComponent({

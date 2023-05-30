@@ -74,12 +74,12 @@
   }
 
   interface IData {
-    LINK_TARGET: typeof LINK_TARGET,
+    LINK_TARGET: typeof LINK_TARGET;
 
     /**
      * Holds the currently active tab defintion.
      */
-    activeTab: ITab | null,
+    activeTab: ITab | null;
   }
 
   /**

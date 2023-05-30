@@ -24,7 +24,7 @@ interface ISessionGetters extends _GettersTree<ISessionState> {
   /**
    * Gets the current theme id.
    */
-  getTheme: (state: ISessionState) => string,
+  getTheme: (state: ISessionState) => string;
 }
 
 interface ISessionActions {

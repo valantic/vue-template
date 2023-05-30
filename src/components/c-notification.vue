@@ -19,7 +19,7 @@
   import eIcon from '@/elements/e-icon.vue';
 
   interface ISetup {
-    notificationStore: TNotificationStore
+    notificationStore: TNotificationStore;
   }
 
   interface IData {

@@ -15,7 +15,7 @@
   import notificationStore, { TNotificationStore } from '@/stores/notification';
 
   interface ISetup {
-    notificationStore: TNotificationStore
+    notificationStore: TNotificationStore;
   }
 
   export default defineComponent({

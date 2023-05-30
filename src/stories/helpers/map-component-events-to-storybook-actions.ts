@@ -2,8 +2,8 @@ import { DefineComponent } from 'vue';
 
 interface IStorybookActions {
   [key: string]: {
-    action: string,
-  }
+    action: string;
+  };
 }
 
 /**

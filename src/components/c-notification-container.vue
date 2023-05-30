@@ -15,7 +15,7 @@
   import notificationStore, { INotificationItem, TNotificationStore } from '@/stores/notification';
 
   interface ISetup {
-    notificationStore: TNotificationStore
+    notificationStore: TNotificationStore;
   }
 
   /**
