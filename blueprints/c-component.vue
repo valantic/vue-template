@@ -7,8 +7,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
-  // interface ISetup {}
-  // interface IData {}
+  // interface Setup {}
+  // interface Data {}
 
   /**
    * TODO: add component description.
@@ -21,8 +21,8 @@
     // props: {},
     // emits: {},
 
-    // setup(): ISetup {},
-    // data(): IData {
+    // setup(): Setup {},
+    // data(): Data {
     //   return {};
     // },
 

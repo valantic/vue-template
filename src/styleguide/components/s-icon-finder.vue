@@ -71,16 +71,16 @@
   import spritePath from '@/assets/icons.svg';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface ISetup {
+  interface Setup {
     input: Ref<HTMLInputElement | null>;
   }
 
-  interface IFilteredIcon {
+  interface FilteredIcon {
     name: string;
     negative: boolean;
   }
 
-  interface IData {
+  interface Data {
 
     /**
      * An array of available icons.
@@ -113,7 +113,7 @@
     spritePath: string;
   }
 
-  interface IIcon {
+  interface Icon {
     name: string;
   }
 
@@ -125,9 +125,9 @@
     components: {
       eIcon,
     },
-    // props: {}, 
+    // props: {},
 
-    setup(): ISetup {
+    setup(): Setup {
       const input = ref();
 
       return {
@@ -135,7 +135,7 @@
       };
     },
 
-    data(): IData {
+    data(): Data {
       return {
         icons: Object.keys(icons)
           .map(path => path
@@ -156,7 +156,7 @@
       /**
        * Returns an array of query filtered icons.
        */
-      filteredIcons(): IFilteredIcon[] {
+      filteredIcons(): FilteredIcon[] {
         const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);
 
         return list.map((icon: string) => { // eslint-disable-line arrow-body-style
@@ -171,7 +171,7 @@
       /**
        * Event handler for copy to clipboard button.
        */
-      copyToClipboard(icon: IIcon) {
+      copyToClipboard(icon: Icon) {
         const hiddenInput = this.input as HTMLInputElement;
         let template;
 

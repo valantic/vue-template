@@ -39,10 +39,10 @@
   import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
   import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
 
-  // interface ISetup {}
+  // interface Setup {}
 
   /**
    * Renders a modal dialog.
@@ -117,8 +117,8 @@
       'close': null,
     },
 
-    // setup(): ISetup {},
-    // data(): IData {
+    // setup(): Setup {},
+    // data(): Data {
     //   return {};
     // },
 
@@ -126,7 +126,7 @@
       /**
        * Returns modifier classes.
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         return {
           size: this.size,
           spacing: this.spacing,

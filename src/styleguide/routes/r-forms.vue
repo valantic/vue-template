@@ -158,18 +158,18 @@
   import eButton from '@/elements/e-button.vue';
   import { FieldStates } from '@/compositions/form-states';
 
-  interface ISelectItem {
+  interface SelectItem {
     label: string;
     value: string;
   }
 
-  interface ISetup {
+  interface Setup {
     v$: Ref<Validation>;
     formRef: Ref<HTMLFormElement | null>;
     FieldStates: typeof FieldStates;
   }
 
-  interface IData {
+  interface Data {
     form: {
       name: string;
       email: string;
@@ -180,8 +180,8 @@
       businessFields: string[];
     };
     mock: {
-      businessFields: ISelectItem[];
-      languages: ISelectItem[];
+      businessFields: SelectItem[];
+      languages: SelectItem[];
     };
   }
 
@@ -200,7 +200,7 @@
       eButton,
     },
 
-    setup(): ISetup {
+    setup(): Setup {
       const formRef = ref();
 
       return {
@@ -211,7 +211,7 @@
       };
     },
 
-    data(): IData {
+    data(): Data {
       return {
         form: {
           name: '',

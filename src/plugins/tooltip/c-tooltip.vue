@@ -39,11 +39,11 @@
     DEFAULT_POPPER_OPTIONS,
   } from '@/plugins/tooltip/shared';
 
-  interface ISetup {
+  interface Setup {
     tooltip: Ref<HTMLDivElement>;
   }
 
-  interface IData {
+  interface Data {
 
     /**
      * Holds the component instance related popper instance.
@@ -83,14 +83,14 @@
     },
     // emits: {},
 
-    setup(): ISetup {
+    setup(): Setup {
       const tooltip = ref();
 
       return {
         tooltip,
       };
     },
-    data(): IData {
+    data(): Data {
       return {
         popperInstance: null,
         mouseLeaveDebounce: null,

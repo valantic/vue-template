@@ -34,13 +34,13 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import sLanguage from './s-language.vue';
   import sThemeSelector from './s-theme-selector.vue';
   import sDemoSettings from './s-demo-settings.vue';
   import sNavigationBlock from './s-navigation-block.vue';
 
-  interface IData {
+  interface Data {
     isOpen: boolean;
   }
 
@@ -69,7 +69,7 @@
         ].includes(value),
       },
     },
-    data(): IData {
+    data(): Data {
       return {
         isOpen: false,
       };
@@ -78,7 +78,7 @@
       /**
        * Returns all modifiers for the wrapper class.
        */
-      wrapperModifiers(): IModifiers {
+      wrapperModifiers(): Modifiers {
         return {
           position: this.navPosition,
           open: this.isOpen,

@@ -72,11 +72,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import notificationStore, { TNotificationStore } from '@/stores/notification';
+  import notificationStore, { NotificationStore } from '@/stores/notification';
   import eButton from '@/elements/e-button.vue';
 
-  interface ISetup {
-    notificationStore: TNotificationStore;
+  interface Setup {
+    notificationStore: NotificationStore;
   }
 
   export default defineComponent({
@@ -86,7 +86,7 @@
       eButton,
     },
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         notificationStore: notificationStore(),
       };

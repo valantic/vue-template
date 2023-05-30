@@ -19,10 +19,10 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { faker } from '@faker-js/faker/locale/en';
-  import eTable, { IETableColumn, IETableItem } from '@/elements/e-table.vue';
+  import eTable, { TableColumn, TableItem } from '@/elements/e-table.vue';
 
-  interface ISetup {
-    columnsDefinition: IETableColumn[];
+  interface Setup {
+    columnsDefinition: TableColumn[];
   }
 
   export default defineComponent({
@@ -33,7 +33,7 @@
     // props: {},
     // emits: {},
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         columnsDefinition: [
           {
@@ -90,7 +90,7 @@
     },
 
     computed: {
-      items(): IETableItem[] {
+      items(): TableItem[] {
         return new Array(40)
           .fill(null)
           .map((item, index) => ({

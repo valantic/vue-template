@@ -26,17 +26,17 @@
   import { defineComponent } from 'vue';
   import spritePath from '@/assets/icons.svg';
 
-  interface ISizeLookup {
+  interface SizeLookup {
     [key: string]: number[];
   }
 
-  interface ISize {
+  interface Size {
     width: number;
     height: number;
   }
 
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
-  const sizeLookup: ISizeLookup = {
+  const sizeLookup: SizeLookup = {
     play: [1024, 721],
   };
 
@@ -98,7 +98,7 @@
        *
        * @returns {object}
        */
-      viewBox(): ISize {
+      viewBox(): Size {
         const { icon } = this;
         const lookup = sizeLookup[icon];
         const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize];
@@ -137,6 +137,6 @@
 
   .e-icon {
     display: block;
-    pointer-events: none; // Prevents IE11 from swallowing events.
+    pointer-events: none; // Prevents E11 from swallowing events.
   }
 </style>

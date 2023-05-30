@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker/locale/en';
 import { BREAKPOINTS_MAX, DEFAULT_IMAGE_SIZES } from '@/setup/globals';
-import { IImageSources, IImageSrcset, IImageMedia } from '@/types/image';
+import { ImageSources, ImageSrcset, ImageMedia } from '@/types/image';
 
-interface IRatios {
+interface Ratios {
   [key: string]: number;
 }
 
@@ -12,7 +12,7 @@ interface IRatios {
 export function createSrcSetImage(
   heightRatio = 1,
   sizes: number[] = Object.values(DEFAULT_IMAGE_SIZES)
-): IImageSrcset {
+): ImageSrcset {
   const srcset = sizes.map(width => `${faker.image.imageUrl(
     width,
     Math.ceil(heightRatio * width),
@@ -31,7 +31,7 @@ export function createSrcSetImage(
  * Creates a randomized image (sources).
  */
 export function createSourcesImage(
-  ratios: IRatios = {
+  ratios: Ratios = {
     xxs: 1,
     xs: 1,
     sm: 1,
@@ -40,7 +40,7 @@ export function createSourcesImage(
     fallback: 1,
   },
   sizes = DEFAULT_IMAGE_SIZES
-): IImageSources {
+): ImageSources {
   const media = Object.entries(BREAKPOINTS_MAX).map(([breakpoint, size]) => {
     const width = sizes[breakpoint as keyof typeof BREAKPOINTS_MAX] as number;
 
@@ -48,7 +48,7 @@ export function createSourcesImage(
       media: `(max-width: ${size}px)`,
       srcset:  faker.image.imageUrl(width, Math.round(width / ratios[breakpoint]), 'abstract', true),
     };
-  }).reduce((accumulator: IImageMedia, item) => {
+  }).reduce((accumulator: ImageMedia, item) => {
     accumulator[item.media] = item.srcset;
 
     return accumulator;

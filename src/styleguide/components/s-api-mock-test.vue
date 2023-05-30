@@ -86,29 +86,29 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eSelect from '@/elements/e-select.vue';
 
-  interface IDebugConfiguration {
+  interface DebugConfiguration {
     header: string;
     enabled: boolean;
     status: string;
     response: string;
   }
 
-  interface ISetup {
+  interface Setup {
     statusOptions: {
       label: string;
       value: string;
     }[];
   }
 
-  interface IData {
+  interface Data {
     search: string;
     handlers: ReadonlyArray<RequestHandler> | null;
     configurations: {
-      [key: string]: IDebugConfiguration;
+      [key: string]: DebugConfiguration;
     };
   }
 
-  interface IEndpoint {
+  interface Endpoint {
     header: string;
     method: string;
     path: string;
@@ -128,7 +128,7 @@
       close: null,
     },
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         statusOptions: [
           {
@@ -150,7 +150,7 @@
         ],
       };
     },
-    data(): IData {
+    data(): Data {
       return {
         search: '',
         handlers: null,
@@ -162,20 +162,20 @@
       /**
        * Returns the mapped list of endpoints.
        */
-      mappedEndpoints(): IEndpoint[] {
+      mappedEndpoints(): Endpoint[] {
         const { handlers } = this;
 
         if (!handlers) {
           return [];
         }
 
-        return handlers.map(handler => handler.info) as IEndpoint[];
+        return handlers.map(handler => handler.info) as Endpoint[];
       },
 
       /**
        * Returns the filtered list of endpoints.
        */
-      filteredEndpoints(): IEndpoint[] {
+      filteredEndpoints(): Endpoint[] {
         const { search, mappedEndpoints } = this;
 
         if (!search) {
@@ -190,7 +190,7 @@
        * Updates handler and local storage when configuration changed.
        */
       configurations: {
-        handler(configurationsValue: IDebugConfiguration): void {
+        handler(configurationsValue: DebugConfiguration): void {
           this.setupHandlers();
           window.localStorage.setItem(storageKey, JSON.stringify(configurationsValue));
         },
