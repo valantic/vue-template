@@ -1,16 +1,16 @@
-import { IDelimiters } from '@/plugins/vue-bem-cn/src/globals';
+import { Delimiters } from '@/plugins/vue-bem-cn/src/globals';
 import { isString, isPObject, hyphenate } from '../utils';
 import bemNames from './bem-names';
 
-interface IOptions {
-  delimiters: IDelimiters;
+interface Options {
+  delimiters: Delimiters;
   hyphenate: boolean;
 }
 
 /**
  * Returns a BEM name creator method with the given options applied.
  */
-export default function bemCn(block: string, options: IOptions) {
+export default function bemCn(block: string, options: Options) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function entities(elem: any, mods?: string | object, mix?: string): string {
     const resultObj = {

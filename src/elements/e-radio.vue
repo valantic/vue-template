@@ -20,8 +20,8 @@
 
 <script lang="ts">
   import { defineComponent, toRefs } from 'vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
@@ -64,7 +64,7 @@
 
     emits: ['update:modelValue', 'change'],
 
-    setup(props): IFormStates {
+    setup(props): FormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -93,7 +93,7 @@
       /**
        * Returns a configuration Object for modifier classes.
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         return {
           ...this.stateModifiers,
           selected: this.internalValue === this.value,
@@ -103,7 +103,7 @@
       /**
        * Returns all modifiers for the field class.
        */
-      fieldModifiers(): IModifiers {
+      fieldModifiers(): Modifiers {
         return {
           selected: this.internalValue === this.value,
         };

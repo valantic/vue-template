@@ -38,16 +38,16 @@
 <script lang="ts">
   import { defineComponent, PropType, toRefs } from 'vue';
   import i18n from '@/setup/i18n';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
 
-  interface IData {
+  interface Data {
     internalValue: string;
   }
 
-  interface IOptions {
+  interface Options {
     [key: string]: string;
   }
 
@@ -81,7 +81,7 @@
        */
       options: {
         required: true,
-        type: Array as PropType<IOptions[]>,
+        type: Array as PropType<Options[]>,
       },
 
       /**
@@ -129,13 +129,13 @@
 
     emits: ['update:modelValue'],
 
-    setup(props): IFormStates {
+    setup(props): FormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
     },
 
-    data(): IData {
+    data(): Data {
       return {
         internalValue: this.modelValue,
       };
@@ -145,7 +145,7 @@
       /**
        * Defines state modifier classes.
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         return {
           ...this.stateModifiers,
         };

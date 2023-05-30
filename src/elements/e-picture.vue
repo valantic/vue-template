@@ -22,17 +22,17 @@
 <script lang="ts">
   import { defineComponent, PropType, StyleValue } from 'vue';
   import { BREAKPOINTS_MAX } from '@/setup/globals';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  export interface IImageSizes {
+  export interface ImageSizes {
     [key: keyof typeof BREAKPOINTS_MAX | 'fallback' | string]: number;
   }
 
-  interface ISizePerBreakpoint {
-    [key: string]: number
+  interface SizePerBreakpoint {
+    [key: string]: number;
   }
 
-  interface IData {
+  interface Data {
     loaded: boolean;
     fallbackHeight: number;
     internalSrcSet: string;
@@ -101,7 +101,7 @@
        * `{ <breakpoint (px value|short name)>: <minWidth>, ... }`
        */
       sizes: {
-        type: Object as PropType<IImageSizes>,
+        type: Object as PropType<ImageSizes>,
         default: null,
       },
 
@@ -167,7 +167,7 @@
         default: true,
       },
     },
-    data(): IData {
+    data(): Data {
       return {
         /**
          * Becomes true if the image is loaded.
@@ -191,7 +191,7 @@
       /**
        * Returns an object of BEM modifiers.
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         return {
           inline: this.inline,
           ratio: !!this.ratio,
@@ -219,7 +219,7 @@
           return undefined;
         }
 
-        const mappedSizesPerBreakpoints: ISizePerBreakpoint = {};
+        const mappedSizesPerBreakpoints: SizePerBreakpoint = {};
         const fallback = this.sizes.fallback ? `,${this.sizes.fallback}px` : ',100vw';
 
         return Object

@@ -28,7 +28,7 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
   import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
 
-  interface IData {
+  interface Data {
 
     /**
      * Determines if the user is logged in.
@@ -51,7 +51,7 @@
     },
 
     // props: {},
-    data(): IData {
+    data(): Data {
       return {
         loggedIn: true,
         showApiHandlerConfiguration: false,

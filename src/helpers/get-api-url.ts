@@ -1,13 +1,13 @@
 import apiUrls from '@/setup/api-urls.json';
 
-interface IUrlKeyValues {
+interface UrlKeyValues {
   [key: string]: string;
 }
 
 /**
  * Gets the url for the given 'urlKey'. The method also accepts an Object of interpolation values.
  */
-export default function getApiUrl(urlKey: keyof typeof apiUrls, values: IUrlKeyValues): string {
+export default function getApiUrl(urlKey: keyof typeof apiUrls, values: UrlKeyValues): string {
   let url = apiUrls[urlKey];
 
   if (!url) {

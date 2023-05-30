@@ -17,8 +17,8 @@
 
 <script lang="ts">
   import { defineComponent, toRefs } from 'vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Label component for form elements, can be used with a slot or a for attribute
@@ -78,7 +78,7 @@
       },
     },
 
-    setup(props): IFormStates {
+    setup(props): FormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -88,7 +88,7 @@
       /**
        * Defines state modifier classes.
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         return {
           ...this.stateModifiers,
           position: this.position,
@@ -151,7 +151,7 @@
       }
 
       .e-label__inner {
-        flex-shrink: 0; // fixes height bug on IE11
+        flex-shrink: 0; // fixes height bug on E11
       }
     }
 

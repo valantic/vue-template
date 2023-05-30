@@ -1,22 +1,22 @@
-import { IDelimiters } from '@/plugins/vue-bem-cn/src/globals';
+import { Delimiters } from '@/plugins/vue-bem-cn/src/globals';
 import { isString, isNumber } from '../utils';
 
-interface IModifiers {
+interface Modifiers {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
+  [key: string]: any;
 }
 
-interface IEntities {
+interface Entities {
   block: string;
   el?: string;
-  mods?: IModifiers;
+  mods?: Modifiers;
   mixin?: string;
 }
 
 /**
  * Create String from BEM entitys.
  */
-export default function bemNames(entities: IEntities, delimiters: IDelimiters): string {
+export default function bemNames(entities: Entities, delimiters: Delimiters): string {
   let resultString = entities.block;
 
   if (entities.el) {

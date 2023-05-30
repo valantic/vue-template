@@ -35,23 +35,23 @@ module.exports = {
     // Fix and enable again
     'import/extensions': 'off',
     'vue/require-emit-validator': 'off',
-    // TODO: move to eslint-config-valantic
-    'space-before-function-paren': ['error', {
-      anonymous: 'never',
-      named: 'never',
-      asyncArrow: 'always',
-    }],
-    'max-lines': ['error', {
-      max: 1000,
-      skipBlankLines: true,
-      skipComments: true,
-    }],
     '@typescript-eslint/no-empty-interface': ['error', {
       allowSingleExtends: true,
     }],
-    'no-undefined': 'off', // Conflicts with 'undefined' fallback of TypeScript definitions.
     '@typescript-eslint/explicit-function-return-type': ['error', {
       allowTypedFunctionExpressions: true,
+    }],
+    // TODO: move to eslint-config-valantic
+    '@typescript-eslint/member-delimiter-style': ['error', {
+      multiline: {
+        delimiter: 'semi',
+        requireLast: true,
+      },
+      singleline: {
+        delimiter: 'semi',
+        requireLast: false,
+      },
+      multilineDetection: 'last-member',
     }],
   },
   overrides: [{

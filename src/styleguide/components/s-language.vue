@@ -16,7 +16,7 @@
   import { defineComponent } from 'vue';
   import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
-  interface IData {
+  interface Data {
     i18nLocales: string[];
   }
 
@@ -25,7 +25,7 @@
 
     // props: {},
 
-    data(): IData {
+    data(): Data {
       return {
         i18nLocales: I18N_LOCALES,
       };

@@ -7,8 +7,8 @@
 
 <script lang="ts">
   import { defineComponent, toRefs } from 'vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Component is used to display a notification (status message) directly in the form field.
@@ -22,7 +22,7 @@
       ...withProps(),
     },
 
-    setup(props): IFormStates {
+    setup(props): FormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -34,9 +34,9 @@
 
     computed: {
       /**
-       * Defines state modifier classes.
-       */
-      modifiers(): IModifiers {
+      * Defines state modifier classes.
+      */
+      modifiers(): Modifiers {
         return {
           ...this.stateModifiers,
         };

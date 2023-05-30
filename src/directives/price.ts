@@ -1,6 +1,6 @@
 import { DirectiveBinding } from 'vue';
 import formatPrice from '@/helpers/format-price';
-import { ICustomDirective } from '@/types/custom-directive';
+import { CustomDirective } from '@/types/custom-directive';
 
 /**
  * Formats the html content of the provided element as price.
@@ -35,4 +35,4 @@ export default {
     beforeMount: format,
     updated: format,
   },
-} as ICustomDirective;
+} as CustomDirective;

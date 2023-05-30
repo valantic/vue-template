@@ -20,10 +20,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import useTheme, { ITheme } from '@/compositions/themes';
+  import useTheme, { Theme } from '@/compositions/themes';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface ILogo {
+  interface Logo {
     icon: string;
     alt: string;
     title: string;
@@ -48,7 +48,7 @@
     //   return {};
     // },
 
-    setup(): ITheme {
+    setup(): Theme {
       return {
         ...useTheme(),
       };
@@ -58,7 +58,7 @@
       /**
        * Get's the correct logo depending on the theme value from the store.
        */
-      logo(): ILogo {
+      logo(): Logo {
         const title = this.$t('e-logo.linkTitle');
         let icon = '';
         let alt = '';

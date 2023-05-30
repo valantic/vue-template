@@ -8,7 +8,7 @@ module.exports = {
     {
       directory: '../src/stories/elements/',
       titlePrefix: 'Elements/',
-      files: '*.stories.js',
+      files: '*.stories.@(js|ts)',
     },
     {
       directory: '../src/stories/components/',

@@ -23,8 +23,8 @@
 
 <script lang="ts">
   import { defineComponent, PropType, toRefs } from 'vue';
-  import useFormStates, { IFormStates, withProps } from '@/compositions/form-states';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Checkbox component for form elements.
@@ -77,7 +77,7 @@
 
     emits: ['update:modelValue', 'change', 'focus', 'blur'],
 
-    setup(props): IFormStates {
+    setup(props): FormStates {
       return {
         ...useFormStates(toRefs(props).state),
       };
@@ -91,7 +91,7 @@
       /**
        * Returns a configuration Object for modifier classes.
        */
-      modifiers(): IModifiers {
+      modifiers(): Modifiers {
         return {
           ...this.stateModifiers,
           variant: this.variant,
