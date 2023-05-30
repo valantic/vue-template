@@ -17,11 +17,11 @@ function createNotification({
   selector,
   redirectUrl,
 }: {
-  type?: string,
-  message?: string,
-  expire?: boolean,
-  selector?: string,
-  redirectUrl?: string,
+  type?: string;
+  message?: string;
+  expire?: boolean;
+  selector?: string;
+  redirectUrl?: string;
 }): NotificationItem {
   return {
     id: 0,

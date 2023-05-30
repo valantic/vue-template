@@ -53,8 +53,8 @@
 
   interface Data {
     active: boolean;
-    placementOptions: Record<'label' | 'value', string>[],
-    placement: Placement
+    placementOptions: Record<'label' | 'value', string>[];
+    placement: Placement;
   }
 
   export default defineComponent({

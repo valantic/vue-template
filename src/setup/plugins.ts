@@ -11,8 +11,8 @@ import dayjs from '@/plugins/dayjs';
 // import tooltip from '@/plugins/tooltip';
 
 export interface CustomPlugin {
-  plugin: Plugin,
-  options?: Record<string, unknown>
+  plugin: Plugin;
+  options?: Record<string, unknown>;
 }
 
 export default [

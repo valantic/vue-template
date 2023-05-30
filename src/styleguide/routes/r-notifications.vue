@@ -76,7 +76,7 @@
   import eButton from '@/elements/e-button.vue';
 
   interface Setup {
-    notificationStore: NotificationStore
+    notificationStore: NotificationStore;
   }
 
   export default defineComponent({

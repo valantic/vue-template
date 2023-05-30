@@ -1,7 +1,7 @@
 /* eslint-disable id-length */
 
 export interface Delimiters {
-  ns: string
+  ns: string;
   el: string;
   mod: string;
   modVal: string;

@@ -260,7 +260,7 @@
     /**
      * Row items that should be displayed in expanded state.
      */
-    expandedRows: TableItem[],
+    expandedRows: TableItem[];
   }
 
   /**

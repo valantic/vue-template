@@ -41,6 +41,18 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': ['error', {
       allowTypedFunctionExpressions: true,
     }],
+    // TODO: move to eslint-config-valantic
+    '@typescript-eslint/member-delimiter-style': ['error', {
+      multiline: {
+        delimiter: 'semi',
+        requireLast: true,
+      },
+      singleline: {
+        delimiter: 'semi',
+        requireLast: false,
+      },
+      multilineDetection: 'last-member',
+    }],
   },
   overrides: [{
     files: ['tests/**/*.*'],

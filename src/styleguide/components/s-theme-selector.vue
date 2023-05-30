@@ -29,7 +29,7 @@
   }
 
   interface Setup {
-    sessionStore: SessionStore
+    sessionStore: SessionStore;
   }
 
   export default defineComponent({

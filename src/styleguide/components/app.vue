@@ -14,7 +14,7 @@
   import notificationStore, { NotificationStore } from '@/stores/notification';
 
   interface Setup {
-    notificationStore: NotificationStore
+    notificationStore: NotificationStore;
   }
 
   export default defineComponent({

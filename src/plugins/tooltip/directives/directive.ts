@@ -23,7 +23,7 @@ interface TooltipElement extends HTMLElement {
     isHidden: boolean;
     popper: Instance;
     events: TooltipEvent[];
-  }
+  };
 }
 
 /**

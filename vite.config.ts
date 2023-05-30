@@ -10,7 +10,7 @@ import viteBuilds from './vite.builds.json';
 interface Modes {
   [key: string]: {
     input: string[];
-  }
+  };
 }
 
 interface ViteBuilds {

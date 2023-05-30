@@ -1,6 +1,6 @@
 import { Directive } from 'vue';
 
 export interface CustomDirective {
-  name: string,
-  directive: Directive,
+  name: string;
+  directive: Directive;
 }

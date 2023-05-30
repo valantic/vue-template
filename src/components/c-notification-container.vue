@@ -15,7 +15,7 @@
   import notificationStore, { NotificationItem, NotificationStore } from '@/stores/notification';
 
   interface Setup {
-    notificationStore: NotificationStore
+    notificationStore: NotificationStore;
   }
 
   /**

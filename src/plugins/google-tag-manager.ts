@@ -46,25 +46,25 @@ interface AddShippingInfoPayload {
 export interface Gtm {
   push(payload: Record<string, unknown>): void;
   pushAddToCart(item: ListItem, list: GaListNames): void;
-  pushLogin(): void,
-  pushSignUp(): void,
-  pushSearch(searchTerm: string): void,
-  pushViewItemList(items: ListItem[], list: GaListNames): void,
-  pushViewItem(item: ListItem): void,
-  pushViewCart(items: ListItem[], value: number, currency: string): void,
-  pushRemoveFromCart(items: ListItem): void,
-  pushAddToWishlist(item: ListItem): void,
-  pushBeginCheckout(items: ListItem[], value: number, currency: string): void,
-  pushSelectItem(item: ListItem, list: GaListNames): void,
-  pushPurchase(payload: PurchasePayload): void,
-  pushAddPaymentInfo(payload: AddPaymentInfoPayload): void,
-  pushAddShippingInfo(payload: AddShippingInfoPayload): void,
+  pushLogin(): void;
+  pushSignUp(): void;
+  pushSearch(searchTerm: string): void;
+  pushViewItemList(items: ListItem[], list: GaListNames): void;
+  pushViewItem(item: ListItem): void;
+  pushViewCart(items: ListItem[], value: number, currency: string): void;
+  pushRemoveFromCart(items: ListItem): void;
+  pushAddToWishlist(item: ListItem): void;
+  pushBeginCheckout(items: ListItem[], value: number, currency: string): void;
+  pushSelectItem(item: ListItem, list: GaListNames): void;
+  pushPurchase(payload: PurchasePayload): void;
+  pushAddPaymentInfo(payload: AddPaymentInfoPayload): void;
+  pushAddShippingInfo(payload: AddShippingInfoPayload): void;
   debug(enable: boolean): void;
 }
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  interface Window { dataLayer: Record<string, unknown>[]; }
+  interface Window { dataLayer: Record<string, unknown>[] }
 }
 
 /**

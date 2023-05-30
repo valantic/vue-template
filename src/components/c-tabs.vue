@@ -74,12 +74,12 @@
   }
 
   interface Data {
-    LinkTarget: typeof LinkTarget,
+    LinkTarget: typeof LinkTarget;
 
     /**
      * Holds the currently active tab defintion.
      */
-    activeTab: Tab | null,
+    activeTab: Tab | null;
   }
 
   /**

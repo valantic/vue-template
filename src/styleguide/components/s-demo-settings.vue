@@ -38,7 +38,7 @@
     /**
      * Determines if the api handler configuration is displayed.
      */
-    showApiHandlerConfiguration: boolean,
+    showApiHandlerConfiguration: boolean;
   }
 
   export default defineComponent({

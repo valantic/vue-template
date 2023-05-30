@@ -29,7 +29,7 @@
   }
 
   interface SizePerBreakpoint {
-    [key: string]: number
+    [key: string]: number;
   }
 
   interface Data {

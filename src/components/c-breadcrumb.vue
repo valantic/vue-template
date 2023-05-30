@@ -21,7 +21,7 @@
   import breadcrumb, { BreadcrumbStore, BreadcrumbItem } from '@/stores/breadcrumb';
 
   interface Setup {
-    breadcrumbStore: BreadcrumbStore
+    breadcrumbStore: BreadcrumbStore;
   }
 
   /**

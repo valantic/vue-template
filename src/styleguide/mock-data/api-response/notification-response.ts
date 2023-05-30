@@ -2,8 +2,8 @@ import { NotificationItem } from '@/stores/notification';
 import mockNotifications from '@/styleguide/mock-data/data-object/notification';
 
 interface NotificationResponse {
-  data: object,
-  notifications: NotificationItem[]
+  data: object;
+  notifications: NotificationItem[];
 }
 
 /**
