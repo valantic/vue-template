@@ -12,12 +12,12 @@
   import { defineComponent } from 'vue';
   import eCheckbox from '@/elements/e-checkbox.vue';
 
-  interface IData {
+  interface Data {
 
     /**
      * Determines if the HTML validation styles should be applied.
      */
-    enabled: boolean
+    enabled: boolean;
   }
 
   /**
@@ -32,7 +32,7 @@
     // mixins: [],
 
     // props: {},
-    data(): IData {
+    data(): Data {
       return {
         enabled: true,
       };
@@ -100,6 +100,13 @@
         @include html-validator-warning('Ensure that <button> has meaningful content or is labelled appropriately.');
       }
 
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      label,
       div {
         @include html-validator-warning('Element <div> not allowed as child of element <button>.');
       }
@@ -139,6 +146,13 @@
         }
       }
 
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      label,
       div {
         @include html-validator-warning('This element is not allowed as child of element <label> in this context.');
       }
