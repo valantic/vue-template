@@ -10,9 +10,9 @@ import dayjs from '@/plugins/dayjs';
 // import VueFocus from '@/plugins/v-focus';
 // import tooltip from '@/plugins/tooltip';
 
-export interface ICustomPlugin {
-  plugin: Plugin,
-  options?: Record<string, unknown>
+export interface CustomPlugin {
+  plugin: Plugin;
+  options?: Record<string, unknown>;
 }
 
 export default [
@@ -30,4 +30,4 @@ export default [
   // { plugin: tooltip},
   // { plugin: VueFocus},
   { plugin: dayjs },
-] satisfies ICustomPlugin[];
+] satisfies CustomPlugin[];

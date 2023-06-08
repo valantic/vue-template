@@ -1,4 +1,4 @@
-interface IViewportSpacing {
+interface ViewportSpacing {
   top: number;
   right: number;
   bottom: number;
@@ -15,7 +15,7 @@ const spacingFallback = {
 /**
  * Calculates if the given DOM element is visible in the viewport.
  */
-export default function isElementInViewport(element: HTMLElement, viewportSpacing: IViewportSpacing = spacingFallback): boolean {
+export default function isElementInViewport(element: HTMLElement, viewportSpacing: ViewportSpacing = spacingFallback): boolean {
   const elementRect = element.getBoundingClientRect();
 
   return elementRect.top >= (viewportSpacing.top || 0)

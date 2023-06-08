@@ -24,7 +24,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { RouteRecordRaw } from 'vue-router';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   export default defineComponent({
     name: 's-navigation-block',
@@ -51,7 +51,7 @@
       /**
        * Returns all modifiers for the component main class.
        */
-      componentModifiers(): IModifiers {
+      componentModifiers(): Modifiers {
         return {
           hasIndent: this.hasIndent,
         };

@@ -28,7 +28,7 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
   import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
 
-  interface IData {
+  interface Data {
 
     /**
      * Determines if the user is logged in.
@@ -38,12 +38,11 @@
     /**
      * Determines if the api handler configuration is displayed.
      */
-    showApiHandlerConfiguration: boolean,
+    showApiHandlerConfiguration: boolean;
   }
 
   export default defineComponent({
     name: 's-demo-settings',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       eCheckbox,
@@ -52,7 +51,7 @@
     },
 
     // props: {},
-    data(): IData {
+    data(): Data {
       return {
         loggedIn: true,
         showApiHandlerConfiguration: false,

@@ -12,15 +12,14 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import notificationStore, { TNotificationStore } from '@/stores/notification';
+  import notificationStore, { NotificationStore } from '@/stores/notification';
 
-  interface ISetup {
-    notificationStore: TNotificationStore
+  interface Setup {
+    notificationStore: NotificationStore;
   }
 
   export default defineComponent({
     name: 'l-default',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       cNotificationContainer,
@@ -28,7 +27,7 @@
 
     // props: {},
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         notificationStore: notificationStore(),
       };

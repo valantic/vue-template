@@ -15,7 +15,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import cGoogleMaps, { ICGoogleMapsLocation } from '@/components/c-google-maps.vue';
+  import cGoogleMaps, { GoogleMapsLocation } from '@/components/c-google-maps.vue';
 
   export default defineComponent({
     name: 'r-google-maps',
@@ -31,7 +31,7 @@
           lng: 72.79504659999998,
           geocode: 'Breitfeldstrasse 13, 9015 St.Gallen',
           title: 'Aksa Beach',
-        }] satisfies ICGoogleMapsLocation[],
+        }] satisfies GoogleMapsLocation[],
       };
     },
 

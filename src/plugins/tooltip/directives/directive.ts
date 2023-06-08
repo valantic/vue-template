@@ -14,16 +14,16 @@ import {
 
 const storageKey = Symbol('Tooltip directive instance');
 
-type TTooltipEvent = {
+type TooltipEvent = {
   [key: string]: EventListener;
 }
 
-interface ITooltipElement extends HTMLElement {
+interface TooltipElement extends HTMLElement {
   [storageKey]: {
     isHidden: boolean;
     popper: Instance;
-    events: TTooltipEvent[];
-  }
+    events: TooltipEvent[];
+  };
 }
 
 /**
@@ -47,7 +47,7 @@ function createTooltipElement(content: string): HTMLElement {
 /**
  * Bind the given array of event definitions tho the given element.
  */
-function bindEvents(element: HTMLElement, events: TTooltipEvent[], bind = true): void {
+function bindEvents(element: HTMLElement, events: TooltipEvent[], bind = true): void {
   events.forEach(event => Object.entries(event).forEach(([type, callback]) => {
     if (bind) {
       element.addEventListener(type, callback);
@@ -68,7 +68,7 @@ function bindEvents(element: HTMLElement, events: TTooltipEvent[], bind = true):
 export default {
   name: 'tooltip',
 
-  beforeMount(el: ITooltipElement, binding: DirectiveBinding): void {
+  beforeMount(el: TooltipElement, binding: DirectiveBinding): void {
     const isHidden = binding.arg === 'hidden';
     const placement = isHidden ? 'bottom' : binding.arg as Placement;
     const content = binding.value;
@@ -128,7 +128,7 @@ export default {
       }, DEBOUNCE_CLOSE);
     }
 
-    const events = triggers.map((trigger): TTooltipEvent => {
+    const events = triggers.map((trigger): TooltipEvent => {
       switch (trigger) {
         default: // mouseover
           return {
@@ -154,7 +154,7 @@ export default {
     };
   },
 
-  updated(el: ITooltipElement, binding: DirectiveBinding):void {
+  updated(el: TooltipElement, binding: DirectiveBinding):void {
     const instance = el[storageKey];
 
     instance.isHidden = binding.arg === 'hidden';
@@ -162,7 +162,7 @@ export default {
     bindEvents(el, instance.events, !instance.isHidden);
   },
 
-  beforeUnmount(el: ITooltipElement): void {
+  beforeUnmount(el: TooltipElement): void {
     const instance = el[storageKey];
 
     bindEvents(el, instance.events, false);

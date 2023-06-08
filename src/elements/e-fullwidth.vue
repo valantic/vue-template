@@ -11,7 +11,7 @@
 
   type ResizeObserverCallback = () => void;
 
-  interface IData {
+  interface Data {
     scrollbarWidth: number;
     resizeObserver: ResizeObserver;
     resizeTimeout: ReturnType<typeof setTimeout> | null;
@@ -26,7 +26,7 @@
     // components: {},
 
     // props: {},
-    data(): IData {
+    data(): Data {
       return {
         /**
          * Holds the width of the page scrollbar.

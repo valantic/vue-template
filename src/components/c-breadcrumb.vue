@@ -18,10 +18,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import breadcrumb, { TBreadcrumbStore, IBreadcrumbItem } from '@/stores/breadcrumb';
+  import breadcrumb, { BreadcrumbStore, BreadcrumbItem } from '@/stores/breadcrumb';
 
-  interface ISetup {
-    breadcrumbStore: TBreadcrumbStore
+  interface Setup {
+    breadcrumbStore: BreadcrumbStore;
   }
 
   /**
@@ -29,14 +29,13 @@
    */
   export default defineComponent({
     name: 'c-breadcrumb',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
 
     // props: {},
     // emits: {},
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         breadcrumbStore: breadcrumb(),
       };
@@ -49,7 +48,7 @@
       /**
        * Returns an Array of breadcrumb items.
        */
-      getItems(): readonly IBreadcrumbItem[] {
+      getItems(): readonly BreadcrumbItem[] {
         return this.breadcrumbStore.getItems;
       },
     },

@@ -4,54 +4,54 @@ import {
   StateTree,
   _GettersTree,
 } from 'pinia';
-import { STORE } from '@/setup/globals';
+import { GlobalStore } from '@/setup/globals';
 
-export interface IBreadcrumbItem {
+export interface BreadcrumbItem {
   name: string;
   url: string;
 }
 
-interface IBreadcrumbState extends StateTree {
+interface BreadcrumbState extends StateTree {
 
   /**
    * Holds the breadcrumb items.
    */
-  items: IBreadcrumbItem[];
+  items: BreadcrumbItem[];
 }
 
-interface IBreadcrumbGetters extends _GettersTree<IBreadcrumbState> {
+interface BreadcrumbGetters extends _GettersTree<BreadcrumbState> {
 
   /**
    * Gets the list of current breadcrumb items.
    */
-  getItems: (state: IBreadcrumbState) => IBreadcrumbItem[];
+  getItems(state: BreadcrumbState): BreadcrumbItem[];
 }
 
-interface IBreadcrumbActions {
+interface BreadcrumbActions {
 
   /**
    * Sets the list of breadcrumbs in the state.
    */
-  setItems: (data: IBreadcrumbItem[]) => void;
+  setItems(data: BreadcrumbItem[]): void;
 }
 
-export type TBreadcrumbStore = Store<string, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>;
+export type BreadcrumbStore = Store<string, BreadcrumbState, BreadcrumbGetters, BreadcrumbActions>;
 
-interface IInitialStoreDate {
+interface InitialStoreDate {
 
   /**
    * Holds the initial breadcrumb items.
    */
-  items?: IBreadcrumbItem[];
+  items?: BreadcrumbItem[];
 }
 
-const storeName = STORE.BREADCRUMBS;
+const storeName = GlobalStore.BREADCRUMBS;
 
-export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetters, IBreadcrumbActions>(storeName, {
-  state: (): IBreadcrumbState => {
-    const initialData: IInitialStoreDate = window.initialData?.[storeName] || {};
+export default defineStore<typeof storeName, BreadcrumbState, BreadcrumbGetters, BreadcrumbActions>(storeName, {
+  state: (): BreadcrumbState => {
+    const initialData: InitialStoreDate = window.initialData?.[storeName] || {};
 
-    const state: IBreadcrumbState = {
+    const state: BreadcrumbState = {
       items: [],
     };
 
@@ -59,7 +59,7 @@ export default defineStore<typeof storeName, IBreadcrumbState, IBreadcrumbGetter
       const breadcrumbsModule = import.meta
         .glob('@/styleguide/mock-data/initial-data/breadcrumbs', { eager: true });
 
-      state.items = breadcrumbsModule['@/styleguide/mock-data/initial-data/breadcrumbs'] as IBreadcrumbItem[];
+      state.items = breadcrumbsModule['@/styleguide/mock-data/initial-data/breadcrumbs'] as BreadcrumbItem[];
     }
 
     if (Array.isArray(initialData.items)) {

@@ -16,36 +16,35 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import buildConfig from '@/../vite.builds.json';
-  import sessionStore, { TSessionStore } from '@/stores/session';
+  import sessionStore, { SessionStore } from '@/stores/session';
 
-  interface ITheme {
+  interface Theme {
     name: string;
     id: string;
     selected?: boolean;
   }
 
-  interface IData {
+  interface Data {
     availableThemes: string[];
   }
 
-  interface ISetup {
-    sessionStore: TSessionStore
+  interface Setup {
+    sessionStore: SessionStore;
   }
 
   export default defineComponent({
     name: 's-theme-selector',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
 
     // props: {},
 
-    setup(): ISetup {
+    setup(): Setup {
       return {
         sessionStore: sessionStore(),
       };
     },
-    data(): IData {
+    data(): Data {
       return {
         availableThemes: buildConfig.themeFiles,
       };
@@ -62,7 +61,7 @@
       /**
        * Loops the themes and mark the selected by the global theme.
        */
-      themes(): ITheme[] {
+      themes(): Theme[] {
         const themes = this.availableThemes;
         const activeTheme = this.getTheme;
 

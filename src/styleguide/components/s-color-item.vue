@@ -21,27 +21,23 @@
   import { defineComponent, PropType } from 'vue';
   import sColorSpecimen from './s-color-specimen.vue';
 
-  interface IColor {
+  interface Color {
     name: string;
     value: string[];
   }
 
   export default defineComponent({
     name: 's-color-item',
-    status: 0, // TODO: remove when component was prepared for current project.
-
     components: {
       sColorSpecimen,
     },
 
     props: {
-
       /**
        * Palette name to be rendered. See keys in src/setup/js/color.js
        */
       palette: {
         type: String,
-        default: null,
         required: true,
       },
 
@@ -49,8 +45,7 @@
        * Array of color objects to be rendered. See src/setup/js/color.js
        */
       colors: {
-        type: Array as PropType<IColor[]>,
-        default: null,
+        type: Array as PropType<Color[]>,
         required: true,
       },
     },

@@ -5,10 +5,10 @@ import axios, {
   AxiosInstance,
   AxiosPromise,
 } from 'axios';
-import notificationStore, { INotificationItem } from '@/stores/notification';
+import notificationStore, { NotificationItem } from '@/stores/notification';
 import { PAGE_LANG } from '@/setup/i18n';
 
-export interface IApi {
+export interface Api {
 
   /**
    * Runs a get request with given url with given url params.
@@ -45,23 +45,23 @@ export const axiosInstance: AxiosInstance = axios.create({
   },
 });
 
-interface IPluginApi {
-  $api: IApi,
+interface PluginApi {
+  $api: Api;
 }
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
-    $api: IApi
+    $api: Api;
   }
 }
 
-export default function api():IPluginApi {
+export default function api():PluginApi {
   const notificationStoreInstance = notificationStore();
 
   /**
    * Pushes an array of messages to the notification handler.
    */
-  function showNotifications(notifications: INotificationItem[]): void {
+  function showNotifications(notifications: NotificationItem[]): void {
     if (!Array.isArray(notifications)) {
       return;
     }

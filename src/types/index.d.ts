@@ -1,11 +1,11 @@
-import { STORE } from '@/setup/globals';
+import { GlobalStore } from '@/setup/globals';
 
-export interface IInitialData {
-  [STORE.SESSION]: unknown; // TODO: define Interface.
-  [STORE.BREADCRUMBS]: unknown; // TODO: define Interface.
-  [STORE.NOTIFICATION]: unknown; // TODO: define Interface.
+export interface InitialData {
+  [GlobalStore.SESSION]: unknown; // TODO: define Interface.
+  [GlobalStore.BREADCRUMBS]: unknown; // TODO: define Interface.
+  [GlobalStore.NOTIFICATION]: unknown; // TODO: define Interface.
 }
 
 declare global {
-  interface Window { initialData: IInitialData; }
+  interface Window { initialData: InitialData }
 }

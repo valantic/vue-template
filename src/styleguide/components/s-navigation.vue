@@ -34,19 +34,18 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { IModifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import sLanguage from './s-language.vue';
   import sThemeSelector from './s-theme-selector.vue';
   import sDemoSettings from './s-demo-settings.vue';
   import sNavigationBlock from './s-navigation-block.vue';
 
-  interface IData {
+  interface Data {
     isOpen: boolean;
   }
 
   export default defineComponent({
     name: 's-navigation',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sDemoSettings,
@@ -69,7 +68,7 @@
         ].includes(value),
       },
     },
-    data(): IData {
+    data(): Data {
       return {
         isOpen: false,
       };
@@ -78,7 +77,7 @@
       /**
        * Returns all modifiers for the wrapper class.
        */
-      wrapperModifiers(): IModifiers {
+      wrapperModifiers(): Modifiers {
         return {
           position: this.navPosition,
           open: this.isOpen,
