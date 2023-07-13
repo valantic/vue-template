@@ -13,63 +13,64 @@
   </label>
 </template>
 
-<script>
-  import { mapGetters } from 'vuex';
-  import { webpack } from '@/../package.json';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import buildConfig from '@/../vite.builds.json';
+  import sessionStore, { SessionStore } from '@/stores/session';
 
-  const themePath = `/${webpack.outputAssetsFolder}css/${webpack.filePrefix}theme-`;
+  interface Theme {
+    name: string;
+    id: string;
+    selected?: boolean;
+  }
 
-  export default {
+  interface Data {
+    availableThemes: string[];
+  }
+
+  interface Setup {
+    sessionStore: SessionStore;
+  }
+
+  export default defineComponent({
     name: 's-theme-selector',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     // props: {},
-    data() {
+
+    setup(): Setup {
       return {
-        defaultThemes: [
-          {
-            name: 'Theme 01',
-            id: '01'
-          },
-          {
-            name: 'Theme 02',
-            id: '02'
-          }
-        ],
+        sessionStore: sessionStore(),
+      };
+    },
+    data(): Data {
+      return {
+        availableThemes: buildConfig.themeFiles,
       };
     },
 
     computed: {
-      ...mapGetters('session', [
-        'getTheme',
-      ]),
+      /**
+       * Returns the currently active theme.
+       */
+      getTheme(): string {
+        return this.sessionStore.getTheme;
+      },
 
       /**
        * Loops the themes and mark the selected by the global theme.
-       *
-       * @returns {Array} list of themes
        */
-      themes() {
-        const list = this.defaultThemes;
-        const activeId = this.getTheme;
+      themes(): Theme[] {
+        const themes = this.availableThemes;
+        const activeTheme = this.getTheme;
 
-        return list.map((theme) => {
-          let selected = false;
-
-          if (theme.id === activeId) {
-            selected = true;
-          }
-
-          return {
-            name: theme.name,
-            id: theme.id,
-            selected
-          };
-        });
-      }
+        return themes.map(theme => ({
+          name: theme,
+          id: theme,
+          selected: theme === activeTheme,
+        }));
+      },
     },
 
     watch: {
@@ -81,16 +82,16 @@
         immediate: true,
         handler() {
           const cssId = 'themeStylesheet';
-          const link = document.getElementById(cssId);
+          const link = document.getElementById(cssId) as HTMLLinkElement;
           const theme = this.getTheme;
 
           if (!link) {
             this.createStyleElement(theme, cssId);
           } else {
-            link.href = `${themePath}${theme}.css`;
+            link.href = `/${buildConfig.themeSource}${theme}.scss`;
           }
-        }
-      }
+        },
+      },
     },
 
     // created() {},
@@ -100,38 +101,35 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
        * Event handler for the change event of the theme selector.
-       *
-       * @param {Event} event - The related DOM event.
        */
-      onChange(event) {
-        this.$store.commit('session/setTheme', event.target.value);
+      onChange(event: Event) {
+        const element = event.target as HTMLSelectElement;
+
+        this.sessionStore.setTheme(element.value);
       },
 
       /**
        * Creates a new style link element.
-       *
-       * @param {String} themeId - The name of the desired theme.
-       * @param {String} cssId - The unique ID for the link element.
        */
-      createStyleElement(themeId, cssId) {
+      createStyleElement(theme: string, cssId: string) {
         const head = document.getElementsByTagName('head')[0];
         const link = document.createElement('link');
 
         link.id = cssId;
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = `${themePath}${themeId}.css`;
+        link.href = `/${buildConfig.themeSource}${theme}.scss`;
         link.media = 'all';
 
         head.appendChild(link);
-      }
+      },
     },
     // render() {},
-  };
+  });
 </script>

@@ -9,18 +9,19 @@
   </div>
 </template>
 
-<script>
-  import colors from '../../setup/js/color';
-  import sColorItem from './s-color-item';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import colors, { Colors } from '../../setup/js/color';
+  import sColorItem from './s-color-item.vue';
 
-  export default {
+  type ColorVariants = keyof Colors;
+
+  export default defineComponent({
     name: 's-color',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
-      sColorItem
+      sColorItem,
     },
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -30,21 +31,18 @@
     computed: {
       /**
        * Returns an Object of color lists.
-       *
-       * @returns {Object}
        */
-      colors() {
+      colors(): Colors {
         return colors;
       },
 
       /**
        * Returns an Array of color palette names.
-       *
-       * @returns {Array.<String>}
+       * @returns {ColorVariants[]}
        */
-      palettes() {
-        return Object.keys(colors);
-      }
+      palettes(): ColorVariants[] {
+        return Object.keys(colors) as Array<ColorVariants>;
+      },
     },
     // watch: {},
 
@@ -56,17 +54,18 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
-
+  });
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .s-color {
-    font-family: $font-family--primary;
+    font-family: variables.$font-family--primary;
   }
 </style>

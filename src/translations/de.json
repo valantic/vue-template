@@ -9,14 +9,27 @@
     "chooseOption": "Bitte wählen"
   },
   "e-table": {
+    "deselectAll": "Auswahl aufheben",
+    "selectAll": "Alle auswählen",
+    "selectItem": "Auswählen",
+    "showDetailsHeader": "Details anzeigen",
     "sort": "Nach {name} sortieren",
-    "noResults": "Keine Ergebnisse für die aktuelle Auswahl."
+    "noResults": "Keine Ergebnisse für die aktuelle Auswahl.",
+    "toggleSortingOptions": "Sortierung"
   },
   "e-progress": {
     "loading": "Lade …"
   },
+  "e-multiselect": {
+    "defaultPlaceholder": "Bitte wählen",
+    "searchFieldPlaceholder": "Suche"
+  },
   "c-breadcrumb": {
     "linkTitle": "Gehe zu {name}"
+  },
+  "c-confirmation-modal": {
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen"
   },
   "c-notification": {
     "confirm": "OK",
@@ -24,7 +37,7 @@
     "close": "Schliessen"
   },
   "c-modal": {
-    "closeTitle": "Fenster schliessen"
+    "buttonClose": "Fenster schliessen"
   },
   "c-multiselect": {
     "search": "suchen",
@@ -32,13 +45,12 @@
     "itemsEmpty": "Keine Ergebnisse.",
     "searchTitle": "Suche"
   },
-  "c-panel": {
-    "openButtonTitle": "Öffnen",
-    "closedButtonTitle": "Schliessen"
+  "c-slider":{
+    "navigationPrevious": "Zurück",
+    "navigationNext": "Vorwärts"
   },
-  "c-swiper": {
-    "images": "0 Bilder | 1 Bild | {count} Bilder",
-    "zoom": "Bild vergrössern",
-    "videos": "0 Videos | 1 Video | {count} Videos"
+  "s-language":{
+    "de": "Deutsch",
+    "fr": "Französisch"
   }
 }

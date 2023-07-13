@@ -15,7 +15,7 @@ indent_style = space
 indent_size = 2
 
 # Matches multiple files with brace expansion notation
-[*.js]
+[{*.js, *.ts}]
 max_line_length = 130
 
 [*.{diff,md}]

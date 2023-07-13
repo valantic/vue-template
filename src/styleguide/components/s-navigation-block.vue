@@ -1,28 +1,32 @@
 <template>
   <ul :class="b(componentModifiers)">
-    <router-link
-      v-for="route in filteredRoutes"
-      :key="route.name"
-      :class="b('navigation-item')"
-      :to="{ name: route.name, params: route.meta.params, query: route.meta.query }"
-      :active-class="b('navigation-item', { activePath: true })"
-      :exact-active-class="b('navigation-item', { active: true })"
-      tag="li"
-      exact
+    <li v-for="route in filteredRoutes"
+        :key="route.name"
+        :class="b('navigation-item')"
     >
-      <a :class="b('navigation-link')">
-        {{ route.meta.title }}
-      </a>
+      <router-link
+        :to="{ name: route.name, params: route.meta?.params, query: route.meta?.query }"
+        :class="b('navigation-link')"
+        :active-class="b('navigation-link', { activePath: true })"
+        :exact-active-class="b('navigation-link', { active: true })"
+        exact
+      >
+        {{ route.meta?.title }}
+      </router-link>
       <s-navigation-block v-if="route.children && route.children.length"
                           :routes="route.children"
                           has-indent
       />
-    </router-link>
+    </li>
   </ul>
 </template>
 
-<script>
-  export default {
+<script lang="ts">
+  import { defineComponent, PropType } from 'vue';
+  import { RouteRecordRaw } from 'vue-router';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+
+  export default defineComponent({
     name: 's-navigation-block',
     // components: {},
     props: {
@@ -30,7 +34,7 @@
        * An array of styleguide routes.
        */
       routes: {
-        type: Array,
+        type: Array as PropType<readonly RouteRecordRaw[]>,
         default: () => [],
       },
 
@@ -46,10 +50,8 @@
     computed: {
       /**
        * Returns all modifiers for the component main class.
-       *
-       * @returns {Object}
        */
-      componentModifiers() {
+      componentModifiers(): Modifiers {
         return {
           hasIndent: this.hasIndent,
         };
@@ -57,22 +59,20 @@
 
       /**
        * Returns an array of routes, that should be visible on the navigation.
-       *
-       * @returns {Array.<Object>}
        */
-      filteredRoutes() {
+      filteredRoutes(): RouteRecordRaw[] {
         return this.routes.filter(route => route.meta && !route.meta.hideInStyleguide);
-      }
+      },
     },
     // methods: {},
     // created() {}
-  };
+  });
 </script>
 
 <style lang="scss">
-  .s-navigation-block {
-    @extend %list-reset;
+  @use '../../setup/scss/variables';
 
+  .s-navigation-block {
     min-width: 200px;
     overflow: auto;
 
@@ -80,43 +80,18 @@
       padding-left: 20px;
     }
 
-    &__navigation-item {
-      &--components {
-        border-top: 1px solid $color-grayscale--400;
-      }
+    &__navigation-link {
+      display: block;
+      padding: variables.$spacing--5 variables.$spacing--20;
+      text-decoration: none;
 
-      &--language,
-      &--theme,
-      &--settings {
-        padding: $spacing--10 $spacing--20;
-        border-bottom: 1px solid $color-grayscale--400;
+      &:hover {
+        text-decoration: underline;
       }
 
       &--active,
       &--active-path {
         font-weight: bold;
-      }
-    }
-
-    &__navigation-link {
-      padding: $spacing--5 $spacing--20;
-      text-decoration: none;
-      display: block;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-
-    &__navigation-item--logo {
-      border-bottom: 1px solid $color-grayscale--400;
-
-      img {
-        max-width: 150px;
-      }
-
-      .s-navigation__navigation-link {
-        padding: $spacing--10 $spacing--5;
       }
     }
   }

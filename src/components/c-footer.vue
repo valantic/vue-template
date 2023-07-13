@@ -1,15 +1,14 @@
 <template>
-  <footer :class="b()">
-    Footer
-  </footer>
+  <footer :class="b()"></footer>
 </template>
 
-<script>
-  export default {
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
     name: 'c-footer',
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -27,16 +26,18 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
   .c-footer {
-    // ...
+    &::before { // TODO: remove
+      content: 'Footer';
+    }
   }
 </style>

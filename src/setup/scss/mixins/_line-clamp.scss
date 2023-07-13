@@ -1,0 +1,18 @@
+@use '../functions/strip-unit' as *;
+
+////
+/// Line clampin' (Truncating multiple line text)
+/// @see https://css-tricks.com/line-clampin/
+///
+/// @param {number} $clamp - Number of lines after text gets cut off.
+/// @param {number} [$line-height = 1] - Desired line height.
+///
+////
+@mixin line-clamp($clamp, $line-height: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $clamp;
+  max-height: $clamp * (strip-unit($line-height) * 1em);
+  overflow: hidden;
+  line-height: strip-unit($line-height);
+}

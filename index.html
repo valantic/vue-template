@@ -4,22 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Vue template</title>
+
   <script>
-    window.initialData = {};
+    // Initial data demo
+    window.initialData = {
+      session: {},
+      breadcrumb: {},
+      notification: {},
+    };
+    /*
+    window.initialData.breadcrumb.items = [
+      {
+        name: 'Home',
+        url: '#',
+      },
+      {
+        name: 'Sandbox',
+        url: '#',
+      }
+    ];
+    window.initialData.notification.notifications = [
+      {
+        id: 0,
+        type: 'success',
+        message: 'Example Message',
+        expire: null,
+        selector: null,
+        redirectUrl: '',
+      }
+    ];
+     */
   </script>
+
+  <script type="module" src="/src/main.ts" defer></script>
 </head>
 <body>
   <div id="app">
-    <header is="c-header"></header>
-    <div is="l-default"></div>
-    <footer is="c-footer"></footer>
+    <header is="vue:c-header"></header>
+    <div is="vue:l-default"></div>
+    <footer is="vue:c-footer"></footer>
   </div>
-
-  <script>
-    const payload = [{ "message": "This notification was delivered trough initial data.", "type": "success" }];
-
-    window.initialData['notification/data'] = payload;
-  </script>
 
   <noscript>
     <div class="c-no-script">

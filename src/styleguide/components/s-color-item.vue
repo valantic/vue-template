@@ -4,7 +4,7 @@
       {{ headline }}
     </h4>
     <ul :class="b('grid')">
-      <li v-for="(color) in colors"
+      <li v-for="color in colors"
           :key="color.name"
           :class="b('grid-item')"
       >
@@ -17,37 +17,37 @@
   </div>
 </template>
 
-<script>
-  import sColorSpecimen from './s-color-specimen';
+<script lang="ts">
+  import { defineComponent, PropType } from 'vue';
+  import sColorSpecimen from './s-color-specimen.vue';
 
-  export default {
+  interface Color {
+    name: string;
+    value: string[];
+  }
+
+  export default defineComponent({
     name: 's-color-item',
-    status: 0, // TODO: remove when component was prepared for current project.
-
     components: {
-      sColorSpecimen
+      sColorSpecimen,
     },
-    // mixins: [],
 
     props: {
-
       /**
        * Palette name to be rendered. See keys in src/setup/js/color.js
        */
       palette: {
         type: String,
-        default: null,
-        required: true
+        required: true,
       },
 
       /**
        * Array of color objects to be rendered. See src/setup/js/color.js
        */
       colors: {
-        type: Array,
-        default: null,
-        required: true
-      }
+        type: Array as PropType<Color[]>,
+        required: true,
+      },
     },
     // data() {
     //   return {};
@@ -56,12 +56,10 @@
     computed: {
       /**
        * Returns the headline for the component.
-       *
-       * @returns {String}
        */
-      headline() {
+      headline(): string {
         return `${this.palette} colors`;
-      }
+      },
     },
     // watch: {},
 
@@ -73,34 +71,37 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
+  @use '../../setup/scss/variables';
+  @use '../../setup/scss/mixins';
+
   .s-color-item {
     &__grid {
-      @extend %list-reset;
-
       display: flex;
       flex-wrap: wrap;
-      margin: $spacing--0 (-$spacing--5);
+      margin: variables.$spacing--0 (-(variables.$spacing--5));
     }
 
     &__grid-item {
-      padding: $spacing--5;
-      flex: 0 1 percentage(6 / 12);
+      flex: 0 1 percentage(math.div(6, 12));
+      max-width: 200px;
+      padding: variables.$spacing--5;
 
-      @include media(sm) {
-        flex-basis: percentage(4 / 12);
+      @include mixins.media(sm) {
+        flex-basis: percentage(math.div(4, 12));
       }
 
-      @include media(md) {
-        flex-basis: percentage(2 / 12);
+      @include mixins.media(md) {
+        flex-basis: percentage(math.div(2, 12));
       }
     }
 

@@ -2,13 +2,14 @@
   <div :class="b()">
     <div :class="b('navigation-wrapper', wrapperModifiers)" @click="onClick">
       <div :class="b('viewport')">
-        {{ $viewport.currentViewport }}<sup>{{ $viewport.viewport }}</sup>
+        {{ $viewport.currentViewport }}
       </div>
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', { logo: true })">
           <a :class="b('navigation-link')"
              href="https://www.valantic.com"
              target="_blank"
+             rel="noopener noreferrer"
           >
             <img src="@/assets/valantic.svg" alt="valantic">
           </a>
@@ -26,28 +27,25 @@
         <li :class="b('navigation-item')">
           <s-navigation-block :routes="$router.options.routes" />
         </li>
-        <li :class="b('navigation-item', { components: true })">
-          <a :class="b('navigation-link')"
-             :href="styleguidistUrl"
-             target="_blank"
-          >
-            Components
-          </a>
-        </li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-  import sLanguage from './s-language';
-  import sThemeSelector from './s-theme-selector';
-  import sDemoSettings from './s-demo-settings';
-  import sNavigationBlock from './s-navigation-block';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import sLanguage from './s-language.vue';
+  import sThemeSelector from './s-theme-selector.vue';
+  import sDemoSettings from './s-demo-settings.vue';
+  import sNavigationBlock from './s-navigation-block.vue';
 
-  export default {
+  interface Data {
+    isOpen: boolean;
+  }
+
+  export default defineComponent({
     name: 's-navigation',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sDemoSettings,
@@ -57,57 +55,34 @@
     },
     props: {
       /**
-       * An array of styleguide routes
-       */
-      routes: {
-        type: Array,
-        default: () => [],
-      },
-
-      /**
        * Position of navigation (top-right, top-left, bottom-left, bottom-right)
        */
       navPosition: {
         type: String,
         default: 'top-right',
-        validator(value) {
-          return [
-            'top-left',
-            'top-right',
-            'bottom-right',
-            'bottom-left',
-          ].includes(value);
-        },
+        validator: (value: string) => [
+          'top-left',
+          'top-right',
+          'bottom-right',
+          'bottom-left',
+        ].includes(value),
       },
     },
-    data() {
+    data(): Data {
       return {
         isOpen: false,
       };
     },
     computed: {
       /**
-       * Returns the styleguidest url, based on the current environment.
-       *
-       * @returns {String}
-       */
-      styleguidistUrl() {
-        return process.env.IS_STYLEGUIDE_BUILD
-          ? './styleguidist'
-          : '//localhost:6060';
-      },
-
-      /**
        * Returns all modifiers for the wrapper class.
-       *
-       * @returns {Object}
        */
-      wrapperModifiers() {
+      wrapperModifiers(): Modifiers {
         return {
           position: this.navPosition,
           open: this.isOpen,
         };
-      }
+      },
     },
     methods: {
       /**
@@ -115,40 +90,42 @@
        */
       onClick() {
         this.isOpen = !this.isOpen;
-      }
-    }
-  };
+      },
+    },
+  });
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .s-navigation {
     $this: &;
-    $border: $spacing--10 solid $color-grayscale--400;
+    $border: variables.$spacing--10 solid variables.$color-grayscale--400;
     $trigger-size: 40px;
 
     z-index: 1;
 
     &__navigation-wrapper {
-      font-family: $font-family--primary;
-      margin: auto;
       position: fixed;
-      min-width: $spacing--40;
-      background-color: $color-grayscale--1000;
+      min-width: variables.$spacing--40;
       height: 100%;
+      margin: auto;
+      background-color: variables.$color-grayscale--1000;
+      font-family: variables.$font-family--primary;
 
       &::after { // Toggle
-        content: '';
-        opacity: 0.2;
         position: absolute;
+        content: '';
         width: $trigger-size;
         height: $trigger-size;
-        background-color: $color-grayscale--1000;
-        border-top: 1px solid $color-grayscale--400;
-        border-left: 1px solid $color-grayscale--400;
+        opacity: 0.2;
+        border-top: 1px solid variables.$color-grayscale--400;
+        border-left: 1px solid variables.$color-grayscale--400;
+        background-color: variables.$color-grayscale--1000;
         background-image: url('../assets/menu-button.svg');
         background-repeat: no-repeat;
-        background-size: $trigger-size - 15px;
         background-position: center;
+        background-size: $trigger-size - 15px;
         cursor: pointer;
       }
 
@@ -168,11 +145,11 @@
 
       &--position-top-right,
       &--position-bottom-right {
-        border-bottom: 0;
-        min-width: 0;
         top: 0;
         right: 0;
         bottom: 0;
+        min-width: 0;
+        border-bottom: 0;
 
         &::after {
           top: 0;
@@ -193,9 +170,9 @@
 
       &--position-top-left,
       &--position-bottom-left {
-        border-bottom: 0;
-        min-width: 0;
         top: 0;
+        min-width: 0;
+        border-bottom: 0;
 
         &::after {
           top: 0;
@@ -216,22 +193,20 @@
     }
 
     &__viewport {
-      display: block;
       position: absolute;
       left: 0;
+      display: block;
+      padding-right: variables.$spacing--10;
       transform: translateX(-100%);
-      padding-right: $spacing--10;
-      text-shadow: 1px 1px 5px $color-grayscale--0;
-      color: $color-grayscale--1000;
+      color: variables.$color-grayscale--1000;
+      text-shadow: 1px 1px 5px variables.$color-grayscale--0;
 
       #{$this}__navigation-wrapper--open & {
-        padding-right: $spacing--20;
+        padding-right: variables.$spacing--20;
       }
     }
 
     &__navigation {
-      @extend %list-reset;
-
       min-width: 200px;
       max-height: 100vh;
       overflow: auto;
@@ -239,14 +214,14 @@
 
     &__navigation-item {
       &--components {
-        border-top: 1px solid $color-grayscale--400;
+        border-top: 1px solid variables.$color-grayscale--400;
       }
 
       &--language,
       &--theme,
       &--settings {
-        padding: $spacing--10 $spacing--20;
-        border-bottom: 1px solid $color-grayscale--400;
+        padding: variables.$spacing--10 variables.$spacing--20;
+        border-bottom: 1px solid variables.$color-grayscale--400;
       }
 
       &--active,
@@ -256,9 +231,9 @@
     }
 
     &__navigation-link {
-      padding: $spacing--10 $spacing--20;
-      text-decoration: none;
       display: block;
+      padding: variables.$spacing--10 variables.$spacing--20;
+      text-decoration: none;
 
       &:hover {
         text-decoration: underline;
@@ -266,15 +241,15 @@
     }
 
     &__navigation-item--logo {
-      border-bottom: 1px solid $color-grayscale--400;
-      padding: 0 $spacing--15;
+      padding: 0 variables.$spacing--15;
+      border-bottom: 1px solid variables.$color-grayscale--400;
 
       img {
         max-width: 150px;
       }
 
       .s-navigation__navigation-link {
-        padding: $spacing--10 $spacing--5;
+        padding: variables.$spacing--10 variables.$spacing--5;
       }
     }
   }

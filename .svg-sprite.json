@@ -1,0 +1,16 @@
+{
+  "dest": "src/assets/",
+  "shape": {
+    "spacing": {
+      "box": "content"
+    }
+  },
+  "mode": {
+    "stack": {
+      "sprite": "icons.svg",
+      "bust": false,
+      "dest": ".",
+      "rootviewbox": false
+    }
+  }
+}

@@ -4,18 +4,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  // interface Setup {}
+  // interface Data {}
+
   /**
-   * TODO: add description for component styleguide.
+   * TODO: add component description.
    */
-  export default {
+  export default defineComponent({
     name: 'c-component', // TODO: update name according to filename
 
     // components: {},
-    // mixins: [],
 
     // props: {},
-    // data() {
+    // emits: {},
+
+    // setup(): Setup {},
+    // data(): Data {
     //   return {};
     // },
 
@@ -30,15 +37,17 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
+  // @use '../setup/scss/variables';
+
   .c-component { // TODO: update selector according to filename
     // ...
   }

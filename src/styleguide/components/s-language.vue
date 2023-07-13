@@ -1,50 +1,52 @@
 <template>
   <label>
     <span class="invisible">Language</span>
-    <select :class="b()" :value="language" @change="onChange">
+    <select v-model="language" :class="b()">
       <option v-for="locale in i18nLocales"
               :key="locale"
-              :value="locale">
+              :value="locale"
+      >
         {{ $t(`s-language.${locale}`) }}
       </option>
     </select>
   </label>
 </template>
 
-<script>
-  import i18nMixin from '../../mixins/i18n';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
-  export default {
+  interface Data {
+    i18nLocales: string[];
+  }
+
+  export default defineComponent({
     name: 's-language',
-    status: 0, // TODO: remove when component was prepared for current project.
-
-    mixins: [i18nMixin],
 
     // props: {},
 
-    // data() {},
+    data(): Data {
+      return {
+        i18nLocales: I18N_LOCALES,
+      };
+    },
 
     // components: {},
     computed: {
       /**
        * The current language.
-       *
-       * @returns {String}
        */
-      language() {
-        return this.$i18n.locale;
+      language: {
+        get() {
+          // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
+          return i18n.global.locale?.value;
+        },
+        set(value: string) {
+          i18nSetLocale(value);
+        },
       },
     },
-    methods: {
-      /**
-       * Event handler for the change event of the language selector.
-       *
-       * @param {Event} event - The related DOM event.
-       */
-      onChange(event) {
-        this.i18nSetLocale(event.target.value);
-      },
-    },
+    // methods: {},
     // watch: {},
 
     // beforeCreate() {},
@@ -55,9 +57,9 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
-  };
+    // beforeUnmount() {},
+    // unmounted() {},
+  });
 </script>
 
 <style lang="scss">

@@ -1,0 +1,29 @@
+@use 'sass:list';
+
+////
+// Adds the given icon as a background image to the wrapping element.
+//
+// Hint: use 'color' on the element instead of an explicit color for the icon when ever possible.
+//
+// @param  {string}   State the icon
+//
+////
+
+// Keep size in sync with e-icon.
+@mixin icon($icon, $size: 24px 24px, $backgroundPosition: center center, $mask: true, $color: currentColor) {
+  $calculatedSize: $size;
+
+  @if list.length($size) == 1 {
+    $calculatedSize: $size $size; // Single values can lead to problems.
+  }
+
+  // Legacy support. No color applied.
+  background: url('../assets/icons.svg##{$icon}') no-repeat $backgroundPosition / $calculatedSize;
+
+  @if $mask == true {
+    @supports (mask: no-repeat) {
+      background: $color;
+      mask: url('../assets/icons.svg##{$icon}') no-repeat $backgroundPosition / $calculatedSize;
+    }
+  }
+}

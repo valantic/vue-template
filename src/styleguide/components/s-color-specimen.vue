@@ -9,29 +9,27 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent, PropType, StyleValue } from 'vue';
 
   /**
    * Renders a color specimen tile.
    *
    * **WARNING: uses 'v-html' for the 'displayName'. Make sure, that the source for this data is trustworthy.**
    */
-  export default {
+
+  export default defineComponent({
     name: 's-color-specimen',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     props: {
-
       /**
        * Human readable name of the color
        */
       name: {
         type: String,
-        default: null,
-        required: true
+        required: true,
       },
 
       /**
@@ -39,10 +37,9 @@
        * If 2 values are given it will be treated as gradient.
        */
       value: {
-        type: Array,
-        default: null,
-        required: true
-      }
+        type: Array as PropType<string[]>,
+        required: true,
+      },
     },
     // data() {
     //   return {};
@@ -51,35 +48,29 @@
     computed: {
       /**
        * Returns the name HTML of the color.
-       *
-       * @returns {String}
        */
-      displayName() {
+      displayName(): string {
         return this.name.split(' - ').join('<br />');
       },
 
       /**
        * Returns the value HTML of the color.
-       *
-       * @returns {String}
        */
-      displayValue() {
+      displayValue(): string {
         return this.value.join(' - ');
       },
 
       /**
        * Returns the background style for the color.
-       *
-       * @returns {String}
        */
-      backgroundColor() {
+      backgroundColor(): StyleValue {
         const [color1, color2] = this.value;
 
         return {
-          background: `linear-gradient(to right, ${color1} , ${color2 || color1})`
+          background: `linear-gradient(to right, ${color1} , ${color2 || color1})`,
         };
-      }
-    }
+      },
+    },
     // watch: {},
 
     // beforeCreate() {},
@@ -90,34 +81,36 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables';
+
   .s-color-specimen {
-    border: 1px solid $color-secondary--1;
+    border: 1px solid variables.$color-secondary--1;
 
     &__color {
       padding-top: 100%;
     }
 
     &__name {
-      white-space: nowrap;
-      text-align: center;
       font-size: 14px;
-      line-height: 24px;
       font-weight: bold;
+      line-height: 24px;
+      text-align: center;
+      white-space: nowrap;
     }
 
     &__value {
-      text-align: center;
       font-size: 12px;
       line-height: 22px;
+      text-align: center;
     }
   }
 </style>

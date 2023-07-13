@@ -1,436 +1,372 @@
 <template>
-  <portal :order="parseInt(uuid, 10)" :to="portalTarget">
-    <modal :name="uuid"
-           :classes="b({ size })"
-           :width="width"
-           :max-width="maxWidth"
-           :pivot-y="0.1"
-           :transition="isMobile ? mobileTransition : 'false'"
-           height="auto"
-           adaptive
-           scrollable
-           @closed="closedModal"
-           @before-close="onModalBeforeClose">
-      <!--
-        @slot Allows to use a customized header.
-          @binding {String} title - The modal title.
-          @binding {String} spacing - The given title spacing.
-          @binding {Boolean} closeable - A flag that determines if the modal should be closeable.
-          @binding {Function} close - The close callback, that should be executed when a close button is clicked.
-      -->
-      <div :class="b('notifications')">
-        <c-notification-container display-type="modal" />
-      </div>
-      <slot name="header"
-            :title="title"
-            :spacing="spacing"
-            :closeable="closeable"
-            :close="closeModal"
-      >
-        <div :class="b('header', { spacing })">
-          <div :class="b('header-inner', { mobile: isMobile })">
-            <button v-if="closeable"
-                    :class="b('header-close', { mobile: true })"
-                    :aria-label="$t('c-modal.closeTitle')"
-                    @click="closeModal"
-            >
-              <e-icon
-                icon="i-arrow--left--info"
-                width="18"
-                height="18"
-              />
-            </button>
-            <div :class="b('title-wrapper')">
-              <h4 v-if="title" :class="b('title')">
+  <Transition name="c-modal--fade-animation"
+              @after-enter="onAfterEnter"
+              @after-leave="onAfterLeave"
+  >
+    <dialog v-if="isOpen"
+            :class="b(modifiers)"
+    >
+      <div v-outside-click="onOutsideClick" :class="b('inner')">
+        <div v-if="$slots.head || title || isClosable" :class="b('header')">
+          <div :class="b('header-inner')">
+            <slot name="head" :close="close">
+              <h2 v-if="title" :class="b('title')">
                 {{ title }}
-              </h4>
-            </div>
-            <button v-if="closeable"
-                    :class="b('header-close')"
-                    :aria-label="$t('c-modal.closeTitle')"
-                    @click="closeModal"
-            >
-              <e-icon
-                icon="i-close"
-                width="25"
-                height="25"
-                inline
-              />
-            </button>
+              </h2>
+              <button v-if="isClosable"
+                      :aria-label="$t('c-modal.buttonClose')"
+                      :class="b('button-close')"
+                      type="button"
+                      @click="close"
+              >
+                <e-icon icon="i-close" size="30" />
+              </button>
+            </slot>
           </div>
         </div>
-      </slot>
-      <div :class="b('content', { spacing })">
-        <!-- @slot The modals main content. -->
-        <slot></slot>
+        <div :class="b('content')">
+          <slot></slot>
+        </div>
+        <div v-if="$slots.stickyFooter" :class="b('sticky-footer')">
+          <slot name="stickyFooter"></slot>
+        </div>
       </div>
-    </modal>
-  </portal>
+    </dialog>
+  </Transition>
 </template>
 
-<script>
-  import { BREAKPOINTS } from '@/setup/globals';
-  import avoidContentResizing from '@/helpers/avoid-content-resizing';
+<script lang="ts">
+  import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+  import { defineComponent } from 'vue';
   import propScale from '@/helpers/prop.scale';
-  import uuid from '@/mixins/uuid';
-  import cNotificationContainer from '@/components/c-notification-container';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eIcon from '@/elements/e-icon.vue';
+
+  // interface Setup {}
 
   /**
-   * Components wraps the plugin https://github.com/euvl/vue-js-modal, it's output is rendered through vue-portal.
-   * You can give the component a custom header component. The scope content will be placed in the main
-   * slot which represents the modal content.
+   * Renders a modal dialog.
+   *
+   * Based on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog.
    */
-  export default {
+  export default defineComponent({
     name: 'c-modal',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
-      cNotificationContainer,
+      eIcon,
     },
-    mixins: [
-      uuid,
-    ],
 
     props: {
       /**
-       * Describes the name of the portal-target to render the modal.
-       */
-      portalTarget: {
-        type: String,
-        default: 'modal-container',
-      },
-
-      /**
-       * Set's the inner spacing of the modal [0, 500].
-       */
-      spacing: propScale(500, [
-        0,
-        500
-      ]),
-
-      /**
-       * Defines size for modal [300, 600].
-       */
-      size: propScale(300, [
-        300,
-        600,
-      ]),
-
-      /**
-       * Optional title for the header.
-       */
-      title: {
-        type: String,
-        default: '',
-      },
-
-      /**
-       * If 'true' adds a close icon to the header.
-       */
-      closeable: {
-        type: Boolean,
-        default: true
-      },
-
-      /**
        * Toggles the visibility of the modal.
        */
-      open: {
+      isOpen: {
         type: Boolean,
         default: false,
       },
 
       /**
-       * Defines the transition on mobile (default is slide in from right to left).
+       * Allows defining a title.
        */
-      mobileTransition: {
+      title: {
         type: String,
-        default: 'slide',
-        validator(value) {
-          return [
-            'slide',
-            'fade',
-          ].includes(value);
-        }
+        default: null,
       },
+
+      /**
+       * Allows defining whether the modal is closable.
+       */
+      isClosable: {
+        type: Boolean,
+        default: true,
+      },
+
+      /**
+       * Allows enabling/disabling close on outside click.
+       */
+      closeOnOutsideClick: {
+        type: Boolean,
+        default: false,
+      },
+
+      /**
+       * Allows modifying the size of the modal.
+       *
+       * Valid values: `[600, 700, 800]`
+       */
+      size: propScale(600, [
+        600,
+        700,
+        800,
+      ]),
+
+      /**
+       * Allows modifying the inner spacing of the modal.
+       *
+       * Valid values: `[0, 300, 500]`
+       */
+      spacing: propScale(500, [
+        0,
+        300,
+        500,
+      ]),
     },
-    data() {
-      return {
-        scrollPositionY: 0,
-      };
+    emits: {
+      'update:isOpen': (state: unknown): boolean => typeof state === 'boolean',
+      'open': null,
+      'close': null,
     },
-    // data() {
+
+    // setup(): Setup {},
+    // data(): Data {
     //   return {};
     // },
 
     computed: {
       /**
-       * Flag that shows if the current viewport is < sm.
-       *
-       * @returns {Boolean}
+       * Returns modifier classes.
        */
-      isMobile() {
-        return !this.$viewport.isSm;
+      modifiers(): Modifiers {
+        return {
+          size: this.size,
+          spacing: this.spacing,
+        };
       },
-
-      /**
-       * Calculates the width as a percentage value based on the size property.
-       * Important: The "width" property of the modal plugin isn't reactive!
-       *
-       * @returns {String}
-       */
-      width() {
-        if (this.isMobile) {
-          return '100%';
-        }
-
-        switch (this.size) {
-          case '300':
-            return '50%';
-
-          case '600':
-            return '80%';
-
-          default:
-            return '100%';
-        }
-      },
-
-      /**
-       * Calculates the max-width for the modal based on the size property. The max-width has the same value
-       * Value like on the width property of the biggest break point.
-       *
-       * @returns {Number}
-       */
-      maxWidth() {
-        switch (this.size) {
-          case '300':
-            return 0.5 * BREAKPOINTS.xl;
-
-          case '600':
-            return 0.8 * BREAKPOINTS.xl;
-
-          default:
-            return BREAKPOINTS.xl;
-        }
-      }
     },
     watch: {
-      open() {
-        if (this.open) {
-          this.scrollPositionY = window.scrollY;
-          avoidContentResizing(true);
-          this.$modal.show(this.uuid);
-          this.$modalStack.add(this.uuid);
+
+      /**
+       * Triggers opening/closing modal.
+       */
+      isOpen(state: boolean): void {
+        if (state) {
+          this.open();
         } else {
-          this.$modal.hide(this.uuid);
+          this.close();
         }
-      }
+      },
     },
 
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() {},
+    mounted() {
+      if (this.isOpen) {
+        this.open();
+      }
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
-    beforeDestroy() {
-      this.$modalStack.remove(this.uuid);
-    },
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     methods: {
       /**
-       * Hides the modal.
-       *
-       * @param {Object} event - The event object.
+       * Opens the modal.
        */
-      closeModal(event) {
-        if (event) {
-          event.preventDefault();
-        }
-
-        this.$modal.hide(this.uuid);
+      open(): void {
+        this.$nextTick(() => {
+          this.$el.showModal(); // Native function of `HTMLDialogElement`
+          this.$emit('update:isOpen', true);
+        });
       },
 
       /**
-       * Event gets fired after modal is closed.
+       * Closes the modal.
        */
-      closedModal() {
-        /**
-         * Close event after modal is closed
-         *
-         * @event close
-         */
+      close(): void {
+        if (this.isOpen) {
+          this.$emit('update:isOpen', false);
+        }
+
         this.$emit('close');
-
-        /**
-         * Updates the 'open' prop to allow the usage of '.sync' on the open prop.
-         *
-         * @event update:open
-         */
-        this.$emit('update:open', false);
-
-        this.$modalStack.remove(this.uuid);
-        window.scrollTo(0, this.scrollPositionY);
       },
 
       /**
-       * Event handler for vue-js-modal beforeClose event.
-       *
-       * @param {Object} modal - The current modal instance.
+       * Handler for keypress events.
        */
-      onModalBeforeClose(modal) {
-        if (!this.closeable) {
-          modal.stop();
+      onKeyDown(event: KeyboardEvent): void {
+        if (this.isOpen && event.code === 'Escape') {
+          this.close();
         }
+      },
 
-        avoidContentResizing(false);
+      /**
+       * Handler for outside click event.
+       */
+      onOutsideClick(): void {
+        if (this.closeOnOutsideClick && this.isOpen) {
+          this.close();
+        }
+      },
+
+      /**
+       * Handler for when the modal open-animation is completed.
+       */
+      onAfterEnter(): void {
+        disableBodyScroll(this.$el, { reserveScrollBarGap: true });
+        this.$emit('open');
+        document.addEventListener('keydown', this.onKeyDown);
+      },
+
+      /**
+       * Handler for when the modal close-animation is completed.
+       */
+      onAfterLeave(): void {
+        enableBodyScroll(this.$el);
+        document.removeEventListener('keydown', this.onKeyDown);
       },
     },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
-  /* stylelint-disable selector-class-pattern */
+  // @use 'sass:math';
+  @use '../setup/scss/variables';
+  @use '../setup/scss/mixins' as *;
+  // @use '../setup/scss/extends' as *;
+  // @use '../setup/scss/functions' as *;
+
   .c-modal {
-    background-color: $color-grayscale--1000;
-    text-align: left;
-    box-shadow: 0 0 15px 0 $color-grayscale--500;
+    $this: &;
+
+    max-width: 100vw;
     padding: 0;
+    overflow-x: hidden;
+    border: none;
+    background: none;
 
-    @include media($down: xs) {
-      /* stylelint-disable declaration-no-important */
-      // Important rules are needed to overwrite the inline styles of the plugin
-      width: 100% !important;
-      left: 0 !important;
-      top: 0 !important;
-      min-height: 100vh !important;
-      /* stylelint-enable declaration-no-important */
+    @include media($down: sm) {
+      height: 100vh;
+      max-height: none;
     }
 
-    &__content,
-    &__header {
-      &--spacing-0 {
-        padding: 0;
+    &::backdrop {
+      opacity: 0.75;
+      background-color: variables.$color-grayscale--0;
+    }
+
+    &__inner {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+      overflow-y: auto;
+      background-color: variables.$color-grayscale--1000;
+      justify-self: center;
+
+      @include media(md) {
+        display: block;
+        align-self: center;
+        max-width: 75vw;
+        height: auto;
+        overflow-y: hidden;
       }
 
-      &--spacing-500 {
-        padding: $spacing--20;
+      @include media(lg) {
+        max-width: 66vw;
+      }
 
-        @include media(sm) {
-          padding: $spacing--20 $spacing--50;
-        }
+      @include media(xl) {
+        max-width: 66vw;
+      }
+    }
+
+    &__header,
+    &__sticky-footer {
+      padding: variables.$spacing--25;
+      border-bottom: 1px solid variables.$color-grayscale--600;
+
+      @include media(md) {
+        padding: variables.$spacing--25 variables.$spacing--50;
       }
     }
 
     &__header {
-      position: relative;
-      border-top: 2px solid $color-primary--1;
-      border-bottom: 2px solid $color-grayscale--600;
-
-      @include media(sm) {
-        border-top: 0;
-        border-bottom: 0;
-      }
+      border-bottom: 1px solid variables.$color-grayscale--600;
     }
 
     &__header-inner {
       display: flex;
       justify-content: space-between;
-      width: 100%;
-      padding: 0;
+      align-items: center;
+    }
 
-      @include media(sm) {
-        margin-bottom: 0;
-      }
+    &__content {
+      flex: 1 0 auto;
+      padding: variables.$spacing--25;
 
-      &--mobile {
-        padding: 0 $spacing--20;
+      @include media(md) {
+        padding: variables.$spacing--50;
       }
     }
 
-    &__title-wrapper {
-      flex: 1 0;
+    &__sticky-footer {
+      border-top: 1px solid variables.$color-grayscale--600;
+
+      @include media($down: sm) {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: variables.$color-grayscale--1000;
+      }
     }
 
     &__title {
-      @include media($down: sm) {
-        margin-bottom: 0;
-        font-weight: $font-weight--bold;
+      margin: 0;
+    }
+
+    &__button-close {
+      padding-left: variables.$spacing--20;
+      cursor: pointer;
+    }
+
+    &--size-600 &__inner {
+      @include media(md) {
+        width: 600px;
       }
     }
 
-    &__header-close {
-      @extend %button-reset;
-
-      cursor: pointer;
-      margin-right: $spacing--20;
-
-      @include media($down: xs) {
-        display: none;
+    &--size-700 &__inner {
+      @include media(md) {
+        width: 800px;
       }
+    }
 
-      path {
-        fill: $color-primary--1;
-      }
+    &--spacing-0 &__content {
+      padding: 0;
+    }
 
-      &--mobile {
-        display: flex;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+    &--spacing-300 {
+      #{$this}__header,
+      #{$this}__footer,
+      #{$this}__content {
+        padding: variables.$spacing--25;
 
-        @include media(sm) {
-          display: none;
+        @include media(md) {
+          padding: variables.$spacing--30;
         }
       }
     }
   }
 
-  .v--modal-overlay {
-    // stylelint-disable-next-line declaration-no-important
-    background: rgba($color-grayscale--700, 0.9) !important;
-
-    .v--modal-background-click {
-      width: 100%;
-      // stylelint-disable declaration-no-important
-      padding: 0 !important;
-      height: auto !important;
-      min-height: 100% !important;
-      // stylelint-enable declaration-no-important
-
-      @include media(sm) {
-        // stylelint-disable-next-line declaration-no-important
-        padding: $spacing--100 0 !important;
-      }
+  .c-modal--fade-animation-enter-active,
+  .c-modal--fade-animation-leave-active {
+    &,
+    &::backdrop {
+      transition: opacity 200ms ease-in-out;
     }
   }
 
-  .v--modal-overlay.scrollable .v--modal-box {
-    // stylelint-disable-next-line declaration-no-important
-    margin-bottom: 0 !important;
-    padding-bottom: $spacing--100;
-
-    @include media(sm) {
-      padding-bottom: 0;
+  .c-modal--fade-animation-enter-from,
+  .c-modal--fade-animation-leave-to {
+    &,
+    &::backdrop {
+      opacity: 0;
     }
-  }
-
-  .slide-enter-active {
-    transition: all $transition-duration-300 ease;
-  }
-
-  .slide-leave-active {
-    transition: all $transition-duration-300 ease;
-  }
-
-  .slide-enter,
-  .slide-leave-to {
-    transform: translateX(100%);
   }
 </style>

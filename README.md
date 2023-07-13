@@ -1,6 +1,7 @@
 # vue-template
 
-This is a custom Vue template which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
+This is a custom Vue template written in TypeScript which is based on the idea of using BEM, CriticalCSS and a living 
+styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
 
 ## Introduction
 
@@ -26,6 +27,7 @@ You **MUST** also be familiar with the following tools:
 * [BEM](http://getbem.com/)
 * [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
 * [ESLint](https://eslint.org/)
+* [TypeScript](https://www.typescriptlang.org/)
 * [Git](https://git-scm.com/)
 * [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Jest](https://facebook.github.io/jest/)
@@ -49,7 +51,11 @@ You **MUST** install the following tools globally, before you can use this templ
 
 ### Prepare your IDE
 
-Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
+Please make sure your IDE is configured to apply 
+- [ESLint](https://eslint.org/docs/user-guide/integrations)
+- [TypeScript](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
+- [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins)
+- [.editorconfig](https://editorconfig.org/#download) linting/settings.
 
 **This template supports ES2020+. Please make sure your IDE is configured accordingly.**
 
@@ -115,21 +121,19 @@ NOTE: always use `npm ci` when setting up the project or updated the code base. 
 
 | Operating systems/Devices | Browser | Priority | Breakpoints |
 | --- | --- | --- | --- |
-| Windows 7 | IE11 | **high** | all |
-| Windows 8 | IE11 | **high** | all |
-| Windows 10 | IE11 | **high** | all |
-| Windows 10 | Edge (newest) | **high** | all |
-| Windows 10 | Chrome (newest) | _medium_ | all |
-| Windows 10 | Firefox (newest) | _medium_ | all |
-| Mac OS X 10.13 | Safari (newest) | _medium_ | all |
-| Mac OS X 10.13 | Chrome (newest) | low | all |
-| Mac OS X 10.13 | Firefox (newest) | low | all |
-| Phone 8 (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
-| Phone 8 Plus (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
-| Phone X (iOS 11) | Safari (newest) | low | xxs, xs, sm (md) |
-| Galaxy S8 (Android 7) | Chrome Mobile (newest) | low | xxs, xs, sm (md) |
-| iPad Pro (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
-| iPad 5th (iOS 11) | Safari Mobile (newest) | low | sm, md, lg |
+| Windows 10 | Chrome (current) | **high** | all |
+| Windows 10 | Edge (current) | **high** | all |
+| Windows 10 | Firefox (current) | _medium_| all |
+| Windows 10 | IE11 | low | >= md |
+| Windows 7 | IE11 | low | >= md |
+| Mac OS X 10.15 | Chrome (current) | **high** | all |
+| Mac OS X 10.15 | Safari (current) | **high** | all |
+| Mac OS X 10.15 | Firefox (current) | _medium_ | all |
+| iPhone X (current iOS) | Safari (current) | low | <= md |
+| iPhone 11 (current iOS) | Safari (current) | low | <= md |
+| Galaxy S20 (current Android) | Chrome Mobile (current) | low | <= md |
+| iPad Pro 4th (current iOS) | Safari Mobile (current) | low | sm, md, lg |
+| iPad 7th (current iOS) | Safari Mobile (current) | low | sm, md, lg |
 
 #### Updating browserslist
 
@@ -167,14 +171,6 @@ $ npm run dev
 
 The app should now run on [http://localhost:8080](http://localhost:8080)
 
-#### Styleguidist
-
-If you prefer to develop inside the component styleguide run the following script instead or in a new tab:
-
-```
-$ npm run dev:s
-```
-
 ### Integrate vue-template into an other repository
 
 If you need to integrate this repository into an other project (e.g. a backend repository) we recommend to use `git subtree`. This will create a copy of a certain branch and allow updates later on while not changing the other projects git setup. For more information see [Atlassian Blog](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree) and [Git subtree](https://git-scm.com/book/de/v1/Git-Tools-Subtree-Merging).
@@ -208,7 +204,7 @@ git subtree pull --prefix assets/vue https://github.com/valantic/vue-template.gi
 .  |- mixins            Vue mixins
 .  |- plugins           Self maintained plugins
 .  |- setup             Configuration and setup of the application
-.  |- store             Vuex store and modules
+.  |- stores            Pinia stores
 .  |- styleguide        Assets, components, mock data and routes for the stylguide 
 .  |- translations      Translations for the application
 |- blueprints           File blueprints
@@ -345,7 +341,7 @@ For information about best practices read the following guides:
 * This project uses always `kebab-case` for [Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended), [Component name casing in JS/JSX](https://vuejs.org/v2/style-guide/#Component-name-casing-in-JS-JSX-strongly-recommended) and [Component name casing in templates ](https://vuejs.org/v2/style-guide/#Component-name-casing-in-templates-strongly-recommended).
 * We use BEM namespace `e-` for [base component names](Bhttps://vuejs.org/v2/style-guide/#Base-component-names-strongly-recommended).
 
-### Single file components
+### Single file components (SFC)
 
 We build Vue components as [single file components](https://vuejs.org/v2/guide/single-file-components.html). All production components are placed within `/app/components` (styleguide only components in `/app/styleguide/components`).
 
@@ -354,76 +350,192 @@ We build Vue components as [single file components](https://vuejs.org/v2/guide/s
 * Naming follows BEM block convention.
 * Naming MUST always be singular.
 
-## Vuex
+### Vue and TypeScript
 
-[Vuex](https://vuex.vuejs.org/en/) is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
+To have the types working for Vue SFC, they need to be defined as
 
-Vuex allows us to divide our store into modules and make it more scalable. In this case each module (index.js) contains its own state, mutations, actions and getters. For this project the following setup will be used:
+```vue
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    
+  });
+</script>
+```
+
+To fully benefit from the power of TypeScript, define the types according to the following examples:
+
+#### Props
+
+For Primitive Types, TypeScript is able to detect the type based on the Vue Prop Type definition:
+
+```ts
+myProp: {
+  type: String,
+  required: true,
+},
+```
+
+When using arrays or objects without further typings, TypeScript treats a prop as `any[]` or `any`. To have proper
+typing, you can define your array / object props like this:
+
+```ts
+myArrayProp: {
+  type: Array as PropType<string[]>,
+  default: () => [],
+},
+```
+
+When defining a Prop with a validator, it's important to use the arrow function style to prevent random typescript errors:
+
+```ts
+color: {
+  type: String,
+  default: 'yellow',
+  validator: (value: string) => [
+    'red',
+    'yellow',
+    'blue',
+    'white',
+  ].includes(value),
+},
+```
+
+#### Setup
+
+When Using Code from another File (Composition based) or accessing Component Elements via ref, the code needs to be 
+defined in the Setup Method. The setup Method needs to have a proper Return Type by defining an Interface:
+
+```ts
+import { defineComponent, ref, Ref } from 'vue';
+import useFormStates, { IFormStates } from '@/compositions/form-states';
+
+interface ISetup extends IFormStates {
+  input: Ref<HTMLInputElement | null>;
+  slot: Ref<HTMLSpanElement | null>;
+}
+
+export default defineComponent({
+  setup(props): ISetup {
+    const input = ref();
+    const slot = ref();
+
+    return {
+      ...useFormStates(toRefs(props).state),
+      input,
+      slot,
+    };
+  },
+});
+```
+
+#### Data
+
+To fully benefit from TypeScript, please define your Data function with an Interface like this:
+
+```ts
+interface IData {
+  myDataProperty: string;
+}
+export default defineComponent({
+  data(): IData {
+	  return {
+      myDataProperty: 'Hello World',
+	  }
+  }
+});
+```
+
+#### Computed / Methods
+
+To prevent random TypeScript errors in your component, make sure, to always type your computed return types and method 
+signatures!
+
+#### Misc
+
+- Component general Instance: Use `ComponentPublicInstance` as Type if you don't know the type of the component
+- Component specific Instance: Use `Ref<InstanceType<typeof yourComponent>` to access a property of a ref being a component
+
+#### IDE Support
+
+To see Type errors in your editor, make sure to enable TypeScript Language Support in your IDE. For PHP Storm, you
+can follow [this Instructions](https://www.jetbrains.com/help/phpstorm/using-tslint-code-quality-tool.html).
+
+#### Vue-2 to Vue-3
+
+With the update to Vue-3 and TypeScript, some basic things have changed. The most notable are listed here:
+
+1. Use `export default defineComponent({ ... })` to define your component
+2. Global Vue Component properties need to be defined in the `shims-xxx` files
+3. Mixins have been replaced by Composables (Composition API)
+4. Ref Access needs to be done via Setup Method
+   [read more](https://v3.vuejs.org/guide/composition-api-template-refs.html#template-refs)
+5. Event emit does only work to the direct parent, otherwise you need to use an emitting plugin
+   [read more](https://v3.vuejs.org/guide/migration/events-api.html#events-api)
+6. Emitting events with the same as a native event need to be defined in `emits` property
+   [read more](https://v3.vuejs.org/guide/migration/emits-option.html#emits-option)
+7. The directive lifecycle hooks have been adjusted
+   [read more](https://v3.vuejs.org/guide/migration/custom-directives.html#custom-directives)
+8. The way how `v-model` works, has been changed
+   [read more](https://v3.vuejs.org/guide/migration/v-model.html#v-model)
+9. The way how the `is` attribute works, has changed
+   [read more](https://v3.vuejs.org/api/special-attributes.html#is)
+10. As the successor of vuex we use Pinia store which supports Vue 3 and is also Type Safe.
+    [read more](https://pinia.vuejs.org/)
+
+For more information about the migration, read the [migration page](https://v3.vuejs.org/guide/migration/introduction.html#introduction)
+
+####  Decisions and Issues
+
+During switching to Vue-3 and TypeScript, the following decisions had to be made:
+
+1. Build Chain: For typescript, one can either use `ts-loader` and output browser ready js directly or just use the `ts-loader`
+   to compile TypeScript to JavaScript and then continue with e.g. `babel-loader`. Although the latter uses two loaders and
+   is potentially slower, we decided to use it, to have browser list support for the end result
+2. Code Linting: We use ESLint with some additional rules needed for typescript. 
+   Our `.eslintrc` extends `@vue/typescript`, which is a vue optimized ESLint config
+   [read more](https://www.npmjs.com/package/@vue/eslint-config-typescript)
+   The alternative would be to use `plugin:@typescript-eslint/recommended`, which is stricter
+
+The following issues arisen during the switch and are still open:
+
+1. Some dependencies are only available in next / alpha version
+2. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good 
+   tools to do that at the moment, [read more](https://github.com/vuejs/vue-cli/issues/2950)
+   - Using native `tsc --noEmit` does not work for TypeScript code in Vue `sfc` files
+   - The following 3rd Party tools where tested but where not working well
+     - https://github.com/zhanba/vue-tslint => Works only with Vue-2
+     - https://github.com/johnsoncodehk/vue-tsc => Does not seem to respect the tsconfig from the project
+     - https://github.com/Yuyz0112/vue-type-check => Does not recognize component properties
+
+## Pinia
+
+[Pinia](https://pinia.vuejs.org/) is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
 
 ### Modularity 
-```
-store
-  |- index.js
-  |- cart
-  | |- index.js
-  |- navigation
-  | |- index.js
-  |- session
-  | |- index.js
-````
+Pinia is modular by design and let us divide our project into multiple stores.
 
-All `index.js` files from `app/store/modules` will be auto imported, and the file name will be converted to a camelCased module name.
+```
+stores
+  |- session.ts
+  |- notification.ts
+  |- breadcrumb.ts
+````
 
 **Note: the module name MUST be written in singular.**
 
-### Namespacing
-By default, actions, mutations and getters inside modules are still registered under the global namespace. To make sure all modules are more self-contained and reusable, we make use of the 'namespace' option, which automatically adds a prefix for the specific module.
-
-```javascript
-// store/modules/cart/index.js
-
-export default {
-  namespaced: true,
-  state: {},
-  getters: {}, // e.g. -> getters['cart/product']
-  mutations: {},
-  actions: {},
-};
-```
-
-As the application grows it's possible to even split the module again e.g. into a structure like this:
-
-```
-store
-  |- index.js
-  |- cart
-  | |- index.js
-  | |- getters.js
-  | |- mutations.js
-  | |- actions.js
-  |- navigation
-  | |- index.js
-  | |- getters.js
-  | |- mutations.js
-  | |- actions.js
-  |- session
-  | |- index.js
-  | |- getters.js
-  | |- mutations.js
-  | |- actions.js
-```
-
 ### Prefixing
 
-We defined several prefixes you should use on Vuex getters, mutations and actions, so they can be better distinguished when used in the components.
+We defined several prefixes you should use on Pinia getters and actions, so they can be better distinguished when used in the components.
 
 #### get*
 
-Add the `get` prefix to all getters. This way it's clear in the component, that the used value is comming from Vuex.
+Add the `get` prefix to all getters. This way it's clear in the component, that the used value is coming from Pinia.
 
 #### set*
 
-Add the `set` prefix to all setters. This way it is easier to identify setters from Vuex inside components.
+Add the `set` prefix to all setters. This way it is easier to identify setter actions from Pinia inside components.
 
 #### api*
 
@@ -435,7 +547,7 @@ Add this prefix to actions, that handle initial data. See next section.
 
 ### Initial data
 
-To inject initial data into the Vuex store, we decided to prepare actions (since mutations are limited in regards of store actions), which handle an initial payload.
+To inject initial data into the Pinia store, we decided to use the setup method which is available on each Pinia store.
  
  The data is exchanged via a global JS object.
  
@@ -443,33 +555,21 @@ To inject initial data into the Vuex store, we decided to prepare actions (since
  
  See also `/index.html` as an example.
 
-```html
+```
 <html>
 <body>
   <script>
-    window.initialData = {};
+    window.initialData = {
+      breadcrumb: {}
+    };
   </script>
   ...
   <script>
-    window.initialData['<storeModule>/<propertySetter>'] = { /* ... */ };
+    window.initialData.breadcrumb.items = { /* ... */ };
   </script>
   <script src="vue-app.js"></script>
 </body>
 </html>
-```
-
-```javascript
-// @/store/index.js
-
-const data = window.initialData || {};
-
-// ...
-
-Object.keys(data).forEach((action) => {
-  store.dispatch(action, data[action]);
-});
-
-window.initialData = {};
 ```
 
 #### Props
@@ -514,13 +614,27 @@ In cases where HTML is pre-rendered by twig, slots can be used to give the HTML 
 
 ## Translations
 
-All text which is defined in frontend MUST be placed trough translations. There should not be any hard coded inline text in the component templates or JavaScript.
+All text which is defined in frontend MUST be placed trough translations. There should NOT be any hard coded inline text in the component templates or JavaScript.
 
 ### Plugin
 
 We use the [vue-i18n](https://github.com/kazupon/vue-i18n) plugin to handle translations. This tool also allows us to handle localizations (e.g. number or date formats). The documentation can be found [here](https://kazupon.github.io/vue-i18n/guide/started.html).
 
 We discovered that the provided directive `v-t` accelerates the memory leak issue in IE11 since it creates copies of the translation JSON for each use (as of v8.15.3). For this reason, please use the `{{$t()}}` method.
+
+### Keys
+
+Translations should be marked with a specific translation key. Don't use English text as ab identifier key, since it might interfere with other uses in the application or can simply have different meanings in other languages, that need to be distinguished.
+
+The key should always be namespaced with the components name. E.g. `c-component.specificKey`
+
+```js
+// Bad
+this.$t('Some translateable text.');
+
+// Good
+this.$t('e-button.defaultLabel')
+```
 
 ### Placeholders
 
@@ -537,7 +651,7 @@ If you need to use translations outside of a component or Vue instance, where th
 ```javascript
 import { i18n } from '@/setup/i18n';
  
-const translation = i18n.t('c-add-to-cart.notLoggedInTitle');
+const translation = i18n.global.t('c-add-to-cart.notLoggedInTitle');
 ```
 
 ## Blueprints
@@ -566,7 +680,7 @@ In webpack this separate parts of the application are called `chunks`. You can f
 
 ### Critical CSS
 
-Delivering critical CSS to the browser trough the HTML head can drastically decrease the time until first render. As long as the HTML file itself is gziped still below 14kb. Therefore we decided to ad a manual possibility to define critical CSS styles, which will be extracted in a separate `*.critical.css` file during the build.
+Delivering critical CSS to the browser trough the HTML head can drastically decrease the time until first render. As long as the HTML file itself is gziped still below 14kb. Therefore we decided to add a manual possibility to define critical CSS styles, which will be extracted in a separate `*.critical.css` file during the build.
 
 You can read more about critical CSS [here](https://css-tricks.com/annotating-critical-css/) and the tool we're using [here](https://github.com/mrnocreativity/postcss-critical-split)
 
@@ -583,7 +697,7 @@ Theme styles are delivered seperatly in a *.css file. In this files are the glob
 
 Usage example:
 ```scss
-  .class {
+  .c-class {
     color: $color-primary--1;
     background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
     background-color: rgba($color-primary--1--rgb, 0.5);
@@ -598,15 +712,28 @@ The living styleguide is defined in two parts: one is documenting all available 
 
 Please note, that the living styleguide has its on section in `/app/styleguide` where you can find `components`, `routes` and anything else, which is only related to the living styleguide. This makes it more easy to identify and split out unneeded code during the build.
 
-### Mock data
-
-You can share the mock data from the demo pages with the vue-styleguidist by importing them into the global mixin which is defined inside `app/setup/styleguide.options.js`. They will be merged with the `data()` object of each component which is displayed inside the component styleguide. Access the data with `mockData.<yourKey>` (e.g. `<c-cms-wrapper :components="mockData.cCmsWrapperMockData" />`).
-
 ## Webpack
 
 ### Path alias
 
 Webpack supports to use an [alias](https://webpack.js.org/loaders/css-loader/#alias) for paths. Thanks to this feature, you don't need to define relative paths when importing one JavaScript file into an other. The `@` alias stands for the application root (`/app`). So for example you can just write `import options from '@/setup/options'` in any file to import the `options.js` file from the `setup` folder without caring about relative path resolving.
+
+## Build chain
+
+The build chain uses a combined solution of TypeScript and Babel:
+
+1. The webpack ts-loader shows TS errors and compiles the TypeScript to Javascript files
+2. The webpack babel-loader compiles the Javascript files to the final outpu based on the babel-preset and browserlist
+
+The reasons why we choose this setup are:
+
+1. Using just the `ts-loader` can only use an esXXXX Target, but not a browser / feature depending solution like browserlist
+2. Using just the `babel-loader` with the `@babel/preset-typescript`, one does not get typescript errors in the command line without starting a second `tsc` command
+
+### tsconfig Target
+
+At the moment, we are using `es2019` as TypeScript build target. The reason is, that `esNext` / `es2020` are not transpiling
+`optional-chaining` and `nullish-coalescing` and webpack 4 cannot handle them
 
 ## Node.js and NPM
 
@@ -645,6 +772,10 @@ PostCSS configuration. PostCSS is used for **browser prefixing**, **minification
 ### .stylelintrc.js
 
 Stylelint setup for the current project.
+
+### tsconfig.json
+
+TypeScript configuration for the current project.
 
 ## Known issues
 
@@ -721,13 +852,40 @@ $ brew install nasm
 $ brew upgrade nasm
 ```
 
+#### Error on Windows machines while running the `npm run build script`
+
+If you're on a Windows machine, and you need to build the project – there is a problem with assign node env. variables like
+`NODE_ENV=production`. To get rid of this problem there is an npm package that could help you => https://www.npmjs.com/package/cross-env
+Be sure that you add "cross-env" at the start of the script like:
+
+package.json:
+```json
+{
+  "scripts": {
+      "build": "cross-env NODE_ENV=production webpack --mode production --progress"
+    }
+}
+```
+
+## Vite integration todos
+* [ ] Check again, why we need to use `.value` on some vue-i18n properties (e.g. i18n.global.locale.value). Source: https://vue-i18n.intlify.dev/guide/advanced/lazy.html#lazy-loading
+* [ ] Check if module polyfill is required: https://vitejs.dev/config/build-options.html#build-modulepreload
+* [ ] CSS Prefixing
+* [ ] Apply new ESLint rules to valantic config.
+* [ ] Should there be basic styles for form elements (if no class applied)?
+* [ ] cmd + click in PhpStorm leads to Interface instead of implementation.
+* [ ] Update README
+* [ ] Check "Vite Inspect"
+* [ ] Refactor storybook stories to TS.
+* [ ] @typescript-eslint still required?
+* [ ] Update package.md
+
 ## Roadmap
-
 * [ ] Implement dual build (ES5/ES2015+)
-* [ ] Element styles should be moved to reboot.
-* [ ] Add 'dangerous' flag for components with v-html that will be shown in styleguide like development state flag.
+* [ ] Add 'dangerous' flag for components that use v-html in Storybook.
+* [ ] Add 'development' flag for components in Storybook.
 * [ ] Add custom elements option to the "initial data" section.
-
+  
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)

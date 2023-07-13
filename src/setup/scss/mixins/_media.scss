@@ -1,3 +1,5 @@
+@use '../variables';
+
 ///
 /// Creates a media query
 ///
@@ -5,8 +7,8 @@
 /// @param   {string|number}   [$down]         Either a breakpoint identifier (xxs, xs, ...) or an absolute value (with unit)
 /// @param   {string}          [$media=all]    The targeted media
 ///
-@mixin media($up: null, $down: null, $media: all, $breakpoints: $breakpoints) {
-  $query: if($media == all, "all", "only #{$media}");
+@mixin media($up: null, $down: null, $media: all, $breakpoints: variables.$breakpoints) {
+  $query: if($media == all, 'all', 'only #{$media}');
   $indexOfUpBreakpoint: index(map-keys($breakpoints), $up);
   $indexOfDownBreakpoint: index(map-keys($breakpoints), $down);
   $isUpNumber: type-of($up) == number;
@@ -23,27 +25,27 @@
   $downIsBiggerThanUp: (not($up) or not($down)) or ($isValidUpValue and $isValidDownValue and $upValue < $downValue);
 
   @if not($isValidUpValue) {
-    @error "media(): no valid $up value.";
+    @error 'media(): no valid $up value.';
   } @else if not($isValidDownValue) {
-    @error "media(): no valid $down value.";
+    @error 'media(): no valid $down value.';
   } @else if not($downIsBiggerThanUp) {
-    @error "media(): $up is bigger than $down.";
+    @error 'media(): $up is bigger than $down.';
   } @else if $up == null and $down == null and $media == all {
-    @error "media(): At least one of the parameters MUST be defined ($up, $down, $media).";
+    @error 'media(): At least one of the parameters MUST be defined ($up, $down, $media).';
   } @else if $upValue == 0 and $down == null and $media == all {
-    @error "media(): The given selector would not define a meaningful scope and should be removed.";
+    @error 'media(): The given selector would not define a meaningful scope and should be removed.';
   } @else {
     @if $up {
       @if $upValue != 0 {
-        $query: $query + " and (min-width: #{$upValue})";
+        $query: $query + ' and (min-width: #{$upValue})';
       }
     }
 
     @if $down {
       @if type-of($down) == number {
-        $query: $query + " and (max-width: #{$downValue})";
+        $query: $query + ' and (max-width: #{$downValue})';
       } @else {
-        $query: $query + " and (max-width: #{$downValue - 1px})";
+        $query: $query + ' and (max-width: #{$downValue - 1px})';
       }
     }
 

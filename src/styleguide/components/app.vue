@@ -1,56 +1,74 @@
 <template>
   <div id="app">
-    <header is="c-header" />
+    <header is="vue:c-header" />
     <router-view />
-    <footer is="c-footer" />
-    <s-navigation :routes="routes" nav-position="bottom-right" />
+    <footer is="vue:c-footer" />
+    <s-navigation nav-position="bottom-right" />
   </div>
 </template>
 
-<script>
-  import sNavigation from '@/styleguide/components/s-navigation';
-  import styleguideRoutes from '@/setup/styleguide.routes';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { S_STORAGE_AVAILABLE } from '@/setup/globals';
+  import sNavigation from '@/styleguide/components/s-navigation.vue';
+  import notificationStore, { NotificationStore } from '@/stores/notification';
 
-  export default {
+  interface Setup {
+    notificationStore: NotificationStore;
+  }
+
+  export default defineComponent({
     name: 'app',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     components: {
       sNavigation,
     },
-    // mixins: [],
 
     // props: {},
+
+    setup(): Setup {
+      return {
+        notificationStore: notificationStore(),
+      };
+    },
     // data() {
     //   return {};
     // },
 
-    computed: {
-      /**
-       * An Array of available routes.
-       *
-       * @returns {Array.<Object>}
-       */
-      routes() {
-        return styleguideRoutes;
-      }
-    },
+    // computed: {},
     // watch: {},
 
     // beforeCreate() {},
-    // created() {},
+    created() {
+      this.getNotificationFromStorage();
+    },
     // beforeMount() {},
     // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
-    // methods: {},
+    methods: {
+      /**
+       * Gets localStorage messages and pushes them in the notification store to display.
+       */
+      getNotificationFromStorage() {
+        const notification = S_STORAGE_AVAILABLE && localStorage.getItem('vueNotification');
+        const parsedNotification = notification ? JSON.parse(notification) : null;
+
+        if (parsedNotification) {
+          this.notificationStore.showNotification(parsedNotification);
+
+          // Clears the localStorage notifications.
+          localStorage.removeItem('vueNotification');
+        }
+      },
+    },
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">

@@ -1,13 +1,15 @@
+@use 'sass:math';
+
 ////
 // Remove the unit of a length
 //
-// @param {Length}    $number   Length to remove unit from
+// @param {length}    $number   Length to remove unit from
 //
-// @return {Number}   Unit less number
+// @return {number}   Unit less number
 ////
 @function strip-unit($number) {
   @if type-of($number) == 'number' and not unitless($number) {
-    @return $number / ($number * 0 + 1);
+    @return math.div($number, ($number * 0 + 1));
   }
 
   @return $number;

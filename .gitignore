@@ -4,7 +4,6 @@
 .LSOverride
 .eslintcache
 .stylelintcache
-report.*.json
 
 # IntelliJ project files
 .idea
@@ -23,3 +22,8 @@ npm-debug.log
 
 # nvm
 .nvmrc
+
+# Project
+.env
+/stats/
+report.*.json

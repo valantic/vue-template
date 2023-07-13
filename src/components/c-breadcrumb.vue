@@ -3,10 +3,12 @@
     <ul :class="b('list')">
       <li v-for="(item, index) in getItems"
           :key="`breadcrumb--${index}`"
-          :class="b('item')">
+          :class="b('item')"
+      >
         <a :class="b('link')"
            :href="item.url"
-           :title="$t('c-breadcrumb.linkTitle', { name: item.name })">
+           :title="$t('c-breadcrumb.linkTitle', { name: item.name })"
+        >
           {{ item.name }}
         </a>
       </li>
@@ -14,28 +16,41 @@
   </div>
 </template>
 
-<script>
-  import { mapGetters } from 'vuex';
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import breadcrumb, { BreadcrumbStore, BreadcrumbItem } from '@/stores/breadcrumb';
+
+  interface Setup {
+    breadcrumbStore: BreadcrumbStore;
+  }
 
   /**
    * Renders a list of breadcrumbs items from the store module.
    */
-  export default {
+  export default defineComponent({
     name: 'c-breadcrumb',
-    status: 0, // TODO: remove when component was prepared for current project.
 
     // components: {},
-    // mixins: [],
 
     // props: {},
+    // emits: {},
+
+    setup(): Setup {
+      return {
+        breadcrumbStore: breadcrumb(),
+      };
+    },
     // data() {
     //   return {};
     // },
 
     computed: {
-      ...mapGetters('breadcrumb', [
-        'getItems',
-      ]),
+      /**
+       * Returns an Array of breadcrumb items.
+       */
+      getItems(): readonly BreadcrumbItem[] {
+        return this.breadcrumbStore.getItems;
+      },
     },
     // watch: {},
 
@@ -47,35 +62,34 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
+  @use '../setup/scss/variables';
+  @use '../setup/scss/mixins';
+
   .c-breadcrumb {
-    @include font($font-size--12, 20px);
+    @include mixins.font(variables.$font-size--12, 20px);
 
-    color: $color-grayscale--400;
-
-    &__list {
-      @extend %list-reset;
-    }
+    color: variables.$color-grayscale--400;
 
     &__item {
       display: inline-block;
 
       &::after {
         content: '|';
-        padding: 0 $spacing--5;
+        padding: 0 variables.$spacing--5;
       }
     }
 
     &__item:last-child {
-      color: $color-grayscale--200;
+      color: variables.$color-grayscale--200;
 
       &::after {
         content: '';
@@ -90,7 +104,7 @@
     }
 
     &__link:hover {
-      color: $color-secondary--1;
+      color: variables.$color-secondary--1;
     }
   }
 </style>

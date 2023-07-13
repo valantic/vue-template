@@ -1,0 +1,26 @@
+@use '../variables';
+@use './font' as *;
+
+@mixin heading-h1 { // TODO: update definition for project.
+  @include font(variables.$font-size--18);
+}
+
+@mixin heading-h2 { // TODO: update definition for project.
+  @include font(variables.$font-size--16);
+}
+
+@mixin heading-h3 { // TODO: update definition for project.
+  @include font(variables.$font-size--14);
+}
+
+@mixin heading-h4 { // TODO: update definition for project.
+  @include font(variables.$font-size--14);
+}
+
+@mixin heading-h5 { // TODO: update definition for project.
+  @include font(variables.$font-size--14);
+}
+
+@mixin heading-h6 { // TODO: update definition for project.
+  @include font(variables.$font-size--14);
+}

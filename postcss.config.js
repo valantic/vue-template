@@ -1,38 +1,17 @@
-module.exports = {
+/* eslint-disable global-require, @typescript-eslint/no-var-requires */
+
+module.exports = { // @see https://webpack.js.org/loaders/postcss-loader/#examples-of-config-files
   // Browser config is fetched from package.json:browserslist
   map: false,
-  plugins: {
-    autoprefixer: {},
-    cssnano: {
-      // 'css-declaration-sorter': false,
-      // 'cssnano-util-raw-cache': false,
-      // 'postcss-calc': false,
-      // 'postcss-colormin': false,
-      // 'postcss-convert-values': false,
-      // 'postcss-discard-comments': false,
-      // 'postcss-discard-duplicates': false,
-      // 'postcss-discard-empty': false,
-      // 'postcss-discard-overridden': false,
-      // 'postcss-merge-longhand': false,
-      // 'postcss-merge-rules': false,
-      // 'postcss-minify-font-values': false,
-      // 'postcss-minify-gradients': false,
-      // 'postcss-minify-params': false,
-      // 'postcss-minify-selectors': false,
-      // 'postcss-normalize-charset': false,
-      // 'postcss-normalize-display-values': false,
-      // 'postcss-normalize-positions': false,
-      // 'postcss-normalize-repeat-style': false,
-      // 'postcss-normalize-string': false,
-      // 'postcss-normalize-timing-functions': false,
-      // 'postcss-normalize-unicode': false,
-      // 'postcss-normalize-url': false,
-      // 'postcss-normalize-whitespace': false,
-      // 'postcss-ordered-values': false,
-      // 'postcss-reduce-initial': false,
-      // 'postcss-reduce-transforms': false,
-      // 'postcss-svgo': false,
-      // 'postcss-unique-selectors': false,
-    }
-  },
+  plugins: [
+    require('autoprefixer'),
+    require('cssnano')({
+      preset: [
+        'default',
+        {
+          calc: false, // The precision of SCSS calculations was too low, so we decided to keep calc() in the output to increase the precision.
+        },
+      ],
+    }),
+  ],
 };

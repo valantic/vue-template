@@ -1,0 +1,266 @@
+// stylelint-disable selector-class-pattern
+@use '@/setup/scss/variables';
+@use '@/setup/scss/mixins';
+
+$pimcore-gui--color: #3c3f41;
+
+[class].p-grid { // The [class] selector was required to increase the weight inside .wysiwyg.
+  $this: &;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: variables.$spacing--20;
+  margin-bottom: variables.$spacing--50;
+
+  &__item {
+    align-self: start;
+
+    .pimcore_block_buttons {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &--item-outline {
+    #{$this}__item {
+      border: 1px solid variables.$color-grayscale--500;
+    }
+  }
+}
+
+.p-content-placeholder {
+  padding: variables.$spacing--30;
+  outline: 1px dashed variables.$color-grayscale--500;
+  background-color: variables.$color-grayscale--700;
+
+  &--text-align-center {
+    text-align: center;
+  }
+
+  &--spacing-500 {
+    margin: variables.$spacing--50 0;
+  }
+}
+
+.p-meta {
+  $this: &;
+
+  @include mixins.font(variables.$font-size--10, 12px);
+
+  display: flex;
+  align-items: center;
+  margin-bottom: variables.$spacing--5;
+  opacity: 0.2;
+  color: $pimcore-gui--color;
+  font-family: monospace;
+
+  .pimcore_block_entry:hover & {
+    opacity: 1;
+  }
+
+  .pimcore_block_entry:hover .pimcore_block_entry:not(:hover) & {
+    opacity: 0.2; // Reset for nested components elements.
+  }
+
+  dd,
+  dt {
+    margin: 0;
+    padding: 0;
+
+    + dt {
+      padding-left: variables.$spacing--5;
+      border-left: 1px solid rgba($pimcore-gui--color, 0.25);
+    }
+  }
+
+  dt {
+    padding: variables.$spacing--2 variables.$spacing--5;
+  }
+
+  dd {
+    margin-left: variables.$spacing--5;
+    opacity: 0.75;
+  }
+
+  dd + dd::before {
+    content: ' | ';
+  }
+
+  &--align-right {
+    #{$this}__list {
+      right: auto;
+      left: calc(100% + #{variables.$spacing--2});
+    }
+  }
+}
+
+[class].p-options { // The [class] selector was required to increase the weight inside .wysiwyg.
+  $this: &;
+
+  display: flex;
+  align-items: center;
+  padding: variables.$spacing--5 0;
+
+  .pimcore_block_entry & {
+    opacity: 0.3;
+  }
+
+  &--visible,
+  .pimcore_block_entry_over &,
+  .pimcore_block_entry:hover & {
+    opacity: 1 !important; // stylelint-disable-line declaration-no-important
+  }
+
+  &__item {
+    margin-right: variables.$spacing--10;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  // Non-empty pimcore_input are not recognizable as such.
+  &__item--force-input-border .pimcore_editable_input:not(.empty) {
+    outline: rgb(186, 186, 186) dashed 1px;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+  }
+
+  &__label-text {
+    margin-right: variables.$spacing--5;
+  }
+
+  .pimcore_tag_select,
+  .pimcore_editable_select {
+    display: block; // Simplyfies the use of labels.
+  }
+
+  &--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+
+    #{$this}__item {
+      margin: variables.$spacing--10 0 0 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+[class].p-section {
+  margin-bottom: variables.$spacing--20;
+}
+
+[class].p-areablock {
+  &--horizontal {
+    display: flex;
+
+    .pimcore_area_dropzone {
+      min-width: 20px;
+      min-height: 100%;
+    }
+
+    .pimcore_area_buttons .pimcore_icon_plus_down {
+      transform: rotate(-90deg);
+    }
+
+    .pimcore_area_buttons .pimcore_icon_plus_up {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &--group-indicator {
+    position: relative;
+    padding: 0 0 0 variables.$spacing--20;
+
+    &::before {
+      @include mixins.z-index(front);
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      content: '';
+      width: 0;
+      opacity: 0.1;
+      border-left: 3px solid $pimcore-gui--color;
+    }
+
+    &:hover::before {
+      opacity: 0.5;
+    }
+  }
+}
+
+.p-renderlet-info {
+  margin: variables.$spacing--10;
+}
+
+.p-monospace {
+  font-family: monospace;
+}
+
+.p-danger-zone {
+  margin: variables.$spacing--30 0;
+  padding: variables.$spacing--10;
+  border: 1px solid variables.$color-status--danger;
+  background: rgba(variables.$color-status--danger, 0.2);
+
+  &__message {
+    color: variables.$color-status--danger;
+  }
+
+  &__content {
+    margin: variables.$spacing--10 0;
+    padding: variables.$spacing--10;
+    background: variables.$color-grayscale--1000;
+  }
+}
+
+.p-message {
+  margin: variables.$spacing--10;
+  padding: variables.$spacing--10;
+  border: 1px dashed variables.$color-grayscale--400;
+  background: variables.$color-grayscale--600;
+  color: variables.$color-grayscale--200;
+  text-align: center;
+
+  &--info {
+    border-color: variables.$color-status--info;
+    background: rgba(variables.$color-status--info, 0.2);
+    color: variables.$color-status--info;
+  }
+
+  &--error {
+    border-color: variables.$color-status--danger;
+    background: rgba(variables.$color-status--danger, 0.2);
+    color: variables.$color-status--danger;
+  }
+}
+
+.p-deprecated-field {
+  margin: variables.$spacing--5 0;
+  padding: 0 variables.$spacing--5 variables.$spacing--5;
+  border: 1px solid variables.$color-status--danger;
+
+  &::before {
+    @include mixins.font-size(variables.$font-size--14);
+
+    display: block;
+    content: 'Deprecated field';
+    margin: 0 (-(variables.$spacing--5) variables.$spacing--5);
+    padding: variables.$spacing--5;
+    background: variables.$color-status--danger;
+    color: variables.$color-grayscale--1000;
+    font-weight: bold;
+  }
+
+  &[data-message]::before {
+    content: attr(data-message);
+  }
+}

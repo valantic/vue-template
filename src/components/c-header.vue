@@ -1,15 +1,14 @@
 <template>
-  <header :class="b()">
-    Header
-  </header>
+  <header :class="b()"></header>
 </template>
 
-<script>
-  export default {
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
     name: 'c-header',
 
     // components: {},
-    // mixins: [],
 
     // props: {},
     // data() {
@@ -27,16 +26,18 @@
     // updated() {},
     // activated() {},
     // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
     // methods: {},
     // render() {},
-  };
+  });
 </script>
 
 <style lang="scss">
   .c-header {
-    // ...
+    &::before { // TODO: remove
+      content: 'Header';
+    }
   }
 </style>
