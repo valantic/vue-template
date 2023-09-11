@@ -96,10 +96,10 @@
           .map((item, index) => ({
             id: index,
             isComplete: index === 5,
-            firstName: faker.name.firstName(),
-            lastName: faker.name.lastName(),
+            firstName: faker.person.firstName(),
+            lastName: faker.person.lastName(),
             birthDate: '2018-08-20 18:15:09.587786',
-            city: faker.address.city(),
+            city: faker.location.city(),
             company: faker.company.name(),
             children: 3,
           }));

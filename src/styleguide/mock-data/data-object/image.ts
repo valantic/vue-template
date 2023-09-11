@@ -13,12 +13,10 @@ export function createSrcSetImage(
   heightRatio = 1,
   sizes: number[] = Object.values(DEFAULT_IMAGE_SIZES)
 ): ImageSrcset {
-  const srcset = sizes.map(width => `${faker.image.imageUrl(
+  const srcset = sizes.map(width => `${faker.image.url({
     width,
-    Math.ceil(heightRatio * width),
-    'abstract',
-    true
-  )} ${width}w`);
+    height: Math.ceil(heightRatio * width),
+  })} ${width}w`);
 
   return {
     srcset: srcset.join(', '),
@@ -46,7 +44,7 @@ export function createSourcesImage(
 
     return {
       media: `(max-width: ${size}px)`,
-      srcset:  faker.image.imageUrl(width, Math.round(width / ratios[breakpoint]), 'abstract', true),
+      srcset:  faker.image.url({ width, height: Math.round(width / ratios[breakpoint]) }),
     };
   }).reduce((accumulator: ImageMedia, item) => {
     accumulator[item.media] = item.srcset;
@@ -57,7 +55,7 @@ export function createSourcesImage(
   return {
     media,
     alt: faker.lorem.word(),
-    fallback: faker.image.imageUrl(sizes.fallback, Math.round((sizes.fallback || 1) / ratios.fallback), 'abstract', true),
+    fallback: faker.image.url({ width: sizes.fallback, height: Math.round((sizes.fallback || 1) / ratios.fallback) }),
   };
 }
 

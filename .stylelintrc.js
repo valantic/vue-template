@@ -1,5 +1,5 @@
 module.exports = {
-  processors: ['postcss-html'],
+  customSyntax: 'postcss-html',
   extends: 'stylelint-config-valantic',
   rules: {
     'indentation': [
