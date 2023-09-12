@@ -25,58 +25,65 @@ export default {
     content: faker.lorem.paragraphs(),
   },
 };
+const template = `
+<c-modal v-model:is-open="isOpen"
+        :title="args.title"
+        :is-closable="args.isClosable"
+        :close-on-outside-click="args.closeOnOutsideClick"
+        :size="args.size"
+        :spacing="args.spacing"
+>
+  <template v-if="args.headerSlot" #head>
+    <div style="border: 1px solid blue;">
+      A custom header content
+    </div>
+  </template>
+  {{ args.content }}
+  <template v-if="args.stickyFooterSlot" #stickyFooter>
+    <e-button width="full" @click="isOpen = false">
+      Close
+    </e-button>
+  </template>
+</c-modal>
+<e-button @click="isOpen = true">
+  Open
+</e-button>
+`;
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = args => ({
-  components: {
-    eButton,
-    cModal,
-  },
+const Template = {
+  render: args => ({
+    components: {
+      eButton,
+      cModal,
+    },
 
-  setup() {
-    return { args };
-  },
-  data() {
-    return {
-      isOpen: false,
-    };
-  },
+    setup() {
+      return {
+        ...args,
+        isOpen: false,
+      };
+    },
 
-  template: `
-    <c-modal v-model:is-open="isOpen"
-             :title="args.title"
-             :is-closable="args.isClosable"
-             :close-on-outside-click="args.closeOnOutsideClick"
-             :size="args.size"
-             :spacing="args.spacing"
-    >
-      <template v-if="args.headerSlot" #head>
-        <div style="border: 1px solid blue;">
-          A custom header content
-        </div>
-      </template>
-      {{ args.content }}
-      <template v-if="args.stickyFooterSlot" #stickyFooter>
-        <e-button width="full" @click="isOpen = false">
-          Close
-        </e-button>
-      </template>
-    </c-modal>
-    <e-button @click="isOpen = true">
-      Open
-    </e-button>
-  `,
-});
-
-export const Default = Template.bind({});
-Default.args = {};
-
-export const HeaderSlot = Template.bind({});
-HeaderSlot.args = {
-  headerSlot: true,
+    template,
+  }),
 };
 
-export const StickyFooterSlot = Template.bind({});
-StickyFooterSlot.args = {
-  stickyFooterSlot: true,
+export const Default = {
+  ...Template,
+  args: {},
+};
+
+export const HeaderSlot = {
+  ...Template,
+  args: {
+    headerSlot: true,
+  },
+};
+
+export const StickyFooterSlot = {
+  ...Template,
+  args: {
+    stickyFooterSlot: true,
+  },
 };

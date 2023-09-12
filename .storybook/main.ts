@@ -1,8 +1,9 @@
 /* eslint-disable import/no-import-module-exports */
-import { UserConfig, mergeConfig, UserConfigExport } from 'vite';
+import { mergeConfig } from 'vite';
+import type { StorybookConfig } from '@storybook/vue3-vite';
 import { alias } from '../vite.config';
 
-module.exports = {
+const config: StorybookConfig = {
   stories: [ // @see https://storybook.js.org/docs/react/configure/overview#configure-story-loading
     '../src/stories/**/*.stories.mdx', // Currently not supported because of a bug in the vite builder. @see https://github.com/storybookjs/builder-vite/pull/556
     {
@@ -20,17 +21,26 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/preset-scss',
+    '@storybook/addon-mdx-gfm'
   ],
-  framework: '@storybook/vue3',
-  core: {
-    builder: '@storybook/builder-vite',
+  framework: {
+    name: '@storybook/vue3-vite',
+    options: {}
   },
   staticDirs: ['../static'],
-  async viteFinal(config: UserConfig): Promise<UserConfigExport> {
-    return mergeConfig(config, {
+  async viteFinal(viteConfig) {
+    return mergeConfig(viteConfig, {
       resolve: {
         alias,
       },
     });
   },
+  docs: {
+    autodocs: true
+  },
+  features: {
+    legacyMdx1: true, // 👈 Enables MDX v1 support
+  },
 };
+
+export default config;

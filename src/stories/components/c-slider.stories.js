@@ -4,7 +4,7 @@ import ePicture from '@/elements/e-picture.vue';
 import { createSrcSetImage } from '@/styleguide/mock-data/data-object/image';
 
 export default {
-  components: { cSlider },
+  component: cSlider,
   args: {
     autoPlay: false,
   },
@@ -38,5 +38,6 @@ const Template = args => ({
   `,
 });
 
-export const Default = Template.bind({});
-
+export const Default = {
+  render: Template,
+};
