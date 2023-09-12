@@ -17,7 +17,7 @@ const config = {
   },
 };
 
-describe('Block', () => {
+describe.only('Block', () => {
   const b = bemCn(block, config);
 
   Object.keys(blocks).forEach((item) => {

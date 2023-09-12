@@ -8,7 +8,17 @@ export const delimiters = {
   modVal: '~',
 };
 
-export const blocks = {
+type Block = {
+  block: string;
+  mods?: Record<string, boolean | string | number>;
+  mixin?: string;
+}
+
+interface Blocks {
+  [key: string]: Block;
+}
+
+export const blocks: Blocks = {
   [block]: { block },
   [`${block} ${block}--mod`]: { block, mods: { mod: true } },
   [`${block} ${block}--mod-val`]: { block, mods: { mod: 'val' } },
@@ -25,7 +35,11 @@ export const blocks = {
   [`${block} ${block}--mod mix`]: { block, mods: { mod: true }, mixin: 'mix' },
 };
 
-export const elements = {
+interface Elements extends Blocks {
+  [key: string]: Block & { el: string };
+}
+
+export const elements: Elements = {
   [`${block}__${el}`]: { block, el },
   [`${block}__${el} ${block}__${el}--mod`]: { block, el, mods: { mod: true } },
   [`${block}__${el} ${block}__${el}--mod-val`]: { block, el, mods: { mod: 'val' } },
@@ -48,7 +62,11 @@ export const elements = {
   },
 };
 
-export const delimitersTest = {
+interface DelimitersTest {
+  [key: string]: Block & { el: string };
+}
+
+export const delimitersTest: DelimitersTest = {
   [`ns**${block}++${el} ns**${block}++${el}==mod~val ns**${block}++${el}==modbool`]: {
     block: delimiters.ns + block,
     el,
