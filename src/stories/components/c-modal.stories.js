@@ -22,16 +22,17 @@ export default {
     size: 600,
     spacing: 500,
     stickyFooter: false,
-    content: faker.lorem.paragraphs(),
+    content: faker.lorem.paragraph(),
   },
 };
 const template = `
 <c-modal v-model:is-open="isOpen"
-        :title="args.title"
-        :is-closable="args.isClosable"
-        :close-on-outside-click="args.closeOnOutsideClick"
-        :size="args.size"
-        :spacing="args.spacing"
+         v-bind="args"
+         :title="args.title"
+         :is-closable="args.isClosable"
+         :close-on-outside-click="args.closeOnOutsideClick"
+         :size="args.size"
+         :spacing="args.spacing"
 >
   <template v-if="args.headerSlot" #head>
     <div style="border: 1px solid blue;">
@@ -51,38 +52,40 @@ const template = `
 `;
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = {
-  render: args => ({
-    components: {
-      eButton,
-      cModal,
-    },
+const Template = args => ({
+  components: {
+    eButton,
+    cModal,
+  },
 
-    setup() {
-      return {
-        ...args,
-        isOpen: false,
-      };
-    },
+  setup() {
+    return {
+      args,
+    };
+  },
 
-    template,
-  }),
-};
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
+
+  template,
+});
 
 export const Default = {
-  ...Template,
-  args: {},
+  render: Template,
 };
 
 export const HeaderSlot = {
-  ...Template,
+  render: Template,
   args: {
     headerSlot: true,
   },
 };
 
 export const StickyFooterSlot = {
-  ...Template,
+  render: Template,
   args: {
     stickyFooterSlot: true,
   },
