@@ -11,22 +11,24 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = args => ({
-  components: {
-    cSlider,
-    cSliderItemX,
-    ePicture,
-  },
+const Template = {
+  render: args => ({
+    components: {
+      cSlider,
+      cSliderItemX,
+      ePicture,
+    },
 
-  setup() {
-    return {
-      args,
-      images: new Array(15).fill(null).map(() => createSrcSetImage()),
-    };
-  },
+    setup() {
+      return {
+        args,
+        images: new Array(15).fill(null)
+          .map(() => createSrcSetImage()),
+      };
+    },
 
-  template: `
-    <c-slider v-bind="args">
+    template: `
+      <c-slider v-bind="args">
       <c-slider-item-x v-for="(image, index) in images" :key="index">
         <e-picture :srcset="image.srcset"
                    :fallback="image.fallback"
@@ -34,10 +36,11 @@ const Template = args => ({
                    :ratio="1"
         />
       </c-slider-item-x>
-    </c-slider>
-  `,
-});
+      </c-slider>
+    `,
+  }),
+};
 
 export const Default = {
-  render: Template,
+  ...Template,
 };

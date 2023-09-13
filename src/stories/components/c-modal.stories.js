@@ -52,40 +52,42 @@ const template = `
 `;
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = args => ({
-  components: {
-    eButton,
-    cModal,
-  },
+const Template = {
+  render: args => ({
+    components: {
+      eButton,
+      cModal,
+    },
 
-  setup() {
-    return {
-      args,
-    };
-  },
+    setup() {
+      return {
+        args,
+      };
+    },
 
-  data() {
-    return {
-      isOpen: false,
-    };
-  },
+    data() {
+      return {
+        isOpen: false,
+      };
+    },
 
-  template,
-});
+    template,
+  }),
+};
 
 export const Default = {
-  render: Template,
+  ...Template,
 };
 
 export const HeaderSlot = {
-  render: Template,
+  ...Template,
   args: {
     headerSlot: true,
   },
 };
 
 export const StickyFooterSlot = {
-  render: Template,
+  ...Template,
   args: {
     stickyFooterSlot: true,
   },

@@ -12,29 +12,31 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = args => ({
-  components: {
-    eCheckbox,
-  },
+const Template = {
+  render: args => ({
+    components: {
+      eCheckbox,
+    },
 
-  setup() {
-    return { args };
-  },
+    setup() {
+      return { args };
+    },
 
-  data() {
-    return {
-      isChecked: args.checked,
-    };
-  },
+    data() {
+      return {
+        isChecked: args.checked,
+      };
+    },
 
-  template: `
-  <e-checkbox v-model="isChecked" v-bind:bind:checked="args" :value="true" name="demo" />
+    template: `
+      <e-checkbox v-model="isChecked" v-bind:bind:checked="args" :value="true" name="demo" />
 
-  {{ isChecked }}
-`,
-});
+      {{ isChecked }}
+    `,
+  }),
+};
 
 export const Default = {
-  render: Template,
+  ...Template,
   args: {},
 };
