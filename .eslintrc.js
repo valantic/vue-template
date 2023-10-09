@@ -31,7 +31,8 @@ module.exports = {
         version: '>= 3.2',
       },
     ],
-    // Fix and enable again
+
+    // TODO: Fix and enable again
     'import/extensions': 'off',
   },
   overrides: [
@@ -50,9 +51,10 @@ module.exports = {
         jest: true, // Is required because of unit test blueprint.
       },
       rules: {
-        '@typescript-eslint/no-unused-vars': 'off',
         // Allow unused variables in blueprints.
-        '@typescript-eslint/no-empty-interface': 'off', // Allow empty interfaces in blueprints.
+        '@typescript-eslint/no-unused-vars': 'off',
+        // Allow empty interfaces in blueprints.
+        '@typescript-eslint/no-empty-interface': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
