@@ -1,13 +1,7 @@
-import {
-  Store,
-  defineStore,
-  StateTree,
-  _GettersTree,
-} from 'pinia';
+import { StateTree, Store, _GettersTree, defineStore } from 'pinia';
 import { GlobalStore } from '@/setup/globals';
 
 interface SessionState extends StateTree {
-
   /**
    * Stores the theme id.
    */
@@ -20,7 +14,6 @@ interface SessionState extends StateTree {
 }
 
 interface SessionGetters extends _GettersTree<SessionState> {
-
   /**
    * Gets the current theme id.
    */
@@ -28,7 +21,6 @@ interface SessionGetters extends _GettersTree<SessionState> {
 }
 
 interface SessionActions {
-
   /**
    * Removes a notification.
    */
@@ -37,7 +29,7 @@ interface SessionActions {
 
 export type SessionStore = Store<string, SessionState, SessionGetters, SessionActions>;
 
-const storeName = GlobalStore.SESSION;
+const storeName = GlobalStore.Session;
 
 export default defineStore<typeof storeName, SessionState, SessionGetters, SessionActions>(storeName, {
   state: (): SessionState => {

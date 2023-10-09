@@ -5,7 +5,8 @@ import { ImageSizes } from '@/types/sizes';
  *
  * Keep in sync with SCSS variables!
  */
-export const BREAKPOINTS = { // Keep in sync with SCSS variables!
+export const BREAKPOINTS = {
+  // Keep in sync with SCSS variables!
   xxs: 0,
   xs: 480,
   sm: 768,
@@ -49,14 +50,14 @@ export const S_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
   } catch (error) {
     return false;
   }
-}());
+})();
 
 /**
  * Defines possible link target values.
  */
 export enum LinkTarget {
-  SELF = '_self',
-  BLANK = '_blank',
+  Self = '_self',
+  Blank = '_blank',
   // Only add additional types if required.
 }
 
@@ -72,7 +73,7 @@ export const DEFAULT_IMAGE_SIZES: ImageSizes = {
  * Contains list of all Pinia stores.
  */
 export enum GlobalStore {
-  SESSION = 'session',
-  BREADCRUMBS = 'breadcrumbs',
-  NOTIFICATION = 'notification',
+  Session = 'Session',
+  Breadcrumbs = 'Breadcrumbs',
+  Notification = 'Notification',
 }

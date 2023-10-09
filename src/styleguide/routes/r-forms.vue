@@ -2,124 +2,155 @@
   <div :class="b()">
     <!-- Rendered form -->
     <section :class="b('form')">
-      <h1>
-        Newsletter Registration
-      </h1>
-      <form ref="formRef"
-            action="#form-url"
-            method="POST"
-            @submit.prevent="onSubmit"
+      <h1>Newsletter Registration</h1>
+      <form
+        ref="formRef"
+        action="#form-url"
+        method="POST"
+        @submit.prevent="onSubmit"
       >
         <!-- Section 1 -->
         <e-fieldset legend="Contact information">
           <e-label name="Name">
-            <e-input v-model="form.name"
-                     name="name"
-                     placeholder="Your Name"
+            <e-input
+              v-model="form.name"
+              name="name"
+              placeholder="Your Name"
             />
           </e-label>
-          <e-label name="E-Mail" required>
-            <e-input v-model="form.email"
-                     :state="v$.form.email.$error ? FieldStates.Error : FieldStates.Default"
-                     :notification="v$.form.email.$error ? '<b>No valid email address</b>' : ''"
-                     type="email"
-                     name="email"
-                     placeholder="Your E-Mail"
-                     @blur="v$.form.email.$touch()"
+          <e-label
+            name="E-Mail"
+            required
+          >
+            <e-input
+              v-model="form.email"
+              :state="v$.form.email.$error ? FieldStates.Error : FieldStates.Default"
+              :notification="v$.form.email.$error ? '<b>No valid email address</b>' : ''"
+              type="email"
+              name="email"
+              placeholder="Your E-Mail"
+              @blur="v$.form.email.$touch()"
             />
           </e-label>
-          <e-label name="Language" required>
-            <e-select v-model="form.language"
-                      :options="mock.languages"
-                      :state="v$.form.language.$error ? FieldStates.Error : FieldStates.Default"
-                      :notification="v$.form.language.$error ? 'Required field' : ''"
-                      name="language"
-                      @blur="v$.form.language.$touch()"
+          <e-label
+            name="Language"
+            required
+          >
+            <e-select
+              v-model="form.language"
+              :options="mock.languages"
+              :state="v$.form.language.$error ? FieldStates.Error : FieldStates.Default"
+              :notification="v$.form.language.$error ? 'Required field' : ''"
+              name="language"
+              @blur="v$.form.language.$touch()"
             />
           </e-label>
-          <e-label name="Business fields" required>
-            <e-multiselect v-model="form.businessFields"
-                           :options="mock.businessFields"
-                           :state="v$.form.businessFields.$error ? FieldStates.Error : FieldStates.Default"
-                           :notification="v$.form.businessFields.$error ? 'Required field' : ''"
-                           has-search
-                           @blur="v$.form.businessFields.$touch()"
+          <e-label
+            name="Business fields"
+            required
+          >
+            <e-multiselect
+              v-model="form.businessFields"
+              :options="mock.businessFields"
+              :state="v$.form.businessFields.$error ? FieldStates.Error : FieldStates.Default"
+              :notification="v$.form.businessFields.$error ? 'Required field' : ''"
+              has-search
+              @blur="v$.form.businessFields.$touch()"
             />
           </e-label>
           <e-label name="Notes">
-            <e-textarea v-model="form.notes"
-                        name="notes"
-                        placeholder="Your Notes"
+            <e-textarea
+              v-model="form.notes"
+              name="notes"
+              placeholder="Your Notes"
             />
           </e-label>
         </e-fieldset>
 
         <!-- Section 2 -->
         <e-fieldset legend="Personal interests">
-          <e-label name="Topics" tag="div">
-            <e-checkbox v-model="form.topics"
-                        value="food"
-                        name="topics"
+          <e-label
+            name="Topics"
+            tag="div"
+          >
+            <e-checkbox
+              v-model="form.topics"
+              value="food"
+              name="topics"
             >
               Food
             </e-checkbox>
-            <e-checkbox v-model="form.topics"
-                        value="technics"
-                        name="topics"
+            <e-checkbox
+              v-model="form.topics"
+              value="technics"
+              name="topics"
             >
               Technics
             </e-checkbox>
-            <e-checkbox v-model="form.topics"
-                        value="celebrities"
-                        name="topics"
+            <e-checkbox
+              v-model="form.topics"
+              value="celebrities"
+              name="topics"
             >
               Celebrities
             </e-checkbox>
-            <e-checkbox v-model="form.topics"
-                        value="garden"
-                        name="topics"
-                        variant="toggle"
+            <e-checkbox
+              v-model="form.topics"
+              value="garden"
+              name="topics"
+              variant="toggle"
             >
               Garden
             </e-checkbox>
-            <e-checkbox v-model="form.topics"
-                        value="architecture"
-                        name="topics"
-                        variant="toggle"
+            <e-checkbox
+              v-model="form.topics"
+              value="architecture"
+              name="topics"
+              variant="toggle"
             >
               Architecture
             </e-checkbox>
           </e-label>
 
-          <e-label name="Frequency of Mailing" tag="div">
-            <e-radio v-model="form.frequency"
-                     value="onceAWeek"
-                     name="frequency"
+          <e-label
+            name="Frequency of Mailing"
+            tag="div"
+          >
+            <e-radio
+              v-model="form.frequency"
+              value="onceAWeek"
+              name="frequency"
             >
               Once a week
             </e-radio>
-            <e-radio v-model="form.frequency"
-                     value="twiceAWeek"
-                     name="frequency"
+            <e-radio
+              v-model="form.frequency"
+              value="twiceAWeek"
+              name="frequency"
             >
               Twice a week
             </e-radio>
-            <e-radio v-model="form.frequency"
-                     value="onceAMonth"
-                     name="frequency"
+            <e-radio
+              v-model="form.frequency"
+              value="onceAMonth"
+              name="frequency"
             >
               Once a month
             </e-radio>
-            <e-radio v-model="form.frequency"
-                     value="twiceAMonth"
-                     name="frequency"
+            <e-radio
+              v-model="form.frequency"
+              value="twiceAMonth"
+              name="frequency"
             >
               Twice a month
             </e-radio>
           </e-label>
         </e-fieldset>
 
-        <e-button type="submit" primary>
+        <e-button
+          type="submit"
+          primary
+        >
           Submit
         </e-button>
       </form>
@@ -144,19 +175,19 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, Ref } from 'vue';
   import useVuelidate, { Validation } from '@vuelidate/core';
-  import { required, email } from '@vuelidate/validators';
-  import eFieldset from '@/elements/e-fieldset.vue';
-  import eMultiselect from '@/elements/e-multiselect.vue';
-  import eLabel from '@/elements/e-label.vue';
-  import eInput from '@/elements/e-input.vue';
-  import eSelect from '@/elements/e-select.vue';
-  import eRadio from '@/elements/e-radio.vue';
-  import eCheckbox from '@/elements/e-checkbox.vue';
-  import eTextarea from '@/elements/e-textarea.vue';
+  import { email, required } from '@vuelidate/validators';
+  import { Ref, defineComponent, ref } from 'vue';
+  import { FieldState } from '@/compositions/form-states';
   import eButton from '@/elements/e-button.vue';
-  import { FieldStates } from '@/compositions/form-states';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eFieldset from '@/elements/e-fieldset.vue';
+  import eInput from '@/elements/e-input.vue';
+  import eLabel from '@/elements/e-label.vue';
+  import eMultiselect from '@/elements/e-multiselect.vue';
+  import eRadio from '@/elements/e-radio.vue';
+  import eSelect from '@/elements/e-select.vue';
+  import eTextarea from '@/elements/e-textarea.vue';
 
   interface SelectItem {
     label: string;
@@ -166,7 +197,7 @@
   interface Setup {
     v$: Ref<Validation>;
     formRef: Ref<HTMLFormElement | null>;
-    FieldStates: typeof FieldStates;
+    FieldStates: typeof FieldState;
   }
 
   interface Data {
@@ -207,7 +238,7 @@
         // eslint-disable-next-line id-length
         v$: useVuelidate(),
         formRef,
-        FieldStates,
+        FieldStates: FieldState,
       };
     },
 

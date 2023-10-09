@@ -1,9 +1,4 @@
-import {
-  Store,
-  defineStore,
-  StateTree,
-  _GettersTree,
-} from 'pinia';
+import { StateTree, Store, _GettersTree, defineStore } from 'pinia';
 import { GlobalStore } from '@/setup/globals';
 
 export interface BreadcrumbItem {
@@ -12,7 +7,6 @@ export interface BreadcrumbItem {
 }
 
 interface BreadcrumbState extends StateTree {
-
   /**
    * Holds the breadcrumb items.
    */
@@ -20,7 +14,6 @@ interface BreadcrumbState extends StateTree {
 }
 
 interface BreadcrumbGetters extends _GettersTree<BreadcrumbState> {
-
   /**
    * Gets the list of current breadcrumb items.
    */
@@ -28,7 +21,6 @@ interface BreadcrumbGetters extends _GettersTree<BreadcrumbState> {
 }
 
 interface BreadcrumbActions {
-
   /**
    * Sets the list of breadcrumbs in the state.
    */
@@ -38,14 +30,13 @@ interface BreadcrumbActions {
 export type BreadcrumbStore = Store<string, BreadcrumbState, BreadcrumbGetters, BreadcrumbActions>;
 
 interface InitialStoreDate {
-
   /**
    * Holds the initial breadcrumb items.
    */
   items?: BreadcrumbItem[];
 }
 
-const storeName = GlobalStore.BREADCRUMBS;
+const storeName = GlobalStore.Breadcrumbs;
 
 export default defineStore<typeof storeName, BreadcrumbState, BreadcrumbGetters, BreadcrumbActions>(storeName, {
   state: (): BreadcrumbState => {
@@ -56,8 +47,7 @@ export default defineStore<typeof storeName, BreadcrumbState, BreadcrumbGetters,
     };
 
     if (import.meta.env.DEV) {
-      const breadcrumbsModule = import.meta
-        .glob('@/styleguide/mock-data/initial-data/breadcrumbs', { eager: true });
+      const breadcrumbsModule = import.meta.glob('@/styleguide/mock-data/initial-data/breadcrumbs', { eager: true });
 
       state.items = breadcrumbsModule['@/styleguide/mock-data/initial-data/breadcrumbs'] as BreadcrumbItem[];
     }

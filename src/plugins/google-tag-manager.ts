@@ -1,8 +1,8 @@
 import { Plugin } from 'vue';
 
-enum GaListNames {
-  CATALOG = 'Catalog',
-  SEARCH_RESULTS = 'Search results',
+enum GaListName {
+  Catalog = 'Catalog',
+  SearchResults = 'Search results',
   // .. Add additional lists
 }
 
@@ -45,17 +45,17 @@ interface AddShippingInfoPayload {
 
 export interface Gtm {
   push(payload: Record<string, unknown>): void;
-  pushAddToCart(item: ListItem, list: GaListNames): void;
+  pushAddToCart(item: ListItem, list: GaListName): void;
   pushLogin(): void;
   pushSignUp(): void;
   pushSearch(searchTerm: string): void;
-  pushViewItemList(items: ListItem[], list: GaListNames): void;
+  pushViewItemList(items: ListItem[], list: GaListName): void;
   pushViewItem(item: ListItem): void;
   pushViewCart(items: ListItem[], value: number, currency: string): void;
   pushRemoveFromCart(items: ListItem): void;
   pushAddToWishlist(item: ListItem): void;
   pushBeginCheckout(items: ListItem[], value: number, currency: string): void;
-  pushSelectItem(item: ListItem, list: GaListNames): void;
+  pushSelectItem(item: ListItem, list: GaListName): void;
   pushPurchase(payload: PurchasePayload): void;
   pushAddPaymentInfo(payload: AddPaymentInfoPayload): void;
   pushAddShippingInfo(payload: AddShippingInfoPayload): void;
@@ -64,7 +64,9 @@ export interface Gtm {
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  interface Window { dataLayer: Record<string, unknown>[] }
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+  }
 }
 
 /**
@@ -216,7 +218,7 @@ const plugin: Plugin = {
       /**
        * Pushes `view_item_list`-event to the dataLayer.
        */
-      pushViewItemList(items: ListItem[], list: GaListNames) {
+      pushViewItemList(items: ListItem[], list: GaListName) {
         push({
           event: 'view_item_list',
           ecommerce: {
@@ -233,7 +235,7 @@ const plugin: Plugin = {
       /**
        * Pushes `select_item`-event to the dataLayer.
        */
-      pushSelectItem(item: ListItem, list: GaListNames) {
+      pushSelectItem(item: ListItem, list: GaListName) {
         push({
           event: 'select_item',
           ecommerce: {
@@ -276,15 +278,17 @@ const plugin: Plugin = {
       /**
        * Pushes `add_to_cart`-event to the dataLayer.
        */
-      pushAddToCart(item: ListItem, list: GaListNames) {
+      pushAddToCart(item: ListItem, list: GaListName) {
         push({
           event: 'add_to_cart',
           ecommerce: {
             currency: item.currency,
-            items: [{
-              ...item,
-              item_list_name: list,
-            }],
+            items: [
+              {
+                ...item,
+                item_list_name: list,
+              },
+            ],
           },
         });
       },
