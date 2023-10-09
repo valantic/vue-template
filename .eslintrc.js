@@ -11,11 +11,7 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: [
-    'valantic/vue3',
-    '@vue/typescript',
-    'plugin:storybook/recommended',
-  ],
+  extends: ['valantic/vue3', '@vue/typescript', 'plugin:storybook/recommended', 'valantic/prettier-vue'],
   // Uses eslint-import-resolver-webpack
   settings: {
     'import/resolver': {
@@ -29,63 +25,78 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
-    'vue/no-unsupported-features': ['error', {
-      version: '>= 3.2',
-    }],
+    'vue/no-unsupported-features': [
+      'error',
+      {
+        version: '>= 3.2',
+      },
+    ],
     // Fix and enable again
     'import/extensions': 'off',
     'vue/require-emit-validator': 'off',
-    '@typescript-eslint/no-empty-interface': ['error', {
-      allowSingleExtends: true,
-    }],
-    '@typescript-eslint/explicit-function-return-type': ['error', {
-      allowTypedFunctionExpressions: true,
-    }],
+    '@typescript-eslint/no-empty-interface': [
+      'error',
+      {
+        allowSingleExtends: true,
+      },
+    ],
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
+      {
+        allowTypedFunctionExpressions: true,
+      },
+    ],
     // TODO: move to eslint-config-valantic
-    '@typescript-eslint/member-delimiter-style': ['error', {
-      multiline: {
-        delimiter: 'semi',
-        requireLast: true,
+    '@typescript-eslint/member-delimiter-style': [
+      'error',
+      {
+        multiline: {
+          delimiter: 'semi',
+          requireLast: true,
+        },
+        singleline: {
+          delimiter: 'semi',
+          requireLast: false,
+        },
+        multilineDetection: 'last-member',
       },
-      singleline: {
-        delimiter: 'semi',
-        requireLast: false,
-      },
-      multilineDetection: 'last-member',
-    }],
+    ],
   },
-  overrides: [{
-    files: ['tests/**/*.*'],
-    env: {
-      jest: true,
+  overrides: [
+    {
+      files: ['tests/**/*.*'],
+      env: {
+        jest: true,
+      },
+      rules: {
+        'vue/require-name-property': 'off',
+      },
     },
-    rules: {
-      'vue/require-name-property': 'off',
+    {
+      files: ['blueprints/**/*.*'],
+      env: {
+        jest: true, // Is required because of unit test blueprint.
+      },
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off',
+        // Allow unused variables in blueprints.
+        '@typescript-eslint/no-empty-interface': 'off', // Allow empty interfaces in blueprints.
+        '@typescript-eslint/explicit-function-return-type': 'off',
+      },
     },
-  }, {
-    files: ['blueprints/**/*.*'],
-    env: {
-      jest: true, // Is required because of unit test blueprint.
-
+    {
+      files: ['src/styleguide/**/*.*'],
+      rules: {
+        'vue/no-bare-strings-in-template': 'off',
+        'vue/multi-word-component-names': 'off',
+        'vue/match-component-file-name': 'off',
+      },
     },
-    rules: {
-      '@typescript-eslint/no-unused-vars': 'off',
-      // Allow unused variables in blueprints.
-      '@typescript-eslint/no-empty-interface': 'off', // Allow empty interfaces in blueprints.
-      '@typescript-eslint/explicit-function-return-type': 'off',
-
+    {
+      files: ['src/stories/**/*.*'],
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': 'off',
+      },
     },
-  }, {
-    files: ['src/styleguide/**/*.*'],
-    rules: {
-      'vue/no-bare-strings-in-template': 'off',
-      'vue/multi-word-component-names': 'off',
-      'vue/match-component-file-name': 'off',
-    },
-  }, {
-    files: ['src/stories/**/*.*'],
-    rules: {
-      '@typescript-eslint/explicit-function-return-type': 'off',
-    },
-  }],
+  ],
 };
