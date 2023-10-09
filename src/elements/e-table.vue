@@ -1,9 +1,10 @@
 <template>
-  <table :class="b({ enableRowLinks, hasRowLinks: !!rowLink?.href })"
-         :style="{ '--e-table--toggle-row-height': `${toggleButtonHeight}px` }"
-         @contextmenu.capture="onContextMenu"
-         @mousedown.capture="onMouseDown"
-         @mouseup="onMouseUp($event)"
+  <table
+    :class="b({ enableRowLinks, hasRowLinks: !!rowLink?.href })"
+    :style="{ '--e-table--toggle-row-height': `${toggleButtonHeight}px` }"
+    @contextmenu.capture="onContextMenu"
+    @mousedown.capture="onMouseDown"
+    @mouseup="onMouseUp($event)"
   >
     <!-- @slot Allows to display a customized header row. -->
     <slot
@@ -12,14 +13,16 @@
       :sort-ascending="sortAscending"
       name="header"
     >
-      <tr v-if="isMobile"
-          :class="b('toggle-row')"
+      <tr
+        v-if="isMobile"
+        :class="b('toggle-row')"
       >
         <th :colspan="colspan">
-          <button ref="toggleButton"
-                  :class="b('toggle')"
-                  type="button"
-                  @click.prevent="toggleSortingOptions"
+          <button
+            ref="toggleButton"
+            :class="b('toggle')"
+            type="button"
+            @click.prevent="toggleSortingOptions"
           >
             {{ $t('e-table.toggleSortingOptions') }}
           </button>
@@ -27,15 +30,17 @@
       </tr>
       <tr :class="b('header-row')">
         <template v-if="showSortingOptions">
-          <th v-if="selectable"
-              :class="b('header-cell', { selectColumn: true })"
+          <th
+            v-if="selectable"
+            :class="b('header-cell', { selectColumn: true })"
           >
-            <e-checkbox v-model="toggleAllValue"
-                        :disabled="disabled"
-                        value="0"
-                        name="total"
+            <e-checkbox
+              v-model="toggleAllValue"
+              :disabled="disabled"
+              value="0"
+              name="total"
             >
-              <span :class="{ invisible : !showSortingOptions || !isMobile }">
+              <span :class="{ invisible: !showSortingOptions || !isMobile }">
                 {{ selectedInternal.length ? $t('e-table.deselectAll') : $t('e-table.selectAll') }}
               </span>
             </e-checkbox>
@@ -57,21 +62,26 @@
                 <!-- Adding the support for functions was needed, to allow the use of translations in the header row -->
                 {{ typeof column.title === 'function' ? column.title() : column.title }}
               </span>
-              <e-icon icon="i-arrow--down"
-                      width="16"
-                      height="16"
-                      inline
+              <e-icon
+                icon="i-arrow--down"
+                width="16"
+                height="16"
+                inline
               />
             </button>
-            <span v-else :class="[b('sort-label'), { invisible: !$viewport.isMd || !isHeaderLabelVisible(column) }]">
+            <span
+              v-else
+              :class="[b('sort-label'), { invisible: !$viewport.isMd || !isHeaderLabelVisible(column) }]"
+            >
               <!-- Adding the support for functions was needed, to allow the use of translations in the header row -->
               {{ typeof column.title === 'function' ? column.title() : column.title }}
             </span>
           </th>
         </template>
 
-        <th v-if="hasDetailRows"
-            :class="b('header-cell', { hidden: true })"
+        <th
+          v-if="hasDetailRows"
+          :class="b('header-cell', { hidden: true })"
         >
           <span class="invisible">
             {{ $t('e-table.showDetailsHeader') }}
@@ -79,19 +89,23 @@
         </th>
       </tr>
     </slot>
-    <template v-for="(item, itemIndex) in itemsSorted" :key="itemIndex">
-
+    <template
+      v-for="(item, itemIndex) in itemsSorted"
+      :key="itemIndex"
+    >
       <tr :class="b('data-row', { disabled: item.disabled })">
-        <td v-if="selectable"
-            :class="b('data-cell')"
+        <td
+          v-if="selectable"
+          :class="b('data-cell')"
         >
           <div :class="b('select-column')">
-            <e-checkbox v-model="selectedInternal"
-                        :value="item[itemIdentifier]"
-                        :name="`e-table__selection--${uuid}`"
-                        :disabled="disabled"
+            <e-checkbox
+              v-model="selectedInternal"
+              :value="item[itemIdentifier]"
+              :name="`e-table__selection--${uuid}`"
+              :disabled="disabled"
             >
-              <span :class="{ invisible : !isMobile }">
+              <span :class="{ invisible: !isMobile }">
                 {{ $t('e-table.selectItem') }}
               </span>
             </e-checkbox>
@@ -104,18 +118,20 @@
           :data-label="columnTitle(column)"
           @click="column.onClick || rowLink?.href ? onCellClick(item, column, $event) : null"
         >
-          <a v-if="!column.onClick && typeof rowLink?.href === 'function'"
-             :class="b('cell-link')"
-             :href="rowLink.href(item) || '#'"
-             :title="rowTitle(item)"
-             tabindex="-1"
+          <a
+            v-if="!column.onClick && typeof rowLink?.href === 'function'"
+            :class="b('cell-link')"
+            :href="rowLink.href(item) || '#'"
+            :title="rowTitle(item)"
+            tabindex="-1"
           ></a>
 
           <!-- @slot The default 'date' cell formatting for the project. Can be overwritten by a locale <template #date> -->
-          <slot v-if="column.slotName === 'date'"
-                :item="item"
-                :column="column"
-                name="date"
+          <slot
+            v-if="column.slotName === 'date'"
+            :item="item"
+            :column="column"
+            name="date"
           >
             {{ $dayjs(item[column.key]).format('DD.MM.YYYY') }}
           </slot>
@@ -130,39 +146,48 @@
           </slot>
         </td>
 
-        <td v-if="hasDetailRows"
-            :class="b('data-cell', { detailToggle: true })"
-            :data-label="$t('e-table.showDetailsHeader')"
-            @click.self="onDetailToggleClick(item)"
+        <td
+          v-if="hasDetailRows"
+          :class="b('data-cell', { detailToggle: true })"
+          :data-label="$t('e-table.showDetailsHeader')"
+          @click.self="onDetailToggleClick(item)"
         >
           <label :class="b('detail-toggle-label')">
-            <input v-model="expandedRowsComputed"
-                   :class="b('detail-toggle-input')"
-                   :value="item[itemIdentifier]"
-                   type="checkbox"
-                   name="details"
-            >
-            <e-icon :class="b('detail-toggle-icon')"
-                    icon="i-arrow--down"
-                    :alt="$t('e-table.showDetailsHeader')"
+            <input
+              v-model="expandedRowsComputed"
+              :class="b('detail-toggle-input')"
+              :value="item[itemIdentifier]"
+              type="checkbox"
+              name="details"
+            />
+            <e-icon
+              :class="b('detail-toggle-icon')"
+              icon="i-arrow--down"
+              :alt="$t('e-table.showDetailsHeader')"
             />
           </label>
         </td>
       </tr>
-      <tr v-if="hasDetailRows && expandedRows.includes(item)"
-          :key="`detail--${itemIndex}`"
-          :class="b('detail-row')"
+      <tr
+        v-if="hasDetailRows && expandedRows.includes(item)"
+        :key="`detail--${itemIndex}`"
+        :class="b('detail-row')"
       >
         <td :colspan="colspan">
           <!-- @slot Slot can be used to show detail information for a row. -->
-          <slot name="detailRow"
-                :item="item"
+          <slot
+            name="detailRow"
+            :item="item"
           ></slot>
         </td>
       </tr>
     </template>
     <!-- @slot Allows to display a customized 'no results' row. -->
-    <slot v-if="!itemsSorted.length" name="noResults" :columns="columns">
+    <slot
+      v-if="!itemsSorted.length"
+      name="noResults"
+      :columns="columns"
+    >
       <tr>
         <td
           :colspan="columns.length"
@@ -178,7 +203,10 @@
           :colspan="colspan"
           :class="b('footer-cell')"
         >
-          <slot name="footer" :columns="columns"></slot>
+          <slot
+            name="footer"
+            :columns="columns"
+          ></slot>
         </td>
       </tr>
     </tfoot>
@@ -186,15 +214,10 @@
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    PropType,
-    Ref,
-    ref,
-  } from 'vue';
-  import eIcon from '@/elements/e-icon.vue';
-  import eCheckbox from '@/elements/e-checkbox.vue';
+  import { PropType, Ref, defineComponent, ref } from 'vue';
   import useUuid, { Uuid } from '@/compositions/uuid';
+  import eCheckbox from '@/elements/e-checkbox.vue';
+  import eIcon from '@/elements/e-icon.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   type ItemId = number | string;
@@ -226,7 +249,6 @@
   }
 
   interface Data {
-
     /**
      * Holds a flag if sorting options are visible
      */
@@ -379,7 +401,7 @@
           if (this.selectedInternal.length) {
             this.selectedInternal = [];
           } else {
-            this.selectedInternal = this.items.map(item => item[this.itemIdentifier] as ItemId);
+            this.selectedInternal = this.items.map((item) => item[this.itemIdentifier] as ItemId);
           }
         },
       },
@@ -396,10 +418,13 @@
        */
       selectedInternal: {
         get(): ItemId[] {
-          return this.selected.map(item => item[this.itemIdentifier] as ItemId);
+          return this.selected.map((item) => item[this.itemIdentifier] as ItemId);
         },
         set(itemIds: ItemId[]): void {
-          this.$emit('update:selected', this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as ItemId)));
+          this.$emit(
+            'update:selected',
+            this.items.filter((item) => itemIds.includes(item[this.itemIdentifier] as ItemId)),
+          );
         },
       },
 
@@ -408,10 +433,10 @@
        */
       expandedRowsComputed: {
         get(): ItemId[] {
-          return this.expandedRows.map(item => item[this.itemIdentifier] as ItemId);
+          return this.expandedRows.map((item) => item[this.itemIdentifier] as ItemId);
         },
         set(itemIds: ItemId[]) {
-          this.expandedRows = this.items.filter(item => itemIds.includes(item[this.itemIdentifier] as ItemId));
+          this.expandedRows = this.items.filter((item) => itemIds.includes(item[this.itemIdentifier] as ItemId));
         },
       },
 
@@ -423,9 +448,7 @@
         const items = this.items.slice();
 
         if (sortBy) {
-          const sort = typeof sortBy?.sort === 'function'
-            ? sortBy.sort
-            : this.sortByFieldConstructor(sortBy.key);
+          const sort = typeof sortBy?.sort === 'function' ? sortBy.sort : this.sortByFieldConstructor(sortBy.key);
 
           items.sort(sort);
         }
@@ -630,7 +653,7 @@
               return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true }); // eslint-disable-line no-undefined, no-extra-parens
 
             case typeof aValue === 'number':
-              return aValue as number > (bValue as number) ? 1 : -1; // eslint-disable-line no-extra-parens
+              return (aValue as number) > (bValue as number) ? 1 : -1; // eslint-disable-line no-extra-parens
 
             case typeof aValue === 'boolean':
               return !aValue ? 1 : -1;
@@ -648,7 +671,8 @@
        * Enables the row link for a few ms to allow link specific context menus.
        */
       enableRowLink(): void {
-        if (this.rowLink?.href && !this.hasSelection) { // It was not possible to test for rowHref when binding the event in the template.
+        if (this.rowLink?.href && !this.hasSelection) {
+          // It was not possible to test for rowHref when binding the event in the template.
           this.enableRowLinks = true;
 
           setTimeout(() => {
@@ -660,14 +684,16 @@
       /**
        * Callback for the tables mousedown event.
        */
-      onMouseDown() { // All browsers
+      onMouseDown() {
+        // All browsers
         this.hasSelection = !!window.getSelection()?.toString();
       },
 
       /**
        * Callback for the tables contextmenu event.
        */
-      onContextMenu() { // Chromium, webkit: mousedown, contextmenu
+      onContextMenu() {
+        // Chromium, webkit: mousedown, contextmenu
         this.enableRowLink();
 
         setTimeout(() => {
@@ -678,7 +704,8 @@
       /**
        * Callback for the tables mouseup event.
        */
-      onMouseUp(event: MouseEvent): void { // FF: mousedown, mouseup, contextmenu
+      onMouseUp(event: MouseEvent): void {
+        // FF: mousedown, mouseup, contextmenu
         if (!this.enableRowLinks) {
           // Firefox marks a cells content when holding ctrl/meta while clicking it.
           this.hasSelection = !(event.ctrlKey || event.metaKey) && !!window.getSelection()?.toString();
@@ -691,7 +718,8 @@
        * Callback for clicks within a row.
        */
       onCellClick(item: TableItem, column: TableColumn, event: MouseEvent): void {
-        if (this.hasSelection) { // Cancel cell action if a text selection is active.
+        if (this.hasSelection) {
+          // Cancel cell action if a text selection is active.
           return;
         }
 
@@ -725,7 +753,7 @@
         const expandedRows = this.expandedRowsComputed.slice();
 
         if (expandedRows.includes(id)) {
-          this.expandedRowsComputed = expandedRows.filter(itemId => itemId !== id);
+          this.expandedRowsComputed = expandedRows.filter((itemId) => itemId !== id);
         } else {
           expandedRows.push(id);
 
@@ -970,10 +998,7 @@
 
     &__cell-link {
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       display: block;
       pointer-events: none;
     }

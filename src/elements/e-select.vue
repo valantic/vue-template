@@ -1,34 +1,44 @@
 <template>
   <span :class="b(modifiers)">
-    <select :value="internalValue"
-            :class="b('select')"
-            :disabled="disabled || progress"
-            v-bind="$attrs"
-            @change="onChange"
-            @mouseenter="hover = true"
-            @mouseleave="hover = false"
+    <select
+      :value="internalValue"
+      :class="b('select')"
+      :disabled="disabled || progress"
+      v-bind="$attrs"
+      @change="onChange"
+      @mouseenter="hover = true"
+      @mouseleave="hover = false"
     >
-      <option v-if="placeholder"
-              :disabled="!hasSelectablePlaceholder"
-              value=""
+      <option
+        v-if="placeholder"
+        :disabled="!hasSelectablePlaceholder"
+        value=""
       >
         {{ placeholder }}
       </option>
-      <option v-for="option in options"
-              :key="`${option[valueField]}`"
-              :value="option[valueField]"
-              :selected="option[valueField] === internalValue"
+      <option
+        v-for="option in options"
+        :key="`${option[valueField]}`"
+        :value="option[valueField]"
+        :selected="option[valueField] === internalValue"
       >
         {{ option[labelField] }}
       </option>
     </select>
     <span :class="b('icon-wrapper')">
-      <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
-      <e-icon v-if="!hasDefaultState && !focus"
-              :class="b('state-icon')"
-              :icon="stateIcon"
+      <span
+        v-if="!hasDefaultState"
+        :class="b('icon-splitter')"
+      ></span>
+      <e-icon
+        v-if="!hasDefaultState && !focus"
+        :class="b('state-icon')"
+        :icon="stateIcon"
       />
-      <span v-if="progress" :class="b('progress-container')">
+      <span
+        v-if="progress"
+        :class="b('progress-container')"
+      >
         <e-progress />
       </span>
     </span>
@@ -36,12 +46,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, toRefs } from 'vue';
+  import { PropType, defineComponent, toRefs } from 'vue';
   import i18n from '@/setup/i18n';
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
-  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   interface Data {
     internalValue: string;
@@ -127,7 +137,9 @@
       },
     },
 
-    emits: ['update:modelValue'],
+    emits: {
+      'update:modelValue': (value: string): boolean => typeof value === 'string',
+    },
 
     setup(props): FormStates {
       return {
@@ -282,12 +294,7 @@
 
     &--state-success {
       #{$this}__select {
-        @include mixins.icon(
-            check,
-            22px,
-            right 5px center,
-            false
-        ); // FF does not support mask on <select>.
+        @include mixins.icon(check, 22px, right 5px center, false); // FF does not support mask on <select>.
       }
 
       #{$this}__icon-splitter {

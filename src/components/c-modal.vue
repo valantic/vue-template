@@ -1,25 +1,43 @@
 <template>
-  <Transition name="c-modal--fade-animation"
-              @after-enter="onAfterEnter"
-              @after-leave="onAfterLeave"
+  <Transition
+    name="c-modal--fade-animation"
+    @after-enter="onAfterEnter"
+    @after-leave="onAfterLeave"
   >
-    <dialog v-if="isOpen"
-            :class="b(modifiers)"
+    <dialog
+      v-if="isOpen"
+      :class="b(modifiers)"
     >
-      <div v-outside-click="onOutsideClick" :class="b('inner')">
-        <div v-if="$slots.head || title || isClosable" :class="b('header')">
+      <div
+        v-outside-click="onOutsideClick"
+        :class="b('inner')"
+      >
+        <div
+          v-if="$slots.head || title || isClosable"
+          :class="b('header')"
+        >
           <div :class="b('header-inner')">
-            <slot name="head" :close="close">
-              <h2 v-if="title" :class="b('title')">
+            <slot
+              name="head"
+              :close="close"
+            >
+              <h2
+                v-if="title"
+                :class="b('title')"
+              >
                 {{ title }}
               </h2>
-              <button v-if="isClosable"
-                      :aria-label="$t('c-modal.buttonClose')"
-                      :class="b('button-close')"
-                      type="button"
-                      @click="close"
+              <button
+                v-if="isClosable"
+                :aria-label="$t('c-modal.buttonClose')"
+                :class="b('button-close')"
+                type="button"
+                @click="close"
               >
-                <e-icon icon="i-close" size="30" />
+                <e-icon
+                  icon="i-close"
+                  size="30"
+                />
               </button>
             </slot>
           </div>
@@ -27,7 +45,10 @@
         <div :class="b('content')">
           <slot></slot>
         </div>
-        <div v-if="$slots.stickyFooter" :class="b('sticky-footer')">
+        <div
+          v-if="$slots.stickyFooter"
+          :class="b('sticky-footer')"
+        >
           <slot name="stickyFooter"></slot>
         </div>
       </div>
@@ -36,11 +57,11 @@
 </template>
 
 <script lang="ts">
-  import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+  import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
   import { defineComponent } from 'vue';
+  import eIcon from '@/elements/e-icon.vue';
   import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import eIcon from '@/elements/e-icon.vue';
 
   // interface Setup {}
 
@@ -94,27 +115,19 @@
        *
        * Valid values: `[600, 700, 800]`
        */
-      size: propScale(600, [
-        600,
-        700,
-        800,
-      ]),
+      size: propScale(600, [600, 700, 800]),
 
       /**
        * Allows modifying the inner spacing of the modal.
        *
        * Valid values: `[0, 300, 500]`
        */
-      spacing: propScale(500, [
-        0,
-        300,
-        500,
-      ]),
+      spacing: propScale(500, [0, 300, 500]),
     },
     emits: {
       'update:isOpen': (state: unknown): boolean => typeof state === 'boolean',
-      'open': null,
-      'close': null,
+      open: (): boolean => true,
+      close: (): boolean => true,
     },
 
     // setup(): Setup {},
@@ -134,7 +147,6 @@
       },
     },
     watch: {
-
       /**
        * Triggers opening/closing modal.
        */

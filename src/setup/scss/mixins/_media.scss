@@ -49,6 +49,7 @@
       }
     }
 
+    // stylelint-disable-next-line media-query-no-invalid
     @media #{$query} {
       @content;
     }

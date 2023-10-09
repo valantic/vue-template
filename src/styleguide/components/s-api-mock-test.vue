@@ -1,48 +1,37 @@
 <template>
   <div :class="b()">
     <div :class="b('header')">
-      <h2 :class="b('title')">
-        Mock API Endpoint Handlers
-      </h2>
+      <h2 :class="b('title')">Mock API Endpoint Handlers</h2>
       <div :class="b('header-actions')">
-        <input v-model="search"
-               type="text"
-               name="search"
-               placeholder="Search"
-        >
-        <e-button @click="reset">
-          Reset all
-        </e-button>
+        <input
+          v-model="search"
+          type="text"
+          name="search"
+          placeholder="Search"
+        />
+        <e-button @click="reset"> Reset all </e-button>
       </div>
     </div>
-    <div v-if="!filteredEndpoints.length">
-      No handlers found.
-    </div>
-    <div v-else :class="b('table-wrapper')">
+    <div v-if="!filteredEndpoints.length">No handlers found.</div>
+    <div
+      v-else
+      :class="b('table-wrapper')"
+    >
       <table :class="b('table')">
         <thead>
           <tr>
-            <th>
-              Method
-            </th>
-            <th>
-              Path
-            </th>
-            <th>
-              Debug Mode
-            </th>
-            <th>
-              Status
-            </th>
-            <th style="width: 100%;">
-              Response body (JSON)
-            </th>
+            <th>Method</th>
+            <th>Path</th>
+            <th>Debug Mode</th>
+            <th>Status</th>
+            <th style="width: 100%">Response body (JSON)</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(endpoint, index) in filteredEndpoints"
-              :key="index"
-              :class="b('row', { debugMode: configurations[endpoint.header].enabled })"
+          <tr
+            v-for="(endpoint, index) in filteredEndpoints"
+            :key="index"
+            :class="b('row', { debugMode: configurations[endpoint.header].enabled })"
           >
             <td>
               {{ endpoint.method }}
@@ -51,22 +40,25 @@
               {{ endpoint.path }}
             </td>
             <td>
-              <e-checkbox v-model="configurations[endpoint.header].enabled"
-                          name="debug-mode-enabled"
-                          value
+              <e-checkbox
+                v-model="configurations[endpoint.header].enabled"
+                name="debug-mode-enabled"
+                value
               />
             </td>
             <td>
-              <e-select v-model="configurations[endpoint.header].status"
-                        :options="statusOptions"
-                        name="status"
+              <e-select
+                v-model="configurations[endpoint.header].status"
+                :options="statusOptions"
+                name="status"
               />
             </td>
             <td>
-              <input v-model="configurations[endpoint.header].response"
-                     type="text"
-                     name="response"
-              >
+              <input
+                v-model="configurations[endpoint.header].response"
+                type="text"
+                name="response"
+              />
             </td>
           </tr>
         </tbody>
@@ -76,15 +68,11 @@
 </template>
 
 <script lang="ts">
+  import { RequestHandler, ResponseResolver, rest } from 'msw';
   import { defineComponent } from 'vue';
-  import {
-    RequestHandler,
-    ResponseResolver,
-    rest,
-  } from 'msw';
-  import mockWorker from '@/styleguide/api/browser';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eSelect from '@/elements/e-select.vue';
+  import mockWorker from '@/styleguide/api/browser';
 
   interface DebugConfiguration {
     header: string;
@@ -125,7 +113,7 @@
 
     // props: {},
     emits: {
-      close: null,
+      close: (): boolean => true,
     },
 
     setup(): Setup {
@@ -169,7 +157,7 @@
           return [];
         }
 
-        return handlers.map(handler => handler.info) as Endpoint[];
+        return handlers.map((handler) => handler.info) as Endpoint[];
       },
 
       /**
@@ -182,7 +170,7 @@
           return mappedEndpoints;
         }
 
-        return mappedEndpoints.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase()));
+        return mappedEndpoints.filter((endpoint) => endpoint.header.toLowerCase().includes(search.toLowerCase()));
       },
     },
     watch: {
@@ -261,7 +249,7 @@
        */
       setupHandlers(): void {
         const handlers = Object.values(this.configurations)
-          .filter(configuration => configuration.enabled)
+          .filter((configuration) => configuration.enabled)
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
 
@@ -273,10 +261,9 @@
               // Do nothing
             }
 
-            const resolver: ResponseResolver = (req, res, ctx: any) => res( // eslint-disable-line @typescript-eslint/no-explicit-any
-              ctx.status(parseInt(configuration.status, 10)),
-              response ? ctx.json(response) : null
-            );
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const resolver: ResponseResolver = (req, res, ctx: any) =>
+              res(ctx.status(parseInt(configuration.status, 10)), response ? ctx.json(response) : null);
 
             switch (method) {
               case 'GET':
@@ -298,7 +285,8 @@
             }
 
             return null;
-          }).filter(Boolean) as RequestHandler[];
+          })
+          .filter(Boolean) as RequestHandler[];
 
         mockWorker.resetHandlers();
         mockWorker.use(...handlers);
@@ -360,7 +348,7 @@
       }
 
       td,
-      th, {
+      th {
         padding: variables.$spacing--10;
         white-space: nowrap;
 
@@ -383,7 +371,7 @@
     }
 
     input,
-    select, {
+    select {
       height: 30px;
       border: 1px solid variables.$color-grayscale--0;
       border-radius: 0;

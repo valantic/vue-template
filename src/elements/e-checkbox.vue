@@ -1,19 +1,21 @@
 <template>
-  <label :class="b(modifiers)"
-         @mouseenter="hover = true"
-         @mouseleave="hover = false"
+  <label
+    :class="b(modifiers)"
+    @mouseenter="hover = true"
+    @mouseleave="hover = false"
   >
-    <input v-model="internalValue"
-           v-bind="$attrs"
-           :class="b('field')"
-           :aria-checked="isChecked ? 'true' : 'false'"
-           :disabled="disabled"
-           :value="value"
-           :name="name"
-           type="checkbox"
-           @blur="onBlur"
-           @focus="onFocus"
-    >
+    <input
+      v-model="internalValue"
+      v-bind="$attrs"
+      :class="b('field')"
+      :aria-checked="isChecked ? 'true' : 'false'"
+      :disabled="disabled"
+      :value="value"
+      :name="name"
+      type="checkbox"
+      @blur="onBlur"
+      @focus="onFocus"
+    />
     <span :class="b('indicator')"></span>
     <span :class="b('label-text')">
       <slot></slot>
@@ -22,7 +24,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, toRefs } from 'vue';
+  import { PropType, defineComponent, toRefs } from 'vue';
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
@@ -68,14 +70,16 @@
       variant: {
         type: String,
         default: 'default',
-        validator: (value: string) => [
-          'default',
-          'toggle',
-        ].includes(value),
+        validator: (value: string) => ['default', 'toggle'].includes(value),
       },
     },
 
-    emits: ['update:modelValue', 'change', 'focus', 'blur'],
+    emits: {
+      'update:modelValue': (payload: unknown): boolean => typeof payload !== 'undefined',
+      change: (payload: unknown): boolean => typeof payload !== 'undefined',
+      focus: (): boolean => true,
+      blur: (): boolean => true,
+    },
 
     setup(props): FormStates {
       return {
@@ -120,9 +124,7 @@
        * Evaluates if the checkbox is currently selected.
        */
       isChecked() {
-        return Array.isArray(this.value)
-          ? this.value.includes(this.modelValue)
-          : this.value;
+        return Array.isArray(this.value) ? this.value.includes(this.modelValue) : this.value;
       },
     },
     // watch: {},
