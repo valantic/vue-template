@@ -14,11 +14,11 @@
 export default function processArrayInChunks<T>( // eslint-disable-line max-params
   array: T[],
   chunkSize: number,
-  callback: (chunk: T[]) => Promise<void>,
+  callback: (chunk: T[]) => Promise<void> | void,
   continueOnFailure = true
 ): Promise<void> {
-  if (!Array.isArray(array) || typeof callback !== 'function' || chunkSize <= 0) {
-    throw new Error('Invalid input parameters');
+  if (chunkSize <= 0) {
+    throw new Error('Invalid chunk size input. The chunk size has to be greater than 0.');
   }
 
   /**
