@@ -19,10 +19,15 @@ export function createSrcSetImage(
     'abstract',
     true
   )} ${width}w`);
+  const fallback = srcset[srcset.length - 1];
+
+  if (!fallback) {
+    throw Error("'srcset' has no entries.");
+  }
 
   return {
     srcset: srcset.join(', '),
-    fallback: srcset[srcset.length - 1],
+    fallback,
     alt: faker.lorem.word(),
   };
 }
@@ -46,7 +51,7 @@ export function createSourcesImage(
 
     return {
       media: `(max-width: ${size}px)`,
-      srcset:  faker.image.imageUrl(width, Math.round(width / ratios[breakpoint]), 'abstract', true),
+      srcset:  faker.image.imageUrl(width, Math.round(width / (ratios[breakpoint] || 1)), 'abstract', true),
     };
   }).reduce((accumulator: ImageMedia, item) => {
     accumulator[item.media] = item.srcset;
@@ -57,7 +62,7 @@ export function createSourcesImage(
   return {
     media,
     alt: faker.lorem.word(),
-    fallback: faker.image.imageUrl(sizes.fallback, Math.round((sizes.fallback || 1) / ratios.fallback), 'abstract', true),
+    fallback: faker.image.imageUrl(sizes.fallback, Math.round((sizes.fallback || 1) / (ratios.fallback || 1)), 'abstract', true),
   };
 }
 

@@ -14,7 +14,7 @@ function format(el: HTMLElement, binding: DirectiveBinding): void {
 
   el.textContent = Number.isNaN(priceInput)
     ? ''
-    : formatPrice(parseFloat(binding.value), binding.modifiers.currencyBefore, binding.modifiers.currencyAfter) || '';
+    : formatPrice(parseFloat(binding.value), !!binding.modifiers.currencyBefore, !!binding.modifiers.currencyAfter) || '';
 }
 
 /**

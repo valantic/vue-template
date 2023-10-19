@@ -42,7 +42,7 @@
         <tbody>
           <tr v-for="(endpoint, index) in filteredEndpoints"
               :key="index"
-              :class="b('row', { debugMode: configurations[endpoint.header].enabled })"
+              :class="b('row', { debugMode: configurations[endpoint.header]?.enabled })"
           >
             <td>
               {{ endpoint.method }}
@@ -51,19 +51,22 @@
               {{ endpoint.path }}
             </td>
             <td>
-              <e-checkbox v-model="configurations[endpoint.header].enabled"
+              <!-- eslint-disable-next-line vue/valid-v-model, vue/no-extra-parens -->
+              <e-checkbox v-model="(configurations[endpoint.header] as Record<'enabled', boolean>).enabled"
                           name="debug-mode-enabled"
                           value
               />
             </td>
             <td>
-              <e-select v-model="configurations[endpoint.header].status"
+              <!-- eslint-disable-next-line vue/valid-v-model, vue/no-extra-parens -->
+              <e-select v-model="(configurations[endpoint.header] as Record<'status', string>).status"
                         :options="statusOptions"
                         name="status"
               />
             </td>
             <td>
-              <input v-model="configurations[endpoint.header].response"
+              <!-- eslint-disable-next-line vue/valid-v-model, vue/no-extra-parens -->
+              <input v-model="(configurations[endpoint.header] as Record<'response', string>).response"
                      type="text"
                      name="response"
               >
@@ -264,6 +267,10 @@
           .filter(configuration => configuration.enabled)
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
+
+            if (!method || !path) {
+              throw Error('Invalid header configuration');
+            }
 
             let response: unknown = null;
 

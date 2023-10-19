@@ -99,17 +99,21 @@
        */
       viewBox(): Size {
         const { icon } = this;
-        const lookup = sizeLookup[icon];
-        const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize];
+        const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [];
+        const [
+          lookupWidth, lookupHeight,
+        ] = sizeLookup[icon] || [];
+        const width = size[0] || defaultSize;
+        let height = size[1];
 
-        // Auto map height for non square icons.
-        if (size.length === 1 && lookup) {
-          size[1] = (size[0] / lookup[0]) * lookup[1];
+        // Auto map height for non-square icons.
+        if (!height && lookupWidth && lookupHeight) {
+          height = (width / lookupWidth) * lookupHeight;
         }
 
         return {
-          width: size[0],
-          height: size[1] || size[0],
+          width,
+          height: height || width,
         };
       },
     },

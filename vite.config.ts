@@ -78,7 +78,7 @@ export default defineConfig(({ command, mode }) => {
 
       const {
         input,
-      } = modes[isProfileBuild ? profileBuild : mode];
+      } = modes[isProfileBuild ? profileBuild : mode] || {};
 
       config.base = base;
       config.build = {

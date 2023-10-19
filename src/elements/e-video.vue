@@ -115,7 +115,9 @@
         if (this.videoUrl) {
           const videoSources = VideoUrlSource[this.source];
 
-          return this.arrayHasString(videoSources, this.videoUrl);
+          if (videoSources) {
+            return this.arrayHasString(videoSources, this.videoUrl);
+          }
         }
 
         return false;
