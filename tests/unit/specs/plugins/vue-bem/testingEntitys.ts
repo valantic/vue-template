@@ -14,7 +14,7 @@ type Block = {
   mixin?: string;
 }
 
-interface Blocks {
+type Blocks = {
   [key: string]: Block;
 }
 
@@ -35,7 +35,7 @@ export const blocks: Blocks = {
   [`${block} ${block}--mod mix`]: { block, mods: { mod: true }, mixin: 'mix' },
 };
 
-interface Elements extends Blocks {
+type Elements = Blocks & {
   [key: string]: Block & { el: string };
 }
 
@@ -62,7 +62,7 @@ export const elements: Elements = {
   },
 };
 
-interface DelimitersTest {
+type DelimitersTest = {
   [key: string]: Block & { el: string };
 }
 

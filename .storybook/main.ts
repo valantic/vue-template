@@ -21,11 +21,10 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/preset-scss',
-    '@storybook/addon-mdx-gfm'
   ],
   framework: {
     name: '@storybook/vue3-vite',
-    options: {}
+    options: {},
   },
   staticDirs: ['../static'],
   async viteFinal(viteConfig) {
@@ -36,10 +35,7 @@ const config: StorybookConfig = {
     });
   },
   docs: {
-    autodocs: true
-  },
-  features: {
-    legacyMdx1: true, // 👈 Enables MDX v1 support
+    autodocs: true,
   },
 };
 

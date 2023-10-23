@@ -25,7 +25,7 @@ export default {
     content: faker.lorem.paragraph(),
   },
 };
-const template = `
+const templateString = `
 <c-modal v-model:is-open="isOpen"
          v-bind="args"
          :title="args.title"
@@ -71,7 +71,7 @@ const Template = {
       };
     },
 
-    template,
+    template: templateString,
   }),
 };
 
