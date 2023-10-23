@@ -1,6 +1,7 @@
 import { createI18n, IntlDateTimeFormat } from 'vue-i18n';
 import fallbackMessages from '../translations/de.json';
 import numberFormats from './localization.json';
+import { axiosInstance } from '@/stores/plugins/api';
 
 type MessagesSchema = typeof fallbackMessages;
 
@@ -96,9 +97,7 @@ export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disa
 
   if (i18n.global.locale !== locale) {
     return i18nLoadMessages(locale).then((newLocale) => {
-      import('../stores/plugins/api').then((module) => {
-        module.axiosInstance.defaults.headers.common.locale = newLocale;
-      });
+      axiosInstance.defaults.headers.common.locale = newLocale;
 
       // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
       i18n.global.locale.value = newLocale;
