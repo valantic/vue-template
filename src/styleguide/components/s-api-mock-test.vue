@@ -273,13 +273,7 @@
               // Do nothing
             }
 
-            // TODO: refactor following code for msw 2.0.
-            // const resolver: ResponseResolver = (req, res, ctx: any) => res( // eslint-disable-line @typescript-eslint/no-explicit-any
-            //   ctx.status(parseInt(configuration.status, 10)),
-            //   response ? ctx.json(response) : null
-            // );
-
-            const resolver: ResponseResolver = () => new HttpResponse(null, {
+            const resolver: ResponseResolver = () => HttpResponse.json(response as object, {
               status: parseInt(configuration.status, 10),
             });
 
