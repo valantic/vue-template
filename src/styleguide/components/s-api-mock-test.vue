@@ -359,7 +359,7 @@
       }
 
       td,
-      th, {
+      th {
         padding: variables.$spacing--10;
         white-space: nowrap;
 
@@ -382,7 +382,7 @@
     }
 
     input,
-    select, {
+    select {
       height: 30px;
       border: 1px solid variables.$color-grayscale--0;
       border-radius: 0;
