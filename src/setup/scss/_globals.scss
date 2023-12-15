@@ -41,6 +41,15 @@
     }
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 1em;
+  }
+
   hr {
     margin: variables.$spacing--10 0;
     border-top: 1px solid variables.$color-grayscale--0;
