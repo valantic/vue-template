@@ -274,7 +274,7 @@
        */
       filteredOptions(): Option[] {
         if (this.hasSearch && this.searchTerm) {
-          return this.options.filter(option => option[this.labelField].includes(this.searchTerm));
+          return this.options.filter(option => option[this.labelField]?.includes(this.searchTerm));
         }
 
         return this.options;

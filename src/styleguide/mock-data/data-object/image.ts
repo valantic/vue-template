@@ -4,6 +4,7 @@ import { ImageSources, ImageSrcset, ImageMedia } from '@/types/image';
 
 interface Ratios {
   [key: string]: number;
+  fallback: number;
 }
 
 /**
@@ -22,7 +23,7 @@ export function createSrcSetImage(
 
   return {
     srcset: srcset.join(', '),
-    fallback: srcset[srcset.length - 1],
+    fallback: srcset[srcset.length - 1] || '',
     alt: faker.lorem.word(),
   };
 }
@@ -41,18 +42,29 @@ export function createSourcesImage(
   },
   sizes = DEFAULT_IMAGE_SIZES
 ): ImageSources {
-  const media = Object.entries(BREAKPOINTS_MAX).map(([breakpoint, size]) => {
-    const width = sizes[breakpoint as keyof typeof BREAKPOINTS_MAX] as number;
+  const media = Object.entries(BREAKPOINTS_MAX)
+    .map(([breakpoint, size]) => {
+      const width = sizes[breakpoint as keyof typeof BREAKPOINTS_MAX];
+      const ratio = ratios[breakpoint];
 
-    return {
-      media: `(max-width: ${size}px)`,
-      srcset:  faker.image.imageUrl(width, Math.round(width / ratios[breakpoint]), 'abstract', true),
-    };
-  }).reduce((accumulator: ImageMedia, item) => {
-    accumulator[item.media] = item.srcset;
+      if (!ratio) {
+        throw new Error(`No ratio found for breakpoint '${breakpoint}'`);
+      }
 
-    return accumulator;
-  }, {});
+      if (!width) {
+        throw new Error(`No width given for breakpoint '${breakpoint}'`);
+      }
+
+      return {
+        media: `(max-width: ${size}px)`,
+        srcset: faker.image.imageUrl(width, Math.round(width / ratio), 'abstract', true),
+      };
+    })
+    .reduce((accumulator: ImageMedia, item) => {
+      accumulator[item.media] = item.srcset;
+
+      return accumulator;
+    }, {});
 
   return {
     media,

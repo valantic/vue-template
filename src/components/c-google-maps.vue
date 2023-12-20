@@ -500,8 +500,8 @@
 
             this.createMarker({
               ...location,
-              lat: results[0].geometry.location.lat(),
-              lng: results[0].geometry.location.lng(),
+              lat: results[0]?.geometry.location.lat(),
+              lng: results[0]?.geometry.location.lng(),
             });
 
             if (fitBounds) {

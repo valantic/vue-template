@@ -42,7 +42,7 @@
         <tbody>
           <tr v-for="(endpoint, index) in filteredEndpoints"
               :key="index"
-              :class="b('row', { debugMode: configurations[endpoint.header].enabled })"
+              :class="b('row', { debugMode: !!configurations[endpoint.header]?.enabled })"
           >
             <td>
               {{ endpoint.method }}
@@ -85,22 +85,23 @@
   import mockWorker from '@/styleguide/api/browser';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eSelect from '@/elements/e-select.vue';
+  import eButton from '@/elements/e-button.vue';
 
-  interface DebugConfiguration {
+  type DebugConfiguration = {
     header: string;
     enabled: boolean;
     status: string;
     response: string;
   }
 
-  interface Setup {
+  type Setup = {
     statusOptions: {
       label: string;
       value: string;
     }[];
   }
 
-  interface Data {
+  type Data = {
     search: string;
     handlers: ReadonlyArray<RequestHandler> | null;
     configurations: {
@@ -108,7 +109,7 @@
     };
   }
 
-  interface Endpoint {
+  type Endpoint = {
     header: string;
     method: string;
     path: string;
@@ -121,7 +122,11 @@
    */
   export default defineComponent({
     name: 's-api-mock-test',
-    components: { eSelect, eCheckbox },
+    components: {
+      eSelect,
+      eCheckbox,
+      eButton,
+    },
 
     // props: {},
     emits: {
@@ -264,6 +269,10 @@
           .filter(configuration => configuration.enabled)
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
+
+            if (!path) {
+              throw new Error('No path given for API Mock Test');
+            }
 
             let response: unknown = null;
 
