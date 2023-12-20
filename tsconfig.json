@@ -3,6 +3,7 @@
     "target": "es2019",
     "module": "esnext",
     "moduleResolution": "Node",
+    "noEmit": true,
     "strict": true,
     "jsx": "preserve",
 
