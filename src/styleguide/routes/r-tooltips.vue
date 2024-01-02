@@ -6,9 +6,17 @@
         Disable/Enable Tooltip
       </h2>
 
-      <div :class="b('link')">
-        <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
-      </div>
+      <ul>
+        <li :class="b('link')">
+          <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
+        </li>
+        <li :class="b('link')">
+          <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
+        </li>
+        <li :class="b('link')">
+          <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
+        </li>
+      </ul>
       <div>
         <label>
           <input v-model="active" type="checkbox"> Enable tooltip
@@ -126,7 +134,11 @@
 </script>
 
 <style lang="scss">
+  @use '../../setup/scss/variables' as *;
+
   .r-tooltips {
-    // Add specific styles.
+    &__link {
+      margin-bottom: $spacing--10;
+    }
   }
 </style>

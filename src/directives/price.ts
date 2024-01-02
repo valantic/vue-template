@@ -31,8 +31,7 @@ function format(el: HTMLElement, binding: DirectiveBinding): void {
  */
 export default {
   name: 'price',
-  directive: {
-    beforeMount: format,
-    updated: format,
-  },
-} as CustomDirective;
+
+  beforeMount: format,
+  updated: format,
+} satisfies CustomDirective;

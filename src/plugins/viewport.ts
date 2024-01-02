@@ -18,7 +18,7 @@ export interface Viewport {
 }
 
 /**
- * Adds an viewport instance to Vue itself, which can be used by calling this.$viewport.
+ * Adds a viewport instance to Vue itself, which can be used by calling this.$viewport.
  */
 const plugin: Plugin = {
   install(app) {
