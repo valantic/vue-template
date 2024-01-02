@@ -11,7 +11,7 @@ import {
   DEBOUNCE_CLOSE,
   DEFAULT_POPPER_OPTIONS,
 } from '@/plugins/tooltip/shared';
-import type { CustomDirective } from '@/types/custom-directive';
+import type { NamedDirective } from '@/types/named-directive';
 
 const storageKey = Symbol('Tooltip directive instance');
 const tooltipAnchor = Symbol('The current tooltip anchor');
@@ -157,7 +157,7 @@ function onScroll(): void {
  * tooltipPosition: 'top[-start|end]', 'right[-start|end]', 'bottom[-start|end]', 'left[-start|end]', 'hidden'
  * tooltipTrigger: 'mouseover'
  */
-export default (function(): CustomDirective {
+export default (function(): NamedDirective {
   createTooltipElement();
 
   window.addEventListener('click', onGlobalClick, { passive: true });

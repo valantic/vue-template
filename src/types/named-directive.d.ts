@@ -1,5 +1,5 @@
 import { Directive } from 'vue';
 
-type CustomDirective = Directive & {
+type NamedDirective = Directive & {
   name: string;
 }
