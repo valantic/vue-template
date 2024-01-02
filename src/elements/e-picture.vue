@@ -119,12 +119,11 @@
        * For browser support @see https://caniuse.com/?search=load
        */
       loading: {
-        type: String,
+        type: String as PropType<'lazy' | 'eager'>,
         default: 'lazy',
         validator: (value: string) => [
           'lazy',
           'eager',
-          'auto',
         ].includes(value),
       },
 

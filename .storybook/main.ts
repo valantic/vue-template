@@ -21,6 +21,7 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/preset-scss',
+    '@storybook/addon-mdx-gfm',
   ],
   framework: {
     name: '@storybook/vue3-vite',
