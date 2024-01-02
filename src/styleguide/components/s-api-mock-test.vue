@@ -80,7 +80,8 @@
   import {
     RequestHandler,
     ResponseResolver,
-    http, HttpResponse,
+    http,
+    HttpResponse,
   } from 'msw';
   import mockWorker from '@/styleguide/api/browser';
   import eCheckbox from '@/elements/e-checkbox.vue';
@@ -265,7 +266,7 @@
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
 
-            let response: unknown = null;
+            let response: object = {};
 
             try {
               response = JSON.parse(configuration.response);
@@ -273,7 +274,7 @@
               // Do nothing
             }
 
-            const resolver: ResponseResolver = () => HttpResponse.json(response as object, {
+            const resolver: ResponseResolver = () => HttpResponse.json(response, {
               status: parseInt(configuration.status, 10),
             });
 
