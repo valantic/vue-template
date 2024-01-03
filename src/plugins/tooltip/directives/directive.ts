@@ -48,8 +48,6 @@ function onCloseTransitionend(): void {
  * Hides the tooltip.
  */
 function hideTooltip(debounce = true): void {
-  console.info('hide');
-
   if (hideDebounceTimeout) {
     clearTimeout(hideDebounceTimeout);
   }
@@ -70,7 +68,6 @@ function setTooltipInnerText(content: string): void {
  */
 function showTooltip(el: AnchorElement): void {
   if (hideDebounceTimeout) {
-    console.info('clear');
     clearTimeout(hideDebounceTimeout);
   }
 

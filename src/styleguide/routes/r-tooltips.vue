@@ -10,12 +10,6 @@
         <li :class="b('link')">
           <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
         </li>
-        <li :class="b('link')">
-          <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
-        </li>
-        <li :class="b('link')">
-          <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
-        </li>
       </ul>
       <div>
         <label>
