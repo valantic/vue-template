@@ -1,5 +1,6 @@
 /* stylelint-disable selector-class-pattern, selector-max-id */
 // This file is supposed to only hold styles, that are scoped by a globally used class.
+@use 'sass:math';
 @use './mixins';
 @use './variables';
 
@@ -12,10 +13,99 @@
 }
 
 .wysiwyg {
+  $section-spacing: variables.$spacing--25;
+
+  // Apply top margin for titles if not stacked.
+  *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+    + h1,
+    + h2,
+    + h3,
+    + h4,
+    + h5,
+    + h6 {
+      margin-top: 2 * $section-spacing;
+    }
+  }
+
+  a {
+    color: variables.$color-primary--1;
+
+    &:hover {
+      color: variables.$color-secondary--1;
+    }
+
+    &[disabled],
+    &[disabled]:hover,
+    &[disabled]:active, {
+      color: variables.$color-grayscale--300;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 1em;
+  }
+
+  hr {
+    margin: variables.$spacing--10 0;
+    border-top: 1px solid variables.$color-grayscale--0;
+  }
+
+  ol {
+    margin: $section-spacing 0;
+    padding: 0;
+    counter-reset: section;
+
+    li {
+      display: table-row;
+
+      + li {
+        margin-top: variables.$spacing--5;
+      }
+
+      &::before {
+        display: table-cell;
+        content: counter(section) '.';
+        padding-right: variables.$spacing--10;
+        text-align: right;
+        counter-increment: section;
+      }
+    }
+  }
+
+  p {
+    margin: $section-spacing 0;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
   table {
+    margin: $section-spacing 0;
+
     th,
     td {
+      padding: math.div($section-spacing, 4);
       border: 1px solid variables.$color-grayscale--0;
     }
+  }
+
+  ul {
+    margin: $section-spacing 0;
+    padding: 0 0 0 variables.$spacing--15;
+
+    li + li {
+      margin-top: math.div($section-spacing, 2);
+    }
+  }
+
+  // Prevent additional spacing between 'sections'.
+  :last-child {
+    margin-bottom: 0;
   }
 }
