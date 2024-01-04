@@ -1,18 +1,25 @@
 <template>
   <l-default>
     <div :class="b()" class="wysiwyg">
+      <h1>Titles</h1>
       <h1>WYSIWYG</h1>
       <h2>Text elements</h2>
       <h3>Level 3 title</h3>
       <h4>Level 4 title</h4>
       <h5>Level 5 title</h5>
       <h6>Level 6 title</h6>
+      <hr>
+
+      <h2>Paragraph & text</h2>
       <p>
         Paragraph Lorem <strong>ipsum dolor</strong> sit amet, <i>consectetur adipisicing</i> elit.
         Beatae consequatur dignissimos<sup>1</sup> harum<sub>2</sub> maiores non, numquam optio placeat quisquam sint sit?
       </p>
-      <a href="#">A link element</a>
+      <hr>
 
+      <h2>Link</h2>
+      <a href="#">A link element</a><br>
+      <a href="#" disabled>A link element</a>
       <hr>
 
       <h2>Table</h2>
@@ -39,7 +46,6 @@
           </tr>
         </tfoot>
       </table>
-
       <hr>
 
       <h2>Form elements</h2>
