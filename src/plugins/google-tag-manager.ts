@@ -6,11 +6,11 @@ enum GaListNames {
   // .. Add additional lists
 }
 
-interface Options {
+type Options = {
   debug?: boolean;
 }
 
-interface ListItem {
+type ListItem = {
   item_id: string;
   item_name: string;
   currency?: string | null;
@@ -21,7 +21,7 @@ interface ListItem {
   item_list_name?: string;
 }
 
-interface PurchasePayload {
+type PurchasePayload = {
   currency: string;
   value: number;
   shipping: number | null;
@@ -29,21 +29,21 @@ interface PurchasePayload {
   items: ListItem[];
 }
 
-interface AddPaymentInfoPayload {
+type AddPaymentInfoPayload = {
   currency: string;
   value: number;
   paymentType: string;
   items: ListItem[];
 }
 
-interface AddShippingInfoPayload {
+type AddShippingInfoPayload = {
   currency: string;
   value: number;
   shippingTier: string;
   items: ListItem[];
 }
 
-export interface Gtm {
+export type Gtm = {
   push(payload: Record<string, unknown>): void;
   pushAddToCart(item: ListItem, list: GaListNames): void;
   pushLogin(): void;

@@ -7,7 +7,7 @@ import {
 import { S_STORAGE_AVAILABLE, GlobalStore } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 
-export interface NotificationItem {
+export type NotificationItem = {
   id: number;
   type?: string;
   message?: string;
@@ -16,7 +16,7 @@ export interface NotificationItem {
   redirectUrl?: string;
 }
 
-interface NotificationState extends StateTree {
+type NotificationState = StateTree & {
 
   /**
    * Holds the notification items.
@@ -24,7 +24,7 @@ interface NotificationState extends StateTree {
   notifications: NotificationItem[];
 }
 
-interface NotificationGetters extends _GettersTree<NotificationState> {
+type NotificationGetters = _GettersTree<NotificationState> & {
 
   /**
    * Gets the current list of notifications.
@@ -32,7 +32,7 @@ interface NotificationGetters extends _GettersTree<NotificationState> {
   getNotifications(state: NotificationState): NotificationItem[];
 }
 
-interface NotificationActions {
+type NotificationActions = {
 
   /**
    * Shows the given notification and returns its instance.
@@ -52,7 +52,7 @@ interface NotificationActions {
 
 export type NotificationStore = Store<string, NotificationState, NotificationGetters, NotificationActions>;
 
-interface InitialStoreData {
+type InitialStoreData = {
 
   /**
    * Holds the initial notification items.

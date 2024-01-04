@@ -11,7 +11,7 @@
 
   type ResizeObserverCallback = () => void;
 
-  interface Data {
+  type Data = {
     scrollbarWidth: number;
     resizeObserver: ResizeObserver;
     resizeTimeout: ReturnType<typeof setTimeout> | null;

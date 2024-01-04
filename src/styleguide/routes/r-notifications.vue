@@ -75,7 +75,7 @@
   import notificationStore, { NotificationStore } from '@/stores/notification';
   import eButton from '@/elements/e-button.vue';
 
-  interface Setup {
+  type Setup = {
     notificationStore: NotificationStore;
   }
 

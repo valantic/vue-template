@@ -25,7 +25,7 @@ declare module 'vue-router' {
   }
 }
 
-export interface Route {
+export type Route = {
   path: string;
   name?: string;
   component?: ComponentPublicInstance | Record<string, unknown>;

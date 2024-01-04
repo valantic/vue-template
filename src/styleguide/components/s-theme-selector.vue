@@ -18,17 +18,17 @@
   import buildConfig from '@/../vite.builds.json';
   import sessionStore, { SessionStore } from '@/stores/session';
 
-  interface Theme {
+  type Theme = {
     name: string;
     id: string;
     selected?: boolean;
   }
 
-  interface Data {
+  type Data = {
     availableThemes: string[];
   }
 
-  interface Setup {
+  type Setup = {
     sessionStore: SessionStore;
   }
 

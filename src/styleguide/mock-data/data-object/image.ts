@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker/locale/en';
 import { BREAKPOINTS_MAX, DEFAULT_IMAGE_SIZES } from '@/setup/globals';
 import { ImageSources, ImageSrcset, ImageMedia } from '@/types/image';
 
-interface Ratios {
+type Ratios = {
   [key: string]: number;
 }
 

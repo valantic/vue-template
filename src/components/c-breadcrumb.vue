@@ -20,7 +20,7 @@
   import { defineComponent } from 'vue';
   import breadcrumb, { BreadcrumbStore, BreadcrumbItem } from '@/stores/breadcrumb';
 
-  interface Setup {
+  type Setup = {
     breadcrumbStore: BreadcrumbStore;
   }
 

@@ -6,7 +6,7 @@ import {
 } from 'pinia';
 import { GlobalStore } from '@/setup/globals';
 
-interface SessionState extends StateTree {
+type SessionState = StateTree & {
 
   /**
    * Stores the theme id.
@@ -19,7 +19,7 @@ interface SessionState extends StateTree {
   googleMapsApiKey: string | null;
 }
 
-interface SessionGetters extends _GettersTree<SessionState> {
+type SessionGetters = _GettersTree<SessionState> & {
 
   /**
    * Gets the current theme id.
@@ -27,7 +27,7 @@ interface SessionGetters extends _GettersTree<SessionState> {
   getTheme(state: SessionState): string;
 }
 
-interface SessionActions {
+type SessionActions ={
 
   /**
    * Removes a notification.

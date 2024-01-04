@@ -1,6 +1,6 @@
 import { GlobalStore } from '@/setup/globals';
 
-export interface InitialData {
+export type InitialData = {
   [GlobalStore.SESSION]: unknown; // TODO: define Interface.
   [GlobalStore.BREADCRUMBS]: unknown; // TODO: define Interface.
   [GlobalStore.NOTIFICATION]: unknown; // TODO: define Interface.

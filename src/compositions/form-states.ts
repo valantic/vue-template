@@ -14,7 +14,7 @@ export enum FieldStates {
   Error = 'error',
 }
 
-interface StateModifiers {
+type StateModifiers = {
   state: FieldStates;
   active: boolean;
   disabled: boolean;
@@ -22,7 +22,7 @@ interface StateModifiers {
   hover: boolean;
 }
 
-export interface FormStates {
+export type FormStates = {
   active: Ref<boolean>;
   disabled: Ref<boolean>;
   focus: Ref<boolean>;

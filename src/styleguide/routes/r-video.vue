@@ -29,7 +29,7 @@
 
   import eVideo, { VideoSource } from '@/elements/e-video.vue';
 
-  interface Setup {
+  type Setup = {
     VideoSource: typeof VideoSource;
   }
 

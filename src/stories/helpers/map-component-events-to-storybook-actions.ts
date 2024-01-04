@@ -1,6 +1,6 @@
 import { DefineComponent } from 'vue';
 
-interface StorybookActions {
+type StorybookActions = {
   [key: string]: {
     action: string;
   };

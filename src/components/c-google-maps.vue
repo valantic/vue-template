@@ -17,11 +17,11 @@
   import loadScript from '@/helpers/load-script';
   import sessionStore from '@/stores/session';
 
-  interface Setup {
+  type Setup = {
     container: Ref<HTMLDivElement>;
   }
 
-  interface Data {
+  type Data = {
 
     /**
      * Holds the related Google Maps instance.
@@ -46,7 +46,7 @@
 
   type GoogleMapsCallback = () => void;
 
-  export interface GoogleMapsLocation {
+  export type GoogleMapsLocation = {
     lat?: string | number | null;
     lng?: string | number | null;
     geocode?: string;
@@ -54,11 +54,11 @@
     title?: string;
   }
 
-  interface GoogleMapsInternalLocation extends GoogleMapsLocation{
+  type GoogleMapsInternalLocation = GoogleMapsLocation & {
     referer: GoogleMapsLocation;
   }
 
-  interface EventClick {
+  type EventClick = {
     location: GoogleMapsLocation;
     marker: google.maps.Marker;
   }
