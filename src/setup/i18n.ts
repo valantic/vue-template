@@ -68,10 +68,10 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
         if (import.meta.env.MODE !== 'production') {
           const styleguideTranslations = import.meta
             .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
-          const translations = styleguideTranslations[locale];
+          const localeStyleguideTranslations = styleguideTranslations[locale];
 
-          if (translations) {
-            Object.entries(translations).forEach(([key, value]) => {
+          if (localeStyleguideTranslations) {
+            Object.entries(localeStyleguideTranslations).forEach(([key, value]) => {
               localeMessages[key] = value;
             });
           }

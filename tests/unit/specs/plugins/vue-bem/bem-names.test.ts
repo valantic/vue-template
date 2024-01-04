@@ -9,25 +9,25 @@ import {
 } from './testingEntitys';
 
 describe('Block', () => {
-  Object.entries(blocks).forEach(([key, value]) => {
-    test(key, () => {
-      expect(bemNames(value, DEFAULT_DELIMITERS)).toBe(key);
+  Object.entries(blocks).forEach(([output, input]) => {
+    test(output, () => {
+      expect(bemNames(input, DEFAULT_DELIMITERS)).toBe(output);
     });
   });
 });
 
 describe('Element', () => {
-  Object.entries(elements).forEach(([key, value]) => {
-    test(key, () => {
-      expect(bemNames(value, DEFAULT_DELIMITERS)).toBe(key);
+  Object.entries(elements).forEach(([output, input]) => {
+    test(output, () => {
+      expect(bemNames(input, DEFAULT_DELIMITERS)).toBe(output);
     });
   });
 });
 
 describe('Delimiters', () => {
-  Object.entries(delimitersTest).forEach(([key, value]) => {
-    test(key, () => {
-      expect(bemNames(value, { ...DEFAULT_DELIMITERS, ...delimiters })).toBe(key);
+  Object.entries(delimitersTest).forEach(([output, input]) => {
+    test(output, () => {
+      expect(bemNames(input, { ...DEFAULT_DELIMITERS, ...delimiters })).toBe(output);
     });
   });
 });

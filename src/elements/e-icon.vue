@@ -107,7 +107,7 @@
         let height = size[1];
 
         // Auto map height for non-square icons.
-        if (size.length === 1 && specificWidth && specificHeight) {
+        if (!height && specificWidth && specificHeight) {
           height = (width / specificWidth) * specificHeight;
         }
 

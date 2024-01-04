@@ -493,15 +493,16 @@
         geocoder?.geocode({ address: location.geocode }, (results, status) => {
           if (status === 'OK') {
             const fitBounds = this.allowAutoUpdates && !this.center && this.bounds !== false;
+            const firstResult = results?.[0];
 
-            if (!results?.length) {
+            if (!firstResult) {
               return;
             }
 
             this.createMarker({
               ...location,
-              lat: results[0]?.geometry.location.lat(),
-              lng: results[0]?.geometry.location.lng(),
+              lat: firstResult.geometry.location.lat(),
+              lng: firstResult.geometry.location.lng(),
             });
 
             if (fitBounds) {

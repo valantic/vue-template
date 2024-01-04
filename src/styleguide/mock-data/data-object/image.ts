@@ -20,11 +20,16 @@ export function createSrcSetImage(
     'abstract',
     true
   )} ${width}w`);
+  const fallback = srcset[srcset.length - 1];
+
+  if (!fallback) {
+    throw Error("'srcset' has no entries.");
+  }
 
   return {
     srcset: srcset.join(', '),
-    fallback: srcset[srcset.length - 1] || '',
     alt: faker.lorem.word(),
+    fallback,
   };
 }
 

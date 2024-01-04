@@ -8,7 +8,17 @@ export const delimiters = {
   modVal: '~',
 };
 
-export const blocks = {
+type Block = {
+  [key: string]: {
+    block: string;
+    mods?: {
+      [key: string]: boolean | number | string;
+    };
+    mixin?: string;
+  };
+}
+
+export const blocks: Block = {
   [block]: { block },
   [`${block} ${block}--mod`]: { block, mods: { mod: true } },
   [`${block} ${block}--mod-val`]: { block, mods: { mod: 'val' } },
