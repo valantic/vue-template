@@ -1,11 +1,11 @@
 // @see https://mswjs.io/docs/basics/request-handler
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import notificationResponse from '@/styleguide/mock-data/api-response/notification-response';
 import notification from '@/styleguide/mock-data/data-object/notification';
 
 export default [
-  rest.get('/notifications/global', (req, res, ctx) => {
-    const { searchParams } = req.url;
+  http.get('/notifications/global', ({ request }) => {
+    const { searchParams } = new URL(request.url);
 
     const notificationItem = notification.createNotification({
       type: searchParams.get('type'),
@@ -14,8 +14,6 @@ export default [
       expire: searchParams.get('expire'),
     });
 
-    return res(
-      ctx.json(notificationResponse.createApiResponse(notificationItem))
-    );
+    return HttpResponse.json(notificationResponse.createApiResponse(notificationItem));
   }),
 ];

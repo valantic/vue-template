@@ -80,7 +80,8 @@
   import {
     RequestHandler,
     ResponseResolver,
-    rest,
+    http,
+    HttpResponse,
   } from 'msw';
   import mockWorker from '@/styleguide/api/browser';
   import eCheckbox from '@/elements/e-checkbox.vue';
@@ -265,7 +266,7 @@
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
 
-            let response: unknown = null;
+            let response: object = {};
 
             try {
               response = JSON.parse(configuration.response);
@@ -273,26 +274,25 @@
               // Do nothing
             }
 
-            const resolver: ResponseResolver = (req, res, ctx: any) => res( // eslint-disable-line @typescript-eslint/no-explicit-any
-              ctx.status(parseInt(configuration.status, 10)),
-              response ? ctx.json(response) : null
-            );
+            const resolver: ResponseResolver = () => HttpResponse.json(response, {
+              status: parseInt(configuration.status, 10),
+            });
 
             switch (method) {
               case 'GET':
-                return rest.get(path, resolver) as RequestHandler;
+                return http.get(path, resolver) as RequestHandler;
 
               case 'POST':
-                return rest.post(path, resolver) as RequestHandler;
+                return http.post(path, resolver) as RequestHandler;
 
               case 'PUT':
-                return rest.put(path, resolver) as RequestHandler;
+                return http.put(path, resolver) as RequestHandler;
 
               case 'PATCH':
-                return rest.patch(path, resolver) as RequestHandler;
+                return http.patch(path, resolver) as RequestHandler;
 
               case 'DELETE':
-                return rest.delete(path, resolver) as RequestHandler;
+                return http.delete(path, resolver) as RequestHandler;
 
               // no default
             }
@@ -360,7 +360,7 @@
       }
 
       td,
-      th, {
+      th {
         padding: variables.$spacing--10;
         white-space: nowrap;
 
@@ -383,7 +383,7 @@
     }
 
     input,
-    select, {
+    select {
       height: 30px;
       border: 1px solid variables.$color-grayscale--0;
       border-radius: 0;
