@@ -6,12 +6,12 @@ import {
 } from 'pinia';
 import { GlobalStore } from '@/setup/globals';
 
-export interface BreadcrumbItem {
+export type BreadcrumbItem = {
   name: string;
   url: string;
 }
 
-interface BreadcrumbState extends StateTree {
+type BreadcrumbState = StateTree & {
 
   /**
    * Holds the breadcrumb items.
@@ -19,7 +19,7 @@ interface BreadcrumbState extends StateTree {
   items: BreadcrumbItem[];
 }
 
-interface BreadcrumbGetters extends _GettersTree<BreadcrumbState> {
+type BreadcrumbGetters =_GettersTree<BreadcrumbState> & {
 
   /**
    * Gets the list of current breadcrumb items.
@@ -27,7 +27,7 @@ interface BreadcrumbGetters extends _GettersTree<BreadcrumbState> {
   getItems(state: BreadcrumbState): BreadcrumbItem[];
 }
 
-interface BreadcrumbActions {
+type BreadcrumbActions = {
 
   /**
    * Sets the list of breadcrumbs in the state.
@@ -37,7 +37,7 @@ interface BreadcrumbActions {
 
 export type BreadcrumbStore = Store<string, BreadcrumbState, BreadcrumbGetters, BreadcrumbActions>;
 
-interface InitialStoreDate {
+type InitialStoreDate = {
 
   /**
    * Holds the initial breadcrumb items.
