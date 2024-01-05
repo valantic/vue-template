@@ -7,6 +7,17 @@ import isBetween from 'dayjs/plugin/isBetween';
 import { Plugin } from 'vue';
 import de from 'dayjs/locale/de';
 
+/**
+ * Holds the date format templates used with dayjs.
+ */
+/* eslint-disable @typescript-eslint/naming-convention */
+export enum DateFormat {
+  DD_MM_YYYY = 'DD.MM.YYYY',
+  DD_MM_YYYY_HH_mm = 'DD.MM.YYYY HH:mm',
+  dddd_DD_MMMM_YYYY = 'dddd [/] DD. MMMM YYYY',
+  dddd_DD_MMMM_YYYY_HH_mm = 'dddd [/] DD. MMMM YYYY HH:mm'
+}
+
 const plugin: Plugin = {
   install(app) {
     dayjs.locale('de-ch', de);
