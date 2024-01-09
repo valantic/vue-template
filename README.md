@@ -405,21 +405,25 @@ color: {
 #### Setup
 
 When Using Code from another File (Composition based) or accessing Component Elements via ref, the code needs to be 
-defined in the Setup Method. The setup Method needs to have a proper Return Type by defining an Type:
+defined in the Setup Method. The setup Method needs to have a proper Return Type:
+
 
 
 ```ts
 import { defineComponent, ref, Ref } from 'vue';
-import useFormStates, { IFormStates } from '@/compositions/form-states';
+import useFormStates, { FormStates } from '@/compositions/form-states';
 
-type Setup = IFormStates & {
+type Setup = FormStates & {
+
+
 
   input: Ref<HTMLInputElement | null>;
   slot: Ref<HTMLSpanElement | null>;
 }
 
 export default defineComponent({
-setup(props): Setup {
+    setup(props): Setup {
+
 
     const input = ref();
     const slot = ref();

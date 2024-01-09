@@ -1,10 +1,5 @@
-import {
-  Store,
-  defineStore,
-  StateTree,
-  _GettersTree,
-} from 'pinia';
-import { S_STORAGE_AVAILABLE, GlobalStore } from '@/setup/globals';
+import { defineStore } from 'pinia';
+import { IS_STORAGE_AVAILABLE, Store } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 
 export type NotificationItem = {
@@ -16,7 +11,7 @@ export type NotificationItem = {
   redirectUrl?: string;
 }
 
-type NotificationState = StateTree & {
+type NotificationState = {
 
   /**
    * Holds the notification items.
@@ -24,7 +19,7 @@ type NotificationState = StateTree & {
   notifications: NotificationItem[];
 }
 
-type NotificationGetters = _GettersTree<NotificationState> & {
+type NotificationGetters = {
 
   /**
    * Gets the current list of notifications.
@@ -50,8 +45,6 @@ type NotificationActions = {
   showUnknownError(): void;
 }
 
-export type NotificationStore = Store<string, NotificationState, NotificationGetters, NotificationActions>;
-
 type InitialStoreData = {
 
   /**
@@ -69,7 +62,7 @@ const NOTIFICATION_UNKNOWN_ERROR: NotificationItem = {
   message: i18n.global.t('globalMessages.unknownApiError'),
 };
 
-const storeName = GlobalStore.NOTIFICATION;
+const storeName = Store.Notification;
 
 let currentId = 1;
 
@@ -79,7 +72,7 @@ let currentId = 1;
 function handleRedirect(notification: NotificationItem): void {
   const { redirectUrl } = notification || {};
 
-  if (redirectUrl && S_STORAGE_AVAILABLE) {
+  if (redirectUrl && IS_STORAGE_AVAILABLE) {
     localStorage.setItem('notification', JSON.stringify({
       ...notification,
       redirectUrl: null,

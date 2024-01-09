@@ -12,10 +12,10 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import notificationStore, { NotificationStore } from '@/stores/notification';
+  import useNotificationStore from '@/stores/notification';
 
   type Setup = {
-    notificationStore: NotificationStore;
+    notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
   export default defineComponent({
@@ -29,7 +29,7 @@
 
     setup(): Setup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     // data() {

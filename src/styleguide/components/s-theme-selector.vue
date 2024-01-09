@@ -16,7 +16,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import buildConfig from '@/../vite.builds.json';
-  import sessionStore, { SessionStore } from '@/stores/session';
+  import useSessionStore from '@/stores/session';
 
   type Theme = {
     name: string;
@@ -29,7 +29,7 @@
   }
 
   type Setup = {
-    sessionStore: SessionStore;
+    sessionStore: ReturnType<typeof useSessionStore>;
   }
 
   export default defineComponent({
@@ -41,7 +41,7 @@
 
     setup(): Setup {
       return {
-        sessionStore: sessionStore(),
+        sessionStore: useSessionStore(),
       };
     },
     data(): Data {

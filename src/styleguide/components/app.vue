@@ -9,12 +9,12 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { S_STORAGE_AVAILABLE } from '@/setup/globals';
+  import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
-  import notificationStore, { NotificationStore } from '@/stores/notification';
+  import useNotificationStore from '@/stores/notification';
 
   type Setup = {
-    notificationStore: NotificationStore;
+    notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
   export default defineComponent({
@@ -28,7 +28,7 @@
 
     setup(): Setup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     // data() {
@@ -56,7 +56,7 @@
        * Gets localStorage messages and pushes them in the notification store to display.
        */
       getNotificationFromStorage() {
-        const notification = S_STORAGE_AVAILABLE && localStorage.getItem('vueNotification');
+        const notification = IS_STORAGE_AVAILABLE && localStorage.getItem('vueNotification');
         const parsedNotification = notification ? JSON.parse(notification) : null;
 
         if (parsedNotification) {

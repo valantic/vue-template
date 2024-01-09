@@ -15,11 +15,11 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import notificationStore, { NotificationItem, NotificationStore } from '@/stores/notification';
+  import useNotificationStore, { NotificationItem } from '@/stores/notification';
   import eIcon from '@/elements/e-icon.vue';
 
   type Setup = {
-    notificationStore: NotificationStore;
+    notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
   type Data = {
@@ -48,7 +48,7 @@
 
     setup(): Setup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     data(): Data {

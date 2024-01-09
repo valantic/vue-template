@@ -15,7 +15,7 @@
     ref,
   } from 'vue';
   import loadScript from '@/helpers/load-script';
-  import sessionStore from '@/stores/session';
+  import useSessionStore from '@/stores/session';
 
   type Setup = {
     container: Ref<HTMLDivElement>;
@@ -215,8 +215,8 @@
    * This function checks whether the Map API has already been loaded once.
    */
   function loadMapsAPI(callback: GoogleMapsCallback): void {
-    const useSessionStore = sessionStore();
-    const apiKey = useSessionStore.googleMapsApiKey;
+    const sessionStore = useSessionStore();
+    const apiKey = sessionStore.googleMapsApiKey;
 
     if (!apiKey) {
       throw new Error('No Google Maps API key provided.');

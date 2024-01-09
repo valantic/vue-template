@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
     <ul :class="b('list')">
-      <li v-for="(item, index) in getItems"
+      <li v-for="(item, index) in itemsInternal"
           :key="`breadcrumb--${index}`"
           :class="b('item')"
       >
@@ -18,10 +18,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import breadcrumb, { BreadcrumbStore, BreadcrumbItem } from '@/stores/breadcrumb';
+  import useBreadcrumbStore, { BreadcrumbItem } from '@/stores/breadcrumb';
 
   type Setup = {
-    breadcrumbStore: BreadcrumbStore;
+    breadcrumbStore: ReturnType<typeof useBreadcrumbStore>;
   }
 
   /**
@@ -37,7 +37,7 @@
 
     setup(): Setup {
       return {
-        breadcrumbStore: breadcrumb(),
+        breadcrumbStore: useBreadcrumbStore(),
       };
     },
     // data() {
@@ -48,8 +48,8 @@
       /**
        * Returns an Array of breadcrumb items.
        */
-      getItems(): readonly BreadcrumbItem[] {
-        return this.breadcrumbStore.getItems;
+      itemsInternal(): BreadcrumbItem[] {
+        return this.breadcrumbStore.items;
       },
     },
     // watch: {},
