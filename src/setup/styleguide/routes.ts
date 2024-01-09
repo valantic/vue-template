@@ -2,16 +2,20 @@ import { ComponentPublicInstance } from 'vue';
 import lDefault from '@/layouts/l-default.vue';
 
 import index from '@/styleguide/routes/r-index.vue';
-import sandbox from '@/styleguide/routes/r-sandbox.vue';
-import icons from '@/styleguide/routes/r-icons.vue';
-import forms from '@/styleguide/routes/r-forms.vue';
-import notifications from '@/styleguide/routes/r-notifications.vue';
-import wysiwyg from '@/styleguide/routes/r-wysiwyg.vue';
-import table from '@/styleguide/routes/r-table.vue';
-import tooltips from '@/styleguide/routes/r-tooltips.vue';
-import googleMaps from '@/styleguide/routes/r-google-maps.vue';
-import picture from '@/styleguide/routes/r-picture.vue';
-import video from '@/styleguide/routes/r-video.vue';
+
+// Sandbox
+import sandbox from '@/styleguide/routes/sandbox/r-sandbox.vue';
+import icons from '@/styleguide/routes/sandbox/r-icons.vue';
+import forms from '@/styleguide/routes/sandbox/r-forms.vue';
+import wysiwyg from '@/styleguide/routes/sandbox/r-wysiwyg.vue';
+
+// Components
+import notifications from '@/styleguide/routes/components/r-notifications.vue';
+import table from '@/styleguide/routes/components/r-table.vue';
+import tooltips from '@/styleguide/routes/components/r-tooltips.vue';
+import googleMaps from '@/styleguide/routes/components/r-google-maps.vue';
+import picture from '@/styleguide/routes/components/r-picture.vue';
+import video from '@/styleguide/routes/components/r-video.vue';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -75,14 +79,6 @@ export default [
         },
       },
       {
-        path: 'layout',
-        name: 'styleguideLayout',
-        component: lDefault,
-        meta: {
-          title: 'Layout',
-        },
-      },
-      {
         path: 'wysiwyg',
         name: 'wysiwyg',
         component: wysiwyg,
@@ -98,6 +94,36 @@ export default [
           title: 'Forms',
         },
       },
+    ],
+  },
+  {
+    path: `${root}/layouts`,
+    name: 'layoutsWrapper',
+    redirect: `${root}/layouts/index`,
+    component: categoryWrapper,
+    meta: {
+      title: 'Layouts',
+    },
+    children: [
+      {
+        path: 'layout',
+        name: 'Default layout',
+        component: lDefault,
+        meta: {
+          title: 'Layout',
+        },
+      },
+    ],
+  },
+  {
+    path: `${root}/components`,
+    name: 'componentsWrapper',
+    redirect: `${root}/components/index`,
+    component: categoryWrapper,
+    meta: {
+      title: 'Components',
+    },
+    children: [
       {
         path: 'notifications',
         name: 'Notifications',
@@ -146,7 +172,7 @@ export default [
           title: 'Videos',
         },
       },
-    ],
+    ]
   },
   {
     path: '/:pathMatch(.*)*',
