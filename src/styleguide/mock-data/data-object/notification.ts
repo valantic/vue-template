@@ -24,7 +24,6 @@ function createNotification({
   redirectUrl?: string;
 }): NotificationItem {
   return {
-    id: 0,
     type: type || 'success',
     message: message || `This is an example ${type} message.`,
     expire: typeof expire === 'boolean' ? expire : true,

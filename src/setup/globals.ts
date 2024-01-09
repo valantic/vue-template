@@ -76,3 +76,37 @@ export enum GlobalStore {
   BREADCRUMBS = 'breadcrumbs',
   NOTIFICATION = 'notification',
 }
+
+/**
+ * @type {boolean} Holds a flag if local and session storage are available.
+ * They can lead to exceptions if cookies are disabled on the client.
+ */
+export const IS_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
+  const keyValue = '__storage_test__';
+
+  try {
+    const storage = window.localStorage;
+
+    storage.setItem(keyValue, keyValue);
+    storage.removeItem(keyValue);
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+}());
+
+/**
+ * Contains list of API response messages.
+ */
+export enum ApiResponseMessageAction {
+  Redirect = 'REDIRECT',
+  PageReload = 'PAGE_RELOAD',
+}
+
+/**
+ * Holds all storage keys used in the application.
+ */
+export enum StorageKey {
+  Notifications = 'appNotifications',
+}

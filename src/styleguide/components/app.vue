@@ -11,10 +11,10 @@
   import { defineComponent } from 'vue';
   import { S_STORAGE_AVAILABLE } from '@/setup/globals';
   import sNavigation from '@/styleguide/components/s-navigation.vue';
-  import notificationStore, { NotificationStore } from '@/stores/notification';
+  import useNotificationStore from '@/stores/notification';
 
   interface Setup {
-    notificationStore: NotificationStore;
+    notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
   export default defineComponent({
@@ -28,7 +28,7 @@
 
     setup(): Setup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     // data() {
