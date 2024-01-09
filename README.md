@@ -1,7 +1,7 @@
 # vue-template
 
-This is a custom Vue template written in TypeScript which is based on the idea of using BEM, CriticalCSS and a living 
-styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
+This is a custom Vue3 template which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
+
 
 ## Introduction
 
@@ -9,7 +9,9 @@ styleguide while building mainly not a SPA but a set of components used inside a
 
 If you're new on this project, please take your time and read carefully through this documentation and, if needed, through the linked documentations.
 
-Please note, that there is also a `package.md` file which contains additional information about the used NPM packages and available NPM scripts. 
+Please note, that there is also a `package.md` file which contains additional information about the used NPM packages and available NPM scripts.
+
+
 
 ### Before starting
 
@@ -17,8 +19,9 @@ This template, in most parts, follows the default Vue conventions. Where this is
 
 Before you start working on this project, you **MUST** read the following documentations:
 
-* [Vue Introduction](https://vuejs.org/v2/guide/)
-* [Vue Styleguide](https://vuejs.org/v2/style-guide/)
+- [Vue Introduction](https://vuejs.org/guide/introduction.html)
+- [Vue Styleguide](https://vuejs.org/style-guide/)
+
 * [Vue component styleguide](https://github.com/pablohpsilva/vuejs-component-style-guide)
 * [package.md](package.md)
 
@@ -51,11 +54,8 @@ You **MUST** install the following tools globally, before you can use this templ
 
 ### Prepare your IDE
 
-Please make sure your IDE is configured to apply 
-- [ESLint](https://eslint.org/docs/user-guide/integrations)
-- [TypeScript](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
-- [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins)
-- [.editorconfig](https://editorconfig.org/#download) linting/settings.
+Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
+
 
 **This template supports ES2020+. Please make sure your IDE is configured accordingly.**
 
@@ -76,7 +76,9 @@ NOTE: be aware that this might also effect other projects on your machine.
 
 ### Cloning the repository
 
-Note: to execute the following tasks, you may need to register an SSH key for your machine on the repository side. Ask your project manager about where you need to define it. On how you create/copy the SSH key you can read more [here](https://help.github.com/articles/connecting-to-github-with-ssh/). 
+Note: to execute the following tasks, you may need to register an SSH key for your machine on the repository side. Ask your project manager about where you need to define it. On how you create/copy the SSH key you can read more [here](https://help.github.com/articles/connecting-to-github-with-ssh/).
+
+
 
 Make a local git clone of this project/template by using the following command:
 
@@ -111,7 +113,9 @@ Finally it's time to install the project dependencies and start developing!
 $ npm ci
 ```
 
-NOTE: always use `npm ci` when setting up the project or updated the code base. Unlike `npm install`, `npm ci` will install only exactly the packages and versions which are defined in the `package-lock.json` file. `npm install` on the other hand will always check for updates, meeting the versioning criteria. 
+NOTE: always use `npm ci` when setting up the project or updated the code base. Unlike `npm install`, `npm ci` will install only exactly the packages and versions which are defined in the `package-lock.json` file. `npm install` on the other hand will always check for updates, meeting the versioning criteria.
+
+
 
 ## This project
 
@@ -333,17 +337,21 @@ To name a dynamic set of SCSS variables we use a number system with a range from
 
 For information about best practices read the following guides:
 
-* [Official Vue Style Guide](https://vuejs.org/v2/style-guide/)
+- [Official Vue Style Guide](https://vuejs.org/style-guide/)
+
 * [Vue.js Component Style Guide](https://github.com/pablohpsilva/vuejs-component-style-guide)
 
 #### Additional notes
 
-* This project uses always `kebab-case` for [Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended), [Component name casing in JS/JSX](https://vuejs.org/v2/style-guide/#Component-name-casing-in-JS-JSX-strongly-recommended) and [Component name casing in templates ](https://vuejs.org/v2/style-guide/#Component-name-casing-in-templates-strongly-recommended).
-* We use BEM namespace `e-` for [base component names](Bhttps://vuejs.org/v2/style-guide/#Base-component-names-strongly-recommended).
+- This project uses always `kebab-case` for [Single-file component filename casing](https://vuejs.org/style-guide/rules-strongly-recommended.html#single-file-component-filename-casing), [Component name casing in JS/JSX](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-name-casing-in-js-jsx) and [Component name casing in templates ](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-name-casing-in-templates).
+- We use BEM namespace `e-` for [base component names](https://vuejs.org/style-guide/rules-strongly-recommended.html#base-component-names).
 
-### Single file components (SFC)
+### Single file components
 
-We build Vue components as [single file components](https://vuejs.org/v2/guide/single-file-components.html). All production components are placed within `/app/components` (styleguide only components in `/app/styleguide/components`).
+We build Vue components as [single file components](https://vuejs.org/guide/scaling-up/sfc.html). All production components are placed within `/app/components` (styleguide only components in `/app/styleguide/components`).
+
+
+
 
 #### Naming
 
@@ -670,13 +678,15 @@ We have several possibilities/tools to optimize the size and speed of our applic
 
 Vue allows us to also create `functional components`, which are basically just stateless functions and meant for a single render. Therefore the rendering itself is much faster while no components instance is cluttering the browser cache.
 
-You can read more about this practice [here](https://vuejs.org/v2/guide/render-function.html#Functional-Components).
+You can read more about this practice [here](https://vuejs.org/guide/extras/render-function.html#Functional-Components).
+
 
 ### Async components
 
 Vue is able to load components asynchronously. While this should be used sparingly, since a huge amount of files will also slow down the whole application, it can be used to load big parts which are only used in a very specific an lesser reached part of the application on demand (e.g. the checkout in a shop or an extensive configurator for a certain task).
 
-In webpack this separate parts of the application are called `chunks`. You can find more about how to use this with Vue components [here](https://vuejs.org/v2/guide/components.html#Async-Components). Be also aware, that you can define a specific chunk name by adding a `webpackChunkName` comment. This webpack feature is described [here](https://webpack.js.org/api/module-methods/#import-).
+In webpack this separate parts of the application are called `chunks`. You can find more about how to use this with Vue components [here](https://vuejs.org/guide/essentials/component-basics.html#Async-Components). Be also aware, that you can define a specific chunk name by adding a `webpackChunkName` comment. This webpack feature is described [here](https://webpack.js.org/api/module-methods/#import-).
+
 
 ### Critical CSS
 
