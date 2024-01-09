@@ -1,6 +1,5 @@
 import {
   defineStore,
-  StateTree,
 } from 'pinia';
 import {
   IS_STORAGE_AVAILABLE,
@@ -30,12 +29,19 @@ export type MappedNotificationItem = NotificationItem & {
   id: number;
 }
 
-type NotificationState = StateTree & {
+type NotificationState = {
 
   /**
    * Holds the notification items.
    */
   notifications: MappedNotificationItem[];
+
+  /**
+   * Defines if the global default notifications under the header are displayed.
+   * Can be used to disable them for cases like when the global notifications
+   * are displayed already at another place, e.g. in a modal.
+   */
+  showDefaultGlobalNotifications: boolean;
 }
 
 type InitialData = {

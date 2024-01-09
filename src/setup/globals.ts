@@ -33,25 +33,6 @@ export type ViewportBreakPoint = keyof typeof BREAKPOINTS;
 export const RESIZE_DEBOUNCE = 100;
 
 /**
- * @type {boolean} Holds a flag if local and session storage are available.
- * They can lead to exceptions if cookies are disabled on the client.
- */
-export const S_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
-  const keyValue = '__storage_test__';
-
-  try {
-    const storage = window.localStorage;
-
-    storage.setItem(keyValue, keyValue);
-    storage.removeItem(keyValue);
-
-    return true;
-  } catch (error) {
-    return false;
-  }
-}());
-
-/**
  * Defines possible link target values.
  */
 export enum LinkTarget {
