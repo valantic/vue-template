@@ -1,3 +1,4 @@
+import '@types/cookiebot-sdk';
 import { GlobalStore } from '@/setup/globals';
 
 export interface InitialData {

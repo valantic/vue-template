@@ -16,6 +16,7 @@ import tooltips from '@/styleguide/routes/components/r-tooltips.vue';
 import googleMaps from '@/styleguide/routes/components/r-google-maps.vue';
 import picture from '@/styleguide/routes/components/r-picture.vue';
 import video from '@/styleguide/routes/components/r-video.vue';
+import consent from '@/styleguide/routes/components/r-consent.vue';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -172,7 +173,15 @@ export default [
           title: 'Videos',
         },
       },
-    ]
+      {
+        path: 'cookie-consent',
+        name: 'Cookie consent',
+        component: consent,
+        meta: {
+          title: 'Cookie consent',
+        },
+      },
+    ],
   },
   {
     path: '/:pathMatch(.*)*',
