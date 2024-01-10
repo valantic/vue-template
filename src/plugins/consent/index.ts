@@ -3,6 +3,8 @@ import {
   watch,
 } from 'vue';
 
+// TODO: an active Cookiebot.com plan/integration is required.
+
 export { default as cConsentGatekeeper } from './c-consent-gatekeeper.vue';
 
 // @see https://www.cookiebot.com/en/developer/#h-properties
