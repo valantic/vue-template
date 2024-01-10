@@ -7,10 +7,6 @@ export type BreadcrumbItem = {
 }
 
 type BreadcrumbState = {
-
-  /**
-   * Holds the breadcrumb items.
-   */
   items: BreadcrumbItem[];
 }
 

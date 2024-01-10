@@ -439,7 +439,8 @@ export default defineComponent({
 
 #### Data
 
-To fully benefit from TypeScript, please define your Data function with an Type like this:
+To fully benefit from TypeScript, please define your Data function with a Type like this:
+
 
 
 ```ts
@@ -448,7 +449,7 @@ type Data = {
   myDataProperty: string;
 }
 export default defineComponent({
-data(): Data {
+    data(): Data {
 
 	  return {
       myDataProperty: 'Hello World',
