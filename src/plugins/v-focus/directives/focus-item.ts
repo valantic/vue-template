@@ -1,17 +1,22 @@
 import { DirectiveBinding } from 'vue';
 import state from '../state';
 
+// TODO: Hiding the mask causes instant background removal. I'm not sure, how this can be fixed...
+
 /**
  * Sets or removes a class depending on the current focus state.
  */
-function update(el: HTMLElement, binding: DirectiveBinding): void {
-  if (binding.value) {
+function updated(el: HTMLElement, binding: DirectiveBinding): void {
+  const enabled = !!binding.value;
+
+  if (enabled) {
     el.classList.add('focus-item');
   } else {
     el.classList.remove('focus-item');
   }
 
-  state.enabled = !!binding.value;
+  state.variant = binding.arg || undefined;
+  state.enabled = enabled;
 }
 
 /**
@@ -20,9 +25,16 @@ function update(el: HTMLElement, binding: DirectiveBinding): void {
 export default {
   name: 'focus-item',
 
-  beforeMount: update,
-  updated: update,
+  beforeMount(el: HTMLElement, binding: DirectiveBinding): void {
+    if (binding.value) {
+      updated(el, binding);
+    }
+  },
+
+  updated,
+
   unmounted(): void {
+    state.variant = undefined;
     state.enabled = false;
   },
 };
