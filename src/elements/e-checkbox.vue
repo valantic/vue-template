@@ -4,18 +4,16 @@
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-    <input
-      v-model="internalValue"
-      v-bind="$attrs"
-      :class="b('field')"
-      :aria-checked="isChecked ? 'true' : 'false'"
-      :disabled="disabled"
-      :value="value"
-      :name="name"
-      type="checkbox"
-      @blur="onBlur"
-      @focus="onFocus"
-    />
+    <input v-model="internalValue"
+           v-bind="$attrs"
+           :class="b('field')"
+           :aria-checked="isChecked ? 'true' : 'false'"
+           :value="value"
+           :name="name"
+           type="checkbox"
+           @blur="onBlur"
+           @focus="onFocus"
+    >
     <span :class="b('indicator')"></span>
     <span :class="b('label-text')">
       <slot></slot>
@@ -293,26 +291,30 @@
       }
     }
 
-    &__field:disabled + &__label-text {
-      cursor: default;
-      color: variables.$color-grayscale--500;
+    &__field:checked:disabled {
+      ~ #{$this}__indicator {
+        border-color: variables.$color-grayscale--500;
+      }
 
-      &:hover {
-        color: variables.$color-grayscale--500;
+      ~ #{$this}__indicator:before {
+        background: variables.$color-grayscale--500;
+        cursor: not-allowed;
+      }
+    }
+
+    &__field:disabled {
+      ~ #{$this}__indicator {
+        border-color: variables.$color-grayscale--500;
+        cursor: not-allowed;
+      }
+
+      ~ #{$this}__label-text {
+        cursor: not-allowed;
+        color: variables.$color-grayscale--400;
 
         &::before {
           border-color: variables.$color-grayscale--500;
         }
-      }
-
-      &::before {
-        border-color: variables.$color-grayscale--500;
-      }
-    }
-
-    &__field:checked:disabled + &__label-text {
-      &::after {
-        background: variables.$color-grayscale--500;
       }
     }
   }

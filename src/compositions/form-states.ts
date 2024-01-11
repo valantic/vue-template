@@ -11,14 +11,12 @@ export enum FieldState {
 type StateModifiers = {
   state: FieldState;
   active: boolean;
-  disabled: boolean;
   focus: boolean;
   hover: boolean;
 };
 
 export type FormStates = {
   active: Ref<boolean>;
-  disabled: Ref<boolean>;
   focus: Ref<boolean>;
   hover: Ref<boolean>;
   stateModifiers: ComputedRef<StateModifiers>;
@@ -43,7 +41,6 @@ export const withProps = () => ({
  */
 const formStates = (inputState: Ref<FieldState>): FormStates => {
   const active = ref<boolean>(false);
-  const disabled = ref<boolean>(false);
   const focus = ref<boolean>(false);
   const hover = ref<boolean>(false);
 
@@ -51,12 +48,11 @@ const formStates = (inputState: Ref<FieldState>): FormStates => {
    * Holds an object with several modifiers of the form element.
    */
   const stateModifiers: ComputedRef<StateModifiers> = computed(() => ({
-    state: inputState.value,
-    active: active.value,
-    disabled: disabled.value,
-    focus: focus.value,
-    hover: hover.value,
-  }));
+      state: inputState.value,
+      active: active.value,
+      focus: focus.value,
+      hover: hover.value,
+    }));
 
   /**
    * Holds a boolean if the form element has default state.
@@ -85,7 +81,6 @@ const formStates = (inputState: Ref<FieldState>): FormStates => {
   return {
     // data
     active,
-    disabled,
     focus,
     hover,
 

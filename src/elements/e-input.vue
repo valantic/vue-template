@@ -1,22 +1,19 @@
 <template>
   <span :class="b(modifiers)">
-    <input
-      v-model="internalValue"
-      ref="input"
-      :autocomplete="autocomplete"
-      :class="b('field')"
-      :disabled="disabled"
-      :name="name"
-      :title="title"
-      v-bind="$attrs"
-      @blur="onBlur"
-      @focus="onFocus"
-      @input="onInput"
-      @keyup.enter="onEnterKeyUp"
-      @mouseenter="hover = true"
-      @mouseleave="hover = false"
-    />
-
+    <input v-model="internalValue"
+           ref="input"
+           :autocomplete="autocomplete"
+           :class="b('field')"
+           :name="name"
+           :title="title"
+           v-bind="$attrs"
+           @blur="onBlur"
+           @focus="onFocus"
+           @input="onInput"
+           @keyup.enter="onEnterKeyUp"
+           @mouseenter="hover = true"
+           @mouseleave="hover = false"
+    >
     <span
       v-if="$slots.default || !hasDefaultState"
       ref="slot"
@@ -473,10 +470,10 @@
     &--disabled:not(&--border-0) &__field:hover {
       border-color: variables.$color-grayscale--600;
       background-color: variables.$color-grayscale--1000;
-      color: variables.$color-grayscale--300;
+      color: variables.$color-grayscale--400;
 
       &::placeholder {
-        color: variables.$color-grayscale--300;
+        color: variables.$color-grayscale--400;
       }
     }
 

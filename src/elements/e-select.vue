@@ -1,13 +1,12 @@
 <template>
   <span :class="b(modifiers)">
-    <select
-      :value="internalValue"
-      :class="b('select')"
-      :disabled="disabled || progress"
-      v-bind="$attrs"
-      @change="onChange"
-      @mouseenter="hover = true"
-      @mouseleave="hover = false"
+    <select :value="internalValue"
+            :class="b('select')"
+            :disabled="progress"
+            v-bind="$attrs"
+            @change="onChange"
+            @mouseenter="hover = true"
+            @mouseleave="hover = false"
     >
       <option
         v-if="placeholder"
@@ -263,7 +262,7 @@
     &--disabled &__select,
     &--disabled &__select:hover {
       border-color: variables.$color-grayscale--600;
-      color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--400;
     }
 
     /**

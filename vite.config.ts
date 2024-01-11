@@ -59,6 +59,9 @@ export default defineConfig(({ command, mode }) => {
     test: {
       environment: 'jsdom',
     },
+    css: {
+      devSourcemap: true,
+    },
   };
 
   switch (command) {

@@ -4,16 +4,14 @@
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-    <input
-      v-model="internalValue"
-      v-bind="$attrs"
-      :class="b('field', fieldModifiers)"
-      :disabled="disabled"
-      :value="value"
-      :name="name"
-      type="radio"
-      @change="onChange"
-    />
+    <input v-model="internalValue"
+           v-bind="$attrs"
+           :class="b('field', fieldModifiers)"
+           :value="value"
+           :name="name"
+           type="radio"
+           @change="onChange"
+    >
     <span :class="b('label')">
       <slot></slot>
     </span>
@@ -211,16 +209,8 @@
     }
 
     &__field:disabled + &__label {
-      cursor: default;
-      color: variables.$color-grayscale--500;
-
-      &:hover {
-        color: variables.$color-grayscale--500;
-
-        &::before {
-          border-color: variables.$color-grayscale--500;
-        }
-      }
+      cursor: not-allowed;
+      color: variables.$color-grayscale--400;
 
       &::before {
         border-color: variables.$color-grayscale--500;
@@ -228,6 +218,8 @@
     }
 
     &__field:checked:disabled + &__label {
+      cursor: not-allowed;
+
       &::after {
         background: variables.$color-grayscale--500;
       }
