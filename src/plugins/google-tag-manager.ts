@@ -63,7 +63,6 @@ export type Gtm = {
 }
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   interface Window { dataLayer: Record<string, unknown>[] }
 }
 
