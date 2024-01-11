@@ -248,7 +248,9 @@
     // beforeMount() {},
     mounted() {
       if (this.isCalendarVisible) {
-        this.createCalendar();
+        this.$nextTick(() => {
+          this.createCalendar();
+        });
       }
     },
     // beforeUpdate() {},
@@ -367,7 +369,7 @@
 
           if (this.$el === activeElement || this.$el.contains(activeElement)) {
             // Removes focus on child elements so datepicker can be opened instantly again.
-            activeElement.blur(); // eslint-disable-line no-extra-parens
+            activeElement.blur();
           }
 
           this.isCalendarVisible = false;

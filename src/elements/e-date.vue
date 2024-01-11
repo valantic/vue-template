@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <span :class="b()">
     <e-input v-model.lazy.trim="dateString"
              :class="b('input')"
              :maxlength="format.length"
@@ -16,7 +16,7 @@
               size="18"
       />
     </e-input>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
@@ -82,8 +82,8 @@
     },
     emits: {
       'update:modelValue': (payload: Date) => !!payload,
-      'focus': (payload?: Event) => !!payload,
-      'blur': (payload?: Event) => !!payload,
+      'focus': (payload: Event) => !!payload,
+      'blur': (payload: Event) => !!payload,
     },
 
     setup(): Setup {
