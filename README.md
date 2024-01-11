@@ -1,7 +1,8 @@
 # vue-template
 
-This is a custom Vue template written in TypeScript which is based on the idea of using BEM, CriticalCSS and a living 
-styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
+This is a custom Vue3 template written in TypeScript which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
+
+
 
 ## Introduction
 
@@ -9,7 +10,9 @@ styleguide while building mainly not a SPA but a set of components used inside a
 
 If you're new on this project, please take your time and read carefully through this documentation and, if needed, through the linked documentations.
 
-Please note, that there is also a `package.md` file which contains additional information about the used NPM packages and available NPM scripts. 
+Please note, that there is also a `package.md` file which contains additional information about the used NPM packages and available NPM scripts.
+
+
 
 ### Before starting
 
@@ -17,8 +20,8 @@ This template, in most parts, follows the default Vue conventions. Where this is
 
 Before you start working on this project, you **MUST** read the following documentations:
 
-* [Vue Introduction](https://vuejs.org/v2/guide/)
-* [Vue Styleguide](https://vuejs.org/v2/style-guide/)
+* [Vue Introduction](https://vuejs.org/guide/introduction.html)
+* [Vue Styleguide](https://vuejs.org/style-guide/)
 * [Vue component styleguide](https://github.com/pablohpsilva/vuejs-component-style-guide)
 * [package.md](package.md)
 
@@ -38,7 +41,7 @@ You **MUST** also be familiar with the following tools:
 
 You **SHOULD** also know the following tools:
 
-* [webpack](https://webpack.js.org/)
+* [vite](https://vitejs.dev/)
 
 ### Before installing
 
@@ -51,11 +54,8 @@ You **MUST** install the following tools globally, before you can use this templ
 
 ### Prepare your IDE
 
-Please make sure your IDE is configured to apply 
-- [ESLint](https://eslint.org/docs/user-guide/integrations)
-- [TypeScript](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
-- [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins)
-- [.editorconfig](https://editorconfig.org/#download) linting/settings.
+Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
+
 
 **This template supports ES2020+. Please make sure your IDE is configured accordingly.**
 
@@ -76,7 +76,9 @@ NOTE: be aware that this might also effect other projects on your machine.
 
 ### Cloning the repository
 
-Note: to execute the following tasks, you may need to register an SSH key for your machine on the repository side. Ask your project manager about where you need to define it. On how you create/copy the SSH key you can read more [here](https://help.github.com/articles/connecting-to-github-with-ssh/). 
+Note: to execute the following tasks, you may need to register an SSH key for your machine on the repository side. Ask your project manager about where you need to define it. On how you create/copy the SSH key you can read more [here](https://help.github.com/articles/connecting-to-github-with-ssh/).
+
+
 
 Make a local git clone of this project/template by using the following command:
 
@@ -111,7 +113,9 @@ Finally it's time to install the project dependencies and start developing!
 $ npm ci
 ```
 
-NOTE: always use `npm ci` when setting up the project or updated the code base. Unlike `npm install`, `npm ci` will install only exactly the packages and versions which are defined in the `package-lock.json` file. `npm install` on the other hand will always check for updates, meeting the versioning criteria. 
+NOTE: always use `npm ci` when setting up the project or updated the code base. Unlike `npm install`, `npm ci` will install only exactly the packages and versions which are defined in the `package-lock.json` file. `npm install` on the other hand will always check for updates, meeting the versioning criteria.
+
+
 
 ## This project
 
@@ -161,7 +165,7 @@ npx browserslist@latest --update-db
 
 A complete list of available NPM scripts can be found in [package.md](package.md).
 
-Please make sure to always run Node/NPM tasks trough an NPM script. Installing NPM packages globally in calling them directly is bad practice and can cause inconsistency because of version differences (e.g. install `webpack` as a project dependency and then create an NPM script, which runs this project related `webpack` instead of a global one).
+Please make sure to always run Node/NPM tasks trough an NPM script. Installing NPM packages globally in calling them directly is bad practice and can cause inconsistency because of version differences (e.g. install `vitejs` as a project dependency and then create an NPM script, which runs this project related `vitejs` instead of a global one).
 
 To start developing you only need to execute the `dev` script from your console:
 
@@ -211,7 +215,6 @@ git subtree pull --prefix assets/vue https://github.com/valantic/vue-template.gi
 |- (dist)               Build folder
 |- (node_modules)       Node modules used by this project
 |- static               Static files which will be copied to `dist` during build
-|- stats                webpack profile and monitor files
 |- tests                Jest tests
 .  |- unit              Unit tests
 .  .  |- specs          Test definitions
@@ -333,17 +336,20 @@ To name a dynamic set of SCSS variables we use a number system with a range from
 
 For information about best practices read the following guides:
 
-* [Official Vue Style Guide](https://vuejs.org/v2/style-guide/)
+* [Official Vue Style Guide](https://vuejs.org/style-guide/)
 * [Vue.js Component Style Guide](https://github.com/pablohpsilva/vuejs-component-style-guide)
 
 #### Additional notes
 
-* This project uses always `kebab-case` for [Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended), [Component name casing in JS/JSX](https://vuejs.org/v2/style-guide/#Component-name-casing-in-JS-JSX-strongly-recommended) and [Component name casing in templates ](https://vuejs.org/v2/style-guide/#Component-name-casing-in-templates-strongly-recommended).
-* We use BEM namespace `e-` for [base component names](Bhttps://vuejs.org/v2/style-guide/#Base-component-names-strongly-recommended).
+- This project always uses `kebab-case` for [Single-file component filename casing](https://vuejs.org/style-guide/rules-strongly-recommended.html#single-file-component-filename-casing), [Component name casing in JS/JSX](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-name-casing-in-js-jsx) and [Component name casing in templates ](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-name-casing-in-templates).
+- We use the BEM namespace `e-` for (native) [element component names](https://vuejs.org/style-guide/rules-strongly-recommended.html#base-component-names).
 
-### Single file components (SFC)
+### Single file components
 
-We build Vue components as [single file components](https://vuejs.org/v2/guide/single-file-components.html). All production components are placed within `/app/components` (styleguide only components in `/app/styleguide/components`).
+We build Vue components as [single file components](https://vuejs.org/guide/scaling-up/sfc.html). All production components are placed within `/src/components` (styleguide only components in `/src/styleguide/components`).
+
+
+
 
 #### Naming
 
@@ -678,13 +684,16 @@ We have several possibilities/tools to optimize the size and speed of our applic
 
 Vue allows us to also create `functional components`, which are basically just stateless functions and meant for a single render. Therefore the rendering itself is much faster while no components instance is cluttering the browser cache.
 
-You can read more about this practice [here](https://vuejs.org/v2/guide/render-function.html#Functional-Components).
+You can read more about this practice [here](https://vuejs.org/guide/extras/render-function.html#Functional-Components).
+
 
 ### Async components
 
-Vue is able to load components asynchronously. While this should be used sparingly, since a huge amount of files will also slow down the whole application, it can be used to load big parts which are only used in a very specific an lesser reached part of the application on demand (e.g. the checkout in a shop or an extensive configurator for a certain task).
+In large applications, we may need to divide the app into smaller chunks and only load a component from the server when it's needed. To make that possible, Vue has a `defineAsyncComponent` function. Async Components are described [here](https://vuejs.org/guide/components/async).
 
-In webpack this separate parts of the application are called `chunks`. You can find more about how to use this with Vue components [here](https://vuejs.org/v2/guide/components.html#Async-Components). Be also aware, that you can define a specific chunk name by adding a `webpackChunkName` comment. This webpack feature is described [here](https://webpack.js.org/api/module-methods/#import-).
+You can find more about how to use this with Vue components [here](https://vuejs.org/guide/essentials/component-basics.html#Async-Components).
+
+Vite automatically rewrites code-split dynamic import calls with a preload step. Find more infos [here](https://vitejs.dev/guide/features.html#async-chunk-loading-optimization).
 
 ### Critical CSS
 
@@ -720,28 +729,25 @@ The living styleguide is defined in two parts: one is documenting all available 
 
 Please note, that the living styleguide has its on section in `/app/styleguide` where you can find `components`, `routes` and anything else, which is only related to the living styleguide. This makes it more easy to identify and split out unneeded code during the build.
 
-## Webpack
+## Vite
 
 ### Path alias
 
-Webpack supports to use an [alias](https://webpack.js.org/loaders/css-loader/#alias) for paths. Thanks to this feature, you don't need to define relative paths when importing one JavaScript file into an other. The `@` alias stands for the application root (`/app`). So for example you can just write `import options from '@/setup/options'` in any file to import the `options.js` file from the `setup` folder without caring about relative path resolving.
+Vite is pre-configured to support [CSS @import](https://vitejs.dev/guide/features.html#glob-import-caveats) inlining via postcss-import. Vite aliases are also respected for CSS @import. In addition, all CSS url() references, even if the imported files are in different directories, are always automatically rebased to ensure correctness.
+
+Thanks to this feature, you don't need to define relative paths when importing one JavaScript file into an other. The `@` alias stands for the application root (`/app`). So for example you can just write `import options from '@/setup/options'` in any file to import the `options.js` file from the `setup` folder without caring about relative path resolving.
 
 ## Build chain
 
-The build chain uses a combined solution of TypeScript and Babel:
+The build chain uses a combined solution of TypeScript and Rollup and optional Babel:
 
-1. The webpack ts-loader shows TS errors and compiles the TypeScript to Javascript files
-2. The webpack babel-loader compiles the Javascript files to the final outpu based on the babel-preset and browserlist
-
-The reasons why we choose this setup are:
-
-1. Using just the `ts-loader` can only use an esXXXX Target, but not a browser / feature depending solution like browserlist
-2. Using just the `babel-loader` with the `@babel/preset-typescript`, one does not get typescript errors in the command line without starting a second `tsc` command
+1. Since Vite ships with TypeScript typing it shows TS errors and compiles the TypeScript to Javascript files
+2. Vite uses [Rollup](https://rollupjs.org/) which compiles the Javascript files to the final output based on browserlist
 
 ### tsconfig Target
 
 At the moment, we are using `es2019` as TypeScript build target. The reason is, that `esNext` / `es2020` are not transpiling
-`optional-chaining` and `nullish-coalescing` and webpack 4 cannot handle them
+`optional-chaining` and `nullish-coalescing` cannot handle them
 
 ## Node.js and NPM
 
@@ -786,12 +792,6 @@ Stylelint setup for the current project.
 TypeScript configuration for the current project.
 
 ## Known issues
-
-### Webpack
-
-#### Webpack does not perform code splitting
-
-Make sure you don't use `babel-plugin-dynamic-import-node` since it parses the import/require statements and therefor removes the possibility to split your code! Use [babel-plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/) instead.
 
 ### Node.js & NPM
 
@@ -858,21 +858,6 @@ $ brew install nasm
 # OR
 
 $ brew upgrade nasm
-```
-
-#### Error on Windows machines while running the `npm run build script`
-
-If you're on a Windows machine, and you need to build the project – there is a problem with assign node env. variables like
-`NODE_ENV=production`. To get rid of this problem there is an npm package that could help you => https://www.npmjs.com/package/cross-env
-Be sure that you add "cross-env" at the start of the script like:
-
-package.json:
-```json
-{
-  "scripts": {
-      "build": "cross-env NODE_ENV=production webpack --mode production --progress"
-    }
-}
 ```
 
 ## Vite integration todos

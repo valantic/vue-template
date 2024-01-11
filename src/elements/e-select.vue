@@ -2,7 +2,7 @@
   <span :class="b(modifiers)">
     <select :value="internalValue"
             :class="b('select')"
-            :disabled="disabled || progress"
+            :disabled="progress"
             v-bind="$attrs"
             @change="onChange"
             @mouseenter="hover = true"
@@ -251,7 +251,7 @@
     &--disabled &__select,
     &--disabled &__select:hover {
       border-color: variables.$color-grayscale--600;
-      color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--400;
     }
 
     /**

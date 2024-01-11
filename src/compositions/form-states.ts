@@ -17,14 +17,12 @@ export enum FieldStates {
 type StateModifiers = {
   state: FieldStates;
   active: boolean;
-  disabled: boolean;
   focus: boolean;
   hover: boolean;
 }
 
 export type FormStates = {
   active: Ref<boolean>;
-  disabled: Ref<boolean>;
   focus: Ref<boolean>;
   hover: Ref<boolean>;
   stateModifiers: ComputedRef<StateModifiers>;
@@ -54,7 +52,6 @@ export const withProps = () => ({ // eslint-disable-line -- TODO: did not know h
  */
 const formStates = (inputState: Ref<FieldStates>): FormStates => {
   const active = ref<boolean>(false);
-  const disabled = ref<boolean>(false);
   const focus = ref<boolean>(false);
   const hover = ref<boolean>(false);
 
@@ -64,7 +61,6 @@ const formStates = (inputState: Ref<FieldStates>): FormStates => {
   const stateModifiers: ComputedRef<StateModifiers> = computed(() => ({
       state: inputState.value,
       active: active.value,
-      disabled: disabled.value,
       focus: focus.value,
       hover: hover.value,
     }));
@@ -96,7 +92,6 @@ const formStates = (inputState: Ref<FieldStates>): FormStates => {
   return {
     // data
     active,
-    disabled,
     focus,
     hover,
 

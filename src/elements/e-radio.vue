@@ -6,7 +6,6 @@
     <input v-model="internalValue"
            v-bind="$attrs"
            :class="b('field', fieldModifiers)"
-           :disabled="disabled"
            :value="value"
            :name="name"
            type="radio"
@@ -206,16 +205,8 @@
     }
 
     &__field:disabled + &__label {
-      cursor: default;
-      color: variables.$color-grayscale--500;
-
-      &:hover {
-        color: variables.$color-grayscale--500;
-
-        &::before {
-          border-color: variables.$color-grayscale--500;
-        }
-      }
+      cursor: not-allowed;
+      color: variables.$color-grayscale--400;
 
       &::before {
         border-color: variables.$color-grayscale--500;
@@ -223,6 +214,8 @@
     }
 
     &__field:checked:disabled + &__label {
+      cursor: not-allowed;
+
       &::after {
         background: variables.$color-grayscale--500;
       }
