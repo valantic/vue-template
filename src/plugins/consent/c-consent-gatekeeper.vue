@@ -38,7 +38,7 @@
 
     props: {
       /**
-       * Expects a consent group identifier.
+       * Expects a valid consent group.
        */
       consentGroup: {
         type: String as PropType<ConsentGroup>,
