@@ -57,7 +57,7 @@
     // unmounted() {},
 
     methods: {
-      onConsentApprove() {
+      onConsentApprove(): void {
         alert('Consent approved.'); // eslint-disable-line no-alert
       },
     },
