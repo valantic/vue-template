@@ -17,7 +17,7 @@ type SessionState = {
 const storeName = Store.Session;
 
 export default defineStore(storeName, {
-  state: (): SessionState => {
+  state: () => {
     const state: SessionState = {
       theme: 'theme-01',
       googleMapsApiKey: null,

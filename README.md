@@ -414,9 +414,6 @@ import { defineComponent, ref, Ref } from 'vue';
 import useFormStates, { FormStates } from '@/compositions/form-states';
 
 type Setup = FormStates & {
-
-
-
   input: Ref<HTMLInputElement | null>;
   slot: Ref<HTMLSpanElement | null>;
 }

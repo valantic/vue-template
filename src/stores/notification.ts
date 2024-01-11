@@ -19,30 +19,12 @@ type NotificationState = {
   notifications: NotificationItem[];
 }
 
-type NotificationGetters = {
+export type MappedNotificationItem = NotificationItem & {
 
   /**
-   * Gets the current list of notifications.
+   * The ID of the notification.
    */
-  getNotifications(state: NotificationState): NotificationItem[];
-}
-
-type NotificationActions = {
-
-  /**
-   * Shows the given notification and returns its instance.
-   */
-  showNotification(notificationItem: NotificationItem): NotificationItem;
-
-  /**
-   * Removes a notification.
-   */
-  popNotification(id: number): void;
-
-  /**
-   * Adds an "unknown error" to the notification stack.
-   */
-  showUnknownError(): void;
+  id: number;
 }
 
 type InitialStoreData = {
@@ -94,8 +76,8 @@ function addId(notification: NotificationItem): NotificationItem {
   };
 }
 
-export default defineStore<typeof storeName, NotificationState, NotificationGetters, NotificationActions>(storeName, {
-  state: (): NotificationState => {
+export default defineStore(storeName, {
+  state: () => {
     const initialData: InitialStoreData = window.initialData?.[storeName] || {};
 
     const state: NotificationState = {
@@ -120,7 +102,7 @@ export default defineStore<typeof storeName, NotificationState, NotificationGett
     },
   },
   actions: {
-    showNotification(notification) {
+    showNotification(notification: NotificationItem): MappedNotificationItem {
       handleRedirect(notification);
 
       const mappedNotification = addId(notification);
@@ -130,11 +112,11 @@ export default defineStore<typeof storeName, NotificationState, NotificationGett
       return mappedNotification;
     },
 
-    popNotification(id) {
+    popNotification(id: number): void {
       this.notifications = this.notifications.filter(notification => notification.id !== id);
     },
 
-    showUnknownError() {
+    showUnknownError(): void {
       this.showNotification(NOTIFICATION_UNKNOWN_ERROR);
     },
   },

@@ -6,7 +6,7 @@ import { InitialData as NotificationInitialData } from '@/stores/notification';
 
 export interface WindowInitialData {
   [Store.Session]: SessionInitialData;
-  [Store.Breadcrumbs]?: BreadcrumbInitialData;
+  [Store.Breadcrumb]?: BreadcrumbInitialData;
   [Store.Notification]?: NotificationInitialData;
 }
 

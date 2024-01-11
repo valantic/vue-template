@@ -2,7 +2,6 @@ import { Delimiters } from '@/plugins/vue-bem-cn/src/globals';
 import { isString, isNumber } from '../utils';
 
 type Modifiers = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: unknown;
 }
 

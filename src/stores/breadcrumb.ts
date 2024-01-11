@@ -14,7 +14,7 @@ type InitialData = {
   items?: BreadcrumbItem[];
 }
 
-const storeName = Store.Breadcrumbs;
+const storeName = Store.Breadcrumb;
 
 export default defineStore(storeName, {
   state: () => {

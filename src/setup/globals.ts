@@ -73,6 +73,6 @@ export const DEFAULT_IMAGE_SIZES: ImageSizes = {
  */
 export enum Store {
   Session = 'session',
-  Breadcrumbs = 'breadcrumbs',
+  Breadcrumb = 'breadcrumb',
   Notification = 'notification',
 }
