@@ -4,7 +4,6 @@
            ref="input"
            :autocomplete="autocomplete"
            :class="b('field')"
-           :disabled="disabled"
            :name="name"
            :title="title"
            v-bind="$attrs"
@@ -49,12 +48,12 @@
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup extends FormStates {
+  type Setup = FormStates & {
     input: Ref<HTMLInputElement | null>;
     slot: Ref<HTMLSpanElement | null>;
   }
 
-  interface Data {
+  type Data = {
     internalValue: string;
   }
 
@@ -462,10 +461,10 @@
     &--disabled:not(&--border-0) &__field:hover {
       border-color: variables.$color-grayscale--600;
       background-color: variables.$color-grayscale--1000;
-      color: variables.$color-grayscale--300;
+      color: variables.$color-grayscale--400;
 
       &::placeholder {
-        color: variables.$color-grayscale--300;
+        color: variables.$color-grayscale--400;
       }
     }
 

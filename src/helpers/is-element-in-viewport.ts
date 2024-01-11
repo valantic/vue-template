@@ -1,4 +1,4 @@
-interface ViewportSpacing {
+type ViewportSpacing = {
   top: number;
   right: number;
   bottom: number;

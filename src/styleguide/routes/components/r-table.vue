@@ -21,7 +21,7 @@
   import { faker } from '@faker-js/faker/locale/en';
   import eTable, { TableColumn, TableItem } from '@/elements/e-table.vue';
 
-  interface Setup {
+  type Setup = {
     columnsDefinition: TableColumn[];
   }
 

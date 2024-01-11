@@ -3,7 +3,7 @@ import { VueBemFunction } from '@/plugins/vue-bem-cn/src/globals';
 import { Viewport } from '@/plugins/viewport';
 import { Gtm } from '@/plugins/google-tag-manager';
 
-declare module '@vue/runtime-core' {
+declare module 'vue' {
   // provide typings for global properties
   interface ComponentCustomProperties {
     $dayjs: dayjs;

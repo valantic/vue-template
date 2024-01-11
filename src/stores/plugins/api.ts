@@ -8,7 +8,7 @@ import axios, {
 import notificationStore, { NotificationItem } from '@/stores/notification';
 import { PAGE_LANG } from '@/setup/i18n';
 
-export interface Api {
+export type Api = {
 
   /**
    * Runs a get request with given url with given url params.
@@ -45,7 +45,7 @@ export const axiosInstance: AxiosInstance = axios.create({
   },
 });
 
-interface PluginApi {
+type PluginApi = {
   $api: Api;
 }
 

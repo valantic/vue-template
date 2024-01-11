@@ -30,7 +30,8 @@
     "types": [
       "node",
       "vite/client",
-      "google.maps"
+      "google.maps",
+      "cookiebot-sdk"
     ]
   },
   "include": [

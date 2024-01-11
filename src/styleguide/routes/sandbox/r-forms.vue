@@ -18,6 +18,13 @@
                      placeholder="Your Name"
             />
           </e-label>
+          <e-label name="Surname">
+            <e-input v-model="form.surname"
+                     name="surname"
+                     placeholder="Your Surname"
+                     disabled
+            />
+          </e-label>
           <e-label name="E-Mail" required>
             <e-input v-model="form.email"
                      :state="v$.form.email.$error ? FieldStates.Error : FieldStates.Default"
@@ -35,6 +42,16 @@
                       :notification="v$.form.language.$error ? 'Required field' : ''"
                       name="language"
                       @blur="v$.form.language.$touch()"
+            />
+          </e-label>
+          <e-label name="Color" required>
+            <e-select v-model="form.color"
+                      :options="mock.colors"
+                      :state="v$.form.color.$error ? FieldStates.Error : FieldStates.Default"
+                      :notification="v$.form.color.$error ? 'Required field' : ''"
+                      name="color"
+                      disabled
+                      @blur="v$.form.color.$touch()"
             />
           </e-label>
           <e-label name="Business fields" required>
@@ -60,12 +77,14 @@
             <e-checkbox v-model="form.topics"
                         value="food"
                         name="topics"
+                        disabled
             >
               Food
             </e-checkbox>
             <e-checkbox v-model="form.topics"
                         value="technics"
                         name="topics"
+                        disabled
             >
               Technics
             </e-checkbox>
@@ -113,6 +132,7 @@
             <e-radio v-model="form.frequency"
                      value="twiceAMonth"
                      name="frequency"
+                     disabled
             >
               Twice a month
             </e-radio>
@@ -158,23 +178,25 @@
   import eButton from '@/elements/e-button.vue';
   import { FieldStates } from '@/compositions/form-states';
 
-  interface SelectItem {
+  type SelectItem = {
     label: string;
     value: string;
   }
 
-  interface Setup {
+  type Setup = {
     v$: Ref<Validation>;
     formRef: Ref<HTMLFormElement | null>;
     FieldStates: typeof FieldStates;
   }
 
-  interface Data {
+  type Data = {
     form: {
       name: string;
+      surname: string;
       email: string;
       notes: string;
       language: string;
+      color: string;
       topics: string[];
       frequency: string;
       businessFields: string[];
@@ -182,6 +204,7 @@
     mock: {
       businessFields: SelectItem[];
       languages: SelectItem[];
+      colors: SelectItem[];
     };
   }
 
@@ -215,11 +238,13 @@
       return {
         form: {
           name: '',
+          surname: '',
           email: '',
           notes: '',
           language: '',
-          topics: [],
-          frequency: '',
+          color: 'red',
+          topics: ['technics'],
+          frequency: 'twiceAMonth',
           businessFields: [],
         },
         mock: {
@@ -235,6 +260,16 @@
             {
               label: 'French',
               value: 'french',
+            },
+          ],
+          colors: [
+            {
+              label: 'Red',
+              value: 'red',
+            },
+            {
+              label: 'Green',
+              value: 'green',
             },
           ],
           businessFields: [
@@ -271,6 +306,9 @@
         language: {
           required,
         },
+        color: {
+          required,
+        },
         businessFields: {
           required,
         },
@@ -297,7 +335,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '../../../setup/scss/variables';
 
   .r-forms {
     display: grid;

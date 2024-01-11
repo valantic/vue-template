@@ -6,18 +6,18 @@ const storageKey = Symbol('Outside click directive instance');
 
 type OutsideClickHandlerFunction = (event: Event) => void;
 
-interface OutsideClickValue {
+type OutsideClickValue = {
   excludeRefs: string[];
   excludeIds: string[];
   excludeElements: HTMLElement[];
   handler: OutsideClickHandlerFunction;
 }
 
-interface OutsideClickDirectiveBinding extends DirectiveBinding {
+type OutsideClickDirectiveBinding = DirectiveBinding & {
   value: OutsideClickHandlerFunction | OutsideClickValue;
 }
 
-interface OutsideClickElement extends HTMLElement {
+type OutsideClickElement = HTMLElement & {
   [storageKey]: OutsideClickHandlerFunction;
 }
 

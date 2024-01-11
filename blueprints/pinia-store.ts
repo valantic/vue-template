@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 
-interface State {
+type State = {
   // Add types for the State.
 }
 
-interface InitialData {
+type InitialData = {
   // Add types for InitialData
 }
 

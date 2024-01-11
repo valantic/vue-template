@@ -199,12 +199,12 @@
 
   type ItemId = number | string;
 
-  export interface TableItem {
+  export type TableItem = {
     disabled?: boolean;
     [key: string]: ItemId | unknown;
   }
 
-  export interface TableColumn {
+  export type TableColumn = {
     title: string | (() => string);
     key: string;
     align: 'left' | 'center' | 'right';
@@ -216,16 +216,16 @@
     sort?(a: unknown, b: unknown): number;
   }
 
-  interface RowLink {
+  type RowLink = {
     href?(item: TableItem, column?: TableColumn, event?: Event): string;
     title?: string | ((item?: TableItem) => string);
   }
 
-  interface Setup extends Uuid {
+  type Setup = Uuid & {
     toggleButton: Ref<HTMLButtonElement>;
   }
 
-  interface Data {
+  type Data = {
 
     /**
      * Holds a flag if sorting options are visible

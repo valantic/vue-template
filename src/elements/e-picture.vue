@@ -24,15 +24,15 @@
   import { BREAKPOINTS_MAX } from '@/setup/globals';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  export interface ImageSizes {
+  export type ImageSizes = {
     [key: keyof typeof BREAKPOINTS_MAX | 'fallback' | string]: number;
   }
 
-  interface SizePerBreakpoint {
+  type SizePerBreakpoint = {
     [key: string]: number;
   }
 
-  interface Data {
+  type Data = {
     loaded: boolean;
     fallbackHeight: number;
     internalSrcSet: string;

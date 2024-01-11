@@ -80,18 +80,18 @@
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
 
-  interface Option {
+  type Option = {
     value: string;
     label: string;
     [key: string]: string;
   }
 
-  interface Setup extends FormStates, Uuid {
+  type Setup = FormStates & Uuid & {
     searchField: Ref<HTMLInputElement | null>;
     fieldWrapper: Ref<HTMLButtonElement | null>;
-  }
+  };
 
-  interface Data {
+  type Data = {
     isOpen: boolean;
     searchTerm: string;
   }

@@ -87,21 +87,21 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eSelect from '@/elements/e-select.vue';
 
-  interface DebugConfiguration {
+  type DebugConfiguration = {
     header: string;
     enabled: boolean;
     status: string;
     response: string;
   }
 
-  interface Setup {
+  type Setup = {
     statusOptions: {
       label: string;
       value: string;
     }[];
   }
 
-  interface Data {
+  type Data = {
     search: string;
     handlers: ReadonlyArray<RequestHandler> | null;
     configurations: {
@@ -109,7 +109,7 @@
     };
   }
 
-  interface Endpoint {
+  type Endpoint = {
     header: string;
     method: string;
     path: string;

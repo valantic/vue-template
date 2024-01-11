@@ -21,7 +21,7 @@
   import { defineComponent, PropType } from 'vue';
   import sColorSpecimen from './s-color-specimen.vue';
 
-  interface Color {
+  type Color = {
     name: string;
     value: string[];
   }

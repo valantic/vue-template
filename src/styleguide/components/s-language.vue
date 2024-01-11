@@ -16,7 +16,7 @@
   import { defineComponent } from 'vue';
   import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
-  interface Data {
+  type Data = {
     i18nLocales: string[];
   }
 
