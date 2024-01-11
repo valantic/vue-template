@@ -681,8 +681,6 @@ You can read more about this practice [here](https://vuejs.org/guide/extras/rend
 
 ### Async components
 
-Vue is able to load components asynchronously. While this should be used sparingly, since a huge amount of files will also slow down the whole application, it can be used to load big parts which are only used in a very specific an lesser reached part of the application on demand (e.g. the checkout in a shop or an extensive configurator for a certain task).
-
 In large applications, we may need to divide the app into smaller chunks and only load a component from the server when it's needed. To make that possible, Vue has a `defineAsyncComponent` function. Async Components are described [here](https://vuejs.org/guide/components/async).
 
 You can find more about how to use this with Vue components [here](https://vuejs.org/guide/essentials/component-basics.html#Async-Components).
@@ -852,21 +850,6 @@ $ brew install nasm
 # OR
 
 $ brew upgrade nasm
-```
-
-#### Error on Windows machines while running the `npm run build script`
-
-If you're on a Windows machine, and you need to build the project – there is a problem with assign node env. variables like
-`NODE_ENV=production`. To get rid of this problem there is an npm package that could help you => https://www.npmjs.com/package/cross-env
-Be sure that you add "cross-env" at the start of the script like:
-
-package.json:
-```json
-{
-  "scripts": {
-      "build": "cross-env NODE_ENV=production vite build --mode=app"
-    }
-}
 ```
 
 ## Vite integration todos
