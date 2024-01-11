@@ -26,11 +26,11 @@
   import { defineComponent } from 'vue';
   import spritePath from '@/assets/icons.svg';
 
-  interface SizeLookup {
+  type SizeLookup = {
     [key: string]: number[];
   }
 
-  interface Size {
+  type Size = {
     width: number;
     height: number;
   }

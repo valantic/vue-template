@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
 
-export interface Delimiters {
+export type Delimiters = {
   ns: string;
   el: string;
   mod: string;
@@ -19,7 +19,7 @@ export const DEFAULT_CONFIG = {
   methodName: 'b',
 };
 
-export interface Modifiers {
+export type Modifiers = {
   [key: string]: boolean | string | number | undefined;
 }
 

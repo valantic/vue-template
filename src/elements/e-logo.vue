@@ -23,7 +23,7 @@
   import useTheme, { Theme } from '@/compositions/themes';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Logo {
+  type Logo = {
     icon: string;
     alt: string;
     title: string;
