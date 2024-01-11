@@ -71,7 +71,7 @@
 </script>
 
 <style lang="scss">
-@use '../../setup/scss/variables';
+@use '../../../setup/scss/variables';
 
 .r-video {
   &__form {
