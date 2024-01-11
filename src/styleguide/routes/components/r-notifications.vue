@@ -75,7 +75,7 @@
   import useNotificationStore from '@/stores/notification';
   import eButton from '@/elements/e-button.vue';
 
-  interface Setup {
+  type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
@@ -115,8 +115,8 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/mixins';
-  @use '../../setup/scss/variables';
+  @use '../../../setup/scss/mixins';
+  @use '../../../setup/scss/variables';
 
   .r-notifications {
     display: flex;

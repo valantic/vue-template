@@ -9,7 +9,7 @@ import notificationStore, { mapApiResponseMessages } from '@/stores/notification
 import { PAGE_LANG } from '@/setup/i18n';
 import { ApiResponseMessages } from '@/types/api-response';
 
-export interface Api {
+export type Api = {
 
   /**
    * Runs a get request with given url with given url params.

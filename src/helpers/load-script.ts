@@ -1,9 +1,9 @@
-interface Callback {
+type Callback = {
   id: string;
   callback(): unknown;
 }
 
-interface Attributes {
+type Attributes = {
   defer: boolean;
   async: boolean;
 }

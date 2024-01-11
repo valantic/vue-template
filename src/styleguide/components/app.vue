@@ -13,7 +13,7 @@
   import sNavigation from '@/styleguide/components/s-navigation.vue';
   import useNotificationStore from '@/stores/notification';
 
-  interface Setup {
+  type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
   }
 

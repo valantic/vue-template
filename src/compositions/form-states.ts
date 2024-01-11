@@ -14,14 +14,14 @@ export enum FieldStates {
   Error = 'error',
 }
 
-interface StateModifiers {
+type StateModifiers = {
   state: FieldStates;
   active: boolean;
   focus: boolean;
   hover: boolean;
 }
 
-export interface FormStates {
+export type FormStates = {
   active: Ref<boolean>;
   focus: Ref<boolean>;
   hover: Ref<boolean>;

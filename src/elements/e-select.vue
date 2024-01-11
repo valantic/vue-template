@@ -43,11 +43,11 @@
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
 
-  interface Data {
+  type Data = {
     internalValue: string;
   }
 
-  interface Options {
+  type Options = {
     [key: string]: string;
   }
 

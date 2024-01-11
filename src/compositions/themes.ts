@@ -1,7 +1,7 @@
 import { computed, ComputedRef } from 'vue';
 import sessionStore from '@/stores/session';
 
-export interface Theme {
+export type Theme = {
   theme: ComputedRef<string>;
 }
 

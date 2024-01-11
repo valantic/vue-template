@@ -1,10 +1,8 @@
-import {
-  defineStore,
-} from 'pinia';
+import { defineStore } from 'pinia';
 import {
   IS_STORAGE_AVAILABLE,
+  Store,
   StorageKey,
-  GlobalStore,
   ApiResponseMessageAction,
 } from '@/setup/globals';
 import i18n from '@/setup/i18n';
@@ -60,7 +58,7 @@ const NOTIFICATION_UNKNOWN_ERROR: NotificationItem = {
   message: i18n.global.t('globalMessages.unknownApiError'),
 };
 
-const storeName = GlobalStore.NOTIFICATION;
+const storeName = Store.Notification;
 
 let currentId = 1;
 
@@ -155,7 +153,7 @@ export function mapApiResponseMessages(messages: ApiResponseMessages): Notificat
 }
 
 export default defineStore(storeName, {
-  state: (): NotificationState => {
+  state: () => {
     const initialData: InitialData = window.initialData?.[storeName] || {};
     const { messages } = initialData || {};
 

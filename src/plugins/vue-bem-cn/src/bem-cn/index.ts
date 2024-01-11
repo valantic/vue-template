@@ -2,7 +2,7 @@ import { Delimiters } from '@/plugins/vue-bem-cn/src/globals';
 import { isString, isPObject, hyphenate } from '../utils';
 import bemNames from './bem-names';
 
-interface Options {
+type Options = {
   delimiters: Delimiters;
   hyphenate: boolean;
 }

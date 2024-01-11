@@ -52,10 +52,10 @@ export const DEFAULT_IMAGE_SIZES: ImageSizes = {
 /**
  * Contains list of all Pinia stores.
  */
-export enum GlobalStore {
-  SESSION = 'session',
-  BREADCRUMBS = 'breadcrumbs',
-  NOTIFICATION = 'notification',
+export enum Store {
+  Session = 'session',
+  Breadcrumb = 'breadcrumb',
+  Notification = 'notification',
 }
 
 /**

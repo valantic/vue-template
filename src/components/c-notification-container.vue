@@ -14,7 +14,7 @@
   import cNotification from '@/components/c-notification.vue';
   import useNotificationStore, { MappedNotificationItem } from '@/stores/notification';
 
-  interface Setup {
+  type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
   }
 

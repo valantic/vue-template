@@ -18,11 +18,11 @@
   import useNotificationStore, { MappedNotificationItem } from '@/stores/notification';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup {
+  type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
-  interface Data {
+  type Data = {
     expireDelay: number;
   }
 

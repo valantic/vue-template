@@ -42,7 +42,7 @@
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
 
-  // interface Setup {}
+  // type Setup = {}
 
   /**
    * Renders a modal dialog.

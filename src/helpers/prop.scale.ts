@@ -1,4 +1,4 @@
-interface PropConfig {
+type PropConfig = {
   type: (NumberConstructor | StringConstructor)[];
   default: number;
   validator?(value: string): boolean;

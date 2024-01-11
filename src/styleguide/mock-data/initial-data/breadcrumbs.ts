@@ -1,17 +1,9 @@
-import { faker } from '@faker-js/faker/locale/en';
-import breadcrumb from '../data-object/breadcrumb';
+import createBreadcrumbItem from '@/styleguide/mock-data/data-object/breadcrumb';
 
-export default [
-  {
-    ...breadcrumb,
-    name: faker.commerce.productName(),
-  },
-  {
-    ...breadcrumb,
-    name: faker.commerce.productName(),
-  },
-  {
-    ...breadcrumb,
-    name: faker.commerce.productName(),
-  },
-];
+export default {
+  items: [
+    createBreadcrumbItem(),
+    createBreadcrumbItem(),
+    createBreadcrumbItem(),
+  ],
+};
