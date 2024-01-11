@@ -847,9 +847,6 @@ $ brew upgrade nasm
 
 ## Vite integration todos
 * [ ] Apply new ESLint rules to valantic config.
-* [ ] Check "Vite Inspect"
-* [ ] Refactor storybook stories to TS.
-* [ ] Update package.md
 
 ## Roadmap
 * [ ] Add 'dangerous' flag for components that use v-html in Storybook.
