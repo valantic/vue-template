@@ -117,7 +117,7 @@
                 :column="column"
                 name="date"
           >
-            {{ $dayjs(item[column.key]).format('DD.MM.YYYY') }}
+            {{ $dayjs(item[column.key] as Date).format('DD.MM.YYYY') }}
           </slot>
           <!-- @slot Use this dynamic slot to add custom templates to the cells -->
           <slot
@@ -636,7 +636,7 @@
               return !aValue ? 1 : -1;
 
             case aValue instanceof Date:
-              return this.$dayjs(aValue).isAfter(bValue as Date) ? 1 : -1;
+              return this.$dayjs(aValue as Date).isAfter(bValue as Date) ? 1 : -1;
 
             default:
               return 0;
