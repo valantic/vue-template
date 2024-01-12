@@ -10,7 +10,12 @@
         :label="startLabel || $t(range ? 'c-date-picker.inputStartLabel' : 'c-date-picker.inputLabel')"
         :name="startName"
         @focus="onFocusStartDate"
-      />
+      >
+        <e-icon :class="b('icon')"
+                icon="i-calendar"
+                size="18"
+        />
+      </e-date>
       <e-date
         v-if="range"
         v-model="endDate"
@@ -18,7 +23,12 @@
         :label="endLabel || $t('c-date-picker.inputEndLabel')"
         :name="endName"
         @focus="onFocusEndDate"
-      />
+      >
+        <e-icon :class="b('icon')"
+                icon="i-calendar"
+                size="18"
+        />
+      </e-date>
     </div>
     <transition :name="b('transition', { fade: true })">
       <div v-show="isCalendarVisible"
@@ -448,16 +458,17 @@
 
     &__calendar-header {
       position: relative;
+      display: flex;
+      gap: variables.$spacing--5;
+      justify-content: center;
       padding: variables.$spacing--15;
       border-bottom: 1px solid variables.$color-grayscale--0;
       text-align: center;
     }
 
     &__close {
-      position: absolute;
       top: 50%;
       right: variables.$spacing--15;
-      transform: translateY(-50%);
       cursor: pointer;
     }
 
@@ -527,7 +538,7 @@
           &:focus,
           &:hover {
             border-bottom-color: variables.$color-grayscale--1000;
-            color: variables.$color-grayscale--1000;
+            background-color: variables.$color-grayscale--1000;
           }
         }
       }

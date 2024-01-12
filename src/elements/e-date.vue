@@ -10,11 +10,7 @@
              @focus="onFocus"
              @blur="onBlur"
     >
-      <e-icon v-if="!isInvalid"
-              :class="b('icon')"
-              icon="i-calendar"
-              size="18"
-      />
+      <slot></slot>
     </e-input>
   </span>
 </template>
@@ -24,7 +20,6 @@
   import { Dayjs } from 'dayjs';
   import { DateFormat } from '@/plugins/dayjs';
   import { FieldState } from '@/compositions/form-states';
-  import eIcon from '@/elements/e-icon.vue';
   import eInput from '@/elements/e-input.vue';
 
   interface Setup {
@@ -44,7 +39,6 @@
     name: 'e-date',
     components: {
       eInput,
-      eIcon,
     },
 
     props: {
@@ -82,8 +76,8 @@
     },
     emits: {
       'update:modelValue': (payload: Date) => !!payload,
-      'focus': (payload: Event) => !!payload,
-      'blur': (payload: Event) => !!payload,
+      'focus': (payload?: Event) => !!payload,
+      'blur': (payload?: Event) => !!payload,
     },
 
     setup(): Setup {
