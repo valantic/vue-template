@@ -1,13 +1,8 @@
-import {
-  Store,
-  defineStore,
-  StateTree,
-  _GettersTree,
-} from 'pinia';
-import { S_STORAGE_AVAILABLE, GlobalStore } from '@/setup/globals';
+import { defineStore } from 'pinia';
+import { IS_STORAGE_AVAILABLE, Store } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 
-export interface NotificationItem {
+export type NotificationItem = {
   id: number;
   type?: string;
   message?: string;
@@ -16,7 +11,7 @@ export interface NotificationItem {
   redirectUrl?: string;
 }
 
-interface NotificationState extends StateTree {
+type NotificationState = {
 
   /**
    * Holds the notification items.
@@ -24,35 +19,15 @@ interface NotificationState extends StateTree {
   notifications: NotificationItem[];
 }
 
-interface NotificationGetters extends _GettersTree<NotificationState> {
+export type MappedNotificationItem = NotificationItem & {
 
   /**
-   * Gets the current list of notifications.
+   * The ID of the notification.
    */
-  getNotifications(state: NotificationState): NotificationItem[];
+  id: number;
 }
 
-interface NotificationActions {
-
-  /**
-   * Shows the given notification and returns its instance.
-   */
-  showNotification(notificationItem: NotificationItem): NotificationItem;
-
-  /**
-   * Removes a notification.
-   */
-  popNotification(id: number): void;
-
-  /**
-   * Adds an "unknown error" to the notification stack.
-   */
-  showUnknownError(): void;
-}
-
-export type NotificationStore = Store<string, NotificationState, NotificationGetters, NotificationActions>;
-
-interface InitialStoreData {
+type InitialStoreData = {
 
   /**
    * Holds the initial notification items.
@@ -69,7 +44,7 @@ const NOTIFICATION_UNKNOWN_ERROR: NotificationItem = {
   message: i18n.global.t('globalMessages.unknownApiError'),
 };
 
-const storeName = GlobalStore.NOTIFICATION;
+const storeName = Store.Notification;
 
 let currentId = 1;
 
@@ -79,7 +54,7 @@ let currentId = 1;
 function handleRedirect(notification: NotificationItem): void {
   const { redirectUrl } = notification || {};
 
-  if (redirectUrl && S_STORAGE_AVAILABLE) {
+  if (redirectUrl && IS_STORAGE_AVAILABLE) {
     localStorage.setItem('notification', JSON.stringify({
       ...notification,
       redirectUrl: null,
@@ -101,8 +76,8 @@ function addId(notification: NotificationItem): NotificationItem {
   };
 }
 
-export default defineStore<typeof storeName, NotificationState, NotificationGetters, NotificationActions>(storeName, {
-  state: (): NotificationState => {
+export default defineStore(storeName, {
+  state: () => {
     const initialData: InitialStoreData = window.initialData?.[storeName] || {};
 
     const state: NotificationState = {
@@ -127,7 +102,7 @@ export default defineStore<typeof storeName, NotificationState, NotificationGett
     },
   },
   actions: {
-    showNotification(notification) {
+    showNotification(notification: NotificationItem): MappedNotificationItem {
       handleRedirect(notification);
 
       const mappedNotification = addId(notification);
@@ -137,11 +112,11 @@ export default defineStore<typeof storeName, NotificationState, NotificationGett
       return mappedNotification;
     },
 
-    popNotification(id) {
+    popNotification(id: number): void {
       this.notifications = this.notifications.filter(notification => notification.id !== id);
     },
 
-    showUnknownError() {
+    showUnknownError(): void {
       this.showNotification(NOTIFICATION_UNKNOWN_ERROR);
     },
   },

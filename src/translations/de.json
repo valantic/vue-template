@@ -31,6 +31,10 @@
     "confirm": "Bestätigen",
     "cancel": "Abbrechen"
   },
+  "c-consent-gatekeeper": {
+    "noConsentMessage": "Diese Funktionalität benötigt Ihre Zustimmung für \"{consentGroup}\"-Cookies. Bitte aktualisieren Sie Ihre Zustimmung.",
+    "showConsentButtonLabel": "Zustimmung anpassen"
+  },
   "c-notification": {
     "confirm": "OK",
     "decline": "Abbrechen",

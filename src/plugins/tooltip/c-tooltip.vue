@@ -39,11 +39,11 @@
     DEFAULT_POPPER_OPTIONS,
   } from '@/plugins/tooltip/shared';
 
-  interface Setup {
+  type Setup = {
     tooltip: Ref<HTMLDivElement>;
   }
 
-  interface Data {
+  type Data = {
 
     /**
      * Holds the component instance related popper instance.

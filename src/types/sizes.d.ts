@@ -1,4 +1,4 @@
-export interface ImageSizes {
+export type ImageSizes = {
   fallback?: number;
   lg?: number;
   md?: number;

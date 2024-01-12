@@ -14,8 +14,8 @@
   import { defineComponent } from 'vue';
   import ePicture, { ImageSizes } from '@/elements/e-picture.vue';
 
-  // interface Setup {}
-  interface Data {
+  // type Setup = {}
+  type Data = {
     sizes: ImageSizes;
   }
 

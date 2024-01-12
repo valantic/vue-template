@@ -6,36 +6,10 @@
   <title>Vue template</title>
 
   <script>
-    // Initial data demo
-    window.initialData = {
-      session: {},
-      breadcrumb: {},
-      notification: {},
-    };
-    /*
-    window.initialData.breadcrumb.items = [
-      {
-        name: 'Home',
-        url: '#',
-      },
-      {
-        name: 'Sandbox',
-        url: '#',
-      }
-    ];
-    window.initialData.notification.notifications = [
-      {
-        id: 0,
-        type: 'success',
-        message: 'Example Message',
-        expire: null,
-        selector: null,
-        redirectUrl: '',
-      }
-    ];
-     */
+    window.initialData = {};
   </script>
 
+  <script type="module" src="/src/styleguide/mock-data/initial-data.ts"></script>
   <script type="module" src="/src/main.ts" defer></script>
 </head>
 <body>

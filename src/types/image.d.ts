@@ -1,16 +1,16 @@
-export interface ImageMedia {
+export type ImageMedia = {
   [key: string]: string;
 }
 
-export interface Image {
+export type Image = {
   fallback: string;
   alt: string;
 }
 
-export interface ImageSources extends Image {
+export type ImageSources = Image & {
   media: ImageMedia;
-}
+};
 
-export interface ImageSrcset extends Image {
+export type ImageSrcset = Image & {
   srcset: string;
 }

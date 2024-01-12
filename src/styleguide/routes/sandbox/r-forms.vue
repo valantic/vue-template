@@ -196,18 +196,18 @@
   import eDate from '@/elements/e-date.vue';
   import cDatePicker from '@/components/c-date-picker.vue';
 
-  interface SelectItem {
+  type SelectItem = {
     label: string;
     value: string;
   }
 
-  interface Setup {
+  type Setup = {
     v$: Ref<Validation>;
     formRef: Ref<HTMLFormElement | null>;
     FieldState: typeof FieldState;
   }
 
-  interface Data {
+  type Data = {
     form: {
       name: string;
       surname: string;
@@ -361,7 +361,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '../../../setup/scss/variables';
 
   .r-forms {
     display: grid;

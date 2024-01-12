@@ -71,16 +71,16 @@
   import spritePath from '@/assets/icons.svg';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup {
+  type Setup = {
     input: Ref<HTMLInputElement | null>;
   }
 
-  interface FilteredIcon {
+  type FilteredIcon = {
     name: string;
     negative: boolean;
   }
 
-  interface Data {
+  type Data = {
 
     /**
      * An array of available icons.
@@ -113,7 +113,7 @@
     spritePath: string;
   }
 
-  interface Icon {
+  type Icon = {
     name: string;
   }
 
