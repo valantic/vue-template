@@ -13,11 +13,11 @@
   import { defineComponent } from 'vue';
   import { cConsentGatekeeper, ConsentGroup } from '@/plugins/consent';
 
-  interface Setup {
+  type Setup = {
     ConsentGroup: typeof ConsentGroup;
   }
 
-  // interface Data {}
+  // type Data = {}
 
   /**
    * Showcase for the consent plugin.

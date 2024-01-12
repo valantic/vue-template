@@ -27,11 +27,11 @@
   import eIcon from '@/elements/e-icon.vue';
   import eInput from '@/elements/e-input.vue';
 
-  interface Setup {
+  type Setup = {
     FieldState: typeof FieldState;
   }
 
-  interface Data {
+  type Data = {
     dayjsDate: Dayjs;
     textValue: string;
     isInvalid: boolean;
