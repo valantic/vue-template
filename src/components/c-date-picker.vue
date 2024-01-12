@@ -75,11 +75,11 @@
   import eDate from '@/elements/e-date.vue';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup {
+  type Setup = {
     calendar: Ref<HTMLDivElement | undefined>;
   }
 
-  interface Data {
+  type Data = {
     calendarInstance?: Pikaday;
     isCalendarVisible: boolean;
     startDate: Date;

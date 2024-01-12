@@ -1,6 +1,6 @@
 import { NotificationItem } from '@/stores/notification';
 
-interface MockNotifications {
+type MockNotifications = {
   success: NotificationItem;
   info: NotificationItem;
   error: NotificationItem;

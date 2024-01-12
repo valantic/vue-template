@@ -48,9 +48,9 @@
   import { LinkTarget } from '@/setup/globals';
   import { Link } from '@/types/link';
 
-  interface Setup extends Uuid {}
+  type Setup = Uuid;
 
-  export interface Tab {
+  export type Tab = {
 
     /**
      * The text title for the current tab.
@@ -73,7 +73,7 @@
     link?: Link;
   }
 
-  interface Data {
+  type Data = {
     LinkTarget: typeof LinkTarget;
 
     /**

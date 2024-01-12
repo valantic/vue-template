@@ -12,7 +12,7 @@
   import { defineComponent } from 'vue';
   import eCheckbox from '@/elements/e-checkbox.vue';
 
-  interface Data {
+  type Data = {
 
     /**
      * Determines if the HTML validation styles should be applied.

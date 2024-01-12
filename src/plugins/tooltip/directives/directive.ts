@@ -18,7 +18,7 @@ type TooltipEvent = {
   [key: string]: EventListener;
 }
 
-interface TooltipElement extends HTMLElement {
+type TooltipElement = HTMLElement & {
   [storageKey]: {
     isHidden: boolean;
     popper: Instance;
