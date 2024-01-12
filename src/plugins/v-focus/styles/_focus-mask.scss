@@ -9,7 +9,7 @@
     width: 0;
     height: 0;
     opacity: 0;
-    background: variables.$color-grayscale--400;
+    background: rgba(variables.$color-grayscale--400, 0.5);
     transition: opacity variables.$transition-duration--200 ease-in-out;
   }
 
@@ -31,6 +31,6 @@
   }
 
   &--variant-color::before {
-    background: variables.$color-primary--1;
+    background: rgba(variables.$color-primary--1, 0.5);
   }
 }
