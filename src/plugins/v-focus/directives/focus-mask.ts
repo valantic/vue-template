@@ -1,6 +1,6 @@
 import state from '../state';
 
-const bemBlock = 'focus-mask';
+const bemBlock = 'v-focus-mask';
 
 /**
  * Adds or removes a focus class to the given element based on the current focus state.
@@ -18,8 +18,7 @@ function update(el: HTMLElement): void {
     }
   } else {
     const removeClasses = (): void => {
-      el.classList.remove(visibleModifier);
-      el.classList.remove(hidingModifier);
+      el.classList.remove(visibleModifier, hidingModifier);
 
       if (variantModifier) {
         el.classList.remove(variantModifier);

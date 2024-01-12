@@ -1,7 +1,7 @@
 @use '../../../setup/scss/variables';
 @use '../../../setup/scss/mixins';
 
-.focus-mask {
+.v-focus-mask {
   &::before {
     @include mixins.z-index(focusOverlay);
 

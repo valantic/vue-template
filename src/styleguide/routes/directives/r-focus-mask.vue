@@ -12,17 +12,6 @@
         Toggle focus
       </button>
     </div>
-    <h2>Variant</h2>
-    <div v-focus-item:color="hasColorFocus">
-      I have the focus.
-      <br>
-      <br>
-      <button type="button"
-              @click="hasColorFocus = !hasColorFocus"
-      >
-        Toggle focus
-      </button>
-    </div>
   </div>
 </template>
 
@@ -33,7 +22,6 @@
 
   type Data = {
     hasFocus: boolean;
-    hasColorFocus: boolean;
   }
 
   /**
@@ -53,7 +41,6 @@
     data(): Data {
       return {
         hasFocus: false,
-        hasColorFocus: false,
       };
     },
 
