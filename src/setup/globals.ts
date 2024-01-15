@@ -36,8 +36,8 @@ export const RESIZE_DEBOUNCE = 100;
  * Defines possible link target values.
  */
 export enum LinkTarget {
-  SELF = '_self',
-  BLANK = '_blank',
+  Self = '_self',
+  Blank = '_blank',
   // Only add additional types if required.
 }
 
@@ -86,8 +86,8 @@ export enum ApiResponseMessageAction {
 }
 
 /**
- * Holds all storage keys used in the application.
+ * Holds all window storage keys used in the application.
  */
-export enum StorageKey {
+export enum WindowsStorage {
   Notifications = 'appNotifications',
 }

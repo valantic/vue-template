@@ -1,9 +1,9 @@
 import { ApiResponseMessage } from '@/types/api-response-message';
 
 export type ApiResponseMessages = {
-  SUCCESS: ApiResponseMessage[];
-  ERROR: ApiResponseMessage[];
-  INFO: ApiResponseMessage[];
+  success: ApiResponseMessage[];
+  error: ApiResponseMessage[];
+  info: ApiResponseMessage[];
 }
 
 export type ApiResponse = {

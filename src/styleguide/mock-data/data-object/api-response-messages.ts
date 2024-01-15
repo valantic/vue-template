@@ -5,9 +5,9 @@ import { ApiResponseMessages } from '@/types/api-response';
  */
 export default function createApiResponseMessages(options?: Partial<ApiResponseMessages>): ApiResponseMessages {
   return {
-    SUCCESS: [],
-    ERROR: [],
-    INFO: [],
+    success: [],
+    error: [],
+    info: [],
     ...options,
   };
 }

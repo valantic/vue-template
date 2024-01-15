@@ -5,7 +5,6 @@ import createApiResponseMessages from '@/styleguide/mock-data/data-object/api-re
 
 export default function notifications(req: RestRequest): ApiResponse | null {
   const { searchParams } = req.url;
-
   const type = searchParams.get('type');
   const redirectUrl = searchParams.get('redirectUrl');
   const expire = JSON.parse(searchParams.get('expire') || 'true');
@@ -18,15 +17,15 @@ export default function notifications(req: RestRequest): ApiResponse | null {
 
   switch (type) {
     case 'success':
-      messages.SUCCESS.push(createApiResponseMessage(message));
+      messages.success.push(createApiResponseMessage(message));
       break;
 
     case 'info':
-      messages.INFO.push(createApiResponseMessage(message));
+      messages.info.push(createApiResponseMessage(message));
       break;
 
     default:
-      messages.ERROR.push(createApiResponseMessage(message));
+      messages.error.push(createApiResponseMessage(message));
       break;
   }
 

@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import {
   IS_STORAGE_AVAILABLE,
   Store,
-  StorageKey,
+  WindowsStorage,
   ApiResponseMessageAction,
 } from '@/setup/globals';
 import i18n from '@/setup/i18n';
@@ -35,7 +35,7 @@ type NotificationState = {
   notifications: MappedNotificationItem[];
 
   /**
-   * Defines if the global default notifications under the header are displayed.
+   * Defines if the global default notifications should be displayed.
    * Can be used to disable them for cases like when the global notifications
    * are displayed already at another place, e.g. in a modal.
    */
@@ -87,11 +87,11 @@ function handleRedirectOrReload(notification: NotificationItem): void {
  */
 function getNotificationsFromStorage(): MappedNotificationItem[] {
   try {
-    const messages = window.localStorage.getItem(StorageKey.Notifications);
+    const messages = window.localStorage.getItem(WindowsStorage.Notifications);
     const messagesParsed = messages ? JSON.parse(messages) : null;
 
     if (Array.isArray(messagesParsed) && messagesParsed.length) {
-      window.localStorage.removeItem(StorageKey.Notifications);
+      window.localStorage.removeItem(WindowsStorage.Notifications);
 
       return messagesParsed;
     }
@@ -122,30 +122,30 @@ function mapApiResponseMessage(message: ApiResponseMessage, type: 'success' | 'i
     message: message.message,
     expire: typeof secondsToShow === 'number' && secondsToShow > 0,
     pageReload: message.action === ApiResponseMessageAction.PageReload,
-    redirectUrl: message.redirectUrl || undefined,
+    redirectUrl: message.redirectUrl,
   };
 }
 
 export function mapApiResponseMessages(messages: ApiResponseMessages): NotificationItem[] {
-  const { SUCCESS, INFO, ERROR } = messages || {};
+  const { success, info, error } = messages || {};
 
   const notifications: NotificationItem[] = [];
 
-  if (Array.isArray(SUCCESS) && SUCCESS.length) {
+  if (Array.isArray(success) && success.length) {
     notifications.push(
-      ...SUCCESS.map(message => mapApiResponseMessage(message, 'success'))
+      ...success.map(message => mapApiResponseMessage(message, 'success'))
     );
   }
 
-  if (Array.isArray(INFO) && INFO.length) {
+  if (Array.isArray(info) && info.length) {
     notifications.push(
-      ...INFO.map(message => mapApiResponseMessage(message, 'info'))
+      ...info.map(message => mapApiResponseMessage(message, 'info'))
     );
   }
 
-  if (Array.isArray(ERROR) && ERROR.length) {
+  if (Array.isArray(error) && error.length) {
     notifications.push(
-      ...ERROR.map(message => mapApiResponseMessage(message, 'error'))
+      ...error.map(message => mapApiResponseMessage(message, 'error'))
     );
   }
 
