@@ -4,8 +4,13 @@
 
 .c-tooltip {
   $this: &;
-  $pointer-width: 6px;
-  $wrapper-padding: $pointer-width + 6px;
+  $background-color: $color-grayscale--500;
+  $color: $color-grayscale--0;
+  $box-shadow-color: rgba($color-grayscale--0, 0.2);
+  $border-radius: $border-radius--500;
+  $pointer__width: 6px;
+  $wrapper__padding: $pointer__width + 6px;
+  $content__padding: $spacing--5 $spacing--10;
 
   position: relative;
   display: block;
@@ -22,12 +27,11 @@
   }
 
   &__tooltip-wrapper {
-    @include z-index(front); // Was required for IE11.
-
     position: absolute;
     display: none;
     max-width: 80vw;
     opacity: 0;
+    color: $color;
     transition: opacity $transition-duration--100;
     pointer-events: none;
 
@@ -42,12 +46,12 @@
 
     &[data-popper-placement*='right'],
     &[data-popper-placement*='left'] {
-      padding: 0 $wrapper-padding;
+      padding: 0 $wrapper__padding;
     }
 
     &[data-popper-placement*='top'],
     &[data-popper-placement*='bottom'] {
-      padding: $wrapper-padding 0;
+      padding: $wrapper__padding 0;
     }
 
     &--active { // Popper not initialized
@@ -58,14 +62,20 @@
       opacity: 1;
       pointer-events: all;
     }
+
+    &--component {
+      display: block;
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 
   &__tooltip {
     position: relative;
-    padding: 10px;
-    border-radius: $border-radius--500;
-    background: $color-grayscale--500;
-    box-shadow: 0 0 6px rgba($color-grayscale--0, 0.2);
+    padding: $content__padding;
+    border-radius: $border-radius;
+    background: $background-color;
+    box-shadow: 0 0 6px $box-shadow-color;
     pointer-events: none;
 
     &::before,
@@ -75,10 +85,10 @@
       content: '';
       width: 0;
       height: 0;
-      border: $pointer-width solid transparent;
+      border: $pointer__width solid transparent;
       border-bottom-color: $color-grayscale--500;
       border-left-color: $color-grayscale--500;
-      background: $color-grayscale--500;
+      background: $background-color;
 
       // Left center
       [data-popper-placement='right'] & {
@@ -104,7 +114,7 @@
       // Top start
       [data-popper-placement='top-start'] &,
       [data-popper-placement='bottom-start'] & {
-        left: $wrapper-padding + $spacing--10;
+        left: $wrapper__padding + $spacing--10;
       }
 
       // Top center
@@ -118,7 +128,23 @@
     &::after {
       @include z-index(back);
 
-      box-shadow: 0 2px 6px rgba($color-grayscale--0, 0.2);
+      box-shadow: 0 2px 6px $box-shadow-color;
+    }
+  }
+
+  &__transition {
+    &--fade-enter-active,
+    &--fade-leave-active {
+      transition: opacity $transition-duration--200 ease;
+    }
+
+    &--fade-enter-from,
+    &--fade-leave-to {
+      opacity: 0;
+    }
+
+    &--fade-leave-to {
+      transition-delay: 200ms; // Delays hiding of the tooltip.
     }
   }
 }

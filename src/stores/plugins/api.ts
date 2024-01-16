@@ -112,7 +112,7 @@ export default function api():PluginApi {
           abortStack[uniqueId] = new AbortController();
           config = {
             ...config,
-            signal: abortStack[uniqueId].signal,
+            signal: abortStack[uniqueId]?.signal,
           };
         }
 
