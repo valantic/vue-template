@@ -5,7 +5,7 @@ const bemBlock = 'v-focus-mask';
 /**
  * Adds or removes a focus class to the given element based on the current focus state.
  */
-function update(el: HTMLElement): void {
+function updated(el: HTMLElement): void {
   const visibleModifier = `${bemBlock}--visible`;
   const variantModifier = state.variant && `${bemBlock}--variant-${state.variant}`;
   const hidingModifier = `${bemBlock}--hiding`;
@@ -43,9 +43,9 @@ export default {
     el.classList.add(bemBlock);
 
     if (state.enabled) {
-      update(el);
+      updated(el);
     }
   },
 
-  updated: update,
+  updated,
 };

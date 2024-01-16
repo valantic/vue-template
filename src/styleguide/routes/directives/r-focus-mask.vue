@@ -25,10 +25,10 @@
   }
 
   /**
-   * Showcase for the consent plugin.
+   * Showcase for the focus mask and item directives.
    */
   export default defineComponent({
-    name: 'r-consent',
+    name: 'r-focus-mask',
 
     // components: {},
 
@@ -64,9 +64,9 @@
 </script>
 
 <style lang="scss">
-  // @use '@/setup/scss/variables';
+  @use '@/setup/scss/variables';
 
-  .r-consent {
-    padding: 50px;
+  .r-focus-mask {
+    padding: variables.$spacing--50;
   }
 </style>
