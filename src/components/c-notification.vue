@@ -15,7 +15,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import useNotificationStore, { NotificationItem } from '@/stores/notification';
+  import useNotificationStore, { MappedNotificationItem } from '@/stores/notification';
   import eIcon from '@/elements/e-icon.vue';
 
   type Setup = {
@@ -41,7 +41,7 @@
        * The notification object consisting of the following properties:
        */
       notification: {
-        type: Object as PropType<NotificationItem>,
+        type: Object as PropType<MappedNotificationItem>,
         required: true,
       },
     },

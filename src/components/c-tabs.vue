@@ -13,8 +13,8 @@
            :aria-selected="tab.id === activeTab?.id"
            :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
            :href="tab.link?.href || `#c-tabs-${uuid}--panel-${tab.id}`"
-           :target="tab.link?.target || LinkTarget.SELF"
-           :rel="tab.link?.target === LinkTarget.BLANK ? 'noopener noreferrer' : undefined"
+           :target="tab.link?.target || LinkTarget.Self"
+           :rel="tab.link?.target === LinkTarget.Blank ? 'noopener noreferrer' : undefined"
            role="tab"
            @click="onTabClick(tab)"
         >

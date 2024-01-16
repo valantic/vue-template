@@ -1,17 +1,19 @@
 import { DirectiveBinding } from 'vue';
 import state from '../state';
 
+const bemBlock = 'v-focus-item';
+
 /**
  * Sets or removes a class depending on the current focus state.
  */
-function update(el: HTMLElement, binding: DirectiveBinding): void {
-  if (binding.value) {
-    el.classList.add('focus-item');
-  } else {
-    el.classList.remove('focus-item');
-  }
+function updated(el: HTMLElement, binding: DirectiveBinding): void {
+  const focusModifier = `${bemBlock}--focus`;
+  const enabled = !!binding.value;
 
-  state.enabled = !!binding.value;
+  el.classList.toggle(focusModifier, enabled);
+
+  state.variant = binding.arg || undefined;
+  state.enabled = enabled;
 }
 
 /**
@@ -20,9 +22,16 @@ function update(el: HTMLElement, binding: DirectiveBinding): void {
 export default {
   name: 'focus-item',
 
-  beforeMount: update,
-  updated: update,
+  beforeMount(el: HTMLElement, binding: DirectiveBinding): void {
+    if (binding.value) {
+      updated(el, binding);
+    }
+  },
+
+  updated,
+
   unmounted(): void {
+    state.variant = undefined;
     state.enabled = false;
   },
 };

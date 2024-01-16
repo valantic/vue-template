@@ -7,7 +7,7 @@ import i18n from '@/setup/i18n'; // MUST come after i18n because of build order.
 import directives from '@/setup/directives';
 import components from '@/setup/ssr-components';
 import dayjs from '@/plugins/dayjs';
-// import VueFocus from '@/plugins/v-focus';
+import VueFocus from '@/plugins/v-focus';
 // import tooltip from '@/plugins/tooltip';
 
 export type CustomPlugin = {
@@ -28,6 +28,6 @@ export default [
   { plugin: directives },
   { plugin: components },
   // { plugin: tooltip},
-  // { plugin: VueFocus},
+  { plugin: VueFocus },
   { plugin: dayjs },
 ] satisfies CustomPlugin[];
