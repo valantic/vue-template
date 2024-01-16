@@ -18,9 +18,16 @@
                      placeholder="Your Name"
             />
           </e-label>
+          <e-label name="Surname">
+            <e-input v-model="form.surname"
+                     name="surname"
+                     placeholder="Your Surname"
+                     disabled
+            />
+          </e-label>
           <e-label name="E-Mail" required>
             <e-input v-model="form.email"
-                     :state="v$.form.email.$error ? FieldStates.Error : FieldStates.Default"
+                     :state="v$.form.email.$error ? FieldState.Error : FieldState.Default"
                      :notification="v$.form.email.$error ? '<b>No valid email address</b>' : ''"
                      type="email"
                      name="email"
@@ -31,16 +38,26 @@
           <e-label name="Language" required>
             <e-select v-model="form.language"
                       :options="mock.languages"
-                      :state="v$.form.language.$error ? FieldStates.Error : FieldStates.Default"
+                      :state="v$.form.language.$error ? FieldState.Error : FieldState.Default"
                       :notification="v$.form.language.$error ? 'Required field' : ''"
                       name="language"
                       @blur="v$.form.language.$touch()"
             />
           </e-label>
+          <e-label name="Color" required>
+            <e-select v-model="form.color"
+                      :options="mock.colors"
+                      :state="v$.form.color.$error ? FieldState.Error : FieldState.Default"
+                      :notification="v$.form.color.$error ? 'Required field' : ''"
+                      name="color"
+                      disabled
+                      @blur="v$.form.color.$touch()"
+            />
+          </e-label>
           <e-label name="Business fields" required>
             <e-multiselect v-model="form.businessFields"
                            :options="mock.businessFields"
-                           :state="v$.form.businessFields.$error ? FieldStates.Error : FieldStates.Default"
+                           :state="v$.form.businessFields.$error ? FieldState.Error : FieldState.Default"
                            :notification="v$.form.businessFields.$error ? 'Required field' : ''"
                            has-search
                            @blur="v$.form.businessFields.$touch()"
@@ -60,12 +77,14 @@
             <e-checkbox v-model="form.topics"
                         value="food"
                         name="topics"
+                        disabled
             >
               Food
             </e-checkbox>
             <e-checkbox v-model="form.topics"
                         value="technics"
                         name="topics"
+                        disabled
             >
               Technics
             </e-checkbox>
@@ -113,9 +132,26 @@
             <e-radio v-model="form.frequency"
                      value="twiceAMonth"
                      name="frequency"
+                     disabled
             >
               Twice a month
             </e-radio>
+          </e-label>
+        </e-fieldset>
+
+        <e-fieldset legend="Date Pickers">
+          <e-label name="Date Input" tag="div" inner-tag="div">
+            <e-date v-model="form.date" name="date" label="date" />
+          </e-label>
+          <e-label name="Date Picker" tag="div" inner-tag="div">
+            <c-date-picker v-model:start="form.startDate" name="start" />
+          </e-label>
+          <e-label name="Date Range Picker" tag="div" inner-tag="div">
+            <c-date-picker v-model:start="form.startDate"
+                           v-model:end="form.endDate"
+                           name="date-picker"
+                           range
+            />
           </e-label>
         </e-fieldset>
 
@@ -156,32 +192,40 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eTextarea from '@/elements/e-textarea.vue';
   import eButton from '@/elements/e-button.vue';
-  import { FieldStates } from '@/compositions/form-states';
+  import { FieldState } from '@/compositions/form-states';
+  import eDate from '@/elements/e-date.vue';
+  import cDatePicker from '@/components/c-date-picker.vue';
 
-  interface SelectItem {
+  type SelectItem = {
     label: string;
     value: string;
   }
 
-  interface Setup {
+  type Setup = {
     v$: Ref<Validation>;
     formRef: Ref<HTMLFormElement | null>;
-    FieldStates: typeof FieldStates;
+    FieldState: typeof FieldState;
   }
 
-  interface Data {
+  type Data = {
     form: {
       name: string;
+      surname: string;
       email: string;
       notes: string;
       language: string;
+      color: string;
       topics: string[];
       frequency: string;
       businessFields: string[];
+      date: Date;
+      startDate: Date;
+      endDate: Date;
     };
     mock: {
       businessFields: SelectItem[];
       languages: SelectItem[];
+      colors: SelectItem[];
     };
   }
 
@@ -198,6 +242,8 @@
       eCheckbox,
       eTextarea,
       eButton,
+      cDatePicker,
+      eDate,
     },
 
     setup(): Setup {
@@ -207,7 +253,7 @@
         // eslint-disable-next-line id-length
         v$: useVuelidate(),
         formRef,
-        FieldStates,
+        FieldState,
       };
     },
 
@@ -215,12 +261,17 @@
       return {
         form: {
           name: '',
+          surname: '',
           email: '',
           notes: '',
           language: '',
-          topics: [],
-          frequency: '',
+          color: 'red',
+          topics: ['technics'],
+          frequency: 'twiceAMonth',
           businessFields: [],
+          date: new Date(),
+          startDate: new Date(),
+          endDate: new Date(),
         },
         mock: {
           languages: [
@@ -235,6 +286,16 @@
             {
               label: 'French',
               value: 'french',
+            },
+          ],
+          colors: [
+            {
+              label: 'Red',
+              value: 'red',
+            },
+            {
+              label: 'Green',
+              value: 'green',
             },
           ],
           businessFields: [
@@ -271,6 +332,9 @@
         language: {
           required,
         },
+        color: {
+          required,
+        },
         businessFields: {
           required,
         },
@@ -297,7 +361,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '../../../setup/scss/variables';
 
   .r-forms {
     display: grid;

@@ -34,11 +34,11 @@
   } from 'vue';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup {
+  type Setup = {
     stage: Ref<HTMLDivElement>;
   }
 
-  interface Data {
+  type Data = {
     emblaInstance: null | EmblaCarouselType;
     activeSlide: number;
     activePage: number;

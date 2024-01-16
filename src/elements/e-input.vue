@@ -4,7 +4,6 @@
            ref="input"
            :autocomplete="autocomplete"
            :class="b('field')"
-           :disabled="disabled"
            :name="name"
            :title="title"
            v-bind="$attrs"
@@ -49,12 +48,13 @@
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup extends FormStates {
+  type Setup = FormStates & {
     input: Ref<HTMLInputElement | null>;
     slot: Ref<HTMLSpanElement | null>;
+    slotStart: Ref<HTMLSpanElement | null>;
   }
 
-  interface Data {
+  type Data = {
     internalValue: string;
   }
 
@@ -148,16 +148,23 @@
       },
     },
 
-    emits: ['update:modelValue', 'focus', 'blur', 'enter'],
+    emits: {
+      'update:modelValue': (payload: string) => typeof payload === 'string',
+      'focus': () => true,
+      'blur': () => true,
+      'enter': () => true,
+    },
 
     setup(props): Setup {
       const input = ref();
       const slot = ref();
+      const slotStart = ref();
 
       return {
         ...useFormStates(toRefs(props).state),
         input,
         slot,
+        slotStart,
       };
     },
 
@@ -193,7 +200,16 @@
         };
       },
     },
-    // watch: {},
+    watch: {
+      /**
+       * Updates internal value if model value got changed from parent.
+       */
+      modelValue(value: string) {
+        if (value !== this.internalValue) {
+          this.internalValue = value;
+        }
+      },
+    },
 
     // beforeCreate() {},
     // created() {},
@@ -289,6 +305,14 @@
 
           if (this.input) {
             this.input.style.paddingRight = `${slotWidth + 10}px`;
+          }
+        }
+
+        if (this.slotStart) {
+          const slotWidth = this.slotStart.clientWidth;
+
+          if (this.input) {
+            this.input.style.paddingLeft = `${slotWidth + 15}px`;
           }
         }
       },
@@ -420,6 +444,7 @@
       right: variables.$spacing--5;
       display: flex;
       transform: translateY(-50%);
+      pointer-events: none;
     }
 
     &__slot {
@@ -462,10 +487,10 @@
     &--disabled:not(&--border-0) &__field:hover {
       border-color: variables.$color-grayscale--600;
       background-color: variables.$color-grayscale--1000;
-      color: variables.$color-grayscale--300;
+      color: variables.$color-grayscale--400;
 
       &::placeholder {
-        color: variables.$color-grayscale--300;
+        color: variables.$color-grayscale--400;
       }
     }
 

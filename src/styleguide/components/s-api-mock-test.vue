@@ -51,19 +51,22 @@
               {{ endpoint.path }}
             </td>
             <td>
-              <e-checkbox v-model="configurations[endpoint.header].enabled"
+              <!-- eslint-disable-next-line vue/no-extra-parens -->
+              <e-checkbox v-model="(configurations[endpoint.header] as Record<'enabled', boolean>).enabled"
                           name="debug-mode-enabled"
                           value
               />
             </td>
             <td>
-              <e-select v-model="configurations[endpoint.header].status"
+              <!-- eslint-disable-next-line vue/no-extra-parens -->
+              <e-select v-model="(configurations[endpoint.header] as Record<'status', string>).status"
                         :options="statusOptions"
                         name="status"
               />
             </td>
             <td>
-              <input v-model="configurations[endpoint.header].response"
+              <!-- eslint-disable-next-line vue/no-extra-parens -->
+              <input v-model="(configurations[endpoint.header] as Record<'response', string>).response"
                      type="text"
                      name="response"
               >
@@ -270,8 +273,8 @@
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
 
-            if (!path) {
-              throw new Error('No path given for API Mock Test');
+            if (!path || !method) {
+              throw Error('Invalid header configuration');
             }
 
             let response: unknown = null;

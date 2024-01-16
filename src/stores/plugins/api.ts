@@ -1,14 +1,15 @@
 import axios, {
   AxiosError,
-  AxiosRequestConfig,
-  AxiosResponse,
   AxiosInstance,
   AxiosPromise,
+  AxiosRequestConfig,
+  AxiosResponse,
 } from 'axios';
-import notificationStore, { NotificationItem } from '@/stores/notification';
+import notificationStore, { mapApiResponseMessages } from '@/stores/notification';
 import { PAGE_LANG } from '@/setup/i18n';
+import { ApiResponseMessages } from '@/types/api-response';
 
-export interface Api {
+export type Api = {
 
   /**
    * Runs a get request with given url with given url params.
@@ -28,7 +29,7 @@ export interface Api {
   /**
    * Runs a put request with a given url and payload.
    */
-  put(url: string, data?: object, config?: AxiosRequestConfig): AxiosPromise;
+  put(url: string, data?: object, config?: AxiosRequestConfig, uniqueId?: string): AxiosPromise;
 
   /**
    * Runs a delete request with a given url and payload.
@@ -45,8 +46,12 @@ export const axiosInstance: AxiosInstance = axios.create({
   },
 });
 
-interface PluginApi {
+type PluginApi = {
   $api: Api;
+}
+
+type ApiError = AxiosError & {
+  messages: ApiResponseMessages;
 }
 
 declare module 'pinia' {
@@ -57,26 +62,23 @@ declare module 'pinia' {
 
 export default function api():PluginApi {
   const notificationStoreInstance = notificationStore();
+  const abortStack: Record<string, AbortController> = {};
 
   /**
    * Pushes an array of messages to the notification handler.
    */
-  function showNotifications(notifications: NotificationItem[]): void {
-    if (!Array.isArray(notifications)) {
-      return;
-    }
-
-    notifications.forEach(notificationStoreInstance.showNotification);
+  function showNotifications(messages: ApiResponseMessages): void {
+    mapApiResponseMessages(messages).forEach(notificationStoreInstance.showNotification);
   }
 
   /**
    * Handles successful ajax requests.
    */
   function handleSuccess(response: AxiosResponse): AxiosResponse {
-    const { notifications } = response?.data || {};
+    const { messages } = response?.data || {};
 
-    if (notifications) {
-      showNotifications(notifications);
+    if (messages) {
+      showNotifications(messages);
     }
 
     return response || {};
@@ -85,11 +87,11 @@ export default function api():PluginApi {
   /**
    * Handles axios error responses.
    */
-  function handleError(error: AxiosError<any>): AxiosPromise<AxiosError> { // eslint-disable-line @typescript-eslint/no-explicit-any
-    const { notifications } = error?.response?.data || {};
+  function handleError(error: AxiosError<ApiError>): AxiosPromise<AxiosError> {
+    const { messages } = error?.response?.data || {};
 
-    if (notifications) {
-      showNotifications(notifications);
+    if (messages) {
+      showNotifications(messages);
     } else {
       notificationStoreInstance.showUnknownError();
     }
@@ -99,11 +101,37 @@ export default function api():PluginApi {
 
   return {
     $api: {
-      get(url, config): AxiosPromise {
+      get(url, config, uniqueId): AxiosPromise {
+        if (uniqueId) {
+          const abortController = abortStack[uniqueId];
+
+          if (abortController) {
+            abortController.abort();
+          }
+
+          abortStack[uniqueId] = new AbortController();
+          config = {
+            ...config,
+            signal: abortStack[uniqueId]?.signal,
+          };
+        }
+
         return axiosInstance
           .get(url, config)
-          .then(response => handleSuccess(response))
-          .catch(error => handleError(error));
+          .then((response) => {
+            if (uniqueId) {
+              delete abortStack[uniqueId];
+            }
+
+            return handleSuccess(response);
+          })
+          .catch((error) => {
+            if (axios.isCancel(error)) {
+              return Promise.reject(error);
+            }
+
+            return handleError(error);
+          });
       },
 
       post(url, data, config): AxiosPromise {

@@ -6,7 +6,7 @@ import {
 } from 'vue';
 import { BREAKPOINTS, ViewportBreakPoint } from '@/setup/globals';
 
-export interface Viewport {
+export type Viewport = {
   isXxs: boolean;
   isXs: boolean;
   isSm: boolean;

@@ -1,6 +1,6 @@
 module.exports = {
   '*.{js,ts,vue}': [
-    () => 'vue-tsc --noEmit',
+    () => 'vue-tsc',
     'eslint --config .eslintrc.fix.js --fix',
   ],
   '*.{css,vue,scss}': [

@@ -80,18 +80,18 @@
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
 
-  interface Option {
+  type Option = {
     value: string;
     label: string;
     [key: string]: string;
   }
 
-  interface Setup extends FormStates, Uuid {
+  type Setup = FormStates & Uuid & {
     searchField: Ref<HTMLInputElement | null>;
     fieldWrapper: Ref<HTMLButtonElement | null>;
-  }
+  };
 
-  interface Data {
+  type Data = {
     isOpen: boolean;
     searchTerm: string;
   }
@@ -250,7 +250,11 @@
       selectionAsString(): string {
         if (this.internalValue.length) {
           return this.options
-            .filter(option => this.internalValue.includes(option[this.valueField]))
+            .filter((option) => {
+              const value = option[this.valueField];
+
+              return typeof value !== 'undefined' && this.internalValue.includes(value);
+            })
             .map(option => option[this.labelField])
             .join(', ');
         }

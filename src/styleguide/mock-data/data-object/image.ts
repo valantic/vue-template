@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker/locale/en';
 import { BREAKPOINTS_MAX, DEFAULT_IMAGE_SIZES } from '@/setup/globals';
 import { ImageSources, ImageSrcset, ImageMedia } from '@/types/image';
 
-interface Ratios {
+type Ratios = {
   [key: string]: number;
   fallback: number;
 }
@@ -20,11 +20,16 @@ export function createSrcSetImage(
     'abstract',
     true
   )} ${width}w`);
+  const fallback = srcset[srcset.length - 1];
+
+  if (!fallback) {
+    throw Error("'srcset' has no entries.");
+  }
 
   return {
     srcset: srcset.join(', '),
-    fallback: srcset[srcset.length - 1] || '',
     alt: faker.lorem.word(),
+    fallback,
   };
 }
 
