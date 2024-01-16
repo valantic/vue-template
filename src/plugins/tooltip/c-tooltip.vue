@@ -9,9 +9,10 @@
     <slot></slot>
 
     <!-- Moves tooltip to a portal to prevent invalid HTML nesting. -->
-    <Teleport v-if="tooltipInitialized" to="body">
+    <Teleport to="body">
       <transition :name="b('transition', { fade: true })">
         <div
+          v-if="tooltipInitialized"
           v-show="tooltipVisible"
           ref="tooltip"
           :class="b('tooltip-wrapper', { component: true })"
@@ -42,11 +43,11 @@
     DEFAULT_POPPER_OPTIONS,
   } from '@/plugins/tooltip/shared';
 
-  interface Setup {
+  type Setup = {
     tooltip: Ref<HTMLDivElement>;
   }
 
-  interface Data {
+  type Data = {
     popperInstance: Instance | null;
     tooltipInitialized: boolean;
     tooltipVisible: boolean;

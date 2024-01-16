@@ -7,7 +7,7 @@
       </h2>
 
       <ul>
-        <li :class="b('link')">
+        <li :class="b('item')">
           <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
         </li>
       </ul>
@@ -131,7 +131,7 @@
   @use '../../setup/scss/variables' as *;
 
   .r-tooltips {
-    &__link {
+    &__item {
       margin-bottom: $spacing--10;
     }
   }

@@ -20,7 +20,7 @@ type TooltipEvent = {
   [key: string]: EventListener;
 }
 
-interface AnchorElement extends HTMLElement {
+type AnchorElement = HTMLElement & {
   [storageKey]: {
     isHidden: boolean;
     popper: Instance;
@@ -29,7 +29,7 @@ interface AnchorElement extends HTMLElement {
   };
 }
 
-interface Tooltip extends HTMLDivElement {
+type Tooltip = HTMLDivElement & {
   [tooltipAnchor]?: HTMLElement;
 }
 
