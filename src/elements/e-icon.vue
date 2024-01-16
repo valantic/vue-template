@@ -26,7 +26,7 @@
   import { defineComponent } from 'vue';
   import spritePath from '@/assets/icons.svg';
 
-  type SizeLookup = {
+  type SpecificIconSizes = {
     [key: string]: number[];
   }
 
@@ -36,7 +36,7 @@
   }
 
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
-  const sizeLookup: SizeLookup = {
+  const specificIconSizes: SpecificIconSizes = {
     play: [1024, 721],
   };
 
@@ -99,17 +99,21 @@
        */
       viewBox(): Size {
         const { icon } = this;
-        const lookup = sizeLookup[icon];
+        const [
+          specificWidth, specificHeight,
+        ] = specificIconSizes[icon] || [];
         const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize];
+        const width = size[0] || defaultSize;
+        let height = size[1];
 
-        // Auto map height for non square icons.
-        if (size.length === 1 && lookup) {
-          size[1] = (size[0] / lookup[0]) * lookup[1];
+        // Auto map height for non-square icons.
+        if (!height && specificWidth && specificHeight) {
+          height = (width / specificWidth) * specificHeight;
         }
 
         return {
-          width: size[0],
-          height: size[1] || size[0],
+          width,
+          height: height || width,
         };
       },
     },

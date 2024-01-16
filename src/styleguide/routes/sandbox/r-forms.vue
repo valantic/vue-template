@@ -27,7 +27,7 @@
           </e-label>
           <e-label name="E-Mail" required>
             <e-input v-model="form.email"
-                     :state="v$.form.email.$error ? FieldStates.Error : FieldStates.Default"
+                     :state="v$.form.email.$error ? FieldState.Error : FieldState.Default"
                      :notification="v$.form.email.$error ? '<b>No valid email address</b>' : ''"
                      type="email"
                      name="email"
@@ -38,7 +38,7 @@
           <e-label name="Language" required>
             <e-select v-model="form.language"
                       :options="mock.languages"
-                      :state="v$.form.language.$error ? FieldStates.Error : FieldStates.Default"
+                      :state="v$.form.language.$error ? FieldState.Error : FieldState.Default"
                       :notification="v$.form.language.$error ? 'Required field' : ''"
                       name="language"
                       @blur="v$.form.language.$touch()"
@@ -47,7 +47,7 @@
           <e-label name="Color" required>
             <e-select v-model="form.color"
                       :options="mock.colors"
-                      :state="v$.form.color.$error ? FieldStates.Error : FieldStates.Default"
+                      :state="v$.form.color.$error ? FieldState.Error : FieldState.Default"
                       :notification="v$.form.color.$error ? 'Required field' : ''"
                       name="color"
                       disabled
@@ -57,7 +57,7 @@
           <e-label name="Business fields" required>
             <e-multiselect v-model="form.businessFields"
                            :options="mock.businessFields"
-                           :state="v$.form.businessFields.$error ? FieldStates.Error : FieldStates.Default"
+                           :state="v$.form.businessFields.$error ? FieldState.Error : FieldState.Default"
                            :notification="v$.form.businessFields.$error ? 'Required field' : ''"
                            has-search
                            @blur="v$.form.businessFields.$touch()"
@@ -139,6 +139,22 @@
           </e-label>
         </e-fieldset>
 
+        <e-fieldset legend="Date Pickers">
+          <e-label name="Date Input" tag="div" inner-tag="div">
+            <e-date v-model="form.date" name="date" label="date" />
+          </e-label>
+          <e-label name="Date Picker" tag="div" inner-tag="div">
+            <c-date-picker v-model:start="form.startDate" name="start" />
+          </e-label>
+          <e-label name="Date Range Picker" tag="div" inner-tag="div">
+            <c-date-picker v-model:start="form.startDate"
+                           v-model:end="form.endDate"
+                           name="date-picker"
+                           range
+            />
+          </e-label>
+        </e-fieldset>
+
         <e-button type="submit" primary>
           Submit
         </e-button>
@@ -176,7 +192,9 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eTextarea from '@/elements/e-textarea.vue';
   import eButton from '@/elements/e-button.vue';
-  import { FieldStates } from '@/compositions/form-states';
+  import { FieldState } from '@/compositions/form-states';
+  import eDate from '@/elements/e-date.vue';
+  import cDatePicker from '@/components/c-date-picker.vue';
 
   type SelectItem = {
     label: string;
@@ -186,7 +204,7 @@
   type Setup = {
     v$: Ref<Validation>;
     formRef: Ref<HTMLFormElement | null>;
-    FieldStates: typeof FieldStates;
+    FieldState: typeof FieldState;
   }
 
   type Data = {
@@ -200,6 +218,9 @@
       topics: string[];
       frequency: string;
       businessFields: string[];
+      date: Date;
+      startDate: Date;
+      endDate: Date;
     };
     mock: {
       businessFields: SelectItem[];
@@ -221,6 +242,8 @@
       eCheckbox,
       eTextarea,
       eButton,
+      cDatePicker,
+      eDate,
     },
 
     setup(): Setup {
@@ -230,7 +253,7 @@
         // eslint-disable-next-line id-length
         v$: useVuelidate(),
         formRef,
-        FieldStates,
+        FieldState,
       };
     },
 
@@ -246,6 +269,9 @@
           topics: ['technics'],
           frequency: 'twiceAMonth',
           businessFields: [],
+          date: new Date(),
+          startDate: new Date(),
+          endDate: new Date(),
         },
         mock: {
           languages: [

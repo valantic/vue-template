@@ -250,7 +250,11 @@
       selectionAsString(): string {
         if (this.internalValue.length) {
           return this.options
-            .filter(option => this.internalValue.includes(option[this.valueField]))
+            .filter((option) => {
+              const value = option[this.valueField];
+
+              return typeof value !== 'undefined' && this.internalValue.includes(value);
+            })
             .map(option => option[this.labelField])
             .join(', ');
         }
@@ -274,7 +278,7 @@
        */
       filteredOptions(): Option[] {
         if (this.hasSearch && this.searchTerm) {
-          return this.options.filter(option => option[this.labelField].includes(this.searchTerm));
+          return this.options.filter(option => option[this.labelField]?.includes(this.searchTerm));
         }
 
         return this.options;

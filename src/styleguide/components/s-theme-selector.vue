@@ -127,7 +127,7 @@
         link.href = `/${buildConfig.themeSource}${theme}.scss`;
         link.media = 'all';
 
-        head.appendChild(link);
+        head?.appendChild(link);
       },
     },
     // render() {},

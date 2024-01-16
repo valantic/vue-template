@@ -121,6 +121,8 @@ tbd
   > vite, postcss, scss
 - [postcss-scss](https://www.npmjs.com/package/postcss-scss) - A SCSS parser for PostCSS.
   > vite, postcss, scss
+- [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer) - Visualize and analyze your Rollup bundle to see which modules are taking up space.
+  > vite
 - [sass](https://www.npmjs.com/package/sass) - Node.js bindings to libsass.
   > vite, scss
 - [stylelint](https://www.npmjs.com/package/stylelint) - A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.
@@ -129,7 +131,7 @@ tbd
   > stylelint
 - [svg-sprite](https://www.npmjs.com/package/svg-sprite) - IOs a low-level Node.js module that takes a bunch of SVG files, optimizes them and bakes them into SVG sprites of several types.
   > svg, component, c-icon
-- [svg-svgo](https://www.npmjs.com/package/svgo) - SVG Optimizer is a Node.js-based tool for optimizing SVG vector graphics files..
+- [svgo](https://www.npmjs.com/package/svgo) - SVG Optimizer is a Node.js-based tool for optimizing SVG vector graphics files..
   > vite, svg
 - [typescript](https://www.typescriptlang.org/) - Basic Package to write Code in Typescript.
   > vite, TypeScript

@@ -28,7 +28,7 @@ export const blocks: Blocks = {
     mods: {
       mod: 'val',
       modbool: true,
-      'some-mod': false,
+      'unsupported-mod': false,
     },
   },
   [`${block} mix`]: { block, mixin: 'mix' },
@@ -50,7 +50,7 @@ export const elements: Elements = {
     mods: {
       mod: 'val',
       modbool: true,
-      'some-mod': false,
+      'unsupported-mod': false,
     },
   },
   [`${block}__${el} mix`]: { block, el, mixin: 'mix' },
@@ -73,7 +73,7 @@ export const delimitersTest: DelimitersTest = {
     mods: {
       mod: 'val',
       modbool: true,
-      'some-mode': false,
+      'unsupported-mod': false,
     },
   },
 };
