@@ -15,14 +15,14 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import notificationStore, { NotificationItem, NotificationStore } from '@/stores/notification';
+  import useNotificationStore, { NotificationItem } from '@/stores/notification';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup {
-    notificationStore: NotificationStore;
+  type Setup = {
+    notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
-  interface Data {
+  type Data = {
     expireDelay: number;
   }
 
@@ -48,7 +48,7 @@
 
     setup(): Setup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     data(): Data {

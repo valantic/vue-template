@@ -30,18 +30,18 @@
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eProgress from './e-progress.vue';
 
-  interface Attributes {
+  type Attributes = {
     role: string | null;
     disabled: boolean;
     [key: string]: string | boolean | null;
   }
 
-  interface ElementDimensions {
+  type ElementDimensions = {
     width: string;
     height: string;
   }
 
-  interface Data {
+  type Data = {
     hasHover: boolean;
     isActive: boolean;
     hasFocus: boolean;

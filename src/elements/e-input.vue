@@ -48,12 +48,12 @@
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup extends FormStates {
+  type Setup = FormStates & {
     input: Ref<HTMLInputElement | null>;
     slot: Ref<HTMLSpanElement | null>;
   }
 
-  interface Data {
+  type Data = {
     internalValue: string;
   }
 

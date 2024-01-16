@@ -6,7 +6,7 @@ import { Gtm } from '@/plugins/google-tag-manager';
 declare module '@vue/runtime-core' {
   // provide typings for global properties
   interface ComponentCustomProperties {
-    $dayjs: dayjs;
+    $dayjs: typeof dayjs;
     $viewport: Viewport;
     $gtm: Gtm;
     gtmIdentifier: string;

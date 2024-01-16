@@ -1,6 +1,6 @@
 import apiUrls from '@/setup/api-urls.json';
 
-interface UrlKeyValues {
+type UrlKeyValues = {
   [key: string]: string;
 }
 

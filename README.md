@@ -409,19 +409,23 @@ color: {
 #### Setup
 
 When Using Code from another File (Composition based) or accessing Component Elements via ref, the code needs to be 
-defined in the Setup Method. The setup Method needs to have a proper Return Type by defining an Interface:
+defined in the Setup Method. The setup Method needs to have a proper Return Type:
+
+
 
 ```ts
 import { defineComponent, ref, Ref } from 'vue';
-import useFormStates, { IFormStates } from '@/compositions/form-states';
+import useFormStates, { FormStates } from '@/compositions/form-states';
 
-interface ISetup extends IFormStates {
+type Setup = FormStates & {
   input: Ref<HTMLInputElement | null>;
   slot: Ref<HTMLSpanElement | null>;
 }
 
 export default defineComponent({
-  setup(props): ISetup {
+    setup(props): Setup {
+
+
     const input = ref();
     const slot = ref();
 
@@ -436,14 +440,18 @@ export default defineComponent({
 
 #### Data
 
-To fully benefit from TypeScript, please define your Data function with an Interface like this:
+To fully benefit from TypeScript, please define your Data function with a Type like this:
+
+
 
 ```ts
-interface IData {
+type Data = {
+
   myDataProperty: string;
 }
 export default defineComponent({
-  data(): IData {
+    data(): Data {
+
 	  return {
       myDataProperty: 'Hello World',
 	  }

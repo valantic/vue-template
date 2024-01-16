@@ -117,7 +117,7 @@
                 :column="column"
                 name="date"
           >
-            {{ $dayjs(item[column.key]).format('DD.MM.YYYY') }}
+            {{ $dayjs(item[column.key] as Date).format('DD.MM.YYYY') }}
           </slot>
           <!-- @slot Use this dynamic slot to add custom templates to the cells -->
           <slot
@@ -199,12 +199,12 @@
 
   type ItemId = number | string;
 
-  export interface TableItem {
+  export type TableItem = {
     disabled?: boolean;
     [key: string]: ItemId | unknown;
   }
 
-  export interface TableColumn {
+  export type TableColumn = {
     title: string | (() => string);
     key: string;
     align: 'left' | 'center' | 'right';
@@ -216,16 +216,16 @@
     sort?(a: unknown, b: unknown): number;
   }
 
-  interface RowLink {
+  type RowLink = {
     href?(item: TableItem, column?: TableColumn, event?: Event): string;
     title?: string | ((item?: TableItem) => string);
   }
 
-  interface Setup extends Uuid {
+  type Setup = Uuid & {
     toggleButton: Ref<HTMLButtonElement>;
   }
 
-  interface Data {
+  type Data = {
 
     /**
      * Holds a flag if sorting options are visible
@@ -636,7 +636,7 @@
               return !aValue ? 1 : -1;
 
             case aValue instanceof Date:
-              return this.$dayjs(aValue).isAfter(bValue as Date) ? 1 : -1;
+              return this.$dayjs(aValue as Date).isAfter(bValue as Date) ? 1 : -1;
 
             default:
               return 0;

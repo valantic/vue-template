@@ -29,7 +29,7 @@
 
   import eVideo, { VideoSource } from '@/elements/e-video.vue';
 
-  interface Setup {
+  type Setup = {
     VideoSource: typeof VideoSource;
   }
 
@@ -71,7 +71,7 @@
 </script>
 
 <style lang="scss">
-@use '../../setup/scss/variables';
+@use '../../../setup/scss/variables';
 
 .r-video {
   &__form {

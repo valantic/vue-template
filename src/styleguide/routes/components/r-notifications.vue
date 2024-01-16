@@ -72,11 +72,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotificationContainer from '@/components/c-notification-container.vue';
-  import notificationStore, { NotificationStore } from '@/stores/notification';
+  import useNotificationStore from '@/stores/notification';
   import eButton from '@/elements/e-button.vue';
 
-  interface Setup {
-    notificationStore: NotificationStore;
+  type Setup = {
+    notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
   export default defineComponent({
@@ -88,7 +88,7 @@
 
     setup(): Setup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     // data() {},
@@ -115,8 +115,8 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/mixins';
-  @use '../../setup/scss/variables';
+  @use '../../../setup/scss/mixins';
+  @use '../../../setup/scss/variables';
 
   .r-notifications {
     display: flex;

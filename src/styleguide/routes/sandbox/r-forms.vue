@@ -178,18 +178,18 @@
   import eButton from '@/elements/e-button.vue';
   import { FieldStates } from '@/compositions/form-states';
 
-  interface SelectItem {
+  type SelectItem = {
     label: string;
     value: string;
   }
 
-  interface Setup {
+  type Setup = {
     v$: Ref<Validation>;
     formRef: Ref<HTMLFormElement | null>;
     FieldStates: typeof FieldStates;
   }
 
-  interface Data {
+  type Data = {
     form: {
       name: string;
       surname: string;
@@ -335,7 +335,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '../../../setup/scss/variables';
 
   .r-forms {
     display: grid;

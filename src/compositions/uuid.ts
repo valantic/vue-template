@@ -1,6 +1,6 @@
 let globalUuid = 0;
 
-export interface Uuid {
+export type Uuid = {
   uuid: number;
 }
 

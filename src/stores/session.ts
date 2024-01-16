@@ -1,12 +1,7 @@
-import {
-  Store,
-  defineStore,
-  StateTree,
-  _GettersTree,
-} from 'pinia';
-import { GlobalStore } from '@/setup/globals';
+import { defineStore } from 'pinia';
+import { Store } from '@/setup/globals';
 
-interface SessionState extends StateTree {
+type SessionState = {
 
   /**
    * Stores the theme id.
@@ -19,28 +14,10 @@ interface SessionState extends StateTree {
   googleMapsApiKey: string | null;
 }
 
-interface SessionGetters extends _GettersTree<SessionState> {
+const storeName = Store.Session;
 
-  /**
-   * Gets the current theme id.
-   */
-  getTheme(state: SessionState): string;
-}
-
-interface SessionActions {
-
-  /**
-   * Removes a notification.
-   */
-  setTheme(id: string): void;
-}
-
-export type SessionStore = Store<string, SessionState, SessionGetters, SessionActions>;
-
-const storeName = GlobalStore.SESSION;
-
-export default defineStore<typeof storeName, SessionState, SessionGetters, SessionActions>(storeName, {
-  state: (): SessionState => {
+export default defineStore(storeName, {
+  state: () => {
     const state: SessionState = {
       theme: 'theme-01',
       googleMapsApiKey: null,
@@ -58,7 +35,7 @@ export default defineStore<typeof storeName, SessionState, SessionGetters, Sessi
     },
   },
   actions: {
-    setTheme(id) {
+    setTheme(id: string): void {
       this.theme = id;
     },
   },
