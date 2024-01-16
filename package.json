@@ -22,7 +22,7 @@
     "serve": "vite preview",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
-    "tsc": "vue-tsc --noEmit"
+    "tsc": "vue-tsc"
   },
   "webpack": {
     "buildPath": "dist",

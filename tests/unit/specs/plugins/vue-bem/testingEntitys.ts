@@ -8,7 +8,17 @@ export const delimiters = {
   modVal: '~',
 };
 
-export const blocks = {
+type Block = {
+  [key: string]: {
+    block: string;
+    mods?: {
+      [key: string]: boolean | number | string;
+    };
+    mixin?: string;
+  };
+}
+
+export const blocks: Block = {
   [block]: { block },
   [`${block} ${block}--mod`]: { block, mods: { mod: true } },
   [`${block} ${block}--mod-val`]: { block, mods: { mod: 'val' } },
@@ -18,7 +28,7 @@ export const blocks = {
     mods: {
       mod: 'val',
       modbool: true,
-      'some-mod': false,
+      'unsupported-mod': false,
     },
   },
   [`${block} mix`]: { block, mixin: 'mix' },
@@ -36,7 +46,7 @@ export const elements = {
     mods: {
       mod: 'val',
       modbool: true,
-      'some-mod': false,
+      'unsupported-mod': false,
     },
   },
   [`${block}__${el} mix`]: { block, el, mixin: 'mix' },
@@ -55,7 +65,7 @@ export const delimitersTest = {
     mods: {
       mod: 'val',
       modbool: true,
-      'some-mode': false,
+      'unsupported-mod': false,
     },
   },
 };
