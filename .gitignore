@@ -20,9 +20,6 @@ gen
 # npm
 npm-debug.log
 
-# nvm
-.nvmrc
-
 # Project
 .env
 /stats/

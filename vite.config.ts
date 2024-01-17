@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
-import markdown, { Mode } from 'vite-plugin-markdown';
+import { plugin as mdPlugin, Mode } from 'vite-plugin-markdown';
 import viteBuilds from './vite.builds.json';
 
 interface Modes {
@@ -40,7 +40,7 @@ export default defineConfig(({ command, mode }) => {
       ViteImageOptimizer({ // eslint-disable-line new-cap
         // logStats: false,
       }),
-      markdown({
+      mdPlugin({
         mode: [Mode.VUE],
       }),
     ],

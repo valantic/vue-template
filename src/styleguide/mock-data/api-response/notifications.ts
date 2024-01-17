@@ -1,10 +1,10 @@
-import { RestRequest } from 'msw';
 import { ApiResponse } from '@/types/api-response';
 import createApiResponseMessage from '@/styleguide/mock-data/data-object/api-response-message';
 import createApiResponseMessages from '@/styleguide/mock-data/data-object/api-response-messages';
 
-export default function notifications(req: RestRequest): ApiResponse | null {
-  const { searchParams } = req.url;
+export default function notifications(req: Request): ApiResponse | null {
+  const { searchParams } = new URL(req.url);
+
   const type = searchParams.get('type');
   const redirectUrl = searchParams.get('redirectUrl');
   const expire = JSON.parse(searchParams.get('expire') || 'true');

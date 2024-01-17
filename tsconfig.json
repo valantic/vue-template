@@ -3,19 +3,15 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "es2021",
-    "verbatimModuleSyntax": true,
-
+    "verbatimModuleSyntax": false,
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
-
     "strict": true,
     "noUncheckedIndexedAccess": true,
-
     "moduleResolution": "Node",
     "module": "ESNext",
     "noEmit": true,
-
     "importHelpers": true,
     "lib": [
       "es2021",
@@ -24,7 +20,8 @@
     ],
     "typeRoots": [
       "./src/types",
-      "./node_modules/@types/"
+      "./node_modules/@types/",
+      "./node_modules/"
     ],
     "types": [
       "node",
@@ -32,7 +29,6 @@
       "google.maps",
       "cookiebot-sdk"
     ],
-
     "baseUrl": ".",
     "paths": {
       "@/*": [
