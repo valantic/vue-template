@@ -18,7 +18,7 @@
             <img
               src="@/assets/valantic.svg"
               alt="valantic"
-            />
+            >
           </a>
         </li>
         <li

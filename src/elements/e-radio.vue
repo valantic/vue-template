@@ -64,7 +64,7 @@
 
     emits: {
       'update:modelValue': (value: string | number): boolean => ['string', 'number'].includes(typeof value),
-      change: (value: string | number): boolean => ['string', 'number'].includes(typeof value),
+      'change': (value: string | number): boolean => ['string', 'number'].includes(typeof value),
     },
 
     setup(props): FormStates {

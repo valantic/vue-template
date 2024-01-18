@@ -126,8 +126,8 @@
     },
     emits: {
       'update:isOpen': (state: unknown): boolean => typeof state === 'boolean',
-      open: (): boolean => true,
-      close: (): boolean => true,
+      'open': (): boolean => true,
+      'close': (): boolean => true,
     },
 
     // setup(): Setup {},

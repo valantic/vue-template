@@ -74,9 +74,9 @@
 
     emits: {
       'update:modelValue': (payload: unknown): boolean => typeof payload !== 'undefined',
-      change: (payload: unknown): boolean => typeof payload !== 'undefined',
-      focus: (): boolean => true,
-      blur: (): boolean => true,
+      'change': (payload: unknown): boolean => typeof payload !== 'undefined',
+      'focus': (): boolean => true,
+      'blur': (): boolean => true,
     },
 
     setup(props): FormStates {

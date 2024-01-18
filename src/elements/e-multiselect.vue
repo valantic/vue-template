@@ -180,7 +180,10 @@
       },
     },
 
-    emits: ['update:modelValue', 'close'],
+    emits: {
+      'update:modelValue': (value: unknown) => value !== undefined,
+      'close': (value: unknown) => value !== undefined,
+    },
 
     setup(props): Setup {
       const searchField = ref();
