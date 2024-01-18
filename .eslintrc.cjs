@@ -11,7 +11,7 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: ['valantic/vue3', '@vue/typescript', 'plugin:storybook/recommended'],
+  extends: ['valantic/vue3', '@vue/typescript', 'plugin:storybook/recommended', 'prettier'],
   // Uses eslint-import-resolver-webpack
   settings: {
     'import/resolver': {
