@@ -10,6 +10,7 @@
   arrowParens: 'always',
   vueIndentScriptAndStyle: true,
   singleAttributePerLine: true,
+  quoteProps: 'consistent',
   plugins: ['@trivago/prettier-plugin-sort-imports'],
 
   // @trivago/prettier-plugin-sort-imports@latest options
