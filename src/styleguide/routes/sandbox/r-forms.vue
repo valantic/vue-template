@@ -54,7 +54,7 @@
                       @blur="v$.form.color.$touch()"
             />
           </e-label>
-          <e-label name="Business fields" required>
+          <e-label tag="span" name="Business fields" required>
             <e-multiselect v-model="form.businessFields"
                            :options="mock.businessFields"
                            :state="v$.form.businessFields.$error ? FieldState.Error : FieldState.Default"
@@ -378,7 +378,7 @@
       margin-bottom: variables.$spacing--50;
     }
 
-    .e-label:not(:last-of-type) {
+    .e-label:not(:last-child) {
       margin-bottom: variables.$spacing--20;
     }
 

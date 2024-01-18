@@ -302,7 +302,9 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() {},
+    mounted() {
+      window.addEventListener('click', this.onClick, { capture: true });
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -311,6 +313,15 @@
     // destroyed() {},
 
     methods: {
+      /**
+       * Checks if the dropdown needs to be closed because of an outside click
+       */
+      onClick(event: MouseEvent) {
+        if (this.$el !== event.target && !this.$el.contains(event.target)) {
+          this.close();
+        }
+      },
+
       /**
        * Close options event handler.
        */
