@@ -1,16 +1,16 @@
 import { Plugin } from 'vue';
 
-enum GaListName {
-  Catalog = 'Catalog',
-  SearchResults = 'Search results',
+enum GaListNames {
+  CATALOG = 'Catalog',
+  SEARCH_RESULTS = 'Search results',
   // .. Add additional lists
 }
 
-interface Options {
+type Options = {
   debug?: boolean;
 }
 
-interface ListItem {
+type ListItem = {
   item_id: string;
   item_name: string;
   currency?: string | null;
@@ -21,7 +21,7 @@ interface ListItem {
   item_list_name?: string;
 }
 
-interface PurchasePayload {
+type PurchasePayload = {
   currency: string;
   value: number;
   shipping: number | null;
@@ -29,33 +29,33 @@ interface PurchasePayload {
   items: ListItem[];
 }
 
-interface AddPaymentInfoPayload {
+type AddPaymentInfoPayload = {
   currency: string;
   value: number;
   paymentType: string;
   items: ListItem[];
 }
 
-interface AddShippingInfoPayload {
+type AddShippingInfoPayload = {
   currency: string;
   value: number;
   shippingTier: string;
   items: ListItem[];
 }
 
-export interface Gtm {
+export type Gtm = {
   push(payload: Record<string, unknown>): void;
-  pushAddToCart(item: ListItem, list: GaListName): void;
+  pushAddToCart(item: ListItem, list: GaListNames): void;
   pushLogin(): void;
   pushSignUp(): void;
   pushSearch(searchTerm: string): void;
-  pushViewItemList(items: ListItem[], list: GaListName): void;
+  pushViewItemList(items: ListItem[], list: GaListNames): void;
   pushViewItem(item: ListItem): void;
   pushViewCart(items: ListItem[], value: number, currency: string): void;
   pushRemoveFromCart(items: ListItem): void;
   pushAddToWishlist(item: ListItem): void;
   pushBeginCheckout(items: ListItem[], value: number, currency: string): void;
-  pushSelectItem(item: ListItem, list: GaListName): void;
+  pushSelectItem(item: ListItem, list: GaListNames): void;
   pushPurchase(payload: PurchasePayload): void;
   pushAddPaymentInfo(payload: AddPaymentInfoPayload): void;
   pushAddShippingInfo(payload: AddShippingInfoPayload): void;
@@ -63,10 +63,7 @@ export interface Gtm {
 }
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  interface Window {
-    dataLayer: Record<string, unknown>[];
-  }
+  interface Window { dataLayer: Record<string, unknown>[] }
 }
 
 /**
@@ -218,7 +215,7 @@ const plugin: Plugin = {
       /**
        * Pushes `view_item_list`-event to the dataLayer.
        */
-      pushViewItemList(items: ListItem[], list: GaListName) {
+      pushViewItemList(items: ListItem[], list: GaListNames) {
         push({
           event: 'view_item_list',
           ecommerce: {
@@ -235,7 +232,7 @@ const plugin: Plugin = {
       /**
        * Pushes `select_item`-event to the dataLayer.
        */
-      pushSelectItem(item: ListItem, list: GaListName) {
+      pushSelectItem(item: ListItem, list: GaListNames) {
         push({
           event: 'select_item',
           ecommerce: {
@@ -278,17 +275,15 @@ const plugin: Plugin = {
       /**
        * Pushes `add_to_cart`-event to the dataLayer.
        */
-      pushAddToCart(item: ListItem, list: GaListName) {
+      pushAddToCart(item: ListItem, list: GaListNames) {
         push({
           event: 'add_to_cart',
           ecommerce: {
             currency: item.currency,
-            items: [
-              {
-                ...item,
-                item_list_name: list,
-              },
-            ],
+            items: [{
+              ...item,
+              item_list_name: list,
+            }],
           },
         });
       },

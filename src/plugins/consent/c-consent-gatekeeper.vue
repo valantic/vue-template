@@ -13,12 +13,12 @@
   import { ConsentGroup, showConsentDialog, consentState } from '@/plugins/consent/index';
   import eButton from '@/elements/e-button.vue';
 
-  interface Setup {
+  type Setup = {
     showConsentDialog: typeof showConsentDialog;
     consentState: typeof consentState;
   }
 
-  // interface Data {}
+  // type Data = {}
 
   /**
    * TODO: if you want to use this component make sure to register and enable cookiebot.com first.

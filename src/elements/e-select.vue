@@ -52,11 +52,11 @@
   import eProgress from '@/elements/e-progress.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  interface Data {
+  type Data = {
     internalValue: string;
   }
 
-  interface Options {
+  type Options = {
     [key: string]: string;
   }
 

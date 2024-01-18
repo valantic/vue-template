@@ -8,7 +8,7 @@ export default {
     ...mapComponentEventsToStorybookActions(cTabs),
   },
   args: {
-    tabs:  [
+    tabs: [
       { title: 'Tab 1', id: 'tab1' },
       { title: 'Tab 2', id: 'tab2', active: true },
       { title: 'Tab 3', id: 'tab3' },
@@ -57,7 +57,10 @@ const Template = (args, { story }) => {
   return demo;
 };
 
-export const Default = Template.bind({});
+export const Default = {
+  render: Template,
+};
 
-export const NoContent = Template.bind({});
-
+export const NoContent = {
+  render: Template,
+};

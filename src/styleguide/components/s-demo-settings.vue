@@ -28,7 +28,7 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
   import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
 
-  interface Data {
+  type Data = {
 
     /**
      * Determines if the user is logged in.

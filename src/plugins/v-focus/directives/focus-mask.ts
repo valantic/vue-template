@@ -1,13 +1,35 @@
 import state from '../state';
 
+const bemBlock = 'v-focus-mask';
+
 /**
  * Adds or removes a focus class to the given element based on the current focus state.
  */
-function update(el: HTMLElement): void {
+function updated(el: HTMLElement): void {
+  const visibleModifier = `${bemBlock}--visible`;
+  const variantModifier = state.variant && `${bemBlock}--variant-${state.variant}`;
+  const hidingModifier = `${bemBlock}--hiding`;
+
   if (state.enabled) { // This will also make the directive reactive to the observable.
-    el.classList.add('focus-mask');
+    el.classList.add(visibleModifier);
+
+    if (variantModifier) {
+      el.classList.add(variantModifier);
+    }
   } else {
-    el.classList.remove('focus-mask');
+    const removeClasses = (): void => {
+      el.classList.remove(visibleModifier, hidingModifier);
+
+      if (variantModifier) {
+        el.classList.remove(variantModifier);
+      }
+
+      el.removeEventListener('transitionend', removeClasses);
+    };
+
+    el.addEventListener('transitionend', removeClasses);
+
+    el.classList.add(hidingModifier);
   }
 }
 
@@ -17,6 +39,13 @@ function update(el: HTMLElement): void {
 export default {
   name: 'focus-mask',
 
-  beforeMount: update,
-  updated: update,
+  mounted(el: HTMLElement): void {
+    el.classList.add(bemBlock);
+
+    if (state.enabled) {
+      updated(el);
+    }
+  },
+
+  updated,
 };

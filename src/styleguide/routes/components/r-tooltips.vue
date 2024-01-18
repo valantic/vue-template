@@ -6,9 +6,11 @@
         Disable/Enable Tooltip
       </h2>
 
-      <div :class="b('link')">
-        <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
-      </div>
+      <ul>
+        <li :class="b('item')">
+          <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
+        </li>
+      </ul>
       <div>
         <label>
           <input v-model="active" type="checkbox"> Enable tooltip
@@ -51,7 +53,7 @@
   import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
   import tooltipDirective from '@/plugins/tooltip/directives/directive';
 
-  interface Data {
+  type Data = {
     active: boolean;
     placementOptions: Record<'label' | 'value', string>[];
     placement: Placement;
@@ -126,7 +128,11 @@
 </script>
 
 <style lang="scss">
+  @use '../../../setup/scss/variables' as *;
+
   .r-tooltips {
-    // Add specific styles.
+    &__item {
+      margin-bottom: $spacing--10;
+    }
   }
 </style>

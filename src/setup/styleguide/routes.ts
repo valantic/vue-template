@@ -18,6 +18,9 @@ import picture from '@/styleguide/routes/components/r-picture.vue';
 import video from '@/styleguide/routes/components/r-video.vue';
 import consent from '@/styleguide/routes/components/r-consent.vue';
 
+// Directives
+import focusMask from '@/styleguide/routes/directives/r-focus-mask.vue';
+
 declare module 'vue-router' {
   interface RouteMeta {
     title: string;
@@ -30,7 +33,7 @@ declare module 'vue-router' {
   }
 }
 
-export interface Route {
+export type Route = {
   path: string;
   name?: string;
   component?: ComponentPublicInstance | Record<string, unknown>;
@@ -179,6 +182,25 @@ export default [
         component: consent,
         meta: {
           title: 'Cookie consent',
+        },
+      },
+    ],
+  },
+  {
+    path: `${root}/directives`,
+    name: 'directivesWrapper',
+    redirect: `${root}/directives/index`,
+    component: categoryWrapper,
+    meta: {
+      title: 'Directives',
+    },
+    children: [
+      {
+        path: 'focus-mask',
+        name: 'Focus mask',
+        component: focusMask,
+        meta: {
+          title: 'Focus mask',
         },
       },
     ],

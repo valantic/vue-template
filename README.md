@@ -57,8 +57,6 @@ You **MUST** install the following tools globally, before you can use this templ
 Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
 
 
-**This template supports ES2020+. Please make sure your IDE is configured accordingly.**
-
 ### Know issues
 
 #### I use Windows and have issues with the line ending style
@@ -411,19 +409,23 @@ color: {
 #### Setup
 
 When Using Code from another File (Composition based) or accessing Component Elements via ref, the code needs to be 
-defined in the Setup Method. The setup Method needs to have a proper Return Type by defining an Interface:
+defined in the Setup Method. The setup Method needs to have a proper Return Type:
+
+
 
 ```ts
 import { defineComponent, ref, Ref } from 'vue';
-import useFormStates, { IFormStates } from '@/compositions/form-states';
+import useFormStates, { FormStates } from '@/compositions/form-states';
 
-interface ISetup extends IFormStates {
+type Setup = FormStates & {
   input: Ref<HTMLInputElement | null>;
   slot: Ref<HTMLSpanElement | null>;
 }
 
 export default defineComponent({
-  setup(props): ISetup {
+    setup(props): Setup {
+
+
     const input = ref();
     const slot = ref();
 
@@ -438,14 +440,18 @@ export default defineComponent({
 
 #### Data
 
-To fully benefit from TypeScript, please define your Data function with an Interface like this:
+To fully benefit from TypeScript, please define your Data function with a Type like this:
+
+
 
 ```ts
-interface IData {
+type Data = {
+
   myDataProperty: string;
 }
 export default defineComponent({
-  data(): IData {
+    data(): Data {
+
 	  return {
       myDataProperty: 'Hello World',
 	  }
@@ -736,11 +742,6 @@ The build chain uses a combined solution of TypeScript and Rollup and optional B
 1. Since Vite ships with TypeScript typing it shows TS errors and compiles the TypeScript to Javascript files
 2. Vite uses [Rollup](https://rollupjs.org/) which compiles the Javascript files to the final output based on browserlist
 
-### tsconfig Target
-
-At the moment, we are using `es2019` as TypeScript build target. The reason is, that `esNext` / `es2020` are not transpiling
-`optional-chaining` and `nullish-coalescing` cannot handle them
-
 ## Node.js and NPM
 
 Please see the separate [package.md](package.md).
@@ -853,20 +854,9 @@ $ brew upgrade nasm
 ```
 
 ## Vite integration todos
-* [ ] Check again, why we need to use `.value` on some vue-i18n properties (e.g. i18n.global.locale.value). Source: https://vue-i18n.intlify.dev/guide/advanced/lazy.html#lazy-loading
-* [ ] Check if module polyfill is required: https://vitejs.dev/config/build-options.html#build-modulepreload
-* [ ] CSS Prefixing
 * [ ] Apply new ESLint rules to valantic config.
-* [ ] Should there be basic styles for form elements (if no class applied)?
-* [ ] cmd + click in PhpStorm leads to Interface instead of implementation.
-* [ ] Update README
-* [ ] Check "Vite Inspect"
-* [ ] Refactor storybook stories to TS.
-* [ ] @typescript-eslint still required?
-* [ ] Update package.md
 
 ## Roadmap
-* [ ] Implement dual build (ES5/ES2015+)
 * [ ] Add 'dangerous' flag for components that use v-html in Storybook.
 * [ ] Add 'development' flag for components in Storybook.
 * [ ] Add custom elements option to the "initial data" section.

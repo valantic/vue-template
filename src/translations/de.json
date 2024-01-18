@@ -49,6 +49,15 @@
     "itemsEmpty": "Keine Ergebnisse.",
     "searchTitle": "Suche"
   },
+  "c-date-picker": {
+    "calendarRangeTitle": "Datumsbereich auswählen",
+    "calendarTitle": "Datum auswählen",
+    "inputEndLabel": "Ende",
+    "inputLabel": "Datum",
+    "inputStartLabel": "Start",
+    "nextMonth": "Nächster Monat",
+    "previousMonth": "Vorheriger Monat"
+  },
   "c-slider":{
     "navigationPrevious": "Zurück",
     "navigationNext": "Vorwärts"

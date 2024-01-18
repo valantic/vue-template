@@ -63,7 +63,7 @@
   import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  // interface Setup {}
+  // type Setup = {}
 
   /**
    * Renders a modal dialog.

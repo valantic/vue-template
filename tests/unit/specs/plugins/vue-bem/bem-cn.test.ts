@@ -20,9 +20,9 @@ const config = {
 describe('Block', () => {
   const b = bemCn(block, config);
 
-  Object.keys(blocks).forEach((item) => {
-    test(item, () => {
-      expect(b(blocks[item].mods, blocks[item].mixin)).toBe(item);
+  Object.entries(blocks).forEach(([output, input]) => {
+    test(output, () => {
+      expect(b(input.mods, input.mixin)).toBe(output);
     });
   });
 
@@ -36,9 +36,9 @@ describe('Block', () => {
 describe('Elements', () => {
   const b = bemCn(block, config);
 
-  Object.keys(elements).forEach((item) => {
-    test(item, () => {
-      expect(b(elements[item].el, elements[item].mods, elements[item].mixin)).toBe(item);
+  Object.entries(elements).forEach(([output, input]) => {
+    test(output, () => {
+      expect(b(input.el, input.mods, input.mixin)).toBe(output);
     });
   });
 });
@@ -46,10 +46,10 @@ describe('Elements', () => {
 describe('Delimiters', () => {
   const b = bemCn(delimiters.ns + block, { ...config, delimiters });
 
-  Object.keys(delimitersTest).forEach((item) => {
-    test(item, () => {
-      expect(b(delimitersTest[item].el, delimitersTest[item].mods))
-        .toBe(item);
+  Object.entries(delimitersTest).forEach(([output, input]) => {
+    test(output, () => {
+      expect(b(input.el, input.mods))
+        .toBe(output);
     });
   });
 });

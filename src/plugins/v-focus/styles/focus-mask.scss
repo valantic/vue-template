@@ -1,13 +1,35 @@
-.focus-mask {
-  position: relative;
+@use '../../../setup/scss/variables';
+@use '../../../setup/scss/mixins';
 
+.v-focus-mask {
   &::before {
-    @include z-index(focusOverlay);
+    @include mixins.z-index(focusOverlay);
 
-    position: absolute;
-    inset: 0;
-    display: block;
     content: '';
-    background: rgba($color-grayscale--600, 0.9);
+    width: 0;
+    height: 0;
+    opacity: 0;
+    background: rgba(variables.$color-grayscale--400, 0.5);
+    transition: opacity variables.$transition-duration--200 ease-in-out;
+  }
+
+  &--visible {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      width: auto;
+      height: auto;
+      opacity: 1;
+      inset: 0;
+    }
+  }
+
+  &--hiding::before {
+    opacity: 0;
+  }
+
+  &--variant-color::before {
+    background: rgba(variables.$color-primary--1, 0.5);
   }
 }

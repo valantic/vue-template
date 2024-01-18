@@ -31,32 +31,39 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = args => ({
-  components: { eButton },
+const Template = {
+  render: args => ({
+    components: { eButton },
 
-  setup() {
-    return { args };
-  },
+    setup() {
+      return { args };
+    },
 
-  template: `
-    <e-button v-bind="args">
+    template: `
+      <e-button v-bind="args">
       {{ args.label }}
-    </e-button>
-  `,
-});
-
-export const Default = Template.bind({});
-Default.args = {
-  primary: false,
+      </e-button>
+    `,
+  }),
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
+export const Default = {
+  ...Template,
+  args: {
+    primary: false,
+  },
 };
 
-export const Link = Template.bind({});
-Link.args = {
-  href: 'http://www.google.com',
+export const Primary = {
+  ...Template,
+  args: {
+    primary: true,
+  },
 };
 
+export const Link = {
+  ...Template,
+  args: {
+    href: 'http://www.google.com',
+  },
+};

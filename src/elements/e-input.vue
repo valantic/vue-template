@@ -14,32 +14,19 @@
            @mouseenter="hover = true"
            @mouseleave="hover = false"
     >
-    <span
-      v-if="$slots.default || !hasDefaultState"
-      ref="slot"
-      :class="b('slot-wrapper')"
-    >
-      <span
-        v-if="$slots.default"
-        :class="b('slot')"
-      >
+
+    <span v-if="$slots.default || !hasDefaultState" ref="slot" :class="b('slot-wrapper')">
+      <span v-if="$slots.default" :class="b('slot')">
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
       </span>
-      <span
-        v-if="!hasDefaultState && !focus"
-        :class="b('icon-splitter')"
-      ></span>
-      <e-icon
-        v-if="!hasDefaultState && !focus"
-        :class="b('state-icon')"
-        :icon="stateIcon"
+      <span v-if="!hasDefaultState && !focus" :class="b('icon-splitter')"></span>
+      <e-icon v-if="!hasDefaultState && !focus"
+              :class="b('state-icon')"
+              :icon="stateIcon"
       />
     </span>
-    <span
-      v-if="showNotification"
-      :class="b('notification')"
-    >
+    <span v-if="showNotification" :class="b('notification')">
       <c-form-notification :state="state">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <span v-html="notification"></span>
@@ -49,19 +36,25 @@
 </template>
 
 <script lang="ts">
-  import { Ref, defineComponent, ref, toRefs } from 'vue';
+  import {
+    Ref,
+    defineComponent,
+    ref,
+    toRefs,
+  } from 'vue';
+  import propScale from '@/helpers/prop.scale';
   import cFormNotification from '@/components/c-form-notification.vue';
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
-  import eIcon from '@/elements/e-icon.vue';
-  import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import eIcon from '@/elements/e-icon.vue';
 
-  interface Setup extends FormStates {
+  type Setup = FormStates & {
     input: Ref<HTMLInputElement | null>;
     slot: Ref<HTMLSpanElement | null>;
+    slotStart: Ref<HTMLSpanElement | null>;
   }
 
-  interface Data {
+  type Data = {
     internalValue: string;
   }
 
@@ -131,7 +124,10 @@
        * Available values: [0, 500]
        * Default: 500
        */
-      border: propScale(500, [0, 500]),
+      border: propScale(500, [
+        0,
+        500,
+      ]),
 
       /**
        * Option for selecting value text on focus.
@@ -153,20 +149,22 @@
     },
 
     emits: {
-      'update:modelValue': (payload: unknown): boolean => typeof payload !== 'undefined',
-      enter: (): boolean => true,
-      focus: (): boolean => true,
-      blur: (): boolean => true,
+      'update:modelValue': (payload: string) => typeof payload === 'string',
+      'focus': () => true,
+      'blur': () => true,
+      'enter': () => true,
     },
 
     setup(props): Setup {
       const input = ref();
       const slot = ref();
+      const slotStart = ref();
 
       return {
         ...useFormStates(toRefs(props).state),
         input,
         slot,
+        slotStart,
       };
     },
 
@@ -187,7 +185,11 @@
        * Defines state modifier classes.
        */
       modifiers(): Modifiers {
-        const { border, noNativeControl, notification } = this;
+        const {
+          border,
+          noNativeControl,
+          notification,
+        } = this;
 
         return {
           ...this.stateModifiers,
@@ -198,7 +200,16 @@
         };
       },
     },
-    // watch: {},
+    watch: {
+      /**
+       * Updates internal value if model value got changed from parent.
+       */
+      modelValue(value: string) {
+        if (value !== this.internalValue) {
+          this.internalValue = value;
+        }
+      },
+    },
 
     // beforeCreate() {},
     // created() {},
@@ -296,6 +307,14 @@
             this.input.style.paddingRight = `${slotWidth + 10}px`;
           }
         }
+
+        if (this.slotStart) {
+          const slotWidth = this.slotStart.clientWidth;
+
+          if (this.input) {
+            this.input.style.paddingLeft = `${slotWidth + 15}px`;
+          }
+        }
       },
 
       /**
@@ -376,22 +395,19 @@
     }
 
     // placeholder (has to be split in seperate blocks to work on each browser)
-    &__field::-webkit-input-placeholder {
-      // WebKit, Blink, Edge
+    &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
     }
 
-    &__field:-moz-placeholder {
-      // Mozilla Firefox 4 to 18
+    &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
     }
 
-    &__field::placeholder {
-      // Most modern browsers support this now
+    &__field::placeholder { // Most modern browsers support this now
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
@@ -428,6 +444,7 @@
       right: variables.$spacing--5;
       display: flex;
       transform: translateY(-50%);
+      pointer-events: none;
     }
 
     &__slot {
