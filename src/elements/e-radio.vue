@@ -1,7 +1,8 @@
 <template>
-  <label :class="b(modifiers)"
-         @mouseenter="hover = true"
-         @mouseleave="hover = false"
+  <label
+    :class="b(modifiers)"
+    @mouseenter="hover = true"
+    @mouseleave="hover = false"
   >
     <input v-model="internalValue"
            v-bind="$attrs"
@@ -61,7 +62,10 @@
       },
     },
 
-    emits: ['update:modelValue', 'change'],
+    emits: {
+      'update:modelValue': (value: string | number): boolean => ['string', 'number'].includes(typeof value),
+      'change': (value: string | number): boolean => ['string', 'number'].includes(typeof value),
+    },
 
     setup(props): FormStates {
       return {

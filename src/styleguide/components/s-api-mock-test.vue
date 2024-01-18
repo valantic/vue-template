@@ -134,7 +134,7 @@
 
     // props: {},
     emits: {
-      close: null,
+      close: () => true,
     },
 
     setup(): Setup {

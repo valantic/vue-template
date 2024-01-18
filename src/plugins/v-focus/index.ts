@@ -1,7 +1,8 @@
-import './styles/styles.scss';
 import { Plugin } from 'vue';
 import itemDirective from './directives/focus-item';
 import maskDirective from './directives/focus-mask';
+import './styles/focus-item.scss';
+import './styles/focus-mask.scss';
 
 /**
  * This plugin adds two directives, to apply a "focus" effect to a page/element.
