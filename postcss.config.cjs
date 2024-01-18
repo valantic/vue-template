@@ -1,6 +1,6 @@
 /* eslint-disable global-require, @typescript-eslint/no-var-requires */
 
-export default { // @see https://webpack.js.org/loaders/postcss-loader/#examples-of-config-files
+module.exports = { // @see https://webpack.js.org/loaders/postcss-loader/#examples-of-config-files
   // Browser config is fetched from package.json:browserslist
   map: false,
   plugins: [
