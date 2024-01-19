@@ -169,7 +169,7 @@
           :colspan="columns.length"
           :class="b('no-results')"
         >
-          {{ $t('e-table.noResults') }}
+          {{ $t('globalMessages.noResults') }}
         </td>
       </tr>
     </slot>
