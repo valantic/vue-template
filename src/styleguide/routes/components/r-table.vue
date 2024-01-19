@@ -88,7 +88,7 @@
         return new Array(40)
           .fill(null)
           .map((item, index) => ({
-            id: index,
+            id: index + 1,
             isComplete: index === 5,
             firstName: faker.person.firstName(),
             lastName: faker.person.lastName(),
