@@ -117,7 +117,7 @@
                 :column="column"
                 name="date"
           >
-            {{ $dayjs(item[column.key] as Date).format('DD.MM.YYYY') }}
+            {{ $dayjs(item[column.key] as Date).format(DateFormat.DD_MM_YYYY) }}
           </slot>
           <!-- @slot Use this dynamic slot to add custom templates to the cells -->
           <slot
@@ -192,6 +192,7 @@
     Ref,
     ref,
   } from 'vue';
+  import { DateFormat } from '@/plugins/dayjs';
   import eIcon from '@/elements/e-icon.vue';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import useUuid, { Uuid } from '@/compositions/uuid';
@@ -222,6 +223,7 @@
   }
 
   type Setup = Uuid & {
+    DateFormat: typeof DateFormat;
     toggleButton: Ref<HTMLButtonElement>;
   }
 
@@ -352,6 +354,7 @@
 
       return {
         ...useUuid(),
+        DateFormat,
         toggleButton,
       };
     },
@@ -660,14 +663,14 @@
       /**
        * Callback for the tables mousedown event.
        */
-      onMouseDown() { // All browsers
+      onMouseDown(): void { // All browsers
         this.hasSelection = !!window.getSelection()?.toString();
       },
 
       /**
        * Callback for the tables contextmenu event.
        */
-      onContextMenu() { // Chromium, webkit: mousedown, contextmenu
+      onContextMenu(): void { // Chromium, webkit: mousedown, contextmenu
         this.enableRowLink();
 
         setTimeout(() => {

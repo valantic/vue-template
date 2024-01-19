@@ -98,7 +98,7 @@
             isComplete: index === 5,
             firstName: faker.person.firstName(),
             lastName: faker.person.lastName(),
-            birthDate: '2018-08-20 18:15:09.587786',
+            birthDate: faker.date.anytime(),
             city: faker.location.city(),
             company: faker.company.name(),
             children: 3,
