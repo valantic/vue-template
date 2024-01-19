@@ -209,9 +209,9 @@
   export type TableColumn = {
     title: string | (() => string);
     key: string;
-    align: 'left' | 'center' | 'right';
-    slotName: string;
-    sortable: boolean;
+    align?: 'left' | 'center' | 'right';
+    slotName?: string;
+    sortable?: boolean;
     nowrap?: boolean;
     titleHidden?: boolean | (() => boolean);
     onClick?(item: TableItem, column: TableColumn, event?: Event): void;
