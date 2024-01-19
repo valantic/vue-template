@@ -79,8 +79,8 @@
         </th>
       </tr>
     </slot>
-    <template v-for="(item, itemIndex) in itemsSorted" :key="itemIndex">
 
+    <template v-for="(item, itemIndex) in itemsSorted" :key="item[itemIdentifier] || itemIndex">
       <tr :class="b('data-row', { disabled: item.disabled })">
         <td v-if="selectable"
             :class="b('data-cell')"
@@ -161,6 +161,7 @@
         </td>
       </tr>
     </template>
+
     <!-- @slot Allows to display a customized 'no results' row. -->
     <slot v-if="!itemsSorted.length" name="noResults" :columns="columns">
       <tr>
