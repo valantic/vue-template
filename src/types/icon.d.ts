@@ -1,9 +1,9 @@
-type Icon =
-  'i-arrow-2--left' |
-  'i-arrow-2--right' |
-  'i-arrow--down' |
+// Don't edit this file. Use the NPM script 'build:icons' instead.
+type Icon = 'i-arrow--down' |
   'i-arrow--left' |
   'i-arrow--right' |
+  'i-arrow-2--left' |
+  'i-arrow-2--right' |
   'i-calendar' |
   'i-check' |
   'i-close' |
