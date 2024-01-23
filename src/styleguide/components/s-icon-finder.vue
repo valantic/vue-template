@@ -76,7 +76,7 @@
   }
 
   type FilteredIcon = {
-    name: string;
+    name: Icon;
     negative: boolean;
   }
 
@@ -111,10 +111,6 @@
      * The sprite path to use.
      */
     spritePath: string;
-  }
-
-  type Icon = {
-    name: string;
   }
 
   const icons = import.meta.glob('@/assets/icons/*.svg');
@@ -157,21 +153,19 @@
        * Returns an array of query filtered icons.
        */
       filteredIcons(): FilteredIcon[] {
-        const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);
-
-        return list.map((icon: string) => { // eslint-disable-line arrow-body-style
-          return {
+        return this.icons
+          .filter((icon): icon is Icon => icon.indexOf(this.filter) > -1)
+          .map((icon: Icon) => ({
             name: icon,
             negative: Boolean(icon.match(/negative/)),
-          };
-        });
+          }));
       },
     },
     methods: {
       /**
        * Event handler for copy to clipboard button.
        */
-      copyToClipboard(icon: Icon) {
+      copyToClipboard(icon: FilteredIcon) {
         const hiddenInput = this.input as HTMLInputElement;
         let template;
 

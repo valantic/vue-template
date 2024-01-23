@@ -23,11 +23,12 @@
       </option>
     </select>
     <span :class="b('icon-wrapper')">
-      <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
-      <e-icon v-if="!hasDefaultState && !focus"
-              :class="b('state-icon')"
-              :icon="stateIcon"
-      />
+      <template v-if="!hasDefaultState && !focus && stateIcon">
+        <span :class="b('icon-splitter')"></span>
+        <e-icon :class="b('state-icon')"
+                :icon="stateIcon"
+        />
+      </template>
       <span v-if="progress" :class="b('progress-container')">
         <e-progress />
       </span>
