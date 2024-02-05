@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, PropType } from 'vue';
   import spritePath from '@/assets/icons.svg';
 
   type SpecificIconSizes = {
@@ -53,7 +53,7 @@
        * Name of the svg icon
        */
       icon: {
-        type: String,
+        type: String as PropType<Icon>,
         required: true,
       },
 

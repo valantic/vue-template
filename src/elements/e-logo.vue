@@ -24,7 +24,7 @@
   import eIcon from '@/elements/e-icon.vue';
 
   type Logo = {
-    icon: string;
+    icon: Icon;
     alt: string;
     title: string;
   }
@@ -56,12 +56,12 @@
 
     computed: {
       /**
-       * Get's the correct logo depending on the theme value from the store.
+       * Gets the correct logo depending on the theme value from the store.
        */
       logo(): Logo {
         const title = this.$t('e-logo.linkTitle');
-        let icon = '';
         let alt = '';
+        let icon: Icon;
 
         switch (this.theme) {
           case '01':
@@ -70,23 +70,8 @@
             break;
 
           case '02':
-            icon = 'svg-logo-name-02';
+            icon = 'i-styleguide-heart';
             alt = 'example logo 02';
-            break;
-
-          case '03':
-            icon = 'svg-logo-name-03';
-            alt = 'example logo 03';
-            break;
-
-          case '04':
-            icon = 'svg-logo-name-04';
-            alt = 'example logo 04';
-            break;
-
-          case '05':
-            icon = 'svg-logo-name-05';
-            alt = 'example logo 05';
             break;
 
           default:
