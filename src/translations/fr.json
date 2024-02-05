@@ -1,6 +1,7 @@
 {
   "globalMessages": {
-    "unknownApiError": "Une erreur inconnue s'est produite."
+    "unknownApiError": "Une erreur inconnue s'est produite.",
+    "noResults": "Aucun résultat."
   },
   "e-logo": {
     "linkTitle": "à la page d'accueil"
@@ -10,7 +11,6 @@
   },
   "e-table": {
     "sort": "Trier par {name}",
-    "noResults": "Aucun résultat pour la sélection actuelle."
   },
   "e-progress": {
     "loading": "Charge …"
