@@ -89,6 +89,7 @@ export default defineConfig(({ command, mode }) => {
         assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
         manifest: true,
         emptyOutDir: true,
+        sourcemap: true,
         copyPublicDir: true,
 
         // TODO: watch?

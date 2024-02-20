@@ -26,7 +26,7 @@ export type FormStates = {
   focus: Ref<boolean>;
   hover: Ref<boolean>;
   stateModifiers: ComputedRef<StateModifiers>;
-  stateIcon: ComputedRef<string>;
+  stateIcon: ComputedRef<Icon | null>;
   hasDefaultState: ComputedRef<boolean>;
 }
 
@@ -73,7 +73,7 @@ const formStates = (inputState: Ref<FieldState>): FormStates => {
   /**
    * Holds a string containing the icon name matching the current form element state.
    */
-  const stateIcon: ComputedRef<string> = computed(() => {
+  const stateIcon: ComputedRef<Icon | null> = computed(() => {
     switch (inputState.value) {
       case FieldState.Error:
         return 'i-error';
@@ -85,7 +85,7 @@ const formStates = (inputState: Ref<FieldState>): FormStates => {
         return 'i-info';
 
       default:
-        return '';
+        return null;
     }
   });
 

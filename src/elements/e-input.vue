@@ -20,11 +20,12 @@
         <!-- @slot Use this slot for Content next to the input value. For e.g. icons or units. -->
         <slot></slot>
       </span>
-      <span v-if="!hasDefaultState && !focus" :class="b('icon-splitter')"></span>
-      <e-icon v-if="!hasDefaultState && !focus"
-              :class="b('state-icon')"
-              :icon="stateIcon"
-      />
+      <template v-if="!hasDefaultState && !focus && stateIcon">
+        <span :class="b('icon-splitter')"></span>
+        <e-icon :class="b('state-icon')"
+                :icon="stateIcon"
+        />
+      </template>
     </span>
     <span v-if="showNotification" :class="b('notification')">
       <c-form-notification :state="state">

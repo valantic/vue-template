@@ -10,7 +10,7 @@
               @input="onInput"
     >
     </textarea>
-    <span v-if="!hasDefaultState && !focus" :class="b('icon-wrapper')">
+    <span v-if="!hasDefaultState && !focus && stateIcon" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
               :icon="stateIcon"

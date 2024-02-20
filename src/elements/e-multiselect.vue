@@ -30,7 +30,7 @@
               size="22"
               inline
       />
-      <e-icon v-else
+      <e-icon v-else-if="stateIcon"
               :class="b('state-icon')"
               :icon="stateIcon"
       />
