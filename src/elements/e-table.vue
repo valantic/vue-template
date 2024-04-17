@@ -896,6 +896,7 @@
       // https://sonepar-suisse.atlassian.net/browse/WF-5573
       background-clip: padding-box;
       text-align: right;
+      vertical-align: middle;
 
       @include mixins.media(sm) {
         display: table-cell;
