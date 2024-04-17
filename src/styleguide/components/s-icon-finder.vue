@@ -1,57 +1,58 @@
 <template>
-  <div :class="b()" :style="{ '--s-icon-finder--color': color }">
+  <div
+    :class="b()"
+    :style="{ '--s-icon-finder--color': color }"
+  >
     <div :class="b('filter')">
       <label :class="b('label')">
         Search:
-        <input v-model="filter"
-               :class="b('filter-input')"
-               placeholder="Search …"
-        >
+        <input
+          v-model="filter"
+          :class="b('filter-input')"
+          placeholder="Search …"
+        />
       </label>
       <label :class="b('label')">
         Color:
-        <input v-model="color"
-               :class="b('filter-input')"
-               type="color"
-        >
+        <input
+          v-model="color"
+          :class="b('filter-input')"
+          type="color"
+        />
       </label>
       <label :class="b('label', { variant: true })">
         Variant:
-        <select v-model="variant"
-                :class="b('filter-input')"
+        <select
+          v-model="variant"
+          :class="b('filter-input')"
         >
-          <option value="inline">
-            inline (colorable)
-          </option>
-          <option value="image">
-            image
-          </option>
-          <option value="css">
-            css
-          </option>
-          <option value="mask">
-            css mask (colorable)
-          </option>
+          <option value="inline">inline (colorable)</option>
+          <option value="image">image</option>
+          <option value="css">css</option>
+          <option value="mask">css mask (colorable)</option>
         </select>
       </label>
     </div>
     <div :class="b('grid')">
-      <div v-for="(icon, index) in filteredIcons"
-           :key="index"
-           :class="b('grid-item', { negative: icon.negative })"
-           role="button"
-           @click="copyToClipboard(icon)"
+      <div
+        v-for="(icon, index) in filteredIcons"
+        :key="index"
+        :class="b('grid-item', { negative: icon.negative })"
+        role="button"
+        @click="copyToClipboard(icon)"
       >
         <div :class="b('icon-wrapper')">
-          <div v-if="['mask', 'css'].includes(variant)"
-               :class="b('icon', { variant })"
-               :style="{ [variant === 'css' ? 'backgroundImage' : 'maskImage']: `url(${spritePath}#${icon.name})` }"
+          <div
+            v-if="['mask', 'css'].includes(variant)"
+            :class="b('icon', { variant })"
+            :style="{ [variant === 'css' ? 'backgroundImage' : 'maskImage']: `url(${spritePath}#${icon.name})` }"
           ></div>
-          <e-icon v-else
-                  :key="icon.name"
-                  :icon="icon.name"
-                  :inline="variant === 'inline'"
-                  size="80"
+          <e-icon
+            v-else
+            :key="icon.name"
+            :icon="icon.name"
+            :inline="variant === 'inline'"
+            size="80"
           />
         </div>
         <div :class="b('icon-label')">
@@ -59,29 +60,35 @@
         </div>
       </div>
     </div>
-    <div v-if="notification" :class="b('notification')">
+    <div
+      v-if="notification"
+      :class="b('notification')"
+    >
       {{ notification }}
     </div>
-    <input ref="input" :class="b('clipboard')" type="text">
+    <input
+      ref="input"
+      :class="b('clipboard')"
+      type="text"
+    />
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, Ref, ref } from 'vue';
+  import { Ref, defineComponent, ref } from 'vue';
   import spritePath from '@/assets/icons.svg';
   import eIcon from '@/elements/e-icon.vue';
 
   type Setup = {
     input: Ref<HTMLInputElement | null>;
-  }
+  };
 
   type FilteredIcon = {
-    name: string;
+    name: Icon;
     negative: boolean;
-  }
+  };
 
   type Data = {
-
     /**
      * An array of available icons.
      */
@@ -111,11 +118,7 @@
      * The sprite path to use.
      */
     spritePath: string;
-  }
-
-  type Icon = {
-    name: string;
-  }
+  };
 
   const icons = import.meta.glob('@/assets/icons/*.svg');
 
@@ -138,10 +141,7 @@
     data(): Data {
       return {
         icons: Object.keys(icons)
-          .map(path => path
-            .split('/')
-            .pop()
-            ?.replace('.svg', '') || '')
+          .map((path) => path.split('/').pop()?.replace('.svg', '') || '')
           .filter(Boolean),
         filter: '',
         notification: '',
@@ -157,21 +157,19 @@
        * Returns an array of query filtered icons.
        */
       filteredIcons(): FilteredIcon[] {
-        const list = this.icons.filter((icon: string) => icon.indexOf(this.filter) > -1);
-
-        return list.map((icon: string) => { // eslint-disable-line arrow-body-style
-          return {
+        return this.icons
+          .filter((icon): icon is Icon => icon.indexOf(this.filter) > -1)
+          .map((icon: Icon) => ({
             name: icon,
             negative: Boolean(icon.match(/negative/)),
-          };
-        });
+          }));
       },
     },
     methods: {
       /**
        * Event handler for copy to clipboard button.
        */
-      copyToClipboard(icon: Icon) {
+      copyToClipboard(icon: FilteredIcon) {
         const hiddenInput = this.input as HTMLInputElement;
         let template;
 

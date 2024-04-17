@@ -1,6 +1,7 @@
 {
   "globalMessages": {
-    "unknownApiError": "Une erreur inconnue s'est produite."
+    "unknownApiError": "Une erreur inconnue s'est produite.",
+    "noResults": "Aucun résultat."
   },
   "e-logo": {
     "linkTitle": "à la page d'accueil"
@@ -9,8 +10,7 @@
     "chooseOption": "SVP Sélectionner"
   },
   "e-table": {
-    "sort": "Trier par {name}",
-    "noResults": "Aucun résultat pour la sélection actuelle."
+    "sort": "Trier par {name}"
   },
   "e-progress": {
     "loading": "Charge …"
@@ -36,7 +36,7 @@
     "itemsEmpty": "Aucun résultat",
     "searchTitle": "Recherche"
   },
-  "s-language":{
+  "s-language": {
     "de": "Allemand",
     "fr": "Français"
   }

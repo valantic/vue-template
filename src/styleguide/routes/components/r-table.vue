@@ -1,29 +1,26 @@
 <template>
   <div :class="b()">
-    <h1>
-      Table
-    </h1>
-    <e-table v-model:selected="selectedItems"
-             :items="items"
-             :columns="columnsDefinition"
-             selectable
-             has-detail-rows
+    <h1>Table</h1>
+    <e-table
+      v-model:selected="selectedItems"
+      :items="items"
+      :columns="columnsDefinition"
+      selectable
+      has-detail-rows
     >
-      <template #detailRow="{ item }">
-        Detail row for {{ item.id }}.
-      </template>
+      <template #detailRow="{ item }"> Detail row for {{ item.id }}. </template>
     </e-table>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
   import { faker } from '@faker-js/faker/locale/en';
+  import { defineComponent } from 'vue';
   import eTable, { TableColumn, TableItem } from '@/elements/e-table.vue';
 
   type Setup = {
     columnsDefinition: TableColumn[];
-  }
+  };
 
   export default defineComponent({
     name: 'r-table',
@@ -39,21 +36,17 @@
           {
             title: 'City',
             key: 'city',
-            align: 'left',
             slotName: 'city',
             sortable: true,
           },
           {
             title: 'Firstname',
             key: 'firstName',
-            align: 'left',
             slotName: 'firstname',
-            sortable: true,
           },
           {
             title: 'Lastname',
             key: 'lastName',
-            align: 'left',
             titleHidden: true,
             slotName: 'lastname',
             sortable: false,
@@ -61,25 +54,22 @@
           {
             title: 'Birthdate',
             key: 'birthDate',
-            align: 'left',
             slotName: 'date',
-            sortable: true,
           },
           {
             title: 'Company',
             key: 'company',
-            align: 'left',
+            align: 'center',
             slotName: 'company',
             sortable: false,
           },
           {
             title: 'Children',
             key: 'children',
-            align: 'left',
+            align: 'right',
             slotName: 'children',
             sortable: false,
           },
-
         ],
       };
     },
@@ -91,18 +81,16 @@
 
     computed: {
       items(): TableItem[] {
-        return new Array(40)
-          .fill(null)
-          .map((item, index) => ({
-            id: index,
-            isComplete: index === 5,
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-            birthDate: '2018-08-20 18:15:09.587786',
-            city: faker.location.city(),
-            company: faker.company.name(),
-            children: 3,
-          }));
+        return new Array(40).fill(null).map((item, index) => ({
+          id: index + 1,
+          isComplete: index === 5,
+          firstName: faker.person.firstName(),
+          lastName: faker.person.lastName(),
+          birthDate: faker.date.anytime(),
+          city: faker.location.city(),
+          company: faker.company.name(),
+          children: 3,
+        }));
       },
     },
     // watch: {},

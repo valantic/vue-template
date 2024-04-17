@@ -2,7 +2,6 @@
   <Transition
     name="c-modal--fade-animation"
     @after-enter="onAfterEnter"
-    @after-leave="onAfterLeave"
   >
     <dialog
       v-if="isOpen"
@@ -10,6 +9,7 @@
     >
       <div
         v-outside-click="onOutsideClick"
+        ref="scrollContainer"
         :class="b('inner')"
       >
         <div
@@ -193,6 +193,9 @@
           this.$emit('update:isOpen', false);
         }
 
+        enableBodyScroll(this.$refs.scrollContainer as HTMLElement);
+        document.removeEventListener('keydown', this.onKeyDown);
+
         this.$emit('close');
       },
 
@@ -218,17 +221,10 @@
        * Handler for when the modal open-animation is completed.
        */
       onAfterEnter(): void {
-        disableBodyScroll(this.$el, { reserveScrollBarGap: true });
+        disableBodyScroll(this.$refs.scrollContainer as HTMLElement, { reserveScrollBarGap: true });
+
         this.$emit('open');
         document.addEventListener('keydown', this.onKeyDown);
-      },
-
-      /**
-       * Handler for when the modal close-animation is completed.
-       */
-      onAfterLeave(): void {
-        enableBodyScroll(this.$el);
-        document.removeEventListener('keydown', this.onKeyDown);
       },
     },
     // render() {},

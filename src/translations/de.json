@@ -1,6 +1,7 @@
 {
   "globalMessages": {
-    "unknownApiError": "Es ist ein unbekannter Fehler aufgetreten."
+    "unknownApiError": "Es ist ein unbekannter Fehler aufgetreten.",
+    "noResults": "Keine Ergebnisse gefunden."
   },
   "e-logo": {
     "linkTitle": "zur Startseite"
@@ -14,7 +15,6 @@
     "selectItem": "Auswählen",
     "showDetailsHeader": "Details anzeigen",
     "sort": "Nach {name} sortieren",
-    "noResults": "Keine Ergebnisse für die aktuelle Auswahl.",
     "toggleSortingOptions": "Sortierung"
   },
   "e-progress": {
@@ -58,11 +58,11 @@
     "nextMonth": "Nächster Monat",
     "previousMonth": "Vorheriger Monat"
   },
-  "c-slider":{
+  "c-slider": {
     "navigationPrevious": "Zurück",
     "navigationNext": "Vorwärts"
   },
-  "s-language":{
+  "s-language": {
     "de": "Deutsch",
     "fr": "Französisch"
   }

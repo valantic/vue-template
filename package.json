@@ -14,7 +14,7 @@
     "test": "npm run tsc && npm run lint && npm run test:unit -- --watch=false",
     "test:unit": "vitest --dir tests",
     "build": "vite build --mode=app",
-    "build:icons": "svg-sprite --config .svg-sprite.json src/assets/icons/*.svg",
+    "build:icons": "svg-sprite --config .svg-sprite.json src/assets/icons/*.svg; node ./update-ts-icon-type",
     "build:profile": "npm run build -- --mode=profile",
     "build:storybook": "storybook build --output-dir dist/storybook",
     "build:watch": "npm run build -- --watch",

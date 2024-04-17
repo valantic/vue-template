@@ -1,12 +1,13 @@
 <template>
   <span :class="b(modifiers)">
-    <select :value="internalValue"
-            :class="b('select')"
-            :disabled="progress"
-            v-bind="$attrs"
-            @change="onChange"
-            @mouseenter="hover = true"
-            @mouseleave="hover = false"
+    <select
+      :value="internalValue"
+      :class="b('select')"
+      :disabled="progress"
+      v-bind="$attrs"
+      @change="onChange"
+      @mouseenter="hover = true"
+      @mouseleave="hover = false"
     >
       <option
         v-if="placeholder"
@@ -25,15 +26,13 @@
       </option>
     </select>
     <span :class="b('icon-wrapper')">
-      <span
-        v-if="!hasDefaultState"
-        :class="b('icon-splitter')"
-      ></span>
-      <e-icon
-        v-if="!hasDefaultState && !focus"
-        :class="b('state-icon')"
-        :icon="stateIcon"
-      />
+      <template v-if="!hasDefaultState && !focus && stateIcon">
+        <span :class="b('icon-splitter')"></span>
+        <e-icon
+          :class="b('state-icon')"
+          :icon="stateIcon"
+        />
+      </template>
       <span
         v-if="progress"
         :class="b('progress-container')"
@@ -54,11 +53,11 @@
 
   type Data = {
     internalValue: string;
-  }
+  };
 
   type Options = {
     [key: string]: string;
-  }
+  };
 
   /**
    * Renders a styled select element. Options can be passed with the `options` property.

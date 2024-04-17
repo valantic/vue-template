@@ -1,10 +1,11 @@
 /* eslint-disable capitalized-comments, no-case-declarations */
-import { defineConfig, UserConfigExport } from 'vitest/config'; // Vitest instead of Vite was used because of extended Interface.
+// Vitest instead of Vite was used because of extended Interface.
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
-import { plugin as mdPlugin, Mode } from 'vite-plugin-markdown';
+import { Mode, plugin as mdPlugin } from 'vite-plugin-markdown';
+import { UserConfigExport, defineConfig } from 'vitest/config';
 import viteBuilds from './vite.builds.json';
 
 interface Modes {
@@ -37,7 +38,8 @@ export default defineConfig(({ command, mode }) => {
   const config: UserConfigExport = {
     plugins: [
       vue(),
-      ViteImageOptimizer({ // eslint-disable-line new-cap
+      ViteImageOptimizer({
+        // eslint-disable-line new-cap
         // logStats: false,
       }),
       mdPlugin({
@@ -67,21 +69,13 @@ export default defineConfig(({ command, mode }) => {
   switch (command) {
     case 'build': // @see https://vitejs.dev/config/build-options.html
       const isProfileBuild = mode === 'profile';
-      const {
-        base,
-        outDir,
-        assetsDir,
-        modes,
-        profileBuild,
-      } = viteBuilds as ViteBuilds || {};
+      const { base, outDir, assetsDir, modes, profileBuild } = (viteBuilds as ViteBuilds) || {};
 
       if (!isProfileBuild && !modes[mode]) {
         throw Error(`Given mode '${mode}' is unknown.`);
       }
 
-      const {
-        input,
-      } = modes[isProfileBuild ? profileBuild : mode] || {};
+      const { input } = modes[isProfileBuild ? profileBuild : mode] || {};
 
       config.base = base;
       config.build = {
@@ -89,6 +83,7 @@ export default defineConfig(({ command, mode }) => {
         assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
         manifest: true,
         emptyOutDir: true,
+        sourcemap: true,
         copyPublicDir: true,
 
         // TODO: watch?
@@ -139,7 +134,8 @@ export default defineConfig(({ command, mode }) => {
         }
 
         config.plugins.push(
-          visualizer({ // NOTE: the sizes reported by this plugin relate to the source, not build size... @see https://github.com/btd/rollup-plugin-visualizer/issues/96
+          visualizer({
+            // NOTE: the sizes reported by this plugin relate to the source, not build size... @see https://github.com/btd/rollup-plugin-visualizer/issues/96
             filename: './stats/index.html',
             open: true,
             template: 'treemap',

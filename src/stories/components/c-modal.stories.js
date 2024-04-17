@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker/locale/en';
-
 import cModal from '@/components/c-modal.vue';
 import eButton from '@/elements/e-button.vue';
 
@@ -16,16 +15,19 @@ export default {
     },
   },
   args: {
-    title: 'My Modal Title',
+    title: 'My Modal Title that can be longer than one line or even longer than two lines on mobile',
     isClosable: true,
     closeOnOutsideClick: false,
     size: 600,
     spacing: 500,
     stickyFooter: false,
-    content: faker.lorem.paragraph(),
+    content: faker.lorem.paragraph(200),
   },
 };
 const templateString = `
+Paragraph to test scrolling on mobile when modal is closed: <br>
+${faker.lorem.paragraph(50)}
+<br>
 <c-modal v-model:is-open="isOpen"
          v-bind="args"
          :title="args.title"
@@ -53,7 +55,7 @@ const templateString = `
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = {
-  render: args => ({
+  render: (args) => ({
     components: {
       eButton,
       cModal,

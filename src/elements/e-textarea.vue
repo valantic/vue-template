@@ -1,17 +1,18 @@
 <template>
   <span :class="b(modifiers)">
-    <textarea :class="b('field', fieldModifiers)"
-              :name="name"
-              :rows="rows"
-              :value="value"
-              v-bind="$attrs"
-              @focus="onFocus"
-              @blur="onBlur"
-              @input="onInput"
+    <textarea
+      :class="b('field', fieldModifiers)"
+      :name="name"
+      :rows="rows"
+      :value="value"
+      v-bind="$attrs"
+      @focus="onFocus"
+      @blur="onBlur"
+      @input="onInput"
     >
     </textarea>
     <span
-      v-if="!hasDefaultState && !focus"
+      v-if="!hasDefaultState && !focus && stateIcon"
       :class="b('icon-wrapper')"
     >
       <span :class="b('icon-splitter')"></span>
