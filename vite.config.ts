@@ -38,8 +38,8 @@ export default defineConfig(({ command, mode }) => {
   const config: UserConfigExport = {
     plugins: [
       vue(),
+      // eslint-disable-next-line new-cap
       ViteImageOptimizer({
-        // eslint-disable-line new-cap
         // logStats: false,
       }),
       mdPlugin({

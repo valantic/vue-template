@@ -9,6 +9,7 @@ fs.readdir(iconFolder, (error, files) => {
   fs.writeFile(
     outputFile,
     `// Don't edit this file. Use the NPM script 'build:icons' instead.\n${iconList}`,
+    // eslint-disable-next-line no-console
     () => console.error
   );
 });
