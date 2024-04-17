@@ -79,8 +79,8 @@
         </th>
       </tr>
     </slot>
-    <template v-for="(item, itemIndex) in itemsSorted" :key="itemIndex">
 
+    <template v-for="(item, itemIndex) in itemsSorted" :key="item[itemIdentifier] || itemIndex">
       <tr :class="b('data-row', { disabled: item.disabled })">
         <td v-if="selectable"
             :class="b('data-cell')"
@@ -117,7 +117,7 @@
                 :column="column"
                 name="date"
           >
-            {{ $dayjs(item[column.key] as Date).format('DD.MM.YYYY') }}
+            {{ $dayjs(item[column.key] as Date).format(DateFormat.DD_MM_YYYY) }}
           </slot>
           <!-- @slot Use this dynamic slot to add custom templates to the cells -->
           <slot
@@ -161,6 +161,7 @@
         </td>
       </tr>
     </template>
+
     <!-- @slot Allows to display a customized 'no results' row. -->
     <slot v-if="!itemsSorted.length" name="noResults" :columns="columns">
       <tr>
@@ -168,7 +169,7 @@
           :colspan="columns.length"
           :class="b('no-results')"
         >
-          {{ $t('e-table.noResults') }}
+          {{ $t('globalMessages.noResults') }}
         </td>
       </tr>
     </slot>
@@ -192,6 +193,7 @@
     Ref,
     ref,
   } from 'vue';
+  import { DateFormat } from '@/plugins/dayjs';
   import eIcon from '@/elements/e-icon.vue';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import useUuid, { Uuid } from '@/compositions/uuid';
@@ -207,9 +209,9 @@
   export type TableColumn = {
     title: string | (() => string);
     key: string;
-    align: 'left' | 'center' | 'right';
-    slotName: string;
-    sortable: boolean;
+    align?: 'left' | 'center' | 'right';
+    slotName?: string;
+    sortable?: boolean;
     nowrap?: boolean;
     titleHidden?: boolean | (() => boolean);
     onClick?(item: TableItem, column: TableColumn, event?: Event): void;
@@ -222,6 +224,7 @@
   }
 
   type Setup = Uuid & {
+    DateFormat: typeof DateFormat;
     toggleButton: Ref<HTMLButtonElement>;
   }
 
@@ -352,6 +355,7 @@
 
       return {
         ...useUuid(),
+        DateFormat,
         toggleButton,
       };
     },
@@ -660,14 +664,14 @@
       /**
        * Callback for the tables mousedown event.
        */
-      onMouseDown() { // All browsers
+      onMouseDown(): void { // All browsers
         this.hasSelection = !!window.getSelection()?.toString();
       },
 
       /**
        * Callback for the tables contextmenu event.
        */
-      onContextMenu() { // Chromium, webkit: mousedown, contextmenu
+      onContextMenu(): void { // Chromium, webkit: mousedown, contextmenu
         this.enableRowLink();
 
         setTimeout(() => {
@@ -892,6 +896,7 @@
       // https://sonepar-suisse.atlassian.net/browse/WF-5573
       background-clip: padding-box;
       text-align: right;
+      vertical-align: middle;
 
       @include mixins.media(sm) {
         display: table-cell;
