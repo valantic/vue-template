@@ -1,12 +1,14 @@
 <template>
   <Transition name="c-modal--fade-animation"
               @after-enter="onAfterEnter"
-              @after-leave="onAfterLeave"
   >
     <dialog v-if="isOpen"
             :class="b(modifiers)"
     >
-      <div v-outside-click="onOutsideClick" :class="b('inner')">
+      <div v-outside-click="onOutsideClick"
+           ref="scrollContainer"
+           :class="b('inner')"
+      >
         <div v-if="$slots.head || title || isClosable" :class="b('header')">
           <div :class="b('header-inner')">
             <slot name="head" :close="close">
@@ -42,7 +44,7 @@
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
 
-  // interface Setup {}
+  // type Setup = {}
 
   /**
    * Renders a modal dialog.
@@ -181,6 +183,9 @@
           this.$emit('update:isOpen', false);
         }
 
+        enableBodyScroll(this.$refs.scrollContainer as HTMLElement);
+        document.removeEventListener('keydown', this.onKeyDown);
+
         this.$emit('close');
       },
 
@@ -206,17 +211,10 @@
        * Handler for when the modal open-animation is completed.
        */
       onAfterEnter(): void {
-        disableBodyScroll(this.$el, { reserveScrollBarGap: true });
+        disableBodyScroll(this.$refs.scrollContainer as HTMLElement, { reserveScrollBarGap: true });
+
         this.$emit('open');
         document.addEventListener('keydown', this.onKeyDown);
-      },
-
-      /**
-       * Handler for when the modal close-animation is completed.
-       */
-      onAfterLeave(): void {
-        enableBodyScroll(this.$el);
-        document.removeEventListener('keydown', this.onKeyDown);
       },
     },
     // render() {},

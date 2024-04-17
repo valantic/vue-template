@@ -6,7 +6,7 @@ import {
 } from 'vue';
 import { BREAKPOINTS, ViewportBreakPoint } from '@/setup/globals';
 
-export interface Viewport {
+export type Viewport = {
   isXxs: boolean;
   isXs: boolean;
   isSm: boolean;
@@ -18,7 +18,7 @@ export interface Viewport {
 }
 
 /**
- * Adds an viewport instance to Vue itself, which can be used by calling this.$viewport.
+ * Adds a viewport instance to Vue itself, which can be used by calling this.$viewport.
  */
 const plugin: Plugin = {
   install(app) {

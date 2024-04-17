@@ -2,7 +2,6 @@
   <span :class="b(modifiers)">
     <textarea :class="b('field', fieldModifiers)"
               :name="name"
-              :disabled="disabled"
               :rows="rows"
               :value="value"
               v-bind="$attrs"
@@ -11,7 +10,7 @@
               @input="onInput"
     >
     </textarea>
-    <span v-if="!hasDefaultState && !focus" :class="b('icon-wrapper')">
+    <span v-if="!hasDefaultState && !focus && stateIcon" :class="b('icon-wrapper')">
       <span :class="b('icon-splitter')"></span>
       <e-icon :class="b('state-icon')"
               :icon="stateIcon"
@@ -273,12 +272,12 @@
     &__field:disabled,
     &--disabled &__field,
     &--disabled &__field:hover {
-      border-color: variables.$color-grayscale--600;
+      border: 1px solid variables.$color-grayscale--600;
       background-color: variables.$color-grayscale--1000;
-      color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--400;
 
       &::placeholder {
-        color: variables.$color-grayscale--600;
+        color: variables.$color-grayscale--400;
       }
     }
 

@@ -13,8 +13,8 @@
            :aria-selected="tab.id === activeTab?.id"
            :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
            :href="tab.link?.href || `#c-tabs-${uuid}--panel-${tab.id}`"
-           :target="tab.link?.target || LinkTarget.SELF"
-           :rel="tab.link?.target === LinkTarget.BLANK ? 'noopener noreferrer' : undefined"
+           :target="tab.link?.target || LinkTarget.Self"
+           :rel="tab.link?.target === LinkTarget.Blank ? 'noopener noreferrer' : undefined"
            role="tab"
            @click="onTabClick(tab)"
         >
@@ -48,9 +48,9 @@
   import { LinkTarget } from '@/setup/globals';
   import { Link } from '@/types/link';
 
-  interface Setup extends Uuid {}
+  type Setup = Uuid;
 
-  export interface Tab {
+  export type Tab = {
 
     /**
      * The text title for the current tab.
@@ -73,7 +73,7 @@
     link?: Link;
   }
 
-  interface Data {
+  type Data = {
     LinkTarget: typeof LinkTarget;
 
     /**

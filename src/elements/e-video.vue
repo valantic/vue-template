@@ -21,7 +21,7 @@
   /**
    * Specifies the allowed video base url.
    */
-  const VideoUrlSource: { [key: string]: string[] } = {
+  const videoUrlSource: { [key: string]: string[] } = {
     [VideoSource.Youtube]: ['https://www.youtube.com', 'https://youtu.be'],
     [VideoSource.Vimeo]: ['https://vimeo.com/'],
   };
@@ -29,7 +29,7 @@
   /**
    * Specifies the embedded video player base url.
    */
-  const PlayerUrlSource = {
+  const playerUrlSource = {
     [VideoSource.Vimeo]: 'https://player.vimeo.com/video/{videoId}',
     [VideoSource.Youtube]: 'https://www.youtube.com/embed/{videoId}',
   };
@@ -113,9 +113,9 @@
        */
       isValidUrl(): boolean {
         if (this.videoUrl) {
-          const videoSources = VideoUrlSource[this.source];
+          const videoSources = videoUrlSource[this.source];
 
-          return this.arrayHasString(videoSources, this.videoUrl);
+          return !!videoSources && this.arrayHasString(videoSources, this.videoUrl);
         }
 
         return false;
@@ -125,7 +125,7 @@
        * Returns the validated and adapted video source.
        */
       mapSrc(): string | undefined {
-        const playerBaseUrl = PlayerUrlSource[this.source];
+        const playerBaseUrl = playerUrlSource[this.source];
 
         if (!this.videoId && !this.videoUrl) {
           // eslint-disable-next-line no-console

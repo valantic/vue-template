@@ -7,8 +7,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
-  // interface Setup {}
-  // interface Data {}
+  // type Setup = {}
+  // type Data = {}
 
   /**
    * TODO: add component description.

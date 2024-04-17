@@ -12,10 +12,10 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import cNotification from '@/components/c-notification.vue';
-  import notificationStore, { NotificationItem, NotificationStore } from '@/stores/notification';
+  import useNotificationStore, { MappedNotificationItem } from '@/stores/notification';
 
-  interface Setup {
-    notificationStore: NotificationStore;
+  type Setup = {
+    notificationStore: ReturnType<typeof useNotificationStore>;
   }
 
   /**
@@ -44,7 +44,7 @@
 
     setup(): Setup {
       return {
-        notificationStore: notificationStore(),
+        notificationStore: useNotificationStore(),
       };
     },
     // data() {
@@ -55,7 +55,7 @@
       /**
        * Gets the filtered notifications depending on the selector.
        */
-      filteredNotifications(): readonly NotificationItem[] {
+      filteredNotifications(): MappedNotificationItem[] {
         if (this.selector !== 'default') {
           return this.notificationStore.getNotifications
             .filter(notification => notification.selector === this.selector);

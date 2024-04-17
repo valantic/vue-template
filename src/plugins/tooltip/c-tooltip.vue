@@ -2,24 +2,30 @@
   <component
     :is="rootElement"
     :class="b()"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
+    @mouseenter="showTooltip"
+    @mouseleave="tooltipVisible = false"
   >
     <!-- @slot The slot for the tooltips anchor element(s). -->
     <slot></slot>
 
     <!-- Moves tooltip to a portal to prevent invalid HTML nesting. -->
     <Teleport to="body">
-      <div
-        ref="tooltip"
-        :class="b('tooltip-wrapper')"
-        @load.capture="onLoad"
-      >
-        <div :class="b('tooltip')">
-          <!-- @slot This slot will be used for the tooltip content. -->
-          <slot name="tooltip"></slot>
+      <transition :name="b('transition', { fade: true })">
+        <div
+          v-if="tooltipInitialized"
+          v-show="tooltipVisible"
+          ref="tooltip"
+          :class="b('tooltip-wrapper', { component: true })"
+          @load.capture="updatePopperInstance"
+          @mouseenter="tooltipVisible = true"
+          @mouseleave="tooltipVisible = false"
+        >
+          <div :class="b('tooltip')">
+            <!-- @slot This slot will be used for the tooltip content. -->
+            <slot name="tooltip"></slot>
+          </div>
         </div>
-      </div>
+      </transition>
     </Teleport>
   </component>
 </template>
@@ -33,34 +39,25 @@
   } from 'vue';
   import { createPopper, Instance, Options } from '@popperjs/core';
   import {
-    CLASS_TOOLTIP_WRAPPER_ACTIVE,
-    CLASS_TOOLTIP_WRAPPER_VISIBLE,
-    DEBOUNCE_CLOSE,
+    BEM_BLOCK_NAME,
     DEFAULT_POPPER_OPTIONS,
   } from '@/plugins/tooltip/shared';
 
-  interface Setup {
+  type Setup = {
     tooltip: Ref<HTMLDivElement>;
   }
 
-  interface Data {
-
-    /**
-     * Holds the component instance related popper instance.
-     */
+  type Data = {
     popperInstance: Instance | null;
-
-    /**
-     * Holds a debounce timeout for the mouseleave event.
-     */
-    mouseLeaveDebounce: ReturnType<typeof setTimeout> | null;
+    tooltipInitialized: boolean;
+    tooltipVisible: boolean;
   }
 
   /**
    * Renders a tooltip for the elements inside its slot.
    */
   export default defineComponent({
-    name: 'c-tooltip',
+    name: BEM_BLOCK_NAME,
 
     // components: {},
 
@@ -80,6 +77,14 @@
         type: String,
         default: 'div',
       },
+
+      /**
+       * Allows to disable the tooltip.
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
     },
     // emits: {},
 
@@ -93,7 +98,8 @@
     data(): Data {
       return {
         popperInstance: null,
-        mouseLeaveDebounce: null,
+        tooltipInitialized: false,
+        tooltipVisible: false,
       };
     },
 
@@ -115,25 +121,25 @@
       popperOptions(): void {
         this.popperInstance?.setOptions(this.mergedPopperOptions);
       },
+
+      /**
+       * Creates or updates the popper instance when the visibility changes.
+       */
+      tooltipVisible(visible): void {
+        this.createPopperInstance();
+        this.enableEventListeners(visible);
+      },
     },
 
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    mounted() {
-      setTimeout(() => { // Delay popper create, since it won't be visible initially anyway.
-        this.createPopperInstance();
-      }, 500);
-    },
+    // mounted() {},
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
     // deactivated() {},
     beforeUnmount() {
-      const { tooltip } = this;
-
-      tooltip?.removeEventListener('mouseenter', this.clearDebounce);
-      tooltip?.removeEventListener('mouseleave', this.onMouseLeave);
       this.popperInstance?.destroy();
     },
     // unmounted() {},
@@ -143,25 +149,13 @@
        * Creates a new popper instance for the current component instance.
        */
       createPopperInstance(): void {
-        const { tooltip } = this;
+        const { tooltip, popperInstance } = this;
 
-        if (!tooltip) {
+        if (popperInstance || !tooltip) {
           return;
         }
 
-        tooltip.addEventListener('mouseenter', this.clearDebounce);
-        tooltip.addEventListener('mouseleave', this.onMouseLeave);
-
         this.popperInstance = createPopper(this.$el, this.tooltip, this.mergedPopperOptions);
-      },
-
-      /**
-       * Clears the mouseLeaveDebounce for the tooltip.
-       */
-      clearDebounce(): void {
-        if (this.mouseLeaveDebounce) {
-          clearTimeout(this.mouseLeaveDebounce);
-        }
       },
 
       /**
@@ -172,7 +166,7 @@
           ...options,
           modifiers: [
             ...options.modifiers || [],
-            { name: 'eventListeners', enabled },
+            { name: 'eventListeners', enabled }, // Auto observes scroll and resize events.
           ],
         }));
       },
@@ -180,42 +174,22 @@
       /**
        * Handles the mouseenter event of the toggle.
        */
-      onMouseEnter(): void {
-        const { tooltip } = this;
+      showTooltip(): void {
+        if (this.disabled) {
+          return;
+        }
 
-        this.clearDebounce();
-        this.enableEventListeners();
-        this.popperInstance?.update();
-        tooltip?.classList.add(CLASS_TOOLTIP_WRAPPER_ACTIVE);
+        this.tooltipInitialized = true;
 
         this.$nextTick(() => {
-          tooltip?.classList.add(CLASS_TOOLTIP_WRAPPER_VISIBLE);
+          this.tooltipVisible = true;
         });
-      },
-
-      /**
-       * Handles the mouseleave event of the toggle.
-       */
-      onMouseLeave(): void {
-        this.clearDebounce();
-
-        this.mouseLeaveDebounce = setTimeout(() => {
-          const { tooltip } = this;
-
-          tooltip.addEventListener('transitionend', () => {
-            tooltip?.classList.remove(CLASS_TOOLTIP_WRAPPER_ACTIVE);
-          }, { once: true });
-
-          tooltip?.classList.remove(CLASS_TOOLTIP_WRAPPER_VISIBLE);
-
-          this.enableEventListeners(false);
-        }, DEBOUNCE_CLOSE);
       },
 
       /**
        * Refreshes the popper if images did load inside of it.
        */
-      onLoad(): void {
+      updatePopperInstance(): void {
         this.popperInstance?.update();
       },
     },

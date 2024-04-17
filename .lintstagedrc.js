@@ -1,7 +1,7 @@
-module.exports = {
+export default {
   '*.{js,ts,vue}': [
-    () => 'vue-tsc --noEmit',
-    'eslint --config .eslintrc.fix.js --fix',
+    () => 'vue-tsc',
+    'eslint --config .eslintrc.fix.cjs --fix',
   ],
   '*.{css,vue,scss}': [
     'stylelint --config .stylelintrc.fix.js --fix',

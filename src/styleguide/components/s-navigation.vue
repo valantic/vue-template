@@ -40,7 +40,7 @@
   import sDemoSettings from './s-demo-settings.vue';
   import sNavigationBlock from './s-navigation-block.vue';
 
-  interface Data {
+  type Data = {
     isOpen: boolean;
   }
 

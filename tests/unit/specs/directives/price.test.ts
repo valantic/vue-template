@@ -13,7 +13,7 @@ const testCases = {
 describe('directive | v-price', () => {
   const app = createApp({});
 
-  app.directive(price.name, price.directive);
+  app.directive(price.name, price);
 
   it('has name property', () => {
     expect(price.name).toBeTruthy();
@@ -29,7 +29,7 @@ describe('directive | v-price', () => {
 
       const global = {
         directives: {
-          Price: price.directive,
+          Price: price,
         },
       };
 

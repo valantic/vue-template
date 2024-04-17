@@ -6,7 +6,7 @@ import {
   ref,
 } from 'vue';
 
-export enum FieldStates {
+export enum FieldState {
   Default = 'default',
   Success = 'success',
   Info = 'info',
@@ -14,21 +14,19 @@ export enum FieldStates {
   Error = 'error',
 }
 
-interface StateModifiers {
-  state: FieldStates;
+type StateModifiers = {
+  state: FieldState;
   active: boolean;
-  disabled: boolean;
   focus: boolean;
   hover: boolean;
 }
 
-export interface FormStates {
+export type FormStates = {
   active: Ref<boolean>;
-  disabled: Ref<boolean>;
   focus: Ref<boolean>;
   hover: Ref<boolean>;
   stateModifiers: ComputedRef<StateModifiers>;
-  stateIcon: ComputedRef<string>;
+  stateIcon: ComputedRef<Icon | null>;
   hasDefaultState: ComputedRef<boolean>;
 }
 
@@ -37,7 +35,7 @@ export const withProps = () => ({ // eslint-disable-line -- TODO: did not know h
    * Form states for class names (default, error, success, warning, info)
    */
   state: {
-    type: String as PropType<FieldStates>,
+    type: String as PropType<FieldState>,
     default: 'default',
     validator: (value: string): boolean => [
       'error',
@@ -52,9 +50,8 @@ export const withProps = () => ({ // eslint-disable-line -- TODO: did not know h
 /**
  * Defines the reactive properties which can be used for form elements
  */
-const formStates = (inputState: Ref<FieldStates>): FormStates => {
+const formStates = (inputState: Ref<FieldState>): FormStates => {
   const active = ref<boolean>(false);
-  const disabled = ref<boolean>(false);
   const focus = ref<boolean>(false);
   const hover = ref<boolean>(false);
 
@@ -64,7 +61,6 @@ const formStates = (inputState: Ref<FieldStates>): FormStates => {
   const stateModifiers: ComputedRef<StateModifiers> = computed(() => ({
       state: inputState.value,
       active: active.value,
-      disabled: disabled.value,
       focus: focus.value,
       hover: hover.value,
     }));
@@ -72,31 +68,30 @@ const formStates = (inputState: Ref<FieldStates>): FormStates => {
   /**
    * Holds a boolean if the form element has default state.
    */
-  const hasDefaultState: ComputedRef<boolean> = computed(() => inputState.value === FieldStates.Default);
+  const hasDefaultState: ComputedRef<boolean> = computed(() => inputState.value === FieldState.Default);
 
   /**
    * Holds a string containing the icon name matching the current form element state.
    */
-  const stateIcon: ComputedRef<string> = computed(() => {
+  const stateIcon: ComputedRef<Icon | null> = computed(() => {
     switch (inputState.value) {
-      case FieldStates.Error:
+      case FieldState.Error:
         return 'i-error';
 
-      case FieldStates.Success:
+      case FieldState.Success:
         return 'i-check';
 
-      case FieldStates.Info:
+      case FieldState.Info:
         return 'i-info';
 
       default:
-        return '';
+        return null;
     }
   });
 
   return {
     // data
     active,
-    disabled,
     focus,
     hover,
 

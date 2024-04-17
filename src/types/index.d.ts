@@ -1,11 +1,17 @@
-import { GlobalStore } from '@/setup/globals';
+import { Store } from '@/setup/globals';
 
-export interface InitialData {
-  [GlobalStore.SESSION]: unknown; // TODO: define Interface.
-  [GlobalStore.BREADCRUMBS]: unknown; // TODO: define Interface.
-  [GlobalStore.NOTIFICATION]: unknown; // TODO: define Interface.
+import { InitialData as SessionInitialData } from '@/stores/session';
+import { InitialData as BreadcrumbInitialData } from '@/stores/breadcrumb';
+import { InitialData as NotificationInitialData } from '@/stores/notification';
+
+type WindowInitialData = {
+  [Store.Session]: SessionInitialData;
+  [Store.Breadcrumb]?: BreadcrumbInitialData;
+  [Store.Notification]?: NotificationInitialData;
 }
 
 declare global {
-  interface Window { initialData: InitialData }
+  interface Window {
+    initialData: WindowInitialData;
+  }
 }

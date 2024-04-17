@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
-import markdown, { Mode } from 'vite-plugin-markdown';
+import { plugin as mdPlugin, Mode } from 'vite-plugin-markdown';
 import viteBuilds from './vite.builds.json';
 
 interface Modes {
@@ -40,7 +40,7 @@ export default defineConfig(({ command, mode }) => {
       ViteImageOptimizer({ // eslint-disable-line new-cap
         // logStats: false,
       }),
-      markdown({
+      mdPlugin({
         mode: [Mode.VUE],
       }),
     ],
@@ -58,6 +58,9 @@ export default defineConfig(({ command, mode }) => {
     },
     test: {
       environment: 'jsdom',
+    },
+    css: {
+      devSourcemap: true,
     },
   };
 
@@ -78,7 +81,7 @@ export default defineConfig(({ command, mode }) => {
 
       const {
         input,
-      } = modes[isProfileBuild ? profileBuild : mode];
+      } = modes[isProfileBuild ? profileBuild : mode] || {};
 
       config.base = base;
       config.build = {
@@ -86,6 +89,7 @@ export default defineConfig(({ command, mode }) => {
         assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
         manifest: true,
         emptyOutDir: true,
+        sourcemap: true,
         copyPublicDir: true,
 
         // TODO: watch?

@@ -15,13 +15,13 @@
     ref,
   } from 'vue';
   import loadScript from '@/helpers/load-script';
-  import sessionStore from '@/stores/session';
+  import useSessionStore from '@/stores/session';
 
-  interface Setup {
+  type Setup = {
     container: Ref<HTMLDivElement>;
   }
 
-  interface Data {
+  type Data = {
 
     /**
      * Holds the related Google Maps instance.
@@ -46,7 +46,7 @@
 
   type GoogleMapsCallback = () => void;
 
-  export interface GoogleMapsLocation {
+  export type GoogleMapsLocation = {
     lat?: string | number | null;
     lng?: string | number | null;
     geocode?: string;
@@ -54,11 +54,11 @@
     title?: string;
   }
 
-  interface GoogleMapsInternalLocation extends GoogleMapsLocation{
+  type GoogleMapsInternalLocation = GoogleMapsLocation & {
     referer: GoogleMapsLocation;
   }
 
-  interface EventClick {
+  type EventClick = {
     location: GoogleMapsLocation;
     marker: google.maps.Marker;
   }
@@ -215,8 +215,8 @@
    * This function checks whether the Map API has already been loaded once.
    */
   function loadMapsAPI(callback: GoogleMapsCallback): void {
-    const useSessionStore = sessionStore();
-    const apiKey = useSessionStore.googleMapsApiKey;
+    const sessionStore = useSessionStore();
+    const apiKey = sessionStore.googleMapsApiKey;
 
     if (!apiKey) {
       throw new Error('No Google Maps API key provided.');
@@ -493,15 +493,16 @@
         geocoder?.geocode({ address: location.geocode }, (results, status) => {
           if (status === 'OK') {
             const fitBounds = this.allowAutoUpdates && !this.center && this.bounds !== false;
+            const firstResult = results?.[0];
 
-            if (!results?.length) {
+            if (!firstResult) {
               return;
             }
 
             this.createMarker({
               ...location,
-              lat: results[0].geometry.location.lat(),
-              lng: results[0].geometry.location.lng(),
+              lat: firstResult.geometry.location.lat(),
+              lng: firstResult.geometry.location.lng(),
             });
 
             if (fitBounds) {

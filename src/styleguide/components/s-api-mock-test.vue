@@ -42,7 +42,7 @@
         <tbody>
           <tr v-for="(endpoint, index) in filteredEndpoints"
               :key="index"
-              :class="b('row', { debugMode: configurations[endpoint.header].enabled })"
+              :class="b('row', { debugMode: !!configurations[endpoint.header]?.enabled })"
           >
             <td>
               {{ endpoint.method }}
@@ -51,19 +51,22 @@
               {{ endpoint.path }}
             </td>
             <td>
-              <e-checkbox v-model="configurations[endpoint.header].enabled"
+              <!-- eslint-disable-next-line vue/no-extra-parens -->
+              <e-checkbox v-model="(configurations[endpoint.header] as Record<'enabled', boolean>).enabled"
                           name="debug-mode-enabled"
                           value
               />
             </td>
             <td>
-              <e-select v-model="configurations[endpoint.header].status"
+              <!-- eslint-disable-next-line vue/no-extra-parens -->
+              <e-select v-model="(configurations[endpoint.header] as Record<'status', string>).status"
                         :options="statusOptions"
                         name="status"
               />
             </td>
             <td>
-              <input v-model="configurations[endpoint.header].response"
+              <!-- eslint-disable-next-line vue/no-extra-parens -->
+              <input v-model="(configurations[endpoint.header] as Record<'response', string>).response"
                      type="text"
                      name="response"
               >
@@ -80,27 +83,29 @@
   import {
     RequestHandler,
     ResponseResolver,
-    rest,
+    http,
+    HttpResponse,
   } from 'msw';
   import mockWorker from '@/styleguide/api/browser';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eSelect from '@/elements/e-select.vue';
+  import eButton from '@/elements/e-button.vue';
 
-  interface DebugConfiguration {
+  type DebugConfiguration = {
     header: string;
     enabled: boolean;
     status: string;
     response: string;
   }
 
-  interface Setup {
+  type Setup = {
     statusOptions: {
       label: string;
       value: string;
     }[];
   }
 
-  interface Data {
+  type Data = {
     search: string;
     handlers: ReadonlyArray<RequestHandler> | null;
     configurations: {
@@ -108,7 +113,7 @@
     };
   }
 
-  interface Endpoint {
+  type Endpoint = {
     header: string;
     method: string;
     path: string;
@@ -121,7 +126,11 @@
    */
   export default defineComponent({
     name: 's-api-mock-test',
-    components: { eSelect, eCheckbox },
+    components: {
+      eSelect,
+      eCheckbox,
+      eButton,
+    },
 
     // props: {},
     emits: {
@@ -265,7 +274,11 @@
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
 
-            let response: unknown = null;
+            if (!path || !method) {
+              throw Error('Invalid header configuration');
+            }
+
+            let response: object = {};
 
             try {
               response = JSON.parse(configuration.response);
@@ -273,26 +286,25 @@
               // Do nothing
             }
 
-            const resolver: ResponseResolver = (req, res, ctx: any) => res( // eslint-disable-line @typescript-eslint/no-explicit-any
-              ctx.status(parseInt(configuration.status, 10)),
-              response ? ctx.json(response) : null
-            );
+            const resolver: ResponseResolver = () => HttpResponse.json(response, {
+              status: parseInt(configuration.status, 10),
+            });
 
             switch (method) {
               case 'GET':
-                return rest.get(path, resolver) as RequestHandler;
+                return http.get(path, resolver) as RequestHandler;
 
               case 'POST':
-                return rest.post(path, resolver) as RequestHandler;
+                return http.post(path, resolver) as RequestHandler;
 
               case 'PUT':
-                return rest.put(path, resolver) as RequestHandler;
+                return http.put(path, resolver) as RequestHandler;
 
               case 'PATCH':
-                return rest.patch(path, resolver) as RequestHandler;
+                return http.patch(path, resolver) as RequestHandler;
 
               case 'DELETE':
-                return rest.delete(path, resolver) as RequestHandler;
+                return http.delete(path, resolver) as RequestHandler;
 
               // no default
             }
@@ -360,7 +372,7 @@
       }
 
       td,
-      th, {
+      th {
         padding: variables.$spacing--10;
         white-space: nowrap;
 
@@ -383,7 +395,7 @@
     }
 
     input,
-    select, {
+    select {
       height: 30px;
       border: 1px solid variables.$color-grayscale--0;
       border-radius: 0;

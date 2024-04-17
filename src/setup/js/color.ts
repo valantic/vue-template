@@ -1,11 +1,11 @@
 // Keep in sync with src/setup/scss/_color.scss
 
-interface ColorType {
+type ColorType = {
   name: string;
   value: string[];
 }
 
-export interface Colors {
+export type Colors = {
   primary: ColorType[];
   secondary: ColorType[];
   grayscale: ColorType[];

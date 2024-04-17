@@ -31,6 +31,10 @@
     "confirm": "Bestätigen",
     "cancel": "Abbrechen"
   },
+  "c-consent-gatekeeper": {
+    "noConsentMessage": "Diese Funktionalität benötigt Ihre Zustimmung für \"{consentGroup}\"-Cookies. Bitte aktualisieren Sie Ihre Zustimmung.",
+    "showConsentButtonLabel": "Zustimmung anpassen"
+  },
   "c-notification": {
     "confirm": "OK",
     "decline": "Abbrechen",
@@ -44,6 +48,15 @@
     "save": "Speichern",
     "itemsEmpty": "Keine Ergebnisse.",
     "searchTitle": "Suche"
+  },
+  "c-date-picker": {
+    "calendarRangeTitle": "Datumsbereich auswählen",
+    "calendarTitle": "Datum auswählen",
+    "inputEndLabel": "Ende",
+    "inputLabel": "Datum",
+    "inputStartLabel": "Start",
+    "nextMonth": "Nächster Monat",
+    "previousMonth": "Vorheriger Monat"
   },
   "c-slider":{
     "navigationPrevious": "Zurück",

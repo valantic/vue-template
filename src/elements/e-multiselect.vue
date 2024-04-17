@@ -30,7 +30,7 @@
               size="22"
               inline
       />
-      <e-icon v-else
+      <e-icon v-else-if="stateIcon"
               :class="b('state-icon')"
               :icon="stateIcon"
       />
@@ -80,18 +80,18 @@
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
 
-  interface Option {
+  type Option = {
     value: string;
     label: string;
     [key: string]: string;
   }
 
-  interface Setup extends FormStates, Uuid {
+  type Setup = FormStates & Uuid & {
     searchField: Ref<HTMLInputElement | null>;
     fieldWrapper: Ref<HTMLButtonElement | null>;
-  }
+  };
 
-  interface Data {
+  type Data = {
     isOpen: boolean;
     searchTerm: string;
   }
@@ -250,7 +250,11 @@
       selectionAsString(): string {
         if (this.internalValue.length) {
           return this.options
-            .filter(option => this.internalValue.includes(option[this.valueField]))
+            .filter((option) => {
+              const value = option[this.valueField];
+
+              return typeof value !== 'undefined' && this.internalValue.includes(value);
+            })
             .map(option => option[this.labelField])
             .join(', ');
         }
@@ -274,7 +278,7 @@
        */
       filteredOptions(): Option[] {
         if (this.hasSearch && this.searchTerm) {
-          return this.options.filter(option => option[this.labelField].includes(this.searchTerm));
+          return this.options.filter(option => option[this.labelField]?.includes(this.searchTerm));
         }
 
         return this.options;
@@ -298,7 +302,9 @@
     // beforeCreate() {},
     // created() {},
     // beforeMount() {},
-    // mounted() {},
+    mounted() {
+      window.addEventListener('click', this.onClick, { capture: true });
+    },
     // beforeUpdate() {},
     // updated() {},
     // activated() {},
@@ -307,6 +313,15 @@
     // destroyed() {},
 
     methods: {
+      /**
+       * Checks if the dropdown needs to be closed because of an outside click
+       */
+      onClick(event: MouseEvent) {
+        if (this.$el !== event.target && !this.$el.contains(event.target)) {
+          this.close();
+        }
+      },
+
       /**
        * Close options event handler.
        */

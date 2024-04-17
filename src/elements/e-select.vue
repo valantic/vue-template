@@ -2,7 +2,7 @@
   <span :class="b(modifiers)">
     <select :value="internalValue"
             :class="b('select')"
-            :disabled="disabled || progress"
+            :disabled="progress"
             v-bind="$attrs"
             @change="onChange"
             @mouseenter="hover = true"
@@ -23,11 +23,12 @@
       </option>
     </select>
     <span :class="b('icon-wrapper')">
-      <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
-      <e-icon v-if="!hasDefaultState && !focus"
-              :class="b('state-icon')"
-              :icon="stateIcon"
-      />
+      <template v-if="!hasDefaultState && !focus && stateIcon">
+        <span :class="b('icon-splitter')"></span>
+        <e-icon :class="b('state-icon')"
+                :icon="stateIcon"
+        />
+      </template>
       <span v-if="progress" :class="b('progress-container')">
         <e-progress />
       </span>
@@ -43,11 +44,11 @@
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
 
-  interface Data {
+  type Data = {
     internalValue: string;
   }
 
-  interface Options {
+  type Options = {
     [key: string]: string;
   }
 
@@ -251,7 +252,7 @@
     &--disabled &__select,
     &--disabled &__select:hover {
       border-color: variables.$color-grayscale--600;
-      color: variables.$color-grayscale--600;
+      color: variables.$color-grayscale--400;
     }
 
     /**

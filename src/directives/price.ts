@@ -1,6 +1,6 @@
 import { DirectiveBinding } from 'vue';
 import formatPrice from '@/helpers/format-price';
-import { CustomDirective } from '@/types/custom-directive';
+import { NamedDirective } from '@/types/named-directive';
 
 /**
  * Formats the html content of the provided element as price.
@@ -14,7 +14,7 @@ function format(el: HTMLElement, binding: DirectiveBinding): void {
 
   el.textContent = Number.isNaN(priceInput)
     ? ''
-    : formatPrice(parseFloat(binding.value), binding.modifiers.currencyBefore, binding.modifiers.currencyAfter) || '';
+    : formatPrice(parseFloat(binding.value), binding.modifiers?.currencyBefore, binding.modifiers?.currencyAfter);
 }
 
 /**
@@ -31,8 +31,7 @@ function format(el: HTMLElement, binding: DirectiveBinding): void {
  */
 export default {
   name: 'price',
-  directive: {
-    beforeMount: format,
-    updated: format,
-  },
-} as CustomDirective;
+
+  beforeMount: format,
+  updated: format,
+} satisfies NamedDirective;
