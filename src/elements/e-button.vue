@@ -3,7 +3,7 @@
              :class="b(modifiers)"
              :style="style"
              v-bind="attributes"
-             @touchstart="hasTouch = true"
+             @touchstart.passive="hasTouch = true"
              @mouseenter="onMouseEnter"
              @mouseleave="onMouseLeave"
              @mousedown="onMouseDown"
