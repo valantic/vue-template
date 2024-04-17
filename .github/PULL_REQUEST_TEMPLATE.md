@@ -8,7 +8,7 @@
 - *link*
  
 ### Checklist
-- [ ] I merged the current development branch (before testing)
+- [ ] I merged the current main branch (before testing)
 - [ ] Added JSDoc and styleguide demo
 - [ ] Tested all links in project relevant browsers
 - [ ] Tested all links in different screen sizes
