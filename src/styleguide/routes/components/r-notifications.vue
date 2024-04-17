@@ -3,64 +3,32 @@
     <div :class="b()">
       <div>
         <!-- Default API Messages -->
-        <h2 :class="b('label')">
-          Default global Messages:
-        </h2>
-        <e-button @click="getApiResponseMessage('success')">
-          Success
-        </e-button>
-        <e-button @click="getApiResponseMessage('info')">
-          Info
-        </e-button>
-        <e-button @click="getApiResponseMessage('error')">
-          Error
-        </e-button>
+        <h2 :class="b('label')">Default global Messages:</h2>
+        <e-button @click="getApiResponseMessage('success')"> Success </e-button>
+        <e-button @click="getApiResponseMessage('info')"> Info </e-button>
+        <e-button @click="getApiResponseMessage('error')"> Error </e-button>
 
         <!-- Custom Container Messages -->
-        <h2 :class="b('label')">
-          Custom Container Message
-        </h2>
-        <e-button @click="getApiResponseMessage('success', 'footer')">
-          Success
-        </e-button>
-        <e-button @click="getApiResponseMessage('info', 'footer')">
-          Info
-        </e-button>
-        <e-button @click="getApiResponseMessage('error', 'footer')">
-          Error
-        </e-button>
+        <h2 :class="b('label')">Custom Container Message</h2>
+        <e-button @click="getApiResponseMessage('success', 'footer')"> Success </e-button>
+        <e-button @click="getApiResponseMessage('info', 'footer')"> Info </e-button>
+        <e-button @click="getApiResponseMessage('error', 'footer')"> Error </e-button>
 
         <!-- Redirect handling -->
-        <h2 :class="b('label')">
-          Redirect
-        </h2>
-        <e-button @click="getApiResponseMessage('success', '', '/styleguide/sandbox/layout')">
-          Success
-        </e-button>
-        <e-button @click="getApiResponseMessage('info', '', '/styleguide/sandbox/layout')">
-          Info
-        </e-button>
-        <e-button @click="getApiResponseMessage('error', '', '/styleguide/sandbox/layout')">
-          Error
-        </e-button>
+        <h2 :class="b('label')">Redirect</h2>
+        <e-button @click="getApiResponseMessage('success', '', '/styleguide/sandbox/layout')"> Success </e-button>
+        <e-button @click="getApiResponseMessage('info', '', '/styleguide/sandbox/layout')"> Info </e-button>
+        <e-button @click="getApiResponseMessage('error', '', '/styleguide/sandbox/layout')"> Error </e-button>
 
         <!-- Static Not expiring Messages -->
-        <h2 :class="b('label')">
-          Static (don't expire) Messages
-        </h2>
-        <e-button @click="getApiResponseMessage('success', '', '', false)">
-          Success
-        </e-button>
-        <e-button @click="getApiResponseMessage('info', '', '', false)">
-          Info
-        </e-button>
-        <e-button @click="getApiResponseMessage('error', '', '', false)">
-          Error
-        </e-button>
+        <h2 :class="b('label')">Static (don't expire) Messages</h2>
+        <e-button @click="getApiResponseMessage('success', '', '', false)"> Success </e-button>
+        <e-button @click="getApiResponseMessage('info', '', '', false)"> Info </e-button>
+        <e-button @click="getApiResponseMessage('error', '', '', false)"> Error </e-button>
       </div>
     </div>
 
-    <hr>
+    <hr />
 
     <div :class="b('second-container')">
       Custom Container:
@@ -71,13 +39,13 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import cNotificationContainer from '@/components/c-notification-container.vue';
   import useNotificationStore from '@/stores/notification';
+  import cNotificationContainer from '@/components/c-notification-container.vue';
   import eButton from '@/elements/e-button.vue';
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
-  }
+  };
 
   export default defineComponent({
     name: 'r-notifications',

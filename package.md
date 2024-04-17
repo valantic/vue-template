@@ -20,31 +20,32 @@ This will test the current state of TS, JS and CSS code. Tests **MUST** be execu
 
 #### All scripts
 
-* `npm run clean:caches` - Clears linter caches.
-* `npm run dev` - Runs the development environment.
-* `npm run fix:eslint` - Runs ESLint in `--fix` mode, to autofix some issues.
-* `npm run fix:stylelint` - Runs Stylelint in `--fix` mode, to autofix some issues.
-* `npm run lint` - Runs all available linters.
-* `npm run lint:eslint` - Runs ESLint without the `--fix` mode.
-* `npm run lint:stylelint` - Runs Stylelint without the `--fix` mode.
-* `npm run lint-staged` - Required by Git Hooks.
-* `npm run test` - Runs all available tests (unit, linters).
-* `npm run test:unit` - Executes Vitest tests.
-* `npm run build` - Builds the productive application.
-* `npm run build:icons` - Updates the SVG sprite.
-* `npm run build:profile` - Runs a build and shows a package content overview.
-* `npm run build:storybook` - Creates storybook build.
-* `npm run build:watch` - Allows to develop with a continuous productive build.
-* `npm run serve` - Runs Vite in preview mode.
-* `npm run prepare` - Auto executed setup script for Git Hooks.
-* `npm run storybook` - Runs the storybook server.
-* `npm run tsc` - Runs TypeScript tests.
+- `npm run clean:caches` - Clears linter caches.
+- `npm run dev` - Runs the development environment.
+- `npm run fix:eslint` - Runs ESLint in `--fix` mode, to autofix some issues.
+- `npm run fix:stylelint` - Runs Stylelint in `--fix` mode, to autofix some issues.
+- `npm run lint` - Runs all available linters.
+- `npm run lint:eslint` - Runs ESLint without the `--fix` mode.
+- `npm run lint:stylelint` - Runs Stylelint without the `--fix` mode.
+- `npm run lint-staged` - Required by Git Hooks.
+- `npm run test` - Runs all available tests (unit, linters).
+- `npm run test:unit` - Executes Vitest tests.
+- `npm run build` - Builds the productive application.
+- `npm run build:icons` - Updates the SVG sprite.
+- `npm run build:profile` - Runs a build and shows a package content overview.
+- `npm run build:storybook` - Creates storybook build.
+- `npm run build:watch` - Allows to develop with a continuous productive build.
+- `npm run serve` - Runs Vite in preview mode.
+- `npm run prepare` - Auto executed setup script for Git Hooks.
+- `npm run storybook` - Runs the storybook server.
+- `npm run tsc` - Runs TypeScript tests.
 
 ## Dependencies
 
 ### Project
 
 ### Template
+
 - [@popperjs/core](https://www.npmjs.com/package/@popperjs/core) - Tooltip & Popover Positioning Engine
   > components, tooltip
 - [@vuelidate/core](https://www.npmjs.com/package/@vuelidate/core) - Simple, lightweight model-based validation for Vue.js 2.x & 3.0
@@ -77,18 +78,19 @@ tbd
 ### Project
 
 ### Template
+
 - [@faker-js/faker](https://www.npmjs.com/package/@faker-js/faker) - Generate massive amounts of fake (but realistic) data for testing and development.
   > development, mock data
-- [@storybook/*](https://storybook.js.org/) - Build UIs without the grunt work.
+- [@storybook/\*](https://storybook.js.org/) - Build UIs without the grunt work.
   > development, storybook, components
-- [@types/*](https://github.com/DefinitelyTyped/DefinitelyTyped) - About
+- [@types/\*](https://github.com/DefinitelyTyped/DefinitelyTyped) - About
   The repository for high quality TypeScript type definitions.
   > development, typescript
-- [@typescript-eslint/*](https://github.com/typescript-eslint/typescript-eslint) - Monorepo for all the tooling which enables ESLint to support TypeScript.
+- [@typescript-eslint/\*](https://github.com/typescript-eslint/typescript-eslint) - Monorepo for all the tooling which enables ESLint to support TypeScript.
   > eslint
 - [@vitejs/plugin-vue](https://www.npmjs.com/package/@vitejs/plugin-vue) - Vite Vue Plugin.
   > vite
-- [@vue/*](https://www.npmjs.com/package/@vitejs/plugin-vue) - Additional tools for the vue development.
+- [@vue/\*](https://www.npmjs.com/package/@vitejs/plugin-vue) - Additional tools for the vue development.
   > eslint, vitest
 - [autoprefixer](https://www.npmjs.com/package/autoprefixer) - PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from caniuse.com.
   > webpack, scss

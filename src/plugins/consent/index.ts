@@ -1,7 +1,4 @@
-import {
-  reactive,
-  watch,
-} from 'vue';
+import { reactive, watch } from 'vue';
 
 // TODO: an active Cookiebot.com plan/integration is required.
 
@@ -33,15 +30,15 @@ export function showConsentDialog(): void {
 }
 
 if (!consentState.isCookiebotAvailable) {
-  window.addEventListener('CookiebotOnLoad', () => {
-    consentState.isCookiebotAvailable = true;
-  }, { once: true });
+  window.addEventListener(
+    'CookiebotOnLoad',
+    () => {
+      consentState.isCookiebotAvailable = true;
+    },
+    { once: true }
+  );
 }
 
 window.addEventListener('CookiebotOnConsentReady', updateConsentState);
 
-watch(
-  () => consentState.isCookiebotAvailable,
-  updateConsentState,
-  { immediate: true }
-);
+watch(() => consentState.isCookiebotAvailable, updateConsentState, { immediate: true });

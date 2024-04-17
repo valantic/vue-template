@@ -31,27 +31,19 @@
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    PropType,
-    Ref,
-    ref,
-  } from 'vue';
-  import { createPopper, Instance, Options } from '@popperjs/core';
-  import {
-    BEM_BLOCK_NAME,
-    DEFAULT_POPPER_OPTIONS,
-  } from '@/plugins/tooltip/shared';
+  import { Instance, Options, createPopper } from '@popperjs/core';
+  import { PropType, Ref, defineComponent, ref } from 'vue';
+  import { BEM_BLOCK_NAME, DEFAULT_POPPER_OPTIONS } from '@/plugins/tooltip/shared';
 
   type Setup = {
     tooltip: Ref<HTMLDivElement>;
-  }
+  };
 
   type Data = {
     popperInstance: Instance | null;
     tooltipInitialized: boolean;
     tooltipVisible: boolean;
-  }
+  };
 
   /**
    * Renders a tooltip for the elements inside its slot.
@@ -162,10 +154,10 @@
        * Enables the event listener for the popper instance.
        */
       enableEventListeners(enabled = true): void {
-        this.popperInstance?.setOptions(options => ({
+        this.popperInstance?.setOptions((options) => ({
           ...options,
           modifiers: [
-            ...options.modifiers || [],
+            ...(options.modifiers || []),
             { name: 'eventListeners', enabled }, // Auto observes scroll and resize events.
           ],
         }));

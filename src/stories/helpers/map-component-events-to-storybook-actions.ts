@@ -4,7 +4,7 @@ type StorybookActions = {
   [key: string]: {
     action: string;
   };
-}
+};
 
 /**
  * Maps the events of the given component to an action definition for Storybooks 'argTypes'.

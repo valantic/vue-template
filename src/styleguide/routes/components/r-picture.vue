@@ -1,11 +1,12 @@
 <template>
   <l-default>
-    <e-picture :sizes="sizes"
-               :width="300"
-               :height="1500"
-               srcset="https://images.pexels.com/photos/10313905/pexels-photo-10313905.jpeg"
-               fallback="https://images.pexels.com/photos/9074921/pexels-photo-9074921.jpeg"
-               alt="Image description"
+    <e-picture
+      :sizes="sizes"
+      :width="300"
+      :height="1500"
+      srcset="https://images.pexels.com/photos/10313905/pexels-photo-10313905.jpeg"
+      fallback="https://images.pexels.com/photos/9074921/pexels-photo-9074921.jpeg"
+      alt="Image description"
     />
   </l-default>
 </template>
@@ -17,7 +18,7 @@
   // type Setup = {}
   type Data = {
     sizes: ImageSizes;
-  }
+  };
 
   /**
    * A component that integrates the e-picture for testing its functionality and passing properties.

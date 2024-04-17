@@ -3,7 +3,7 @@
 type ColorType = {
   name: string;
   value: string[];
-}
+};
 
 export type Colors = {
   primary: ColorType[];
@@ -11,7 +11,7 @@ export type Colors = {
   grayscale: ColorType[];
   gradient: ColorType[];
   status: ColorType[];
-}
+};
 
 const colors: Colors = {
   primary: [

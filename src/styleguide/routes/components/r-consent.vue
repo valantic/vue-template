@@ -1,8 +1,9 @@
 <template>
   <div :class="b()">
-    <c-consent-gatekeeper :consent-group="ConsentGroup.Necessary"
-                          consent-message="An active Cookiebot.com plan/integration is required to enable this page."
-                          @approved="onConsentApprove"
+    <c-consent-gatekeeper
+      :consent-group="ConsentGroup.Necessary"
+      consent-message="An active Cookiebot.com plan/integration is required to enable this page."
+      @approved="onConsentApprove"
     >
       Consent sensitive content.
     </c-consent-gatekeeper>
@@ -11,11 +12,11 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { cConsentGatekeeper, ConsentGroup } from '@/plugins/consent';
+  import { ConsentGroup, cConsentGatekeeper } from '@/plugins/consent';
 
   type Setup = {
     ConsentGroup: typeof ConsentGroup;
-  }
+  };
 
   // type Data = {}
 

@@ -22,7 +22,8 @@
   @for $breakpointIndex from 2 through length($breakpoints) {
     $breakpoint: nth(map-keys($breakpoints), $breakpointIndex);
 
-    @include media($breakpoint) { // Wrapping spacing loop in media() reduces output size
+    @include media($breakpoint) {
+      // Wrapping spacing loop in media() reduces output size
       @for $spacingIndex from 1 through length($spacings) {
         $spacing: nth($spacings, $spacingIndex);
 

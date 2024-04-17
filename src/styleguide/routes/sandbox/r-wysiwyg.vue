@@ -1,6 +1,9 @@
 <template>
   <l-default>
-    <div :class="b()" class="wysiwyg">
+    <div
+      :class="b()"
+      class="wysiwyg"
+    >
       <h1>Titles</h1>
       <h1>WYSIWYG</h1>
       <h2>Text elements</h2>
@@ -8,19 +11,23 @@
       <h4>Level 4 title</h4>
       <h5>Level 5 title</h5>
       <h6>Level 6 title</h6>
-      <hr>
+      <hr />
 
       <h2>Paragraph & text</h2>
       <p>
-        Paragraph Lorem <strong>ipsum dolor</strong> sit amet, <i>consectetur adipisicing</i> elit.
-        Beatae consequatur dignissimos<sup>1</sup> harum<sub>2</sub> maiores non, numquam optio placeat quisquam sint sit?
+        Paragraph Lorem <strong>ipsum dolor</strong> sit amet, <i>consectetur adipisicing</i> elit. Beatae consequatur
+        dignissimos<sup>1</sup> harum<sub>2</sub> maiores non, numquam optio placeat quisquam sint sit?
       </p>
-      <hr>
+      <hr />
 
       <h2>Link</h2>
-      <a href="#">A link element</a><br>
-      <a href="#" disabled>A link element</a>
-      <hr>
+      <a href="#">A link element</a><br />
+      <a
+        href="#"
+        disabled
+        >A link element</a
+      >
+      <hr />
 
       <h2>Table</h2>
       <table>
@@ -46,7 +53,7 @@
           </tr>
         </tfoot>
       </table>
-      <hr>
+      <hr />
 
       <h2>Form elements</h2>
       <form>
@@ -54,49 +61,44 @@
           <legend>Input elements</legend>
           <label>
             Text:
-            <input type="text" placeholder="Placeholder">
+            <input
+              type="text"
+              placeholder="Placeholder"
+            />
           </label>
           <label>
-            <input type="checkbox">
+            <input type="checkbox" />
             Checkbox
           </label>
           <label>
-            <input type="radio">
+            <input type="radio" />
             Radio
           </label>
         </fieldset>
         <select>
           <optgroup label="Group 1">
-            <option value="1">
-              Option 1
-            </option>
-            <option value="2">
-              Option 2
-            </option>
-            <option value="3" disabled>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option
+              value="3"
+              disabled
+            >
               Option 3
             </option>
           </optgroup>
           <optgroup label="Group 2">
-            <option value="4">
-              Option 4
-            </option>
-            <option value="5">
-              Option 5
-            </option>
+            <option value="4">Option 4</option>
+            <option value="5">Option 5</option>
           </optgroup>
         </select>
         <textarea></textarea>
-        <button type="submit">
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
 
-      <hr>
+      <hr />
 
       <h2>Other elements</h2>
       <pre>Some pre-formated content.</pre>
-
     </div>
   </l-default>
 </template>

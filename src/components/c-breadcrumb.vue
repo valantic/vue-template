@@ -1,13 +1,15 @@
 <template>
   <div :class="b()">
     <ul :class="b('list')">
-      <li v-for="(item, index) in breadcrumbStore.items"
-          :key="`breadcrumb--${index}`"
-          :class="b('item')"
+      <li
+        v-for="(item, index) in breadcrumbStore.items"
+        :key="`breadcrumb--${index}`"
+        :class="b('item')"
       >
-        <a :class="b('link')"
-           :href="item.url"
-           :title="$t('c-breadcrumb.linkTitle', { name: item.name })"
+        <a
+          :class="b('link')"
+          :href="item.url"
+          :title="$t('c-breadcrumb.linkTitle', { name: item.name })"
         >
           {{ item.name }}
         </a>
@@ -22,7 +24,7 @@
 
   type Setup = {
     breadcrumbStore: ReturnType<typeof useBreadcrumbStore>;
-  }
+  };
 
   /**
    * Renders a list of breadcrumbs items from the store module.

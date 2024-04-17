@@ -4,16 +4,17 @@
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-    <input v-model="internalValue"
-           v-bind="$attrs"
-           :class="b('field')"
-           :aria-checked="isChecked ? 'true' : 'false'"
-           :value="value"
-           :name="name"
-           type="checkbox"
-           @blur="onBlur"
-           @focus="onFocus"
-    >
+    <input
+      v-model="internalValue"
+      v-bind="$attrs"
+      :class="b('field')"
+      :aria-checked="isChecked ? 'true' : 'false'"
+      :value="value"
+      :name="name"
+      type="checkbox"
+      @blur="onBlur"
+      @focus="onFocus"
+    />
     <span :class="b('indicator')"></span>
     <span :class="b('label-text')">
       <slot></slot>

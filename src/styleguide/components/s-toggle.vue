@@ -11,7 +11,7 @@
       v-model="internalValue"
       :class="b('input')"
       type="checkbox"
-    >
+    />
     <span :class="b('slider')"></span>
   </label>
 </template>

@@ -4,14 +4,15 @@
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-    <input v-model="internalValue"
-           v-bind="$attrs"
-           :class="b('field', fieldModifiers)"
-           :value="value"
-           :name="name"
-           type="radio"
-           @change="onChange"
-    >
+    <input
+      v-model="internalValue"
+      v-bind="$attrs"
+      :class="b('field', fieldModifiers)"
+      :value="value"
+      :name="name"
+      type="radio"
+      @change="onChange"
+    />
     <span :class="b('label')">
       <slot></slot>
     </span>

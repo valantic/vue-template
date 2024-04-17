@@ -1,22 +1,25 @@
 <template>
   <div :class="b()">
-    <ul :class="b('tab-list')"
-        :aria-label="ariaLabel"
-        role="tablist"
+    <ul
+      :class="b('tab-list')"
+      :aria-label="ariaLabel"
+      role="tablist"
     >
-      <li v-for="tab in tabs"
-          :key="tab.id"
-          :class="b('tab-item')"
+      <li
+        v-for="tab in tabs"
+        :key="tab.id"
+        :class="b('tab-item')"
       >
-        <a :id="`c-tabs-${uuid}--tab-${tab.id}`"
-           :class="b('tab', { [tab.id]: true, active: tab.id === activeTab?.id })"
-           :aria-selected="tab.id === activeTab?.id"
-           :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
-           :href="tab.link?.href || `#c-tabs-${uuid}--panel-${tab.id}`"
-           :target="tab.link?.target || LinkTarget.Self"
-           :rel="tab.link?.target === LinkTarget.Blank ? 'noopener noreferrer' : undefined"
-           role="tab"
-           @click="onTabClick(tab)"
+        <a
+          :id="`c-tabs-${uuid}--tab-${tab.id}`"
+          :class="b('tab', { [tab.id]: true, active: tab.id === activeTab?.id })"
+          :aria-selected="tab.id === activeTab?.id"
+          :aria-controls="`c-tabs-${uuid}--panel-${tab.id}`"
+          :href="tab.link?.href || `#c-tabs-${uuid}--panel-${tab.id}`"
+          :target="tab.link?.target || LinkTarget.Self"
+          :rel="tab.link?.target === LinkTarget.Blank ? 'noopener noreferrer' : undefined"
+          role="tab"
+          @click="onTabClick(tab)"
         >
           <!-- @slot ${tab.id}__tab - Allows to overwrite the tab title. -->
           <slot :name="`${tab.id}__tab`">
@@ -27,13 +30,14 @@
     </ul>
     <!-- @slot default - Allows to use the component without panels. -->
     <slot>
-      <div v-for="tab in tabs"
-           :id="`c-tabs-${uuid}--panel-${tab.id}`"
-           :key="tab.id"
-           :class="b('panel', { [tab.id]: true, visible: tab.id === activeTab?.id })"
-           :aria-labelledby="`c-tabs-${uuid}--tab-${tab.id}`"
-           :tabindex="tab.id === activeTab?.id ? 0 : -1"
-           role="tabpanel"
+      <div
+        v-for="tab in tabs"
+        :id="`c-tabs-${uuid}--panel-${tab.id}`"
+        :key="tab.id"
+        :class="b('panel', { [tab.id]: true, visible: tab.id === activeTab?.id })"
+        :aria-labelledby="`c-tabs-${uuid}--tab-${tab.id}`"
+        :tabindex="tab.id === activeTab?.id ? 0 : -1"
+        role="tabpanel"
       >
         <!-- @slot ${tab.id} - Renders the panel content for the current tab. -->
         <slot :name="tab.id"></slot>
@@ -43,15 +47,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
-  import useUuid, { Uuid } from '@/compositions/uuid';
+  import { PropType, defineComponent } from 'vue';
   import { LinkTarget } from '@/setup/globals';
+  import useUuid, { Uuid } from '@/compositions/uuid';
   import { Link } from '@/types/link';
 
   type Setup = Uuid;
 
   export type Tab = {
-
     /**
      * The text title for the current tab.
      */
@@ -71,7 +74,7 @@
      * Allows to track additional information for a tab. e.g. a link.
      */
     link?: Link;
-  }
+  };
 
   type Data = {
     LinkTarget: typeof LinkTarget;
@@ -80,7 +83,7 @@
      * Holds the currently active tab defintion.
      */
     activeTab: Tab | null;
-  }
+  };
 
   /**
    * Renders an A11y compatible tab component.
@@ -125,7 +128,7 @@
     data(): Data {
       return {
         LinkTarget,
-        activeTab: this.tabs.find(tab => tab.active) || null,
+        activeTab: this.tabs.find((tab) => tab.active) || null,
       };
     },
 

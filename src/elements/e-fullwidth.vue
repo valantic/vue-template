@@ -1,12 +1,15 @@
 <template>
-  <div :class="b()" :style="style">
+  <div
+    :class="b()"
+    :style="style"
+  >
     <!-- @slot Default slot -->
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, StyleValue } from 'vue';
+  import { StyleValue, defineComponent } from 'vue';
   import scrollbarWidth from '@/helpers/scrollbar-width';
 
   type ResizeObserverCallback = () => void;
@@ -15,7 +18,7 @@
     scrollbarWidth: number;
     resizeObserver: ResizeObserver;
     resizeTimeout: ReturnType<typeof setTimeout> | null;
-  }
+  };
 
   /**
    * Allows to display a full width element inside a container with limited width.
@@ -38,7 +41,8 @@
          * will also be triggered, if the height of the page changes, and the scrollbar becomes visible.
          * The resize event was only triggered, when the user manually changes the screen size.
          */
-        resizeObserver: window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth as ResizeObserverCallback),
+        resizeObserver:
+          window.ResizeObserver && new ResizeObserver(this.updateScrollbarWidth as ResizeObserverCallback),
 
         /**
          * Holds the ID of the currently running resize timeout.
@@ -73,7 +77,8 @@
     beforeMount() {
       if (this.resizeObserver) {
         this.resizeObserver.observe(window.document.body);
-      } else { // Fallback for browsers without ResizeObserver support.
+      } else {
+        // Fallback for browsers without ResizeObserver support.
         window.addEventListener('resizeend', this.updateScrollbarWidth);
       }
     },

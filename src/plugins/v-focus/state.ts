@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 type FocusState = {
   enabled: boolean;
   variant?: string;
-}
+};
 
 const state: FocusState = reactive({
   /**

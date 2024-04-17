@@ -2,8 +2,6 @@
 
 This is a custom Vue3 template written in TypeScript which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
 
-
-
 ## Introduction
 
 ### About this readme
@@ -12,50 +10,47 @@ If you're new on this project, please take your time and read carefully through 
 
 Please note, that there is also a `package.md` file which contains additional information about the used NPM packages and available NPM scripts.
 
-
-
 ### Before starting
 
 This template, in most parts, follows the default Vue conventions. Where this is not the case, you'll find documentation on the customizations in this readme.
 
 Before you start working on this project, you **MUST** read the following documentations:
 
-* [Vue Introduction](https://vuejs.org/guide/introduction.html)
-* [Vue Styleguide](https://vuejs.org/style-guide/)
-* [Vue component styleguide](https://github.com/pablohpsilva/vuejs-component-style-guide)
-* [package.md](package.md)
+- [Vue Introduction](https://vuejs.org/guide/introduction.html)
+- [Vue Styleguide](https://vuejs.org/style-guide/)
+- [Vue component styleguide](https://github.com/pablohpsilva/vuejs-component-style-guide)
+- [package.md](package.md)
 
 You **MUST** also be familiar with the following tools:
 
-* [BEM](http://getbem.com/)
-* [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
-* [ESLint](https://eslint.org/)
-* [TypeScript](https://www.typescriptlang.org/)
-* [Git](https://git-scm.com/)
-* [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
-* [Jest](https://facebook.github.io/jest/)
-* [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
-* [SCSS](https://sass-lang.com/)
-* [Stylelint](https://stylelint.io/)
-* Your IDE
+- [BEM](http://getbem.com/)
+- [ES2015+](https://babeljs.io/learn-es2015/) (especially with Classes, Const/Let, Modules, Promises)
+- [ESLint](https://eslint.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Git](https://git-scm.com/)
+- [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
+- [Jest](https://facebook.github.io/jest/)
+- [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
+- [SCSS](https://sass-lang.com/)
+- [Stylelint](https://stylelint.io/)
+- Your IDE
 
 You **SHOULD** also know the following tools:
 
-* [vite](https://vitejs.dev/)
+- [vite](https://vitejs.dev/)
 
 ### Before installing
 
 You **MUST** install the following tools globally, before you can use this template:
 
-* [Node.js & NPM](https://nodejs.org/en/) (See package.json for the required versions. Use a version manager in case you work on different projects (e.g. [n](https://www.npmjs.com/package/n) or [nvm](https://github.com/creationix/nvm/blob/master/README.md))).
-* [Vue-Devtools](https://github.com/vuejs/vue-devtools) for your browser.
-* [Homebrew](https://brew.sh/) is most likely also needed for 3rd party tools.
-* A modern IDE
+- [Node.js & NPM](https://nodejs.org/en/) (See package.json for the required versions. Use a version manager in case you work on different projects (e.g. [n](https://www.npmjs.com/package/n) or [nvm](https://github.com/creationix/nvm/blob/master/README.md))).
+- [Vue-Devtools](https://github.com/vuejs/vue-devtools) for your browser.
+- [Homebrew](https://brew.sh/) is most likely also needed for 3rd party tools.
+- A modern IDE
 
 ### Prepare your IDE
 
 Please make sure your IDE is configured to apply [ESLint](https://eslint.org/docs/user-guide/integrations), [Stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins) and [.editorconfig](https://editorconfig.org/#download) linting/settings.
-
 
 ### Know issues
 
@@ -75,8 +70,6 @@ NOTE: be aware that this might also effect other projects on your machine.
 ### Cloning the repository
 
 Note: to execute the following tasks, you may need to register an SSH key for your machine on the repository side. Ask your project manager about where you need to define it. On how you create/copy the SSH key you can read more [here](https://help.github.com/articles/connecting-to-github-with-ssh/).
-
-
 
 Make a local git clone of this project/template by using the following command:
 
@@ -113,29 +106,27 @@ $ npm ci
 
 NOTE: always use `npm ci` when setting up the project or updated the code base. Unlike `npm install`, `npm ci` will install only exactly the packages and versions which are defined in the `package-lock.json` file. `npm install` on the other hand will always check for updates, meeting the versioning criteria.
 
-
-
 ## This project
 
 > TODO: replace this section with project specific information.
 
 ### Browser support
 
-| Operating systems/Devices | Browser | Priority | Breakpoints |
-| --- | --- | --- | --- |
-| Windows 10 | Chrome (current) | **high** | all |
-| Windows 10 | Edge (current) | **high** | all |
-| Windows 10 | Firefox (current) | _medium_| all |
-| Windows 10 | IE11 | low | >= md |
-| Windows 7 | IE11 | low | >= md |
-| Mac OS X 10.15 | Chrome (current) | **high** | all |
-| Mac OS X 10.15 | Safari (current) | **high** | all |
-| Mac OS X 10.15 | Firefox (current) | _medium_ | all |
-| iPhone X (current iOS) | Safari (current) | low | <= md |
-| iPhone 11 (current iOS) | Safari (current) | low | <= md |
-| Galaxy S20 (current Android) | Chrome Mobile (current) | low | <= md |
-| iPad Pro 4th (current iOS) | Safari Mobile (current) | low | sm, md, lg |
-| iPad 7th (current iOS) | Safari Mobile (current) | low | sm, md, lg |
+| Operating systems/Devices    | Browser                 | Priority | Breakpoints |
+| ---------------------------- | ----------------------- | -------- | ----------- |
+| Windows 10                   | Chrome (current)        | **high** | all         |
+| Windows 10                   | Edge (current)          | **high** | all         |
+| Windows 10                   | Firefox (current)       | _medium_ | all         |
+| Windows 10                   | IE11                    | low      | >= md       |
+| Windows 7                    | IE11                    | low      | >= md       |
+| Mac OS X 10.15               | Chrome (current)        | **high** | all         |
+| Mac OS X 10.15               | Safari (current)        | **high** | all         |
+| Mac OS X 10.15               | Firefox (current)       | _medium_ | all         |
+| iPhone X (current iOS)       | Safari (current)        | low      | <= md       |
+| iPhone 11 (current iOS)      | Safari (current)        | low      | <= md       |
+| Galaxy S20 (current Android) | Chrome Mobile (current) | low      | <= md       |
+| iPad Pro 4th (current iOS)   | Safari Mobile (current) | low      | sm, md, lg  |
+| iPad 7th (current iOS)       | Safari Mobile (current) | low      | sm, md, lg  |
 
 #### Updating browserslist
 
@@ -207,7 +198,7 @@ git subtree pull --prefix assets/vue https://github.com/valantic/vue-template.gi
 .  |- plugins           Self maintained plugins
 .  |- setup             Configuration and setup of the application
 .  |- stores            Pinia stores
-.  |- styleguide        Assets, components, mock data and routes for the stylguide 
+.  |- styleguide        Assets, components, mock data and routes for the stylguide
 .  |- translations      Translations for the application
 |- blueprints           File blueprints
 |- (dist)               Build folder
@@ -304,12 +295,12 @@ Pseudo selector classes can be used (mainly :first-child / :last-child). But be 
 
 #### Selector Concatenation in less/sass Files with `&`
 
-* Selector concatenation is allowed:
-  * to concatenate block and element
-  * to add states
-* Selector concatenation is not allowed:
-  * to nesting more than two layers (exceptionally allowed 3rd layer for state selector)
-  * to assemble an element name or modifier name
+- Selector concatenation is allowed:
+  - to concatenate block and element
+  - to add states
+- Selector concatenation is not allowed:
+  - to nesting more than two layers (exceptionally allowed 3rd layer for state selector)
+  - to assemble an element name or modifier name
 
 #### Use of Global State Classes
 
@@ -320,7 +311,7 @@ We don't use global state classes like `.is-active` or `.is-open`, only modifier
 ### Vendor prefixes
 
 Vendor prefixes are automatically applied according to the `browserslist` in `package.json`. You don't need to write them yourself.
-  
+
 ### Naming Color Variables
 
 To name a dynamic set of SCSS variables we use a number system with a range from `0` to `1000`. Using specific names often turns out to become hard to extend and handle in the future (e.g. lightGray, lighterGray, lightestGray).
@@ -334,8 +325,8 @@ To name a dynamic set of SCSS variables we use a number system with a range from
 
 For information about best practices read the following guides:
 
-* [Official Vue Style Guide](https://vuejs.org/style-guide/)
-* [Vue.js Component Style Guide](https://github.com/pablohpsilva/vuejs-component-style-guide)
+- [Official Vue Style Guide](https://vuejs.org/style-guide/)
+- [Vue.js Component Style Guide](https://github.com/pablohpsilva/vuejs-component-style-guide)
 
 #### Additional notes
 
@@ -346,13 +337,10 @@ For information about best practices read the following guides:
 
 We build Vue components as [single file components](https://vuejs.org/guide/scaling-up/sfc.html). All production components are placed within `/src/components` (styleguide only components in `/src/styleguide/components`).
 
-
-
-
 #### Naming
 
-* Naming follows BEM block convention.
-* Naming MUST always be singular.
+- Naming follows BEM block convention.
+- Naming MUST always be singular.
 
 ### Vue and TypeScript
 
@@ -362,9 +350,7 @@ To have the types working for Vue SFC, they need to be defined as
 <script lang="ts">
   import { defineComponent } from 'vue';
 
-  export default defineComponent({
-    
-  });
+  export default defineComponent({});
 </script>
 ```
 
@@ -408,24 +394,20 @@ color: {
 
 #### Setup
 
-When Using Code from another File (Composition based) or accessing Component Elements via ref, the code needs to be 
+When Using Code from another File (Composition based) or accessing Component Elements via ref, the code needs to be
 defined in the Setup Method. The setup Method needs to have a proper Return Type:
 
-
-
 ```ts
-import { defineComponent, ref, Ref } from 'vue';
+import { Ref, defineComponent, ref } from 'vue';
 import useFormStates, { FormStates } from '@/compositions/form-states';
 
 type Setup = FormStates & {
   input: Ref<HTMLInputElement | null>;
   slot: Ref<HTMLSpanElement | null>;
-}
+};
 
 export default defineComponent({
-    setup(props): Setup {
-
-
+  setup(props): Setup {
     const input = ref();
     const slot = ref();
 
@@ -442,26 +424,22 @@ export default defineComponent({
 
 To fully benefit from TypeScript, please define your Data function with a Type like this:
 
-
-
 ```ts
 type Data = {
-
   myDataProperty: string;
-}
+};
 export default defineComponent({
-    data(): Data {
-
-	  return {
+  data(): Data {
+    return {
       myDataProperty: 'Hello World',
-	  }
-  }
+    };
+  },
 });
 ```
 
 #### Computed / Methods
 
-To prevent random TypeScript errors in your component, make sure, to always type your computed return types and method 
+To prevent random TypeScript errors in your component, make sure, to always type your computed return types and method
 signatures!
 
 #### Misc
@@ -498,14 +476,14 @@ With the update to Vue-3 and TypeScript, some basic things have changed. The mos
 
 For more information about the migration, read the [migration page](https://v3.vuejs.org/guide/migration/introduction.html#introduction)
 
-####  Decisions and Issues
+#### Decisions and Issues
 
 During switching to Vue-3 and TypeScript, the following decisions had to be made:
 
 1. Build Chain: For typescript, one can either use `ts-loader` and output browser ready js directly or just use the `ts-loader`
    to compile TypeScript to JavaScript and then continue with e.g. `babel-loader`. Although the latter uses two loaders and
    is potentially slower, we decided to use it, to have browser list support for the end result
-2. Code Linting: We use ESLint with some additional rules needed for typescript. 
+2. Code Linting: We use ESLint with some additional rules needed for typescript.
    Our `.eslintrc` extends `@vue/typescript`, which is a vue optimized ESLint config
    [read more](https://www.npmjs.com/package/@vue/eslint-config-typescript)
    The alternative would be to use `plugin:@typescript-eslint/recommended`, which is stricter
@@ -513,7 +491,7 @@ During switching to Vue-3 and TypeScript, the following decisions had to be made
 The following issues arisen during the switch and are still open:
 
 1. Some dependencies are only available in next / alpha version
-2. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good 
+2. TypeScript errors are NOT detected as part of the code linting, this is a conscious decision, as there are no good
    tools to do that at the moment, [read more](https://github.com/vuejs/vue-cli/issues/2950)
    - Using native `tsc --noEmit` does not work for TypeScript code in Vue `sfc` files
    - The following 3rd Party tools where tested but where not working well
@@ -525,7 +503,8 @@ The following issues arisen during the switch and are still open:
 
 [Pinia](https://pinia.vuejs.org/) is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
 
-### Modularity 
+### Modularity
+
 Pinia is modular by design and let us divide our project into multiple stores.
 
 ```
@@ -533,7 +512,7 @@ stores
   |- session.ts
   |- notification.ts
   |- breadcrumb.ts
-````
+```
 
 **Note: the module name MUST be written in singular.**
 
@@ -541,31 +520,31 @@ stores
 
 We defined several prefixes you should use on Pinia getters and actions, so they can be better distinguished when used in the components.
 
-#### get*
+#### get\*
 
 Add the `get` prefix to all getters. This way it's clear in the component, that the used value is coming from Pinia.
 
-#### set*
+#### set\*
 
 Add the `set` prefix to all setters. This way it is easier to identify setter actions from Pinia inside components.
 
-#### api*
+#### api\*
 
 Use this prefix for all actions, that trigger an Ajax request. This way it is easier to identify code that triggers a server request from components.
 
-#### data*
+#### data\*
 
 Add this prefix to actions, that handle initial data. See next section.
 
 ### Initial data
 
 To inject initial data into the Pinia store, we decided to use the setup method which is available on each Pinia store.
- 
- The data is exchanged via a global JS object.
- 
- NOTE: make sure that initial data is **SANITIZED** and **DOES NOT** contain closing script tags!
- 
- See also `/index.html` as an example.
+
+The data is exchanged via a global JS object.
+
+NOTE: make sure that initial data is **SANITIZED** and **DOES NOT** contain closing script tags!
+
+See also `/index.html` as an example.
 
 ```
 <html>
@@ -592,9 +571,9 @@ If data is only needed by one specific component and most likely will not be mod
 
 ```html
 <html>
-<body>
-  <c-component title="{{ data.title }}"></c-component>
-</body>
+  <body>
+    <c-component title="{{ data.title }}"></c-component>
+  </body>
 </html>
 ```
 
@@ -606,21 +585,20 @@ In cases where HTML is pre-rendered by twig, slots can be used to give the HTML 
 
 ```html
 <html>
-<body>
-  <l-content-25-75>
-    <ul slot="sidebar">
-      <li>Foo</li>
-      <li>Baa</li>
-    </ul>
+  <body>
+    <l-content-25-75>
+      <ul slot="sidebar">
+        <li>Foo</li>
+        <li>Baa</li>
+      </ul>
 
-    {% if data.children is empty %}
+      {% if data.children is empty %}
       <h1>No items</h1>
-    {% else %}
+      {% else %}
       <h1>We found {{ data.amount }} items.</h1>
-    {% endif %}
-
-  </l-content-25-75>
-</body>
+      {% endif %}
+    </l-content-25-75>
+  </body>
 </html>
 ```
 
@@ -645,7 +623,7 @@ The key should always be namespaced with the components name. E.g. `c-component.
 this.$t('Some translateable text.');
 
 // Good
-this.$t('e-button.defaultLabel')
+this.$t('e-button.defaultLabel');
 ```
 
 ### Placeholders
@@ -662,7 +640,7 @@ If you need to use translations outside of a component or Vue instance, where th
 
 ```javascript
 import { i18n } from '@/setup/i18n';
- 
+
 const translation = i18n.global.t('c-add-to-cart.notLoggedInTitle');
 ```
 
@@ -684,7 +662,6 @@ Vue allows us to also create `functional components`, which are basically just s
 
 You can read more about this practice [here](https://vuejs.org/guide/extras/render-function.html#Functional-Components).
 
-
 ### Async components
 
 In large applications, we may need to divide the app into smaller chunks and only load a component from the server when it's needed. To make that possible, Vue has a `defineAsyncComponent` function. Async Components are described [here](https://vuejs.org/guide/components/async).
@@ -700,23 +677,27 @@ Delivering critical CSS to the browser trough the HTML head can drastically decr
 You can read more about critical CSS [here](https://css-tricks.com/annotating-critical-css/) and the tool we're using [here](https://github.com/mrnocreativity/postcss-critical-split)
 
 ### SVG usage
+
 Check svg files delivered from designers and remove unnecessary attributes like "title" (because title attribute will displayed on hover-state)
 
 ### Themes
-Theme styles are delivered seperatly in a *.css file. In this files are the global css-vars defined which can be used in every vue component.
-* For the available theme colors check the theme files: `app/setup/scss/themes/theme-**.scss`
-* Vue mixin for including theme class-names into component `app/mixins/themes.js`
-* The current theme is always available in the store `app/store/modules/session/index.js`
-* Developers can always use the SASS color variables `$color-primary--1,...`, the mapping of the SASS variable will handle the usage of a CSS variable, BUT: you have to use the --rgb SASS variable for a rgba() use case
-* [Infos css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) (For the IE polyfill we use [this](https://github.com/jhildenbiddle/css-vars-ponyfill))
+
+Theme styles are delivered seperatly in a \*.css file. In this files are the global css-vars defined which can be used in every vue component.
+
+- For the available theme colors check the theme files: `app/setup/scss/themes/theme-**.scss`
+- Vue mixin for including theme class-names into component `app/mixins/themes.js`
+- The current theme is always available in the store `app/store/modules/session/index.js`
+- Developers can always use the SASS color variables `$color-primary--1,...`, the mapping of the SASS variable will handle the usage of a CSS variable, BUT: you have to use the --rgb SASS variable for a rgba() use case
+- [Infos css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) (For the IE polyfill we use [this](https://github.com/jhildenbiddle/css-vars-ponyfill))
 
 Usage example:
+
 ```scss
-  .c-class {
-    color: $color-primary--1;
-    background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
-    background-color: rgba($color-primary--1--rgb, 0.5);
-  }
+.c-class {
+  color: $color-primary--1;
+  background: linear-gradient(to right, $color-gradient--2-0, $color-gradient--2-1);
+  background-color: rgba($color-primary--1--rgb, 0.5);
+}
 ```
 
 ## Living styleguide
@@ -854,13 +835,15 @@ $ brew upgrade nasm
 ```
 
 ## Vite integration todos
-* [ ] Apply new ESLint rules to valantic config.
+
+- [ ] Apply new ESLint rules to valantic config.
 
 ## Roadmap
-* [ ] Add 'dangerous' flag for components that use v-html in Storybook.
-* [ ] Add 'development' flag for components in Storybook.
-* [ ] Add custom elements option to the "initial data" section.
-  
+
+- [ ] Add 'dangerous' flag for components that use v-html in Storybook.
+- [ ] Add 'development' flag for components in Storybook.
+- [ ] Add custom elements option to the "initial data" section.
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)

@@ -1,8 +1,7 @@
 // this plugin is a copy of https://www.npmjs.com/package/vue-bem-cn with some optimisations applied
-
 import { App, Plugin } from 'vue';
 import bemCn from './bem-cn';
-import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from './globals';
+import { DEFAULT_CONFIG, DEFAULT_DELIMITERS } from './globals';
 import { hyphenate, isString } from './utils';
 
 export default {
@@ -27,7 +26,7 @@ export default {
         const nsBlock = cfg.delimiters.ns + block;
         const generator = bemCn(cfg.hyphenate ? hyphenate(nsBlock) : nsBlock, cfg);
 
-        this[cfg.methodName] = (...args: any[]): string => generator(...args as [string]);
+        this[cfg.methodName] = (...args: any[]): string => generator(...(args as [string]));
       },
     });
   },

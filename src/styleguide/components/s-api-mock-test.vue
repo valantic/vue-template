@@ -1,48 +1,37 @@
 <template>
   <div :class="b()">
     <div :class="b('header')">
-      <h2 :class="b('title')">
-        Mock API Endpoint Handlers
-      </h2>
+      <h2 :class="b('title')">Mock API Endpoint Handlers</h2>
       <div :class="b('header-actions')">
-        <input v-model="search"
-               type="text"
-               name="search"
-               placeholder="Search"
-        >
-        <e-button @click="reset">
-          Reset all
-        </e-button>
+        <input
+          v-model="search"
+          type="text"
+          name="search"
+          placeholder="Search"
+        />
+        <e-button @click="reset"> Reset all </e-button>
       </div>
     </div>
-    <div v-if="!filteredEndpoints.length">
-      No handlers found.
-    </div>
-    <div v-else :class="b('table-wrapper')">
+    <div v-if="!filteredEndpoints.length">No handlers found.</div>
+    <div
+      v-else
+      :class="b('table-wrapper')"
+    >
       <table :class="b('table')">
         <thead>
           <tr>
-            <th>
-              Method
-            </th>
-            <th>
-              Path
-            </th>
-            <th>
-              Debug Mode
-            </th>
-            <th>
-              Status
-            </th>
-            <th style="width: 100%;">
-              Response body (JSON)
-            </th>
+            <th>Method</th>
+            <th>Path</th>
+            <th>Debug Mode</th>
+            <th>Status</th>
+            <th style="width: 100%">Response body (JSON)</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(endpoint, index) in filteredEndpoints"
-              :key="index"
-              :class="b('row', { debugMode: !!configurations[endpoint.header]?.enabled })"
+          <tr
+            v-for="(endpoint, index) in filteredEndpoints"
+            :key="index"
+            :class="b('row', { debugMode: !!configurations[endpoint.header]?.enabled })"
           >
             <td>
               {{ endpoint.method }}
@@ -52,24 +41,27 @@
             </td>
             <td>
               <!-- eslint-disable-next-line vue/no-extra-parens -->
-              <e-checkbox v-model="(configurations[endpoint.header] as Record<'enabled', boolean>).enabled"
-                          name="debug-mode-enabled"
-                          value
+              <e-checkbox
+                v-model="(configurations[endpoint.header] as Record<'enabled', boolean>).enabled"
+                name="debug-mode-enabled"
+                value
               />
             </td>
             <td>
               <!-- eslint-disable-next-line vue/no-extra-parens -->
-              <e-select v-model="(configurations[endpoint.header] as Record<'status', string>).status"
-                        :options="statusOptions"
-                        name="status"
+              <e-select
+                v-model="(configurations[endpoint.header] as Record<'status', string>).status"
+                :options="statusOptions"
+                name="status"
               />
             </td>
             <td>
               <!-- eslint-disable-next-line vue/no-extra-parens -->
-              <input v-model="(configurations[endpoint.header] as Record<'response', string>).response"
-                     type="text"
-                     name="response"
-              >
+              <input
+                v-model="(configurations[endpoint.header] as Record<'response', string>).response"
+                type="text"
+                name="response"
+              />
             </td>
           </tr>
         </tbody>
@@ -79,31 +71,26 @@
 </template>
 
 <script lang="ts">
+  import { HttpResponse, RequestHandler, ResponseResolver, http } from 'msw';
   import { defineComponent } from 'vue';
-  import {
-    RequestHandler,
-    ResponseResolver,
-    http,
-    HttpResponse,
-  } from 'msw';
-  import mockWorker from '@/styleguide/api/browser';
+  import eButton from '@/elements/e-button.vue';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eSelect from '@/elements/e-select.vue';
-  import eButton from '@/elements/e-button.vue';
+  import mockWorker from '@/styleguide/api/browser';
 
   type DebugConfiguration = {
     header: string;
     enabled: boolean;
     status: string;
     response: string;
-  }
+  };
 
   type Setup = {
     statusOptions: {
       label: string;
       value: string;
     }[];
-  }
+  };
 
   type Data = {
     search: string;
@@ -111,13 +98,13 @@
     configurations: {
       [key: string]: DebugConfiguration;
     };
-  }
+  };
 
   type Endpoint = {
     header: string;
     method: string;
     path: string;
-  }
+  };
 
   const storageKey = 'sApiMockTest';
 
@@ -178,7 +165,7 @@
           return [];
         }
 
-        return handlers.map(handler => handler.info) as Endpoint[];
+        return handlers.map((handler) => handler.info) as Endpoint[];
       },
 
       /**
@@ -191,7 +178,7 @@
           return mappedEndpoints;
         }
 
-        return mappedEndpoints.filter(endpoint => endpoint.header.toLowerCase().includes(search.toLowerCase()));
+        return mappedEndpoints.filter((endpoint) => endpoint.header.toLowerCase().includes(search.toLowerCase()));
       },
     },
     watch: {
@@ -270,7 +257,7 @@
        */
       setupHandlers(): void {
         const handlers = Object.values(this.configurations)
-          .filter(configuration => configuration.enabled)
+          .filter((configuration) => configuration.enabled)
           .map((configuration) => {
             const [method, path] = configuration.header.split(' ');
 
@@ -286,9 +273,10 @@
               // Do nothing
             }
 
-            const resolver: ResponseResolver = () => HttpResponse.json(response, {
-              status: parseInt(configuration.status, 10),
-            });
+            const resolver: ResponseResolver = () =>
+              HttpResponse.json(response, {
+                status: parseInt(configuration.status, 10),
+              });
 
             switch (method) {
               case 'GET':
@@ -310,7 +298,8 @@
             }
 
             return null;
-          }).filter(Boolean) as RequestHandler[];
+          })
+          .filter(Boolean) as RequestHandler[];
 
         mockWorker.resetHandlers();
         mockWorker.use(...handlers);

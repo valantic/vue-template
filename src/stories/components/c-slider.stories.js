@@ -1,5 +1,5 @@
-import cSlider from '@/components/c-slider.vue';
 import cSliderItemX from '@/components/c-slider-item-x.vue';
+import cSlider from '@/components/c-slider.vue';
 import ePicture from '@/elements/e-picture.vue';
 import { createSrcSetImage } from '@/styleguide/mock-data/data-object/image';
 
@@ -12,7 +12,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = {
-  render: args => ({
+  render: (args) => ({
     components: {
       cSlider,
       cSliderItemX,
@@ -22,8 +22,7 @@ const Template = {
     setup() {
       return {
         args,
-        images: new Array(15).fill(null)
-          .map(() => createSrcSetImage()),
+        images: new Array(15).fill(null).map(() => createSrcSetImage()),
       };
     },
 

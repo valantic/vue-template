@@ -2,11 +2,11 @@ import { defineStore } from 'pinia';
 
 type State = {
   // Add types for the State.
-}
+};
 
 type InitialData = {
   // Add types for InitialData
-}
+};
 
 const storeName = 'myStore'; // TODO: update store name.
 

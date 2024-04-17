@@ -11,9 +11,10 @@
         :name="startName"
         @focus="onFocusStartDate"
       >
-        <e-icon :class="b('icon')"
-                icon="i-calendar"
-                size="18"
+        <e-icon
+          :class="b('icon')"
+          icon="i-calendar"
+          size="18"
         />
       </e-date>
       <e-date
@@ -24,15 +25,17 @@
         :name="endName"
         @focus="onFocusEndDate"
       >
-        <e-icon :class="b('icon')"
-                icon="i-calendar"
-                size="18"
+        <e-icon
+          :class="b('icon')"
+          icon="i-calendar"
+          size="18"
         />
       </e-date>
     </div>
     <transition :name="b('transition', { fade: true })">
-      <div v-show="isCalendarVisible"
-           :class="b('calendar-wrapper')"
+      <div
+        v-show="isCalendarVisible"
+        :class="b('calendar-wrapper')"
       >
         <div :class="b('calendar-header')">
           <button
@@ -61,23 +64,24 @@
       </div>
     </transition>
     <transition :name="b('transition', { fade: true })">
-      <div v-if="isCalendarVisible"
-           :class="b('backdrop')"
-           @click="close(false)"
+      <div
+        v-if="isCalendarVisible"
+        :class="b('backdrop')"
+        @click="close(false)"
       ></div>
     </transition>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, Ref } from 'vue';
   import Pikaday from 'pikaday';
+  import { Ref, defineComponent, ref } from 'vue';
   import eDate from '@/elements/e-date.vue';
   import eIcon from '@/elements/e-icon.vue';
 
   type Setup = {
     calendar: Ref<HTMLDivElement | undefined>;
-  }
+  };
 
   type Data = {
     calendarInstance?: Pikaday;
@@ -86,12 +90,12 @@
     endDate: Date;
     editRangeStart: boolean;
     closeTimeout?: ReturnType<typeof setTimeout>;
-  }
+  };
 
   type ChangePayload = {
     start: Date;
     end: Date;
-  }
+  };
 
   /**
    * Renders a date picker element.
@@ -215,7 +219,8 @@
       },
 
       startDate(value, oldValue): void {
-        if (!this.calendarInstance) { // Cancel on external change.
+        if (!this.calendarInstance) {
+          // Cancel on external change.
           return;
         }
 
@@ -234,7 +239,8 @@
       },
 
       endDate(value, oldValue): void {
-        if (!this.calendarInstance) { // Cancel on external change.
+        if (!this.calendarInstance) {
+          // Cancel on external change.
           return;
         }
 
@@ -279,7 +285,8 @@
           .fill(null)
           .map((item, index) => now.day(index).toDate());
 
-        const picker = new Pikaday({ // eslint-disable-line new-cap
+        const picker = new Pikaday({
+          // eslint-disable-line new-cap
           onSelect: this.onCalendarSelect.bind(this),
           showDaysInNextAndPreviousMonths: true,
           enableSelectionDaysInNextAndPreviousMonths: true,
@@ -293,8 +300,8 @@
             months: Array(12)
               .fill(null)
               .map((item, index) => this.$d(now.month(index).toDate(), 'month')),
-            weekdays: weekdays.map(date => this.$d(date, 'weekday')),
-            weekdaysShort: weekdays.map(date => this.$d(date, 'weekdayNarrow')),
+            weekdays: weekdays.map((date) => this.$d(date, 'weekday')),
+            weekdaysShort: weekdays.map((date) => this.$d(date, 'weekdayNarrow')),
           },
           onDraw: this.onCalendarDraw,
           keyboardInput: false, // Since Pikaday calls `onSelect` on every keyboard input, this is mostly useless for us, since we don't know if the user navigates or selects a date.
@@ -374,21 +381,24 @@
         }
 
         // Closing delayed gives a better user experience showing the changed state for a moment.
-        this.closeTimeout = setTimeout(() => {
-          const activeElement = document.activeElement as HTMLElement;
+        this.closeTimeout = setTimeout(
+          () => {
+            const activeElement = document.activeElement as HTMLElement;
 
-          if (this.$el === activeElement || this.$el.contains(activeElement)) {
-            // Removes focus on child elements so datepicker can be opened instantly again.
-            activeElement.blur();
-          }
+            if (this.$el === activeElement || this.$el.contains(activeElement)) {
+              // Removes focus on child elements so datepicker can be opened instantly again.
+              activeElement.blur();
+            }
 
-          this.isCalendarVisible = false;
-          this.editRangeStart = true;
-          this.$emit('close', {
-            start: this.startDate,
-            end: this.endDate,
-          });
-        }, delay ? 300 : 0);
+            this.isCalendarVisible = false;
+            this.editRangeStart = true;
+            this.$emit('close', {
+              start: this.startDate,
+              end: this.endDate,
+            });
+          },
+          delay ? 300 : 0
+        );
       },
 
       show(): void {
@@ -524,7 +534,8 @@
         @include mixins.z-index(datePicker);
       }
 
-      #{$this}__anchor { // Safari backdrop layering fix.
+      #{$this}__anchor {
+        // Safari backdrop layering fix.
         position: relative;
       }
 
@@ -587,7 +598,8 @@
         }
       }
 
-      thead th abbr { // Unfortunately no classes available
+      thead th abbr {
+        // Unfortunately no classes available
         @include mixins.font(variables.$font-size--14, variables.$line-height--18);
 
         color: variables.$color-grayscale--0;

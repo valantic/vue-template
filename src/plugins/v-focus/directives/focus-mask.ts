@@ -10,7 +10,8 @@ function updated(el: HTMLElement): void {
   const variantModifier = state.variant && `${bemBlock}--variant-${state.variant}`;
   const hidingModifier = `${bemBlock}--hiding`;
 
-  if (state.enabled) { // This will also make the directive reactive to the observable.
+  if (state.enabled) {
+    // This will also make the directive reactive to the observable.
     el.classList.add(visibleModifier);
 
     if (variantModifier) {

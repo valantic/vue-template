@@ -1,6 +1,9 @@
 <template>
   <slot v-if="hasGivenConsent"></slot>
-  <div v-else :class="b()">
+  <div
+    v-else
+    :class="b()"
+  >
     {{ consentMessage || $t('c-consent-gatekeeper.noConsentMessage', { consentGroup }) }}
     <e-button @click="showConsentDialog">
       {{ $t('c-consent-gatekeeper.showConsentButtonLabel') }}
@@ -9,14 +12,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
-  import { ConsentGroup, showConsentDialog, consentState } from '@/plugins/consent/index';
+  import { PropType, defineComponent } from 'vue';
   import eButton from '@/elements/e-button.vue';
+  import { ConsentGroup, consentState, showConsentDialog } from '@/plugins/consent/index';
 
   type Setup = {
     showConsentDialog: typeof showConsentDialog;
     consentState: typeof consentState;
-  }
+  };
 
   // type Data = {}
 

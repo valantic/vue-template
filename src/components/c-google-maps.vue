@@ -8,21 +8,15 @@
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    PropType,
-    Ref,
-    ref,
-  } from 'vue';
-  import loadScript from '@/helpers/load-script';
+  import { PropType, Ref, defineComponent, ref } from 'vue';
   import useSessionStore from '@/stores/session';
+  import loadScript from '@/helpers/load-script';
 
   type Setup = {
     container: Ref<HTMLDivElement>;
-  }
+  };
 
   type Data = {
-
     /**
      * Holds the related Google Maps instance.
      */
@@ -42,7 +36,7 @@
      * Determines if the component is allowed to auto update the bounding.
      */
     allowAutoUpdates: boolean;
-  }
+  };
 
   type GoogleMapsCallback = () => void;
 
@@ -52,16 +46,16 @@
     geocode?: string;
     icon?: string;
     title?: string;
-  }
+  };
 
   type GoogleMapsInternalLocation = GoogleMapsLocation & {
     referer: GoogleMapsLocation;
-  }
+  };
 
   type EventClick = {
     location: GoogleMapsLocation;
     marker: google.maps.Marker;
-  }
+  };
 
   declare global {
     interface Window {
@@ -75,7 +69,8 @@
   let geocoder: google.maps.Geocoder | null = null;
   let isMapsAPILoaded = false;
 
-  export const GOOGLE_MAPS_THEME_GRAY: google.maps.MapTypeStyle[] = [ // @see https://snazzymaps.com/style/15/subtle-grayscale
+  export const GOOGLE_MAPS_THEME_GRAY: google.maps.MapTypeStyle[] = [
+    // @see https://snazzymaps.com/style/15/subtle-grayscale
     {
       featureType: 'administrative',
       elementType: 'all',
@@ -207,7 +202,7 @@
    */
   window[callbackFunctionName] = (): void => {
     isMapsAPILoaded = true;
-    callbackStack.forEach(callback => callback());
+    callbackStack.forEach((callback) => callback());
     callbackStack.length = 0;
   };
 
@@ -261,10 +256,7 @@
         type: String,
         default: 'default',
         validator(value: string) {
-          return [
-            'default',
-            'gray',
-          ].includes(value);
+          return ['default', 'gray'].includes(value);
         },
       },
 
@@ -345,18 +337,20 @@
        * Maps the locations to the Google Maps required format.
        */
       mappedLocations(): GoogleMapsInternalLocation[] {
-        return this.locations?.map((location) => {
-          const { lat, lng } = location;
+        return (
+          this.locations?.map((location) => {
+            const { lat, lng } = location;
 
-          return {
-            lat: lat ? parseFloat(`${lat}`) : null,
-            lng: lng ? parseFloat(`${lng}`) : null,
-            icon: location.icon,
-            geocode: location.geocode,
-            title: location.title,
-            referer: location, // Keep a reference to the original for event payloads.
-          };
-        }) || [];
+            return {
+              lat: lat ? parseFloat(`${lat}`) : null,
+              lng: lng ? parseFloat(`${lng}`) : null,
+              icon: location.icon,
+              geocode: location.geocode,
+              title: location.title,
+              referer: location, // Keep a reference to the original for event payloads.
+            };
+          }) || []
+        );
       },
 
       /**
@@ -412,7 +406,8 @@
        */
       createMapInstance(): void {
         if (!this.mappedLocations?.length && !this.center) {
-          const errorMsg = 'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.'; // eslint-disable-line vue/max-len
+          const errorMsg =
+            'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.'; // eslint-disable-line vue/max-len
 
           throw new Error(errorMsg);
         }
@@ -447,7 +442,7 @@
       /**
        * Maps custom icons for the Google Maps. If no source is given, the default icon will be used.
        */
-      mapIcon(iconSrc: string): google.maps.Icon|google.maps.Symbol | null {
+      mapIcon(iconSrc: string): google.maps.Icon | google.maps.Symbol | null {
         if (!iconSrc || typeof iconSrc !== 'string') {
           return null;
         }
@@ -559,7 +554,7 @@
           } else {
             const locationsBounds = new window.google.maps.LatLngBounds();
 
-            this.markers.forEach(marker => locationsBounds.extend(marker.getPosition() as google.maps.LatLng));
+            this.markers.forEach((marker) => locationsBounds.extend(marker.getPosition() as google.maps.LatLng));
             this.mapInstance.fitBounds(locationsBounds);
           }
         }, 200);

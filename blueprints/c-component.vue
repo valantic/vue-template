@@ -1,7 +1,5 @@
 <template>
-  <div :class="b()">
-
-  </div>
+  <div :class="b()"></div>
 </template>
 
 <script lang="ts">
@@ -48,7 +46,8 @@
 <style lang="scss">
   // @use '../setup/scss/variables';
 
-  .c-component { // TODO: update selector according to filename
+  .c-component {
+    // TODO: update selector according to filename
     // ...
   }
 </style>

@@ -1,16 +1,23 @@
 <template>
-  <component :is="tag" :class="b(modifiers)">
+  <component
+    :is="tag"
+    :class="b(modifiers)"
+  >
     <span :class="b('name', { invisible })">
       <template v-if="$slots.name">
         <slot name="name"></slot>
       </template>
-      <template v-else>
-        {{ name }}{{ required ? '*' : '' }}
-      </template>
+      <template v-else> {{ name }}{{ required ? '*' : '' }} </template>
     </span>
-    <span v-if="$slots.default" :class="b('inner')">
+    <span
+      v-if="$slots.default"
+      :class="b('inner')"
+    >
       <!-- @slot Label content -->
-      <slot @focus="focus = true" @blur="focus = false"></slot>
+      <slot
+        @focus="focus = true"
+        @blur="focus = false"
+      ></slot>
     </span>
   </component>
 </template>
@@ -53,12 +60,7 @@
       position: {
         type: String,
         default: 'top',
-        validator: (value: string) => [
-          'top',
-          'right',
-          'bottom',
-          'left',
-        ].includes(value),
+        validator: (value: string) => ['top', 'right', 'bottom', 'left'].includes(value),
       },
 
       /**

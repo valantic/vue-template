@@ -1,9 +1,4 @@
-import {
-  computed,
-  Plugin,
-  reactive,
-  ref,
-} from 'vue';
+import { Plugin, computed, reactive, ref } from 'vue';
 import { BREAKPOINTS, ViewportBreakPoint } from '@/setup/globals';
 
 export type Viewport = {
@@ -15,7 +10,7 @@ export type Viewport = {
   isXl: boolean;
   isMobile: boolean;
   currentViewport: ViewportBreakPoint | string; // TODO: 'string' is a workaround, because I did not know how to use the type ViewportBreakPoint on line 66.
-}
+};
 
 /**
  * Adds a viewport instance to Vue itself, which can be used by calling this.$viewport.
@@ -64,10 +59,10 @@ const plugin: Plugin = {
      * Returns the short name of the current viewport (e.g. 'md').
      */
     const currentViewport = computed(
-      () => Object
-        .entries(BREAKPOINTS)
-        ?.reverse()
-        ?.find(breakpoint => viewport.value >= breakpoint[1])?.[0] || ''
+      () =>
+        Object.entries(BREAKPOINTS)
+          ?.reverse()
+          ?.find((breakpoint) => viewport.value >= breakpoint[1])?.[0] || ''
     );
 
     window.addEventListener('resizeend', () => {

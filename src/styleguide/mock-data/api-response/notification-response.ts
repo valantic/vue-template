@@ -4,7 +4,7 @@ import mockNotifications from '@/styleguide/mock-data/data-object/notification';
 type NotificationResponse = {
   data: object;
   notifications: NotificationItem[];
-}
+};
 
 /**
  * Creates an empty API response with a notification.

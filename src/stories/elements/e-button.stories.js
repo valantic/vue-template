@@ -1,5 +1,5 @@
-import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 import eButton from '@/elements/e-button.vue';
+import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 
 export default {
   component: eButton,
@@ -32,7 +32,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = {
-  render: args => ({
+  render: (args) => ({
     components: { eButton },
 
     setup() {

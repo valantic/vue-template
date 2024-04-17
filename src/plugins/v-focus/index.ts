@@ -24,7 +24,7 @@ import './styles/focus-mask.scss';
 const plugin: Plugin = {
   install(app) {
     // Add directives to Vue.
-    [itemDirective, maskDirective].forEach(directive => app.directive(directive.name, directive));
+    [itemDirective, maskDirective].forEach((directive) => app.directive(directive.name, directive));
   },
 };
 
