@@ -8,10 +8,13 @@
         {{ name }}{{ required ? '*' : '' }}
       </template>
     </span>
-    <span v-if="$slots.default" :class="b('inner')">
+    <component v-if="$slots.default"
+               :is="tag === 'label' ? 'span' : tag"
+               :class="b('inner')"
+    >
       <!-- @slot Label content -->
       <slot @focus="focus = true" @blur="focus = false"></slot>
-    </span>
+    </component>
   </component>
 </template>
 
