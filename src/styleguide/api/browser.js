@@ -3,7 +3,7 @@ import handlers from './handler';
 
 const worker = setupWorker(...handlers);
 
-worker.start({
+await worker.start({
   onUnhandledRequest: 'bypass', // By default msw shows warning for request that are not handled by it.
 });
 
