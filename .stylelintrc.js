@@ -1,4 +1,13 @@
 export default {
-  customSyntax: 'postcss-html',
   extends: 'stylelint-config-valantic',
+  overrides: [
+    {
+      'files': '**/*.scss',
+      'customSyntax': 'postcss-scss',
+    },
+    {
+      'files': '**/*.vue',
+      'customSyntax': 'postcss-html',
+    },
+  ],
 };
