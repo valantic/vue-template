@@ -31,7 +31,7 @@ TODO: Add a short description how time tracking should be done in the project.
 TODO: Describe if and how the changelog should look like.
 
 
-# Feature / USer documentation
+# Feature / User documentation
 
 TODO: Add link to the feature documentation of the project.
 
