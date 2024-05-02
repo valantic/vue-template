@@ -14,10 +14,7 @@
       :class="b('inner')"
     >
       <!-- @slot Label content -->
-      <slot
-        @focus="focus = true"
-        @blur="focus = false"
-      ></slot>
+      <slot></slot>
     </span>
   </component>
 </template>
@@ -180,8 +177,7 @@
       }
     }
 
-    &--active,
-    &--focus {
+    &--active {
       color: variables.$color-secondary--1;
     }
 
