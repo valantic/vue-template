@@ -1,5 +1,4 @@
 import type { StoryObj } from '@storybook/vue3';
-
 import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 import eButton from '@/elements/e-button.vue';
 

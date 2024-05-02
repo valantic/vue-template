@@ -1,3 +1,4 @@
+import type { StoryObj } from '@storybook/vue3';
 import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 import eCheckbox from '@/elements/e-checkbox.vue';
 
@@ -12,8 +13,9 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = {
-  render: args => ({
+const Template: StoryObj = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => ({
     components: {
       eCheckbox,
     },
