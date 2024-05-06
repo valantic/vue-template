@@ -9,6 +9,7 @@
         v-for="tab in tabs"
         :key="tab.id"
         :class="b('tab-item')"
+        role="tab"
       >
         <a
           :id="`c-tabs-${uuid}--tab-${tab.id}`"
