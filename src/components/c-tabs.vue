@@ -7,7 +7,7 @@
       <li v-for="tab in tabs"
           :key="tab.id"
           :class="b('tab-item')"
-          role="tabitem"
+          role="tab"
       >
         <a :id="`c-tabs-${uuid}--tab-${tab.id}`"
            :class="b('tab', { [tab.id]: true, active: tab.id === activeTab?.id })"
