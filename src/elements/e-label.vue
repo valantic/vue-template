@@ -9,13 +9,14 @@
       </template>
       <template v-else> {{ name }}{{ required ? '*' : '' }} </template>
     </span>
-    <span
+    <component
       v-if="$slots.default"
+      :is="tag === 'label' ? 'span' : tag"
       :class="b('inner')"
     >
       <!-- @slot Label content -->
       <slot></slot>
-    </span>
+    </component>
   </component>
 </template>
 
