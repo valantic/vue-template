@@ -1,14 +1,7 @@
-import { describe, test, expect } from 'vitest';
-import { DEFAULT_DELIMITERS, DEFAULT_CONFIG } from '@/plugins/vue-bem-cn/src/globals';
+import { describe, expect, test } from 'vitest';
 import bemCn from '@/plugins/vue-bem-cn/src/bem-cn';
-import {
-  blocks,
-  elements,
-  block,
-  delimiters,
-  delimitersTest,
-  hyphenate,
-} from './testingEntitys';
+import { DEFAULT_CONFIG, DEFAULT_DELIMITERS } from '@/plugins/vue-bem-cn/src/globals';
+import { block, blocks, delimiters, delimitersTest, elements, hyphenate } from './testingEntitys';
 
 const config = {
   ...DEFAULT_CONFIG,
@@ -48,8 +41,7 @@ describe('Delimiters', () => {
 
   Object.entries(delimitersTest).forEach(([output, input]) => {
     test(output, () => {
-      expect(b(input.el, input.mods))
-        .toBe(output);
+      expect(b(input.el, input.mods)).toBe(output);
     });
   });
 });

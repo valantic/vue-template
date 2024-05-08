@@ -13,31 +13,14 @@
     "module": "ESNext",
     "noEmit": true,
     "importHelpers": true,
-    "lib": [
-      "es2021",
-      "dom",
-      "dom.iterable"
-    ],
-    "typeRoots": [
-      "./src/types",
-      "./node_modules/@types/",
-      "./node_modules/"
-    ],
-    "types": [
-      "node",
-      "vite/client",
-      "google.maps",
-      "cookiebot-sdk"
-    ],
+    "lib": ["es2021", "dom", "dom.iterable"],
+    "typeRoots": ["./src/types", "./node_modules/@types/", "./node_modules/"],
+    "types": ["node", "vite/client", "google.maps", "cookiebot-sdk"],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@!production/*": [
-        "src/*"
-      ]
-    },
+      "@/*": ["src/*"],
+      "@!production/*": ["src/*"]
+    }
   },
   "include": [
     "src/**/*.ts",
@@ -49,7 +32,5 @@
     ".storybook/**/*.tsx",
     "vite.config.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

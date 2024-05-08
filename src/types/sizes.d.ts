@@ -6,4 +6,4 @@ export type ImageSizes = {
   xs?: number;
   xxs?: number;
   [key: number]: number;
-}
+};

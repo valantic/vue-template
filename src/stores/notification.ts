@@ -1,10 +1,5 @@
 import { defineStore } from 'pinia';
-import {
-  IS_STORAGE_AVAILABLE,
-  Store,
-  WindowsStorage,
-  ApiResponseMessageAction,
-} from '@/setup/globals';
+import { ApiResponseMessageAction, IS_STORAGE_AVAILABLE, Store, WindowsStorage } from '@/setup/globals';
 import i18n from '@/setup/i18n';
 import { ApiResponseMessages } from '@/types/api-response';
 import { ApiResponseMessage } from '@/types/api-response-message';
@@ -17,18 +12,16 @@ export type NotificationItem = {
   pageReload?: boolean;
   redirectUrl?: string;
   showToUser?: boolean;
-}
+};
 
 export type MappedNotificationItem = NotificationItem & {
-
   /**
    * The ID of the notification.
    */
   id: number;
-}
+};
 
 type NotificationState = {
-
   /**
    * Holds the notification items.
    */
@@ -40,15 +33,14 @@ type NotificationState = {
    * are displayed already at another place, e.g. in a modal.
    */
   showDefaultGlobalNotifications: boolean;
-}
+};
 
 type InitialData = {
-
   /**
    * Holds the initial response messages.
    */
   messages?: ApiResponseMessages;
-}
+};
 
 /**
  * Default unknown error notification template.
@@ -69,10 +61,13 @@ function handleRedirectOrReload(notification: NotificationItem): void {
   const { redirectUrl } = notification || {};
 
   if (redirectUrl && IS_STORAGE_AVAILABLE) {
-    localStorage.setItem('notification', JSON.stringify({
-      ...notification,
-      redirectUrl: null,
-    }));
+    localStorage.setItem(
+      'notification',
+      JSON.stringify({
+        ...notification,
+        redirectUrl: null,
+      })
+    );
 
     if (notification.pageReload) {
       window.location.reload();
@@ -132,21 +127,15 @@ export function mapApiResponseMessages(messages: ApiResponseMessages): Notificat
   const notifications: NotificationItem[] = [];
 
   if (Array.isArray(success) && success.length) {
-    notifications.push(
-      ...success.map(message => mapApiResponseMessage(message, 'success'))
-    );
+    notifications.push(...success.map((message) => mapApiResponseMessage(message, 'success')));
   }
 
   if (Array.isArray(info) && info.length) {
-    notifications.push(
-      ...info.map(message => mapApiResponseMessage(message, 'info'))
-    );
+    notifications.push(...info.map((message) => mapApiResponseMessage(message, 'info')));
   }
 
   if (Array.isArray(error) && error.length) {
-    notifications.push(
-      ...error.map(message => mapApiResponseMessage(message, 'error'))
-    );
+    notifications.push(...error.map((message) => mapApiResponseMessage(message, 'error')));
   }
 
   return notifications;
@@ -197,7 +186,7 @@ export default defineStore(storeName, {
      * Removes a notification.
      */
     popNotification(id: number): void {
-      this.notifications = this.notifications.filter(notification => notification.id !== id);
+      this.notifications = this.notifications.filter((notification) => notification.id !== id);
     },
 
     showUnknownError(): void {

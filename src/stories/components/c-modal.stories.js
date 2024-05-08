@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker/locale/en';
-
 import cModal from '@/components/c-modal.vue';
 import eButton from '@/elements/e-button.vue';
 
@@ -56,7 +55,7 @@ ${faker.lorem.paragraph(50)}
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = {
-  render: args => ({
+  render: (args) => ({
     components: {
       eButton,
       cModal,

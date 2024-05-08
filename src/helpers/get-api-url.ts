@@ -2,7 +2,7 @@ import apiUrls from '@/setup/api-urls.json';
 
 type UrlKeyValues = {
   [key: string]: string;
-}
+};
 
 /**
  * Gets the url for the given 'urlKey'. The method also accepts an Object of interpolation values.

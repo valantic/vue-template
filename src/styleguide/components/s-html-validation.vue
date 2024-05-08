@@ -1,8 +1,9 @@
 <template>
-  <e-checkbox v-model="enabled"
-              variant="toggle"
-              name="html-validation"
-              value
+  <e-checkbox
+    v-model="enabled"
+    variant="toggle"
+    name="html-validation"
+    value
   >
     HTML validation
   </e-checkbox>
@@ -13,12 +14,11 @@
   import eCheckbox from '@/elements/e-checkbox.vue';
 
   type Data = {
-
     /**
      * Determines if the HTML validation styles should be applied.
      */
     enabled: boolean;
-  }
+  };
 
   /**
    * Adds a toggle to en-/disable CSS driven HTML validation.
@@ -114,7 +114,9 @@
 
     img {
       &[sizes^=','] {
-        @include html-validator-warning('Bad value for attribute "sizes" on element <img>: Starts with empty source size.');
+        @include html-validator-warning(
+          'Bad value for attribute "sizes" on element <img>: Starts with empty source size.'
+        );
       }
     }
 
@@ -142,7 +144,9 @@
         & ~ * progress,
         & ~ * select,
         & ~ * textarea {
-          @include html-validator-warning('The <label> element may contain at most one <button>, <input>, <meter>, <output>, <progress>, <select>, or <textarea> descendant and/or no duplicated label values.');
+          @include html-validator-warning(
+            'The <label> element may contain at most one <button>, <input>, <meter>, <output>, <progress>, <select>, or <textarea> descendant and/or no duplicated label values.'
+          );
         }
       }
 
@@ -165,7 +169,9 @@
       }
 
       :not(source) ~ img {
-        @include html-validator-warning('If element "img" is not used with "source", "width" and "height" should be applied.');
+        @include html-validator-warning(
+          'If element "img" is not used with "source", "width" and "height" should be applied.'
+        );
       }
     }
 

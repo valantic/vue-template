@@ -1,25 +1,36 @@
 <template>
   <div :class="b({ initialized: !!emblaInstance })">
-    <div ref="stage" :class="b('stage')">
+    <div
+      ref="stage"
+      :class="b('stage')"
+    >
       <ul :class="b('stage-inner')">
         <slot></slot>
       </ul>
     </div>
-    <button :class="b('navigation', { previous: true })"
-            :aria-label="$t('c-slider.navigationPrevious')"
-            :disabled="disablePrevious"
-            type="button"
-            @click="previousPage"
+    <button
+      :class="b('navigation', { previous: true })"
+      :aria-label="$t('c-slider.navigationPrevious')"
+      :disabled="disablePrevious"
+      type="button"
+      @click="previousPage"
     >
-      <e-icon icon="i-arrow--left" size="30" />
+      <e-icon
+        icon="i-arrow--left"
+        size="30"
+      />
     </button>
-    <button :class="b('navigation', { next: true })"
-            :aria-label="$t('c-slider.navigationNext')"
-            :disabled="disableNext"
-            type="button"
-            @click="nextPage"
+    <button
+      :class="b('navigation', { next: true })"
+      :aria-label="$t('c-slider.navigationNext')"
+      :disabled="disableNext"
+      type="button"
+      @click="nextPage"
     >
-      <e-icon icon="i-arrow--right" size="30" />
+      <e-icon
+        icon="i-arrow--right"
+        size="30"
+      />
     </button>
   </div>
 </template>
@@ -27,16 +38,12 @@
 <script lang="ts">
   import EmblaCarousel, { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
   import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay';
-  import {
-    defineComponent, PropType,
-    Ref,
-    ref,
-  } from 'vue';
+  import { PropType, Ref, defineComponent, ref } from 'vue';
   import eIcon from '@/elements/e-icon.vue';
 
   type Setup = {
     stage: Ref<HTMLDivElement>;
-  }
+  };
 
   type Data = {
     emblaInstance: null | EmblaCarouselType;
@@ -44,7 +51,7 @@
     activePage: number;
     slidesPerPage: number;
     noOfPages: number;
-  }
+  };
 
   /**
    * Renders a slider.
@@ -133,12 +140,17 @@
         plugins.push(Autoplay(this.autoPlayOptions)); // eslint-disable-line new-cap
       }
 
-      this.emblaInstance = EmblaCarousel(this.stage as HTMLElement, { // eslint-disable-line new-cap
-        align: 'start',
-        skipSnaps: true,
-        containScroll: 'keepSnaps',
-        ...this.options,
-      }, plugins);
+      // eslint-disable-next-line new-cap
+      this.emblaInstance = EmblaCarousel(
+        this.stage as HTMLElement,
+        {
+          align: 'start',
+          skipSnaps: true,
+          containScroll: 'keepSnaps',
+          ...this.options,
+        },
+        plugins
+      );
       this.emblaInstance.on('select', this.onEmblaSelect);
       this.emblaInstance.on('init', this.onEmblaInit);
       this.emblaInstance.on('resize', this.onEmblaResize);

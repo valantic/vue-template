@@ -1,5 +1,5 @@
-import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 import cComponent from '@/components/c-component';
+import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 
 export default {
   component: cComponent,
@@ -10,7 +10,7 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = args => ({
+const Template = (args) => ({
   components: {
     cComponent,
   },
@@ -26,4 +26,3 @@ const Template = args => ({
 
 export const Default = Template.bind({});
 Default.args = {};
-

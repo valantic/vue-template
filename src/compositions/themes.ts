@@ -1,9 +1,9 @@
-import { computed, ComputedRef } from 'vue';
+import { ComputedRef, computed } from 'vue';
 import sessionStore from '@/stores/session';
 
 export type Theme = {
   theme: ComputedRef<string>;
-}
+};
 
 export default (customTheme?: string): Theme => {
   /**

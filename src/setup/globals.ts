@@ -5,7 +5,8 @@ import { ImageSizes } from '@/types/sizes';
  *
  * Keep in sync with SCSS variables!
  */
-export const BREAKPOINTS = { // Keep in sync with SCSS variables!
+export const BREAKPOINTS = {
+  // Keep in sync with SCSS variables!
   xxs: 0,
   xs: 480,
   sm: 768,
@@ -75,7 +76,7 @@ export const IS_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
   } catch (error) {
     return false;
   }
-}());
+})();
 
 /**
  * Contains list of API response messages.

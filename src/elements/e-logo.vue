@@ -1,19 +1,22 @@
 <template>
   <div :class="b()">
-    <a v-if="$attrs.href"
-       :class="b('link')"
-       :title="logo.title"
-       v-bind="$attrs"
-       tabindex="-1"
+    <a
+      v-if="$attrs.href"
+      :class="b('link')"
+      :title="logo.title"
+      v-bind="$attrs"
+      tabindex="-1"
     >
       <!-- TODO: Check if e-icon is the best way to render the logo -->
-      <e-icon :icon="logo.icon"
-              :alt="logo.alt"
+      <e-icon
+        :icon="logo.icon"
+        :alt="logo.alt"
       />
     </a>
-    <e-icon v-else
-            :icon="logo.icon"
-            :alt="logo.alt"
+    <e-icon
+      v-else
+      :icon="logo.icon"
+      :alt="logo.alt"
     />
   </div>
 </template>
@@ -27,7 +30,7 @@
     icon: Icon;
     alt: string;
     title: string;
-  }
+  };
 
   /**
    * e-logo renders the company logo depending on the current theme (from the store)

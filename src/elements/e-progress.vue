@@ -35,10 +35,7 @@
        *
        * Valid values: `[0, 500]`
        */
-      spacing: propScale(500, [
-        0,
-        500,
-      ]),
+      spacing: propScale(500, [0, 500]),
 
       /**
        * Defines a fallback message. "e-progress.loading" is used by default

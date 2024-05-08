@@ -1,6 +1,5 @@
 TODO: If you start a new project from this repository, fill out all todos in this file and add new categories if needed.
 
-
 # Project documentation:
 
 TODO: Add link to documentation.
@@ -8,7 +7,6 @@ TODO: Add link to documentation.
 # Team
 
 TODO: Add link to team setup.
-
 
 # Git Workflow
 
@@ -30,7 +28,6 @@ TODO: Add a short description how time tracking should be done in the project.
 
 TODO: Describe if and how the changelog should look like.
 
-
 # Feature / User documentation
 
 TODO: Add link to the feature documentation of the project.
@@ -39,7 +36,6 @@ TODO: Add link to the feature documentation of the project.
 
 TODO: Add commands used in this project. (See example below)
 
-| Command         | Description |
-|-----------------| --- |
+| Command         | Description      |
+| --------------- | ---------------- |
 | `npm run build` | Builds frontend. |
-

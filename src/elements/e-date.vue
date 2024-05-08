@@ -1,14 +1,15 @@
 <template>
   <span :class="b()">
-    <e-input v-model.lazy.trim="dateString"
-             :class="b('input')"
-             :maxlength="format.length"
-             :name="name"
-             :state="isInvalid ? FieldState.Error : FieldState.Default"
-             :aria-label="label"
-             @keypress.enter.prevent="onEnter"
-             @focus="onFocus"
-             @blur="onBlur"
+    <e-input
+      v-model.lazy.trim="dateString"
+      :class="b('input')"
+      :maxlength="format.length"
+      :name="name"
+      :state="isInvalid ? FieldState.Error : FieldState.Default"
+      :aria-label="label"
+      @keypress.enter.prevent="onEnter"
+      @focus="onFocus"
+      @blur="onBlur"
     >
       <slot></slot>
     </e-input>
@@ -16,21 +17,21 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
   import { Dayjs } from 'dayjs';
-  import { DateFormat } from '@/plugins/dayjs';
+  import { defineComponent } from 'vue';
   import { FieldState } from '@/compositions/form-states';
   import eInput from '@/elements/e-input.vue';
+  import { DateFormat } from '@/plugins/dayjs';
 
   type Setup = {
     FieldState: typeof FieldState;
-  }
+  };
 
   type Data = {
     dayjsDate: Dayjs;
     textValue: string;
     isInvalid: boolean;
-  }
+  };
 
   /**
    * Renders a date input field.
@@ -108,9 +109,7 @@
         },
 
         get(): string {
-          return this.isInvalid
-            ? this.textValue
-            : this.dayjsDate.format(this.format);
+          return this.isInvalid ? this.textValue : this.dayjsDate.format(this.format);
         },
       },
     },

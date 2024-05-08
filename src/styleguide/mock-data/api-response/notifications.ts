@@ -1,6 +1,6 @@
-import { ApiResponse } from '@/types/api-response';
 import createApiResponseMessage from '@/styleguide/mock-data/data-object/api-response-message';
 import createApiResponseMessages from '@/styleguide/mock-data/data-object/api-response-messages';
+import { ApiResponse } from '@/types/api-response';
 
 export default function notifications(req: Request): ApiResponse | null {
   const { searchParams } = new URL(req.url);

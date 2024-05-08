@@ -12,11 +12,11 @@ type Block = {
   block: string;
   mods?: Record<string, boolean | string | number>;
   mixin?: string;
-}
+};
 
 type Blocks = {
   [key: string]: Block;
-}
+};
 
 export const blocks: Blocks = {
   [block]: { block },
@@ -26,8 +26,8 @@ export const blocks: Blocks = {
   [`${block} ${block}--mod-val ${block}--modbool`]: {
     block,
     mods: {
-      mod: 'val',
-      modbool: true,
+      'mod': 'val',
+      'modbool': true,
       'unsupported-mod': false,
     },
   },
@@ -37,7 +37,7 @@ export const blocks: Blocks = {
 
 type Elements = Blocks & {
   [key: string]: Block & { el: string };
-}
+};
 
 export const elements: Elements = {
   [`${block}__${el}`]: { block, el },
@@ -48,8 +48,8 @@ export const elements: Elements = {
     block,
     el,
     mods: {
-      mod: 'val',
-      modbool: true,
+      'mod': 'val',
+      'modbool': true,
       'unsupported-mod': false,
     },
   },
@@ -64,15 +64,15 @@ export const elements: Elements = {
 
 type DelimitersTest = {
   [key: string]: Block & { el: string };
-}
+};
 
 export const delimitersTest: DelimitersTest = {
   [`ns**${block}++${el} ns**${block}++${el}==mod~val ns**${block}++${el}==modbool`]: {
     block: delimiters.ns + block,
     el,
     mods: {
-      mod: 'val',
-      modbool: true,
+      'mod': 'val',
+      'modbool': true,
       'unsupported-mod': false,
     },
   },

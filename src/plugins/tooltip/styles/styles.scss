@@ -54,11 +54,13 @@
       padding: $wrapper__padding 0;
     }
 
-    &--active { // Popper not initialized
+    &--active {
+      // Popper not initialized
       display: block;
     }
 
-    &--visible { // directive
+    &--visible {
+      // directive
       opacity: 1;
       pointer-events: all;
     }

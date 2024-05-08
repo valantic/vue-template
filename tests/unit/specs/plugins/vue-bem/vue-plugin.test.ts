@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
-import { describe, test, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { describe, expect, test } from 'vitest';
 import vueBemCn from '@/plugins/vue-bem-cn';
 
 describe('Check installation', () => {
@@ -135,7 +135,8 @@ describe('Check custom settings', () => {
   });
 
   test('Expect correct element string for hyphenate option', () => {
-    const expectedString = 'block-name__element-name block-name__element-name--has-mod block-name__element-name--mod-val';
+    const expectedString =
+      'block-name__element-name block-name__element-name--has-mod block-name__element-name--mod-val';
     const config = {
       hyphenate: true,
     };

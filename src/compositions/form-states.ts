@@ -1,10 +1,4 @@
-import {
-  computed,
-  ComputedRef,
-  PropType,
-  Ref,
-  ref,
-} from 'vue';
+import { ComputedRef, PropType, Ref, computed, ref } from 'vue';
 
 export enum FieldState {
   Default = 'default',
@@ -19,7 +13,7 @@ type StateModifiers = {
   active: boolean;
   focus: boolean;
   hover: boolean;
-}
+};
 
 export type FormStates = {
   active: Ref<boolean>;
@@ -28,22 +22,17 @@ export type FormStates = {
   stateModifiers: ComputedRef<StateModifiers>;
   stateIcon: ComputedRef<Icon | null>;
   hasDefaultState: ComputedRef<boolean>;
-}
+};
 
-export const withProps = () => ({ // eslint-disable-line -- TODO: did not know how to fix the return type so it is valid on component side.
+// eslint-disable-next-line -- TODO: did not know how to fix the return type so it is valid on component side.
+export const withProps = () => ({
   /**
    * Form states for class names (default, error, success, warning, info)
    */
   state: {
     type: String as PropType<FieldState>,
     default: 'default',
-    validator: (value: string): boolean => [
-      'error',
-      'success',
-      'warning',
-      'info',
-      'default',
-    ].includes(value),
+    validator: (value: string): boolean => ['error', 'success', 'warning', 'info', 'default'].includes(value),
   },
 });
 
@@ -59,11 +48,11 @@ const formStates = (inputState: Ref<FieldState>): FormStates => {
    * Holds an object with several modifiers of the form element.
    */
   const stateModifiers: ComputedRef<StateModifiers> = computed(() => ({
-      state: inputState.value,
-      active: active.value,
-      focus: focus.value,
-      hover: hover.value,
-    }));
+    state: inputState.value,
+    active: active.value,
+    focus: focus.value,
+    hover: hover.value,
+  }));
 
   /**
    * Holds a boolean if the form element has default state.

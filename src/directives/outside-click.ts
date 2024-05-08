@@ -11,17 +11,21 @@ type OutsideClickValue = {
   excludeIds: string[];
   excludeElements: HTMLElement[];
   handler: OutsideClickHandlerFunction;
-}
+};
 
 type OutsideClickDirectiveBinding = DirectiveBinding & {
   value: OutsideClickHandlerFunction | OutsideClickValue;
-}
+};
 
 type OutsideClickElement = HTMLElement & {
   [storageKey]: OutsideClickHandlerFunction;
-}
+};
 
-function isClickOnExcludedRefElement(excludeRefs: string[], eventTarget: Node, binding: OutsideClickDirectiveBinding): boolean {
+function isClickOnExcludedRefElement(
+  excludeRefs: string[],
+  eventTarget: Node,
+  binding: OutsideClickDirectiveBinding
+): boolean {
   return !!excludeRefs.find((refName) => {
     const excludedElement = binding.instance?.$refs[refName];
 
@@ -52,7 +56,7 @@ function isClickOnExcludedIdElement(excludeIds: string[], eventTarget: Node): bo
 }
 
 function isClickOnExcludedElement(excludeElements: Node[], eventTarget: Node): boolean {
-  return excludeElements.some(element => element.contains(eventTarget));
+  return excludeElements.some((element) => element.contains(eventTarget));
 }
 
 /**
@@ -67,7 +71,8 @@ export default {
 
   directive: {
     beforeMount(el: OutsideClickElement, binding: OutsideClickDirectiveBinding): void {
-      const handler: OutsideClickHandlerFunction = typeof binding.value === 'function' ? binding.value : binding.value?.handler;
+      const handler: OutsideClickHandlerFunction =
+        typeof binding.value === 'function' ? binding.value : binding.value?.handler;
 
       if (!handler) {
         throw new Error('No event handler defined for v-outside-click.');
@@ -75,7 +80,7 @@ export default {
       let userIsScrolling = false;
 
       // Click / Touchstart handler.
-      el[storageKey] = (event):void => {
+      el[storageKey] = (event): void => {
         const eventTarget: Node = event.target as Node;
 
         // These conditions are needed to detect scrolling on touch devices.
@@ -94,15 +99,12 @@ export default {
         // We check to see if the clicked element is not the dialog element and not excluded.
         if (el !== event.target && !el.contains(eventTarget)) {
           if (typeof binding.value === 'object') {
-            const {
-              excludeRefs = [],
-              excludeIds = [],
-              excludeElements = [],
-            } = binding.value;
+            const { excludeRefs = [], excludeIds = [], excludeElements = [] } = binding.value;
 
-            if (isClickOnExcludedRefElement(excludeRefs, eventTarget, binding)
-              || isClickOnExcludedIdElement(excludeIds, eventTarget)
-              || isClickOnExcludedElement(excludeElements, eventTarget)
+            if (
+              isClickOnExcludedRefElement(excludeRefs, eventTarget, binding) ||
+              isClickOnExcludedIdElement(excludeIds, eventTarget) ||
+              isClickOnExcludedElement(excludeElements, eventTarget)
             ) {
               return;
             }

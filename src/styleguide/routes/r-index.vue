@@ -1,18 +1,19 @@
 <!-- eslint-disable max-len -->
 <template>
   <div :class="b()">
-    <h1>
-      Styleguide
-    </h1>
-    <hr>
+    <h1>Styleguide</h1>
+    <hr />
     <p>Welcome to the styleguide.</p>
-    <div v-if="isProduction" :class="b('warning')">
+    <div
+      v-if="isProduction"
+      :class="b('warning')"
+    >
       Please note: this build is not meant for production. Please use <code :class="b('code')">npm run build</code> to
       create a production build.
     </div>
 
     <h2>README.md</h2>
-    <hr>
+    <hr />
     <s-readme />
   </div>
 </template>

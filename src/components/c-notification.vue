@@ -3,28 +3,32 @@
     <div :class="b('message')">
       {{ notification.message }}
     </div>
-    <button :class="b('close-button')"
-            type="button"
-            @click="close"
+    <button
+      :class="b('close-button')"
+      type="button"
+      @click="close"
     >
-      <e-icon icon="i-close" size="20" />
+      <e-icon
+        icon="i-close"
+        size="20"
+      />
     </button>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
-  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import { PropType, defineComponent } from 'vue';
   import useNotificationStore, { MappedNotificationItem } from '@/stores/notification';
   import eIcon from '@/elements/e-icon.vue';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
-  }
+  };
 
   type Data = {
     expireDelay: number;
-  }
+  };
 
   /**
    * Notification component to be used within c-notification-container. See /styleguide/notifications for demo.

@@ -1,4 +1,4 @@
-import { createI18n, IntlDateTimeFormat } from 'vue-i18n';
+import { IntlDateTimeFormat, createI18n } from 'vue-i18n';
 import fallbackMessages from '../translations/de.json';
 import numberFormats from './localization.json';
 
@@ -11,18 +11,21 @@ export const I18N_FALLBACK_MESSAGES = fallbackMessages;
 export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
 
 const datetimeFormats: IntlDateTimeFormat = {
-  month: { // January, February, March, ...
+  month: {
+    // January, February, March, ...
     month: 'long',
   },
-  weekday: { // Monday, Tuesday, Wednesday, ...
+  weekday: {
+    // Monday, Tuesday, Wednesday, ...
     weekday: 'long',
   },
 };
 
 // Add styleguide only translations
 if (import.meta.env.MODE !== 'production') {
-  const styleguideTranslations = import.meta
-    .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
+  const styleguideTranslations = import.meta.glob('./styleguide.translations.json', { eager: true })[
+    './styleguide.translations.json'
+  ] as Record<string, object>;
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
@@ -62,25 +65,25 @@ export default i18n;
  */
 export const i18nLoadMessages = (locale: string): Promise<string> => {
   if (!Object.keys(i18n.global.messages).includes(locale)) {
-    return import(`../translations/${locale}.json`)
-      .then(({ default: localeMessages }) => {
-        // Add styleguide only translations
-        if (import.meta.env.MODE !== 'production') {
-          const styleguideTranslations = import.meta
-            .glob('./styleguide.translations.json', { eager: true })['./styleguide.translations.json'] as Record<string, object>;
-          const localeStyleguideTranslations = styleguideTranslations[locale];
+    return import(`../translations/${locale}.json`).then(({ default: localeMessages }) => {
+      // Add styleguide only translations
+      if (import.meta.env.MODE !== 'production') {
+        const styleguideTranslations = import.meta.glob('./styleguide.translations.json', { eager: true })[
+          './styleguide.translations.json'
+        ] as Record<string, object>;
+        const localeStyleguideTranslations = styleguideTranslations[locale];
 
-          if (localeStyleguideTranslations) {
-            Object.entries(localeStyleguideTranslations).forEach(([key, value]) => {
-              localeMessages[key] = value;
-            });
-          }
+        if (localeStyleguideTranslations) {
+          Object.entries(localeStyleguideTranslations).forEach(([key, value]) => {
+            localeMessages[key] = value;
+          });
         }
+      }
 
-        i18n.global.setLocaleMessage(locale, localeMessages);
+      i18n.global.setLocaleMessage(locale, localeMessages);
 
-        return locale;
-      }); // eslint-disable-line vue/script-indent
+      return locale;
+    }); // eslint-disable-line vue/script-indent
   }
 
   return Promise.resolve(locale);
@@ -90,7 +93,8 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
  * Sets the application locale to the given value.
  * Loads locale messages if needed.
  */
-export const i18nSetLocale = (locale: string): Promise<void> => { // eslint-disable-line no-param-reassign
+export const i18nSetLocale = (locale: string): Promise<void> => {
+  // eslint-disable-line no-param-reassign
   if (!I18N_LOCALES.includes(locale)) {
     locale = I18N_FALLBACK;
   }

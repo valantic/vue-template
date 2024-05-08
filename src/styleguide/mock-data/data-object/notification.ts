@@ -5,7 +5,7 @@ type MockNotifications = {
   info: NotificationItem;
   error: NotificationItem;
   createNotification(notificationOptions: object): NotificationItem;
-}
+};
 
 /**
  * Creates a notification object with the given params.

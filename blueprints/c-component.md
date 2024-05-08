@@ -1,11 +1,10 @@
 ### Title
 
 ```vue
-<c-component/>
+<c-component />
 ```
 
 ```vue
-
 <template>
   <c-component />
 </template>

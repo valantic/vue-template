@@ -1,10 +1,14 @@
 <template>
   <label>
     <span class="invisible">Language</span>
-    <select v-model="language" :class="b()">
-      <option v-for="locale in i18nLocales"
-              :key="locale"
-              :value="locale"
+    <select
+      v-model="language"
+      :class="b()"
+    >
+      <option
+        v-for="locale in i18nLocales"
+        :key="locale"
+        :value="locale"
       >
         {{ $t(`s-language.${locale}`) }}
       </option>
@@ -18,7 +22,7 @@
 
   type Data = {
     i18nLocales: string[];
-  }
+  };
 
   export default defineComponent({
     name: 's-language',

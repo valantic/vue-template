@@ -1,22 +1,30 @@
 <template>
   <span :class="b(modifiers)">
-    <textarea :class="b('field', fieldModifiers)"
-              :name="name"
-              :rows="rows"
-              :value="value"
-              v-bind="$attrs"
-              @focus="onFocus"
-              @blur="onBlur"
-              @input="onInput"
+    <textarea
+      :class="b('field', fieldModifiers)"
+      :name="name"
+      :rows="rows"
+      :value="value"
+      v-bind="$attrs"
+      @focus="onFocus"
+      @blur="onBlur"
+      @input="onInput"
     >
     </textarea>
-    <span v-if="!hasDefaultState && !focus && stateIcon" :class="b('icon-wrapper')">
+    <span
+      v-if="!hasDefaultState && !focus && stateIcon"
+      :class="b('icon-wrapper')"
+    >
       <span :class="b('icon-splitter')"></span>
-      <e-icon :class="b('state-icon')"
-              :icon="stateIcon"
+      <e-icon
+        :class="b('state-icon')"
+        :icon="stateIcon"
       />
     </span>
-    <div v-if="notification && focus" :class="b('notification')">
+    <div
+      v-if="notification && focus"
+      :class="b('notification')"
+    >
       <c-form-notification :state="state">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <span v-html="notification"></span>
@@ -29,8 +37,8 @@
   import { defineComponent, toRefs } from 'vue';
   import cFormNotification from '@/components/c-form-notification.vue';
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
-  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eIcon from '@/elements/e-icon.vue';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
@@ -91,7 +99,11 @@
       },
     },
 
-    emits: ['input', 'focus', 'blur'],
+    emits: {
+      input: (value: string): boolean => typeof value === 'string',
+      focus: (): boolean => true,
+      blur: (): boolean => true,
+    },
 
     setup(props): FormStates {
       return {
@@ -200,19 +212,22 @@
 
     // placeholder
     // placeholder (has to be split in seperate blocks to work on each browser)
-    &__field::-webkit-input-placeholder { // WebKit, Blink, Edge
+    &__field::-webkit-input-placeholder {
+      // WebKit, Blink, Edge
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
     }
 
-    &__field:-moz-placeholder { // Mozilla Firefox 4 to 18
+    &__field:-moz-placeholder {
+      // Mozilla Firefox 4 to 18
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;
     }
 
-    &__field::placeholder { // Most modern browsers support this now
+    &__field::placeholder {
+      // Most modern browsers support this now
       opacity: 1;
       color: variables.$color-grayscale--400;
       font-family: variables.$font-family--primary;

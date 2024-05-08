@@ -6,4 +6,4 @@ export type ApiResponseMessage = {
   redirectUrl?: string;
   showToUser: boolean;
   action?: ApiResponseMessageAction;
-}
+};

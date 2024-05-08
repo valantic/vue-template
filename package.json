@@ -7,8 +7,6 @@
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "vite",
-    "fix:eslint": "npm run lint:eslint -- --config .eslintrc.fix.cjs --cache=false --fix",
-    "fix:stylelint": "npm run lint:stylelint -- --cache=false --config .stylelintrc.fix.js --fix",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint --ext .ts,.js,.vue ./",
     "lint:stylelint": "stylelint 'src/**/*.?(vue|scss)'",
@@ -22,6 +20,7 @@
     "build:watch": "npm run build -- --watch",
     "serve": "vite preview",
     "prepare": "husky install",
+    "prettier": "prettier . --write",
     "storybook": "storybook dev -p 6006",
     "tsc": "vue-tsc"
   },
@@ -86,6 +85,7 @@
     "@storybook/testing-library": "~0.2.2",
     "@storybook/vue3": "~7.6.8",
     "@storybook/vue3-vite": "~7.6.8",
+    "@trivago/prettier-plugin-sort-imports": "~4.2.0",
     "@types/body-scroll-lock": "~3.1.2",
     "@types/cookiebot-sdk": "~2.43.4",
     "@types/google.maps": "~3.54.10",
@@ -101,6 +101,7 @@
     "cssnano": "~6.0.3",
     "eslint": "~8.56.0",
     "eslint-config-airbnb-base": "~15.0.0",
+    "eslint-config-prettier": "~9.1.0",
     "eslint-config-valantic": "~16.0.1",
     "eslint-import-resolver-typescript": "~3.6.1",
     "eslint-import-resolver-vite": "~1.1.0",

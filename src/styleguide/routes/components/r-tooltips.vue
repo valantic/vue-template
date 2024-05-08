@@ -1,10 +1,8 @@
 <template>
   <div :class="b()">
     <h1>Tooltip</h1>
-    <div style=" width: max-content; margin: auto;padding: 10vh 0; text-align: center;">
-      <h2 style=" padding-bottom: 30px;font-weight: bold;">
-        Disable/Enable Tooltip
-      </h2>
+    <div style="width: max-content; margin: auto; padding: 10vh 0; text-align: center">
+      <h2 style="padding-bottom: 30px; font-weight: bold">Disable/Enable Tooltip</h2>
 
       <ul>
         <li :class="b('item')">
@@ -13,32 +11,33 @@
       </ul>
       <div>
         <label>
-          <input v-model="active" type="checkbox"> Enable tooltip
+          <input
+            v-model="active"
+            type="checkbox"
+          />
+          Enable tooltip
         </label>
       </div>
     </div>
 
-    <div style=" width: max-content; margin: auto;padding: 10vh 0; text-align: center;">
-      <h2 style=" padding-bottom: 30px;font-weight: bold;">
-        Select Tooltip Position
-      </h2>
+    <div style="width: max-content; margin: auto; padding: 10vh 0; text-align: center">
+      <h2 style="padding-bottom: 30px; font-weight: bold">Select Tooltip Position</h2>
 
       <div>
         <c-tooltip :popper-options="popperOptions">
           Hover me to see the tooltip.
 
-          <template #tooltip>
-            This is the content for the tooltip
-          </template>
+          <template #tooltip> This is the content for the tooltip </template>
         </c-tooltip>
       </div>
 
-      <ul style="display: flex; justify-content: center; margin: 0; padding: 10px 0 30px; list-style: none;">
+      <ul style="display: flex; justify-content: center; margin: 0; padding: 10px 0 30px; list-style: none">
         <li>
-          <e-select v-model="placement"
-                    :options="placementOptions"
-                    label="tooltip-position"
-                    name="tooltip-position"
+          <e-select
+            v-model="placement"
+            :options="placementOptions"
+            label="tooltip-position"
+            name="tooltip-position"
           />
         </li>
       </ul>
@@ -47,8 +46,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
   import { Options, Placement } from '@popperjs/core';
+  import { defineComponent } from 'vue';
   import eSelect from '@/elements/e-select.vue';
   import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
   import tooltipDirective from '@/plugins/tooltip/directives/directive';
@@ -57,7 +56,7 @@
     active: boolean;
     placementOptions: Record<'label' | 'value', string>[];
     placement: Placement;
-  }
+  };
 
   export default defineComponent({
     name: 'r-tooltips',
@@ -94,7 +93,6 @@
         ],
 
         placement: 'bottom',
-
       };
     },
 

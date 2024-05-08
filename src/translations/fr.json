@@ -10,7 +10,7 @@
     "chooseOption": "SVP Sélectionner"
   },
   "e-table": {
-    "sort": "Trier par {name}",
+    "sort": "Trier par {name}"
   },
   "e-progress": {
     "loading": "Charge …"
@@ -36,7 +36,7 @@
     "itemsEmpty": "Aucun résultat",
     "searchTitle": "Recherche"
   },
-  "s-language":{
+  "s-language": {
     "de": "Allemand",
     "fr": "Français"
   }

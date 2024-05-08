@@ -1,14 +1,16 @@
 <template>
   <div :class="b()">
     <h1>Google Maps</h1>
-    <c-google-maps :class="b('google-map')"
-                   :locations="locations"
-                   theme="gray"
+    <c-google-maps
+      :class="b('google-map')"
+      :locations="locations"
+      theme="gray"
     />
 
-    <c-google-maps :class="b('google-map')"
-                   :locations="locations"
-                   theme="gray"
+    <c-google-maps
+      :class="b('google-map')"
+      :locations="locations"
+      theme="gray"
     />
   </div>
 </template>
@@ -26,12 +28,14 @@
     // props: {},
     data() {
       return {
-        locations: [{
-          lat: 19.1759668,
-          lng: 72.79504659999998,
-          geocode: 'Breitfeldstrasse 13, 9015 St.Gallen',
-          title: 'Aksa Beach',
-        }] satisfies GoogleMapsLocation[],
+        locations: [
+          {
+            lat: 19.1759668,
+            lng: 72.79504659999998,
+            geocode: 'Breitfeldstrasse 13, 9015 St.Gallen',
+            title: 'Aksa Beach',
+          },
+        ] satisfies GoogleMapsLocation[],
       };
     },
 

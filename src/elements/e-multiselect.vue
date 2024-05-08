@@ -1,40 +1,47 @@
 <template>
   <span :class="b(modifiers)">
     <!-- Search field -->
-    <input v-if="isOpen && hasSearch"
-           v-model="searchTerm"
-           ref="searchField"
-           :placeholder="$t('e-multiselect.searchFieldPlaceholder')"
-           :class="b('search-field')"
-           type="text"
-           @mouseenter="hover = true"
-           @mouseleave="hover = false"
-    >
+    <input
+      v-if="isOpen && hasSearch"
+      v-model="searchTerm"
+      ref="searchField"
+      :placeholder="$t('e-multiselect.searchFieldPlaceholder')"
+      :class="b('search-field')"
+      type="text"
+      @mouseenter="hover = true"
+      @mouseleave="hover = false"
+    />
 
     <!-- Trigger Button -->
-    <button v-else
-            ref="fieldWrapper"
-            :class="b('field-wrapper', { open: isOpen, disabled: isDisabled })"
-            :disabled="isDisabled"
-            type="button"
-            @click="isOpen = !isOpen"
-            @mouseenter="hover = true"
-            @mouseleave="hover = false"
+    <button
+      v-else
+      ref="fieldWrapper"
+      :class="b('field-wrapper', { open: isOpen, disabled: isDisabled })"
+      :disabled="isDisabled"
+      type="button"
+      @click="isOpen = !isOpen"
+      @mouseenter="hover = true"
+      @mouseleave="hover = false"
     >
       <span :class="b('output-value')">
         {{ outputValue }}
       </span>
-      <e-icon v-if="hasDefaultState && !focus"
-              :class="b('arrow-icon')"
-              icon="i-arrow--down"
-              size="22"
-              inline
+      <e-icon
+        v-if="hasDefaultState && !focus"
+        :class="b('arrow-icon')"
+        icon="i-arrow--down"
+        size="22"
+        inline
       />
-      <e-icon v-else-if="stateIcon"
-              :class="b('state-icon')"
-              :icon="stateIcon"
+      <e-icon
+        v-else-if="stateIcon"
+        :class="b('state-icon')"
+        :icon="stateIcon"
       />
-      <span v-if="!hasDefaultState" :class="b('icon-splitter')"></span>
+      <span
+        v-if="!hasDefaultState"
+        :class="b('icon-splitter')"
+      ></span>
       <span :class="b('progress-wrapper')">
         <e-progress v-if="progress" />
       </span>
@@ -42,18 +49,21 @@
 
     <!-- Content -->
     <transition name="top-slide">
-      <span v-show="isOpen"
-            v-outside-click="{ excludeRefs: ['fieldWrapper', 'searchField'], handler: close }"
-            :class="b('options-wrapper')"
+      <span
+        v-show="isOpen"
+        v-outside-click="{ excludeRefs: ['fieldWrapper', 'searchField'], handler: close }"
+        :class="b('options-wrapper')"
       >
         <ul :class="b('options-list')">
-          <li v-for="option in filteredOptions"
-              :key="option[valueField]"
-              :class="b('options-item')"
+          <li
+            v-for="option in filteredOptions"
+            :key="option[valueField]"
+            :class="b('options-item')"
           >
-            <e-checkbox v-model="internalValue"
-                        :value="option[valueField]"
-                        :name="`e-multiselect--${uuid}`"
+            <e-checkbox
+              v-model="internalValue"
+              :value="option[valueField]"
+              :name="`e-multiselect--${uuid}`"
             >
               {{ option[labelField] }}
             </e-checkbox>
@@ -65,36 +75,31 @@
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    PropType,
-    ref,
-    Ref,
-    toRefs,
-  } from 'vue';
+  import { PropType, Ref, defineComponent, ref, toRefs } from 'vue';
   import i18n from '@/setup/i18n';
-  import useUuid, { Uuid } from '@/compositions/uuid';
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
-  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import useUuid, { Uuid } from '@/compositions/uuid';
   import eCheckbox from '@/elements/e-checkbox.vue';
   import eIcon from '@/elements/e-icon.vue';
   import eProgress from '@/elements/e-progress.vue';
+  import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   type Option = {
     value: string;
     label: string;
     [key: string]: string;
-  }
-
-  type Setup = FormStates & Uuid & {
-    searchField: Ref<HTMLInputElement | null>;
-    fieldWrapper: Ref<HTMLButtonElement | null>;
   };
+
+  type Setup = FormStates &
+    Uuid & {
+      searchField: Ref<HTMLInputElement | null>;
+      fieldWrapper: Ref<HTMLButtonElement | null>;
+    };
 
   type Data = {
     isOpen: boolean;
     searchTerm: string;
-  }
+  };
 
   /**
    * This renders a multi-select component.
@@ -180,7 +185,10 @@
       },
     },
 
-    emits: ['update:modelValue', 'close'],
+    emits: {
+      'update:modelValue': (value: unknown) => value !== undefined,
+      'close': (value: unknown) => value !== undefined,
+    },
 
     setup(props): Setup {
       const searchField = ref();
@@ -255,7 +263,7 @@
 
               return typeof value !== 'undefined' && this.internalValue.includes(value);
             })
-            .map(option => option[this.labelField])
+            .map((option) => option[this.labelField])
             .join(', ');
         }
 
@@ -278,7 +286,7 @@
        */
       filteredOptions(): Option[] {
         if (this.hasSearch && this.searchTerm) {
-          return this.options.filter(option => option[this.labelField]?.includes(this.searchTerm));
+          return this.options.filter((option) => option[this.labelField]?.includes(this.searchTerm));
         }
 
         return this.options;

@@ -1,0 +1,37 @@
+{
+  printWidth: 120,
+  tabWidth: 2,
+  useTabs: false,
+  endOfLine: 'auto',
+  semi: true,
+  singleQuote: true,
+  bracketSpacing: true,
+  bracketSameLine: false,
+  arrowParens: 'always',
+  vueIndentScriptAndStyle: true,
+  singleAttributePerLine: true,
+  quoteProps: 'consistent',
+  plugins: ['@trivago/prettier-plugin-sort-imports'],
+
+  // @trivago/prettier-plugin-sort-imports@latest options
+  importOrder: [
+    '<THIRD_PARTY_MODULES>',
+    '^@!production/(.*)$',
+    '^@/setup/(.*)$',
+    '^@/stores/(.*)$',
+    '^@/(.*)$',
+    '^[../]',
+    '^[./]',
+    '^@/types/(.*)$',
+  ],
+  importOrderSortSpecifiers: true,
+
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      options: {
+        parser: 'typescript',
+      },
+    },
+  ],
+}

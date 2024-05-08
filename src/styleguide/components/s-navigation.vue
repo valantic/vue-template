@@ -1,23 +1,36 @@
 <template>
   <div :class="b()">
-    <div :class="b('navigation-wrapper', wrapperModifiers)" @click="onClick">
+    <div
+      :class="b('navigation-wrapper', wrapperModifiers)"
+      @click="onClick"
+    >
       <div :class="b('viewport')">
         {{ $viewport.currentViewport }}
       </div>
       <ul :class="b('navigation')">
         <li :class="b('navigation-item', { logo: true })">
-          <a :class="b('navigation-link')"
-             href="https://www.valantic.com"
-             target="_blank"
-             rel="noopener noreferrer"
+          <a
+            :class="b('navigation-link')"
+            href="https://www.valantic.com"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <img src="@/assets/valantic.svg" alt="valantic">
+            <img
+              src="@/assets/valantic.svg"
+              alt="valantic"
+            />
           </a>
         </li>
-        <li :class="b('navigation-item', { language: true })" @click.stop>
+        <li
+          :class="b('navigation-item', { language: true })"
+          @click.stop
+        >
           <s-language />
         </li>
-        <li :class="b('navigation-item', { theme: true })" @click.stop>
+        <li
+          :class="b('navigation-item', { theme: true })"
+          @click.stop
+        >
           <s-theme-selector />
         </li>
         <li :class="b('navigation-item', { settings: true })">
@@ -35,14 +48,14 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import sLanguage from './s-language.vue';
-  import sThemeSelector from './s-theme-selector.vue';
   import sDemoSettings from './s-demo-settings.vue';
+  import sLanguage from './s-language.vue';
   import sNavigationBlock from './s-navigation-block.vue';
+  import sThemeSelector from './s-theme-selector.vue';
 
   type Data = {
     isOpen: boolean;
-  }
+  };
 
   export default defineComponent({
     name: 's-navigation',
@@ -60,12 +73,7 @@
       navPosition: {
         type: String,
         default: 'top-right',
-        validator: (value: string) => [
-          'top-left',
-          'top-right',
-          'bottom-right',
-          'bottom-left',
-        ].includes(value),
+        validator: (value: string) => ['top-left', 'top-right', 'bottom-right', 'bottom-left'].includes(value),
       },
     },
     data(): Data {
@@ -113,7 +121,8 @@
       background-color: variables.$color-grayscale--1000;
       font-family: variables.$font-family--primary;
 
-      &::after { // Toggle
+      &::after {
+        // Toggle
         position: absolute;
         content: '';
         width: $trigger-size;

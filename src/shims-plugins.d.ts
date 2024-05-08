@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { VueBemFunction } from '@/plugins/vue-bem-cn/src/globals';
-import { Viewport } from '@/plugins/viewport';
 import { Gtm } from '@/plugins/google-tag-manager';
+import { Viewport } from '@/plugins/viewport';
+import { VueBemFunction } from '@/plugins/vue-bem-cn/src/globals';
 
 declare module '@vue/runtime-core' {
   // provide typings for global properties
