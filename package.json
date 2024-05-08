@@ -72,6 +72,7 @@
     "pikaday": "~1.8.2",
     "pinia": "~2.1.7",
     "the-new-css-reset": "~1.11.2",
+    "vite": "~5.2.11",
     "vue": "~3.4.14",
     "vue-i18n": "~9.9.0"
   },
@@ -125,7 +126,6 @@
     "svg-sprite": "~2.0.2",
     "svgo": "~3.2.0",
     "typescript": "~5.3.3",
-    "vite": "~4.5.3",
     "vite-plugin-image-optimizer": "~1.1.7",
     "vite-plugin-markdown": "~2.1.0",
     "vitest": "~0.34.6",
