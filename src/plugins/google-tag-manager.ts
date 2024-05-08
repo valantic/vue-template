@@ -8,7 +8,7 @@ enum GaListNames {
 
 type Options = {
   debug?: boolean;
-}
+};
 
 type ListItem = {
   item_id: string;
@@ -19,7 +19,7 @@ type ListItem = {
   quantity?: number | null;
   item_category?: string | null;
   item_list_name?: string;
-}
+};
 
 type PurchasePayload = {
   currency: string;
@@ -27,21 +27,21 @@ type PurchasePayload = {
   shipping: number | null;
   tax: number | null;
   items: ListItem[];
-}
+};
 
 type AddPaymentInfoPayload = {
   currency: string;
   value: number;
   paymentType: string;
   items: ListItem[];
-}
+};
 
 type AddShippingInfoPayload = {
   currency: string;
   value: number;
   shippingTier: string;
   items: ListItem[];
-}
+};
 
 export type Gtm = {
   push(payload: Record<string, unknown>): void;
@@ -60,10 +60,12 @@ export type Gtm = {
   pushAddPaymentInfo(payload: AddPaymentInfoPayload): void;
   pushAddShippingInfo(payload: AddShippingInfoPayload): void;
   debug(enable: boolean): void;
-}
+};
 
 declare global {
-  interface Window { dataLayer: Record<string, unknown>[] }
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+  }
 }
 
 /**
@@ -280,10 +282,12 @@ const plugin: Plugin = {
           event: 'add_to_cart',
           ecommerce: {
             currency: item.currency,
-            items: [{
-              ...item,
-              item_list_name: list,
-            }],
+            items: [
+              {
+                ...item,
+                item_list_name: list,
+              },
+            ],
           },
         });
       },

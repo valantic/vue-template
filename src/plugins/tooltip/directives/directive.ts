@@ -1,10 +1,8 @@
+import { Instance, Placement, createPopper } from '@popperjs/core';
 import { DirectiveBinding } from 'vue';
-import { createPopper, Placement, Instance } from '@popperjs/core';
-import '../styles/styles.scss';
-
 import {
-  CLASS_TOOLTIP,
   CLASS_ANCHOR,
+  CLASS_TOOLTIP,
   CLASS_TOOLTIP_WRAPPER,
   CLASS_TOOLTIP_WRAPPER_ACTIVE,
   CLASS_TOOLTIP_WRAPPER_VISIBLE,
@@ -12,13 +10,14 @@ import {
   DEFAULT_POPPER_OPTIONS,
 } from '@/plugins/tooltip/shared';
 import type { NamedDirective } from '@/types/named-directive';
+import '../styles/styles.scss';
 
 const storageKey = Symbol('Tooltip directive instance');
 const tooltipAnchor = Symbol('The current tooltip anchor');
 
 type TooltipEvent = {
   [key: string]: EventListener;
-}
+};
 
 type AnchorElement = HTMLElement & {
   [storageKey]: {
@@ -27,11 +26,11 @@ type AnchorElement = HTMLElement & {
     events: TooltipEvent[];
     content: string;
   };
-}
+};
 
 type Tooltip = HTMLDivElement & {
   [tooltipAnchor]?: HTMLElement;
-}
+};
 
 let tooltip: Tooltip;
 let tooltipInner: HTMLDivElement;
@@ -52,11 +51,14 @@ function hideTooltip(debounce = true): void {
     clearTimeout(hideDebounceTimeout);
   }
 
-  hideDebounceTimeout = setTimeout(() => {
-    tooltip.addEventListener('transitionend', onCloseTransitionend, { once: true });
-    tooltip.classList.remove(CLASS_TOOLTIP_WRAPPER_VISIBLE);
-    tooltip[tooltipAnchor] = undefined;
-  }, debounce ? DEBOUNCE_CLOSE : 0);
+  hideDebounceTimeout = setTimeout(
+    () => {
+      tooltip.addEventListener('transitionend', onCloseTransitionend, { once: true });
+      tooltip.classList.remove(CLASS_TOOLTIP_WRAPPER_VISIBLE);
+      tooltip[tooltipAnchor] = undefined;
+    },
+    debounce ? DEBOUNCE_CLOSE : 0
+  );
 }
 
 function setTooltipInnerText(content: string): void {
@@ -76,7 +78,8 @@ function showTooltip(el: AnchorElement): void {
   tooltip.classList.add(CLASS_TOOLTIP_WRAPPER_ACTIVE);
   tooltip[tooltipAnchor] = el;
 
-  el[storageKey].popper.update().then(() => { // Makes sure the position matches the current toggle size.
+  el[storageKey].popper.update().then(() => {
+    // Makes sure the position matches the current toggle size.
     setTimeout(() => {
       tooltip.classList.add(CLASS_TOOLTIP_WRAPPER_VISIBLE);
     });
@@ -87,13 +90,15 @@ function showTooltip(el: AnchorElement): void {
  * Bind the given array of event definitions to the given element.
  */
 function bindEvents(element: HTMLElement, events: TooltipEvent[], bind = true): void {
-  events.forEach(event => Object.entries(event).forEach(([type, callback]) => {
-    if (bind) {
-      element.addEventListener(type, callback);
-    } else {
-      element.removeEventListener(type, callback);
-    }
-  }));
+  events.forEach((event) =>
+    Object.entries(event).forEach(([type, callback]) => {
+      if (bind) {
+        element.addEventListener(type, callback);
+      } else {
+        element.removeEventListener(type, callback);
+      }
+    })
+  );
 }
 
 /**
@@ -124,7 +129,7 @@ function createTooltipElement(): HTMLDivElement {
  * Defines the tooltip placement based on the binding value.
  */
 function getTooltipPlacement(binding: DirectiveBinding): Placement | undefined {
-  return binding.arg === 'hidden' ? 'bottom' : binding.arg as Placement;
+  return binding.arg === 'hidden' ? 'bottom' : (binding.arg as Placement);
 }
 
 /**
@@ -154,7 +159,7 @@ function onScroll(): void {
  * tooltipPosition: 'top[-start|end]', 'right[-start|end]', 'bottom[-start|end]', 'left[-start|end]', 'hidden'
  * tooltipTrigger: 'mouseover'
  */
-export default (function(): NamedDirective {
+export default (function (): NamedDirective {
   createTooltipElement();
 
   window.addEventListener('click', onGlobalClick, { passive: true });
@@ -185,7 +190,10 @@ export default (function(): NamedDirective {
             return {
               click(event): void {
                 if (!el[storageKey].isHidden) {
-                  if (tooltip[tooltipAnchor] === event.target && tooltip.classList.contains(CLASS_TOOLTIP_WRAPPER_VISIBLE)) {
+                  if (
+                    tooltip[tooltipAnchor] === event.target &&
+                    tooltip.classList.contains(CLASS_TOOLTIP_WRAPPER_VISIBLE)
+                  ) {
                     hideTooltip(false);
                   } else {
                     showTooltip(el);
@@ -245,4 +253,4 @@ export default (function(): NamedDirective {
       window.removeEventListener('scroll', onScroll);
     },
   };
-}());
+})();

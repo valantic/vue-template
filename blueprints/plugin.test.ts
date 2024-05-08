@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest';
-import plugin from '@/plugins/plugin'; // TODO: update source
+import { describe, expect, it } from 'vitest';
+import plugin from '@/plugins/plugin';
 
-describe('plugin | plugin', () => { // TODO: update title
+// TODO: update source
+
+describe('plugin | plugin', () => {
+  // TODO: update title
   it('should have an "install" method', () => {
     expect(plugin.install).toBeTruthy();
   });

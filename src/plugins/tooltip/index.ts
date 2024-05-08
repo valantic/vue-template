@@ -1,8 +1,6 @@
-import {
-  Plugin,
-} from 'vue';
-import directive from './directives/directive';
+import { Plugin } from 'vue';
 import component from './c-tooltip.vue';
+import directive from './directives/directive';
 
 /**
  * Installs the tooltip directive and component for the given instance.

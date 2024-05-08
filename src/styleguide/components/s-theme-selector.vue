@@ -1,11 +1,15 @@
 <template>
   <label>
     <span class="invisible">Theme</span>
-    <select :class="b()" @change="onChange">
-      <option v-for="theme in themes"
-              :key="theme.id"
-              :value="theme.id"
-              :selected="theme.selected"
+    <select
+      :class="b()"
+      @change="onChange"
+    >
+      <option
+        v-for="theme in themes"
+        :key="theme.id"
+        :value="theme.id"
+        :selected="theme.selected"
       >
         {{ theme.name }}
       </option>
@@ -15,22 +19,22 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import buildConfig from '@/../vite.builds.json';
   import useSessionStore from '@/stores/session';
+  import buildConfig from '@/../vite.builds.json';
 
   type Theme = {
     name: string;
     id: string;
     selected?: boolean;
-  }
+  };
 
   type Data = {
     availableThemes: string[];
-  }
+  };
 
   type Setup = {
     sessionStore: ReturnType<typeof useSessionStore>;
-  }
+  };
 
   export default defineComponent({
     name: 's-theme-selector',
@@ -65,7 +69,7 @@
         const themes = this.availableThemes;
         const activeTheme = this.getTheme;
 
-        return themes.map(theme => ({
+        return themes.map((theme) => ({
           name: theme,
           id: theme,
           selected: theme === activeTheme,

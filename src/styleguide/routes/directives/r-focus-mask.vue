@@ -1,13 +1,17 @@
 <template>
-  <div v-focus-mask :class="b()">
+  <div
+    v-focus-mask
+    :class="b()"
+  >
     <h1>Focus mask</h1>
     <h2>Default</h2>
     <div v-focus-item="hasFocus">
       I have the focus.
-      <br>
-      <br>
-      <button type="button"
-              @click="hasFocus = !hasFocus"
+      <br />
+      <br />
+      <button
+        type="button"
+        @click="hasFocus = !hasFocus"
       >
         Toggle focus
       </button>
@@ -22,7 +26,7 @@
 
   type Data = {
     hasFocus: boolean;
-  }
+  };
 
   /**
    * Showcase for the focus mask and item directives.

@@ -1,12 +1,7 @@
-import { describe, test, expect } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import bemNames from '@/plugins/vue-bem-cn/src/bem-cn/bem-names';
 import { DEFAULT_DELIMITERS } from '@/plugins/vue-bem-cn/src/globals';
-import {
-  blocks,
-  elements,
-  delimiters,
-  delimitersTest,
-} from './testingEntitys';
+import { blocks, delimiters, delimitersTest, elements } from './testingEntitys';
 
 describe('Block', () => {
   Object.entries(blocks).forEach(([output, input]) => {

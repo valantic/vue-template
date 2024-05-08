@@ -1,6 +1,4 @@
-import {
- describe, expect, it, vi,
-} from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import processArrayInChunks from '@/helpers/process-array-in-chunks';
 
 describe('proccess-array-in-chunks', () => {
@@ -48,9 +46,7 @@ describe('proccess-array-in-chunks', () => {
       }
     });
 
-    await expect(
-      processArrayInChunks<number>(array, chunkSize, callback, false)
-    ).rejects.toThrow('Test error');
+    await expect(processArrayInChunks<number>(array, chunkSize, callback, false)).rejects.toThrow('Test error');
 
     expect(callback).toHaveBeenCalledTimes(2);
     expect(callback).toHaveBeenCalledWith([1, 2]);
@@ -79,9 +75,7 @@ describe('proccess-array-in-chunks', () => {
       }
     });
 
-    await expect(
-      processArrayInChunks<number>(array, chunkSize, callback, false)
-    ).rejects.toThrow('Test error');
+    await expect(processArrayInChunks<number>(array, chunkSize, callback, false)).rejects.toThrow('Test error');
 
     expect(callback).toHaveBeenCalledTimes(2);
     expect(callback).toHaveBeenCalledWith([1, 2]);

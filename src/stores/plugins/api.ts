@@ -1,16 +1,9 @@
-import axios, {
-  AxiosError,
-  AxiosInstance,
-  AxiosPromise,
-  AxiosRequestConfig,
-  AxiosResponse,
-} from 'axios';
-import notificationStore, { mapApiResponseMessages } from '@/stores/notification';
+import axios, { AxiosError, AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { PAGE_LANG } from '@/setup/i18n';
+import notificationStore, { mapApiResponseMessages } from '@/stores/notification';
 import { ApiResponseMessages } from '@/types/api-response';
 
 export type Api = {
-
   /**
    * Runs a get request with given url with given url params.
    */
@@ -35,7 +28,7 @@ export type Api = {
    * Runs a delete request with a given url and payload.
    */
   delete(url: string, config: AxiosRequestConfig): AxiosPromise;
-}
+};
 
 // Creating an Axios instance to set general header properties (for each request)
 export const axiosInstance: AxiosInstance = axios.create({
@@ -48,11 +41,11 @@ export const axiosInstance: AxiosInstance = axios.create({
 
 type PluginApi = {
   $api: Api;
-}
+};
 
 type ApiError = AxiosError & {
   messages: ApiResponseMessages;
-}
+};
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
@@ -60,7 +53,7 @@ declare module 'pinia' {
   }
 }
 
-export default function api():PluginApi {
+export default function api(): PluginApi {
   const notificationStoreInstance = notificationStore();
   const abortStack: Record<string, AbortController> = {};
 
@@ -137,29 +130,29 @@ export default function api():PluginApi {
       post(url, data, config): AxiosPromise {
         return axiosInstance
           .post(url, data, config)
-          .then(response => handleSuccess(response))
-          .catch(error => handleError(error));
+          .then((response) => handleSuccess(response))
+          .catch((error) => handleError(error));
       },
 
       put(url, data, config): AxiosPromise {
         return axiosInstance
           .post(url, data, config)
-          .then(response => handleSuccess(response))
-          .catch(error => handleError(error));
+          .then((response) => handleSuccess(response))
+          .catch((error) => handleError(error));
       },
 
       patch(url, data, config): AxiosPromise {
         return axiosInstance
           .patch(url, data, config)
-          .then(response => handleSuccess(response))
-          .catch(error => handleError(error));
+          .then((response) => handleSuccess(response))
+          .catch((error) => handleError(error));
       },
 
       delete(url, config): AxiosPromise {
         return axiosInstance
           .delete(url, config)
-          .then(response => handleSuccess(response))
-          .catch(error => handleError(error));
+          .then((response) => handleSuccess(response))
+          .catch((error) => handleError(error));
       },
     },
   };

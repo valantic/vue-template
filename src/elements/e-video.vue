@@ -15,7 +15,7 @@
 
   export enum VideoSource {
     Vimeo = 'vimeo',
-    Youtube = 'youtube'
+    Youtube = 'youtube',
   }
 
   /**
@@ -160,7 +160,7 @@
         /**
          * The videoId can consist of lowercase/uppercase letters, numbers, dashes and underscores.
          */
-        if (this.videoId && (/[a-zA-Z0-9-_]/).test(this.videoId) === false) {
+        if (this.videoId && /[a-zA-Z0-9-_]/.test(this.videoId) === false) {
           // eslint-disable-next-line no-console
           console.error('video-id can not be part of a URL');
 
@@ -203,10 +203,7 @@
       /**
        * This is a helper for replacing part of a string.
        */
-      replaceIdInUrl(
-        original: string,
-        replace?: string
-      ): string | undefined {
+      replaceIdInUrl(original: string, replace?: string): string | undefined {
         if (!replace) {
           return undefined;
         }
@@ -218,25 +215,25 @@
        * Helper to check wether a string matches with entries in an array.
        */
       arrayHasString(arr: string[], searchString: string): boolean {
-        return arr.some(videoSource => searchString.startsWith(videoSource));
+        return arr.some((videoSource) => searchString.startsWith(videoSource));
       },
     },
-  // render() {},
+    // render() {},
   });
 </script>
 
 <style lang="scss">
-.e-video {
-  &--responsive {
-    aspect-ratio: 16/9;
-  }
-
-  &__iframe {
+  .e-video {
     &--responsive {
       aspect-ratio: 16/9;
-      width: 100%;
-      height: 100%;
+    }
+
+    &__iframe {
+      &--responsive {
+        aspect-ratio: 16/9;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
-}
 </style>

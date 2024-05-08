@@ -1,9 +1,8 @@
 import { Plugin } from 'vue';
-
+import cFooter from '@/components/c-footer.vue';
+import cHeader from '@/components/c-header.vue';
 // SSR related
 import lDefault from '@/layouts/l-default.vue';
-import cHeader from '@/components/c-header.vue';
-import cFooter from '@/components/c-footer.vue';
 
 const plugin: Plugin = {
   install(app) {

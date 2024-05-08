@@ -28,7 +28,7 @@ export default {
 } as Meta;
 
 const Template: StoryObj = {
-  render: args => ({
+  render: (args) => ({
     components: { eVideo },
     setup() {
       return { args };

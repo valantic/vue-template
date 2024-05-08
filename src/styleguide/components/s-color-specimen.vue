@@ -1,8 +1,15 @@
 <template>
   <div :class="b()">
-    <div :class="b('color')" :style="backgroundColor"></div>
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="displayName" :class="b('name')"></div>
+    <div
+      :class="b('color')"
+      :style="backgroundColor"
+    ></div>
+    <!-- eslint-disable vue/no-v-html -->
+    <div
+      v-html="displayName"
+      :class="b('name')"
+    ></div>
+    <!-- eslint-enable vue/no-v-html -->
     <div :class="b('value')">
       {{ displayValue }}
     </div>
@@ -10,7 +17,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, StyleValue } from 'vue';
+  import { PropType, StyleValue, defineComponent } from 'vue';
 
   /**
    * Renders a color specimen tile.

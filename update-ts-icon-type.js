@@ -4,7 +4,7 @@ const iconFolder = 'src/assets/icons';
 const outputFile = 'src/types/icon.d.ts';
 
 fs.readdir(iconFolder, (error, files) => {
-  const iconList = `type Icon = ${files.map(file => `'${file.replace('.svg', '')}'`).join(' |\n  ')};\n`;
+  const iconList = `type Icon = ${files.map((file) => `'${file.replace('.svg', '')}'`).join(' |\n  ')};\n`;
 
   fs.writeFile(
     outputFile,
@@ -13,4 +13,3 @@ fs.readdir(iconFolder, (error, files) => {
     () => console.error
   );
 });
-

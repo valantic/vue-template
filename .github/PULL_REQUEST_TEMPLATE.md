@@ -1,22 +1,27 @@
 ## Pull request
-*description*
- 
+
+_description_
+
 ### Ticket
-*ticket-link*
- 
+
+_ticket-link_
+
 ### Browser testing
-- *link*
- 
+
+- _link_
+
 ### Checklist
-- [ ] I merged the current development branch (before testing)
+
+- [ ] I merged the current main branch (before testing)
 - [ ] Added JSDoc and styleguide demo
 - [ ] Tested all links in project relevant browsers
 - [ ] Tested all links in different screen sizes
 - [ ] Did run automated tests and linters
 - [ ] Did assign ticket
 - [ ] Double checked target branch
- 
+
 ## Review/Test checklist
+
 - [ ] Did review code and documentation
 - [ ] Tested all links in project relevant browsers
 - [ ] Tested all links in different screen sizes

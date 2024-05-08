@@ -1,16 +1,16 @@
 import { Delimiters } from '@/plugins/vue-bem-cn/src/globals';
-import { isString, isNumber } from '../utils';
+import { isNumber, isString } from '../utils';
 
 type Modifiers = {
   [key: string]: unknown;
-}
+};
 
 type Entities = {
   block: string;
   el?: string;
   mods?: Modifiers;
   mixin?: string;
-}
+};
 
 /**
  * Create String from BEM entitys.

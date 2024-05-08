@@ -10,12 +10,12 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
-  import sNavigation from '@/styleguide/components/s-navigation.vue';
   import useNotificationStore from '@/stores/notification';
+  import sNavigation from '@/styleguide/components/s-navigation.vue';
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
-  }
+  };
 
   export default defineComponent({
     name: 'app',

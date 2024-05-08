@@ -13,31 +13,38 @@ body {
 
 // TODO check if we can stop using @extend
 
-h1 { // TODO: update definition for project.
+h1 {
+  // TODO: update definition for project.
   @include mixins.heading-h1();
 }
 
-h2 { // TODO: update definition for project.
+h2 {
+  // TODO: update definition for project.
   @include mixins.heading-h2();
 }
 
-h3 { // TODO: update definition for project.
+h3 {
+  // TODO: update definition for project.
   @include mixins.heading-h3();
 }
 
-h4 { // TODO: update definition for project.
+h4 {
+  // TODO: update definition for project.
   @include mixins.heading-h4();
 }
 
-h5 { // TODO: update definition for project.
+h5 {
+  // TODO: update definition for project.
   @include mixins.heading-h5();
 }
 
-h6 { // TODO: update definition for project.
+h6 {
+  // TODO: update definition for project.
   @include mixins.heading-h6();
 }
 
-p { // TODO: update definition for project.
+p {
+  // TODO: update definition for project.
   @include mixins.font(variables.$font-size--14);
 }
 

@@ -4,15 +4,15 @@ import { Store } from '@/setup/globals';
 export type BreadcrumbItem = {
   name: string;
   url: string;
-}
+};
 
 type BreadcrumbState = {
   items: BreadcrumbItem[];
-}
+};
 
 type InitialData = {
   items?: BreadcrumbItem[];
-}
+};
 
 const storeName = Store.Breadcrumb;
 

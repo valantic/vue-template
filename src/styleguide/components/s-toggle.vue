@@ -1,13 +1,17 @@
 <template>
   <label :class="b()">
-    <span v-if="$slots.default" :class="b('label')">
+    <span
+      v-if="$slots.default"
+      :class="b('label')"
+    >
       <!-- @slot renders its content as element label -->
       <slot></slot>
     </span>
-    <input v-model="internalValue"
-           :class="b('input')"
-           type="checkbox"
-    >
+    <input
+      v-model="internalValue"
+      :class="b('input')"
+      type="checkbox"
+    />
     <span :class="b('slider')"></span>
   </label>
 </template>
@@ -30,7 +34,9 @@
       },
     },
 
-    emits: ['update:modelValue'],
+    emits: {
+      'update:modelValue': (value: unknown): boolean => typeof value !== 'undefined',
+    },
 
     // data() {
     //   return {};

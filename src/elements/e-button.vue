@@ -1,22 +1,24 @@
 <template>
-  <component :is="type"
-             :class="b(modifiers)"
-             :style="style"
-             v-bind="attributes"
-             @touchstart="hasTouch = true"
-             @mouseenter="onMouseEnter"
-             @mouseleave="onMouseLeave"
-             @mousedown="onMouseDown"
-             @mouseup="onMouseUp"
-             @focus="onFocus"
-             @blur="onBlur"
-             @click="onClick"
+  <component
+    :is="type"
+    :class="b(modifiers)"
+    :style="style"
+    v-bind="attributes"
+    @touchstart.passive="hasTouch = true"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+    @mousedown="onMouseDown"
+    @mouseup="onMouseUp"
+    @focus="onFocus"
+    @blur="onBlur"
+    @click="onClick"
   >
     <!-- span is required to prevent content shifting in E11. -->
     <span :class="b('inner')">
-      <e-progress v-if="progress"
-                  :spacing="0"
-                  negative
+      <e-progress
+        v-if="progress"
+        :spacing="0"
+        negative
       />
       <!-- @slot Button content. -->
       <slot v-else></slot>
@@ -34,19 +36,19 @@
     role: string | null;
     disabled: boolean;
     [key: string]: string | boolean | null;
-  }
+  };
 
   type ElementDimensions = {
     width: string;
     height: string;
-  }
+  };
 
   type Data = {
     hasHover: boolean;
     isActive: boolean;
     hasFocus: boolean;
     hasTouch: boolean;
-  }
+  };
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
@@ -72,19 +74,13 @@
       width: {
         type: String,
         default: null,
-        validator: (value: string) => [
-          'full',
-          'auto',
-        ].includes(value),
+        validator: (value: string) => ['full', 'auto'].includes(value),
       },
 
       /**
        * Modifies the inner spacing for the button.
        */
-      spacing: propScale(500, [
-        0,
-        500,
-      ]),
+      spacing: propScale(500, [0, 500]),
 
       /**
        * If `true` the button gets the negative style
@@ -217,9 +213,7 @@
        * Returns inline styles to keep dimensions during progress state.
        */
       style(): ElementDimensions | null {
-        return this.progress && this.width !== 'full'
-          ? this.getElementDimensions()
-          : null;
+        return this.progress && this.width !== 'full' ? this.getElementDimensions() : null;
       },
 
       /**
@@ -305,9 +299,7 @@
       getElementDimensions(): ElementDimensions | null {
         const element = this.$el;
 
-        return element
-          ? { width: `${element.offsetWidth}px`, height: `${element.offsetHeight}px` }
-          : null;
+        return element ? { width: `${element.offsetWidth}px`, height: `${element.offsetHeight}px` } : null;
       },
     },
   });

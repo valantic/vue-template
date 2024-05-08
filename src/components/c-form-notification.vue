@@ -34,8 +34,8 @@
 
     computed: {
       /**
-      * Defines state modifier classes.
-      */
+       * Defines state modifier classes.
+       */
       modifiers(): Modifiers {
         return {
           ...this.stateModifiers,

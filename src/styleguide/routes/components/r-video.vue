@@ -7,7 +7,10 @@
       allow-fullscreen
     />
     <!-- youtube example with id -->
-    <e-video :source="VideoSource.Youtube" video-id="WYs_Y4D3NUs" />
+    <e-video
+      :source="VideoSource.Youtube"
+      video-id="WYs_Y4D3NUs"
+    />
 
     <!-- vimeo example with url -->
     <e-video
@@ -26,12 +29,11 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-
   import eVideo, { VideoSource } from '@/elements/e-video.vue';
 
   type Setup = {
     VideoSource: typeof VideoSource;
-  }
+  };
 
   /**
    * A component that integrates the e-picture for testing its functionality and passing properties.
@@ -51,31 +53,31 @@
       };
     },
 
-  // computed: {},
-  // watch: {},
+    // computed: {},
+    // watch: {},
 
-  // beforeCreate() {},
-  // created() {},
-  // beforeMount() {},
-  // mounted() {},
-  // beforeUpdate() {},
-  // updated() {},
-  // activated() {},
-  // deactivated() {},
-  // beforeUnmount() {},
-  // unmounted() {},
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
 
-  // methods: {},
-  // render() {},
+    // methods: {},
+    // render() {},
   });
 </script>
 
 <style lang="scss">
-@use '../../../setup/scss/variables';
+  @use '../../../setup/scss/variables';
 
-.r-video {
-  &__form {
-    display: flex;
+  .r-video {
+    &__form {
+      display: flex;
+    }
   }
-}
 </style>

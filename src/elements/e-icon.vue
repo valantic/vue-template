@@ -1,39 +1,41 @@
 <template>
-  <svg v-if="inline"
-       :class="b({ [icon]: true })"
-       :width="viewBox.width"
-       :height="viewBox.height"
-       :aria-hidden="!alt"
-       xmlns="http://www.w3.org/2000/svg"
-       xmlns:xlink="http://www.w3.org/1999/xlink"
-       focusable="false"
-       tabindex="-1"
+  <svg
+    v-if="inline"
+    :class="b({ [icon]: true })"
+    :width="viewBox.width"
+    :height="viewBox.height"
+    :aria-hidden="!alt"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    focusable="false"
+    tabindex="-1"
   >
     <title v-if="alt">
       {{ alt }}
     </title>
     <use :xlink:href="`${spritePath}#${icon}`" />
   </svg>
-  <img v-else
-       :src="`${spritePath}#${icon}`"
-       :alt="alt"
-       :width="viewBox.width"
-       :height="viewBox.height"
-  >
+  <img
+    v-else
+    :src="`${spritePath}#${icon}`"
+    :alt="alt"
+    :width="viewBox.width"
+    :height="viewBox.height"
+  />
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import { PropType, defineComponent } from 'vue';
   import spritePath from '@/assets/icons.svg';
 
   type SpecificIconSizes = {
     [key: string]: number[];
-  }
+  };
 
   type Size = {
     width: number;
     height: number;
-  }
+  };
 
   const defaultSize = 24; // Keep size in sync with SCSS 'icon' mixin.
   const specificIconSizes: SpecificIconSizes = {
@@ -99,10 +101,8 @@
        */
       viewBox(): Size {
         const { icon } = this;
-        const [
-          specificWidth, specificHeight,
-        ] = specificIconSizes[icon] || [];
-        const size = this.size?.split(' ').map(sizeParameter => parseInt(sizeParameter, 10)) || [defaultSize];
+        const [specificWidth, specificHeight] = specificIconSizes[icon] || [];
+        const size = this.size?.split(' ').map((sizeParameter) => parseInt(sizeParameter, 10)) || [defaultSize];
         const width = size[0] || defaultSize;
         let height = size[1];
 

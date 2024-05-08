@@ -5,7 +5,7 @@ export type Delimiters = {
   el: string;
   mod: string;
   modVal: string;
-}
+};
 
 export const DEFAULT_DELIMITERS: Delimiters = {
   ns: '',
@@ -21,6 +21,6 @@ export const DEFAULT_CONFIG = {
 
 export type Modifiers = {
   [key: string]: boolean | string | number | undefined;
-}
+};
 
 export type VueBemFunction = (elementOrModifiers?: string | Modifiers, modifiers?: Modifiers) => string;

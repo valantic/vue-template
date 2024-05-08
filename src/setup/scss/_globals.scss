@@ -36,7 +36,7 @@
 
     &[disabled],
     &[disabled]:hover,
-    &[disabled]:active, {
+    &[disabled]:active {
       color: variables.$color-grayscale--300;
     }
   }

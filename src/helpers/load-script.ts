@@ -1,12 +1,12 @@
 type Callback = {
   id: string;
   callback(): unknown;
-}
+};
 
 type Attributes = {
   defer: boolean;
   async: boolean;
-}
+};
 
 let scriptLoadingQueue: string[] = [];
 let loadScriptCallbacks: Callback[] = [];
@@ -17,10 +17,7 @@ let loadScriptCallbacks: Callback[] = [];
  */
 export default function loadScript(scriptSrc: string, callback?: () => unknown, attributes?: Attributes): void {
   const existingTag = document.querySelector(`script[src="${scriptSrc}"]`);
-  const {
-    defer = true,
-    async = true,
-  } = attributes || {};
+  const { defer = true, async = true } = attributes || {};
 
   if (!existingTag) {
     const script = document.createElement('script');
@@ -46,7 +43,7 @@ export default function loadScript(scriptSrc: string, callback?: () => unknown, 
           return isCurrentScript;
         });
 
-        scriptLoadingQueue = scriptLoadingQueue.filter(loadingScript => loadingScript !== scriptSrc);
+        scriptLoadingQueue = scriptLoadingQueue.filter((loadingScript) => loadingScript !== scriptSrc);
       };
     }
 

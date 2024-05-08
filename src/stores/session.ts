@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import { Store } from '@/setup/globals';
 
 type SessionState = {
-
   /**
    * Stores the theme id.
    */
@@ -12,7 +11,7 @@ type SessionState = {
    * Stores the Google Maps API key.
    */
   googleMapsApiKey: string | null;
-}
+};
 
 const storeName = Store.Session;
 

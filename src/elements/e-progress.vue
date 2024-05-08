@@ -35,10 +35,7 @@
        *
        * Valid values: `[0, 500]`
        */
-      spacing: propScale(500, [
-        0,
-        500,
-      ]),
+      spacing: propScale(500, [0, 500]),
 
       /**
        * Defines a fallback message. "e-progress.loading" is used by default
@@ -139,15 +136,15 @@
       animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;
 
       &:nth-child(1) {
-        animation-delay: math.div($_e-progress__animation-duration, 3 * -1);
+        animation-delay: math.div($_e-progress__animation-duration, 3) * -1;
       }
 
       &:nth-child(2) {
-        animation-delay: math.div($_e-progress__animation-duration, 3 * -2);
+        animation-delay: math.div($_e-progress__animation-duration, 3) * -2;
       }
 
       &:nth-child(3) {
-        animation-delay: math.div($_e-progress__animation-duration, 3 * -3);
+        animation-delay: math.div($_e-progress__animation-duration, 3) * -3;
       }
     }
   }

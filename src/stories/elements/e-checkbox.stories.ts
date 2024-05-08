@@ -1,6 +1,6 @@
 import type { StoryObj } from '@storybook/vue3';
-import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 import eCheckbox from '@/elements/e-checkbox.vue';
+import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 
 export default {
   component: eCheckbox,

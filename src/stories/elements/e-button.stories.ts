@@ -1,6 +1,6 @@
 import type { StoryObj } from '@storybook/vue3';
-import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 import eButton from '@/elements/e-button.vue';
+import mapComponentEventsToStorybookActions from '@/stories/helpers/map-component-events-to-storybook-actions';
 
 export default {
   component: eButton,
@@ -33,7 +33,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template: StoryObj = {
-  render: args => ({
+  render: (args) => ({
     components: { eButton },
 
     setup() {

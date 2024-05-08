@@ -1,11 +1,11 @@
 import { Delimiters } from '@/plugins/vue-bem-cn/src/globals';
-import { isString, isPObject, hyphenate } from '../utils';
+import { hyphenate, isPObject, isString } from '../utils';
 import bemNames from './bem-names';
 
 type Options = {
   delimiters: Delimiters;
   hyphenate: boolean;
-}
+};
 
 /**
  * Returns a BEM name creator method with the given options applied.
@@ -42,8 +42,6 @@ export default function bemCn(block: string, options: Options) {
 
     const bemClasses = bemNames(resultObj, options.delimiters);
 
-    return options.hyphenate
-      ? hyphenate(bemClasses)
-      : bemClasses;
+    return options.hyphenate ? hyphenate(bemClasses) : bemClasses;
   };
 }

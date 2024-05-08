@@ -4,7 +4,8 @@
 
 $pimcore-gui--color: #3c3f41;
 
-[class].p-grid { // The [class] selector was required to increase the weight inside .wysiwyg.
+[class].p-grid {
+  // The [class] selector was required to increase the weight inside .wysiwyg.
   $this: &;
 
   display: grid;
@@ -94,7 +95,8 @@ $pimcore-gui--color: #3c3f41;
   }
 }
 
-[class].p-options { // The [class] selector was required to increase the weight inside .wysiwyg.
+[class].p-options {
+  // The [class] selector was required to increase the weight inside .wysiwyg.
   $this: &;
 
   display: flex;

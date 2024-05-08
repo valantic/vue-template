@@ -4,9 +4,10 @@
       {{ headline }}
     </h4>
     <ul :class="b('grid')">
-      <li v-for="color in colors"
-          :key="color.name"
-          :class="b('grid-item')"
+      <li
+        v-for="color in colors"
+        :key="color.name"
+        :class="b('grid-item')"
       >
         <s-color-specimen
           :name="color.name"
@@ -18,13 +19,13 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import { PropType, defineComponent } from 'vue';
   import sColorSpecimen from './s-color-specimen.vue';
 
   type Color = {
     name: string;
     value: string[];
-  }
+  };
 
   export default defineComponent({
     name: 's-color-item',
