@@ -428,7 +428,7 @@
         set(itemIds: ItemId[]): void {
           this.$emit(
             'update:selected',
-            this.items.filter((item) => itemIds.includes(item[this.itemIdentifier] as ItemId))
+            this.items.filter((item) => itemIds.includes(item[this.itemIdentifier] as ItemId)),
           );
         },
       },

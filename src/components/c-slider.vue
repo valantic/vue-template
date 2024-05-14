@@ -149,7 +149,7 @@
           containScroll: 'keepSnaps',
           ...this.options,
         },
-        plugins
+        plugins,
       );
       this.emblaInstance.on('select', this.onEmblaSelect);
       this.emblaInstance.on('init', this.onEmblaInit);

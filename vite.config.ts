@@ -139,7 +139,7 @@ export default defineConfig(({ command, mode }) => {
             filename: './stats/index.html',
             open: true,
             template: 'treemap',
-          })
+          }),
         );
       }
 

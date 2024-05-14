@@ -59,7 +59,7 @@
       filteredNotifications(): MappedNotificationItem[] {
         if (this.selector !== 'default') {
           return this.notificationStore.getNotifications.filter(
-            (notification) => notification.selector === this.selector
+            (notification) => notification.selector === this.selector,
           );
         }
 

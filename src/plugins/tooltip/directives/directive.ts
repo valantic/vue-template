@@ -57,7 +57,7 @@ function hideTooltip(debounce = true): void {
       tooltip.classList.remove(CLASS_TOOLTIP_WRAPPER_VISIBLE);
       tooltip[tooltipAnchor] = undefined;
     },
-    debounce ? DEBOUNCE_CLOSE : 0
+    debounce ? DEBOUNCE_CLOSE : 0,
   );
 }
 
@@ -97,7 +97,7 @@ function bindEvents(element: HTMLElement, events: TooltipEvent[], bind = true): 
       } else {
         element.removeEventListener(type, callback);
       }
-    })
+    }),
   );
 }
 

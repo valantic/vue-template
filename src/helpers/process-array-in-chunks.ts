@@ -5,7 +5,7 @@ export default function processArrayInChunks<T>( // eslint-disable-line max-para
   itemsToProcess: T[],
   chunkSize: number,
   callback: (chunk: T[]) => Promise<void> | void,
-  continueOnFailure = true
+  continueOnFailure = true,
 ): Promise<void> {
   if (chunkSize <= 0) {
     throw new Error('Invalid chunk size input. The chunk size has to be greater than 0.');

@@ -397,7 +397,7 @@
               end: this.endDate,
             });
           },
-          delay ? 300 : 0
+          delay ? 300 : 0,
         );
       },
 

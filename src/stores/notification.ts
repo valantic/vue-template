@@ -66,7 +66,7 @@ function handleRedirectOrReload(notification: NotificationItem): void {
       JSON.stringify({
         ...notification,
         redirectUrl: null,
-      })
+      }),
     );
 
     if (notification.pageReload) {

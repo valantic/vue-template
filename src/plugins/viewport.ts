@@ -62,7 +62,7 @@ const plugin: Plugin = {
       () =>
         Object.entries(BREAKPOINTS)
           ?.reverse()
-          ?.find((breakpoint) => viewport.value >= breakpoint[1])?.[0] || ''
+          ?.find((breakpoint) => viewport.value >= breakpoint[1])?.[0] || '',
     );
 
     window.addEventListener('resizeend', () => {
