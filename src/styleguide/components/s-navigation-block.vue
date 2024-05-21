@@ -63,7 +63,19 @@
        * Returns an array of routes, that should be visible on the navigation.
        */
       filteredRoutes(): RouteRecordRaw[] {
-        return this.routes.filter((route) => route.meta && !route.meta.hideInStyleguide);
+        const filteredRoutes = this.routes.filter((route) => route.meta && !route.meta.hideInStyleguide);
+
+        return filteredRoutes.sort((first, second) => {
+          if (!first.meta || !second.meta) {
+            return 0;
+          }
+
+          if (first.meta.title < second.meta.title) {
+            return -1;
+          }
+
+          return second.meta.title < first.meta.title ? 1 : 0;
+        });
       },
     },
     // methods: {},
