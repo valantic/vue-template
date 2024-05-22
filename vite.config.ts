@@ -3,6 +3,7 @@
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
+import type { PluginOption } from 'vite';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { Mode, plugin as mdPlugin } from 'vite-plugin-markdown';
 import { UserConfigExport, defineConfig } from 'vitest/config';
@@ -139,7 +140,7 @@ export default defineConfig(({ command, mode }) => {
             filename: './stats/index.html',
             open: true,
             template: 'treemap',
-          })
+          }) as PluginOption
         );
       }
 

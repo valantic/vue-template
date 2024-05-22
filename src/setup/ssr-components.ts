@@ -14,7 +14,7 @@ const plugin: Plugin = {
     ];
 
     components.forEach((component) => {
-      app.component(component.name, component);
+      app.component(component.name || '', component);
     });
   },
 };
