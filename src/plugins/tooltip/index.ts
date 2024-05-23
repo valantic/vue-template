@@ -8,7 +8,7 @@ import directive from './directives/directive';
 const plugin: Plugin = {
   install(app) {
     app.directive(directive.name, directive);
-    app.component(component.name, component);
+    app.component(component.name || '', component);
   },
 };
 
