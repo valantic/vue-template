@@ -1,5 +1,6 @@
 ### Next
 
+- (Feature) Adds component Search input to s-navigation
 - (Feature) Adds styleguide build information to the index page.
 - (Feature) Adds support for local webpack dist (Pimcore).
 - (Feature) Adds auto-reload for scss file changes.

@@ -38,7 +38,14 @@
           <s-demo-settings />
         </li>
         <li :class="b('navigation-item')">
-          <s-navigation-block :routes="$router.options.routes" />
+          <input
+            v-model="componentSearchFilter"
+            :class="b('navigation-component-search')"
+            type="search"
+            placeholder="Search …"
+            @click.stop
+          />
+          <s-navigation-block :routes="routesFilteredByTitle" />
         </li>
       </ul>
     </div>
@@ -47,7 +54,9 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { RouteRecordRaw } from 'vue-router';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import filterRoutesByTitle from '../routes/utils/filter-routes-by-title';
   import sDemoSettings from './s-demo-settings.vue';
   import sLanguage from './s-language.vue';
   import sNavigationBlock from './s-navigation-block.vue';
@@ -55,6 +64,7 @@
 
   type Data = {
     isOpen: boolean;
+    componentSearchFilter: string;
   };
 
   export default defineComponent({
@@ -79,6 +89,7 @@
     data(): Data {
       return {
         isOpen: false,
+        componentSearchFilter: '',
       };
     },
     computed: {
@@ -90,6 +101,11 @@
           position: this.navPosition,
           open: this.isOpen,
         };
+      },
+      routesFilteredByTitle(): RouteRecordRaw[] {
+        const { routes } = this.$router.options;
+
+        return filterRoutesByTitle(routes, this.componentSearchFilter);
       },
     },
     methods: {
@@ -259,6 +275,17 @@
 
       .s-navigation__navigation-link {
         padding: variables.$spacing--10 variables.$spacing--5;
+      }
+    }
+
+    &__navigation-component-search {
+      width: 100%;
+      margin-top: variables.$spacing--10;
+      padding: variables.$spacing--10;
+      border: 1px solid transparent;
+
+      &:focus {
+        border-color: variables.$color-status--info;
       }
     }
   }
