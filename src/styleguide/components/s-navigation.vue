@@ -51,7 +51,7 @@
             </div>
             <input
               v-model="componentFilter"
-              :class="b('navigation-component-filter')"
+              :class="b('navigation-component-filter-input')"
               type="search"
               placeholder="Search …"
               @click.stop
@@ -318,7 +318,7 @@
       color: variables.$color-primary--1;
     }
 
-    &__navigation-component-filter {
+    &__navigation-component-filter-input {
       width: 100%;
       margin-top: variables.$spacing--10;
       padding: variables.$spacing--10;
