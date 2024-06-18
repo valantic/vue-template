@@ -38,13 +38,25 @@
           <s-demo-settings />
         </li>
         <li :class="b('navigation-item')">
-          <input
-            v-model="componentSearchFilter"
-            :class="b('navigation-component-search')"
-            type="search"
-            placeholder="Search …"
-            @click.stop
-          />
+          <div :class="b('navigation-component-search-wrapper')">
+            <div
+              v-show="componentSearchFilter"
+              :class="b('navigation-component-search-reset')"
+              @click="onReset"
+            >
+              <e-icon
+                icon="i-close"
+                size="16"
+              />
+            </div>
+            <input
+              v-model="componentSearchFilter"
+              :class="b('navigation-component-search')"
+              type="search"
+              placeholder="Search …"
+              @click.stop
+            />
+          </div>
           <s-navigation-block :routes="routesFilteredByTitle" />
         </li>
       </ul>
@@ -55,6 +67,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { RouteRecordRaw } from 'vue-router';
+  import eIcon from '@/elements/e-icon.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import filterRoutesByTitle from '../routes/utils/filter-routes-by-title';
   import sDemoSettings from './s-demo-settings.vue';
@@ -75,6 +88,7 @@
       sLanguage,
       sThemeSelector,
       sNavigationBlock,
+      eIcon,
     },
     props: {
       /**
@@ -114,6 +128,13 @@
        */
       onClick() {
         this.isOpen = !this.isOpen;
+      },
+      /**
+       * Reset the search filter.
+       */
+      onReset(event: Event) {
+        event.stopPropagation();
+        this.componentSearchFilter = '';
       },
     },
   });
@@ -276,6 +297,25 @@
       .s-navigation__navigation-link {
         padding: variables.$spacing--10 variables.$spacing--5;
       }
+    }
+
+    &__navigation-component-search-wrapper {
+      position: relative;
+    }
+
+    &__navigation-component-search-reset {
+      position: absolute;
+      top: 12px;
+      right: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 16px;
+      height: 16px;
+      border: 1px solid variables.$color-primary--1;
+      border-radius: 50%;
+      cursor: pointer;
+      color: variables.$color-primary--1;
     }
 
     &__navigation-component-search {
