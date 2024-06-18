@@ -38,10 +38,10 @@
           <s-demo-settings />
         </li>
         <li :class="b('navigation-item')">
-          <div :class="b('navigation-component-search-wrapper')">
+          <div :class="b('navigation-component-filter-wrapper')">
             <div
-              v-show="componentSearchFilter"
-              :class="b('navigation-component-search-reset')"
+              v-show="componentFilter"
+              :class="b('navigation-component-filter-reset')"
               @click="onReset"
             >
               <e-icon
@@ -50,8 +50,8 @@
               />
             </div>
             <input
-              v-model="componentSearchFilter"
-              :class="b('navigation-component-search')"
+              v-model="componentFilter"
+              :class="b('navigation-component-filter')"
               type="search"
               placeholder="Search …"
               @click.stop
@@ -77,7 +77,7 @@
 
   type Data = {
     isOpen: boolean;
-    componentSearchFilter: string;
+    componentFilter: string;
   };
 
   export default defineComponent({
@@ -103,7 +103,7 @@
     data(): Data {
       return {
         isOpen: false,
-        componentSearchFilter: '',
+        componentFilter: '',
       };
     },
     computed: {
@@ -119,7 +119,7 @@
       routesFilteredByTitle(): RouteRecordRaw[] {
         const { routes } = this.$router.options;
 
-        return filterRoutesByTitle(routes, this.componentSearchFilter);
+        return filterRoutesByTitle(routes, this.componentFilter);
       },
     },
     methods: {
@@ -134,7 +134,7 @@
        */
       onReset(event: Event) {
         event.stopPropagation();
-        this.componentSearchFilter = '';
+        this.componentFilter = '';
       },
     },
   });
@@ -299,11 +299,11 @@
       }
     }
 
-    &__navigation-component-search-wrapper {
+    &__navigation-component-filter-wrapper {
       position: relative;
     }
 
-    &__navigation-component-search-reset {
+    &__navigation-component-filter-reset {
       position: absolute;
       top: 12px;
       right: 8px;
@@ -318,7 +318,7 @@
       color: variables.$color-primary--1;
     }
 
-    &__navigation-component-search {
+    &__navigation-component-filter {
       width: 100%;
       margin-top: variables.$spacing--10;
       padding: variables.$spacing--10;
