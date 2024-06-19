@@ -38,10 +38,10 @@
           <s-demo-settings />
         </li>
         <li :class="b('navigation-item')">
-          <div :class="b('navigation-component-filter-wrapper')">
+          <div :class="b('navigation-filter-wrapper')">
             <div
               v-show="componentFilter"
-              :class="b('navigation-component-filter-reset')"
+              :class="b('navigation-filter-reset')"
               @click="onReset"
             >
               <e-icon
@@ -51,7 +51,7 @@
             </div>
             <input
               v-model="componentFilter"
-              :class="b('navigation-component-filter-input')"
+              :class="b('navigation-filter-input')"
               type="search"
               placeholder="Search …"
               @click.stop
@@ -299,11 +299,11 @@
       }
     }
 
-    &__navigation-component-filter-wrapper {
+    &__navigation-filter-wrapper {
       position: relative;
     }
 
-    &__navigation-component-filter-reset {
+    &__navigation-filter-reset {
       position: absolute;
       top: 12px;
       right: 8px;
@@ -318,7 +318,7 @@
       color: variables.$color-primary--1;
     }
 
-    &__navigation-component-filter-input {
+    &__navigation-filter-input {
       width: 100%;
       margin-top: variables.$spacing--10;
       padding: variables.$spacing--10;
