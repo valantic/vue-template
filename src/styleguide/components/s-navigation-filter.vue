@@ -3,7 +3,7 @@
     <div
       v-show="internalValue"
       :class="b('navigation-filter-icon', { reset: !!internalValue })"
-      @click="onReset"
+      @click.stop="onReset"
     >
       <e-icon
         icon="i-close"
@@ -86,8 +86,7 @@
       },
     },
     methods: {
-      onReset(event: Event) {
-        event.stopPropagation();
+      onReset() {
         this.internalValue = '';
       },
     },
