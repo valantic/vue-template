@@ -60,6 +60,7 @@
             </div>
             <input
               v-model="navigationFilter"
+              v-focus="isOpen && !!navigationFilter"
               :class="b('navigation-filter-input')"
               type="search"
               placeholder="Search …"
@@ -74,7 +75,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, nextTick } from 'vue';
   import { RouteRecordRaw } from 'vue-router';
   import eIcon from '@/elements/e-icon.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
@@ -98,6 +99,18 @@
       sThemeSelector,
       sNavigationBlock,
       eIcon,
+    },
+    directives: {
+      // Focus the element on nextTick if binding evaluates to true.
+      focus: {
+        updated(el, binding) {
+          if (binding.value) {
+            nextTick(() => {
+              el.focus();
+            });
+          }
+        },
+      },
     },
     props: {
       /**
