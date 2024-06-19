@@ -41,11 +41,20 @@
           <div :class="b('navigation-filter-wrapper')">
             <div
               v-show="navigationFilter"
-              :class="b('navigation-filter-reset')"
+              :class="b('navigation-filter-icon', { reset: !!navigationFilter })"
               @click="onReset"
             >
               <e-icon
                 icon="i-close"
+                size="16"
+              />
+            </div>
+            <div
+              v-show="!navigationFilter"
+              :class="b('navigation-filter-icon', { search: !!navigationFilter })"
+            >
+              <e-icon
+                icon="i-search"
                 size="16"
               />
             </div>
@@ -303,7 +312,7 @@
       position: relative;
     }
 
-    &__navigation-filter-reset {
+    &__navigation-filter-icon {
       position: absolute;
       top: 12px;
       right: 8px;
@@ -312,10 +321,15 @@
       align-items: center;
       width: 16px;
       height: 16px;
-      border: 1px solid variables.$color-primary--1;
-      border-radius: 50%;
-      cursor: pointer;
-      color: variables.$color-primary--1;
+
+      &--reset {
+        cursor: pointer;
+        color: variables.$color-primary--1;
+      }
+
+      &--search {
+        color: variables.$color-primary--2;
+      }
     }
 
     &__navigation-filter-input {
