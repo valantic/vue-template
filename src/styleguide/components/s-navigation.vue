@@ -40,7 +40,7 @@
         <li :class="b('navigation-item')">
           <div :class="b('navigation-filter-wrapper')">
             <div
-              v-show="componentFilter"
+              v-show="navigationFilter"
               :class="b('navigation-filter-reset')"
               @click="onReset"
             >
@@ -50,7 +50,7 @@
               />
             </div>
             <input
-              v-model="componentFilter"
+              v-model="navigationFilter"
               :class="b('navigation-filter-input')"
               type="search"
               placeholder="Search …"
@@ -77,7 +77,7 @@
 
   type Data = {
     isOpen: boolean;
-    componentFilter: string;
+    navigationFilter: string;
   };
 
   export default defineComponent({
@@ -103,7 +103,7 @@
     data(): Data {
       return {
         isOpen: false,
-        componentFilter: '',
+        navigationFilter: '',
       };
     },
     computed: {
@@ -119,7 +119,7 @@
       routesFilteredByTitle(): RouteRecordRaw[] {
         const { routes } = this.$router.options;
 
-        return filterRoutesByTitle(routes, this.componentFilter);
+        return filterRoutesByTitle(routes, this.navigationFilter);
       },
     },
     methods: {
@@ -134,7 +134,7 @@
        */
       onReset(event: Event) {
         event.stopPropagation();
-        this.componentFilter = '';
+        this.navigationFilter = '';
       },
     },
   });
