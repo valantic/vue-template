@@ -40,7 +40,9 @@
       eIcon,
     },
     directives: {
-      // Focus the element on nextTick if binding evaluates to true.
+      /**
+       * Focus the element on nextTick if binding evaluates to true.
+       */
       focus: {
         updated(el, binding) {
           if (binding.value) {
