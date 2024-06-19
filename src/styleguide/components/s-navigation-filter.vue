@@ -20,7 +20,7 @@
       />
     </div>
     <input
-      v-model="internalValue"
+      v-model.trim="internalValue"
       v-focus="isOpen && !!internalValue"
       :class="b('navigation-filter-input')"
       type="search"
