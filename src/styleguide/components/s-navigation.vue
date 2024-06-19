@@ -38,35 +38,10 @@
           <s-demo-settings />
         </li>
         <li :class="b('navigation-item')">
-          <div :class="b('navigation-filter-wrapper')">
-            <div
-              v-show="navigationFilter"
-              :class="b('navigation-filter-icon', { reset: !!navigationFilter })"
-              @click="onReset"
-            >
-              <e-icon
-                icon="i-close"
-                size="16"
-              />
-            </div>
-            <div
-              v-show="!navigationFilter"
-              :class="b('navigation-filter-icon', { search: !!navigationFilter })"
-            >
-              <e-icon
-                icon="i-search"
-                size="16"
-              />
-            </div>
-            <input
-              v-model="navigationFilter"
-              v-focus="isOpen && !!navigationFilter"
-              :class="b('navigation-filter-input')"
-              type="search"
-              placeholder="Search …"
-              @click.stop
-            />
-          </div>
+          <s-navigation-filter
+            v-model="navigationFilter"
+            :is-open="isOpen"
+          />
           <s-navigation-block :routes="routesFilteredByTitle" />
         </li>
       </ul>
@@ -75,14 +50,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, nextTick } from 'vue';
+  import { defineComponent } from 'vue';
   import { RouteRecordRaw } from 'vue-router';
-  import eIcon from '@/elements/e-icon.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import filterRoutesByTitle from '../routes/utils/filter-routes-by-title';
   import sDemoSettings from './s-demo-settings.vue';
   import sLanguage from './s-language.vue';
   import sNavigationBlock from './s-navigation-block.vue';
+  import sNavigationFilter from './s-navigation-filter.vue';
   import sThemeSelector from './s-theme-selector.vue';
 
   type Data = {
@@ -98,19 +73,7 @@
       sLanguage,
       sThemeSelector,
       sNavigationBlock,
-      eIcon,
-    },
-    directives: {
-      // Focus the element on nextTick if binding evaluates to true.
-      focus: {
-        updated(el, binding) {
-          if (binding.value) {
-            nextTick(() => {
-              el.focus();
-            });
-          }
-        },
-      },
+      sNavigationFilter,
     },
     props: {
       /**
@@ -150,13 +113,6 @@
        */
       onClick() {
         this.isOpen = !this.isOpen;
-      },
-      /**
-       * Reset the search filter.
-       */
-      onReset(event: Event) {
-        event.stopPropagation();
-        this.navigationFilter = '';
       },
     },
   });
@@ -318,41 +274,6 @@
 
       .s-navigation__navigation-link {
         padding: variables.$spacing--10 variables.$spacing--5;
-      }
-    }
-
-    &__navigation-filter-wrapper {
-      position: relative;
-    }
-
-    &__navigation-filter-icon {
-      position: absolute;
-      top: 12px;
-      right: 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 16px;
-      height: 16px;
-
-      &--reset {
-        cursor: pointer;
-        color: variables.$color-primary--1;
-      }
-
-      &--search {
-        color: variables.$color-primary--2;
-      }
-    }
-
-    &__navigation-filter-input {
-      width: 100%;
-      margin-top: variables.$spacing--10;
-      padding: variables.$spacing--10;
-      border: 1px solid transparent;
-
-      &:focus {
-        border-color: variables.$color-status--info;
       }
     }
   }
