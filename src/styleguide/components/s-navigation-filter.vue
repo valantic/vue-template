@@ -1,27 +1,27 @@
 <template>
   <div :class="b('navigation-filter-wrapper')">
-    <div
-      v-show="internalValue"
-      :class="b('navigation-filter-icon', { reset: !!internalValue })"
+    <a
+      v-if="internalValue"
+      :class="b('navigation-filter-icon', { reset: true })"
       @click.stop="onReset"
     >
       <e-icon
         icon="i-close"
         size="16"
       />
-    </div>
-    <div
-      v-show="!internalValue"
-      :class="b('navigation-filter-icon', { search: !!internalValue })"
+    </a>
+    <a
+      v-else
+      :class="b('navigation-filter-icon', { search: true })"
     >
       <e-icon
         icon="i-search"
         size="16"
       />
-    </div>
+    </a>
     <input
       v-model.trim="internalValue"
-      v-focus="isOpen && !!internalValue"
+      ref="searchInput"
       :class="b('navigation-filter-input')"
       type="search"
       placeholder="Search …"
@@ -39,25 +39,13 @@
     components: {
       eIcon,
     },
-    directives: {
-      /**
-       * Focus the element on nextTick if binding evaluates to true.
-       */
-      focus: {
-        updated(el, binding) {
-          if (binding.value) {
-            nextTick(() => {
-              el.focus();
-            });
-          }
-        },
-      },
-    },
+    // directives: {},
     props: {
       /**
        * The searchTerm to filter the navigation for.
+       * Comes in as 2-way binding (v-model) from the parent component.
        */
-      value: {
+      modelValue: {
         type: String,
         default: '',
       },
@@ -72,17 +60,29 @@
     emits: {
       'update:modelValue': (value: string) => typeof value === 'string',
     },
-    data() {
-      return {
-        internalValue: this.value,
-      };
+    // data() {
+    //   return {};
+    // },
+    computed: {
+      /**
+       * Getter / setter for the internal value.
+       */
+      internalValue: {
+        get(): string {
+          return this.modelValue;
+        },
+        set(newVal: string): void {
+          this.$emit('update:modelValue', newVal);
+        },
+      },
     },
     watch: {
-      value(newVal) {
-        this.internalValue = newVal;
-      },
-      internalValue(newVal) {
-        this.$emit('update:modelValue', newVal);
+      isOpen(newVal) {
+        if (newVal && this.internalValue) {
+          nextTick(() => {
+            (this.$refs.searchInput as HTMLInputElement)?.focus();
+          });
+        }
       },
     },
     methods: {
@@ -108,8 +108,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 16px;
-      height: 16px;
 
       &--reset {
         cursor: pointer;

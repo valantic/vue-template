@@ -102,9 +102,7 @@
         };
       },
       routesFilteredByTitle(): RouteRecordRaw[] {
-        const { routes } = this.$router.options;
-
-        return filterRoutesByTitle(routes, this.navigationFilter);
+        return filterRoutesByTitle(this.$router.options.routes, this.navigationFilter);
       },
     },
     methods: {
