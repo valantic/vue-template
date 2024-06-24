@@ -1,24 +1,26 @@
 <template>
   <div :class="b('navigation-filter-wrapper')">
-    <a
+    <button
       v-if="internalValue"
       :class="b('navigation-filter-icon', { reset: true })"
+      type="button"
       @click.stop="onReset"
     >
       <e-icon
         icon="i-close"
         size="16"
       />
-    </a>
-    <a
+    </button>
+    <button
       v-else
-      :class="b('navigation-filter-icon', { search: true })"
+      :class="b('navigation-filter-icon')"
+      type="button"
     >
       <e-icon
         icon="i-search"
         size="16"
       />
-    </a>
+    </button>
     <input
       v-model.trim="internalValue"
       ref="searchInput"
@@ -108,14 +110,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      color: variables.$color-primary--2;
 
       &--reset {
         cursor: pointer;
         color: variables.$color-primary--1;
-      }
-
-      &--search {
-        color: variables.$color-primary--2;
       }
     }
 
