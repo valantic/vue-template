@@ -62,9 +62,11 @@
     emits: {
       'update:modelValue': (value: string) => typeof value === 'string',
     },
+
     // data() {
     //   return {};
     // },
+
     computed: {
       /**
        * Getter / setter for the internal value.
@@ -87,11 +89,25 @@
         }
       },
     },
+
+    // beforeCreate() {},
+    // created() {},
+    // beforeMount() {},
+    // mounted() {},
+    // beforeUpdate() {},
+    // updated() {},
+    // activated() {},
+    // deactivated() {},
+    // beforeUnmount() {},
+    // unmounted() {},
+
     methods: {
       onReset() {
         this.internalValue = '';
       },
     },
+
+    // render() {},
   });
 </script>
 
