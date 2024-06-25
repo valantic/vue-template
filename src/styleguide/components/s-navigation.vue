@@ -38,7 +38,11 @@
           <s-demo-settings />
         </li>
         <li :class="b('navigation-item')">
-          <s-navigation-block :routes="$router.options.routes" />
+          <s-navigation-filter
+            v-model="navigationFilter"
+            :is-open="isOpen"
+          />
+          <s-navigation-block :routes="routesFilteredByTitle" />
         </li>
       </ul>
     </div>
@@ -47,14 +51,18 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { RouteRecordRaw } from 'vue-router';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
+  import filterRoutesByTitle from '../routes/utils/filter-routes-by-title';
   import sDemoSettings from './s-demo-settings.vue';
   import sLanguage from './s-language.vue';
   import sNavigationBlock from './s-navigation-block.vue';
+  import sNavigationFilter from './s-navigation-filter.vue';
   import sThemeSelector from './s-theme-selector.vue';
 
   type Data = {
     isOpen: boolean;
+    navigationFilter: string;
   };
 
   export default defineComponent({
@@ -65,6 +73,7 @@
       sLanguage,
       sThemeSelector,
       sNavigationBlock,
+      sNavigationFilter,
     },
     props: {
       /**
@@ -79,6 +88,7 @@
     data(): Data {
       return {
         isOpen: false,
+        navigationFilter: '',
       };
     },
     computed: {
@@ -90,6 +100,9 @@
           position: this.navPosition,
           open: this.isOpen,
         };
+      },
+      routesFilteredByTitle(): RouteRecordRaw[] {
+        return filterRoutesByTitle(this.$router.options.routes, this.navigationFilter);
       },
     },
     methods: {

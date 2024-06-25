@@ -1,5 +1,6 @@
 ### Next
 
+- (Feature) Adds component s-navigation-filter for filtering sidebar navigation links
 - (Feature) Adds styleguide build information to the index page.
 - (Feature) Adds support for local webpack dist (Pimcore).
 - (Feature) Adds auto-reload for scss file changes.
