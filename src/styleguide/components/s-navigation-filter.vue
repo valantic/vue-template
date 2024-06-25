@@ -11,7 +11,7 @@
         size="16"
       />
     </button>
-    <button
+    <div
       v-else
       :class="b('navigation-filter-icon')"
       type="button"
@@ -20,7 +20,7 @@
         icon="i-search"
         size="16"
       />
-    </button>
+    </div>
     <input
       v-model.trim="internalValue"
       ref="searchInput"
