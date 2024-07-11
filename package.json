@@ -120,19 +120,19 @@
     "react": "~18.3.1",
     "react-dom": "~18.3.1",
     "rollup-plugin-visualizer": "~5.12.0",
-    "sass": "~1.77.0",
+    "sass": "~1.77.1",
     "storybook": "~7.6.8",
     "stylelint": "~16.5.0",
     "stylelint-config-valantic": "~9.0.0",
     "svg-sprite": "~2.0.2",
-    "svgo": "~3.3.0",
+    "svgo": "~3.3.2",
     "typescript": "~5.4.5",
     "vite-plugin-image-optimizer": "~1.1.7",
     "vite-plugin-markdown": "~2.2.0",
     "vitest": "~1.6.0",
-    "vue-component-type-helpers": "~2.0.16",
+    "vue-component-type-helpers": "~2.0.17",
     "vue-router": "~4.3.2",
-    "vue-tsc": "~2.0.16"
+    "vue-tsc": "~2.0.17"
   },
   "browserslist": [
     "> 2%",
