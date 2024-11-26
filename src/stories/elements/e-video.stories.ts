@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3';
 import eVideo from '@/elements/e-video.vue';
 
 export default {
@@ -27,22 +27,28 @@ export default {
   },
 } as Meta;
 
-const Template: Story = (args) => ({
-  components: { eVideo },
-  setup() {
-    return { args };
-  },
-  template: '<e-video v-bind="args" />',
-});
-
-export const Youtube = Template.bind({});
-Youtube.args = {
-  source: 'youtube',
-  videoUrl: 'https://www.youtube.com/watch?v=rSSPwrdGx-M',
+const Template: StoryObj = {
+  render: (args) => ({
+    components: { eVideo },
+    setup() {
+      return { args };
+    },
+    template: '<e-video v-bind="args" />',
+  }),
 };
 
-export const Vimeo = Template.bind({});
-Vimeo.args = {
-  source: 'vimeo',
-  videoId: '264037633',
+export const Youtube = {
+  ...Template,
+  args: {
+    source: 'youtube',
+    videoUrl: 'https://www.youtube.com/watch?v=rSSPwrdGx-M',
+  },
+};
+
+export const Vimeo = {
+  ...Template,
+  args: {
+    source: 'vimeo',
+    videoId: '264037633',
+  },
 };
