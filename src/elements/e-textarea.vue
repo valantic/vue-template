@@ -4,7 +4,7 @@
       :class="b('field', fieldModifiers)"
       :name="name"
       :rows="rows"
-      :value="value"
+      :value="modelValue"
       v-bind="$attrs"
       @focus="onFocus"
       @blur="onBlur"
@@ -61,7 +61,7 @@
       /**
        * Value passed by v-model
        */
-      value: {
+      modelValue: {
         default: null,
         type: String,
       },
@@ -100,9 +100,9 @@
     },
 
     emits: {
-      input: (value: string): boolean => typeof value === 'string',
-      focus: (): boolean => true,
-      blur: (): boolean => true,
+      'update:modelValue': (value: string): boolean => typeof value === 'string',
+      'focus': (): boolean => true,
+      'blur': (): boolean => true,
     },
 
     setup(props): FormStates {
@@ -135,6 +135,7 @@
         };
       },
     },
+
     // watch: {},
 
     // beforeCreate() {},
@@ -151,18 +152,18 @@
     methods: {
       /**
        * Emits input to parent component.
+       *
+       * @param   {String}  event   Field input
        */
-      onInput(event: Event) {
-        const textArea = event.currentTarget as HTMLTextAreaElement;
-
-        this.$emit('input', textArea.value);
+      onInput(event: Event): void {
+        this.$emit('update:modelValue', (event.target as HTMLInputElement).value);
       },
 
       /**
        * Emits focus to parent and wrapper component. This is needed for e.g. setting the focus on the label as well.
        * Updates "hasFocus" state.
        */
-      onFocus() {
+      onFocus(): void {
         this.focus = true;
 
         this.$emit('focus');
@@ -172,7 +173,7 @@
        * Emits blur to parent and wrapper component. This is needed for e.g. removing the focus on the label as well.
        * Updates "hasFocus" state.
        */
-      onBlur() {
+      onBlur(): void {
         this.focus = false;
 
         this.$emit('blur');
@@ -287,7 +288,7 @@
     &__field:disabled,
     &--disabled &__field,
     &--disabled &__field:hover {
-      border: 1px solid variables.$color-grayscale--600;
+      border-color: variables.$color-grayscale--600;
       background-color: variables.$color-grayscale--1000;
       color: variables.$color-grayscale--400;
 

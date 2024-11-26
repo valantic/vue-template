@@ -118,7 +118,6 @@
 
   .e-label {
     display: block;
-    cursor: pointer;
     color: variables.$color-grayscale--200;
 
     &__inner {

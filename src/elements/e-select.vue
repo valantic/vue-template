@@ -261,6 +261,7 @@
     &--disabled &__select,
     &--disabled &__select:hover {
       border-color: variables.$color-grayscale--600;
+      cursor: default;
       color: variables.$color-grayscale--400;
     }
 
