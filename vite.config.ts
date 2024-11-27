@@ -4,9 +4,10 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption } from 'vite';
+import { defineConfig } from 'vite';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { Mode, plugin as mdPlugin } from 'vite-plugin-markdown';
-import { UserConfigExport, defineConfig } from 'vitest/config';
+import { UserConfigExport } from 'vitest/config';
 import viteBuilds from './vite.builds.json';
 
 interface Modes {
@@ -64,6 +65,12 @@ export default defineConfig(({ command, mode }) => {
     },
     css: {
       devSourcemap: true,
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler', // or "modern"
+          silenceDeprecations: ['legacy-js-api'],
+        },
+      },
     },
   };
 

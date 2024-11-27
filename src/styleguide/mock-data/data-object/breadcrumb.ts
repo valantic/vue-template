@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import { BreadcrumbItem } from '@/stores/breadcrumb';
 
 const { commerce, internet } = faker;

@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import { ApiResponseMessage } from '@/types/api-response-message';
 
 /**

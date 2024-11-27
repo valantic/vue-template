@@ -44,9 +44,10 @@
 <style lang="scss">
   @use '../../setup/scss/mixins';
   @use '../../setup/scss/variables';
+  @use 'sass:map';
 
   .r-index {
-    max-width: map-get(variables.$breakpoints, xl);
+    max-width: map.get(variables.$breakpoints, xl);
     margin: 0 auto;
     padding: variables.$spacing--30;
 
