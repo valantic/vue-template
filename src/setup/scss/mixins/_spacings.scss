@@ -20,7 +20,7 @@
   // Loop media queries
   // NOTE: skipped index 1 (xxs) because it creates invalid query selector.
   @for $breakpointIndex from 2 through length($breakpoints) {
-    $breakpoint: nth(map-keys($breakpoints), $breakpointIndex);
+    $breakpoint: nth(map.keys($breakpoints), $breakpointIndex);
 
     @include media($breakpoint) {
       // Wrapping spacing loop in media() reduces output size

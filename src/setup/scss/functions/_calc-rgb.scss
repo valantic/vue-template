@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 ////
 // Calculates the rgb value of a HEX value
 //
@@ -6,9 +8,9 @@
 // @returns {string}    RGB value like "100,100,100"
 ////
 @function calc-rgb($hex) {
-  $red: red($hex);
-  $green: green($hex);
-  $blue: blue($hex);
+  $red: color.channel($hex, 'red', $space: rgb);
+  $green: color.channel($hex, 'green', $space: rgb);
+  $blue: color.channel($hex, 'blue', $space: rgb);
 
   @return $red, $green, $blue;
 }
