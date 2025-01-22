@@ -67,6 +67,7 @@
             // Clears the localStorage notifications.
             window.localStorage.removeItem('vueNotification');
           }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
           throw new Error('An error occurred why retrieving messages from the localStorage.');
         }

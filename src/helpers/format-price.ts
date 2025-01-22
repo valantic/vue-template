@@ -7,7 +7,12 @@ export default function formatPrice(value: number, currencyBefore?: boolean, cur
   const locale = 'de'; // TODO - replace hardcoded locale
   const currency = 'CHF'; // TODO - replace hardcoded currency
 
-  const formattedPrice = i18n.global.n(value / 100, 'currency', locale).replace(/’|'/g, '\u0020'); // Divide by 100 because we get prices in centimes.
+  // If we don't get a number, we don't modify the content.
+  if (Number.isNaN(value)) {
+    return '';
+  }
+
+  const formattedPrice = i18n.global.n(value / 100, 'decimal', locale).replace(/’|'/g, '\u0020'); // Divide by 100 because we get prices in centimes.
   const beforePriceSlot = currencyBefore ? `${currency} ` : '';
   const afterPriceSlot = currencyAfter ? ` ${currency}` : '';
 
