@@ -9,7 +9,10 @@ type StorybookActions = {
 /**
  * Maps the events of the given component to an action definition for Storybooks 'argTypes'.
  */
-export default function mapComponentEventsToStorybookActions(component: DefineComponent): StorybookActions | null {
+export default function mapComponentEventsToStorybookActions(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  component: DefineComponent | any
+): StorybookActions | null {
   if (!component.emits || Array.isArray(component.emits)) {
     return null;
   }
