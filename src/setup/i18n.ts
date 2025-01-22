@@ -1,6 +1,5 @@
 import { IntlDateTimeFormat, createI18n } from 'vue-i18n';
 import fallbackMessages from '../translations/de.json';
-import numberFormats from './localization.json';
 
 type MessagesSchema = typeof fallbackMessages;
 
@@ -55,7 +54,18 @@ const i18n = createI18n<[MessagesSchema], 'de'>({
   messages: {
     [I18N_FALLBACK]: I18N_FALLBACK_MESSAGES,
   },
-  numberFormats,
+  numberFormats: {
+    de: {
+      decimal: {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+      },
+      percent: {
+        style: 'percent',
+        useGrouping: false,
+      },
+    },
+  },
 });
 
 export default i18n;

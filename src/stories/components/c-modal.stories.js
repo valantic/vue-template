@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import cModal from '@/components/c-modal.vue';
 import eButton from '@/elements/e-button.vue';
 

@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import { BREAKPOINTS_MAX, DEFAULT_IMAGE_SIZES } from '@/setup/globals';
 import type { ImageMedia, ImageSources, ImageSrcset } from '@/types/image';
 
