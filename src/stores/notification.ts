@@ -90,6 +90,8 @@ function getNotificationsFromStorage(): MappedNotificationItem[] {
 
       return messagesParsed;
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     console.error(new Error('An error occurred while retrieving messages from the localStorage.')); // eslint-disable-line no-console
   }
