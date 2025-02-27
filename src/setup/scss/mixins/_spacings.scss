@@ -1,6 +1,8 @@
+@use 'sass:map';
+@use 'sass:list';
 @use '../variables';
-@use '../functions/strip-unit' as *;
-@use './media' as *;
+@use '../functions/strip-unit';
+@use './media';
 
 ///
 /// Creates a set of spacings for the given class
@@ -12,25 +14,25 @@
 ///
 @mixin spacings($class, $property, $spacings: variables.$spacings, $breakpoints: variables.$breakpoints) {
   @each $spacing in $spacings {
-    .#{$class}-#{strip-unit($spacing)} {
+    .#{$class}-#{strip-unit.strip-unit($spacing)} {
       #{$property}: #{$spacing};
     }
   }
 
   // Loop media queries
   // NOTE: skipped index 1 (xxs) because it creates invalid query selector.
-  @for $breakpointIndex from 2 through length($breakpoints) {
-    $breakpoint: nth(map.keys($breakpoints), $breakpointIndex);
+  @for $breakpointIndex from 2 through list.length($breakpoints) {
+    $breakpoint: list.nth(map.keys($breakpoints), $breakpointIndex);
 
-    @include media($breakpoint) {
+    @include media.media($breakpoint) {
       // Wrapping spacing loop in media() reduces output size
-      @for $spacingIndex from 1 through length($spacings) {
-        $spacing: nth($spacings, $spacingIndex);
+      @for $spacingIndex from 1 through list.length($spacings) {
+        $spacing: list.nth($spacings, $spacingIndex);
 
         // Don't create a breakpoint related spacing if 0 $spacing and 0 $breakpoint
         @if $breakpointIndex != 1 and $spacingIndex != 1 {
           // stylelint-disable-next-line max-nesting-depth
-          .#{$class}-#{$breakpoint}-#{strip-unit($spacing)} {
+          .#{$class}-#{$breakpoint}-#{strip-unit.strip-unit($spacing)} {
             #{$property}: #{$spacing};
           }
         }

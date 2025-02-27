@@ -113,8 +113,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .e-label {
     display: block;

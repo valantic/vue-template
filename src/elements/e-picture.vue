@@ -299,7 +299,7 @@
 
 <style lang="scss">
   @use 'sass:list';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .e-picture {
     // Can be <picture> or <img>!

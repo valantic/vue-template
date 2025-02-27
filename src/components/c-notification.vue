@@ -108,8 +108,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .c-notification {
     position: relative;

@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use '../functions/strip-unit' as *;
+@use '../functions/strip-unit';
 @use '../config';
 
 ////
@@ -11,5 +11,5 @@
 // @returns   {line-height}   line-height property with unit less value
 ////
 @mixin line-height($line-height: config.$config--line-height, $font-size: config.$config--font-size) {
-  line-height: math.div(strip-unit($line-height), strip-unit($font-size));
+  line-height: math.div(strip-unit.strip-unit($line-height), strip-unit.strip-unit($font-size));
 }

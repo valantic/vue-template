@@ -1,7 +1,7 @@
-@use '../variables';
 @use 'sass:meta';
 @use 'sass:map';
 @use 'sass:list';
+@use '../variables';
 
 ///
 /// Creates a media query
@@ -17,8 +17,8 @@
   $isUpNumber: meta.type-of($up) == number;
   $isDownNumber: meta.type-of($down) == number;
   $upKey: if(
-    $down and not($isDownNumber) and $indexOfDownBreakpoint and $indexOfDownBreakpoint < length($breakpoints),
-    nth(map.keys($breakpoints), $indexOfDownBreakpoint + 1),
+    $down and not($isDownNumber) and $indexOfDownBreakpoint and $indexOfDownBreakpoint < list.length($breakpoints),
+    list.nth(map.keys($breakpoints), $indexOfDownBreakpoint + 1),
     null
   );
   $upValue: if($isUpNumber, $up, false) or map.get($breakpoints, $up);

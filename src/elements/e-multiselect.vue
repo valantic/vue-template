@@ -355,8 +355,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
 
   .e-multiselect {
     $this: &;

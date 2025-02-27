@@ -87,7 +87,7 @@
 
 <style lang="scss">
   @use 'sass:math';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   $_e-progress__animation-duration: 2000ms;
   $_e-progress--padding: variables.$spacing--5;

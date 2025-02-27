@@ -172,8 +172,8 @@
 
 <style lang="scss">
   @use 'sass:math';
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .e-checkbox {
     $this: &;

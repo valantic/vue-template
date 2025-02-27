@@ -47,8 +47,8 @@
 
 <style lang="scss">
   @use 'sass:math';
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
 
   .c-slider-item-x {
     position: relative;
