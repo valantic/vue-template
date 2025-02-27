@@ -1,4 +1,5 @@
 @use '../setup/scss/variables';
+@use 'sass:color';
 
 // stylelint-disable
 
@@ -15,7 +16,7 @@
       z-index: 1000;
       border: 1px solid $red;
       padding: 2px variables.$spacing--5;
-      background: lighten($red, 40%);
+      background: color.adjust($red, $lightness: 40%);
       color: $black;
       max-width: 200px;
       font-size: 0.8rem;

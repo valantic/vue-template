@@ -198,7 +198,7 @@
     created() {
       mockWorker.resetHandlers();
 
-      this.handlers = mockWorker.listHandlers();
+      this.handlers = mockWorker.listHandlers() as ReadonlyArray<RequestHandler> | null;
       this.setDefaultConfigurations();
 
       try {
@@ -212,6 +212,8 @@
 
           this.setupHandlers();
         }
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
         console.warn('Configuration from storage could not be read'); // eslint-disable-line
       }
@@ -269,6 +271,8 @@
 
             try {
               response = JSON.parse(configuration.response);
+
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (e) {
               // Do nothing
             }

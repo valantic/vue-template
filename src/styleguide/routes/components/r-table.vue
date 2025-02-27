@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-  import { faker } from '@faker-js/faker/locale/en';
+  import { faker } from '@faker-js/faker';
   import { defineComponent } from 'vue';
   import eTable, { TableColumn, TableItem } from '@/elements/e-table.vue';
 

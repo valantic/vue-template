@@ -66,8 +66,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
 
   .c-breadcrumb {
     @include mixins.font(variables.$font-size--12, 20px);

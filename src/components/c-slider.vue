@@ -240,10 +240,10 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
-  // @use '../setup/scss/extends';
-  // @use '../setup/scss/functions';
+  @use '@/setup/scss/variables';
+  // @use '@/setup/scss/mixins';
+  // @use '@/setup/scss/extends';
+  // @use '@/setup/scss/functions';
 
   .c-slider {
     position: relative;

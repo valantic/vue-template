@@ -67,6 +67,7 @@
             // Clears the localStorage notifications.
             window.localStorage.removeItem('vueNotification');
           }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
           throw new Error('An error occurred why retrieving messages from the localStorage.');
         }
@@ -77,8 +78,9 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
+  @use 'sass:map';
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
 
   .l-default {
     display: flex;
@@ -92,7 +94,7 @@
 
     &__inner {
       position: relative;
-      max-width: #{map-get(variables.$breakpoints, xl) - 20px};
+      max-width: #{map.get(variables.$breakpoints, xl) - 20px};
       margin: 0 auto;
       background: variables.$color-grayscale--1000;
       box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);

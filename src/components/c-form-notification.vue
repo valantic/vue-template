@@ -61,8 +61,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .c-form-notification {
     @include mixins.font(variables.$font-size--14, 18px);

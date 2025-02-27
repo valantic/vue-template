@@ -1,5 +1,5 @@
-@use '../setup/scss/mixins';
-@use '../setup/scss/variables';
+@use '@/setup/scss/mixins';
+@use '@/setup/scss/variables';
 
 .c-form {
   &__field + &__field {

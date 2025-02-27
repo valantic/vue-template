@@ -342,8 +342,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
   // stylelint-disable no-descending-specificity
   // TODO: refactor style to get rid of no-descending-specificity
 

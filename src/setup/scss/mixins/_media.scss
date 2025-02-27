@@ -1,3 +1,6 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:list';
 @use '../variables';
 
 ///
@@ -9,17 +12,17 @@
 ///
 @mixin media($up: null, $down: null, $media: all, $breakpoints: variables.$breakpoints) {
   $query: if($media == all, 'all', 'only #{$media}');
-  $indexOfUpBreakpoint: index(map-keys($breakpoints), $up);
-  $indexOfDownBreakpoint: index(map-keys($breakpoints), $down);
-  $isUpNumber: type-of($up) == number;
-  $isDownNumber: type-of($down) == number;
+  $indexOfUpBreakpoint: list.index(map.keys($breakpoints), $up);
+  $indexOfDownBreakpoint: list.index(map.keys($breakpoints), $down);
+  $isUpNumber: meta.type-of($up) == number;
+  $isDownNumber: meta.type-of($down) == number;
   $upKey: if(
-    $down and not($isDownNumber) and $indexOfDownBreakpoint and $indexOfDownBreakpoint < length($breakpoints),
-    nth(map-keys($breakpoints), $indexOfDownBreakpoint + 1),
+    $down and not($isDownNumber) and $indexOfDownBreakpoint and $indexOfDownBreakpoint < list.length($breakpoints),
+    list.nth(map.keys($breakpoints), $indexOfDownBreakpoint + 1),
     null
   );
-  $upValue: if($isUpNumber, $up, false) or map-get($breakpoints, $up);
-  $downValue: if($isDownNumber, $down, false) or ($upKey and map-get($breakpoints, $upKey));
+  $upValue: if($isUpNumber, $up, false) or map.get($breakpoints, $up);
+  $downValue: if($isDownNumber, $down, false) or ($upKey and map.get($breakpoints, $upKey));
   $isValidUpValue: if(not($up) or ($up and $upValue), true, false);
   $isValidDownValue: if(not($down) or ($down and $downValue and $downValue > 0), true, false);
   $downIsBiggerThanUp: (not($up) or not($down)) or ($isValidUpValue and $isValidDownValue and $upValue < $downValue);
@@ -42,7 +45,7 @@
     }
 
     @if $down {
-      @if type-of($down) == number {
+      @if meta.type-of($down) == number {
         $query: $query + ' and (max-width: #{$downValue})';
       } @else {
         $query: $query + ' and (max-width: #{$downValue - 1px})';

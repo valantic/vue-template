@@ -565,7 +565,7 @@
 </script>
 
 <style lang="scss">
-  // @use '../setup/scss/variables';
+  // @use '@/setup/scss/variables';
 
   .c-google-maps {
     height: 50vh;
