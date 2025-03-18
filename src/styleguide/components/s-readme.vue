@@ -9,6 +9,9 @@
   // @ts-ignore Needed because typescript cannot resolve `.md` files.
   import { VueComponent } from '@/../README.md';
 
+  // type Setup = {};
+  // type Data = {};
+
   export default defineComponent({
     name: 's-readme',
     status: 1,
@@ -18,7 +21,11 @@
     },
 
     // props: {},
-    // data() {
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
+    // data(): Data {
     //   return {
     //     content: html,
     //   };
@@ -45,8 +52,8 @@
 
 <!-- eslint-disable -->
 <style lang="scss">
-  @use '../../setup/scss/mixins';
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   /* stylelint-disable */
 

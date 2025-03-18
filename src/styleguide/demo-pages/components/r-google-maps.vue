@@ -19,6 +19,11 @@
   import { defineComponent } from 'vue';
   import cGoogleMaps, { GoogleMapsLocation } from '@/components/c-google-maps.vue';
 
+  // type Setup = {};
+  type Data = {
+    locations: GoogleMapsLocation[];
+  };
+
   export default defineComponent({
     name: 'r-google-maps',
     components: {
@@ -26,7 +31,11 @@
     },
 
     // props: {},
-    data() {
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
+    data(): Data {
       return {
         locations: [
           {

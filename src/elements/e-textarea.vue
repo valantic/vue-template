@@ -40,6 +40,9 @@
   import eIcon from '@/elements/e-icon.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+  // type Data = {};
+
   /**
    * Renders a styled `<textarea>` element which supports the default form state-types.
    * The height can be set by the `rows` property.
@@ -111,7 +114,7 @@
       };
     },
 
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 
@@ -152,8 +155,6 @@
     methods: {
       /**
        * Emits input to parent component.
-       *
-       * @param   {String}  event   Field input
        */
       onInput(event: Event): void {
         this.$emit('update:modelValue', (event.target as HTMLInputElement).value);

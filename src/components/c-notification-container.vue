@@ -22,6 +22,8 @@
     notificationStore: ReturnType<typeof useNotificationStore>;
   };
 
+  // type Data = {};
+
   /**
    * Container for rendering notifications. See /styleguide/notifications for demo.
    */
@@ -48,7 +50,7 @@
         notificationStore: useNotificationStore(),
       };
     },
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 
@@ -85,7 +87,7 @@
 </script>
 
 <style lang="scss">
-  @use '@/setup/scss/mixins';
+  // @use '@/setup/scss/mixins';
   @use '@/setup/scss/variables';
 
   .c-notification-container {

@@ -22,6 +22,10 @@
     columnsDefinition: TableColumn[];
   };
 
+  type Data = {
+    selectedItems: TableItem[];
+  };
+
   export default defineComponent({
     name: 'r-table',
 
@@ -73,7 +77,7 @@
         ],
       };
     },
-    data() {
+    data(): Data {
       return {
         selectedItems: [],
       };
@@ -112,7 +116,7 @@
 </script>
 
 <style lang="scss">
-  // @use '../setup/scss/variables';
+  // @use '@/setup/scss/variables';
 
   .r-table {
     // ...

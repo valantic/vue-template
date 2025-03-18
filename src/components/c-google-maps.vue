@@ -476,9 +476,6 @@
 
       /**
        * Try to create a marker from an address string.
-       *
-       * @param {Object} location - A location object.
-       * @param {String} location.geocode - An address string, that will be used to calculate the coordinates.
        */
       createMakerFromAddress(location: GoogleMapsInternalLocation): void {
         if (!location.geocode) {
@@ -511,8 +508,6 @@
 
       /**
        * Creates a new marker on the current map.
-       *
-       * @returns {Property.Marker}
        */
       createMarker(location: GoogleMapsInternalLocation): google.maps.Marker {
         const marker = new window.google.maps.Marker({

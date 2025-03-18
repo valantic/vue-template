@@ -14,6 +14,9 @@
   import colors, { Colors } from '../../setup/js/color';
   import sColorItem from './s-color-item.vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   type ColorVariants = keyof Colors;
 
   export default defineComponent({
@@ -24,7 +27,11 @@
     },
 
     // props: {},
-    // data() {
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
+    // data(): Data {
     //   return {};
     // },
 
@@ -63,7 +70,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .s-color {
     font-family: variables.$font-family--primary;

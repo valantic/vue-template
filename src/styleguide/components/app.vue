@@ -16,6 +16,7 @@
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
   };
+  // type Data = {};
 
   export default defineComponent({
     name: 'app',
@@ -31,7 +32,7 @@
         notificationStore: useNotificationStore(),
       };
     },
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 

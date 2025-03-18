@@ -1,21 +1,21 @@
 import { ComponentPublicInstance } from 'vue';
 import lDefault from '@/layouts/l-default.vue';
-import consent from '@/styleguide/routes/components/r-consent.vue';
-import googleMaps from '@/styleguide/routes/components/r-google-maps.vue';
+import consent from '@/styleguide/demo-pages/components/r-consent.vue';
+import googleMaps from '@/styleguide/demo-pages/components/r-google-maps.vue';
 // Components
-import notifications from '@/styleguide/routes/components/r-notifications.vue';
-import picture from '@/styleguide/routes/components/r-picture.vue';
-import table from '@/styleguide/routes/components/r-table.vue';
-import tooltips from '@/styleguide/routes/components/r-tooltips.vue';
-import video from '@/styleguide/routes/components/r-video.vue';
+import notifications from '@/styleguide/demo-pages/components/r-notifications.vue';
+import picture from '@/styleguide/demo-pages/components/r-picture.vue';
+import table from '@/styleguide/demo-pages/components/r-table.vue';
+import tooltips from '@/styleguide/demo-pages/components/r-tooltips.vue';
+import video from '@/styleguide/demo-pages/components/r-video.vue';
 // Directives
-import focusMask from '@/styleguide/routes/directives/r-focus-mask.vue';
-import index from '@/styleguide/routes/r-index.vue';
-import forms from '@/styleguide/routes/sandbox/r-forms.vue';
-import icons from '@/styleguide/routes/sandbox/r-icons.vue';
+import focusMask from '@/styleguide/demo-pages/directives/r-focus-mask.vue';
+import index from '@/styleguide/demo-pages/r-index.vue';
+import forms from '@/styleguide/demo-pages/sandbox/r-forms.vue';
+import icons from '@/styleguide/demo-pages/sandbox/r-icons.vue';
 // Sandbox
-import sandbox from '@/styleguide/routes/sandbox/r-sandbox.vue';
-import wysiwyg from '@/styleguide/routes/sandbox/r-wysiwyg.vue';
+import sandbox from '@/styleguide/demo-pages/sandbox/r-sandbox.vue';
+import wysiwyg from '@/styleguide/demo-pages/sandbox/r-wysiwyg.vue';
 
 declare module 'vue-router' {
   interface RouteMeta {

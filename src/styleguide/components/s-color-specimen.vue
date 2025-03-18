@@ -19,12 +19,14 @@
 <script lang="ts">
   import { PropType, StyleValue, defineComponent } from 'vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   /**
    * Renders a color specimen tile.
    *
    * **WARNING: uses 'v-html' for the 'displayName'. Make sure, that the source for this data is trustworthy.**
    */
-
   export default defineComponent({
     name: 's-color-specimen',
 
@@ -48,6 +50,10 @@
         required: true,
       },
     },
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
     // data() {
     //   return {};
     // },
@@ -97,7 +103,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .s-color-specimen {
     border: 1px solid variables.$color-secondary--1;

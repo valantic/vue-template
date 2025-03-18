@@ -35,6 +35,8 @@
     VideoSource: typeof VideoSource;
   };
 
+  // type Data = {};
+
   /**
    * A component that integrates the e-picture for testing its functionality and passing properties.
    */
@@ -45,13 +47,18 @@
       eVideo,
     },
 
-    // props: {}, // emits: {},
+    // props: {},
+    // emits: {},
 
     setup(): Setup {
       return {
         VideoSource,
       };
     },
+    // data(): Data {
+    //   return {
+    //   };
+    // },
 
     // computed: {},
     // watch: {},
@@ -73,8 +80,6 @@
 </script>
 
 <style lang="scss">
-  @use '../../../setup/scss/variables';
-
   .r-video {
     &__form {
       display: flex;

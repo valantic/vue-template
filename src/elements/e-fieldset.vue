@@ -15,10 +15,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   /**
-   *
    * Component to render a fieldset with or without legend.
-   *
    */
   export default defineComponent({
     name: 'e-fieldset',
@@ -35,7 +36,10 @@
         default: null,
       },
     },
-    // data() {
+    // setup(): Setup {
+    //   return {};
+    // },
+    // data(): Data {
     //   return {};
     // },
 

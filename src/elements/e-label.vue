@@ -25,6 +25,9 @@
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+  // type Data = {};
+
   /**
    * Label component for form elements, can be used with a slot or a for attribute
    */
@@ -83,6 +86,10 @@
         ...useFormStates(toRefs(props).state),
       };
     },
+
+    // data(): Data {
+    //   return {};
+    // },
 
     computed: {
       /**
