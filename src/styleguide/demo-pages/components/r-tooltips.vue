@@ -136,7 +136,7 @@
 
   .r-tooltips {
     &__item {
-      margin-bottom: variables.$spacing--10;
+      margin-bottom: variables.$va-spacing--10;
     }
   }
 </style>

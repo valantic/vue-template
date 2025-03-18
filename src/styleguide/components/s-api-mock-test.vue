@@ -320,27 +320,27 @@
     right: 0;
     bottom: 0;
     left: 0;
-    padding: variables.$spacing--10;
-    border-top: 10px solid variables.$color-grayscale--400;
-    background-color: variables.$color-grayscale--1000;
+    padding: variables.$va-spacing--10;
+    border-top: 10px solid var(--theme-color-grayscale--400);
+    background-color: var(--theme-color-grayscale-1000);
 
     @include mixins.media(md) {
       @include mixins.z-index(back);
 
       right: 210px;
-      padding: variables.$spacing--20;
+      padding: variables.$va-spacing--20;
     }
 
     &__title {
-      @include mixins.font(variables.$font-size--18, null, variables.$font-weight--bold);
+      @include mixins.font(variables.$va-font-size--18, null, variables.$va-font-weight--bold);
 
-      margin-bottom: variables.$spacing--20;
+      margin-bottom: variables.$va-spacing--20;
     }
 
     &__header {
-      margin-bottom: variables.$spacing--20;
-      padding-bottom: variables.$spacing--10;
-      border-bottom: 1px solid variables.$color-grayscale--500;
+      margin-bottom: variables.$va-spacing--20;
+      padding-bottom: variables.$va-spacing--10;
+      border-bottom: 1px solid var(--theme-color-grayscale-500);
     }
 
     &__header-actions {
@@ -357,12 +357,12 @@
       width: 100%;
 
       th {
-        font-weight: variables.$font-weight--bold;
+        font-weight: variables.$va-font-weight--bold;
       }
 
       td,
       th {
-        padding: variables.$spacing--10;
+        padding: variables.$va-spacing--10;
         white-space: nowrap;
 
         &:first-of-type {
@@ -380,13 +380,13 @@
     }
 
     &__row--debug-mode {
-      color: variables.$color-status--error;
+      color: var(--theme-color-status--error);
     }
 
     input,
     select {
       height: 30px;
-      border: 1px solid variables.$color-grayscale--0;
+      border: 1px solid var(--theme-color-grayscale-0);
       border-radius: 0;
     }
 

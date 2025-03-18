@@ -116,32 +116,32 @@
     min-width: 400px;
     max-width: 100%;
     min-height: 60px;
-    padding: variables.$spacing--5;
+    padding: variables.$va-spacing--5;
 
     &--type-success {
-      background-color: variables.$color-status--success;
-      color: variables.$color-grayscale--0;
+      background-color: var(--theme-color-status--success);
+      color: var(--theme-color-grayscale-0);
     }
 
     &--type-info {
-      background-color: variables.$color-status--info;
-      color: variables.$color-grayscale--0;
+      background-color: var(--theme-color-status--info);
+      color: var(--theme-color-grayscale-0);
     }
 
     &--type-error {
-      background-color: variables.$color-status--error;
-      color: variables.$color-grayscale--0;
+      background-color: var(--theme-color-status--error);
+      color: var(--theme-color-grayscale-0);
     }
 
     &__message {
       width: 100%;
-      padding-right: variables.$spacing--30;
+      padding-right: variables.$va-spacing--30;
     }
 
     &__close-button {
       position: absolute;
-      top: variables.$spacing--5;
-      right: variables.$spacing--5;
+      top: variables.$va-spacing--5;
+      right: variables.$va-spacing--5;
       color: inherit;
     }
   }

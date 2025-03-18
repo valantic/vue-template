@@ -790,13 +790,13 @@
       position: sticky;
       top: 0;
       z-index: 1;
-      background-color: variables.$color-grayscale--1000;
+      background-color: var(--theme-color-grayscale-1000);
     }
 
     &__toggle {
       position: relative;
       display: block;
-      padding: variables.$spacing--10 0;
+      padding: variables.$va-spacing--10 0;
       overflow: hidden;
       border-bottom: 0;
       cursor: pointer;
@@ -807,9 +807,9 @@
     &__toggle-icon {
       position: absolute;
       top: 50%;
-      left: variables.$spacing--5;
+      left: variables.$va-spacing--5;
       transform: translateY(-50%);
-      transition: transform variables.$transition-duration--200 ease;
+      transition: transform variables.$va-transition-duration--200 ease;
 
       &--open {
         transform: translateY(-50%) rotate(180deg);
@@ -822,8 +822,8 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
-      border-bottom: 2px solid variables.$color-grayscale--0;
-      background-color: variables.$color-grayscale--1000;
+      border-bottom: 2px solid var(--theme-color-grayscale-0);
+      background-color: var(--theme-color-grayscale-1000);
 
       @include mixins.media(sm) {
         top: auto;
@@ -833,19 +833,19 @@
     }
 
     &__header-cell {
-      padding-bottom: variables.$spacing--10;
-      color: variables.$color-grayscale--0;
+      padding-bottom: variables.$va-spacing--10;
+      color: var(--theme-color-grayscale-0);
       vertical-align: bottom;
 
       &:first-child {
         @include mixins.media(sm) {
-          padding-left: variables.$spacing--5;
+          padding-left: variables.$va-spacing--5;
         }
       }
 
       &:last-child:not(&--sortable) {
         @include mixins.media(sm) {
-          padding-right: variables.$spacing--5;
+          padding-right: variables.$va-spacing--5;
         }
       }
 
@@ -872,7 +872,7 @@
     }
 
     &__data-row {
-      border-bottom: 1px solid variables.$color-grayscale--0;
+      border-bottom: 1px solid var(--theme-color-grayscale-0);
 
       &--disabled {
         position: relative;
@@ -890,7 +890,7 @@
       cursor: pointer;
 
       .e-icon {
-        margin-left: variables.$spacing--5;
+        margin-left: variables.$va-spacing--5;
         opacity: 0.3;
         transform: rotate(180deg);
       }
@@ -918,7 +918,7 @@
       position: relative;
       display: flex;
       justify-content: space-between;
-      padding: variables.$spacing--5;
+      padding: variables.$va-spacing--5;
 
       // This is a hacky solution for a FF issue where the background color overlaps the border.
       // See: https://bugzilla.mozilla.org/show_bug.cgi?id=688556
@@ -929,13 +929,13 @@
 
       @include mixins.media(sm) {
         display: table-cell;
-        padding: variables.$spacing--5 variables.$spacing--20 variables.$spacing--5 0;
+        padding: variables.$va-spacing--5 variables.$va-spacing--20 variables.$va-spacing--5 0;
         text-align: inherit;
       }
 
       &::before {
         content: attr(data-label);
-        margin-right: variables.$spacing--10;
+        margin-right: variables.$va-spacing--10;
         text-align: left;
 
         @include mixins.media(sm) {
@@ -945,16 +945,16 @@
 
       &:first-child {
         @include mixins.media(sm) {
-          padding-left: variables.$spacing--5;
+          padding-left: variables.$va-spacing--5;
         }
       }
 
       &:last-child {
-        padding-right: variables.$spacing--5;
+        padding-right: variables.$va-spacing--5;
       }
 
       &:nth-child(odd) {
-        background-color: variables.$color-grayscale--700;
+        background-color: var(--theme-color-grayscale-700);
 
         @include mixins.media(sm) {
           background-color: inherit;
@@ -978,14 +978,14 @@
       }
 
       &--detail-toggle {
-        padding-right: variables.$spacing--5;
+        padding-right: variables.$va-spacing--5;
         text-align: right;
       }
     }
 
     &__select-column {
       width: 100%;
-      margin-left: -(variables.$spacing--10);
+      margin-left: -(variables.$va-spacing--10);
       text-align: left;
 
       @include mixins.media(sm) {
@@ -994,12 +994,12 @@
     }
 
     &__footer-row {
-      border-bottom: 3px solid variables.$color-grayscale--500;
-      color: variables.$color-grayscale--200;
+      border-bottom: 3px solid var(--theme-color-grayscale-500);
+      color: var(--theme-color-grayscale-200);
     }
 
     &__footer-cell {
-      padding: variables.$spacing--15 variables.$spacing--2;
+      padding: variables.$va-spacing--15 variables.$va-spacing--2;
     }
 
     &__cell-link {
@@ -1010,8 +1010,8 @@
     }
 
     &__no-results {
-      padding-top: variables.$spacing--15;
-      padding-bottom: variables.$spacing--15;
+      padding-top: variables.$va-spacing--15;
+      padding-bottom: variables.$va-spacing--15;
     }
 
     &--has-row-links {
@@ -1043,12 +1043,12 @@
     }
 
     &__detail-toggle-icon {
-      transition: transform variables.$transition-duration--200;
+      transition: transform variables.$va-transition-duration--200;
     }
 
     &__detail-row {
-      padding: 0 variables.$spacing--10;
-      border-bottom: 1px solid variables.$color-grayscale--600;
+      padding: 0 variables.$va-spacing--10;
+      border-bottom: 1px solid var(--theme-color-grayscale-600);
     }
   }
 </style>

@@ -345,16 +345,16 @@
 
     // input
     &__field {
-      @include mixins.font(variables.$font-size--14, 18px);
+      @include mixins.font(variables.$va-font-size--14, 18px);
 
       position: relative;
       width: 100%;
       height: $e-input-height;
-      padding: variables.$spacing--5 variables.$spacing--10;
-      border: 1px solid variables.$color-grayscale--500;
-      border-radius: variables.$border-radius--500;
-      color: variables.$color-secondary--1;
-      font-family: variables.$font-family--primary;
+      padding: variables.$va-spacing--5 variables.$va-spacing--10;
+      border: 1px solid var(--theme-color-grayscale-500);
+      border-radius: variables.$va-border-radius--100;
+      color: var(--theme-color-secondary--1);
+      font-family: variables.$va-font-family--text;
 
       // disable iPhone styling
       -webkit-appearance: none;
@@ -383,37 +383,37 @@
     &__field::-webkit-input-placeholder {
       // WebKit, Blink, Edge
       opacity: 1;
-      color: variables.$color-grayscale--400;
-      font-family: variables.$font-family--primary;
+      color: var(--theme-color-grayscale--400);
+      font-family: variables.$va-font-family--text;
     }
 
     &__field:-moz-placeholder {
       // Mozilla Firefox 4 to 18
       opacity: 1;
-      color: variables.$color-grayscale--400;
-      font-family: variables.$font-family--primary;
+      color: var(--theme-color-grayscale--400);
+      font-family: variables.$va-font-family--text;
     }
 
     &__field::placeholder {
       // Most modern browsers support this now
       opacity: 1;
-      color: variables.$color-grayscale--400;
-      font-family: variables.$font-family--primary;
+      color: var(--theme-color-grayscale--400);
+      font-family: variables.$va-font-family--text;
     }
 
     &__fixed-label {
-      @include mixins.font(variables.$font-size--14, 18px);
+      @include mixins.font(variables.$va-font-size--14, 18px);
 
       position: absolute;
       top: 50%;
-      left: variables.$spacing--5;
+      left: variables.$va-spacing--5;
       display: flex;
       transform: translateY(-50%);
-      color: variables.$color-grayscale--400;
+      color: var(--theme-color-grayscale--400);
     }
 
     &__icon-splitter {
-      margin: 0 variables.$spacing--5;
+      margin: 0 variables.$va-spacing--5;
       border-left: 1px solid;
     }
 
@@ -429,24 +429,24 @@
     &__slot-wrapper {
       position: absolute;
       top: 50%;
-      right: variables.$spacing--5;
+      right: variables.$va-spacing--5;
       display: flex;
       transform: translateY(-50%);
       pointer-events: none;
     }
 
     &__slot {
-      @include mixins.font(variables.$font-size--14);
+      @include mixins.font(variables.$va-font-size--14);
 
       display: flex;
-      color: variables.$color-grayscale--400;
+      color: var(--theme-color-grayscale--400);
       line-height: $e-input-height;
     }
 
     // active
     &:not(&--border-0) &__field:active,
     &--active:not(&--border-0) &__field {
-      border: 1px solid variables.$color-grayscale--400;
+      border: 1px solid var(--theme-color-grayscale--400);
     }
 
     // focus
@@ -457,13 +457,13 @@
 
     &:not(&--border-0) &__field:focus,
     &--focus:not(&--border-0) &__field {
-      border: 1px solid variables.$color-grayscale--400;
+      border: 1px solid var(--theme-color-grayscale--400);
     }
 
     // hover
     &:not(&--border-0) &__field:hover,
     &--hover:not(&--border-0) &__field {
-      border: 1px solid variables.$color-grayscale--400;
+      border: 1px solid var(--theme-color-grayscale--400);
     }
 
     // disabled
@@ -473,18 +473,18 @@
     &--disabled:not(&--border-0) &__field,
     &--disabled &__field:hover,
     &--disabled:not(&--border-0) &__field:hover {
-      border-color: variables.$color-grayscale--600;
-      background-color: variables.$color-grayscale--1000;
-      color: variables.$color-grayscale--400;
+      border-color: var(--theme-color-grayscale-600);
+      background-color: var(--theme-color-grayscale-1000);
+      color: var(--theme-color-grayscale--400);
 
       &::placeholder {
-        color: variables.$color-grayscale--400;
+        color: var(--theme-color-grayscale--400);
       }
     }
 
     &--disabled {
       #{$this}__slot {
-        color: variables.$color-grayscale--300;
+        color: var(--theme-color-grayscale-300);
       }
     }
 
@@ -493,34 +493,34 @@
       **/
     &--state-default {
       .e-input__slot-wrapper {
-        right: variables.$spacing--5;
+        right: variables.$va-spacing--5;
       }
     }
 
     &--state-error:not(.e-input--border-0) &__field {
-      border-color: variables.$color-status--error;
+      border-color: var(--theme-color-status--error);
     }
 
     &--state-error .e-input__icon-splitter {
-      border-color: variables.$color-status--error;
+      border-color: var(--theme-color-status--error);
     }
 
     &--state-error:not(.e-input--border-0) &__field:hover {
-      border: 1px solid variables.$color-status--error;
+      border: 1px solid var(--theme-color-status--error);
     }
 
     &--state-error:not(.e-input--border-0) &__field:focus {
-      border: 1px solid variables.$color-status--error;
+      border: 1px solid var(--theme-color-status--error);
     }
 
     &--state-info {
       .e-input__icon-splitter {
-        border-color: variables.$color-grayscale--500;
+        border-color: var(--theme-color-grayscale-500);
       }
     }
 
     &--state-error {
-      color: variables.$color-status--error;
+      color: var(--theme-color-status--error);
     }
 
     &--state-success {
@@ -534,7 +534,7 @@
      */
     &--notification {
       .e-input__field {
-        padding: variables.$spacing--5 variables.$spacing--10;
+        padding: variables.$va-spacing--5 variables.$va-spacing--10;
         background: none;
       }
     }

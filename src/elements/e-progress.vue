@@ -96,7 +96,7 @@
   @use '@/setup/scss/variables';
 
   $_e-progress__animation-duration: 2000ms;
-  $_e-progress--padding: variables.$spacing--5;
+  $_e-progress--padding: variables.$va-spacing--5;
 
   @keyframes e-progress-rotation-animation {
     0% {
@@ -136,9 +136,9 @@
       display: block;
       width: 0.6em;
       height: 0.6em;
-      margin: variables.$spacing--5 auto 0;
+      margin: variables.$va-spacing--5 auto 0;
       border-radius: 50%;
-      background-color: variables.$color-secondary--1;
+      background-color: var(--theme-color-secondary--1);
       animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;
 
       &:nth-child(1) {
@@ -157,7 +157,7 @@
 
   .e-progress--negative {
     .e-progress__bubble {
-      background-color: variables.$color-primary--3;
+      background-color: var(--theme-color-primary--3);
     }
   }
 </style>

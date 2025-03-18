@@ -3,6 +3,7 @@
 // Style reset
 @use 'the-new-css-reset/css/reset';
 // General project styles
-@use 'scss/basics';
-@use 'scss/elements';
-@use 'scss/globals';
+@use 'scss/themes/theme-default';
+@use 'styling-template/scss/basics';
+@use 'styling-template/scss/globals';
+@use './scss/setup';

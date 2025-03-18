@@ -367,10 +367,10 @@
       align-items: center;
       width: 100%;
       min-height: $e-multiselect-height;
-      padding: 0 variables.$spacing--5 0 variables.$spacing--10;
-      border: 1px solid variables.$color-grayscale--500;
+      padding: 0 variables.$va-spacing--5 0 variables.$va-spacing--10;
+      border: 1px solid var(--theme-color-grayscale-500);
       border-radius: 3px;
-      background-color: variables.$color-grayscale--1000;
+      background-color: var(--theme-color-grayscale-1000);
       cursor: pointer;
 
       &:focus {
@@ -378,18 +378,18 @@
       }
 
       .e-icon {
-        transition: transform variables.$transition-duration--200 linear;
+        transition: transform variables.$va-transition-duration--200 linear;
       }
     }
 
     // hover
     &__field-wrapper:hover,
     &--hover &__field-wrapper {
-      border-color: variables.$color-grayscale--400;
+      border-color: var(--theme-color-grayscale--400);
     }
 
     &__field-wrapper--open {
-      border-color: variables.$color-grayscale--400;
+      border-color: var(--theme-color-grayscale--400);
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
 
@@ -398,12 +398,12 @@
       }
 
       + #{$this}__options-wrapper {
-        border-color: variables.$color-grayscale--400;
+        border-color: var(--theme-color-grayscale--400);
       }
     }
 
     &__field-wrapper--disabled {
-      color: variables.$color-grayscale--500;
+      color: var(--theme-color-grayscale-500);
       pointer-events: none;
     }
 
@@ -425,9 +425,9 @@
       width: 100%;
       max-height: 300px;
       overflow: auto;
-      border: 1px solid variables.$color-grayscale--500;
+      border: 1px solid var(--theme-color-grayscale-500);
       border-top: 0;
-      background-color: variables.$color-grayscale--1000;
+      background-color: var(--theme-color-grayscale-1000);
       transform-origin: top;
     }
 
@@ -436,7 +436,7 @@
     }
 
     &__options-item {
-      padding: variables.$spacing--2 variables.$spacing--5;
+      padding: variables.$va-spacing--2 variables.$va-spacing--5;
     }
 
     &__progress-wrapper {
@@ -453,9 +453,9 @@
     &__search-field {
       width: 100%;
       min-height: $e-multiselect-height;
-      padding: 0 variables.$spacing--5;
+      padding: 0 variables.$va-spacing--5;
       outline: none;
-      border: 1px solid variables.$color-grayscale--500;
+      border: 1px solid var(--theme-color-grayscale-500);
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
     }
@@ -474,20 +474,20 @@
       #{$this}__field-wrapper {
         @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
-        border-color: variables.$color-status--error;
-        color: variables.$color-status--error;
+        border-color: var(--theme-color-status--error);
+        color: var(--theme-color-status--error);
 
         &:hover {
-          border-color: variables.$color-status--error;
+          border-color: var(--theme-color-status--error);
         }
 
         &:focus {
-          border: 1px solid variables.$color-status--error;
+          border: 1px solid var(--theme-color-status--error);
         }
       }
 
       #{$this}__icon-splitter {
-        border-color: variables.$color-status--error;
+        border-color: var(--theme-color-status--error);
       }
     }
 
@@ -504,7 +504,7 @@
     // Transition
     .top-slide-enter-active,
     .top-slide-leave-active {
-      transition: all variables.$transition-duration--200 ease-in-out;
+      transition: all variables.$va-transition-duration--200 ease-in-out;
     }
 
     .top-slide-enter,

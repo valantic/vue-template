@@ -6,6 +6,6 @@
     @include mixins.z-index(focusItem);
 
     position: relative;
-    background-color: variables.$color-grayscale--1000;
+    background-color: var(--theme-color-grayscale-1000);
   }
 }

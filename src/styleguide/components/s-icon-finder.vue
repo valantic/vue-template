@@ -230,17 +230,17 @@
   @use '@/setup/scss/variables';
 
   .s-icon-finder {
-    font-family: variables.$font-family--primary;
+    font-family: variables.$va-font-family--text;
 
     &__filter {
       display: flex;
-      margin-bottom: variables.$spacing--35;
+      margin-bottom: variables.$va-spacing--35;
     }
 
     &__label {
       display: flex;
       align-items: center;
-      margin: 0 variables.$spacing--10 variables.$spacing--10 0;
+      margin: 0 variables.$va-spacing--10 variables.$va-spacing--10 0;
 
       &--variant {
         margin: 0 0 0 auto;
@@ -249,7 +249,7 @@
 
     &__filter-input {
       display: block;
-      margin-left: variables.$spacing--5;
+      margin-left: variables.$va-spacing--5;
     }
 
     &__grid {
@@ -276,7 +276,7 @@
     }
 
     &__grid-item--negative {
-      background-color: variables.$color-grayscale--500;
+      background-color: var(--theme-color-grayscale-500);
     }
 
     &__icon-wrapper {
@@ -316,13 +316,13 @@
       left: 0;
       z-index: 999;
       width: 100%;
-      padding: variables.$spacing--10;
-      background-color: variables.$color-status--success;
+      padding: variables.$va-spacing--10;
+      background-color: var(--theme-color-status--success);
       text-align: center;
     }
 
     &__grid-item:hover &__icon-wrapper {
-      color: variables.$color-primary--1;
+      color: var(--theme-color-primary--1);
     }
   }
 </style>

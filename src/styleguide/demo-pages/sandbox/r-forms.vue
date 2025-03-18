@@ -435,21 +435,21 @@
     &__form,
     &__data,
     &__validation {
-      padding: variables.$spacing--50;
-      border: 1px dotted variables.$color-grayscale--500;
+      padding: variables.$va-spacing--50;
+      border: 1px dotted var(--theme-color-grayscale-500);
     }
 
     .e-fieldset {
-      margin-bottom: variables.$spacing--50;
+      margin-bottom: variables.$va-spacing--50;
     }
 
     .e-label:not(:last-child) {
-      margin-bottom: variables.$spacing--20;
+      margin-bottom: variables.$va-spacing--20;
     }
 
     .e-checkbox + .e-checkbox,
     .e-radio + .e-radio {
-      margin-top: variables.$spacing--5;
+      margin-top: variables.$va-spacing--5;
     }
   }
 </style>

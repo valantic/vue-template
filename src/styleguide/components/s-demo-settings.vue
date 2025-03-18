@@ -92,10 +92,10 @@
   @use '@/setup/scss/variables';
 
   .s-demo-settings {
-    margin-top: variables.$spacing--10;
+    margin-top: variables.$va-spacing--10;
 
     .s-toggle + .s-toggle {
-      margin-top: variables.$spacing--5;
+      margin-top: variables.$va-spacing--5;
     }
   }
 </style>

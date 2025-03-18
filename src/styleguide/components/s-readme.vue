@@ -267,7 +267,7 @@
       list-style: disc;
 
       li + li {
-        margin-top: variables.$spacing--10;
+        margin-top: variables.$va-spacing--10;
       }
     }
     ol {
@@ -275,7 +275,7 @@
       list-style: decimal;
 
       li + li {
-        margin-top: variables.$spacing--10;
+        margin-top: variables.$va-spacing--10;
       }
     }
     hr {

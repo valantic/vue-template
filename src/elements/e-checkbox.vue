@@ -182,7 +182,7 @@
     $this: &;
     $label-size: 16px;
 
-    @include mixins.font(variables.$font-size--16, 22px);
+    @include mixins.font(variables.$va-font-size--16, 22px);
 
     position: relative;
     display: block;
@@ -205,9 +205,9 @@
         align-items: center;
         width: $label-size;
         height: $label-size;
-        border: 1px solid variables.$color-grayscale--400;
+        border: 1px solid var(--theme-color-grayscale--400);
         border-radius: 3px;
-        background: variables.$color-grayscale--1000;
+        background: var(--theme-color-grayscale-1000);
 
         &::before {
           content: '';
@@ -216,7 +216,7 @@
           opacity: 0;
           border: 1px solid transparent;
           border-radius: 3px;
-          background: variables.$color-grayscale--0;
+          background: var(--theme-color-grayscale-0);
           transform: scale(0);
           transition-timing-function: ease-in-out;
           transition-duration: 100ms;
@@ -246,8 +246,8 @@
         height: math.div($toggle--size, 3) * 2;
         margin: 0 math.div($toggle--size, 2);
         border-radius: $toggle--size;
-        background-color: variables.$color-grayscale--500;
-        transition: background-color variables.$transition-duration--300;
+        background-color: var(--theme-color-grayscale-500);
+        transition: background-color variables.$va-transition-duration--300;
 
         &::before {
           position: absolute;
@@ -257,10 +257,10 @@
           width: $toggle--size;
           height: $toggle--size;
           border-radius: 50%;
-          background-color: variables.$color-grayscale--1000;
-          box-shadow: 0 1px 2px 1px rgba(variables.$color-grayscale--0, 0.2);
+          background-color: var(--theme-color-grayscale-1000);
+          box-shadow: 0 1px 2px 1px rgba(var(--theme-color-grayscale-0), 0.2);
           transform: translateY(-50%);
-          transition: left variables.$transition-duration--300;
+          transition: left variables.$va-transition-duration--300;
         }
       }
 
@@ -268,7 +268,7 @@
         &:checked ~ #{$this}__indicator {
           &::before {
             left: calc(100% - (#{$toggle--size} / 2));
-            background-color: variables.$color-grayscale--0;
+            background-color: var(--theme-color-grayscale-0);
             transform: translateY(-50%);
           }
         }
@@ -278,46 +278,46 @@
     &__label-text {
       display: block;
       margin: 0;
-      padding-left: variables.$spacing--10;
+      padding-left: variables.$va-spacing--10;
 
       &:hover {
-        color: variables.$color-grayscale--0;
+        color: var(--theme-color-grayscale-0);
 
         &::before {
-          border-color: variables.$color-grayscale--0;
+          border-color: var(--theme-color-grayscale-0);
         }
       }
     }
 
     &__field:checked {
       ~ #{$this}__label-text {
-        color: variables.$color-grayscale--0;
+        color: var(--theme-color-grayscale-0);
       }
     }
 
     &__field:checked:disabled {
       ~ #{$this}__indicator {
-        border-color: variables.$color-grayscale--500;
+        border-color: var(--theme-color-grayscale-500);
       }
 
       ~ #{$this}__indicator:before {
-        background: variables.$color-grayscale--500;
+        background: var(--theme-color-grayscale-500);
         cursor: not-allowed;
       }
     }
 
     &__field:disabled {
       ~ #{$this}__indicator {
-        border-color: variables.$color-grayscale--500;
+        border-color: var(--theme-color-grayscale-500);
         cursor: not-allowed;
       }
 
       ~ #{$this}__label-text {
         cursor: not-allowed;
-        color: variables.$color-grayscale--400;
+        color: var(--theme-color-grayscale--400);
 
         &::before {
-          border-color: variables.$color-grayscale--500;
+          border-color: var(--theme-color-grayscale-500);
         }
       }
     }

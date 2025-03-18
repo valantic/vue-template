@@ -10,8 +10,8 @@ $pimcore-gui--color: #3c3f41;
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: variables.$spacing--20;
-  margin-bottom: variables.$spacing--50;
+  gap: variables.$va-spacing--20;
+  margin-bottom: variables.$va-spacing--50;
 
   &__item {
     align-self: start;
@@ -24,33 +24,33 @@ $pimcore-gui--color: #3c3f41;
 
   &--item-outline {
     #{$this}__item {
-      border: 1px solid variables.$color-grayscale--500;
+      border: 1px solid var(--theme-color-grayscale-500);
     }
   }
 }
 
 .p-content-placeholder {
-  padding: variables.$spacing--30;
-  outline: 1px dashed variables.$color-grayscale--500;
-  background-color: variables.$color-grayscale--700;
+  padding: variables.$va-spacing--30;
+  outline: 1px dashed var(--theme-color-grayscale-500);
+  background-color: var(--theme-color-grayscale-700);
 
   &--text-align-center {
     text-align: center;
   }
 
   &--spacing-500 {
-    margin: variables.$spacing--50 0;
+    margin: variables.$va-spacing--50 0;
   }
 }
 
 .p-meta {
   $this: &;
 
-  @include mixins.font(variables.$font-size--10, 12px);
+  @include mixins.font(variables.$va-font-size--10, 12px);
 
   display: flex;
   align-items: center;
-  margin-bottom: variables.$spacing--5;
+  margin-bottom: variables.$va-spacing--5;
   opacity: 0.2;
   color: $pimcore-gui--color;
   font-family: monospace;
@@ -69,17 +69,17 @@ $pimcore-gui--color: #3c3f41;
     padding: 0;
 
     + dt {
-      padding-left: variables.$spacing--5;
+      padding-left: variables.$va-spacing--5;
       border-left: 1px solid rgba($pimcore-gui--color, 0.25);
     }
   }
 
   dt {
-    padding: variables.$spacing--2 variables.$spacing--5;
+    padding: variables.$va-spacing--2 variables.$va-spacing--5;
   }
 
   dd {
-    margin-left: variables.$spacing--5;
+    margin-left: variables.$va-spacing--5;
     opacity: 0.75;
   }
 
@@ -90,7 +90,7 @@ $pimcore-gui--color: #3c3f41;
   &--align-right {
     #{$this}__list {
       right: auto;
-      left: calc(100% + #{variables.$spacing--2});
+      left: calc(100% + #{variables.$va-spacing--2});
     }
   }
 }
@@ -101,7 +101,7 @@ $pimcore-gui--color: #3c3f41;
 
   display: flex;
   align-items: center;
-  padding: variables.$spacing--5 0;
+  padding: variables.$va-spacing--5 0;
 
   .pimcore_block_entry & {
     opacity: 0.3;
@@ -114,7 +114,7 @@ $pimcore-gui--color: #3c3f41;
   }
 
   &__item {
-    margin-right: variables.$spacing--10;
+    margin-right: variables.$va-spacing--10;
 
     &:last-child {
       margin-right: 0;
@@ -132,7 +132,7 @@ $pimcore-gui--color: #3c3f41;
   }
 
   &__label-text {
-    margin-right: variables.$spacing--5;
+    margin-right: variables.$va-spacing--5;
   }
 
   .pimcore_tag_select,
@@ -145,7 +145,7 @@ $pimcore-gui--color: #3c3f41;
     align-items: flex-start;
 
     #{$this}__item {
-      margin: variables.$spacing--10 0 0 0;
+      margin: variables.$va-spacing--10 0 0 0;
 
       &:first-child {
         margin-top: 0;
@@ -155,7 +155,7 @@ $pimcore-gui--color: #3c3f41;
 }
 
 [class].p-section {
-  margin-bottom: variables.$spacing--20;
+  margin-bottom: variables.$va-spacing--20;
 }
 
 [class].p-areablock {
@@ -178,7 +178,7 @@ $pimcore-gui--color: #3c3f41;
 
   &--group-indicator {
     position: relative;
-    padding: 0 0 0 variables.$spacing--20;
+    padding: 0 0 0 variables.$va-spacing--20;
 
     &::before {
       @include mixins.z-index(front);
@@ -200,7 +200,7 @@ $pimcore-gui--color: #3c3f41;
 }
 
 .p-renderlet-info {
-  margin: variables.$spacing--10;
+  margin: variables.$va-spacing--10;
 }
 
 .p-monospace {
@@ -208,57 +208,57 @@ $pimcore-gui--color: #3c3f41;
 }
 
 .p-danger-zone {
-  margin: variables.$spacing--30 0;
-  padding: variables.$spacing--10;
-  border: 1px solid variables.$color-status--danger;
-  background: rgba(variables.$color-status--danger, 0.2);
+  margin: variables.$va-spacing--30 0;
+  padding: variables.$va-spacing--10;
+  border: 1px solid var(--theme-color-status--danger);
+  background: rgba(var(--theme-color-status--danger), 0.2);
 
   &__message {
-    color: variables.$color-status--danger;
+    color: var(--theme-color-status--danger);
   }
 
   &__content {
-    margin: variables.$spacing--10 0;
-    padding: variables.$spacing--10;
-    background: variables.$color-grayscale--1000;
+    margin: variables.$va-spacing--10 0;
+    padding: variables.$va-spacing--10;
+    background: var(--theme-color-grayscale-1000);
   }
 }
 
 .p-message {
-  margin: variables.$spacing--10;
-  padding: variables.$spacing--10;
-  border: 1px dashed variables.$color-grayscale--400;
-  background: variables.$color-grayscale--600;
-  color: variables.$color-grayscale--200;
+  margin: variables.$va-spacing--10;
+  padding: variables.$va-spacing--10;
+  border: 1px dashed var(--theme-color-grayscale--400);
+  background: var(--theme-color-grayscale-600);
+  color: var(--theme-color-grayscale-200);
   text-align: center;
 
   &--info {
-    border-color: variables.$color-status--info;
-    background: rgba(variables.$color-status--info, 0.2);
-    color: variables.$color-status--info;
+    border-color: var(--theme-color-status--info);
+    background: rgba(var(--theme-color-status--info), 0.2);
+    color: var(--theme-color-status--info);
   }
 
   &--error {
-    border-color: variables.$color-status--danger;
-    background: rgba(variables.$color-status--danger, 0.2);
-    color: variables.$color-status--danger;
+    border-color: var(--theme-color-status--danger);
+    background: rgba(var(--theme-color-status--danger), 0.2);
+    color: var(--theme-color-status--danger);
   }
 }
 
 .p-deprecated-field {
-  margin: variables.$spacing--5 0;
-  padding: 0 variables.$spacing--5 variables.$spacing--5;
-  border: 1px solid variables.$color-status--danger;
+  margin: variables.$va-spacing--5 0;
+  padding: 0 variables.$va-spacing--5 variables.$va-spacing--5;
+  border: 1px solid var(--theme-color-status--danger);
 
   &::before {
-    @include mixins.font-size(variables.$font-size--14);
+    @include mixins.font-size(variables.$va-font-size--14);
 
     display: block;
     content: 'Deprecated field';
-    margin: 0 (-(variables.$spacing--5) variables.$spacing--5);
-    padding: variables.$spacing--5;
-    background: variables.$color-status--danger;
-    color: variables.$color-grayscale--1000;
+    margin: 0 (-(variables.$va-spacing--5) variables.$va-spacing--5);
+    padding: variables.$va-spacing--5;
+    background: var(--theme-color-status--danger);
+    color: var(--theme-color-grayscale-1000);
     font-weight: bold;
   }
 

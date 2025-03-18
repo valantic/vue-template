@@ -68,7 +68,7 @@
 
   .e-fieldset {
     &__legend {
-      @include mixins.font(variables.$font-size--18, 22px, variables.$font-weight--regular);
+      @include mixins.font(variables.$va-font-size--18, 22px, variables.$va-font-weight--regular);
     }
 
     &__inner {
@@ -76,7 +76,7 @@
     }
 
     &__fields {
-      padding: variables.$spacing--5 0;
+      padding: variables.$va-spacing--5 0;
     }
   }
 </style>

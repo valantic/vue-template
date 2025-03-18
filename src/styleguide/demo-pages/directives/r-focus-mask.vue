@@ -71,6 +71,6 @@
   @use '@/setup/scss/variables';
 
   .r-focus-mask {
-    padding: variables.$spacing--50;
+    padding: variables.$va-spacing--50;
   }
 </style>

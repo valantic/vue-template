@@ -9,8 +9,8 @@
     width: 0;
     height: 0;
     opacity: 0;
-    background: rgba(variables.$color-grayscale--400, 0.5);
-    transition: opacity variables.$transition-duration--200 ease-in-out;
+    background: rgba(var(--theme-color-grayscale--400), 0.5);
+    transition: opacity variables.$va-transition-duration--200 ease-in-out;
   }
 
   &--visible {
@@ -30,6 +30,6 @@
   }
 
   &--variant-color::before {
-    background: rgba(variables.$color-primary--1, 0.5);
+    background: rgba(var(--theme-color-primary--1), 0.5);
   }
 }

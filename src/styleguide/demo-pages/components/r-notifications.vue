@@ -96,7 +96,7 @@
 
     &__label {
       display: block;
-      margin: variables.$spacing--15 0 variables.$spacing--5;
+      margin: variables.$va-spacing--15 0 variables.$va-spacing--5;
     }
 
     &__second-container {
@@ -104,7 +104,7 @@
     }
 
     .e-button:not(:last-of-type) {
-      margin-right: variables.$spacing--20;
+      margin-right: variables.$va-spacing--20;
     }
   }
 </style>
