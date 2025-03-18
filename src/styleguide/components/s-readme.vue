@@ -58,14 +58,14 @@
   /* stylelint-disable */
 
   /*
-  This document has been created with Marked.app <https://marked2app.com>, Copyright 2013 Brett Terpstra
-  Content is property of the document author
-  Please leave this notice in place, along with any additional credits below.
-  ---------------------------------------------------------------
-  Title: GitHub
-  Author: Brett Terpstra
-  Description: Github README style. Includes theme for Pygmentized code blocks.
-  */
+This document has been created with Marked.app <https://marked2app.com>, Copyright 2013 Brett Terpstra
+Content is property of the document author
+Please leave this notice in place, along with any additional credits below.
+---------------------------------------------------------------
+Title: GitHub
+Author: Brett Terpstra
+Description: Github README style. Includes theme for Pygmentized code blocks.
+*/
   .s-readme {
     color: black;
     background: #fff;

@@ -20,11 +20,16 @@ const datetimeFormats: IntlDateTimeFormat = {
   },
 };
 
+// TODO: Check if this still works after refactoring the s-language-select.
+const getStyleguideTranslations = (): Record<string, object> =>
+  import.meta.glob('../styleguide/translations.json', { eager: true })['../styleguide/translations.json'] as Record<
+    string,
+    object
+  >;
+
 // Add styleguide only translations
 if (import.meta.env.MODE !== 'production') {
-  const styleguideTranslations = import.meta.glob('./styleguide.translations.json', { eager: true })[
-    './styleguide.translations.json'
-  ] as Record<string, object>;
+  const styleguideTranslations = getStyleguideTranslations();
 
   if (styleguideTranslations[I18N_FALLBACK]) {
     Object.entries(styleguideTranslations[I18N_FALLBACK]).forEach(([key, value]) => {
@@ -79,9 +84,7 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
     return import(`../translations/${locale}.json`).then(({ default: localeMessages }) => {
       // Add styleguide only translations
       if (import.meta.env.MODE !== 'production') {
-        const styleguideTranslations = import.meta.glob('./styleguide.translations.json', { eager: true })[
-          './styleguide.translations.json'
-        ] as Record<string, object>;
+        const styleguideTranslations = getStyleguideTranslations();
         const localeStyleguideTranslations = styleguideTranslations[locale];
 
         if (localeStyleguideTranslations) {

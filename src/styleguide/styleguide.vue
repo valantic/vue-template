@@ -8,14 +8,15 @@
 </template>
 
 <script lang="ts">
+  import sNavigation from '@valantic/vue-styleguide/src/styleguide/components/s-navigation.vue';
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
   import useNotificationStore from '@/stores/notification';
-  import sNavigation from '@/styleguide/components/s-navigation.vue';
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
   };
+
   // type Data = {};
 
   export default defineComponent({
