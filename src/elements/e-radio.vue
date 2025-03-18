@@ -172,10 +172,10 @@
       padding-left: variables.$va-spacing--25;
 
       &:hover {
-        color: var(--theme-color-grayscale-0);
+        color: var(--theme-color-grayscale--0);
 
         &::before {
-          border-color: var(--theme-color-grayscale-0);
+          border-color: var(--theme-color-grayscale--0);
         }
       }
 
@@ -197,14 +197,14 @@
       &::after {
         opacity: 0;
         border: 1px solid transparent;
-        background: var(--theme-color-grayscale-0);
+        background: var(--theme-color-grayscale--0);
         transform: scale(0);
         transition: transform 0.1s ease-in-out;
       }
     }
 
     &__field:checked + &__label {
-      color: var(--theme-color-grayscale-0);
+      color: var(--theme-color-grayscale--0);
 
       &::after {
         opacity: 1;

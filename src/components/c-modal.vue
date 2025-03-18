@@ -257,7 +257,7 @@
 
     &::backdrop {
       opacity: 0.75;
-      background-color: var(--theme-color-grayscale-0);
+      background-color: var(--theme-color-grayscale--0);
     }
 
     &__inner {

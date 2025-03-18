@@ -120,17 +120,17 @@
 
     &--type-success {
       background-color: var(--theme-color-status--success);
-      color: var(--theme-color-grayscale-0);
+      color: var(--theme-color-grayscale--0);
     }
 
     &--type-info {
       background-color: var(--theme-color-status--info);
-      color: var(--theme-color-grayscale-0);
+      color: var(--theme-color-grayscale--0);
     }
 
     &--type-error {
       background-color: var(--theme-color-status--error);
-      color: var(--theme-color-grayscale-0);
+      color: var(--theme-color-grayscale--0);
     }
 
     &__message {

@@ -4,8 +4,8 @@
 .c-tooltip {
   $this: &;
   $background-color: var(--theme-color-grayscale--500);
-  $color: var(--theme-color-grayscale-0);
-  $box-shadow-color: rgba(var(--theme-color-grayscale-0), 0.2);
+  $color: var(--theme-color-grayscale--0);
+  $box-shadow-color: rgba(var(--theme-color-grayscale--0), 0.2);
   $border-radius: variables.$va-border-radius--100;
   $pointer__width: 6px;
   $wrapper__padding: $pointer__width + 6px;

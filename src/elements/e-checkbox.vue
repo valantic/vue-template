@@ -216,7 +216,7 @@
           opacity: 0;
           border: 1px solid transparent;
           border-radius: 3px;
-          background: var(--theme-color-grayscale-0);
+          background: var(--theme-color-grayscale--0);
           transform: scale(0);
           transition-timing-function: ease-in-out;
           transition-duration: 100ms;
@@ -258,7 +258,7 @@
           height: $toggle--size;
           border-radius: 50%;
           background-color: var(--theme-color-grayscale--1000);
-          box-shadow: 0 1px 2px 1px rgba(var(--theme-color-grayscale-0), 0.2);
+          box-shadow: 0 1px 2px 1px rgba(var(--theme-color-grayscale--0), 0.2);
           transform: translateY(-50%);
           transition: left variables.$va-transition-duration--300;
         }
@@ -268,7 +268,7 @@
         &:checked ~ #{$this}__indicator {
           &::before {
             left: calc(100% - (#{$toggle--size} / 2));
-            background-color: var(--theme-color-grayscale-0);
+            background-color: var(--theme-color-grayscale--0);
             transform: translateY(-50%);
           }
         }
@@ -281,17 +281,17 @@
       padding-left: variables.$va-spacing--10;
 
       &:hover {
-        color: var(--theme-color-grayscale-0);
+        color: var(--theme-color-grayscale--0);
 
         &::before {
-          border-color: var(--theme-color-grayscale-0);
+          border-color: var(--theme-color-grayscale--0);
         }
       }
     }
 
     &__field:checked {
       ~ #{$this}__label-text {
-        color: var(--theme-color-grayscale-0);
+        color: var(--theme-color-grayscale--0);
       }
     }
 

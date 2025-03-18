@@ -822,7 +822,7 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
-      border-bottom: 2px solid var(--theme-color-grayscale-0);
+      border-bottom: 2px solid var(--theme-color-grayscale--0);
       background-color: var(--theme-color-grayscale--1000);
 
       @include mixins.media(sm) {
@@ -834,7 +834,7 @@
 
     &__header-cell {
       padding-bottom: variables.$va-spacing--10;
-      color: var(--theme-color-grayscale-0);
+      color: var(--theme-color-grayscale--0);
       vertical-align: bottom;
 
       &:first-child {
@@ -872,7 +872,7 @@
     }
 
     &__data-row {
-      border-bottom: 1px solid var(--theme-color-grayscale-0);
+      border-bottom: 1px solid var(--theme-color-grayscale--0);
 
       &--disabled {
         position: relative;
