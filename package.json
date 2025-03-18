@@ -81,6 +81,7 @@
     "@types/resize-observer-browser": "~0.1.11",
     "@typescript-eslint/eslint-plugin": "~8.21.0",
     "@typescript-eslint/parser": "~8.21.0",
+    "@valantic/vue-styleguide": "github:valantic/vue-styleguide#main",
     "@vitejs/plugin-vue": "~5.2.1",
     "@vue/eslint-config-typescript": "~13.0.0",
     "@vue/test-utils": "~2.4.6",
