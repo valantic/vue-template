@@ -53,22 +53,22 @@
   @use '@/setup/scss/variables';
 
   .r-index {
-    max-width: map.get(variables.$breakpoints, xl);
+    max-width: map.get(variables.$va-breakpoints, xl);
     margin: 0 auto;
-    padding: variables.$spacing--30;
+    padding: variables.$va-spacing--30;
 
     &__warning {
-      padding: variables.$spacing--10;
-      border: 1px solid variables.$color-status--error;
-      background: rgba(variables.$color-status--error--rgb, 0.5);
+      padding: variables.$va-spacing--10;
+      border: 1px solid var(--theme-color-status--error);
+      background: rgba(var(--theme-color-status--error-rgb), 0.5);
       text-align: center;
     }
 
     &__code {
       display: inline-block;
-      border: 1px solid variables.$color-grayscale--400;
-      background: rgba(variables.$color-primary--2--rgb, 0.5);
-      color: variables.$color-primary--3;
+      border: 1px solid var(--theme-color-grayscale--400);
+      background: rgba(var(--theme-color-primary--2-rgb), 0.5);
+      color: var(--theme-color-primary--3);
     }
   }
 </style>

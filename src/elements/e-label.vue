@@ -125,14 +125,14 @@
 
   .e-label {
     display: block;
-    color: variables.$color-grayscale--200;
+    color: var(--theme-color-grayscale-200);
 
     &__inner {
       width: 100%;
     }
 
     &__name {
-      @include mixins.font(variables.$font-size--16, variables.$spacing--20);
+      @include mixins.font(variables.$va-font-size--16, variables.$va-spacing--20);
 
       display: block;
       color: inherit;
@@ -144,7 +144,7 @@
 
     &--position-top {
       .e-label__name {
-        margin-bottom: variables.$spacing--5;
+        margin-bottom: variables.$va-spacing--5;
       }
     }
 
@@ -153,7 +153,7 @@
       flex-direction: column-reverse;
 
       .e-label__name {
-        margin-top: variables.$spacing--5;
+        margin-top: variables.$va-spacing--5;
       }
 
       .e-label__inner {
@@ -168,7 +168,7 @@
         display: flex;
         flex: 1 0 auto;
         align-items: center;
-        margin-right: variables.$spacing--15;
+        margin-right: variables.$va-spacing--15;
       }
     }
 
@@ -180,20 +180,20 @@
         display: flex;
         flex: 1 0 auto;
         align-items: center;
-        margin-left: variables.$spacing--15;
+        margin-left: variables.$va-spacing--15;
       }
     }
 
     &--active {
-      color: variables.$color-secondary--1;
+      color: var(--theme-color-secondary--1);
     }
 
     &--disabled {
-      color: variables.$color-grayscale--300;
+      color: var(--theme-color-grayscale-300);
     }
 
     &--state-error {
-      color: variables.$color-status--error;
+      color: var(--theme-color-status--error);
     }
   }
 </style>

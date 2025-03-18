@@ -96,13 +96,13 @@
     &__grid {
       display: flex;
       flex-wrap: wrap;
-      margin: variables.$spacing--0 (-(variables.$spacing--5));
+      margin: variables.$va-spacing--0 (-(variables.$va-spacing--5));
     }
 
     &__grid-item {
       flex: 0 1 percentage(math.div(6, 12));
       max-width: 200px;
-      padding: variables.$spacing--5;
+      padding: variables.$va-spacing--5;
 
       @include mixins.media(sm) {
         flex-basis: percentage(math.div(4, 12));

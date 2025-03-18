@@ -256,13 +256,13 @@
     &__navigation {
       position: absolute;
       top: 50%;
-      padding: variables.$spacing--5;
+      padding: variables.$va-spacing--5;
       opacity: 0;
-      background-color: variables.$color-primary--2;
+      background-color: var(--theme-color-primary--2);
       transform: translateY(-50%);
       cursor: pointer;
-      color: variables.$color-grayscale--1000;
-      transition: opacity variables.$transition-duration--100 ease-in-out;
+      color: var(--theme-color-grayscale-1000);
+      transition: opacity variables.$va-transition-duration--100 ease-in-out;
 
       &--next {
         right: 20px;

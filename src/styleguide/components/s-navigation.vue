@@ -159,18 +159,18 @@
 
   .s-navigation {
     $this: &;
-    $border: variables.$spacing--10 solid variables.$color-grayscale--400;
+    $border: variables.$va-spacing--10 solid var(--theme-color-grayscale--400);
     $trigger-size: 40px;
 
     z-index: 1;
 
     &__navigation-wrapper {
       position: fixed;
-      min-width: variables.$spacing--40;
+      min-width: variables.$va-spacing--40;
       height: 100%;
       margin: auto;
-      background-color: variables.$color-grayscale--1000;
-      font-family: variables.$font-family--primary;
+      background-color: var(--theme-color-grayscale-1000);
+      font-family: variables.$va-font-family--text;
 
       &::after {
         // Toggle
@@ -179,9 +179,9 @@
         width: $trigger-size;
         height: $trigger-size;
         opacity: 0.2;
-        border-top: 1px solid variables.$color-grayscale--400;
-        border-left: 1px solid variables.$color-grayscale--400;
-        background-color: variables.$color-grayscale--1000;
+        border-top: 1px solid var(--theme-color-grayscale--400);
+        border-left: 1px solid var(--theme-color-grayscale--400);
+        background-color: var(--theme-color-grayscale-1000);
         background-image: url('../assets/menu-button.svg');
         background-repeat: no-repeat;
         background-position: center;
@@ -256,13 +256,13 @@
       position: absolute;
       left: 0;
       display: block;
-      padding-right: variables.$spacing--10;
+      padding-right: variables.$va-spacing--10;
       transform: translateX(-100%);
-      color: variables.$color-grayscale--1000;
-      text-shadow: 1px 1px 5px variables.$color-grayscale--0;
+      color: var(--theme-color-grayscale-1000);
+      text-shadow: 1px 1px 5px var(--theme-color-grayscale-0);
 
       #{$this}__navigation-wrapper--open & {
-        padding-right: variables.$spacing--20;
+        padding-right: variables.$va-spacing--20;
       }
     }
 
@@ -274,14 +274,14 @@
 
     &__navigation-item {
       &--components {
-        border-top: 1px solid variables.$color-grayscale--400;
+        border-top: 1px solid var(--theme-color-grayscale--400);
       }
 
       &--language,
       &--theme,
       &--settings {
-        padding: variables.$spacing--10 variables.$spacing--20;
-        border-bottom: 1px solid variables.$color-grayscale--400;
+        padding: variables.$va-spacing--10 variables.$va-spacing--20;
+        border-bottom: 1px solid var(--theme-color-grayscale--400);
       }
 
       &--active,
@@ -292,7 +292,7 @@
 
     &__navigation-link {
       display: block;
-      padding: variables.$spacing--10 variables.$spacing--20;
+      padding: variables.$va-spacing--10 variables.$va-spacing--20;
       text-decoration: none;
 
       &:hover {
@@ -301,15 +301,15 @@
     }
 
     &__navigation-item--logo {
-      padding: 0 variables.$spacing--15;
-      border-bottom: 1px solid variables.$color-grayscale--400;
+      padding: 0 variables.$va-spacing--15;
+      border-bottom: 1px solid var(--theme-color-grayscale--400);
 
       img {
         max-width: 150px;
       }
 
       .s-navigation__navigation-link {
-        padding: variables.$spacing--10 variables.$spacing--5;
+        padding: variables.$va-spacing--10 variables.$va-spacing--5;
       }
     }
   }

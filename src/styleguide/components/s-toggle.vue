@@ -100,9 +100,9 @@
       width: 2 * $_s-slider__size;
       height: $_s-slider__size;
       border-radius: $_s-slider__size;
-      background-color: variables.$color-grayscale--600;
+      background-color: var(--theme-color-grayscale-600);
       cursor: pointer;
-      transition: variables.$transition-duration--300;
+      transition: variables.$va-transition-duration--300;
 
       &::before {
         position: absolute;
@@ -112,8 +112,8 @@
         width: 0.8 * $_s-slider__size;
         height: 0.8 * $_s-slider__size;
         border-radius: 50%;
-        background-color: variables.$color-primary--3;
-        transition: variables.$transition-duration--300;
+        background-color: var(--theme-color-primary--3);
+        transition: variables.$va-transition-duration--300;
       }
     }
 
@@ -121,7 +121,7 @@
       display: none;
 
       &:checked + #{$this}__slider {
-        background-color: variables.$color-primary--1;
+        background-color: var(--theme-color-primary--1);
       }
 
       &:checked + #{$this}__slider::before {

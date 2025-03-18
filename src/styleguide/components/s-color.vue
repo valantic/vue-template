@@ -73,6 +73,6 @@
   @use '@/setup/scss/variables';
 
   .s-color {
-    font-family: variables.$font-family--primary;
+    font-family: variables.$va-font-family--text;
   }
 </style>

@@ -133,22 +133,22 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: variables.$color-primary--2;
+      color: var(--theme-color-primary--2);
 
       &--reset {
         cursor: pointer;
-        color: variables.$color-primary--1;
+        color: var(--theme-color-primary--1);
       }
     }
 
     &__navigation-filter-input {
       width: 100%;
-      margin-top: variables.$spacing--10;
-      padding: variables.$spacing--10;
+      margin-top: variables.$va-spacing--10;
+      padding: variables.$va-spacing--10;
       border: 1px solid transparent;
 
       &:focus {
-        border-color: variables.$color-status--info;
+        border-color: var(--theme-color-status--info);
       }
     }
   }

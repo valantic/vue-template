@@ -105,7 +105,7 @@
 
     &__navigation-link {
       display: block;
-      padding: variables.$spacing--5 variables.$spacing--20;
+      padding: variables.$va-spacing--5 variables.$va-spacing--20;
       text-decoration: none;
 
       &:hover {

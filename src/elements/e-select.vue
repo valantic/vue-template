@@ -213,9 +213,9 @@
 
       width: 100%;
       height: $height;
-      padding: variables.$spacing--5 variables.$spacing--30 variables.$spacing--0 variables.$spacing--10;
+      padding: variables.$va-spacing--5 variables.$va-spacing--30 variables.$va-spacing--0 variables.$va-spacing--10;
       outline: none;
-      border: 1px solid variables.$color-grayscale--500;
+      border: 1px solid var(--theme-color-grayscale-500);
       border-radius: 3px;
       cursor: pointer;
       appearance: none;
@@ -234,7 +234,7 @@
     &__icon-wrapper {
       position: absolute;
       top: 50%;
-      right: variables.$spacing--5;
+      right: variables.$va-spacing--5;
       transform: translateY(-50%);
     }
 
@@ -249,7 +249,7 @@
     // hover
     &__select:hover,
     &--hover &__select {
-      border: 1px solid variables.$color-grayscale--400;
+      border: 1px solid var(--theme-color-grayscale--400);
     }
 
     // focus
@@ -262,9 +262,9 @@
     &__select:disabled,
     &--disabled &__select,
     &--disabled &__select:hover {
-      border-color: variables.$color-grayscale--600;
+      border-color: var(--theme-color-grayscale-600);
       cursor: default;
-      color: variables.$color-grayscale--400;
+      color: var(--theme-color-grayscale--400);
     }
 
     /**
@@ -272,25 +272,25 @@
      */
     /* stylelint-disable no-descending-specificity */
     &--state-error {
-      color: variables.$color-status--error;
+      color: var(--theme-color-status--error);
 
       #{$this}__select {
         @include mixins.icon(error, 22px, right 5px center, false); // FF does not support mask on <select>.
 
-        border-color: variables.$color-status--error;
+        border-color: var(--theme-color-status--error);
       }
 
       #{$this}__icon-splitter {
-        border-color: variables.$color-status--error;
+        border-color: var(--theme-color-status--error);
       }
     }
 
     &--state-error &__select:hover {
-      border-color: variables.$color-status--error;
+      border-color: var(--theme-color-status--error);
     }
 
     &--state-error &__select:focus {
-      border: 1px solid variables.$color-status--error;
+      border: 1px solid var(--theme-color-status--error);
     }
 
     &--state-success {
