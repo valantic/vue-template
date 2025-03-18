@@ -113,6 +113,6 @@
     align-items: center;
     padding: variables.$va-spacing--50 variables.$va-spacing--20;
     border: 3px solid var(--theme-color-primary--1);
-    background: var(--theme-color-grayscale-1000);
+    background: var(--theme-color-grayscale--1000);
   }
 </style>

@@ -790,7 +790,7 @@
       position: sticky;
       top: 0;
       z-index: 1;
-      background-color: var(--theme-color-grayscale-1000);
+      background-color: var(--theme-color-grayscale--1000);
     }
 
     &__toggle {
@@ -823,7 +823,7 @@
       display: flex;
       flex-direction: column;
       border-bottom: 2px solid var(--theme-color-grayscale-0);
-      background-color: var(--theme-color-grayscale-1000);
+      background-color: var(--theme-color-grayscale--1000);
 
       @include mixins.media(sm) {
         top: auto;
@@ -954,7 +954,7 @@
       }
 
       &:nth-child(odd) {
-        background-color: var(--theme-color-grayscale-700);
+        background-color: var(--theme-color-grayscale--700);
 
         @include mixins.media(sm) {
           background-color: inherit;
@@ -994,8 +994,8 @@
     }
 
     &__footer-row {
-      border-bottom: 3px solid var(--theme-color-grayscale-500);
-      color: var(--theme-color-grayscale-200);
+      border-bottom: 3px solid var(--theme-color-grayscale--500);
+      color: var(--theme-color-grayscale--200);
     }
 
     &__footer-cell {
@@ -1048,7 +1048,7 @@
 
     &__detail-row {
       padding: 0 variables.$va-spacing--10;
-      border-bottom: 1px solid var(--theme-color-grayscale-600);
+      border-bottom: 1px solid var(--theme-color-grayscale--600);
     }
   }
 </style>

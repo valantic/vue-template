@@ -100,7 +100,7 @@
       width: 2 * $_s-slider__size;
       height: $_s-slider__size;
       border-radius: $_s-slider__size;
-      background-color: var(--theme-color-grayscale-600);
+      background-color: var(--theme-color-grayscale--600);
       cursor: pointer;
       transition: variables.$va-transition-duration--300;
 

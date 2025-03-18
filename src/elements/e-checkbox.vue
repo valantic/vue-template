@@ -207,7 +207,7 @@
         height: $label-size;
         border: 1px solid var(--theme-color-grayscale--400);
         border-radius: 3px;
-        background: var(--theme-color-grayscale-1000);
+        background: var(--theme-color-grayscale--1000);
 
         &::before {
           content: '';
@@ -246,7 +246,7 @@
         height: math.div($toggle--size, 3) * 2;
         margin: 0 math.div($toggle--size, 2);
         border-radius: $toggle--size;
-        background-color: var(--theme-color-grayscale-500);
+        background-color: var(--theme-color-grayscale--500);
         transition: background-color variables.$va-transition-duration--300;
 
         &::before {
@@ -257,7 +257,7 @@
           width: $toggle--size;
           height: $toggle--size;
           border-radius: 50%;
-          background-color: var(--theme-color-grayscale-1000);
+          background-color: var(--theme-color-grayscale--1000);
           box-shadow: 0 1px 2px 1px rgba(var(--theme-color-grayscale-0), 0.2);
           transform: translateY(-50%);
           transition: left variables.$va-transition-duration--300;
@@ -297,18 +297,18 @@
 
     &__field:checked:disabled {
       ~ #{$this}__indicator {
-        border-color: var(--theme-color-grayscale-500);
+        border-color: var(--theme-color-grayscale--500);
       }
 
       ~ #{$this}__indicator:before {
-        background: var(--theme-color-grayscale-500);
+        background: var(--theme-color-grayscale--500);
         cursor: not-allowed;
       }
     }
 
     &__field:disabled {
       ~ #{$this}__indicator {
-        border-color: var(--theme-color-grayscale-500);
+        border-color: var(--theme-color-grayscale--500);
         cursor: not-allowed;
       }
 
@@ -317,7 +317,7 @@
         color: var(--theme-color-grayscale--400);
 
         &::before {
-          border-color: var(--theme-color-grayscale-500);
+          border-color: var(--theme-color-grayscale--500);
         }
       }
     }

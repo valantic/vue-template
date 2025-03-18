@@ -217,7 +217,7 @@
       color: var(--theme-color-grayscale--400);
 
       &::before {
-        border-color: var(--theme-color-grayscale-500);
+        border-color: var(--theme-color-grayscale--500);
       }
     }
 
@@ -225,7 +225,7 @@
       cursor: not-allowed;
 
       &::after {
-        background: var(--theme-color-grayscale-500);
+        background: var(--theme-color-grayscale--500);
       }
     }
   }

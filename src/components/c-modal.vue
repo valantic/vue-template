@@ -266,7 +266,7 @@
       width: 100%;
       height: 100vh;
       overflow-y: auto;
-      background-color: var(--theme-color-grayscale-1000);
+      background-color: var(--theme-color-grayscale--1000);
       justify-self: center;
 
       @include mixins.media(md) {
@@ -289,7 +289,7 @@
     &__header,
     &__sticky-footer {
       padding: variables.$va-spacing--25;
-      border-bottom: 1px solid var(--theme-color-grayscale-600);
+      border-bottom: 1px solid var(--theme-color-grayscale--600);
 
       @include mixins.media(md) {
         padding: variables.$va-spacing--25 variables.$va-spacing--50;
@@ -297,7 +297,7 @@
     }
 
     &__header {
-      border-bottom: 1px solid var(--theme-color-grayscale-600);
+      border-bottom: 1px solid var(--theme-color-grayscale--600);
     }
 
     &__header-inner {
@@ -316,14 +316,14 @@
     }
 
     &__sticky-footer {
-      border-top: 1px solid var(--theme-color-grayscale-600);
+      border-top: 1px solid var(--theme-color-grayscale--600);
 
       @include mixins.media($down: sm) {
         position: sticky;
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: var(--theme-color-grayscale-1000);
+        background-color: var(--theme-color-grayscale--1000);
       }
     }
 

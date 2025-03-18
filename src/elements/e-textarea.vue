@@ -197,7 +197,7 @@
       display: block;
       width: 100%;
       padding: variables.$va-spacing--5 variables.$va-spacing--10;
-      border: 1px solid var(--theme-color-grayscale-500);
+      border: 1px solid var(--theme-color-grayscale--500);
       border-radius: 3px;
 
       // disable iPhone styling
@@ -289,8 +289,8 @@
     &__field:disabled,
     &--disabled &__field,
     &--disabled &__field:hover {
-      border-color: var(--theme-color-grayscale-600);
-      background-color: var(--theme-color-grayscale-1000);
+      border-color: var(--theme-color-grayscale--600);
+      background-color: var(--theme-color-grayscale--1000);
       color: var(--theme-color-grayscale--400);
 
       &::placeholder {
@@ -319,7 +319,7 @@
 
     &--state-info {
       .e-textarea__icon-splitter {
-        border-color: var(--theme-color-grayscale-500);
+        border-color: var(--theme-color-grayscale--500);
       }
     }
 

@@ -24,15 +24,15 @@ $pimcore-gui--color: #3c3f41;
 
   &--item-outline {
     #{$this}__item {
-      border: 1px solid var(--theme-color-grayscale-500);
+      border: 1px solid var(--theme-color-grayscale--500);
     }
   }
 }
 
 .p-content-placeholder {
   padding: variables.$va-spacing--30;
-  outline: 1px dashed var(--theme-color-grayscale-500);
-  background-color: var(--theme-color-grayscale-700);
+  outline: 1px dashed var(--theme-color-grayscale--500);
+  background-color: var(--theme-color-grayscale--700);
 
   &--text-align-center {
     text-align: center;
@@ -220,7 +220,7 @@ $pimcore-gui--color: #3c3f41;
   &__content {
     margin: variables.$va-spacing--10 0;
     padding: variables.$va-spacing--10;
-    background: var(--theme-color-grayscale-1000);
+    background: var(--theme-color-grayscale--1000);
   }
 }
 
@@ -228,8 +228,8 @@ $pimcore-gui--color: #3c3f41;
   margin: variables.$va-spacing--10;
   padding: variables.$va-spacing--10;
   border: 1px dashed var(--theme-color-grayscale--400);
-  background: var(--theme-color-grayscale-600);
-  color: var(--theme-color-grayscale-200);
+  background: var(--theme-color-grayscale--600);
+  color: var(--theme-color-grayscale--200);
   text-align: center;
 
   &--info {
@@ -258,7 +258,7 @@ $pimcore-gui--color: #3c3f41;
     margin: 0 (-(variables.$va-spacing--5) variables.$va-spacing--5);
     padding: variables.$va-spacing--5;
     background: var(--theme-color-status--danger);
-    color: var(--theme-color-grayscale-1000);
+    color: var(--theme-color-grayscale--1000);
     font-weight: bold;
   }
 

@@ -78,7 +78,7 @@
     background-position-y: calc(#{variables.$va-font-size--18} / 2 - 2px);
     background-size: 20px;
     box-shadow: 0 4px 10px 1px rgba(var(--theme-color-grayscale--400), 0.3);
-    color: var(--theme-color-grayscale-1000);
+    color: var(--theme-color-grayscale--1000);
 
     &--state-error {
       background-color: var(--theme-color-status--error);

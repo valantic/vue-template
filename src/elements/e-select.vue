@@ -215,7 +215,7 @@
       height: $height;
       padding: variables.$va-spacing--5 variables.$va-spacing--30 variables.$va-spacing--0 variables.$va-spacing--10;
       outline: none;
-      border: 1px solid var(--theme-color-grayscale-500);
+      border: 1px solid var(--theme-color-grayscale--500);
       border-radius: 3px;
       cursor: pointer;
       appearance: none;
@@ -262,7 +262,7 @@
     &__select:disabled,
     &--disabled &__select,
     &--disabled &__select:hover {
-      border-color: var(--theme-color-grayscale-600);
+      border-color: var(--theme-color-grayscale--600);
       cursor: default;
       color: var(--theme-color-grayscale--400);
     }
