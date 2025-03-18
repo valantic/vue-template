@@ -471,7 +471,7 @@
       gap: variables.$va-spacing--5;
       justify-content: center;
       padding: variables.$va-spacing--15;
-      border-bottom: 1px solid var(--theme-color-grayscale-0);
+      border-bottom: 1px solid var(--theme-color-grayscale--0);
       text-align: center;
     }
 
@@ -497,7 +497,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(var(--theme-color-grayscale-0), 0.85);
+      background: rgba(var(--theme-color-grayscale--0), 0.85);
     }
 
     &--range {
@@ -570,7 +570,7 @@
       @include mixins.z-index(datePicker);
 
       border: none;
-      color: var(--theme-color-grayscale-0);
+      color: var(--theme-color-grayscale--0);
       font-family: variables.$va-font-family--text;
 
       .pika-lendar {
@@ -605,7 +605,7 @@
         // Unfortunately no classes available
         @include mixins.font(variables.$va-font-size--14, variables.$va-line-height--18);
 
-        color: var(--theme-color-grayscale-0);
+        color: var(--theme-color-grayscale--0);
       }
 
       .pika-button.pika-day {
@@ -620,7 +620,7 @@
         border-radius: initial !important; // stylelint-disable-line declaration-no-important
         background: none;
         box-shadow: initial !important; // stylelint-disable-line declaration-no-important
-        color: var(--theme-color-grayscale-0);
+        color: var(--theme-color-grayscale--0);
       }
 
       .is-today {
@@ -651,7 +651,7 @@
       .is-inrange {
         .pika-button.pika-day {
           background: none;
-          color: var(--theme-color-grayscale-0);
+          color: var(--theme-color-grayscale--0);
 
           &::before {
             @include mixins.z-index(back);

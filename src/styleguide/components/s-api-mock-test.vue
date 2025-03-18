@@ -386,7 +386,7 @@
     input,
     select {
       height: 30px;
-      border: 1px solid var(--theme-color-grayscale-0);
+      border: 1px solid var(--theme-color-grayscale--0);
       border-radius: 0;
     }
 

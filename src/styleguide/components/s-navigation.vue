@@ -259,7 +259,7 @@
       padding-right: variables.$va-spacing--10;
       transform: translateX(-100%);
       color: var(--theme-color-grayscale--1000);
-      text-shadow: 1px 1px 5px var(--theme-color-grayscale-0);
+      text-shadow: 1px 1px 5px var(--theme-color-grayscale--0);
 
       #{$this}__navigation-wrapper--open & {
         padding-right: variables.$va-spacing--20;

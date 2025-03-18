@@ -168,13 +168,13 @@
     &__tab-list {
       display: flex;
       align-items: stretch;
-      border-bottom: 1px solid var(--theme-color-grayscale-0);
+      border-bottom: 1px solid var(--theme-color-grayscale--0);
     }
 
     &__tab-item {
       display: flex;
       align-items: stretch;
-      border: 1px solid var(--theme-color-grayscale-0);
+      border: 1px solid var(--theme-color-grayscale--0);
       border-bottom: 0;
 
       &:not(:first-child) {
@@ -187,7 +187,7 @@
       cursor: pointer;
 
       &--active {
-        background: var(--theme-color-grayscale-0);
+        background: var(--theme-color-grayscale--0);
         color: var(--theme-color-grayscale--1000);
       }
     }
@@ -195,7 +195,7 @@
     &__panel {
       display: none;
       padding: variables.$va-spacing--5 variables.$va-spacing--10;
-      border: 1px solid var(--theme-color-grayscale-0);
+      border: 1px solid var(--theme-color-grayscale--0);
       border-top: 0;
 
       &--visible {
