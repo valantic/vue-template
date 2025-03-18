@@ -125,7 +125,7 @@
 
   .e-label {
     display: block;
-    color: var(--theme-color-grayscale-200);
+    color: var(--theme-color-grayscale--200);
 
     &__inner {
       width: 100%;
@@ -189,7 +189,7 @@
     }
 
     &--disabled {
-      color: var(--theme-color-grayscale-300);
+      color: var(--theme-color-grayscale--300);
     }
 
     &--state-error {

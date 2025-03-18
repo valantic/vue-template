@@ -322,7 +322,7 @@
     left: 0;
     padding: variables.$va-spacing--10;
     border-top: 10px solid var(--theme-color-grayscale--400);
-    background-color: var(--theme-color-grayscale-1000);
+    background-color: var(--theme-color-grayscale--1000);
 
     @include mixins.media(md) {
       @include mixins.z-index(back);
@@ -340,7 +340,7 @@
     &__header {
       margin-bottom: variables.$va-spacing--20;
       padding-bottom: variables.$va-spacing--10;
-      border-bottom: 1px solid var(--theme-color-grayscale-500);
+      border-bottom: 1px solid var(--theme-color-grayscale--500);
     }
 
     &__header-actions {

@@ -188,7 +188,7 @@
 
       &--active {
         background: var(--theme-color-grayscale-0);
-        color: var(--theme-color-grayscale-1000);
+        color: var(--theme-color-grayscale--1000);
       }
     }
 

@@ -169,7 +169,7 @@
       min-width: variables.$va-spacing--40;
       height: 100%;
       margin: auto;
-      background-color: var(--theme-color-grayscale-1000);
+      background-color: var(--theme-color-grayscale--1000);
       font-family: variables.$va-font-family--text;
 
       &::after {
@@ -181,7 +181,7 @@
         opacity: 0.2;
         border-top: 1px solid var(--theme-color-grayscale--400);
         border-left: 1px solid var(--theme-color-grayscale--400);
-        background-color: var(--theme-color-grayscale-1000);
+        background-color: var(--theme-color-grayscale--1000);
         background-image: url('../assets/menu-button.svg');
         background-repeat: no-repeat;
         background-position: center;
@@ -258,7 +258,7 @@
       display: block;
       padding-right: variables.$va-spacing--10;
       transform: translateX(-100%);
-      color: var(--theme-color-grayscale-1000);
+      color: var(--theme-color-grayscale--1000);
       text-shadow: 1px 1px 5px var(--theme-color-grayscale-0);
 
       #{$this}__navigation-wrapper--open & {

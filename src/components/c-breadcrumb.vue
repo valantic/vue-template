@@ -85,7 +85,7 @@
     }
 
     &__item:last-child {
-      color: var(--theme-color-grayscale-200);
+      color: var(--theme-color-grayscale--200);
 
       &::after {
         content: '';

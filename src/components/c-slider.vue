@@ -261,7 +261,7 @@
       background-color: var(--theme-color-primary--2);
       transform: translateY(-50%);
       cursor: pointer;
-      color: var(--theme-color-grayscale-1000);
+      color: var(--theme-color-grayscale--1000);
       transition: opacity variables.$va-transition-duration--100 ease-in-out;
 
       &--next {

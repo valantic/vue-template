@@ -351,7 +351,7 @@
       width: 100%;
       height: $e-input-height;
       padding: variables.$va-spacing--5 variables.$va-spacing--10;
-      border: 1px solid var(--theme-color-grayscale-500);
+      border: 1px solid var(--theme-color-grayscale--500);
       border-radius: variables.$va-border-radius--100;
       color: var(--theme-color-secondary--1);
       font-family: variables.$va-font-family--text;
@@ -473,8 +473,8 @@
     &--disabled:not(&--border-0) &__field,
     &--disabled &__field:hover,
     &--disabled:not(&--border-0) &__field:hover {
-      border-color: var(--theme-color-grayscale-600);
-      background-color: var(--theme-color-grayscale-1000);
+      border-color: var(--theme-color-grayscale--600);
+      background-color: var(--theme-color-grayscale--1000);
       color: var(--theme-color-grayscale--400);
 
       &::placeholder {
@@ -484,7 +484,7 @@
 
     &--disabled {
       #{$this}__slot {
-        color: var(--theme-color-grayscale-300);
+        color: var(--theme-color-grayscale--300);
       }
     }
 
@@ -515,7 +515,7 @@
 
     &--state-info {
       .e-input__icon-splitter {
-        border-color: var(--theme-color-grayscale-500);
+        border-color: var(--theme-color-grayscale--500);
       }
     }
 

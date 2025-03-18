@@ -92,14 +92,14 @@
 
     &__content {
       flex: 1 0 auto;
-      background: var(--theme-color-grayscale-600);
+      background: var(--theme-color-grayscale--600);
     }
 
     &__inner {
       position: relative;
       max-width: #{map.get(variables.$va-breakpoints, xl) - 20px};
       margin: 0 auto;
-      background: var(--theme-color-grayscale-1000);
+      background: var(--theme-color-grayscale--1000);
       box-shadow: 0 4px 10px 1px rgba(var(--theme-color-grayscale--400), 0.3);
     }
 

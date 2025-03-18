@@ -457,7 +457,7 @@
       position: absolute;
       min-width: 100%; // Width of anchor.
       margin-top: variables.$va-spacing--10;
-      background: var(--theme-color-grayscale-1000);
+      background: var(--theme-color-grayscale--1000);
 
       @include mixins.media(sm) {
         min-width: 500px;
@@ -540,15 +540,15 @@
 
       .e-date {
         &__icon {
-          color: var(--theme-color-grayscale-1000);
+          color: var(--theme-color-grayscale--1000);
         }
 
         .e-input__field {
           &,
           &:focus,
           &:hover {
-            border-bottom-color: var(--theme-color-grayscale-1000);
-            background-color: var(--theme-color-grayscale-1000);
+            border-bottom-color: var(--theme-color-grayscale--1000);
+            background-color: var(--theme-color-grayscale--1000);
           }
         }
       }
@@ -643,7 +643,7 @@
       .is-selected {
         .pika-button.pika-day {
           background: var(--theme-color-primary--1);
-          color: var(--theme-color-grayscale-1000);
+          color: var(--theme-color-grayscale--1000);
           font-weight: initial;
         }
       }

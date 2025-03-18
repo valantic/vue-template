@@ -368,9 +368,9 @@
       width: 100%;
       min-height: $e-multiselect-height;
       padding: 0 variables.$va-spacing--5 0 variables.$va-spacing--10;
-      border: 1px solid var(--theme-color-grayscale-500);
+      border: 1px solid var(--theme-color-grayscale--500);
       border-radius: 3px;
-      background-color: var(--theme-color-grayscale-1000);
+      background-color: var(--theme-color-grayscale--1000);
       cursor: pointer;
 
       &:focus {
@@ -403,7 +403,7 @@
     }
 
     &__field-wrapper--disabled {
-      color: var(--theme-color-grayscale-500);
+      color: var(--theme-color-grayscale--500);
       pointer-events: none;
     }
 
@@ -425,9 +425,9 @@
       width: 100%;
       max-height: 300px;
       overflow: auto;
-      border: 1px solid var(--theme-color-grayscale-500);
+      border: 1px solid var(--theme-color-grayscale--500);
       border-top: 0;
-      background-color: var(--theme-color-grayscale-1000);
+      background-color: var(--theme-color-grayscale--1000);
       transform-origin: top;
     }
 
@@ -455,7 +455,7 @@
       min-height: $e-multiselect-height;
       padding: 0 variables.$va-spacing--5;
       outline: none;
-      border: 1px solid var(--theme-color-grayscale-500);
+      border: 1px solid var(--theme-color-grayscale--500);
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
     }

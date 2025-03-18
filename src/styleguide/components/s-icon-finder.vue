@@ -276,7 +276,7 @@
     }
 
     &__grid-item--negative {
-      background-color: var(--theme-color-grayscale-500);
+      background-color: var(--theme-color-grayscale--500);
     }
 
     &__icon-wrapper {

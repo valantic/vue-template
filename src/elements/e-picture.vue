@@ -355,7 +355,7 @@
     }
 
     &--placeholder {
-      background-color: var(--theme-color-grayscale-200);
+      background-color: var(--theme-color-grayscale--200);
     }
   }
 </style>

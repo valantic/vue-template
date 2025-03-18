@@ -436,7 +436,7 @@
     &__data,
     &__validation {
       padding: variables.$va-spacing--50;
-      border: 1px dotted var(--theme-color-grayscale-500);
+      border: 1px dotted var(--theme-color-grayscale--500);
     }
 
     .e-fieldset {

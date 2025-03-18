@@ -324,7 +324,7 @@
     min-width: 165px;
     padding: 6px variables.$va-spacing--10;
     outline: none;
-    border: 1px solid var(--theme-color-grayscale-500);
+    border: 1px solid var(--theme-color-grayscale--500);
     border-radius: $border-radius;
     background: transparent;
     cursor: pointer;
@@ -338,8 +338,8 @@
     &--focus,
     &:focus {
       outline: none;
-      border: 1px solid var(--theme-color-grayscale-500);
-      background-color: var(--theme-color-grayscale-500);
+      border: 1px solid var(--theme-color-grayscale--500);
+      background-color: var(--theme-color-grayscale--500);
       color: var(--theme-color-primary--3);
     }
 
@@ -352,7 +352,7 @@
 
     &--hover:not(&--touch),
     &:hover:not(&--touch) {
-      background-color: var(--theme-color-grayscale-500);
+      background-color: var(--theme-color-grayscale--500);
       color: var(--theme-color-primary--3);
     }
 
@@ -367,10 +367,10 @@
     &--disabled,
     &[disabled]:hover,
     &--disabled:hover {
-      border-color: var(--theme-color-grayscale-600);
+      border-color: var(--theme-color-grayscale--600);
       background-color: transparent;
       cursor: default;
-      color: var(--theme-color-grayscale-300);
+      color: var(--theme-color-grayscale--300);
       pointer-events: none;
     }
 
