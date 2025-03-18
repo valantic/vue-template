@@ -4,6 +4,6 @@
 @use 'the-new-css-reset/css/reset';
 // General project styles
 @use 'scss/themes/theme-default';
-@use 'styling-template/scss/basics';
-@use 'styling-template/scss/globals';
+@use '@valantic/scss-utils/scss/basics';
+@use '@valantic/scss-utils/scss/globals';
 @use './scss/setup';
