@@ -28,6 +28,9 @@
   import { RouteRecordRaw } from 'vue-router';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+  // type Data = {};
+
   export default defineComponent({
     name: 's-navigation-block',
     // components: {},
@@ -48,7 +51,13 @@
         default: false,
       },
     },
-    // data() {},
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
+    // data(): Data {
+    //   return {};
+    // },
     computed: {
       /**
        * Returns all modifiers for the component main class.
@@ -84,7 +93,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .s-navigation-block {
     min-width: 200px;

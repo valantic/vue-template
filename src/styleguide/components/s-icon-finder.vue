@@ -225,8 +225,8 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/mixins';
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .s-icon-finder {
     font-family: variables.$font-family--primary;

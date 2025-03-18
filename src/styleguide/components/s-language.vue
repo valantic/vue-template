@@ -20,6 +20,8 @@
   import { defineComponent } from 'vue';
   import i18n, { I18N_LOCALES, i18nSetLocale } from '@/setup/i18n';
 
+  // type Setup = {};
+
   type Data = {
     i18nLocales: string[];
   };
@@ -29,6 +31,10 @@
 
     // props: {},
 
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
     data(): Data {
       return {
         i18nLocales: I18N_LOCALES,

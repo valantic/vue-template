@@ -13,6 +13,8 @@
   import { defineComponent } from 'vue';
   import eCheckbox from '@/elements/e-checkbox.vue';
 
+  // type Setup = {};
+
   type Data = {
     /**
      * Determines if the HTML validation styles should be applied.
@@ -32,6 +34,10 @@
     // mixins: [],
 
     // props: {},
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
     data(): Data {
       return {
         enabled: true,
@@ -65,7 +71,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/variables';
   @use 'sass:color';
 
   // stylelint-disable max-line-length

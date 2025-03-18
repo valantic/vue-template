@@ -52,6 +52,8 @@
   import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
   import tooltipDirective from '@/plugins/tooltip/directives/directive';
 
+  // type Setup = {};
+
   type Data = {
     active: boolean;
     placementOptions: Record<'label' | 'value', string>[];
@@ -70,6 +72,10 @@
     },
 
     // props: {},
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
     data(): Data {
       return {
         active: true,
@@ -126,11 +132,11 @@
 </script>
 
 <style lang="scss">
-  @use '../../../setup/scss/variables' as *;
+  @use '@/setup/scss/variables';
 
   .r-tooltips {
     &__item {
-      margin-bottom: $spacing--10;
+      margin-bottom: variables.$spacing--10;
     }
   }
 </style>

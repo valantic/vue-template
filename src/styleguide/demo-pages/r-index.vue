@@ -22,11 +22,17 @@
   import { defineComponent } from 'vue';
   import sReadme from '@/styleguide/components/s-readme.vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   export default defineComponent({
     name: 'r-index',
     components: { sReadme },
 
-    // data() {
+    // setup(): Setup {
+    //   return {};
+    // },
+    // data(): Data {
     //   return {};
     // },
 
@@ -42,9 +48,9 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/mixins';
-  @use '../../setup/scss/variables';
   @use 'sass:map';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .r-index {
     max-width: map.get(variables.$breakpoints, xl);

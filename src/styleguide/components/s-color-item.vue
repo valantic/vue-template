@@ -22,6 +22,9 @@
   import { PropType, defineComponent } from 'vue';
   import sColorSpecimen from './s-color-specimen.vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   type Color = {
     name: string;
     value: string[];
@@ -50,7 +53,11 @@
         required: true,
       },
     },
-    // data() {
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
+    // data(): Data {
     //   return {};
     // },
 
@@ -82,8 +89,8 @@
 
 <style lang="scss">
   @use 'sass:math';
-  @use '../../setup/scss/variables';
-  @use '../../setup/scss/mixins';
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
 
   .s-color-item {
     &__grid {

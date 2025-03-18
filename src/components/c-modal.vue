@@ -63,7 +63,8 @@
   import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  // type Setup = {}
+  // type Setup = {};
+  // type Data = {};
 
   /**
    * Renders a modal dialog.
@@ -130,7 +131,9 @@
       'close': (): boolean => true,
     },
 
-    // setup(): Setup {},
+    // setup(): Setup {
+    //   return {};
+    // },
     // data(): Data {
     //   return {};
     // },

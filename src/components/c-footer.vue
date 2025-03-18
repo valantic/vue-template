@@ -5,13 +5,19 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   export default defineComponent({
     name: 'c-footer',
 
     // components: {},
 
     // props: {},
-    // data() {
+    // setup(): Setup {
+    //   return {};
+    // },
+    // data(): Data {
     //   return {};
     // },
 

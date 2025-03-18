@@ -25,6 +25,7 @@
   type Setup = {
     breadcrumbStore: ReturnType<typeof useBreadcrumbStore>;
   };
+  // type Data = {};
 
   /**
    * Renders a list of breadcrumbs items from the store module.
@@ -42,7 +43,7 @@
         breadcrumbStore: useBreadcrumbStore(),
       };
     },
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 

@@ -12,6 +12,8 @@
   import { StyleValue, defineComponent } from 'vue';
   import scrollbarWidth from '@/helpers/scrollbar-width';
 
+  // type Setup = {};
+
   type ResizeObserverCallback = () => void;
 
   type Data = {
@@ -29,6 +31,9 @@
     // components: {},
 
     // props: {},
+    // setup(): Setup {
+    //   return {};
+    // },
     data(): Data {
       return {
         /**

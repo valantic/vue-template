@@ -16,6 +16,9 @@
   import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+  // type Data = {};
+
   export default defineComponent({
     name: 'e-progress',
 
@@ -45,7 +48,10 @@
         default: null, // Translation can not be set here because it will not be computed
       },
     },
-    // data() {
+    // setup(): Setup {
+    //   return {};
+    // },
+    // data(): Data {
     //   return {};
     // },
 

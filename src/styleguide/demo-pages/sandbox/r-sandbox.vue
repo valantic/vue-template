@@ -1,21 +1,35 @@
 <template>
-  <l-default>
-    <s-icon-finder :class="b('icon-finder')" />
-  </l-default>
+  <div :class="b()">
+    <h1>Sandbox</h1>
+    <h2>E-Logo</h2>
+    <e-logo custom-theme="01" />
+    <h2>C-Breadbrumb</h2>
+    <c-breadcrumb />
+  </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import sIconFinder from '@/styleguide/components/s-icon-finder.vue';
+  import cBreadcrumb from '@/components/c-breadcrumb.vue';
+  import eLogo from '@/elements/e-logo.vue';
+
+  // type Setup = {};
+  // type Data = {};
 
   export default defineComponent({
-    name: 'r-icons',
+    name: 'r-sandbox',
     components: {
-      sIconFinder,
+      cBreadcrumb,
+      eLogo,
     },
 
     // props: {},
-    // data() {
+    // emits: {},
+
+    // setup(): Setup {
+    //   return {};
+    // },
+    // data(): Data {
     //   return {};
     // },
 
@@ -39,9 +53,7 @@
 </script>
 
 <style lang="scss">
-  .r-icons {
-    &__icon-finder {
-      max-width: 90%; // Prevent viewport overflow
-    }
+  .r-sandbox {
+    // Add specific styles.
   }
 </style>

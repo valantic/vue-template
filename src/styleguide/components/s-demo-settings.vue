@@ -34,6 +34,8 @@
   import sApiMockTest from '@/styleguide/components/s-api-mock-test.vue';
   import sHtmlValidation from '@/styleguide/components/s-html-validation.vue';
 
+  // type Setup = {};
+
   type Data = {
     /**
      * Determines if the user is logged in.
@@ -56,6 +58,10 @@
     },
 
     // props: {},
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
     data(): Data {
       return {
         loggedIn: true,
@@ -83,7 +89,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .s-demo-settings {
     margin-top: variables.$spacing--10;

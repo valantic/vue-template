@@ -13,6 +13,9 @@
 <script lang="ts">
   import { PropType, defineComponent } from 'vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   export enum VideoSource {
     Vimeo = 'vimeo',
     Youtube = 'youtube',
@@ -105,7 +108,12 @@
     },
 
     // emits: {},
-    // setup(): Setup {},
+    // setup(): Setup {
+    //   return {};
+    // },
+    // data(): Data {
+    //   return {};
+    // },
 
     computed: {
       /**

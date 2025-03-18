@@ -27,6 +27,9 @@
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+  // type Data = {};
+
   /**
    * Checkbox component for form elements.
    * Can be used as single element with a Boolean value or multiple checkboxes with an Array.
@@ -86,7 +89,7 @@
       };
     },
 
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 

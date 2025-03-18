@@ -18,6 +18,8 @@
     notificationStore: ReturnType<typeof useNotificationStore>;
   };
 
+  // type Data = {};
+
   export default defineComponent({
     name: 'l-default',
 
@@ -32,7 +34,7 @@
         notificationStore: useNotificationStore(),
       };
     },
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 

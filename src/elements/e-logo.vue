@@ -26,6 +26,9 @@
   import useTheme, { Theme } from '@/compositions/themes';
   import eIcon from '@/elements/e-icon.vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   type Logo = {
     icon: Icon;
     alt: string;
@@ -56,6 +59,9 @@
         ...useTheme(),
       };
     },
+    // data(): Data {
+    //   return {);
+    // },
 
     computed: {
       /**
