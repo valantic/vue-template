@@ -3,12 +3,16 @@
     <header is="vue:c-header" />
     <router-view />
     <footer is="vue:c-footer" />
-    <s-navigation nav-position="bottom-right" />
+    <c-vas-sidebar
+      :settings="styleguideSettings"
+      @update-theme="onUpdateTheme"
+    />
   </div>
 </template>
 
 <script lang="ts">
-  import sNavigation from '@valantic/vue-styleguide/src/styleguide/components/s-navigation.vue';
+  import cVasSidebar from '@valantic/vue-styleguide/src/components/c-vas-sidebar.vue';
+  import { StyleguideSettings } from '@valantic/vue-styleguide/src/types/settings';
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
   import useNotificationStore from '@/stores/notification';
@@ -17,13 +21,15 @@
     notificationStore: ReturnType<typeof useNotificationStore>;
   };
 
-  // type Data = {};
+  type Data = {
+    styleguideSettings: StyleguideSettings;
+  };
 
   export default defineComponent({
     name: 'app',
 
     components: {
-      sNavigation,
+      cVasSidebar,
     },
 
     // props: {},
@@ -33,9 +39,25 @@
         notificationStore: useNotificationStore(),
       };
     },
-    // data(): Data {
-    //   return {};
-    // },
+    data(): Data {
+      return {
+        styleguideSettings: {
+          themePath: 'src/setup/scss/themes',
+          availableThemes: [
+            {
+              name: 'theme-01',
+              id: 'theme-01',
+              selected: true,
+            },
+            {
+              name: 'theme-02',
+              id: 'theme-02',
+              selected: false,
+            },
+          ],
+        },
+      };
+    },
 
     // computed: {},
     // watch: {},
@@ -67,6 +89,10 @@
           // Clears the localStorage notifications.
           localStorage.removeItem('vueNotification');
         }
+      },
+
+      onUpdateTheme(theme: string) {
+        console.log('theme has changed.', theme);
       },
     },
     // render() {},
