@@ -10,7 +10,6 @@
       v-bind="$attrs"
       @blur="onBlur"
       @focus="onFocus"
-      @input="onInput"
       @keyup.enter="onEnterKeyUp"
       @mouseenter="hover = true"
       @mouseleave="hover = false"
@@ -62,9 +61,7 @@
     slotStart: Ref<HTMLSpanElement | null>;
   };
 
-  type Data = {
-    internalValue: string;
-  };
+  // type Data = {};
 
   /**
    * Input form component
@@ -89,7 +86,7 @@
        */
       modelValue: {
         default: null,
-        type: String,
+        type: [String, Number],
       },
 
       /**
@@ -154,7 +151,7 @@
     },
 
     emits: {
-      'update:modelValue': (payload: string) => typeof payload === 'string',
+      'update:modelValue': (payload: string | number) => typeof payload === 'string',
       'focus': () => true,
       'blur': () => true,
       'enter': () => true,
@@ -173,11 +170,9 @@
       };
     },
 
-    data(): Data {
-      return {
-        internalValue: this.modelValue,
-      };
-    },
+    // data(): Data {
+    //   return {};
+    // },
     computed: {
       /**
        * Returns a flag, if field notifications should be displayed.
@@ -200,17 +195,20 @@
           noNativeControl,
         };
       },
-    },
-    watch: {
+
       /**
-       * Updates internal value if model value got changed from parent.
+       * Handles the internal value of the input field.
        */
-      modelValue(value: string) {
-        if (value !== this.internalValue) {
-          this.internalValue = value;
-        }
+      internalValue: {
+        get(): string | number {
+          return this.modelValue;
+        },
+        set(value: string | number) {
+          this.$emit('update:modelValue', value);
+        },
       },
     },
+    // watch: {},
 
     // beforeCreate() {},
     // created() {},
@@ -237,20 +235,6 @@
     },
 
     methods: {
-      /**
-       * Emits input to parent component.
-       */
-      onInput(event: Event) {
-        const target = event.target as HTMLInputElement;
-
-        this.internalValue = target.value;
-
-        /**
-         * input event fires on input
-         */
-        this.$emit('update:modelValue', target.value);
-      },
-
       /**
        * Emits focus to parent and wrapper component.
        * Update "focus" state.
