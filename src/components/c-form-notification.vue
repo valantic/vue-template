@@ -67,29 +67,29 @@
   @use '@/setup/scss/variables';
 
   .c-form-notification {
-    @include mixins.font(variables.$font-size--14, 18px);
+    @include mixins.font(variables.$va-font-size--14, 18px);
 
     display: block;
-    padding: variables.$spacing--10 35px variables.$spacing--10 variables.$spacing--5;
-    border-bottom-right-radius: variables.$border-radius--500;
-    border-bottom-left-radius: variables.$border-radius--500;
+    padding: variables.$va-spacing--10 35px variables.$va-spacing--10 variables.$va-spacing--5;
+    border-bottom-right-radius: variables.$va-border-radius--100;
+    border-bottom-left-radius: variables.$va-border-radius--100;
     background-repeat: no-repeat;
     background-position-x: calc(100% - 5px);
-    background-position-y: calc(#{variables.$font-size--18} / 2 - 2px);
+    background-position-y: calc(#{variables.$va-font-size--18} / 2 - 2px);
     background-size: 20px;
-    box-shadow: 0 4px 10px 1px rgba(variables.$color-grayscale--400, 0.3);
-    color: variables.$color-grayscale--1000;
+    box-shadow: 0 4px 10px 1px rgba(var(--theme-color-grayscale--400), 0.3);
+    color: var(--theme-color-grayscale--1000);
 
     &--state-error {
-      background-color: variables.$color-status--error;
+      background-color: var(--theme-color-status--error);
     }
 
     &--state-info {
-      background-color: variables.$color-status--info;
+      background-color: var(--theme-color-status--error) tatus--info;
     }
 
     &--state-success {
-      background-color: variables.$color-status--success;
+      background-color: var(--theme-color-status--success);
     }
   }
 </style>

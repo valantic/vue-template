@@ -1,3 +1,1 @@
-@use './mixins';
-@include mixins.spacings('spacing--bottom', 'margin-bottom');
-@include mixins.spacings('spacing--top', 'margin-top');
+@use '@valantic/scss-utils/scss/spacings';

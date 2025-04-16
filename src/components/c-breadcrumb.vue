@@ -71,21 +71,21 @@
   @use '@/setup/scss/mixins';
 
   .c-breadcrumb {
-    @include mixins.font(variables.$font-size--12, 20px);
+    @include mixins.font(variables.$va-font-size--12, 20px);
 
-    color: variables.$color-grayscale--400;
+    color: var(--theme-color-grayscale--400);
 
     &__item {
       display: inline-block;
 
       &::after {
         content: '|';
-        padding: 0 variables.$spacing--5;
+        padding: 0 variables.$va-spacing--5;
       }
     }
 
     &__item:last-child {
-      color: variables.$color-grayscale--200;
+      color: var(--theme-color-grayscale--200);
 
       &::after {
         content: '';
@@ -100,7 +100,7 @@
     }
 
     &__link:hover {
-      color: variables.$color-secondary--1;
+      color: var(--theme-color-secondary--1);
     }
   }
 </style>

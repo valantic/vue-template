@@ -31,7 +31,7 @@
     "url": "git+https://github.com/valantic/vue-template.git"
   },
   "engines": {
-    "node": ">=20.10 <21",
+    "node": ">=22 <23",
     "npm": ">=10 <11"
   },
   "keywords": [
@@ -47,6 +47,7 @@
   "homepage": "https://github.com/valantic/vue-template",
   "dependencies": {
     "@popperjs/core": "~2.11.8",
+    "@valantic/scss-utils": "github:valantic/scss-utils#main",
     "@vuelidate/core": "~2.0.3",
     "@vuelidate/validators": "~2.0.4",
     "axios": "~1.7.9",
@@ -80,6 +81,7 @@
     "@types/resize-observer-browser": "~0.1.11",
     "@typescript-eslint/eslint-plugin": "~8.21.0",
     "@typescript-eslint/parser": "~8.21.0",
+    "@valantic/vue-styleguide": "github:valantic/vue-styleguide#main",
     "@vitejs/plugin-vue": "~5.2.1",
     "@vue/eslint-config-typescript": "~13.0.0",
     "@vue/test-utils": "~2.4.6",
@@ -101,6 +103,7 @@
     "postcss": "~8.5.3",
     "postcss-html": "~1.8.0",
     "postcss-scss": "~4.0.9",
+    "prettier": "~3.2.5",
     "react": "~18.3.1",
     "react-dom": "~18.3.1",
     "rollup-plugin-visualizer": "~5.14.0",

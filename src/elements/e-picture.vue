@@ -317,7 +317,7 @@
 
       &[loading='lazy'] {
         opacity: 0;
-        transition: opacity variables.$transition-duration--200;
+        transition: opacity variables.$va-transition-duration--200;
       }
     }
 
@@ -355,7 +355,7 @@
     }
 
     &--placeholder {
-      background-color: variables.$color-grayscale--200;
+      background-color: var(--theme-color-grayscale--200);
     }
   }
 </style>

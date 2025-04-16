@@ -457,39 +457,39 @@
     &__calendar-wrapper {
       position: absolute;
       min-width: 100%; // Width of anchor.
-      margin-top: variables.$spacing--10;
-      background: variables.$color-grayscale--1000;
+      margin-top: variables.$va-spacing--10;
+      background: var(--theme-color-grayscale--1000);
 
       @include mixins.media(sm) {
         min-width: 500px;
-        margin-top: variables.$spacing--15;
+        margin-top: variables.$va-spacing--15;
       }
     }
 
     &__calendar-header {
       position: relative;
       display: flex;
-      gap: variables.$spacing--5;
+      gap: variables.$va-spacing--5;
       justify-content: center;
-      padding: variables.$spacing--15;
-      border-bottom: 1px solid variables.$color-grayscale--0;
+      padding: variables.$va-spacing--15;
+      border-bottom: 1px solid var(--theme-color-grayscale--0);
       text-align: center;
     }
 
     &__close {
       top: 50%;
-      right: variables.$spacing--15;
+      right: variables.$va-spacing--15;
       cursor: pointer;
     }
 
     &__calendar {
       display: flex;
       justify-content: center;
-      padding-block: variables.$spacing--20;
+      padding-block: variables.$va-spacing--20;
     }
 
     &__title {
-      @include mixins.font(variables.$font-size--18, variables.$line-height--20);
+      @include mixins.font(variables.$va-font-size--18, variables.$va-line-height--20);
     }
 
     &__backdrop {
@@ -498,7 +498,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(variables.$color-grayscale--0, 0.85);
+      background: rgba(var(--theme-color-grayscale--0), 0.85);
     }
 
     &--range {
@@ -507,13 +507,13 @@
         grid-template-areas: 'start' 'end';
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
-        row-gap: variables.$spacing--10;
+        row-gap: variables.$va-spacing--10;
 
         @include mixins.media(xs) {
           grid-template-areas: 'start end';
           grid-template-columns: 1fr 1fr;
           grid-template-rows: auto;
-          column-gap: variables.$spacing--25;
+          column-gap: variables.$va-spacing--25;
         }
       }
 
@@ -541,15 +541,15 @@
 
       .e-date {
         &__icon {
-          color: variables.$color-grayscale--1000;
+          color: var(--theme-color-grayscale--1000);
         }
 
         .e-input__field {
           &,
           &:focus,
           &:hover {
-            border-bottom-color: variables.$color-grayscale--1000;
-            background-color: variables.$color-grayscale--1000;
+            border-bottom-color: var(--theme-color-grayscale--1000);
+            background-color: var(--theme-color-grayscale--1000);
           }
         }
       }
@@ -558,7 +558,7 @@
     &__transition {
       &--fade-enter-active,
       &--fade-leave-active {
-        transition: opacity variables.$transition-duration--200 ease;
+        transition: opacity variables.$va-transition-duration--200 ease;
       }
 
       &--fade-enter-from,
@@ -571,8 +571,8 @@
       @include mixins.z-index(datePicker);
 
       border: none;
-      color: variables.$color-grayscale--0;
-      font-family: variables.$font-family--primary;
+      color: var(--theme-color-grayscale--0);
+      font-family: variables.$va-font-family--text;
 
       .pika-lendar {
         width: 100%;
@@ -581,7 +581,11 @@
 
       .pika-title {
         .pika-label {
-          @include mixins.font(variables.$font-size--18, variables.$line-height--20, variables.$font-weight--bold);
+          @include mixins.font(
+            variables.$va-font-size--18,
+            variables.$va-line-height--20,
+            variables.$va-font-weight--bold
+          );
         }
 
         .pika-prev,
@@ -600,24 +604,24 @@
 
       thead th abbr {
         // Unfortunately no classes available
-        @include mixins.font(variables.$font-size--14, variables.$line-height--18);
+        @include mixins.font(variables.$va-font-size--14, variables.$va-line-height--18);
 
-        color: variables.$color-grayscale--0;
+        color: var(--theme-color-grayscale--0);
       }
 
       .pika-button.pika-day {
-        @include mixins.font(variables.$font-size--16, variables.$line-height--18);
+        @include mixins.font(variables.$va-font-size--16, variables.$va-line-height--18);
 
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: variables.$spacing--10;
+        padding: variables.$va-spacing--10;
         border: initial !important; // stylelint-disable-line declaration-no-important
         border-radius: initial !important; // stylelint-disable-line declaration-no-important
         background: none;
         box-shadow: initial !important; // stylelint-disable-line declaration-no-important
-        color: variables.$color-grayscale--0;
+        color: var(--theme-color-grayscale--0);
       }
 
       .is-today {
@@ -631,7 +635,7 @@
       .is-outside-current-month {
         .pika-button.pika-day {
           opacity: 1;
-          color: variables.$color-grayscale--400;
+          color: var(--theme-color-grayscale--400);
         }
       }
 
@@ -639,8 +643,8 @@
       .is-endrange,
       .is-selected {
         .pika-button.pika-day {
-          background: variables.$color-primary--1;
-          color: variables.$color-grayscale--1000;
+          background: var(--theme-color-primary--1);
+          color: var(--theme-color-grayscale--1000);
           font-weight: initial;
         }
       }
@@ -648,7 +652,7 @@
       .is-inrange {
         .pika-button.pika-day {
           background: none;
-          color: variables.$color-grayscale--0;
+          color: var(--theme-color-grayscale--0);
 
           &::before {
             @include mixins.z-index(back);
@@ -660,7 +664,7 @@
             width: 100%;
             height: 100%;
             opacity: 0.3;
-            background-color: variables.$color-primary--1;
+            background-color: var(--theme-color-primary--1);
           }
         }
       }
