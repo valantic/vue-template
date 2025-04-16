@@ -26,6 +26,14 @@
               disabled
             />
           </e-label>
+          <e-label name="Float">
+            <e-input
+              v-model="form.float"
+              type="number"
+              name="float"
+              placeholder="Enter a float number"
+            />
+          </e-label>
           <e-label
             name="E-Mail"
             required
@@ -268,6 +276,7 @@
     form: {
       name: string;
       surname: string;
+      float?: number;
       email: string;
       notes: string;
       language: string;
