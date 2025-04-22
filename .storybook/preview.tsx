@@ -21,4 +21,5 @@ const preview: Preview = {
   },
 };
 
+// eslint-disable-next-line vue/require-direct-export
 export default preview;

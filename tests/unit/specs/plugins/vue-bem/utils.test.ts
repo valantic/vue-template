@@ -1,4 +1,3 @@
-/* eslint-disable no-undefined */
 import { describe, expect, test } from 'vitest';
 import { hyphenate, isNumber, isPObject, isString } from '@/plugins/vue-bem-cn/src/utils';
 

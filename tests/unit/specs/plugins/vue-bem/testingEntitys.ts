@@ -1,4 +1,4 @@
-/* eslint-disable quote-props, id-length */
+/* eslint-disable id-length */
 export const block = 'BlockName';
 export const el = 'elementName';
 export const delimiters = {

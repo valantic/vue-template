@@ -1,8 +1,8 @@
 import { Plugin } from 'vue';
 
-enum GaListNames {
-  CATALOG = 'Catalog',
-  SEARCH_RESULTS = 'Search results',
+enum GaListNames { // eslint-disable-line @typescript-eslint/naming-convention
+  CATALOG = 'Catalog', // eslint-disable-line @typescript-eslint/naming-convention
+  SEARCH_RESULTS = 'Search results', // eslint-disable-line @typescript-eslint/naming-convention
   // .. Add additional lists
 }
 
@@ -88,10 +88,10 @@ const plugin: Plugin = {
         // Log if debug and development mode are active
         if (import.meta.env.MODE !== 'production') {
           if (debug) {
-            console.group('GTM debug'); // eslint-disable-line no-console
-            console.log('payload', payload); // eslint-disable-line no-console
-            console.log('dataLayer', window.dataLayer); // eslint-disable-line no-console
-            console.groupEnd(); // eslint-disable-line no-console
+            console.group('GTM debug');
+            console.log('payload', payload);
+            console.log('dataLayer', window.dataLayer);
+            console.groupEnd();
           }
         }
       } else {

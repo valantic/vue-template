@@ -24,7 +24,6 @@ export type FormStates = {
   hasDefaultState: ComputedRef<boolean>;
 };
 
-// eslint-disable-next-line -- TODO: did not know how to fix the return type so it is valid on component side.
 export const withProps = () => ({
   /**
    * Form states for class names (default, error, success, warning, info)

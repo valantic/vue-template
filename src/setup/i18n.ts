@@ -49,7 +49,7 @@ const i18n = createI18n<[MessagesSchema], 'de'>({
    * Callback for the 'missing' event, during translation lookup.
    */
   missing(locale, messageKey) {
-    console.error(`No '${locale}' translations found for '${messageKey}'`); // eslint-disable-line no-console
+    console.error(`No '${locale}' translations found for '${messageKey}'`);
   },
   messages: {
     [I18N_FALLBACK]: I18N_FALLBACK_MESSAGES,
@@ -93,7 +93,7 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
       i18n.global.setLocaleMessage(locale, localeMessages);
 
       return locale;
-    }); // eslint-disable-line vue/script-indent
+    });
   }
 
   return Promise.resolve(locale);
@@ -104,7 +104,6 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
  * Loads locale messages if needed.
  */
 export const i18nSetLocale = (locale: string): Promise<void> => {
-  // eslint-disable-line no-param-reassign
   if (!I18N_LOCALES.includes(locale)) {
     locale = I18N_FALLBACK;
   }

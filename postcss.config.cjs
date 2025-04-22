@@ -1,11 +1,11 @@
-/* eslint-disable global-require, @typescript-eslint/no-var-requires */
-
 module.exports = {
   // @see https://webpack.js.org/loaders/postcss-loader/#examples-of-config-files
   // Browser config is fetched from package.json:browserslist
   map: false,
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require('autoprefixer'),
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require('cssnano')({
       preset: [
         'default',

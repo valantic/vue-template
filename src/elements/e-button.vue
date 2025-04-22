@@ -261,6 +261,8 @@
        * Mousedown event handler.
        */
       onMouseDown() {
+        console.log('frsoch');
+
         this.isActive = true;
       },
 
