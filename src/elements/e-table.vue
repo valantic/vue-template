@@ -578,7 +578,7 @@
        */
       isHeaderLabelVisible(column: TableColumn): boolean {
         // Adding the support for functions was needed, to change visibility state dynamically (improved a11y).
-        return !!(typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden !== true);
+        return typeof column.titleHidden === 'function' ? column.titleHidden() : column.titleHidden !== true;
       },
 
       /**
@@ -771,8 +771,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
 
   .e-table {
     $this: &;

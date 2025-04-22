@@ -25,6 +25,9 @@
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+  // type Data = {};
+
   /**
    * Label component for form elements, can be used with a slot or a for attribute
    */
@@ -84,6 +87,10 @@
       };
     },
 
+    // data(): Data {
+    //   return {};
+    // },
+
     computed: {
       /**
        * Defines state modifier classes.
@@ -113,8 +120,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .e-label {
     display: block;

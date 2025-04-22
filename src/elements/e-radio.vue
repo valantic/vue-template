@@ -24,6 +24,9 @@
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+  // type Data = {};
+
   /**
    * Renders a radio element. Use a v-for loop to generate a set of radio buttons.
    *
@@ -74,7 +77,7 @@
       };
     },
 
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 
@@ -144,8 +147,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .e-radio {
     $this: &;

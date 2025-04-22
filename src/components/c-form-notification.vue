@@ -10,6 +10,8 @@
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Data = {};
+
   /**
    * Component is used to display a notification (status message) directly in the form field.
    * It needs a content and a state
@@ -28,7 +30,7 @@
       };
     },
 
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 
@@ -61,8 +63,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .c-form-notification {
     @include mixins.font(variables.$font-size--14, 18px);

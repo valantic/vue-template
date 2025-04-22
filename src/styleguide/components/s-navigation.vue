@@ -16,7 +16,7 @@
             rel="noopener noreferrer"
           >
             <img
-              src="@/assets/valantic.svg"
+              src="@/styleguide/assets/valantic.svg"
               alt="valantic"
             />
           </a>
@@ -53,12 +53,13 @@
   import { defineComponent } from 'vue';
   import { RouteRecordRaw } from 'vue-router';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
-  import filterRoutesByTitle from '../routes/utils/filter-routes-by-title';
   import sDemoSettings from './s-demo-settings.vue';
   import sLanguage from './s-language.vue';
   import sNavigationBlock from './s-navigation-block.vue';
   import sNavigationFilter from './s-navigation-filter.vue';
   import sThemeSelector from './s-theme-selector.vue';
+
+  // type Setup = {};
 
   type Data = {
     isOpen: boolean;
@@ -85,6 +86,10 @@
         validator: (value: string) => ['top-left', 'top-right', 'bottom-right', 'bottom-left'].includes(value),
       },
     },
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
     data(): Data {
       return {
         isOpen: false,
@@ -102,7 +107,7 @@
         };
       },
       routesFilteredByTitle(): RouteRecordRaw[] {
-        return filterRoutesByTitle(this.$router.options.routes, this.navigationFilter);
+        return this.filterRoutesByTitle(this.$router.options.routes, this.navigationFilter);
       },
     },
     methods: {
@@ -112,12 +117,45 @@
       onClick() {
         this.isOpen = !this.isOpen;
       },
+
+      /**
+       * Filters the routes by their title.
+       *
+       * @param routes - Array of type RouteRecordRaw to be filtered
+       * @param searchTerm - String (route.meta.title) to filter the routes by
+       * @returns - Array of type RouteRecordRaw filtered by the searchTerm
+       */
+      filterRoutesByTitle(routes: readonly RouteRecordRaw[], searchTerm: string): RouteRecordRaw[] {
+        const lowerCaseSearchTerm = searchTerm.toLowerCase();
+
+        return routes.reduce((filteredRoutes: RouteRecordRaw[], route) => {
+          const titleMatch = route.meta?.title?.toLowerCase().includes(lowerCaseSearchTerm);
+
+          if (titleMatch) {
+            // the route matches the search term
+            filteredRoutes.push(route);
+          } else if (route.children) {
+            // the parent route does not match the search term, but its children might
+            const matchingChildren = this.filterRoutesByTitle(route.children, searchTerm);
+
+            if (matchingChildren.length > 0) {
+              // a child route matches, add the parent route with the matching child routes
+              filteredRoutes.push({
+                ...route,
+                children: matchingChildren,
+              });
+            }
+          }
+
+          return filteredRoutes;
+        }, []);
+      },
     },
   });
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .s-navigation {
     $this: &;

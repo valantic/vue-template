@@ -19,6 +19,9 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   export default defineComponent({
     name: 's-toggle',
 
@@ -38,7 +41,11 @@
       'update:modelValue': (value: unknown): boolean => typeof value !== 'undefined',
     },
 
-    // data() {
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
+    // data(): Data {
     //   return {};
     // },
 
@@ -77,7 +84,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   $_s-slider__size: 1.2em;
 

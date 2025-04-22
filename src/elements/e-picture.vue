@@ -29,6 +29,8 @@
   import { BREAKPOINTS_MAX } from '@/setup/globals';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+
   export type ImageSizes = {
     [key: keyof typeof BREAKPOINTS_MAX | 'fallback' | string]: number;
   };
@@ -164,6 +166,9 @@
         default: true,
       },
     },
+    // setup(): Setup {
+    //   return {};
+    // },
     data(): Data {
       return {
         /**
@@ -299,7 +304,7 @@
 
 <style lang="scss">
   @use 'sass:list';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .e-picture {
     // Can be <picture> or <img>!

@@ -25,6 +25,7 @@
   type Setup = {
     breadcrumbStore: ReturnType<typeof useBreadcrumbStore>;
   };
+  // type Data = {};
 
   /**
    * Renders a list of breadcrumbs items from the store module.
@@ -42,7 +43,7 @@
         breadcrumbStore: useBreadcrumbStore(),
       };
     },
-    // data() {
+    // data(): Data {
     //   return {};
     // },
 
@@ -66,8 +67,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
 
   .c-breadcrumb {
     @include mixins.font(variables.$font-size--12, 20px);

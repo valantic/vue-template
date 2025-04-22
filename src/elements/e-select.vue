@@ -51,6 +51,8 @@
   import eProgress from '@/elements/e-progress.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
+  // type Setup = {};
+
   type Data = {
     internalValue: string;
   };
@@ -194,8 +196,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   $e-select-height: 30px;
 

@@ -272,17 +272,13 @@
 
       /**
        * Shows if the disabled state of the component should be active.
-       *
-       * @returns {boolean}
        */
-      isDisabled() {
+      isDisabled(): boolean {
         return this.disabled || this.progress;
       },
 
       /**
        * Gets the filtered options if the user used the search.
-       *
-       * @returns {array.<object>}
        */
       filteredOptions(): Option[] {
         if (this.hasSearch && this.searchTerm) {
@@ -355,8 +351,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
 
   .e-multiselect {
     $this: &;

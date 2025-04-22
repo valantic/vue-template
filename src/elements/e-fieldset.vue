@@ -15,10 +15,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   /**
-   *
    * Component to render a fieldset with or without legend.
-   *
    */
   export default defineComponent({
     name: 'e-fieldset',
@@ -35,7 +36,10 @@
         default: null,
       },
     },
-    // data() {
+    // setup(): Setup {
+    //   return {};
+    // },
+    // data(): Data {
     //   return {};
     // },
 
@@ -59,8 +63,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .e-fieldset {
     &__legend {

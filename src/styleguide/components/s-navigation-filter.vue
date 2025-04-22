@@ -36,6 +36,9 @@
   import { defineComponent, nextTick } from 'vue';
   import eIcon from '@/elements/e-icon.vue';
 
+  // type Setup = {};
+  // type Data = {};
+
   export default defineComponent({
     name: 's-navigation-filter',
     components: {
@@ -63,7 +66,11 @@
       'update:modelValue': (value: string) => typeof value === 'string',
     },
 
-    // data() {
+    // setup(): Setup {
+    //   return {
+    //   };
+    // },
+    // data(): Data {
     //   return {};
     // },
 
@@ -112,7 +119,7 @@
 </script>
 
 <style lang="scss">
-  @use '../../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .s-navigation-filter {
     &__navigation-filter-wrapper {

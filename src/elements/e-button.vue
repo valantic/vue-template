@@ -32,6 +32,8 @@
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eProgress from './e-progress.vue';
 
+  // type Setup = {};
+
   type Attributes = {
     role: string | null;
     disabled: boolean;
@@ -155,6 +157,9 @@
       },
     },
 
+    // setup(): Setup {
+    //   return {};
+    // },
     data(): Data {
       return {
         /**
@@ -306,8 +311,8 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/mixins';
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .e-button {
     $border-radius: 3px;

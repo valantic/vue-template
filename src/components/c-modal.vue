@@ -63,7 +63,8 @@
   import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
-  // type Setup = {}
+  // type Setup = {};
+  // type Data = {};
 
   /**
    * Renders a modal dialog.
@@ -130,7 +131,9 @@
       'close': (): boolean => true,
     },
 
-    // setup(): Setup {},
+    // setup(): Setup {
+    //   return {};
+    // },
     // data(): Data {
     //   return {};
     // },
@@ -233,10 +236,10 @@
 
 <style lang="scss">
   // @use 'sass:math';
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins' as *;
-  // @use '../setup/scss/extends' as *;
-  // @use '../setup/scss/functions' as *;
+  @use '@/setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  // @use '@/setup/scss/extends' as *;
+  // @use '@/setup/scss/functions';
 
   .c-modal {
     $this: &;
@@ -247,7 +250,7 @@
     border: none;
     background: none;
 
-    @include media($down: sm) {
+    @include mixins.media($down: sm) {
       height: 100vh;
       max-height: none;
     }
@@ -266,7 +269,7 @@
       background-color: variables.$color-grayscale--1000;
       justify-self: center;
 
-      @include media(md) {
+      @include mixins.media(md) {
         display: block;
         align-self: center;
         max-width: 75vw;
@@ -274,11 +277,11 @@
         overflow-y: hidden;
       }
 
-      @include media(lg) {
+      @include mixins.media(lg) {
         max-width: 66vw;
       }
 
-      @include media(xl) {
+      @include mixins.media(xl) {
         max-width: 66vw;
       }
     }
@@ -288,7 +291,7 @@
       padding: variables.$spacing--25;
       border-bottom: 1px solid variables.$color-grayscale--600;
 
-      @include media(md) {
+      @include mixins.media(md) {
         padding: variables.$spacing--25 variables.$spacing--50;
       }
     }
@@ -307,7 +310,7 @@
       flex: 1 0 auto;
       padding: variables.$spacing--25;
 
-      @include media(md) {
+      @include mixins.media(md) {
         padding: variables.$spacing--50;
       }
     }
@@ -315,7 +318,7 @@
     &__sticky-footer {
       border-top: 1px solid variables.$color-grayscale--600;
 
-      @include media($down: sm) {
+      @include mixins.media($down: sm) {
         position: sticky;
         bottom: 0;
         left: 0;
@@ -334,13 +337,13 @@
     }
 
     &--size-600 &__inner {
-      @include media(md) {
+      @include mixins.media(md) {
         width: 600px;
       }
     }
 
     &--size-700 &__inner {
-      @include media(md) {
+      @include mixins.media(md) {
         width: 800px;
       }
     }
@@ -355,7 +358,7 @@
       #{$this}__content {
         padding: variables.$spacing--25;
 
-        @include media(md) {
+        @include mixins.media(md) {
           padding: variables.$spacing--30;
         }
       }

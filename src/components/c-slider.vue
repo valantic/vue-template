@@ -112,8 +112,6 @@
     computed: {
       /**
        * Defines if the previous button should be disabled.
-       *
-       * @returns {Boolean}
        */
       disablePrevious(): boolean {
         return !this.options?.loop && this.activeSlide === 0;
@@ -121,8 +119,6 @@
 
       /**
        * Defines if the next button should be disabled.
-       *
-       * @returns {Boolean}
        */
       disableNext(): boolean {
         return !this.options?.loop && this.activePage === this.noOfPages - 1;
@@ -240,10 +236,10 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
-  @use '../setup/scss/mixins';
-  // @use '../setup/scss/extends';
-  // @use '../setup/scss/functions';
+  @use '@/setup/scss/variables';
+  // @use '@/setup/scss/mixins';
+  // @use '@/setup/scss/extends';
+  // @use '@/setup/scss/functions';
 
   .c-slider {
     position: relative;

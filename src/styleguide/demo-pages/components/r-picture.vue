@@ -32,7 +32,9 @@
     // props: {},
     // emits: {},
 
-    // setup(): Setup {},
+    // setup(): Setup {
+    //   return {};
+    // },
     data(): Data {
       return {
         sizes: {

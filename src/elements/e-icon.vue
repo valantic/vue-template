@@ -28,6 +28,12 @@
   import { PropType, defineComponent } from 'vue';
   import spritePath from '@/assets/icons.svg';
 
+  // type Setup = {};
+
+  type Data = {
+    spritePath: string;
+  };
+
   type SpecificIconSizes = {
     [key: string]: number[];
   };
@@ -84,7 +90,10 @@
       },
     },
 
-    data() {
+    // setup(): Setup {
+    //   return {};
+    // },
+    data(): Data {
       return {
         /**
          * The local path to the svg sprite.
@@ -136,7 +145,7 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .e-icon {
     display: block;

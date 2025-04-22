@@ -47,6 +47,8 @@
     notificationStore: ReturnType<typeof useNotificationStore>;
   };
 
+  // type Data = {};
+
   export default defineComponent({
     name: 'r-notifications',
     components: {
@@ -59,7 +61,9 @@
         notificationStore: useNotificationStore(),
       };
     },
-    // data() {},
+    // data(): Data {
+    //   return {};
+    // },
 
     // computed: {},
     // mounted() {},
@@ -83,8 +87,8 @@
 </script>
 
 <style lang="scss">
-  @use '../../../setup/scss/mixins';
-  @use '../../../setup/scss/variables';
+  @use '@/setup/scss/mixins';
+  @use '@/setup/scss/variables';
 
   .r-notifications {
     display: flex;

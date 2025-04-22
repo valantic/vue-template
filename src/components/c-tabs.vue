@@ -162,7 +162,7 @@
 </script>
 
 <style lang="scss">
-  @use '../setup/scss/variables';
+  @use '@/setup/scss/variables';
 
   .c-tabs {
     &__tab-list {
