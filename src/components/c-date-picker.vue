@@ -286,7 +286,6 @@
           .map((item, index) => now.day(index).toDate());
 
         const picker = new Pikaday({
-          // eslint-disable-line new-cap
           onSelect: this.onCalendarSelect.bind(this),
           showDaysInNextAndPreviousMonths: true,
           enableSelectionDaysInNextAndPreviousMonths: true,

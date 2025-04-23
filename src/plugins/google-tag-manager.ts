@@ -88,10 +88,12 @@ const plugin: Plugin = {
         // Log if debug and development mode are active
         if (import.meta.env.MODE !== 'production') {
           if (debug) {
+            /* eslint-disable no-console */
             console.group('GTM debug');
             console.log('payload', payload);
             console.log('dataLayer', window.dataLayer);
             console.groupEnd();
+            /* eslint-enable no-console */
           }
         }
       } else {

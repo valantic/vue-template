@@ -49,7 +49,7 @@ const i18n = createI18n<[MessagesSchema], 'de'>({
    * Callback for the 'missing' event, during translation lookup.
    */
   missing(locale, messageKey) {
-    console.error(`No '${locale}' translations found for '${messageKey}'`);
+    console.error(`No '${locale}' translations found for '${messageKey}'`); // eslint-disable-line no-console
   },
   messages: {
     [I18N_FALLBACK]: I18N_FALLBACK_MESSAGES,

@@ -215,7 +215,7 @@
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
-        console.warn('Configuration from storage could not be read'); // eslint-disable-line
+        console.warn('Configuration from storage could not be read'); // eslint-disable-line no-console
       }
     },
     // beforeMount() {},

@@ -71,7 +71,6 @@
           };
         }
 
-        // eslint-disable-next-line no-undefined
         return undefined;
       },
     },

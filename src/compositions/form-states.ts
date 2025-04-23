@@ -1,4 +1,5 @@
 import { ComputedRef, PropType, Ref, computed, ref } from 'vue';
+import { Icon } from '@/types/icon';
 
 export enum FieldState {
   Default = 'default',
@@ -36,7 +37,7 @@ export const withProps = () => ({
 });
 
 /**
- * Defines the reactive properties which can be used for form elements
+ * Defines the reactive properties which can be used for form elements.
  */
 const formStates = (inputState: Ref<FieldState>): FormStates => {
   const active = ref<boolean>(false);

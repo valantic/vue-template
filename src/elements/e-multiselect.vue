@@ -318,7 +318,7 @@
 
     methods: {
       /**
-       * Checks if the dropdown needs to be closed because of an outside click
+       * Checks if the dropdown needs to be closed because of an outside click.
        */
       onClick(event: MouseEvent) {
         if (this.$el !== event.target && !this.$el.contains(event.target)) {

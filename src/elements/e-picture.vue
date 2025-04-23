@@ -6,7 +6,7 @@
     <source
       v-for="(mediaSrcset, mediaQuery) in sources"
       :key="mediaQuery"
-      :media="mediaQuery"
+      :media="mediaQuery?.toString()"
       :srcset="mediaSrcset"
     />
     <img
@@ -70,7 +70,7 @@
        * `{ <media>: <srcset>, ... }`
        */
       sources: {
-        type: Object,
+        type: Object as PropType<{ [key: string]: string }>,
         default: null,
       },
 

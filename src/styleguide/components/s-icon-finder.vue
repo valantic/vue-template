@@ -78,6 +78,7 @@
   import { Ref, defineComponent, ref } from 'vue';
   import spritePath from '@/assets/icons.svg';
   import eIcon from '@/elements/e-icon.vue';
+  import { Icon } from '@/types/icon';
 
   type Setup = {
     input: Ref<HTMLInputElement | null>;

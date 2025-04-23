@@ -1,5 +1,5 @@
 // Don't edit this file. Use the NPM script 'build:icons' instead.
-type Icon =
+export type Icon =
   | 'i-arrow--down'
   | 'i-arrow--left'
   | 'i-arrow--right'

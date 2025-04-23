@@ -27,6 +27,7 @@
 <script lang="ts">
   import { PropType, defineComponent } from 'vue';
   import spritePath from '@/assets/icons.svg';
+  import { Icon } from '@/types/icon';
 
   // type Setup = {};
 

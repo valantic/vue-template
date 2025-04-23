@@ -1,33 +1,53 @@
 import eslint from '@eslint/js';
-import eslintConfigPrettier from 'eslint-config-prettier';
-import eslintConfigValantic from 'eslint-config-valantic';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import eslintConfigValantic from 'eslint-config-valantic/vue3.js';
 import tseslint from 'typescript-eslint';
 
 // https://eslint.org/docs/user-guide/configuring
-export default tseslint.config(
+export default [
   eslint.configs.recommended,
-  tseslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...eslintConfigValantic,
   eslintConfigPrettier,
-  eslintConfigValantic,
   {
-    ignores: ['dist/', 'node_modules/', 'public/'],
+    ignores: ['dist/', 'node_modules/', 'public/', '**/.DS_Store'],
   },
   {
-    files: ['*.js', '*.ts', '*.vue'],
     languageOptions: {
       globals: {
         google: 'readonly', // Fixes `no-undef` for `google` namespace. (types are loaded by `@types/google.maps`)
       },
     },
-    // Uses eslint-import-resolver-webpack
-    settings: {
-      'import/resolver': {
-        vite: {
-          configPath: './vite.config.ts',
+    rules: {
+      // TODO: Fix and enable again
+      'import/extensions': 'off',
+      'vue/no-unsupported-features': [
+        'error',
+        {
+          version: '^3.5.0',
         },
+      ],
+    },
+  },
+  {
+    files: ['*.vue', '**/*.vue'],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
       },
     },
-    // add your custom rules here
-    rules: {},
-  }
-);
+    rules: {
+      'vue/multi-word-component-names': 'off',
+      'vue/component-definition-name-casing': 'off',
+    },
+  },
+  {
+    files: ['src/styleguide/**/*.*'],
+    ignores: ['**/*.svg', '**/*.scss'],
+    rules: {
+      'vue/no-bare-strings-in-template': 'off',
+      'vue/multi-word-component-names': 'off',
+      'vue/match-component-file-name': 'off',
+    },
+  },
+];

@@ -655,10 +655,10 @@
 
           switch (true) {
             case typeof aValue === 'string':
-              return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true }); // eslint-disable-line no-undefined, no-extra-parens
+              return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true });
 
             case typeof aValue === 'number':
-              return (aValue as number) > (bValue as number) ? 1 : -1; // eslint-disable-line no-extra-parens
+              return (aValue as number) > (bValue as number) ? 1 : -1;
 
             case typeof aValue === 'boolean':
               return !aValue ? 1 : -1;
