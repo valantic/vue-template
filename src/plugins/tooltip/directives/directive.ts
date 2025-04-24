@@ -16,6 +16,7 @@ const storageKey = Symbol('Tooltip directive instance');
 const tooltipAnchor = Symbol('The current tooltip anchor');
 
 type TooltipEvent = {
+  // eslint-disable-next-line no-undef
   [key: string]: EventListener;
 };
 

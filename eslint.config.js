@@ -24,6 +24,7 @@ export default [
     rules: {
       // TODO: Fix and enable again
       'import/extensions': 'off',
+      'no-undefined': 'off',
       'vue/no-unsupported-features': [
         'error',
         {
