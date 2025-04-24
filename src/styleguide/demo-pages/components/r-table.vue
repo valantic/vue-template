@@ -85,16 +85,18 @@
 
     computed: {
       items(): TableItem[] {
-        return new Array(40).fill(null).map((item, index) => ({
-          id: index + 1,
-          isComplete: index === 5,
-          firstName: faker.person.firstName(),
-          lastName: faker.person.lastName(),
-          birthDate: faker.date.anytime(),
-          city: faker.location.city(),
-          company: faker.company.name(),
-          children: 3,
-        }));
+        return Array.from({ length: 40 })
+          .fill(null)
+          .map((item, index) => ({
+            id: index + 1,
+            isComplete: index === 5,
+            firstName: faker.person.firstName(),
+            lastName: faker.person.lastName(),
+            birthDate: faker.date.anytime(),
+            city: faker.location.city(),
+            company: faker.company.name(),
+            children: 3,
+          }));
       },
     },
     // watch: {},

@@ -30,7 +30,7 @@ export default function loadScript(scriptSrc: string, callback?: () => unknown, 
     script.async = async;
 
     if (typeof callback === 'function') {
-      script.onload = (): void => {
+      script.addEventListener('load', (): void => {
         callback();
 
         loadScriptCallbacks = loadScriptCallbacks.filter((queueItem) => {
@@ -44,10 +44,10 @@ export default function loadScript(scriptSrc: string, callback?: () => unknown, 
         });
 
         scriptLoadingQueue = scriptLoadingQueue.filter((loadingScript) => loadingScript !== scriptSrc);
-      };
+      });
     }
 
-    document.head.appendChild(script);
+    document.head.append(script);
   } else if (typeof callback === 'function') {
     if (scriptLoadingQueue.includes(scriptSrc)) {
       loadScriptCallbacks.push({

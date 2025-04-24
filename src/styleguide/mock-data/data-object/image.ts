@@ -10,6 +10,7 @@ type Ratios = {
 /**
  * Creates a randomized image (srcset).
  */
+// eslint-disable-next-line unicorn/prevent-abbreviations
 export function createSrcSetImage(heightRatio = 1, sizes: number[] = Object.values(DEFAULT_IMAGE_SIZES)): ImageSrcset {
   const srcset = sizes.map(
     (width) =>
@@ -18,10 +19,10 @@ export function createSrcSetImage(heightRatio = 1, sizes: number[] = Object.valu
         height: Math.ceil(heightRatio * width),
       })} ${width}w`
   );
-  const fallback = srcset[srcset.length - 1];
+  const fallback = srcset.at(-1);
 
   if (!fallback) {
-    throw Error("'srcset' has no entries.");
+    throw new Error("'srcset' has no entries.");
   }
 
   return {
@@ -35,6 +36,7 @@ export function createSrcSetImage(heightRatio = 1, sizes: number[] = Object.valu
  * Creates a randomized image (sources).
  */
 export function createSourcesImage(
+  // eslint-disable-next-line unicorn/no-object-as-default-parameter
   ratios: Ratios = {
     xxs: 1,
     xs: 1,

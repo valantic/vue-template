@@ -242,7 +242,7 @@
 
               return breakpointValue;
             })
-            .filter((breakpointValue) => breakpointValue)
+            .filter(Boolean)
             // @ts-ignore Needed because typescript cannot detect if a/b is not null.
             .sort((a, b) => (a > b ? 1 : -1))
             .map((breakpoint) => {

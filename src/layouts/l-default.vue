@@ -64,13 +64,14 @@
           const messagesParsed = messages ? JSON.parse(messages) : null;
 
           if (Array.isArray(messagesParsed) && messagesParsed.length) {
-            messagesParsed.forEach(this.notificationStore.showNotification);
+            messagesParsed.forEach((element) => {
+              this.notificationStore.showNotification(element);
+            });
 
             // Clears the localStorage notifications.
             window.localStorage.removeItem('vueNotification');
           }
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (error) {
+        } catch {
           throw new Error('An error occurred why retrieving messages from the localStorage.');
         }
       },

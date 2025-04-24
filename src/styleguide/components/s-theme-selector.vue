@@ -89,10 +89,10 @@
           const link = document.getElementById(cssId) as HTMLLinkElement;
           const theme = this.getTheme;
 
-          if (!link) {
-            this.createStyleElement(theme, cssId);
-          } else {
+          if (link) {
             link.href = `/${buildConfig.themeSource}${theme}.scss`;
+          } else {
+            this.createStyleElement(theme, cssId);
           }
         },
       },
@@ -131,7 +131,7 @@
         link.href = `/${buildConfig.themeSource}${theme}.scss`;
         link.media = 'all';
 
-        head?.appendChild(link);
+        head?.append(link);
       },
     },
     // render() {},

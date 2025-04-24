@@ -159,10 +159,10 @@
        */
       filteredIcons(): FilteredIcon[] {
         return this.icons
-          .filter((icon): icon is Icon => icon.indexOf(this.filter) > -1)
+          .filter((icon): icon is Icon => icon.includes(this.filter))
           .map((icon: Icon) => ({
             name: icon,
-            negative: Boolean(icon.match(/negative/)),
+            negative: Boolean(/negative/.test(icon)),
           }));
       },
     },

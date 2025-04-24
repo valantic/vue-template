@@ -22,7 +22,9 @@ const Template = {
     setup() {
       return {
         args,
-        images: new Array(15).fill(null).map(() => createSrcSetImage()),
+        images: Array.from({ length: 15 })
+          .fill(null)
+          .map(() => createSrcSetImage()),
       };
     },
 

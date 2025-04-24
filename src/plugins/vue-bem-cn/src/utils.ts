@@ -20,4 +20,4 @@ export const isNumber = (value: any): boolean => !Number.isNaN(value) && Number.
 /**
  * Converts the given camelCase String to kebab-case.
  */
-export const hyphenate = (value: string): string => value.replace(/\B([A-Z])/g, '-$1').toLowerCase();
+export const hyphenate = (value: string): string => value.replaceAll(/\B([A-Z])/g, '-$1').toLowerCase();

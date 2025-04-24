@@ -281,7 +281,7 @@
     methods: {
       createCalendar(): void {
         const now = this.$dayjs();
-        const weekdays = Array(7)
+        const weekdays = Array.from({ length: 7 })
           .fill(null)
           .map((item, index) => now.day(index).toDate());
 
@@ -296,7 +296,7 @@
           i18n: {
             previousMonth: this.$t('c-date-picker.previousMonth'),
             nextMonth: this.$t('c-date-picker.nextMonth'),
-            months: Array(12)
+            months: Array.from({ length: 12 })
               .fill(null)
               .map((item, index) => this.$d(now.month(index).toDate(), 'month')),
             weekdays: weekdays.map((date) => this.$d(date, 'weekday')),
@@ -315,7 +315,7 @@
         }
 
         this.calendarInstance = picker;
-        this.calendar?.appendChild(picker.el);
+        this.calendar?.append(picker.el);
 
         if (this.range) {
           this.calendarInstance.setStartRange(this.startDate);

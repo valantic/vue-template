@@ -86,15 +86,13 @@ const plugin: Plugin = {
         window.dataLayer.push(payload);
 
         // Log if debug and development mode are active
-        if (import.meta.env.MODE !== 'production') {
-          if (debug) {
-            /* eslint-disable no-console */
-            console.group('GTM debug');
-            console.log('payload', payload);
-            console.log('dataLayer', window.dataLayer);
-            console.groupEnd();
-            /* eslint-enable no-console */
-          }
+        if (import.meta.env.MODE !== 'production' && debug) {
+          /* eslint-disable no-console */
+          console.group('GTM debug');
+          console.log('payload', payload);
+          console.log('dataLayer', window.dataLayer);
+          console.groupEnd();
+          /* eslint-enable no-console */
         }
       } else {
         throw new Error('Google Tag Manager dataLayer is not available!');

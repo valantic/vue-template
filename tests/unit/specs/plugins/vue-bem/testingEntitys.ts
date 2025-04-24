@@ -1,7 +1,8 @@
-/* eslint-disable id-length */
+/* eslint-disable-line unicorn/filename-case */
 export const block = 'BlockName';
 export const el = 'elementName';
 export const delimiters = {
+  // eslint-disable-next-line id-length
   ns: 'ns**',
   el: '++',
   mod: '==',

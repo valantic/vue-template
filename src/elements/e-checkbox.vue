@@ -77,8 +77,8 @@
     },
 
     emits: {
-      'update:modelValue': (payload: unknown): boolean => typeof payload !== 'undefined',
-      'change': (payload: unknown): boolean => typeof payload !== 'undefined',
+      'update:modelValue': (payload: unknown): boolean => payload !== undefined,
+      'change': (payload: unknown): boolean => payload !== undefined,
       'focus': (): boolean => true,
       'blur': (): boolean => true,
     },

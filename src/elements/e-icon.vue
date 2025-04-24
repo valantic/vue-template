@@ -112,7 +112,7 @@
       viewBox(): Size {
         const { icon } = this;
         const [specificWidth, specificHeight] = specificIconSizes[icon] || [];
-        const size = this.size?.split(' ').map((sizeParameter) => parseInt(sizeParameter, 10)) || [defaultSize];
+        const size = this.size?.split(' ').map((sizeParameter) => Number.parseInt(sizeParameter, 10)) || [defaultSize];
         const width = size[0] || defaultSize;
         let height = size[1];
 

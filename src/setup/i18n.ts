@@ -43,6 +43,7 @@ const i18n = createI18n<[MessagesSchema], 'de'>({
     [PAGE_LANG]: datetimeFormats,
   },
 
+  // eslint-disable-next-line unicorn/no-negated-condition
   warnHtmlInMessage: import.meta.env.MODE !== 'production' ? 'error' : 'off',
 
   /**

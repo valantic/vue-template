@@ -10,11 +10,15 @@ function format(el: HTMLElement, binding: DirectiveBinding): void {
     return;
   }
 
-  const priceInput = parseFloat(binding.value);
+  const priceInput = Number.parseFloat(binding.value);
 
   el.textContent = Number.isNaN(priceInput)
     ? ''
-    : formatPrice(parseFloat(binding.value), binding.modifiers?.currencyBefore, binding.modifiers?.currencyAfter);
+    : formatPrice(
+        Number.parseFloat(binding.value),
+        binding.modifiers?.currencyBefore,
+        binding.modifiers?.currencyAfter
+      );
 }
 
 /**

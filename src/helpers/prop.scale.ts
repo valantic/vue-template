@@ -15,16 +15,16 @@ export default function (defaultValue: number, validNumbers: number[]): PropConf
 
   if (import.meta.env.MODE !== 'production') {
     if (!Array.isArray(validNumbers)) {
-      throw new Error("'validNumbers' is not an array.");
+      throw new TypeError("'validNumbers' is not an array.");
     }
 
     if (typeof defaultValue !== 'number') {
-      throw new Error("'defaultValue' is not a Number.");
+      throw new TypeError("'defaultValue' is not a Number.");
     }
 
     propConfig.validator = function (value): boolean {
       // Note, that validators are not triggered in production mode.
-      return validNumbers.includes(parseInt(value, 10));
+      return validNumbers.includes(Number.parseInt(value, 10));
     };
   }
 

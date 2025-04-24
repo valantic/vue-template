@@ -261,7 +261,7 @@
             .filter((option) => {
               const value = option[this.valueField];
 
-              return typeof value !== 'undefined' && this.internalValue.includes(value);
+              return value !== undefined && this.internalValue.includes(value);
             })
             .map((option) => option[this.labelField])
             .join(', ');
