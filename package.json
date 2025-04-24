@@ -7,7 +7,6 @@
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "vite",
-    "fix:eslint": "npm run lint:eslint -- --config .eslintrc.fix.cjs --cache=false --fix",
     "fix:stylelint": "npm run lint:stylelint -- --cache=false --config .stylelintrc.fix.js --fix",
     "lint": "npm run lint:eslint && npm run lint:stylelint && npm run tsc",
     "lint:eslint": "eslint ./",

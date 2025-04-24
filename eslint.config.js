@@ -1,13 +1,16 @@
 import eslint from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import eslintConfigValanticPrettier from 'eslint-config-valantic/prettier-vue.js';
+import eslintConfigValanticTypescript from 'eslint-config-valantic/typescript.js';
 import eslintConfigValantic from 'eslint-config-valantic/vue3.js';
 import tseslint from 'typescript-eslint';
 
 // https://eslint.org/docs/user-guide/configuring
 export default [
   eslint.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...eslintConfigValanticTypescript,
   ...eslintConfigValantic,
+  ...eslintConfigValanticPrettier,
   eslintConfigPrettier,
   {
     ignores: ['dist/', 'node_modules/', 'public/', '**/.DS_Store'],
