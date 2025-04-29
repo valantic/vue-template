@@ -1,9 +1,9 @@
-/* eslint-disable no-undefined */
 import { describe, expect, test } from 'vitest';
 import { hyphenate, isNumber, isPObject, isString } from '@/plugins/vue-bem-cn/src/utils';
 
 describe('isString', () => {
   test('Expected false for undefined', () => {
+    // eslint-disable-next-line unicorn/no-useless-undefined
     expect(isString(undefined)).not.toBeTruthy();
   });
 
@@ -26,10 +26,11 @@ describe('isString', () => {
 
 describe('isNumber', () => {
   test('Expected false for NaN', () => {
-    expect(isNumber(NaN)).not.toBeTruthy();
+    expect(isNumber(Number.NaN)).not.toBeTruthy();
   });
 
   test('Expected false for undefined', () => {
+    // eslint-disable-next-line unicorn/no-useless-undefined
     expect(isString(undefined)).not.toBeTruthy();
   });
 

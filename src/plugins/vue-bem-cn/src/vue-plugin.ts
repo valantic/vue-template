@@ -5,6 +5,7 @@ import { DEFAULT_CONFIG, DEFAULT_DELIMITERS } from './globals';
 import { hyphenate, isString } from './utils';
 
 export default {
+  // eslint-disable-next-line unicorn/no-object-as-default-parameter
   install(app: App, config = { delimiters: {} }): void {
     const cfg = {
       ...DEFAULT_CONFIG,

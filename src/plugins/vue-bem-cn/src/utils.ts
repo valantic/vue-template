@@ -7,7 +7,7 @@ export const isString = (value: any): boolean => value && typeof value === 'stri
 /**
  * Checks if the given value is a native JS Object with values.
  */
-// eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isPObject = (value: any): boolean =>
   !!(value && typeof value === 'object' && value.constructor === Object && Object.keys(value).length);
 
@@ -20,4 +20,4 @@ export const isNumber = (value: any): boolean => !Number.isNaN(value) && Number.
 /**
  * Converts the given camelCase String to kebab-case.
  */
-export const hyphenate = (value: string): string => value.replace(/\B([A-Z])/g, '-$1').toLowerCase();
+export const hyphenate = (value: string): string => value.replaceAll(/\B([A-Z])/g, '-$1').toLowerCase();

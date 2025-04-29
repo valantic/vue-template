@@ -25,6 +25,7 @@
   import { defineComponent } from 'vue';
   import useTheme, { Theme } from '@/compositions/themes';
   import eIcon from '@/elements/e-icon.vue';
+  import { Icon } from '@/types/icon';
 
   // type Setup = {};
   // type Data = {};

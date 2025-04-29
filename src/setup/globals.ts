@@ -73,9 +73,7 @@ export const IS_STORAGE_AVAILABLE = (function isStorageAvailable(): boolean {
     storage.removeItem(keyValue);
 
     return true;
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
+  } catch {
     return false;
   }
 })();

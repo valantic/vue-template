@@ -28,10 +28,10 @@ export default function processArrayInChunks<T>( // eslint-disable-line max-para
         result
           .then(() => resolve())
           .catch((error) => {
-            if (!continueOnFailure) {
-              reject(error);
-            } else {
+            if (continueOnFailure) {
               resolve();
+            } else {
+              reject(error);
             }
           });
       } else {

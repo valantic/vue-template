@@ -342,8 +342,8 @@
             const { lat, lng } = location;
 
             return {
-              lat: lat ? parseFloat(`${lat}`) : null,
-              lng: lng ? parseFloat(`${lng}`) : null,
+              lat: lat ? Number.parseFloat(`${lat}`) : null,
+              lng: lng ? Number.parseFloat(`${lng}`) : null,
               icon: location.icon,
               geocode: location.geocode,
               title: location.title,
@@ -406,10 +406,10 @@
        */
       createMapInstance(): void {
         if (!this.mappedLocations?.length && !this.center) {
-          const errorMsg =
-            'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.'; // eslint-disable-line vue/max-len
+          const errorMessage =
+            'Neither locations nor a center coordinate was given. At least one of them is needed to create a Google Maps.';
 
-          throw new Error(errorMsg);
+          throw new Error(errorMessage);
         }
 
         this.mapInstance = new window.google.maps.Map(this.container, {
@@ -442,15 +442,15 @@
       /**
        * Maps custom icons for the Google Maps. If no source is given, the default icon will be used.
        */
-      mapIcon(iconSrc: string): google.maps.Icon | google.maps.Symbol | null {
-        if (!iconSrc || typeof iconSrc !== 'string') {
+      mapIcon(iconSource: string): google.maps.Icon | google.maps.Symbol | null {
+        if (!iconSource || typeof iconSource !== 'string') {
           return null;
         }
 
         const { iconSize } = this;
 
         return {
-          url: iconSrc,
+          url: iconSource,
           scaledSize: iconSize ? new window.google.maps.Size(iconSize, iconSize) : null,
         };
       },

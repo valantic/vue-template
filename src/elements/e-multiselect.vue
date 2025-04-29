@@ -261,7 +261,7 @@
             .filter((option) => {
               const value = option[this.valueField];
 
-              return typeof value !== 'undefined' && this.internalValue.includes(value);
+              return value !== undefined && this.internalValue.includes(value);
             })
             .map((option) => option[this.labelField])
             .join(', ');
@@ -318,7 +318,7 @@
 
     methods: {
       /**
-       * Checks if the dropdown needs to be closed because of an outside click
+       * Checks if the dropdown needs to be closed because of an outside click.
        */
       onClick(event: MouseEvent) {
         if (this.$el !== event.target && !this.$el.contains(event.target)) {

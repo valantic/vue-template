@@ -12,7 +12,7 @@ export default function formatPrice(value: number, currencyBefore?: boolean, cur
     return '';
   }
 
-  const formattedPrice = i18n.global.n(value / 100, 'decimal', locale).replace(/’|'/g, '\u0020'); // Divide by 100 because we get prices in centimes.
+  const formattedPrice = i18n.global.n(value / 100, 'decimal', locale).replaceAll(/’|'/g, '\u0020'); // Divide by 100 because we get prices in centimes.
   const beforePriceSlot = currencyBefore ? `${currency} ` : '';
   const afterPriceSlot = currencyAfter ? ` ${currency}` : '';
 

@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 import { Plugin } from 'vue';
 // MUST come after i18n because of build order.
 import directives from '@/setup/directives';

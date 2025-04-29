@@ -5,11 +5,6 @@ type State = {
   // Add types for the State.
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type InitialData = {
-  // Add types for InitialData
-};
-
 const storeName = 'myStore'; // TODO: update store name.
 
 export default defineStore(storeName, {

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import type { StorybookConfig } from '@storybook/vue3-vite';
 import { mergeConfig } from 'vite';
 import { alias } from '../vite.config';

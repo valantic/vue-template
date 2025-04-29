@@ -43,6 +43,7 @@ const i18n = createI18n<[MessagesSchema], 'de'>({
     [PAGE_LANG]: datetimeFormats,
   },
 
+  // eslint-disable-next-line unicorn/no-negated-condition
   warnHtmlInMessage: import.meta.env.MODE !== 'production' ? 'error' : 'off',
 
   /**
@@ -93,7 +94,7 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
       i18n.global.setLocaleMessage(locale, localeMessages);
 
       return locale;
-    }); // eslint-disable-line vue/script-indent
+    });
   }
 
   return Promise.resolve(locale);
@@ -104,7 +105,6 @@ export const i18nLoadMessages = (locale: string): Promise<string> => {
  * Loads locale messages if needed.
  */
 export const i18nSetLocale = (locale: string): Promise<void> => {
-  // eslint-disable-line no-param-reassign
   if (!I18N_LOCALES.includes(locale)) {
     locale = I18N_FALLBACK;
   }

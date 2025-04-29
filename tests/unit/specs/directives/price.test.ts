@@ -11,7 +11,9 @@ const testCases = {
 };
 
 describe('directive | v-price', () => {
-  const app = createApp({});
+  const app = createApp({
+    name: 'price-test',
+  });
 
   app.directive(price.name, price);
 

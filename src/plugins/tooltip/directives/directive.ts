@@ -16,6 +16,7 @@ const storageKey = Symbol('Tooltip directive instance');
 const tooltipAnchor = Symbol('The current tooltip anchor');
 
 type TooltipEvent = {
+  // eslint-disable-next-line no-undef
   [key: string]: EventListener;
 };
 
@@ -62,7 +63,7 @@ function hideTooltip(debounce = true): void {
 }
 
 function setTooltipInnerText(content: string): void {
-  tooltipInner.innerText = content;
+  tooltipInner.textContent = content;
 }
 
 /**
@@ -111,7 +112,7 @@ function createTooltipElement(): HTMLDivElement {
   tooltipInner.classList.add(CLASS_TOOLTIP);
 
   tooltip.classList.add(CLASS_TOOLTIP_WRAPPER);
-  tooltip.appendChild(tooltipInner);
+  tooltip.append(tooltipInner);
 
   tooltip.addEventListener('pointerenter', () => {
     if (hideDebounceTimeout) {
@@ -120,7 +121,7 @@ function createTooltipElement(): HTMLDivElement {
   });
   tooltip.addEventListener('mouseleave', () => hideTooltip());
 
-  document.body.appendChild(tooltip);
+  document.body.append(tooltip);
 
   return tooltip;
 }

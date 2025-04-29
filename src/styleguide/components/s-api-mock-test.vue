@@ -212,10 +212,8 @@
 
           this.setupHandlers();
         }
-
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (e) {
-        console.warn('Configuration from storage could not be read'); // eslint-disable-line
+      } catch {
+        console.warn('Configuration from storage could not be read'); // eslint-disable-line no-console
       }
     },
     // beforeMount() {},
@@ -264,22 +262,20 @@
             const [method, path] = configuration.header.split(' ');
 
             if (!path || !method) {
-              throw Error('Invalid header configuration');
+              throw new Error('Invalid header configuration');
             }
 
             let response: object = {};
 
             try {
               response = JSON.parse(configuration.response);
-
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            } catch (e) {
+            } catch {
               // Do nothing
             }
 
             const resolver: ResponseResolver = () =>
               HttpResponse.json(response, {
-                status: parseInt(configuration.status, 10),
+                status: Number.parseInt(configuration.status, 10),
               });
 
             switch (method) {

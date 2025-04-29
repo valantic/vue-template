@@ -450,7 +450,7 @@
        */
       itemsSortedBy(): TableItem[] {
         const { sortBy } = this;
-        const items = this.items.slice();
+        const items = [...this.items];
 
         if (sortBy) {
           const sort = typeof sortBy?.sort === 'function' ? sortBy.sort : this.sortByFieldConstructor(sortBy.key);
@@ -466,7 +466,7 @@
        */
       itemsSorted(): TableItem[] {
         if (!this.sortAscending) {
-          return this.itemsSortedBy.slice().reverse();
+          return [...this.itemsSortedBy].reverse();
         }
 
         return this.itemsSortedBy;
@@ -655,13 +655,13 @@
 
           switch (true) {
             case typeof aValue === 'string':
-              return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true }); // eslint-disable-line no-undefined, no-extra-parens
+              return (aValue as string).localeCompare(bValue as string, undefined, { numeric: true });
 
             case typeof aValue === 'number':
-              return (aValue as number) > (bValue as number) ? 1 : -1; // eslint-disable-line no-extra-parens
+              return (aValue as number) > (bValue as number) ? 1 : -1;
 
             case typeof aValue === 'boolean':
-              return !aValue ? 1 : -1;
+              return aValue ? -1 : 1;
 
             case aValue instanceof Date:
               return this.$dayjs(aValue as Date).isAfter(bValue as Date) ? 1 : -1;
@@ -755,7 +755,7 @@
           return;
         }
 
-        const expandedRows = this.expandedRowsComputed.slice();
+        const expandedRows = [...this.expandedRowsComputed];
 
         if (expandedRows.includes(id)) {
           this.expandedRowsComputed = expandedRows.filter((itemId) => itemId !== id);

@@ -6,7 +6,7 @@
     <source
       v-for="(mediaSrcset, mediaQuery) in sources"
       :key="mediaQuery"
-      :media="mediaQuery"
+      :media="mediaQuery?.toString()"
       :srcset="mediaSrcset"
     />
     <img
@@ -70,7 +70,7 @@
        * `{ <media>: <srcset>, ... }`
        */
       sources: {
-        type: Object,
+        type: Object as PropType<{ [key: string]: string }>,
         default: null,
       },
 
@@ -242,7 +242,7 @@
 
               return breakpointValue;
             })
-            .filter((breakpointValue) => breakpointValue)
+            .filter(Boolean)
             // @ts-ignore Needed because typescript cannot detect if a/b is not null.
             .sort((a, b) => (a > b ? 1 : -1))
             .map((breakpoint) => {

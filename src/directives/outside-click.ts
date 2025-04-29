@@ -26,7 +26,7 @@ function isClickOnExcludedRefElement(
   eventTarget: Node,
   binding: OutsideClickDirectiveBinding
 ): boolean {
-  return !!excludeRefs.find((refName) => {
+  return excludeRefs.some((refName) => {
     const excludedElement = binding.instance?.$refs[refName];
 
     if (Array.isArray(excludedElement)) {

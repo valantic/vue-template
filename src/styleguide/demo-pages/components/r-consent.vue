@@ -59,7 +59,7 @@
 
     methods: {
       onConsentApprove(): void {
-        alert('Consent approved.'); // eslint-disable-line no-alert
+        alert('Consent approved.');
       },
     },
     // render() {},

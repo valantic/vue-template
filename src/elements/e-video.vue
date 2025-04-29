@@ -191,11 +191,9 @@
 
     // beforeCreate() {},
     created() {
-      if (this.width || this.height) {
-        if (!this.height || !this.width) {
-          // eslint-disable-next-line no-console
-          console.error('Both, width and height need to be specified');
-        }
+      if ((this.width || this.height) && (!this.height || !this.width)) {
+        // eslint-disable-next-line no-console
+        console.error('Both, width and height need to be specified');
       }
     },
     // beforeMount() {},

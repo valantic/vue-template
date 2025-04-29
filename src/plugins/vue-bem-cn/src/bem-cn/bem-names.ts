@@ -26,13 +26,11 @@ export default function bemNames(entities: Entities, delimiters: Delimiters): st
     resultString += Object.keys(entities.mods).reduce((prev, name) => {
       const val = entities.mods ? entities.mods[name] : '';
 
-      /* eslint-disable no-param-reassign */
       if (val === true) {
         prev += ` ${resultString}${delimiters.mod}${name}`;
       } else if (isString(val) || isNumber(val)) {
         prev += ` ${resultString}${delimiters.mod}${name}${delimiters.modVal}${val}`;
       }
-      /* eslint-enable no-param-reassign */
 
       return prev;
     }, '');

@@ -61,7 +61,9 @@ export default function api(): PluginApi {
    * Pushes an array of messages to the notification handler.
    */
   function showNotifications(messages: ApiResponseMessages): void {
-    mapApiResponseMessages(messages).forEach(notificationStoreInstance.showNotification);
+    mapApiResponseMessages(messages).forEach((element) => {
+      notificationStoreInstance.showNotification(element);
+    });
   }
 
   /**
@@ -120,7 +122,7 @@ export default function api(): PluginApi {
           })
           .catch((error) => {
             if (axios.isCancel(error)) {
-              return Promise.reject(error);
+              throw error;
             }
 
             return handleError(error);
