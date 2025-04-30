@@ -92,7 +92,7 @@
       },
 
       onUpdateTheme(theme: string) {
-        console.log('theme has changed.', theme);
+        console.log('theme has changed.', theme); // eslint-disable-line no-console
       },
     },
     // render() {},
