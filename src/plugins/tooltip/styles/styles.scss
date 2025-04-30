@@ -3,13 +3,13 @@
 
 .c-tooltip {
   $this: &;
-  $background-color: variables.$color-grayscale--500;
-  $color: variables.$color-grayscale--0;
-  $box-shadow-color: rgba(variables.$color-grayscale--0, 0.2);
-  $border-radius: variables.$border-radius--500;
+  $background-color: var(--theme-color-grayscale--500);
+  $color: var(--theme-color-grayscale--0);
+  $box-shadow-color: rgba(var(--theme-color-grayscale--0), 0.2);
+  $border-radius: variables.$va-border-radius--100;
   $pointer__width: 6px;
   $wrapper__padding: $pointer__width + 6px;
-  $content__padding: variables.$spacing--5 variables.$spacing--10;
+  $content__padding: variables.$va-spacing--5 variables.$va-spacing--10;
 
   position: relative;
   display: block;
@@ -31,7 +31,7 @@
     max-width: 80vw;
     opacity: 0;
     color: $color;
-    transition: opacity variables.$transition-duration--100;
+    transition: opacity variables.$va-transition-duration--100;
     pointer-events: none;
 
     @include mixins.media(sm) {
@@ -87,8 +87,8 @@
       width: 0;
       height: 0;
       border: $pointer__width solid transparent;
-      border-bottom-color: variables.$color-grayscale--500;
-      border-left-color: variables.$color-grayscale--500;
+      border-bottom-color: var(--theme-color-grayscale--500);
+      border-left-color: var(--theme-color-grayscale--500);
       background: $background-color;
 
       // Left center
@@ -115,7 +115,7 @@
       // Top start
       [data-popper-placement='top-start'] &,
       [data-popper-placement='bottom-start'] & {
-        left: $wrapper__padding + variables.$spacing--10;
+        left: $wrapper__padding + variables.$va-spacing--10;
       }
 
       // Top center
@@ -136,7 +136,7 @@
   &__transition {
     &--fade-enter-active,
     &--fade-leave-active {
-      transition: opacity variables.$transition-duration--200 ease;
+      transition: opacity variables.$va-transition-duration--200 ease;
     }
 
     &--fade-enter-from,

@@ -13,7 +13,7 @@ export default [
   ...eslintConfigValanticPrettier,
   eslintConfigPrettier,
   {
-    ignores: ['dist/', 'node_modules/', 'public/', '**/.DS_Store'],
+    ignores: ['dist/', 'node_modules/', 'public/', '**/.DS_Store', 'src/styleguide/translations.json'],
   },
   {
     languageOptions: {

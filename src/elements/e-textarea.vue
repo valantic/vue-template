@@ -196,8 +196,8 @@
       position: relative;
       display: block;
       width: 100%;
-      padding: variables.$spacing--5 variables.$spacing--10;
-      border: 1px solid variables.$color-grayscale--500;
+      padding: variables.$va-spacing--5 variables.$va-spacing--10;
+      border: 1px solid var(--theme-color-grayscale--500);
       border-radius: 3px;
 
       // disable iPhone styling
@@ -217,22 +217,22 @@
     &__field::-webkit-input-placeholder {
       // WebKit, Blink, Edge
       opacity: 1;
-      color: variables.$color-grayscale--400;
-      font-family: variables.$font-family--primary;
+      color: var(--theme-color-grayscale--400);
+      font-family: variables.$va-font-family--text;
     }
 
     &__field:-moz-placeholder {
       // Mozilla Firefox 4 to 18
       opacity: 1;
-      color: variables.$color-grayscale--400;
-      font-family: variables.$font-family--primary;
+      color: var(--theme-color-grayscale--400);
+      font-family: variables.$va-font-family--text;
     }
 
     &__field::placeholder {
       // Most modern browsers support this now
       opacity: 1;
-      color: variables.$color-grayscale--400;
-      font-family: variables.$font-family--primary;
+      color: var(--theme-color-grayscale--400);
+      font-family: variables.$va-font-family--text;
     }
 
     // separator for state icons
@@ -256,7 +256,7 @@
     &__icon-wrapper {
       position: absolute;
       top: 50%;
-      right: variables.$spacing--5;
+      right: variables.$va-spacing--5;
       display: flex;
       height: 100%;
       transform: translateY(-50%);
@@ -269,32 +269,32 @@
     // active
     &__field:active,
     &--active &__field {
-      border: 1px solid variables.$color-grayscale--400;
+      border: 1px solid var(--theme-color-grayscale--400);
     }
 
     // focus
     &__field:focus,
     &--focus &__field {
       outline: none;
-      border: 1px solid variables.$color-grayscale--400;
+      border: 1px solid var(--theme-color-grayscale--400);
     }
 
     // hover
     &__field:hover,
     &--hover &__field {
-      border: 1px solid variables.$color-grayscale--400;
+      border: 1px solid var(--theme-color-grayscale--400);
     }
 
     // disabled
     &__field:disabled,
     &--disabled &__field,
     &--disabled &__field:hover {
-      border-color: variables.$color-grayscale--600;
-      background-color: variables.$color-grayscale--1000;
-      color: variables.$color-grayscale--400;
+      border-color: var(--theme-color-grayscale--600);
+      background-color: var(--theme-color-grayscale--1000);
+      color: var(--theme-color-grayscale--400);
 
       &::placeholder {
-        color: variables.$color-grayscale--400;
+        color: var(--theme-color-grayscale--400);
       }
     }
 
@@ -304,22 +304,22 @@
     /* stylelint-disable no-descending-specificity */
     &--state-error {
       .e-textarea__icon-splitter {
-        border-color: variables.$color-status--error;
+        border-color: var(--theme-color-status--error);
       }
     }
 
     &--state-error &__field:hover,
     &--state-error &__field {
-      border-color: variables.$color-status--error;
+      border-color: var(--theme-color-status--error);
     }
 
     &--state-error &__field:focus {
-      border-color: variables.$color-status--error;
+      border-color: var(--theme-color-status--error);
     }
 
     &--state-info {
       .e-textarea__icon-splitter {
-        border-color: variables.$color-grayscale--500;
+        border-color: var(--theme-color-grayscale--500);
       }
     }
 
@@ -331,7 +331,7 @@
 
     &--state-success &__field:hover,
     &--state-success &__field {
-      border-color: variables.$color-status--success;
+      border-color: var(--theme-color-status--success);
     }
 
     /*
@@ -339,7 +339,7 @@
      */
     &--notification {
       .e-textarea__field {
-        padding: variables.$spacing--5 variables.$spacing--10;
+        padding: variables.$va-spacing--5 variables.$va-spacing--10;
         background: none;
       }
     }
