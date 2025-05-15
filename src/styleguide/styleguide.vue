@@ -45,14 +45,9 @@
           themePath: 'src/setup/scss/themes',
           availableThemes: [
             {
-              name: 'theme-01',
-              id: 'theme-01',
+              name: 'theme-default',
+              id: 'theme-default',
               selected: true,
-            },
-            {
-              name: 'theme-02',
-              id: 'theme-02',
-              selected: false,
             },
           ],
         },

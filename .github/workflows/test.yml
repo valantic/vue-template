@@ -1,8 +1,6 @@
 name: 🚀 Test project on push
 
-on:
-  push:
-    branches: ['feature/new-base-setup']
+on: push
 
 jobs:
   lint:
