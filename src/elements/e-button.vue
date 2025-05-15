@@ -317,18 +317,18 @@
   .e-button {
     $border-radius: 3px;
 
-    @include mixins.font(14, 18, variables.$font-weight--semi-bold);
+    @include mixins.font(14, 18, variables.$va-font-weight--semi-bold);
 
     position: relative;
     display: inline-block;
     min-width: 165px;
-    padding: 6px variables.$spacing--10;
+    padding: 6px variables.$va-spacing--10;
     outline: none;
-    border: 1px solid variables.$color-grayscale--500;
+    border: 1px solid var(--theme-color-grayscale--500);
     border-radius: $border-radius;
     background: transparent;
     cursor: pointer;
-    color: variables.$color-grayscale--400;
+    color: var(--theme-color-grayscale--400);
     text-align: center;
 
     &:hover {
@@ -338,39 +338,39 @@
     &--focus,
     &:focus {
       outline: none;
-      border: 1px solid variables.$color-grayscale--500;
-      background-color: variables.$color-grayscale--500;
-      color: variables.$color-primary--3;
+      border: 1px solid var(--theme-color-grayscale--500);
+      background-color: var(--theme-color-grayscale--500);
+      color: var(--theme-color-primary--3);
     }
 
     &:active:not([disabled]),
     &--active:not([disabled]) {
       position: relative;
-      background-color: variables.$color-grayscale--400;
-      color: variables.$color-primary--3;
+      background-color: var(--theme-color-grayscale--400);
+      color: var(--theme-color-primary--3);
     }
 
     &--hover:not(&--touch),
     &:hover:not(&--touch) {
-      background-color: variables.$color-grayscale--500;
-      color: variables.$color-primary--3;
+      background-color: var(--theme-color-grayscale--500);
+      color: var(--theme-color-primary--3);
     }
 
     &--focus path,
     &--hover:not(&--touch) path,
     &:focus path,
     &:hover:not(&--touch) path {
-      fill: variables.$color-primary--3;
+      fill: var(--theme-color-primary--3);
     }
 
     &[disabled],
     &--disabled,
     &[disabled]:hover,
     &--disabled:hover {
-      border-color: variables.$color-grayscale--600;
+      border-color: var(--theme-color-grayscale--600);
       background-color: transparent;
       cursor: default;
-      color: variables.$color-grayscale--300;
+      color: var(--theme-color-grayscale--300);
       pointer-events: none;
     }
 
@@ -384,8 +384,8 @@
     }
 
     &--negative {
-      background: variables.$color-primary--2;
-      color: variables.$color-primary--3;
+      background: var(--theme-color-primary--2);
+      color: var(--theme-color-primary--3);
     }
 
     &--spacing-0 {
@@ -399,7 +399,7 @@
     &--progress:hover,
     &--progress:focus {
       overflow: hidden; // Prevents overflow of animation
-      background-color: variables.$color-grayscale--400;
+      background-color: var(--theme-color-grayscale--400);
     }
 
     &__inner {
@@ -416,24 +416,24 @@
 
   .e-button--primary {
     &:not([disabled]) {
-      color: variables.$color-secondary--2;
+      color: var(--theme-color-secondary--2);
 
       &.e-button:focus,
       &.e-button--focus {
-        background-color: variables.$color-primary--1;
-        color: variables.$color-primary--3;
+        background-color: var(--theme-color-primary--1);
+        color: var(--theme-color-primary--3);
       }
 
       &.e-button:hover:not(.e-button--touch),
       &.e-button--hover:not(.e-button--touch) {
-        background-color: variables.$color-primary--1;
-        color: variables.$color-primary--3;
+        background-color: var(--theme-color-primary--1);
+        color: var(--theme-color-primary--3);
       }
 
       &.e-button:active:not([disabled]),
       &.e-button--active:not([disabled]) {
-        background-color: variables.$color-secondary--2;
-        color: variables.$color-primary--3;
+        background-color: var(--theme-color-secondary--2);
+        color: var(--theme-color-primary--3);
       }
     }
 
@@ -443,7 +443,7 @@
     &.e-button--progress[disabled]:focus,
     &.e-button--progress:hover,
     &.e-button--progress:focus {
-      background-color: variables.$color-secondary--2;
+      background-color: var(--theme-color-secondary--2);
     }
   }
 </style>

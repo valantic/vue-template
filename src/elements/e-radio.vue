@@ -154,7 +154,7 @@
     $this: &;
     $label-size: 16px;
 
-    @include mixins.font(variables.$font-size--16, 20px);
+    @include mixins.font(variables.$va-font-size--16, 20px);
 
     position: relative;
     display: block;
@@ -169,13 +169,13 @@
     &__label {
       display: block;
       margin: 0;
-      padding-left: variables.$spacing--25;
+      padding-left: variables.$va-spacing--25;
 
       &:hover {
-        color: variables.$color-grayscale--0;
+        color: var(--theme-color-grayscale--0);
 
         &::before {
-          border-color: variables.$color-grayscale--0;
+          border-color: var(--theme-color-grayscale--0);
         }
       }
 
@@ -191,20 +191,20 @@
       }
 
       &::before {
-        border: 1px solid variables.$color-grayscale--400;
+        border: 1px solid var(--theme-color-grayscale--400);
       }
 
       &::after {
         opacity: 0;
         border: 1px solid transparent;
-        background: variables.$color-grayscale--0;
+        background: var(--theme-color-grayscale--0);
         transform: scale(0);
         transition: transform 0.1s ease-in-out;
       }
     }
 
     &__field:checked + &__label {
-      color: variables.$color-grayscale--0;
+      color: var(--theme-color-grayscale--0);
 
       &::after {
         opacity: 1;
@@ -214,10 +214,10 @@
 
     &__field:disabled + &__label {
       cursor: not-allowed;
-      color: variables.$color-grayscale--400;
+      color: var(--theme-color-grayscale--400);
 
       &::before {
-        border-color: variables.$color-grayscale--500;
+        border-color: var(--theme-color-grayscale--500);
       }
     }
 
@@ -225,7 +225,7 @@
       cursor: not-allowed;
 
       &::after {
-        background: variables.$color-grayscale--500;
+        background: var(--theme-color-grayscale--500);
       }
     }
   }

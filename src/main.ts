@@ -11,7 +11,7 @@ const pinia = createPinia();
 let vueOptions = options;
 
 if (import.meta.env.DEV) {
-  const styleguideOptions = await import('@!production/setup/styleguide');
+  const styleguideOptions = await import('@!production/styleguide/setup');
 
   vueOptions = {
     ...vueOptions,
