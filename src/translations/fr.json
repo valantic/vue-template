@@ -3,6 +3,9 @@
     "unknownApiError": "Une erreur inconnue s'est produite.",
     "noResults": "Aucun résultat."
   },
+  "global": {
+    "close": "Fermer"
+  },
   "e-logo": {
     "linkTitle": "à la page d'accueil"
   },

@@ -4,8 +4,7 @@ import { alias } from '../vite.config';
 
 const config: StorybookConfig = {
   stories: [
-    // @see https://storybook.js.org/docs/react/configure/overview#configure-story-loading
-    '../src/stories/**/*.stories.mdx', // Currently not supported because of a bug in the vite builder. @see https://github.com/storybookjs/builder-vite/pull/556
+    '../src/stories/**/*.mdx',
     {
       directory: '../src/stories/elements/',
       titlePrefix: 'Elements/',
@@ -17,7 +16,13 @@ const config: StorybookConfig = {
       files: '*.stories.@(js|jsx|ts|tsx)',
     },
   ],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/preset-scss'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/preset-scss',
+    '@storybook/addon-mdx-gfm',
+    '@chromatic-com/storybook',
+  ],
   framework: {
     name: '@storybook/vue3-vite',
     options: {},
@@ -30,9 +35,7 @@ const config: StorybookConfig = {
       },
     });
   },
-  docs: {
-    autodocs: true,
-  },
+  docs: {},
 };
 
 export default config;
