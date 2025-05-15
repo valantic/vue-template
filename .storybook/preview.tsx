@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/vue3';
 import { setup } from '@storybook/vue3';
 import vuePlugins from '../src/setup/plugins';
-import '../src/setup/scss/themes/theme-01.scss';
+import '../src/setup/scss/themes/theme-default.scss';
 import '../src/setup/styles.scss';
 
 setup((app) => {
@@ -11,7 +11,6 @@ setup((app) => {
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -19,6 +18,8 @@ const preview: Preview = {
       },
     },
   },
+
+  tags: ['autodocs'],
 };
 
 // eslint-disable-next-line vue/require-direct-export
