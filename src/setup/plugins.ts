@@ -5,11 +5,10 @@ import i18n from '@/setup/i18n';
 import components from '@/setup/ssr-components';
 import dayjs from '@/plugins/dayjs';
 import resizeEnd from '@/plugins/resize-end';
+import tooltip from '@/plugins/tooltip';
 import VueFocus from '@/plugins/v-focus';
 import viewport from '@/plugins/viewport';
 import VueBemCn from '@/plugins/vue-bem-cn';
-
-// import tooltip from '@/plugins/tooltip';
 
 export type CustomPlugin = {
   plugin: Plugin;
@@ -29,7 +28,7 @@ export default [
   },
   { plugin: directives },
   { plugin: components },
-  // { plugin: tooltip},
   { plugin: VueFocus },
   { plugin: dayjs },
+  tooltip,
 ] satisfies CustomPlugin[];
