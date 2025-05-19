@@ -56,23 +56,23 @@
     border: 5px solid var(--theme-color-grayscale--0);
 
     @include mixins.media(xs) {
-      flex-basis: percentage(math.div(1, 2));
+      flex-basis: math.percentage(math.div(1, 2));
     }
 
     @include mixins.media(sm) {
-      flex-basis: percentage(math.div(1, 3));
+      flex-basis: math.percentage(math.div(1, 3));
     }
 
     @include mixins.media(md) {
-      flex-basis: percentage(math.div(1, 4));
+      flex-basis: math.percentage(math.div(1, 4));
     }
 
     @include mixins.media(lg) {
-      flex-basis: percentage(math.div(1, 5));
+      flex-basis: math.percentage(math.div(1, 5));
     }
 
     @include mixins.media(xl) {
-      flex-basis: percentage(math.div(1, 6));
+      flex-basis: math.percentage(math.div(1, 6));
     }
 
     .e-picture img {
