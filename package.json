@@ -45,7 +45,6 @@
   },
   "homepage": "https://github.com/valantic/vue-template",
   "dependencies": {
-    "@popperjs/core": "~2.11.8",
     "@valantic/scss-utils": "github:valantic/scss-utils#main",
     "@vuelidate/core": "~2.0.3",
     "@vuelidate/validators": "~2.0.4",
@@ -54,6 +53,7 @@
     "dayjs": "~1.11.13",
     "embla-carousel": "~8.6.0",
     "embla-carousel-autoplay": "~8.6.0",
+    "floating-vue": "~5.2.2",
     "pikaday": "~1.8.2",
     "pinia": "~3.0.2",
     "the-new-css-reset": "~1.11.3",
