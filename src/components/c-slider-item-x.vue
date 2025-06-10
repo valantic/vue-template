@@ -53,7 +53,7 @@
   .c-slider-item-x {
     position: relative;
     flex: 0 0 100%;
-    border: 5px solid variables.$color-grayscale--0;
+    border: 5px solid var(--theme-color-grayscale--0);
 
     @include mixins.media(xs) {
       flex-basis: percentage(math.div(1, 2));

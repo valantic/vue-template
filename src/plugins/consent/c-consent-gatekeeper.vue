@@ -107,12 +107,12 @@
 
   .c-consent-gatekeeper {
     display: flex;
-    gap: variables.$spacing--30;
+    gap: variables.$va-spacing--30;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: variables.$spacing--50 variables.$spacing--20;
-    border: 3px solid variables.$color-primary--1;
-    background: variables.$color-grayscale--1000;
+    padding: variables.$va-spacing--50 variables.$va-spacing--20;
+    border: 3px solid var(--theme-color-primary--1);
+    background: var(--theme-color-grayscale--1000);
   }
 </style>

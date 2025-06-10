@@ -257,7 +257,7 @@
 
     &::backdrop {
       opacity: 0.75;
-      background-color: variables.$color-grayscale--0;
+      background-color: var(--theme-color-grayscale--0);
     }
 
     &__inner {
@@ -266,7 +266,7 @@
       width: 100%;
       height: 100vh;
       overflow-y: auto;
-      background-color: variables.$color-grayscale--1000;
+      background-color: var(--theme-color-grayscale--1000);
       justify-self: center;
 
       @include mixins.media(md) {
@@ -288,16 +288,16 @@
 
     &__header,
     &__sticky-footer {
-      padding: variables.$spacing--25;
-      border-bottom: 1px solid variables.$color-grayscale--600;
+      padding: variables.$va-spacing--25;
+      border-bottom: 1px solid var(--theme-color-grayscale--600);
 
       @include mixins.media(md) {
-        padding: variables.$spacing--25 variables.$spacing--50;
+        padding: variables.$va-spacing--25 variables.$va-spacing--50;
       }
     }
 
     &__header {
-      border-bottom: 1px solid variables.$color-grayscale--600;
+      border-bottom: 1px solid var(--theme-color-grayscale--600);
     }
 
     &__header-inner {
@@ -308,22 +308,22 @@
 
     &__content {
       flex: 1 0 auto;
-      padding: variables.$spacing--25;
+      padding: variables.$va-spacing--25;
 
       @include mixins.media(md) {
-        padding: variables.$spacing--50;
+        padding: variables.$va-spacing--50;
       }
     }
 
     &__sticky-footer {
-      border-top: 1px solid variables.$color-grayscale--600;
+      border-top: 1px solid var(--theme-color-grayscale--600);
 
       @include mixins.media($down: sm) {
         position: sticky;
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: variables.$color-grayscale--1000;
+        background-color: var(--theme-color-grayscale--1000);
       }
     }
 
@@ -332,7 +332,7 @@
     }
 
     &__button-close {
-      padding-left: variables.$spacing--20;
+      padding-left: variables.$va-spacing--20;
       cursor: pointer;
     }
 
@@ -356,10 +356,10 @@
       #{$this}__header,
       #{$this}__footer,
       #{$this}__content {
-        padding: variables.$spacing--25;
+        padding: variables.$va-spacing--25;
 
         @include mixins.media(md) {
-          padding: variables.$spacing--30;
+          padding: variables.$va-spacing--30;
         }
       }
     }
