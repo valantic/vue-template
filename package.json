@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/valantic/vue-template",
   "dependencies": {
-    "@valantic/scss-utils": "github:valantic/scss-utils#main",
+    "@valantic/scss-utils": "github:valantic/scss-utils#0.0.1",
     "@vuelidate/core": "~2.0.3",
     "@vuelidate/validators": "~2.0.4",
     "axios": "~1.9.0",
@@ -82,7 +82,7 @@
     "@types/node": "~22.15.19",
     "@types/pikaday": "~1.7.9",
     "@types/resize-observer-browser": "~0.1.11",
-    "@valantic/vue-styleguide": "github:valantic/vue-styleguide#main",
+    "@valantic/vue-styleguide": "github:valantic/vue-styleguide#0.0.1",
     "@vitejs/plugin-vue": "~5.2.4",
     "@vue/test-utils": "~2.4.6",
     "autoprefixer": "~10.4.20",

@@ -1,21 +1,32 @@
 <template>
   <div :class="b()">
     <VTooltip>
-      <h1>Tooltip</h1>
+      <h1 :class="b('headline')">Tooltip</h1>
 
       <template #popper> This is the title of this page </template>
     </VTooltip>
+
+    <button
+      v-tooltip="{ content: 'Tooltip content here', disabled: false }"
+      type="button"
+    >
+      A button
+    </button>
   </div>
 </template>
 
 <script lang="ts">
+  import VTooltip from 'floating-vue';
   import { defineComponent } from 'vue';
 
   // type Setup = {};
+  // type Data = {};
 
   export default defineComponent({
     name: 'r-tooltips',
-    // components: {},
+    components: {
+      vTooltip: VTooltip,
+    },
     // directives: {},
 
     // props: {},
@@ -50,6 +61,8 @@
   @use '@/setup/scss/variables';
 
   .r-tooltips {
-    display: flex;
+    &__headline {
+      display: inline;
+    }
   }
 </style>
