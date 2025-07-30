@@ -1,118 +1,44 @@
 <template>
   <div :class="b()">
-    <h1>Tooltip</h1>
-    <div style="width: max-content; margin: auto; padding: 10vh 0; text-align: center">
-      <h2 style="padding-bottom: 30px; font-weight: bold">Disable/Enable Tooltip</h2>
+    <VTooltip>
+      <h1 :class="b('headline')">Tooltip</h1>
 
-      <ul>
-        <li :class="b('item')">
-          <span v-tooltip:[position].mouseover="'Content for the tooltip'">Hover me to see the tooltip.</span>
-        </li>
-      </ul>
-      <div>
-        <label>
-          <input
-            v-model="active"
-            type="checkbox"
-          />
-          Enable tooltip
-        </label>
-      </div>
-    </div>
+      <template #popper> This is the title of this page </template>
+    </VTooltip>
 
-    <div style="width: max-content; margin: auto; padding: 10vh 0; text-align: center">
-      <h2 style="padding-bottom: 30px; font-weight: bold">Select Tooltip Position</h2>
-
-      <div>
-        <c-tooltip :popper-options="popperOptions">
-          Hover me to see the tooltip.
-
-          <template #tooltip> This is the content for the tooltip </template>
-        </c-tooltip>
-      </div>
-
-      <ul style="display: flex; justify-content: center; margin: 0; padding: 10px 0 30px; list-style: none">
-        <li>
-          <e-select
-            v-model="placement"
-            :options="placementOptions"
-            label="tooltip-position"
-            name="tooltip-position"
-          />
-        </li>
-      </ul>
-    </div>
+    <button
+      v-tooltip="{ content: 'Tooltip content here', disabled: false }"
+      type="button"
+    >
+      A button
+    </button>
   </div>
 </template>
 
 <script lang="ts">
-  import { Options, Placement } from '@popperjs/core';
+  import VTooltip from 'floating-vue';
   import { defineComponent } from 'vue';
-  import eSelect from '@/elements/e-select.vue';
-  import cTooltip from '@/plugins/tooltip/c-tooltip.vue';
-  import tooltipDirective from '@/plugins/tooltip/directives/directive';
 
   // type Setup = {};
-
-  type Data = {
-    active: boolean;
-    placementOptions: Record<'label' | 'value', string>[];
-    placement: Placement;
-  };
+  // type Data = {};
 
   export default defineComponent({
     name: 'r-tooltips',
     components: {
-      eSelect,
-      cTooltip,
+      vTooltip: VTooltip,
     },
-
-    directives: {
-      tooltip: tooltipDirective,
-    },
+    // directives: {},
 
     // props: {},
     // setup(): Setup {
     //   return {
     //   };
     // },
-    data(): Data {
-      return {
-        active: true,
-        placementOptions: [
-          {
-            label: 'top',
-            value: 'top',
-          },
-          {
-            label: 'right',
-            value: 'right',
-          },
-          {
-            label: 'bottom',
-            value: 'bottom',
-          },
-          {
-            label: 'left',
-            value: 'left',
-          },
-        ],
+    // data(): Data {
+    //   return {};
+    // },
 
-        placement: 'bottom',
-      };
-    },
-
-    computed: {
-      position(): string {
-        return this.active ? 'top' : 'hidden';
-      },
-
-      popperOptions(): Partial<Options> {
-        return {
-          placement: this.placement,
-        };
-      },
-    },
+    // computed: {},
     // watch: {},
 
     // beforeCreate() {},
@@ -135,8 +61,8 @@
   @use '@/setup/scss/variables';
 
   .r-tooltips {
-    &__item {
-      margin-bottom: variables.$va-spacing--10;
+    &__headline {
+      display: inline;
     }
   }
 </style>
