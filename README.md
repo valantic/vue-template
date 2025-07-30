@@ -840,8 +840,6 @@ $ brew upgrade nasm
 
 ## Roadmap
 
-- [ ] Add 'dangerous' flag for components that use v-html in Storybook.
-- [ ] Add 'development' flag for components in Storybook.
 - [ ] Add custom elements option to the "initial data" section.
 
 ## License
