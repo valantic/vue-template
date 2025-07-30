@@ -2,6 +2,7 @@
 // Vitest instead of Vite was used because of extended Interface.
 import vue from '@vitejs/plugin-vue';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption } from 'vite';
 import { defineConfig } from 'vite';
@@ -27,8 +28,8 @@ interface ViteBuilds {
 }
 
 export const alias = {
-  '@': path.resolve(import.meta.dirname, 'src/'),
-  '@!production': path.resolve(import.meta.dirname, 'src/'), // Workaround so that no assets from conditional styleguide related imports become part of the build.
+  '@': path.resolve(fileURLToPath(new URL('src/', import.meta.url))),
+  '@!production': path.resolve(fileURLToPath(new URL('src/', import.meta.url))), // Workaround so that no assets from conditional styleguide related imports become part of the build.
   'vue': 'vue/dist/vue.esm-bundler.js', // Was required because inline import of vue.esm-bundler.js resulted in TS issues.
 };
 
@@ -147,7 +148,7 @@ export default defineConfig(({ command, mode }) => {
             filename: './stats/index.html',
             open: true,
             template: 'treemap',
-          }) as PluginOption
+          }) as PluginOption,
         );
       }
 
