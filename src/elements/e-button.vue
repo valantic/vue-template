@@ -28,6 +28,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import eLoadingIndicator from '@/elements/e-loading-indicator.vue';
+  import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eProgress from './e-progress.vue';
 
@@ -90,11 +91,7 @@
       /**
        * Define the spacing of the button
        */
-      spacing: {
-        type: String,
-        default: 'default',
-        validator: (value: string) => ['default', 'sm'].includes(value),
-      },
+      spacing: propScale(500, [0, 100, 500]),
 
       /**
        * If `true` the button gets the inverted style
@@ -423,12 +420,16 @@
       min-width: unset;
     }
 
-    &.e-button--spacing-default {
-      padding: 0.6rem 1.5rem;
+    &.e-button--spacing-0 {
+      padding: 0;
     }
 
-    &.e-button--spacing-sm {
+    &.e-button--spacing-100 {
       padding: 0.3rem 1rem;
+    }
+
+    &.e-button--spacing-500 {
+      padding: 0.6rem 1.5rem;
     }
 
     &.e-button:focus,
