@@ -16,16 +16,14 @@
   import { StyleguideSettings } from '@valantic/vue-styleguide/src/types/settings';
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
-  import { i18nSetLocale } from '@/setup/i18n';
+  import i18n, { i18nSetLocale } from '@/setup/i18n';
   import useNotificationStore from '@/stores/notification';
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
   };
 
-  type Data = {
-    styleguideSettings: StyleguideSettings;
-  };
+  // type Data = {};
 
   export default defineComponent({
     name: 'app',
@@ -41,9 +39,15 @@
         notificationStore: useNotificationStore(),
       };
     },
-    data(): Data {
-      return {
-        styleguideSettings: {
+    // data(): Data {
+    //   return {};
+    // },
+
+    computed: {
+      styleguideSettings(): StyleguideSettings {
+        // TODO: Use i18n languages for available languages instead of hardcoded values.
+
+        return {
           themePath: 'src/setup/scss/themes',
           availableThemes: [
             {
@@ -52,11 +56,21 @@
               selected: true,
             },
           ],
-        },
-      };
+          availableLanguages: [
+            {
+              label: 'Französisch',
+              value: 'fr',
+            },
+            {
+              label: 'Deutsch',
+              value: 'de',
+            },
+          ],
+          // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
+          selectedLanguage: i18n.global?.locale?.value || 'de',
+        };
+      },
     },
-
-    // computed: {},
     // watch: {},
 
     // beforeCreate() {},
