@@ -100,7 +100,7 @@ export default defineConfig(({ command, mode }) => {
         copyPublicDir: true,
         // Disable css code split by default.
         // This will build all css into one style.css file.
-        cssCodeSplit: false,
+        cssCodeSplit: true,
 
         // TODO: watch?
         rollupOptions: {
