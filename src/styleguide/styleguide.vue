@@ -6,6 +6,7 @@
     <c-vas-sidebar
       :settings="styleguideSettings"
       @update-theme="onUpdateTheme"
+      @update-language="onUpdateLanguage"
     />
   </div>
 </template>
@@ -15,6 +16,7 @@
   import { StyleguideSettings } from '@valantic/vue-styleguide/src/types/settings';
   import { defineComponent } from 'vue';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
+  import { i18nSetLocale } from '@/setup/i18n';
   import useNotificationStore from '@/stores/notification';
 
   type Setup = {
@@ -88,6 +90,10 @@
 
       onUpdateTheme(theme: string) {
         console.log('theme has changed.', theme); // eslint-disable-line no-console
+      },
+
+      onUpdateLanguage(language: string) {
+        i18nSetLocale(language);
       },
     },
     // render() {},
