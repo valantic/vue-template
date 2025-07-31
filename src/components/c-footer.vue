@@ -1,5 +1,9 @@
 <template>
-  <footer :class="b()"></footer>
+  <footer :class="b()">
+    <div :class="b('container')">
+      <strong :class="b('dummy-text')"></strong>
+    </div>
+  </footer>
 </template>
 
 <script lang="ts">
@@ -41,10 +45,22 @@
 </script>
 
 <style lang="scss">
+  @use '@/setup/scss/mixins';
+
   .c-footer {
-    &::before {
-      // TODO: remove
-      content: 'Footer';
+    display: flex;
+    margin-top: auto;
+    background: var(--theme-color-grayscale--900);
+
+    &__container {
+      @include mixins.layout();
+
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    &__dummy-text::after {
+      content: 'Styleguide Footer';
     }
   }
 </style>

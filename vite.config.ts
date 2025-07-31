@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption } from 'vite';
 import { defineConfig } from 'vite';
+import compression from 'vite-plugin-compression';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { Mode, plugin as mdPlugin } from 'vite-plugin-markdown';
 import { UserConfigExport } from 'vitest/config';
@@ -48,6 +49,7 @@ export default defineConfig(({ command, mode }) => {
       mdPlugin({
         mode: [Mode.VUE],
       }),
+      compression(),
     ],
     resolve: {
       alias,
@@ -88,12 +90,17 @@ export default defineConfig(({ command, mode }) => {
 
       config.base = base;
       config.build = {
+        target: 'esnext', // Use modern JS features for a smaller bundle
+        minify: 'esbuild', // Faster and efficient minification
         outDir: `${outDir}/${mode}`,
         assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
-        manifest: true,
+        manifest: 'manifest.json', // Add a name to avoid .vite folders in the output dir.
         emptyOutDir: true,
         sourcemap: true,
         copyPublicDir: true,
+        // Disable css code split by default.
+        // This will build all css into one style.css file.
+        cssCodeSplit: true,
 
         // TODO: watch?
         rollupOptions: {
@@ -132,7 +139,21 @@ export default defineConfig(({ command, mode }) => {
 
               return `${assetsPath}/[name].[hash].[ext]`;
             },
-            // manualChunks() {}, // Defining manual chunks is supper tricky, since the context of the single imports is hard to evaluate (if even possible). I eventually decided not to use this method.
+            manualChunks: {
+              'chunk.vue': ['vue', 'pinia', 'axios'],
+              'chunk.datepicker': ['pikaday'],
+              'chunk.validation': ['@vuelidate/core', '@vuelidate/validators'], // Group validation libraries
+              'chunk.i18n': ['vue-i18n/dist/vue-i18n.cjs'],
+              'chunk.utils': [
+                'dayjs',
+                'dayjs/plugin/advancedFormat',
+                'dayjs/plugin/isSameOrBefore',
+                'dayjs/plugin/timezone',
+                'dayjs/plugin/utc',
+              ], // One chunk for utilities
+              'chunk.carousel': ['embla-carousel', 'embla-carousel-autoplay'], // Keep carousel together
+              'chunk.popups': ['floating-vue', 'body-scroll-lock'], // Group popup-related libraries
+            },
           },
         },
       };

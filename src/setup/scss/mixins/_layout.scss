@@ -1,0 +1,12 @@
+@mixin content-container() {
+  width: 100%;
+  max-width: var(--theme-content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--theme-content-padding);
+}
+
+@mixin layout() {
+  @include content-container();
+
+  flex: 1 0 auto;
+}

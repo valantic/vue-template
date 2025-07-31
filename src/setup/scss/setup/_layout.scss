@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use '../variables';
+
+html,
+body {
+  height: 100%;
+  background-color: var(--theme-color-grayscale--1000);
+  font-size: var(--theme-font-size--base);
+  scroll-behavior: smooth;
+  text-underline-offset: 2px;
+}
+
+// stylelint-disable selector-max-id
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  color: map.get(variables.$colors, 'font');
+  font-family: var(--theme-font-family--text);
+  line-height: map.get(variables.$line-heights, 'regular');
+
+  main.l-content-container {
+    flex: 1;
+  }
+}

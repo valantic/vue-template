@@ -3,17 +3,20 @@
 :root,
 .use-theme--default,
 [data-use-theme='DEFAULT'] {
+  --theme-content-max-width: 1600px;
+  --theme-content-padding: 2rem;
+  // section
   --theme-font-family--headline: 'Source Sans Pro', 'Trebuchet MS', Arial, sans-serif;
   --theme-font-family--text: 'Source Sans Pro', 'Trebuchet MS', Arial, sans-serif;
-  --theme-font-color--headline: #222222;
-  --theme-font-color--text: #222222;
+  --theme-font-color--headline: #1a1a1a;
+  --theme-font-color--text: #1a1a1a;
   --theme-font-size--base: 16px;
   // section
-  --theme-color-primary--1: #ff4b4b;
+  --theme-color-primary--1: #1a1a1a;
   --theme-color-primary--2: #000000;
   --theme-color-primary--3: #ffffff;
   // section
-  --theme-color-primary--1-rgb: #{functions.calc-rgb(#ff4b4b)};
+  --theme-color-primary--1-rgb: #{functions.calc-rgb(#1a1a1a)};
   --theme-color-primary--2-rgb: #{functions.calc-rgb(#000000)};
   --theme-color-primary--3-rgb: #{functions.calc-rgb(#ffffff)};
   // section

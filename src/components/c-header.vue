@@ -1,5 +1,9 @@
 <template>
-  <header :class="b()"></header>
+  <header :class="b()">
+    <div :class="b('container')">
+      <strong :class="b('dummy-text')"></strong>
+    </div>
+  </header>
 </template>
 
 <script lang="ts">
@@ -41,10 +45,20 @@
 </script>
 
 <style lang="scss">
+  @use '@/setup/scss/mixins';
+
   .c-header {
-    &::before {
-      // TODO: remove
-      content: 'Header';
+    display: flex;
+
+    &__container {
+      @include mixins.layout();
+
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    &__dummy-text::after {
+      content: 'Styleguide Header';
     }
   }
 </style>

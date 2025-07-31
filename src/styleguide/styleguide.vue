@@ -1,26 +1,31 @@
 <template>
-  <div id="app">
-    <header is="vue:c-header" />
+  <header is="vue:c-header" />
+  <component
+    v-if="layoutPage"
+    :is="layoutPage"
+  >
     <router-view />
-    <footer is="vue:c-footer" />
-    <c-vas-sidebar
-      :settings="styleguideSettings"
-      @update-theme="onUpdateTheme"
-      @update-language="onUpdateLanguage"
-    />
-  </div>
+  </component>
+  <footer is="vue:c-footer" />
+  <c-vas-sidebar
+    :settings="styleguideSettings"
+    @update-theme="onUpdateTheme"
+    @update-language="onUpdateLanguage"
+  />
 </template>
 
 <script lang="ts">
   import cVasSidebar from '@valantic/vue-styleguide/src/components/c-vas-sidebar.vue';
   import { StyleguideSettings } from '@valantic/vue-styleguide/src/types/settings';
   import { defineComponent } from 'vue';
+  import { useRoute } from 'vue-router';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
   import i18n, { i18nSetLocale } from '@/setup/i18n';
   import useNotificationStore from '@/stores/notification';
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
+    route: ReturnType<typeof useRoute>;
   };
 
   // type Data = {};
@@ -37,6 +42,7 @@
     setup(): Setup {
       return {
         notificationStore: useNotificationStore(),
+        route: useRoute(),
       };
     },
     // data(): Data {
@@ -44,6 +50,10 @@
     // },
 
     computed: {
+      layoutPage(): string {
+        return (this.route?.meta?.layout as string) ?? 'l-default';
+      },
+
       styleguideSettings(): StyleguideSettings {
         // TODO: Use i18n languages for available languages instead of hardcoded values.
 
