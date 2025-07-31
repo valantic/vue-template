@@ -1,7 +1,7 @@
 <template>
   <header :class="b()">
     <div :class="b('container')">
-      <strong>Styleguide Header</strong>
+      <strong :class="b('dummy-text')"></strong>
     </div>
   </header>
 </template>
@@ -55,6 +55,10 @@
 
       padding-top: 1rem;
       padding-bottom: 1rem;
+    }
+
+    &__dummy-text::after {
+      content: 'Styleguide Footer';
     }
   }
 </style>

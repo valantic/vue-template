@@ -115,9 +115,9 @@
     data() {
       return {
         dummyText: faker.lorem.words(45),
-        listEntries: Array(5)
+        listEntries: Array.from({ length: 5 })
           .fill(1)
-          .map((entry) => entry + 1),
+          .map((entry) => Number(entry) + 1),
         line: faker.lorem.words(20),
       };
     },

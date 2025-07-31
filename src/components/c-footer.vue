@@ -1,7 +1,7 @@
 <template>
   <footer :class="b()">
     <div :class="b('container')">
-      <strong>Styleguide Footer</strong>
+      <strong :class="b('dummy-text')"></strong>
     </div>
   </footer>
 </template>
@@ -57,6 +57,10 @@
 
       padding-top: 1rem;
       padding-bottom: 1rem;
+    }
+
+    &__dummy-text::after {
+      content: 'Styleguide Footer';
     }
   }
 </style>
