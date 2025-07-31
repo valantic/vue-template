@@ -1,35 +1,29 @@
 <template>
-  <div :class="b()">
-    <h1>Sandbox</h1>
-    <h2>E-Logo</h2>
-    <e-logo custom-theme="01" />
-    <h2>C-Breadbrumb</h2>
-    <c-breadcrumb />
-  </div>
+  <l-vas-layout>
+    <p>
+      We use this icons:
+      <a href="https://www.flaticon.com/authors/basic-miscellany/lineal?author_id=159">
+        https://www.flaticon.com/authors/basic-miscellany
+      </a>
+    </p>
+    <s-icon-finder />
+  </l-vas-layout>
 </template>
 
 <script lang="ts">
+  import lVasLayout from '@valantic/vue-styleguide/src/layouts/l-vas-layout.vue';
   import { defineComponent } from 'vue';
-  import cBreadcrumb from '@/components/c-breadcrumb.vue';
-  import eLogo from '@/elements/e-logo.vue';
-
-  // type Setup = {};
-  // type Data = {};
+  import sIconFinder from '@/styleguide/components/s-icon-finder.vue';
 
   export default defineComponent({
-    name: 'r-sandbox',
+    name: 'r-icons',
     components: {
-      cBreadcrumb,
-      eLogo,
+      lVasLayout,
+      sIconFinder,
     },
 
     // props: {},
-    // emits: {},
-
-    // setup(): Setup {
-    //   return {};
-    // },
-    // data(): Data {
+    // data() {
     //   return {};
     // },
 
@@ -51,9 +45,3 @@
     // render() {},
   });
 </script>
-
-<style lang="scss">
-  .r-sandbox {
-    // Add specific styles.
-  }
-</style>

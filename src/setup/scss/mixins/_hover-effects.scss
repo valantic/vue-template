@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use '../variables';
+
+@mixin hover-effect--default($transition: false) {
+  @if $transition == true {
+    transition: all map.get(variables.$transitions, 'default');
+  }
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}

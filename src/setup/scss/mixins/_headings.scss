@@ -1,0 +1,95 @@
+@use 'sass:map';
+@use '@valantic/scss-utils/scss/mixins/media';
+@use '../variables';
+
+// Notice, this is an example
+// Update definition for your project.
+%heading-base {
+  font-family: var(--theme-font-family--headline);
+  font-weight: variables.$va-font-weight--bold;
+  line-height: map.get(variables.$line-heights, 'headlines');
+}
+
+@mixin heading-h1 {
+  @extend %heading-base;
+
+  font-size: map.get(variables.$font-sizes--mobile, 'h1');
+
+  @include media.media(sm) {
+    font-size: map.get(variables.$font-sizes--tablet, 'h1');
+  }
+
+  @include media.media(md) {
+    font-size: map.get(variables.$font-sizes--desktop, 'h1');
+  }
+}
+
+@mixin heading-h2 {
+  @extend %heading-base;
+
+  font-size: map.get(variables.$font-sizes--mobile, 'h2');
+
+  @include media.media(sm) {
+    font-size: map.get(variables.$font-sizes--tablet, 'h2');
+  }
+
+  @include media.media(md) {
+    font-size: map.get(variables.$font-sizes--desktop, 'h2');
+  }
+}
+
+@mixin heading-h3 {
+  @extend %heading-base;
+
+  font-size: map.get(variables.$font-sizes--mobile, 'h3');
+
+  @include media.media(sm) {
+    font-size: map.get(variables.$font-sizes--tablet, 'h3');
+  }
+
+  @include media.media(md) {
+    font-size: map.get(variables.$font-sizes--desktop, 'h3');
+  }
+}
+
+@mixin heading-h4 {
+  @extend %heading-base;
+
+  font-size: map.get(variables.$font-sizes--mobile, 'h4');
+
+  @include media.media(sm) {
+    font-size: map.get(variables.$font-sizes--tablet, 'h4');
+  }
+
+  @include media.media(md) {
+    font-size: map.get(variables.$font-sizes--desktop, 'h4');
+  }
+}
+
+@mixin heading-h5 {
+  @extend %heading-base;
+
+  font-size: map.get(variables.$font-sizes--mobile, 'h5');
+
+  @include media.media(sm) {
+    font-size: map.get(variables.$font-sizes--tablet, 'h5');
+  }
+
+  @include media.media(md) {
+    font-size: map.get(variables.$font-sizes--desktop, 'h5');
+  }
+}
+
+@mixin heading-h6 {
+  @extend %heading-base;
+
+  font-size: map.get(variables.$font-sizes--mobile, 'h6');
+
+  @include media.media(sm) {
+    font-size: map.get(variables.$font-sizes--tablet, 'h6');
+  }
+
+  @include media.media(md) {
+    font-size: map.get(variables.$font-sizes--desktop, 'h6');
+  }
+}

@@ -15,10 +15,9 @@
   >
     <!-- span is required to prevent content shifting in E11. -->
     <span :class="b('inner')">
-      <e-progress
+      <e-loading-indicator
         v-if="progress"
         :spacing="0"
-        negative
       />
       <!-- @slot Button content. -->
       <slot v-else></slot>
@@ -28,16 +27,14 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import propScale from '@/helpers/prop.scale';
+  import eLoadingIndicator from '@/elements/e-loading-indicator.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eProgress from './e-progress.vue';
 
-  // type Setup = {};
-
   type Attributes = {
+    [key: string]: string | boolean | null | undefined;
     role: string | null;
-    disabled: boolean;
-    [key: string]: string | boolean | null;
+    disabled: boolean | undefined;
   };
 
   type ElementDimensions = {
@@ -52,6 +49,9 @@
     hasTouch: boolean;
   };
 
+  export const BUTTON_WIDTH_VARIANTS = ['default', 'full', 'auto'];
+  export const BUTTON_STYLE_VARIANTS = ['text', 'text-underline', 'primary', 'secondary'];
+
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
    * The component uses a `<slot>` to render the content.
@@ -64,30 +64,42 @@
     name: 'e-button',
 
     components: {
+      eLoadingIndicator,
       eProgress,
     },
 
     props: {
       /**
        * Defines the width of the button
-       *
-       * Valid values: `[full, auto]`
        */
       width: {
         type: String,
-        default: null,
-        validator: (value: string) => ['full', 'auto'].includes(value),
+        default: 'default',
+        validator: (value: string) => BUTTON_WIDTH_VARIANTS.includes(value),
       },
 
       /**
-       * Modifies the inner spacing for the button.
+       * Define the variant of the button
        */
-      spacing: propScale(500, [0, 500]),
+      variant: {
+        type: String,
+        default: 'text',
+        validator: (value: string) => BUTTON_STYLE_VARIANTS.includes(value),
+      },
 
       /**
-       * If `true` the button gets the negative style
+       * Define the spacing of the button
        */
-      negative: {
+      spacing: {
+        type: String,
+        default: 'default',
+        validator: (value: string) => ['default', 'sm'].includes(value),
+      },
+
+      /**
+       * If `true` the button gets the inverted style
+       */
+      inverted: {
         type: Boolean,
         default: false,
       },
@@ -96,14 +108,6 @@
        * If `true` the button shows a progress animation
        */
       progress: {
-        type: Boolean,
-        default: false,
-      },
-
-      /**
-       * A flag to toggle between primary and secondary styling
-       */
-      primary: {
         type: Boolean,
         default: false,
       },
@@ -157,9 +161,6 @@
       },
     },
 
-    // setup(): Setup {
-    //   return {};
-    // },
     data(): Data {
       return {
         /**
@@ -190,16 +191,16 @@
        */
       modifiers(): Modifiers {
         return {
+          variant: this.variant,
           width: this.width,
-          spacing: this.spacing,
-          negative: this.negative,
+          inverted: this.inverted,
           progress: this.progress,
           disabled: this.disabled,
-          primary: this.primary,
           hover: this.hover || this.hasHover,
           focus: this.focus || this.hasFocus,
           active: this.active || this.isActive,
           touch: this.hasTouch,
+          spacing: this.spacing,
         };
       },
 
@@ -207,11 +208,17 @@
        * Returns an Object of attributes.
        */
       attributes(): Attributes {
-        return {
-          role: this.$attrs.href ? 'button' : null, // Fallback
+        const attributes: Attributes = {
+          role: this.$attrs.href ? null : 'button', // Fallback,
           ...this.$attrs,
-          disabled: this.disabled || this.progress,
+          disabled: undefined,
         };
+
+        if (this.disabled) {
+          attributes.disabled = true;
+        }
+
+        return attributes;
       },
 
       /**
@@ -314,82 +321,66 @@
   @use '@/setup/scss/mixins';
   @use '@/setup/scss/variables';
 
-  .e-button {
-    $border-radius: 3px;
+  @mixin progressHover($background-color, $fragment-background-color) {
+    &.e-button--progress,
+    &.e-button--progress[disabled],
+    &.e-button--progress[disabled]:hover,
+    &.e-button--progress[disabled]:focus,
+    &.e-button--progress:hover,
+    &.e-button--progress:focus {
+      background-color: $background-color;
 
-    @include mixins.font(14, 18, variables.$va-font-weight--semi-bold);
+      .e-loading-indicator__fragment {
+        background-color: $fragment-background-color;
+      }
+    }
+  }
+
+  .e-button {
+    @include mixins.hover-effect--default();
 
     position: relative;
     display: inline-block;
-    min-width: 165px;
-    padding: 6px variables.$va-spacing--10;
     outline: none;
-    border: 1px solid var(--theme-color-grayscale--500);
-    border-radius: $border-radius;
-    background: transparent;
     cursor: pointer;
-    color: var(--theme-color-grayscale--400);
+    color: var(--theme-color-primary--1);
+    font-size: variables.$font-size--regular;
     text-align: center;
-
-    &:hover {
-      text-decoration: none;
-    }
 
     &--focus,
     &:focus {
       outline: none;
-      border: 1px solid var(--theme-color-grayscale--500);
-      background-color: var(--theme-color-grayscale--500);
-      color: var(--theme-color-primary--3);
     }
 
     &:active:not([disabled]),
     &--active:not([disabled]) {
       position: relative;
-      background-color: var(--theme-color-grayscale--400);
-      color: var(--theme-color-primary--3);
     }
 
     &--hover:not(&--touch),
     &:hover:not(&--touch) {
-      background-color: var(--theme-color-grayscale--500);
-      color: var(--theme-color-primary--3);
+      text-decoration: underline;
     }
 
     &--focus path,
     &--hover:not(&--touch) path,
     &:focus path,
     &:hover:not(&--touch) path {
-      fill: var(--theme-color-primary--3);
+      fill: variables.$va-color-primary--3;
     }
 
     &[disabled],
     &--disabled,
     &[disabled]:hover,
     &--disabled:hover {
-      border-color: var(--theme-color-grayscale--600);
-      background-color: transparent;
-      cursor: default;
-      color: var(--theme-color-grayscale--300);
-      pointer-events: none;
+      opacity: 0.4;
+      cursor: not-allowed;
+      text-decoration: none;
     }
 
     &--width-full {
       display: block;
       width: 100%;
-    }
-
-    &--width-auto {
-      min-width: 0;
-    }
-
-    &--negative {
-      background: var(--theme-color-primary--2);
-      color: var(--theme-color-primary--3);
-    }
-
-    &--spacing-0 {
-      padding: 0;
     }
 
     &--progress,
@@ -399,51 +390,99 @@
     &--progress:hover,
     &--progress:focus {
       overflow: hidden; // Prevents overflow of animation
-      background-color: var(--theme-color-grayscale--400);
     }
 
     &__inner {
       position: relative;
-      display: inline-block;
-      vertical-align: baseline;
     }
 
-    .e-progress {
-      margin-top: -2px; // Creates unified height for text/progress button
-      margin-bottom: -1px;
+    .e-loading-indicator__fragment {
+      background-color: var(--theme-color-grayscale--0);
     }
   }
 
-  .e-button--primary {
-    &:not([disabled]) {
-      color: var(--theme-color-secondary--2);
+  .e-button--inverted {
+    color: var(--theme-color-grayscale--1000);
 
-      &.e-button:focus,
-      &.e-button--focus {
-        background-color: var(--theme-color-primary--1);
-        color: var(--theme-color-primary--3);
-      }
+    .e-loading-indicator__fragment {
+      background-color: var(--theme-color-grayscale--1000);
+    }
+  }
 
-      &.e-button:hover:not(.e-button--touch),
-      &.e-button--hover:not(.e-button--touch) {
-        background-color: var(--theme-color-primary--1);
-        color: var(--theme-color-primary--3);
-      }
+  .e-button--variant-primary,
+  .e-button--variant-secondary {
+    min-width: 250px;
+    border-radius: 100px;
 
-      &.e-button:active:not([disabled]),
-      &.e-button--active:not([disabled]) {
-        background-color: var(--theme-color-secondary--2);
-        color: var(--theme-color-primary--3);
-      }
+    .e-loading-indicator {
+      justify-content: center;
+      min-height: 24px;
     }
 
-    &.e-button--progress,
-    &.e-button--progress[disabled],
-    &.e-button--progress[disabled]:hover,
-    &.e-button--progress[disabled]:focus,
-    &.e-button--progress:hover,
-    &.e-button--progress:focus {
-      background-color: var(--theme-color-secondary--2);
+    &.e-button--width-auto {
+      min-width: unset;
     }
+
+    &.e-button--spacing-default {
+      padding: 0.6rem 1.5rem;
+    }
+
+    &.e-button--spacing-sm {
+      padding: 0.3rem 1rem;
+    }
+
+    &.e-button:focus,
+    &.e-button--focus {
+      opacity: 0.7;
+    }
+
+    &.e-button:hover,
+    &.e-button:hover:not(.e-button--touch),
+    &.e-button--hover:not(.e-button--touch) {
+      text-decoration: none;
+    }
+
+    &.e-button[disabled],
+    &.e-button--disabled,
+    &.e-button[disabled]:hover,
+    &.e-button--disabled:hover {
+      opacity: 0.4;
+      cursor: not-allowed;
+      text-decoration: none;
+    }
+  }
+
+  .e-button--variant-primary {
+    @include progressHover(var(--theme-color-primary--1), var(--theme-color-grayscale--1000));
+
+    background-color: var(--theme-color-primary--1);
+    color: var(--theme-color-grayscale--1000);
+
+    &.e-button--inverted {
+      @include progressHover(var(--theme-color-grayscale--1000), var(--theme-color-primary--1));
+
+      background-color: var(--theme-color-grayscale--1000);
+      color: var(--theme-color-primary--1);
+    }
+  }
+
+  .e-button--variant-secondary {
+    @include progressHover(transparent, var(--theme-color-primary--1));
+
+    border: 2px solid var(--theme-color-primary--1);
+    color: var(--theme-color-primary--1);
+
+    &.e-button--inverted {
+      @include progressHover(transparent, var(--theme-color-grayscale--1000));
+
+      border-color: var(--theme-color-grayscale--1000);
+      color: var(--theme-color-grayscale--1000);
+    }
+  }
+
+  .e-button--variant-text-underline {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
   }
 </style>

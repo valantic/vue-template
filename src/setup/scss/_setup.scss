@@ -1,1 +1,5 @@
-@use '@valantic/scss-utils/scss/setup';
+@use '@valantic/scss-utils/scss/setup/form-fields';
+@use '@valantic/scss-utils/scss/setup/base';
+@use '@valantic/scss-utils/scss/setup/text';
+@use './setup/layout';
+@use './setup/headings';

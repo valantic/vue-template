@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../mixins';
+@use '../variables';
+
+h1 {
+  @include mixins.heading-h1();
+}
+
+h2 {
+  @include mixins.heading-h2();
+}
+
+h3 {
+  @include mixins.heading-h3();
+}
+
+h4 {
+  @include mixins.heading-h4();
+}
+
+h5 {
+  @include mixins.heading-h5();
+}
+
+h6 {
+  @include mixins.heading-h6();
+}

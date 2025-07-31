@@ -1,1 +1,15 @@
-@forward '@valantic/scss-utils/scss/mixins';
+@forward '@valantic/scss-utils/scss/mixins/icon';
+@forward '@valantic/scss-utils/scss/mixins/font';
+@forward '@valantic/scss-utils/scss/mixins/font-size';
+@forward '@valantic/scss-utils/scss/mixins/hyphens';
+@forward '@valantic/scss-utils/scss/mixins/line-clamp';
+@forward '@valantic/scss-utils/scss/mixins/line-height';
+@forward '@valantic/scss-utils/scss/mixins/media';
+@forward '@valantic/scss-utils/scss/mixins/spacings';
+@forward '@valantic/scss-utils/scss/mixins/z-index';
+@forward '@valantic/scss-utils/scss/mixins/invisible';
+@forward '@valantic/scss-utils/scss/mixins/container';
+// Custom mixins
+@forward './mixins/headings';
+@forward './mixins/layout';
+@forward './mixins/hover-effects';
