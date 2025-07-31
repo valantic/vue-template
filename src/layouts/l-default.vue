@@ -1,10 +1,8 @@
 <template>
   <div :class="b()">
-    <div :class="b('content')">
-      <div :class="b('inner')">
-        <c-notification-container />
-        <slot></slot>
-      </div>
+    <div :class="b('container')">
+      <c-notification-container />
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -81,26 +79,14 @@
 </script>
 
 <style lang="scss">
-  @use 'sass:map';
-  @use '@/setup/scss/variables';
   @use '@/setup/scss/mixins';
 
   .l-default {
     display: flex;
     flex-direction: column;
-    height: 100vh;
 
-    &__content {
-      flex: 1 0 auto;
-      background: var(--theme-color-grayscale--600);
-    }
-
-    &__inner {
-      position: relative;
-      max-width: #{map.get(variables.$va-breakpoints, xl) - 20px};
-      margin: 0 auto;
-      background: var(--theme-color-grayscale--1000);
-      box-shadow: 0 4px 10px 1px rgba(var(--theme-color-grayscale--400), 0.3);
+    &__container {
+      @include mixins.layout();
     }
 
     .c-notification-container {

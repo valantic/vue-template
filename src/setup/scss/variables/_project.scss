@@ -1,0 +1,58 @@
+$font-sizes--desktop: (
+  'regular': 1rem,
+  'h1': 2.75rem,
+  'h2': 2rem,
+  'h3': 1.375rem,
+  'h4': 1.125rem,
+  'h5': 1.09rem,
+  'h6': 1.04rem,
+  'small': 0.889rem,
+  'extra-small': 0.79rem,
+);
+
+$font-sizes--tablet: (
+  'regular': 1rem,
+  'h1': 2.75rem,
+  'h2': 2rem,
+  'h3': 1.375rem,
+  'h4': 1.125rem,
+  'h5': 1.09rem,
+  'h6': 1.04rem,
+  'small': 0.833rem,
+  'extra-small': 0.694rem,
+);
+
+$font-sizes--mobile: (
+  'regular': 1rem,
+  'h1': 1.625rem,
+  'h2': 1.1875rem,
+  'h3': 1.296rem,
+  'h4': 1rem,
+  'h5': 1rem,
+  'h6': 1rem,
+  'small': 0.937rem,
+  'extra-small': 0.878rem,
+);
+
+$line-heights: (
+  'regular': 1.5,
+  'headlines': 1.2,
+);
+
+$colors: (
+  'font': var(--theme-font-color--text),
+);
+
+$transitions: (
+  'default': 150ms ease-in-out,
+);
+
+$font-size--biggest: 2rem;
+$font-size--big: 1.125rem;
+$font-size--regular: 1rem;
+$font-size--small: 0.9rem;
+$font-size--smaller: 0.88rem;
+$font-size--smallest: 0.75rem;
+$font-size--micro: 0.6rem;
+
+$form-field--border-radius: 3px;

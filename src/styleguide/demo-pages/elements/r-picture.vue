@@ -1,5 +1,5 @@
 <template>
-  <l-default>
+  <l-vas-layout>
     <e-picture
       :sizes="sizes"
       :width="300"
@@ -8,10 +8,11 @@
       fallback="https://images.pexels.com/photos/9074921/pexels-photo-9074921.jpeg"
       alt="Image description"
     />
-  </l-default>
+  </l-vas-layout>
 </template>
 
 <script lang="ts">
+  import lVasLayout from '@valantic/vue-styleguide/src/layouts/l-vas-layout.vue';
   import { defineComponent } from 'vue';
   import ePicture, { ImageSizes } from '@/elements/e-picture.vue';
 
@@ -26,15 +27,14 @@
   export default defineComponent({
     name: 'r-pictures',
     components: {
+      lVasLayout,
       ePicture,
     },
 
     // props: {},
     // emits: {},
 
-    // setup(): Setup {
-    //   return {};
-    // },
+    // setup(): Setup {},
     data(): Data {
       return {
         sizes: {

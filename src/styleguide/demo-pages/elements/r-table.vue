@@ -1,6 +1,5 @@
 <template>
-  <div :class="b()">
-    <h1>Table</h1>
+  <l-vas-layout>
     <e-table
       v-model:selected="selectedItems"
       :items="items"
@@ -10,11 +9,12 @@
     >
       <template #detailRow="{ item }"> Detail row for {{ item.id }}. </template>
     </e-table>
-  </div>
+  </l-vas-layout>
 </template>
 
 <script lang="ts">
   import { faker } from '@faker-js/faker';
+  import lVasLayout from '@valantic/vue-styleguide/src/layouts/l-vas-layout.vue';
   import { defineComponent } from 'vue';
   import eTable, { TableColumn, TableItem } from '@/elements/e-table.vue';
 
@@ -22,14 +22,13 @@
     columnsDefinition: TableColumn[];
   };
 
-  type Data = {
-    selectedItems: TableItem[];
-  };
-
   export default defineComponent({
     name: 'r-table',
 
-    components: { eTable },
+    components: {
+      lVasLayout,
+      eTable,
+    },
 
     // props: {},
     // emits: {},
@@ -77,7 +76,7 @@
         ],
       };
     },
-    data(): Data {
+    data() {
       return {
         selectedItems: [],
       };
@@ -116,11 +115,3 @@
     // render() {},
   });
 </script>
-
-<style lang="scss">
-  // @use '@/setup/scss/variables';
-
-  .r-table {
-    // ...
-  }
-</style>

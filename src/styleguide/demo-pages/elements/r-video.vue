@@ -1,5 +1,5 @@
 <template>
-  <div :class="b()">
+  <l-vas-layout>
     <!-- youtube example with url -->
     <e-video
       :source="VideoSource.Youtube"
@@ -24,18 +24,17 @@
       video-id="264037633"
       allow-fullscreen
     />
-  </div>
+  </l-vas-layout>
 </template>
 
 <script lang="ts">
+  import lVasLayout from '@valantic/vue-styleguide/src/layouts/l-vas-layout.vue';
   import { defineComponent } from 'vue';
   import eVideo, { VideoSource } from '@/elements/e-video.vue';
 
   type Setup = {
     VideoSource: typeof VideoSource;
   };
-
-  // type Data = {};
 
   /**
    * A component that integrates the e-picture for testing its functionality and passing properties.
@@ -44,21 +43,17 @@
     name: 'r-videos',
 
     components: {
+      lVasLayout,
       eVideo,
     },
 
-    // props: {},
-    // emits: {},
+    // props: {}, // emits: {},
 
     setup(): Setup {
       return {
         VideoSource,
       };
     },
-    // data(): Data {
-    //   return {
-    //   };
-    // },
 
     // computed: {},
     // watch: {},
@@ -78,11 +73,3 @@
     // render() {},
   });
 </script>
-
-<style lang="scss">
-  .r-video {
-    &__form {
-      display: flex;
-    }
-  }
-</style>

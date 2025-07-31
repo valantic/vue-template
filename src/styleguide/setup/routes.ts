@@ -1,21 +1,14 @@
-import { ComponentPublicInstance } from 'vue';
+import { sectionWrapper, styleguideRoot } from '@valantic/vue-styleguide/src/styleguide/setup/routes';
 import lDefault from '@/layouts/l-default.vue';
 import consent from '@/styleguide/demo-pages/components/r-consent.vue';
 import googleMaps from '@/styleguide/demo-pages/components/r-google-maps.vue';
 // Components
-import notifications from '@/styleguide/demo-pages/components/r-notifications.vue';
-import picture from '@/styleguide/demo-pages/components/r-picture.vue';
-import table from '@/styleguide/demo-pages/components/r-table.vue';
-import tooltips from '@/styleguide/demo-pages/components/r-tooltips.vue';
-import video from '@/styleguide/demo-pages/components/r-video.vue';
 // Directives
 import focusMask from '@/styleguide/demo-pages/directives/r-focus-mask.vue';
 import index from '@/styleguide/demo-pages/r-index.vue';
-import forms from '@/styleguide/demo-pages/sandbox/r-forms.vue';
-import icons from '@/styleguide/demo-pages/sandbox/r-icons.vue';
+import { routes as elementRoutes } from '@/styleguide/routes/elements';
 // Sandbox
-import sandbox from '@/styleguide/demo-pages/sandbox/r-sandbox.vue';
-import wysiwyg from '@/styleguide/demo-pages/sandbox/r-wysiwyg.vue';
+import { routes as generalRoutes } from '@/styleguide/routes/general';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -29,78 +22,25 @@ declare module 'vue-router' {
   }
 }
 
-export type Route = {
-  path: string;
-  name?: string;
-  component?: ComponentPublicInstance | Record<string, unknown>;
-  children?: Route[];
-};
-
-const root = '/styleguide';
-const categoryWrapper = {
-  template: '<router-view />',
-};
-
 /**
  * This file is only meant for style-example routes
  */
 export default [
   {
-    path: root,
+    path: styleguideRoot,
     name: 'index',
     component: index,
     meta: {
       title: 'Welcome',
     },
   },
+  ...generalRoutes,
+  ...elementRoutes,
   {
-    path: `${root}/sandbox`,
-    name: 'sandboxWrapper',
-    redirect: `${root}/sandbox/index`,
-    component: categoryWrapper,
-    meta: {
-      title: 'Sandbox',
-    },
-    children: [
-      {
-        path: 'index',
-        name: 'sandbox',
-        component: sandbox,
-        meta: {
-          title: 'Sandbox',
-        },
-      },
-      {
-        path: 'icons',
-        name: 'icons',
-        component: icons,
-        meta: {
-          title: 'Icons',
-        },
-      },
-      {
-        path: 'wysiwyg',
-        name: 'wysiwyg',
-        component: wysiwyg,
-        meta: {
-          title: 'WYSIWYG',
-        },
-      },
-      {
-        path: 'forms',
-        name: 'styleguideForms',
-        component: forms,
-        meta: {
-          title: 'Forms',
-        },
-      },
-    ],
-  },
-  {
-    path: `${root}/layouts`,
+    path: `${styleguideRoot}/layouts`,
     name: 'layoutsWrapper',
-    redirect: `${root}/layouts/index`,
-    component: categoryWrapper,
+    redirect: `${styleguideRoot}/layouts/index`,
+    component: sectionWrapper,
     meta: {
       title: 'Layouts',
     },
@@ -116,60 +56,20 @@ export default [
     ],
   },
   {
-    path: `${root}/components`,
+    path: `${styleguideRoot}/components`,
     name: 'componentsWrapper',
-    redirect: `${root}/components/index`,
-    component: categoryWrapper,
+    redirect: `${styleguideRoot}/components/index`,
+    component: sectionWrapper,
     meta: {
       title: 'Components',
     },
     children: [
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: notifications,
-        meta: {
-          title: 'Notifications',
-        },
-      },
-      {
-        path: 'tooltips',
-        name: 'tooltips',
-        component: tooltips,
-        meta: {
-          title: 'Tooltips',
-        },
-      },
-      {
-        path: 'table',
-        name: 'Table',
-        component: table,
-        meta: {
-          title: 'Table',
-        },
-      },
       {
         path: 'google-maps',
         name: 'googleMaps',
         component: googleMaps,
         meta: {
           title: 'Google Maps',
-        },
-      },
-      {
-        path: 'image',
-        name: 'Pictures',
-        component: picture,
-        meta: {
-          title: 'Pictures',
-        },
-      },
-      {
-        path: 'video',
-        name: 'Video',
-        component: video,
-        meta: {
-          title: 'Videos',
         },
       },
       {
@@ -183,10 +83,10 @@ export default [
     ],
   },
   {
-    path: `${root}/directives`,
+    path: `${styleguideRoot}/directives`,
     name: 'directivesWrapper',
-    redirect: `${root}/directives/index`,
-    component: categoryWrapper,
+    redirect: `${styleguideRoot}/directives/index`,
+    component: sectionWrapper,
     meta: {
       title: 'Directives',
     },
@@ -203,6 +103,6 @@ export default [
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: root,
+    redirect: styleguideRoot,
   },
 ];
