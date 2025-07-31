@@ -58,7 +58,7 @@
     }
 
     &__dummy-text::after {
-      content: 'Styleguide Footer';
+      content: 'Styleguide Header';
     }
   }
 </style>

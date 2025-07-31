@@ -1,11 +1,5 @@
 <template>
   <l-vas-layout>
-    <p>
-      We use this icons:
-      <a href="https://www.flaticon.com/authors/basic-miscellany/lineal?author_id=159">
-        https://www.flaticon.com/authors/basic-miscellany
-      </a>
-    </p>
     <s-icon-finder />
   </l-vas-layout>
 </template>
