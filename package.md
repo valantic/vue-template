@@ -33,11 +33,9 @@ This will test the current state of TS, JS and CSS code. Tests **MUST** be execu
 - `npm run build` - Builds the productive application.
 - `npm run build:icons` - Updates the SVG sprite.
 - `npm run build:profile` - Runs a build and shows a package content overview.
-- `npm run build:storybook` - Creates storybook build.
 - `npm run build:watch` - Allows to develop with a continuous productive build.
 - `npm run serve` - Runs Vite in preview mode.
 - `npm run prepare` - Auto executed setup script for Git Hooks.
-- `npm run storybook` - Runs the storybook server.
 - `npm run tsc` - Runs TypeScript tests.
 
 ## Dependencies
@@ -81,8 +79,6 @@ tbd
 
 - [@faker-js/faker](https://www.npmjs.com/package/@faker-js/faker) - Generate massive amounts of fake (but realistic) data for testing and development.
   > development, mock data
-- [@storybook/\*](https://storybook.js.org/) - Build UIs without the grunt work.
-  > development, storybook, components
 - [@types/\*](https://github.com/DefinitelyTyped/DefinitelyTyped) - About
   The repository for high quality TypeScript type definitions.
   > development, typescript
@@ -104,8 +100,6 @@ tbd
   > eslint
 - [eslint-import-resolver-vite](https://www.npmjs.com/package/eslint-import-resolver-vite) - Vite module resolution plugin for eslint-plugin-import.
 - [eslint-plugin-import](https://www.npmjs.com/package/eslint-plugin-import) - This plugin intends to support linting of ES2015+ (ES6+) import/export syntax, and prevent issues with misspelling of file paths and import names.
-  > eslint
-- [eslint-plugin-storybook](https://www.npmjs.com/package/eslint-plugin-storybook) - Best practice rules for Storybook.
   > eslint
 - [eslint-plugin-vue](https://www.npmjs.com/package/eslint-plugin-vue) - Official ESLint plugin for Vue.js
   > eslint
