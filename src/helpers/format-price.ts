@@ -1,10 +1,10 @@
-import i18n from '@/setup/i18n';
+import i18n, { I18N_FALLBACK } from '@/setup/i18n';
 
 /**
  * Formats the price according to project standards (Price value in cents).
  */
 export default function formatPrice(value: number, currencyBefore?: boolean, currencyAfter?: boolean): string | null {
-  const locale = 'de'; // TODO - replace hardcoded locale
+  const locale = I18N_FALLBACK;
   const currency = 'CHF'; // TODO - replace hardcoded currency
 
   // If we don't get a number, we don't modify the content.

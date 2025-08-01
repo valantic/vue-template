@@ -1,0 +1,72 @@
+{
+  "globalMessages": {
+    "unknownApiError": "An unknown error has occurred.",
+    "noResults": "No results found."
+  },
+  "global": {
+    "close": "Close"
+  },
+  "e-logo": {
+    "linkTitle": "to the homepage"
+  },
+  "e-select": {
+    "chooseOption": "Please select"
+  },
+  "e-table": {
+    "deselectAll": "Deselect all",
+    "selectAll": "Select all",
+    "selectItem": "Select",
+    "showDetailsHeader": "Show details",
+    "sort": "Sort by {name}",
+    "toggleSortingOptions": "Sorting"
+  },
+  "e-progress": {
+    "loading": "Loading …"
+  },
+  "e-multiselect": {
+    "defaultPlaceholder": "Please select",
+    "searchFieldPlaceholder": "Search"
+  },
+  "c-breadcrumb": {
+    "linkTitle": "Go to {name}"
+  },
+  "c-confirmation-modal": {
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
+  "c-consent-gatekeeper": {
+    "noConsentMessage": "This functionality requires your consent for \"{consentGroup}\" cookies. Please update your consent.",
+    "showConsentButtonLabel": "Adjust consent"
+  },
+  "c-notification": {
+    "confirm": "OK",
+    "decline": "Cancel",
+    "close": "Close"
+  },
+  "c-modal": {
+    "buttonClose": "Close window"
+  },
+  "c-multiselect": {
+    "search": "search",
+    "save": "Save",
+    "itemsEmpty": "No results.",
+    "searchTitle": "Search"
+  },
+  "c-date-picker": {
+    "calendarRangeTitle": "Select date range",
+    "calendarTitle": "Select date",
+    "inputEndLabel": "End",
+    "inputLabel": "Date",
+    "inputStartLabel": "Start",
+    "nextMonth": "Next month",
+    "previousMonth": "Previous month"
+  },
+  "c-slider": {
+    "navigationPrevious": "Back",
+    "navigationNext": "Forward"
+  },
+  "s-language": {
+    "de": "German",
+    "fr": "French"
+  }
+}

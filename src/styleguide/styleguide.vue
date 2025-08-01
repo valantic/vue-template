@@ -10,6 +10,7 @@
   <c-vas-sidebar
     :settings="styleguideSettings"
     @update-theme="onUpdateTheme"
+    @update-language="onUpdateLanguage"
   />
 </template>
 
@@ -19,6 +20,7 @@
   import { defineComponent } from 'vue';
   import { useRoute } from 'vue-router';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
+  import i18n, { i18nSetLocale } from '@/setup/i18n';
   import useNotificationStore from '@/stores/notification';
 
   type Setup = {
@@ -26,9 +28,7 @@
     route: ReturnType<typeof useRoute>;
   };
 
-  type Data = {
-    styleguideSettings: StyleguideSettings;
-  };
+  // type Data = {};
 
   export default defineComponent({
     name: 'app',
@@ -45,9 +45,19 @@
         route: useRoute(),
       };
     },
-    data(): Data {
-      return {
-        styleguideSettings: {
+    // data(): Data {
+    //   return {};
+    // },
+
+    computed: {
+      layoutPage(): string {
+        return (this.route?.meta?.layout as string) ?? 'l-default';
+      },
+
+      styleguideSettings(): StyleguideSettings {
+        // TODO: Use i18n languages for available languages instead of hardcoded values.
+
+        return {
           themePath: 'src/setup/scss/themes',
           availableThemes: [
             {
@@ -56,13 +66,19 @@
               selected: true,
             },
           ],
-        },
-      };
-    },
-
-    computed: {
-      layoutPage(): string {
-        return (this.route?.meta?.layout as string) ?? 'l-default';
+          availableLanguages: [
+            {
+              label: 'English',
+              value: 'en',
+            },
+            {
+              label: 'Deutsch',
+              value: 'de',
+            },
+          ],
+          // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
+          selectedLanguage: i18n.global?.locale?.value || 'en',
+        };
       },
     },
     // watch: {},
@@ -98,6 +114,10 @@
 
       onUpdateTheme(theme: string) {
         console.log('theme has changed.', theme); // eslint-disable-line no-console
+      },
+
+      onUpdateLanguage(language: string) {
+        i18nSetLocale(language);
       },
     },
     // render() {},
