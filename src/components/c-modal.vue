@@ -29,7 +29,7 @@
               </h2>
               <button
                 v-if="isClosable"
-                :aria-label="$t('c-modal.buttonClose')"
+                :aria-label="$t('c-modal.button-close')"
                 :class="b('button-close')"
                 type="button"
                 @click="close"
@@ -338,13 +338,13 @@
 
     &--size-600 &__inner {
       @include mixins.media(md) {
-        width: 600px;
+        width: 38rem;
       }
     }
 
     &--size-700 &__inner {
       @include mixins.media(md) {
-        width: 800px;
+        width: 50rem;
       }
     }
 

@@ -7,7 +7,7 @@
       <e-date
         v-model="startDate"
         :class="b('start')"
-        :label="startLabel || $t(range ? 'c-date-picker.inputStartLabel' : 'c-date-picker.inputLabel')"
+        :label="startLabel || $t(range ? 'c-date-picker.input-start-label' : 'c-date-picker.input-label')"
         :name="startName"
         @focus="onFocusStartDate"
       >
@@ -21,7 +21,7 @@
         v-if="range"
         v-model="endDate"
         :class="b('end')"
-        :label="endLabel || $t('c-date-picker.inputEndLabel')"
+        :label="endLabel || $t('c-date-picker.input-end-label')"
         :name="endName"
         @focus="onFocusEndDate"
       >
@@ -43,7 +43,7 @@
             type="button"
             @click.prevent="gotoToday"
           >
-            {{ $t(range ? 'c-date-picker.calendarRangeTitle' : 'c-date-picker.calendarTitle') }}
+            {{ $t(range ? 'c-date-picker.calendar-range-title' : 'c-date-picker.calendar-title') }}
           </button>
           <button
             :class="b('close')"
@@ -294,8 +294,8 @@
           firstDay: 1,
           yearRange: 5,
           i18n: {
-            previousMonth: this.$t('c-date-picker.previousMonth'),
-            nextMonth: this.$t('c-date-picker.nextMonth'),
+            previousMonth: this.$t('c-date-picker.previous-month'),
+            nextMonth: this.$t('c-date-picker.next-month'),
             months: Array.from({ length: 12 })
               .fill(null)
               .map((item, index) => this.$d(now.month(index).toDate(), 'month')),
@@ -396,7 +396,7 @@
               end: this.endDate,
             });
           },
-          delay ? 300 : 0
+          delay ? 300 : 0,
         );
       },
 
@@ -460,7 +460,7 @@
       background: var(--theme-color-grayscale--1000);
 
       @include mixins.media(sm) {
-        min-width: 500px;
+        min-width: 31rem;
         margin-top: variables.$va-spacing--15;
       }
     }

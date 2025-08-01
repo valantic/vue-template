@@ -5,7 +5,7 @@
       v-if="isOpen && hasSearch"
       v-model="searchTerm"
       ref="searchField"
-      :placeholder="$t('e-multiselect.searchFieldPlaceholder')"
+      :placeholder="$t('e-multiselect.search-field-placeholder')"
       :class="b('search-field')"
       type="text"
       @mouseenter="hover = true"
@@ -140,7 +140,7 @@
        */
       placeholder: {
         type: [String, Boolean],
-        default: i18n.global.t('e-multiselect.defaultPlaceholder'),
+        default: i18n.global.t('e-multiselect.default-placeholder'),
         validator: (value: string | boolean) => typeof value === 'string' || !value,
       },
 
@@ -356,7 +356,7 @@
 
   .e-multiselect {
     $this: &;
-    $e-multiselect-height: 30px;
+    $e-multiselect-height: 2rem;
 
     position: relative;
     display: block;
@@ -408,8 +408,8 @@
     }
 
     &__output-value {
-      flex: 1 0 calc(100% - 20px);
-      max-width: calc(100% - 20px);
+      flex: 1 0 calc(100% - 1.25rem);
+      max-width: calc(100% - 1.25rem);
       overflow: hidden;
       text-align: left;
       white-space: nowrap;
@@ -423,7 +423,7 @@
       z-index: 1;
       display: block;
       width: 100%;
-      max-height: 300px;
+      max-height: 18rem;
       overflow: auto;
       border: 1px solid var(--theme-color-grayscale--500);
       border-top: 0;
@@ -464,7 +464,7 @@
     &__icon-splitter {
       position: absolute;
       top: 2px;
-      right: 30px;
+      right: 2rem;
       height: calc(100% - 4px);
       border-left: 1px solid;
     }

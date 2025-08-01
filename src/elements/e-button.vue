@@ -51,7 +51,7 @@
   };
 
   export const BUTTON_WIDTH_VARIANTS = ['default', 'full', 'auto'];
-  export const BUTTON_STYLE_VARIANTS = ['text', 'text-underline', 'primary', 'secondary'];
+  export const BUTTON_STYLE_VARIANTS = ['text', 'primary', 'secondary'];
 
   /**
    * Renders a `<button>` or `<a>` element (based on existing `href` attribute) with button style.
@@ -408,12 +408,12 @@
 
   .e-button--variant-primary,
   .e-button--variant-secondary {
-    min-width: 250px;
-    border-radius: 100px;
+    min-width: 15.625rem;
+    border-radius: 6.25rem;
 
     .e-loading-indicator {
       justify-content: center;
-      min-height: 24px;
+      min-height: 1.5rem;
     }
 
     &.e-button--width-auto {
@@ -479,11 +479,5 @@
       border-color: var(--theme-color-grayscale--1000);
       color: var(--theme-color-grayscale--1000);
     }
-  }
-
-  .e-button--variant-text-underline {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-thickness: 2px;
   }
 </style>

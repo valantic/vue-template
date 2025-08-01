@@ -1,42 +1,45 @@
 {
-  "globalMessages": {
-    "unknownApiError": "An unknown error has occurred.",
-    "noResults": "No results found."
+  "global-messages": {
+    "unknown-api-error": "An unknown error has occurred.",
+    "no-results": "No results found."
   },
   "global": {
     "close": "Close"
   },
   "e-logo": {
-    "linkTitle": "to the homepage"
+    "link-title": "to the homepage"
   },
   "e-select": {
-    "chooseOption": "Please select"
+    "choose-option": "Please select"
   },
   "e-table": {
-    "deselectAll": "Deselect all",
-    "selectAll": "Select all",
-    "selectItem": "Select",
-    "showDetailsHeader": "Show details",
+    "deselect-all": "Deselect all",
+    "select-all": "Select all",
+    "select-item": "Select",
+    "show-details-header": "Show details",
     "sort": "Sort by {name}",
-    "toggleSortingOptions": "Sorting"
+    "toggle-sorting-options": "Sorting"
   },
   "e-progress": {
     "loading": "Loading …"
   },
+  "e-loading-indicator": {
+    "loading": "Loading …"
+  },
   "e-multiselect": {
-    "defaultPlaceholder": "Please select",
-    "searchFieldPlaceholder": "Search"
+    "default-placeholder": "Please select",
+    "search-field-placeholder": "Search"
   },
   "c-breadcrumb": {
-    "linkTitle": "Go to {name}"
+    "link-title": "Go to {name}"
   },
   "c-confirmation-modal": {
     "confirm": "Confirm",
     "cancel": "Cancel"
   },
   "c-consent-gatekeeper": {
-    "noConsentMessage": "This functionality requires your consent for \"{consentGroup}\" cookies. Please update your consent.",
-    "showConsentButtonLabel": "Adjust consent"
+    "no-consent-message": "This functionality requires your consent for \"{consentGroup}\" cookies. Please update your consent.",
+    "show-consent-button-label": "Adjust consent"
   },
   "c-notification": {
     "confirm": "OK",
@@ -44,26 +47,24 @@
     "close": "Close"
   },
   "c-modal": {
-    "buttonClose": "Close window"
+    "button-close": "Close window"
   },
   "c-multiselect": {
     "search": "search",
-    "save": "Save",
-    "itemsEmpty": "No results.",
-    "searchTitle": "Search"
+    "save": "Save"
   },
   "c-date-picker": {
-    "calendarRangeTitle": "Select date range",
-    "calendarTitle": "Select date",
-    "inputEndLabel": "End",
-    "inputLabel": "Date",
-    "inputStartLabel": "Start",
-    "nextMonth": "Next month",
-    "previousMonth": "Previous month"
+    "calendar-range-title": "Select date range",
+    "calendar-title": "Select date",
+    "input-end-label": "End",
+    "input-label": "Date",
+    "input-start-label": "Start",
+    "next-month": "Next month",
+    "previous-month": "Previous month"
   },
   "c-slider": {
-    "navigationPrevious": "Back",
-    "navigationNext": "Forward"
+    "navigation-previous": "Back",
+    "navigation-next": "Forward"
   },
   "s-language": {
     "de": "German",

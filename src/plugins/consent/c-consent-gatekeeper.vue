@@ -4,9 +4,9 @@
     v-else
     :class="b()"
   >
-    {{ consentMessage || $t('c-consent-gatekeeper.noConsentMessage', { consentGroup }) }}
+    {{ consentMessage || $t('c-consent-gatekeeper.no-consent-message', { consentGroup }) }}
     <e-button @click="showConsentDialog">
-      {{ $t('c-consent-gatekeeper.showConsentButtonLabel') }}
+      {{ $t('c-consent-gatekeeper.show-consent-button-label') }}
     </e-button>
   </div>
 </template>

@@ -3,7 +3,7 @@
 :root,
 .use-theme--default,
 [data-use-theme='DEFAULT'] {
-  --theme-content-max-width: 1600px;
+  --theme-content-max-width: 100rem;
   --theme-content-padding: 2rem;
   // section
   --theme-font-family--headline: 'Source Sans Pro', 'Trebuchet MS', Arial, sans-serif;

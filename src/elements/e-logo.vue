@@ -69,7 +69,7 @@
        * Gets the correct logo depending on the theme value from the store.
        */
       logo(): Logo {
-        const title = this.$t('e-logo.linkTitle');
+        const title = this.$t('e-logo.link-title');
         let alt = '';
         let icon: Icon;
 

@@ -19,7 +19,7 @@
         <tbody>
           <tr>
             <td>Inline html usage</td>
-            <td>{{ $t('c-date-picker.calendarRangeTitle') }}</td>
+            <td>{{ $t('c-date-picker.calendar-range-title') }}</td>
           </tr>
           <tr>
             <td>Computed usage</td>
@@ -50,7 +50,7 @@
 
     computed: {
       getTranslatedString(): string {
-        return this.$t('c-date-picker.calendarRangeTitle');
+        return this.$t('c-date-picker.calendar-range-title');
       },
     },
     // watch: {},

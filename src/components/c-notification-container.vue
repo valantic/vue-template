@@ -61,7 +61,7 @@
       filteredNotifications(): MappedNotificationItem[] {
         if (this.selector !== 'default') {
           return this.notificationStore.getNotifications.filter(
-            (notification) => notification.selector === this.selector
+            (notification) => notification.selector === this.selector,
           );
         }
 
@@ -104,11 +104,11 @@
     .list-enter,
     .list-leave-to {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(2rem);
     }
 
     .list-leave-to {
-      transform: translateY(-30px);
+      transform: translateY(-2rem);
     }
 
     .list-move {

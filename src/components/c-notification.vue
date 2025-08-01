@@ -113,9 +113,9 @@
 
   .c-notification {
     position: relative;
-    min-width: 400px;
+    min-width: 25rem;
     max-width: 100%;
-    min-height: 60px;
+    min-height: 3.75rem;
     padding: variables.$va-spacing--5;
 
     &--type-success {

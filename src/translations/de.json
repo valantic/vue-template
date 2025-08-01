@@ -1,42 +1,45 @@
 {
-  "globalMessages": {
-    "unknownApiError": "Es ist ein unbekannter Fehler aufgetreten.",
-    "noResults": "Keine Ergebnisse gefunden."
+  "global-messages": {
+    "unknown-api-error": "Es ist ein unbekannter Fehler aufgetreten.",
+    "no-results": "Keine Ergebnisse gefunden."
   },
   "global": {
     "close": "Schliessen"
   },
   "e-logo": {
-    "linkTitle": "zur Startseite"
+    "link-title": "zur Startseite"
   },
   "e-select": {
-    "chooseOption": "Bitte wählen"
+    "choose-option": "Bitte wählen"
   },
   "e-table": {
-    "deselectAll": "Auswahl aufheben",
-    "selectAll": "Alle auswählen",
-    "selectItem": "Auswählen",
-    "showDetailsHeader": "Details anzeigen",
+    "deselect-all": "Auswahl aufheben",
+    "select-all": "Alle auswählen",
+    "select-item": "Auswählen",
+    "show-details-header": "Details anzeigen",
     "sort": "Nach {name} sortieren",
-    "toggleSortingOptions": "Sortierung"
+    "toggle-sorting-options": "Sortierung"
   },
   "e-progress": {
     "loading": "Lade …"
   },
+  "e-loading-indicator": {
+    "loading": "Lade …"
+  },
   "e-multiselect": {
-    "defaultPlaceholder": "Bitte wählen",
-    "searchFieldPlaceholder": "Suche"
+    "default-placeholder": "Bitte wählen",
+    "search-field-placeholder": "Suche"
   },
   "c-breadcrumb": {
-    "linkTitle": "Gehe zu {name}"
+    "link-title": "Gehe zu {name}"
   },
   "c-confirmation-modal": {
     "confirm": "Bestätigen",
     "cancel": "Abbrechen"
   },
   "c-consent-gatekeeper": {
-    "noConsentMessage": "Diese Funktionalität benötigt Ihre Zustimmung für \"{consentGroup}\"-Cookies. Bitte aktualisieren Sie Ihre Zustimmung.",
-    "showConsentButtonLabel": "Zustimmung anpassen"
+    "no-consent-message": "Diese Funktionalität benötigt Ihre Zustimmung für \"{consentGroup}\"-Cookies. Bitte aktualisieren Sie Ihre Zustimmung.",
+    "show-consent-button-label": "Zustimmung anpassen"
   },
   "c-notification": {
     "confirm": "OK",
@@ -44,26 +47,24 @@
     "close": "Schliessen"
   },
   "c-modal": {
-    "buttonClose": "Fenster schliessen"
+    "button-close": "Fenster schliessen"
   },
   "c-multiselect": {
     "search": "suchen",
-    "save": "Speichern",
-    "itemsEmpty": "Keine Ergebnisse.",
-    "searchTitle": "Suche"
+    "save": "Speichern"
   },
   "c-date-picker": {
-    "calendarRangeTitle": "Datumsbereich auswählen",
-    "calendarTitle": "Datum auswählen",
-    "inputEndLabel": "Ende",
-    "inputLabel": "Datum",
-    "inputStartLabel": "Start",
-    "nextMonth": "Nächster Monat",
-    "previousMonth": "Vorheriger Monat"
+    "calendar-range-title": "Datumsbereich auswählen",
+    "calendar-title": "Datum auswählen",
+    "input-end-label": "Ende",
+    "input-label": "Datum",
+    "input-start-label": "Start",
+    "next-month": "Nächster Monat",
+    "previous-month": "Vorheriger Monat"
   },
   "c-slider": {
-    "navigationPrevious": "Zurück",
-    "navigationNext": "Vorwärts"
+    "navigation-previous": "Zurück",
+    "navigation-next": "Vorwärts"
   },
   "s-language": {
     "de": "Deutsch",

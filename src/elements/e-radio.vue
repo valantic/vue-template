@@ -152,7 +152,7 @@
 
   .e-radio {
     $this: &;
-    $label-size: 16px;
+    $label-size: 1rem;
 
     @include mixins.font(variables.$va-font-size--16, 20px);
 

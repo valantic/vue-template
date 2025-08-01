@@ -239,7 +239,7 @@
     &__icon-splitter {
       position: absolute;
       top: 2px;
-      right: 25px;
+      right: 1.6rem;
       height: calc(100% - 4px);
       border-left: 1px solid;
     }
