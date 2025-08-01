@@ -3,7 +3,7 @@
     <div :class="b('color-grid')">
       <div
         v-for="variant in colorVariants"
-        :key="variant"
+        :key="variant.name"
         :class="b('section')"
       >
         <h3>{{ variant.name }}</h3>
@@ -24,7 +24,7 @@
   </l-vas-layout>
 </template>
 
-<script>
+<script lang="ts">
   import lVasLayout from '@valantic/vue-styleguide/src/layouts/l-vas-layout.vue';
 
   export default {

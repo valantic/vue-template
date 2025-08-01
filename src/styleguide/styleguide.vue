@@ -68,8 +68,8 @@
           ],
           availableLanguages: [
             {
-              label: 'Französisch',
-              value: 'fr',
+              label: 'English',
+              value: 'en',
             },
             {
               label: 'Deutsch',
@@ -77,7 +77,7 @@
             },
           ],
           // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
-          selectedLanguage: i18n.global?.locale?.value || 'de',
+          selectedLanguage: i18n.global?.locale?.value || 'en',
         };
       },
     },

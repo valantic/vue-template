@@ -1,13 +1,13 @@
 import { IntlDateTimeFormat, createI18n } from 'vue-i18n';
-import fallbackMessages from '../translations/de.json';
+import fallbackMessages from '../translations/en.json';
 
 type MessagesSchema = typeof fallbackMessages;
 
 export const PAGE_LANG = document?.documentElement?.lang;
 
-export const I18N_FALLBACK = 'de';
+export const I18N_FALLBACK = 'en';
 export const I18N_FALLBACK_MESSAGES = fallbackMessages;
-export const I18N_LOCALES = [I18N_FALLBACK, 'fr'];
+export const I18N_LOCALES = [I18N_FALLBACK, 'de'];
 
 const datetimeFormats: IntlDateTimeFormat = {
   month: {
@@ -20,7 +20,6 @@ const datetimeFormats: IntlDateTimeFormat = {
   },
 };
 
-// TODO: Check if this still works after refactoring the s-language-select.
 const getStyleguideTranslations = (): Record<string, object> =>
   import.meta.glob('../styleguide/translations.json', { eager: true })['../styleguide/translations.json'] as Record<
     string,
@@ -39,7 +38,7 @@ if (import.meta.env.MODE !== 'production') {
   }
 }
 
-const i18n = createI18n<[MessagesSchema], 'de'>({
+const i18n = createI18n<[MessagesSchema], 'en'>({
   legacy: true, // Inject translation methods
   locale: I18N_FALLBACK,
   fallbackLocale: I18N_FALLBACK,
@@ -61,7 +60,7 @@ const i18n = createI18n<[MessagesSchema], 'de'>({
     [I18N_FALLBACK]: I18N_FALLBACK_MESSAGES,
   },
   numberFormats: {
-    de: {
+    en: {
       decimal: {
         style: 'decimal',
         minimumFractionDigits: 2,

@@ -4,6 +4,7 @@ import tooltips from '@/styleguide/demo-pages/components/r-tooltips.vue';
 import colors from '@/styleguide/demo-pages/general/r-colors.vue';
 import forms from '@/styleguide/demo-pages/general/r-forms.vue';
 import icons from '@/styleguide/demo-pages/general/r-icons.vue';
+import translations from '@/styleguide/demo-pages/general/r-translations.vue';
 import typography from '@/styleguide/demo-pages/general/r-typography.vue';
 
 export const routes = [
@@ -61,6 +62,14 @@ export const routes = [
         component: tooltips,
         meta: {
           title: 'Tooltips',
+        },
+      },
+      {
+        path: 'translations',
+        name: 'translations',
+        component: translations,
+        meta: {
+          title: 'Translations (i18n)',
         },
       },
     ],
