@@ -100,7 +100,7 @@
        */
       placeholder: {
         type: [String, Boolean],
-        default: i18n.global.t('e-select.chooseOption'),
+        default: i18n.global.t('e-select.choose-option'),
         validator: (value: string | boolean) => typeof value === 'string' || !value,
       },
 
@@ -199,11 +199,11 @@
   @use '@/setup/scss/mixins';
   @use '@/setup/scss/variables';
 
-  $e-select-height: 30px;
+  $e-select-height: 2rem;
 
   .e-select {
     $this: &;
-    $height: 30px;
+    $height: 2rem;
 
     position: relative;
     display: block;
@@ -241,7 +241,7 @@
     &__icon-splitter {
       position: absolute;
       top: 2px;
-      right: 30px;
+      right: 2rem;
       height: calc(100% - 4px);
       border-left: 1px solid;
     }

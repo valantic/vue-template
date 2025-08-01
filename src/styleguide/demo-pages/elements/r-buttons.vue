@@ -6,7 +6,7 @@
       :class="b('section')"
     >
       <h3>Variant: {{ styleVariant }}</h3>
-      <div :class="b('type-section', { column: true })">
+      <div :class="b('type-section')">
         <e-button
           v-for="(type, index) in width"
           :key="index"
@@ -130,11 +130,9 @@
 
     &__type-section {
       display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
       margin-bottom: 3rem;
-
-      &--column {
-        display: block;
-      }
 
       &--inverted {
         padding: 3rem 0;

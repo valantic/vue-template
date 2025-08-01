@@ -47,7 +47,7 @@ type InitialData = {
  */
 const NOTIFICATION_UNKNOWN_ERROR: NotificationItem = {
   type: 'error',
-  message: i18n.global.t('globalMessages.unknownApiError'),
+  message: i18n.global.t('global-messages.unknown-api-error'),
 };
 
 const storeName = Store.Notification;
@@ -66,7 +66,7 @@ function handleRedirectOrReload(notification: NotificationItem): void {
       JSON.stringify({
         ...notification,
         redirectUrl: null,
-      })
+      }),
     );
 
     if (notification.pageReload) {

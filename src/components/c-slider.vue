@@ -10,7 +10,7 @@
     </div>
     <button
       :class="b('navigation', { previous: true })"
-      :aria-label="$t('c-slider.navigationPrevious')"
+      :aria-label="$t('c-slider.navigation-previous')"
       :disabled="disablePrevious"
       type="button"
       @click="previousPage"
@@ -22,7 +22,7 @@
     </button>
     <button
       :class="b('navigation', { next: true })"
-      :aria-label="$t('c-slider.navigationNext')"
+      :aria-label="$t('c-slider.navigation-next')"
       :disabled="disableNext"
       type="button"
       @click="nextPage"
@@ -145,7 +145,7 @@
           containScroll: 'keepSnaps',
           ...this.options,
         },
-        plugins
+        plugins,
       );
       this.emblaInstance.on('select', this.onEmblaSelect);
       this.emblaInstance.on('init', this.onEmblaInit);
@@ -265,11 +265,11 @@
       transition: opacity variables.$va-transition-duration--100 ease-in-out;
 
       &--next {
-        right: 20px;
+        right: 1.25rem;
       }
 
       &--previous {
-        left: 20px;
+        left: 1.25rem;
       }
 
       &[disabled] {

@@ -24,7 +24,7 @@
             type="button"
             @click.prevent="toggleSortingOptions"
           >
-            {{ $t('e-table.toggleSortingOptions') }}
+            {{ $t('e-table.toggle-sorting-options') }}
           </button>
         </th>
       </tr>
@@ -41,7 +41,7 @@
               name="total"
             >
               <span :class="{ invisible: !showSortingOptions || !isMobile }">
-                {{ selectedInternal.length ? $t('e-table.deselectAll') : $t('e-table.selectAll') }}
+                {{ selectedInternal.length ? $t('e-table.deselect-all') : $t('e-table.select-all') }}
               </span>
             </e-checkbox>
           </th>
@@ -84,7 +84,7 @@
           :class="b('header-cell', { hidden: true })"
         >
           <span class="invisible">
-            {{ $t('e-table.showDetailsHeader') }}
+            {{ $t('e-table.show-details-header') }}
           </span>
         </th>
       </tr>
@@ -107,7 +107,7 @@
               :disabled="disabled"
             >
               <span :class="{ invisible: !isMobile }">
-                {{ $t('e-table.selectItem') }}
+                {{ $t('e-table.select-item') }}
               </span>
             </e-checkbox>
           </div>
@@ -150,7 +150,7 @@
         <td
           v-if="hasDetailRows"
           :class="b('data-cell', { detailToggle: true })"
-          :data-label="$t('e-table.showDetailsHeader')"
+          :data-label="$t('e-table.show-details-header')"
           @click.self="onDetailToggleClick(item)"
         >
           <label :class="b('detail-toggle-label')">
@@ -164,7 +164,7 @@
             <e-icon
               :class="b('detail-toggle-icon')"
               icon="i-arrow--down"
-              :alt="$t('e-table.showDetailsHeader')"
+              :alt="$t('e-table.show-details-header')"
             />
           </label>
         </td>
@@ -195,7 +195,7 @@
           :colspan="columns.length"
           :class="b('no-results')"
         >
-          {{ $t('globalMessages.noResults') }}
+          {{ $t('global-messages.no-results') }}
         </td>
       </tr>
     </slot>
@@ -428,7 +428,7 @@
         set(itemIds: ItemId[]): void {
           this.$emit(
             'update:selected',
-            this.items.filter((item) => itemIds.includes(item[this.itemIdentifier] as ItemId))
+            this.items.filter((item) => itemIds.includes(item[this.itemIdentifier] as ItemId)),
           );
         },
       },

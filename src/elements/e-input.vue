@@ -331,7 +331,7 @@
   // stylelint-disable no-descending-specificity
   // TODO: refactor style to get rid of no-descending-specificity
 
-  $e-input-height: 30px;
+  $e-input-height: 2rem;
 
   .e-input {
     $this: &;

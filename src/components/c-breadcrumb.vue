@@ -9,7 +9,7 @@
         <a
           :class="b('link')"
           :href="item.url"
-          :title="$t('c-breadcrumb.linkTitle', { name: item.name })"
+          :title="$t('c-breadcrumb.link-title', { name: item.name })"
         >
           {{ item.name }}
         </a>
