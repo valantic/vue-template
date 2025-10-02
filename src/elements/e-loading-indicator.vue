@@ -171,7 +171,7 @@
       height: 0.6em;
       margin: 5px auto 0;
       background-color: var(--theme-color-primary--1);
-      animation: e-progress-rotation-animation $loading-animation-duration linear infinite;
+      animation: e-progress-rotation-animation #{$loading-animation-duration} linear infinite;
 
       &:nth-child(1) {
         animation-delay: math.div($loading-animation-duration, 3 * -1);

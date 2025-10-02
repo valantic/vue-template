@@ -318,6 +318,7 @@
   @use '@/setup/scss/mixins';
   @use '@/setup/scss/variables';
 
+  /* stylelint-disable nesting-selector-no-missing-scoping-root */
   @mixin progressHover($background-color, $fragment-background-color) {
     &.e-button--progress,
     &.e-button--progress[disabled],
@@ -332,6 +333,7 @@
       }
     }
   }
+  /* stylelint-enable nesting-selector-no-missing-scoping-root */
 
   .e-button {
     @include mixins.hover-effect--default();

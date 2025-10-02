@@ -70,7 +70,7 @@ $pimcore-gui--color: #3c3f41;
 
     + dt {
       padding-left: variables.$va-spacing--5;
-      border-left: 1px solid rgba($pimcore-gui--color, 0.25);
+      border-left: 1px solid rgba(#{$pimcore-gui--color}, 0.25);
     }
   }
 
@@ -123,7 +123,7 @@ $pimcore-gui--color: #3c3f41;
 
   // Non-empty pimcore_input are not recognizable as such.
   &__item--force-input-border .pimcore_editable_input:not(.empty) {
-    outline: rgb(186, 186, 186) dashed 1px;
+    outline: rgba(186, 186, 186) dashed 1px;
   }
 
   &__label {
@@ -190,7 +190,7 @@ $pimcore-gui--color: #3c3f41;
       content: '';
       width: 0;
       opacity: 0.1;
-      border-left: 3px solid $pimcore-gui--color;
+      border-left: 3px solid #{$pimcore-gui--color};
     }
 
     &:hover::before {

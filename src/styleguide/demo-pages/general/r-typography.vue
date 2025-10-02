@@ -178,7 +178,7 @@
     &__font-special-chars {
       font-size: 1rem;
       line-height: 1.4;
-      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     &__section {

@@ -96,7 +96,7 @@
     "rollup-plugin-visualizer": "~6.0.4",
     "sass": "~1.93.2",
     "stylelint": "~16.24.0",
-    "stylelint-config-valantic": "~9.0.0",
+    "stylelint-config-valantic": "~9.1.0",
     "svg-sprite": "~2.0.4",
     "svgo": "~4.0.0",
     "typescript": "~5.9.3",

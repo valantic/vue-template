@@ -6,8 +6,10 @@
     transition: all map.get(variables.$transitions, 'default');
   }
 
+  /* stylelint-disable nesting-selector-no-missing-scoping-root */
   &:hover {
     opacity: 0.7;
     cursor: pointer;
   }
+  /* stylelint-enable nesting-selector-no-missing-scoping-root */
 }
