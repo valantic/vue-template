@@ -20,7 +20,7 @@
   import { defineComponent } from 'vue';
   import { useRoute } from 'vue-router';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
-  import i18n, { i18nSetLocale } from '@/setup/i18n';
+  import i18n, { I18N_FALLBACK, i18nSetLocale } from '@/setup/i18n';
   import useNotificationStore from '@/stores/notification';
 
   type Setup = {
@@ -55,8 +55,6 @@
       },
 
       styleguideSettings(): StyleguideSettings {
-        // TODO: Use i18n languages for available languages instead of hardcoded values.
-
         return {
           themePath: 'src/setup/scss/themes',
           availableThemes: [
@@ -77,7 +75,7 @@
             },
           ],
           // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
-          selectedLanguage: i18n.global?.locale?.value || 'en',
+          selectedLanguage: i18n.global?.locale?.value || I18N_FALLBACK,
         };
       },
     },
