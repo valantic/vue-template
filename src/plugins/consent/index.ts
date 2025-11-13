@@ -35,7 +35,7 @@ if (!consentState.isCookiebotAvailable) {
     () => {
       consentState.isCookiebotAvailable = true;
     },
-    { once: true }
+    { once: true },
   );
 }
 

@@ -24,7 +24,7 @@ type OutsideClickElement = HTMLElement & {
 function isClickOnExcludedRefElement(
   excludeRefs: string[],
   eventTarget: Node,
-  binding: OutsideClickDirectiveBinding
+  binding: OutsideClickDirectiveBinding,
 ): boolean {
   return excludeRefs.some((refName) => {
     const excludedElement = binding.instance?.$refs[refName];

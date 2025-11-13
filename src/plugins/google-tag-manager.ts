@@ -1,6 +1,7 @@
 import { Plugin } from 'vue';
 
-enum GaListNames { // eslint-disable-line @typescript-eslint/naming-convention
+// eslint-disable-next-line @typescript-eslint/naming-convention
+enum GaListNames {
   CATALOG = 'Catalog', // eslint-disable-line @typescript-eslint/naming-convention
   SEARCH_RESULTS = 'Search results', // eslint-disable-line @typescript-eslint/naming-convention
   // .. Add additional lists

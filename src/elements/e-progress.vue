@@ -139,7 +139,7 @@
       margin: variables.$va-spacing--5 auto 0;
       border-radius: 50%;
       background-color: var(--theme-color-secondary--1);
-      animation: e-progress-rotation-animation $_e-progress__animation-duration linear infinite;
+      animation: e-progress-rotation-animation #{$_e-progress__animation-duration} linear infinite;
 
       &:nth-child(1) {
         animation-delay: math.div($_e-progress__animation-duration, 3) * -1;
