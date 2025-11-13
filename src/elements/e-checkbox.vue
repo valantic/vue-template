@@ -242,7 +242,7 @@
 
       #{$this}__indicator {
         position: relative;
-        width: 1.5 * $toggle--size;
+        width: $toggle--size * 1.5;
         height: math.div($toggle--size, 3) * 2;
         margin: 0 math.div($toggle--size, 2);
         border-radius: $toggle--size;

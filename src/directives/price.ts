@@ -17,7 +17,7 @@ function format(el: HTMLElement, binding: DirectiveBinding): void {
     : formatPrice(
         Number.parseFloat(binding.value),
         binding.modifiers?.currencyBefore,
-        binding.modifiers?.currencyAfter
+        binding.modifiers?.currencyAfter,
       );
 }
 

@@ -17,7 +17,7 @@ export function createSrcSetImage(heightRatio = 1, sizes: number[] = Object.valu
       `${faker.image.url({
         width,
         height: Math.ceil(heightRatio * width),
-      })} ${width}w`
+      })} ${width}w`,
   );
   const fallback = srcset.at(-1);
 
@@ -45,7 +45,7 @@ export function createSourcesImage(
     lg: 1,
     fallback: 1,
   },
-  sizes = DEFAULT_IMAGE_SIZES
+  sizes = DEFAULT_IMAGE_SIZES,
 ): ImageSources {
   const media = Object.entries(BREAKPOINTS_MAX)
     .map(([breakpoint, size]) => {

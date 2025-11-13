@@ -17,7 +17,7 @@ const spacingFallback = {
  */
 export default function isElementInViewport(
   element: HTMLElement,
-  viewportSpacing: ViewportSpacing = spacingFallback
+  viewportSpacing: ViewportSpacing = spacingFallback,
 ): boolean {
   const elementRect = element.getBoundingClientRect();
 

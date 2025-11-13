@@ -23,6 +23,8 @@ export default [
     },
     rules: {
       // TODO: Fix and enable again
+      'unicorn/no-array-sort': 'off',
+      'unicorn/no-array-reverse': 'off',
       'import/extensions': 'off',
       'no-undefined': 'off',
       'vue/no-unsupported-features': [
