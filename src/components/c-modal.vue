@@ -57,10 +57,10 @@
 </template>
 
 <script lang="ts">
+  import propScale from '@valantic/frontend-utils/src/helpers/prop-scale';
   import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
   import { defineComponent } from 'vue';
   import eIcon from '@/elements/e-icon.vue';
-  import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   // type Setup = {};

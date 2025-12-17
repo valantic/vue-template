@@ -4,9 +4,12 @@ import { createApp } from 'vue';
 import price from '@/directives/price';
 
 const testCases = {
-  '10.00': 'v-price="1000"',
-  'CHF 10.00': 'v-price.currencyBefore="1000"',
-  '10.00 CHF': 'v-price.currencyAfter="1000"',
+  '10.00': 'v-price="10"',
+  'CHF 10.00': 'v-price.currencyBefore="10"',
+  '10.00 CHF': 'v-price.currencyAfter="10"',
+  '1’000.00': 'v-price="1000"',
+  'CHF 1’000.00': 'v-price.currencyBefore="1000"',
+  '1’000.00 CHF': 'v-price.currencyAfter="1000"',
   '': 'v-price',
 };
 

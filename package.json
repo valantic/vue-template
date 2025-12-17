@@ -43,7 +43,8 @@
   },
   "homepage": "https://github.com/valantic/vue-template",
   "dependencies": {
-    "@valantic/scss-utils": "github:valantic/scss-utils#feature/npm-update-sept-2025",
+    "@valantic/frontend-utils": "github:valantic/frontend-utils#main",
+    "@valantic/scss-utils": "github:valantic/scss-utils#v0.0.5",
     "@vuelidate/core": "~2.0.3",
     "@vuelidate/validators": "~2.0.4",
     "axios": "~1.12.2",
@@ -70,7 +71,7 @@
     "@types/node": "~24.6.2",
     "@types/pikaday": "~1.7.9",
     "@types/resize-observer-browser": "~0.1.11",
-    "@valantic/vue-styleguide": "github:valantic/vue-styleguide#feature/npm-update",
+    "@valantic/vue-styleguide": "github:valantic/vue-styleguide#v0.0.3",
     "@vitejs/plugin-vue": "~6.0.1",
     "@vue/test-utils": "~2.4.6",
     "autoprefixer": "~10.4.20",

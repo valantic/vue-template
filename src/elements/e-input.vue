@@ -48,11 +48,11 @@
 </template>
 
 <script lang="ts">
+  import propScale from '@valantic/frontend-utils/src/helpers/prop-scale';
   import { Ref, defineComponent, ref, toRefs } from 'vue';
   import cFormNotification from '@/components/c-form-notification.vue';
   import useFormStates, { FormStates, withProps } from '@/compositions/form-states';
   import eIcon from '@/elements/e-icon.vue';
-  import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
 
   type Setup = FormStates & {

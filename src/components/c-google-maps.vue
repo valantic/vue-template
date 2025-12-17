@@ -8,9 +8,9 @@
 </template>
 
 <script lang="ts">
+  import loadScript from '@valantic/frontend-utils/src/helpers/load-script';
   import { PropType, Ref, defineComponent, ref } from 'vue';
   import useSessionStore from '@/stores/session';
-  import loadScript from '@/helpers/load-script';
 
   type Setup = {
     container: Ref<HTMLDivElement>;
