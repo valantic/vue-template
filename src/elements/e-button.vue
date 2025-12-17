@@ -26,9 +26,9 @@
 </template>
 
 <script lang="ts">
+  import propScale from '@valantic/frontend-utils/src/helpers/prop-scale';
   import { defineComponent } from 'vue';
   import eLoadingIndicator from '@/elements/e-loading-indicator.vue';
-  import propScale from '@/helpers/prop.scale';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eProgress from './e-progress.vue';
 

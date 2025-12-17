@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
+  import scrollbarWidth from '@valantic/frontend-utils/src/helpers/scrollbar-width';
   import { StyleValue, defineComponent } from 'vue';
-  import scrollbarWidth from '@/helpers/scrollbar-width';
 
   // type Setup = {};
 
