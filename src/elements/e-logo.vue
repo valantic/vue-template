@@ -70,7 +70,7 @@
        */
       logo(): Logo {
         const title = this.$t('e-logo.link-title');
-        let alt = '';
+        let alt: string;
         let icon: Icon;
 
         switch (this.theme) {
