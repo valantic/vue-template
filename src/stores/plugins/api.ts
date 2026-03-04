@@ -87,7 +87,10 @@ export default function api(): PluginApi {
 
     if (messages) {
       showNotifications(messages);
-    } else {
+    } else if (error?.code !== 'ECONNABORTED') {
+      // We don't show a message if the request was aborted (timeout) as this is mostly
+      // triggered by navigation changes and the user doesn't need to be informed about this.
+      // If there are no messages in the response we show a generic error message.
       notificationStoreInstance.showUnknownError();
     }
 
