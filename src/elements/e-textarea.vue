@@ -246,7 +246,7 @@
 
     // notification below field
     &__notification {
-      @include mixins.z-index(form-notification);
+      @include mixins.z-index(contentOverlay);
 
       position: absolute;
       width: 100%;

@@ -418,7 +418,7 @@
     }
 
     &__notification {
-      @include mixins.z-index(form-notification);
+      @include mixins.z-index(contentOverlay);
 
       position: absolute;
       top: calc(#{$e-input-height} - 1px);

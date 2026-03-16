@@ -9,7 +9,7 @@ import { defineConfig } from 'vite';
 import compression from 'vite-plugin-compression';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { Mode, plugin as mdPlugin } from 'vite-plugin-markdown';
-import { UserConfigExport } from 'vitest/config';
+import { ViteUserConfigExport } from 'vitest/config';
 import viteBuilds from './vite.builds.json';
 
 interface Modes {
@@ -39,7 +39,7 @@ export const alias = {
  * - Style only components are imported by src/setup/components.ts.
  */
 export default defineConfig(({ command, mode }) => {
-  const config: UserConfigExport = {
+  const config: ViteUserConfigExport = {
     plugins: [
       vue(),
       // eslint-disable-next-line new-cap
