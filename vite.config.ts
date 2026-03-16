@@ -167,7 +167,7 @@ export default defineConfig(({ command, mode }) => {
             // NOTE: the sizes reported by this plugin relate to the source, not build size... @see https://github.com/btd/rollup-plugin-visualizer/issues/96
             filename: './stats/index.html',
             open: true,
-            template: 'treemap',
+            template: 'flamegraph',
           }) as PluginOption,
         );
       }
