@@ -70,7 +70,7 @@
     "@types/node": "~24.12.0",
     "@types/pikaday": "~1.7.10",
     "@types/resize-observer-browser": "~0.1.11",
-    "@valantic/vue-styleguide": "github:valantic/vue-styleguide#v1.1.0",
+    "@valantic/vue-styleguide": "github:valantic/vue-styleguide#v1.2.0",
     "@vitejs/plugin-vue": "~6.0.5",
     "@vue/test-utils": "~2.4.6",
     "autoprefixer": "~10.4.27",

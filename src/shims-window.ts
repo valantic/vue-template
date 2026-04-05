@@ -1,11 +1,11 @@
 import { Store } from '@/setup/globals';
-import { InitialData as BreadcrumbInitialData } from '@/stores/breadcrumb';
+import { BreadcrumbState } from '@/stores/breadcrumb';
 import { InitialData as NotificationInitialData } from '@/stores/notification';
-import { InitialData as SessionInitialData } from '@/stores/session';
+import { SessionState } from '@/stores/session';
 
 type WindowInitialData = {
-  [Store.Session]: SessionInitialData;
-  [Store.Breadcrumb]?: BreadcrumbInitialData;
+  [Store.Session]: Partial<SessionState>;
+  [Store.Breadcrumb]?: Partial<BreadcrumbState>;
   [Store.Notification]?: NotificationInitialData;
 };
 

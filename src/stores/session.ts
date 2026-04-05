@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { Store } from '@/setup/globals';
 
-type SessionState = {
+export type SessionState = {
   /**
    * Stores the theme id.
    */
