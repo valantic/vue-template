@@ -24,7 +24,7 @@
    * Showcase for the consent plugin.
    */
   export default defineComponent({
-    name: 'r-consent',
+    name: 'r-cookie-consent',
     components: {
       cConsentGatekeeper,
     },

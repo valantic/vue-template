@@ -3,8 +3,7 @@
 
 .v-focus-mask {
   &::before {
-    @include mixins.z-index(focusOverlay);
-
+    z-index: 300;
     content: '';
     width: 0;
     height: 0;

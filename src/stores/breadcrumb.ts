@@ -6,12 +6,8 @@ export type BreadcrumbItem = {
   url: string;
 };
 
-type BreadcrumbState = {
+export type BreadcrumbState = {
   items: BreadcrumbItem[];
-};
-
-type InitialData = {
-  items?: BreadcrumbItem[];
 };
 
 const storeName = Store.Breadcrumb;
@@ -22,7 +18,7 @@ export default defineStore(storeName, {
       items: [],
     };
 
-    const initialData: InitialData = window.initialData?.[storeName] || {};
+    const initialData: Partial<BreadcrumbState> = window.initialData?.[storeName] || {};
 
     if (Array.isArray(initialData?.items)) {
       state.items = initialData.items;

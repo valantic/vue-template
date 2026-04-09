@@ -7,34 +7,68 @@
     <router-view />
   </component>
   <footer is="vue:c-footer" />
-  <c-vas-sidebar
-    :settings="styleguideSettings"
-    @update-theme="onUpdateTheme"
-    @update-language="onUpdateLanguage"
-  />
+  <c-vas-sidebar>
+    <template #customSettings>
+      <e-vas-toggle v-model="settings.isLoggedIn"> Logged In </e-vas-toggle>
+
+      <label>
+        Language:
+        <e-vas-select
+          :model-value="settings.activeLanguage"
+          :options="options.languages"
+          @change="onChangeLanguage"
+        />
+      </label>
+      <label>
+        Theme:
+        <e-vas-select
+          :model-value="settings.activeTheme"
+          :options="options.themes"
+          @change="onChangeTheme"
+        />
+      </label>
+    </template>
+  </c-vas-sidebar>
 </template>
 
 <script lang="ts">
-  import cVasSidebar from '@valantic/vue-styleguide/src/components/c-vas-sidebar.vue';
-  import { StyleguideSettings } from '@valantic/vue-styleguide/src/types/settings';
+  import { cVasSidebar } from '@valantic/vue-styleguide';
+  import { eVasSelect, eVasToggle } from '@valantic/vue-styleguide/elements';
   import { defineComponent } from 'vue';
   import { useRoute } from 'vue-router';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
-  import i18n, { i18nSetLocale } from '@/setup/i18n';
+  import i18n, { I18N_FALLBACK } from '@/setup/i18n';
   import useNotificationStore from '@/stores/notification';
+
+  type SelectOption = {
+    label: string;
+    value: string;
+  };
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
     route: ReturnType<typeof useRoute>;
   };
 
-  // type Data = {};
+  type Data = {
+    options: {
+      themes: SelectOption[];
+      languages: SelectOption[];
+    };
+    settings: {
+      isLoggedIn: boolean;
+      activeLanguage: string;
+      activeTheme: string;
+    };
+  };
 
   export default defineComponent({
-    name: 'app',
+    name: 'app', // eslint-disable-line vue/match-component-file-name
 
     components: {
       cVasSidebar,
+      eVasSelect,
+      eVasToggle,
     },
 
     // props: {},
@@ -45,28 +79,20 @@
         route: useRoute(),
       };
     },
-    // data(): Data {
-    //   return {};
-    // },
-
-    computed: {
-      layoutPage(): string {
-        return (this.route?.meta?.layout as string) ?? 'l-default';
-      },
-
-      styleguideSettings(): StyleguideSettings {
-        // TODO: Use i18n languages for available languages instead of hardcoded values.
-
-        return {
-          themePath: 'src/setup/scss/themes',
-          availableThemes: [
+    data(): Data {
+      return {
+        options: {
+          themes: [
             {
-              name: 'theme-default',
-              id: 'theme-default',
-              selected: true,
+              label: 'theme-01',
+              value: 'theme-01',
+            },
+            {
+              label: 'theme-02',
+              value: 'theme-02',
             },
           ],
-          availableLanguages: [
+          languages: [
             {
               label: 'English',
               value: 'en',
@@ -76,9 +102,19 @@
               value: 'de',
             },
           ],
+        },
+        settings: {
+          isLoggedIn: false,
           // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
-          selectedLanguage: i18n.global?.locale?.value || 'en',
-        };
+          activeLanguage: i18n.global?.locale?.value || I18N_FALLBACK,
+          activeTheme: 'theme-02',
+        },
+      };
+    },
+
+    computed: {
+      layoutPage(): string {
+        return (this.route?.meta?.layout as string) ?? 'l-default';
       },
     },
     // watch: {},
@@ -112,18 +148,16 @@
         }
       },
 
-      onUpdateTheme(theme: string) {
-        console.log('theme has changed.', theme); // eslint-disable-line no-console
+      onChangeLanguage() {
+        // eslint-disable-next-line no-console
+        console.log('Language changed');
       },
 
-      onUpdateLanguage(language: string) {
-        i18nSetLocale(language);
+      onChangeTheme() {
+        // eslint-disable-next-line no-console
+        console.log('Theme changed');
       },
     },
     // render() {},
   });
 </script>
-
-<style lang="scss">
-  // Define #app styles in @/setup/scss/_globals.scss
-</style>

@@ -27,13 +27,14 @@
 
 <script lang="ts">
   import propScale from '@valantic/frontend-utils/src/helpers/prop-scale';
-  import { defineComponent } from 'vue';
+  import { ClassValue, defineComponent } from 'vue';
   import eLoadingIndicator from '@/elements/e-loading-indicator.vue';
   import { Modifiers } from '@/plugins/vue-bem-cn/src/globals';
   import eProgress from './e-progress.vue';
 
   type Attributes = {
-    [key: string]: string | boolean | null | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: string | boolean | Record<string, any> | ClassValue[] | null | undefined;
     role: string | null;
     disabled: boolean | undefined;
   };

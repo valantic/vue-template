@@ -42,10 +42,7 @@ export default [
         parser: tseslint.parser,
       },
     },
-    rules: {
-      'vue/multi-word-component-names': 'off',
-      'vue/component-definition-name-casing': 'off',
-    },
+    rules: {},
   },
   {
     files: ['src/styleguide/**/*.*'],
@@ -53,7 +50,6 @@ export default [
     rules: {
       'vue/no-bare-strings-in-template': 'off',
       'vue/multi-word-component-names': 'off',
-      'vue/match-component-file-name': 'off',
     },
   },
 ];
