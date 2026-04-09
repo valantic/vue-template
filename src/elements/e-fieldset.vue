@@ -6,6 +6,7 @@
     >
       <span :class="b('inner')">{{ legend }}</span>
     </legend>
+
     <div :class="b('fields')">
       <slot></slot>
     </div>
