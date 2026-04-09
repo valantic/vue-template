@@ -13,6 +13,8 @@
     @blur="onBlur"
     @click="onClick"
   >
+    {{ progress }}
+
     <!-- span is required to prevent content shifting in E11. -->
     <span :class="b('inner')">
       <e-loading-indicator
