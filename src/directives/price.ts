@@ -18,6 +18,7 @@ function format(el: HTMLElement, binding: DirectiveBinding): void {
         value: Number.parseFloat(binding.value),
         currencyBefore: binding.modifiers?.currencyBefore ?? false,
         currencyAfter: binding.modifiers?.currencyAfter ?? false,
+        locale: 'de-CH',
       });
 }
 

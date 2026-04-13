@@ -35,7 +35,7 @@ type NotificationState = {
   showDefaultGlobalNotifications: boolean;
 };
 
-type InitialData = {
+export type InitialData = {
   /**
    * Holds the initial response messages.
    */

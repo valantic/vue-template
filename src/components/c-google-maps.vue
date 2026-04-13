@@ -211,7 +211,7 @@
    */
   function loadMapsAPI(callback: GoogleMapsCallback): void {
     const sessionStore = useSessionStore();
-    const apiKey = sessionStore.googleMapsApiKey;
+    const apiKey = sessionStore?.googleMapsApiKey ?? 'api-key-does-not-exist';
 
     if (!apiKey) {
       throw new Error('No Google Maps API key provided.');

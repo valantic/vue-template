@@ -8,7 +8,10 @@ _ticket-link_
 
 ### Browser testing
 
-- _link_
+- `npm ci`
+- `npm run build`
+- `npm run dev`
+- `npm run test`
 
 ### Checklist
 

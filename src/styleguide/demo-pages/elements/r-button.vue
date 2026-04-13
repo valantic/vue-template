@@ -61,7 +61,7 @@
   // type Data = {};
 
   export default defineComponent({
-    name: 'r-buttons',
+    name: 'r-button',
     components: {
       eButton,
       lVasLayout,
@@ -123,7 +123,7 @@
 </script>
 
 <style lang="scss">
-  .r-buttons {
+  .r-button {
     &__section {
       margin-bottom: 8rem;
     }

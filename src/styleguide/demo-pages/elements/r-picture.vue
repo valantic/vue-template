@@ -25,7 +25,7 @@
    * A component that integrates the e-picture for testing its functionality and passing properties.
    */
   export default defineComponent({
-    name: 'r-pictures',
+    name: 'r-picture',
     components: {
       lVasLayout,
       ePicture,

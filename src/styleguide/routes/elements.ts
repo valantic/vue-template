@@ -1,16 +1,10 @@
-import { sectionWrapper, styleguideRoot } from '@valantic/vue-styleguide/src/styleguide/setup/routes';
-import button from '@/styleguide/demo-pages/elements/r-buttons.vue';
-import loadingIndicator from '@/styleguide/demo-pages/elements/r-loading-indicator.vue';
-import picture from '@/styleguide/demo-pages/elements/r-picture.vue';
-import table from '@/styleguide/demo-pages/elements/r-table.vue';
-import video from '@/styleguide/demo-pages/elements/r-video.vue';
-import wysiwyg from '@/styleguide/demo-pages/elements/r-wysiwyg.vue';
+import { styleguideRouterConfig } from '@valantic/vue-styleguide';
 
 export const routes = [
   {
-    path: `${styleguideRoot}/elements`,
+    path: `${styleguideRouterConfig.rootPath}/elements`,
     name: 'elements',
-    component: sectionWrapper,
+    component: styleguideRouterConfig.routeChildrenComponentWrapper,
     meta: {
       title: 'Elements',
     },
@@ -18,7 +12,7 @@ export const routes = [
       {
         path: 'e-wysiwyg',
         name: 'e-wysiwyg',
-        component: wysiwyg,
+        component: () => import('@/styleguide/demo-pages/elements/r-wysiwyg.vue'),
         meta: {
           title: 'WYSIWYG',
         },
@@ -26,7 +20,7 @@ export const routes = [
       {
         path: 'e-button',
         name: 'e-button',
-        component: button,
+        component: () => import('@/styleguide/demo-pages/elements/r-button.vue'),
         meta: {
           title: 'Button',
         },
@@ -34,15 +28,16 @@ export const routes = [
       {
         path: 'e-picture',
         name: 'e-picture',
-        component: picture,
+        component: () => import('@/styleguide/demo-pages/elements/r-picture.vue'),
         meta: {
           title: 'Picture',
+          alternativeTitles: ['images'],
         },
       },
       {
         path: 'e-table',
         name: 'e-table',
-        component: table,
+        component: () => import('@/styleguide/demo-pages/elements/r-table.vue'),
         meta: {
           title: 'Table',
         },
@@ -50,7 +45,7 @@ export const routes = [
       {
         path: 'e-video',
         name: 'e-video',
-        component: video,
+        component: () => import('@/styleguide/demo-pages/elements/r-video.vue'),
         meta: {
           title: 'Video',
         },
@@ -58,9 +53,10 @@ export const routes = [
       {
         path: 'e-loading-indicator',
         name: 'e-loading-indicator',
-        component: loadingIndicator,
+        component: () => import('@/styleguide/demo-pages/elements/r-loading-indicator.vue'),
         meta: {
           title: 'Loading Indicator',
+          alternativeTitles: ['progress', 'spinner'],
         },
       },
     ],

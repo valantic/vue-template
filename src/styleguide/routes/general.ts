@@ -1,17 +1,10 @@
-import { sectionWrapper, styleguideRoot } from '@valantic/vue-styleguide/src/styleguide/setup/routes';
-import notifications from '@/styleguide/demo-pages/components/r-notifications.vue';
-import tooltips from '@/styleguide/demo-pages/components/r-tooltips.vue';
-import colors from '@/styleguide/demo-pages/general/r-colors.vue';
-import forms from '@/styleguide/demo-pages/general/r-forms.vue';
-import icons from '@/styleguide/demo-pages/general/r-icons.vue';
-import translations from '@/styleguide/demo-pages/general/r-translations.vue';
-import typography from '@/styleguide/demo-pages/general/r-typography.vue';
+import { styleguideRouterConfig } from '@valantic/vue-styleguide';
 
 export const routes = [
   {
-    path: `${styleguideRoot}/general`,
+    path: `${styleguideRouterConfig.rootPath}/general`,
     name: 'general',
-    component: sectionWrapper,
+    component: styleguideRouterConfig.routeChildrenComponentWrapper,
     meta: {
       title: 'General',
     },
@@ -19,7 +12,7 @@ export const routes = [
       {
         path: 'colors',
         name: 'colors',
-        component: colors,
+        component: () => import('@/styleguide/demo-pages/general/r-colors.vue'),
         meta: {
           title: 'Colors',
         },
@@ -27,31 +20,33 @@ export const routes = [
       {
         path: 'icons',
         name: 'icons',
-        component: icons,
+        component: () => import('@/styleguide/demo-pages/general/r-icons.vue'),
         meta: {
           title: 'Icons',
         },
       },
       {
         path: 'forms',
-        name: 'styleguideForms',
-        component: forms,
+        name: 'forms',
+        component: () => import('@/styleguide/demo-pages/general/r-forms.vue'),
         meta: {
-          title: 'Forms',
+          title: 'Form Fields',
+          alternativeTitles: ['input', 'select', 'checkbox', 'radio', 'textarea'],
         },
       },
       {
         path: 'typography',
         name: 'typography',
-        component: typography,
+        component: () => import('@/styleguide/demo-pages/general/r-typography.vue'),
         meta: {
           title: 'Typography',
+          alternativeTitles: ['font', 'text', 'headlines', 'wysiwyg'],
         },
       },
       {
         path: 'notifications',
         name: 'Notifications',
-        component: notifications,
+        component: () => import('@/styleguide/demo-pages/general/r-notifications.vue'),
         meta: {
           title: 'Notifications',
         },
@@ -59,7 +54,7 @@ export const routes = [
       {
         path: 'tooltips',
         name: 'tooltips',
-        component: tooltips,
+        component: () => import('@/styleguide/demo-pages/general/r-tooltips.vue'),
         meta: {
           title: 'Tooltips',
         },
@@ -67,7 +62,7 @@ export const routes = [
       {
         path: 'translations',
         name: 'translations',
-        component: translations,
+        component: () => import('@/styleguide/demo-pages/general/r-translations.vue'),
         meta: {
           title: 'Translations (i18n)',
         },

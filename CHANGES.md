@@ -1,5 +1,7 @@
 ### Next
 
+- (feature) Improved styleguide routes.
+- (feature) Updated packages.
 - (Feature) Adds component s-navigation-filter for filtering sidebar navigation links
 - (Feature) Adds styleguide build information to the index page.
 - (Feature) Adds support for local webpack dist (Pimcore).
@@ -73,7 +75,8 @@
 - (Breaking) Refactors c-modal header component to slot.
 - (Feature) New outside click directive.
 - (Feature) New e-table component.
-- (Bug) Refactors the Google Analytics dataLayer condition. Testing for a native array could be problematic, since it may be replaced during initialisation.
+- (Bug) Refactors the Google Analytics dataLayer condition. Testing for a native array could be problematic, since it
+  may be replaced during initialisation.
 - (Update) Updates all NPM packages to the current version. Except:
   - babel-core because it is still needed by jest/vue-jest
   - babel-eslint because of the issue https://github.com/babel/babel-eslint/issues/815
@@ -82,7 +85,8 @@
 
 ### v 5.0.0 (2020-07-24)
 
-- Updates all NPM packages to the current version (2020-07-24, except babel-eslint because of an issue, https://github.com/babel/babel-eslint/issues/815)
+- Updates all NPM packages to the current version (2020-07-24, except babel-eslint because of an
+  issue, https://github.com/babel/babel-eslint/issues/815)
 - Updates and extends Vue Styleguidist documentations
 - Replaces styleguide components section in Vue Styleguidist with pages
 - Extends e-select with the optional props to define alternative value and label sources
@@ -90,7 +94,8 @@
 
 ### v 4.0.0 (2020-03-20)
 
-- Updates all NPM packages to the current version (2020-03-18, except babel-eslint because of an issue. See https://github.com/babel/babel-eslint/issues/815)
+- Updates all NPM packages to the current version (2020-03-18, except babel-eslint because of an issue.
+  See https://github.com/babel/babel-eslint/issues/815)
 - Removes Vuetify because version 2 created a massive overhead in builded files
 - Adds separate translation files for styleguide #77
 - Adds state flags for components in styleguidist to track state #69
