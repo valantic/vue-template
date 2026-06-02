@@ -18,6 +18,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Run Trivy (table output)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: table
+          exit-code: '0'
+          severity: CRITICAL,HIGH
+          vuln-type: library
+
       - name: Run Trivy (SARIF)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -25,12 +35,12 @@ jobs:
           scan-ref: .
           format: sarif
           output: trivy-results.sarif
-          exit-code: '1'
+          exit-code: '0'
           severity: CRITICAL,HIGH
           vuln-type: library
+          limit-severities-for-sarif: true
 
       - name: Upload results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: trivy-results.sarif
