@@ -45,6 +45,13 @@ SEVERITIES = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']
 ICONS = {'CRITICAL': '🔴', 'HIGH': '🟠', 'MEDIUM': '🟡', 'LOW': '🟢'}
 
 
+SEP_CHARS = set('─━═├└┌┤┐┘┬┴┼╞╡')
+
+
+def is_separator_cell(s: str) -> bool:
+    return bool(s) and s[0] in SEP_CHARS
+
+
 def is_vuln_id(s: str) -> bool:
     return s.startswith('CVE-') or s.startswith('GHSA-')
 
@@ -74,13 +81,13 @@ for line in raw.split('\n'):
     col = lambda i: parts[i] if i < len(parts) else ''  # noqa: E731
 
     # Skip table headers and separator rows
-    if col(1).startswith('─') or col(1) == 'Library':
+    if is_separator_cell(col(1)) or col(1) == 'Library':
         continue
-    if col(2).startswith('─'):
+    if is_separator_cell(col(2)):
         continue
 
     # Track current package (non-empty, non-separator)
-    if col(1) and not col(1).startswith('─'):
+    if col(1) and not is_separator_cell(col(1)):
         current_pkg = col(1)
 
     # Track current severity (inherited across CVEs of same package)
@@ -100,7 +107,7 @@ for line in raw.split('\n'):
             'title':     col(7),
             'url':       '',
         }
-    elif current_vuln and col(7):
+    elif current_vuln and col(7) and not is_separator_cell(col(7)):
         # Continuation line: URL or title wrap
         if col(7).startswith('http'):
             current_vuln['url'] = col(7)
