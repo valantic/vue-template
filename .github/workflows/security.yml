@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Run Trivy (table output)
         uses: aquasecurity/trivy-action@v0.36.0
@@ -24,6 +24,7 @@ jobs:
           scan-type: fs
           scan-ref: .
           format: table
+          output: trivy-table.txt
           exit-code: '0'
           severity: CRITICAL,HIGH
           vuln-type: library
