@@ -134,6 +134,10 @@ sorted_pkgs = sorted(by_pkg.items(), key=lambda x: worst_severity(x[1]))
 
 headline_icon = '🔴' if critical > 0 else '🟠'
 security_tab_url = f'https://github.com/{repo}/security/code-scanning'
+fingerprint = ','.join(sorted(v['cve'] for v in vulns))
+
+with open('vuln-fingerprint.txt', 'w') as f:
+    f.write(fingerprint)
 
 summary_rows = '\n'.join([
     f'| 🔴 Critical | {critical} |',
@@ -167,7 +171,8 @@ for pkg, pkg_vulns in sorted_pkgs:
             title = title[:77].rstrip() + '…'
         details_sections += f'| {cve_link} | {icon} {vuln["severity"]} | {title} |\n'
 
-md = f"""{headline_icon} Automated security scan on **{date_display}** detected vulnerabilities in npm dependencies.
+md = f"""<!-- vuln-fingerprint: {fingerprint} -->
+{headline_icon} Automated security scan on **{date_display}** detected vulnerabilities in npm dependencies.
 
 [View GitHub Actions run]({run_url}) · [View Security Code Scanning]({security_tab_url})
 
