@@ -8,6 +8,7 @@ on:
 permissions:
   contents: read
   security-events: write
+  issues: write
 
 jobs:
   trivy:
@@ -40,6 +41,37 @@ jobs:
           severity: CRITICAL,HIGH
           vuln-type: library
           limit-severities-for-sarif: true
+
+      - name: Generate issue body
+        if: failure()
+        run: python3 .github/scripts/generate-vuln-report.py
+        env:
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          SCAN_DATE: ${{ github.run_started_at }}
+
+      - name: Create or update security issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create security --color d73a4a --description "Security vulnerabilities" 2>/dev/null || true
+
+          EXISTING=$(gh issue list \
+            --label security \
+            --state open \
+            --json number \
+            --jq '.[0].number // empty')
+
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file issue-body.md
+            echo "Updated existing issue #$EXISTING"
+          else
+            gh issue create \
+              --title "[Security] Vulnerabilities detected – $(date +%Y-%m-%d)" \
+              --body-file issue-body.md \
+              --label security
+          fi
 
       - name: Upload results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v4
