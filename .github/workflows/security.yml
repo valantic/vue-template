@@ -46,7 +46,7 @@ jobs:
           limit-severities-for-sarif: true
 
       - name: Generate issue body
-        if: steps.trivy-sarif.outcome == 'failure'
+        if: steps.trivy-sarif.outcome == 'failure' && github.event_name != 'pull_request'
         run: python3 .github/scripts/generate-vuln-report.py
         env:
           REPO: ${{ github.repository }}
