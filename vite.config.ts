@@ -137,6 +137,37 @@ export default defineConfig(({ command, mode }) => {
 
               return `${assetsPath}/[name].[hash].[ext]`;
             },
+            codeSplitting: {
+              groups: [
+                {
+                  /**
+                   * Will bundle all vue packages.
+                   *
+                   * e.g. vue, vue-router, vue-i18n, etc.
+                   */
+                  name: 'vue',
+                  test: /node_modules[\\/](vue|pinia)/,
+                  priority: 20,
+                },
+                {
+                  /**
+                   * Will bundle all vendor node packages.
+                   */
+                  name: 'vendor',
+                  test: /node_modules/,
+                  priority: 10,
+                },
+                {
+                  /**
+                   * Will bundle all custom files.
+                   */
+                  name: 'project',
+                  minShareCount: 2,
+                  minSize: 10000,
+                  priority: 5,
+                },
+              ],
+            },
           },
         },
       };
