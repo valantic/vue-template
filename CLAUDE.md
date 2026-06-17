@@ -2,29 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Commands
-
-```bash
-npm run dev          # Start dev server
-npm run build        # Production build (mode=app)
-npm run test:unit    # Run unit tests (watch mode)
-npm run test         # Lint + unit tests (no watch)
-npm run lint         # ESLint + Stylelint + TypeScript check
-npm run lint:eslint  # ESLint only
-npm run lint:stylelint # Stylelint only
-npm run tsc          # Type-check only (vue-tsc)
-npm run fix:stylelint # Auto-fix stylelint issues
-npm run prettier     # Format all files
-npm run build:icons  # Rebuild SVG sprite + update TS icon types
-npm run clean:caches # Clear ESLint/Stylelint/Vite caches
-```
-
-Run a single test file:
-
-```bash
-npx vitest run tests/unit/specs/directives/price.test.ts
-```
-
 Build modes: `app` (default), `pimcore` (CMS stylesheet only). Profile build: `npm run build:profile`.
 
 ## Architecture

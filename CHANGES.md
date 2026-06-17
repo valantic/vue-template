@@ -1,5 +1,6 @@
 ### Next
 
+- (Enhancement) Updated vue-styleguide to version 2.0.1
 - (feature) Improved styleguide routes.
 - (feature) Updated packages.
 - (Feature) Adds component s-navigation-filter for filtering sidebar navigation links

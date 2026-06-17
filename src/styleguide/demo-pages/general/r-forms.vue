@@ -217,7 +217,7 @@
 </template>
 
 <script lang="ts">
-  import lVasLayout from '@valantic/vue-styleguide/src/layouts/l-vas-layout.vue';
+  import { lVasLayout } from '@valantic/vue-styleguide/layouts';
   import useVuelidate, { Validation } from '@vuelidate/core';
   import { email, required } from '@vuelidate/validators';
   import { Ref, defineComponent, ref } from 'vue';

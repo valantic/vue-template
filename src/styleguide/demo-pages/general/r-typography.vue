@@ -102,7 +102,7 @@
 
 <script lang="ts">
   import { faker } from '@faker-js/faker';
-  import lVasLayout from '@valantic/vue-styleguide/src/layouts/l-vas-layout.vue';
+  import { lVasLayout } from '@valantic/vue-styleguide/layouts';
   import { defineComponent } from 'vue';
 
   export default defineComponent({
