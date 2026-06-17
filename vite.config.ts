@@ -90,9 +90,9 @@ export default defineConfig(({ command, mode }) => {
       config.base = base;
       config.build = {
         target: 'esnext', // Use modern JS features for a smaller bundle
-        minify: 'esbuild', // Faster and efficient minification
+        minify: 'oxc', // Vite 8 bundled minifier (replaces deprecated esbuild)
         outDir: `${outDir}/${mode}`,
-        assetsInlineLimit: 0, // TODO: check if it makes sense to increase this value.
+        assetsInlineLimit: 0, // Disable inline assets.
         manifest: 'manifest.json', // Add a name to avoid .vite folders in the output dir.
         emptyOutDir: true,
         sourcemap: true,
@@ -101,8 +101,7 @@ export default defineConfig(({ command, mode }) => {
         // This will build all css into one style.css file.
         cssCodeSplit: true,
 
-        // TODO: watch?
-        rollupOptions: {
+        rolldownOptions: {
           external: [
             /!dev/, // Removes styleguide/dev only assets.
           ],
@@ -137,21 +136,6 @@ export default defineConfig(({ command, mode }) => {
               }
 
               return `${assetsPath}/[name].[hash].[ext]`;
-            },
-            manualChunks: {
-              'chunk.vue': ['vue', 'pinia', 'axios'],
-              'chunk.datepicker': ['pikaday'],
-              'chunk.validation': ['@vuelidate/core', '@vuelidate/validators'], // Group validation libraries
-              'chunk.i18n': ['vue-i18n/dist/vue-i18n.cjs'],
-              'chunk.utils': [
-                'dayjs',
-                'dayjs/plugin/advancedFormat',
-                'dayjs/plugin/isSameOrBefore',
-                'dayjs/plugin/timezone',
-                'dayjs/plugin/utc',
-              ], // One chunk for utilities
-              'chunk.carousel': ['embla-carousel', 'embla-carousel-autoplay'], // Keep carousel together
-              'chunk.popups': ['floating-vue', 'body-scroll-lock'], // Group popup-related libraries
             },
           },
         },
