@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-  import lVasLayout from '@valantic/vue-styleguide/src/layouts/l-vas-layout.vue';
+  import { lVasLayout } from '@valantic/vue-styleguide/layouts';
   import { defineComponent } from 'vue';
   import eVideo, { VideoSource } from '@/elements/e-video.vue';
 

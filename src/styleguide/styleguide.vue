@@ -9,24 +9,7 @@
   <footer is="vue:c-footer" />
   <c-vas-sidebar>
     <template #customSettings>
-      <e-vas-toggle v-model="settings.isLoggedIn"> Logged In </e-vas-toggle>
-
-      <label>
-        Language:
-        <e-vas-select
-          :model-value="settings.activeLanguage"
-          :options="options.languages"
-          @change="onChangeLanguage"
-        />
-      </label>
-      <label>
-        Theme:
-        <e-vas-select
-          :model-value="settings.activeTheme"
-          :options="options.themes"
-          @change="onChangeTheme"
-        />
-      </label>
+      <e-vas-toggle v-model="isLoggedIn"> Logged In </e-vas-toggle>
     </template>
   </c-vas-sidebar>
 </template>
@@ -37,30 +20,14 @@
   import { defineComponent } from 'vue';
   import { useRoute } from 'vue-router';
   import { IS_STORAGE_AVAILABLE } from '@/setup/globals';
-  import i18n, { I18N_FALLBACK } from '@/setup/i18n';
   import useNotificationStore from '@/stores/notification';
-
-  type SelectOption = {
-    label: string;
-    value: string;
-  };
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
     route: ReturnType<typeof useRoute>;
   };
 
-  type Data = {
-    options: {
-      themes: SelectOption[];
-      languages: SelectOption[];
-    };
-    settings: {
-      isLoggedIn: boolean;
-      activeLanguage: string;
-      activeTheme: string;
-    };
-  };
+  // type Data = {};
 
   export default defineComponent({
     name: 'app', // eslint-disable-line vue/match-component-file-name
@@ -79,42 +46,24 @@
         route: useRoute(),
       };
     },
-    data(): Data {
-      return {
-        options: {
-          themes: [
-            {
-              label: 'theme-01',
-              value: 'theme-01',
-            },
-            {
-              label: 'theme-02',
-              value: 'theme-02',
-            },
-          ],
-          languages: [
-            {
-              label: 'English',
-              value: 'en',
-            },
-            {
-              label: 'Deutsch',
-              value: 'de',
-            },
-          ],
-        },
-        settings: {
-          isLoggedIn: false,
-          // @ts-ignore -- 'locale' is a reactive, not a string. @see https://github.com/intlify/vue-i18n-next/issues/785
-          activeLanguage: i18n.global?.locale?.value || I18N_FALLBACK,
-          activeTheme: 'theme-02',
-        },
-      };
-    },
+    // data(): Data {
+    //   return {
+    //   };
+    // },
 
     computed: {
       layoutPage(): string {
         return (this.route?.meta?.layout as string) ?? 'l-default';
+      },
+
+      isLoggedIn: {
+        get() {
+          return Math.random() > 0.5;
+        },
+        set(value: boolean) {
+          // eslint-disable-next-line no-console
+          console.log('Setting isLoggedIn to:', value);
+        },
       },
     },
     // watch: {},
@@ -146,16 +95,6 @@
           // Clears the localStorage notifications.
           localStorage.removeItem('vueNotification');
         }
-      },
-
-      onChangeLanguage() {
-        // eslint-disable-next-line no-console
-        console.log('Language changed');
-      },
-
-      onChangeTheme() {
-        // eslint-disable-next-line no-console
-        console.log('Theme changed');
       },
     },
     // render() {},
