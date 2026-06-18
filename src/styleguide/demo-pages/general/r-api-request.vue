@@ -10,72 +10,37 @@
         <!-- GET with params -->
         <section :class="b('section')">
           <h2 :class="b('section-title')">GET with params</h2>
-          <e-button
-            variant="secondary"
-            @click="sendGet"
-          >
-            Send GET /api-request/get?name=World
-          </e-button>
+          <e-vas-button @click="sendGet"> Send GET /api-request/get?name=World </e-vas-button>
         </section>
 
         <!-- POST with body -->
         <section :class="b('section')">
           <h2 :class="b('section-title')">POST with body</h2>
-          <e-button
-            variant="secondary"
-            @click="sendPost"
-          >
-            Send POST /api-request/post
-          </e-button>
+          <e-vas-button @click="sendPost"> Send POST /api-request/post </e-vas-button>
         </section>
 
         <!-- PATCH / PUT / DELETE -->
         <section :class="b('section')">
           <h2 :class="b('section-title')">PATCH / PUT / DELETE</h2>
-          <e-button
-            variant="secondary"
-            @click="sendPatch"
-          >
-            PATCH
-          </e-button>
-          <e-button
-            variant="secondary"
-            @click="sendPut"
-          >
-            PUT
-          </e-button>
-          <e-button
-            variant="secondary"
-            @click="sendDelete"
-          >
-            DELETE
-          </e-button>
+          <e-vas-button @click="sendPatch"> PATCH </e-vas-button>
+          <e-vas-button @click="sendPut"> PUT </e-vas-button>
+          <e-vas-button @click="sendDelete"> DELETE </e-vas-button>
         </section>
 
         <!-- Custom headers -->
         <section :class="b('section')">
           <h2 :class="b('section-title')">Custom headers</h2>
           <div :class="b('row')">
-            <label
-              :class="b('label')"
-              for="custom-header-value"
-            >
-              x-custom-header value:
-            </label>
-            <input
+            <label :class="b('label')"> x-custom-header value: </label>
+            <e-vas-input
               v-model="customHeaderValue"
-              id="custom-header-value"
+              name="customHeaderValue"
               :class="b('input')"
               type="text"
               placeholder="my-value"
             />
           </div>
-          <e-button
-            variant="secondary"
-            @click="sendWithCustomHeader"
-          >
-            Send GET with custom header
-          </e-button>
+          <e-vas-button @click="sendWithCustomHeader"> Send GET with custom header </e-vas-button>
         </section>
 
         <!-- Request abort -->
@@ -85,12 +50,7 @@
             The slow endpoint waits 3 s. Clicking "Start" twice aborts the first request — no error notification should
             appear.
           </p>
-          <e-button
-            variant="secondary"
-            @click="startSlowRequest"
-          >
-            Start slow request
-          </e-button>
+          <e-vas-button @click="startSlowRequest"> Start slow request </e-vas-button>
           <span
             v-if="slowPending"
             :class="b('badge', { pending: true })"
@@ -101,24 +61,9 @@
         <!-- Error responses -->
         <section :class="b('section')">
           <h2 :class="b('section-title')">Error responses</h2>
-          <e-button
-            variant="secondary"
-            @click="sendError(400)"
-          >
-            400 Bad Request
-          </e-button>
-          <e-button
-            variant="secondary"
-            @click="sendError(404)"
-          >
-            404 Not Found
-          </e-button>
-          <e-button
-            variant="secondary"
-            @click="sendError(500)"
-          >
-            500 Server Error
-          </e-button>
+          <e-vas-button @click="sendError(400)"> 400 Bad Request </e-vas-button>
+          <e-vas-button @click="sendError(404)"> 404 Not Found </e-vas-button>
+          <e-vas-button @click="sendError(500)"> 500 Server Error </e-vas-button>
         </section>
       </div>
 
@@ -131,10 +76,10 @@
 </template>
 
 <script lang="ts">
+  import { eVasButton, eVasInput } from '@valantic/vue-styleguide/elements';
   import { lVasLayout } from '@valantic/vue-styleguide/layouts';
   import { defineComponent } from 'vue';
   import useNotificationStore from '@/stores/notification';
-  import eButton from '@/elements/e-button.vue';
 
   type Setup = {
     notificationStore: ReturnType<typeof useNotificationStore>;
@@ -154,7 +99,8 @@
 
     components: {
       lVasLayout,
-      eButton,
+      eVasInput,
+      eVasButton,
     },
 
     // props: {},
@@ -266,7 +212,7 @@
       startSlowRequest(): void {
         this.slowPending = true;
         this.notificationStore.$api
-          .get('/api-request/slow', {}, 'slow-demo')
+          .get('/api-request/slow')
           .then((response) => {
             this.slowPending = false;
             this.lastResponse = { status: response.status, data: response.data };

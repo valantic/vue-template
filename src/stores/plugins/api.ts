@@ -3,72 +3,151 @@ import notificationStore, { mapApiResponseMessages } from '@/stores/notification
 import { ApiResponseMessages } from '@/types/api-response';
 import { FetchError, FetchResponse, RequestConfig, createFetchInstance, isAbortError } from './api-request-helper';
 
+/**
+ * Standard API interface for the Pinia plugin.
+ */
 export type Api = {
   /**
-   * Runs a get request with given url with given url params.
+   * Performs a GET request.
+   *
+   * @template T - The type of the response data.
+   * @param url - The request URL.
+   * @param config - Optional request configuration. Includes `uniqueId` for cancellation.
+   * @returns A promise resolving to the fetch response.
    */
-  get(url: string, config?: RequestConfig, uniqueId?: string): Promise<FetchResponse>;
+  get<T = unknown>(url: string, config?: RequestConfig & { uniqueId?: string }): Promise<FetchResponse<T>>;
 
   /**
-   * Runs a post request with a given url and payload.
+   * Performs a POST request.
+   *
+   * @template T - The type of the response data.
+   * @param url - The request URL.
+   * @param data - Optional request payload.
+   * @param config - Optional request configuration. Includes `uniqueId` for cancellation.
+   * @returns A promise resolving to the fetch response.
    */
-  post(url: string, data?: object, config?: RequestConfig): Promise<FetchResponse>;
+  post<T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig & { uniqueId?: string },
+  ): Promise<FetchResponse<T>>;
 
   /**
-   * Runs a patch request with a given url and payload.
+   * Performs a PATCH request.
+   *
+   * @template T - The type of the response data.
+   * @param url - The request URL.
+   * @param data - Optional request payload.
+   * @param config - Optional request configuration. Includes `uniqueId` for cancellation.
+   * @returns A promise resolving to the fetch response.
    */
-  patch(url: string, data?: object, config?: RequestConfig): Promise<FetchResponse>;
+  patch<T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig & { uniqueId?: string },
+  ): Promise<FetchResponse<T>>;
 
   /**
-   * Runs a put request with a given url and payload.
+   * Performs a PUT request.
+   *
+   * @template T - The type of the response data.
+   * @param url - The request URL.
+   * @param data - Optional request payload.
+   * @param config - Optional request configuration. Includes `uniqueId` for cancellation.
+   * @returns A promise resolving to the fetch response.
    */
-  put(url: string, data?: object, config?: RequestConfig, uniqueId?: string): Promise<FetchResponse>;
+  put<T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig & { uniqueId?: string },
+  ): Promise<FetchResponse<T>>;
 
   /**
-   * Runs a delete request with a given url and payload.
+   * Performs a DELETE request.
+   *
+   * @template T - The type of the response data.
+   * @param url - The request URL.
+   * @param config - Optional request configuration. Includes `uniqueId` for cancellation.
+   * @returns A promise resolving to the fetch response.
    */
-  delete(url: string, config?: RequestConfig): Promise<FetchResponse>;
+  delete<T = unknown>(url: string, config?: RequestConfig & { uniqueId?: string }): Promise<FetchResponse<T>>;
 };
 
+/**
+ * Global fetch instance used by the API plugin.
+ */
 export const fetchInstance = createFetchInstance();
 fetchInstance.defaults.headers.common.locale = PAGE_LANG;
 
+/**
+ * Plugin API object structure.
+ */
 type PluginApi = {
   $api: Api;
 };
 
+/**
+ * Common structure for API response data containing messages.
+ */
 type ApiErrorData = {
   messages?: ApiResponseMessages;
 };
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
+    /**
+     * Access the API plugin from within a Pinia store.
+     */
     $api: Api;
   }
 }
 
+/**
+ * Pinia plugin that provides a standardized API client with notification handling.
+ *
+ * @returns The plugin object.
+ */
 export default function api(): PluginApi {
   const notificationStoreInstance = notificationStore();
   const abortStack: Record<string, AbortController> = {};
 
+  /**
+   * Shows notifications from the API response.
+   *
+   * @param messages - The messages to display.
+   */
   function showNotifications(messages: ApiResponseMessages): void {
     mapApiResponseMessages(messages).forEach((element) => {
       notificationStoreInstance.showNotification(element);
     });
   }
 
-  function handleSuccess(response: FetchResponse): FetchResponse {
+  /**
+   * Processes a successful response and shows notifications if present.
+   *
+   * @template T - The type of the response data.
+   * @param response - The fetch response.
+   * @returns The processed response.
+   */
+  function handleSuccess<T>(response: FetchResponse<T>): FetchResponse<T> {
     const { messages } = (response?.data as ApiErrorData) || {};
 
     if (messages) {
       showNotifications(messages);
     }
 
-    return response || {};
+    return response;
   }
 
-  function handleError(error: FetchError<ApiErrorData>): Promise<never> {
-    const { messages } = error?.response?.data || {};
+  /**
+   * Processes a failed request, shows notifications or errors, and rejects the promise.
+   *
+   * @template T - The type of the response data.
+   * @param error - The fetch error.
+   * @returns A rejected promise.
+   */
+  function handleError<T>(error: FetchError<T>): Promise<never> {
+    const { messages } = (error?.response?.data as ApiErrorData) || {};
 
     if (messages) {
       showNotifications(messages);
@@ -81,79 +160,121 @@ export default function api(): PluginApi {
     return Promise.reject(error);
   }
 
+  /**
+   * Internal options for wrapRequest.
+   */
+  type WrapRequestOptions<T> = {
+    method(url: string, ...arguments_: unknown[]): Promise<FetchResponse<T>>;
+    url: string;
+    arguments_: unknown[];
+    config?: RequestConfig & { uniqueId?: string };
+  };
+
+  /**
+   * Wrapper function to handle uniqueId logic and response processing.
+   *
+   * @template T - The type of the response data.
+   * @param options - Request options.
+   * @returns A promise resolving to the fetch response.
+   */
+  async function wrapRequest<T>(options: WrapRequestOptions<T>): Promise<FetchResponse<T>> {
+    const { method, url, arguments_, config } = options;
+    const uniqueId = config?.uniqueId;
+
+    if (uniqueId) {
+      const abortController = abortStack[uniqueId];
+
+      if (abortController) {
+        abortController.abort();
+      }
+
+      abortStack[uniqueId] = new AbortController();
+
+      // Ensure we don't overwrite the signal if it's already provided in config
+      if (config && !config.signal) {
+        config.signal = abortStack[uniqueId].signal;
+      }
+    }
+
+    try {
+      // Re-assemble args with updated config if needed
+      const requestArguments = [...arguments_];
+
+      if (config) {
+        if (requestArguments.length > 0 && typeof requestArguments.at(-1) === 'object') {
+          requestArguments[requestArguments.length - 1] = config;
+        } else {
+          requestArguments.push(config);
+        }
+      }
+
+      const response = await method(url, ...requestArguments);
+
+      if (uniqueId) {
+        delete abortStack[uniqueId];
+      }
+
+      return handleSuccess(response);
+    } catch (error) {
+      if (uniqueId && isAbortError(error)) {
+        // If it's an abort error, we might not want to delete it from stack if a new one was already created
+        // but since we check uniqueId before creating, it should be fine.
+        delete abortStack[uniqueId];
+      }
+
+      if (isAbortError(error)) {
+        throw error;
+      }
+
+      return await handleError(error as FetchError<T>);
+    }
+  }
+
   return {
     $api: {
-      get(url, config, uniqueId): Promise<FetchResponse> {
-        if (uniqueId) {
-          const abortController = abortStack[uniqueId];
-
-          if (abortController) {
-            abortController.abort();
-          }
-
-          abortStack[uniqueId] = new AbortController();
-          config = {
-            ...config,
-            signal: abortStack[uniqueId]?.signal,
-          };
-        }
-
-        return fetchInstance
-          .get(url, config)
-          .then((response) => {
-            if (uniqueId) {
-              delete abortStack[uniqueId];
-            }
-
-            return handleSuccess(response);
-          })
-          .catch((error: unknown) => {
-            if (isAbortError(error)) {
-              throw error;
-            }
-
-            return handleError(error as FetchError<ApiErrorData>);
-          });
+      get<T>(url: string, config?: RequestConfig & { uniqueId?: string }): Promise<FetchResponse<T>> {
+        return wrapRequest({
+          method: fetchInstance.get.bind(fetchInstance) as WrapRequestOptions<T>['method'],
+          url,
+          arguments_: [config],
+          config,
+        });
       },
 
-      async post(url, data, config): Promise<FetchResponse> {
-        try {
-          const response = await fetchInstance.post(url, data, config);
-
-          return handleSuccess(response);
-        } catch (error) {
-          return await handleError(error as FetchError<ApiErrorData>);
-        }
+      post<T>(url: string, data?: unknown, config?: RequestConfig & { uniqueId?: string }): Promise<FetchResponse<T>> {
+        return wrapRequest({
+          method: fetchInstance.post.bind(fetchInstance) as WrapRequestOptions<T>['method'],
+          url,
+          arguments_: [data, config],
+          config,
+        });
       },
 
-      async put(url, data, config): Promise<FetchResponse> {
-        try {
-          const response = await fetchInstance.put(url, data, config);
-
-          return handleSuccess(response);
-        } catch (error) {
-          return await handleError(error as FetchError<ApiErrorData>);
-        }
+      put<T>(url: string, data?: unknown, config?: RequestConfig & { uniqueId?: string }): Promise<FetchResponse<T>> {
+        return wrapRequest({
+          method: fetchInstance.put.bind(fetchInstance) as WrapRequestOptions<T>['method'],
+          url,
+          arguments_: [data, config],
+          config,
+        });
       },
 
-      async patch(url, data, config): Promise<FetchResponse> {
-        try {
-          const response = await fetchInstance.patch(url, data, config);
-
-          return handleSuccess(response);
-        } catch (error) {
-          return await handleError(error as FetchError<ApiErrorData>);
-        }
+      patch<T>(url: string, data?: unknown, config?: RequestConfig & { uniqueId?: string }): Promise<FetchResponse<T>> {
+        return wrapRequest({
+          method: fetchInstance.patch.bind(fetchInstance) as WrapRequestOptions<T>['method'],
+          url,
+          arguments_: [data, config],
+          config,
+        });
       },
 
-      async delete(url, config): Promise<FetchResponse> {
-        try {
-          const response = await fetchInstance.delete(url, config);
-
-          return handleSuccess(response);
-        } catch (error) {
-          return await handleError(error as FetchError<ApiErrorData>);
-        }
+      delete<T>(url: string, config?: RequestConfig & { uniqueId?: string }): Promise<FetchResponse<T>> {
+        return wrapRequest({
+          method: fetchInstance.delete.bind(fetchInstance) as WrapRequestOptions<T>['method'],
+          url,
+          arguments_: [config],
+          config,
+        });
       },
     },
   };
