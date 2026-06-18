@@ -67,6 +67,15 @@ export const routes = [
           title: 'Translations (i18n)',
         },
       },
+      {
+        path: 'api-request',
+        name: 'api-request',
+        component: () => import('@/styleguide/demo-pages/general/r-api-request.vue'),
+        meta: {
+          title: 'API Request Helper',
+          alternativeTitles: ['fetch', 'http', 'api', 'request'],
+        },
+      },
     ],
   },
 ];
