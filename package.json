@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "A customized Vue.js project template",
   "type": "module",
-  "lastDependencyUpdate": "12.03.2026",
+  "lastDependencyUpdate": "22.06.2026",
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "vite",
