@@ -52,8 +52,6 @@ This will test the current state of TS, JS and CSS code. Tests **MUST** be execu
   > vuelidate, validation
 - [@vuelidate/validators](https://www.npmjs.com/package/@vuelidate/validators) - This is the standalone validators package for Vuelidate.
   > vuelidate, validation
-- [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js.
-  > core, api
 - [body-scroll-lock](https://www.npmjs.com/package/body-scroll-lock) - Enables body scroll locking (for iOS Mobile and Tablet, Android, desktop Safari/Chrome/Firefox) without breaking scrolling of a target element (eg. modal/lightbox/flyouts/nav-menus).
   > components, c-modal
 - [dayjs](https://www.npmjs.com/package/dayjs) - Fast 2kB alternative to Moment.js with the same modern API.
