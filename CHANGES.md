@@ -1,5 +1,11 @@
 ### Next
 
+- (Change) Replaces the axios HTTP client with the platform `fetch` API.
+- (Breaking) The `$api` plugin's exported `Api` type contract now uses project-owned types instead of axios's types.
+  - Response values are `ApiResult`, with `data` typed `unknown` and requiring narrowing by the caller.
+  - Rejections are `ApiErrorShape`; the response body is still available at `error.response.data`.
+  - The previously exported shared axios client instance is gone. Code that mutated its default headers must call `setApiLocale` instead.
+- (Change) Adds an explicit default request timeout to `$api`; the previous client shipped without one.
 - (Enhancement) Updated vue-styleguide to version 2.0.1
 - (feature) Improved styleguide routes.
 - (feature) Updated packages.

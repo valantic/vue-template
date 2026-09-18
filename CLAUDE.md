@@ -69,7 +69,7 @@ Dev-only living styleguide. Loaded conditionally in `src/main.ts` only when `imp
 
 ### Build Outputs
 
-Configured in `vite.builds.json`. Output goes to `dist/<mode>/`. Manual chunk splitting groups: `vue+pinia+axios`, `vue-i18n`, `dayjs`, `vuelidate`, `embla-carousel`, `floating-vue+body-scroll-lock`, `pikaday`.
+Configured in `vite.builds.json`. Output goes to `dist/<mode>/`. Manual chunk splitting groups: `vue+pinia`, `vue-i18n`, `dayjs`, `vuelidate`, `embla-carousel`, `floating-vue+body-scroll-lock`, `pikaday`.
 
 ### Testing (`tests/unit/specs/`)
 
