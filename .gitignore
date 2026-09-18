@@ -24,6 +24,3 @@ npm-debug.log
 .env
 /stats/
 report.*.json
-
-# GSD planning artifacts (local-only)
-.planning/
