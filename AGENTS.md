@@ -1,6 +1,7 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, Copilot, etc.) when working with code in
+this repository.
 
 Build modes: `app` (default), `pimcore` (CMS stylesheet only). Profile build: `npm run build:profile`.
 
