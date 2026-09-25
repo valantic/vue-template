@@ -2,6 +2,9 @@
 
 ## unreleased
 
+- Bumped `engines.node` to `>=22 <26` (was `>=22 <25`) to allow Node 25. Updated `.nvmrc` from `24` to `25`. Added
+  `min-release-age=7` and `ignore-scripts=true` to `.npmrc`.
+
 - Renamed the CI workflow to "CI Test" and updated it to `actions/checkout@v7`, `actions/setup-node@v7`, and Node 25.
 - Streamlined `.github/PULL_REQUEST_TEMPLATE.md` and `.gitlab/merge_request_templates/Frontend.md` by removing the
   obsolete checklist sections.
