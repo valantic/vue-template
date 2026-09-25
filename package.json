@@ -1,9 +1,15 @@
 {
   "name": "vue-template",
-  "version": "0.0.0",
   "description": "A customized Vue.js project template",
-  "type": "module",
+  "author": "valantic CEC",
+  "license": "MIT",
+  "version": "0.0.0",
   "lastDependencyUpdate": "22.06.2026",
+  "type": "module",
+  "engines": {
+    "node": ">=22 <26",
+    "npm": ">=10 <12"
+  },
   "scripts": {
     "clean:caches": "rm -rf .eslintcache .stylelintcache node_modules/.cache",
     "dev": "vite",
@@ -23,25 +29,6 @@
     "prettier": "prettier . --write",
     "tsc": "vue-tsc"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/valantic/vue-template.git"
-  },
-  "engines": {
-    "node": ">=22 <26",
-    "npm": ">=10 <12"
-  },
-  "keywords": [
-    "vue",
-    "vuejs",
-    "valantic"
-  ],
-  "author": "valantic CEC",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/valantic/vue-template/issues"
-  },
-  "homepage": "https://github.com/valantic/vue-template",
   "dependencies": {
     "@valantic/frontend-utils": "github:valantic/frontend-utils#v0.0.1",
     "@valantic/scss-utils": "github:valantic/scss-utils#v1.1.0",
@@ -118,5 +105,18 @@
   ],
   "msw": {
     "workerDirectory": "public"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valantic/vue-template.git"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "valantic"
+  ],
+  "bugs": {
+    "url": "https://github.com/valantic/vue-template/issues"
+  },
+  "homepage": "https://github.com/valantic/vue-template"
 }
