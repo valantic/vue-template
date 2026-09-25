@@ -2,6 +2,8 @@
 
 ## unreleased
 
+- Streamlined `.github/PULL_REQUEST_TEMPLATE.md` and `.gitlab/merge_request_templates/Frontend.md` by removing the
+  obsolete checklist sections.
 - Added a Documentation section to AGENTS.md/CLAUDE.md requiring feature docs to live in this repo's own `docs/`
   folder (indexed by `docs/README.md`), separate from the workspace-level `docs/`.
 - Replaced the axios HTTP client with a `fetch`-based transport, `apiRequest` (plus `ApiError`,
