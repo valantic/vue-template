@@ -1,6 +1,7 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, Copilot, etc.) when working with code in
+this repository.
 
 Build modes: `app` (default), `pimcore` (CMS stylesheet only). Profile build: `npm run build:profile`.
 
@@ -86,7 +87,7 @@ Defined in `src/setup/globals.ts`: `xxs(0) xs(480) sm(768) md(1024) lg(1200) xl(
 - **Components don't style other components** — use modifiers for cross-component style influence
 - **SCSS color variables** use numeric scale (`$color-primary--100`) not semantic names
 - **Blueprints** in `/blueprints/` — always base new components/tests/styleguide entries on them
-- Node >=22 <26 (`.nvmrc` pins dev to 25), npm >=10 <12 required
+- Node >=22 <25, npm >=10 <12 required
 
 ## Documentation
 
