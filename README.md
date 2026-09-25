@@ -1,6 +1,21 @@
+<div align="center">
+
 # vue-template
 
+**A customized Vue.js project template.**
+
+[**Report an Issue**](https://github.com/valantic/vue-template/issues/new) ·
+[**Request a Feature**](https://github.com/valantic/vue-template/issues/new?labels=enhancement)
+
+</div>
+
+---
+
+## About this project
+
 This is a custom Vue3 template written in TypeScript which is based on the idea of using BEM, CriticalCSS and a living styleguide while building mainly not a SPA but a set of components used inside a CMS like system.
+
+---
 
 ## Introduction
 
@@ -842,8 +857,18 @@ $ brew upgrade nasm
 
 - [ ] Add custom elements option to the "initial data" section.
 
+---
+
+<div align="center">
+
+## from valantic - with love
+
+Built and maintained by [valantic](https://www.valantic.com/en/careers/) — we're hiring, check out our [open positions](https://www.valantic.com/en/careers/).
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
 
 Copyright (c) 2017-present, valantic CEC Schweiz AG
+
+</div>
