@@ -2,6 +2,9 @@
 
 ## unreleased
 
+- Added a repo banner (`.github/assets/banner.jpeg`) to the top of `README.md`, matching the `vue-styleguide`
+  convention.
+
 - Restructured `README.md` to follow the `vue-styleguide` schema (centered header with tagline/links, `About this
 project`) and added the shared "from valantic - with love" footer.
 
