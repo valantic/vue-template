@@ -2,6 +2,7 @@
 
 ## unreleased
 
+- [docs] Documented in `AGENTS.md`/`CLAUDE.md` that this boilerplate is not versioned, tagged or released.
 - [docs] Adopted the shared shared-frontend changelog convention (`# Changelog` title, `unreleased` / `vX.Y.Z`
   headings, `[feat]`/`[fix]`/… prefixes, `### Breaking Changes` with migration notes), documented in `AGENTS.md` and
   `CLAUDE.md`. Merged the legacy `CHANGES.md` (webpack era, up to v7.0.0) unchanged into a `## Legacy` section at the

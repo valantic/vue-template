@@ -88,6 +88,8 @@ Defined in `src/setup/globals.ts`: `xxs(0) xs(480) sm(768) md(1024) lg(1200) xl(
 - **SCSS color variables** use numeric scale (`$color-primary--100`) not semantic names
 - **Blueprints** in `/blueprints/` — always base new components/tests/styleguide entries on them
 - Node >=22 <25, npm >=10 <12 required
+- **Not released**: this repo is a boilerplate — it is not versioned, tagged or published, and has no release
+  scripts. Do not add any.
 
 ## Changelog (required for every task)
 
