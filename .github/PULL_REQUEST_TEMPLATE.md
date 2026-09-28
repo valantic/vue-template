@@ -2,9 +2,9 @@
 
 _description_
 
-### Ticket
+### Ticket / Issue
 
-_ticket-link_
+- https://github.com/valantic/vue-template/issues/xx
 
 ### Browser testing
 
