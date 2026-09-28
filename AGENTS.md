@@ -89,6 +89,29 @@ Defined in `src/setup/globals.ts`: `xxs(0) xs(480) sm(768) md(1024) lg(1200) xl(
 - **Blueprints** in `/blueprints/` — always base new components/tests/styleguide entries on them
 - Node >=22 <25, npm >=10 <12 required
 
+## Changelog (required for every task)
+
+`CHANGELOG.md` follows the convention shared by all valantic shared-frontend repos.
+
+- Every change that alters behavior, fixes a bug, or adds/removes something consumers can see gets one entry under
+  `## unreleased` in the same change — do not defer it to a follow-up task.
+- Format: `- [type] Description.` — one entry per logical change, kept as a flat list (no "Added"/"Fixed" category
+  subheadings), so each entry stays self-contained and merge conflicts can be resolved line by line.
+- Allowed prefixes ([Conventional Commits](https://www.conventionalcommits.org/) types): `[feat]`, `[fix]`,
+  `[refactor]`, `[perf]`, `[docs]`, `[test]`, `[build]`, `[ci]`, `[chore]`, `[revert]`. Older prefixes in released
+  sections (`[ENHANCEMENT]`, `(Change)`, …) are history — do not reuse them and do not rewrite old entries.
+- Write the description so it is understandable without the diff: name the affected module and the effect for
+  consumers.
+- Breaking changes are grouped under a `### Breaking Changes` subheading placed directly under `## unreleased`, above
+  the regular entries. They keep their prefix and must end with a **Migration:** sentence stating what consumers
+  have to do.
+- A change is breaking if projects based on this template have to adapt when pulling it in: removed/renamed
+  components, props, stores, plugins, aliases, build modes or config files, or changed BEM class names. When in
+  doubt, list it under `### Breaking Changes` rather than omit the migration note.
+- Headings: title `# Changelog`, unreleased section `## unreleased` (exact, lowercase — release tooling matches it
+  literally), released sections `## vX.Y.Z`. Only the unreleased section is edited; released sections stay as they
+  are.
+
 ## Documentation
 
 This repo keeps its own feature docs in a `docs/` folder (with an index at `docs/README.md`) — this is separate from
