@@ -979,6 +979,10 @@ $ brew upgrade nasm
 
 - [ ] Add custom elements option to the "initial data" section.
 
+## Contributing
+
+How to contribute is described in [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ---
 
 <div align="center">

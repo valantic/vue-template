@@ -2,6 +2,15 @@
 
 ## unreleased
 
+- [docs] Restructured `AGENTS.md` to the shared outline (new `What this is` and `Commands` sections) and added the
+  shared `## Working rules` section (git rules, no release/publish or dependency changes without approval, engineering
+  priorities, `npm test` before finishing).
+- [docs] Added a `## Code conventions` section to `AGENTS.md` summarizing the valantic frontend guidelines (incl.
+  Options API, Pinia).
+- [docs] Added `CONTRIBUTING.md` (Getting started / Developing / Changelog / Releasing, shared outline).
+- [docs] Replaced the duplicated `CLAUDE.md` content with a pointer to `AGENTS.md`, like the other repos, and made
+  `AGENTS.md` refer to `engines`/`.nvmrc` for the Node.js/npm versions (the copy there was outdated).
+- [docs] Added a `## Contributing` section to `README.md` linking `CONTRIBUTING.md`.
 - [docs] Documented in `AGENTS.md`/`CLAUDE.md` that this boilerplate is not versioned, tagged or released.
 - [docs] Adopted the shared shared-frontend changelog convention (`# Changelog` title, `unreleased` / `vX.Y.Z`
   headings, `[feat]`/`[fix]`/… prefixes, `### Breaking Changes` with migration notes), documented in `AGENTS.md` and

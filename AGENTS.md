@@ -3,11 +3,29 @@
 This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, Copilot, etc.) when working with code in
 this repository.
 
-Build modes: `app` (default), `pimcore` (CMS stylesheet only). Profile build: `npm run build:profile`.
+## What this is
+
+`vue-template` is valantic's **Vue 3 + TypeScript boilerplate** for frontends integrated into a CMS (primarily
+Pimcore), not a SPA: components are mounted on specific DOM nodes in server-rendered pages. Projects are started from
+it or pull its updates in (see "Integrate vue-template into an other repository" in `README.md`). It is not versioned,
+tagged or published, and has no release scripts — do not add any.
+
+## Commands
+
+- `npm test` — full check: `npm run lint && npm run test:unit -- --watch=false`. Run before considering work done.
+- `npm run lint` — runs `lint:eslint`, `lint:stylelint`, and `tsc` (type-check via `vue-tsc`) together.
+- `npm run test:unit` — Vitest, run from `tests/`. To run a single test file: `npm run test:unit -- <path>`. To run a
+  single test by name: `npm run test:unit -- -t "<test name>"`.
+- `npm run fix:stylelint` — Stylelint with `--fix` (uses `.stylelintrc.fix.js`).
+- `npm run prettier` — formats the whole repo in place.
+- `npm run dev` / `npm run serve` — Vite dev server / preview of the built app.
+- `npm run build` — Vite build. Build modes (`vite.builds.json`): `app` (default), `pimcore` (CMS stylesheet only).
+  Profile build: `npm run build:profile`.
+- `npm run build:icons` — regenerates the SVG sprite from `src/assets/icons/*.svg` and updates the icon TS type. Run
+  this after adding/removing an icon SVG.
+- `npm run clean:caches` — clears `.eslintcache`, `.stylelintcache`, `node_modules/.cache`.
 
 ## Architecture
-
-This is a **Vue 3 + TypeScript component library** designed for CMS integration (primarily Pimcore), not a SPA. Components are mounted on specific DOM nodes in server-rendered pages.
 
 ### App Bootstrap (`src/main.ts`)
 
@@ -80,16 +98,57 @@ Vitest + jsdom + `@vue/test-utils`. Test files follow `*.test.ts` naming. Bluepr
 
 Defined in `src/setup/globals.ts`: `xxs(0) xs(480) sm(768) md(1024) lg(1200) xl(1440)`. Must stay in sync with SCSS variables.
 
-## Key Conventions
+### Key conventions
 
 - **No grandchild BEM selectors**: `.c-card__header-title` not `.c-card__header__title`
 - **No global state classes** (`.is-active`): use BEM modifiers instead
 - **Components don't style other components** — use modifiers for cross-component style influence
 - **SCSS color variables** use numeric scale (`$color-primary--100`) not semantic names
 - **Blueprints** in `/blueprints/` — always base new components/tests/styleguide entries on them
-- Node >=22 <25, npm >=10 <12 required
-- **Not released**: this repo is a boilerplate — it is not versioned, tagged or published, and has no release
-  scripts. Do not add any.
+- Required Node.js/npm versions: see `engines` in `package.json` and `.nvmrc`
+
+## Code conventions
+
+Follow the repo's ESLint/Stylelint/Prettier config and `.editorconfig`. On top of that:
+
+- Naming: files `kebab-case`; types, interfaces and enums `PascalCase`; functions, properties and variables
+  `camelCase`. Singular names for single things (types, enums, components, stores), plural only for collections. Use
+  whole, descriptive words — identifiers have at least 3 characters (`id-length`), except the ones whitelisted in the
+  ESLint config.
+- TypeScript: never use `any` — use `unknown` plus narrowing or a generic; if `any` is unavoidable, isolate it and
+  comment why. Use `type` for object shapes; `interface` only for features exclusive to it, without an `I` prefix.
+- Control flow: no `while` or plain `for` loops (use array methods, or `for...of` when `await`/`break`/`continue` is
+  needed), no `switch` (use object literals or `if`/`else`), no one-line `if` bodies.
+- Comments only where the code is not self-explanatory, in JSDoc style.
+- Vue: components use the Options API with `defineComponent` and `<script lang="ts">` — never `<script setup>` or the
+  Composition API style. Use method shorthand (not arrow functions) in `methods`/`computed`. Base new files on
+  `blueprints/` and keep their structure, lifecycle-hook order and commented-out blocks.
+- Templates: no loop index as `v-for` key, no `v-text`, move complex conditions into `computed`. Declare every emitted
+  event in `emits`; remove event listeners in `unmounted`.
+- State management: Pinia, never Vuex.
+- Styles: no hard-coded colors — reuse the existing color variables (add a new `kebab-case` variable if needed).
+
+valantic developers find the full guidelines in the internal ai-cornerstone repository (`guidelines/frontend/`, skills
+`frontend-best-practices` and `vue-best-practices`).
+
+## Working rules
+
+These rules are identical in every valantic shared-frontend repo.
+
+- Git: never commit unless explicitly asked. Never push unless explicitly asked in that request. Never pull or
+  create/switch branches (`git pull`, `git checkout`, `git switch`, `git branch`, …). Branch names are
+  `feature/<name>` or `bugfix/<name>`.
+- Never run a release script or `npm publish` unless explicitly asked.
+- Never install, update or remove npm packages without approval. Never edit generated or vendored files
+  (`node_modules/`, `dist/`, lock files by hand).
+- Priorities: correctness, simplicity, consistency with the existing code, maintainability, minimal changes. Prefer the
+  smallest correct change.
+- Understand the existing code and search for existing implementations before adding new ones; reuse over new
+  abstractions. Do not refactor unrelated code, change public APIs, or change behavior outside the task's scope.
+- Before finishing, run `npm test` and fix failures caused by the change. Every change gets a changelog entry and,
+  where a feature changes, a doc update (see Changelog and Documentation below).
+- If a requirement is unclear, ask. If only an implementation detail is unclear, follow the existing patterns in this
+  repo.
 
 ## Changelog (required for every task)
 
