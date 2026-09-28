@@ -47,7 +47,7 @@ jobs:
           limit-severities-for-sarif: true
 
       - name: Generate report body
-        if: steps.trivy-sarif.outcome == 'failure'
+        if: always() && steps.trivy-sarif.outcome == 'failure'
         run: python3 .github/scripts/generate-vuln-report.py
         env:
           REPO: ${{ github.repository }}
@@ -55,7 +55,7 @@ jobs:
           SCAN_DATE: ${{ github.run_started_at }}
 
       - name: Create or update security issue
-        if: steps.trivy-sarif.outcome == 'failure' && github.event_name != 'pull_request'
+        if: always() && steps.trivy-sarif.outcome == 'failure' && github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -105,7 +105,7 @@ jobs:
           fi
 
       - name: Comment on pull request
-        if: github.event_name == 'pull_request'
+        if: always() && github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
