@@ -13,6 +13,8 @@
   `contents: read`.
 - [ci] `security.yml` now runs daily instead of hourly, uses `actions/checkout@v7` and pins
   `aquasecurity/trivy-action` to the commit SHA of `v0.36.0` instead of the movable tag.
+- [ci] `security.yml` now posts (and keeps updated) a pull request comment with the vulnerability breakdown when the
+  Trivy scan fails a PR check, instead of only failing the job with no feedback beyond the raw log.
 - [chore] Harmonized the copyright line in `LICENSE` to `2017-present, valantic CEC Schweiz AG`, matching the README.
 - [docs] Restructured `AGENTS.md` to the shared outline (new `What this is` and `Commands` sections) and added the
   shared `## Working rules` section (git rules, no release/publish or dependency changes without approval, engineering
