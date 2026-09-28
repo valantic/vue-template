@@ -2,6 +2,12 @@
 
 ## unreleased
 
+- [docs] `AGENTS.md`: corrected the chunk-splitting groups to what `vite.config.ts` defines (`vue`, `vendor`,
+  `project`).
+- [docs] Added feature docs under `docs/` (indexed by `docs/README.md`) covering the app bootstrap, build
+  modes, Pinia stores/`$api` plugin, i18n, the local styleguide, the default and opt-in plugins,
+  compositions, and directives/helpers; moved the equivalent workspace knowledge-base pages to link here
+  instead of duplicating the content.
 - [ci] Aligned `.github/workflows/test.yml` with the other shared-frontend repos: job `test`, step "Run tests"
   (the old label claimed checks that don't run here), Node version read from `.nvmrc`, token limited to
   `contents: read`.
