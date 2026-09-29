@@ -2,6 +2,11 @@
 
 ## unreleased
 
+- [fix] `.editorconfig`: removed a stray space in the `[{*.js, *.ts}]` glob (`[{*.js,*.ts}]`) that prevented it from
+  matching `*.ts` files.
+- [fix] `generate-vuln-report.py`: `worst_severity()` no longer raises `ValueError` and aborts the report step when
+  every vulnerability for a package has a severity outside `SEVERITIES` — it now falls back to the lowest rank.
+
 - [docs] `AGENTS.md`: corrected the chunk-splitting groups to what `vite.config.ts` defines (`vue`, `vendor`,
   `project`).
 - [docs] Added feature docs under `docs/` (indexed by `docs/README.md`) covering the app bootstrap, build

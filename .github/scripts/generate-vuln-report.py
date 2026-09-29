@@ -12,6 +12,7 @@ Required env vars:
 import os
 import re
 import sys
+from collections import defaultdict
 
 TRIVY_TABLE = 'trivy-table.txt'
 OUTPUT_FILE = 'issue-body.md'
@@ -119,14 +120,16 @@ if current_vuln:
 
 # --- Group by package ---
 
-from collections import defaultdict
 by_pkg: dict[str, list[dict]] = defaultdict(list)
 for v in vulns:
     by_pkg[v['pkg']].append(v)
 
 # Sort packages by worst severity
 def worst_severity(pkg_vulns: list[dict]) -> int:
-    return min(SEVERITIES.index(v['severity']) for v in pkg_vulns if v['severity'] in SEVERITIES)
+    return min(
+        (SEVERITIES.index(v['severity']) for v in pkg_vulns if v['severity'] in SEVERITIES),
+        default=len(SEVERITIES),
+    )
 
 sorted_pkgs = sorted(by_pkg.items(), key=lambda x: worst_severity(x[1]))
 
