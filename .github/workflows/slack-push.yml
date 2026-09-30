@@ -1,0 +1,20 @@
+name: Slack Main Branch Push Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send notification to Slack
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: |
+            {
+              "text": "🚀 *Push to main branch in `${{ github.repository }}`*\n*Author:* ${{ github.actor }}\n*Commit:* <${{ github.event.head_commit.url }}\vert{}${{ github.event.head_commit.message }}>"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
